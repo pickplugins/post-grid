@@ -1,0 +1,1386 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Post Grid\n"
+"POT-Creation-Date: 2020-04-15 00:34+0600\n"
+"PO-Revision-Date: 2020-04-15 00:34+0600\n"
+"Last-Translator: \n"
+"Language-Team: pickplugins <support@pickplugins.com>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: includes\n"
+"X-Poedit-SearchPath-1: grid-items\n"
+"X-Poedit-SearchPath-2: templates\n"
+
+#: grid-items/hover_items.php:32
+msgid "Zoom."
+msgstr ""
+
+#: grid-items/hover_items.php:37
+#, fuzzy
+#| msgid "Read more."
+msgid "Read More."
+msgstr "> Artikel lesen"
+
+#: grid-items/layer-content.php:113 templates/layer-content.php:118
+msgid "Read more."
+msgstr "> Artikel lesen"
+
+#: grid-items/layer-content.php:204 templates/layer-content.php:204
+#, php-format
+msgid "View all posts in %s"
+msgstr ""
+
+#: grid-items/layer-content.php:232 templates/layer-content.php:235
+msgid "Please activate Rating widget Plugin"
+msgstr ""
+
+#: grid-items/layer-content.php:247 templates/layer-content.php:265
+msgid "Comments"
+msgstr ""
+
+#: grid-items/layer-content.php:260 templates/layer-content.php:278
+msgid "No comments yet"
+msgstr ""
+
+#: grid-items/layer-content.php:283
+msgid "No more comments"
+msgstr ""
+
+#: grid-items/layer-content.php:354 templates/layer-content.php:372
+msgid "No Comments"
+msgstr ""
+
+#: grid-items/layer-content.php:356 templates/layer-content.php:374
+msgid " Comments"
+msgstr ""
+
+#: grid-items/layer-content.php:358 templates/layer-content.php:376
+msgid "1 Comment"
+msgstr ""
+
+#: grid-items/nav-bottom-new.php:74
+msgid "Older posts"
+msgstr ""
+
+#: grid-items/nav-bottom-new.php:75
+msgid "Newer posts"
+msgstr ""
+
+#: grid-items/nav-search.php:60
+msgid "Search"
+msgstr ""
+
+#: grid-items/nav-top-new.php:21
+msgid "Start typing..."
+msgstr ""
+
+#: grid-items/variables.php:299 templates/variables.php:299
+msgid "All"
+msgstr ""
+
+#: grid-items/variables.php:378
+#: includes/functions/functions-post-grid-meta-box.php:1543
+#: includes/functions/functions-post-grid-meta-box.php:1578
+#: templates/variables.php:378
+msgid "Start typing"
+msgstr ""
+
+#: grid-items/variables.php:618
+#: includes/functions/functions-post-grid-meta-box.php:1389
+#: templates/nav-bottom.php:72 templates/variables.php:618
+msgid "« Previous"
+msgstr ""
+
+#: grid-items/variables.php:628
+#: includes/functions/functions-post-grid-meta-box.php:1390
+#: templates/nav-bottom.php:73 templates/variables.php:628
+msgid "Next »"
+msgstr ""
+
+#: includes/class-functions.php:21
+msgid "Load more"
+msgstr ""
+
+#: includes/class-functions.php:66 includes/class-functions.php:973
+msgid "Featured Image"
+msgstr ""
+
+#: includes/class-functions.php:67 includes/class-functions.php:981
+msgid "First images from content"
+msgstr ""
+
+#: includes/class-functions.php:68 includes/class-functions.php:1054
+msgid "Empty thumbnail"
+msgstr ""
+
+#: includes/class-functions.php:988
+msgid "First gallery from content"
+msgstr ""
+
+#: includes/class-functions.php:994
+msgid "First youtube video from content"
+msgstr ""
+
+#: includes/class-functions.php:1000
+msgid "Custom youtube video"
+msgstr ""
+
+#: includes/class-functions.php:1006
+msgid "First vimeo video from content"
+msgstr ""
+
+#: includes/class-functions.php:1012
+msgid "Custom vimeo video"
+msgstr ""
+
+#: includes/class-functions.php:1018
+msgid "First dailymotion video from content"
+msgstr ""
+
+#: includes/class-functions.php:1024
+msgid "Custom dailymotion video"
+msgstr ""
+
+#: includes/class-functions.php:1030
+msgid "First MP3 from content"
+msgstr ""
+
+#: includes/class-functions.php:1036
+msgid "Custom MP3"
+msgstr ""
+
+#: includes/class-functions.php:1042
+msgid "First SoundCloud from content"
+msgstr ""
+
+#: includes/class-functions.php:1048
+msgid "Custom SoundCloud"
+msgstr ""
+
+#: includes/class-functions.php:1064
+msgid "Custom Thumbnail"
+msgstr ""
+
+#: includes/class-functions.php:1073
+msgid "Font Awesome"
+msgstr ""
+
+#: includes/class-license.php:47
+msgid "Expired"
+msgstr ""
+
+#: includes/class-license.php:59
+msgid "year"
+msgstr ""
+
+#: includes/class-license.php:63
+msgid "month"
+msgstr ""
+
+#: includes/class-license.php:67
+msgid "day"
+msgstr ""
+
+#: includes/class-license.php:71
+msgid "hour"
+msgstr ""
+
+#: includes/class-license.php:75
+msgid "minute"
+msgstr ""
+
+#: includes/class-license.php:79
+msgid "second"
+msgstr ""
+
+#: includes/class-license.php:133
+#, php-format
+msgid ""
+"Please activate your license for <b>%s &raquo; <a href=\"%sedit.php?"
+"post_type=post_grid&page=license\">License</a></b>"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:16
+msgid "ID"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:17
+msgid "Author"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:18
+msgid "Title"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:19
+msgid "Name"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:20 includes/functions.php:552
+msgid "Type"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:21
+msgid "Date"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:22
+msgid "post_date"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:23
+msgid "modified"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:24
+msgid "Parent"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:25
+msgid "Random"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:26
+msgid "Comment count"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:27
+msgid "Menu order"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:28
+msgid "Meta value"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:29
+msgid "Meta Value(number)"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:30
+msgid "post__in"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:31
+msgid "post_name__in"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:38
+msgid "Publish"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:39
+msgid "Pending"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:40
+msgid "Draft"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:41
+msgid "Auto draft"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:42
+msgid "Future"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:43
+msgid "Private"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:44
+msgid "Inherit"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:45
+msgid "Trash"
+msgstr ""
+
+#: includes/class-post-grid-meta-box.php:46
+msgid "Any"
+msgstr ""
+
+#: includes/class-settings-tabs.php:345
+msgid "Placeholder.jpg"
+msgstr ""
+
+#: includes/class-settings-tabs.php:401 includes/class-settings-tabs.php:482
+msgid "Upload"
+msgstr ""
+
+#: includes/class-settings-tabs.php:402 includes/class-settings-tabs.php:483
+msgid "Clear"
+msgstr ""
+
+#: includes/class-settings-tabs.php:589 includes/class-settings-tabs.php:860
+msgid "Add"
+msgstr ""
+
+#: includes/class-settings.php:27
+msgid "Layout Editor"
+msgstr ""
+
+#: includes/class-settings.php:29
+msgid "Settings"
+msgstr ""
+
+#: includes/class-settings.php:32
+msgid "Data Update"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:69
+msgid "How to create post grid"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:73
+msgid "Custom read more text"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:77
+msgid "Remove read more text"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:81
+msgid "Excerpt word count"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:86
+msgid "Custom media height"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:90
+msgid "Item custom padding margin"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:94
+msgid "Grid item height"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:98
+msgid "Column Width or column number"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:102
+msgid "Post title linked"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:106
+#: includes/functions/functions-post-grid-meta-box.php:1215
+msgid "Featured image linked to post"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:110
+msgid "Query post by categories or terms"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:114
+msgid "Query post by tags or terms"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:118
+#: includes/functions/functions-post-grid-meta-box.php:1556
+msgid "Display search input"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:122
+msgid "Work with layout editor"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:126
+msgid "[ Pro ] Create filterable grid"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:130
+msgid "[ Pro ] Filterable custom filter type data logic"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:135
+msgid "[ Pro ] Filterable custom all text"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:139
+msgid "[ Pro ] Filterable default active filter"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:144
+msgid "[ Pro ] Filterable custom filter"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:149
+msgid "[ Pro ] Filterable dropdown single filter"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:154
+msgid "[ Pro ] Filterable display sort filter"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:159
+msgid "[ Pro ] Filterable multi filter"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:166
+msgid "[ Pro ] Post grid on archive tags"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:174
+msgid "[ Pro ] Query post by meta field"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:180
+msgid "[ Pro ] Multi skin"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:184
+msgid "[ Pro ] Sticky post query"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:188
+msgid "[ Pro ] Masonry layout"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:192
+msgid "[ Pro ] Post query by author"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:196
+msgid "[ Pro ] Create glossary grid"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:200
+msgid "[ Pro ] Post carousel slider"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:205
+msgid "[ Pro ] Grid layout type"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:209
+msgid "[ Pro ] Thumbnail youtube"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:227
+msgid "How to Create a Post Grid?"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:231
+msgid "How to upgrade to premium?"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:241
+msgid "Post grid on archive page?"
+msgstr ""
+
+#: includes/classes/class-post-grid-support.php:247
+msgid "How to display HTML/Shortcode via layout editor ?"
+msgstr ""
+
+#: includes/classes/class-post-types.php:18
+#: includes/classes/class-post-types.php:19
+msgid "Post Grid"
+msgstr ""
+
+#: includes/classes/class-post-types.php:30
+#, php-format
+msgid "All %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:31
+msgid "Add New"
+msgstr ""
+
+#: includes/classes/class-post-types.php:32
+#, php-format
+msgid "Add %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:33
+#: includes/functions/functions-post-grid-meta-box.php:610
+msgid "Edit"
+msgstr ""
+
+#: includes/classes/class-post-types.php:34
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:35
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:36
+#: includes/classes/class-post-types.php:37
+#, php-format
+msgid "View %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:38
+#, php-format
+msgid "Search %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:39
+#, php-format
+msgid "No %s found"
+msgstr ""
+
+#: includes/classes/class-post-types.php:40
+#, php-format
+msgid "No %s found in trash"
+msgstr ""
+
+#: includes/classes/class-post-types.php:41
+#, php-format
+msgid "Parent %s"
+msgstr ""
+
+#: includes/classes/class-post-types.php:43
+#, php-format
+msgid "This is where you can create and manage %s."
+msgstr ""
+
+#: includes/data-update/class-post-grid-data-update.php:36
+#, php-format
+msgid ""
+"Data update required for  <b>%s &raquo; <a href=\"%sedit.php?"
+"post_type=post_grid&page=data-update\">Update</a></b>"
+msgstr ""
+
+#: includes/functions.php:57
+msgid "Shortcode"
+msgstr ""
+
+#: includes/functions.php:535 includes/functions.php:859
+#: includes/functions/functions-post-grid-meta-box.php:1257
+#: includes/menu/layout-editor.php:348
+msgid "Move"
+msgstr ""
+
+#: includes/functions.php:536 includes/functions.php:860
+#: includes/menu/layout-editor.php:105 includes/menu/layout-editor.php:349
+msgid "Expand or collapse"
+msgstr ""
+
+#: includes/functions.php:546
+msgid "Key"
+msgstr ""
+
+#: includes/functions.php:548
+msgid "Value"
+msgstr ""
+
+#: includes/functions.php:550
+msgid "Compare"
+msgstr ""
+
+#: includes/functions.php:858 includes/menu/layout-editor.php:347
+msgid "Remove"
+msgstr ""
+
+#: includes/functions.php:869 includes/menu/layout-editor.php:416
+msgid "Custom class:"
+msgstr ""
+
+#: includes/functions.php:874 includes/menu/layout-editor.php:492
+msgid "Meta Key:"
+msgstr ""
+
+#: includes/functions.php:875 includes/menu/layout-editor.php:513
+msgid "Wrapper:"
+msgstr ""
+
+#: includes/functions.php:882
+msgid "Custom HTML:"
+msgstr ""
+
+#: includes/functions.php:890 includes/menu/layout-editor.php:554
+msgid "Read more text:"
+msgstr ""
+
+#: includes/functions.php:895
+msgid "Five star count:"
+msgstr ""
+
+#: includes/functions.php:900 includes/menu/layout-editor.php:428
+msgid "Taxonomy:"
+msgstr ""
+
+#: includes/functions.php:901 includes/menu/layout-editor.php:438
+msgid "Term count:"
+msgstr ""
+
+#: includes/functions.php:908
+msgid "Arrow size(px):"
+msgstr ""
+
+#: includes/functions.php:909
+msgid "Background color:"
+msgstr ""
+
+#: includes/functions.php:917
+msgid "Character limit:"
+msgstr ""
+
+#: includes/functions.php:925 includes/menu/layout-editor.php:455
+msgid "Link target:"
+msgstr ""
+
+#: includes/functions.php:1128
+msgid "No post found"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:77
+msgid "Post Grid Shortcode"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:104
+#: includes/functions/functions-settings-hook.php:18
+msgid "General"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:105
+#: includes/functions/functions-settings-hook.php:19
+msgid "Choose some general options."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:113
+msgid "Enable lazy load"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:114
+msgid "Choose enable or disable lazy load."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:120
+#: includes/functions/functions-post-grid-meta-box.php:1223
+#: includes/functions/functions-post-grid-meta-box.php:1563
+#: includes/functions/functions-post-grid-meta-box.php:1646
+#: includes/functions/functions-settings-hook.php:46
+msgid "No"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:121
+#: includes/functions/functions-post-grid-meta-box.php:1222
+#: includes/functions/functions-post-grid-meta-box.php:1562
+#: includes/functions/functions-post-grid-meta-box.php:1645
+#: includes/functions/functions-settings-hook.php:46
+msgid "Yes"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:132
+msgid "Lazy load image source"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:133
+msgid "Set custom lazy load image source."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:237
+msgid "Post types"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:238
+msgid ""
+"Select your desired post types here you want to display post from, you can "
+"choose multiple post type."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:319
+#: includes/functions/functions-post-grid-meta-box.php:1800
+msgid "Categories or Terms"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:320
+#: includes/functions/functions-post-grid-meta-box.php:1801
+msgid "Select post terms or categories"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:337
+#: includes/functions/functions-post-grid-meta-box.php:1818
+msgid "Terms relation"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:338
+msgid "Choose term relation. some option only available in pro"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:345
+#: includes/functions/functions-post-grid-meta-box.php:1826
+msgid "IN"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:346
+#: includes/functions/functions-post-grid-meta-box.php:1827
+msgid "NOT IN"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:347
+#: includes/functions/functions-post-grid-meta-box.php:401
+#: includes/functions/functions-post-grid-meta-box.php:1828
+msgid "AND"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:348
+#: includes/functions/functions-post-grid-meta-box.php:1829
+msgid "EXISTS"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:349
+#: includes/functions/functions-post-grid-meta-box.php:1830
+msgid "NOT EXISTS"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:365
+#: includes/functions/functions-post-grid-meta-box.php:1846
+msgid "Please choose at least one post types. save/update post grid"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:392
+msgid "Taxonomies relation"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:393
+msgid "Choose Taxonomies relation."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:400
+msgid "OR"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:410
+msgid "Post status"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:411
+msgid "Display post from following post status."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:425
+msgid "Post query order"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:426
+msgid "Query order ascending or descending."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:433
+msgid "Ascending"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:434
+msgid "Descending"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:444
+msgid "Post query orderby"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:445
+msgid "Select post query orderby"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:459
+msgid "Query orderby meta key"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:460
+msgid "You can use custom meta field key for orderby meta key"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:475
+msgid "Posts per page"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:476
+msgid ""
+"Number of post each pagination. -1 to display all. default is 10 if you left "
+"empty."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:488
+msgid "Offset"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:489
+msgid ""
+"Display posts from the n'th, if you set Posts per page to -1 will not work "
+"offset."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:502
+msgid "Exclude by post ID"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:503
+msgid ""
+"You can exclude any post by ids here, use comma separate post id value, ex: "
+"45,48"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:517
+msgid "Search parameter"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:518
+msgid ""
+"Query post by search keyword, please follow the reference https://codex."
+"wordpress.org/Class_Reference/WP_Query#Search_Parameter"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:758
+msgid "Content Layout"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:988
+msgid "Grid items width"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:989
+#, php-format
+msgid ""
+"Grid item width for different device, you can use % or px, em and etc, "
+"example: 80% or 250px"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1010
+#: includes/functions/functions-post-grid-meta-box.php:1025
+#: includes/functions/functions-post-grid-meta-box.php:1038
+#: includes/functions/functions-post-grid-meta-box.php:1072
+msgid "Auto height"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1011
+#: includes/functions/functions-post-grid-meta-box.php:1026
+#: includes/functions/functions-post-grid-meta-box.php:1039
+#: includes/functions/functions-post-grid-meta-box.php:1073
+msgid "Fixed height"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1012
+#: includes/functions/functions-post-grid-meta-box.php:1027
+#: includes/functions/functions-post-grid-meta-box.php:1040
+#: includes/functions/functions-post-grid-meta-box.php:1074
+msgid "Max height"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1055
+msgid "Grid items height"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1056
+#, php-format
+msgid ""
+"Grid item height for different device, you can use % or px, em and etc, "
+"example: 80% or 250px"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1086
+msgid "Media height"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1087
+#, php-format
+msgid ""
+"Grid item media height for different device, you can use % or px, em and "
+"etc, example: 80% or 250px"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1103
+msgid "Items background color type"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1104
+msgid "Select items background color type."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1110
+msgid "Fixed"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1120
+msgid "Grid items background color"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1121
+msgid "Set custom color for grid item."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1134
+msgid "Grid items margin"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1135
+msgid ""
+"Grid item wrapper margin, you can use top right bottom left style, ex: 10px "
+"15px 10px 15px"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1147
+msgid "Grid items padding"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1148
+msgid ""
+"Grid item wrapper padding, you can use top right bottom left style, ex: 10px "
+"15px 10px 15px"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1161
+msgid "Grid container padding"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1162
+msgid "Set custom padding for grid container, ex: 10px 15px 10px 15px"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1174
+#: includes/functions/functions-post-grid-meta-box.php:1187
+msgid "Grid container background color"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1175
+#: includes/functions/functions-post-grid-meta-box.php:1188
+msgid "Set custom background color for grid container."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1200
+msgid "Featured image size"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1201
+msgid "Select media image size"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1216
+msgid "Select if you want to link to post with featured image."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1291
+msgid "Media source"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1292
+msgid "Choose media source you want to display from."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1359
+msgid "Grid layout"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1360
+msgid "Choose grid layout"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1408
+msgid "Pagination type"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1409
+msgid "Select pagination you want to display."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1415
+#: includes/functions/functions-settings-hook.php:33
+msgid "None"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1416
+msgid "Normal Pagination"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1426
+msgid "Max number of pagination"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1427
+msgid "keep 0 (zero) for auto"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1439
+msgid "Pagination Previous text"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1440
+msgid "Custom text for previous page"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1453
+msgid "Pagination Next text"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1454
+msgid "Custom text for next page"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1466
+msgid "Pagination font size"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1467
+msgid "Custom font size for pagination"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1482
+msgid "Pagination font color"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1483
+msgid "Set custom color for pagination text."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1494
+msgid "Pagination default background color"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1495
+msgid "Set custom value for pagination background color."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1506
+msgid "Pagination active/hover background color"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1507
+msgid "Set custom value filterable pagination item active background color."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1557
+msgid "Display or hide search input field at top."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1574
+msgid "Search input placeholder text"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1575
+msgid "Custom text for search input field"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1588
+msgid "Search icon"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1589
+msgid ""
+"Custom icon for search input field, you can use <a target=\"_blank\" href="
+"\"https://fontawesome.com/icons\">fontawesome</a> icons."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1638
+msgid "Masonry enable"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1639
+msgid "Enable or disable masonry style grid."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1699
+msgid "Custom Js."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1700
+msgid ""
+"You can add custom scripts here, do not use <code>&lt;script&gt; &lt;/"
+"script&gt;</code> tag"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1714
+msgid "Custom CSS."
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1715
+msgid ""
+"You can add custom css here, do not use <code>  &lt;style&gt; &lt;/style&gt;"
+"</code> tag"
+msgstr ""
+
+#: includes/functions/functions-post-grid-meta-box.php:1819
+msgid "Choose term relation."
+msgstr ""
+
+#: includes/functions/functions-post-grid.php:193
+msgid "No categories found."
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:28
+msgid "Font-awesome version"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:29
+msgid "Choose font awesome version you want to load."
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:33
+msgid "Version 5+"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:33
+msgid "Version 4+"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:41
+msgid "Enable post grid preview"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:42
+msgid "You can enable preview post grid."
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:77
+msgid "Get support"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:78
+msgid "Use following to get help and support from our expert team."
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:86
+msgid ""
+"Ask question for free on our forum and get quick reply from our expert team "
+"members."
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:87
+msgid "Create support ticket"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:89
+msgid "Read our documentation before asking your question."
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:90
+msgid "Documentation"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:92
+msgid "Watch video tutorials."
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:93
+msgid "All tutorials"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:109
+msgid "Ask question"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:134
+msgid "Submit reviews"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:170
+msgid "Get Premium"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:171
+msgid ""
+"Thanks for using our plugin, if you looking for some advance feature please "
+"buy premium version."
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:179
+msgid ""
+"If you love our plugin and want more feature please consider to buy pro "
+"version."
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:180
+#: includes/functions/functions-settings-hook.php:210
+msgid "Buy premium"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:181
+msgid "See all demo"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:183
+msgid "See the differences"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:188
+#: includes/functions/functions-settings-hook.php:203
+msgid "Features"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:189
+#: includes/functions/functions-settings-hook.php:204
+msgid "Free"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:190
+#: includes/functions/functions-settings-hook.php:205
+msgid "Premium"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:195
+msgid "Query by product taxonomies"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:208
+msgid "Buy now"
+msgstr ""
+
+#: includes/functions/functions-settings-hook.php:223
+msgid "Get pro version"
+msgstr ""
+
+#: includes/menu/data-update.php:20
+#, php-format
+msgid "%s - Data Update"
+msgstr ""
+
+#: includes/menu/layout-editor.php:53 includes/menu/settings-old.php:87
+#: includes/menu/settings.php:56
+msgid "Changes Saved."
+msgstr ""
+
+#: includes/menu/layout-editor.php:64
+#, php-format
+msgid "%s - Layout Editor"
+msgstr ""
+
+#: includes/menu/layout-editor.php:143
+msgid "Content:"
+msgstr ""
+
+#: includes/menu/layout-editor.php:270
+msgid "Create New"
+msgstr ""
+
+#: includes/menu/layout-editor.php:372
+msgid "CSS:"
+msgstr ""
+
+#: includes/menu/layout-editor.php:373
+msgid "Sample css"
+msgstr ""
+
+#: includes/menu/layout-editor.php:389
+msgid "CSS Hover:"
+msgstr ""
+
+#: includes/menu/layout-editor.php:406
+msgid "Word limit:"
+msgstr ""
+
+#: includes/menu/layout-editor.php:515
+#, php-format
+msgid ""
+"use %s where you want to repalce the meta value.<pre>&lt;div&gt;Before %s - "
+"%s After&lt;/div&gt;</pre>"
+msgstr ""
+
+#: includes/menu/layout-editor.php:538
+msgid "HTML:"
+msgstr ""
+
+#: includes/menu/layout-editor.php:615 includes/menu/settings.php:121
+msgid "Save Changes"
+msgstr ""
+
+#: includes/menu/settings-old.php:17
+msgid "<i class=\"fas fa-laptop-code\"></i> General"
+msgstr ""
+
+#: includes/menu/settings-old.php:56
+msgid "Post Grid - Settings"
+msgstr ""
+
+#: includes/menu/settings-old.php:144
+msgid "Update"
+msgstr ""
+
+#: includes/menu/settings.php:11 includes/post-grid-meta-box.php:57
+#, php-format
+msgid "%s General"
+msgstr ""
+
+#: includes/menu/settings.php:20
+#, php-format
+msgid "%s Help & support"
+msgstr ""
+
+#: includes/menu/settings.php:27
+#, php-format
+msgid "%s Buy Pro"
+msgstr ""
+
+#: includes/menu/settings.php:46
+#, php-format
+msgid "%s Settings"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:18
+msgid "Post Grid Options"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:19
+msgid "Post Grid Information"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:50
+#, php-format
+msgid "%s Shortcode"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:64
+#, php-format
+msgid "%s Query Post"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:72
+#, php-format
+msgid "%s Skin & Layout"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:80
+#, php-format
+msgid "%s Layout Settings"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:89
+#, php-format
+msgid "%s Grid"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:99
+#, php-format
+msgid "%s Masonry"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:109
+#, php-format
+msgid "%s Pagination"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:119
+#, php-format
+msgid "%s Custom Scripts"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:126
+#, php-format
+msgid "%s Search"
+msgstr ""
+
+#: includes/post-grid-meta-box.php:160
+msgid "View Type"
+msgstr ""
+
+#: templates/layer-content.php:301
+msgid "No More comments"
+msgstr ""
+
+#: templates/nav-top.php:20
+msgid "Press enter to reset"
+msgstr ""
+
+#: templates/post-grid.php:138
+msgid "No Post found"
+msgstr ""

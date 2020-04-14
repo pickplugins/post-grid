@@ -1,0 +1,204 @@
+<?php
+/*
+Plugin Name: Post Grid by PickPlugins
+Plugin URI: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/
+Description: Awesome post grid for query post from any post type and display on grid.
+Version: 2.0.45
+Author: PickPlugins
+Author URI: https://www.pickplugins.com/
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+if ( ! defined('ABSPATH')) exit;  // if direct access 
+
+if( !class_exists( 'PostGrid' )){
+    class PostGrid{
+
+        public function __construct(){
+
+            define('post_grid_plugin_url', plugins_url('/', __FILE__));
+            define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
+            define('post_grid_plugin_basename', plugin_basename(__FILE__));
+            define('post_grid_plugin_name', 'Post Grid');
+            define('post_grid_version', '2.0.45');
+
+            include('includes/classes/class-post-types.php');
+            include('includes/functions/functions-settings-hook.php');
+
+
+            include('includes/classes/class-post-grid-support.php');
+            include('includes/data-update/class-post-grid-data-update.php');
+            include('includes/class-functions.php');
+            include('includes/class-shortcodes.php');
+            include('includes/class-settings.php');
+            include('includes/class-post-grid-meta-box.php');
+            include('includes/class-settings-tabs.php');
+            include('includes/functions/functions-post-grid-meta-box.php');
+            include('includes/post-grid-meta-box.php');
+            include('includes/functions/functions-post-grid.php');
+            include('includes/functions.php');
+            include('includes/shortcodes/shortcode-current_user_id.php');
+
+
+            add_action('wp_enqueue_scripts', array($this, '_scripts_front'));
+            add_action('admin_enqueue_scripts', array($this, '_scripts_admin'));
+            add_action('admin_enqueue_scripts', 'wp_enqueue_media');
+
+            add_action('plugins_loaded', array($this, '_textdomain'));
+
+            register_activation_hook(__FILE__, array($this, '_activation'));
+            register_deactivation_hook(__FILE__, array($this, '_deactivation'));
+
+
+        }
+
+
+        public function _textdomain(){
+
+            $locale = apply_filters('plugin_locale', get_locale(), 'post-grid');
+            load_textdomain('post-grid', WP_LANG_DIR . '/post-grid/post-grid-' . $locale . '.mo');
+
+            load_plugin_textdomain('post-grid', false, plugin_basename(dirname(__FILE__)) . '/languages/');
+
+        }
+
+        public function _activation(){
+
+
+            $class_post_grid_functions = new class_post_grid_functions();
+
+
+            $post_grid_layout_content = get_option('post_grid_layout_content');
+            if (empty($post_grid_layout_content)){
+                $layout_content_list = $class_post_grid_functions->layout_content_list();
+                update_option('post_grid_layout_content', $layout_content_list);
+            }
+
+
+
+            $post_grid_info = get_option('post_grid_info');
+            $post_grid_info['current_version'] = post_grid_version;
+            $post_grid_info['last_version'] = isset($post_grid_info['last_version']) ? $post_grid_info['last_version'] : '2.0.30';
+            $post_grid_info['data_update_status'] = isset($post_grid_info['data_update_status']) ? $post_grid_info['data_update_status'] : 'pending';
+            update_option('post_grid_info', $post_grid_info);
+
+
+            /*
+             * Custom action hook for plugin activation.
+             * Action hook: post_grid_activation
+             * */
+            do_action('post_grid_activation');
+
+        }
+
+        public function post_grid_uninstall(){
+
+            /*
+             * Custom action hook for plugin uninstall/delete.
+             * Action hook: post_grid_uninstall
+             * */
+            do_action('post_grid_uninstall');
+        }
+
+        public function _deactivation(){
+
+            /*
+             * Custom action hook for plugin deactivation.
+             * Action hook: post_grid_deactivation
+             * */
+            do_action('post_grid_deactivation');
+        }
+
+
+        public function _scripts_front(){
+            wp_enqueue_script('jquery');
+
+            // Register Scripts & JS
+            wp_register_script('post_grid_scripts', post_grid_plugin_url.'/assets/frontend/js/scripts.js', array('jquery'));
+            wp_register_script('masonry.js', post_grid_plugin_url.'/assets/frontend/js/masonry.pkgd.min.js', array('jquery'));
+            wp_register_script('imagesloaded.js', post_grid_plugin_url.'/assets/frontend/js/imagesloaded.pkgd.js', array('jquery'));
+
+            // Register CSS & Styles
+            wp_register_style(  'post-grid-style', post_grid_plugin_url . 'assets/frontend/css/style.css');
+            wp_register_style(  'post-grid-skin', post_grid_plugin_url . 'assets/global/css/style.skins.css');
+
+            wp_register_style('font-awesome-4', post_grid_plugin_url.'assets/global/css/font-awesome-4.css');
+            wp_register_style('font-awesome-5', post_grid_plugin_url.'assets/global/css/font-awesome-5.css');
+
+        }
+
+
+        public function _scripts_admin(){
+
+            $screen = get_current_screen();
+
+            //var_dump($screen);
+
+            wp_register_script('post_grid_admin_js', post_grid_plugin_url.'assets/admin/js/scripts.js', array('jquery'));
+
+            wp_register_script('select2', post_grid_plugin_url.'assets/admin/js/select2.full.js', array('jquery'));
+            wp_register_style(  'select2', post_grid_plugin_url . 'assets/admin/css/select2.min.css');
+
+            wp_enqueue_style('post_grid_skin', post_grid_plugin_url . 'assets/global/css/style.skins.css');
+
+
+            wp_register_style('font-awesome-4', post_grid_plugin_url.'assets/global/css/font-awesome-4.css');
+            wp_register_style('font-awesome-5', post_grid_plugin_url.'assets/global/css/font-awesome-5.css');
+
+            wp_register_style('settings-tabs', post_grid_plugin_url.'assets/settings-tabs/settings-tabs.css');
+            wp_register_script('settings-tabs', post_grid_plugin_url.'assets/settings-tabs/settings-tabs.js'  , array( 'jquery' ));
+
+            wp_register_style('layout-editor', post_grid_plugin_url.'assets/admin/css/layout-editor.css');
+            wp_register_script('layout-editor', post_grid_plugin_url.'assets/admin/js/layout-editor.js', array('jquery'));
+            wp_register_style('bootstrap-grid', post_grid_plugin_url.'assets/global/css/bootstrap-grid.css');
+
+
+            if ($screen->id == 'post_grid'){
+
+                wp_enqueue_script('post_grid_admin_js');
+                wp_localize_script('post_grid_admin_js', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
+
+                wp_enqueue_style('post_grid_skin');
+
+
+                wp_enqueue_style('select2');
+                wp_enqueue_script('select2');
+
+                $settings_tabs_field = new settings_tabs_field();
+                $settings_tabs_field->admin_scripts();
+
+            }
+
+
+
+            if ($screen->id == 'post_grid_page_layout_editor'){
+
+                $settings_tabs_field = new settings_tabs_field();
+                $settings_tabs_field->admin_scripts();
+
+                wp_enqueue_script('post_grid_admin_js');
+                wp_localize_script('post_grid_admin_js', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
+                wp_enqueue_style('bootstrap-grid');
+
+                wp_enqueue_style('layout-editor');
+                wp_enqueue_script('layout-editor');
+
+                wp_enqueue_style('select2');
+                wp_enqueue_script('select2');
+            }
+
+
+            if ($screen->id == 'post_grid_page_post-grid-settings'){
+                $settings_tabs_field = new settings_tabs_field();
+                $settings_tabs_field->admin_scripts();
+            }
+
+
+
+        }
+
+
+    }
+}
+new PostGrid();

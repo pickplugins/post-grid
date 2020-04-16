@@ -165,25 +165,7 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 		
 		}
 		
-		
-		
-		if($lazy_load_enable=='yes'){
-			
-			//echo '#post-grid-'.$grid_id.'{display: none;}';
-		
-			}
-		
-		
-		
-		
 
-		
-		
-		
-		
-		
-		
-		
 	
 	echo '</style>';
 	
@@ -211,67 +193,11 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-		if($pagination_type=='loadmore'){
-			
-			echo '#post-grid-'.$grid_id.' #load-more-'.$grid_id.'{
-				
-				font-size:'.$pagination_font_size.';		
-				color:'.$pagination_font_color.';		
-				background:'.$pagination_bg_color.';
-				
-				
-				}';
-			
-			echo '#post-grid-'.$grid_id.' #load-more-'.$grid_id.'.loading{
-					
-				background:'.$pagination_active_bg_color.';
-				}';			
-
-			}
-
-
-
-
-
-
-
-
 	echo '#post-grid-'.$grid_id.' .pagination .page-numbers:hover, #post-grid-'.$grid_id.' .pagination .page-numbers.current, #post-grid-'.$grid_id.' .pagination .pager.active{
 		background:'.$pagination_active_bg_color.';
 		}';	
 	
-	
-	echo '#post-grid-'.$grid_id.' .nav-filter .filter{
-		
-		font-size:'.$filterable_font_size.';		
-		color:'.$filterable_font_color.';		
-		background:'.$filterable_bg_color.';
-		margin:'.$filterable_navs_margin.';
 
-		}';		
-	
-	
-	echo '#post-grid-'.$grid_id.' .nav-filter .filter:hover, #post-grid-'.$grid_id.' .nav-filter .filter.active{
-		background:'.$filterable_active_bg_color.';
-		}';		
-	
-	
-	
-	
-	
-	echo '#post-grid-'.$grid_id.' .owl-dots .owl-dot {
-			background: '.$slider_dots_bg_color.' none repeat scroll 0 0;
-				 
-			}';		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		echo '#post-grid-'.$grid_id.' {
@@ -280,33 +206,18 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 		}';
 
 	
-/*
 
-	if($skin=='flip-y' || $skin=='flip-x'){
-		
-		echo '#post-grid-'.$grid_id.' .item{
-			height:'.$items_fixed_height.' !important;
-			}';	
-		
-		}
-
-*/
 		
 		
 	if($items_media_height_style == 'auto_height'){
 		$items_media_height = 'auto';
-		}
-	elseif($items_media_height_style == 'fixed_height'){
+	}elseif($items_media_height_style == 'fixed_height'){
 		$items_media_height = $items_media_fixed_height;
-		}
-		
-	elseif($items_media_height_style == 'max_height'){
+	}elseif($items_media_height_style == 'max_height'){
 		$items_media_height = $items_media_fixed_height;
-		}		
-		
-	else{
+	}else{
 		$items_media_height = '220px';
-		}
+	}
 		
 		
 		
@@ -319,16 +230,12 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 	echo '#post-grid-'.$grid_id.' .item .layer-media{';
 		
 		if($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height'){
-			
 			echo 'height:'.$items_media_height.';';
-			}
-		elseif($items_media_height_style=='max_height'){
+		}elseif($items_media_height_style=='max_height'){
 			echo 'max-height:'.$items_media_height.';';
-			}
-		else{
+		}else{
 			echo 'height:'.$items_media_height.';';
-			
-			}
+		}
 
 		echo 'overflow: hidden;
 		}';	
@@ -367,20 +274,14 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 	echo '#post-grid-'.$grid_id.' .item{';
 
 		if($items_height_style == 'fixed_height'){
-			
 			echo 'height:'.$items_height.';';
-			}
-		elseif($items_height_style=='max_height'){
+		}elseif($items_height_style=='max_height'){
 			echo 'max-height:'.$items_height.';';
-			}
-        elseif($items_height_style=='auto_height'){
+		}elseif($items_height_style=='auto_height'){
+			echo 'height:auto;';
+		}else{
 			echo 'height:auto;';
 		}
-
-		else{
-			echo 'height:auto;';
-			
-			}
 
 
 	echo '}';
@@ -393,21 +294,14 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 	echo '#post-grid-'.$grid_id.' .item{';
 
 		if($items_height_style_tablet == 'fixed_height'){
-			
 			echo 'height:'.$items_fixed_height_tablet.';';
-			}
-		elseif($items_height_style_tablet=='max_height'){
+		}elseif($items_height_style_tablet=='max_height'){
 			echo 'max-height:'.$items_fixed_height_tablet.';';
-			}
-
-        elseif($items_height_style_tablet=='auto_height'){
+		}elseif($items_height_style_tablet=='auto_height'){
 			echo 'max-height:auto;';
-		}
-
-		else{
+		}else{
 			echo 'height:auto;';
-			
-			}
+		}
 
 
 	echo '}';
@@ -420,20 +314,14 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 	echo '#post-grid-'.$grid_id.' .item{';
 
 		if($items_height_style_mobile == 'fixed_height'){
-			
 			echo 'height:'.$items_fixed_height_mobile.';';
-			}
-		elseif($items_height_style_mobile=='max_height'){
+		}elseif($items_height_style_mobile=='max_height'){
 			echo 'max-height:'.$items_fixed_height_mobile.';';
-			}
-        elseif($items_height_style_mobile == 'auto_height'){
+		}elseif($items_height_style_mobile == 'auto_height'){
+			echo 'height:auto;';
+		}else{
 			echo 'height:auto;';
 		}
-
-		else{
-			echo 'height:auto;';
-			
-			}
 
 
 	echo '}';
@@ -445,113 +333,6 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 if($grid_type!='slider'){
 	
-	
-	
-	if($grid_layout_name=='layout_grid'){
-		
-
-		
-		}
-		
-	elseif($grid_layout_name=='layout_1_N'){
-		
-		$width = intval($items_width_desktop*$grid_layout_col_multi)+intval($items_margin*2*($grid_layout_col_multi-1));
-		
-		echo '
-		
-		@media only screen and (min-width: 1024px ) {
-		
-		#post-grid-'.$grid_id.' .item:first-child{
-			width: '.($width).'px;
-			}
-		}
-			
-			';
-			
-			
-		}		
-		
-	elseif($grid_layout_name=='layout_N_1'){
-		
-		$width = intval($items_width_desktop*$grid_layout_col_multi)+intval($items_margin*2*($grid_layout_col_multi-1));
-		
-		echo '
-		
-		@media only screen and (min-width: 1024px ) {
-		
-		#post-grid-'.$grid_id.' .item:last-child{
-			width: '.($width).'px;
-			}
-		}
-			
-			';
-			
-		}
-	
-	
-		
-	elseif($grid_layout_name=='layout_3'){
-		
-		$width = intval($items_width_desktop)+intval($items_margin);
-		
-		echo '
-		
-		@media only screen and (min-width: 1024px ) {
-		
-		#post-grid-'.$grid_id.' .item:first-child{
-			float: left;
-			}
-			
-		#post-grid-'.$grid_id.' .item{
-			float: right;
-			}		
-
-			
-		}
-			
-			';
-			
-		}	
-	
-	
-	
-	
-	
-
-	elseif($grid_layout_name=='layout_L_R'){
-		
-		echo '
-		
-		@media only screen and (min-width: 1024px ) {
-		
-		#post-grid-'.$grid_id.' .item.odd .layer-media{
-			float: right;
-
-			}
-		}
-			
-			';
-			
-		}	
-
-	elseif($grid_layout_name=='layout_1_N_1'){
-		
-		$width = intval($items_width_desktop*$grid_layout_col_multi)+intval($items_margin*2*($grid_layout_col_multi-1));
-		
-		echo '
-		
-		@media only screen and (min-width: 1024px ) {
-		
-		#post-grid-'.$grid_id.' .item:nth-child(1),
-		#post-grid-'.$grid_id.' .item:nth-child('.($grid_layout_col_multi+2).') {
-			width: '.($width).'px;
-			}
-		}
-			
-			';
-			
-		}
-
 	
 
 	
@@ -574,34 +355,6 @@ if($grid_type!='slider'){
 
 
 
-if($grid_type == 'timeline'){
-?>
-
-    .post-grid.timeline .item.odd .timeline-arrow:after, .post-grid.timeline .item.even .timeline-arrow:after {
-        border-width: <?php echo $timeline_arrow_size; ?>;
-
-    }
-    .post-grid.timeline .item .timeline-arrow {
-        height: <?php echo $timeline_arrow_size; ?>;
-    }
-
-    .post-grid.timeline .timeline-line{
-        background: <?php echo $timeline_bg_color; ?>;
-
-    }
-    .post-grid.timeline .item.even .timeline-bubble, .post-grid.timeline .item.odd .timeline-bubble{
-        background: <?php echo $timeline_bubble_bg_color; ?>;
-        border: 5px solid <?php echo $timeline_bubble_border_color; ?>;
-    }
-    .post-grid.timeline .item.even .timeline-arrow:after{
-        border-left-color: <?php echo $timeline_arrow_bg_color; ?>;
-    }
-
-    .post-grid.timeline .item.odd .timeline-arrow:after{
-        border-right-color: <?php echo $timeline_arrow_bg_color; ?>;
-    }
-    <?php
-}
 			
 			
 ?>

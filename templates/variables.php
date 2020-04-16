@@ -143,40 +143,23 @@ $items_bg_color = isset($post_grid_meta_options['items_bg_color']) ? $post_grid_
 
 
 
-		
-		
 
 
-		
-		
-	if(!empty($post_grid_meta_options['item_height']['style'])){
-		
-		$items_height_style = $post_grid_meta_options['item_height']['style'];
-		}
-	else{
-		$items_height_style = 'auto_height';
-		
-		}
+$items_height_style = !empty($post_grid_meta_options['item_height']['style']) ? $post_grid_meta_options['item_height']['style'] : 'auto_height';
+$items_height_style_tablet = !empty($post_grid_meta_options['item_height']['style_tablet']) ? $post_grid_meta_options['item_height']['style_tablet'] : 'auto_height';
+$items_height_style_mobile = !empty($post_grid_meta_options['item_height']['style_mobile']) ?$post_grid_meta_options['item_height']['style_mobile'] : 'auto_height';
 
 
-	if(!empty($post_grid_meta_options['item_height']['style_tablet'])){
-
-		$items_height_style_tablet = $post_grid_meta_options['item_height']['style_tablet'];
-	}
-	else{
-		$items_height_style_tablet = 'auto_height';
-
-	}
 
 
-	if(!empty($post_grid_meta_options['item_height']['style_mobile'])){
+$items_fixed_height = !empty($post_grid_meta_options['item_height']['fixed_height']) ? $post_grid_meta_options['item_height']['fixed_height'] : '220px';
+$items_fixed_height_tablet = !empty($post_grid_meta_options['item_height']['fixed_height_tablet']) ? $post_grid_meta_options['item_height']['fixed_height_tablet'] : '220px';
+$items_fixed_height_mobile = !empty($post_grid_meta_options['item_height']['fixed_height_mobile']) ? $post_grid_meta_options['item_height']['fixed_height_mobile'] : '220px';
 
-		$items_height_style_mobile = $post_grid_meta_options['item_height']['style_mobile'];
-	}
-	else{
-		$items_height_style_mobile = 'auto_height';
 
-	}
+
+$items_media_height_style = !empty($post_grid_meta_options['media_height']['style']) ? $post_grid_meta_options['media_height']['style'] : 'auto_height';
+$items_media_fixed_height = !empty($post_grid_meta_options['media_height']['fixed_height']) ? $post_grid_meta_options['media_height']['fixed_height'] : '';
 
 
 
@@ -185,89 +168,14 @@ $items_bg_color = isset($post_grid_meta_options['items_bg_color']) ? $post_grid_
 
 
 
-			
-	if(!empty($post_grid_meta_options['item_height']['fixed_height'])){
-		
-		$items_fixed_height = $post_grid_meta_options['item_height']['fixed_height'];
-		}
-	else{
-		$items_fixed_height = '220px';
-		
-		}
-		
-		
-	if(!empty($post_grid_meta_options['item_height']['fixed_height_tablet'])){
-		
-		$items_fixed_height_tablet = $post_grid_meta_options['item_height']['fixed_height_tablet'];
-		}
-	else{
-		$items_fixed_height_tablet = '220px';
-		
-		}		
-		
-		
-	if(!empty($post_grid_meta_options['item_height']['fixed_height_mobile'])){
-		
-		$items_fixed_height_mobile = $post_grid_meta_options['item_height']['fixed_height_mobile'];
-		}
-	else{
-		$items_fixed_height_mobile = '220px';
-		
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-	if(!empty($post_grid_meta_options['media_height']['style'])){
-		
-		$items_media_height_style = $post_grid_meta_options['media_height']['style'];
-		}
-	else{
-		$items_media_height_style = 'auto_height';
-		
-		}				
-			
-	if(!empty($post_grid_meta_options['media_height']['fixed_height'])){
-		
-		$items_media_fixed_height = $post_grid_meta_options['media_height']['fixed_height'];
-		}
-	else{
-		$items_media_fixed_height = '';
-		
-		}
-		
-		
-	if(!empty($post_grid_meta_options['media_source'])){
-		
-		$media_source = $post_grid_meta_options['media_source'];
-		}
-	else{
-		$media_source = array();
-		
-		}
-		
-	if(!empty($post_grid_meta_options['featured_img_size'])){
-		
-		$featured_img_size = $post_grid_meta_options['featured_img_size'];
-		}
-	else{
-		$featured_img_size = 'full';
-		
-		}		
-		
-		
-	if(!empty($post_grid_meta_options['thumb_linked'])){
-		
-		$thumb_linked = $post_grid_meta_options['thumb_linked'];
-		}
-	else{
-		$thumb_linked = 'yes';
-		
-		}
+
+$media_source = !empty($post_grid_meta_options['media_source']) ? $post_grid_meta_options['media_source'] : array();
+$featured_img_size = !empty($post_grid_meta_options['featured_img_size']) ? $post_grid_meta_options['featured_img_size'] : 'full';
+$thumb_linked = !empty($post_grid_meta_options['thumb_linked']) ? $post_grid_meta_options['thumb_linked'] : 'yes';
+
+
+
+
 
 
 $items_margin = isset($post_grid_meta_options['margin']) ? $post_grid_meta_options['margin'] : '';
@@ -608,64 +516,19 @@ $nav_top_search_icon = isset($post_grid_meta_options['nav_top']['search_icon']) 
 		$max_num_pages = 0;
 		
 		}
-		
-		
-	if(!empty($post_grid_meta_options['pagination']['prev_text'])){
-		
-		$pagination_prev_text = $post_grid_meta_options['pagination']['prev_text'];
-		}
-	else{
-		$pagination_prev_text = __('« Previous', 'post-grid');
-		
-		}		
-		
-		
-	if(!empty($post_grid_meta_options['pagination']['next_text'])){
-		
-		$pagination_next_text = $post_grid_meta_options['pagination']['next_text'];
-		}
-	else{
-		$pagination_next_text = __('Next »', 'post-grid');
-		
-		}
-		
-	if(!empty($post_grid_meta_options['pagination']['font_size'])){
-		
-		$pagination_font_size = $post_grid_meta_options['pagination']['font_size'];
-		}
-	else{
-		$pagination_font_size = '17px';
-		
-		}		
-		
-		
-	if(!empty($post_grid_meta_options['pagination']['font_color'])){
-		
-		$pagination_font_color = $post_grid_meta_options['pagination']['font_color'];
-		}
-	else{
-		$pagination_font_color = '#646464';
-		
-		}		
-		
-	if(!empty($post_grid_meta_options['pagination']['bg_color'])){
-		
-		$pagination_bg_color = $post_grid_meta_options['pagination']['bg_color'];
-		}
-	else{
-		$pagination_bg_color = '#646464';
-		
-		}		
-		
-		
-	if(!empty($post_grid_meta_options['pagination']['active_bg_color'])){
-		
-		$pagination_active_bg_color = $post_grid_meta_options['pagination']['active_bg_color'];
-		}
-	else{
-		$pagination_active_bg_color = '#4b4b4b';
-		
-		}
+
+$pagination_prev_text = !empty($post_grid_meta_options['pagination']['prev_text']) ? $post_grid_meta_options['pagination']['prev_text'] : __('« Previous', 'post-grid');
+$pagination_next_text = !empty($post_grid_meta_options['pagination']['next_text']) ? $post_grid_meta_options['pagination']['next_text'] : __('Next »', 'post-grid');
+
+
+
+$pagination_font_size = !empty($post_grid_meta_options['pagination']['font_size']) ? $post_grid_meta_options['pagination']['font_size'] : '17px';
+$pagination_font_color = !empty($post_grid_meta_options['pagination']['font_color']) ? $post_grid_meta_options['pagination']['font_color'] : '#646464';
+$pagination_bg_color = !empty($post_grid_meta_options['pagination']['bg_color']) ? $post_grid_meta_options['pagination']['bg_color'] : '#646464';
+$pagination_active_bg_color = !empty($post_grid_meta_options['pagination']['active_bg_color']) ?$post_grid_meta_options['pagination']['active_bg_color'] : '#4b4b4b';
+
+
+
 
 
 

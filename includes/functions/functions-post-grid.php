@@ -10,7 +10,7 @@ function post_grid_preview_content($content){
 
         $post_id = get_the_id();
 
-        $content .= do_shortcode('[post_grid id="'.$post_id.'"]');
+        $content .= do_shortcode('[post_grid_new id="'.$post_id.'"]');
 
     }
 

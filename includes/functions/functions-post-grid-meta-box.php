@@ -98,6 +98,7 @@ function post_grid_settings_tabs_content_general($tab, $post_id){
 
     $lazy_load_enable = !empty($post_grid_meta_options['lazy_load_enable']) ? $post_grid_meta_options['lazy_load_enable'] : 'yes';
     $lazy_load_image_src = !empty($post_grid_meta_options['lazy_load_image_src']) ? $post_grid_meta_options['lazy_load_image_src'] : '';
+    $load_fontawesome = !empty($post_grid_meta_options['load_fontawesome']) ? $post_grid_meta_options['load_fontawesome'] : '';
 
     ?>
     <div class="section">
@@ -137,6 +138,29 @@ function post_grid_settings_tabs_content_general($tab, $post_id){
         );
 
         $settings_tabs_field->generate_field($args, $post_id);
+
+
+        $args = array(
+            'id'		=> 'load_fontawesome',
+            'parent'		=> 'post_grid_meta_options',
+            'title'		=> __('Load font awesome','post-grid'),
+            'details'	=> __('Choose enable or disable font-awesome load.','post-grid'),
+            'type'		=> 'radio',
+            'multiple'		=> true,
+            'value'		=> $load_fontawesome,
+            'default'		=> 'no',
+            'args'		=> array(
+                'no'=>__('No','post-grid'),
+                'yes'=>__('Yes','post-grid'),
+
+            ),
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
 
 
         ?>
@@ -1424,10 +1448,10 @@ function post_grid_settings_tabs_content_pagination($tab, $post_id){
             'id'		=> 'max_num_pages',
             'parent'		=> 'post_grid_meta_options[pagination]',
             'title'		=> __('Max number of pagination','post-grid'),
-            'details'	=> __('keep 0 (zero) for auto','post-grid'),
+            'details'	=> __('Display max number of pagination item, default: 0','post-grid'),
             'type'		=> 'text',
             'value'		=> $max_num_pages,
-            'default'		=> '0',
+            'default'		=> 0,
         );
 
         $settings_tabs_field->generate_field($args, $post_id);
@@ -1436,7 +1460,7 @@ function post_grid_settings_tabs_content_pagination($tab, $post_id){
         $args = array(
             'id'		=> 'prev_text',
             'parent'		=> 'post_grid_meta_options[pagination]',
-            'title'		=> __('Pagination Previous text','post-grid'),
+            'title'		=> __('Previous text','post-grid'),
             'details'	=> __('Custom text for previous page','post-grid'),
             'type'		=> 'text',
             'value'		=> $prev_text,
@@ -1450,7 +1474,7 @@ function post_grid_settings_tabs_content_pagination($tab, $post_id){
         $args = array(
             'id'		=> 'next_text',
             'parent'		=> 'post_grid_meta_options[pagination]',
-            'title'		=> __('Pagination Next text','post-grid'),
+            'title'		=> __('Next text','post-grid'),
             'details'	=> __('Custom text for next page','post-grid'),
             'type'		=> 'text',
             'value'		=> $next_text,
@@ -1463,7 +1487,7 @@ function post_grid_settings_tabs_content_pagination($tab, $post_id){
         $args = array(
             'id'		=> 'font_size',
             'parent'		=> 'post_grid_meta_options[pagination]',
-            'title'		=> __('Pagination font size','post-grid'),
+            'title'		=> __('Font size','post-grid'),
             'details'	=> __('Custom font size for pagination','post-grid'),
             'type'		=> 'text',
             'value'		=> $font_size,
@@ -1479,8 +1503,8 @@ function post_grid_settings_tabs_content_pagination($tab, $post_id){
         $args = array(
             'id'		=> 'font_color',
             'parent'		=> 'post_grid_meta_options[pagination]',
-            'title'		=> __('Pagination font color','post-grid'),
-            'details'	=> __('Set custom color for pagination text.','post-grid'),
+            'title'		=> __('Text or link color','post-grid'),
+            'details'	=> __('Set custom text or link color.','post-grid'),
             'type'		=> 'colorpicker',
             'value'		=> $font_color,
             'default'		=> '#ddd',
@@ -1491,8 +1515,8 @@ function post_grid_settings_tabs_content_pagination($tab, $post_id){
         $args = array(
             'id'		=> 'bg_color',
             'parent'		=> 'post_grid_meta_options[pagination]',
-            'title'		=> __('Pagination default background color','post-grid'),
-            'details'	=> __('Set custom value for pagination background color.','post-grid'),
+            'title'		=> __('Default background color','post-grid'),
+            'details'	=> __('Set custom background color.','post-grid'),
             'type'		=> 'colorpicker',
             'value'		=> $bg_color,
             'default'		=> '#ddd',
@@ -1503,8 +1527,8 @@ function post_grid_settings_tabs_content_pagination($tab, $post_id){
         $args = array(
             'id'		=> 'active_bg_color',
             'parent'		=> 'post_grid_meta_options[pagination]',
-            'title'		=> __('Pagination active/hover background color','post-grid'),
-            'details'	=> __('Set custom value filterable pagination item active background color.','post-grid'),
+            'title'		=> __('Active or hover background color','post-grid'),
+            'details'	=> __('Set custom background color.','post-grid'),
             'type'		=> 'colorpicker',
             'value'		=> $active_bg_color,
             'default'		=> '#ddd',
@@ -1542,6 +1566,7 @@ function post_grid_settings_tabs_content_search($tab, $post_id){
     $nav_top_search = !empty($post_grid_meta_options['nav_top']['search']) ? $post_grid_meta_options['nav_top']['search'] : 'no';
     $nav_top_search_placeholder = !empty($post_grid_meta_options['nav_top']['search_placeholder']) ? $post_grid_meta_options['nav_top']['search_placeholder'] : __('Start typing', 'post-grid');
     $nav_top_search_icon = !empty($post_grid_meta_options['nav_top']['search_icon']) ? $post_grid_meta_options['nav_top']['search_icon'] : '<i class="fas fa-search"></i>';
+    $search_loading_icon = !empty($post_grid_meta_options['nav_top']['search_loading_icon']) ? $post_grid_meta_options['nav_top']['search_loading_icon'] : '<i class="fas fa-spinner fa-spin"></i>';
 
     ?>
     <div class="section">
@@ -1595,7 +1620,17 @@ function post_grid_settings_tabs_content_search($tab, $post_id){
         $settings_tabs_field->generate_field($args, $post_id);
 
 
+        $args = array(
+            'id'		=> 'search_loading_icon',
+            'parent'		=> 'post_grid_meta_options[nav_top]',
+            'title'		=> __('Search loading icon','post-grid'),
+            'details'	=> __('Custom icon for search input field, you can use <a target="_blank" href="https://fontawesome.com/icons">fontawesome</a> icons.','post-grid'),
+            'type'		=> 'text',
+            'value'		=> $search_loading_icon,
+            'default'		=> '<i class="fas fa-spinner fa-spin"></i>',
+        );
 
+        $settings_tabs_field->generate_field($args, $post_id);
 
 
 

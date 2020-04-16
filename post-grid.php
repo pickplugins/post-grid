@@ -25,6 +25,8 @@ if( !class_exists( 'PostGrid' )){
 
             include('includes/classes/class-post-types.php');
             include('includes/functions/functions-settings-hook.php');
+            include('templates/post-grid-hook.php');
+            include('includes/functions/post-grid-layout-elements.php');
 
 
             include('includes/classes/class-post-grid-support.php');

@@ -16,7 +16,7 @@ $load_more_text = $class_post_grid_functions->load_more_text();
 
 //var_dump($max_num_pages);
 
-if($max_num_pages==0){
+if($max_num_pages == 0){
     $max_num_pages = $post_grid_wp_query->max_num_pages;
 }
 

@@ -181,6 +181,13 @@ class class_post_grid_functions{
                     'css'=>'display: block;font-size: 13px;line-height: normal;padding: 5px 10px;text-align: left;',
                 ),
 
+                'five_star'=>array(
+                    'name'=>'Five star',
+                    'dummy_html'=>'Star',
+                    'css'=>'display: block;font-size: 13px;line-height: normal;padding: 5px 10px;text-align: left;',
+                ),
+
+
             ),
 
         );

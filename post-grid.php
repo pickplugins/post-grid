@@ -28,6 +28,10 @@ if( !class_exists( 'PostGrid' )){
             include('templates/post-grid-hook.php');
             include('includes/functions/post-grid-layout-elements.php');
 
+            include('includes/class-metabox-post-grid-layout.php');
+            include('includes/class-metabox-post-grid-layout-hook.php');
+            include('includes/functions-layout-hook.php');
+
 
             include('includes/classes/class-post-grid-support.php');
             include('includes/data-update/class-post-grid-data-update.php');

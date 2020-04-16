@@ -36,8 +36,7 @@ class settings_tabs_field{
         wp_enqueue_script( 'code-editor' );
         wp_enqueue_style( 'code-editor' );
 
-        //wp_enqueue_editor();
-        //wp_enqueue_media();
+        wp_enqueue_editor();
     }
 
     function field_template($option){
@@ -522,71 +521,66 @@ class settings_tabs_field{
 
         $settings_tabs_field = new settings_tabs_field();
 
+
         ob_start();
         ?>
-        <script>
-            jQuery(document).ready(function($) {
-                jQuery(document).on("click", ".field-repeatable-wrapper-<?php echo $css_id; ?> .add-repeat-field", function() {
+        <div class="item-wrap collapsible">
+            <div class="header">
+                <span class="remove" onclick="jQuery(this).parent().parent().remove()"><?php echo $remove_text; ?></span>
+                <?php
+                if($sortable):
+                    ?>
+                    <span class="sort" ><i class="fas fa-arrows-alt"></i></span>
+                <?php
+                endif;
+                ?>
+                <span  class="title-text">#TIMEINDEX</span>
+            </div>
+            <?php
 
 
-                    now = jQuery.now();
-                    fields_arr = <?php echo json_encode($fields); ?>;
-                    html = '<div class="item-wrap collapsible"><div class="header"><span class="remove" ' +
-                        'onclick="jQuery(this).parent().parent().remove()"><?php echo $remove_text; ?></span> ';
-                    <?php if($sortable):?>
-                    html += '<span class="sort" ><i class="fas fa-arrows-alt"></i></span>';
-                    <?php endif; ?>
-                    html += ' <span  class="title-text">#'+now+'</span></div>';
+            if(!empty($fields)):
+                foreach ($fields as $field):
 
-                    <?php
-
-                    $fieldHtml = '';
-
-                        if(!empty($fields)):
-                            foreach ($fields as $field):
-
-                                $fieldType = isset($field['type']) ? $field['type'] : '';
-                                $field['parent'] = $field_name.'[TIMEINDEX]';
-
-                                ob_start();
-                                ?>
-                                <div class="item">
-                                    <?php if($collapsible):?>
-                                        <div class="content">
-                                    <?php endif; ?>
-
-                                    <?php
-                                    $settings_tabs_field->generate_field($field);
-                                    ?>
-                                    <?php if($collapsible):?>
-                                        </div>
-                                    <?php endif; ?>
-
-                                </div>
-                                <?php
-                                $fieldHtml .= ob_get_clean();
-                            endforeach;
-                        endif;
-
-
-                    $string = str_replace("\n", "", $fieldHtml);
-                    $fieldHtml = str_replace("\r", "", $string);
+                    $fieldType = isset($field['type']) ? $field['type'] : '';
+                    $field['parent'] = $field_name.'[TIMEINDEX]';
 
 
                     ?>
+                    <div class="item">
+                        <?php if($collapsible):?>
+                        <div class="content">
+                            <?php endif; ?>
 
-                    fieldHtml = '<?php echo $fieldHtml; ?>';
-                    html+= fieldHtml.replace(/TIMEINDEX/g, now);
-                    html+='</div>';
+                            <?php
+                            $settings_tabs_field->generate_field($field);
+                            ?>
+                            <?php if($collapsible):?>
+                        </div>
+                    <?php endif; ?>
 
-                    jQuery('.<?php echo 'field-repeatable-wrapper-'.$css_id; ?> .repeatable-field-list').append(html);
+                    </div>
+                <?php
 
-                })
-            });
-        </script>
+                endforeach;
+            endif;
+            ?>
+        </div>
+        <?php
+
+        $fieldHtml = ob_get_clean();
+
+        $fieldHtml = preg_replace("/[\r\n]+/", "\n", $fieldHtml);
+        $fieldHtml = preg_replace("/\s+/", ' ', $fieldHtml);
+
+
+        ob_start();
+        ?>
+
+
         <div id="input-wrapper-<?php echo $css_id; ?>" class=" input-wrapper field-repeatable-wrapper
             field-repeatable-wrapper-<?php echo $css_id; ?>">
-            <div class="add-repeat-field"><i class="far fa-plus-square"></i> <?php _e('Add','accordions'); ?></div>
+            <div add_html="<?php echo esc_attr($fieldHtml); ?>" class="add-repeat-field"><i class="far fa-plus-square"></i> <?php _e('Add','accordions'); ?></div>
             <div class="repeatable-field-list sortable" id="<?php echo $css_id; ?>">
                 <?php
                 if(!empty($values)):

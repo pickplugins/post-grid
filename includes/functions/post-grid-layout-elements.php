@@ -3,6 +3,34 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
+add_action('post_grid_layout_element_custom_text', 'post_grid_layout_element_custom_text');
+
+function post_grid_layout_element_custom_text($args){
+
+    $element  = isset($args['element']) ? $args['element'] : array();
+    $elementIndex  = isset($args['index']) ? $args['index'] : '';
+
+    $post_id = isset($args['post_id']) ? $args['post_id'] : '';
+
+    if(empty($post_id)) return;
+
+    $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+
+    $title = get_the_title($post_id);
+
+    $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
+    $text = isset($element['text']) ?  $element['text'] : '';
+
+
+
+
+    ?>
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> custom_text ">
+        <?php echo esc_html($text); ?>
+    </div>
+    <?php
+}
 
 
 

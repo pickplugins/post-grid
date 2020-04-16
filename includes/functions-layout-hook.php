@@ -1258,10 +1258,12 @@ function post_grid_layout_elements_option_wrapper_end($parameters){
 
             $args = array(
                 'id'		=> 'wrapper_id',
+                'wraper_class'		=> 'hidden',
+
                 'parent' => $input_name.'[wrapper_end]',
                 'title'		=> __('Wrapper id','woocommerce-products-slider'),
                 'details'	=> __('Write wrapper id, ex: div, p, span.','woocommerce-products-slider'),
-                'type'		=> 'text',
+                'type'		=> 'hidden',
                 'value'		=> $meta_key,
                 'default'		=> '',
             );

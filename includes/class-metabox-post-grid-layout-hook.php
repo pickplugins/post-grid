@@ -118,7 +118,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         'title_link'=>array('name' =>__('Title with link','woocommerce-products-slider')),
                         'read_more'=>array('name' =>__('Read more','woocommerce-products-slider')),
                         'thumb'=>array('name' =>__('Thumbnail','woocommerce-products-slider')),
-                        'thumb_link'=>array('name' =>__('thumb with link ','woocommerce-products-slider')),
+                        'thumb_link'=>array('name' =>__('Thumbnail with link ','woocommerce-products-slider')),
 
                         'excerpt'=>array('name' =>__('Post excerpt','woocommerce-products-slider')),
                         'excerpt_read_more'=>array('name' =>__('excerpt with','woocommerce-products-slider')),
@@ -133,19 +133,59 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         'hr'=>array('name' =>__('Horizontal line','woocommerce-products-slider')),
                         'five_star'=>array('name' =>__('Five star','woocommerce-products-slider')),
 
-
                         ),
+                );
 
+
+                $elements_group['woo'] = array(
+                    'group_title'=>'WooCommerce',
+                    'items'=>array(
+                        'woo_full_price'=>array('name' =>__('Full price','woocommerce-products-slider')),
+                        'woo_add_to_cart'=>array('name' =>__('Add to cart','woocommerce-products-slider')),
+                        'woo_categories'=>array('name' =>__('Categories','woocommerce-products-slider')),
+                        'woo_tags'=>array('name' =>__('Tags','woocommerce-products-slider')),
+
+
+                    ),
+                );
+
+                $elements_group['edd'] = array(
+                    'group_title'=>'Easy Digital Download',
+                    'items'=>array(
+                        'edd_price'=>array('name' =>__('Price','woocommerce-products-slider')),
+                        'edd_add_to_cart'=>array('name' =>__('Add to cart','woocommerce-products-slider')),
+                        'edd_categories'=>array('name' =>__('Categories','woocommerce-products-slider')),
+                        'edd_tags'=>array('name' =>__('Tags','woocommerce-products-slider')),
+
+
+                    ),
+                );
+
+                $elements_group['acf'] = array(
+                    'group_title'=>'Advance Field Manager',
+                    'items'=>array(
+                        'acf_text'=>array('name' =>__('Text','woocommerce-products-slider')),
+                        'acf_textarea'=>array('name' =>__('textarea','woocommerce-products-slider')),
+                        'acf_number'=>array('name' =>__('number','woocommerce-products-slider')),
+                        'acf_email'=>array('name' =>__('email','woocommerce-products-slider')),
+                        'acf_wysiwyg'=>array('name' =>__('wysiwyg','woocommerce-products-slider')),
+                        'acf_image'=>array('name' =>__('image','woocommerce-products-slider')),
+                        'acf_file'=>array('name' =>__('file','woocommerce-products-slider')),
+                        'acf_select'=>array('name' =>__('select','woocommerce-products-slider')),
+                        'acf_checkbox'=>array('name' =>__('checkbox','woocommerce-products-slider')),
+                        'acf_page_link'=>array('name' =>__('page link','woocommerce-products-slider')),
+                        'acf_taxonomy'=>array('name' =>__('taxonomy','woocommerce-products-slider')),
+                        'acf_user'=>array('name' =>__('user','woocommerce-products-slider')),
+                        'acf_date_picker'=>array('name' =>__('date picker','woocommerce-products-slider')),
+
+
+                    ),
                 );
 
 
 
-
-
-                $elements_group['woo'] = array('group_title'=>'WooCommerce');
-                $elements_group['edd'] = array('group_title'=>'Easy Digital Download');
-                $elements_group['acf'] = array('group_title'=>'Advance Field Manager');
-                $elements_group['events_manager'] = array('group_title'=>'Events manager');
+                //$elements_group['events_manager'] = array('group_title'=>'Events manager');
+                //$elements_group['yith'] = array('group_title'=>'Yith');
 
 
 

@@ -42,13 +42,15 @@ class settings_tabs_field{
     function field_template($option){
 
         $id 			= isset( $option['id'] ) ? $option['id'] : "";
+        $wraper_class			= isset( $option['wraper_class'] ) ? $option['wraper_class'] : "";
+
         $is_error 			= isset( $option['is_error'] ) ? $option['is_error'] : false;
         $error_details 			= isset( $option['error_details'] ) ? $option['error_details'] : '';
 
         ob_start();
 
         ?>
-        <div class="setting-field <?php if($is_error) echo 'field-error';  ?>">
+        <div class="setting-field <?php if($is_error) echo 'field-error';  ?> <?php echo $wraper_class; ?>">
             <div class="field-lable">%s</div>
             <div class="field-input">%s
                 <p class="description">%s</p>

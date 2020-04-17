@@ -574,6 +574,114 @@ function post_grid_settings_tabs_content_query_post($tab, $post_id){
 
 
 
+add_action('post_grid_settings_tabs_content_layouts','post_grid_settings_tabs_content_layouts');
+function post_grid_settings_tabs_content_layouts($post_id){
+
+
+    $settings_tabs_field = new settings_tabs_field();
+    $wcps_options = get_post_meta($post_id,'wcps_options', true);
+    $item_layout_id = !empty($wcps_options['item_layout_id']) ? $wcps_options['item_layout_id'] : post_grid_get_first_post('post_grid_layout');
+
+    $post_grid_plugin_info = get_option('post_grid_plugin_info');
+    $import_layouts = isset($post_grid_plugin_info['import_layouts']) ? $post_grid_plugin_info['import_layouts'] : '';
+
+
+    ?>
+    <div class="section">
+        <div class="section-title"><?php echo __('Layouts', 'woocommerce-products-slider'); ?></div>
+        <p class="description section-description"><?php echo __('Choose item layouts.', 'woocommerce-products-slider'); ?></p>
+
+
+        <?php
+
+
+
+        ob_start();
+
+        ?>
+        <p><a target="_blank" class="button" href="<?php echo admin_url().'post-new.php?post_type=post_grid_layout'; ?>"><?php echo __('Create layout','woocommerce-products-slider'); ?></a> </p>
+        <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Manage layouts','woocommerce-products-slider'); ?></a> </p>
+
+        <?php
+        if($import_layouts != 'done'):
+            ?>
+            <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Import layouts','woocommerce-products-slider'); ?></a> </p>
+        <?php
+        endif;
+
+
+
+        $html = ob_get_clean();
+
+        $args = array(
+            'id'		=> 'create_post_grid_layout',
+            'parent'		=> 'wcps_options[query]',
+            'title'		=> __('Create layout','woocommerce-products-slider'),
+            'details'	=> __('Please follow the links to create layouts or manage.','woocommerce-products-slider'),
+            'type'		=> 'custom_html',
+            'html'		=> $html,
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+        $item_layout_args = array();
+
+        $query_args['post_type'] 		= array('post_grid_layout');
+        $query_args['post_status'] 		= array('publish');
+        $query_args['orderby']  		= 'date';
+        $query_args['order']  			= 'DESC';
+        $query_args['posts_per_page'] 	= -1;
+        $wp_query = new WP_Query($query_args);
+
+        if ( $wp_query->have_posts() ) :
+
+            while ( $wp_query->have_posts() ) : $wp_query->the_post();
+
+                $post_id = get_the_id();
+                $layout_name = get_the_title();
+                $product_thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post_id), 'full' );
+                $product_thumb_url = isset($product_thumb['0']) ? esc_url_raw($product_thumb['0']) : '';
+
+                $layout_options = get_post_meta($post_id,'layout_options', true);
+                $layout_preview_img = !empty($layout_options['layout_preview_img']) ? $layout_options['layout_preview_img'] : 'https://i.imgur.com/JyurCtY.jpg';
+
+                $product_thumb_url = !empty( $product_thumb_url ) ? $product_thumb_url : $layout_preview_img;
+
+                $item_layout_args[$post_id] = array('name'=>$layout_name, 'link_text'=>'Edit', 'link'=> get_edit_post_link($post_id), 'thumb'=> $product_thumb_url, );
+
+            endwhile;
+        endif;
+
+
+
+
+
+        $args = array(
+            'id'		=> 'item_layout_id',
+            'parent' => 'wcps_options',
+            'title'		=> __('Item layouts','woocommerce-products-slider'),
+            'details'	=> __('Choose grid item layout.','woocommerce-products-slider'),
+            'type'		=> 'radio_image',
+            'value'		=> $item_layout_id,
+            'default'		=> '',
+            'width'		=> '250px',
+            'args'		=> $item_layout_args,
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+
+        ?>
+    </div>
+    <?php
+
+
+}
+
+
+
 add_action('post_grid_settings_tabs_content_skin_layout', 'post_grid_settings_tabs_content_skin_layout', 10, 2);
 
 function post_grid_settings_tabs_content_skin_layout($tab, $post_id){

@@ -2,35 +2,66 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
-
 add_action('post_grid_layout_element_custom_text', 'post_grid_layout_element_custom_text');
-
 function post_grid_layout_element_custom_text($args){
 
     $element  = isset($args['element']) ? $args['element'] : array();
     $elementIndex  = isset($args['index']) ? $args['index'] : '';
-
     $post_id = isset($args['post_id']) ? $args['post_id'] : '';
 
     if(empty($post_id)) return;
-
-    $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
-
 
     $title = get_the_title($post_id);
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $text = isset($element['text']) ?  $element['text'] : '';
 
-
-
-
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> custom_text ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> custom_text ">
         <?php echo esc_html($text); ?>
     </div>
     <?php
 }
+
+
+
+add_action('post_grid_layout_element_css_custom_text', 'post_grid_layout_element_css_custom_text', 10);
+function post_grid_layout_element_css_custom_text($args){
+
+
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $element = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $color = isset($element['color']) ? $element['color'] : '';
+    $font_size = isset($element['font_size']) ? $element['font_size'] : '';
+    $font_family = isset($element['font_family']) ? $element['font_family'] : '';
+    $margin = isset($element['margin']) ? $element['margin'] : '';
+    $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+
+    ?>
+    <style type="text/css">
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        <?php if(!empty($text_align)): ?>
+            text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        }
+    </style>
+    <?php
+}
+
 
 
 
@@ -47,13 +78,14 @@ function post_grid_layout_element_title($args){
 
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
 
-
+    $post_link = get_permalink($post_id);
     $title = get_the_title($post_id);
 
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
     $char_end = isset($element['char_end']) ? $element['char_end'] : '...';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
 
 
     if($char_limit > 0){
@@ -61,11 +93,69 @@ function post_grid_layout_element_title($args){
     }
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title ">
-        <?php echo esc_html($title); ?>
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title ">
+        <?php if($link_to == 'post_link'): ?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($title); ?></a>
+        <?php else: ?>
+            <?php echo esc_html($title); ?>
+        <?php endif; ?>
+
+
     </div>
     <?php
 }
+
+
+add_action('post_grid_layout_element_css_title', 'post_grid_layout_element_css_title', 10);
+function post_grid_layout_element_css_title($args){
+
+
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $element = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $color = isset($element['color']) ? $element['color'] : '';
+    $font_size = isset($element['font_size']) ? $element['font_size'] : '';
+    $font_family = isset($element['font_family']) ? $element['font_family'] : '';
+    $margin = isset($element['margin']) ? $element['margin'] : '';
+    $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+
+    ?>
+    <style type="text/css">
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        <?php if(!empty($text_align)): ?>
+            text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?> a{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        }
+    </style>
+    <?php
+}
+
+
+
 
 
 add_action('post_grid_layout_element_title_link', 'post_grid_layout_element_title_link');
@@ -85,6 +175,7 @@ function post_grid_layout_element_title_link($args){
     $title = get_the_title($post_id);
     $post_link = get_permalink($post_id);
 
+    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
@@ -97,13 +188,65 @@ function post_grid_layout_element_title_link($args){
 
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title_link ">
-        <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($title); ?></a>
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title_link ">
+        <?php if($link_to == 'post_link'): ?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($title); ?></a>
+        <?php else: ?>
+            <?php echo esc_html($title); ?>
+        <?php endif; ?>
     </div>
     <?php
 }
 
 
+
+add_action('post_grid_layout_element_css_title_link', 'post_grid_layout_element_css_title_link', 10);
+function post_grid_layout_element_css_title_link($args){
+
+
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $element = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $color = isset($element['color']) ? $element['color'] : '';
+    $font_size = isset($element['font_size']) ? $element['font_size'] : '';
+    $font_family = isset($element['font_family']) ? $element['font_family'] : '';
+    $margin = isset($element['margin']) ? $element['margin'] : '';
+    $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+
+    ?>
+    <style type="text/css">
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        <?php if(!empty($text_align)): ?>
+            text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?> a{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        }
+    </style>
+    <?php
+}
 
 
 
@@ -137,7 +280,7 @@ function post_grid_layout_element_content($args){
 
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> content ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> content ">
         <?php echo ($post_content); ?>
     </div>
     <?php
@@ -159,24 +302,83 @@ function post_grid_layout_element_excerpt($args){
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
 
     $post_excerpt = get_the_excerpt($post_id);
+    $post_link = get_permalink($post_id);
 
+    $link_target = isset($element['link_target']) ? $element['link_target'] : '';
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
-    $char_end = isset($element['char_end']) ? $element['char_end'] : '...';
+    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
 
 
     if($char_limit > 0){
-        $post_excerpt = wp_trim_words($post_excerpt, $char_limit, $char_end);
+        $post_excerpt = wp_trim_words($post_excerpt, $char_limit, '');
     }
 
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt ">
         <?php echo ($post_excerpt); ?>
+        <?php
+        if(!empty($read_more_text)):
+            ?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
+        <?php
+        endif;
+        ?>
     </div>
     <?php
 }
+
+
+add_action('post_grid_layout_element_css_excerpt', 'post_grid_layout_element_css_excerpt', 10);
+function post_grid_layout_element_css_excerpt($args){
+
+
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $element = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $color = isset($element['color']) ? $element['color'] : '';
+    $font_size = isset($element['font_size']) ? $element['font_size'] : '';
+    $font_family = isset($element['font_family']) ? $element['font_family'] : '';
+    $margin = isset($element['margin']) ? $element['margin'] : '';
+    $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+
+    ?>
+    <style type="text/css">
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        <?php if(!empty($text_align)): ?>
+            text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?> a{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        }
+    </style>
+    <?php
+}
+
 
 
 
@@ -202,7 +404,7 @@ function post_grid_layout_element_excerpt_read_more($args){
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
-    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '...';
+    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
 
 
@@ -212,7 +414,7 @@ function post_grid_layout_element_excerpt_read_more($args){
 
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt_read_more ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt_read_more ">
         <?php echo ($post_excerpt); ?>
         <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
 
@@ -220,6 +422,54 @@ function post_grid_layout_element_excerpt_read_more($args){
     <?php
 }
 
+
+add_action('post_grid_layout_element_css_excerpt_read_more', 'post_grid_layout_element_css_excerpt_read_more', 10);
+function post_grid_layout_element_css_excerpt_read_more($args){
+
+
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $element = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $color = isset($element['color']) ? $element['color'] : '';
+    $font_size = isset($element['font_size']) ? $element['font_size'] : '';
+    $font_family = isset($element['font_family']) ? $element['font_family'] : '';
+    $margin = isset($element['margin']) ? $element['margin'] : '';
+    $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+
+    ?>
+    <style type="text/css">
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        <?php if(!empty($text_align)): ?>
+            text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?> a{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        }
+    </style>
+    <?php
+}
 
 
 
@@ -237,15 +487,73 @@ function post_grid_layout_element_read_more($args){
 
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
-    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '...';
+    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
 
 
     ?>
-    <a class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more " target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
+    <?php if($link_to == 'post_link'): ?>
+        <a class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more " target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
+    <?php else: ?>
+        <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more ">
+            <?php echo esc_html($read_more_text); ?>
+        </div>
+    <?php endif; ?>
 
     <?php
 }
+
+
+
+add_action('post_grid_layout_element_css_read_more', 'post_grid_layout_element_css_read_more', 10);
+function post_grid_layout_element_css_read_more($args){
+
+
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $element = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $color = isset($element['color']) ? $element['color'] : '';
+    $font_size = isset($element['font_size']) ? $element['font_size'] : '';
+    $font_family = isset($element['font_family']) ? $element['font_family'] : '';
+    $margin = isset($element['margin']) ? $element['margin'] : '';
+    $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+
+    ?>
+    <style type="text/css">
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        <?php if(!empty($text_align)): ?>
+            text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?> a{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        }
+    </style>
+    <?php
+}
+
 
 
 add_action('post_grid_layout_element_thumb', 'post_grid_layout_element_thumb');
@@ -259,15 +567,15 @@ function post_grid_layout_element_thumb($args){
     if(empty($post_id)) return;
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
-    $default_thumb = isset($element['default_thumb']) ? $element['default_thumb'] : '';
+    $default_thumb_src = isset($element['default_thumb_src']) ? $element['default_thumb_src'] : '';
     $thumb_size = isset($element['thumb_size']) ?  $element['thumb_size'] : 'large';
 
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
-    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
 
 
     $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post_id), $thumb_size );
-    $thumb_url = !empty($thumb['0']) ? $thumb['0'] : $default_thumb;
+    $thumb_url = !empty($thumb['0']) ? $thumb['0'] : $default_thumb_src;
 
     if(empty($thumb_url)) return;
 
@@ -277,16 +585,16 @@ function post_grid_layout_element_thumb($args){
 
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
         <?php
         if($link_to == 'post_link'):
             ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><img src="<?php echo esc_url_raw($thumb_url); ?>"></a>
-            <?php
+        <?php
         else:
             ?>
             <img src="<?php echo esc_url_raw($thumb_url); ?>">
-            <?php
+        <?php
 
         endif;
         ?>
@@ -295,6 +603,64 @@ function post_grid_layout_element_thumb($args){
     </div>
     <?php
 }
+
+
+add_action('post_grid_layout_element_css_thumb', 'post_grid_layout_element_css_thumb', 10);
+function post_grid_layout_element_css_thumb($args){
+
+    //echo '<pre>'.var_export($args, true).'</pre>';
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $elementData = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $thumb_height = isset($elementData['thumb_height']) ? $elementData['thumb_height'] : '';
+    $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
+    $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
+    $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
+
+    $margin = isset($elementData['margin']) ? $elementData['margin'] : '';
+
+
+    ?>
+    <style type="text/css">
+
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            overflow: hidden;
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        }
+
+        @media only screen and (min-width: 1024px ){
+            .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            <?php if(!empty($thumb_height_large)): ?>
+                max-height: <?php echo $thumb_height_large; ?>;
+            <?php endif; ?>
+            }
+        }
+
+        @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+            .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            <?php if(!empty($thumb_height_medium)): ?>
+                max-height: <?php echo $thumb_height_medium; ?>;
+            <?php endif; ?>
+            }
+        }
+
+        @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
+            .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            <?php if(!empty($thumb_height_small)): ?>
+                max-height: <?php echo $thumb_height_small; ?>;
+            <?php endif; ?>
+            }
+        }
+
+
+
+    </style>
+    <?php
+}
+
 
 
 add_action('post_grid_layout_element_thumb_link', 'post_grid_layout_element_thumb_link');
@@ -308,15 +674,15 @@ function post_grid_layout_element_thumb_link($args){
     if(empty($post_id)) return;
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
-    $default_thumb = isset($element['default_thumb']) ? $element['default_thumb'] : '';
+    $default_thumb_src = isset($element['default_thumb_src']) ? $element['default_thumb_src'] : '';
     $thumb_size = isset($element['thumb_size']) ?  $element['thumb_size'] : 'large';
 
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
-    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
 
 
     $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post_id), $thumb_size );
-    $thumb_url = !empty($thumb['0']) ? $thumb['0'] : $default_thumb;
+    $thumb_url = !empty($thumb['0']) ? $thumb['0'] : $default_thumb_src;
 
     if(empty($thumb_url)) return;
 
@@ -326,7 +692,7 @@ function post_grid_layout_element_thumb_link($args){
 
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb_link ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb_link ">
         <?php
         if($link_to == 'post_link'):
             ?>
@@ -344,6 +710,74 @@ function post_grid_layout_element_thumb_link($args){
     </div>
     <?php
 }
+
+
+add_action('post_grid_layout_element_css_thumb_link', 'post_grid_layout_element_css_thumb_link', 10);
+function post_grid_layout_element_css_thumb_link($args){
+
+    //echo '<pre>'.var_export($args, true).'</pre>';
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $elementData = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $thumb_height = isset($elementData['thumb_height']) ? $elementData['thumb_height'] : '';
+    $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
+    $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
+    $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
+
+    $margin = isset($elementData['margin']) ? $elementData['margin'] : '';
+
+
+    ?>
+    <style type="text/css">
+
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            overflow: hidden;
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        }
+
+        @media only screen and (min-width: 1024px ){
+            .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            <?php if(!empty($thumb_height_large)): ?>
+                max-height: <?php echo $thumb_height_large; ?>;
+            <?php endif; ?>
+            }
+        }
+
+        @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+            .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            <?php if(!empty($thumb_height_medium)): ?>
+                max-height: <?php echo $thumb_height_medium; ?>;
+            <?php endif; ?>
+            }
+        }
+
+        @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
+            .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            <?php if(!empty($thumb_height_small)): ?>
+                max-height: <?php echo $thumb_height_small; ?>;
+            <?php endif; ?>
+            }
+        }
+
+
+
+    </style>
+    <?php
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 add_action('post_grid_layout_element_post_date', 'post_grid_layout_element_post_date');
@@ -365,7 +799,7 @@ function post_grid_layout_element_post_date($args){
     $post_date = get_the_date($date_format, $post_id);
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> post_date ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> post_date ">
         <?php
         if($link_to == 'post_link'):
             ?>
@@ -383,6 +817,53 @@ function post_grid_layout_element_post_date($args){
 }
 
 
+add_action('post_grid_layout_element_css_post_date', 'post_grid_layout_element_css_post_date', 10);
+function post_grid_layout_element_css_post_date($args){
+
+
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $element = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $color = isset($element['color']) ? $element['color'] : '';
+    $font_size = isset($element['font_size']) ? $element['font_size'] : '';
+    $font_family = isset($element['font_family']) ? $element['font_family'] : '';
+    $margin = isset($element['margin']) ? $element['margin'] : '';
+    $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+
+    ?>
+    <style type="text/css">
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        <?php if(!empty($text_align)): ?>
+            text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?> a{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        }
+    </style>
+    <?php
+}
 
 add_action('post_grid_layout_element_author', 'post_grid_layout_element_author');
 
@@ -403,12 +884,19 @@ function post_grid_layout_element_author($args){
     $post_author = get_the_author();
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
         <?php
         if($link_to == 'post_link'):
             ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($post_author); ?></a>
         <?php
+        elseif($link_to == 'author_posts_link'):
+            $post_author_link = get_author_posts_url( get_the_author_meta( 'ID' ) ) ;
+
+            ?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_author_link); ?>"><?php echo esc_html($post_author); ?></a>
+            <?php
+
         else:
             ?>
             <?php echo esc_html($post_author); ?>
@@ -417,6 +905,56 @@ function post_grid_layout_element_author($args){
         ?>
 
     </div>
+    <?php
+}
+
+
+
+add_action('post_grid_layout_element_css_author', 'post_grid_layout_element_css_author', 10);
+function post_grid_layout_element_css_author($args){
+
+
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $element = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $color = isset($element['color']) ? $element['color'] : '';
+    $font_size = isset($element['font_size']) ? $element['font_size'] : '';
+    $font_family = isset($element['font_family']) ? $element['font_family'] : '';
+    $margin = isset($element['margin']) ? $element['margin'] : '';
+    $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+
+    ?>
+    <style type="text/css">
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        <?php if(!empty($text_align)): ?>
+            text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?> a{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        }
+    </style>
     <?php
 }
 
@@ -441,7 +979,7 @@ function post_grid_layout_element_author_link($args){
     $post_author = get_the_author();
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author_link ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author_link ">
         <?php
         if($link_to == 'author_link'):
             ?>
@@ -458,6 +996,54 @@ function post_grid_layout_element_author_link($args){
     <?php
 }
 
+
+add_action('post_grid_layout_element_css_author_link', 'post_grid_layout_element_css_author_link', 10);
+function post_grid_layout_element_css_author_link($args){
+
+
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $element = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $color = isset($element['color']) ? $element['color'] : '';
+    $font_size = isset($element['font_size']) ? $element['font_size'] : '';
+    $font_family = isset($element['font_family']) ? $element['font_family'] : '';
+    $margin = isset($element['margin']) ? $element['margin'] : '';
+    $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+
+    ?>
+    <style type="text/css">
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        <?php if(!empty($text_align)): ?>
+            text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?> a{
+        <?php if(!empty($color)): ?>
+            color: <?php echo $color; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_size)): ?>
+            font-size: <?php echo $font_size; ?>;
+        <?php endif; ?>
+        <?php if(!empty($font_family)): ?>
+            font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        }
+    </style>
+    <?php
+}
 
 
 
@@ -501,7 +1087,7 @@ function post_grid_layout_element_categories($args){
     }
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> categories ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> categories ">
         <?php echo sprintf($wrapper_html, $categories_html); ?>
     </div>
     <?php
@@ -549,7 +1135,7 @@ function post_grid_layout_element_tags($args){
     }
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
         <?php echo sprintf($wrapper_html, $categories_html); ?>
     </div>
     <?php
@@ -587,7 +1173,7 @@ function post_grid_layout_element_comments_count($args){
     }
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
         <?php echo sprintf($wrapper_html, $comments_count_html); ?>
     </div>
     <?php
@@ -627,7 +1213,7 @@ function post_grid_layout_element_share_button($args){
     $share_button_html = apply_filters('post_grid_filter_share_buttons', $share_button_html);
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> share_button ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> share_button ">
         <?php echo sprintf($wrapper_html, $share_button_html); ?>
     </div>
     <?php
@@ -655,7 +1241,7 @@ function post_grid_layout_element_hr($args){
 
 
     ?>
-    <hr class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> hr "></hr>
+    <hr class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> hr "></hr>
     <?php
 }
 
@@ -706,7 +1292,7 @@ function post_grid_layout_element_five_star($args){
     }
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> five_star ">
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> five_star ">
         <?php echo sprintf($wrapper_html, $five_star_html); ?>
     </div>
     <?php

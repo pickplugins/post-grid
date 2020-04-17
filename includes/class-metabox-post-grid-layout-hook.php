@@ -97,7 +97,9 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
         $settings_tabs_field = new settings_tabs_field();
 
         $layout_elements_data = get_post_meta($post_id,'layout_elements_data', true);
+        $layout_options = get_post_meta($post_id,'layout_options', true);
 
+        $preview_post_type = isset($layout_options['preview_post_type']) ? $layout_options['preview_post_type'] : 'post';
 
 
         ?>
@@ -121,7 +123,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         'thumb_link'=>array('name' =>__('Thumbnail with link ','woocommerce-products-slider')),
 
                         'excerpt'=>array('name' =>__('Post excerpt','woocommerce-products-slider')),
-                        'excerpt_read_more'=>array('name' =>__('excerpt with','woocommerce-products-slider')),
+                        'excerpt_read_more'=>array('name' =>__('Excerpt with read more','woocommerce-products-slider')),
                         'content'=>array('name' =>__('Content','woocommerce-products-slider')),
                         'post_date'=>array('name' =>__('Post date','woocommerce-products-slider')),
                         'author'=>array('name' =>__('Author','woocommerce-products-slider')),
@@ -144,8 +146,6 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         'woo_add_to_cart'=>array('name' =>__('Add to cart','woocommerce-products-slider')),
                         'woo_categories'=>array('name' =>__('Categories','woocommerce-products-slider')),
                         'woo_tags'=>array('name' =>__('Tags','woocommerce-products-slider')),
-
-
                     ),
                 );
 
@@ -363,6 +363,22 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
 //            $settings_tabs_field->generate_field($args);
 
 
+            $post_types = post_grid_posttypes_array();
+
+            $args = array(
+                'id'		=> 'preview_post_type',
+                'parent'		=> 'layout_options',
+                'title'		=> __('Preview post type','woocommerce-products-slider'),
+                'details'	=> __('Set layout preview post type.','woocommerce-products-slider'),
+                'type'		=> 'select',
+                'value'		=> $preview_post_type,
+                'default'		=> 'post',
+                'args'		=> $post_types,
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
             ob_start();
 
 
@@ -379,7 +395,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                     foreach ($layout_elements_data as $elementGroupIndex => $elementGroupData){
                         foreach ($elementGroupData as $elementIndex => $elementData){
 
-                            $args['post_id'] = 50207;
+                            $args['post_id'] =  post_grid_get_first_post($preview_post_type);
                             $args['element'] = $elementData;
                             $args['index'] = $elementGroupIndex;
 

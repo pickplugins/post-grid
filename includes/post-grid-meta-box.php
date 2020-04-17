@@ -74,6 +74,13 @@ function meta_boxes_post_grid_input( $post ) {
     );
 
     $post_grid_settings_tab[] = array(
+        'id' => 'layouts',
+        'title' => sprintf(__('%s Layouts','woocommerce-products-slider'),'<i class="fas fa-qrcode"></i>'),
+        'priority' => 5,
+        'active' => ($current_tab == 'layouts') ? true : false,
+    );
+
+    $post_grid_settings_tab[] = array(
         'id' => 'layout_settings',
         'title' => sprintf(__('%s Layout Settings','post-grid'), '<i class="fas fa-tools"></i>'),
         'priority' => 4,

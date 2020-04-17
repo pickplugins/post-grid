@@ -8,7 +8,27 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
+function post_grid_get_first_post($post_type = 'post'){
 
+    $args = array(
+        'post_type' => $post_type,
+        'post_status' => 'publish',
+        'posts_per_page' => 1,
+    );
+
+    $post_id ='';
+
+    $wp_query = new WP_Query($args);
+
+    if ($wp_query->have_posts()) :
+        while ($wp_query->have_posts()) : $wp_query->the_post();
+            $product_id = get_the_id();
+            return $product_id;
+        endwhile;
+    else:
+
+    endif;
+}
 
 
 

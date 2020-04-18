@@ -2,6 +2,39 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
+add_action('post_grid_layout_element_wrapper_start', 'post_grid_layout_element_wrapper_start', 10);
+function post_grid_layout_element_wrapper_start($args){
+
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $element_class = !empty($element_index) ? 'element-'.$element_index : '';
+
+    //echo '<pre>'.var_export($args, true).'</pre>';
+    $elementData = isset($args['element']) ? $args['element'] : array();
+    $wrapper_class = isset($elementData['wrapper_class']) ? $elementData['wrapper_class'] : '';
+    $wrapper_id = isset($elementData['wrapper_id']) ? $elementData['wrapper_id'] : '';
+
+
+
+    ?>
+    <div class="<?php echo $wrapper_class; ?> <?php echo $element_class; ?>" id="<?php echo $wrapper_id; ?>">
+    <?php
+
+}
+
+
+add_action('post_grid_layout_element_wrapper_end', 'post_grid_layout_element_wrapper_end', 10);
+function post_grid_layout_element_wrapper_end($args){
+
+
+    ?>
+    </div>
+    <?php
+
+}
+
+
+
+
 add_action('post_grid_layout_element_custom_text', 'post_grid_layout_element_custom_text');
 function post_grid_layout_element_custom_text($args){
 
@@ -554,6 +587,111 @@ function post_grid_layout_element_css_read_more($args){
     <?php
 }
 
+
+add_action('post_grid_layout_element_media', 'post_grid_layout_element_media');
+
+function post_grid_layout_element_media($args){
+
+    $element  = isset($args['element']) ? $args['element'] : array();
+    $elementIndex  = isset($args['index']) ? $args['index'] : '';
+    $post_id = isset($args['post_id']) ? $args['post_id'] : '';
+
+    if(empty($post_id)) return;
+
+    $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
+    $default_thumb_src = isset($element['default_thumb_src']) ? $element['default_thumb_src'] : '';
+    $thumb_size = isset($element['thumb_size']) ?  $element['thumb_size'] : 'large';
+
+    $link_target = isset($element['link_target']) ? $element['link_target'] : '';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
+
+
+    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post_id), $thumb_size );
+    $thumb_url = !empty($thumb['0']) ? $thumb['0'] : $default_thumb_src;
+
+    if(empty($thumb_url)) return;
+
+
+    $post_link = get_permalink($post_id);
+
+
+
+    ?>
+    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
+        <?php
+        if($link_to == 'post_link'):
+            ?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><img src="<?php echo esc_url_raw($thumb_url); ?>"></a>
+        <?php
+        else:
+            ?>
+            <img src="<?php echo esc_url_raw($thumb_url); ?>">
+        <?php
+
+        endif;
+        ?>
+
+
+    </div>
+    <?php
+}
+
+
+add_action('post_grid_layout_element_css_media', 'post_grid_layout_element_css_media', 10);
+function post_grid_layout_element_css_media($args){
+
+    //echo '<pre>'.var_export($args, true).'</pre>';
+    $element_index = isset($args['element_index']) ? $args['element_index'] : '';
+    $elementData = isset($args['elementData']) ? $args['elementData'] : array();
+    $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
+
+    $thumb_height = isset($elementData['thumb_height']) ? $elementData['thumb_height'] : '';
+    $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
+    $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
+    $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
+
+    $margin = isset($elementData['margin']) ? $elementData['margin'] : '';
+
+
+    ?>
+    <style type="text/css">
+
+        .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            overflow: hidden;
+        <?php if(!empty($margin)): ?>
+            margin: <?php echo $margin; ?>;
+        <?php endif; ?>
+        }
+
+        @media only screen and (min-width: 1024px ){
+            .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            <?php if(!empty($thumb_height_large)): ?>
+                max-height: <?php echo $thumb_height_large; ?>;
+            <?php endif; ?>
+            }
+        }
+
+        @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+            .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            <?php if(!empty($thumb_height_medium)): ?>
+                max-height: <?php echo $thumb_height_medium; ?>;
+            <?php endif; ?>
+            }
+        }
+
+        @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
+            .layout-<?php echo $layout_id; ?> .element-<?php echo $element_index; ?>{
+            <?php if(!empty($thumb_height_small)): ?>
+                max-height: <?php echo $thumb_height_small; ?>;
+            <?php endif; ?>
+            }
+        }
+
+
+
+    </style>
+    <?php
+}
 
 
 add_action('post_grid_layout_element_thumb', 'post_grid_layout_element_thumb');

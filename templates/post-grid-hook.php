@@ -273,6 +273,8 @@ function post_grid_loop($args){
 
     $enable_multi_skin = isset($post_grid_options['enable_multi_skin']) ? $post_grid_options['enable_multi_skin'] : 'no';
     $skin = isset($post_grid_options['skin']) ? $post_grid_options['skin'] : 'flat';
+    $item_layout_id = isset($post_grid_options['item_layout_id']) ? $post_grid_options['item_layout_id'] : '';
+
 
     if($loop_count % 2 == 0){
         $odd_even_calss = 'even';
@@ -308,7 +310,7 @@ function post_grid_loop($args){
         <div class="layer-wrapper">
             <?php
 
-            $layout_args['layout_id'] = $skin;
+            $layout_args['layout_id'] = !empty($skin) ? $skin : $item_layout_id;
             $layout_args['post_id'] = $post_id;
             $layout_args['options'] = $post_grid_options;
 
@@ -319,8 +321,11 @@ function post_grid_loop($args){
         </div>
     </div>
     <?php
-
 }
+
+
+
+
 
 add_action('post_grid_item_layout', 'post_grid_item_layout_media');
 
@@ -400,21 +405,30 @@ function post_grid_item_layout_content($args){
         }
     }
 
-    foreach($layout as $elementIndex=>$element){
-        $element_id = isset($element['key']) ? $element['key'] : '';
+    ?>
+    <div class="layer-content">
+        <?php
+        foreach($layout as $elementIndex=>$element){
+            $element_id = isset($element['key']) ? $element['key'] : '';
 
-        if(empty($element_id)) return;
+            if(empty($element_id)) return;
 
-        //var_dump($element_id);
-        $element_args['element'] = $element;
-        $element_args['index'] = $elementIndex;
+            //var_dump($element_id);
+            $element_args['element'] = $element;
+            $element_args['index'] = $elementIndex;
 
-        $element_args['post_id'] = $post_id;
-        $element_args['layout_id'] = $post_id;
+            $element_args['post_id'] = $post_id;
+            $element_args['layout_id'] = $post_id;
 
-        do_action('post_grid_layout_element_'.$element_id, $element_args);
+            do_action('post_grid_layout_element_'.$element_id, $element_args);
 
-    }
+        }
+
+        ?>
+    </div>
+    <?php
+
+
 
 
 

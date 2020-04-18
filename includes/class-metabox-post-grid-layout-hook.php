@@ -114,7 +114,9 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                     'group_title'=>'General',
                     'items'=>array(
                         'wrapper_start'=>array('name' =>__('Wrapper start','woocommerce-products-slider')),
-                        'wrapper_end'=>array('name' =>__('Wrapper start','woocommerce-products-slider')),
+                        'wrapper_end'=>array('name' =>__('Wrapper end','woocommerce-products-slider')),
+                        'media'=>array('name' =>__('Media','woocommerce-products-slider')),
+
                         'custom_text'=>array('name' =>__('Custom text','woocommerce-products-slider')),
                         'title'=>array('name' =>__('Post title','woocommerce-products-slider')),
                         'title_link'=>array('name' =>__('Title with link','woocommerce-products-slider')),
@@ -299,6 +301,11 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                 <style type="text/css">
                     .layout-builder{
                         clear: both;
+                    }
+
+
+                    .layout-builder .layout-elements .item{
+
                     }
                     .layout-tags{
                         margin-bottom: 20px;

@@ -388,13 +388,13 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
 
 
 
-            $item_layout_id = get_the_id();
-            $args['layout_id'] = $item_layout_id;
+            $layout_id = get_the_id();
+            $args['layout_id'] = $layout_id;
 
             ?>
             <div class="layout-preview">
 
-                <div class="elements-wrapper layout-<?php echo $item_layout_id; ?>">
+                <div class="elements-wrapper layout-<?php echo $layout_id; ?>">
                     <?php
                     if(!empty($layout_elements_data))
                     foreach ($layout_elements_data as $elementGroupIndex => $elementGroupData){
@@ -430,15 +430,15 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                 foreach ($elementGroupData as $elementIndex => $elementData){
 
 
-                    $args['elementData'] = $elementData;
-                    $args['element_index'] = $elementGroupIndex;
+                    $args['element'] = $elementData;
+                    $args['index'] = $elementGroupIndex;
 
                     //echo $elementIndex;
                     do_action('post_grid_layout_element_css_'.$elementIndex, $args);
                 }
             }
 
-            $custom_scripts = get_post_meta($item_layout_id,'custom_scripts', true);
+            $custom_scripts = get_post_meta($layout_id,'custom_scripts', true);
             $custom_css = isset($custom_scripts['custom_css']) ? $custom_scripts['custom_css'] : '';
 
             ?>
@@ -457,7 +457,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                     height: auto;
                 }
                 <?php
-                echo str_replace('__ID__', 'layout-'.$item_layout_id, $custom_css);
+                echo str_replace('__ID__', 'layout-'.$layout_id, $custom_css);
                 ?>
             </style>
             <?php

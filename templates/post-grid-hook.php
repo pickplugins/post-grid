@@ -13,6 +13,8 @@ function post_grid_main_container($atts){
     $args['grid_id'] = $grid_id;
     $args['options'] = $post_grid_options;
 
+    wp_enqueue_style( 'post-grid-style' );
+    //wp_enqueue_style( 'post-grid-skin' );
 
     ?>
     <div id="post-grid-<?php echo $grid_id; ?>" class="post-grid <?php echo $grid_type; ?>">
@@ -21,6 +23,8 @@ function post_grid_main_container($atts){
         ?>
     </div>
     <?php
+
+
 
 }
 
@@ -273,13 +277,12 @@ function post_grid_loop($args){
 
     $enable_multi_skin = isset($post_grid_options['enable_multi_skin']) ? $post_grid_options['enable_multi_skin'] : 'no';
     $skin = isset($post_grid_options['skin']) ? $post_grid_options['skin'] : 'flat';
-    $item_layout_id = isset($post_grid_options['item_layout_id']) ? $post_grid_options['item_layout_id'] : '';
+    $layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
 
 
     if($loop_count % 2 == 0){
         $odd_even_calss = 'even';
-    }
-    else{
+    }else{
         $odd_even_calss = 'odd';
     }
 
@@ -301,19 +304,19 @@ function post_grid_loop($args){
     $item_css_class['odd_even'] = $odd_even_calss;
 
 
+    //var_dump($layout_id);
 
     $item_css_class = apply_filters('post_grid_item_classes', $item_css_class);
     $item_css_class = implode(' ', $item_css_class);
 
     ?>
-    <div class="<?php echo $item_css_class; ?>">
-        <div class="layer-wrapper">
+    <div class="<?php echo $item_css_class; ?> ">
+        <div class="layer-wrapper layout-<?php echo $layout_id; ?>">
             <?php
 
-            $layout_args['layout_id'] = !empty($skin) ? $skin : $item_layout_id;
+            $layout_args['layout_id'] = !empty($layout_id) ? $layout_id  : $skin;
             $layout_args['post_id'] = $post_id;
             $layout_args['options'] = $post_grid_options;
-
 
             do_action('post_grid_item_layout', $layout_args);
 
@@ -327,13 +330,15 @@ function post_grid_loop($args){
 
 
 
-add_action('post_grid_item_layout', 'post_grid_item_layout_media');
+//add_action('post_grid_item_layout', 'post_grid_item_layout_media');
 
 function post_grid_item_layout_media($args){
 
     $post_id = $args['post_id'] ;
     $post_grid_options = $args['options'];
+    $layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
 
+    if(!empty($layout_id)) return;
 
     $media_source = !empty($post_grid_options['media_source']) ? $post_grid_options['media_source'] : array();
     $featured_img_size = !empty($post_grid_options['featured_img_size']) ? $post_grid_options['featured_img_size'] : 'full';
@@ -377,13 +382,17 @@ function post_grid_item_layout_media($args){
 
 
 
-add_action('post_grid_item_layout', 'post_grid_item_layout_content');
+//add_action('post_grid_item_layout', 'post_grid_item_layout_content');
 
 function post_grid_item_layout_content($args){
 
     $post_id = $args['post_id'];
     $post_grid_options = $args['options'];
     $skin = $args['layout_id'];
+
+    $layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
+
+    if(!empty($layout_id)) return;
 
     $post_grid_layout_content = get_option( 'post_grid_layout_content' );
     $class_post_grid_functions = new class_post_grid_functions();
@@ -435,6 +444,55 @@ function post_grid_item_layout_content($args){
 }
 
 
+
+add_action('post_grid_item_layout', 'post_grid_item_layout_new');
+
+function post_grid_item_layout_new($args){
+
+
+
+
+    $post_id = $args['post_id'];
+    $post_grid_options = $args['options'];
+    $layout_id = $args['layout_id'];
+
+
+
+    //$layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
+
+
+
+    if(empty($layout_id)) return;
+
+    $layout_elements_data = get_post_meta( $layout_id, 'layout_elements_data', true );
+
+
+    //echo '<pre>'.var_export($layout_elements_data, ture).'</pre>';
+
+
+    foreach($layout_elements_data as $elementIndex=>$elementData){
+        foreach($elementData as $elementId=>$element) {
+
+            //var_dump($element);
+
+            $element_args['element'] = $element;
+            $element_args['index'] = $elementIndex;
+
+            $element_args['post_id'] = $post_id;
+            $element_args['layout_id'] = $layout_id;
+
+            do_action('post_grid_layout_element_' . $elementId, $element_args);
+            do_action('post_grid_layout_element_css_' . $elementId, $element_args);
+        }
+
+    }
+
+
+
+
+
+
+}
 
 
 
@@ -498,6 +556,8 @@ function post_grid_main_view_type_grid_scripts($args){
     $grid_id = $args['grid_id'];
 
 
+
+
     $items_width_desktop = isset($post_grid_options['width']['desktop']) ? $post_grid_options['width']['desktop'] : '';
     $items_width_tablet = isset($post_grid_options['width']['tablet']) ? $post_grid_options['width']['tablet'] : '';
     $items_width_mobile = isset($post_grid_options['width']['mobile']) ? $post_grid_options['width']['mobile'] : '';
@@ -549,6 +609,7 @@ function post_grid_main_view_type_grid_scripts($args){
 
     $items_bg_color_type = isset($post_grid_options['items_bg_color_type']) ? $post_grid_options['items_bg_color_type'] : '';
     $items_bg_color = isset($post_grid_options['items_bg_color']) ? $post_grid_options['items_bg_color'] : '#fff';
+
 
 
     ?>
@@ -654,6 +715,11 @@ function post_grid_main_view_type_grid_scripts($args){
                 ?>
             }
         }
+
+        <?php
+
+
+        ?>
     </style>
     <?php
 
@@ -667,6 +733,7 @@ function post_grid_main_scripts($args){
     $post_grid_options = $args['options'];
 
 
+    $layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
 
     $custom_js = isset($post_grid_options['custom_js']) ? $post_grid_options['custom_js'] : '';
     $custom_css = isset($post_grid_options['custom_css']) ? $post_grid_options['custom_css'] : '';
@@ -679,29 +746,13 @@ function post_grid_main_scripts($args){
 
 
 
-    ?>
-    <?php if(!empty($custom_css)): ?>
-        <style type="text/css">
-            <?php
-            echo $custom_css;
-            ?>
-        </style>
-    <?php endif; ?>
-    <?php if(!empty($custom_js)): ?>
-        <script>
-            <?php echo $custom_js; ?>
 
-        </script>
-    <?php endif; ?>
-    <?php
 
 
     wp_enqueue_script(   'post_grid_scripts');
     wp_localize_script('post_grid_scripts', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
 
 
-    wp_enqueue_style( 'post-grid-style' );
-    wp_enqueue_style( 'post-grid-skin' );
 
     if($masonry_enable == 'yes'){
         wp_enqueue_script( 'masonry.js' );
@@ -718,6 +769,39 @@ function post_grid_main_scripts($args){
         }
 
     }
+
+    $layout_custom_scripts = get_post_meta($layout_id,'custom_scripts', true);
+    $layout_custom_css = isset($layout_custom_scripts['custom_css']) ? $layout_custom_scripts['custom_css'] : '';
+    ?>
+    <?php if(!empty($custom_css)): ?>
+        <style type="text/css">
+            <?php
+            echo $custom_css;
+            ?>
+        </style>
+    <?php endif; ?>
+
+    <?php if(!empty($layout_custom_css)): ?>
+        <style type="text/css">
+            <?php
+            echo str_replace('__ID__', 'layout-'.$layout_id, $layout_custom_css);
+            ?>
+        </style>
+    <?php endif; ?>
+
+    <?php if(!empty($custom_js)): ?>
+        <script>
+            <?php echo $custom_js; ?>
+
+        </script>
+    <?php endif; ?>
+    <?php
+
+
+
+
+    // layout custom css
+
 
 
 

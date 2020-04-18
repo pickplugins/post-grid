@@ -2713,6 +2713,8 @@ function post_grid_layout_elements_option_author($parameters){
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
+    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
+
 
     ?>
     <div class="item">
@@ -2804,7 +2806,19 @@ function post_grid_layout_elements_option_author($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'text_align',
+                'css_id'		=> $element_index.'_text_align',
+                'parent' => $input_name.'[author]',
+                'title'		=> __('Text align','woocommerce-products-slider'),
+                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'type'		=> 'select',
+                'value'		=> $text_align,
+                'default'		=> 'left',
+                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+            );
 
+            $settings_tabs_field->generate_field($args);
 
             ?>
 

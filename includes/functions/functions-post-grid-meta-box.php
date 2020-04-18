@@ -574,16 +574,17 @@ function post_grid_settings_tabs_content_query_post($tab, $post_id){
 
 
 
-add_action('post_grid_settings_tabs_content_layouts','post_grid_settings_tabs_content_layouts');
-function post_grid_settings_tabs_content_layouts($post_id){
+add_action('post_grid_settings_tabs_content_layouts','post_grid_settings_tabs_content_layouts',10, 2);
+function post_grid_settings_tabs_content_layouts($tab, $post_id){
 
-
+   //var_dump($post_id);
     $settings_tabs_field = new settings_tabs_field();
-    $wcps_options = get_post_meta($post_id,'wcps_options', true);
-    $item_layout_id = !empty($wcps_options['item_layout_id']) ? $wcps_options['item_layout_id'] : post_grid_get_first_post('post_grid_layout');
+    $post_grid_meta_options = get_post_meta($post_id,'post_grid_meta_options', true);
+    $layout_id = !empty($post_grid_meta_options['layout_id']) ? $post_grid_meta_options['layout_id'] : post_grid_get_first_post('post_grid_layout');
 
     $post_grid_plugin_info = get_option('post_grid_plugin_info');
     $import_layouts = isset($post_grid_plugin_info['import_layouts']) ? $post_grid_plugin_info['import_layouts'] : '';
+
 
 
     ?>
@@ -615,7 +616,7 @@ function post_grid_settings_tabs_content_layouts($post_id){
 
         $args = array(
             'id'		=> 'create_post_grid_layout',
-            'parent'		=> 'wcps_options[query]',
+            'parent'		=> 'post_grid_meta_options[query]',
             'title'		=> __('Create layout','woocommerce-products-slider'),
             'details'	=> __('Please follow the links to create layouts or manage.','woocommerce-products-slider'),
             'type'		=> 'custom_html',
@@ -658,12 +659,12 @@ function post_grid_settings_tabs_content_layouts($post_id){
 
 
         $args = array(
-            'id'		=> 'item_layout_id',
-            'parent' => 'wcps_options',
+            'id'		=> 'layout_id',
+            'parent' => 'post_grid_meta_options',
             'title'		=> __('Item layouts','woocommerce-products-slider'),
             'details'	=> __('Choose grid item layout.','woocommerce-products-slider'),
             'type'		=> 'radio_image',
-            'value'		=> $item_layout_id,
+            'value'		=> $layout_id,
             'default'		=> '',
             'width'		=> '250px',
             'args'		=> $item_layout_args,

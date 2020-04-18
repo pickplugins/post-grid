@@ -1837,6 +1837,8 @@ function post_grid_layout_elements_option_categories($parameters){
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $wrapper_margin = isset($element_data['wrapper_margin']) ? $element_data['wrapper_margin'] : '';
     $link_color = isset($element_data['link_color']) ? $element_data['link_color'] : '';
+    $text_color = isset($element_data['text_color']) ? $element_data['text_color'] : '';
+
     $separator = isset($element_data['separator']) ? $element_data['separator'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
@@ -1847,7 +1849,7 @@ function post_grid_layout_elements_option_categories($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Product category','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Post categories','woocommerce-products-slider'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -1939,6 +1941,18 @@ function post_grid_layout_elements_option_categories($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'text_color',
+                'css_id'		=> $element_index.'_text_color',
+                'parent' => $input_name.'[categories]',
+                'title'		=> __('Text color','woocommerce-products-slider'),
+                'details'	=> __('Choose text color.','woocommerce-products-slider'),
+                'type'		=> 'colorpicker',
+                'value'		=> $text_color,
+                'default'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
 
             $args = array(
@@ -1989,7 +2003,7 @@ function post_grid_layout_elements_option_tags($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Product tag','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Post tag','woocommerce-products-slider'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2105,6 +2119,8 @@ function post_grid_layout_elements_option_comments_count($parameters){
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
+    $color = isset($element_data['color']) ? $element_data['color'] : '';
+    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
     ?>
     <div class="item">
@@ -2112,7 +2128,7 @@ function post_grid_layout_elements_option_comments_count($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Sale count','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Comment count','woocommerce-products-slider'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2123,15 +2139,59 @@ function post_grid_layout_elements_option_comments_count($parameters){
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[comments_count]',
                 'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace comment count output.','woocommerce-products-slider'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
-                'placeholder'		=> 'Total sold: %s',
+                'placeholder'		=> 'Total comments: %s',
             );
 
             $settings_tabs_field->generate_field($args);
 
+
+
+
+            $args = array(
+                'id'		=> 'color',
+                'css_id'		=> $element_index.'_color',
+                'parent' => $input_name.'[comments_count]',
+                'title'		=> __('Color','woocommerce-products-slider'),
+                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'type'		=> 'colorpicker',
+                'value'		=> $color,
+                'default'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'font_size',
+                'css_id'		=> $element_index.'_font_size',
+                'parent' => $input_name.'[comments_count]',
+                'title'		=> __('Font size','woocommerce-products-slider'),
+                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'type'		=> 'text',
+                'value'		=> $font_size,
+                'default'		=> '',
+                'placeholder'		=> '14px',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+            $args = array(
+                'id'		=> 'font_family',
+                'css_id'		=> $element_index.'_font_family',
+                'parent' => $input_name.'[comments_count]',
+                'title'		=> __('Font family','woocommerce-products-slider'),
+                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'type'		=> 'text',
+                'value'		=> $font_family,
+                'default'		=> '',
+                'placeholder'		=> 'Open Sans',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
 
             $args = array(
@@ -2147,6 +2207,23 @@ function post_grid_layout_elements_option_comments_count($parameters){
             );
 
             $settings_tabs_field->generate_field($args);
+
+
+            $args = array(
+                'id'		=> 'text_align',
+                'css_id'		=> $element_index.'_text_align',
+                'parent' => $input_name.'[comments_count]',
+                'title'		=> __('Text align','woocommerce-products-slider'),
+                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'type'		=> 'select',
+                'value'		=> $text_align,
+                'default'		=> 'left',
+                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
 
 
 
@@ -2171,15 +2248,11 @@ function post_grid_layout_elements_option_five_star($parameters){
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
 
-    $icon_img_src = isset($element_data['icon_img_src']) ? $element_data['icon_img_src'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $position = isset($element_data['position']) ? $element_data['position'] : '';
-    $background_color = isset($element_data['background_color']) ? $element_data['background_color'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $padding = isset($element_data['padding']) ? $element_data['padding'] : '';
+    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
+    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
 
     ?>
@@ -2188,74 +2261,13 @@ function post_grid_layout_elements_option_five_star($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Featured mark','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Five star','woocommerce-products-slider'); ?></span>
         </div>
         <div class="element-options options">
 
             <?php
 
-            $args = array(
-                'id'		=> 'icon_img_src',
-                'parent' => $input_name.'[five_star]',
-                'title'		=> __('Icon image','woocommerce-products-slider'),
-                'details'	=> __('Choose icon image','woocommerce-products-slider'),
-                'type'		=> 'media_url',
-                'value'		=> $icon_img_src,
-                'default'		=> '',
-            );
 
-            $settings_tabs_field->generate_field($args);
-
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[five_star]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace on-sale output.','woocommerce-products-slider'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'On sale: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'position',
-                'css_id'		=> $element_index.'_position',
-                'parent' => $input_name.'[five_star]',
-                'title'		=> __('position','woocommerce-products-slider'),
-                'details'	=> __('Choose position.','woocommerce-products-slider'),
-                'type'		=> 'select',
-                'value'		=> $position,
-                'default'		=> '',
-                'args'		=> array(
-                    'topright'=>__('Top-right','woocommerce-products-slider'),
-                    'topleft'=>__('Top-left','woocommerce-products-slider'),
-                    'bottomright'=>__('Bottom-right','woocommerce-products-slider'),
-                    'bottomleft'=>__('Bottom-left','woocommerce-products-slider'),
-                    ''=>__('None','woocommerce-products-slider'),
-                )
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-
-            $args = array(
-                'id'		=> 'background_color',
-                'css_id'		=> $element_index.'_background_coloradd_to_cart',
-                'parent' => $input_name.'[five_star]',
-                'title'		=> __('Background color','woocommerce-products-slider'),
-                'details'	=> __('Choose background color.','woocommerce-products-slider'),
-                'type'		=> 'colorpicker',
-                'value'		=> $background_color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'color',
@@ -2286,19 +2298,32 @@ function post_grid_layout_elements_option_five_star($parameters){
             $settings_tabs_field->generate_field($args);
 
             $args = array(
-                'id'		=> 'padding',
-                'css_id'		=> $element_index.'_padding',
+                'id'		=> 'margin',
+                'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[five_star]',
-                'title'		=> __('Padding','woocommerce-products-slider'),
-                'details'	=> __('Choose padding.','woocommerce-products-slider'),
+                'title'		=> __('Margin','woocommerce-products-slider'),
+                'details'	=> __('Choose margin.','woocommerce-products-slider'),
                 'type'		=> 'text',
-                'value'		=> $padding,
+                'value'		=> $margin,
                 'default'		=> '',
                 'placeholder'		=> '5px 10px',
             );
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'text_align',
+                'css_id'		=> $element_index.'_text_align',
+                'parent' => $input_name.'[five_star]',
+                'title'		=> __('Text align','woocommerce-products-slider'),
+                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'type'		=> 'select',
+                'value'		=> $text_align,
+                'default'		=> 'left',
+                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             ?>
 
@@ -2317,13 +2342,9 @@ function post_grid_layout_elements_option_hr($parameters){
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-    $icon_img_src = isset($element_data['icon_img_src']) ? $element_data['icon_img_src'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $position = isset($element_data['position']) ? $element_data['position'] : '';
     $background_color = isset($element_data['background_color']) ? $element_data['background_color'] : '';
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $padding = isset($element_data['padding']) ? $element_data['padding'] : '';
+    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
+    $height = isset($element_data['height']) ? $element_data['height'] : '';
 
     ?>
     <div class="item">
@@ -2331,57 +2352,12 @@ function post_grid_layout_elements_option_hr($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('On sale mark','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Horizontal line','woocommerce-products-slider'); ?></span>
         </div>
         <div class="element-options options">
 
             <?php
 
-            $args = array(
-                'id'		=> 'icon_img_src',
-                'parent' => $input_name.'[hr]',
-                'title'		=> __('Icon image','woocommerce-products-slider'),
-                'details'	=> __('Choose icon image','woocommerce-products-slider'),
-                'type'		=> 'media_url',
-                'value'		=> $icon_img_src,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[hr]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace on-sale output.','woocommerce-products-slider'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'On sale: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'position',
-                'css_id'		=> $element_index.'_position',
-                'parent' => $input_name.'[hr]',
-                'title'		=> __('position','woocommerce-products-slider'),
-                'details'	=> __('Choose position.','woocommerce-products-slider'),
-                'type'		=> 'select',
-                'value'		=> $position,
-                'default'		=> '',
-                'args'		=> array(
-                    'topright'=>__('Top-right','woocommerce-products-slider'),
-                    'topleft'=>__('Top-left','woocommerce-products-slider'),
-                    'bottomright'=>__('Bottom-right','woocommerce-products-slider'),
-                    'bottomleft'=>__('Bottom-left','woocommerce-products-slider'),
-                    ''=>__('None','woocommerce-products-slider'),
-                )
-            );
-
-            $settings_tabs_field->generate_field($args);
 
 
 
@@ -2398,50 +2374,34 @@ function post_grid_layout_elements_option_hr($parameters){
 
             $settings_tabs_field->generate_field($args);
 
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_color',
-                'parent' => $input_name.'[hr]',
-                'title'		=> __('Text color','woocommerce-products-slider'),
-                'details'	=> __('Choose text color.','woocommerce-products-slider'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
 
             $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
+                'id'		=> 'height',
+                'css_id'		=> $element_index.'_height',
                 'parent' => $input_name.'[hr]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Choose text font size.','woocommerce-products-slider'),
+                'title'		=> __('Height','woocommerce-products-slider'),
+                'details'	=> __('Choose height.','woocommerce-products-slider'),
                 'type'		=> 'text',
-                'value'		=> $font_size,
+                'value'		=> $height,
                 'default'		=> '',
-                'placeholder'		=> '16px',
+                'placeholder'		=> '5px',
             );
 
             $settings_tabs_field->generate_field($args);
 
             $args = array(
-                'id'		=> 'padding',
+                'id'		=> 'margin',
                 'css_id'		=> $element_index.'_padding',
                 'parent' => $input_name.'[hr]',
-                'title'		=> __('Padding','woocommerce-products-slider'),
-                'details'	=> __('Choose padding.','woocommerce-products-slider'),
+                'title'		=> __('Margin','woocommerce-products-slider'),
+                'details'	=> __('Choose margin.','woocommerce-products-slider'),
                 'type'		=> 'text',
-                'value'		=> $padding,
+                'value'		=> $margin,
                 'default'		=> '',
                 'placeholder'		=> '5px 10px',
             );
 
             $settings_tabs_field->generate_field($args);
-
-
 
             ?>
 
@@ -2460,13 +2420,9 @@ function post_grid_layout_elements_option_share_button($parameters){
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-    $icon_img_src = isset($element_data['icon_img_src']) ? $element_data['icon_img_src'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $position = isset($element_data['position']) ? $element_data['position'] : '';
-    $background_color = isset($element_data['background_color']) ? $element_data['background_color'] : '';
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $padding = isset($element_data['padding']) ? $element_data['padding'] : '';
+    $icon_color = isset($element_data['icon_color']) ? $element_data['icon_color'] : '';
+    $icon_margin = isset($element_data['icon_margin']) ? $element_data['icon_margin'] : '';
 
     ?>
     <div class="item">
@@ -2474,85 +2430,14 @@ function post_grid_layout_elements_option_share_button($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('On sale mark','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Share button','woocommerce-products-slider'); ?></span>
         </div>
         <div class="element-options options">
 
             <?php
 
-            $args = array(
-                'id'		=> 'icon_img_src',
-                'parent' => $input_name.'[share_button]',
-                'title'		=> __('Icon image','woocommerce-products-slider'),
-                'details'	=> __('Choose icon image','woocommerce-products-slider'),
-                'type'		=> 'media_url',
-                'value'		=> $icon_img_src,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[share_button]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace on-sale output.','woocommerce-products-slider'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'On sale: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'position',
-                'css_id'		=> $element_index.'_position',
-                'parent' => $input_name.'[share_button]',
-                'title'		=> __('position','woocommerce-products-slider'),
-                'details'	=> __('Choose position.','woocommerce-products-slider'),
-                'type'		=> 'select',
-                'value'		=> $position,
-                'default'		=> '',
-                'args'		=> array(
-                    'topright'=>__('Top-right','woocommerce-products-slider'),
-                    'topleft'=>__('Top-left','woocommerce-products-slider'),
-                    'bottomright'=>__('Bottom-right','woocommerce-products-slider'),
-                    'bottomleft'=>__('Bottom-left','woocommerce-products-slider'),
-                    ''=>__('None','woocommerce-products-slider'),
-                )
-            );
-
-            $settings_tabs_field->generate_field($args);
 
 
-
-            $args = array(
-                'id'		=> 'background_color',
-                'css_id'		=> $element_index.'_background_coloradd_to_cart',
-                'parent' => $input_name.'[share_button]',
-                'title'		=> __('Background color','woocommerce-products-slider'),
-                'details'	=> __('Choose background color.','woocommerce-products-slider'),
-                'type'		=> 'colorpicker',
-                'value'		=> $background_color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_color',
-                'parent' => $input_name.'[share_button]',
-                'title'		=> __('Text color','woocommerce-products-slider'),
-                'details'	=> __('Choose text color.','woocommerce-products-slider'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
 
 
 
@@ -2570,20 +2455,34 @@ function post_grid_layout_elements_option_share_button($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+
+
             $args = array(
-                'id'		=> 'padding',
-                'css_id'		=> $element_index.'_padding',
+                'id'		=> 'icon_margin',
+                'css_id'		=> $element_index.'_icon_margin',
                 'parent' => $input_name.'[share_button]',
-                'title'		=> __('Padding','woocommerce-products-slider'),
-                'details'	=> __('Choose padding.','woocommerce-products-slider'),
+                'title'		=> __('Icon margin','woocommerce-products-slider'),
+                'details'	=> __('Set icon margin.','woocommerce-products-slider'),
                 'type'		=> 'text',
-                'value'		=> $padding,
+                'value'		=> $icon_margin,
                 'default'		=> '',
                 'placeholder'		=> '5px 10px',
             );
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'icon_color',
+                'css_id'		=> $element_index.'_color',
+                'parent' => $input_name.'[share_button]',
+                'title'		=> __('Icon color','woocommerce-products-slider'),
+                'details'	=> __('Choose icon color.','woocommerce-products-slider'),
+                'type'		=> 'colorpicker',
+                'value'		=> $icon_color,
+                'default'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
 
             ?>

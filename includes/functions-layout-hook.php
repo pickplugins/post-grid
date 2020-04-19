@@ -908,11 +908,13 @@ function post_grid_layout_elements_option_media($parameters){
                 if(!empty($media_source))
                     foreach ($media_source as $elementIndex => $argData){
                         $enable = isset($argData['enable']) ? $argData['enable'] :'';
-                        if(!empty($enable))
-                            $media_source_new[$elementIndex]  = array('enable'=> $enable);
+
+                        if($enable == 'yes')
+                        $media_source_new[$elementIndex]  = array('enable'=> $enable);
+
                     }
 
-                echo '<pre>'.var_export($media_source_new, true).'</pre>';
+                //echo '<pre>'.var_export($media_source_new, true).'</pre>';
                 //echo '<pre>'.var_export($media_source_new, true).'</pre>';
 
                 $media_sources_new = array_replace($media_source_new, $media_sources_list);

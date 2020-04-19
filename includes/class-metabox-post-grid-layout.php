@@ -16,7 +16,7 @@ class class_metabox_post_grid_layout{
 
 	public function metabox_post_grid_layout($post_type){
 
-            add_meta_box('metabox-post_grid-layout',__('Layout data', 'woocommerce-products-slider'), array($this, 'meta_box_post_grid_layout_data'), 'post_grid_layout', 'normal', 'high');
+            add_meta_box('metabox-post_grid-layout',__('Layout data', 'post-grid'), array($this, 'meta_box_post_grid_layout_data'), 'post_grid_layout', 'normal', 'high');
 
 		}
 
@@ -42,7 +42,7 @@ class class_metabox_post_grid_layout{
 
         $post_grid_settings_tab[] = array(
             'id' => 'layout_builder',
-            'title' => sprintf(__('%s Layout builder','woocommerce-products-slider'),'<i class="fas fa-qrcode"></i>'),
+            'title' => sprintf(__('%s Layout builder','post-grid'),'<i class="fas fa-qrcode"></i>'),
             'priority' => 4,
             'active' => true,
         );
@@ -50,7 +50,7 @@ class class_metabox_post_grid_layout{
 
         $post_grid_settings_tab[] = array(
             'id' => 'custom_scripts',
-            'title' => sprintf(__('%s Custom scripts','woocommerce-products-slider'),'<i class="far fa-building"></i>'),
+            'title' => sprintf(__('%s Custom scripts','post-grid'),'<i class="far fa-building"></i>'),
             'priority' => 5,
             'active' => false,
         );

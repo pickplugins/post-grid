@@ -62,45 +62,45 @@ function meta_boxes_post_grid_input( $post ) {
     $post_grid_settings_tab[] = array(
         'id' => 'query_post',
         'title' => sprintf(__('%s Query Post','post-grid'), '<i class="fas fa-cubes"></i>'),
-        'priority' => 2,
+        'priority' => 3,
         'active' => ($current_tab == 'query_post') ? true : false,
     );
 
     $post_grid_settings_tab[] = array(
         'id' => 'skin_layout',
-        'title' => sprintf(__('%s Skin & Layout','post-grid'), '<i class="fas fa-magic"></i>'),
-        'priority' => 3,
+        'title' => sprintf(__('%s Skin & Layout (Old)','post-grid'), '<i class="fas fa-magic"></i>'),
+        'priority' => 4,
         'active' => ($current_tab == 'skin_layout') ? true : false,
     );
 
     $post_grid_settings_tab[] = array(
         'id' => 'layouts',
-        'title' => sprintf(__('%s Layouts (New)','woocommerce-products-slider'),'<i class="fas fa-qrcode"></i>'),
+        'title' => sprintf(__('%s Layouts (New)','post-grid'),'<i class="fas fa-qrcode"></i>'),
         'priority' => 5,
         'active' => ($current_tab == 'layouts') ? true : false,
     );
 
-    $post_grid_settings_tab[] = array(
-        'id' => 'layout_settings',
-        'title' => sprintf(__('%s Layout Settings','post-grid'), '<i class="fas fa-tools"></i>'),
-        'priority' => 4,
-        'active' => ($current_tab == 'layout_settings') ? true : false,
-    );
+//    $post_grid_settings_tab[] = array(
+//        'id' => 'layout_settings',
+//        'title' => sprintf(__('%s Layout Settings','post-grid'), '<i class="fas fa-tools"></i>'),
+//        'priority' => 6,
+//        'active' => ($current_tab == 'layout_settings') ? true : false,
+//    );
 
-
     $post_grid_settings_tab[] = array(
-        'id' => 'grid',
-        'title' => sprintf(__('%s Grid','post-grid'), '<i class="fas fa-th"></i>'),
-        'priority' => 5,
-        'active' => ($current_tab == 'grid') ? true : false,
+        'id' => 'grid_settings',
+        'title' => sprintf(__('%s Grid settings','post-grid'), '<i class="fas fa-th"></i>'),
+        'priority' => 7,
+        'active' => ($current_tab == 'grid_settings') ? true : false,
         'data_visible' => 'grid',
         'hidden' => ($grid_type == 'grid')? false : true ,
     );
 
+
     $post_grid_settings_tab[] = array(
         'id' => 'masonry',
         'title' => sprintf(__('%s Masonry','post-grid'), '<i class="fas fa-th-large"></i>'),
-        'priority' => 5,
+        'priority' => 9,
         'active' => ($current_tab == 'masonry') ? true : false,
         'data_visible' => 'masonry grid glossary timeline filterable',
         'hidden' => ($grid_type == 'slider')? true : false ,
@@ -109,7 +109,7 @@ function meta_boxes_post_grid_input( $post ) {
     $post_grid_settings_tab[] = array(
         'id' => 'pagination',
         'title' => sprintf(__('%s Pagination','post-grid'), '<i class="fas fa-pager"></i>'),
-        'priority' => 5,
+        'priority' => 10,
         'active' => ($current_tab == 'pagination') ? true : false,
         'data_visible' => 'masonry grid glossary timeline filterable isotope',
         'hidden' => ($grid_type == 'slider')? true : false ,
@@ -118,13 +118,13 @@ function meta_boxes_post_grid_input( $post ) {
     $post_grid_settings_tab[] = array(
         'id' => 'custom_scripts',
         'title' => sprintf(__('%s Custom Scripts','post-grid'), '<i class="fas fa-code"></i>'),
-        'priority' => 6,
+        'priority' => 11,
         'active' => ($current_tab == 'custom_scripts') ? true : false,
     );
     $post_grid_settings_tab[] = array(
         'id' => 'search',
         'title' => sprintf(__('%s Search','post-grid'), '<i class="fas fa-search"></i>'),
-        'priority' => 5,
+        'priority' => 12,
         'active' => ($current_tab == 'search') ? true : false,
     );
 

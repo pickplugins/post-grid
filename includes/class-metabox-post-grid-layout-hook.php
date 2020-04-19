@@ -22,16 +22,16 @@ if(!function_exists('post_grid_layout_metabox_content_custom_scripts')){
 
         ?>
         <div class="section">
-            <div class="section-title"><?php echo __('Custom scripts', 'woocommerce-products-slider'); ?></div>
-            <p class="description section-description"><?php echo __('Write custom scripts to override CSS and scripts.', 'woocommerce-products-slider'); ?></p>
+            <div class="section-title"><?php echo __('Custom scripts', 'post-grid'); ?></div>
+            <p class="description section-description"><?php echo __('Write custom scripts to override CSS and scripts.', 'post-grid'); ?></p>
 
 
             <?php
             $args = array(
                 'id'		=> 'custom_css',
                 'parent'		=> 'custom_scripts',
-                'title'		=> __('Custom CSS','woocommerce-products-slider'),
-                'details'	=> __('Write custom CSS to override default style, do not use <code>&lt;style>&lt;/style></code> tag. use <code>__ID__</code> to replace by layout id <code>layout-'.$post_id.'</code>.','woocommerce-products-slider'),
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Write custom CSS to override default style, do not use <code>&lt;style>&lt;/style></code> tag. use <code>__ID__</code> to replace by layout id <code>layout-'.$post_id.'</code>.','post-grid'),
                 'type'		=> 'scripts_css',
                 'value'		=> $custom_css,
                 'default'		=> '',
@@ -44,8 +44,8 @@ if(!function_exists('post_grid_layout_metabox_content_custom_scripts')){
             $args = array(
                 'id'		=> 'custom_js',
                 'parent'		=> 'custom_scripts',
-                'title'		=> __('Custom JS','woocommerce-products-slider'),
-                'details'	=> __('Write custom JS to override default style, do not use <code>&lt;script>&lt;/script></code> tag.','woocommerce-products-slider'),
+                'title'		=> __('Custom JS','post-grid'),
+                'details'	=> __('Write custom JS to override default style, do not use <code>&lt;script>&lt;/script></code> tag.','post-grid'),
                 'type'		=> 'scripts_js',
                 'value'		=> $custom_js,
                 'default'		=> '',
@@ -57,8 +57,8 @@ if(!function_exists('post_grid_layout_metabox_content_custom_scripts')){
             $args = array(
                 'id'		=> 'layout_preview_img',
                 'parent'		=> 'layout_options',
-                'title'		=> __('Preview image','woocommerce-products-slider'),
-                'details'	=> __('Set layout preview image.','woocommerce-products-slider'),
+                'title'		=> __('Preview image','post-grid'),
+                'details'	=> __('Set layout preview image.','post-grid'),
                 'type'		=> 'media_url',
                 'value'		=> $layout_preview_img,
                 'default'		=> '',
@@ -104,8 +104,8 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
 
         ?>
         <div class="section">
-            <div class="section-title"><?php echo __('Layout builder', 'woocommerce-products-slider'); ?></div>
-            <p class="description section-description"><?php echo __('Customize layout settings.', 'woocommerce-products-slider'); ?></p>
+            <div class="section-title"><?php echo __('Layout builder', 'post-grid'); ?></div>
+            <p class="description section-description"><?php echo __('Customize layout settings.', 'post-grid'); ?></p>
             <div class="setting-field ">
 
                 <?php
@@ -113,29 +113,29 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                 $elements_group['general'] = array(
                     'group_title'=>'General',
                     'items'=>array(
-                        'wrapper_start'=>array('name' =>__('Wrapper start','woocommerce-products-slider')),
-                        'wrapper_end'=>array('name' =>__('Wrapper end','woocommerce-products-slider')),
-                        'media'=>array('name' =>__('Media','woocommerce-products-slider')),
+                        'wrapper_start'=>array('name' =>__('Wrapper start','post-grid')),
+                        'wrapper_end'=>array('name' =>__('Wrapper end','post-grid')),
+                        'media'=>array('name' =>__('Media','post-grid')),
 
-                        'custom_text'=>array('name' =>__('Custom text','woocommerce-products-slider')),
-                        'title'=>array('name' =>__('Post title','woocommerce-products-slider')),
-                        'title_link'=>array('name' =>__('Title with link','woocommerce-products-slider')),
-                        'read_more'=>array('name' =>__('Read more','woocommerce-products-slider')),
-                        'thumb'=>array('name' =>__('Thumbnail','woocommerce-products-slider')),
-                        'thumb_link'=>array('name' =>__('Thumbnail with link ','woocommerce-products-slider')),
+                        'custom_text'=>array('name' =>__('Custom text','post-grid')),
+                        'title'=>array('name' =>__('Post title','post-grid')),
+                        'title_link'=>array('name' =>__('Title with link','post-grid')),
+                        'read_more'=>array('name' =>__('Read more','post-grid')),
+                        'thumb'=>array('name' =>__('Thumbnail','post-grid')),
+                        'thumb_link'=>array('name' =>__('Thumbnail with link ','post-grid')),
 
-                        'excerpt'=>array('name' =>__('Post excerpt','woocommerce-products-slider')),
-                        'excerpt_read_more'=>array('name' =>__('Excerpt with read more','woocommerce-products-slider')),
-                        'content'=>array('name' =>__('Content','woocommerce-products-slider')),
-                        'post_date'=>array('name' =>__('Post date','woocommerce-products-slider')),
-                        'author'=>array('name' =>__('Author','woocommerce-products-slider')),
-                        'author_link'=>array('name' =>__('Author with link','woocommerce-products-slider')),
-                        'categories'=>array('name' =>__('Categories','woocommerce-products-slider')),
-                        'tags'=>array('name' =>__('Tags','woocommerce-products-slider')),
-                        'comments_count'=>array('name' =>__('Comments count','woocommerce-products-slider')),
-                        'share_button'=>array('name' =>__('Share button','woocommerce-products-slider')),
-                        'hr'=>array('name' =>__('Horizontal line','woocommerce-products-slider')),
-                        'five_star'=>array('name' =>__('Five star','woocommerce-products-slider')),
+                        'excerpt'=>array('name' =>__('Post excerpt','post-grid')),
+                        'excerpt_read_more'=>array('name' =>__('Excerpt with read more','post-grid')),
+                        'content'=>array('name' =>__('Content','post-grid')),
+                        'post_date'=>array('name' =>__('Post date','post-grid')),
+                        'author'=>array('name' =>__('Author','post-grid')),
+                        'author_link'=>array('name' =>__('Author with link','post-grid')),
+                        'categories'=>array('name' =>__('Categories','post-grid')),
+                        'tags'=>array('name' =>__('Tags','post-grid')),
+                        'comments_count'=>array('name' =>__('Comments count','post-grid')),
+                        'share_button'=>array('name' =>__('Share button','post-grid')),
+                        'hr'=>array('name' =>__('Horizontal line','post-grid')),
+                        'five_star'=>array('name' =>__('Five star','post-grid')),
 
                         ),
                 );
@@ -144,20 +144,20 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
 //                $elements_group['woo'] = array(
 //                    'group_title'=>'WooCommerce',
 //                    'items'=>array(
-//                        'woo_full_price'=>array('name' =>__('Full price','woocommerce-products-slider')),
-//                        'woo_add_to_cart'=>array('name' =>__('Add to cart','woocommerce-products-slider')),
-//                        'woo_categories'=>array('name' =>__('Categories','woocommerce-products-slider')),
-//                        'woo_tags'=>array('name' =>__('Tags','woocommerce-products-slider')),
+//                        'woo_full_price'=>array('name' =>__('Full price','post-grid')),
+//                        'woo_add_to_cart'=>array('name' =>__('Add to cart','post-grid')),
+//                        'woo_categories'=>array('name' =>__('Categories','post-grid')),
+//                        'woo_tags'=>array('name' =>__('Tags','post-grid')),
 //                    ),
 //                );
 //
 //                $elements_group['edd'] = array(
 //                    'group_title'=>'Easy Digital Download',
 //                    'items'=>array(
-//                        'edd_price'=>array('name' =>__('Price','woocommerce-products-slider')),
-//                        'edd_add_to_cart'=>array('name' =>__('Add to cart','woocommerce-products-slider')),
-//                        'edd_categories'=>array('name' =>__('Categories','woocommerce-products-slider')),
-//                        'edd_tags'=>array('name' =>__('Tags','woocommerce-products-slider')),
+//                        'edd_price'=>array('name' =>__('Price','post-grid')),
+//                        'edd_add_to_cart'=>array('name' =>__('Add to cart','post-grid')),
+//                        'edd_categories'=>array('name' =>__('Categories','post-grid')),
+//                        'edd_tags'=>array('name' =>__('Tags','post-grid')),
 //
 //
 //                    ),
@@ -166,19 +166,19 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
 //                $elements_group['acf'] = array(
 //                    'group_title'=>'Advance Field Manager',
 //                    'items'=>array(
-//                        'acf_text'=>array('name' =>__('Text','woocommerce-products-slider')),
-//                        'acf_textarea'=>array('name' =>__('textarea','woocommerce-products-slider')),
-//                        'acf_number'=>array('name' =>__('number','woocommerce-products-slider')),
-//                        'acf_email'=>array('name' =>__('email','woocommerce-products-slider')),
-//                        'acf_wysiwyg'=>array('name' =>__('wysiwyg','woocommerce-products-slider')),
-//                        'acf_image'=>array('name' =>__('image','woocommerce-products-slider')),
-//                        'acf_file'=>array('name' =>__('file','woocommerce-products-slider')),
-//                        'acf_select'=>array('name' =>__('select','woocommerce-products-slider')),
-//                        'acf_checkbox'=>array('name' =>__('checkbox','woocommerce-products-slider')),
-//                        'acf_page_link'=>array('name' =>__('page link','woocommerce-products-slider')),
-//                        'acf_taxonomy'=>array('name' =>__('taxonomy','woocommerce-products-slider')),
-//                        'acf_user'=>array('name' =>__('user','woocommerce-products-slider')),
-//                        'acf_date_picker'=>array('name' =>__('date picker','woocommerce-products-slider')),
+//                        'acf_text'=>array('name' =>__('Text','post-grid')),
+//                        'acf_textarea'=>array('name' =>__('textarea','post-grid')),
+//                        'acf_number'=>array('name' =>__('number','post-grid')),
+//                        'acf_email'=>array('name' =>__('email','post-grid')),
+//                        'acf_wysiwyg'=>array('name' =>__('wysiwyg','post-grid')),
+//                        'acf_image'=>array('name' =>__('image','post-grid')),
+//                        'acf_file'=>array('name' =>__('file','post-grid')),
+//                        'acf_select'=>array('name' =>__('select','post-grid')),
+//                        'acf_checkbox'=>array('name' =>__('checkbox','post-grid')),
+//                        'acf_page_link'=>array('name' =>__('page link','post-grid')),
+//                        'acf_taxonomy'=>array('name' =>__('taxonomy','post-grid')),
+//                        'acf_user'=>array('name' =>__('user','post-grid')),
+//                        'acf_date_picker'=>array('name' =>__('date picker','post-grid')),
 //
 //
 //                    ),
@@ -286,7 +286,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         else:
                             ?>
                             <div class="empty-element">
-                                <?php echo sprintf(__('%s Click to add tags.','woocommerce-products-slider'), '<i class="far fa-hand-point-up"></i>') ?>
+                                <?php echo sprintf(__('%s Click to add tags.','post-grid'), '<i class="far fa-hand-point-up"></i>') ?>
                             </div>
                         <?php
                         endif;
@@ -358,8 +358,8 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
 //            $args = array(
 //                'id'		=> 'layout_builder',
 //                //'parent'		=> '',
-//                'title'		=> __('Layout elements','woocommerce-products-slider'),
-//                'details'	=> __('Customize layout elements.','woocommerce-products-slider'),
+//                'title'		=> __('Layout elements','post-grid'),
+//                'details'	=> __('Customize layout elements.','post-grid'),
 //                'type'		=> 'custom_html',
 //                'html'		=> $html,
 //                'default'		=> '',
@@ -373,8 +373,8 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
             $args = array(
                 'id'		=> 'preview_post_type',
                 'parent'		=> 'layout_options',
-                'title'		=> __('Preview post type','woocommerce-products-slider'),
-                'details'	=> __('Set layout preview post type.','woocommerce-products-slider'),
+                'title'		=> __('Preview post type','post-grid'),
+                'details'	=> __('Set layout preview post type.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $preview_post_type,
                 'default'		=> 'post',
@@ -467,8 +467,8 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
             $args = array(
                 'id'		=> 'layout_preview',
                 //'parent'		=> '',
-                'title'		=> __('Layout preview','woocommerce-products-slider'),
-                'details'	=> __('Layout preview','woocommerce-products-slider'),
+                'title'		=> __('Layout preview','post-grid'),
+                'details'	=> __('Layout preview','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
                 'default'		=> '',

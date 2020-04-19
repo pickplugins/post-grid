@@ -100,10 +100,15 @@ function post_grid_settings_tabs_content_general($tab, $post_id){
     $lazy_load_image_src = !empty($post_grid_meta_options['lazy_load_image_src']) ? $post_grid_meta_options['lazy_load_image_src'] : '';
     $load_fontawesome = !empty($post_grid_meta_options['load_fontawesome']) ? $post_grid_meta_options['load_fontawesome'] : '';
 
+    $container_padding = !empty($post_grid_meta_options['container']['padding']) ? $post_grid_meta_options['container']['padding'] : '10px';
+    $container_bg_color = !empty($post_grid_meta_options['container']['bg_color']) ? $post_grid_meta_options['container']['bg_color'] : '';
+    $container_bg_image = !empty($post_grid_meta_options['container']['bg_image']) ? $post_grid_meta_options['container']['bg_image'] : '';
+
+
     ?>
     <div class="section">
-        <div class="section-title"><?php echo __('General', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose some general options.', 'post-grid'); ?></p>
+        <div class="section-title"><?php echo __('Lazy load', 'post-grid'); ?></div>
+        <p class="description section-description"><?php echo __('Choose lazy load options.', 'post-grid'); ?></p>
 
         <?php
 
@@ -168,6 +173,56 @@ function post_grid_settings_tabs_content_general($tab, $post_id){
 
     </div>
 
+    <div class="section">
+        <div class="section-title"><?php echo __('Container settings', 'post-grid'); ?></div>
+        <p class="description section-description"><?php echo __('Choose container options.', 'post-grid'); ?></p>
+
+        <?php
+
+
+        $args = array(
+            'id'		=> 'padding',
+            'parent'		=> 'post_grid_meta_options[container]',
+            'title'		=> __('Container padding','post-grid'),
+            'details'	=> __('Set custom padding for grid container, ex: 10px 15px 10px 15px','post-grid'),
+            'type'		=> 'text',
+            'value'		=> $container_padding,
+            'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+        $args = array(
+            'id'		=> 'bg_color',
+            'parent'		=> 'post_grid_meta_options[container]',
+            'title'		=> __('Container background color','post-grid'),
+            'details'	=> __('Set custom background color for grid container.','post-grid'),
+            'type'		=> 'colorpicker',
+            'value'		=> $container_bg_color,
+            'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+        $args = array(
+            'id'		=> 'bg_image',
+            'parent'		=> 'post_grid_meta_options[container]',
+            'title'		=> __('Container background color','post-grid'),
+            'details'	=> __('Set custom background color for grid container.','post-grid'),
+            'type'		=> 'media_url',
+            'value'		=> $container_bg_image,
+            'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+        ?>
+
+    </div>
 
 
 
@@ -580,7 +635,7 @@ function post_grid_settings_tabs_content_layouts($tab, $post_id){
    //var_dump($post_id);
     $settings_tabs_field = new settings_tabs_field();
     $post_grid_meta_options = get_post_meta($post_id,'post_grid_meta_options', true);
-    $layout_id = !empty($post_grid_meta_options['layout_id']) ? $post_grid_meta_options['layout_id'] : post_grid_get_first_post('post_grid_layout');
+    $layout_id = !empty($post_grid_meta_options['layout_id']) ? $post_grid_meta_options['layout_id'] : ''; //post_grid_get_first_post('post_grid_layout')
 
     $post_grid_plugin_info = get_option('post_grid_plugin_info');
     $import_layouts = isset($post_grid_plugin_info['import_layouts']) ? $post_grid_plugin_info['import_layouts'] : '';
@@ -589,8 +644,8 @@ function post_grid_settings_tabs_content_layouts($tab, $post_id){
 
     ?>
     <div class="section">
-        <div class="section-title"><?php echo __('Layouts', 'woocommerce-products-slider'); ?></div>
-        <p class="description section-description"><?php echo __('Choose item layouts.', 'woocommerce-products-slider'); ?></p>
+        <div class="section-title"><?php echo __('Layouts', 'post-grid'); ?></div>
+        <p class="description section-description"><?php echo __('Choose item layouts.', 'post-grid'); ?></p>
 
 
         <?php
@@ -600,13 +655,13 @@ function post_grid_settings_tabs_content_layouts($tab, $post_id){
         ob_start();
 
         ?>
-        <p><a target="_blank" class="button" href="<?php echo admin_url().'post-new.php?post_type=post_grid_layout'; ?>"><?php echo __('Create layout','woocommerce-products-slider'); ?></a> </p>
-        <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Manage layouts','woocommerce-products-slider'); ?></a> </p>
+        <p><a target="_blank" class="button" href="<?php echo admin_url().'post-new.php?post_type=post_grid_layout'; ?>"><?php echo __('Create layout','post-grid'); ?></a> </p>
+        <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Manage layouts','post-grid'); ?></a> </p>
 
         <?php
         if($import_layouts != 'done'):
             ?>
-            <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Import layouts','woocommerce-products-slider'); ?></a> </p>
+            <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Import layouts','post-grid'); ?></a> </p>
         <?php
         endif;
 
@@ -617,8 +672,8 @@ function post_grid_settings_tabs_content_layouts($tab, $post_id){
         $args = array(
             'id'		=> 'create_post_grid_layout',
             'parent'		=> 'post_grid_meta_options[query]',
-            'title'		=> __('Create layout','woocommerce-products-slider'),
-            'details'	=> __('Please follow the links to create layouts or manage.','woocommerce-products-slider'),
+            'title'		=> __('Create layout','post-grid'),
+            'details'	=> __('Please follow the links to create layouts or manage.','post-grid'),
             'type'		=> 'custom_html',
             'html'		=> $html,
         );
@@ -635,7 +690,11 @@ function post_grid_settings_tabs_content_layouts($tab, $post_id){
         $query_args['posts_per_page'] 	= -1;
         $wp_query = new WP_Query($query_args);
 
+        $item_layout_args[''] = array('name'=>'Empty layout',  'thumb'=> 'https://i.imgur.com/JyurCtY.jpg', );
+
+
         if ( $wp_query->have_posts() ) :
+
 
             while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
@@ -661,8 +720,8 @@ function post_grid_settings_tabs_content_layouts($tab, $post_id){
         $args = array(
             'id'		=> 'layout_id',
             'parent' => 'post_grid_meta_options',
-            'title'		=> __('Item layouts','woocommerce-products-slider'),
-            'details'	=> __('Choose grid item layout.','woocommerce-products-slider'),
+            'title'		=> __('Item layouts','post-grid'),
+            'details'	=> __('Choose grid item layout.','post-grid'),
             'type'		=> 'radio_image',
             'value'		=> $layout_id,
             'default'		=> '',
@@ -1030,174 +1089,11 @@ function post_grid_settings_tabs_content_skin_layout($tab, $post_id){
 //            $settings_tabs_field->generate_field($args, $post_id);
 
 
-
-
-            ?>
-        </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_settings_tabs_content_layout_settings', 'post_grid_settings_tabs_content_layout_settings', 10, 2);
-
-function post_grid_settings_tabs_content_layout_settings($tab, $post_id){
-
-    $settings_tabs_field = new settings_tabs_field();
-    $class_post_grid_functions = new class_post_grid_functions();
-
-
-    $post_grid_posttypes_array = post_grid_posttypes_array();
-
-    $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
-
-    $items_width_desktop = !empty($post_grid_meta_options['width']['desktop']) ? $post_grid_meta_options['width']['desktop'] : '280px';
-    $items_width_tablet = !empty($post_grid_meta_options['width']['tablet']) ? $post_grid_meta_options['width']['tablet'] : '280px';
-    $items_width_mobile = !empty($post_grid_meta_options['width']['mobile']) ? $post_grid_meta_options['width']['mobile'] : '90%';
-
-    $items_height_style = !empty($post_grid_meta_options['item_height']['style']) ? $post_grid_meta_options['item_height']['style'] : 'auto_height';
-    $items_height_style_tablet = !empty($post_grid_meta_options['item_height']['style_tablet']) ? $post_grid_meta_options['item_height']['style_tablet'] : 'auto_height';
-    $items_height_style_mobile = !empty($post_grid_meta_options['item_height']['style_mobile']) ? $post_grid_meta_options['item_height']['style_mobile'] : 'auto_height';
-
-    $items_fixed_height = !empty($post_grid_meta_options['item_height']['fixed_height']) ? $post_grid_meta_options['item_height']['fixed_height'] : '220px';
-    $items_fixed_height_tablet = !empty($post_grid_meta_options['item_height']['fixed_height_tablet']) ? $post_grid_meta_options['item_height']['fixed_height_tablet'] : '220px';
-    $items_fixed_height_mobile = !empty($post_grid_meta_options['item_height']['fixed_height_mobile']) ? $post_grid_meta_options['item_height']['fixed_height_mobile'] : '220px';
-
-    $items_media_height_style = !empty($post_grid_meta_options['media_height']['style']) ? $post_grid_meta_options['media_height']['style'] : 'auto_height';
-    $items_media_fixed_height = !empty($post_grid_meta_options['media_height']['fixed_height']) ? $post_grid_meta_options['media_height']['fixed_height'] : '220px';
-
-
-
-
-    $items_bg_color_type = !empty($post_grid_meta_options['items_bg_color_type']) ? $post_grid_meta_options['items_bg_color_type'] : 'fixed';
-    $items_bg_color = !empty($post_grid_meta_options['items_bg_color']) ? $post_grid_meta_options['items_bg_color'] : '#fff';
-
-    $items_margin = !empty($post_grid_meta_options['margin']) ? $post_grid_meta_options['margin'] : '10px';
-    $item_padding = !empty($post_grid_meta_options['item_padding']) ? $post_grid_meta_options['item_padding'] : '0px';
-
-    $featured_img_size = !empty($post_grid_meta_options['featured_img_size']) ? $post_grid_meta_options['featured_img_size'] : '';
-    $thumb_linked = !empty($post_grid_meta_options['thumb_linked']) ? $post_grid_meta_options['thumb_linked'] : 'yes';
-    $media_source = !empty($post_grid_meta_options['media_source']) ? $post_grid_meta_options['media_source'] : array();
-
-
-    $container_padding = !empty($post_grid_meta_options['container']['padding']) ? $post_grid_meta_options['container']['padding'] : '10px';
-    $container_bg_color = !empty($post_grid_meta_options['container']['bg_color']) ? $post_grid_meta_options['container']['bg_color'] : '';
-    $container_bg_image = !empty($post_grid_meta_options['container']['bg_image']) ? $post_grid_meta_options['container']['bg_image'] : '';
-
-
-
-
-    ?>
-        <div class="section">
-            <div class="section-title">Layout settings</div>
-            <p class="description section-description">Customize the layout</p>
-
-            <?php
-
-            ob_start();
-
-            ?>
-            <div class="">
-                Desktop:(min-width:1024px)<br>
-                <input placeholder="250px or 30%" type="text" name="post_grid_meta_options[width][desktop]" value="<?php echo $items_width_desktop; ?>" />
-            </div>
-            <br>
-            <div class="">
-                Tablet:( min-width:768px )<br>
-                <input placeholder="250px or 30%" type="text" name="post_grid_meta_options[width][tablet]" value="<?php echo $items_width_tablet; ?>" />
-            </div>
-            <br>
-            <div class="">
-                Mobile:( min-width : 320px, )<br>
-                <input placeholder="250px or 30%" type="text" name="post_grid_meta_options[width][mobile]" value="<?php echo $items_width_mobile; ?>" />
-            </div>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'skins',
-                'title'		=> __('Grid items width','post-grid'),
-                'details'	=> __('Grid item width for different device, you can use % or px, em and etc, example: 80% or 250px','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-
-
-            ob_start();
-
-            ?>
-            <table>
-                <tr>
-                    <td style="padding: 0 20px 0  0">
-
-                        <div class="">
-                            <p><b>Desktop:</b>(min-width:1024px)</p>
-                            <label><input <?php if($items_height_style=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
-
-                            <input type="text" name="post_grid_meta_options[item_height][fixed_height]" value="<?php echo $items_fixed_height; ?>" />
-
-                        </div>
-
-
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:  0 20px 0  0">
-                        <div class="">
-                            <p><b>Tablet:</b>( min-width:768px )</p>
-                            <label><input <?php if($items_height_style_tablet=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style_tablet=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style_tablet=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
-
-                            <input type="text" name="post_grid_meta_options[item_height][fixed_height_tablet]" value="<?php echo $items_fixed_height_tablet; ?>" />
-
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding: 0 20px 0  0">
-                        <div class="">
-                            <p><b>Mobile:</b>( min-width : 320px, )</p>
-                            <label><input <?php if($items_height_style_mobile=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style_mobile=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style_mobile=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
-
-                            <input type="text" name="post_grid_meta_options[item_height][fixed_height_mobile]" value="<?php echo $items_fixed_height_mobile; ?>" />
-
-                        </div>
-                    </td>
-                </tr>
-
-            </table>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'skins',
-                'title'		=> __('Grid items height','post-grid'),
-                'details'	=> __('Grid item height for different device, you can use % or px, em and etc, example: 80% or 250px','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-
-
+            $items_media_height_style = !empty($post_grid_meta_options['media_height']['style']) ? $post_grid_meta_options['media_height']['style'] : 'auto_height';
+            $items_media_fixed_height = !empty($post_grid_meta_options['media_height']['fixed_height']) ? $post_grid_meta_options['media_height']['fixed_height'] : '220px';
+            $featured_img_size = !empty($post_grid_meta_options['featured_img_size']) ? $post_grid_meta_options['featured_img_size'] : '';
+            $thumb_linked = !empty($post_grid_meta_options['thumb_linked']) ? $post_grid_meta_options['thumb_linked'] : 'yes';
+            $media_source = !empty($post_grid_meta_options['media_source']) ? $post_grid_meta_options['media_source'] : array();
 
             ob_start();
 
@@ -1226,105 +1122,6 @@ function post_grid_settings_tabs_content_layout_settings($tab, $post_id){
 
             $settings_tabs_field->generate_field($args, $post_id);
 
-
-
-
-
-            $args = array(
-                'id'		=> 'items_bg_color_type',
-                'parent'		=> 'post_grid_meta_options',
-                'title'		=> __('Items background color type','post-grid'),
-                'details'	=> __('Select items background color type.','post-grid'),
-                'type'		=> 'radio',
-                'multiple'		=> true,
-                'value'		=> $items_bg_color_type,
-                'default'		=> 'fixed',
-                'args'		=> array(
-                    'fixed'=>__('Fixed','post-grid'),
-                ),
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-            $args = array(
-                'id'		=> 'items_bg_color',
-                'parent'		=> 'post_grid_meta_options',
-                'title'		=> __('Grid items background color','post-grid'),
-                'details'	=> __('Set custom color for grid item.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $items_bg_color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'parent'		=> 'post_grid_meta_options',
-                'title'		=> __('Grid items margin','post-grid'),
-                'details'	=> __('Grid item wrapper margin, you can use top right bottom left style, ex: 10px 15px 10px 15px','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $items_margin,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-            $args = array(
-                'id'		=> 'item_padding',
-                'parent'		=> 'post_grid_meta_options',
-                'title'		=> __('Grid items padding','post-grid'),
-                'details'	=> __('Grid item wrapper padding, you can use top right bottom left style, ex: 10px 15px 10px 15px','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $item_padding,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-
-            $args = array(
-                'id'		=> 'padding',
-                'parent'		=> 'post_grid_meta_options[container]',
-                'title'		=> __('Grid container padding','post-grid'),
-                'details'	=> __('Set custom padding for grid container, ex: 10px 15px 10px 15px','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $container_padding,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-            $args = array(
-                'id'		=> 'bg_color',
-                'parent'		=> 'post_grid_meta_options[container]',
-                'title'		=> __('Grid container background color','post-grid'),
-                'details'	=> __('Set custom background color for grid container.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $container_bg_color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-            $args = array(
-                'id'		=> 'bg_image',
-                'parent'		=> 'post_grid_meta_options[container]',
-                'title'		=> __('Grid container background color','post-grid'),
-                'details'	=> __('Set custom background color for grid container.','post-grid'),
-                'type'		=> 'media_url',
-                'value'		=> $container_bg_image,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
 
 
             $args = array(
@@ -1407,11 +1204,7 @@ function post_grid_settings_tabs_content_layout_settings($tab, $post_id){
 
                 })
             </script>
-            <style type="text/css">
-                #post_grid_metabox .media-source-list .items .move {
 
-                }
-            </style>
             <?php
 
 
@@ -1429,7 +1222,251 @@ function post_grid_settings_tabs_content_layout_settings($tab, $post_id){
 
             );
 
+            $settings_tabs_field->generate_field($args);
+
+            ?>
+        </div>
+    <?php
+
+}
+
+
+
+add_action('post_grid_settings_tabs_content_grid_settings', 'post_grid_settings_tabs_content_grid_settings', 10, 2);
+
+function post_grid_settings_tabs_content_grid_settings($tab, $post_id){
+
+    $settings_tabs_field = new settings_tabs_field();
+    $class_post_grid_functions = new class_post_grid_functions();
+
+
+    $post_grid_posttypes_array = post_grid_posttypes_array();
+
+    $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
+
+    $items_width_desktop = !empty($post_grid_meta_options['width']['desktop']) ? $post_grid_meta_options['width']['desktop'] : '280px';
+    $items_width_tablet = !empty($post_grid_meta_options['width']['tablet']) ? $post_grid_meta_options['width']['tablet'] : '280px';
+    $items_width_mobile = !empty($post_grid_meta_options['width']['mobile']) ? $post_grid_meta_options['width']['mobile'] : '90%';
+
+    $items_height_style = !empty($post_grid_meta_options['item_height']['style']) ? $post_grid_meta_options['item_height']['style'] : 'auto_height';
+    $items_height_style_tablet = !empty($post_grid_meta_options['item_height']['style_tablet']) ? $post_grid_meta_options['item_height']['style_tablet'] : 'auto_height';
+    $items_height_style_mobile = !empty($post_grid_meta_options['item_height']['style_mobile']) ? $post_grid_meta_options['item_height']['style_mobile'] : 'auto_height';
+
+    $items_fixed_height = !empty($post_grid_meta_options['item_height']['fixed_height']) ? $post_grid_meta_options['item_height']['fixed_height'] : '220px';
+    $items_fixed_height_tablet = !empty($post_grid_meta_options['item_height']['fixed_height_tablet']) ? $post_grid_meta_options['item_height']['fixed_height_tablet'] : '220px';
+    $items_fixed_height_mobile = !empty($post_grid_meta_options['item_height']['fixed_height_mobile']) ? $post_grid_meta_options['item_height']['fixed_height_mobile'] : '220px';
+
+
+
+
+
+    $items_bg_color_type = !empty($post_grid_meta_options['items_bg_color_type']) ? $post_grid_meta_options['items_bg_color_type'] : 'fixed';
+    $items_bg_color = !empty($post_grid_meta_options['items_bg_color']) ? $post_grid_meta_options['items_bg_color'] : '#fff';
+
+    $items_margin = !empty($post_grid_meta_options['margin']) ? $post_grid_meta_options['margin'] : '10px';
+    $item_padding = !empty($post_grid_meta_options['item_padding']) ? $post_grid_meta_options['item_padding'] : '0px';
+
+
+    $grid_layout_name = !empty($post_grid_meta_options['grid_layout']['name']) ? $post_grid_meta_options['grid_layout']['name'] : 'layout_grid';
+    $grid_layout_col_multi = !empty($post_grid_meta_options['grid_layout']['col_multi']) ? $post_grid_meta_options['grid_layout']['col_multi'] : '2';
+
+
+
+    ?>
+        <div class="section">
+            <div class="section-title">Layout settings</div>
+            <p class="description section-description">Customize the layout</p>
+
+            <?php
+
+
+
+            $grid_layout_args[$post_id] = array('name'=>'N by N',  'thumb'=> post_grid_plugin_url.'assets/admin/images/layout_grid.png', );
+
+            $grid_layout_args = apply_filters('post_grid_grid_layouts', $grid_layout_args);
+
+
+            $args = array(
+                'id'		=> 'name',
+                'parent' => 'post_grid_meta_options[grid_layout]',
+                'title'		=> __('Grid layout','post-grid'),
+                'details'	=> __('Choose grid item layout.','post-grid'),
+                'type'		=> 'radio_image',
+                'value'		=> $grid_layout_name,
+                'default'		=> '',
+                'width'		=> '100px',
+                'args'		=> $grid_layout_args,
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+
+            ob_start();
+
+            ?>
+            <div class="">
+                Desktop:(min-width:1024px)<br>
+                <input placeholder="250px or 30%" type="text" name="post_grid_meta_options[width][desktop]" value="<?php echo $items_width_desktop; ?>" />
+            </div>
+            <br>
+            <div class="">
+                Tablet:( min-width:768px )<br>
+                <input placeholder="250px or 30%" type="text" name="post_grid_meta_options[width][tablet]" value="<?php echo $items_width_tablet; ?>" />
+            </div>
+            <br>
+            <div class="">
+                Mobile:( min-width : 320px, )<br>
+                <input placeholder="250px or 30%" type="text" name="post_grid_meta_options[width][mobile]" value="<?php echo $items_width_mobile; ?>" />
+            </div>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'skins',
+                'title'		=> __('Grid item width','post-grid'),
+                'details'	=> __('Grid item width for different device, you can use % or px, em and etc, example: 80% or 250px','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+
+            );
+
             $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
+            ob_start();
+
+            ?>
+            <table>
+                <tr>
+                    <td style="padding: 0 20px 0  0">
+
+                        <div class="">
+                            <p><b>Desktop:</b>(min-width:1024px)</p>
+                            <label><input <?php if($items_height_style=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
+
+                            <input type="text" name="post_grid_meta_options[item_height][fixed_height]" value="<?php echo $items_fixed_height; ?>" />
+
+                        </div>
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:  0 20px 0  0">
+                        <div class="">
+                            <p><b>Tablet:</b>( min-width:768px )</p>
+                            <label><input <?php if($items_height_style_tablet=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style_tablet=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style_tablet=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
+
+                            <input type="text" name="post_grid_meta_options[item_height][fixed_height_tablet]" value="<?php echo $items_fixed_height_tablet; ?>" />
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 20px 0  0">
+                        <div class="">
+                            <p><b>Mobile:</b>( min-width : 320px, )</p>
+                            <label><input <?php if($items_height_style_mobile=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style_mobile=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style_mobile=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
+
+                            <input type="text" name="post_grid_meta_options[item_height][fixed_height_mobile]" value="<?php echo $items_fixed_height_mobile; ?>" />
+
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'skins',
+                'title'		=> __('Grid item height','post-grid'),
+                'details'	=> __('Grid item height for different device, you can use % or px, em and etc, example: 80% or 250px','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+
+            );
+
+            $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
+
+
+
+
+
+            $args = array(
+                'id'		=> 'items_bg_color_type',
+                'parent'		=> 'post_grid_meta_options',
+                'title'		=> __('Items background color type','post-grid'),
+                'details'	=> __('Select items background color type.','post-grid'),
+                'type'		=> 'radio',
+                'multiple'		=> true,
+                'value'		=> $items_bg_color_type,
+                'default'		=> 'fixed',
+                'args'		=> array(
+                    'fixed'=>__('Fixed','post-grid'),
+                ),
+            );
+
+            $settings_tabs_field->generate_field($args, $post_id);
+
+
+            $args = array(
+                'id'		=> 'items_bg_color',
+                'parent'		=> 'post_grid_meta_options',
+                'title'		=> __('Grid item background color','post-grid'),
+                'details'	=> __('Set custom color for grid item.','post-grid'),
+                'type'		=> 'colorpicker',
+                'value'		=> $items_bg_color,
+                'default'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+            $args = array(
+                'id'		=> 'margin',
+                'parent'		=> 'post_grid_meta_options',
+                'title'		=> __('Grid item margin','post-grid'),
+                'details'	=> __('Grid item wrapper margin, you can use top right bottom left style, ex: 10px 15px 10px 15px','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $items_margin,
+                'default'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args, $post_id);
+
+
+            $args = array(
+                'id'		=> 'item_padding',
+                'parent'		=> 'post_grid_meta_options',
+                'title'		=> __('Grid item padding','post-grid'),
+                'details'	=> __('Grid item wrapper padding, you can use top right bottom left style, ex: 10px 15px 10px 15px','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $item_padding,
+                'default'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args, $post_id);
+
+
 
 
 
@@ -1453,8 +1490,6 @@ function post_grid_settings_tabs_content_grid($tab, $post_id){
     $settings_tabs_field = new settings_tabs_field();
     $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
 
-    $grid_layout_name = !empty($post_grid_meta_options['grid_layout']['name']) ? $post_grid_meta_options['grid_layout']['name'] : 'layout_grid';
-    $grid_layout_col_multi = !empty($post_grid_meta_options['grid_layout']['col_multi']) ? $post_grid_meta_options['grid_layout']['col_multi'] : '2';
 
     ?>
     <div class="section">
@@ -1463,41 +1498,6 @@ function post_grid_settings_tabs_content_grid($tab, $post_id){
 
 
         <?php
-        ob_start();
-
-        ?>
-
-        <label>
-            <input  type="radio" <?php if($grid_layout_name=='layout_grid') echo 'checked' ?> name="post_grid_meta_options[grid_layout][name]" value="layout_grid"><img title="N - N" src="<?php echo post_grid_plugin_url; ?>assets/admin/images/layout_grid.png" />
-        </label>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <?php
-
-        $html = ob_get_clean();
-
-        $args = array(
-            'id'		=> 'grid_layout',
-            'title'		=> __('Grid layout','post-grid'),
-            'details'	=> __('Choose grid layout','post-grid'),
-            'type'		=> 'custom_html',
-            'html'		=> $html,
-
-
-        );
-
-        $settings_tabs_field->generate_field($args, $post_id);
 
         ?>
 

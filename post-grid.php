@@ -27,6 +27,8 @@ if( !class_exists( 'PostGrid' )){
             include('includes/functions/functions-settings-hook.php');
             include('templates/post-grid-hook.php');
             include('includes/functions/post-grid-layout-elements.php');
+            include('includes/functions/media-source-options.php');
+
 
             include('includes/class-metabox-post-grid-layout.php');
             include('includes/class-metabox-post-grid-layout-hook.php');

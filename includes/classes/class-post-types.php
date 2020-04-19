@@ -66,8 +66,8 @@ class class_post_grid_post_types{
         if ( post_type_exists( "post_grid_layout" ) )
             return;
 
-        $singular  = __( 'Layout', 'woocommerce-products-slider' );
-        $plural    = __( 'Layouts', 'woocommerce-products-slider' );
+        $singular  = __( 'Layout', 'post-grid' );
+        $plural    = __( 'Layouts', 'post-grid' );
 
 
         register_post_type( "post_grid_layout",
@@ -76,20 +76,20 @@ class class_post_grid_post_types{
                     'name' 					=> $plural,
                     'singular_name' 		=> $singular,
                     'menu_name'             => $singular,
-                    'all_items'             => sprintf( __( 'All %s', 'woocommerce-products-slider' ), $plural ),
-                    'add_new' 				=> __( 'Add New', 'woocommerce-products-slider' ),
-                    'add_new_item' 			=> sprintf( __( 'Add %s', 'woocommerce-products-slider' ), $singular ),
-                    'edit' 					=> __( 'Edit', 'woocommerce-products-slider' ),
-                    'edit_item' 			=> sprintf( __( 'Edit %s', 'woocommerce-products-slider' ), $singular ),
-                    'new_item' 				=> sprintf( __( 'New %s', 'woocommerce-products-slider' ), $singular ),
-                    'view' 					=> sprintf( __( 'View %s', 'woocommerce-products-slider' ), $singular ),
-                    'view_item' 			=> sprintf( __( 'View %s', 'woocommerce-products-slider' ), $singular ),
-                    'search_items' 			=> sprintf( __( 'Search %s', 'woocommerce-products-slider' ), $plural ),
-                    'not_found' 			=> sprintf( __( 'No %s found', 'woocommerce-products-slider' ), $plural ),
-                    'not_found_in_trash' 	=> sprintf( __( 'No %s found in trash', 'woocommerce-products-slider' ), $plural ),
-                    'parent' 				=> sprintf( __( 'Parent %s', 'woocommerce-products-slider' ), $singular )
+                    'all_items'             => sprintf( __( 'All %s', 'post-grid' ), $plural ),
+                    'add_new' 				=> __( 'Add New', 'post-grid' ),
+                    'add_new_item' 			=> sprintf( __( 'Add %s', 'post-grid' ), $singular ),
+                    'edit' 					=> __( 'Edit', 'post-grid' ),
+                    'edit_item' 			=> sprintf( __( 'Edit %s', 'post-grid' ), $singular ),
+                    'new_item' 				=> sprintf( __( 'New %s', 'post-grid' ), $singular ),
+                    'view' 					=> sprintf( __( 'View %s', 'post-grid' ), $singular ),
+                    'view_item' 			=> sprintf( __( 'View %s', 'post-grid' ), $singular ),
+                    'search_items' 			=> sprintf( __( 'Search %s', 'post-grid' ), $plural ),
+                    'not_found' 			=> sprintf( __( 'No %s found', 'post-grid' ), $plural ),
+                    'not_found_in_trash' 	=> sprintf( __( 'No %s found in trash', 'post-grid' ), $plural ),
+                    'parent' 				=> sprintf( __( 'Parent %s', 'post-grid' ), $singular )
                 ),
-                'description' => sprintf( __( 'This is where you can create and manage %s.', 'woocommerce-products-slider' ), $plural ),
+                'description' => sprintf( __( 'This is where you can create and manage %s.', 'post-grid' ), $plural ),
                 'public' 				=> false,
                 'show_ui' 				=> true,
                 'capability_type' 		=> 'post',

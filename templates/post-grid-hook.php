@@ -14,7 +14,7 @@ function post_grid_main_container($atts){
     $args['options'] = $post_grid_options;
 
     wp_enqueue_style( 'post-grid-style' );
-    //wp_enqueue_style( 'post-grid-skin' );
+
 
     ?>
     <div id="post-grid-<?php echo $grid_id; ?>" class="post-grid <?php echo $grid_type; ?>">
@@ -330,7 +330,7 @@ function post_grid_loop($args){
 
 
 
-//add_action('post_grid_item_layout', 'post_grid_item_layout_media');
+add_action('post_grid_item_layout', 'post_grid_item_layout_media');
 
 function post_grid_item_layout_media($args){
 
@@ -340,11 +340,12 @@ function post_grid_item_layout_media($args){
 
     if(!empty($layout_id)) return;
 
+
     $media_source = !empty($post_grid_options['media_source']) ? $post_grid_options['media_source'] : array();
     $featured_img_size = !empty($post_grid_options['featured_img_size']) ? $post_grid_options['featured_img_size'] : 'full';
     $thumb_linked = !empty($post_grid_options['thumb_linked']) ? $post_grid_options['thumb_linked'] : 'yes';
 
-    //var_dump($post_id);
+    wp_enqueue_style( 'post-grid-skin' );
 
     $html_media = '';
 
@@ -382,7 +383,7 @@ function post_grid_item_layout_media($args){
 
 
 
-//add_action('post_grid_item_layout', 'post_grid_item_layout_content');
+add_action('post_grid_item_layout', 'post_grid_item_layout_content');
 
 function post_grid_item_layout_content($args){
 
@@ -449,13 +450,11 @@ add_action('post_grid_item_layout', 'post_grid_item_layout_new');
 
 function post_grid_item_layout_new($args){
 
-
-
-
     $post_id = $args['post_id'];
     $post_grid_options = $args['options'];
     $layout_id = $args['layout_id'];
 
+    if(empty($layout_id)) return;
 
 
     //$layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
@@ -715,14 +714,8 @@ function post_grid_main_view_type_grid_scripts($args){
                 ?>
             }
         }
-
-        <?php
-
-
-        ?>
     </style>
     <?php
-
 }
 
 
@@ -813,6 +806,38 @@ function post_grid_main_scripts($args){
 
 
 
+add_action('post_grid_container', 'post_grid_main_convert_layout', 90);
+
+function post_grid_main_convert_layout($args){
+
+    $options = $args['options'];
+
+    $content_layout = isset($options['layout']['content']) ? $options['layout']['content'] : '';
+    $layout_skin = isset($options['skin']) ? $options['skin'] : '';
+    $media_source = isset($options['media_source']) ? $options['media_source'] : '';
+    $media_height = isset($options['media_height']) ? $options['media_height'] : '';
+
+
+    if(empty($content_layout)) return;
+    if(empty($layout_skin)) return;
+
+    $post_grid_layout_content = get_option('post_grid_layout_content');
+
+
+    $content_layout_data = isset($post_grid_layout_content[$content_layout]) ? $post_grid_layout_content[$content_layout] : '';
+
+    if(empty($content_layout_data)) return;
+
+
+
+    echo '<pre>'.var_export($layout_skin, true).'</pre>';
+    echo '<pre>'.var_export($media_height, true).'</pre>';
+
+    echo '<pre>'.var_export($media_source, true).'</pre>';
+
+    echo '<pre>'.var_export($content_layout_data, true).'</pre>';
+
+}
 
 
 

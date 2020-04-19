@@ -31,7 +31,7 @@ function post_grid_layout_elements_option_custom_text($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Custom text','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Custom text','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -41,8 +41,8 @@ function post_grid_layout_elements_option_custom_text($parameters){
                 'id'		=> 'text',
                 'css_id'		=> $element_index.'_text',
                 'parent' => $input_name.'[custom_text]',
-                'title'		=> __('Custom text','woocommerce-products-slider'),
-                'details'	=> __('Write custom text.','woocommerce-products-slider'),
+                'title'		=> __('Custom text','post-grid'),
+                'details'	=> __('Write custom text.','post-grid'),
                 'type'		=> 'textarea',
                 'value'		=> $text,
                 'default'		=> '',
@@ -55,8 +55,8 @@ function post_grid_layout_elements_option_custom_text($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_custom_text',
                 'parent' => $input_name.'[custom_text]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -68,8 +68,8 @@ function post_grid_layout_elements_option_custom_text($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[custom_text]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -83,8 +83,8 @@ function post_grid_layout_elements_option_custom_text($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[custom_text]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -98,8 +98,8 @@ function post_grid_layout_elements_option_custom_text($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[custom_text]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -113,12 +113,12 @@ function post_grid_layout_elements_option_custom_text($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[custom_text]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -136,8 +136,8 @@ function post_grid_layout_elements_option_custom_text($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -185,7 +185,7 @@ function post_grid_layout_elements_option_title($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post title','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Post title','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -195,14 +195,14 @@ function post_grid_layout_elements_option_title($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[title]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link title.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to link title.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'post_link',
                 'args'		=> array(
-                    'post_link'=> __('Post link', 'woocommerce-products-slider'),
-                    'none'=> __('None', 'woocommerce-products-slider'),
+                    'post_link'=> __('Post link', 'post-grid'),
+                    'none'=> __('None', 'post-grid'),
                 ),
             );
 
@@ -214,16 +214,16 @@ function post_grid_layout_elements_option_title($parameters){
                 'id'		=> 'link_target',
                 'css_id'		=> $element_index.'_link_target',
                 'parent' => $input_name.'[title]',
-                'title'		=> __('Link target','woocommerce-products-slider'),
-                'details'	=> __('Choose option link target.','woocommerce-products-slider'),
+                'title'		=> __('Link target','post-grid'),
+                'details'	=> __('Choose option link target.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_target,
                 'default'		=> 'post_link',
                 'args'		=> array(
-                    '_blank'=> __('_blank', 'woocommerce-products-slider'),
-                    '_parent'=> __('_parent', 'woocommerce-products-slider'),
-                    '_self'=> __('_self', 'woocommerce-products-slider'),
-                    '_top'=> __('_top', 'woocommerce-products-slider'),
+                    '_blank'=> __('_blank', 'post-grid'),
+                    '_parent'=> __('_parent', 'post-grid'),
+                    '_self'=> __('_self', 'post-grid'),
+                    '_top'=> __('_top', 'post-grid'),
 
                 ),
             );
@@ -235,8 +235,8 @@ function post_grid_layout_elements_option_title($parameters){
                 'id'		=> 'char_limit',
                 'css_id'		=> $element_index.'_char_limit',
                 'parent' => $input_name.'[title]',
-                'title'		=> __('Character limit','woocommerce-products-slider'),
-                'details'	=> __('Set character limit.','woocommerce-products-slider'),
+                'title'		=> __('Character limit','post-grid'),
+                'details'	=> __('Set character limit.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $char_limit,
                 'default'		=> '20',
@@ -251,8 +251,8 @@ function post_grid_layout_elements_option_title($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_title_color',
                 'parent' => $input_name.'[title]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -264,8 +264,8 @@ function post_grid_layout_elements_option_title($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[title]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '20px',
@@ -279,8 +279,8 @@ function post_grid_layout_elements_option_title($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[title]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -294,8 +294,8 @@ function post_grid_layout_elements_option_title($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[title]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '10px 0',
@@ -309,12 +309,12 @@ function post_grid_layout_elements_option_title($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[title]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -334,8 +334,8 @@ function post_grid_layout_elements_option_title($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -388,7 +388,7 @@ function post_grid_layout_elements_option_title_link($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post title with link','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Post title with link','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -399,15 +399,15 @@ function post_grid_layout_elements_option_title_link($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[title_link]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link title.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to link title.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
                 'args'		=> array(
-                    'post_link'=> __('Post link', 'woocommerce-products-slider'),
-                    //'meta_value'=> __('Meta value', 'woocommerce-products-slider'),
-                    'none'=> __('None', 'woocommerce-products-slider'),
+                    'post_link'=> __('Post link', 'post-grid'),
+                    //'meta_value'=> __('Meta value', 'post-grid'),
+                    'none'=> __('None', 'post-grid'),
                 ),
             );
 
@@ -418,16 +418,16 @@ function post_grid_layout_elements_option_title_link($parameters){
                 'id'		=> 'link_target',
                 'css_id'		=> $element_index.'_link_target',
                 'parent' => $input_name.'[title_link]',
-                'title'		=> __('Link target','woocommerce-products-slider'),
-                'details'	=> __('Choose option link target.','woocommerce-products-slider'),
+                'title'		=> __('Link target','post-grid'),
+                'details'	=> __('Choose option link target.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_target,
                 'default'		=> 'post_link',
                 'args'		=> array(
-                    '_blank'=> __('_blank', 'woocommerce-products-slider'),
-                    '_parent'=> __('_parent', 'woocommerce-products-slider'),
-                    '_self'=> __('_self', 'woocommerce-products-slider'),
-                    '_top'=> __('_top', 'woocommerce-products-slider'),
+                    '_blank'=> __('_blank', 'post-grid'),
+                    '_parent'=> __('_parent', 'post-grid'),
+                    '_self'=> __('_self', 'post-grid'),
+                    '_top'=> __('_top', 'post-grid'),
 
                 ),
             );
@@ -439,8 +439,8 @@ function post_grid_layout_elements_option_title_link($parameters){
                 'id'		=> 'char_limit',
                 'css_id'		=> $element_index.'_char_limit',
                 'parent' => $input_name.'[title_link]',
-                'title'		=> __('Character limit','woocommerce-products-slider'),
-                'details'	=> __('Set character limit.','woocommerce-products-slider'),
+                'title'		=> __('Character limit','post-grid'),
+                'details'	=> __('Set character limit.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $char_limit,
                 'default'		=> '',
@@ -455,8 +455,8 @@ function post_grid_layout_elements_option_title_link($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_color',
                 'parent' => $input_name.'[title_link]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -468,8 +468,8 @@ function post_grid_layout_elements_option_title_link($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[title_link]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -483,8 +483,8 @@ function post_grid_layout_elements_option_title_link($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[title_link]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -498,8 +498,8 @@ function post_grid_layout_elements_option_title_link($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[title_link]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -513,12 +513,12 @@ function post_grid_layout_elements_option_title_link($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[title_link]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -535,8 +535,8 @@ function post_grid_layout_elements_option_title_link($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -583,7 +583,7 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Excerpt read more','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Excerpt read more','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -593,8 +593,8 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
                 'id'		=> 'char_limit',
                 'css_id'		=> $element_index.'_char_limit',
                 'parent' => $input_name.'[excerpt_read_more]',
-                'title'		=> __('Word limit','woocommerce-products-slider'),
-                'details'	=> __('Set word limit.','woocommerce-products-slider'),
+                'title'		=> __('Word limit','post-grid'),
+                'details'	=> __('Set word limit.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $char_limit,
                 'default'		=> '',
@@ -607,8 +607,8 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
                 'id'		=> 'read_more_text',
                 'css_id'		=> $element_index.'_read_more_text',
                 'parent' => $input_name.'[excerpt_read_more]',
-                'title'		=> __('Read more text','woocommerce-products-slider'),
-                'details'	=> __('Custom read more text.','woocommerce-products-slider'),
+                'title'		=> __('Read more text','post-grid'),
+                'details'	=> __('Custom read more text.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $read_more_text,
                 'default'		=> '',
@@ -620,16 +620,16 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
                 'id'		=> 'link_target',
                 'css_id'		=> $element_index.'_link_target',
                 'parent' => $input_name.'[excerpt_read_more]',
-                'title'		=> __('Link target','woocommerce-products-slider'),
-                'details'	=> __('Choose option link target.','woocommerce-products-slider'),
+                'title'		=> __('Link target','post-grid'),
+                'details'	=> __('Choose option link target.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_target,
                 'default'		=> 'post_link',
                 'args'		=> array(
-                    '_blank'=> __('_blank', 'woocommerce-products-slider'),
-                    '_parent'=> __('_parent', 'woocommerce-products-slider'),
-                    '_self'=> __('_self', 'woocommerce-products-slider'),
-                    '_top'=> __('_top', 'woocommerce-products-slider'),
+                    '_blank'=> __('_blank', 'post-grid'),
+                    '_parent'=> __('_parent', 'post-grid'),
+                    '_self'=> __('_self', 'post-grid'),
+                    '_top'=> __('_top', 'post-grid'),
 
                 ),
             );
@@ -645,8 +645,8 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_color',
                 'parent' => $input_name.'[excerpt_read_more]',
-                'title'		=> __('Text Color','woocommerce-products-slider'),
-                'details'	=> __('Choose text color.','woocommerce-products-slider'),
+                'title'		=> __('Text Color','post-grid'),
+                'details'	=> __('Choose text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -658,8 +658,8 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[excerpt_read_more]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -672,8 +672,8 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[excerpt_read_more]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -686,12 +686,12 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[excerpt_read_more]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -733,7 +733,7 @@ function post_grid_layout_elements_option_read_more($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Read more','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Read more','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -743,8 +743,8 @@ function post_grid_layout_elements_option_read_more($parameters){
                 'id'		=> 'read_more_text',
                 'css_id'		=> $element_index.'_read_more_text',
                 'parent' => $input_name.'[read_more]',
-                'title'		=> __('Read more text','woocommerce-products-slider'),
-                'details'	=> __('Custom read more text.','woocommerce-products-slider'),
+                'title'		=> __('Read more text','post-grid'),
+                'details'	=> __('Custom read more text.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $read_more_text,
                 'default'		=> '',
@@ -758,15 +758,15 @@ function post_grid_layout_elements_option_read_more($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[read_more]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link title.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to link title.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
                 'args'		=> array(
-                    'post_link'=> __('Post link', 'woocommerce-products-slider'),
-                    //'meta_value'=> __('Meta value', 'woocommerce-products-slider'),
-                    'none'=> __('None', 'woocommerce-products-slider'),
+                    'post_link'=> __('Post link', 'post-grid'),
+                    //'meta_value'=> __('Meta value', 'post-grid'),
+                    'none'=> __('None', 'post-grid'),
                 ),
             );
 
@@ -777,16 +777,16 @@ function post_grid_layout_elements_option_read_more($parameters){
                 'id'		=> 'link_target',
                 'css_id'		=> $element_index.'_link_target',
                 'parent' => $input_name.'[read_more]',
-                'title'		=> __('Link target','woocommerce-products-slider'),
-                'details'	=> __('Choose option link target.','woocommerce-products-slider'),
+                'title'		=> __('Link target','post-grid'),
+                'details'	=> __('Choose option link target.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_target,
                 'default'		=> 'post_link',
                 'args'		=> array(
-                    '_blank'=> __('_blank', 'woocommerce-products-slider'),
-                    '_parent'=> __('_parent', 'woocommerce-products-slider'),
-                    '_self'=> __('_self', 'woocommerce-products-slider'),
-                    '_top'=> __('_top', 'woocommerce-products-slider'),
+                    '_blank'=> __('_blank', 'post-grid'),
+                    '_parent'=> __('_parent', 'post-grid'),
+                    '_self'=> __('_self', 'post-grid'),
+                    '_top'=> __('_top', 'post-grid'),
 
                 ),
             );
@@ -798,8 +798,8 @@ function post_grid_layout_elements_option_read_more($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_color',
                 'parent' => $input_name.'[read_more]',
-                'title'		=> __('Text Color','woocommerce-products-slider'),
-                'details'	=> __('Choose text color.','woocommerce-products-slider'),
+                'title'		=> __('Text Color','post-grid'),
+                'details'	=> __('Choose text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -811,8 +811,8 @@ function post_grid_layout_elements_option_read_more($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[read_more]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -825,8 +825,8 @@ function post_grid_layout_elements_option_read_more($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[read_more]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -839,12 +839,12 @@ function post_grid_layout_elements_option_read_more($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[read_more]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -872,17 +872,20 @@ function post_grid_layout_elements_option_media($parameters){
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
-    $thumb_size = isset($element_data['thumb_size']) ? $element_data['thumb_size'] : '';
-    $default_thumb_src = isset($element_data['default_thumb_src']) ? $element_data['default_thumb_src'] : '';
-    $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
+    $media_source = isset($element_data['media_source']) ? $element_data['media_source'] : array();
 
-    $thumb_height = isset($element_data['thumb_height']) ? $element_data['thumb_height'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
 
-    $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
-    $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
-    $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
+    $media_sources_list = apply_filters('post_grid_media_source_list',
+        array(
+            'featured_image'=>__('Featured Image','post-grid'),
+            'first_image'=>__('First images from content','post-grid'),
+            'empty_thumb'=>__('Empty thumbnail','post-grid'),
+        )
+    );
+
+    //echo '<pre>'.var_export('$media_source', true).'</pre>';
+    //echo '<pre>'.var_export($media_source, true).'</pre>';
+    //echo '<pre>'.var_export($media_sources_list, true).'</pre>';
 
 
     ?>
@@ -890,115 +893,179 @@ function post_grid_layout_elements_option_media($parameters){
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Media','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Media','post-grid'); ?></span>
         </div>
         <div class="element-options options">
-
             <?php
 
-            $thumbnail_sizes = array();
-            $thumbnail_sizes['full'] = __('Full', '');
-            $get_intermediate_image_sizes =  get_intermediate_image_sizes();
 
-            if(!empty($get_intermediate_image_sizes))
-                foreach($get_intermediate_image_sizes as $size_key){
-                    $size_name = str_replace('_', ' ',$size_key);
-                    $size_name = str_replace('-', ' ',$size_name);
+            ob_start();
 
-                    $thumbnail_sizes[$size_key] = ucfirst($size_name);
-                }
-            //echo '<pre>'.var_export($thumbnail_sizes, true).'</pre>';
+            if(!empty($media_sources_list)){
+
+                $media_source_new = array();
+
+                if(!empty($media_source))
+                    foreach ($media_source as $elementIndex => $argData){
+                        $enable = isset($argData['enable']) ? $argData['enable'] :'';
+                        if(!empty($enable))
+                            $media_source_new[$elementIndex]  = array('enable'=> $enable);
+                    }
+
+                echo '<pre>'.var_export($media_source_new, true).'</pre>';
+                //echo '<pre>'.var_export($media_source_new, true).'</pre>';
+
+                $media_sources_new = array_replace($media_source_new, $media_sources_list);
+
+                $media_sources_new = (!empty($media_sources_new)) ? $media_sources_new : $media_sources_list;
+
+
+                //echo '<pre>'.var_export('$media_sources_new', true).'</pre>';
+
+                //echo '<pre>'.var_export($media_sources_new, true).'</pre>';
+
+                ?>
+
+                <div class="expandable sortable">
+
+                    <?php
+
+                    foreach ($media_sources_new as $source_id => $source_name ) {
+
+                        $media_source_options = array();
+
+                        $source_data = isset($media_source[$source_id]) ? $media_source[$source_id] : array();
+
+
+                        $source_enable = isset($media_source[$source_id]['enable']) ? $media_source[$source_id]['enable'] : '';
+
+                        //echo '<pre>'.var_export($source_data, true).'</pre>';
+
+                        $media_source_options['index'] = $element_index;
+                        $media_source_options['input_name'] = $input_name;
+                        $media_source_options['source_data'] = $source_data;
+
+
+                        ?>
+                        <div class="item">
+                            <div class="element-title header ">
+                                <span class="sort"><i class="fas fa-sort"></i></span>
+                                <?php
+                                if($source_enable == 'yes'):
+                                    ?><i class="fas fa-check"></i><?php
+                                else:
+                                    ?><i class="fas fa-times"></i><?php
+                                endif;?>
+                                <span class="expand"><?php echo $source_name; ?></span>
+                            </div>
+                            <div class="element-options options">
+                                <?php
+                                do_action('media_source_options_'.$source_id, $media_source_options);
+                                ?>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <?php
+            }
+
+
+
+            $html = ob_get_clean();
 
             $args = array(
-                'id'		=> 'thumb_size',
-                'parent' => $input_name.'[media]',
-                'title'		=> __('Thumbnail size','woocommerce-products-slider'),
-                'details'	=> __('Choose thumbnail size.','woocommerce-products-slider'),
-                'type'		=> 'select',
-                'value'		=> $thumb_size,
-                'default'		=> 'large',
-                'args'		=> $thumbnail_sizes,
+                'id' => 'media_source',
+                'title' => __('Media source', 'post-grid'),
+                'details' => __('Choose media sources.', 'post-grid'),
+                'type' => 'custom_html',
+                'html' => $html,
             );
 
             $settings_tabs_field->generate_field($args);
 
 
 
-            $args = array(
-                'id'		=> 'link_to',
-                'css_id'		=> $element_index.'_link_to',
-                'parent' => $input_name.'[media]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link title.','woocommerce-products-slider'),
-                'type'		=> 'select',
-                'value'		=> $link_to,
-                'default'		=> 'none',
-                'args'		=> array(
-                    'post_link'=> __('Post link', 'woocommerce-products-slider'),
-                    //'meta_value'=> __('Meta value', 'woocommerce-products-slider'),
-                    'none'=> __('None', 'woocommerce-products-slider'),
-                ),
-            );
+            $media_height = isset($element_data['media_height']) ? $element_data['media_height'] : '';
 
-            $settings_tabs_field->generate_field($args);
+            $media_height_large = isset($media_height['large']) ? $media_height['large'] : '';
+            $media_height_large_type = isset($media_height['large_type']) ? $media_height['large_type'] : '';
+
+            $media_height_medium = isset($media_height['medium']) ? $media_height['medium'] : '';
+            $media_height_medium_type = isset($media_height['medium_type']) ? $media_height['medium_type'] : '';
+
+            $media_height_small = isset($media_height['small']) ? $media_height['small'] : '';
+            $media_height_small_type = isset($media_height['small_type']) ? $media_height['small_type'] : '';
 
 
             $args = array(
-                'id'		=> 'link_target',
-                'css_id'		=> $element_index.'_link_target',
-                'parent' => $input_name.'[media]',
-                'title'		=> __('Link target','woocommerce-products-slider'),
-                'details'	=> __('Choose option link target.','woocommerce-products-slider'),
-                'type'		=> 'select',
-                'value'		=> $link_target,
-                'default'		=> 'post_link',
-                'args'		=> array(
-                    '_blank'=> __('_blank', 'woocommerce-products-slider'),
-                    '_parent'=> __('_parent', 'woocommerce-products-slider'),
-                    '_self'=> __('_self', 'woocommerce-products-slider'),
-                    '_top'=> __('_top', 'woocommerce-products-slider'),
-
-                ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-
-            $args = array(
-                'id'		=> 'thumb_height',
-                'title'		=> __('Thumbnail height','woocommerce-products-slider'),
-                'details'	=> __('Set thumbnail height.','woocommerce-products-slider'),
+                'id'		=> 'media_height',
+                'title'		=> __('Media height','post-grid'),
+                'details'	=> __('Set media height.','post-grid'),
                 'type'		=> 'option_group',
                 'options'		=> array(
+
+                    array(
+                        'id'		=> 'large_type',
+                        'css_id'		=> $element_index.'_text_align',
+                        'parent'		=> $input_name.'[media][media_height]',
+                        'title'		=> __('In desktop','post-grid'),
+                        'details'	=> __('min-width: 1200px, ex: 280px','post-grid'),
+                        'type'		=> 'select',
+                        'value'		=> $media_height_large_type,
+                        'default'		=> 'left',
+                        'args'		=> array('auto_height'=> __('Auto height', 'post-grid'),'fixed_height'=> __('Fixed height', 'post-grid'),'max_height'=> __('Max height', 'post-grid') ),
+                    ),
                     array(
                         'id'		=> 'large',
-                        'parent'		=> $input_name.'[media][thumb_height]',
-                        'title'		=> __('In desktop','woocommerce-products-slider'),
-                        'details'	=> __('min-width: 1200px, ex: 280px','woocommerce-products-slider'),
+                        'parent'		=> $input_name.'[media][media_height]',
+                        'title'		=> __('Height value','post-grid'),
+                        //'details'	=> __('','post-grid'),
                         'type'		=> 'text',
-                        'value'		=> $thumb_height_large,
+                        'value'		=> $media_height_large,
                         'default'		=> '',
                         'placeholder'   => '280px',
+                    ),
+                    array(
+                        'id'		=> 'medium_type',
+                        'css_id'		=> $element_index.'_text_align',
+                        'parent'		=> $input_name.'[media][media_height]',
+                        'title'		=> __('In tablet & small desktop','post-grid'),
+                        'details'	=> __('min-width: 992px, ex: 280px','post-grid'),
+                        'type'		=> 'select',
+                        'value'		=> $media_height_medium_type,
+                        'default'		=> 'left',
+                        'args'		=> array('auto_height'=> __('Auto height', 'post-grid'),'fixed_height'=> __('Fixed height', 'post-grid'),'max_height'=> __('Max height', 'post-grid') ),
                     ),
                     array(
                         'id'		=> 'medium',
-                        'parent'		=> $input_name.'[media][thumb_height]',
-                        'title'		=> __('In tablet & small desktop','woocommerce-products-slider'),
-                        'details'	=> __('min-width: 992px, ex: 280px','woocommerce-products-slider'),
+                        'parent'		=> $input_name.'[media][media_height]',
+                        'title'		=> __('Height value','post-grid'),
+                        //'details'	=> __('','post-grid'),
                         'type'		=> 'text',
-                        'value'		=> $thumb_height_medium,
+                        'value'		=> $media_height_medium,
                         'default'		=> '',
                         'placeholder'   => '280px',
                     ),
                     array(
+                        'id'		=> 'small_type',
+                        'css_id'		=> $element_index.'_text_align',
+                        'parent'		=> $input_name.'[media][media_height]',
+                        'title'		=> __('In mobile','post-grid'),
+                        'details'	=> __('max-width: 768px, ex: 280px','post-grid'),
+                        'type'		=> 'select',
+                        'value'		=> $media_height_small_type,
+                        'default'		=> 'left',
+                        'args'		=> array('auto_height'=> __('Auto height', 'post-grid'),'fixed_height'=> __('Fixed height', 'post-grid'),'max_height'=> __('Max height', 'post-grid') ),
+                    ),
+                    array(
                         'id'		=> 'small',
-                        'parent'		=> $input_name.'[media][thumb_height]',
-                        'title'		=> __('In mobile','woocommerce-products-slider'),
-                        'details'	=> __('max-width: 768px, ex: 280px','woocommerce-products-slider'),
+                        'parent'		=> $input_name.'[media][media_height]',
+                        'title'		=> __('Height value','post-grid'),
+                        //'details'	=> __('','post-grid'),
                         'type'		=> 'text',
-                        'value'		=> $thumb_height_small,
+                        'value'		=> $media_height_small,
                         'default'		=> '',
                         'placeholder'   => '280px',
                     ),
@@ -1008,32 +1075,10 @@ function post_grid_layout_elements_option_media($parameters){
 
             $settings_tabs_field->generate_field($args);
 
-            $args = array(
-                'id'		=> 'default_thumb_src',
-                'parent' => $input_name.'[media]',
-                'title'		=> __('Default thumbnail','woocommerce-products-slider'),
-                'details'	=> __('Choose default thumbnail.','woocommerce-products-slider'),
-                'type'		=> 'media_url',
-                'value'		=> $default_thumb_src,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
 
 
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[media]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
 
-            $settings_tabs_field->generate_field($args);
+
 
             ob_start();
             ?>
@@ -1047,8 +1092,8 @@ function post_grid_layout_elements_option_media($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -1097,7 +1142,7 @@ function post_grid_layout_elements_option_thumb_link($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Thumbnail with link','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Thumbnail with link','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -1119,8 +1164,8 @@ function post_grid_layout_elements_option_thumb_link($parameters){
             $args = array(
                 'id'		=> 'thumb_size',
                 'parent' => $input_name.'[thumb_link]',
-                'title'		=> __('Thumbnail size','woocommerce-products-slider'),
-                'details'	=> __('Choose thumbnail size.','woocommerce-products-slider'),
+                'title'		=> __('Thumbnail size','post-grid'),
+                'details'	=> __('Choose thumbnail size.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $thumb_size,
                 'default'		=> 'large',
@@ -1135,15 +1180,15 @@ function post_grid_layout_elements_option_thumb_link($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[thumb_link]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link title.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to link title.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
                 'args'		=> array(
-                    'post_link'=> __('Post link', 'woocommerce-products-slider'),
-                    //'meta_value'=> __('Meta value', 'woocommerce-products-slider'),
-                    'none'=> __('None', 'woocommerce-products-slider'),
+                    'post_link'=> __('Post link', 'post-grid'),
+                    //'meta_value'=> __('Meta value', 'post-grid'),
+                    'none'=> __('None', 'post-grid'),
                 ),
             );
 
@@ -1154,16 +1199,16 @@ function post_grid_layout_elements_option_thumb_link($parameters){
                 'id'		=> 'link_target',
                 'css_id'		=> $element_index.'_link_target',
                 'parent' => $input_name.'[thumb_link]',
-                'title'		=> __('Link target','woocommerce-products-slider'),
-                'details'	=> __('Choose option link target.','woocommerce-products-slider'),
+                'title'		=> __('Link target','post-grid'),
+                'details'	=> __('Choose option link target.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_target,
                 'default'		=> 'post_link',
                 'args'		=> array(
-                    '_blank'=> __('_blank', 'woocommerce-products-slider'),
-                    '_parent'=> __('_parent', 'woocommerce-products-slider'),
-                    '_self'=> __('_self', 'woocommerce-products-slider'),
-                    '_top'=> __('_top', 'woocommerce-products-slider'),
+                    '_blank'=> __('_blank', 'post-grid'),
+                    '_parent'=> __('_parent', 'post-grid'),
+                    '_self'=> __('_self', 'post-grid'),
+                    '_top'=> __('_top', 'post-grid'),
 
                 ),
             );
@@ -1174,15 +1219,15 @@ function post_grid_layout_elements_option_thumb_link($parameters){
 
             $args = array(
                 'id'		=> 'thumb_height',
-                'title'		=> __('Thumbnail height','woocommerce-products-slider'),
-                'details'	=> __('Set thumbnail height.','woocommerce-products-slider'),
+                'title'		=> __('Thumbnail height','post-grid'),
+                'details'	=> __('Set thumbnail height.','post-grid'),
                 'type'		=> 'option_group',
                 'options'		=> array(
                     array(
                         'id'		=> 'large',
                         'parent'		=> $input_name.'[thumb_link][thumb_height]',
-                        'title'		=> __('In desktop','woocommerce-products-slider'),
-                        'details'	=> __('min-width: 1200px, ex: 280px','woocommerce-products-slider'),
+                        'title'		=> __('In desktop','post-grid'),
+                        'details'	=> __('min-width: 1200px, ex: 280px','post-grid'),
                         'type'		=> 'text',
                         'value'		=> $thumb_height_large,
                         'default'		=> '',
@@ -1191,8 +1236,8 @@ function post_grid_layout_elements_option_thumb_link($parameters){
                     array(
                         'id'		=> 'medium',
                         'parent'		=> $input_name.'[thumb_link][thumb_height]',
-                        'title'		=> __('In tablet & small desktop','woocommerce-products-slider'),
-                        'details'	=> __('min-width: 992px, ex: 280px','woocommerce-products-slider'),
+                        'title'		=> __('In tablet & small desktop','post-grid'),
+                        'details'	=> __('min-width: 992px, ex: 280px','post-grid'),
                         'type'		=> 'text',
                         'value'		=> $thumb_height_medium,
                         'default'		=> '',
@@ -1201,8 +1246,8 @@ function post_grid_layout_elements_option_thumb_link($parameters){
                     array(
                         'id'		=> 'small',
                         'parent'		=> $input_name.'[thumb_link][thumb_height]',
-                        'title'		=> __('In mobile','woocommerce-products-slider'),
-                        'details'	=> __('max-width: 768px, ex: 280px','woocommerce-products-slider'),
+                        'title'		=> __('In mobile','post-grid'),
+                        'details'	=> __('max-width: 768px, ex: 280px','post-grid'),
                         'type'		=> 'text',
                         'value'		=> $thumb_height_small,
                         'default'		=> '',
@@ -1217,8 +1262,8 @@ function post_grid_layout_elements_option_thumb_link($parameters){
             $args = array(
                 'id'		=> 'default_thumb_src',
                 'parent' => $input_name.'[thumb_link]',
-                'title'		=> __('Default thumbnail','woocommerce-products-slider'),
-                'details'	=> __('Choose default thumbnail.','woocommerce-products-slider'),
+                'title'		=> __('Default thumbnail','post-grid'),
+                'details'	=> __('Choose default thumbnail.','post-grid'),
                 'type'		=> 'media_url',
                 'value'		=> $default_thumb_src,
                 'default'		=> '',
@@ -1231,8 +1276,8 @@ function post_grid_layout_elements_option_thumb_link($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[thumb_link]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -1253,8 +1298,8 @@ function post_grid_layout_elements_option_thumb_link($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -1303,7 +1348,7 @@ function post_grid_layout_elements_option_thumb($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Thumbnail','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Thumbnail','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -1325,8 +1370,8 @@ function post_grid_layout_elements_option_thumb($parameters){
             $args = array(
                 'id'		=> 'thumb_size',
                 'parent' => $input_name.'[thumb]',
-                'title'		=> __('Thumbnail size','woocommerce-products-slider'),
-                'details'	=> __('Choose thumbnail size.','woocommerce-products-slider'),
+                'title'		=> __('Thumbnail size','post-grid'),
+                'details'	=> __('Choose thumbnail size.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $thumb_size,
                 'default'		=> 'large',
@@ -1342,14 +1387,14 @@ function post_grid_layout_elements_option_thumb($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[thumb]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link title.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to link title.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
                 'args'		=> array(
-                    'post_link'=> __('Post link', 'woocommerce-products-slider'),
-                    'none'=> __('None', 'woocommerce-products-slider'),
+                    'post_link'=> __('Post link', 'post-grid'),
+                    'none'=> __('None', 'post-grid'),
                 ),
             );
 
@@ -1360,16 +1405,16 @@ function post_grid_layout_elements_option_thumb($parameters){
                 'id'		=> 'link_target',
                 'css_id'		=> $element_index.'_link_target',
                 'parent' => $input_name.'[thumb]',
-                'title'		=> __('Link target','woocommerce-products-slider'),
-                'details'	=> __('Choose option link target.','woocommerce-products-slider'),
+                'title'		=> __('Link target','post-grid'),
+                'details'	=> __('Choose option link target.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_target,
                 'default'		=> 'post_link',
                 'args'		=> array(
-                    '_blank'=> __('_blank', 'woocommerce-products-slider'),
-                    '_parent'=> __('_parent', 'woocommerce-products-slider'),
-                    '_self'=> __('_self', 'woocommerce-products-slider'),
-                    '_top'=> __('_top', 'woocommerce-products-slider'),
+                    '_blank'=> __('_blank', 'post-grid'),
+                    '_parent'=> __('_parent', 'post-grid'),
+                    '_self'=> __('_self', 'post-grid'),
+                    '_top'=> __('_top', 'post-grid'),
 
                 ),
             );
@@ -1380,15 +1425,15 @@ function post_grid_layout_elements_option_thumb($parameters){
 
             $args = array(
                 'id'		=> 'thumb_height',
-                'title'		=> __('Thumbnail height','woocommerce-products-slider'),
-                'details'	=> __('Set thumbnail height.','woocommerce-products-slider'),
+                'title'		=> __('Thumbnail height','post-grid'),
+                'details'	=> __('Set thumbnail height.','post-grid'),
                 'type'		=> 'option_group',
                 'options'		=> array(
                     array(
                         'id'		=> 'large',
                         'parent'		=> $input_name.'[thumb][thumb_height]',
-                        'title'		=> __('In desktop','woocommerce-products-slider'),
-                        'details'	=> __('min-width: 1200px, ex: 280px','woocommerce-products-slider'),
+                        'title'		=> __('In desktop','post-grid'),
+                        'details'	=> __('min-width: 1200px, ex: 280px','post-grid'),
                         'type'		=> 'text',
                         'value'		=> $thumb_height_large,
                         'default'		=> '',
@@ -1397,8 +1442,8 @@ function post_grid_layout_elements_option_thumb($parameters){
                     array(
                         'id'		=> 'medium',
                         'parent'		=> $input_name.'[thumb][thumb_height]',
-                        'title'		=> __('In tablet & small desktop','woocommerce-products-slider'),
-                        'details'	=> __('min-width: 992px, ex: 280px','woocommerce-products-slider'),
+                        'title'		=> __('In tablet & small desktop','post-grid'),
+                        'details'	=> __('min-width: 992px, ex: 280px','post-grid'),
                         'type'		=> 'text',
                         'value'		=> $thumb_height_medium,
                         'default'		=> '',
@@ -1407,8 +1452,8 @@ function post_grid_layout_elements_option_thumb($parameters){
                     array(
                         'id'		=> 'small',
                         'parent'		=> $input_name.'[thumb][thumb_height]',
-                        'title'		=> __('In mobile','woocommerce-products-slider'),
-                        'details'	=> __('max-width: 768px, ex: 280px','woocommerce-products-slider'),
+                        'title'		=> __('In mobile','post-grid'),
+                        'details'	=> __('max-width: 768px, ex: 280px','post-grid'),
                         'type'		=> 'text',
                         'value'		=> $thumb_height_small,
                         'default'		=> '',
@@ -1423,8 +1468,8 @@ function post_grid_layout_elements_option_thumb($parameters){
             $args = array(
                 'id'		=> 'default_thumb_src',
                 'parent' => $input_name.'[thumb]',
-                'title'		=> __('Default thumbnail','woocommerce-products-slider'),
-                'details'	=> __('Choose default thumbnail.','woocommerce-products-slider'),
+                'title'		=> __('Default thumbnail','post-grid'),
+                'details'	=> __('Choose default thumbnail.','post-grid'),
                 'type'		=> 'media_url',
                 'value'		=> $default_thumb_src,
                 'default'		=> '',
@@ -1437,8 +1482,8 @@ function post_grid_layout_elements_option_thumb($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[thumb]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -1459,8 +1504,8 @@ function post_grid_layout_elements_option_thumb($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -1491,7 +1536,7 @@ function post_grid_layout_elements_option_content($parameters){
 
     $content_source = isset($element_data['content_source']) ? $element_data['content_source'] : '';
     $word_count = isset($element_data['word_count']) ? $element_data['word_count'] : 15;
-    $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : __('Read more','woocommerce-products-slider');
+    $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : __('Read more','post-grid');
     $read_more_color = isset($element_data['read_more_color']) ? $element_data['read_more_color'] : '';
 
     $color = isset($element_data['color']) ? $element_data['color'] : '';
@@ -1510,7 +1555,7 @@ function post_grid_layout_elements_option_content($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Content','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Content','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -1520,12 +1565,12 @@ function post_grid_layout_elements_option_content($parameters){
                 'id'		=> 'content_source',
                 'css_id'		=> $element_index.'_content_source',
                 'parent' => $input_name.'[content]',
-                'title'		=> __('Content source','woocommerce-products-slider'),
-                'details'	=> __('Choose content source.','woocommerce-products-slider'),
+                'title'		=> __('Content source','post-grid'),
+                'details'	=> __('Choose content source.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $content_source,
                 'default'		=> 'excerpt',
-                'args'		=> array('short_description'=> __('Short description', 'woocommerce-products-slider'),'excerpt'=> __('Auto Excerpt', 'woocommerce-products-slider'), 'content'=> __('Content', 'woocommerce-products-slider')),
+                'args'		=> array('short_description'=> __('Short description', 'post-grid'),'excerpt'=> __('Auto Excerpt', 'post-grid'), 'content'=> __('Content', 'post-grid')),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1534,8 +1579,8 @@ function post_grid_layout_elements_option_content($parameters){
                 'id'		=> 'word_count',
                 'css_id'		=> $element_index.'_word_count',
                 'parent' => $input_name.'[content]',
-                'title'		=> __('Word count','woocommerce-products-slider'),
-                'details'	=> __('Set word count.','woocommerce-products-slider'),
+                'title'		=> __('Word count','post-grid'),
+                'details'	=> __('Set word count.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $word_count,
                 'default'		=> '',
@@ -1549,8 +1594,8 @@ function post_grid_layout_elements_option_content($parameters){
                 'id'		=> 'read_more_text',
                 'css_id'		=> $element_index.'_read_more_text',
                 'parent' => $input_name.'[content]',
-                'title'		=> __('Read more text','woocommerce-products-slider'),
-                'details'	=> __('Set custom read more text.','woocommerce-products-slider'),
+                'title'		=> __('Read more text','post-grid'),
+                'details'	=> __('Set custom read more text.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $read_more_text,
                 'default'		=> '',
@@ -1564,8 +1609,8 @@ function post_grid_layout_elements_option_content($parameters){
                 'id'		=> 'read_more_color',
                 'css_id'		=> $element_index.'_read_more_color',
                 'parent' => $input_name.'[content]',
-                'title'		=> __('Read more color','woocommerce-products-slider'),
-                'details'	=> __('Set custom read more color.','woocommerce-products-slider'),
+                'title'		=> __('Read more color','post-grid'),
+                'details'	=> __('Set custom read more color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $read_more_color,
                 'default'		=> '',
@@ -1580,8 +1625,8 @@ function post_grid_layout_elements_option_content($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_content_color',
                 'parent' => $input_name.'[content]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -1593,8 +1638,8 @@ function post_grid_layout_elements_option_content($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[content]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -1608,8 +1653,8 @@ function post_grid_layout_elements_option_content($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[content]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -1622,12 +1667,12 @@ function post_grid_layout_elements_option_content($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[content]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1637,8 +1682,8 @@ function post_grid_layout_elements_option_content($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[content]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -1661,8 +1706,8 @@ function post_grid_layout_elements_option_content($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -1674,17 +1719,17 @@ function post_grid_layout_elements_option_content($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[content]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to product link.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to product link.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'product_link',
                 'args'		=> array(
-                    'none'=> __('None', 'woocommerce-products-slider'),
-                    'product_link'=> __('Product link', 'woocommerce-products-slider'),
-                    'external_product_url'=> __('External product', 'woocommerce-products-slider'),
-//                    'popup_box'=> __('Popup box', 'woocommerce-products-slider'),
-//                    'custom_link'=> __('Custom link', 'woocommerce-products-slider')
+                    'none'=> __('None', 'post-grid'),
+                    'product_link'=> __('Product link', 'post-grid'),
+                    'external_product_url'=> __('External product', 'post-grid'),
+//                    'popup_box'=> __('Popup box', 'post-grid'),
+//                    'custom_link'=> __('Custom link', 'post-grid')
                 ),
             );
 
@@ -1726,7 +1771,7 @@ function post_grid_layout_elements_option_excerpt($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post excerpt','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Post excerpt','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -1737,8 +1782,8 @@ function post_grid_layout_elements_option_excerpt($parameters){
                 'id'		=> 'char_limit',
                 'css_id'		=> $element_index.'_char_limit',
                 'parent' => $input_name.'[excerpt]',
-                'title'		=> __('Word limit','woocommerce-products-slider'),
-                'details'	=> __('Set word limit.','woocommerce-products-slider'),
+                'title'		=> __('Word limit','post-grid'),
+                'details'	=> __('Set word limit.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $char_limit,
                 'default'		=> '',
@@ -1751,8 +1796,8 @@ function post_grid_layout_elements_option_excerpt($parameters){
                 'id'		=> 'read_more_text',
                 'css_id'		=> $element_index.'_read_more_text',
                 'parent' => $input_name.'[excerpt]',
-                'title'		=> __('Read more text','woocommerce-products-slider'),
-                'details'	=> __('Custom read more text.','woocommerce-products-slider'),
+                'title'		=> __('Read more text','post-grid'),
+                'details'	=> __('Custom read more text.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $read_more_text,
                 'default'		=> '',
@@ -1764,16 +1809,16 @@ function post_grid_layout_elements_option_excerpt($parameters){
                 'id'		=> 'link_target',
                 'css_id'		=> $element_index.'_link_target',
                 'parent' => $input_name.'[excerpt]',
-                'title'		=> __('Link target','woocommerce-products-slider'),
-                'details'	=> __('Choose option link target.','woocommerce-products-slider'),
+                'title'		=> __('Link target','post-grid'),
+                'details'	=> __('Choose option link target.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_target,
                 'default'		=> 'post_link',
                 'args'		=> array(
-                    '_blank'=> __('_blank', 'woocommerce-products-slider'),
-                    '_parent'=> __('_parent', 'woocommerce-products-slider'),
-                    '_self'=> __('_self', 'woocommerce-products-slider'),
-                    '_top'=> __('_top', 'woocommerce-products-slider'),
+                    '_blank'=> __('_blank', 'post-grid'),
+                    '_parent'=> __('_parent', 'post-grid'),
+                    '_self'=> __('_self', 'post-grid'),
+                    '_top'=> __('_top', 'post-grid'),
 
                 ),
             );
@@ -1789,8 +1834,8 @@ function post_grid_layout_elements_option_excerpt($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[excerpt]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '10px 0',
@@ -1803,8 +1848,8 @@ function post_grid_layout_elements_option_excerpt($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_color',
                 'parent' => $input_name.'[excerpt]',
-                'title'		=> __('Text Color','woocommerce-products-slider'),
-                'details'	=> __('Choose text color.','woocommerce-products-slider'),
+                'title'		=> __('Text Color','post-grid'),
+                'details'	=> __('Choose text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -1817,12 +1862,12 @@ function post_grid_layout_elements_option_excerpt($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[excerpt]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1832,8 +1877,8 @@ function post_grid_layout_elements_option_excerpt($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[excerpt]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '15px',
@@ -1876,7 +1921,7 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Wrapper start','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Wrapper start','post-grid'); ?></span>
 
             <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
 
@@ -1888,8 +1933,8 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
             $args = array(
                 'id'		=> 'wrapper_id',
                 'parent' => $input_name.'[wrapper_start]',
-                'title'		=> __('Wrapper id','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper id, ex: my-unique-id.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper id','post-grid'),
+                'details'	=> __('Write wrapper id, ex: my-unique-id.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_id,
                 'default'		=> '',
@@ -1901,8 +1946,8 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
             $args = array(
                 'id'		=> 'wrapper_class',
                 'parent' => $input_name.'[wrapper_start]',
-                'title'		=> __('Wrapper class','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper class, ex: layer-thumbnail','woocommerce-products-slider'),
+                'title'		=> __('Wrapper class','post-grid'),
+                'details'	=> __('Write wrapper class, ex: layer-thumbnail','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_class,
                 'default'		=> '',
@@ -1914,8 +1959,8 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
                 'id'		=> 'css_idle',
                 'css_id'		=> 'css_idle_'.preg_replace('/\D/', '', $input_name) ,
                 'parent' => $input_name.'[wrapper_start]',
-                'title'		=> __('Custom CSS','woocommerce-products-slider'),
-                'details'	=> __('Write custom CSS. do not use <code>&lt;style>&lt;/style></code>','woocommerce-products-slider'),
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Write custom CSS. do not use <code>&lt;style>&lt;/style></code>','post-grid'),
                 'type'		=> 'scripts_css',
                 'value'		=> $css_idle,
                 'default'		=> '',
@@ -1927,8 +1972,8 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[wrapper_start]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -1949,8 +1994,8 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -1989,7 +2034,7 @@ function post_grid_layout_elements_option_wrapper_end($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Wrapper end','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Wrapper end','post-grid'); ?></span>
             <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
         </div>
         <div class="element-options options">
@@ -2001,8 +2046,8 @@ function post_grid_layout_elements_option_wrapper_end($parameters){
                 'wraper_class'		=> 'hidden',
 
                 'parent' => $input_name.'[wrapper_end]',
-                'title'		=> __('Wrapper id','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper id, ex: div, p, span.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper id','post-grid'),
+                'details'	=> __('Write wrapper id, ex: div, p, span.','post-grid'),
                 'type'		=> 'hidden',
                 'value'		=> $meta_key,
                 'default'		=> '',
@@ -2053,7 +2098,7 @@ function post_grid_layout_elements_option_categories($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post categories','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Post categories','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2062,8 +2107,8 @@ function post_grid_layout_elements_option_categories($parameters){
             $args = array(
                 'id'		=> 'max_count',
                 'parent' => $input_name.'[categories]',
-                'title'		=> __('Max count','woocommerce-products-slider'),
-                'details'	=> __('Write max count','woocommerce-products-slider'),
+                'title'		=> __('Max count','post-grid'),
+                'details'	=> __('Write max count','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $max_count,
                 'default'		=> 3,
@@ -2076,8 +2121,8 @@ function post_grid_layout_elements_option_categories($parameters){
                 'id'		=> 'separator',
                 'css_id'		=> $element_index.'_position_color',
                 'parent' => $input_name.'[categories]',
-                'title'		=> __('Link separator','woocommerce-products-slider'),
-                'details'	=> __('Choose link separator.','woocommerce-products-slider'),
+                'title'		=> __('Link separator','post-grid'),
+                'details'	=> __('Choose link separator.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $separator,
                 'default'		=> '',
@@ -2091,8 +2136,8 @@ function post_grid_layout_elements_option_categories($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[categories]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace category output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace category output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -2105,8 +2150,8 @@ function post_grid_layout_elements_option_categories($parameters){
                 'id'		=> 'wrapper_margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[categories]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_margin,
                 'default'		=> '',
@@ -2120,8 +2165,8 @@ function post_grid_layout_elements_option_categories($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[categories]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Choose font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Choose font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -2136,8 +2181,8 @@ function post_grid_layout_elements_option_categories($parameters){
                 'id'		=> 'link_color',
                 'css_id'		=> $element_index.'_link_color',
                 'parent' => $input_name.'[categories]',
-                'title'		=> __('Link color','woocommerce-products-slider'),
-                'details'	=> __('Choose link color.','woocommerce-products-slider'),
+                'title'		=> __('Link color','post-grid'),
+                'details'	=> __('Choose link color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $link_color,
                 'default'		=> '',
@@ -2149,8 +2194,8 @@ function post_grid_layout_elements_option_categories($parameters){
                 'id'		=> 'text_color',
                 'css_id'		=> $element_index.'_text_color',
                 'parent' => $input_name.'[categories]',
-                'title'		=> __('Text color','woocommerce-products-slider'),
-                'details'	=> __('Choose text color.','woocommerce-products-slider'),
+                'title'		=> __('Text color','post-grid'),
+                'details'	=> __('Choose text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $text_color,
                 'default'		=> '',
@@ -2163,12 +2208,12 @@ function post_grid_layout_elements_option_categories($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[categories]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -2207,7 +2252,7 @@ function post_grid_layout_elements_option_tags($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post tag','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Post tag','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2217,8 +2262,8 @@ function post_grid_layout_elements_option_tags($parameters){
             $args = array(
                 'id'		=> 'max_count',
                 'parent' => $input_name.'[tags]',
-                'title'		=> __('Max count','woocommerce-products-slider'),
-                'details'	=> __('Write max count','woocommerce-products-slider'),
+                'title'		=> __('Max count','post-grid'),
+                'details'	=> __('Write max count','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $max_count,
                 'default'		=> 3,
@@ -2231,8 +2276,8 @@ function post_grid_layout_elements_option_tags($parameters){
                 'id'		=> 'separator',
                 'css_id'		=> $element_index.'_position_color',
                 'parent' => $input_name.'[tags]',
-                'title'		=> __('Link separator','woocommerce-products-slider'),
-                'details'	=> __('Choose link separator.','woocommerce-products-slider'),
+                'title'		=> __('Link separator','post-grid'),
+                'details'	=> __('Choose link separator.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $separator,
                 'default'		=> '',
@@ -2247,8 +2292,8 @@ function post_grid_layout_elements_option_tags($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[tags]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace tags output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace tags output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -2261,8 +2306,8 @@ function post_grid_layout_elements_option_tags($parameters){
                 'id'		=> 'wrapper_margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[tags]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_margin,
                 'default'		=> '',
@@ -2275,8 +2320,8 @@ function post_grid_layout_elements_option_tags($parameters){
                 'id'		=> 'link_color',
                 'css_id'		=> $element_index.'_link_color',
                 'parent' => $input_name.'[tags]',
-                'title'		=> __('Link color','woocommerce-products-slider'),
-                'details'	=> __('Choose link color.','woocommerce-products-slider'),
+                'title'		=> __('Link color','post-grid'),
+                'details'	=> __('Choose link color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $link_color,
                 'default'		=> '',
@@ -2289,12 +2334,12 @@ function post_grid_layout_elements_option_tags($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[tags]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -2332,7 +2377,7 @@ function post_grid_layout_elements_option_comments_count($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Comment count','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Comment count','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2342,8 +2387,8 @@ function post_grid_layout_elements_option_comments_count($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[comments_count]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace comment count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace comment count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -2359,8 +2404,8 @@ function post_grid_layout_elements_option_comments_count($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_color',
                 'parent' => $input_name.'[comments_count]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -2372,8 +2417,8 @@ function post_grid_layout_elements_option_comments_count($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[comments_count]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -2387,8 +2432,8 @@ function post_grid_layout_elements_option_comments_count($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[comments_count]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -2402,8 +2447,8 @@ function post_grid_layout_elements_option_comments_count($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[comments_count]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -2417,12 +2462,12 @@ function post_grid_layout_elements_option_comments_count($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[comments_count]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -2465,7 +2510,7 @@ function post_grid_layout_elements_option_five_star($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Five star','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Five star','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2477,8 +2522,8 @@ function post_grid_layout_elements_option_five_star($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_color',
                 'parent' => $input_name.'[five_star]',
-                'title'		=> __('Text color','woocommerce-products-slider'),
-                'details'	=> __('Choose text color.','woocommerce-products-slider'),
+                'title'		=> __('Text color','post-grid'),
+                'details'	=> __('Choose text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -2491,8 +2536,8 @@ function post_grid_layout_elements_option_five_star($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[five_star]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Choose text font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Choose text font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -2505,8 +2550,8 @@ function post_grid_layout_elements_option_five_star($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[five_star]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Choose margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Choose margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -2519,12 +2564,12 @@ function post_grid_layout_elements_option_five_star($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[five_star]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -2556,7 +2601,7 @@ function post_grid_layout_elements_option_hr($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Horizontal line','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Horizontal line','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2569,8 +2614,8 @@ function post_grid_layout_elements_option_hr($parameters){
                 'id'		=> 'background_color',
                 'css_id'		=> $element_index.'_background_coloradd_to_cart',
                 'parent' => $input_name.'[hr]',
-                'title'		=> __('Background color','woocommerce-products-slider'),
-                'details'	=> __('Choose background color.','woocommerce-products-slider'),
+                'title'		=> __('Background color','post-grid'),
+                'details'	=> __('Choose background color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $background_color,
                 'default'		=> '',
@@ -2583,8 +2628,8 @@ function post_grid_layout_elements_option_hr($parameters){
                 'id'		=> 'height',
                 'css_id'		=> $element_index.'_height',
                 'parent' => $input_name.'[hr]',
-                'title'		=> __('Height','woocommerce-products-slider'),
-                'details'	=> __('Choose height.','woocommerce-products-slider'),
+                'title'		=> __('Height','post-grid'),
+                'details'	=> __('Choose height.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $height,
                 'default'		=> '',
@@ -2597,8 +2642,8 @@ function post_grid_layout_elements_option_hr($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_padding',
                 'parent' => $input_name.'[hr]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Choose margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Choose margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -2634,7 +2679,7 @@ function post_grid_layout_elements_option_share_button($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Share button','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Share button','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2649,8 +2694,8 @@ function post_grid_layout_elements_option_share_button($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[share_button]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Choose text font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Choose text font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -2665,8 +2710,8 @@ function post_grid_layout_elements_option_share_button($parameters){
                 'id'		=> 'icon_margin',
                 'css_id'		=> $element_index.'_icon_margin',
                 'parent' => $input_name.'[share_button]',
-                'title'		=> __('Icon margin','woocommerce-products-slider'),
-                'details'	=> __('Set icon margin.','woocommerce-products-slider'),
+                'title'		=> __('Icon margin','post-grid'),
+                'details'	=> __('Set icon margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $icon_margin,
                 'default'		=> '',
@@ -2679,8 +2724,8 @@ function post_grid_layout_elements_option_share_button($parameters){
                 'id'		=> 'icon_color',
                 'css_id'		=> $element_index.'_color',
                 'parent' => $input_name.'[share_button]',
-                'title'		=> __('Icon color','woocommerce-products-slider'),
-                'details'	=> __('Choose icon color.','woocommerce-products-slider'),
+                'title'		=> __('Icon color','post-grid'),
+                'details'	=> __('Choose icon color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $icon_color,
                 'default'		=> '',
@@ -2722,7 +2767,7 @@ function post_grid_layout_elements_option_author($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Author name','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Author name','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2733,15 +2778,15 @@ function post_grid_layout_elements_option_author($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[author]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link title.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to link title.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
                 'args'		=> array(
-                    'post_link'=> __('Post link', 'woocommerce-products-slider'),
-                    'author_posts_link'=> __('Author posts link', 'woocommerce-products-slider'),
-                    'none'=> __('None', 'woocommerce-products-slider'),
+                    'post_link'=> __('Post link', 'post-grid'),
+                    'author_posts_link'=> __('Author posts link', 'post-grid'),
+                    'none'=> __('None', 'post-grid'),
                 ),
             );
 
@@ -2751,8 +2796,8 @@ function post_grid_layout_elements_option_author($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[author]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -2767,8 +2812,8 @@ function post_grid_layout_elements_option_author($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_color',
                 'parent' => $input_name.'[author]',
-                'title'		=> __('Text color','woocommerce-products-slider'),
-                'details'	=> __('Choose text color.','woocommerce-products-slider'),
+                'title'		=> __('Text color','post-grid'),
+                'details'	=> __('Choose text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -2782,8 +2827,8 @@ function post_grid_layout_elements_option_author($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[author]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Choose text font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Choose text font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -2796,8 +2841,8 @@ function post_grid_layout_elements_option_author($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_padding',
                 'parent' => $input_name.'[author]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Choose padding.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Choose padding.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -2810,12 +2855,12 @@ function post_grid_layout_elements_option_author($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[author]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -2853,7 +2898,7 @@ function post_grid_layout_elements_option_author_link($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Author name with link','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Author name with link','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2863,15 +2908,15 @@ function post_grid_layout_elements_option_author_link($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[author_link]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link title.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to link title.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
                 'args'		=> array(
-                    'post_link'=> __('Post link', 'woocommerce-products-slider'),
-                    'author_posts_link'=> __('Author posts link', 'woocommerce-products-slider'),
-                    'none'=> __('None', 'woocommerce-products-slider'),
+                    'post_link'=> __('Post link', 'post-grid'),
+                    'author_posts_link'=> __('Author posts link', 'post-grid'),
+                    'none'=> __('None', 'post-grid'),
                 ),
             );
 
@@ -2882,8 +2927,8 @@ function post_grid_layout_elements_option_author_link($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[author_link]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace on-sale output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace on-sale output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -2897,8 +2942,8 @@ function post_grid_layout_elements_option_author_link($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_color',
                 'parent' => $input_name.'[author_link]',
-                'title'		=> __('Text color','woocommerce-products-slider'),
-                'details'	=> __('Choose text color.','woocommerce-products-slider'),
+                'title'		=> __('Text color','post-grid'),
+                'details'	=> __('Choose text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -2912,8 +2957,8 @@ function post_grid_layout_elements_option_author_link($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[author_link]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Choose text font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Choose text font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -2926,8 +2971,8 @@ function post_grid_layout_elements_option_author_link($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_padding',
                 'parent' => $input_name.'[author_link]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Choose padding.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Choose padding.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -2974,7 +3019,7 @@ function post_grid_layout_elements_option_post_date($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post date','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Post date','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2984,8 +3029,8 @@ function post_grid_layout_elements_option_post_date($parameters){
                 'id'		=> 'date_format',
                 'css_id'		=> $element_index.'_background_colorpost_date',
                 'parent' => $input_name.'[post_date]',
-                'title'		=> __('Background color','woocommerce-products-slider'),
-                'details'	=> __('Choose background color.','woocommerce-products-slider'),
+                'title'		=> __('Background color','post-grid'),
+                'details'	=> __('Choose background color.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $date_format,
                 'default'		=> '',
@@ -2999,14 +3044,14 @@ function post_grid_layout_elements_option_post_date($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[post_date]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link title.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to link title.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
                 'args'		=> array(
-                    'post_link'=> __('Post link', 'woocommerce-products-slider'),
-                    'none'=> __('None', 'woocommerce-products-slider'),
+                    'post_link'=> __('Post link', 'post-grid'),
+                    'none'=> __('None', 'post-grid'),
                 ),
             );
 
@@ -3016,8 +3061,8 @@ function post_grid_layout_elements_option_post_date($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_custom_text',
                 'parent' => $input_name.'[post_date]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -3029,8 +3074,8 @@ function post_grid_layout_elements_option_post_date($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[post_date]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -3044,8 +3089,8 @@ function post_grid_layout_elements_option_post_date($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[post_date]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -3059,8 +3104,8 @@ function post_grid_layout_elements_option_post_date($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[post_date]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -3074,12 +3119,12 @@ function post_grid_layout_elements_option_post_date($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[post_date]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3129,7 +3174,7 @@ function post_grid_layout_elements_option_term_title($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Term title','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Term title','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -3139,8 +3184,8 @@ function post_grid_layout_elements_option_term_title($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_term_title',
                 'parent' => $input_name.'[term_title]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -3152,8 +3197,8 @@ function post_grid_layout_elements_option_term_title($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[term_title]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -3167,8 +3212,8 @@ function post_grid_layout_elements_option_term_title($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[term_title]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -3182,8 +3227,8 @@ function post_grid_layout_elements_option_term_title($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[term_title]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -3197,12 +3242,12 @@ function post_grid_layout_elements_option_term_title($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[term_title]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3219,8 +3264,8 @@ function post_grid_layout_elements_option_term_title($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -3265,7 +3310,7 @@ function post_grid_layout_elements_option_term_thumb($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Term thumbnail','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Term thumbnail','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -3287,8 +3332,8 @@ function post_grid_layout_elements_option_term_thumb($parameters){
             $args = array(
                 'id'		=> 'thumb_size',
                 'parent' => $input_name.'[term_thumb]',
-                'title'		=> __('Thumbnail size','woocommerce-products-slider'),
-                'details'	=> __('Choose thumbnail size.','woocommerce-products-slider'),
+                'title'		=> __('Thumbnail size','post-grid'),
+                'details'	=> __('Choose thumbnail size.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $thumb_size,
                 'default'		=> 'large',
@@ -3303,15 +3348,15 @@ function post_grid_layout_elements_option_term_thumb($parameters){
 
             $args = array(
                 'id'		=> 'thumb_height',
-                'title'		=> __('Thumbnail height','woocommerce-products-slider'),
-                'details'	=> __('Set thumbnail height.','woocommerce-products-slider'),
+                'title'		=> __('Thumbnail height','post-grid'),
+                'details'	=> __('Set thumbnail height.','post-grid'),
                 'type'		=> 'option_group',
                 'options'		=> array(
                     array(
                         'id'		=> 'large',
                         'parent'		=> $input_name.'[term_thumb][thumb_height]',
-                        'title'		=> __('In desktop','woocommerce-products-slider'),
-                        'details'	=> __('min-width: 1200px, ex: 280px','woocommerce-products-slider'),
+                        'title'		=> __('In desktop','post-grid'),
+                        'details'	=> __('min-width: 1200px, ex: 280px','post-grid'),
                         'type'		=> 'text',
                         'value'		=> $thumb_height_large,
                         'default'		=> '',
@@ -3320,8 +3365,8 @@ function post_grid_layout_elements_option_term_thumb($parameters){
                     array(
                         'id'		=> 'medium',
                         'parent'		=> $input_name.'[term_thumb][thumb_height]',
-                        'title'		=> __('In tablet & small desktop','woocommerce-products-slider'),
-                        'details'	=> __('min-width: 992px, ex: 280px','woocommerce-products-slider'),
+                        'title'		=> __('In tablet & small desktop','post-grid'),
+                        'details'	=> __('min-width: 992px, ex: 280px','post-grid'),
                         'type'		=> 'text',
                         'value'		=> $thumb_height_medium,
                         'default'		=> '',
@@ -3330,8 +3375,8 @@ function post_grid_layout_elements_option_term_thumb($parameters){
                     array(
                         'id'		=> 'small',
                         'parent'		=> $input_name.'[term_thumb][thumb_height]',
-                        'title'		=> __('In mobile','woocommerce-products-slider'),
-                        'details'	=> __('max-width: 768px, ex: 280px','woocommerce-products-slider'),
+                        'title'		=> __('In mobile','post-grid'),
+                        'details'	=> __('max-width: 768px, ex: 280px','post-grid'),
                         'type'		=> 'text',
                         'value'		=> $thumb_height_small,
                         'default'		=> '',
@@ -3346,8 +3391,8 @@ function post_grid_layout_elements_option_term_thumb($parameters){
             $args = array(
                 'id'		=> 'default_thumb_src',
                 'parent' => $input_name.'[term_thumb]',
-                'title'		=> __('Default thumbnail','woocommerce-products-slider'),
-                'details'	=> __('Choose default thumbnail.','woocommerce-products-slider'),
+                'title'		=> __('Default thumbnail','post-grid'),
+                'details'	=> __('Choose default thumbnail.','post-grid'),
                 'type'		=> 'media_url',
                 'value'		=> $default_thumb_src,
                 'default'		=> '',
@@ -3360,8 +3405,8 @@ function post_grid_layout_elements_option_term_thumb($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[term_thumb]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -3382,8 +3427,8 @@ function post_grid_layout_elements_option_term_thumb($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -3435,7 +3480,7 @@ function post_grid_layout_elements_option_term_description($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Term description','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Term description','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -3445,8 +3490,8 @@ function post_grid_layout_elements_option_term_description($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_term_description',
                 'parent' => $input_name.'[term_description]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -3458,8 +3503,8 @@ function post_grid_layout_elements_option_term_description($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[term_description]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -3473,8 +3518,8 @@ function post_grid_layout_elements_option_term_description($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[term_description]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -3488,8 +3533,8 @@ function post_grid_layout_elements_option_term_description($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[term_description]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -3503,12 +3548,12 @@ function post_grid_layout_elements_option_term_description($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[term_description]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3518,15 +3563,15 @@ function post_grid_layout_elements_option_term_description($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[term_description]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link product.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to link product.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'product_link',
                 'args'		=> array(
-                    'none'=> __('None', 'woocommerce-products-slider'),
-                    'product_link'=> __('product link', 'woocommerce-products-slider'),
-                    'external_product_url'=> __('External product', 'woocommerce-products-slider'),
+                    'none'=> __('None', 'post-grid'),
+                    'product_link'=> __('product link', 'post-grid'),
+                    'external_product_url'=> __('External product', 'post-grid'),
                 ),
             );
 
@@ -3544,8 +3589,8 @@ function post_grid_layout_elements_option_term_description($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -3593,7 +3638,7 @@ function post_grid_layout_elements_option_term_slug($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Term slug','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Term slug','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -3603,8 +3648,8 @@ function post_grid_layout_elements_option_term_slug($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_term_description',
                 'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -3616,8 +3661,8 @@ function post_grid_layout_elements_option_term_slug($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -3631,8 +3676,8 @@ function post_grid_layout_elements_option_term_slug($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -3646,8 +3691,8 @@ function post_grid_layout_elements_option_term_slug($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -3661,12 +3706,12 @@ function post_grid_layout_elements_option_term_slug($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3676,15 +3721,15 @@ function post_grid_layout_elements_option_term_slug($parameters){
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
                 'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Link to','woocommerce-products-slider'),
-                'details'	=> __('Choose option to link product.','woocommerce-products-slider'),
+                'title'		=> __('Link to','post-grid'),
+                'details'	=> __('Choose option to link product.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'product_link',
                 'args'		=> array(
-                    'none'=> __('None', 'woocommerce-products-slider'),
-                    'product_link'=> __('product link', 'woocommerce-products-slider'),
-                    'external_product_url'=> __('External product', 'woocommerce-products-slider'),
+                    'none'=> __('None', 'post-grid'),
+                    'product_link'=> __('product link', 'post-grid'),
+                    'external_product_url'=> __('External product', 'post-grid'),
                 ),
             );
 
@@ -3702,8 +3747,8 @@ function post_grid_layout_elements_option_term_slug($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -3752,7 +3797,7 @@ function post_grid_layout_elements_option_term_post_count($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Term post count','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Term post count','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -3763,8 +3808,8 @@ function post_grid_layout_elements_option_term_post_count($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -3777,8 +3822,8 @@ function post_grid_layout_elements_option_term_post_count($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_term_description',
                 'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -3790,8 +3835,8 @@ function post_grid_layout_elements_option_term_post_count($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -3805,8 +3850,8 @@ function post_grid_layout_elements_option_term_post_count($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -3820,8 +3865,8 @@ function post_grid_layout_elements_option_term_post_count($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -3835,12 +3880,12 @@ function post_grid_layout_elements_option_term_post_count($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3855,8 +3900,8 @@ function post_grid_layout_elements_option_term_post_count($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -3904,7 +3949,7 @@ function post_grid_layout_elements_option_dokan_store_name($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Dokan store name','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Dokan store name','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -3915,8 +3960,8 @@ function post_grid_layout_elements_option_dokan_store_name($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -3929,8 +3974,8 @@ function post_grid_layout_elements_option_dokan_store_name($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_dokan_store_name',
                 'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -3942,8 +3987,8 @@ function post_grid_layout_elements_option_dokan_store_name($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -3957,8 +4002,8 @@ function post_grid_layout_elements_option_dokan_store_name($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -3972,8 +4017,8 @@ function post_grid_layout_elements_option_dokan_store_name($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -3987,12 +4032,12 @@ function post_grid_layout_elements_option_dokan_store_name($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -4007,8 +4052,8 @@ function post_grid_layout_elements_option_dokan_store_name($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -4055,7 +4100,7 @@ function post_grid_layout_elements_option_dokan_store_address($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Dokan store address','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Dokan store address','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -4066,8 +4111,8 @@ function post_grid_layout_elements_option_dokan_store_address($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -4080,8 +4125,8 @@ function post_grid_layout_elements_option_dokan_store_address($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_dokan_store_address',
                 'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -4093,8 +4138,8 @@ function post_grid_layout_elements_option_dokan_store_address($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -4108,8 +4153,8 @@ function post_grid_layout_elements_option_dokan_store_address($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -4123,8 +4168,8 @@ function post_grid_layout_elements_option_dokan_store_address($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -4138,12 +4183,12 @@ function post_grid_layout_elements_option_dokan_store_address($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -4158,8 +4203,8 @@ function post_grid_layout_elements_option_dokan_store_address($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -4207,7 +4252,7 @@ function post_grid_layout_elements_option_dokan_store_city($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Dokan store city','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Dokan store city','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -4218,8 +4263,8 @@ function post_grid_layout_elements_option_dokan_store_city($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -4232,8 +4277,8 @@ function post_grid_layout_elements_option_dokan_store_city($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_dokan_store_address',
                 'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -4245,8 +4290,8 @@ function post_grid_layout_elements_option_dokan_store_city($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -4260,8 +4305,8 @@ function post_grid_layout_elements_option_dokan_store_city($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -4275,8 +4320,8 @@ function post_grid_layout_elements_option_dokan_store_city($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -4290,12 +4335,12 @@ function post_grid_layout_elements_option_dokan_store_city($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -4310,8 +4355,8 @@ function post_grid_layout_elements_option_dokan_store_city($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -4357,7 +4402,7 @@ function post_grid_layout_elements_option_dokan_store_country($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Dokan store country','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Dokan store country','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -4368,8 +4413,8 @@ function post_grid_layout_elements_option_dokan_store_country($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -4382,8 +4427,8 @@ function post_grid_layout_elements_option_dokan_store_country($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_dokan_store_country',
                 'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -4395,8 +4440,8 @@ function post_grid_layout_elements_option_dokan_store_country($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -4410,8 +4455,8 @@ function post_grid_layout_elements_option_dokan_store_country($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -4425,8 +4470,8 @@ function post_grid_layout_elements_option_dokan_store_country($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -4440,12 +4485,12 @@ function post_grid_layout_elements_option_dokan_store_country($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -4460,8 +4505,8 @@ function post_grid_layout_elements_option_dokan_store_country($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -4508,7 +4553,7 @@ function post_grid_layout_elements_option_dokan_store_phone($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Dokan store phone','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Dokan store phone','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -4519,8 +4564,8 @@ function post_grid_layout_elements_option_dokan_store_phone($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -4533,8 +4578,8 @@ function post_grid_layout_elements_option_dokan_store_phone($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_dokan_store_country',
                 'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -4546,8 +4591,8 @@ function post_grid_layout_elements_option_dokan_store_phone($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -4561,8 +4606,8 @@ function post_grid_layout_elements_option_dokan_store_phone($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -4576,8 +4621,8 @@ function post_grid_layout_elements_option_dokan_store_phone($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -4591,12 +4636,12 @@ function post_grid_layout_elements_option_dokan_store_phone($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -4611,8 +4656,8 @@ function post_grid_layout_elements_option_dokan_store_phone($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -4656,7 +4701,7 @@ function post_grid_layout_elements_option_dokan_banner($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Dokan store banner','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Dokan store banner','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -4666,8 +4711,8 @@ function post_grid_layout_elements_option_dokan_banner($parameters){
                 'id'		=> 'width',
                 'css_id'		=> $element_index.'_width',
                 'parent' => $input_name.'[dokan_banner]',
-                'title'		=> __('Width','woocommerce-products-slider'),
-                'details'	=> __('Set banner width. ex: 200px or 45%','woocommerce-products-slider'),
+                'title'		=> __('Width','post-grid'),
+                'details'	=> __('Set banner width. ex: 200px or 45%','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $width,
                 'default'		=> '',
@@ -4680,8 +4725,8 @@ function post_grid_layout_elements_option_dokan_banner($parameters){
                 'id'		=> 'height',
                 'css_id'		=> $element_index.'_height',
                 'parent' => $input_name.'[dokan_banner]',
-                'title'		=> __('height','woocommerce-products-slider'),
-                'details'	=> __('Set banner height. ex: 200px','woocommerce-products-slider'),
+                'title'		=> __('height','post-grid'),
+                'details'	=> __('Set banner height. ex: 200px','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $height,
                 'default'		=> '',
@@ -4694,8 +4739,8 @@ function post_grid_layout_elements_option_dokan_banner($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[dokan_banner]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -4709,12 +4754,12 @@ function post_grid_layout_elements_option_dokan_banner($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[dokan_banner]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -4729,8 +4774,8 @@ function post_grid_layout_elements_option_dokan_banner($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -4774,7 +4819,7 @@ function post_grid_layout_elements_option_dokan_avatar($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Dokan store avatar','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Dokan store avatar','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -4785,8 +4830,8 @@ function post_grid_layout_elements_option_dokan_avatar($parameters){
                 'id'		=> 'width',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[dokan_avatar]',
-                'title'		=> __('Width','woocommerce-products-slider'),
-                'details'	=> __('Set avatar width. ex: 200px or 50%','woocommerce-products-slider'),
+                'title'		=> __('Width','post-grid'),
+                'details'	=> __('Set avatar width. ex: 200px or 50%','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $width,
                 'default'		=> '',
@@ -4800,8 +4845,8 @@ function post_grid_layout_elements_option_dokan_avatar($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[dokan_avatar]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -4815,12 +4860,12 @@ function post_grid_layout_elements_option_dokan_avatar($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[dokan_avatar]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -4835,8 +4880,8 @@ function post_grid_layout_elements_option_dokan_avatar($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -4882,7 +4927,7 @@ function post_grid_layout_elements_option_order_title($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Order title','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Order title','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -4893,8 +4938,8 @@ function post_grid_layout_elements_option_order_title($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[order_title]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -4907,8 +4952,8 @@ function post_grid_layout_elements_option_order_title($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_order_title',
                 'parent' => $input_name.'[order_title]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -4920,8 +4965,8 @@ function post_grid_layout_elements_option_order_title($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[order_title]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -4935,8 +4980,8 @@ function post_grid_layout_elements_option_order_title($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[order_title]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -4950,8 +4995,8 @@ function post_grid_layout_elements_option_order_title($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[order_title]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -4965,12 +5010,12 @@ function post_grid_layout_elements_option_order_title($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[order_title]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -4985,8 +5030,8 @@ function post_grid_layout_elements_option_order_title($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -5032,7 +5077,7 @@ function post_grid_layout_elements_option_order_date($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Order date','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Order date','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -5043,8 +5088,8 @@ function post_grid_layout_elements_option_order_date($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[order_date]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -5057,8 +5102,8 @@ function post_grid_layout_elements_option_order_date($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_order_date',
                 'parent' => $input_name.'[order_date]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -5070,8 +5115,8 @@ function post_grid_layout_elements_option_order_date($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[order_date]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -5085,8 +5130,8 @@ function post_grid_layout_elements_option_order_date($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[order_date]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -5100,8 +5145,8 @@ function post_grid_layout_elements_option_order_date($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[order_date]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -5115,12 +5160,12 @@ function post_grid_layout_elements_option_order_date($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[order_date]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -5135,8 +5180,8 @@ function post_grid_layout_elements_option_order_date($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -5181,7 +5226,7 @@ function post_grid_layout_elements_option_order_customer_name($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Customer name','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Customer name','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -5192,8 +5237,8 @@ function post_grid_layout_elements_option_order_customer_name($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -5206,8 +5251,8 @@ function post_grid_layout_elements_option_order_customer_name($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_order_customer_name',
                 'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -5219,8 +5264,8 @@ function post_grid_layout_elements_option_order_customer_name($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -5234,8 +5279,8 @@ function post_grid_layout_elements_option_order_customer_name($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -5249,8 +5294,8 @@ function post_grid_layout_elements_option_order_customer_name($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -5264,12 +5309,12 @@ function post_grid_layout_elements_option_order_customer_name($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -5284,8 +5329,8 @@ function post_grid_layout_elements_option_order_customer_name($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -5327,7 +5372,7 @@ function post_grid_layout_elements_option_order_customer_thumb($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Customer thumbnail','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Customer thumbnail','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -5337,8 +5382,8 @@ function post_grid_layout_elements_option_order_customer_thumb($parameters){
                 'id'		=> 'width',
                 'css_id'		=> $element_index.'_width',
                 'parent' => $input_name.'[order_customer_thumb]',
-                'title'		=> __('width','woocommerce-products-slider'),
-                'details'	=> __('Set width.','woocommerce-products-slider'),
+                'title'		=> __('width','post-grid'),
+                'details'	=> __('Set width.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $width,
                 'default'		=> '',
@@ -5351,8 +5396,8 @@ function post_grid_layout_elements_option_order_customer_thumb($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[order_customer_thumb]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -5366,12 +5411,12 @@ function post_grid_layout_elements_option_order_customer_thumb($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[order_customer_thumb]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -5386,8 +5431,8 @@ function post_grid_layout_elements_option_order_customer_thumb($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -5433,7 +5478,7 @@ function post_grid_layout_elements_option_order_country($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Customer country','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Customer country','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -5444,8 +5489,8 @@ function post_grid_layout_elements_option_order_country($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[order_country]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -5458,8 +5503,8 @@ function post_grid_layout_elements_option_order_country($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_order_country',
                 'parent' => $input_name.'[order_country]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -5471,8 +5516,8 @@ function post_grid_layout_elements_option_order_country($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[order_country]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -5486,8 +5531,8 @@ function post_grid_layout_elements_option_order_country($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[order_country]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -5501,8 +5546,8 @@ function post_grid_layout_elements_option_order_country($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[order_country]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -5516,12 +5561,12 @@ function post_grid_layout_elements_option_order_country($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[order_country]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -5536,8 +5581,8 @@ function post_grid_layout_elements_option_order_country($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -5581,7 +5626,7 @@ function post_grid_layout_elements_option_order_payment_method($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Customer payment method','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Customer payment method','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -5592,8 +5637,8 @@ function post_grid_layout_elements_option_order_payment_method($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -5606,8 +5651,8 @@ function post_grid_layout_elements_option_order_payment_method($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_payment_method',
                 'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -5619,8 +5664,8 @@ function post_grid_layout_elements_option_order_payment_method($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -5634,8 +5679,8 @@ function post_grid_layout_elements_option_order_payment_method($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -5649,8 +5694,8 @@ function post_grid_layout_elements_option_order_payment_method($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -5664,12 +5709,12 @@ function post_grid_layout_elements_option_order_payment_method($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -5684,8 +5729,8 @@ function post_grid_layout_elements_option_order_payment_method($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -5732,7 +5777,7 @@ function post_grid_layout_elements_option_order_total($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Order total','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Order total','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -5743,8 +5788,8 @@ function post_grid_layout_elements_option_order_total($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[order_total]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -5757,8 +5802,8 @@ function post_grid_layout_elements_option_order_total($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_order_total',
                 'parent' => $input_name.'[order_total]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -5770,8 +5815,8 @@ function post_grid_layout_elements_option_order_total($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[order_total]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -5785,8 +5830,8 @@ function post_grid_layout_elements_option_order_total($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[order_total]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -5800,8 +5845,8 @@ function post_grid_layout_elements_option_order_total($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[order_total]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -5815,12 +5860,12 @@ function post_grid_layout_elements_option_order_total($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[order_total]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -5835,8 +5880,8 @@ function post_grid_layout_elements_option_order_total($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -5881,7 +5926,7 @@ function post_grid_layout_elements_option_order_items($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Order items','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Order items','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -5892,8 +5937,8 @@ function post_grid_layout_elements_option_order_items($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[order_items]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -5906,8 +5951,8 @@ function post_grid_layout_elements_option_order_items($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_order_items',
                 'parent' => $input_name.'[order_items]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -5919,8 +5964,8 @@ function post_grid_layout_elements_option_order_items($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[order_items]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -5934,8 +5979,8 @@ function post_grid_layout_elements_option_order_items($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[order_items]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -5949,8 +5994,8 @@ function post_grid_layout_elements_option_order_items($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[order_items]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -5964,12 +6009,12 @@ function post_grid_layout_elements_option_order_items($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[order_items]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -5984,8 +6029,8 @@ function post_grid_layout_elements_option_order_items($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 
@@ -6031,7 +6076,7 @@ function post_grid_layout_elements_option_order_discount_total($parameters){
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Order discount total','woocommerce-products-slider'); ?></span>
+            <span class="expand"><?php echo __('Order discount total','post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -6042,8 +6087,8 @@ function post_grid_layout_elements_option_order_discount_total($parameters){
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Wrapper html','woocommerce-products-slider'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','woocommerce-products-slider'),
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $wrapper_html,
                 'default'		=> '',
@@ -6056,8 +6101,8 @@ function post_grid_layout_elements_option_order_discount_total($parameters){
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_order_discount_total',
                 'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Color','woocommerce-products-slider'),
-                'details'	=> __('Title text color.','woocommerce-products-slider'),
+                'title'		=> __('Color','post-grid'),
+                'details'	=> __('Title text color.','post-grid'),
                 'type'		=> 'colorpicker',
                 'value'		=> $color,
                 'default'		=> '',
@@ -6069,8 +6114,8 @@ function post_grid_layout_elements_option_order_discount_total($parameters){
                 'id'		=> 'font_size',
                 'css_id'		=> $element_index.'_font_size',
                 'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Font size','woocommerce-products-slider'),
-                'details'	=> __('Set font size.','woocommerce-products-slider'),
+                'title'		=> __('Font size','post-grid'),
+                'details'	=> __('Set font size.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_size,
                 'default'		=> '',
@@ -6084,8 +6129,8 @@ function post_grid_layout_elements_option_order_discount_total($parameters){
                 'id'		=> 'font_family',
                 'css_id'		=> $element_index.'_font_family',
                 'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Font family','woocommerce-products-slider'),
-                'details'	=> __('Set font family.','woocommerce-products-slider'),
+                'title'		=> __('Font family','post-grid'),
+                'details'	=> __('Set font family.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $font_family,
                 'default'		=> '',
@@ -6099,8 +6144,8 @@ function post_grid_layout_elements_option_order_discount_total($parameters){
                 'id'		=> 'margin',
                 'css_id'		=> $element_index.'_margin',
                 'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Margin','woocommerce-products-slider'),
-                'details'	=> __('Set margin.','woocommerce-products-slider'),
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
                 'type'		=> 'text',
                 'value'		=> $margin,
                 'default'		=> '',
@@ -6114,12 +6159,12 @@ function post_grid_layout_elements_option_order_discount_total($parameters){
                 'id'		=> 'text_align',
                 'css_id'		=> $element_index.'_text_align',
                 'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Text align','woocommerce-products-slider'),
-                'details'	=> __('Choose text align.','woocommerce-products-slider'),
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
                 'type'		=> 'select',
                 'value'		=> $text_align,
                 'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'woocommerce-products-slider'),'right'=> __('Right', 'woocommerce-products-slider'),'center'=> __('Center', 'woocommerce-products-slider') ),
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -6134,8 +6179,8 @@ function post_grid_layout_elements_option_order_discount_total($parameters){
 
             $args = array(
                 'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','woocommerce-products-slider'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','woocommerce-products-slider'),
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
 

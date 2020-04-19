@@ -275,13 +275,12 @@ jQuery(document).ready(function($){
 
 
     $(document).on('click', '.settings-tabs .expandable .expand', function(){
-        if($(this).parent().parent().hasClass('active'))
-        {
-            $(this).parent().parent().removeClass('active');
-        }
-        else
-        {
-            $(this).parent().parent().addClass('active');
+        if($(this).parent().parent().children('.options').hasClass('active')){
+            //$(this).parent().parent().removeClass('active');
+            $(this).parent().parent().children('.options').removeClass('active');
+        }else {
+            //$(this).parent().parent().addClass('active');
+            $(this).parent().parent().children('.options').addClass('active');
         }
 
 

@@ -198,8 +198,7 @@ function post_grid_layout_element_css_title($args){
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
     $css = isset($element['css']) ? $element['css'] : '';
-
-    //var_dump();
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
     <style type="text/css">
@@ -668,7 +667,7 @@ function post_grid_layout_element_media($args){
 
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> element-media ">
         <?php
         if($link_to == 'post_link'):
             ?>

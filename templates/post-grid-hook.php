@@ -5,6 +5,8 @@ add_action('post_grid_main', 'post_grid_main_container', 90);
 
 function post_grid_main_container($atts){
 
+    global  $post_grid_css;
+
     $grid_id = $atts['id'];
     $post_grid_options = get_post_meta( $grid_id, 'post_grid_meta_options', true );
 
@@ -336,6 +338,7 @@ function post_grid_item_layout_media($args){
 
     $post_id = $args['post_id'] ;
     $post_grid_options = $args['options'];
+
     $layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
 
     if(!empty($layout_id)) return;
@@ -448,6 +451,7 @@ add_action('post_grid_container', 'post_grid_container_old_layout_css');
 
 function post_grid_container_old_layout_css($args){
 
+    $post_grid_options = $args['options'];
 
     $layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
 
@@ -550,9 +554,12 @@ function post_grid_item_layout_new($args){
     $layout_elements_data = get_post_meta( $layout_id, 'layout_elements_data', true );
 
 
+    global $element_css;
+
     //echo '<pre>'.var_export($layout_elements_data, ture).'</pre>';
 
 
+    if(!empty($layout_elements_data))
     foreach($layout_elements_data as $elementIndex=>$elementData){
         foreach($elementData as $elementId=>$element) {
 
@@ -565,7 +572,14 @@ function post_grid_item_layout_new($args){
             $element_args['layout_id'] = $layout_id;
 
             do_action('post_grid_layout_element_' . $elementId, $element_args);
+
+
+            ob_start();
             do_action('post_grid_layout_element_css_' . $elementId, $element_args);
+            $element_css .= ob_get_clean();
+
+            //var_dump($element_css);
+
         }
 
     }
@@ -694,6 +708,9 @@ function post_grid_main_view_type_grid_scripts($args){
     $items_bg_color = isset($post_grid_options['items_bg_color']) ? $post_grid_options['items_bg_color'] : '#fff';
 
 
+    global  $element_css;
+
+    //var_dump($element_css);
 
     ?>
     <style type="text/css">
@@ -798,7 +815,11 @@ function post_grid_main_view_type_grid_scripts($args){
                 ?>
             }
         }
+
+
+
     </style>
+    <?php echo $element_css; ?>
     <?php
 }
 
@@ -899,7 +920,7 @@ function post_grid_main_convert_layout($args){
 
     $layout_id = isset($options['layout_id']) ? $options['layout_id'] : '';
 
-    echo '<pre>'.var_export($layout_id, true).'</pre>';
+    //echo '<pre>'.var_export($layout_id, true).'</pre>';
 
 
     if(!empty($layout_id)) return;
@@ -1037,13 +1058,21 @@ function post_grid_main_convert_layout($args){
 
     );
 
-    $post_id = wp_insert_post($post_args);
+    $new_layout_id = wp_insert_post($post_args);
 
-    update_post_meta($post_id,'layout_elements_data', $layout_elements_data);
+    $custom_scripts['custom_css'] = post_grid_layout_css($layout_skin);
+    $custom_scripts['custom_js'] = '';
+    $layout_options['layout_preview_img'] = '';
+
+
+    update_post_meta($new_layout_id,'layout_elements_data', $layout_elements_data);
+    update_post_meta($new_layout_id,'custom_scripts', $custom_scripts);
+    update_post_meta($new_layout_id,'layout_options', $layout_options);
+
 
     //echo '<pre>'.var_export($options, true).'</pre>';
 
-    $options['layout_id'] = $post_id;
+    $options['layout_id'] = $new_layout_id;
 
     update_post_meta($grid_id,'post_grid_meta_options', $options);
 

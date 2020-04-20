@@ -20,8 +20,8 @@ function post_grid_layout_elements_option_custom_text($parameters){
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 
 
@@ -129,7 +129,7 @@ function post_grid_layout_elements_option_custom_text($parameters){
 
             ob_start();
             ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -174,8 +174,8 @@ function post_grid_layout_elements_option_title($parameters){
 
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 
 
@@ -322,12 +322,41 @@ function post_grid_layout_elements_option_title($parameters){
 
 
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_margin',
+                'parent' => $input_name.'[title]',
+                'title'		=> __('CSS','post-grid'),
+                'details'	=> __('Set css.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_margin',
+                'parent' => $input_name.'[title]',
+                'title'		=> __('CSS hover','post-grid'),
+                'details'	=> __('Set hover css.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
 
 
             ob_start();
             ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -377,8 +406,8 @@ function post_grid_layout_elements_option_title_link($parameters){
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : 0;
 
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 
 
@@ -524,11 +553,39 @@ function post_grid_layout_elements_option_title_link($parameters){
             $settings_tabs_field->generate_field($args);
 
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_margin',
+                'parent' => $input_name.'[title_link]',
+                'title'		=> __('CSS','post-grid'),
+                'details'	=> __('Set css.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_margin',
+                'parent' => $input_name.'[title_link]',
+                'title'		=> __('CSS hover','post-grid'),
+                'details'	=> __('Set hover css.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
 
             ob_start();
             ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -576,6 +633,9 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
     ?>
     <div class="item">
@@ -696,6 +756,24 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             ?>
 
@@ -726,6 +804,11 @@ function post_grid_layout_elements_option_read_more($parameters){
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
+
+
 
     ?>
     <div class="item">
@@ -850,6 +933,25 @@ function post_grid_layout_elements_option_read_more($parameters){
             $settings_tabs_field->generate_field($args);
 
 
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
             ?>
 
         </div>
@@ -876,6 +978,8 @@ function post_grid_layout_elements_option_media($parameters){
     $padding = isset($element_data['padding']) ? $element_data['padding'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
 
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 
     $media_sources_list = apply_filters('post_grid_media_source_list',
@@ -918,6 +1022,8 @@ function post_grid_layout_elements_option_media($parameters){
 
                     if(!empty($media_sources_new))
                     foreach ($media_sources_new as $source_id => $source_name ) {
+
+                        if(is_array($source_name)) continue;
 
                         $media_source_options = array();
                         $source_data = isset($media_source[$source_id]) ? $media_source[$source_id] : array();
@@ -1088,10 +1194,8 @@ function post_grid_layout_elements_option_media($parameters){
 
             ob_start();
             ?>
-            <code onclick="this.select()">
-                .element-<?php echo $element_index?>{}
-
-            </code>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -1140,6 +1244,10 @@ function post_grid_layout_elements_option_thumb_link($parameters){
     $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
     $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
     $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
+
 
 
     ?>
@@ -1294,10 +1402,8 @@ function post_grid_layout_elements_option_thumb_link($parameters){
 
             ob_start();
             ?>
-            <code onclick="this.select()">
-                .element-<?php echo $element_index?>{}
-
-            </code>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -1346,6 +1452,10 @@ function post_grid_layout_elements_option_thumb($parameters){
     $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
     $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
     $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
+
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 
     ?>
@@ -1500,10 +1610,8 @@ function post_grid_layout_elements_option_thumb($parameters){
 
             ob_start();
             ?>
-            <code onclick="this.select()">
-                .element-<?php echo $element_index?>{}
-
-            </code>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -1552,8 +1660,8 @@ function post_grid_layout_elements_option_content($parameters){
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
     ?>
     <div class="item">
@@ -1700,27 +1808,6 @@ function post_grid_layout_elements_option_content($parameters){
 
 
 
-            ob_start();
-            ?>
-            <code onclick="this.select()">
-                .element-<?php echo $element_index?>{}
-
-            </code>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
             $args = array(
                 'id'		=> 'link_to',
                 'css_id'		=> $element_index.'_link_to',
@@ -1740,6 +1827,26 @@ function post_grid_layout_elements_option_content($parameters){
             );
 
             $settings_tabs_field->generate_field($args);
+
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             ?>
 
@@ -1770,6 +1877,10 @@ function post_grid_layout_elements_option_excerpt($parameters){
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : 0;
     $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
+
 
     ?>
     <div class="item">
@@ -1893,6 +2004,26 @@ function post_grid_layout_elements_option_excerpt($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
             ?>
 
         </div>
@@ -1920,6 +2051,11 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
     $wrapper_class = isset($element_data['wrapper_class']) ? $element_data['wrapper_class'] : '';
     $css_idle = isset($element_data['css_idle']) ? $element_data['css_idle'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
+
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
+
 
     ?>
     <div class="item wrapper_start">
@@ -1990,10 +2126,7 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
 
             ob_start();
             ?>
-            <code onclick="this.select()">
-                .element-<?php echo $element_index?>{}
-
-            </code>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -2030,9 +2163,7 @@ function post_grid_layout_elements_option_wrapper_end($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
 
-    $meta_key = isset($element_data['meta_key']) ? $element_data['meta_key'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
+    $wrapper_id = isset($element_data['wrapper_id']) ? $element_data['wrapper_id'] : '';
 
     ?>
     <div class="item wrapper_end">
@@ -2055,7 +2186,7 @@ function post_grid_layout_elements_option_wrapper_end($parameters){
                 'title'		=> __('Wrapper id','post-grid'),
                 'details'	=> __('Write wrapper id, ex: div, p, span.','post-grid'),
                 'type'		=> 'hidden',
-                'value'		=> $meta_key,
+                'value'		=> $wrapper_id,
                 'default'		=> '',
             );
 
@@ -2096,6 +2227,9 @@ function post_grid_layout_elements_option_categories($parameters){
 
     $separator = isset($element_data['separator']) ? $element_data['separator'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 
     ?>
@@ -2224,6 +2358,26 @@ function post_grid_layout_elements_option_categories($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
             ?>
 
         </div>
@@ -2250,6 +2404,9 @@ function post_grid_layout_elements_option_tags($parameters){
     $link_color = isset($element_data['link_color']) ? $element_data['link_color'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
     $separator = isset($element_data['separator']) ? $element_data['separator'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 
     ?>
@@ -2350,8 +2507,24 @@ function post_grid_layout_elements_option_tags($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
+            <?php
 
+            $html = ob_get_clean();
 
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             ?>
 
@@ -2376,6 +2549,9 @@ function post_grid_layout_elements_option_comments_count($parameters){
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
     ?>
     <div class="item">
@@ -2481,7 +2657,23 @@ function post_grid_layout_elements_option_comments_count($parameters){
 
 
 
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}</textarea>
+            <?php
 
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
 
 
             ?>
@@ -2508,6 +2700,9 @@ function post_grid_layout_elements_option_five_star($parameters){
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
 
     ?>
@@ -2580,6 +2775,24 @@ function post_grid_layout_elements_option_five_star($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}</textarea>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
             ?>
 
         </div>
@@ -2600,6 +2813,9 @@ function post_grid_layout_elements_option_hr($parameters){
     $background_color = isset($element_data['background_color']) ? $element_data['background_color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $height = isset($element_data['height']) ? $element_data['height'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
     ?>
     <div class="item">
@@ -2658,6 +2874,25 @@ function post_grid_layout_elements_option_hr($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}</textarea>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
             ?>
 
         </div>
@@ -2678,6 +2913,9 @@ function post_grid_layout_elements_option_share_button($parameters){
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $icon_color = isset($element_data['icon_color']) ? $element_data['icon_color'] : '';
     $icon_margin = isset($element_data['icon_margin']) ? $element_data['icon_margin'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
     ?>
     <div class="item">
@@ -2739,7 +2977,24 @@ function post_grid_layout_elements_option_share_button($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
+            <?php
 
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
             ?>
 
         </div>
@@ -2766,6 +3021,8 @@ function post_grid_layout_elements_option_author($parameters){
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
     ?>
     <div class="item">
@@ -2871,6 +3128,26 @@ function post_grid_layout_elements_option_author($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
             ?>
 
         </div>
@@ -2897,6 +3174,9 @@ function post_grid_layout_elements_option_author_link($parameters){
     $background_color = isset($element_data['background_color']) ? $element_data['background_color'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
     ?>
     <div class="item">
@@ -2987,8 +3267,24 @@ function post_grid_layout_elements_option_author_link($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            ob_start();
+            ?>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
+            <?php
 
+            $html = ob_get_clean();
 
+            $args = array(
+                'id'		=> 'use_css',
+                'title'		=> __('Use of CSS','post-grid'),
+                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
             ?>
 
         </div>
@@ -3018,6 +3314,9 @@ function post_grid_layout_elements_option_post_date($parameters){
 
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
 
     ?>
     <div class="item">
@@ -3135,135 +3434,11 @@ function post_grid_layout_elements_option_post_date($parameters){
 
             $settings_tabs_field->generate_field($args);
 
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-
-
-
-
-
-
-add_action('post_grid_layout_elements_option_term_title','post_grid_layout_elements_option_term_title');
-
-
-function post_grid_layout_elements_option_term_title($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Term title','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_term_title',
-                'parent' => $input_name.'[term_title]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[term_title]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[term_title]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[term_title]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[term_title]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-
 
             ob_start();
             ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
+            <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
+.element_<?php echo $element_index?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -3284,2927 +3459,4 @@ function post_grid_layout_elements_option_term_title($parameters){
         </div>
     </div>
     <?php
-
 }
-
-
-
-
-add_action('post_grid_layout_elements_option_term_thumb','post_grid_layout_elements_option_term_thumb');
-function post_grid_layout_elements_option_term_thumb($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-    $thumb_size = isset($element_data['thumb_size']) ? $element_data['thumb_size'] : '';
-    $default_thumb_src = isset($element_data['default_thumb_src']) ? $element_data['default_thumb_src'] : '';
-
-    $thumb_height = isset($element_data['thumb_height']) ? $element_data['thumb_height'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-
-    $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
-    $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
-    $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Term thumbnail','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-            $thumbnail_sizes = array();
-            $thumbnail_sizes['full'] = __('Full', '');
-            $get_intermediate_image_sizes =  get_intermediate_image_sizes();
-
-            if(!empty($get_intermediate_image_sizes))
-                foreach($get_intermediate_image_sizes as $size_key){
-                    $size_name = str_replace('_', ' ',$size_key);
-                    $size_name = str_replace('-', ' ',$size_name);
-
-                    $thumbnail_sizes[$size_key] = ucfirst($size_name);
-                }
-            //echo '<pre>'.var_export($thumbnail_sizes, true).'</pre>';
-
-            $args = array(
-                'id'		=> 'thumb_size',
-                'parent' => $input_name.'[term_thumb]',
-                'title'		=> __('Thumbnail size','post-grid'),
-                'details'	=> __('Choose thumbnail size.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $thumb_size,
-                'default'		=> 'large',
-                'args'		=> $thumbnail_sizes,
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-
-
-
-            $args = array(
-                'id'		=> 'thumb_height',
-                'title'		=> __('Thumbnail height','post-grid'),
-                'details'	=> __('Set thumbnail height.','post-grid'),
-                'type'		=> 'option_group',
-                'options'		=> array(
-                    array(
-                        'id'		=> 'large',
-                        'parent'		=> $input_name.'[term_thumb][thumb_height]',
-                        'title'		=> __('In desktop','post-grid'),
-                        'details'	=> __('min-width: 1200px, ex: 280px','post-grid'),
-                        'type'		=> 'text',
-                        'value'		=> $thumb_height_large,
-                        'default'		=> '',
-                        'placeholder'   => '280px',
-                    ),
-                    array(
-                        'id'		=> 'medium',
-                        'parent'		=> $input_name.'[term_thumb][thumb_height]',
-                        'title'		=> __('In tablet & small desktop','post-grid'),
-                        'details'	=> __('min-width: 992px, ex: 280px','post-grid'),
-                        'type'		=> 'text',
-                        'value'		=> $thumb_height_medium,
-                        'default'		=> '',
-                        'placeholder'   => '280px',
-                    ),
-                    array(
-                        'id'		=> 'small',
-                        'parent'		=> $input_name.'[term_thumb][thumb_height]',
-                        'title'		=> __('In mobile','post-grid'),
-                        'details'	=> __('max-width: 768px, ex: 280px','post-grid'),
-                        'type'		=> 'text',
-                        'value'		=> $thumb_height_small,
-                        'default'		=> '',
-                        'placeholder'   => '280px',
-                    ),
-                ),
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'default_thumb_src',
-                'parent' => $input_name.'[term_thumb]',
-                'title'		=> __('Default thumbnail','post-grid'),
-                'details'	=> __('Choose default thumbnail.','post-grid'),
-                'type'		=> 'media_url',
-                'value'		=> $default_thumb_src,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[term_thumb]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ob_start();
-            ?>
-            <code onclick="this.select()">
-                .element-<?php echo $element_index?>{}
-
-            </code>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-
-
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_layout_elements_option_term_description','post_grid_layout_elements_option_term_description');
-
-
-function post_grid_layout_elements_option_term_description($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Term description','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_term_description',
-                'parent' => $input_name.'[term_description]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[term_description]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[term_description]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[term_description]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[term_description]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'link_to',
-                'css_id'		=> $element_index.'_link_to',
-                'parent' => $input_name.'[term_description]',
-                'title'		=> __('Link to','post-grid'),
-                'details'	=> __('Choose option to link product.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $link_to,
-                'default'		=> 'product_link',
-                'args'		=> array(
-                    'none'=> __('None', 'post-grid'),
-                    'product_link'=> __('product link', 'post-grid'),
-                    'external_product_url'=> __('External product', 'post-grid'),
-                ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_layout_elements_option_term_slug','post_grid_layout_elements_option_term_slug');
-
-
-function post_grid_layout_elements_option_term_slug($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Term slug','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_term_description',
-                'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'link_to',
-                'css_id'		=> $element_index.'_link_to',
-                'parent' => $input_name.'[term_slug]',
-                'title'		=> __('Link to','post-grid'),
-                'details'	=> __('Choose option to link product.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $link_to,
-                'default'		=> 'product_link',
-                'args'		=> array(
-                    'none'=> __('None', 'post-grid'),
-                    'product_link'=> __('product link', 'post-grid'),
-                    'external_product_url'=> __('External product', 'post-grid'),
-                ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_layout_elements_option_term_post_count','post_grid_layout_elements_option_term_post_count');
-
-
-function post_grid_layout_elements_option_term_post_count($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Term post count','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Total post: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_term_description',
-                'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[term_post_count]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-
-add_action('post_grid_layout_elements_option_dokan_store_name','post_grid_layout_elements_option_dokan_store_name');
-function post_grid_layout_elements_option_dokan_store_name($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Dokan store name','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Store name: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_dokan_store_name',
-                'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[dokan_store_name]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_layout_elements_option_dokan_store_address','post_grid_layout_elements_option_dokan_store_address');
-function post_grid_layout_elements_option_dokan_store_address($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Dokan store address','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Address: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_dokan_store_address',
-                'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[dokan_store_address]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-
-add_action('post_grid_layout_elements_option_dokan_store_city','post_grid_layout_elements_option_dokan_store_city');
-function post_grid_layout_elements_option_dokan_store_city($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Dokan store city','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'City: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_dokan_store_address',
-                'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[dokan_store_city]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-add_action('post_grid_layout_elements_option_dokan_store_country','post_grid_layout_elements_option_dokan_store_country');
-function post_grid_layout_elements_option_dokan_store_country($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Dokan store country','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Country: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_dokan_store_country',
-                'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[dokan_store_country]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_layout_elements_option_dokan_store_phone','post_grid_layout_elements_option_dokan_store_phone');
-function post_grid_layout_elements_option_dokan_store_phone($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Dokan store phone','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Phone: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_dokan_store_country',
-                'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[dokan_store_phone]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_layout_elements_option_dokan_banner','post_grid_layout_elements_option_dokan_banner');
-function post_grid_layout_elements_option_dokan_banner($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $width = isset($element_data['width']) ? $element_data['width'] : '';
-    $height = isset($element_data['height']) ? $element_data['height'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Dokan store banner','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-            $args = array(
-                'id'		=> 'width',
-                'css_id'		=> $element_index.'_width',
-                'parent' => $input_name.'[dokan_banner]',
-                'title'		=> __('Width','post-grid'),
-                'details'	=> __('Set banner width. ex: 200px or 45%','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $width,
-                'default'		=> '',
-                'placeholder'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'height',
-                'css_id'		=> $element_index.'_height',
-                'parent' => $input_name.'[dokan_banner]',
-                'title'		=> __('height','post-grid'),
-                'details'	=> __('Set banner height. ex: 200px','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $height,
-                'default'		=> '',
-                'placeholder'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[dokan_banner]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[dokan_banner]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-
-add_action('post_grid_layout_elements_option_dokan_avatar','post_grid_layout_elements_option_dokan_avatar');
-function post_grid_layout_elements_option_dokan_avatar($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $width = isset($element_data['width']) ? $element_data['width'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Dokan store avatar','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'width',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[dokan_avatar]',
-                'title'		=> __('Width','post-grid'),
-                'details'	=> __('Set avatar width. ex: 200px or 50%','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $width,
-                'default'		=> '',
-                'placeholder'		=> '200px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[dokan_avatar]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[dokan_avatar]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_layout_elements_option_order_title','post_grid_layout_elements_option_order_title');
-function post_grid_layout_elements_option_order_title($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Order title','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[order_title]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Phone: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_order_title',
-                'parent' => $input_name.'[order_title]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[order_title]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[order_title]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[order_title]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[order_title]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_layout_elements_option_order_date','post_grid_layout_elements_option_order_date');
-function post_grid_layout_elements_option_order_date($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Order date','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[order_date]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Phone: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_order_date',
-                'parent' => $input_name.'[order_date]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[order_date]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[order_date]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[order_date]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[order_date]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-add_action('post_grid_layout_elements_option_order_customer_name','post_grid_layout_elements_option_order_customer_name');
-function post_grid_layout_elements_option_order_customer_name($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Customer name','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Phone: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_order_customer_name',
-                'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[order_customer_name]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-add_action('post_grid_layout_elements_option_order_customer_thumb','post_grid_layout_elements_option_order_customer_thumb');
-function post_grid_layout_elements_option_order_customer_thumb($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-    $width = isset($element_data['width']) ? $element_data['width'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Customer thumbnail','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-            $args = array(
-                'id'		=> 'width',
-                'css_id'		=> $element_index.'_width',
-                'parent' => $input_name.'[order_customer_thumb]',
-                'title'		=> __('width','post-grid'),
-                'details'	=> __('Set width.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $width,
-                'default'		=> '',
-                'placeholder'		=> '200px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[order_customer_thumb]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[order_customer_thumb]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_layout_elements_option_order_country','post_grid_layout_elements_option_order_country');
-function post_grid_layout_elements_option_order_country($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Customer country','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[order_country]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Phone: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_order_country',
-                'parent' => $input_name.'[order_country]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[order_country]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[order_country]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[order_country]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[order_country]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-add_action('post_grid_layout_elements_option_order_payment_method','post_grid_layout_elements_option_order_payment_method');
-function post_grid_layout_elements_option_order_payment_method($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Customer payment method','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Phone: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_payment_method',
-                'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[order_payment_method]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-
-add_action('post_grid_layout_elements_option_order_total','post_grid_layout_elements_option_order_total');
-function post_grid_layout_elements_option_order_total($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Order total','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[order_total]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Phone: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_order_total',
-                'parent' => $input_name.'[order_total]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[order_total]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[order_total]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[order_total]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[order_total]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-add_action('post_grid_layout_elements_option_order_items','post_grid_layout_elements_option_order_items');
-function post_grid_layout_elements_option_order_items($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Order items','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[order_items]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Order items: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_order_items',
-                'parent' => $input_name.'[order_items]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[order_items]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[order_items]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[order_items]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[order_items]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-add_action('post_grid_layout_elements_option_order_discount_total','post_grid_layout_elements_option_order_discount_total');
-function post_grid_layout_elements_option_order_discount_total($parameters){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
-    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
-    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
-
-
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
-    $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
-    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-
-    $custom_css = isset($element_data['custom_css']) ? $element_data['custom_css'] : '';
-    $custom_css_hover = isset($element_data['custom_css_hover']) ? $element_data['custom_css_hover'] : '';
-
-
-
-    ?>
-    <div class="item">
-        <div class="element-title header ">
-            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
-            <span class="sort"><i class="fas fa-sort"></i></span>
-
-            <span class="expand"><?php echo __('Order discount total','post-grid'); ?></span>
-        </div>
-        <div class="element-options options">
-
-            <?php
-
-
-            $args = array(
-                'id'		=> 'wrapper_html',
-                'css_id'		=> $element_index.'_wrapper_html',
-                'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Wrapper html','post-grid'),
-                'details'	=> __('Write wrapper html, use <code>%s</code> to replace sale count output.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $wrapper_html,
-                'default'		=> '',
-                'placeholder'		=> 'Discount total: %s',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_order_discount_total',
-                'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'font_family',
-                'css_id'		=> $element_index.'_font_family',
-                'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Font family','post-grid'),
-                'details'	=> __('Set font family.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_family,
-                'default'		=> '',
-                'placeholder'		=> 'Open Sans',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'css_id'		=> $element_index.'_margin',
-                'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Margin','post-grid'),
-                'details'	=> __('Set margin.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $margin,
-                'default'		=> '',
-                'placeholder'		=> '5px 0',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'text_align',
-                'css_id'		=> $element_index.'_text_align',
-                'parent' => $input_name.'[order_discount_total]',
-                'title'		=> __('Text align','post-grid'),
-                'details'	=> __('Choose text align.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $text_align,
-                'default'		=> 'left',
-                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            ob_start();
-            ?>
-            <textarea readonly type="text"  onclick="this.select();">.element-<?php echo $element_index?>{}</textarea>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'use_css',
-                'title'		=> __('Use of CSS','post-grid'),
-                'details'	=> __('Use following class selector to add custom CSS for this element.','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            ?>
-
-        </div>
-    </div>
-    <?php
-
-}
-
-
-
-
-
-
-

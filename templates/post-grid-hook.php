@@ -444,7 +444,91 @@ function post_grid_item_layout_content($args){
 
 }
 
+add_action('post_grid_container', 'post_grid_container_old_layout_css');
 
+function post_grid_container_old_layout_css($args){
+
+
+    $layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
+
+    if(!empty($layout_id)) return;
+
+
+    $grid_id = $args['grid_id'];
+    $post_grid_options = $args['options'];
+    $layout_content = isset($post_grid_options['layout']['content']) ? $post_grid_options['layout']['content'] : 'flat';
+
+    $class_post_grid_functions = new class_post_grid_functions();
+    $items_bg_color_values = $class_post_grid_functions->items_bg_color_values();
+
+    $post_grid_layout_content = get_option( 'post_grid_layout_content' );
+
+    if(empty($post_grid_layout_content)){
+        $layout = $class_post_grid_functions->layout_content($layout_content);
+    }else{
+        if(!empty($post_grid_layout_content[$layout_content])){
+            $layout = $post_grid_layout_content[$layout_content];
+        }else{
+            $layout = array();
+        }
+    }
+
+
+    //var_dump($layout);
+
+    ?>
+    <style type="text/css">
+        <?php
+        foreach($layout as $item_id=>$item_info){
+            $item_css = $item_info['css'];
+            $item_key = $item_info['key'];
+
+            if($item_key=='categories' || $item_key=='tags'){
+                ?>
+                #post-grid-<?php echo $grid_id; ?> .element_<?php echo $item_id; ?> a{<?php echo $item_css; ?>}
+                <?php
+            }elseif($item_key=='down_arrow'){
+                $arrow_size = $item_info['arrow_size'];
+                $arrow_bg_color = $item_info['arrow_bg_color'];
+                ?>
+                #post-grid-<?php echo $grid_id; ?> .element_<?php echo $item_id; ?>{<?php echo $item_css; ?>}
+                #post-grid-<?php echo $grid_id; ?> .element_<?php echo $item_id; ?>{
+                  border-left: <?php echo $arrow_size; ?> solid rgba(0, 0, 0, 0);
+                  border-right: <?php echo $arrow_size; ?> solid rgba(0, 0, 0, 0);
+                  border-top: <?php echo $arrow_size; ?> solid  <?php echo $arrow_bg_color; ?>;
+                  height: 0;
+                  width: 0;
+                }
+                <?php
+
+            }elseif($item_key=='up_arrow'){
+                $arrow_size = $item_info['arrow_size'];
+                $arrow_bg_color = $item_info['arrow_bg_color'];
+                ?>
+                #post-grid-<?php echo $grid_id; ?> .element_<?php echo $item_id; ?>{<?php echo $item_css; ?>}
+                #post-grid-<?php echo $grid_id; ?> .element_<?php echo $item_id; ?>{
+                  border-bottom: <?php echo $arrow_size; ?> solid <?php echo $arrow_bg_color; ?>;
+                  border-left: <?php echo $arrow_size; ?> solid transparent;
+                  border-right: <?php echo $arrow_size; ?> solid transparent;
+                  height: 0;
+                  width: 0;
+                }
+                <?php
+            }else{
+                ?>
+                #post-grid-<?php echo $grid_id; ?> .element_<?php echo $item_id; ?>{<?php echo $item_css; ?>}
+                <?php
+            }
+        }
+	foreach($layout as $item_id=>$item_info){
+		$item_css_hover = $item_info['css_hover'];
+		echo '#post-grid-'.$grid_id.' .element_'.$item_id.':hover{'.$item_css_hover.'}';
+		}
+    ?>
+    </style>
+    <?php
+
+}
 
 add_action('post_grid_item_layout', 'post_grid_item_layout_new');
 
@@ -811,12 +895,29 @@ add_action('post_grid_container', 'post_grid_main_convert_layout', 90);
 function post_grid_main_convert_layout($args){
 
     $options = $args['options'];
+    $grid_id = (int) $args['grid_id'];
 
-    $content_layout = isset($options['layout']['content']) ? $options['layout']['content'] : '';
+    $layout_id = isset($options['layout_id']) ? $options['layout_id'] : '';
+
+    //echo '<pre>'.var_export($layout_id, true).'</pre>';
+
+
+    if(!empty($layout_id)) return;
+
+
+    $content_layout = isset($options['layout']['content']) ? $options['layout']['content'] : '';;
     $layout_skin = isset($options['skin']) ? $options['skin'] : '';
     $media_source = isset($options['media_source']) ? $options['media_source'] : '';
     $media_height = isset($options['media_height']) ? $options['media_height'] : '';
 
+    $media_height_style = isset($media_height['style']) ? $media_height['style'] : '';
+    $media_fixed_height = isset($media_height['fixed_height']) ? $media_height['fixed_height'] : '';
+
+
+    $featured_img_size = !empty($post_grid_options['featured_img_size']) ? $post_grid_options['featured_img_size'] : 'full';
+
+    $thumb_linked = isset($post_grid_options['thumb_linked']) ? $post_grid_options['thumb_linked'] : 'no';
+    $thumb_linked = ($thumb_linked == 'yes') ? 'post_link' : 'none';
 
     if(empty($content_layout)) return;
     if(empty($layout_skin)) return;
@@ -830,12 +931,123 @@ function post_grid_main_convert_layout($args){
 
 
 
-    echo '<pre>'.var_export($layout_skin, true).'</pre>';
-    echo '<pre>'.var_export($media_height, true).'</pre>';
+    $layout_elements_data = array();
 
-    echo '<pre>'.var_export($media_source, true).'</pre>';
+    $layout_elements_data[0]['wrapper_start']['wrapper_id'] = '';
+    $layout_elements_data[0]['wrapper_start']['wrapper_class'] = 'layer-media';
+    $layout_elements_data[0]['wrapper_start']['css_idle'] = '';
 
-    echo '<pre>'.var_export($content_layout_data, true).'</pre>';
+
+    $layout_elements_data[1]['media']['media_height']['large_type'] = $media_height_style;
+    $layout_elements_data[1]['media']['media_height']['large'] = $media_fixed_height;
+    $layout_elements_data[1]['media']['media_height']['medium_type'] = $media_height_style;
+    $layout_elements_data[1]['media']['media_height']['medium'] = $media_fixed_height;
+    $layout_elements_data[1]['media']['media_height']['small_type'] = $media_height_style;
+    $layout_elements_data[1]['media']['media_height']['small'] = $media_fixed_height;
+
+    foreach ( $media_source as $source ){
+        $source_id = $source['id'];
+        $source_checked = isset( $source['checked']) ? 'yes' : 'no';
+
+        if($source_checked != 'yes') continue;
+
+        $layout_elements_data[1]['media']['media_source'][$source_id]['enable'] = $source_checked;
+
+        if($source_id == 'featured_image' || $source_id == 'first_image' || $source_id == 'empty_thumb'){
+            $layout_elements_data[1]['media']['media_source'][$source_id]['link_to'] = $thumb_linked;
+        }
+
+        if($source_id == 'featured_image' ){
+            $layout_elements_data[1]['media']['media_source'][$source_id]['link_to'] = $featured_img_size;
+        }
+
+
+    }
+
+
+
+    $layout_elements_data[1]['media']['margin'] = '';
+    $layout_elements_data[1]['media']['padding'] = '';
+
+
+
+    $layout_elements_data[2]['wrapper_end']['wrapper_id'] = '';
+
+    $layout_elements_data[3]['wrapper_start']['wrapper_id'] = '';
+    $layout_elements_data[3]['wrapper_start']['wrapper_class'] = 'layer-content';
+
+    $item_count = 4;
+
+    foreach ($content_layout_data as $index => $item){
+
+        //echo '<pre>'.var_export($item, true).'</pre>';
+
+        $custom_class = isset($item['custom_class']) ? $item['custom_class'] : '';
+        $char_limit = isset($item['char_limit']) ? $item['char_limit'] : '';
+        $key = isset($item['key']) ? $item['key'] : '';
+        $css = isset($item['css']) ? $item['css'] : '';
+        $css_hover = isset($item['css_hover']) ? $item['css_hover'] : '';
+        $read_more_text = isset($item['read_more_text']) ? $item['read_more_text'] : '';
+        $link_target = isset($item['link_target']) ? $item['link_target'] : '';
+        $five_star_count = isset($item['five_star_count']) ? $item['five_star_count'] : '';
+
+
+        $layout_elements_data[$index][$key]['custom_class'] = $custom_class;
+        $layout_elements_data[$index][$key]['css'] = $css;
+        $layout_elements_data[$index][$key]['css_hover'] = $css_hover;
+
+        if($key == 'title' || $key == 'title_link' || $key == 'excerpt' || $key == 'excerpt_read_more'){
+            $layout_elements_data[$index][$key]['char_limit'] = $char_limit;
+
+        }
+
+        if($key == 'read_more' || $key == 'excerpt_read_more'){
+            $layout_elements_data[$index][$key]['read_more_text'] = $read_more_text;
+
+        }
+        if($key == 'read_more' || $key == 'excerpt_read_more' || $key == 'title_link'){
+            $layout_elements_data[$index][$key]['link_target'] = $link_target;
+
+        }
+
+
+        if($key == 'five_star'){
+            $layout_elements_data[$index][$key]['five_star_count'] = $five_star_count;
+
+        }
+
+
+
+        $item_count++;
+
+    }
+
+    $layout_elements_data[$item_count]['wrapper_end']['wrapper_id'] = '';
+
+
+    //echo '<pre>'.var_export($layout_elements_data, true).'</pre>';
+
+    $post_grid_title = get_the_title($grid_id);
+
+    $post_args = array(
+        'post_title' => $post_grid_title.' - '.$layout_skin,
+        'post_type' => 'post_grid_layout',
+        'post_status' => 'publish',
+        'post_author' => 1,
+
+    );
+
+    $post_id = wp_insert_post($post_args);
+
+    update_post_meta($post_id,'layout_elements_data', $layout_elements_data);
+
+    //echo '<pre>'.var_export($options, true).'</pre>';
+
+    $options['layout_id'] = $post_id;
+
+    update_post_meta($grid_id,'post_grid_meta_options', $options);
+
+
 
 }
 

@@ -6,7 +6,7 @@ add_action('post_grid_layout_element_wrapper_start', 'post_grid_layout_element_w
 function post_grid_layout_element_wrapper_start($args){
 
     $index = isset($args['index']) ? $args['index'] : '';
-    $element_class = !empty($index) ? 'element-'.$index : '';
+    $element_class = !empty($index) ? 'element_'.$index : '';
 
     //echo '<pre>'.var_export($args, true).'</pre>';
     $element = isset($args['element']) ? $args['element'] : array();
@@ -35,10 +35,12 @@ function post_grid_layout_element_css_wrapper_start($args){
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+    $css = isset($element['css']) ? $element['css'] : '';
+
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -53,6 +55,9 @@ function post_grid_layout_element_css_wrapper_start($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
         <?php endif; ?>
         }
     </style>
@@ -90,7 +95,7 @@ function post_grid_layout_element_custom_text($args){
     $text = isset($element['text']) ?  $element['text'] : '';
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> custom_text ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> custom_text ">
         <?php echo esc_html($text); ?>
     </div>
     <?php
@@ -114,7 +119,7 @@ function post_grid_layout_element_css_custom_text($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -166,7 +171,7 @@ function post_grid_layout_element_title($args){
     }
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title ">
         <?php if($link_to == 'post_link'): ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($title); ?></a>
         <?php else: ?>
@@ -192,10 +197,13 @@ function post_grid_layout_element_css_title($args){
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+    $css = isset($element['css']) ? $element['css'] : '';
+
+    //var_dump();
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -211,8 +219,11 @@ function post_grid_layout_element_css_title($args){
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -261,7 +272,7 @@ function post_grid_layout_element_title_link($args){
 
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title_link ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title_link ">
         <?php if($link_to == 'post_link'): ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($title); ?></a>
         <?php else: ?>
@@ -289,7 +300,7 @@ function post_grid_layout_element_css_title_link($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -306,7 +317,7 @@ function post_grid_layout_element_css_title_link($args){
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -353,7 +364,7 @@ function post_grid_layout_element_content($args){
 
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> content ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> content ">
         <?php echo ($post_content); ?>
     </div>
     <?php
@@ -381,7 +392,7 @@ function post_grid_layout_element_excerpt($args){
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
-    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
+    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : __('Read more', 'post-grid');
 
 
     if($char_limit > 0){
@@ -390,7 +401,7 @@ function post_grid_layout_element_excerpt($args){
 
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt ">
         <?php echo ($post_excerpt); ?>
         <?php
         if(!empty($read_more_text)):
@@ -420,7 +431,7 @@ function post_grid_layout_element_css_excerpt($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -437,7 +448,7 @@ function post_grid_layout_element_css_excerpt($args){
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -487,7 +498,7 @@ function post_grid_layout_element_excerpt_read_more($args){
 
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt_read_more ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt_read_more ">
         <?php echo ($post_excerpt); ?>
         <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
 
@@ -512,7 +523,7 @@ function post_grid_layout_element_css_excerpt_read_more($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -529,7 +540,7 @@ function post_grid_layout_element_css_excerpt_read_more($args){
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -567,9 +578,9 @@ function post_grid_layout_element_read_more($args){
 
     ?>
     <?php if($link_to == 'post_link'): ?>
-        <a class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more " target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
+        <a class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more " target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
     <?php else: ?>
-        <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more ">
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more ">
             <?php echo esc_html($read_more_text); ?>
         </div>
     <?php endif; ?>
@@ -595,7 +606,7 @@ function post_grid_layout_element_css_read_more($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -612,7 +623,7 @@ function post_grid_layout_element_css_read_more($args){
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -657,7 +668,7 @@ function post_grid_layout_element_media($args){
 
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
         <?php
         if($link_to == 'post_link'):
             ?>
@@ -696,7 +707,7 @@ function post_grid_layout_element_css_media($args){
     ?>
     <style type="text/css">
 
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             overflow: hidden;
         <?php if(!empty($margin)): ?>
             margin: <?php echo $margin; ?>;
@@ -704,7 +715,7 @@ function post_grid_layout_element_css_media($args){
         }
 
         @media only screen and (min-width: 1024px ){
-            .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             <?php if(!empty($thumb_height_large)): ?>
                 max-height: <?php echo $thumb_height_large; ?>;
             <?php endif; ?>
@@ -712,7 +723,7 @@ function post_grid_layout_element_css_media($args){
         }
 
         @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
-            .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             <?php if(!empty($thumb_height_medium)): ?>
                 max-height: <?php echo $thumb_height_medium; ?>;
             <?php endif; ?>
@@ -720,7 +731,7 @@ function post_grid_layout_element_css_media($args){
         }
 
         @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
-            .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             <?php if(!empty($thumb_height_small)): ?>
                 max-height: <?php echo $thumb_height_small; ?>;
             <?php endif; ?>
@@ -763,7 +774,7 @@ function post_grid_layout_element_thumb($args){
 
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb ">
         <?php
         if($link_to == 'post_link'):
             ?>
@@ -802,7 +813,7 @@ function post_grid_layout_element_css_thumb($args){
     ?>
     <style type="text/css">
 
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             overflow: hidden;
         <?php if(!empty($margin)): ?>
             margin: <?php echo $margin; ?>;
@@ -810,7 +821,7 @@ function post_grid_layout_element_css_thumb($args){
         }
 
         @media only screen and (min-width: 1024px ){
-            .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             <?php if(!empty($thumb_height_large)): ?>
                 max-height: <?php echo $thumb_height_large; ?>;
             <?php endif; ?>
@@ -818,7 +829,7 @@ function post_grid_layout_element_css_thumb($args){
         }
 
         @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
-            .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             <?php if(!empty($thumb_height_medium)): ?>
                 max-height: <?php echo $thumb_height_medium; ?>;
             <?php endif; ?>
@@ -826,7 +837,7 @@ function post_grid_layout_element_css_thumb($args){
         }
 
         @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
-            .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             <?php if(!empty($thumb_height_small)): ?>
                 max-height: <?php echo $thumb_height_small; ?>;
             <?php endif; ?>
@@ -870,7 +881,7 @@ function post_grid_layout_element_thumb_link($args){
 
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb_link ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> thumb_link ">
         <?php
         if($link_to == 'post_link'):
             ?>
@@ -909,7 +920,7 @@ function post_grid_layout_element_css_thumb_link($args){
     ?>
     <style type="text/css">
 
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             overflow: hidden;
         <?php if(!empty($margin)): ?>
             margin: <?php echo $margin; ?>;
@@ -917,7 +928,7 @@ function post_grid_layout_element_css_thumb_link($args){
         }
 
         @media only screen and (min-width: 1024px ){
-            .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             <?php if(!empty($thumb_height_large)): ?>
                 max-height: <?php echo $thumb_height_large; ?>;
             <?php endif; ?>
@@ -925,7 +936,7 @@ function post_grid_layout_element_css_thumb_link($args){
         }
 
         @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
-            .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             <?php if(!empty($thumb_height_medium)): ?>
                 max-height: <?php echo $thumb_height_medium; ?>;
             <?php endif; ?>
@@ -933,7 +944,7 @@ function post_grid_layout_element_css_thumb_link($args){
         }
 
         @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
-            .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             <?php if(!empty($thumb_height_small)): ?>
                 max-height: <?php echo $thumb_height_small; ?>;
             <?php endif; ?>
@@ -977,7 +988,7 @@ function post_grid_layout_element_post_date($args){
     $post_date = get_the_date($date_format, $post_id);
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> post_date ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> post_date ">
         <?php
         if($link_to == 'post_link'):
             ?>
@@ -1011,7 +1022,7 @@ function post_grid_layout_element_css_post_date($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -1028,7 +1039,7 @@ function post_grid_layout_element_css_post_date($args){
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -1062,7 +1073,7 @@ function post_grid_layout_element_author($args){
     $post_author = get_the_author();
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
         <?php
         if($link_to == 'post_link'):
             ?>
@@ -1104,7 +1115,7 @@ function post_grid_layout_element_css_author($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -1121,7 +1132,7 @@ function post_grid_layout_element_css_author($args){
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -1156,7 +1167,7 @@ function post_grid_layout_element_author_link($args){
     $post_author = get_the_author();
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
         <?php
         if($link_to == 'post_link'):
             ?>
@@ -1196,7 +1207,7 @@ function post_grid_layout_element_css_author_link($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -1213,7 +1224,7 @@ function post_grid_layout_element_css_author_link($args){
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -1272,7 +1283,7 @@ function post_grid_layout_element_categories($args){
     //var_dump($categories_html);
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> categories ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> categories ">
         <?php echo sprintf($wrapper_html, $categories_html); ?>
     </div>
     <?php
@@ -1297,7 +1308,7 @@ function post_grid_layout_element_css_categories($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($text_color)): ?>
             color: <?php echo $text_color; ?>;
         <?php endif; ?>
@@ -1314,7 +1325,7 @@ function post_grid_layout_element_css_categories($args){
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($link_color)): ?>
             color: <?php echo $link_color; ?>;
         <?php endif; ?>
@@ -1370,7 +1381,7 @@ function post_grid_layout_element_tags($args){
     }
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
         <?php echo sprintf($wrapper_html, $categories_html); ?>
     </div>
     <?php
@@ -1395,7 +1406,7 @@ function post_grid_layout_element_css_tags($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($text_color)): ?>
             color: <?php echo $text_color; ?>;
         <?php endif; ?>
@@ -1412,7 +1423,7 @@ function post_grid_layout_element_css_tags($args){
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($link_color)): ?>
             color: <?php echo $link_color; ?>;
         <?php endif; ?>
@@ -1457,7 +1468,7 @@ function post_grid_layout_element_comments_count($args){
         }
 
         ?>
-        <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
+        <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
             <?php echo sprintf($wrapper_html, $comments_count_html); ?>
         </div>
         <?php
@@ -1485,7 +1496,7 @@ function post_grid_layout_element_css_comments_count($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>
@@ -1551,7 +1562,7 @@ function post_grid_layout_element_share_button($args){
     $share_button_html = apply_filters('post_grid_filter_share_buttons', $share_button_html);
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> share_button ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> share_button ">
         <?php echo sprintf($wrapper_html, $share_button_html); ?>
     </div>
     <?php
@@ -1578,7 +1589,7 @@ function post_grid_layout_element_css_share_button($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($icon_color)): ?>
             color: <?php echo $icon_color; ?>;
         <?php endif; ?>
@@ -1592,7 +1603,7 @@ function post_grid_layout_element_css_share_button($args){
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
         }
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?> a{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($icon_color)): ?>
             color: <?php echo $icon_color; ?>;
         <?php endif; ?>
@@ -1631,7 +1642,7 @@ function post_grid_layout_element_hr($args){
 
 
     ?>
-    <hr class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> hr "></hr>
+    <hr class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> hr "></hr>
     <?php
 }
 
@@ -1651,7 +1662,7 @@ function post_grid_layout_element_css_hr($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($margin)): ?>
             margin: <?php echo $margin; ?>;
         <?php endif; ?>
@@ -1713,7 +1724,7 @@ function post_grid_layout_element_five_star($args){
     }
 
     ?>
-    <div class="element element-<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> five_star ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> five_star ">
         <?php echo sprintf($wrapper_html, $five_star_html); ?>
     </div>
     <?php
@@ -1739,7 +1750,7 @@ function post_grid_layout_element_css_five_star($args){
 
     ?>
     <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element-<?php echo $index; ?>{
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
         <?php endif; ?>

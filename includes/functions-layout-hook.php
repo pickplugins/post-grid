@@ -567,7 +567,7 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
 
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : 0;
-    $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : '';
+    $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : __('Read more', 'post-grid');
 
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
@@ -718,7 +718,7 @@ function post_grid_layout_elements_option_read_more($parameters){
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
-    $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : '';
+    $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : __('Read more', 'post-grid');
 
     $color = isset($element_data['color']) ? $element_data['color'] : '';
 

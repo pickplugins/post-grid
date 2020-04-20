@@ -106,7 +106,7 @@ function media_source_options_first_image($media_source){
     $args = array(
         'id'		=> 'link_to',
         'css_id'		=> $index.'_link_to',
-        'parent' => $input_name.'[media][media_source][featured_image]',
+        'parent' => $input_name.'[media][media_source][first_image]',
         'title'		=> __('Link to','post-grid'),
         'details'	=> __('Choose link to featured image.','post-grid'),
         'type'		=> 'select',
@@ -159,7 +159,7 @@ function media_source_options_empty_thumb($media_source){
     $args = array(
         'id'		=> 'link_to',
         'css_id'		=> $index.'_link_to',
-        'parent' => $input_name.'[media][media_source][featured_image]',
+        'parent' => $input_name.'[media][media_source][empty_thumb]',
         'title'		=> __('Link to','post-grid'),
         'details'	=> __('Choose link to featured image.','post-grid'),
         'type'		=> 'select',

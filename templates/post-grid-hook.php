@@ -899,7 +899,7 @@ function post_grid_main_convert_layout($args){
 
     $layout_id = isset($options['layout_id']) ? $options['layout_id'] : '';
 
-    //echo '<pre>'.var_export($layout_id, true).'</pre>';
+    echo '<pre>'.var_export($layout_id, true).'</pre>';
 
 
     if(!empty($layout_id)) return;
@@ -992,27 +992,27 @@ function post_grid_main_convert_layout($args){
         $five_star_count = isset($item['five_star_count']) ? $item['five_star_count'] : '';
 
 
-        $layout_elements_data[$index][$key]['custom_class'] = $custom_class;
-        $layout_elements_data[$index][$key]['css'] = $css;
-        $layout_elements_data[$index][$key]['css_hover'] = $css_hover;
+        $layout_elements_data[$item_count][$key]['custom_class'] = $custom_class;
+        $layout_elements_data[$item_count][$key]['css'] = $css;
+        $layout_elements_data[$item_count][$key]['css_hover'] = $css_hover;
 
         if($key == 'title' || $key == 'title_link' || $key == 'excerpt' || $key == 'excerpt_read_more'){
-            $layout_elements_data[$index][$key]['char_limit'] = $char_limit;
+            $layout_elements_data[$item_count][$key]['char_limit'] = $char_limit;
 
         }
 
         if($key == 'read_more' || $key == 'excerpt_read_more'){
-            $layout_elements_data[$index][$key]['read_more_text'] = $read_more_text;
+            $layout_elements_data[$item_count][$key]['read_more_text'] = $read_more_text;
 
         }
         if($key == 'read_more' || $key == 'excerpt_read_more' || $key == 'title_link'){
-            $layout_elements_data[$index][$key]['link_target'] = $link_target;
+            $layout_elements_data[$item_count][$key]['link_target'] = $link_target;
 
         }
 
 
         if($key == 'five_star'){
-            $layout_elements_data[$index][$key]['five_star_count'] = $five_star_count;
+            $layout_elements_data[$item_count][$key]['five_star_count'] = $five_star_count;
 
         }
 

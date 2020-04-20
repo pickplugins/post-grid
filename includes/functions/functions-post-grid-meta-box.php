@@ -1281,7 +1281,7 @@ function post_grid_settings_tabs_content_grid_settings($tab, $post_id){
 
 
 
-            $grid_layout_args[$post_id] = array('name'=>'N by N',  'thumb'=> post_grid_plugin_url.'assets/admin/images/layout_grid.png', );
+            $grid_layout_args['layout_grid'] = array('name'=>'N by N',  'thumb'=> post_grid_plugin_url.'assets/admin/images/layout_grid.png', );
 
             $grid_layout_args = apply_filters('post_grid_grid_layouts', $grid_layout_args);
 

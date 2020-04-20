@@ -17,6 +17,7 @@ function media_source_options_featured_image($media_source){
     $margin = isset($source_data['margin']) ? $source_data['margin'] : '';
     $enable = isset($source_data['enable']) ? $source_data['enable'] : '';
     $image_size = isset($source_data['image_size']) ? $source_data['image_size'] : '';
+    $link_to = isset($source_data['link_to']) ? $source_data['link_to'] : '';
 
 
     $args = array(
@@ -49,7 +50,22 @@ function media_source_options_featured_image($media_source){
 
     $settings_tabs_field->generate_field($args);
 
+    $args = array(
+        'id'		=> 'link_to',
+        'css_id'		=> $index.'_link_to',
+        'parent' => $input_name.'[media][media_source][featured_image]',
+        'title'		=> __('Link to','post-grid'),
+        'details'	=> __('Choose link to featured image.','post-grid'),
+        'type'		=> 'select',
+        'value'		=> $link_to,
+        'default'		=> 'post_link',
+        'args'		=> array(
+            'post_link'=> __('Post link', 'post-grid'),
+            'none'=> __('None', 'post-grid'),
+        ),
+    );
 
+    $settings_tabs_field->generate_field($args);
 
 
 
@@ -67,6 +83,7 @@ function media_source_options_first_image($media_source){
     $source_data = isset($media_source['source_data']) ? $media_source['source_data'] : '';
 
     $enable = isset($source_data['enable']) ? $source_data['enable'] : '';
+    $link_to = isset($source_data['link_to']) ? $source_data['link_to'] : '';
 
 
 
@@ -86,6 +103,22 @@ function media_source_options_first_image($media_source){
 
     $settings_tabs_field->generate_field($args);
 
+    $args = array(
+        'id'		=> 'link_to',
+        'css_id'		=> $index.'_link_to',
+        'parent' => $input_name.'[media][media_source][featured_image]',
+        'title'		=> __('Link to','post-grid'),
+        'details'	=> __('Choose link to featured image.','post-grid'),
+        'type'		=> 'select',
+        'value'		=> $link_to,
+        'default'		=> 'post_link',
+        'args'		=> array(
+            'post_link'=> __('Post link', 'post-grid'),
+            'none'=> __('None', 'post-grid'),
+        ),
+    );
+
+    $settings_tabs_field->generate_field($args);
 
 }
 add_action('media_source_options_empty_thumb', 'media_source_options_empty_thumb');
@@ -101,6 +134,7 @@ function media_source_options_empty_thumb($media_source){
 
     $enable = isset($source_data['enable']) ? $source_data['enable'] : '';
     $default_thumb_src = isset($source_data['default_thumb_src']) ? $source_data['default_thumb_src'] : '';
+    $link_to = isset($source_data['link_to']) ? $source_data['link_to'] : '';
 
 
 
@@ -122,7 +156,22 @@ function media_source_options_empty_thumb($media_source){
     $settings_tabs_field->generate_field($args);
 
 
+    $args = array(
+        'id'		=> 'link_to',
+        'css_id'		=> $index.'_link_to',
+        'parent' => $input_name.'[media][media_source][featured_image]',
+        'title'		=> __('Link to','post-grid'),
+        'details'	=> __('Choose link to featured image.','post-grid'),
+        'type'		=> 'select',
+        'value'		=> $link_to,
+        'default'		=> 'post_link',
+        'args'		=> array(
+            'post_link'=> __('Post link', 'post-grid'),
+            'none'=> __('None', 'post-grid'),
+        ),
+    );
 
+    $settings_tabs_field->generate_field($args);
 
 
     $args = array(

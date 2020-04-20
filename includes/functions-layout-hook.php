@@ -873,6 +873,9 @@ function post_grid_layout_elements_option_media($parameters){
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
     $media_source = isset($element_data['media_source']) ? $element_data['media_source'] : array();
+    $padding = isset($element_data['padding']) ? $element_data['padding'] : '';
+    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
+
 
 
     $media_sources_list = apply_filters('post_grid_media_source_list',
@@ -882,10 +885,6 @@ function post_grid_layout_elements_option_media($parameters){
             'empty_thumb'=>__('Empty thumbnail','post-grid'),
         )
     );
-
-    //echo '<pre>'.var_export('$media_source', true).'</pre>';
-    //echo '<pre>'.var_export($media_source, true).'</pre>';
-    //echo '<pre>'.var_export($media_sources_list, true).'</pre>';
 
 
     ?>
@@ -898,11 +897,9 @@ function post_grid_layout_elements_option_media($parameters){
         <div class="element-options options">
             <?php
 
-
             ob_start();
 
             if(!empty($media_sources_list)){
-
                 $media_source_new = array();
 
                 if(!empty($media_source))
@@ -913,40 +910,22 @@ function post_grid_layout_elements_option_media($parameters){
                         $media_source_new[$elementIndex]  = array('enable'=> $enable);
 
                     }
-
-                //echo '<pre>'.var_export($media_source_new, true).'</pre>';
-                //echo '<pre>'.var_export($media_source_new, true).'</pre>';
-
                 $media_sources_new = array_replace($media_source_new, $media_sources_list);
-
                 $media_sources_new = (!empty($media_sources_new)) ? $media_sources_new : $media_sources_list;
-
-
-                //echo '<pre>'.var_export('$media_sources_new', true).'</pre>';
-
-                //echo '<pre>'.var_export($media_sources_new, true).'</pre>';
-
                 ?>
-
                 <div class="expandable sortable">
-
                     <?php
 
+                    if(!empty($media_sources_new))
                     foreach ($media_sources_new as $source_id => $source_name ) {
 
                         $media_source_options = array();
-
                         $source_data = isset($media_source[$source_id]) ? $media_source[$source_id] : array();
-
-
                         $source_enable = isset($media_source[$source_id]['enable']) ? $media_source[$source_id]['enable'] : '';
-
-                        //echo '<pre>'.var_export($source_data, true).'</pre>';
 
                         $media_source_options['index'] = $element_index;
                         $media_source_options['input_name'] = $input_name;
                         $media_source_options['source_data'] = $source_data;
-
 
                         ?>
                         <div class="item">
@@ -972,8 +951,6 @@ function post_grid_layout_elements_option_media($parameters){
                 </div>
                 <?php
             }
-
-
 
             $html = ob_get_clean();
 
@@ -1079,7 +1056,34 @@ function post_grid_layout_elements_option_media($parameters){
 
 
 
+            $args = array(
+                'id'		=> 'margin',
+                'css_id'		=> $element_index.'_margin',
+                'parent' => $input_name.'[media]',
+                'title'		=> __('Margin','post-grid'),
+                'details'	=> __('Set margin.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $margin,
+                'default'		=> '',
+                'placeholder'		=> '5px 0',
+            );
 
+            $settings_tabs_field->generate_field($args);
+
+
+            $args = array(
+                'id'		=> 'padding',
+                'css_id'		=> $element_index.'_margin',
+                'parent' => $input_name.'[media]',
+                'title'		=> __('Padding','post-grid'),
+                'details'	=> __('Set padding.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $padding,
+                'default'		=> '',
+                'placeholder'		=> '5px 0',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
 
             ob_start();

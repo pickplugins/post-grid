@@ -104,7 +104,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
 
         ?>
         <div class="section">
-            <div class="section-title"><?php echo __('Layout builder', 'post-grid'); ?></div>
+            <div class="section-title"><?php echo __('Layout Editor', 'post-grid'); ?></div>
             <p class="description section-description"><?php echo __('Customize layout settings.', 'post-grid'); ?></p>
             <div class="setting-field ">
 

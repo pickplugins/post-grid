@@ -922,8 +922,21 @@ function post_grid_main_convert_layout($args){
 
     //echo '<pre>'.var_export($layout_id, true).'</pre>';
 
+    $post_grid_layout_convert = isset($_GET['post_grid_layout_convert']) ? sanitize_text_field($_GET['post_grid_layout_convert']) : '';
+    $_wpnonce = isset($_GET['_wpnonce']) ? sanitize_text_field($_GET['_wpnonce']) : '';
 
-    if(!empty($layout_id)) return;
+    $layout_converted = false;
+
+    if(wp_verify_nonce($_wpnonce,'post_grid_layout_convert')){
+
+        //echo '<pre>'.var_export($_wpnonce, true).'</pre>';
+        $layout_converted = true;
+
+    }else{
+        if(!empty($layout_id)) return;
+    }
+
+
 
 
     $content_layout = isset($options['layout']['content']) ? $options['layout']['content'] : '';;
@@ -1051,7 +1064,7 @@ function post_grid_main_convert_layout($args){
     $post_grid_title = get_the_title($grid_id);
 
     $post_args = array(
-        'post_title' => $post_grid_title.' - '.$layout_skin,
+        'post_title' => $post_grid_title.' - '.$layout_skin .' - '. $content_layout,
         'post_type' => 'post_grid_layout',
         'post_status' => 'publish',
         'post_author' => 1,
@@ -1076,6 +1089,13 @@ function post_grid_main_convert_layout($args){
 
     update_post_meta($grid_id,'post_grid_meta_options', $options);
 
+    if($layout_converted){
+
+        ?>
+        <p>Layout converted successfully, please go <a href="<?php echo get_edit_post_link($new_layout_id); ?>">#<?php echo $new_layout_id; ?></a> this link to edit layout </p>
+        <p>Please report issue if you found any problem, <a href="https://www.pickplugins.com/forum/">create support ticket</a> </p>
+        <?php
+    }
 
 
 }

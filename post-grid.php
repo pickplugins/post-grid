@@ -78,6 +78,7 @@ if( !class_exists( 'PostGrid' )){
             $class_post_grid_functions = new class_post_grid_functions();
 
 
+
             $post_grid_layout_content = get_option('post_grid_layout_content');
             if (empty($post_grid_layout_content)){
                 $layout_content_list = $class_post_grid_functions->layout_content_list();
@@ -92,6 +93,10 @@ if( !class_exists( 'PostGrid' )){
             $post_grid_info['data_update_status'] = isset($post_grid_info['data_update_status']) ? $post_grid_info['data_update_status'] : 'pending';
             update_option('post_grid_info', $post_grid_info);
 
+
+            $class_post_grid_post_types = new class_post_grid_post_types();
+            $class_post_grid_post_types->_posttype_post_grid();
+            flush_rewrite_rules();
 
             /*
              * Custom action hook for plugin activation.

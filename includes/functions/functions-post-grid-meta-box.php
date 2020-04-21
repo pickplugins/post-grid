@@ -660,8 +660,12 @@ function post_grid_settings_tabs_content_layouts($tab, $post_id){
 
         <?php
         if($import_layouts != 'done'):
+
+            $layout_convert_url = get_permalink($post_id).'?post_grid_layout_convert=true';
+            $layout_convert_url = wp_nonce_url($layout_convert_url, 'post_grid_layout_convert');
+
             ?>
-            <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Import layouts','post-grid'); ?></a> </p>
+            <p><a target="_blank" class="button" href="<?php echo $layout_convert_url; ?>"><?php echo __('Covert old layout to new layout','post-grid'); ?></a> </p>
         <?php
         endif;
 
@@ -721,7 +725,7 @@ function post_grid_settings_tabs_content_layouts($tab, $post_id){
             'id'		=> 'layout_id',
             'parent' => 'post_grid_meta_options',
             'title'		=> __('Item layouts','post-grid'),
-            'details'	=> __('Choose grid item layout.','post-grid'),
+            'details'	=> __('Choose grid item layout. When "Empty layout" is selecetd old layout data will be loaded.','post-grid'),
             'type'		=> 'radio_image',
             'value'		=> $layout_id,
             'default'		=> '',

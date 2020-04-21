@@ -1488,14 +1488,15 @@ class settings_tabs_field{
                 //var_dump($checked);
 
                 ?>
-                <label title="<?php echo $name; ?>" class="<?php if($checked =='checked') echo 'active';?> <?php if($disabled == true) echo 'disabled';?>">
+                <label style="width: <?php echo $width; ?>;" title="<?php echo $name; ?>" class="<?php if($checked =='checked') echo 'active';?> <?php if($disabled == true) echo 'disabled';?>">
                     <input <?php if($disabled) echo 'disabled'; ?>  name="<?php echo $field_name; ?>" type="radio" id="<?php echo $css_id; ?>-<?php echo $key; ?>" value="<?php echo $key; ?>"  <?php echo $checked; ?>>
 
                     <?php
                     if(!empty($thumb)):
+
                         ?>
-                            <img style="width: <?php echo $width; ?>;" alt="<?php echo $name; ?>" src="<?php echo $thumb; ?>">
-                            <div style="padding: 5px;" class="name"><?php echo $name; ?></div>
+                        <img  alt="<?php echo $name; ?>" src="<?php echo $thumb; ?>">
+                        <div style="padding: 5px;" class="name"><?php echo $name; ?></div>
 
                         <?php
                     else:

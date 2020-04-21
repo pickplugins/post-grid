@@ -42,7 +42,7 @@ class class_metabox_post_grid_layout{
 
         $post_grid_settings_tab[] = array(
             'id' => 'layout_builder',
-            'title' => sprintf(__('%s Layout builder','post-grid'),'<i class="fas fa-qrcode"></i>'),
+            'title' => sprintf(__('%s Layout editor','post-grid'),'<i class="fas fa-qrcode"></i>'),
             'priority' => 4,
             'active' => true,
         );

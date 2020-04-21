@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.45
+	Stable tag: 2.0.46
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,12 @@ then paste this shortcode anywhere in your page to display grid<br />
 2. screenshot-2
 
 == Changelog ==
+
+	= 2.0.46 =
+    * 2020-04-21 update - Layout builder re-designed.
+    * 2020-04-21 update - Remove unnecessary CSS and JS files.
+    * 2020-04-21 update - Optimize CSS and JS file loading.
+
 
 	= 2.0.45 =
     * 2020-04-14 remove - remove unnecessary scripts and css files.

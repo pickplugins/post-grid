@@ -42,98 +42,96 @@ function meta_boxes_post_grid_input( $post ) {
 
     $settings_tabs_field =  new settings_tabs_field();
 
-    $post_grid_settings_tab = array();
+    $settings_tabs = array();
 
 
-    $post_grid_settings_tab[] = array(
+    $settings_tabs[] = array(
         'id' => 'shortcode',
         'title' => sprintf(__('%s Shortcode','post-grid'), '<i class="fas fa-laptop-code"></i>'),
-        'priority' => 1,
+        'priority' => 5,
         'active' => ($current_tab == 'shortcode') ? true : false,
     );
 
-    $post_grid_settings_tab[] = array(
+    $settings_tabs[] = array(
         'id' => 'general',
         'title' => sprintf(__('%s General','post-grid'), '<i class="fas fa-cogs"></i>'),
-        'priority' => 2,
+        'priority' => 10,
         'active' => ($current_tab == 'general') ? true : false,
     );
 
-    $post_grid_settings_tab[] = array(
+    $settings_tabs[] = array(
         'id' => 'query_post',
         'title' => sprintf(__('%s Query Post','post-grid'), '<i class="fas fa-cubes"></i>'),
-        'priority' => 3,
+        'priority' => 15,
         'active' => ($current_tab == 'query_post') ? true : false,
     );
 
-    $post_grid_settings_tab[] = array(
+    $settings_tabs[] = array(
         'id' => 'skin_layout',
         'title' => sprintf(__('%s Skin & Layout (Old)','post-grid'), '<i class="fas fa-magic"></i>'),
-        'priority' => 4,
+        'priority' => 20,
         'active' => ($current_tab == 'skin_layout') ? true : false,
     );
 
-    $post_grid_settings_tab[] = array(
+    $settings_tabs[] = array(
         'id' => 'layouts',
         'title' => sprintf(__('%s Layouts (New)','post-grid'),'<i class="fas fa-qrcode"></i>'),
-        'priority' => 5,
+        'priority' => 30,
         'active' => ($current_tab == 'layouts') ? true : false,
     );
 
-//    $post_grid_settings_tab[] = array(
-//        'id' => 'layout_settings',
-//        'title' => sprintf(__('%s Layout Settings','post-grid'), '<i class="fas fa-tools"></i>'),
-//        'priority' => 6,
-//        'active' => ($current_tab == 'layout_settings') ? true : false,
-//    );
 
-    $post_grid_settings_tab[] = array(
+
+    $settings_tabs[] = array(
         'id' => 'grid_settings',
         'title' => sprintf(__('%s Grid settings','post-grid'), '<i class="fas fa-th"></i>'),
-        'priority' => 7,
+        'priority' => 35,
         'active' => ($current_tab == 'grid_settings') ? true : false,
         'data_visible' => 'grid',
         'hidden' => ($grid_type == 'grid')? false : true ,
     );
 
 
-    $post_grid_settings_tab[] = array(
+    $settings_tabs[] = array(
         'id' => 'masonry',
         'title' => sprintf(__('%s Masonry','post-grid'), '<i class="fas fa-th-large"></i>'),
-        'priority' => 9,
+        'priority' => 40,
         'active' => ($current_tab == 'masonry') ? true : false,
         'data_visible' => 'masonry grid glossary timeline filterable',
         'hidden' => ($grid_type == 'slider')? true : false ,
     );
 
-    $post_grid_settings_tab[] = array(
+    $settings_tabs[] = array(
         'id' => 'pagination',
         'title' => sprintf(__('%s Pagination','post-grid'), '<i class="fas fa-pager"></i>'),
-        'priority' => 10,
+        'priority' => 45,
         'active' => ($current_tab == 'pagination') ? true : false,
         'data_visible' => 'masonry grid glossary timeline filterable isotope',
         'hidden' => ($grid_type == 'slider')? true : false ,
     );
 
-    $post_grid_settings_tab[] = array(
+    $settings_tabs[] = array(
         'id' => 'custom_scripts',
         'title' => sprintf(__('%s Custom Scripts','post-grid'), '<i class="fas fa-code"></i>'),
-        'priority' => 11,
+        'priority' => 50,
         'active' => ($current_tab == 'custom_scripts') ? true : false,
     );
-    $post_grid_settings_tab[] = array(
+
+    $settings_tabs[] = array(
         'id' => 'search',
         'title' => sprintf(__('%s Search','post-grid'), '<i class="fas fa-search"></i>'),
-        'priority' => 12,
+        'priority' => 55,
         'active' => ($current_tab == 'search') ? true : false,
     );
 
-    $post_grid_settings_tabs = apply_filters('post_grid_settings_tabs', $post_grid_settings_tab);
+    $settings_tabs = apply_filters('post_grid_metabox_tabs', $settings_tabs);
+
+    //var_dump($settings_tabs);
 
 
     $tabs_sorted = array();
-    foreach ($post_grid_settings_tabs as $page_key => $tab) $tabs_sorted[$page_key] = isset( $tab['priority'] ) ? $tab['priority'] : 0;
-    array_multisort($tabs_sorted, SORT_ASC, $post_grid_settings_tabs);
+    foreach ($settings_tabs as $page_key => $tab) $tabs_sorted[$page_key] = isset( $tab['priority'] ) ? $tab['priority'] : 0;
+    array_multisort($tabs_sorted, SORT_ASC, $settings_tabs);
 
 
 
@@ -146,6 +144,27 @@ function meta_boxes_post_grid_input( $post ) {
 
     <div class="post-grid-meta-box">
 
+        <script>
+            jQuery(document).ready(function($){
+                $(document).on('click', '.settings-tabs input[name="post_grid_meta_options[grid_type]"]', function(){
+                    var val = $(this).val();
+                    console.log( val );
+                    $('.settings-tabs .tab-navs li').each(function( index ) {
+                        data_visible = $( this ).attr('data_visible');
+                        if(typeof data_visible != 'undefined'){
+                            n = data_visible.indexOf(val);
+                            if(n<0){
+                                $( this ).hide();
+                            }else{
+                                $( this ).show();
+                            }
+                        }else{
+                            console.log('Not matched: '+ data_visible );
+                        }
+                    });
+                })
+            })
+        </script>
 
         <div class="settings-tabs vertical">
             <input class="current_tab" type="hidden" name="post_grid_meta_options[current_tab]" value="<?php echo $current_tab; ?>">
@@ -171,7 +190,7 @@ function meta_boxes_post_grid_input( $post ) {
 
             <ul class="tab-navs">
                 <?php
-                foreach ($post_grid_settings_tabs as $tab){
+                foreach ($settings_tabs as $tab){
                     $id = $tab['id'];
                     $title = $tab['title'];
                     $active = $tab['active'];
@@ -184,7 +203,7 @@ function meta_boxes_post_grid_input( $post ) {
                 ?>
             </ul>
             <?php
-            foreach ($post_grid_settings_tabs as $tab){
+            foreach ($settings_tabs as $tab){
                 $id = $tab['id'];
                 $title = $tab['title'];
                 $active = $tab['active'];
@@ -194,7 +213,7 @@ function meta_boxes_post_grid_input( $post ) {
 
                 <div class="tab-content <?php if($active) echo 'active';?>" id="<?php echo $id; ?>">
                     <?php
-                    do_action('post_grid_settings_tabs_content_'.$id, $tab, $post_id);
+                    do_action('post_grid_metabox_tabs_content_'.$id, $tab, $post_id);
                     ?>
                 </div>
                 <?php

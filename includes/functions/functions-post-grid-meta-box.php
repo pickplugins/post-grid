@@ -9,9 +9,9 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-add_action('post_grid_settings_tabs_content_shortcode', 'post_grid_settings_tabs_content_shortcode',10, 2);
+add_action('post_grid_metabox_tabs_content_shortcode', 'post_grid_metabox_tabs_content_shortcode',10, 2);
 
-function post_grid_settings_tabs_content_shortcode($tab, $post_id){
+function post_grid_metabox_tabs_content_shortcode($tab, $post_id){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -88,9 +88,9 @@ function post_grid_settings_tabs_content_shortcode($tab, $post_id){
 }
 
 
-add_action('post_grid_settings_tabs_content_general', 'post_grid_settings_tabs_content_general', 10, 2);
+add_action('post_grid_metabox_tabs_content_general', 'post_grid_metabox_tabs_content_general', 10, 2);
 
-function post_grid_settings_tabs_content_general($tab, $post_id){
+function post_grid_metabox_tabs_content_general($tab, $post_id){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -230,9 +230,9 @@ function post_grid_settings_tabs_content_general($tab, $post_id){
 
 }
 
-add_action('post_grid_settings_tabs_content_query_post', 'post_grid_settings_tabs_content_query_post', 10, 2);
+add_action('post_grid_metabox_tabs_content_query_post', 'post_grid_metabox_tabs_content_query_post', 10, 2);
 
-function post_grid_settings_tabs_content_query_post($tab, $post_id){
+function post_grid_metabox_tabs_content_query_post($tab, $post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $class_post_grid_meta_box = new class_post_grid_meta_box();
@@ -629,8 +629,8 @@ function post_grid_settings_tabs_content_query_post($tab, $post_id){
 
 
 
-add_action('post_grid_settings_tabs_content_layouts','post_grid_settings_tabs_content_layouts',10, 2);
-function post_grid_settings_tabs_content_layouts($tab, $post_id){
+add_action('post_grid_metabox_tabs_content_layouts','post_grid_metabox_tabs_content_layouts',10, 2);
+function post_grid_metabox_tabs_content_layouts($tab, $post_id){
 
    //var_dump($post_id);
     $settings_tabs_field = new settings_tabs_field();
@@ -746,9 +746,9 @@ function post_grid_settings_tabs_content_layouts($tab, $post_id){
 
 
 
-add_action('post_grid_settings_tabs_content_skin_layout', 'post_grid_settings_tabs_content_skin_layout', 10, 2);
+add_action('post_grid_metabox_tabs_content_skin_layout', 'post_grid_metabox_tabs_content_skin_layout', 10, 2);
 
-function post_grid_settings_tabs_content_skin_layout($tab, $post_id){
+function post_grid_metabox_tabs_content_skin_layout($tab, $post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $class_post_grid_functions = new class_post_grid_functions();
@@ -1236,9 +1236,9 @@ function post_grid_settings_tabs_content_skin_layout($tab, $post_id){
 
 
 
-add_action('post_grid_settings_tabs_content_grid_settings', 'post_grid_settings_tabs_content_grid_settings', 10, 2);
+add_action('post_grid_metabox_tabs_content_grid_settings', 'post_grid_metabox_tabs_content_grid_settings', 10, 2);
 
-function post_grid_settings_tabs_content_grid_settings($tab, $post_id){
+function post_grid_metabox_tabs_content_grid_settings($tab, $post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $class_post_grid_functions = new class_post_grid_functions();
@@ -1487,9 +1487,9 @@ function post_grid_settings_tabs_content_grid_settings($tab, $post_id){
 
 
 
-add_action('post_grid_settings_tabs_content_grid', 'post_grid_settings_tabs_content_grid', 10, 2);
+add_action('post_grid_metabox_tabs_content_grid', 'post_grid_metabox_tabs_content_grid', 10, 2);
 
-function post_grid_settings_tabs_content_grid($tab, $post_id){
+function post_grid_metabox_tabs_content_grid($tab, $post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
@@ -1514,9 +1514,9 @@ function post_grid_settings_tabs_content_grid($tab, $post_id){
 
 
 
-add_action('post_grid_settings_tabs_content_pagination', 'post_grid_settings_tabs_content_pagination', 10, 2);
+add_action('post_grid_metabox_tabs_content_pagination', 'post_grid_metabox_tabs_content_pagination', 10, 2);
 
-function post_grid_settings_tabs_content_pagination($tab, $post_id){
+function post_grid_metabox_tabs_content_pagination($tab, $post_id){
 
     $settings_tabs_field = new settings_tabs_field();
     $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
@@ -1668,9 +1668,9 @@ function post_grid_settings_tabs_content_pagination($tab, $post_id){
 
 
 
-add_action('post_grid_settings_tabs_content_search', 'post_grid_settings_tabs_content_search', 10, 2);
+add_action('post_grid_metabox_tabs_content_search', 'post_grid_metabox_tabs_content_search', 10, 2);
 
-function post_grid_settings_tabs_content_search($tab, $post_id){
+function post_grid_metabox_tabs_content_search($tab, $post_id){
 
 
     $settings_tabs_field = new settings_tabs_field();
@@ -1762,9 +1762,9 @@ function post_grid_settings_tabs_content_search($tab, $post_id){
 }
 
 
-add_action('post_grid_settings_tabs_content_masonry', 'post_grid_settings_tabs_content_masonry', 10, 2);
+add_action('post_grid_metabox_tabs_content_masonry', 'post_grid_metabox_tabs_content_masonry', 10, 2);
 
-function post_grid_settings_tabs_content_masonry($tab, $post_id){
+function post_grid_metabox_tabs_content_masonry($tab, $post_id){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -1819,9 +1819,9 @@ function post_grid_settings_tabs_content_masonry($tab, $post_id){
 
 
 
-add_action('post_grid_settings_tabs_content_custom_scripts', 'post_grid_settings_tabs_content_custom_scripts', 10, 2);
+add_action('post_grid_metabox_tabs_content_custom_scripts', 'post_grid_metabox_tabs_content_custom_scripts', 10, 2);
 
-function post_grid_settings_tabs_content_custom_scripts($tab, $post_id){
+function post_grid_metabox_tabs_content_custom_scripts($tab, $post_id){
 
 
     $settings_tabs_field = new settings_tabs_field();

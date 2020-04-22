@@ -223,7 +223,7 @@ function post_grid_posts_loop($args){
         do_action('post_grid_loop_top', $args);
 
         ?>
-        <div class="grid-items">
+        <div class="<?php echo apply_filters('post_grid_grid_items_class','grid-items', $args); ?>">
             <?php
             do_action('post_grid_before_loop', $args);
 
@@ -308,7 +308,7 @@ function post_grid_loop($args){
 
     //var_dump($layout_id);
 
-    $item_css_class = apply_filters('post_grid_item_classes', $item_css_class);
+    $item_css_class = apply_filters('post_grid_item_classes', $item_css_class, $args);
     $item_css_class = implode(' ', $item_css_class);
 
     ?>
@@ -545,12 +545,6 @@ function post_grid_item_layout_new($args){
     if(empty($layout_id)) return;
 
 
-    //$layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
-
-
-
-    if(empty($layout_id)) return;
-
     $layout_elements_data = get_post_meta( $layout_id, 'layout_elements_data', true );
 
 
@@ -602,7 +596,9 @@ function post_grid_loop_bottom_pagination($args, $wp_query){
 
 
     $post_grid_options = $args['options'];
+    $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
 
+    if($grid_type != 'grid') return;
 
     if ( get_query_var('paged') ) {
         $paged = get_query_var('paged');
@@ -650,9 +646,14 @@ add_action('post_grid_container', 'post_grid_main_view_type_grid_scripts', 90);
 
 function post_grid_main_view_type_grid_scripts($args){
     $post_grid_options = $args['options'];
+
+    $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
+
+    //var_dump($grid_type);
+
+    if($grid_type != 'grid' && $grid_type != 'filterable') return;
+    //var_dump($grid_type);
     $grid_id = $args['grid_id'];
-
-
 
 
     $items_width_desktop = isset($post_grid_options['width']['desktop']) ? $post_grid_options['width']['desktop'] : '';

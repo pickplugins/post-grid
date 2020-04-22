@@ -137,52 +137,16 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         'hr'=>array('name' =>__('Horizontal line','post-grid')),
                         'five_star'=>array('name' =>__('Five star','post-grid')),
 
+
                         ),
                 );
 
 //
-//                $elements_group['woo'] = array(
-//                    'group_title'=>'WooCommerce',
-//                    'items'=>array(
-//                        'woo_full_price'=>array('name' =>__('Full price','post-grid')),
-//                        'woo_add_to_cart'=>array('name' =>__('Add to cart','post-grid')),
-//                        'woo_categories'=>array('name' =>__('Categories','post-grid')),
-//                        'woo_tags'=>array('name' =>__('Tags','post-grid')),
-//                    ),
-//                );
+
 //
-//                $elements_group['edd'] = array(
-//                    'group_title'=>'Easy Digital Download',
-//                    'items'=>array(
-//                        'edd_price'=>array('name' =>__('Price','post-grid')),
-//                        'edd_add_to_cart'=>array('name' =>__('Add to cart','post-grid')),
-//                        'edd_categories'=>array('name' =>__('Categories','post-grid')),
-//                        'edd_tags'=>array('name' =>__('Tags','post-grid')),
+
 //
-//
-//                    ),
-//                );
-//
-//                $elements_group['acf'] = array(
-//                    'group_title'=>'Advance Field Manager',
-//                    'items'=>array(
-//                        'acf_text'=>array('name' =>__('Text','post-grid')),
-//                        'acf_textarea'=>array('name' =>__('textarea','post-grid')),
-//                        'acf_number'=>array('name' =>__('number','post-grid')),
-//                        'acf_email'=>array('name' =>__('email','post-grid')),
-//                        'acf_wysiwyg'=>array('name' =>__('wysiwyg','post-grid')),
-//                        'acf_image'=>array('name' =>__('image','post-grid')),
-//                        'acf_file'=>array('name' =>__('file','post-grid')),
-//                        'acf_select'=>array('name' =>__('select','post-grid')),
-//                        'acf_checkbox'=>array('name' =>__('checkbox','post-grid')),
-//                        'acf_page_link'=>array('name' =>__('page link','post-grid')),
-//                        'acf_taxonomy'=>array('name' =>__('taxonomy','post-grid')),
-//                        'acf_user'=>array('name' =>__('user','post-grid')),
-//                        'acf_date_picker'=>array('name' =>__('date picker','post-grid')),
-//
-//
-//                    ),
-//                );
+
 
 
 

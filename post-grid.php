@@ -130,8 +130,8 @@ if( !class_exists( 'PostGrid' )){
 
             // Register Scripts & JS
             wp_register_script('post_grid_scripts', post_grid_plugin_url.'/assets/frontend/js/scripts.js', array('jquery'));
-            wp_register_script('masonry.js', post_grid_plugin_url.'/assets/frontend/js/masonry.pkgd.min.js', array('jquery'));
-            wp_register_script('imagesloaded.js', post_grid_plugin_url.'/assets/frontend/js/imagesloaded.pkgd.js', array('jquery'));
+            wp_register_script('masonry', post_grid_plugin_url.'/assets/frontend/js/masonry.pkgd.min.js', array('jquery'));
+            wp_register_script('imagesloaded', post_grid_plugin_url.'/assets/frontend/js/imagesloaded.pkgd.js', array('jquery'));
 
             // Register CSS & Styles
             wp_register_style(  'post-grid-style', post_grid_plugin_url . 'assets/frontend/css/style.css');
@@ -162,6 +162,8 @@ if( !class_exists( 'PostGrid' )){
 
             wp_register_style('settings-tabs', post_grid_plugin_url.'assets/settings-tabs/settings-tabs.css');
             wp_register_script('settings-tabs', post_grid_plugin_url.'assets/settings-tabs/settings-tabs.js'  , array( 'jquery' ));
+            wp_register_script('form-field-dependency', post_grid_plugin_url.'assets/settings-tabs/form-field-dependency.js'  , array( 'jquery' ));
+
 
             wp_register_style('layout-editor', post_grid_plugin_url.'assets/admin/css/layout-editor.css');
             wp_register_script('layout-editor', post_grid_plugin_url.'assets/admin/js/layout-editor.js', array('jquery'));

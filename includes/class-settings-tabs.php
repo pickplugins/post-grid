@@ -32,6 +32,7 @@ class settings_tabs_field{
 
         wp_enqueue_style( 'settings-tabs' );
         wp_enqueue_script( 'settings-tabs' );
+        wp_enqueue_script( 'form-field-dependency' );
 
         wp_enqueue_script( 'code-editor' );
         wp_enqueue_style( 'code-editor' );
@@ -43,14 +44,100 @@ class settings_tabs_field{
 
         $id 			= isset( $option['id'] ) ? $option['id'] : "";
         $wraper_class			= isset( $option['wraper_class'] ) ? $option['wraper_class'] : "";
+        $conditions 	= isset( $option['conditions'] ) ? $option['conditions'] : array();
 
         $is_error 			= isset( $option['is_error'] ) ? $option['is_error'] : false;
         $error_details 			= isset( $option['error_details'] ) ? $option['error_details'] : '';
 
+
+
+        if(!empty($conditions)):
+
+            $depends = '';
+
+            $field = isset($conditions['field']) ? $conditions['field'] :'';
+            $cond_value = isset($conditions['value']) ? $conditions['value']: '';
+            $type = isset($conditions['type']) ? $conditions['type'] : '';
+            $pattern = isset($conditions['pattern']) ? $conditions['pattern'] : '';
+            $modifier = isset($conditions['modifier']) ? $conditions['modifier'] : '';
+            $like = isset($conditions['like']) ? $conditions['like'] : '';
+            $strict = isset($conditions['strict']) ? $conditions['strict'] : '';
+            $empty = isset($conditions['empty']) ? $conditions['empty'] : '';
+            $sign = isset($conditions['sign']) ? $conditions['sign'] : '';
+            $min = isset($conditions['min']) ? $conditions['min'] : '';
+            $max = isset($conditions['max']) ? $conditions['max'] : '';
+
+            $depends .= "{'[name=$field]':";
+            $depends .= '{';
+
+            if(!empty($type)):
+                $depends .= "'type':";
+                $depends .= "'".$type."'";
+            endif;
+
+            if(!empty($modifier)):
+                $depends .= ",'modifier':";
+                $depends .= "'".$modifier."'";
+            endif;
+
+            if(!empty($like)):
+                $depends .= ",'like':";
+                $depends .= "'".$like."'";
+            endif;
+
+            if(!empty($strict)):
+                $depends .= ",'strict':";
+                $depends .= "'".$strict."'";
+            endif;
+
+            if(!empty($empty)):
+                $depends .= ",'empty':";
+                $depends .= "'".$empty."'";
+            endif;
+
+            if(!empty($sign)):
+                $depends .= ",'sign':";
+                $depends .= "'".$sign."'";
+            endif;
+
+            if(!empty($min)):
+                $depends .= ",'min':";
+                $depends .= "'".$min."'";
+            endif;
+
+            if(!empty($max)):
+                $depends .= ",'max':";
+                $depends .= "'".$max."'";
+            endif;
+            if(!empty($cond_value)):
+                $depends .= ",'value':";
+                if(is_array($cond_value)):
+                    $count= count($cond_value);
+                    $i = 1;
+                    $depends .= "[";
+                    foreach ($cond_value as $val):
+                        $depends .= "'".$val."'";
+                        if($i<$count)
+                            $depends .= ",";
+                        $i++;
+                    endforeach;
+                    $depends .= "]";
+                else:
+                    $depends .= "[";
+                    $depends .= "'".$cond_value."'";
+                    $depends .= "]";
+                endif;
+            endif;
+            $depends .= '}}';
+
+        endif;
+
+
+
         ob_start();
 
         ?>
-        <div class="setting-field <?php if($is_error) echo 'field-error';  ?> <?php echo $wraper_class; ?>">
+        <div <?php if(!empty($depends)) {?> data-depends="[<?php echo $depends; ?>]" <?php } ?> class="setting-field <?php if($is_error) echo 'field-error';  ?> <?php echo $wraper_class; ?> <?php if(!empty($depends)) echo 'dependency-field'; ?>">
             <div class="field-lable">%s</div>
             <div class="field-input">%s
                 <p class="description">%s</p>

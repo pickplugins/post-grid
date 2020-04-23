@@ -818,7 +818,37 @@ function post_grid_main_view_type_grid_scripts($args){
         }
 
 
+        <?php
 
+        $filterable_font_size = !empty($post_grid_options['nav_top']['filterable_font_size']) ? $post_grid_options['nav_top']['filterable_font_size'] : '14px';
+        $filterable_navs_margin = !empty($post_grid_options['nav_top']['filterable_navs_margin']) ? $post_grid_options['nav_top']['filterable_navs_margin'] : '5px';
+
+        $filterable_font_color = !empty($post_grid_options['nav_top']['filterable_font_color']) ? $post_grid_options['nav_top']['filterable_font_color'] : '#999';
+        $filterable_bg_color = !empty($post_grid_options['nav_top']['filterable_bg_color']) ? $post_grid_options['nav_top']['filterable_bg_color'] : '#fff';
+        $filterable_active_bg_color = !empty($post_grid_options['nav_top']['filterable_active_bg_color']) ? $post_grid_options['nav_top']['filterable_active_bg_color'] : '#ddd';
+
+        ?>
+        #post-grid-<?php echo $grid_id; ?> .nav-filter .filter{
+            font-size:<?php echo $filterable_font_size; ?>;
+            color:<?php echo $filterable_font_color; ?>;
+            background:<?php echo $filterable_bg_color; ?>;
+            margin:<?php echo $filterable_navs_margin; ?>;
+        }
+        #post-grid-<?php echo $grid_id; ?> .nav-filter .filter:hover, #post-grid-<?php echo $grid_id; ?> .nav-filter .filter.mixitup-control-active{
+           background:<?php echo $filterable_active_bg_color; ?>;
+       }
+        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers:hover,
+        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers.current,
+        #post-grid-<?php echo $grid_id; ?> .pagination .pager.mixitup-control-active{
+            background:<?php echo $pagination_active_bg_color; ?>;
+        }
+        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers,
+        #post-grid-<?php echo $grid_id; ?> .pagination .pager,
+        #post-grid-<?php echo $grid_id; ?> .paginate.next-previous a{
+            font-size:<?php echo $pagination_font_size; ?>;
+            color:<?php echo $pagination_font_color; ?>;
+            background:<?php echo $pagination_bg_color; ?>;
+        }
     </style>
     <?php echo $element_css; ?>
     <?php
@@ -830,6 +860,8 @@ add_action('post_grid_container', 'post_grid_main_scripts', 90);
 
 function post_grid_main_scripts($args){
     $post_grid_options = $args['options'];
+    $grid_id = $args['grid_id'];
+    $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
 
 
     $layout_id = isset($post_grid_options['layout_id']) ? $post_grid_options['layout_id'] : '';
@@ -871,6 +903,10 @@ function post_grid_main_scripts($args){
 
     $layout_custom_scripts = get_post_meta($layout_id,'custom_scripts', true);
     $layout_custom_css = isset($layout_custom_scripts['custom_css']) ? $layout_custom_scripts['custom_css'] : '';
+
+
+    //var_dump($masonry_enable);
+
     ?>
     <?php if(!empty($custom_css)): ?>
         <style type="text/css">
@@ -888,12 +924,34 @@ function post_grid_main_scripts($args){
         </style>
     <?php endif; ?>
 
-    <?php if(!empty($custom_js)): ?>
+
         <script>
-            <?php echo $custom_js; ?>
+            <?php
+            if(!empty($custom_js)): ?>
+                <?php echo $custom_js; ?>
+            <?php
+            endif;
+            ?>
+            <?php
+            if($masonry_enable=='yes'):
+                ?>
+                jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
+                    var $container = $('#post-grid-<?php echo $grid_id; ?> .grid-items');
+                    $container.masonry({
+                        itemSelector: '.item',
+                        columnWidth: '.item', //as you wish , you can use numeric
+                        isAnimated: true,
+                        isFitWidth: true,
+                        horizontalOrder: true,
+                    });
+                    $container.imagesLoaded().done( function() {
+                        $container.masonry('layout');
+                    });
+                })
+            <?php endif; ?>
 
         </script>
-    <?php endif; ?>
+
     <?php
 
 

@@ -91,6 +91,13 @@ function meta_boxes_post_grid_input( $post ) {
         'hidden' => ($grid_type == 'grid')? false : true ,
     );
 
+    $settings_tabs[] = array(
+        'id' => 'item_style',
+        'title' => sprintf(__('%s Item style','post-grid'),'<i class="fas fa-qrcode"></i>'),
+        'priority' => 38,
+        'active' => ($current_tab == 'item_style') ? true : false,
+    );
+
 
     $settings_tabs[] = array(
         'id' => 'masonry',

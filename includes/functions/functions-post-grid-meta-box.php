@@ -1233,7 +1233,167 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id){
     <?php
 
 }
+add_action('post_grid_metabox_tabs_content_item_style', 'post_grid_metabox_tabs_content_item_style', 10, 2);
 
+function post_grid_metabox_tabs_content_item_style($tab, $post_id){
+
+    $settings_tabs_field = new settings_tabs_field();
+    $class_post_grid_functions = new class_post_grid_functions();
+    $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
+
+    $items_height_style = !empty($post_grid_meta_options['item_height']['style']) ? $post_grid_meta_options['item_height']['style'] : 'auto_height';
+    $items_height_style_tablet = !empty($post_grid_meta_options['item_height']['style_tablet']) ? $post_grid_meta_options['item_height']['style_tablet'] : 'auto_height';
+    $items_height_style_mobile = !empty($post_grid_meta_options['item_height']['style_mobile']) ? $post_grid_meta_options['item_height']['style_mobile'] : 'auto_height';
+
+    $items_fixed_height = !empty($post_grid_meta_options['item_height']['fixed_height']) ? $post_grid_meta_options['item_height']['fixed_height'] : '220px';
+    $items_fixed_height_tablet = !empty($post_grid_meta_options['item_height']['fixed_height_tablet']) ? $post_grid_meta_options['item_height']['fixed_height_tablet'] : '220px';
+    $items_fixed_height_mobile = !empty($post_grid_meta_options['item_height']['fixed_height_mobile']) ? $post_grid_meta_options['item_height']['fixed_height_mobile'] : '220px';
+
+    $items_bg_color_type = !empty($post_grid_meta_options['items_bg_color_type']) ? $post_grid_meta_options['items_bg_color_type'] : 'fixed';
+    $items_bg_color = !empty($post_grid_meta_options['items_bg_color']) ? $post_grid_meta_options['items_bg_color'] : '#fff';
+
+    $items_margin = !empty($post_grid_meta_options['margin']) ? $post_grid_meta_options['margin'] : '10px';
+    $item_padding = !empty($post_grid_meta_options['item_padding']) ? $post_grid_meta_options['item_padding'] : '0px';
+
+
+    ?>
+        <div class="section">
+            <div class="section-title">Item style settings</div>
+            <p class="description section-description">Customize item style</p>
+
+            <?php
+
+
+            ob_start();
+
+            ?>
+            <table>
+                <tr>
+                    <td style="padding: 0 20px 0  0">
+
+                        <div class="">
+                            <p><b>Desktop:</b>(min-width:1024px)</p>
+                            <label><input <?php if($items_height_style=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
+
+                            <input type="text" name="post_grid_meta_options[item_height][fixed_height]" value="<?php echo $items_fixed_height; ?>" />
+
+                        </div>
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:  0 20px 0  0">
+                        <div class="">
+                            <p><b>Tablet:</b>( min-width:768px )</p>
+                            <label><input <?php if($items_height_style_tablet=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style_tablet=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style_tablet=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
+
+                            <input type="text" name="post_grid_meta_options[item_height][fixed_height_tablet]" value="<?php echo $items_fixed_height_tablet; ?>" />
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0 20px 0  0">
+                        <div class="">
+                            <p><b>Mobile:</b>( min-width : 320px, )</p>
+                            <label><input <?php if($items_height_style_mobile=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style_mobile=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
+                            <label><input <?php if($items_height_style_mobile=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
+
+                            <input type="text" name="post_grid_meta_options[item_height][fixed_height_mobile]" value="<?php echo $items_fixed_height_mobile; ?>" />
+
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'items_height',
+                'title'		=> __('Grid item height','post-grid'),
+                'details'	=> __('Grid item height for different device, you can use % or px, em and etc, example: 80% or 250px','post-grid'),
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+
+            );
+
+            $settings_tabs_field->generate_field($args, $post_id);
+
+
+            $args = array(
+                'id'		=> 'items_bg_color_type',
+                'parent'		=> 'post_grid_meta_options',
+                'title'		=> __('Items background color type','post-grid'),
+                'details'	=> __('Select items background color type.','post-grid'),
+                'type'		=> 'radio',
+                'multiple'		=> true,
+                'value'		=> $items_bg_color_type,
+                'default'		=> 'fixed',
+                'args'		=> array(
+                    'fixed'=>__('Fixed','post-grid'),
+                ),
+            );
+
+            $settings_tabs_field->generate_field($args, $post_id);
+
+
+            $args = array(
+                'id'		=> 'items_bg_color',
+                'parent'		=> 'post_grid_meta_options',
+                'title'		=> __('Grid item background color','post-grid'),
+                'details'	=> __('Set custom color for grid item.','post-grid'),
+                'type'		=> 'colorpicker',
+                'value'		=> $items_bg_color,
+                'default'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+            $args = array(
+                'id'		=> 'margin',
+                'parent'		=> 'post_grid_meta_options',
+                'title'		=> __('Grid item margin','post-grid'),
+                'details'	=> __('Grid item wrapper margin, you can use top right bottom left style, ex: 10px 15px 10px 15px','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $items_margin,
+                'default'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args, $post_id);
+
+
+            $args = array(
+                'id'		=> 'item_padding',
+                'parent'		=> 'post_grid_meta_options',
+                'title'		=> __('Grid item padding','post-grid'),
+                'details'	=> __('Grid item wrapper padding, you can use top right bottom left style, ex: 10px 15px 10px 15px','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $item_padding,
+                'default'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+            ?>
+        </div>
+            <?php
+
+
+
+}
 
 
 add_action('post_grid_metabox_tabs_content_grid_settings', 'post_grid_metabox_tabs_content_grid_settings', 10, 2);
@@ -1252,23 +1412,12 @@ function post_grid_metabox_tabs_content_grid_settings($tab, $post_id){
     $items_width_tablet = !empty($post_grid_meta_options['width']['tablet']) ? $post_grid_meta_options['width']['tablet'] : '280px';
     $items_width_mobile = !empty($post_grid_meta_options['width']['mobile']) ? $post_grid_meta_options['width']['mobile'] : '90%';
 
-    $items_height_style = !empty($post_grid_meta_options['item_height']['style']) ? $post_grid_meta_options['item_height']['style'] : 'auto_height';
-    $items_height_style_tablet = !empty($post_grid_meta_options['item_height']['style_tablet']) ? $post_grid_meta_options['item_height']['style_tablet'] : 'auto_height';
-    $items_height_style_mobile = !empty($post_grid_meta_options['item_height']['style_mobile']) ? $post_grid_meta_options['item_height']['style_mobile'] : 'auto_height';
-
-    $items_fixed_height = !empty($post_grid_meta_options['item_height']['fixed_height']) ? $post_grid_meta_options['item_height']['fixed_height'] : '220px';
-    $items_fixed_height_tablet = !empty($post_grid_meta_options['item_height']['fixed_height_tablet']) ? $post_grid_meta_options['item_height']['fixed_height_tablet'] : '220px';
-    $items_fixed_height_mobile = !empty($post_grid_meta_options['item_height']['fixed_height_mobile']) ? $post_grid_meta_options['item_height']['fixed_height_mobile'] : '220px';
 
 
 
 
 
-    $items_bg_color_type = !empty($post_grid_meta_options['items_bg_color_type']) ? $post_grid_meta_options['items_bg_color_type'] : 'fixed';
-    $items_bg_color = !empty($post_grid_meta_options['items_bg_color']) ? $post_grid_meta_options['items_bg_color'] : '#fff';
 
-    $items_margin = !empty($post_grid_meta_options['margin']) ? $post_grid_meta_options['margin'] : '10px';
-    $item_padding = !empty($post_grid_meta_options['item_padding']) ? $post_grid_meta_options['item_padding'] : '0px';
 
 
     $grid_layout_name = !empty($post_grid_meta_options['grid_layout']['name']) ? $post_grid_meta_options['grid_layout']['name'] : 'layout_grid';
@@ -1342,133 +1491,12 @@ function post_grid_metabox_tabs_content_grid_settings($tab, $post_id){
 
 
 
-            ob_start();
-
-            ?>
-            <table>
-                <tr>
-                    <td style="padding: 0 20px 0  0">
-
-                        <div class="">
-                            <p><b>Desktop:</b>(min-width:1024px)</p>
-                            <label><input <?php if($items_height_style=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
-
-                            <input type="text" name="post_grid_meta_options[item_height][fixed_height]" value="<?php echo $items_fixed_height; ?>" />
-
-                        </div>
-
-
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:  0 20px 0  0">
-                        <div class="">
-                            <p><b>Tablet:</b>( min-width:768px )</p>
-                            <label><input <?php if($items_height_style_tablet=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style_tablet=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style_tablet=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_tablet]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
-
-                            <input type="text" name="post_grid_meta_options[item_height][fixed_height_tablet]" value="<?php echo $items_fixed_height_tablet; ?>" />
-
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding: 0 20px 0  0">
-                        <div class="">
-                            <p><b>Mobile:</b>( min-width : 320px, )</p>
-                            <label><input <?php if($items_height_style_mobile=='auto_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="auto_height" /><?php _e('Auto height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style_mobile=='fixed_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="fixed_height" /><?php _e('Fixed height','post-grid'); ?></label><br />
-                            <label><input <?php if($items_height_style_mobile=='max_height') echo 'checked'; ?> type="radio" name="post_grid_meta_options[item_height][style_mobile]" value="max_height" /><?php _e('Max height','post-grid'); ?></label><br />
-
-                            <input type="text" name="post_grid_meta_options[item_height][fixed_height_mobile]" value="<?php echo $items_fixed_height_mobile; ?>" />
-
-                        </div>
-                    </td>
-                </tr>
-
-            </table>
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'skins',
-                'title'		=> __('Grid item height','post-grid'),
-                'details'	=> __('Grid item height for different device, you can use % or px, em and etc, example: 80% or 250px','post-grid'),
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
 
 
 
 
 
 
-
-
-
-            $args = array(
-                'id'		=> 'items_bg_color_type',
-                'parent'		=> 'post_grid_meta_options',
-                'title'		=> __('Items background color type','post-grid'),
-                'details'	=> __('Select items background color type.','post-grid'),
-                'type'		=> 'radio',
-                'multiple'		=> true,
-                'value'		=> $items_bg_color_type,
-                'default'		=> 'fixed',
-                'args'		=> array(
-                    'fixed'=>__('Fixed','post-grid'),
-                ),
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-            $args = array(
-                'id'		=> 'items_bg_color',
-                'parent'		=> 'post_grid_meta_options',
-                'title'		=> __('Grid item background color','post-grid'),
-                'details'	=> __('Set custom color for grid item.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $items_bg_color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-
-            $args = array(
-                'id'		=> 'margin',
-                'parent'		=> 'post_grid_meta_options',
-                'title'		=> __('Grid item margin','post-grid'),
-                'details'	=> __('Grid item wrapper margin, you can use top right bottom left style, ex: 10px 15px 10px 15px','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $items_margin,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
-
-
-            $args = array(
-                'id'		=> 'item_padding',
-                'parent'		=> 'post_grid_meta_options',
-                'title'		=> __('Grid item padding','post-grid'),
-                'details'	=> __('Grid item wrapper padding, you can use top right bottom left style, ex: 10px 15px 10px 15px','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $item_padding,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args, $post_id);
 
 
 
@@ -1565,6 +1593,9 @@ function post_grid_metabox_tabs_content_pagination($tab, $post_id){
             'type'		=> 'text',
             'value'		=> $max_num_pages,
             'default'		=> 0,
+//            'conditions' => array(
+//                'field' => 'post_grid_meta_options','value' => 'normal','type' => '='
+//            )
         );
 
         $settings_tabs_field->generate_field($args, $post_id);

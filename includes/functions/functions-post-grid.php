@@ -30,6 +30,8 @@ function post_grid_get_glossary_index($wp_query){
             $glossary_index[] = isset($post_title[0]) ? $post_title[0] : '';
 
         endwhile;
+        wp_reset_query();
+        wp_reset_postdata();
     endif;
 
     return $glossary_index;

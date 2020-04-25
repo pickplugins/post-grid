@@ -44,6 +44,7 @@ function meta_boxes_post_grid_input( $post ) {
 
     $settings_tabs = array();
 
+    //var_dump($current_tab);
 
     $settings_tabs[] = array(
         'id' => 'shortcode',

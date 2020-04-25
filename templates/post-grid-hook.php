@@ -99,7 +99,7 @@ function post_grid_posts_loop($args){
 
 
 
-    global $wp_query;
+    //global $wp_query;
 
 
 
@@ -214,13 +214,14 @@ function post_grid_posts_loop($args){
     $post_grid_wp_query = new WP_Query($query_merge);
 
     // for global use
-    //global $wp_query;
+    global $wp_query;
     $wp_query = $post_grid_wp_query;
 
 
     $loop_count = 0;
 
     if ( $post_grid_wp_query->have_posts() ) :
+
         do_action('post_grid_loop_top', $args);
 
         ?>

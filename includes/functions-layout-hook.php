@@ -2005,6 +2005,35 @@ function post_grid_layout_elements_option_excerpt($parameters){
             $settings_tabs_field->generate_field($args);
 
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[excerpt]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[excerpt]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
             ob_start();
             ?>
             <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}

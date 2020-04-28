@@ -432,7 +432,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                 'id'		=> 'layout_preview',
                 //'parent'		=> '',
                 'title'		=> __('Layout preview','post-grid'),
-                'details'	=> __('Layout preview','post-grid'),
+                'details'	=> __('Layout preview, some layout require featured image set on post.','post-grid'),
                 'type'		=> 'custom_html',
                 'html'		=> $html,
                 'default'		=> '',

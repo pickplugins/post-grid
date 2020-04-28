@@ -162,7 +162,6 @@ if( !class_exists( 'PostGrid' )){
 
             wp_register_style('settings-tabs', post_grid_plugin_url.'assets/settings-tabs/settings-tabs.css');
             wp_register_script('settings-tabs', post_grid_plugin_url.'assets/settings-tabs/settings-tabs.js'  , array( 'jquery' ));
-            wp_register_script('form-field-dependency', post_grid_plugin_url.'assets/settings-tabs/form-field-dependency.js'  , array( 'jquery' ));
 
 
             wp_register_style('layout-editor', post_grid_plugin_url.'assets/admin/css/layout-editor.css');

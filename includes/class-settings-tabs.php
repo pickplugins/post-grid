@@ -32,7 +32,6 @@ class settings_tabs_field{
 
         wp_enqueue_style( 'settings-tabs' );
         wp_enqueue_script( 'settings-tabs' );
-        wp_enqueue_script( 'form-field-dependency' );
 
         wp_enqueue_script( 'code-editor' );
         wp_enqueue_style( 'code-editor' );

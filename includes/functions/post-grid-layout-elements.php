@@ -35,8 +35,9 @@ function post_grid_layout_element_css_wrapper_start($args){
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-    $css = isset($element['css']) ? $element['css'] : '';
 
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
     <style type="text/css">
@@ -58,6 +59,11 @@ function post_grid_layout_element_css_wrapper_start($args){
         <?php endif; ?>
         <?php if(!empty($css)): ?>
         <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
     </style>
@@ -117,6 +123,9 @@ function post_grid_layout_element_css_custom_text($args){
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
 
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
+
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -134,6 +143,14 @@ function post_grid_layout_element_css_custom_text($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
     </style>
@@ -222,6 +239,11 @@ function post_grid_layout_element_css_title($args){
         <?php echo $css; ?>
         <?php endif; ?>
         }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
+        <?php endif; ?>
+        }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($color)): ?>
             color: <?php echo $color; ?>;
@@ -297,6 +319,9 @@ function post_grid_layout_element_css_title_link($args){
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
 
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
+
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -314,6 +339,14 @@ function post_grid_layout_element_css_title_link($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
@@ -428,6 +461,8 @@ function post_grid_layout_element_css_excerpt($args){
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
 
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -445,6 +480,14 @@ function post_grid_layout_element_css_excerpt($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
@@ -520,6 +563,8 @@ function post_grid_layout_element_css_excerpt_read_more($args){
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
 
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -537,6 +582,14 @@ function post_grid_layout_element_css_excerpt_read_more($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
@@ -603,6 +656,8 @@ function post_grid_layout_element_css_read_more($args){
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
 
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -620,6 +675,14 @@ function post_grid_layout_element_css_read_more($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
@@ -701,7 +764,8 @@ function post_grid_layout_element_css_media($args){
     $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
 
     $margin = isset($element['margin']) ? $element['margin'] : '';
-
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
     <style type="text/css">
@@ -807,7 +871,8 @@ function post_grid_layout_element_css_thumb($args){
     $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
 
     $margin = isset($element['margin']) ? $element['margin'] : '';
-
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
     <style type="text/css">
@@ -914,7 +979,8 @@ function post_grid_layout_element_css_thumb_link($args){
     $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
 
     $margin = isset($element['margin']) ? $element['margin'] : '';
-
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
     <style type="text/css">
@@ -1018,7 +1084,8 @@ function post_grid_layout_element_css_post_date($args){
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -1036,6 +1103,14 @@ function post_grid_layout_element_css_post_date($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
@@ -1111,7 +1186,8 @@ function post_grid_layout_element_css_author($args){
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -1129,6 +1205,14 @@ function post_grid_layout_element_css_author($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
@@ -1203,7 +1287,8 @@ function post_grid_layout_element_css_author_link($args){
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -1221,6 +1306,14 @@ function post_grid_layout_element_css_author_link($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
@@ -1304,7 +1397,8 @@ function post_grid_layout_element_css_categories($args){
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
-
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -1323,6 +1417,9 @@ function post_grid_layout_element_css_categories($args){
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
         }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($link_color)): ?>
@@ -1333,6 +1430,11 @@ function post_grid_layout_element_css_categories($args){
         <?php endif; ?>
         <?php if(!empty($font_family)): ?>
             font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
     </style>
@@ -1403,6 +1505,8 @@ function post_grid_layout_element_css_tags($args){
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
 
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -1421,6 +1525,9 @@ function post_grid_layout_element_css_tags($args){
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
         }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($link_color)): ?>
@@ -1431,6 +1538,11 @@ function post_grid_layout_element_css_tags($args){
         <?php endif; ?>
         <?php if(!empty($font_family)): ?>
             font-family: <?php echo $font_family; ?>;
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
     </style>
@@ -1493,6 +1605,8 @@ function post_grid_layout_element_css_comments_count($args){
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
 
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -1510,6 +1624,14 @@ function post_grid_layout_element_css_comments_count($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
     </style>
@@ -1584,7 +1706,8 @@ function post_grid_layout_element_css_share_button($args){
     $icon_margin = isset($element['icon_margin']) ? $element['icon_margin'] : '';
     $icon_color = isset($element['icon_color']) ? $element['icon_color'] : '';
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
-
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
     <style type="text/css">
@@ -1601,6 +1724,9 @@ function post_grid_layout_element_css_share_button($args){
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
         <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
         }
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
         <?php if(!empty($icon_color)): ?>
@@ -1613,8 +1739,11 @@ function post_grid_layout_element_css_share_button($args){
             margin: <?php echo $icon_margin; ?>;
         <?php endif; ?>
         }
-
-
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
+        <?php endif; ?>
+        }
     </style>
     <?php
 }
@@ -1658,7 +1787,8 @@ function post_grid_layout_element_css_hr($args){
 
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $background_color = isset($element['background_color']) ? $element['background_color'] : '';
-
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
@@ -1670,6 +1800,14 @@ function post_grid_layout_element_css_hr($args){
         <?php endif; ?>
         <?php if(!empty($height)): ?>
             padding: <?php echo $height; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
         <?php endif; ?>
         }
     </style>
@@ -1745,7 +1883,8 @@ function post_grid_layout_element_css_five_star($args){
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $text_align = isset($element['text_align']) ? $element['text_align'] : '';
 
-
+    $css = isset($element['css']) ? $element['css'] : '';
+    $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
     <style type="text/css">
@@ -1761,6 +1900,14 @@ function post_grid_layout_element_css_five_star($args){
         <?php endif; ?>
         <?php if(!empty($text_align)): ?>
             text-align: <?php echo $text_align; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
+        }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+            <?php echo $css_hover; ?>
         <?php endif; ?>
         }
     </style>

@@ -3,7 +3,7 @@
 Plugin Name: Post Grid by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/
 Description: Awesome post grid for query post from any post type and display on grid.
-Version: 2.0.45
+Version: 2.0.46
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -21,7 +21,7 @@ if( !class_exists( 'PostGrid' )){
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid');
-            define('post_grid_version', '2.0.45');
+            define('post_grid_version', '2.0.46');
 
             include('includes/classes/class-post-types.php');
             include('includes/functions/functions-settings-hook.php');
@@ -78,24 +78,18 @@ if( !class_exists( 'PostGrid' )){
             $class_post_grid_functions = new class_post_grid_functions();
 
 
-
-            $post_grid_layout_content = get_option('post_grid_layout_content');
-            if (empty($post_grid_layout_content)){
-                $layout_content_list = $class_post_grid_functions->layout_content_list();
-                update_option('post_grid_layout_content', $layout_content_list);
-            }
-
-
-
             $post_grid_info = get_option('post_grid_info');
             $post_grid_info['current_version'] = post_grid_version;
-            $post_grid_info['last_version'] = isset($post_grid_info['last_version']) ? $post_grid_info['last_version'] : '2.0.30';
+            $post_grid_info['last_version'] = '2.0.44';
             $post_grid_info['data_update_status'] = isset($post_grid_info['data_update_status']) ? $post_grid_info['data_update_status'] : 'pending';
             update_option('post_grid_info', $post_grid_info);
 
 
             $class_post_grid_post_types = new class_post_grid_post_types();
             $class_post_grid_post_types->_posttype_post_grid();
+            $class_post_grid_post_types->_posttype_post_grid_layout();
+
+
             flush_rewrite_rules();
 
             /*

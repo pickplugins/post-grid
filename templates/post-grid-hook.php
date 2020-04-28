@@ -39,11 +39,15 @@ function post_grid_container_search($args){
     $grid_id = $args['grid_id'];
     $post_grid_options = $args['options'];
 
-    $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
 
     $nav_top_search = isset($post_grid_options['nav_top']['search']) ? $post_grid_options['nav_top']['search'] : 'no';
+    $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
+
+    if($nav_top_search !='yes') return;
+
     $nav_top_search_placeholder = isset($post_grid_options['nav_top']['search_placeholder']) ? $post_grid_options['nav_top']['search_placeholder'] : __('Start typing', 'post-grid');
     $nav_top_search_icon = isset($post_grid_options['nav_top']['search_icon']) ? $post_grid_options['nav_top']['search_icon'] : '<i class="fas fa-search"></i>';
+
 
 
     $keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : '';
@@ -74,7 +78,7 @@ add_action('post_grid_container', 'post_grid_posts_loop');
 
 function post_grid_posts_loop($args){
 
-    //global $wp_query;
+    global $wp_query;
 
     $post_grid_options = $args['options'];
     $grid_id = $args['grid_id'];
@@ -196,7 +200,7 @@ function post_grid_posts_loop($args){
 
     $post_grid_wp_query = new WP_Query($query_args);
 
-    //$wp_query = $post_grid_wp_query;
+    $wp_query = $post_grid_wp_query;
 
 
     //echo '<pre>'.var_export($post_grid_wp_query, true).'</pre>';

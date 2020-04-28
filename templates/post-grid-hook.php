@@ -31,10 +31,99 @@ function post_grid_main_container($atts){
 }
 
 
+add_action('post_grid_container', 'post_grid_container_search', 5);
+
+function post_grid_container_search($args){
+
+
+    $grid_id = $args['id'];
+    $post_grid_options = $args['options'];
+
+    $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
+
+    $nav_top_search = isset($post_grid_options['nav_top']['search']) ? $post_grid_options['nav_top']['search'] : 'no';
+    $nav_top_search_placeholder = isset($post_grid_options['nav_top']['search_placeholder']) ? $post_grid_options['nav_top']['search_placeholder'] : __('Start typing', 'post-grid');
+    $nav_top_search_icon = isset($post_grid_options['nav_top']['search_icon']) ? $post_grid_options['nav_top']['search_icon'] : '<i class="fas fa-search"></i>';
+
+
+    $keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : '';
+
+    ?>
+
+    <form action="#" method="get" class="nav-search">
+
+        <div class="field-wrap">
+            <label>Keyword:</label>
+            <div class="input-wrap">
+                <input name="keyword" grid_id="<?php echo $grid_id; ?>" title="<?php echo __('Press enter to reset', 'post-grid'); ?>" class="search" type="text"  placeholder="<?php echo $nav_top_search_placeholder; ?>" value="<?php echo $keyword; ?>">
+            </div>
+        </div>
+
+        <div class="field-wrap">
+            <label>Category:</label>
+            <div class="input-wrap">
+                <select>
+                    <option>None</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="field-wrap">
+            <label>Category:</label>
+            <div class="input-wrap">
+                <input type="text">
+            </div>
+        </div>
+
+        <div class="field-wrap">
+            <label>Category:</label>
+            <div class="input-wrap">
+                <input type="text">
+            </div>
+        </div>
+
+        <div class="field-wrap">
+            <label>Category:</label>
+            <div class="input-wrap">
+                <select>
+                    <option>None</option>
+                </select>
+            </div>
+        </div>
+
+
+        <?php
+
+        do_action('post_grid_search_fields', $args);
+
+        ?>
+
+
+        <div class="field-wrap">
+            <input type="submit" value="Submit">
+        </div>
+
+
+    </form>
+
+
+    <?php
+
+
+
+}
+
+
+
+
+
+
+
 add_action('post_grid_container', 'post_grid_posts_loop');
 
 function post_grid_posts_loop($args){
 
+    //global $wp_query;
 
     $post_grid_options = $args['options'];
     $grid_id = $args['grid_id'];
@@ -55,12 +144,7 @@ function post_grid_posts_loop($args){
     $taxonomies = !empty($post_grid_options['taxonomies']) ? $post_grid_options['taxonomies'] : array();
     $categories_relation = isset($post_grid_options['categories_relation']) ? $post_grid_options['categories_relation'] : 'OR';
 
-    $meta_query = !empty($post_grid_options['meta_query']) ? $post_grid_options['meta_query'] : array();
-    $meta_query_relation = isset($post_grid_options['meta_query_relation'])? $post_grid_options['meta_query_relation'] : 'OR';
-
     $query_args = array();
-
-
 
 
 
@@ -86,22 +170,12 @@ function post_grid_posts_loop($args){
 
 
     $tax_query_relation = array( 'relation' => $categories_relation );
-
     $tax_query = array_merge($tax_query_relation, $tax_query );
-
-
-
 
 
     /* ################################ Keyword query ######################################*/
 
-    if(isset($_GET['keyword'])){
-
-        $keyword = sanitize_text_field($_GET['keyword']);
-
-    }
-
-
+    $keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : $keyword;
 
 
     /* ################################ Single pages ######################################*/
@@ -167,16 +241,18 @@ function post_grid_posts_loop($args){
     $query_args = apply_filters('post_grid_query_args', $query_args, $args);
 
 
-    echo '<pre>'.var_export($query_args, true).'</pre>';
+    //echo '<pre>'.var_export($query_args, true).'</pre>';
 
-    $wp_query = new WP_Query($query_args);
+    $post_grid_wp_query = new WP_Query($query_args);
+
+    //$wp_query = $post_grid_wp_query;
 
 
-    //echo '<pre>'.var_export($wp_query, true).'</pre>';
+    //echo '<pre>'.var_export($post_grid_wp_query, true).'</pre>';
 
     $loop_count = 0;
 
-    if ( $wp_query->have_posts() ) :
+    if ( $post_grid_wp_query->have_posts() ) :
 
         do_action('post_grid_loop_top', $args);
 
@@ -185,7 +261,7 @@ function post_grid_posts_loop($args){
             <?php
             do_action('post_grid_before_loop', $args);
 
-            while ( $wp_query->have_posts() ) : $wp_query->the_post();
+            while ( $post_grid_wp_query->have_posts() ) : $post_grid_wp_query->the_post();
                 $post_id = get_the_ID();
                 $args['post_id'] = $post_id;
                 $args['loop_count'] = $loop_count;
@@ -200,7 +276,7 @@ function post_grid_posts_loop($args){
             ?>
         </div>
         <?php
-        do_action('post_grid_loop_bottom', $args, $wp_query);
+        do_action('post_grid_loop_bottom', $args, $post_grid_wp_query);
 
         wp_reset_query();
         wp_reset_postdata();
@@ -550,7 +626,7 @@ function post_grid_item_layout_new($args){
 
 add_action('post_grid_loop_bottom', 'post_grid_loop_bottom_pagination', 10, 2);
 
-function post_grid_loop_bottom_pagination($args, $wp_query){
+function post_grid_loop_bottom_pagination($args, $post_grid_wp_query){
 
 
     $post_grid_options = $args['options'];
@@ -568,7 +644,7 @@ function post_grid_loop_bottom_pagination($args, $wp_query){
 
     $pagination_prev_text = !empty($post_grid_options['pagination']['prev_text']) ? $post_grid_options['pagination']['prev_text'] : __('« Previous', 'post-grid');
     $pagination_next_text = !empty($post_grid_options['pagination']['next_text']) ? $post_grid_options['pagination']['next_text'] : __('Next »', 'post-grid');
-    $max_num_pages = $wp_query->max_num_pages;
+    $max_num_pages = $post_grid_wp_query->max_num_pages;
 
 
     ?>

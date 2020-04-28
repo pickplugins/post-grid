@@ -58,50 +58,7 @@ function post_grid_posts_loop($args){
     $meta_query = !empty($post_grid_options['meta_query']) ? $post_grid_options['meta_query'] : array();
     $meta_query_relation = isset($post_grid_options['meta_query_relation'])? $post_grid_options['meta_query_relation'] : 'OR';
 
-    $default_query_args = array();
-
-    $meta_query_args = array();
-    if(!empty($meta_query)):
-
-        $i = 0;
-        foreach ($meta_query as  $meta_queryIndex=>$meta_queryData):
-            $arg_type = $meta_queryData['arg_type'];
-            $relation = $meta_queryData['relation'];
-
-            if($arg_type == 'single'):
-                $meta_query_args[$meta_queryIndex]['key'] = $meta_queryData['key'];
-                $meta_query_args[$meta_queryIndex]['value'] = $meta_queryData['value'];
-                $meta_query_args[$meta_queryIndex]['compare'] = $meta_queryData['compare'];
-                $meta_query_args[$meta_queryIndex]['type'] = $meta_queryData['type'];
-
-            elseif($arg_type == 'group'):
-                $group_args = isset($meta_queryData['args']) ? $meta_queryData['args'] : array();
-
-                if(!empty($group_args)):
-                    $meta_query_args[$meta_queryIndex]['relation'] = $relation;
-                    foreach ($group_args as $argIndex=>$arg):
-                        $meta_query_args[$meta_queryIndex][$argIndex]['key'] = $arg['key'];
-                        $meta_query_args[$meta_queryIndex][$argIndex]['value'] = $arg['value'];
-                        $meta_query_args[$meta_queryIndex][$argIndex]['compare'] = $arg['compare'];
-                        $meta_query_args[$meta_queryIndex][$argIndex]['type'] = $arg['type'];
-                    endforeach;
-                endif;
-            endif;
-        endforeach;
-    endif;
-
-    $meta_query = $meta_query_args;
-    if(!empty($meta_query)){
-        $meta_query_relation = array('relation' => $meta_query_relation);
-        $meta_query = array_merge($meta_query_relation, $meta_query );
-    }
-
-
-
-
-    //global $wp_query;
-
-
+    $query_args = array();
 
 
 
@@ -152,7 +109,7 @@ function post_grid_posts_loop($args){
 
     if(is_singular()):
         $current_post_id = get_the_ID();
-        $default_query_args['post__not_in'] = array($current_post_id);
+        $query_args['post__not_in'] = array($current_post_id);
     endif;
 
 
@@ -170,57 +127,56 @@ function post_grid_posts_loop($args){
 
 
     if(!empty($post_types))
-        $default_query_args['post_type'] = $post_types;
+        $query_args['post_type'] = $post_types;
 
     if(!empty($post_status))
-        $default_query_args['post_status'] = $post_status;
+        $query_args['post_status'] = $post_status;
 
     if(!empty($keyword))
-        $default_query_args['s'] = $keyword;
+        $query_args['s'] = $keyword;
 
 
     if(!empty($exclude_post_id))
-        $default_query_args['post__not_in'] = $exclude_post_id;
+        $query_args['post__not_in'] = $exclude_post_id;
 
     if(!empty($query_order))
-        $default_query_args['order'] = $query_order;
+        $query_args['order'] = $query_order;
 
     if(!empty($query_orderby))
-        $default_query_args['orderby'] = $query_orderby;
+        $query_args['orderby'] = $query_orderby;
 
     if(!empty($query_orderby_meta_key))
-        $default_query_args['meta_key'] = $query_orderby_meta_key;
+        $query_args['meta_key'] = $query_orderby_meta_key;
 
     if(!empty($posts_per_page))
-        $default_query_args['posts_per_page'] = (int)$posts_per_page;
+        $query_args['posts_per_page'] = (int)$posts_per_page;
 
     if(!empty($paged))
-        $default_query_args['paged'] = $paged;
+        $query_args['paged'] = $paged;
 
     if(!empty($offset))
-        $default_query_args['offset'] = $offset + ( ($paged-1) * $posts_per_page );
+        $query_args['offset'] = $offset + ( ($paged-1) * $posts_per_page );
 
 
     if(!empty($tax_query))
-        $default_query_args['tax_query'] = $tax_query;
+        $query_args['tax_query'] = $tax_query;
 
-    if(!empty($meta_query))
-        $default_query_args['meta_query'] = $meta_query;
 
-    $query_merge = apply_filters('post_grid_filter_query_args', $default_query_args, $grid_id);
 
-    //echo '<pre>'.var_export($query_merge, true).'</pre>';
+    $query_args = apply_filters('post_grid_filter_query_args', $query_args, $grid_id);
+    $query_args = apply_filters('post_grid_query_args', $query_args, $args);
 
-    $post_grid_wp_query = new WP_Query($query_merge);
 
-    // for global use
-    global $wp_query;
-    $wp_query = $post_grid_wp_query;
+    echo '<pre>'.var_export($query_args, true).'</pre>';
 
+    $wp_query = new WP_Query($query_args);
+
+
+    //echo '<pre>'.var_export($wp_query, true).'</pre>';
 
     $loop_count = 0;
 
-    if ( $post_grid_wp_query->have_posts() ) :
+    if ( $wp_query->have_posts() ) :
 
         do_action('post_grid_loop_top', $args);
 
@@ -229,7 +185,7 @@ function post_grid_posts_loop($args){
             <?php
             do_action('post_grid_before_loop', $args);
 
-            while ( $post_grid_wp_query->have_posts() ) : $post_grid_wp_query->the_post();
+            while ( $wp_query->have_posts() ) : $wp_query->the_post();
                 $post_id = get_the_ID();
                 $args['post_id'] = $post_id;
                 $args['loop_count'] = $loop_count;
@@ -244,7 +200,7 @@ function post_grid_posts_loop($args){
             ?>
         </div>
         <?php
-        do_action('post_grid_loop_bottom', $args, $post_grid_wp_query);
+        do_action('post_grid_loop_bottom', $args, $wp_query);
 
         wp_reset_query();
         wp_reset_postdata();

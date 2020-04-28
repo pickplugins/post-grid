@@ -124,7 +124,33 @@ function post_grid_layout_elements_option_custom_text($parameters){
             $settings_tabs_field->generate_field($args);
 
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[custom_text]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
 
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[custom_text]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
 
             ob_start();
@@ -349,8 +375,6 @@ function post_grid_layout_elements_option_title($parameters){
             );
 
             $settings_tabs_field->generate_field($args);
-
-
 
 
             ob_start();
@@ -582,6 +606,8 @@ function post_grid_layout_elements_option_title_link($parameters){
             $settings_tabs_field->generate_field($args);
 
 
+
+
             ob_start();
             ?>
             <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
@@ -755,6 +781,35 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
             );
 
             $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[excerpt_read_more]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[excerpt_read_more]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             ob_start();
             ?>
@@ -932,6 +987,34 @@ function post_grid_layout_elements_option_read_more($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[read_more]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[read_more]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             ob_start();
             ?>
@@ -1011,7 +1094,7 @@ function post_grid_layout_elements_option_media($parameters){
                         $enable = isset($argData['enable']) ? $argData['enable'] :'';
 
                         if($enable == 'yes')
-                        $media_source_new[$elementIndex]  = array('enable'=> $enable);
+                            $media_source_new[$elementIndex]  = array('enable'=> $enable);
 
                     }
                 $media_sources_new = array_replace($media_source_new, $media_sources_list);
@@ -1021,38 +1104,38 @@ function post_grid_layout_elements_option_media($parameters){
                     <?php
 
                     if(!empty($media_sources_new))
-                    foreach ($media_sources_new as $source_id => $source_name ) {
+                        foreach ($media_sources_new as $source_id => $source_name ) {
 
-                        if(is_array($source_name)) continue;
+                            if(is_array($source_name)) continue;
 
-                        $media_source_options = array();
-                        $source_data = isset($media_source[$source_id]) ? $media_source[$source_id] : array();
-                        $source_enable = isset($media_source[$source_id]['enable']) ? $media_source[$source_id]['enable'] : '';
+                            $media_source_options = array();
+                            $source_data = isset($media_source[$source_id]) ? $media_source[$source_id] : array();
+                            $source_enable = isset($media_source[$source_id]['enable']) ? $media_source[$source_id]['enable'] : '';
 
-                        $media_source_options['index'] = $element_index;
-                        $media_source_options['input_name'] = $input_name;
-                        $media_source_options['source_data'] = $source_data;
+                            $media_source_options['index'] = $element_index;
+                            $media_source_options['input_name'] = $input_name;
+                            $media_source_options['source_data'] = $source_data;
 
-                        ?>
-                        <div class="item">
-                            <div class="element-title header ">
-                                <span class="sort"><i class="fas fa-sort"></i></span>
-                                <?php
-                                if($source_enable == 'yes'):
-                                    ?><i class="fas fa-check"></i><?php
-                                else:
-                                    ?><i class="fas fa-times"></i><?php
-                                endif;?>
-                                <span class="expand"><?php echo $source_name; ?></span>
+                            ?>
+                            <div class="item">
+                                <div class="element-title header ">
+                                    <span class="sort"><i class="fas fa-sort"></i></span>
+                                    <?php
+                                    if($source_enable == 'yes'):
+                                        ?><i class="fas fa-check"></i><?php
+                                    else:
+                                        ?><i class="fas fa-times"></i><?php
+                                    endif;?>
+                                    <span class="expand"><?php echo $source_name; ?></span>
+                                </div>
+                                <div class="element-options options">
+                                    <?php
+                                    do_action('media_source_options_'.$source_id, $media_source_options);
+                                    ?>
+                                </div>
                             </div>
-                            <div class="element-options options">
-                                <?php
-                                do_action('media_source_options_'.$source_id, $media_source_options);
-                                ?>
-                            </div>
-                        </div>
-                        <?php
-                    }
+                            <?php
+                        }
                     ?>
                 </div>
                 <?php
@@ -1192,6 +1275,34 @@ function post_grid_layout_elements_option_media($parameters){
             $settings_tabs_field->generate_field($args);
 
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[media]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[media]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
             ob_start();
             ?>
             <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
@@ -1267,12 +1378,12 @@ function post_grid_layout_elements_option_thumb_link($parameters){
             $get_intermediate_image_sizes =  get_intermediate_image_sizes();
 
             if(!empty($get_intermediate_image_sizes))
-            foreach($get_intermediate_image_sizes as $size_key){
-                $size_name = str_replace('_', ' ',$size_key);
-                $size_name = str_replace('-', ' ',$size_name);
+                foreach($get_intermediate_image_sizes as $size_key){
+                    $size_name = str_replace('_', ' ',$size_key);
+                    $size_name = str_replace('-', ' ',$size_name);
 
-                $thumbnail_sizes[$size_key] = ucfirst($size_name);
-            }
+                    $thumbnail_sizes[$size_key] = ucfirst($size_name);
+                }
             //echo '<pre>'.var_export($thumbnail_sizes, true).'</pre>';
 
             $args = array(
@@ -1399,6 +1510,35 @@ function post_grid_layout_elements_option_thumb_link($parameters){
             );
 
             $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[thumb_link]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[thumb_link]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             ob_start();
             ?>
@@ -1607,6 +1747,35 @@ function post_grid_layout_elements_option_thumb($parameters){
             );
 
             $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[thumb]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[thumb]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             ob_start();
             ?>
@@ -1828,6 +1997,35 @@ function post_grid_layout_elements_option_content($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[content]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[content]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
             ob_start();
             ?>
             <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
@@ -2033,7 +2231,6 @@ function post_grid_layout_elements_option_excerpt($parameters){
 
             $settings_tabs_field->generate_field($args);
 
-
             ob_start();
             ?>
             <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}
@@ -2078,7 +2275,6 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
 
     $wrapper_id = isset($element_data['wrapper_id']) ? $element_data['wrapper_id'] : '';
     $wrapper_class = isset($element_data['wrapper_class']) ? $element_data['wrapper_class'] : '';
-    $css_idle = isset($element_data['css_idle']) ? $element_data['css_idle'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
 
 
@@ -2126,18 +2322,7 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
 
             $settings_tabs_field->generate_field($args);
 
-            $args = array(
-                'id'		=> 'css_idle',
-                'css_id'		=> 'css_idle_'.preg_replace('/\D/', '', $input_name) ,
-                'parent' => $input_name.'[wrapper_start]',
-                'title'		=> __('Custom CSS','post-grid'),
-                'details'	=> __('Write custom CSS. do not use <code>&lt;style>&lt;/style></code>','post-grid'),
-                'type'		=> 'scripts_css',
-                'value'		=> $css_idle,
-                'default'		=> '',
-            );
 
-            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'margin',
@@ -2149,6 +2334,34 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
                 'value'		=> $margin,
                 'default'		=> '',
                 'placeholder'		=> '5px 0',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[wrapper_start]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[wrapper_start]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
             );
 
             $settings_tabs_field->generate_field($args);
@@ -2387,6 +2600,33 @@ function post_grid_layout_elements_option_categories($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[categories]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[categories]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             ob_start();
             ?>
@@ -2532,6 +2772,34 @@ function post_grid_layout_elements_option_tags($parameters){
                 'value'		=> $text_align,
                 'default'		=> 'left',
                 'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[tags]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[tags]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
             );
 
             $settings_tabs_field->generate_field($args);
@@ -2683,8 +2951,33 @@ function post_grid_layout_elements_option_comments_count($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[comments_count]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
 
+            $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[comments_count]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             ob_start();
             ?>
@@ -2804,6 +3097,35 @@ function post_grid_layout_elements_option_five_star($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[five_star]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[five_star]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
             ob_start();
             ?>
             <textarea readonly type="text"  onclick="this.select();">.element_<?php echo $element_index?>{}</textarea>
@@ -2899,6 +3221,34 @@ function post_grid_layout_elements_option_hr($parameters){
                 'value'		=> $margin,
                 'default'		=> '',
                 'placeholder'		=> '5px 10px',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[hr]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[hr]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3002,6 +3352,34 @@ function post_grid_layout_elements_option_share_button($parameters){
                 'type'		=> 'colorpicker',
                 'value'		=> $icon_color,
                 'default'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[share_button]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[share_button]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3157,6 +3535,33 @@ function post_grid_layout_elements_option_author($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[author]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[author]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             ob_start();
             ?>
@@ -3292,6 +3697,34 @@ function post_grid_layout_elements_option_author_link($parameters){
                 'value'		=> $margin,
                 'default'		=> '',
                 'placeholder'		=> '5px 10px',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[author_link]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[author_link]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3463,6 +3896,33 @@ function post_grid_layout_elements_option_post_date($parameters){
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'		=> 'css',
+                'css_id'		=> $element_index.'_css',
+                'parent' => $input_name.'[post_date]',
+                'title'		=> __('Custom CSS','post-grid'),
+                'details'	=> __('Set csutom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'css_hover',
+                'css_id'		=> $element_index.'_css_hover',
+                'parent' => $input_name.'[post_date]',
+                'title'		=> __('Hover CSS','post-grid'),
+                'details'	=> __('Set hover custom CSS.','post-grid'),
+                'type'		=> 'textarea',
+                'value'		=> $css_hover,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             ob_start();
             ?>

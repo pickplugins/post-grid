@@ -129,9 +129,9 @@ if( !class_exists( 'PostGrid' )){
             wp_enqueue_script('jquery');
 
             // Register Scripts & JS
-            wp_register_script('post_grid_scripts', post_grid_plugin_url.'/assets/frontend/js/scripts.js', array('jquery'));
-            wp_register_script('masonry', post_grid_plugin_url.'/assets/frontend/js/masonry.pkgd.min.js', array('jquery'));
-            wp_register_script('imagesloaded', post_grid_plugin_url.'/assets/frontend/js/imagesloaded.pkgd.js', array('jquery'));
+            wp_register_script('post_grid_scripts', post_grid_plugin_url.'assets/frontend/js/scripts.js', array('jquery'));
+            wp_register_script('masonry', post_grid_plugin_url.'assets/frontend/js/masonry.pkgd.min.js', array('jquery'));
+            wp_register_script('imagesloaded', post_grid_plugin_url.'assets/frontend/js/imagesloaded.pkgd.js', array('jquery'));
 
             // Register CSS & Styles
             wp_register_style(  'post-grid-style', post_grid_plugin_url . 'assets/frontend/css/style.css');

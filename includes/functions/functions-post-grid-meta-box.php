@@ -1703,6 +1703,7 @@ add_action('post_grid_metabox_tabs_content_search', 'post_grid_metabox_tabs_cont
 
 function post_grid_metabox_tabs_content_search($tab, $post_id){
 
+    $class_post_grid_meta_box = new class_post_grid_meta_box();
 
     $settings_tabs_field = new settings_tabs_field();
     $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
@@ -1711,6 +1712,9 @@ function post_grid_metabox_tabs_content_search($tab, $post_id){
     $nav_top_search_placeholder = !empty($post_grid_meta_options['nav_top']['search_placeholder']) ? $post_grid_meta_options['nav_top']['search_placeholder'] : __('Start typing', 'post-grid');
     $nav_top_search_icon = !empty($post_grid_meta_options['nav_top']['search_icon']) ? $post_grid_meta_options['nav_top']['search_icon'] : '<i class="fas fa-search"></i>';
     $search_loading_icon = !empty($post_grid_meta_options['nav_top']['search_loading_icon']) ? $post_grid_meta_options['nav_top']['search_loading_icon'] : '<i class="fas fa-spinner fa-spin"></i>';
+
+    $query_order = !empty($post_grid_meta_options['nav_top']['query_order']) ? $post_grid_meta_options['nav_top']['query_order'] : 'DESC';
+    $query_orderby = !empty($post_grid_meta_options['nav_top']['query_orderby']) ? $post_grid_meta_options['nav_top']['query_orderby'] : array('date');
 
     ?>
     <div class="section">
@@ -1722,8 +1726,8 @@ function post_grid_metabox_tabs_content_search($tab, $post_id){
         $args = array(
             'id'		=> 'search',
             'parent'		=> 'post_grid_meta_options[nav_top]',
-            'title'		=> __('Display search input','post-grid'),
-            'details'	=> __('Display or hide search input field at top.','post-grid'),
+            'title'		=> __('Display search form','post-grid'),
+            'details'	=> __('Display or hide search form at top.','post-grid'),
             'type'		=> 'radio',
             'value'		=> $nav_top_search,
             'default'		=> 'no',
@@ -1740,7 +1744,7 @@ function post_grid_metabox_tabs_content_search($tab, $post_id){
         $args = array(
             'id'		=> 'search_placeholder',
             'parent'		=> 'post_grid_meta_options[nav_top]',
-            'title'		=> __('Search input placeholder text','post-grid'),
+            'title'		=> __('Placeholder text','post-grid'),
             'details'	=> __('Custom text for search input field','post-grid'),
             'type'		=> 'text',
             'value'		=> $nav_top_search_placeholder,
@@ -1767,7 +1771,7 @@ function post_grid_metabox_tabs_content_search($tab, $post_id){
         $args = array(
             'id'		=> 'search_loading_icon',
             'parent'		=> 'post_grid_meta_options[nav_top]',
-            'title'		=> __('Search loading icon','post-grid'),
+            'title'		=> __('Loading icon','post-grid'),
             'details'	=> __('Custom icon for search input field, you can use <a target="_blank" href="https://fontawesome.com/icons">fontawesome</a> icons.','post-grid'),
             'type'		=> 'text',
             'value'		=> $search_loading_icon,
@@ -1778,6 +1782,38 @@ function post_grid_metabox_tabs_content_search($tab, $post_id){
 
 
 
+        $args = array(
+            'id'		=> 'query_order',
+            'parent'		=> 'post_grid_meta_options[nav_top]',
+            'title'		=> __('Post query order','post-grid'),
+            'details'	=> __('Query order ascending or descending.','post-grid'),
+            'type'		=> 'select',
+            //'for'		=> $taxonomy,
+            //'multiple'		=> true,
+            'value'		=> $query_order,
+            'default'		=> 'DESC',
+            'args'		=> array(
+                'ASC'=>__('Ascending','post-grid'),
+                'DESC'=>__('Descending','post-grid'),
+            ),
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+        $args = array(
+            'id'		=> 'query_orderby',
+            'parent'		=> 'post_grid_meta_options[nav_top]',
+            'title'		=> __('Post query orderby','post-grid'),
+            'details'	=> __('Select post query orderby','post-grid'),
+            'type'		=> 'select2',
+            'multiple'		=> true,
+            'value'		=> $query_orderby,
+            'default'		=> array('date'),
+            'args'		=> $class_post_grid_meta_box->get_query_orderby(),
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
 
 
 

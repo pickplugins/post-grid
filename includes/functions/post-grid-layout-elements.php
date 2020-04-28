@@ -763,6 +763,14 @@ function post_grid_layout_element_css_media($args){
     $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
     $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
 
+    $height_large_type = isset($element['large_type']) ? $element['large_type'] : '';
+    $height_medium_type = isset($element['medium_type']) ? $element['medium_type'] : '';
+    $height_small_type = isset($element['small_type']) ? $element['small_type'] : '';
+
+
+
+    $padding = isset($element['padding']) ? $element['padding'] : '';
+
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
@@ -775,7 +783,20 @@ function post_grid_layout_element_css_media($args){
         <?php if(!empty($margin)): ?>
             margin: <?php echo $margin; ?>;
         <?php endif; ?>
+        <?php if(!empty($padding)): ?>
+            padding: <?php echo $padding; ?>;
+        <?php endif; ?>
+        <?php if(!empty($css)): ?>
+        <?php echo $css; ?>
+        <?php endif; ?>
         }
+        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+        <?php if(!empty($css_hover)): ?>
+        <?php echo $css_hover; ?>
+        <?php endif; ?>
+        }
+
+
 
         @media only screen and (min-width: 1024px ){
             .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{

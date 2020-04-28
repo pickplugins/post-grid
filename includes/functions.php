@@ -1005,156 +1005,165 @@ add_action('wp_ajax_post_grid_layout_add_elements', 'post_grid_layout_add_elemen
 
 
 function post_grid_ajax_search(){
+
+
+
+    $grid_id = isset($_POST['grid_id']) ? sanitize_text_field($_POST['grid_id']) : '';
+
+    $post_grid_options = get_post_meta($grid_id, 'post_grid_meta_options', true);
+
+    $keyword = isset($_POST['keyword']) ? sanitize_text_field($_POST['keyword']) : '';
+
+
+    $post_types = isset($post_grid_options['post_types']) ? $post_grid_options['post_types'] : array('post');
+    //$keyword = isset($post_grid_options['keyword']) ? $post_grid_options['keyword'] : '';
+    $exclude_post_id = isset($post_grid_options['exclude_post_id']) ? $post_grid_options['exclude_post_id'] : '';
+
+    $post_status = isset($post_grid_options['post_status']) ? $post_grid_options['post_status'] : 'publish';
+    $query_order = isset($post_grid_options['query_order']) ? $post_grid_options['query_order'] : 'DESC';
+    $query_orderby = isset($post_grid_options['query_orderby']) ? $post_grid_options['query_orderby'] : array('date');
+    $query_orderby = implode(' ', $query_orderby);
+    $offset = isset($post_grid_options['offset']) ? (int)$post_grid_options['offset'] : '';
+    $posts_per_page = isset($post_grid_options['posts_per_page']) ? $post_grid_options['posts_per_page'] : 10;
+    $query_orderby_meta_key = isset($post_grid_options['query_orderby_meta_key']) ? $post_grid_options['query_orderby_meta_key'] : '';
+
+
+    $taxonomies = !empty($post_grid_options['taxonomies']) ? $post_grid_options['taxonomies'] : array();
+    $categories_relation = isset($post_grid_options['categories_relation']) ? $post_grid_options['categories_relation'] : 'OR';
+
+    $query_args = array();
+
+
+
+    /* ################################ Tax query ######################################*/
+
+    $tax_query = array();
+
+    foreach($taxonomies as $taxonomy => $taxonomyData){
+
+        $terms = !empty($taxonomyData['terms']) ? $taxonomyData['terms'] : array();
+        $terms_relation = !empty($taxonomyData['terms_relation']) ? $taxonomyData['terms_relation'] : 'OR';
+        $checked = !empty($taxonomyData['checked']) ? $taxonomyData['checked'] : '';
+
+        if(!empty($terms) && !empty($checked)){
+            $tax_query[] = array(
+                'taxonomy' => $taxonomy,
+                'field'    => 'term_id',
+                'terms'    => $terms,
+                'operator'    => $terms_relation,
+            );
+        }
+    }
+
+
+    $tax_query_relation = array( 'relation' => $categories_relation );
+    $tax_query = array_merge($tax_query_relation, $tax_query );
+
+
+    /* ################################ Keyword query ######################################*/
+
+    $keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : $keyword;
+
+
+    /* ################################ Single pages ######################################*/
+
+
+    if(is_singular()):
+        $current_post_id = get_the_ID();
+        $query_args['post__not_in'] = array($current_post_id);
+    endif;
+
+
+
+
+    if ( get_query_var('paged') ) {
+        $paged = get_query_var('paged');
+    }elseif ( get_query_var('page') ) {
+        $paged = get_query_var('page');
+    }else {
+        $paged = 1;
+    }
+
+
+
+
+    if(!empty($post_types))
+        $query_args['post_type'] = $post_types;
+
+    if(!empty($post_status))
+        $query_args['post_status'] = $post_status;
+
+    if(!empty($keyword))
+        $query_args['s'] = $keyword;
+
+
+    if(!empty($exclude_post_id))
+        $query_args['post__not_in'] = $exclude_post_id;
+
+    if(!empty($query_order))
+        $query_args['order'] = $query_order;
+
+    if(!empty($query_orderby))
+        $query_args['orderby'] = $query_orderby;
+
+    if(!empty($query_orderby_meta_key))
+        $query_args['meta_key'] = $query_orderby_meta_key;
+
+    if(!empty($posts_per_page))
+        $query_args['posts_per_page'] = (int)$posts_per_page;
+
+    if(!empty($paged))
+        $query_args['paged'] = $paged;
+
+    if(!empty($offset))
+        $query_args['offset'] = $offset + ( ($paged-1) * $posts_per_page );
+
+
+    if(!empty($tax_query))
+        $query_args['tax_query'] = $tax_query;
+
+
+
+    $query_args = apply_filters('post_grid_filter_query_args', $query_args, $grid_id);
+   // $query_args = apply_filters('post_grid_query_args', $query_args, $args);
+
+
+    //echo '<pre>'.var_export($query_args, true).'</pre>';
+
+    $post_grid_wp_query = new WP_Query($query_args);
+
+    //$wp_query = $post_grid_wp_query;
+
+    $args['options'] = $post_grid_options;
+    //echo '<pre>'.var_export($post_grid_wp_query, true).'</pre>';
+
+    $loop_count = 0;
+
+    ob_start();
+
+    if ( $post_grid_wp_query->have_posts() ) :
+        while ( $post_grid_wp_query->have_posts() ) : $post_grid_wp_query->the_post();
+            $post_id = get_the_ID();
+            $args['post_id'] = $post_id;
+            $args['loop_count'] = $loop_count;
+
+            do_action('post_grid_loop', $args);
+
+            $loop_count++;
+        endwhile;
+
+        wp_reset_query();
+        wp_reset_postdata();
+    endif;
+
+    $html = ob_get_clean();
+
+    echo $html;
+
+    die();
 		
-    $html = '';
-    $grid_id = sanitize_text_field($_POST['grid_id']);
 
-    include post_grid_plugin_dir.'/templates/variables.php';
-
-    $keyword = sanitize_text_field($_POST['keyword']);
-
-    include post_grid_plugin_dir.'/templates/query.php';
-    $odd_even = 0;
-		if ( $post_grid_wp_query->have_posts() ) :
-			while ( $post_grid_wp_query->have_posts() ) : $post_grid_wp_query->the_post();
-
-		    ob_start();
-
-
-                $item_post_id = get_the_ID();
-                //var_dump($item_post_id);
-
-
-                $post_grid_post_settings = get_post_meta( get_the_ID(), 'post_grid_post_settings', true );
-
-
-                //var_dump($post_grid_post_settings);
-
-                if($enable_multi_skin=='yes'){
-
-                    if(!empty($post_grid_post_settings['post_skin'])){
-
-                        $skin = $post_grid_post_settings['post_skin'];
-
-                    }
-                    else{
-
-                        $skin = $skin_main;
-                    }
-
-                }
-
-                if($odd_even%2==0){
-                    $odd_even_calss = 'even';
-                }
-                else{
-                    $odd_even_calss = 'odd';
-                }
-                $odd_even++;
-
-                if($grid_type=='glossary'){
-                    $glossary_str = get_the_title($item_post_id);
-                    $glossary_cha = isset($glossary_str[0]) ? $glossary_str[0] : '';
-                }
-
-
-                $item_css_class = array();
-
-                $item_css_class['item'] = 'item';
-                $item_css_class['item_id'] = 'item-'.$item_post_id;
-
-                $item_css_class['skin'] = 'skin '.$skin;
-                $item_css_class['odd_even'] = $odd_even_calss;
-
-                if($grid_type=='filterable' || $grid_type=='glossary'){
-                    $item_css_class['mix'] = 'mix';
-                    $item_css_class['post_term_slug'] = post_grid_term_slug_list($item_post_id);
-                }
-
-
-                if($grid_type=='glossary'){
-                    $item_css_class['glossary'] = $glossary_cha;
-                }
-
-
-                $item_css_class = apply_filters('post_grid_item_classes', $item_css_class);
-                $item_css_class = implode(' ', $item_css_class);
-
-
-
-
-                ?><div class="<?php echo $item_css_class; ?>">
-
-                <div class="layer-wrapper">
-                    <?php
-                    include post_grid_plugin_dir.'/templates/layer-media.php';
-                    include post_grid_plugin_dir.'/templates/layer-content.php';
-
-                    ?>
-                </div>
-
-                <?php
-
-                if($grid_type == 'timeline'){
-                    ?>
-                    <span class="timeline-arrow">
-                                    <i class="timeline-bubble"></i>
-                                </span>
-                    <?php
-                }
-                ?>
-
-
-
-
-                </div><!-- End .item --><?php
-
-                $post_grid_ads_loop_meta_options = get_post_meta($grid_id, 'post_grid_ads_loop_meta_options', true);
-
-                if(!empty($post_grid_ads_loop_meta_options['ads_positions'])){
-
-                    $ads_positions = $post_grid_ads_loop_meta_options['ads_positions'];
-                    $ads_positions = explode(',',$ads_positions);
-
-                    $ads_positions_html = $post_grid_ads_loop_meta_options['ads_positions_html'];
-
-                    $post_grid_ads_positions = apply_filters('post_grid_filter_ads_positions', $ads_positions);
-
-                    foreach($post_grid_ads_positions as $position){
-
-                        if( $post_grid_wp_query->current_post == $position ){
-
-                            if(!empty($ads_positions_html[$position]))
-                                echo apply_filters('post_grid_nth_item_html',$ads_positions_html[$position]);
-
-                        }
-                    }
-
-                }
-
-
-
-
-
-                $html.= ob_get_clean();
-
-
-	
-			endwhile;
-			wp_reset_query();
-		else:
-		
-			$html.='<div class="item">';
-			$html.=__('No post found', 'post-grid');  // .item
-			$html.='</div>';  // .item	
-				
-		endif;
-		
-		echo $html;
-		
-		die();
-		
-	}
+}
 
 add_action('wp_ajax_post_grid_ajax_search', 'post_grid_ajax_search');
 add_action('wp_ajax_nopriv_post_grid_ajax_search', 'post_grid_ajax_search');

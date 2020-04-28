@@ -36,7 +36,7 @@ add_action('post_grid_container', 'post_grid_container_search', 5);
 function post_grid_container_search($args){
 
 
-    $grid_id = $args['id'];
+    $grid_id = $args['grid_id'];
     $post_grid_options = $args['options'];
 
     $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
@@ -49,62 +49,13 @@ function post_grid_container_search($args){
     $keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : '';
 
     ?>
-
-    <form action="#" method="get" class="nav-search">
-
-        <div class="field-wrap">
-            <label>Keyword:</label>
-            <div class="input-wrap">
-                <input name="keyword" grid_id="<?php echo $grid_id; ?>" title="<?php echo __('Press enter to reset', 'post-grid'); ?>" class="search" type="text"  placeholder="<?php echo $nav_top_search_placeholder; ?>" value="<?php echo $keyword; ?>">
-            </div>
+    <div class="grid-nav-top">
+        <div class="nav-search">
+            <span class="search-icon"><?php echo $nav_top_search_icon; ?></span>
+            <input grid_id="<?php echo $grid_id; ?>" title="<?php echo __('Press enter to reset', 'post-grid'); ?>" class="search" type="text"  placeholder="<?php echo $nav_top_search_placeholder; ?>" value="<?php echo $keyword; ?>">
         </div>
+    </div>
 
-        <div class="field-wrap">
-            <label>Category:</label>
-            <div class="input-wrap">
-                <select>
-                    <option>None</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="field-wrap">
-            <label>Category:</label>
-            <div class="input-wrap">
-                <input type="text">
-            </div>
-        </div>
-
-        <div class="field-wrap">
-            <label>Category:</label>
-            <div class="input-wrap">
-                <input type="text">
-            </div>
-        </div>
-
-        <div class="field-wrap">
-            <label>Category:</label>
-            <div class="input-wrap">
-                <select>
-                    <option>None</option>
-                </select>
-            </div>
-        </div>
-
-
-        <?php
-
-        do_action('post_grid_search_fields', $args);
-
-        ?>
-
-
-        <div class="field-wrap">
-            <input type="submit" value="Submit">
-        </div>
-
-
-    </form>
 
 
     <?php

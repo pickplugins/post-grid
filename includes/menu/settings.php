@@ -22,12 +22,12 @@ $post_grid_settings_tab[] = array(
     'active' => ($current_tab == 'help_support') ? true : false,
 );
 
-$post_grid_settings_tab[] = array(
-    'id' => 'buy_pro',
-    'title' => sprintf(__('%s Buy Pro','post-grid'),'<i class="fas fa-store"></i>'),
-    'priority' => 9,
-    'active' => ($current_tab == 'buy_pro') ? true : false,
-);
+//$post_grid_settings_tab[] = array(
+//    'id' => 'buy_pro',
+//    'title' => sprintf(__('%s Buy Pro','post-grid'),'<i class="fas fa-store"></i>'),
+//    'priority' => 9,
+//    'active' => ($current_tab == 'buy_pro') ? true : false,
+//);
 
 $post_grid_settings_tab = apply_filters('post_grid_settings_tabs', $post_grid_settings_tab);
 

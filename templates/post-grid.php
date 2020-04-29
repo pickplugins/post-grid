@@ -135,8 +135,8 @@ if($enable_multi_skin=='yes'){
 
         ?>
         <div class="no-post-found">
-        <?php echo apply_filters('post_grid_no_post_text', __('No Post found','post-grid')); ?>
-        </div> <!-- .no-post-found -->
+        <?php echo apply_filters('post_grid_no_post_text', $no_post_text); ?>
+        </div>
         <?php
     endif;
 

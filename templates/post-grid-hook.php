@@ -246,14 +246,23 @@ function post_grid_posts_loop($args){
     <?php
     endif;
 
-
-
-
-
-
 }
 
+add_action('post_grid_loop_no_post', 'post_grid_loop_no_post');
 
+function post_grid_loop_no_post($args){
+
+    $post_grid_options = $args['options'];
+
+    $no_post_text = !empty($post_grid_options['no_post_text']) ? $post_grid_options['no_post_text'] : __('No post found','post-grid');
+
+    ?>
+    <div class="no-post-found">
+        <?php echo apply_filters('post_grid_no_post_text', $no_post_text); ?>
+    </div>
+    <?php
+
+}
 
 
 

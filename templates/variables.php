@@ -67,6 +67,7 @@ else{
     $meta_query = array();
 }
 
+$no_post_text = isset($post_grid_meta_options['no_post_text']) ? $post_grid_meta_options['no_post_text'] : __('No post found','post-grid');
 
 
 $sticky_post_query_type = isset($post_grid_meta_options['sticky_post_query']['type']) ? $post_grid_meta_options['sticky_post_query']['type'] : 'none';

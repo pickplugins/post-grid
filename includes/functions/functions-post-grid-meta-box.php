@@ -252,10 +252,7 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
     $categories_relation = !empty($post_grid_meta_options['categories_relation']) ? $post_grid_meta_options['categories_relation'] : 'OR';
     $taxonomies = !empty($post_grid_meta_options['taxonomies']) ? $post_grid_meta_options['taxonomies'] : array();
 
-    $meta_query = !empty($post_grid_meta_options['meta_query']) ? $post_grid_meta_options['meta_query'] : array();
-    $meta_query_relation = !empty($post_grid_meta_options['meta_query_relation']) ? $post_grid_meta_options['meta_query_relation'] : 'OR';
 
-    $extra_query_parameter = !empty($post_grid_meta_options['extra_query_parameter']) ? $post_grid_meta_options['extra_query_parameter'] : '';
 
     $post_status = !empty($post_grid_meta_options['post_status']) ? $post_grid_meta_options['post_status'] : array();
     $query_order = !empty($post_grid_meta_options['query_order']) ? $post_grid_meta_options['query_order'] : '';
@@ -267,32 +264,12 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
     $exclude_post_id = isset($post_grid_meta_options['exclude_post_id']) ? $post_grid_meta_options['exclude_post_id'] : '';
 
     $keyword = !empty($post_grid_meta_options['keyword']) ? $post_grid_meta_options['keyword'] :'';
-    $permission_query = !empty($post_grid_meta_options['permission_query']) ? $post_grid_meta_options['permission_query'] :'';
-    $ignore_archive = !empty($post_grid_meta_options['ignore_archive']) ? $post_grid_meta_options['ignore_archive'] :'';
-    $sticky_post_query_type = !empty($post_grid_meta_options['sticky_post_query']['type']) ? $post_grid_meta_options['sticky_post_query']['type'] :'none';
-    $ignore_sticky_posts = !empty($post_grid_meta_options['sticky_post_query']['ignore_sticky_posts']) ? $post_grid_meta_options['sticky_post_query']['ignore_sticky_posts'] :0;
-    $date_query_type = !empty($post_grid_meta_options['date_query']['type']) ? $post_grid_meta_options['date_query']['type'] : 'none';
-
-    $extact_date_year = !empty($post_grid_meta_options['date_query']['extact_date']['year']) ? $post_grid_meta_options['date_query']['extact_date']['year'] : '';
-    $extact_date_month = !empty($post_grid_meta_options['date_query']['extact_date']['month']) ? $post_grid_meta_options['date_query']['extact_date']['month'] : '';
-    $extact_date_day = !empty($post_grid_meta_options['date_query']['extact_date']['day']) ? $post_grid_meta_options['date_query']['extact_date']['day'] : '';
-    $between_two_date_after_year = !empty($post_grid_meta_options['date_query']['between_two_date']['after']['year']) ? $post_grid_meta_options['date_query']['between_two_date']['after']['year'] : '';
-    $between_two_date_after_month = !empty($post_grid_meta_options['date_query']['between_two_date']['after']['month']) ? $post_grid_meta_options['date_query']['between_two_date']['after']['month'] : '';
-    $between_two_date_after_day = !empty($post_grid_meta_options['date_query']['between_two_date']['after']['day']) ? $post_grid_meta_options['date_query']['between_two_date']['after']['day'] : '';
-    $between_two_date_before_year = !empty($post_grid_meta_options['date_query']['between_two_date']['before']['year']) ? $post_grid_meta_options['date_query']['between_two_date']['before']['year'] : '';
-    $between_two_date_before_month = !empty($post_grid_meta_options['date_query']['between_two_date']['before']['month']) ? $post_grid_meta_options['date_query']['between_two_date']['before']['month'] : '';
-    $between_two_date_before_day = !empty($post_grid_meta_options['date_query']['between_two_date']['before']['day']) ? $post_grid_meta_options['date_query']['between_two_date']['before']['day'] : '';
-    $between_two_date_inclusive = !empty($post_grid_meta_options['date_query']['between_two_date']['inclusive']) ? $post_grid_meta_options['date_query']['between_two_date']['inclusive'] : 'true';
 
 
-    $author_query_type = !empty($post_grid_meta_options['author_query']['type']) ? $post_grid_meta_options['author_query']['type'] : 'none';
-    $author__in = !empty($post_grid_meta_options['author_query']['author__in']) ? $post_grid_meta_options['author_query']['author__in'] : '';
-    $author__not_in = !empty($post_grid_meta_options['author_query']['author__not_in']) ? $post_grid_meta_options['author_query']['author__not_in'] : '';
 
-    $password_query_type = !empty($post_grid_meta_options['password_query']['type']) ? $post_grid_meta_options['password_query']['type'] : 'none';
-    $password_query_has_password = !empty($post_grid_meta_options['password_query']['has_password']) ? $post_grid_meta_options['password_query']['has_password'] : 'null';
-    $password_query_post_password = !empty($post_grid_meta_options['password_query']['post_password']) ? $post_grid_meta_options['password_query']['post_password'] : '';
 
+
+    $no_post_text = !empty($post_grid_meta_options['no_post_text']) ? $post_grid_meta_options['no_post_text'] : '';
 
 
 
@@ -331,22 +308,14 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         ?>
         <div class="setting-field">
             <div class="field-lable">Post Taxonomies & terms</div>
-
             <div class="field-input">
-
-
-                <?php
-               // echo post_grid_get_categories($post_id);
-                ?>
                 <div class="expandable" id="taxonomies-terms">
-
                     <?php
                     if(!empty($post_taxonomies_arr)):
                     foreach ($post_taxonomies_arr as $taxonomyIndex => $taxonomy){
 
                         $taxonomy_term_arr = array();
                         $the_taxonomy = get_taxonomy($taxonomy);
-
                         $terms_relation = isset($taxonomies[$taxonomy]['terms_relation']) ? $taxonomies[$taxonomy]['terms_relation'] : 'IN';
                         $terms = isset($taxonomies[$taxonomy]['terms']) ? $taxonomies[$taxonomy]['terms'] : array();
                         $checked = isset($taxonomies[$taxonomy]['checked']) ? $taxonomies[$taxonomy]['checked'] : '';
@@ -355,23 +324,12 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
                             'hide_empty' => false,
                         ) );
 
-
-                        //var_dump($taxonomy_terms);
-
                         if(!empty($taxonomy_terms))
                         foreach ($taxonomy_terms as $taxonomy_term){
-
-
                             $taxonomy_term_arr[$taxonomy_term->term_id] =$taxonomy_term->name.'('.$taxonomy_term->count.')';
                         }
-
                         $taxonomy_term_arr = !empty($taxonomy_term_arr) ? $taxonomy_term_arr : array();
-
                         ?>
-
-
-
-
                         <div class="item">
                             <div class="header">
                                 <span class="expand  ">
@@ -381,15 +339,7 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
                                 <label><input type="checkbox" <?php if(!empty($checked)) echo 'checked'; ?>  name="post_grid_meta_options[taxonomies][<?php echo $taxonomy; ?>][checked]" value="<?php echo $taxonomy; ?>" /> <?php echo $the_taxonomy->labels->name; ?>(<?php echo $taxonomy; ?>)</label>
                             </div>
                             <div class="options">
-                                <pre><?php //echo var_export($taxonomy, true); ?></pre>
-
-
                                 <?php
-
-
-
-
-
 
                                 $args = array(
                                     'id'		=> 'terms',
@@ -405,10 +355,6 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
                                 );
 
                                 $settings_tabs_field->generate_field($args, $post_id);
-
-
-
-
 
                                 $args = array(
                                     'id'		=> 'terms_relation',
@@ -430,38 +376,17 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
                                 );
 
                                 $settings_tabs_field->generate_field($args, $post_id);
-
                                 ?>
-
                             </div>
                         </div>
                         <?php
-
-
-
-
                     }else:
                         echo __('Please choose at least one post types. save/update post grid','post-grid');
-
                     endif;
-
-
                     ?>
-
-
-
-
-
                 </div>
-
-
-
-                <p class="description">Select post categories & terms.</p>
+                <p class="description"><?php echo __('Select post categories & terms.', 'post-grid'); ?></p>
             </div>
-
-
-
-
         </div>
 
         <?php
@@ -545,9 +470,6 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
 
         $settings_tabs_field->generate_field($args, $post_id);
 
-
-
-
         $args = array(
             'id'		=> 'posts_per_page',
             'parent'		=> 'post_grid_meta_options',
@@ -604,18 +526,19 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $settings_tabs_field->generate_field($args, $post_id);
 
 
+        $args = array(
+            'id'		=> 'no_post_text',
+            'parent'		=> 'post_grid_meta_options',
+            'title'		=> __('No post found text','post-grid'),
+            'details'	=> __('Custom text for no post found. default: No post found','post-grid'),
+            'type'		=> 'text',
+            'value'		=> $no_post_text,
+            'default'		=> '',
+            'placeholder'		=> 'No post found',
+        );
 
+        $settings_tabs_field->generate_field($args, $post_id);
         ?>
-
-
-
-
-
-
-
-
-
-
     </div>
 
     <?php

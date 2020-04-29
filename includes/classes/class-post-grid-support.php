@@ -64,6 +64,10 @@ class class_post_grid_support{
 
 
         $tutorials = array(
+            array(
+                'question'=>__('Latest Version 2.0.46 Overview', 'post-grid'),
+                'answer_url'=>'https://youtu.be/YVtsIbEb9zs',
+            ),
 
             array(
                 'question'=>__('How to create post grid', 'post-grid'),

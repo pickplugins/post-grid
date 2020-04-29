@@ -1,6 +1,5 @@
 jQuery(document).ready(function($){
 
-    //$(".dependency-field").formFieldDependency({});
     $( ".settings-tabs-loading").fadeOut();
     $( ".settings-tabs").fadeIn();
 

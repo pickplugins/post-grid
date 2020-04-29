@@ -6,7 +6,7 @@ class class_post_grid_shortcodes{
 	
     public function __construct(){
 		
-		add_shortcode( 'post_grid', array( $this, 'post_grid_display' ) );
+		add_shortcode( 'post_grid', array( $this, 'post_grid_new_display' ) );
         add_shortcode( 'post_grid_new', array( $this, 'post_grid_new_display' ) );
 
     }

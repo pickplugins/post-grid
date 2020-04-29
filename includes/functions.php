@@ -499,6 +499,188 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
 
 
 
+function post_grid_media($post_id, $args ){
+
+    $source_id = $args['source_id'] ;
+    $source_args = $args['source_args'] ;
+    $post_settings = $args['post_settings'] ;
+
+    $thumb_linked = '';
+
+    $item_post_permalink = apply_filters('post_grid_item_post_permalink', get_permalink($post_id));
+
+
+
+    $html_thumb = '';
+
+
+    if($source_id == 'featured_image'){
+
+
+        $image_size = isset($source_args['image_size']) ? $source_args['image_size'] : 'large';
+        $link_to = isset($source_args['link_to']) ? $source_args['link_to'] : 'post_link';
+
+        $thumb_custom_url = isset($post_settings['thumb_custom_url']) ? $post_settings['thumb_custom_url'] : '';
+
+
+        $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post_id), $image_size );
+        $alt_text = get_post_meta(get_post_thumbnail_id($post_id), '_wp_attachment_image_alt', true);
+        $thumb_url = isset($thumb['0']) ? $thumb['0'] : '';
+
+        if(!empty($thumb_url)){
+            if($link_to=='post_link'){
+                if(!empty($thumb_custom_url)){
+                    $html_thumb.= '<a href="'.$thumb_custom_url.'"><img alt="'.$alt_text.'" src="'.$thumb_url.'" /></a>';
+                }
+                else{
+                    $html_thumb.= '<a href="'.$item_post_permalink.'"><img alt="'.$alt_text.'" src="'.$thumb_url.'" /></a>';
+                }
+            }
+            else{
+                $html_thumb.= '<img alt="'.$alt_text.'" src="'.$thumb_url.'" />';
+            }
+        }
+        else{
+            $html_thumb.= '';
+        }
+    }
+
+
+
+    elseif($source_id == 'empty_thumb'){
+
+        $link_to = isset($source_args['link_to']) ? $source_args['link_to'] : 'post_link';
+        $default_thumb_src = isset($source_args['default_thumb_src']) ? $source_args['default_thumb_src'] : post_grid_plugin_url.'assets/frontend/css/images/placeholder.png';
+
+
+        if($link_to=='post_link'){
+            $html_thumb.= '<a class="custom" href="'.$item_post_permalink.'"><img src="'.$default_thumb_src.'" /></a>';
+        }
+        else{
+            $html_thumb.= '<img class="custom" src="'.$default_thumb_src.'" />';
+        }
+    }
+
+
+    elseif($source_id == 'first_image'){
+
+        $link_to = isset($source_args['link_to']) ? $source_args['link_to'] : 'post_link';
+
+
+        //global $post, $posts;
+        $post = get_post($post_id);
+        $post_content = $post->post_content;
+        $first_img = '';
+        ob_start();
+        ob_end_clean();
+        $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post_content, $matches);
+
+        if(!empty($matches[1][0]))
+            $first_img = $matches[1][0];
+
+        if(empty($first_img)) {
+            $html_thumb.= '';
+        }
+        else{
+
+            if($link_to=='post_link'){
+                $html_thumb.= '<a href="'.$item_post_permalink.'"><img src="'.$first_img.'" /></a>';
+            }
+            else{
+                $html_thumb.= '<img src="'.$first_img.'" />';
+            }
+        }
+    }
+    elseif($source_id == 'siteorigin_first_image'){
+
+        $link_to = isset($source_args['link_to']) ? $source_args['link_to'] : 'post_link';
+
+        //global $post, $posts;
+        $post = get_post($post_id);
+        /**$post_content = $post->post_content; */
+        $post_content = htmlspecialchars_decode($post->post_content,ENT_QUOTES);
+        $first_img = '';
+        ob_start();
+        ob_end_clean();
+
+
+        if ( class_exists( 'SiteOrigin_Widgets_Bundle' ) ){
+            $output = str_replace( array( '\/' ), "\\" ,$post_content); // SiteOrigin adds \/ combinations
+            $output = str_replace( array( 'src=\\' ), 'src=',$output);   // SiteOrigin adds \\
+            $output = str_replace( array( '"url":' ), ' <img src=',$output);  //SiteOrigin does change the src to url
+            $output = str_replace( array( '&lt;img src=&quot;' ), '<img src="',$output);    //SiteOrigin does add &&lt and &quot combinations which are not removed
+            $output = str_replace( array( '&quot;"' ), '"',$output); // Remove this quot combination
+            $output = str_replace( array( '&quot;' ), '',$output);   // Remove this quot combination
+
+            /** search for post containing SiteOrigin image */
+            $findme='"image":';
+            $start= strpos($post_content, $findme);
+            $findme = ',"image_fallback"';
+            $end = strpos($post_content, $findme);
+            $lengte= $end-$start;
+            $search=(substr($post_content,$start,$lengte));
+            /** error_log('Gevonden:' .$search); */
+            if ($search !=""){
+                /** split the text */
+                $stringParts = explode(":", $search);
+                $firstPart = $stringParts[0];
+                /** copy the post_id */
+                $ImagePost = $stringParts[1];
+                /** error_log("postNo:" .$ImagePost);           */
+                $getimage=wp_get_attachment_image($ImagePost,$size='medium' );
+
+                if ($getimage !=""){
+                    $output = $getimage ;
+                }
+            }
+        }
+        else {
+            /** no SiteOrigin image so get the matches */
+            $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post_content, $matches);
+
+        }
+
+        $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*?>/i', $output, $matches);
+        if ($output = '0'){
+            $output = preg_match_all('/?<img src=[\'"]([^\'"]+)[\'"].*?>/i', $output, $matches);
+        }
+        if(!empty($matches[1][0])) {
+            $first_img = $matches[1][0];
+            /** error_log('first_img:' .$first_img); */
+            $last_char = $first_img[strlen($first_img) - 1]; // Check to see if a slash is at the end of the line
+            if ($last_char == '\\') {
+                $first_img = substr($first_img, 0, -1);
+            }
+        }
+
+
+        if(empty($first_img)) {
+            $html_thumb.= '';
+        }
+        else{
+
+            if($link_to=='post_link'){
+                $html_thumb.= '<a href="'.$item_post_permalink.'"><img src="'.$first_img.'" /></a>';
+            }
+            else{
+                $html_thumb.= '<img src="'.$first_img.'" />';
+            }
+        }
+
+
+    }
+
+
+
+
+    return $html_thumb;
+
+
+
+
+}
+
+
 
 
 
@@ -995,15 +1177,6 @@ add_action('wp_ajax_post_grid_layout_add_elements', 'post_grid_layout_add_elemen
 
 
 
-
-
-
-
-
-
-
-
-
 function post_grid_ajax_search(){
 
 
@@ -1124,7 +1297,7 @@ function post_grid_ajax_search(){
 
 
 
-    $query_args = apply_filters('post_grid_filter_query_args', $query_args, $grid_id);
+    $query_args = apply_filters('post_grid_ajax_query_args', $query_args, $grid_id);
    // $query_args = apply_filters('post_grid_query_args', $query_args, $args);
 
 

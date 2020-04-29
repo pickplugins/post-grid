@@ -712,36 +712,51 @@ function post_grid_layout_element_media($args){
     if(empty($post_id)) return;
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
-    $default_thumb_src = isset($element['default_thumb_src']) ? $element['default_thumb_src'] : '';
-    $thumb_size = isset($element['thumb_size']) ?  $element['thumb_size'] : 'large';
+    $media_source = isset($element['media_source']) ? $element['media_source'] : '';
 
-    $link_target = isset($element['link_target']) ? $element['link_target'] : '';
-    $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
+    $featured_img_size = !empty($element['featured_img_size']) ? $element['featured_img_size'] : 'full';
+    $thumb_linked = !empty($element['thumb_linked']) ? $element['thumb_linked'] : 'yes';
 
-
-    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post_id), $thumb_size );
-    $thumb_url = !empty($thumb['0']) ? $thumb['0'] : $default_thumb_src;
-
-    if(empty($thumb_url)) return;
-
-
-    $post_link = get_permalink($post_id);
-
+    $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
 
 
     ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> element-media ">
         <?php
-        if($link_to == 'post_link'):
-            ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><img src="<?php echo esc_url_raw($thumb_url); ?>"></a>
-        <?php
-        else:
-            ?>
-            <img src="<?php echo esc_url_raw($thumb_url); ?>">
-        <?php
 
-        endif;
+        $html_media = '';
+
+        $is_image = false;
+        foreach($media_source as $source_id => $source_info){
+
+            $args['source_id'] = $source_id;
+            $args['source_args'] = $source_info;
+            $args['post_settings'] = $post_grid_post_settings;
+
+
+            //var_dump($source_id);
+           // var_dump($source_info);
+
+            $is_enable = isset($source_info['enable']) ? $source_info['enable'] : '';
+
+            $media = post_grid_media($post_id, $args);
+
+            if ( $is_image ) continue;
+
+            if($is_enable == 'yes'){
+                if(!empty($media)){
+
+                    $html_media = post_grid_media($post_id, $args);
+                    $is_image = true;
+                }
+                else{
+                    $html_media = '';
+                }
+            }
+        }
+
+        echo $html_media;
+
         ?>
 
 
@@ -758,26 +773,22 @@ function post_grid_layout_element_css_media($args){
     $element = isset($args['element']) ? $args['element'] : array();
     $layout_id = isset($args['layout_id']) ? $args['layout_id'] : '';
 
-    $thumb_height = isset($element['thumb_height']) ? $element['thumb_height'] : '';
-    $thumb_height_large = isset($thumb_height['large']) ? $thumb_height['large'] : '';
-    $thumb_height_medium = isset($thumb_height['medium']) ? $thumb_height['medium'] : '';
-    $thumb_height_small = isset($thumb_height['small']) ? $thumb_height['small'] : '';
+    $media_height = isset($element['media_height']) ? $element['media_height'] : '';
+    $thumb_height_large = isset($media_height['large']) ? $media_height['large'] : '';
+    $thumb_height_medium = isset($media_height['medium']) ? $media_height['medium'] : '';
+    $thumb_height_small = isset($media_height['small']) ? $media_height['small'] : '';
 
-    $height_large_type = isset($element['large_type']) ? $element['large_type'] : '';
-    $height_medium_type = isset($element['medium_type']) ? $element['medium_type'] : '';
-    $height_small_type = isset($element['small_type']) ? $element['small_type'] : '';
-
-
+    $height_large_type = isset($media_height['large_type']) ? $media_height['large_type'] : '';
+    $height_medium_type = isset($media_height['medium_type']) ? $media_height['medium_type'] : '';
+    $height_small_type = isset($media_height['small_type']) ? $media_height['small_type'] : '';
 
     $padding = isset($element['padding']) ? $element['padding'] : '';
-
     $margin = isset($element['margin']) ? $element['margin'] : '';
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
     <style type="text/css">
-
         .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
             overflow: hidden;
         <?php if(!empty($margin)): ?>
@@ -795,35 +806,52 @@ function post_grid_layout_element_css_media($args){
         <?php echo $css_hover; ?>
         <?php endif; ?>
         }
-
-
-
         @media only screen and (min-width: 1024px ){
             .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if(!empty($thumb_height_large)): ?>
-                max-height: <?php echo $thumb_height_large; ?>;
-            <?php endif; ?>
+
+                <?php if($height_large_type =='auto_height'):  ?>
+                        height: auto;
+                <?php elseif ($height_large_type =='fixed_height'): ?>
+                    <?php if(!empty($thumb_height_large)): ?>
+                        height: <?php echo $thumb_height_large; ?>;
+                    <?php endif; ?>
+                <?php elseif ($height_large_type =='max_height'): ?>
+                    <?php if(!empty($thumb_height_large)): ?>
+                        max-height: <?php echo $thumb_height_large; ?>;
+                    <?php endif; ?>
+                <?php endif; ?>
             }
         }
-
         @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
             .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if(!empty($thumb_height_medium)): ?>
-                max-height: <?php echo $thumb_height_medium; ?>;
+            <?php if($height_medium_type =='auto_height'):  ?>
+                height: auto;
+            <?php elseif ($height_medium_type =='fixed_height'): ?>
+                <?php if(!empty($thumb_height_medium)): ?>
+                    height: <?php echo $thumb_height_medium; ?>;
+                <?php endif; ?>
+            <?php elseif ($height_medium_type =='max_height'): ?>
+                <?php if(!empty($thumb_height_medium)): ?>
+                    max-height: <?php echo $thumb_height_medium; ?>;
+                <?php endif; ?>
             <?php endif; ?>
             }
         }
-
         @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
             .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if(!empty($thumb_height_small)): ?>
-                max-height: <?php echo $thumb_height_small; ?>;
+            <?php if($height_small_type =='auto_height'):  ?>
+                height: auto;
+            <?php elseif ($height_small_type =='fixed_height'): ?>
+                <?php if(!empty($thumb_height_small)): ?>
+                    height: <?php echo $thumb_height_small; ?>;
+                <?php endif; ?>
+            <?php elseif ($height_small_type =='max_height'): ?>
+                <?php if(!empty($thumb_height_small)): ?>
+                    max-height: <?php echo $thumb_height_small; ?>;
+                <?php endif; ?>
             <?php endif; ?>
             }
         }
-
-
-
     </style>
     <?php
 }

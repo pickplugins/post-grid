@@ -560,10 +560,10 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id){
     $post_grid_meta_options = get_post_meta($post_id,'post_grid_meta_options', true);
     $layout_id = !empty($post_grid_meta_options['layout_id']) ? $post_grid_meta_options['layout_id'] : ''; //post_grid_get_first_post('post_grid_layout')
 
-    $post_grid_plugin_info = get_option('post_grid_plugin_info');
-    $import_layouts = isset($post_grid_plugin_info['import_layouts']) ? $post_grid_plugin_info['import_layouts'] : '';
+    $post_grid_info = get_option('post_grid_info');
+    $import_layouts = isset($post_grid_info['import_layouts']) ? $post_grid_info['import_layouts'] : '';
 
-
+    //var_dump($import_layouts);
 
     ?>
     <div class="section">
@@ -573,6 +573,8 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id){
 
         <?php
 
+        $layout_convert_url = get_permalink($post_id).'?post_grid_layout_convert=true';
+        $layout_convert_url = wp_nonce_url($layout_convert_url, 'post_grid_layout_convert');
 
 
         ob_start();
@@ -580,15 +582,13 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id){
         ?>
         <p><a target="_blank" class="button" href="<?php echo admin_url().'post-new.php?post_type=post_grid_layout'; ?>"><?php echo __('Create layout','post-grid'); ?></a> </p>
         <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Manage layouts','post-grid'); ?></a> </p>
-
+        <p><a target="_blank" class="button" href="<?php echo $layout_convert_url; ?>"><?php echo __('Covert old layout to new layout','post-grid'); ?></a> for this post grid.</p>
         <?php
         if($import_layouts != 'done'):
 
-            $layout_convert_url = get_permalink($post_id).'?post_grid_layout_convert=true';
-            $layout_convert_url = wp_nonce_url($layout_convert_url, 'post_grid_layout_convert');
 
             ?>
-            <p><a target="_blank" class="button" href="<?php echo $layout_convert_url; ?>"><?php echo __('Covert old layout to new layout','post-grid'); ?></a> </p>
+            <p><a href="<?php echo admin_url().'edit.php?post_type=post_grid&page=import_layouts'; ?>" class="button import-default-layouts"><?php echo __('Import default layouts','post-grid'); ?></a> </p>
         <?php
         endif;
 

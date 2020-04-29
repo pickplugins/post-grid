@@ -1534,8 +1534,8 @@ function post_grid_main_scripts($args){
 
 
     if($masonry_enable == 'yes'){
-        wp_enqueue_script( 'masonry.js' );
-        wp_enqueue_script( 'imagesloaded.js' );
+        wp_enqueue_script( 'masonry' );
+        wp_enqueue_script( 'imagesloaded' );
     }
 
     //var_dump($load_fontawesome);

@@ -1070,6 +1070,8 @@ function post_grid_layout_elements_option_media($parameters){
             'featured_image'=>__('Featured Image','post-grid'),
             'first_image'=>__('First images from content','post-grid'),
             'empty_thumb'=>__('Empty thumbnail','post-grid'),
+            'siteorigin_first_image'=>__('SiteOrigin first image','post-grid'),
+
         )
     );
 

@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.46
+	Stable tag: 2.0.48
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,18 @@ then paste this shortcode anywhere in your page to display grid<br />
 2. screenshot-2
 
 == Changelog ==
+
+	= 2.0.48 =
+    * 2020-04-29 fix - new layout media image source issue fixed.
+    * 2020-04-29 add - default layout xml file added and ready to import.
+    * 2020-04-30 add - added new media source "SiteOrigin first image"
+
+
+	= 2.0.47 =
+    * 2020-04-29 add - No post found custom input field added
+    * 2020-04-29 fix - Media height issue fixed.
+    * 2020-04-29 fix - masonry issue fixed.
+
 
 	= 2.0.46 =
     * 2020-04-21 update - Layout builder re-designed.

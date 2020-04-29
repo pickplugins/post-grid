@@ -17,6 +17,8 @@ jQuery(document).ready(function($){
 
 			});
 	})
+
+
 	$(document).on('change', '#post_grid_metabox #post_types', function(){
 		post_types = $(this).val();
 		grid_id = $(this).attr('grid_id');

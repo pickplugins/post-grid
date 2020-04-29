@@ -121,6 +121,68 @@ function media_source_options_first_image($media_source){
     $settings_tabs_field->generate_field($args);
 
 }
+
+
+
+add_action('media_source_options_siteorigin_first_image', 'media_source_options_siteorigin_first_image');
+
+function media_source_options_siteorigin_first_image($media_source){
+    $settings_tabs_field = new settings_tabs_field();
+
+    $post_grid_settings = get_option('post_grid_settings');
+
+    $index = isset($media_source['index']) ? $media_source['index'] : '';
+    $input_name = isset($media_source['input_name']) ? $media_source['input_name'] : '';
+    $source_data = isset($media_source['source_data']) ? $media_source['source_data'] : '';
+
+    $enable = isset($source_data['enable']) ? $source_data['enable'] : '';
+    $link_to = isset($source_data['link_to']) ? $source_data['link_to'] : '';
+
+
+
+    $args = array(
+        'id'		=> 'enable',
+        'parent' => $input_name.'[media][media_source][siteorigin_first_image]',
+        'title'		=> __('Enable','post-grid'),
+        'details'	=> __('Enable or disable this media source.','post-grid'),
+        'type'		=> 'radio',
+        'value'		=> $enable,
+        'default'		=> 'no',
+        'args'		=> array(
+            'no'=>__('No','post-grid'),
+            'yes'=>__('Yes','post-grid'),
+        ),
+    );
+
+    $settings_tabs_field->generate_field($args);
+
+    $args = array(
+        'id'		=> 'link_to',
+        'css_id'		=> $index.'_link_to',
+        'parent' => $input_name.'[media][media_source][siteorigin_first_image]',
+        'title'		=> __('Link to','post-grid'),
+        'details'	=> __('Choose link to featured image.','post-grid'),
+        'type'		=> 'select',
+        'value'		=> $link_to,
+        'default'		=> 'post_link',
+        'args'		=> array(
+            'post_link'=> __('Post link', 'post-grid'),
+            'none'=> __('None', 'post-grid'),
+        ),
+    );
+
+    $settings_tabs_field->generate_field($args);
+
+}
+
+
+
+
+
+
+
+
+
 add_action('media_source_options_empty_thumb', 'media_source_options_empty_thumb');
 
 function media_source_options_empty_thumb($media_source){

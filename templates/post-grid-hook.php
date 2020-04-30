@@ -595,8 +595,13 @@ function post_grid_loop_bottom_pagination($args, $post_grid_wp_query){
 
     $post_grid_options = $args['options'];
     $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
+    $pagination_type = isset($post_grid_options['nav_bottom']['pagination_type']) ? $post_grid_options['nav_bottom']['pagination_type'] : 'normal';
 
-    if($grid_type != 'grid') return;
+    //var_dump($pagination_type);
+
+    //if($grid_type != 'grid') return;
+    if($pagination_type != 'normal') return;
+
 
     if ( get_query_var('paged') ) {
         $paged = get_query_var('paged');
@@ -1622,31 +1627,34 @@ add_action('post_grid_container', 'post_grid_main_convert_layout', 90);
 
 function post_grid_main_convert_layout($args){
 
-    $options = $args['options'];
-    $grid_id = (int) $args['grid_id'];
 
-    $layout_id = isset($options['layout_id']) ? $options['layout_id'] : '';
-
-    //echo '<pre>'.var_export($layout_id, true).'</pre>';
 
     $post_grid_layout_convert = isset($_GET['post_grid_layout_convert']) ? sanitize_text_field($_GET['post_grid_layout_convert']) : '';
     $_wpnonce = isset($_GET['_wpnonce']) ? sanitize_text_field($_GET['_wpnonce']) : '';
+
+    if(empty($post_grid_layout_convert)) return;
+
 
     $layout_converted = false;
 
     if(wp_verify_nonce($_wpnonce,'post_grid_layout_convert')){
 
-        //echo '<pre>'.var_export($_wpnonce, true).'</pre>';
         $layout_converted = true;
-
     }else{
+        $options = $args['options'];
+        $grid_id = (int) $args['grid_id'];
+
+        $layout_id = isset($options['layout_id']) ? $options['layout_id'] : '';
+
         if(!empty($layout_id)) return;
     }
 
 
 
+    if(!$layout_converted) return;
 
-    $content_layout = isset($options['layout']['content']) ? $options['layout']['content'] : '';;
+
+    $content_layout = isset($options['layout']['content']) ? $options['layout']['content'] : '';
     $layout_skin = isset($options['skin']) ? $options['skin'] : '';
     $media_source = isset($options['media_source']) ? $options['media_source'] : '';
     $media_height = isset($options['media_height']) ? $options['media_height'] : '';
@@ -1655,10 +1663,17 @@ function post_grid_main_convert_layout($args){
     $media_fixed_height = isset($media_height['fixed_height']) ? $media_height['fixed_height'] : '';
 
 
-    $featured_img_size = !empty($post_grid_options['featured_img_size']) ? $post_grid_options['featured_img_size'] : 'full';
+    //var_dump($options);
 
-    $thumb_linked = isset($post_grid_options['thumb_linked']) ? $post_grid_options['thumb_linked'] : 'no';
+    $featured_img_size = !empty($options['featured_img_size']) ? $options['featured_img_size'] : 'full';
+
+    $thumb_linked = isset($options['thumb_linked']) ? $options['thumb_linked'] : 'no';
+    //var_dump($options);
+
     $thumb_linked = ($thumb_linked == 'yes') ? 'post_link' : 'none';
+
+
+    //var_dump($thumb_linked);
 
     if(empty($content_layout)) return;
     if(empty($layout_skin)) return;
@@ -1698,9 +1713,7 @@ function post_grid_main_convert_layout($args){
             $layout_elements_data[1]['media']['media_source'][$source_id]['link_to'] = $thumb_linked;
         }
 
-        if($source_id == 'featured_image' ){
-            $layout_elements_data[1]['media']['media_source'][$source_id]['link_to'] = $featured_img_size;
-        }
+
 
 
     }
@@ -1739,7 +1752,7 @@ function post_grid_main_convert_layout($args){
 
         if($key == 'title' || $key == 'title_link' || $key == 'excerpt' || $key == 'excerpt_read_more'){
             $layout_elements_data[$item_count][$key]['char_limit'] = $char_limit;
-
+            $layout_elements_data[$item_count][$key]['link_to'] = 'post_link';
         }
 
         if($key == 'read_more' || $key == 'excerpt_read_more'){
@@ -1748,6 +1761,7 @@ function post_grid_main_convert_layout($args){
         }
         if($key == 'read_more' || $key == 'excerpt_read_more' || $key == 'title_link'){
             $layout_elements_data[$item_count][$key]['link_target'] = $link_target;
+            $layout_elements_data[$item_count][$key]['link_to'] = 'post_link';
 
         }
 

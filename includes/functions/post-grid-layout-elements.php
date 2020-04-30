@@ -180,7 +180,7 @@ function post_grid_layout_element_title($args){
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
     $char_end = isset($element['char_end']) ? $element['char_end'] : '...';
-    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
 
 
     if($char_limit > 0){
@@ -280,7 +280,7 @@ function post_grid_layout_element_title_link($args){
     $title = get_the_title($post_id);
     $post_link = get_permalink($post_id);
 
-    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
@@ -625,7 +625,7 @@ function post_grid_layout_element_read_more($args){
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
-    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
 
 
     ?>
@@ -1094,7 +1094,7 @@ function post_grid_layout_element_post_date($args){
     if(empty($post_id)) return;
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
-    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $date_format = isset($element['date_format']) ? $element['date_format'] : 'd-m-Y';
 
@@ -1188,7 +1188,7 @@ function post_grid_layout_element_author($args){
     if(empty($post_id)) return;
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
-    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $date_format = isset($element['date_format']) ? $element['date_format'] : 'd-m-Y';
 
@@ -1291,7 +1291,7 @@ function post_grid_layout_element_author_link($args){
     if(empty($post_id)) return;
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
-    $link_to = isset($element['link_to']) ? $element['link_to'] : '';
+    $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $date_format = isset($element['date_format']) ? $element['date_format'] : 'd-m-Y';
 

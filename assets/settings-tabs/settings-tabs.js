@@ -49,8 +49,11 @@ jQuery(document).ready(function($){
         if(editor_enabled == 'no' && typeof wp.editor != 'undefined'){
             wp.editor.initialize( id, {
                 mediaButtons: true,
-                tinymce:      {
-                    toolbar1: 'bold,italic,bullist,numlist,link,blockquote,alignleft,aligncenter,alignright,strikethrough,hr,forecolor,pastetext,removeformat,codeformat,undo,redo'
+                tinymce: {
+                    wpautop: true,
+                    plugins : 'charmap colorpicker compat3x directionality fullscreen hr image lists media paste tabfocus textcolor wordpress wpautoresize wpdialogs wpeditimage wpemoji wpgallery wplink wptextpattern wpview',
+                    toolbar1: 'bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen | wp_adv',
+                    toolbar2: 'formatselect alignjustify forecolor | pastetext removeformat charmap | outdent indent | undo redo | wp_help'
                 },
                 quicktags:    true,
             } );

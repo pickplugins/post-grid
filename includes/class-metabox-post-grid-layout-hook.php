@@ -169,7 +169,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         foreach ($group_items as $elementIndex => $element):
                             ob_start();
 
-                            do_action('post_grid_layout_elements_option_'.$elementIndex);
+                            do_action('post_grid_layout_element_option_'.$elementIndex);
 
                             $layout_elements_option[$elementIndex] = ob_get_clean();
                         endforeach;
@@ -242,7 +242,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                                 foreach ($item_data as $elementIndex => $element_data){
 
                                     $args = array('input_name'=> 'layout_elements_data['.$index.']', 'element_data'=> $element_data, 'index'=>$index);
-                                    do_action('post_grid_layout_elements_option_'.$elementIndex, $args);
+                                    do_action('post_grid_layout_element_option_'.$elementIndex, $args);
                                 }
 
 
@@ -301,7 +301,16 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                     .layout-elements{
                         margin-left: 390px;
                     }
-
+                    @media (max-width: 1550px){
+                        .layout-elements {
+                            margin-left: 0px;
+                        }
+                        .layout-tags {
+                            display: block;
+                            width: 100%;
+                            float: none;
+                        }
+                    }
                 </style>
 
             </div>

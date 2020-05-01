@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.50
+	Stable tag: 2.0.52
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,15 @@ then paste this shortcode anywhere in your page to display grid<br />
 2. screenshot-2
 
 == Changelog ==
+
+
+	= 2.0.52 =
+    * 2020-05-01 fix - lazy load issue fixed.
+
+	= 2.0.51 =
+    * 2020-05-01 fix - pagination displaying issue fixed
+    * 2020-05-01 add - action hook post_grid_pagination_{type} added
+
 
 	= 2.0.50 =
     * 2020-04-30 fix - media link issue fixed.

@@ -1,10 +1,10 @@
 <?php
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
-add_action('post_grid_layout_elements_option_custom_text','post_grid_layout_elements_option_custom_text');
+add_action('post_grid_layout_element_option_custom_text','post_grid_layout_element_option_custom_text');
 
 
-function post_grid_layout_elements_option_custom_text($parameters){
+function post_grid_layout_element_option_custom_text($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -180,8 +180,8 @@ function post_grid_layout_elements_option_custom_text($parameters){
 }
 
 
-add_action('post_grid_layout_elements_option_title','post_grid_layout_elements_option_title');
-function post_grid_layout_elements_option_title($parameters){
+add_action('post_grid_layout_element_option_title','post_grid_layout_element_option_title');
+function post_grid_layout_element_option_title($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -408,10 +408,10 @@ function post_grid_layout_elements_option_title($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_title_link','post_grid_layout_elements_option_title_link');
+add_action('post_grid_layout_element_option_title_link','post_grid_layout_element_option_title_link');
 
 
-function post_grid_layout_elements_option_title_link($parameters){
+function post_grid_layout_element_option_title_link($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -639,8 +639,8 @@ function post_grid_layout_elements_option_title_link($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_excerpt_read_more','post_grid_layout_elements_option_excerpt_read_more');
-function post_grid_layout_elements_option_excerpt_read_more($parameters){
+add_action('post_grid_layout_element_option_excerpt_read_more','post_grid_layout_element_option_excerpt_read_more');
+function post_grid_layout_element_option_excerpt_read_more($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -839,8 +839,8 @@ function post_grid_layout_elements_option_excerpt_read_more($parameters){
 }
 
 
-add_action('post_grid_layout_elements_option_read_more','post_grid_layout_elements_option_read_more');
-function post_grid_layout_elements_option_read_more($parameters){
+add_action('post_grid_layout_element_option_read_more','post_grid_layout_element_option_read_more');
+function post_grid_layout_element_option_read_more($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -1046,10 +1046,10 @@ function post_grid_layout_elements_option_read_more($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_media','post_grid_layout_elements_option_media');
+add_action('post_grid_layout_element_option_media','post_grid_layout_element_option_media');
 
 
-function post_grid_layout_elements_option_media($parameters){
+function post_grid_layout_element_option_media($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -1335,10 +1335,10 @@ function post_grid_layout_elements_option_media($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_thumb_link','post_grid_layout_elements_option_thumb_link');
+add_action('post_grid_layout_element_option_thumb_link','post_grid_layout_element_option_thumb_link');
 
 
-function post_grid_layout_elements_option_thumb_link($parameters){
+function post_grid_layout_element_option_thumb_link($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -1572,10 +1572,10 @@ function post_grid_layout_elements_option_thumb_link($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_thumb','post_grid_layout_elements_option_thumb');
+add_action('post_grid_layout_element_option_thumb','post_grid_layout_element_option_thumb');
 
 
-function post_grid_layout_elements_option_thumb($parameters){
+function post_grid_layout_element_option_thumb($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -1808,10 +1808,10 @@ function post_grid_layout_elements_option_thumb($parameters){
 }
 
 
-add_action('post_grid_layout_elements_option_content','post_grid_layout_elements_option_content');
+add_action('post_grid_layout_element_option_content','post_grid_layout_element_option_content');
 
 
-function post_grid_layout_elements_option_content($parameters){
+function post_grid_layout_element_option_content($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -2059,8 +2059,8 @@ function post_grid_layout_elements_option_content($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_excerpt','post_grid_layout_elements_option_excerpt');
-function post_grid_layout_elements_option_excerpt($parameters){
+add_action('post_grid_layout_element_option_excerpt','post_grid_layout_element_option_excerpt');
+function post_grid_layout_element_option_excerpt($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -2264,10 +2264,10 @@ function post_grid_layout_elements_option_excerpt($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_wrapper_start','post_grid_layout_elements_option_wrapper_start');
+add_action('post_grid_layout_element_option_wrapper_start','post_grid_layout_element_option_wrapper_start');
 
 
-function post_grid_layout_elements_option_wrapper_start($parameters){
+function post_grid_layout_element_option_wrapper_start($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -2397,10 +2397,10 @@ function post_grid_layout_elements_option_wrapper_start($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_wrapper_end','post_grid_layout_elements_option_wrapper_end');
+add_action('post_grid_layout_element_option_wrapper_end','post_grid_layout_element_option_wrapper_end');
 
 
-function post_grid_layout_elements_option_wrapper_end($parameters){
+function post_grid_layout_element_option_wrapper_end($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -2452,8 +2452,8 @@ function post_grid_layout_elements_option_wrapper_end($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_categories','post_grid_layout_elements_option_categories');
-function post_grid_layout_elements_option_categories($parameters){
+add_action('post_grid_layout_element_option_categories','post_grid_layout_element_option_categories');
+function post_grid_layout_element_option_categories($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -2658,8 +2658,8 @@ function post_grid_layout_elements_option_categories($parameters){
 }
 
 
-add_action('post_grid_layout_elements_option_tags','post_grid_layout_elements_option_tags');
-function post_grid_layout_elements_option_tags($parameters){
+add_action('post_grid_layout_element_option_tags','post_grid_layout_element_option_tags');
+function post_grid_layout_element_option_tags($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -2833,8 +2833,8 @@ function post_grid_layout_elements_option_tags($parameters){
 
 }
 
-add_action('post_grid_layout_elements_option_comments_count','post_grid_layout_elements_option_comments_count');
-function post_grid_layout_elements_option_comments_count($parameters){
+add_action('post_grid_layout_element_option_comments_count','post_grid_layout_element_option_comments_count');
+function post_grid_layout_element_option_comments_count($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -3010,8 +3010,8 @@ function post_grid_layout_elements_option_comments_count($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_five_star','post_grid_layout_elements_option_five_star');
-function post_grid_layout_elements_option_five_star($parameters){
+add_action('post_grid_layout_element_option_five_star','post_grid_layout_element_option_five_star');
+function post_grid_layout_element_option_five_star($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -3154,8 +3154,8 @@ function post_grid_layout_elements_option_five_star($parameters){
 
 }
 
-add_action('post_grid_layout_elements_option_hr','post_grid_layout_elements_option_hr');
-function post_grid_layout_elements_option_hr($parameters){
+add_action('post_grid_layout_element_option_hr','post_grid_layout_element_option_hr');
+function post_grid_layout_element_option_hr($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -3282,8 +3282,8 @@ function post_grid_layout_elements_option_hr($parameters){
 
 }
 
-add_action('post_grid_layout_elements_option_share_button','post_grid_layout_elements_option_share_button');
-function post_grid_layout_elements_option_share_button($parameters){
+add_action('post_grid_layout_element_option_share_button','post_grid_layout_element_option_share_button');
+function post_grid_layout_element_option_share_button($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -3413,8 +3413,8 @@ function post_grid_layout_elements_option_share_button($parameters){
 }
 
 
-add_action('post_grid_layout_elements_option_author','post_grid_layout_elements_option_author');
-function post_grid_layout_elements_option_author($parameters){
+add_action('post_grid_layout_element_option_author','post_grid_layout_element_option_author');
+function post_grid_layout_element_option_author($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -3594,8 +3594,8 @@ function post_grid_layout_elements_option_author($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_author_link','post_grid_layout_elements_option_author_link');
-function post_grid_layout_elements_option_author_link($parameters){
+add_action('post_grid_layout_element_option_author_link','post_grid_layout_element_option_author_link');
+function post_grid_layout_element_option_author_link($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 
@@ -3760,8 +3760,8 @@ function post_grid_layout_elements_option_author_link($parameters){
 
 
 
-add_action('post_grid_layout_elements_option_post_date','post_grid_layout_elements_option_post_date');
-function post_grid_layout_elements_option_post_date($parameters){
+add_action('post_grid_layout_element_option_post_date','post_grid_layout_element_option_post_date');
+function post_grid_layout_element_option_post_date($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
 

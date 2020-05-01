@@ -1,6 +1,43 @@
 <?php
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
+
+
+
+add_action('post_grid_main', 'post_grid_main_lazy', 90);
+
+function post_grid_main_lazy($atts){
+
+
+    $grid_id = $atts['id'];
+    $post_grid_options = get_post_meta( $grid_id, 'post_grid_meta_options', true );
+
+    $lazy_load_enable = isset($post_grid_options['lazy_load_enable']) ? $post_grid_options['lazy_load_enable'] : 'grid';
+    $lazy_load_image_src = isset($post_grid_options['lazy_load_image_src']) ? $post_grid_options['lazy_load_image_src'] : '';
+
+
+    ?>
+    <div id="post-grid-lazy-<?php echo $grid_id; ?>" class="post-grid-lazy"><img src="<?php echo $lazy_load_image_src; ?>"/></div>
+    <script>
+        jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
+            jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').fadeOut();
+            jQuery('#post-grid-<?php echo $grid_id; ?>').fadeIn();
+        })
+    </script>
+    <style type="text/css">
+        #post-grid-<?php echo $grid_id; ?>{display: none;}
+        .post-grid-lazy{
+            text-align: center;
+        }
+    </style>
+    <?php
+
+
+
+}
+
+
+
 add_action('post_grid_main', 'post_grid_main_container', 90);
 
 function post_grid_main_container($atts){
@@ -585,23 +622,33 @@ function post_grid_item_layout_new($args){
 
 
 
-
-
-
 add_action('post_grid_loop_bottom', 'post_grid_loop_bottom_pagination', 10, 2);
 
 function post_grid_loop_bottom_pagination($args, $post_grid_wp_query){
 
-
     $post_grid_options = $args['options'];
-    $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
+
     $pagination_type = isset($post_grid_options['nav_bottom']['pagination_type']) ? $post_grid_options['nav_bottom']['pagination_type'] : 'normal';
 
-    //var_dump($pagination_type);
+    if($pagination_type =='none') return;
 
-    //if($grid_type != 'grid') return;
-    if($pagination_type != 'normal') return;
+    ?>
+    <div class="pagination">
+        <?php
+        do_action('post_grid_pagination_'.$pagination_type, $args, $post_grid_wp_query);
+        ?>
+    </div>
+    <?php
 
+}
+
+
+add_action('post_grid_pagination_normal', 'post_grid_pagination_normal', 10, 2);
+
+function post_grid_pagination_normal($args, $post_grid_wp_query){
+
+
+    $post_grid_options = $args['options'];
 
     if ( get_query_var('paged') ) {
         $paged = get_query_var('paged');
@@ -611,34 +658,33 @@ function post_grid_loop_bottom_pagination($args, $post_grid_wp_query){
         $paged = 1;
     }
 
+    $max_num_pages = isset($post_grid_wp_query->max_num_pages) ? $post_grid_wp_query->max_num_pages : 0;
+
     $pagination_prev_text = !empty($post_grid_options['pagination']['prev_text']) ? $post_grid_options['pagination']['prev_text'] : __('« Previous', 'post-grid');
     $pagination_next_text = !empty($post_grid_options['pagination']['next_text']) ? $post_grid_options['pagination']['next_text'] : __('Next »', 'post-grid');
-    $max_num_pages = $post_grid_wp_query->max_num_pages;
+    $pagination_max_num_pages = !empty($post_grid_options['pagination']['max_num_pages']) ? $post_grid_options['pagination']['max_num_pages'] : $max_num_pages;
+
 
 
     ?>
-    <div class="pagination">
-        <div class="paginate">
-            <?php
+    <div class="paginate">
+        <?php
 
-            $big = 999999999; // need an unlikely integer
+        $big = 999999999; // need an unlikely integer
 
-            echo paginate_links(
-                array(
-                    'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-                    'format' => '?paged=%#%',
-                    'current' => max( 1, $paged ),
-                    'total' => $max_num_pages,
-                    'prev_text'          => $pagination_prev_text,
-                    'next_text'          => $pagination_next_text,
+        echo paginate_links(
+            array(
+                'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                'format' => '?paged=%#%',
+                'current' => max( 1, $paged ),
+                'total' => $pagination_max_num_pages,
+                'prev_text'          => $pagination_prev_text,
+                'next_text'          => $pagination_next_text,
+            )
+        );
 
-                )
-            );
-
-            ?>
-        </div>
+        ?>
     </div>
-
     <?php
 
 }
@@ -1330,7 +1376,6 @@ function post_grid_view_type_css_slider($args){
 
     ?>
     <style type="text/css">
-
         #post-grid-<?php echo $grid_id; ?> {
         <?php if(!empty($container_padding)): ?>
             padding:<?php echo $container_padding; ?>;
@@ -1342,8 +1387,6 @@ function post_grid_view_type_css_slider($args){
             background-image: url(<?php echo $container_bg_image; ?>);
         <?php endif; ?>
         }
-
-
         #post-grid-<?php echo $grid_id; ?> .item{
         <?php if(!empty($items_margin)): ?>
             margin:<?php echo $items_margin; ?>;

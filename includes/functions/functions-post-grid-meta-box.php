@@ -843,7 +843,6 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id){
             </div>
             <style type="text/css">
                 #post_grid_metabox .layout-list .idle, #post_grid_metabox .layout-list .hover {
-                    background: rgba(0, 0, 0, 0) url("../images/tile.png") repeat scroll 0 0;
                     display: inline-block;
                     height: auto;
                     margin: 0 10px;
@@ -953,7 +952,6 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id){
                     width: 310px;
                     overflow: hidden;
                     vertical-align: top;
-                    background: rgba(0, 0, 0, 0) url("../images/tile.png") repeat scroll 0 0;
                     padding: 15px;
                 }
                 #post_grid_metabox .skin-list .skin-container .header {
@@ -1490,6 +1488,15 @@ function post_grid_metabox_tabs_content_pagination($tab, $post_id){
         <p class="description section-description">Customize the pagination.</p>
 
         <?php
+
+
+        $pagination_types = apply_filters('post_grid_pagination_types', array(
+            'none'=>__('None','post-grid'),
+            'normal'=>__('Normal Pagination','post-grid'),
+            )
+        );
+
+
         $args = array(
             'id'		=> 'pagination_type',
             'parent'		=> 'post_grid_meta_options[nav_bottom]',
@@ -1499,10 +1506,7 @@ function post_grid_metabox_tabs_content_pagination($tab, $post_id){
             'multiple'		=> true,
             'value'		=> $pagination_type,
             'default'		=> 'inline',
-            'args'		=> array(
-                'none'=>__('None','post-grid'),
-                'normal'=>__('Normal Pagination','post-grid'),
-            ),
+            'args'		=> $pagination_types,
         );
 
         $settings_tabs_field->generate_field($args, $post_id);

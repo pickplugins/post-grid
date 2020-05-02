@@ -649,6 +649,7 @@ function post_grid_pagination_normal($args, $post_grid_wp_query){
 
 
     $post_grid_options = $args['options'];
+    $grid_id = $args['grid_id'];
 
     if ( get_query_var('paged') ) {
         $paged = get_query_var('paged');
@@ -664,6 +665,10 @@ function post_grid_pagination_normal($args, $post_grid_wp_query){
     $pagination_next_text = !empty($post_grid_options['pagination']['next_text']) ? $post_grid_options['pagination']['next_text'] : __('Next »', 'post-grid');
     $pagination_max_num_pages = !empty($post_grid_options['pagination']['max_num_pages']) ? $post_grid_options['pagination']['max_num_pages'] : $max_num_pages;
 
+    $pagination_font_size = !empty($post_grid_options['pagination']['font_size']) ? $post_grid_options['pagination']['font_size'] : '17px';
+    $pagination_font_color = !empty($post_grid_options['pagination']['font_color']) ? $post_grid_options['pagination']['font_color'] : '#646464';
+    $pagination_bg_color = !empty($post_grid_options['pagination']['bg_color']) ? $post_grid_options['pagination']['bg_color'] : '#646464';
+    $pagination_active_bg_color = !empty($post_grid_options['pagination']['active_bg_color']) ? $post_grid_options['pagination']['active_bg_color'] : '#4b4b4b';
 
 
     ?>
@@ -685,6 +690,17 @@ function post_grid_pagination_normal($args, $post_grid_wp_query){
 
         ?>
     </div>
+    <style type="text/css">
+        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers{
+            font-size:<?php echo $pagination_font_size; ?>;
+            color:<?php echo $pagination_font_color; ?>;
+            background:<?php echo $pagination_bg_color; ?>;
+        }
+        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers:hover,
+        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers.current{
+            background:<?php echo $pagination_active_bg_color; ?>;
+        }
+    </style>
     <?php
 
 }
@@ -772,11 +788,6 @@ function post_grid_view_type_css_grid($args){
     $container_bg_color = isset($post_grid_options['container']['bg_color']) ? $post_grid_options['container']['bg_color'] : '';
     $container_bg_image = isset($post_grid_options['container']['bg_image']) ? $post_grid_options['container']['bg_image'] : '';
 
-    $pagination_font_size = !empty($post_grid_options['pagination']['font_size']) ? $post_grid_options['pagination']['font_size'] : '17px';
-    $pagination_font_color = !empty($post_grid_options['pagination']['font_color']) ? $post_grid_options['pagination']['font_color'] : '#646464';
-    $pagination_bg_color = !empty($post_grid_options['pagination']['bg_color']) ? $post_grid_options['pagination']['bg_color'] : '#646464';
-    $pagination_active_bg_color = !empty($post_grid_options['pagination']['active_bg_color']) ? $post_grid_options['pagination']['active_bg_color'] : '#4b4b4b';
-
     $items_bg_color_type = isset($post_grid_options['items_bg_color_type']) ? $post_grid_options['items_bg_color_type'] : '';
     $items_bg_color = isset($post_grid_options['items_bg_color']) ? $post_grid_options['items_bg_color'] : '#fff';
 
@@ -807,31 +818,18 @@ function post_grid_view_type_css_grid($args){
         <?php if($items_bg_color_type=='fixed'): ?>
             background:<?php echo $items_bg_color; ?>;
         <?php endif; ?>
-
         }
         #post-grid-<?php echo $grid_id; ?>  .item .layer-media{
             overflow: hidden;
-        <?php
-        if($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height'){
-            echo 'height:'.$items_media_height.';';
-        }elseif($items_media_height_style=='max_height'){
-            echo 'max-height:'.$items_media_height.';';
-        }else{
-            echo 'height:'.$items_media_height.';';
-        }
-        ?>
-        }
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers,
-        #post-grid-<?php echo $grid_id; ?> .pagination .pager,
-        #post-grid-<?php echo $grid_id; ?> .paginate.next-previous a{
-            font-size:<?php echo $pagination_font_size; ?>;
-            color:<?php echo $pagination_font_color; ?>;
-            background:<?php echo $pagination_bg_color; ?>;
-        }
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers:hover,
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers.current,
-        #post-grid-<?php echo $grid_id; ?> .pagination .pager.active{
-            background:<?php echo $pagination_active_bg_color; ?>;
+            <?php
+            if($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height'){
+                echo 'height:'.$items_media_height.';';
+            }elseif($items_media_height_style=='max_height'){
+                echo 'max-height:'.$items_media_height.';';
+            }else{
+                echo 'height:'.$items_media_height.';';
+            }
+            ?>
         }
         @media only screen and ( min-width: 0px ) and ( max-width: 767px ) {
             #post-grid-<?php echo $grid_id; ?> .item{
@@ -886,31 +884,6 @@ function post_grid_view_type_css_grid($args){
             }
             ?>
             }
-        }
-
-
-        <?php
-
-        $filterable_font_size = !empty($post_grid_options['nav_top']['filterable_font_size']) ? $post_grid_options['nav_top']['filterable_font_size'] : '14px';
-        $filterable_navs_margin = !empty($post_grid_options['nav_top']['filterable_navs_margin']) ? $post_grid_options['nav_top']['filterable_navs_margin'] : '5px';
-
-        $filterable_font_color = !empty($post_grid_options['nav_top']['filterable_font_color']) ? $post_grid_options['nav_top']['filterable_font_color'] : '#999';
-        $filterable_bg_color = !empty($post_grid_options['nav_top']['filterable_bg_color']) ? $post_grid_options['nav_top']['filterable_bg_color'] : '#fff';
-        $filterable_active_bg_color = !empty($post_grid_options['nav_top']['filterable_active_bg_color']) ? $post_grid_options['nav_top']['filterable_active_bg_color'] : '#ddd';
-
-        ?>
-
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers:hover,
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers.current,
-        #post-grid-<?php echo $grid_id; ?> .pagination .pager.mixitup-control-active{
-            background:<?php echo $pagination_active_bg_color; ?>;
-        }
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers,
-        #post-grid-<?php echo $grid_id; ?> .pagination .pager,
-        #post-grid-<?php echo $grid_id; ?> .paginate.next-previous a{
-            font-size:<?php echo $pagination_font_size; ?>;
-            color:<?php echo $pagination_font_color; ?>;
-            background:<?php echo $pagination_bg_color; ?>;
         }
     </style>
     <?php
@@ -968,11 +941,6 @@ function post_grid_view_type_css_filterable($args){
     $container_bg_color = isset($post_grid_options['container']['bg_color']) ? $post_grid_options['container']['bg_color'] : '';
     $container_bg_image = isset($post_grid_options['container']['bg_image']) ? $post_grid_options['container']['bg_image'] : '';
 
-    $pagination_font_size = !empty($post_grid_options['pagination']['font_size']) ? $post_grid_options['pagination']['font_size'] : '17px';
-    $pagination_font_color = !empty($post_grid_options['pagination']['font_color']) ? $post_grid_options['pagination']['font_color'] : '#646464';
-    $pagination_bg_color = !empty($post_grid_options['pagination']['bg_color']) ? $post_grid_options['pagination']['bg_color'] : '#646464';
-    $pagination_active_bg_color = !empty($post_grid_options['pagination']['active_bg_color']) ? $post_grid_options['pagination']['active_bg_color'] : '#4b4b4b';
-
     $items_bg_color_type = isset($post_grid_options['items_bg_color_type']) ? $post_grid_options['items_bg_color_type'] : '';
     $items_bg_color = isset($post_grid_options['items_bg_color']) ? $post_grid_options['items_bg_color'] : '#fff';
 
@@ -1017,19 +985,7 @@ function post_grid_view_type_css_filterable($args){
         }
         ?>
         }
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers,
-        #post-grid-<?php echo $grid_id; ?> .pagination .pager,
-        #post-grid-<?php echo $grid_id; ?> .paginate.next-previous a{
-            font-size:<?php echo $pagination_font_size; ?>;
-            color:<?php echo $pagination_font_color; ?>;
-            background:<?php echo $pagination_bg_color; ?>;
-        }
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers:hover,
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers.current,
-        #post-grid-<?php echo $grid_id; ?> .pagination .pager.active,
-        #post-grid-<?php echo $grid_id; ?> .pagination .pager.mixitup-control-active{
-            background:<?php echo $pagination_active_bg_color; ?>;
-        }
+
 
         @media only screen and ( min-width: 0px ) and ( max-width: 767px ) {
             #post-grid-<?php echo $grid_id; ?> .item{
@@ -1165,10 +1121,6 @@ function post_grid_view_type_css_glossary($args){
     $container_bg_color = isset($post_grid_options['container']['bg_color']) ? $post_grid_options['container']['bg_color'] : '';
     $container_bg_image = isset($post_grid_options['container']['bg_image']) ? $post_grid_options['container']['bg_image'] : '';
 
-    $pagination_font_size = !empty($post_grid_options['pagination']['font_size']) ? $post_grid_options['pagination']['font_size'] : '17px';
-    $pagination_font_color = !empty($post_grid_options['pagination']['font_color']) ? $post_grid_options['pagination']['font_color'] : '#646464';
-    $pagination_bg_color = !empty($post_grid_options['pagination']['bg_color']) ? $post_grid_options['pagination']['bg_color'] : '#646464';
-    $pagination_active_bg_color = !empty($post_grid_options['pagination']['active_bg_color']) ? $post_grid_options['pagination']['active_bg_color'] : '#4b4b4b';
 
     $items_bg_color_type = isset($post_grid_options['items_bg_color_type']) ? $post_grid_options['items_bg_color_type'] : '';
     $items_bg_color = isset($post_grid_options['items_bg_color']) ? $post_grid_options['items_bg_color'] : '#fff';
@@ -1204,30 +1156,16 @@ function post_grid_view_type_css_glossary($args){
         }
         #post-grid-<?php echo $grid_id; ?>  .item .layer-media{
             overflow: hidden;
-        <?php
-        if($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height'){
-            echo 'height:'.$items_media_height.';';
-        }elseif($items_media_height_style=='max_height'){
-            echo 'max-height:'.$items_media_height.';';
-        }else{
-            echo 'height:'.$items_media_height.';';
+            <?php
+            if($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height'){
+                echo 'height:'.$items_media_height.';';
+            }elseif($items_media_height_style=='max_height'){
+                echo 'max-height:'.$items_media_height.';';
+            }else{
+                echo 'height:'.$items_media_height.';';
+            }
+            ?>
         }
-        ?>
-        }
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers,
-        #post-grid-<?php echo $grid_id; ?> .pagination .pager,
-        #post-grid-<?php echo $grid_id; ?> .paginate.next-previous a{
-            font-size:<?php echo $pagination_font_size; ?>;
-            color:<?php echo $pagination_font_color; ?>;
-            background:<?php echo $pagination_bg_color; ?>;
-        }
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers:hover,
-        #post-grid-<?php echo $grid_id; ?> .pagination .page-numbers.current,
-        #post-grid-<?php echo $grid_id; ?> .pagination .pager.active,
-        #post-grid-<?php echo $grid_id; ?> .pagination .pager.mixitup-control-active{
-            background:<?php echo $pagination_active_bg_color; ?>;
-        }
-
         @media only screen and ( min-width: 0px ) and ( max-width: 767px ) {
             #post-grid-<?php echo $grid_id; ?> .item{
             <?php if(!empty($items_width_mobile)): ?>
@@ -1319,10 +1257,6 @@ function post_grid_view_type_css_slider($args){
     $post_grid_options = $args['options'];
     $grid_id = $args['grid_id'];
 
-    $items_width_desktop = isset($post_grid_options['width']['desktop']) ? $post_grid_options['width']['desktop'] : '';
-    $items_width_tablet = isset($post_grid_options['width']['tablet']) ? $post_grid_options['width']['tablet'] : '';
-    $items_width_mobile = isset($post_grid_options['width']['mobile']) ? $post_grid_options['width']['mobile'] : '';
-
     $items_height_style = !empty($post_grid_options['item_height']['style']) ? $post_grid_options['item_height']['style'] : 'auto_height';
     $items_height_style_tablet = !empty($post_grid_options['item_height']['style_tablet']) ? $post_grid_options['item_height']['style_tablet'] : 'auto_height';
     $items_height_style_mobile = !empty($post_grid_options['item_height']['style_mobile']) ?$post_grid_options['item_height']['style_mobile'] : 'auto_height';
@@ -1337,6 +1271,10 @@ function post_grid_view_type_css_slider($args){
     $items_media_height_style = !empty($post_grid_options['media_height']['style']) ? $post_grid_options['media_height']['style'] : 'auto_height';
     $items_media_fixed_height = !empty($post_grid_options['media_height']['fixed_height']) ? $post_grid_options['media_height']['fixed_height'] : '';
 
+    $pagination_font_size = !empty($post_grid_options['pagination']['font_size']) ? $post_grid_options['pagination']['font_size'] : '17px';
+    $pagination_font_color = !empty($post_grid_options['pagination']['font_color']) ? $post_grid_options['pagination']['font_color'] : '#646464';
+    $pagination_bg_color = !empty($post_grid_options['pagination']['bg_color']) ? $post_grid_options['pagination']['bg_color'] : '#646464';
+    $pagination_active_bg_color = !empty($post_grid_options['pagination']['active_bg_color']) ? $post_grid_options['pagination']['active_bg_color'] : '#4b4b4b';
 
 
     if($items_height_style == 'auto_height'){
@@ -1362,12 +1300,6 @@ function post_grid_view_type_css_slider($args){
     $container_padding = isset($post_grid_options['container']['padding']) ? $post_grid_options['container']['padding'] : '';
     $container_bg_color = isset($post_grid_options['container']['bg_color']) ? $post_grid_options['container']['bg_color'] : '';
     $container_bg_image = isset($post_grid_options['container']['bg_image']) ? $post_grid_options['container']['bg_image'] : '';
-
-    $pagination_font_size = !empty($post_grid_options['pagination']['font_size']) ? $post_grid_options['pagination']['font_size'] : '17px';
-    $pagination_font_color = !empty($post_grid_options['pagination']['font_color']) ? $post_grid_options['pagination']['font_color'] : '#646464';
-    $pagination_bg_color = !empty($post_grid_options['pagination']['bg_color']) ? $post_grid_options['pagination']['bg_color'] : '#646464';
-    $pagination_active_bg_color = !empty($post_grid_options['pagination']['active_bg_color']) ? $post_grid_options['pagination']['active_bg_color'] : '#4b4b4b';
-
     $items_bg_color_type = isset($post_grid_options['items_bg_color_type']) ? $post_grid_options['items_bg_color_type'] : '';
     $items_bg_color = isset($post_grid_options['items_bg_color']) ? $post_grid_options['items_bg_color'] : '#fff';
 
@@ -1459,32 +1391,45 @@ function post_grid_view_type_css_slider($args){
             }
         }
 
-        #post-grid-<?php echo $grid_id; ?> .owl-dots .owl-dot {
-            background: <?php echo $slider_dots_bg_color; ?> none repeat scroll 0 0;
+        #post-grid-<?php echo $grid_id; ?> .owl-dots{
+            text-align: center;
+            width: 100%;
+            margin: 30px 0 0;
         }
-
+        #post-grid-<?php echo $grid_id; ?> .owl-dots .owl-dot{
+            background: <?php echo $slider_dots_bg_color; ?>;
+            border-radius: 20px;
+            display: inline-block;
+            height: 15px;
+            margin: 5px 7px;
+            width: 15px;
+            outline: none;
+        }
+        #post-grid-<?php echo $grid_id; ?> .owl-dots .owl-dot.active, #post-grid-<?php echo $grid_id; ?> .owl-dots .owl-dot:hover{
+            background: <?php echo $slider_dots_bg_color; ?>;
+        }
         #post-grid-<?php echo $grid_id; ?> .owl-nav button{
-            background: <?php //echo $navigation_background_color; ?>;
-            color: <?php //echo $navigation_color; ?>;
+            background: <?php echo $slider_dots_bg_color; ?>;
+            color: #fff;
             margin: 0 5px;
             outline: none;
         }
-        #post-grid-<?php echo $grid_id; ?> .owl-nav.topright{
+        #post-grid-<?php echo $grid_id; ?> .owl-nav.top-right{
             position: absolute;
             right: 15px;
             top: 15px;
         }
-        #post-grid-<?php echo $grid_id; ?> .owl-nav.topleft{
+        #post-grid-<?php echo $grid_id; ?> .owl-nav.top-left{
             position: absolute;
             left: 15px;
             top: 15px;
         }
-        #post-grid-<?php echo $grid_id; ?> .owl-nav.bottomleft{
+        #post-grid-<?php echo $grid_id; ?> .owl-nav.bottom-left{
             position: absolute;
             left: 15px;
             bottom: 15px;
         }
-        #post-grid-<?php echo $grid_id; ?> .owl-nav.bottomright{
+        #post-grid-<?php echo $grid_id; ?> .owl-nav.bottom-right{
             position: absolute;
             right: 15px;
             bottom: 15px;
@@ -1495,7 +1440,7 @@ function post_grid_view_type_css_slider($args){
             transform: translate(0, -50%);
             width: 100%;
         }
-        #post-grid-<?php echo $grid_id; ?> .owl-nav.middle-fixed  .owl-next{
+        #post-grid-<?php echo $grid_id; ?> .owl-nav.middle-fixed .owl-next{
             float: right;
         }
         #post-grid-<?php echo $grid_id; ?> .owl-nav.middle-fixed .owl-prev{
@@ -1507,16 +1452,16 @@ function post_grid_view_type_css_slider($args){
             transform: translate(0, -50%);
             width: 100%;
         }
-        #post-grid-<?php echo $grid_id; ?> .owl-nav.middle  .owl-next{
+        #post-grid-<?php echo $grid_id; ?> .owl-nav.middle .owl-next{
             float: right;
             right: -20%;
             position: absolute;
             transition: all ease 1s 0s;
         }
-        #post-grid-<?php echo $grid_id; ?>:hover .owl-nav.middle  .owl-next{
+        #post-grid-<?php echo $grid_id; ?>:hover .owl-nav.middle .owl-next{
             right: 0;
         }
-        #post-grid-<?php echo $grid_id; ?> .owl-nav.middle  .owl-prev{
+        #post-grid-<?php echo $grid_id; ?> .owl-nav.middle .owl-prev{
             left: -20%;
             position: absolute;
             transition: all ease 1s 0s;
@@ -1526,15 +1471,15 @@ function post_grid_view_type_css_slider($args){
             position: absolute;
         }
         #post-grid-<?php echo $grid_id; ?> .owl-nav.flat button{
-            padding: 5px 20px;
+            padding: 5px 20px !important;
             border-radius: 0;
         }
         #post-grid-<?php echo $grid_id; ?> .owl-nav.border button{
-            padding: 5px 20px;
+            padding: 5px 20px !important;
             border: 2px solid #777;
         }
         #post-grid-<?php echo $grid_id; ?> .owl-nav.semi-round button{
-            padding: 5px 20px;
+            padding: 5px 20px !important;
             border-radius: 8px;
         }
         #post-grid-<?php echo $grid_id; ?> .owl-nav.round button{

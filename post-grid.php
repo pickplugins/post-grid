@@ -34,6 +34,7 @@ if( !class_exists( 'PostGrid' )){
             include('includes/class-metabox-post-grid-layout-hook.php');
             include('includes/functions-layout-hook.php');
             include('includes/functions-data-upgrade.php');
+            include('includes/functions-single.php');
 
 
             include('includes/classes/class-post-grid-support.php');

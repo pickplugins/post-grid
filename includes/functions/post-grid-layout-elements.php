@@ -416,8 +416,12 @@ function post_grid_layout_element_excerpt($args){
     if(empty($post_id)) return;
 
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
+    //$the_post = get_post($post_id);
 
+    //$post_excerpt = $the_post->post_excerpt;
     $post_excerpt = get_the_excerpt($post_id);
+
+
     $post_link = get_permalink($post_id);
 
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
@@ -530,7 +534,7 @@ function post_grid_layout_element_excerpt_read_more($args){
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
-    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
+    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : __('Read more','post-grid');
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
 
 

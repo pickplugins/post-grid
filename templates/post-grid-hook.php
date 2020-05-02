@@ -1304,6 +1304,8 @@ function post_grid_view_type_css_slider($args){
     $items_bg_color = isset($post_grid_options['items_bg_color']) ? $post_grid_options['items_bg_color'] : '#fff';
 
     $slider_dots_bg_color = isset($post_grid_options['slider_dots_bg_color']) ? $post_grid_options['slider_dots_bg_color'] : '#1e73be';
+    $slider_navs_bg_color = isset($post_grid_options['slider_navs_bg_color']) ? $post_grid_options['slider_navs_bg_color'] : '#1e73be';
+    $slider_navs_text_color = isset($post_grid_options['slider_navs_text_color']) ? $post_grid_options['slider_navs_text_color'] : '#ffffff';
 
 
     ?>
@@ -1409,8 +1411,8 @@ function post_grid_view_type_css_slider($args){
             background: <?php echo $slider_dots_bg_color; ?>;
         }
         #post-grid-<?php echo $grid_id; ?> .owl-nav button{
-            background: <?php echo $slider_dots_bg_color; ?>;
-            color: #fff;
+            background: <?php echo $slider_navs_bg_color; ?>;
+            color: <?php echo $slider_navs_text_color; ?>;
             margin: 0 5px;
             outline: none;
         }
@@ -1574,7 +1576,10 @@ function post_grid_main_scripts($args){
             endif;
             ?>
             <?php
-            if($masonry_enable=='yes'):
+
+               $masonry_load = apply_filters('post_grid_masonry_load', true, $args);
+
+            if($masonry_enable=='yes' && $masonry_load == true ):
                 ?>
                 jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
                     var $container = $('#post-grid-<?php echo $grid_id; ?> .grid-items');

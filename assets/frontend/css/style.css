@@ -10,7 +10,6 @@
 .post-grid .grid-items {
   margin: 0 auto;
   overflow: hidden;
-  text-align: center;
 }
 
 .post-grid .item {
@@ -311,118 +310,6 @@
 
 
 
-
-
-/*#########################timeline########################*/
-
-
-.post-grid.timeline {
-  position: relative;
-}
-
-.post-grid.timeline .timeline-line {
-  background: #99999969  none repeat scroll 0 0;
-  height: 100%;
-  left: 50%;
-  position: absolute;
-  width: 1px;
-}
-.post-grid.timeline .item:nth-child(2){margin-top: 70px !important}
-
-.post-grid.timeline .item .timeline-arrow{
-  width: 0px;
-  height: 20px;
-  background: #ddd;
-}
-.post-grid.timeline .item .timeline-bubble{}
-
-.post-grid.timeline .item.even .timeline-arrow {
-  left: 100%;
-  top: 30px;
-  position: absolute;
-
-}
-.post-grid.timeline .item.even .timeline-arrow:after {
-  left: 100%;
-  top: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-color: rgba(201, 201, 201, 0);
-  border-left-color: #c9c9c9;
-  border-width: 13px;
-  margin-top: -13px;
-  transform: translateY(-16%);
-}
-
-
-.post-grid.timeline .item.even .timeline-bubble {
-  position: absolute;
-  top: 0%;
-  right: -39px;
-  width: 7px;
-  height: 7px;
-  background: #ccc;
-  border-radius: 50%;
-  border: 5px solid #fff;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
-  transform: translateY(-50%);
-}
-
-
-
-
-
-
-
-
-
-.post-grid.timeline .item.odd .timeline-arrow:after {
-  right: 100%;
-  top: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-color: rgba(201, 201, 201, 0);
-  border-right-color: #c9c9c9;
-  border-width: 13px;
-  margin-top: -13px;
-  transform: translateY(-16%);
-}
-
-
-.post-grid.timeline .item.odd .timeline-bubble {
-  position: absolute;
-  top: 0%;
-  left: -38px;
-  width: 7px;
-  height: 7px;
-  background: #ccc;
-  border-radius: 50%;
-  border: 5px solid #fff;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
-  transform: translateY(-50%);
-}
-
-
-
-
-
-
-
-
-.post-grid.timeline .item.odd .timeline-arrow {
-  right: 100%;
-  top: 30px;
-  position: absolute;
-
-}
 
 
 

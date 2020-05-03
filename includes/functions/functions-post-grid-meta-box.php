@@ -87,6 +87,70 @@ function post_grid_metabox_tabs_content_shortcode($tab, $post_id){
     <?php
 }
 
+add_action('post_grid_metabox_tabs_content_collapsible', 'post_grid_metabox_tabs_content_collapsible', 10, 2);
+
+function post_grid_metabox_tabs_content_collapsible($tab, $post_id){
+
+    $settings_tabs_field = new settings_tabs_field();
+
+    $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
+
+    $collapsible_options = !empty($post_grid_meta_options['collapsible']) ? $post_grid_meta_options['collapsible'] : array();
+
+
+    $header_selector = !empty($collapsible_options['header_selector']) ? $collapsible_options['header_selector'] : '';
+    $body_selector = !empty($collapsible_options['body_selector']) ? $collapsible_options['body_selector'] : '';
+
+
+    ?>
+    <div class="section">
+        <div class="section-title"><?php echo __('Collapsible settings', 'post-grid'); ?></div>
+        <p class="description section-description"><?php echo __('Choose collapsible settings.', 'post-grid'); ?></p>
+
+        <?php
+
+
+        $args = array(
+            'id'		=> 'header_selector',
+            'parent'		=> 'post_grid_meta_options[collapsible]',
+            'title'		=> __('Collapsible header selector','post-grid'),
+            'details'	=> __('Write collapsible header selector class.','post-grid'),
+            'type'		=> 'text',
+            'value'		=> $header_selector,
+            'default'		=> '',
+
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+        $args = array(
+            'id'		=> 'body_selector',
+            'parent'		=> 'post_grid_meta_options[collapsible]',
+            'title'		=> __('Collapsible content selector','post-grid'),
+            'details'	=> __('Write collapsible content selector class.','post-grid'),
+            'type'		=> 'text',
+            'value'		=> $body_selector,
+            'default'		=> '',
+
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
+
+
+        ?>
+
+
+    </div>
+
+
+    <?php
+
+}
 
 add_action('post_grid_metabox_tabs_content_general', 'post_grid_metabox_tabs_content_general', 10, 2);
 
@@ -229,7 +293,6 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
     <?php
 
 }
-
 add_action('post_grid_metabox_tabs_content_query_post', 'post_grid_metabox_tabs_content_query_post', 10, 2);
 
 function post_grid_metabox_tabs_content_query_post($tab, $post_id){

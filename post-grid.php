@@ -135,6 +135,8 @@ if( !class_exists( 'PostGrid' )){
             wp_register_style('font-awesome-4', post_grid_plugin_url.'assets/global/css/font-awesome-4.css');
             wp_register_style('font-awesome-5', post_grid_plugin_url.'assets/global/css/font-awesome-5.css');
 
+            wp_register_style('jquery-ui',  post_grid_plugin_url.'assets/frontend/css/jquery-ui.css');
+
         }
 
 

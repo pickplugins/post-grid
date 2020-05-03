@@ -45,6 +45,8 @@ function meta_boxes_post_grid_input( $post ) {
     $settings_tabs = array();
 
     //var_dump($current_tab);
+    //var_dump($grid_type);
+
 
     $settings_tabs[] = array(
         'id' => 'shortcode',
@@ -81,6 +83,24 @@ function meta_boxes_post_grid_input( $post ) {
         'active' => ($current_tab == 'layouts') ? true : false,
     );
 
+    $settings_tabs[] = array(
+        'id' => 'collapsible',
+        'title' => sprintf(__('%s Collapsible','post-grid'),'<i class="fas fa-qrcode"></i>'),
+        'priority' => 32,
+        'active' => ($current_tab == 'collapsible') ? true : false,
+        'data_visible' => 'collapsible',
+        'hidden' => ($grid_type == 'grid')? true : false || ($grid_type == 'slider')? true : false || ($grid_type == 'glossary')? true : false || ($grid_type == 'filterable')? true : false || ($grid_type == 'timeline') ? true : false,
+    );
+
+    $settings_tabs[] = array(
+        'id' => 'timeline',
+        'title' => sprintf(__('%s Timeline','post-grid'),'<i class="fas fa-qrcode"></i>'),
+        'priority' => 33,
+        'active' => ($current_tab == 'timeline') ? true : false,
+        'data_visible' => 'timeline',
+        'hidden' => ($grid_type == 'grid')? true : false || ($grid_type == 'slider')? true : false || ($grid_type == 'glossary')? true : false || ($grid_type == 'filterable')? true : false || ($grid_type == 'collapsible') ? true : false,
+
+    );
 
 
     $settings_tabs[] = array(
@@ -100,12 +120,13 @@ function meta_boxes_post_grid_input( $post ) {
     );
 
 
+
     $settings_tabs[] = array(
         'id' => 'masonry',
         'title' => sprintf(__('%s Masonry','post-grid'), '<i class="fas fa-th-large"></i>'),
         'priority' => 40,
         'active' => ($current_tab == 'masonry') ? true : false,
-        'data_visible' => 'masonry grid glossary timeline filterable',
+        'data_visible' => 'grid glossary timeline filterable',
         'hidden' => ($grid_type == 'slider')? true : false ,
     );
 
@@ -114,7 +135,7 @@ function meta_boxes_post_grid_input( $post ) {
         'title' => sprintf(__('%s Pagination','post-grid'), '<i class="fas fa-pager"></i>'),
         'priority' => 45,
         'active' => ($current_tab == 'pagination') ? true : false,
-        'data_visible' => 'masonry grid glossary timeline filterable isotope',
+        'data_visible' => ' grid glossary timeline filterable collapsible',
         'hidden' => ($grid_type == 'slider')? true : false ,
     );
 
@@ -188,7 +209,7 @@ function meta_boxes_post_grid_input( $post ) {
                 'type'		=> 'radio',
                 'value'		=> $grid_type,
                 'default'		=> '',
-                'args'		=> apply_filters('post_grid_view_types', array('grid' => 'Normal grid' )),
+                'args'		=> apply_filters('post_grid_view_types', array('grid' => 'Normal grid', 'collapsible' => 'Collapsible', 'timeline' => 'Timeline' )),
             );
 
             $settings_tabs_field->generate_field($args);

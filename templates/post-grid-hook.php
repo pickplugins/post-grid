@@ -601,7 +601,6 @@ function post_grid_item_layout_new($args){
     $layout_elements_data = get_post_meta( $layout_id, 'layout_elements_data', true );
 
 
-    global $element_css;
 
     //echo '<pre>'.var_export($layout_elements_data, ture).'</pre>';
 
@@ -619,13 +618,6 @@ function post_grid_item_layout_new($args){
             $element_args['layout_id'] = $layout_id;
 
             do_action('post_grid_layout_element_' . $elementId, $element_args);
-
-
-            ob_start();
-            do_action('post_grid_layout_element_css_' . $elementId, $element_args);
-            $element_css .= ob_get_clean();
-
-            //var_dump($element_css);
 
         }
 
@@ -741,13 +733,6 @@ function post_grid_custom_css($args){
     do_action('post_grid_view_type_css_'.$grid_type, $args);
 
 
-
-    global  $element_css;
-
-    ?>
-
-    <?php echo $element_css; ?>
-    <?php
 }
 
 
@@ -1028,8 +1013,36 @@ function post_grid_main_scripts($args){
     $layout_custom_scripts = get_post_meta($layout_id,'custom_scripts', true);
     $layout_custom_css = isset($layout_custom_scripts['custom_css']) ? $layout_custom_scripts['custom_css'] : '';
 
+    $layout_elements_data = get_post_meta( $layout_id, 'layout_elements_data', true );
 
-    //var_dump($masonry_enable);
+
+
+    if(!empty($layout_elements_data))
+        foreach($layout_elements_data as $elementIndex=>$elementData){
+            foreach($elementData as $elementId=>$element) {
+
+                //var_dump($element);
+
+                $element_args['element'] = $element;
+                $element_args['index'] = $elementIndex;
+
+                //$element_args['post_id'] = $post_id;
+                $element_args['layout_id'] = $layout_id;
+
+                //ob_start();
+                do_action('post_grid_layout_element_css_' . $elementId, $element_args);
+                //$element_css .= ob_get_clean();
+
+            }
+
+        }
+
+
+
+    ?>
+
+    <?php //echo $element_css; ?>
+    <?php
 
     ?>
     <?php if(!empty($custom_css)): ?>

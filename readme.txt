@@ -139,9 +139,12 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 == Changelog ==
 
+	= 2.0.54 =
+    * 2020-05-4 optimize - optimize layout element CSS generate
+
 	= 2.0.53 =
-    * 2020-05-01 fix - var_dump issue fixed for excerpt.
-     * 2020-05-01 add - query post by ids added.
+    * 2020-05-04 fix - var_dump issue fixed for excerpt.
+     * 2020-05-04 add - query post by ids added.
 
 
 	= 2.0.52 =

@@ -4,7 +4,6 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-
 function post_grid_get_first_post($post_type = 'post'){
 
     $args = array(

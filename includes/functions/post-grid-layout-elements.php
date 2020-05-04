@@ -1101,9 +1101,13 @@ function post_grid_layout_element_post_date($args){
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $date_format = isset($element['date_format']) ? $element['date_format'] : 'd-m-Y';
+    $wrapper_html  = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
+
 
     $post_link = get_permalink($post_id);
     $post_date = get_the_date($date_format, $post_id);
+
+    $post_date = sprintf($wrapper_html,$post_date);
 
     ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> post_date ">
@@ -1194,10 +1198,12 @@ function post_grid_layout_element_author($args){
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
-    $date_format = isset($element['date_format']) ? $element['date_format'] : 'd-m-Y';
+    $wrapper_html = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
     $post_link = get_permalink($post_id);
     $post_author = get_the_author();
+
+    $post_author = sprintf($wrapper_html, $post_author);
 
     ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
@@ -1297,10 +1303,12 @@ function post_grid_layout_element_author_link($args){
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
-    $date_format = isset($element['date_format']) ? $element['date_format'] : 'd-m-Y';
+    $wrapper_html = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
     $post_link = get_permalink($post_id);
     $post_author = get_the_author();
+
+    $post_author = sprintf($wrapper_html, $post_author);
 
     ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">

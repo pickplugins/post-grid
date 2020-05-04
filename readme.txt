@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.52
+	Stable tag: 2.0.53
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,9 +139,18 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 == Changelog ==
 
+	= 2.0.53 =
+    * 2020-05-01 fix - var_dump issue fixed for excerpt.
+     * 2020-05-01 add - query post by ids added.
+
 
 	= 2.0.52 =
     * 2020-05-01 fix - lazy load issue fixed.
+    * 2020-05-04 fix - exclude by post ids issue fixed.
+    * 2020-05-04 fix - layout css issue fixed.
+    * 2020-05-04 add - prefix text for post date element
+    * 2020-05-04 add - prefix text for post author element
+
 
 	= 2.0.51 =
     * 2020-05-01 fix - pagination displaying issue fixed

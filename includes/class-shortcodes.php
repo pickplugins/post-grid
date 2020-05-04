@@ -26,7 +26,7 @@ class class_post_grid_shortcodes{
 
 
 
-        wp_reset_postdata();
+        //wp_reset_postdata();
 
         ob_start();
 

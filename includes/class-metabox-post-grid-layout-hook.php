@@ -136,7 +136,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         'share_button'=>array('name' =>__('Share button','post-grid')),
                         'hr'=>array('name' =>__('Horizontal line','post-grid')),
                         'five_star'=>array('name' =>__('Five star','post-grid')),
-                        'collapsible_icon'=>array('name' =>__('Collapsible icon','post-grid')),
+                        //'collapsible_icon'=>array('name' =>__('Collapsible icon','post-grid')),
 
 
                         ),

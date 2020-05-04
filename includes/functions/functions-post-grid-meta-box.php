@@ -87,71 +87,6 @@ function post_grid_metabox_tabs_content_shortcode($tab, $post_id){
     <?php
 }
 
-add_action('post_grid_metabox_tabs_content_collapsible', 'post_grid_metabox_tabs_content_collapsible', 10, 2);
-
-function post_grid_metabox_tabs_content_collapsible($tab, $post_id){
-
-    $settings_tabs_field = new settings_tabs_field();
-
-    $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
-
-    $collapsible_options = !empty($post_grid_meta_options['collapsible']) ? $post_grid_meta_options['collapsible'] : array();
-
-
-    $header_selector = !empty($collapsible_options['header_selector']) ? $collapsible_options['header_selector'] : '';
-    $body_selector = !empty($collapsible_options['body_selector']) ? $collapsible_options['body_selector'] : '';
-
-
-    ?>
-    <div class="section">
-        <div class="section-title"><?php echo __('Collapsible settings', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose collapsible settings.', 'post-grid'); ?></p>
-
-        <?php
-
-
-        $args = array(
-            'id'		=> 'header_selector',
-            'parent'		=> 'post_grid_meta_options[collapsible]',
-            'title'		=> __('Collapsible header selector','post-grid'),
-            'details'	=> __('Write collapsible header selector class.','post-grid'),
-            'type'		=> 'text',
-            'value'		=> $header_selector,
-            'default'		=> '',
-
-        );
-
-        $settings_tabs_field->generate_field($args, $post_id);
-
-
-        $args = array(
-            'id'		=> 'body_selector',
-            'parent'		=> 'post_grid_meta_options[collapsible]',
-            'title'		=> __('Collapsible content selector','post-grid'),
-            'details'	=> __('Write collapsible content selector class.','post-grid'),
-            'type'		=> 'text',
-            'value'		=> $body_selector,
-            'default'		=> '',
-
-        );
-
-        $settings_tabs_field->generate_field($args, $post_id);
-
-
-
-
-
-
-        ?>
-
-
-    </div>
-
-
-    <?php
-
-}
-
 add_action('post_grid_metabox_tabs_content_general', 'post_grid_metabox_tabs_content_general', 10, 2);
 
 function post_grid_metabox_tabs_content_general($tab, $post_id){
@@ -325,6 +260,7 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
     $posts_per_page = !empty($post_grid_meta_options['posts_per_page']) ? $post_grid_meta_options['posts_per_page'] : 10;
     $offset = isset($post_grid_meta_options['offset']) ? $post_grid_meta_options['offset'] : '0';
     $exclude_post_id = isset($post_grid_meta_options['exclude_post_id']) ? $post_grid_meta_options['exclude_post_id'] : '';
+    $include_post_id = isset($post_grid_meta_options['include_post_id']) ? $post_grid_meta_options['include_post_id'] : '';
 
     $keyword = !empty($post_grid_meta_options['keyword']) ? $post_grid_meta_options['keyword'] :'';
 
@@ -574,6 +510,18 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $settings_tabs_field->generate_field($args, $post_id);
 
 
+        $args = array(
+            'id'		=> 'include_post_id',
+            'parent'		=> 'post_grid_meta_options',
+            'title'		=> __('Include by post ID','post-grid'),
+            'details'	=> __('You can include any post by ids here, use comma separate post id value, ex: 45,48','post-grid'),
+            'type'		=> 'text',
+            'value'		=> $include_post_id,
+            'default'		=> '',
+            'placeholder'		=> '45,48,50',
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
 
         $args = array(
             'id'		=> 'keyword',

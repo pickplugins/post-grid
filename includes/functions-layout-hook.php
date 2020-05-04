@@ -3770,6 +3770,8 @@ function post_grid_layout_element_option_post_date($parameters){
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
     $date_format = isset($element_data['date_format']) ? $element_data['date_format'] : '';
+    $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
+
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
 
     $color = isset($element_data['color']) ? $element_data['color'] : '';
@@ -3808,6 +3810,22 @@ function post_grid_layout_element_option_post_date($parameters){
             );
 
             $settings_tabs_field->generate_field($args);
+
+
+            $args = array(
+                'id'		=> 'wrapper_html',
+                'css_id'		=> $element_index.'_wrapper_html',
+                'parent' => $input_name.'[post_date]',
+                'title'		=> __('Wrapper html','post-grid'),
+                'details'	=> __('Write wrapper html, use <code>%s</code> to replace date output.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $wrapper_html,
+                'default'		=> '',
+                'placeholder'		=> 'Date: %s',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             $args = array(
                 'id'		=> 'link_to',

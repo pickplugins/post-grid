@@ -775,8 +775,6 @@ function post_grid_layout_css($layout){
   transition: all 1s ease 0s;
   width: 100%;
 }
-
-
 .__ID__:hover .layer-media .title {
   transform: scale(0);
 }';
@@ -904,13 +902,13 @@ function post_grid_layout_css($layout){
   overflow: hidden;
   vertical-align: top;
 }
-.__ID__.layer-media {
+.__ID__ .layer-media {
   display: inline-block;
   float: left;
   vertical-align: top;
   width: 50%;
 }
-.__ID__.layer-content {
+.__ID__ .layer-content {
   display: inline-block;
   float: right;
   width: 50%;

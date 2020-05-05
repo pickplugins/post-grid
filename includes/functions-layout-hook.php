@@ -2,8 +2,6 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
 add_action('post_grid_layout_element_option_custom_text','post_grid_layout_element_option_custom_text');
-
-
 function post_grid_layout_element_option_custom_text($parameters){
 
     $settings_tabs_field = new settings_tabs_field();
@@ -3610,6 +3608,7 @@ function post_grid_layout_element_option_author_link($parameters){
     $background_color = isset($element_data['background_color']) ? $element_data['background_color'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
+    $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
@@ -3699,6 +3698,20 @@ function post_grid_layout_element_option_author_link($parameters){
                 'value'		=> $margin,
                 'default'		=> '',
                 'placeholder'		=> '5px 10px',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'text_align',
+                'css_id'		=> $element_index.'_text_align',
+                'parent' => $input_name.'[author_link]',
+                'title'		=> __('Text align','post-grid'),
+                'details'	=> __('Choose text align.','post-grid'),
+                'type'		=> 'select',
+                'value'		=> $text_align,
+                'default'		=> 'left',
+                'args'		=> array('left'=> __('Left', 'post-grid'),'right'=> __('Right', 'post-grid'),'center'=> __('Center', 'post-grid') ),
             );
 
             $settings_tabs_field->generate_field($args);

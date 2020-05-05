@@ -103,6 +103,8 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
     $container_bg_color = !empty($post_grid_meta_options['container']['bg_color']) ? $post_grid_meta_options['container']['bg_color'] : '';
     $container_bg_image = !empty($post_grid_meta_options['container']['bg_image']) ? $post_grid_meta_options['container']['bg_image'] : '';
 
+    $items_wrapper_text_align = !empty($post_grid_meta_options['items_wrapper']['text_align']) ? $post_grid_meta_options['items_wrapper']['text_align'] : '';
+
 
     ?>
     <div class="section">
@@ -223,7 +225,39 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
 
     </div>
 
+    <div class="section">
+        <div class="section-title"><?php echo __('Items wrapper settings', 'post-grid'); ?></div>
+        <p class="description section-description"><?php echo __('Choose items wrapper options.', 'post-grid'); ?></p>
 
+        <?php
+
+        $args = array(
+            'id'		=> 'text_align',
+            'parent'		=> 'post_grid_meta_options[items_wrapper]',
+            'title'		=> __('Text align','post-grid'),
+            'details'	=> __('Container text align.','post-grid'),
+            'type'		=> 'select',
+            'value'		=> $items_wrapper_text_align,
+            'default'		=> 'center',
+            'args'		=> array(
+                'left'=>__('Left','post-grid'),
+                'center'=>__('Center','post-grid'),
+                'right'=>__('Right','post-grid'),
+                'start'=>__('Start','post-grid'),
+                'end'=>__('End','post-grid'),
+                'initial'=>__('Initial','post-grid'),
+                'justify'=>__('Justify','post-grid'),
+
+
+            ),
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+        ?>
+
+
+    </div>
 
     <?php
 

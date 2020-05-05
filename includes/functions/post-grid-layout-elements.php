@@ -40,33 +40,33 @@ function post_grid_layout_element_css_wrapper_start($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+</style>
     <?php
 }
 
@@ -127,33 +127,33 @@ function post_grid_layout_element_css_custom_text($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+</style>
     <?php
 }
 
@@ -218,44 +218,44 @@ function post_grid_layout_element_css_title($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+}
+</style>
     <?php
 }
 
@@ -323,44 +323,44 @@ function post_grid_layout_element_css_title_link($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+}
+</style>
     <?php
 }
 
@@ -468,44 +468,44 @@ function post_grid_layout_element_css_excerpt($args){
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+}
+</style>
     <?php
 }
 
@@ -570,44 +570,44 @@ function post_grid_layout_element_css_excerpt_read_more($args){
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+}
+</style>
     <?php
 }
 
@@ -663,44 +663,44 @@ function post_grid_layout_element_css_read_more($args){
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+}
+</style>
     <?php
 }
 
@@ -792,71 +792,70 @@ function post_grid_layout_element_css_media($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            overflow: hidden;
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    overflow: hidden;
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($padding)): ?>
+    padding: <?php echo $padding; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+@media only screen and (min-width: 1024px ){
+    .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    <?php if($height_large_type =='auto_height'):  ?>
+            height: auto;
+    <?php elseif ($height_large_type =='fixed_height'): ?>
+        <?php if(!empty($thumb_height_large)): ?>
+            height: <?php echo $thumb_height_large; ?>;
         <?php endif; ?>
-        <?php if(!empty($padding)): ?>
-            padding: <?php echo $padding; ?>;
+    <?php elseif ($height_large_type =='max_height'): ?>
+        <?php if(!empty($thumb_height_large)): ?>
+            max-height: <?php echo $thumb_height_large; ?>;
         <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
+    <?php endif; ?>
+    }
+}
+@media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+    .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    <?php if($height_medium_type =='auto_height'):  ?>
+        height: auto;
+    <?php elseif ($height_medium_type =='fixed_height'): ?>
+        <?php if(!empty($thumb_height_medium)): ?>
+            height: <?php echo $thumb_height_medium; ?>;
         <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
+    <?php elseif ($height_medium_type =='max_height'): ?>
+        <?php if(!empty($thumb_height_medium)): ?>
+            max-height: <?php echo $thumb_height_medium; ?>;
         <?php endif; ?>
-        }
-        @media only screen and (min-width: 1024px ){
-            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-
-                <?php if($height_large_type =='auto_height'):  ?>
-                        height: auto;
-                <?php elseif ($height_large_type =='fixed_height'): ?>
-                    <?php if(!empty($thumb_height_large)): ?>
-                        height: <?php echo $thumb_height_large; ?>;
-                    <?php endif; ?>
-                <?php elseif ($height_large_type =='max_height'): ?>
-                    <?php if(!empty($thumb_height_large)): ?>
-                        max-height: <?php echo $thumb_height_large; ?>;
-                    <?php endif; ?>
-                <?php endif; ?>
-            }
-        }
-        @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
-            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if($height_medium_type =='auto_height'):  ?>
-                height: auto;
-            <?php elseif ($height_medium_type =='fixed_height'): ?>
-                <?php if(!empty($thumb_height_medium)): ?>
-                    height: <?php echo $thumb_height_medium; ?>;
-                <?php endif; ?>
-            <?php elseif ($height_medium_type =='max_height'): ?>
-                <?php if(!empty($thumb_height_medium)): ?>
-                    max-height: <?php echo $thumb_height_medium; ?>;
-                <?php endif; ?>
-            <?php endif; ?>
-            }
-        }
-        @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
-            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if($height_small_type =='auto_height'):  ?>
-                height: auto;
-            <?php elseif ($height_small_type =='fixed_height'): ?>
-                <?php if(!empty($thumb_height_small)): ?>
-                    height: <?php echo $thumb_height_small; ?>;
-                <?php endif; ?>
-            <?php elseif ($height_small_type =='max_height'): ?>
-                <?php if(!empty($thumb_height_small)): ?>
-                    max-height: <?php echo $thumb_height_small; ?>;
-                <?php endif; ?>
-            <?php endif; ?>
-            }
-        }
-    </style>
+    <?php endif; ?>
+    }
+}
+@media only screen and ( min-width: 0px ) and ( max-width: 767px ){
+    .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    <?php if($height_small_type =='auto_height'):  ?>
+        height: auto;
+    <?php elseif ($height_small_type =='fixed_height'): ?>
+        <?php if(!empty($thumb_height_small)): ?>
+            height: <?php echo $thumb_height_small; ?>;
+        <?php endif; ?>
+    <?php elseif ($height_small_type =='max_height'): ?>
+        <?php if(!empty($thumb_height_small)): ?>
+            max-height: <?php echo $thumb_height_small; ?>;
+        <?php endif; ?>
+    <?php endif; ?>
+    }
+}
+</style>
     <?php
 }
 
@@ -928,42 +927,35 @@ function post_grid_layout_element_css_thumb($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            overflow: hidden;
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        }
-
-        @media only screen and (min-width: 1024px ){
-            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if(!empty($thumb_height_large)): ?>
-                max-height: <?php echo $thumb_height_large; ?>;
-            <?php endif; ?>
-            }
-        }
-
-        @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
-            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if(!empty($thumb_height_medium)): ?>
-                max-height: <?php echo $thumb_height_medium; ?>;
-            <?php endif; ?>
-            }
-        }
-
-        @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
-            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if(!empty($thumb_height_small)): ?>
-                max-height: <?php echo $thumb_height_small; ?>;
-            <?php endif; ?>
-            }
-        }
-
-
-
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    overflow: hidden;
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+}
+@media only screen and (min-width: 1024px ){
+    .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    <?php if(!empty($thumb_height_large)): ?>
+        max-height: <?php echo $thumb_height_large; ?>;
+    <?php endif; ?>
+    }
+}
+@media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+    .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    <?php if(!empty($thumb_height_medium)): ?>
+        max-height: <?php echo $thumb_height_medium; ?>;
+    <?php endif; ?>
+    }
+}
+@media only screen and ( min-width: 0px ) and ( max-width: 767px ){
+    .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    <?php if(!empty($thumb_height_small)): ?>
+        max-height: <?php echo $thumb_height_small; ?>;
+    <?php endif; ?>
+    }
+}
+</style>
     <?php
 }
 
@@ -1036,42 +1028,35 @@ function post_grid_layout_element_css_thumb_link($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            overflow: hidden;
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        }
-
-        @media only screen and (min-width: 1024px ){
-            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if(!empty($thumb_height_large)): ?>
-                max-height: <?php echo $thumb_height_large; ?>;
-            <?php endif; ?>
-            }
-        }
-
-        @media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
-            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if(!empty($thumb_height_medium)): ?>
-                max-height: <?php echo $thumb_height_medium; ?>;
-            <?php endif; ?>
-            }
-        }
-
-        @media only screen and ( min-width: 0px ) and ( max-width: 767px ){
-            .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-            <?php if(!empty($thumb_height_small)): ?>
-                max-height: <?php echo $thumb_height_small; ?>;
-            <?php endif; ?>
-            }
-        }
-
-
-
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    overflow: hidden;
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+}
+@media only screen and (min-width: 1024px ){
+    .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    <?php if(!empty($thumb_height_large)): ?>
+        max-height: <?php echo $thumb_height_large; ?>;
+    <?php endif; ?>
+    }
+}
+@media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+    .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    <?php if(!empty($thumb_height_medium)): ?>
+        max-height: <?php echo $thumb_height_medium; ?>;
+    <?php endif; ?>
+    }
+}
+@media only screen and ( min-width: 0px ) and ( max-width: 767px ){
+    .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+    <?php if(!empty($thumb_height_small)): ?>
+        max-height: <?php echo $thumb_height_small; ?>;
+    <?php endif; ?>
+    }
+}
+</style>
     <?php
 }
 
@@ -1144,44 +1129,44 @@ function post_grid_layout_element_css_post_date($args){
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+}
+</style>
     <?php
 }
 
@@ -1198,7 +1183,7 @@ function post_grid_layout_element_author($args){
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
-    $wrapper_html = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
+    $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
     $post_link = get_permalink($post_id);
     $post_author = get_the_author();
@@ -1248,44 +1233,44 @@ function post_grid_layout_element_css_author($args){
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+}
+</style>
     <?php
 }
 
@@ -1303,7 +1288,7 @@ function post_grid_layout_element_author_link($args){
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
-    $wrapper_html = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
+    $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
     $post_link = get_permalink($post_id);
     $post_author = get_the_author();
@@ -1311,7 +1296,7 @@ function post_grid_layout_element_author_link($args){
     $post_author = sprintf($wrapper_html, $post_author);
 
     ?>
-    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author ">
+    <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> author_link ">
         <?php
         if($link_to == 'post_link'):
             ?>
@@ -1347,48 +1332,48 @@ function post_grid_layout_element_css_author_link($args){
     $font_size = isset($element['font_size']) ? $element['font_size'] : '';
     $font_family = isset($element['font_family']) ? $element['font_family'] : '';
     $margin = isset($element['margin']) ? $element['margin'] : '';
-    $text_align = isset($element['text_align']) ? $element['text_align'] : '';
+    $text_align = isset($element['text_align']) ? $element['text_align'] : 'left';
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+}
+</style>
     <?php
 }
 
@@ -1461,44 +1446,44 @@ function post_grid_layout_element_css_categories($args){
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($text_color)): ?>
-            color: <?php echo $text_color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($link_color)): ?>
-            color: <?php echo $link_color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($text_color)): ?>
+    color: <?php echo $text_color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($link_color)): ?>
+    color: <?php echo $link_color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+</style>
     <?php
 }
 
@@ -1569,44 +1554,44 @@ function post_grid_layout_element_css_tags($args){
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($text_color)): ?>
-            color: <?php echo $text_color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($link_color)): ?>
-            color: <?php echo $link_color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($text_color)): ?>
+    color: <?php echo $text_color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($link_color)): ?>
+    color: <?php echo $link_color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+</style>
     <?php
 }
 
@@ -1669,33 +1654,33 @@ function post_grid_layout_element_css_comments_count($args){
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_family)): ?>
-            font-family: <?php echo $font_family; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($font_family)): ?>
+    font-family: <?php echo $font_family; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+</style>
     <?php
 }
 
@@ -1771,41 +1756,41 @@ function post_grid_layout_element_css_share_button($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($icon_color)): ?>
-            color: <?php echo $icon_color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($wrapper_margin)): ?>
-            margin: <?php echo $wrapper_margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
-        <?php if(!empty($icon_color)): ?>
-            color: <?php echo $icon_color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($icon_margin)): ?>
-            margin: <?php echo $icon_margin; ?>;
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($icon_color)): ?>
+    color: <?php echo $icon_color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($wrapper_margin)): ?>
+    margin: <?php echo $wrapper_margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?> a{
+<?php if(!empty($icon_color)): ?>
+    color: <?php echo $icon_color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($icon_margin)): ?>
+    margin: <?php echo $icon_margin; ?>;
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+</style>
     <?php
 }
 
@@ -1851,27 +1836,27 @@ function post_grid_layout_element_css_hr($args){
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($background_color)): ?>
-            background-color: <?php echo $background_color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($height)): ?>
-            padding: <?php echo $height; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-        <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($background_color)): ?>
+    background-color: <?php echo $background_color; ?>;
+<?php endif; ?>
+<?php if(!empty($height)): ?>
+    padding: <?php echo $height; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+</style>
     <?php
 }
 
@@ -1948,30 +1933,30 @@ function post_grid_layout_element_css_five_star($args){
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
     ?>
-    <style type="text/css">
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-        <?php if(!empty($color)): ?>
-            color: <?php echo $color; ?>;
-        <?php endif; ?>
-        <?php if(!empty($font_size)): ?>
-            font-size: <?php echo $font_size; ?>;
-        <?php endif; ?>
-        <?php if(!empty($margin)): ?>
-            margin: <?php echo $margin; ?>;
-        <?php endif; ?>
-        <?php if(!empty($text_align)): ?>
-            text-align: <?php echo $text_align; ?>;
-        <?php endif; ?>
-        <?php if(!empty($css)): ?>
-        <?php echo $css; ?>
-        <?php endif; ?>
-        }
-        .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
-        <?php if(!empty($css_hover)): ?>
-            <?php echo $css_hover; ?>
-        <?php endif; ?>
-        }
-    </style>
+<style type="text/css">
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
+<?php if(!empty($color)): ?>
+    color: <?php echo $color; ?>;
+<?php endif; ?>
+<?php if(!empty($font_size)): ?>
+    font-size: <?php echo $font_size; ?>;
+<?php endif; ?>
+<?php if(!empty($margin)): ?>
+    margin: <?php echo $margin; ?>;
+<?php endif; ?>
+<?php if(!empty($text_align)): ?>
+    text-align: <?php echo $text_align; ?>;
+<?php endif; ?>
+<?php if(!empty($css)): ?>
+<?php echo $css; ?>
+<?php endif; ?>
+}
+<?php if(!empty($css_hover)): ?>
+.layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>:hover{
+<?php echo $css_hover; ?>
+}
+<?php endif; ?>
+</style>
     <?php
 }
 

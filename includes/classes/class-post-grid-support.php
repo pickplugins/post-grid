@@ -65,155 +65,205 @@ class class_post_grid_support{
 
         $tutorials = array(
             array(
-                'question'=>__('Latest Version 2.0.46 Overview', 'post-grid'),
-                'answer_url'=>'https://youtu.be/YVtsIbEb9zs',
+                'title'=>__('Latest Version 2.0.46 Overview', 'post-grid'),
+                'url'=>'https://youtu.be/YVtsIbEb9zs',
+                'keywords'=>'overview latest version',
             ),
 
             array(
-                'question'=>__('How to create post grid', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=g5kxtJIopXs',
+                'title'=>__('How to create post grid', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=g5kxtJIopXs',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Custom read more text', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=LY7IjS7SFNk',
+                'title'=>__('Custom read more text', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=LY7IjS7SFNk',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Remove read more text', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=ZcS2vRcTe4A',
+                'title'=>__('Remove read more text', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=ZcS2vRcTe4A',
             ),
             array(
-                'question'=>__('Excerpt word count', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=gZ6E3UiKQqk',
+                'title'=>__('Excerpt word count', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=gZ6E3UiKQqk',
+                'keywords'=>'',
             ),
 
             array(
-                'question'=>__('Custom media height', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=TupF2TpHHFA',
+                'title'=>__('Custom media height', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=TupF2TpHHFA',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Item custom padding margin', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=HRZpoib1VvI',
+                'title'=>__('Item custom padding margin', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=HRZpoib1VvI',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Grid item height', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=ydqlgzfsboQ',
+                'title'=>__('Grid item height', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=ydqlgzfsboQ',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Column Width or column number', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=ZV8hd1ij5Wo',
+                'title'=>__('Column Width or column number', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=ZV8hd1ij5Wo',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Post title linked', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=oUVZB9F5d4U',
+                'title'=>__('Post title linked', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=oUVZB9F5d4U',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Featured image linked to post', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=stGOJLwUF-k',
+                'title'=>__('Featured image linked to post', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=stGOJLwUF-k',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Query post by categories or terms', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=xYzqtWRg8W4',
+                'title'=>__('Query post by categories or terms', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=xYzqtWRg8W4',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Query post by tags or terms', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=RKb-B_Q72Ak',
+                'title'=>__('Query post by tags or terms', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=RKb-B_Q72Ak',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Display search input', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=psJR65Fmc_s',
+                'title'=>__('Display search input', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=psJR65Fmc_s',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('Work with layout editor', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=9bQc7q40jMc',
+                'title'=>__('Work with layout editor', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=9bQc7q40jMc',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('[ Pro ] Create filterable grid', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=Zg2r7idmEm0',
+                'title'=>__('[ Pro ] Create filterable grid', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=Zg2r7idmEm0',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('[ Pro ] Filterable custom filter type data logic', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=5Dueav6Yoyc',
+                'title'=>__('[ Pro ] Filterable custom filter type data logic', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=5Dueav6Yoyc',
+                'keywords'=>'',
             ),
 
             array(
-                'question'=>__('[ Pro ] Filterable custom all text', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=JvVkAyoXC3g',
+                'title'=>__('[ Pro ] Filterable custom all text', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=JvVkAyoXC3g',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('[ Pro ] Filterable default active filter', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=h2rbyZNhMhU',
-            ),
-
-            array(
-                'question'=>__('[ Pro ] Filterable custom filter', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=e8phxNKIRsU',
+                'title'=>__('[ Pro ] Filterable default active filter', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=h2rbyZNhMhU',
+                'keywords'=>'',
             ),
 
             array(
-                'question'=>__('[ Pro ] Filterable dropdown single filter', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=ZHY8qf-z3H0',
+                'title'=>__('[ Pro ] Filterable custom filter', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=e8phxNKIRsU',
+                'keywords'=>'',
             ),
 
             array(
-                'question'=>__('[ Pro ] Filterable display sort filter', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=21TYNsp2OPI',
+                'title'=>__('[ Pro ] Filterable dropdown single filter', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=ZHY8qf-z3H0',
+                'keywords'=>'',
             ),
 
             array(
-                'question'=>__('[ Pro ] Filterable multi filter', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=uRcfd_R9YCM',
+                'title'=>__('[ Pro ] Filterable display sort filter', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=21TYNsp2OPI',
+                'keywords'=>'',
             ),
-
-
 
             array(
-                'question'=>__('[ Pro ] Post grid on archive tags', 'post-grid'),
-                'answer_url'=>'https://youtu.be/lNyAjva_UXo',
+                'title'=>__('[ Pro ] Filterable multi filter', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=uRcfd_R9YCM',
+                'keywords'=>'',
             ),
-
 
 
 
             array(
-                'question'=>__('[ Pro ] Query post by meta field', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=0AIDNJvZGR0',
+                'title'=>__('[ Pro ] Post grid on archive tags', 'post-grid'),
+                'url'=>'https://youtu.be/lNyAjva_UXo',
+                'keywords'=>'',
+            ),
+
+
+
+
+            array(
+                'title'=>__('[ Pro ] Query post by meta field', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=0AIDNJvZGR0',
+                'keywords'=>'',
             ),
 
 
             array(
-                'question'=>__('[ Pro ] Multi skin', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=YzUs_P3cFCo',
+                'title'=>__('[ Pro ] Multi skin', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=YzUs_P3cFCo',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('[ Pro ] Sticky post query', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=nVIOUbVjML4',
+                'title'=>__('[ Pro ] Sticky post query', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=nVIOUbVjML4',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('[ Pro ] Masonry layout', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=qYjbv2euNpE',
+                'title'=>__('[ Pro ] Masonry layout', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=qYjbv2euNpE',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('[ Pro ] Post query by author', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=KtoGa8NB3ig',
+                'title'=>__('[ Pro ] Post query by author', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=KtoGa8NB3ig',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('[ Pro ] Create glossary grid', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=MKL4EZ-WYTs',
+                'title'=>__('[ Pro ] Create glossary grid', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=MKL4EZ-WYTs',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('[ Pro ] Post carousel slider', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=A0bZ_luBtQQ',
+                'title'=>__('[ Pro ] Post carousel slider', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=A0bZ_luBtQQ',
+                'keywords'=>'',
             ),
 
             array(
-                'question'=>__('[ Pro ] Grid layout type', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=58piQVkDZN4',
+                'title'=>__('[ Pro ] Grid layout type', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=58piQVkDZN4',
+                'keywords'=>'',
             ),
             array(
-                'question'=>__('[ Pro ] Thumbnail youtube', 'post-grid'),
-                'answer_url'=>'https://www.youtube.com/watch?v=Zm5vD15yvNM',
+                'title'=>__('[ Pro ] Thumbnail youtube', 'post-grid'),
+                'url'=>'https://www.youtube.com/watch?v=Zm5vD15yvNM',
+                'keywords'=>'',
+            ),
+            array(
+                'title'=>__('How to Create a Post Grid?', 'post-grid'),
+                'url'=>'https://www.pickplugins.com/documentation/post-grid/faq/how-to-create-a-post-grid/',
+            ),
+            array(
+                'title'=>__('How to upgrade to premium?', 'post-grid'),
+                'url'=>'https://www.pickplugins.com/documentation/post-grid/upgrade-to-premium/',
             ),
 
+            array(
+                'title'=>__('Post grid on archive page?', 'post-grid'),
+                'url'=>'https://www.pickplugins.com/documentation/post-grid/faq/post-grid-for-archive-page/',
+            ),
+
+
+            array(
+                'title'=>__('How to display HTML/Shortcode via layout editor ?', 'post-grid'),
+                'url'=>'https://www.pickplugins.com/documentation/post-grid/faq/layout-editor-how-at-add-htmlshortcode/',
+            ),
 
         );
 
@@ -227,30 +277,7 @@ class class_post_grid_support{
 
     public function faq(){
         $faq = array(
-            array(
-                'question'=>__('How to Create a Post Grid?', 'post-grid'),
-                'answer_url'=>'https://www.pickplugins.com/documentation/post-grid/faq/how-to-create-a-post-grid/',
-            ),
-            array(
-                'question'=>__('How to upgrade to premium?', 'post-grid'),
-                'answer_url'=>'https://www.pickplugins.com/documentation/post-grid/upgrade-to-premium/',
-            ),
 
-//            array(
-//                'question'=>__('How to activate license?', 'post-grid'),
-//                'answer_url'=>'https://www.pickplugins.com/documentation/woocommerce-products-slider/faq/activate-license/',
-//            ),
-
-            array(
-                'question'=>__('Post grid on archive page?', 'post-grid'),
-                'answer_url'=>'https://www.pickplugins.com/documentation/post-grid/faq/post-grid-for-archive-page/',
-            ),
-
-
-            array(
-                'question'=>__('How to display HTML/Shortcode via layout editor ?', 'post-grid'),
-                'answer_url'=>'https://www.pickplugins.com/documentation/post-grid/faq/layout-editor-how-at-add-htmlshortcode/',
-            ),
         );
 
 

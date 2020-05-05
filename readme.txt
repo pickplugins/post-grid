@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.53
+	Stable tag: 2.0.54
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,9 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 	= 2.0.54 =
     * 2020-05-4 optimize - optimize layout element CSS generate
+    * 2020-05-4 fix - grid item text align issue fixed.
+    * 2020-05-4 fix - element author and author link issue fixed.
+
 
 	= 2.0.53 =
     * 2020-05-04 fix - var_dump issue fixed for excerpt.

@@ -255,7 +255,77 @@ function meta_boxes_post_grid_input( $post ) {
 function meta_boxes_post_grid_side( $post ) {
 
     ?>
+    <div class="plugin-help-search">
+        <input type="search" value="" placeholder="Start typing">
+
+        <ul>
+
+            <?php
+            $class_post_grid_support = new class_post_grid_support();
+
+            $video_tutorials =  $class_post_grid_support->video_tutorials();
+
+            foreach($video_tutorials as $item){
+                $url = $item['url'];
+                $title = $item['title'];
+                $keywords = $item['keywords'];
+
+                ?>
+                <li keywords="<?php echo $keywords; ?>" class="item">
+                    <a target="_blank" href="<?php echo $url; ?>"><i class="far fa-dot-circle"></i> <?php echo $title; ?></a>
+
+                </li>
+                <?php
+
+            }
+
+            ?>
+
+
+        </ul>
+    </div>
+
+
+
+    <style type="text/css">
+        .plugin-help-search{}
+        .plugin-help-search input[type=search]{
+            width: 100%;
+        }
+    </style>
+
+    <script>
+        jQuery(document).ready(function($){
+            jQuery(document).on('keyup', '.plugin-help-search input', function(){
+                keyword = jQuery(this).val().toLowerCase();
+                content_body = [];
+
+                console.log(keyword);
+
+                $('.plugin-help-search li').each(function( index ) {
+                    $( this ).hide();
+                    content = $( this ).text().toLowerCase();
+                    content_body[index] = content;
+                    n = content_body[index].indexOf(keyword);
+                    if(n<0){
+                        $( this ).hide();
+                    }else{
+                        $( this ).show();
+                    }
+                });
+            })
+        })
+    </script>
+
+
+
+
     <div class="post-grid-meta-box">
+
+
+
+
+
 
         <ul>
             <li>Post Grid Version: <?php echo post_grid_version; ?></li>
@@ -276,27 +346,6 @@ function meta_boxes_post_grid_side( $post ) {
 
         <a class="button" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" target="_blank">Submit Reviews</a> <a class="button" href="https://wordpress.org/support/plugin/post-grid/#new-topic-0" target="_blank">Ask wordpress.org</a><p>We spent thousand+ hours to development on this plugin, please submit your reviews wisely.</p><p>If you have any issue with this plugin please submit our forums or contact our support first.</p><p class="description">Your feedback and reviews are most important things to keep our development on track. If you have time please submit us five star <a href="https://wordpress.org/support/plugin/post-grid/reviews/"><span style="color: orange"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></a> reviews.</p>
 
-        <h3>FAQ</h3>
-        <div class="faq">
-            <?php
-            $class_post_grid_support = new class_post_grid_support();
-            $faqs =  $class_post_grid_support->faq();
-
-            echo '<ul>';
-
-                foreach($faqs as $item){
-
-                    echo '<li class="item">';
-                    echo '<a target="_blank" href="'.$item['answer_url'].'"><i class="far fa-dot-circle"></i> '.$item['question'].'</a>';
-
-
-                    echo '</li>';
-                }
-
-            echo '</ul>';
-            ?>
-
-        </div>
 
 
 
@@ -305,19 +354,6 @@ function meta_boxes_post_grid_side( $post ) {
         <div class="faq">
             <?php
 
-            $video_tutorials =  $class_post_grid_support->video_tutorials();
-
-            echo '<ul>';
-                foreach($video_tutorials as $item){
-
-                    echo '<li class="item">';
-                    echo '<a target="_blank" href="'.$item['answer_url'].'"><i class="far fa-dot-circle"></i> '.$item['question'].'</a>';
-
-
-                    echo '</li>';
-
-                }
-                echo '</ul>';
 
             ?>
 

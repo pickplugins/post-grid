@@ -791,6 +791,8 @@ function post_grid_view_type_css_grid($args){
     $container_padding = isset($post_grid_options['container']['padding']) ? $post_grid_options['container']['padding'] : '';
     $container_bg_color = isset($post_grid_options['container']['bg_color']) ? $post_grid_options['container']['bg_color'] : '';
     $container_bg_image = isset($post_grid_options['container']['bg_image']) ? $post_grid_options['container']['bg_image'] : '';
+    $items_wrapper_text_align = isset($post_grid_options['items_wrapper']['text_align']) ? $post_grid_options['items_wrapper']['text_align'] : 'center';
+
 
     $items_bg_color_type = isset($post_grid_options['items_bg_color_type']) ? $post_grid_options['items_bg_color_type'] : '';
     $items_bg_color = isset($post_grid_options['items_bg_color']) ? $post_grid_options['items_bg_color'] : '#fff';
@@ -798,7 +800,6 @@ function post_grid_view_type_css_grid($args){
 
     ?>
     <style type="text/css">
-
         #post-grid-<?php echo $grid_id; ?> {
         <?php if(!empty($container_padding)): ?>
             padding:<?php echo $container_padding; ?>;
@@ -809,9 +810,15 @@ function post_grid_view_type_css_grid($args){
         <?php if(!empty($container_bg_image)): ?>
             background-image: url(<?php echo $container_bg_image; ?>);
         <?php endif; ?>
+        <?php if(!empty($container_text_align)): ?>
+            text-align: <?php echo $container_text_align; ?>;
+        <?php endif; ?>
         }
-
-
+        #post-grid-<?php echo $grid_id; ?> .grid-items{
+        <?php if(!empty($items_wrapper_text_align)): ?>
+            text-align: <?php echo $items_wrapper_text_align; ?>;
+        <?php endif; ?>
+        }
         #post-grid-<?php echo $grid_id; ?> .item{
         <?php if(!empty($items_margin)): ?>
             margin:<?php echo $items_margin; ?>;

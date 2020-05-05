@@ -1671,6 +1671,7 @@ class settings_tabs_field{
             .radio-img img{
 
                 vertical-align: top;
+                width: 100%;
             }
 
         </style>

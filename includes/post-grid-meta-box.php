@@ -266,9 +266,9 @@ function meta_boxes_post_grid_side( $post ) {
             $video_tutorials =  $class_post_grid_support->video_tutorials();
 
             foreach($video_tutorials as $item){
-                $url = $item['url'];
-                $title = $item['title'];
-                $keywords = $item['keywords'];
+                $url = isset($item['url']) ?$item['url'] : '';
+                $title = isset($item['title']) ?$item['title'] : '';
+                $keywords = isset($item['keywords']) ? $item['keywords'] : '';
 
                 ?>
                 <li keywords="<?php echo $keywords; ?>" class="item">

@@ -16,9 +16,11 @@ function post_grid_main_lazy($atts){
     $lazy_load_image_src = isset($post_grid_options['lazy_load_image_src']) ? $post_grid_options['lazy_load_image_src'] : '';
 
 
+
     ?>
     <div id="post-grid-lazy-<?php echo $grid_id; ?>" class="post-grid-lazy"><img src="<?php echo $lazy_load_image_src; ?>"/></div>
     <script>
+
         jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
             jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').fadeOut();
             jQuery('#post-grid-<?php echo $grid_id; ?>').fadeIn();
@@ -54,9 +56,22 @@ function post_grid_main_container($atts){
 
     wp_enqueue_style( 'post-grid-style' );
 
+    $lazy_load_enable = isset($post_grid_options['lazy_load_enable']) ? $post_grid_options['lazy_load_enable'] : 'grid';
+    $masonry_enable = !empty($post_grid_options['masonry_enable']) ? $post_grid_options['masonry_enable'] : 'no';
+    $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
+
+    $post_grid_js_args = array(
+        'id' => $grid_id,
+        'lazy_load' => $lazy_load_enable,
+        'masonry_enable' => $masonry_enable,
+        'view_type' => $grid_type,
+    );
+
+    $post_grid_js_args = apply_filters('post_grid_js_args', $post_grid_js_args, $args);
+
 
     ?>
-    <div id="post-grid-<?php echo $grid_id; ?>" class="post-grid <?php echo $grid_type; ?>">
+    <div data-options='<?php echo json_encode($post_grid_js_args); ?>' id="post-grid-<?php echo $grid_id; ?>" class="post-grid <?php echo $grid_type; ?>">
         <?php
         do_action('post_grid_container', $args);
         ?>
@@ -831,7 +846,6 @@ function post_grid_view_type_css_grid($args){
         <?php endif; ?>
         }
         #post-grid-<?php echo $grid_id; ?>  .item .layer-media{
-            overflow: hidden;
             <?php
             if($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height'){
                 echo 'height:'.$items_media_height.';';

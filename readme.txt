@@ -139,6 +139,9 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 == Changelog ==
 
+	= 2.0.55 =
+    * 2020-05-4 fix - remove empty read more text to avoid conflict old layout.
+
 	= 2.0.54 =
     * 2020-05-4 optimize - optimize layout element CSS generate
     * 2020-05-4 fix - grid item text align issue fixed.

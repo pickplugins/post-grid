@@ -428,7 +428,7 @@ function post_grid_layout_element_excerpt($args){
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
-    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : __('Read more', 'post-grid');
+    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
 
 
     if($char_limit > 0){
@@ -534,7 +534,7 @@ function post_grid_layout_element_excerpt_read_more($args){
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
-    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : __('Read more','post-grid');
+    $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
 
 
@@ -791,10 +791,11 @@ function post_grid_layout_element_css_media($args){
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
+    //var_dump($css);
+
     ?>
 <style type="text/css">
 .layout-<?php echo $layout_id; ?> .element_<?php echo $index; ?>{
-    overflow: hidden;
 <?php if(!empty($margin)): ?>
     margin: <?php echo $margin; ?>;
 <?php endif; ?>

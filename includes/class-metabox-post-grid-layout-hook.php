@@ -142,6 +142,19 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         ),
                 );
 
+                $elements_group['3rd_party_mix'] = array(
+                    'group_title'=>'3rd party mix',
+                    'items'=>array(
+                        'yasr_visitor_votes'=>array('name' =>__('YASR - visitor votes','post-grid')),
+                        'yasr_overall_rating'=>array('name' =>__('YASR- overall rating','post-grid')),
+                        'yith_add_to_wishlist'=>array('name' =>__('YITH - Add to Wishlist','post-grid')),
+                        'rating_widget'=>array('name' =>__('Rating-Widget: Star Review','post-grid')),
+
+
+                    ),
+
+                );
+
 //
 
 //

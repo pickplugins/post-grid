@@ -224,67 +224,6 @@
 
 /*Grid Element CSS*/
 
-.post-grid .element.wc_add_to_cart {}
-.post-grid .element.wc_add_to_cart p {
-  border: medium none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-
-
-
-.post-grid .element.wc_full_price {}
-.post-grid .element.wc_full_price ins {
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-}
-
-
-
-.post-grid .share_button span {
-  display: inline-block;
-  margin: 3px;
-
-}
-
-
-.post-grid .share_button span a {
-  display: inline-block;
-  font-size: 25px;
-}
-
-
-
-.post-grid .zoom {
-  background: #fff none repeat scroll 0 0;
-  border-radius: 50%;
-  box-shadow: 0 0 3px 0 rgb(153, 153, 153);
-  cursor: pointer;
-  display: inline;
-  height: 50px;
-  line-height: normal;
-  text-align: center;
-  width: 50px;
-}
-
-.post-grid .zoom .fa {
-  color: #999;
-  font-size: 24px;
-  margin-top: 12px;
-}
-
-.post-grid .comments-area {
-
-}
-
-.post-grid .commentlist {
-
-}
-
-.post-grid .commentlist li {
-  list-style: outside none none;
-  margin: 0;
-}
 
 
 /*Lazy Load*/

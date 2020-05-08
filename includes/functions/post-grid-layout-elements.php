@@ -1087,7 +1087,7 @@ function post_grid_layout_element_post_date($args){
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $date_format = isset($element['date_format']) ? $element['date_format'] : 'd-m-Y';
-    $wrapper_html  = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
+    $wrapper_html  = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
 
     $post_link = get_permalink($post_id);

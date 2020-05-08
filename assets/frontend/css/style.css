@@ -232,15 +232,7 @@
 }
 
 
-.post-grid .element.wc_gallery {}
-.post-grid .element.wc_gallery img {
-  border-radius: 0;
-  box-shadow: none;
-  display: inline-block;
-  margin: 5px;
-  vertical-align: top;
-  width: 50px;
-}
+
 
 .post-grid .element.wc_full_price {}
 .post-grid .element.wc_full_price ins {

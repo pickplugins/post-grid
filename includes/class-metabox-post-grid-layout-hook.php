@@ -110,6 +110,8 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
 
                 <?php
 
+
+
                 $elements_group['general'] = array(
                     'group_title'=>'General',
                     'items'=>array(
@@ -142,34 +144,16 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         ),
                 );
 
-                $elements_group['3rd_party_mix'] = array(
-                    'group_title'=>'3rd party mix',
-                    'items'=>array(
-                        'yasr_visitor_votes'=>array('name' =>__('YASR - visitor votes','post-grid')),
-                        'yasr_overall_rating'=>array('name' =>__('YASR- overall rating','post-grid')),
-                        'yith_add_to_wishlist'=>array('name' =>__('YITH - Add to Wishlist','post-grid')),
-                        'rating_widget'=>array('name' =>__('Rating-Widget: Star Review','post-grid')),
 
-
-                    ),
-
+                $elements_group['star_rating'] = array(
+                    'group_title'=>'Star Rating',
+                    'items'=>array(),
                 );
 
-//
-
-//
-
-//
-
-
-
-
-                //$elements_group['events_manager'] = array('group_title'=>'Events manager');
-                //$elements_group['yith'] = array('group_title'=>'Yith');
-
-
-
-
+                $elements_group['wishlist'] = array(
+                    'group_title'=>'Wishlist',
+                    'items'=>array(),
+                );
 
                 $elements_group = apply_filters('post_grid_layout_elements', $elements_group);
 
@@ -178,7 +162,9 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
 
                 if(!empty($elements_group))
                     foreach ($elements_group as $group_index => $element_group):
-                        $group_items = $element_group['items'];
+
+
+                        $group_items = isset($element_group['items']) ? $element_group['items'] : array();
 
                         foreach ($group_items as $elementIndex => $element):
                             ob_start();
@@ -222,8 +208,9 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                         if(!empty($elements_group))
                             foreach ($elements_group as $group_index => $element_group):
 
-                                $group_title = $element_group['group_title'];
-                                $group_items = $element_group['items'];
+                                $group_title = isset($element_group['group_title']) ? $element_group['group_title'] : '';
+                                $group_items = isset($element_group['items']) ? $element_group['items'] : array();
+                                //$group_items = apply_filters('post_grid_layout_group_'.$group_index, $group_items);
 
                                 ?>
                                 <div class="item">

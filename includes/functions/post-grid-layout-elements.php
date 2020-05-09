@@ -802,6 +802,7 @@ function post_grid_layout_element_css_media($args){
 <?php if(!empty($padding)): ?>
     padding: <?php echo $padding; ?>;
 <?php endif; ?>
+    overflow: hidden;
 <?php if(!empty($css)): ?>
 <?php echo $css; ?>
 <?php endif; ?>

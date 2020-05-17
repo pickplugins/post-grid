@@ -82,7 +82,7 @@ content,
 
 
 
-###Premium features
+##Premium Features
 
 <strong>Variety of media display</strong>
 you can display YouTube, vimeo, dailymotion, soundcloud, mp3, gallery, Font Awesome icons on thumbnail area. linked to custom link on thumbnail image.
@@ -103,6 +103,39 @@ you can display YouTube, vimeo, dailymotion, soundcloud, mp3, gallery, Font Awes
 * Extra query parameter.
 * Create unlimited layout via layout editor.
 * Add custom HTML(Shortcodes) via layout editor.
+
+##3rd party plugins support
+
+**WooCommerce**
+WooCommerce is #1 ecommerce plugin for WordPress and we provide full support to display following elements for products on the post grid.
+
+* Add to cart
+* Full price
+* Sale price
+* Regular price
+* Star rating
+* Text rating
+* Product categories
+* Product tags
+* Product gallery
+* Product SKU
+
+
+**Easy Digital Download**
+Easy Digital Download is another best ecommerce for digital products and we provide full support to display following elements for downloads on the post grid.
+
+* Price
+* Variable prices
+* Sales stats
+* Earnings stats
+* Add to cart
+* Text rating
+* download categories
+* download tags
+
+
+
+
 
 
 <strong>Video Tutorial(with premium version interface)</strong>

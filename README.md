@@ -134,7 +134,35 @@ Easy Digital Download is another best ecommerce for digital products and we prov
 * download tags
 
 
+**Advanced Custom Fields**
+Advanced Custom Fields is #1 custom fields plugin for WordPress and we added full support to display following meta fields for any post types.
 
+* Text
+* Textarea
+* Number
+* Range
+* Email
+* URL
+* Password
+* Link
+* Post object
+* Page link
+* Taxonomy
+* User
+* Relationship
+* Image
+* File
+* Wysiwyg
+* oEmbed
+* Select
+* Checkbox
+* Radio
+* Button group
+* True / False
+* Date picker
+* Time picker
+* Datetime picker
+* Google Map
 
 
 

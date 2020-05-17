@@ -135,7 +135,7 @@ Easy Digital Download is another best ecommerce for digital products and we prov
 
 
 **Advanced Custom Fields**
-Advanced Custom Fields is #1 custom fields plugin for WordPress and we added full support to display following meta fields for any post types.
+Advanced Custom Fields is #1 custom field's plugin for WordPress and we added full support to display following meta fields for any post types.
 
 * Text
 * Textarea
@@ -163,6 +163,32 @@ Advanced Custom Fields is #1 custom fields plugin for WordPress and we added ful
 * Time picker
 * Datetime picker
 * Google Map
+
+
+
+**The Events Calendar**
+The Events Calendar is #1 events manager plugin for WordPress and we added full support to display following elements for event post type
+
+* Event categories
+* Event tags
+* Event start date
+* Event end date
+* Event URL
+* Event cost
+* Venue address
+* Venue city
+* Venue country
+* Venue province
+* Venue zip
+* Venue phone
+* Venue URL
+* Venue Map
+* Organizer Phone
+* Organizer Website
+* Organizer Email
+
+
+
 
 
 

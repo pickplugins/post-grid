@@ -167,7 +167,7 @@ Advanced Custom Fields is #1 custom field's plugin for WordPress and we added fu
 
 
 **The Events Calendar**
-The Events Calendar is #1 events manager plugin for WordPress and we added full support to display following elements for event post type
+The Events Calendar is #1 event's manager plugin for WordPress and we added full support to display following elements for event post type
 
 * Event categories
 * Event tags
@@ -186,6 +186,23 @@ The Events Calendar is #1 events manager plugin for WordPress and we added full 
 * Organizer Phone
 * Organizer Website
 * Organizer Email
+
+
+**Events Manager**
+Events Manager is another best event's manager plugin for WordPress and we added full support to display following elements for event post type
+
+* Event categories
+* Event tags
+* Event start date
+* Event end date
+* Event start time
+* Event end time
+* Event spaces
+* Max Spaces
+* Cut-Off Date
+* Cut-Off time
+
+
 
 
 

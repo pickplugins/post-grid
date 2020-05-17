@@ -104,7 +104,7 @@ you can display YouTube, vimeo, dailymotion, soundcloud, mp3, gallery, Font Awes
 * Create unlimited layout via layout editor.
 * Add custom HTML(Shortcodes) via layout editor.
 
-##3rd party plugins support
+## 3rd party plugins support
 
 **WooCommerce**
 WooCommerce is #1 ecommerce plugin for WordPress and we provide full support to display following elements for products on the post grid.

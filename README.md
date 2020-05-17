@@ -82,7 +82,7 @@ content,
 
 
 
-##Premium Features
+## Premium Features
 
 <strong>Variety of media display</strong>
 you can display YouTube, vimeo, dailymotion, soundcloud, mp3, gallery, Font Awesome icons on thumbnail area. linked to custom link on thumbnail image.

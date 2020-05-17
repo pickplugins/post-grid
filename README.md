@@ -37,14 +37,11 @@ Query post by custom taxonomy and terms is the most wanted feature already in po
 **Unlimited Post Grid**
 There is no limitation of creating post grid, you can create unlimited post grid on your website.
 
-**Skin & Layout Based**
-Post grid items based on skin and layout based, you can customize layout elements and change skin, if you have basic CSS
- knowledge you can customize layout elements and apply your own style.
+**Layout Based**
+Post grid items based on layouts, you can customize layout elements and change layouts, if you have basic CSS knowledge you can customize layout elements and apply your own style.
 
 **Pagination Support**
-Post Grid has pagination support, thats mean if you post grid has many post so user can go through each pagination to
-see your post archive. you can limit the pagination item count and "Next" & "Previous" text as well, you can also use
-icons instead of text for these.
+Post Grid has pagination support, thats mean if you post grid has many post so user can go through each pagination to see your post archive. you can limit the pagination item count and "Next" & "Previous" text as well, you can also use icons instead of text for these.
 
 **Search Input Field**
 you can display search input field at top of grid, so user can search though your grid and find their desired post.
@@ -56,53 +53,91 @@ Post Grid has many support and input to display your desired post on the grid, y
 * Post categories, tags
 * Taxonomies & terms, taxonomy relation, terms relation,
 * Post publish status,
-* Post order and
+* Post order
 * Order by, order by meta field value,
 * Custom number of posts per page, offset
-* Exclude post by ids, and
+* Exclude post by ids,
 * Display post grid based on keyword search.
 
 
 **Layout settings**
 You can customize grid item layout settings, following option avilable to customize
 
-* Grid item width, you can set custom width for grid item based on mobile, tablet and desktop device. you can also set %
- based column, like 30% will gives you 3 column in each row.
-* Grid item height - you can set custom height of grid item, based on device you can set auto height, fixed height or 
-max height.
+* Grid item width, you can set custom width for grid item based on mobile, tablet and desktop device. you can also set % based column, like 30% will gives you 3 column in each row.
+* Grid item height - you can set custom height of grid item, based on device you can set auto height, fixed height or max height.
 * Grid item background color.
 * Grid item padding.
 * Grid item margins.
 * Lazy load - you can enable lazy load to hide grid on page load.
 * Featured image custom size selection.
-* Custom media source - there is 3 different source available in free version. Featured Image, First images from
-content,
- Empty thumbnail
+* Custom media source - there is 3 different source available in free version. Featured Image, First images from content, Empty thumbnail
 * Masonry style grid also available.
 
 
+###Premium features
 
-## Premium Features
+**View Type**
 
-<strong>Variety of media display</strong>
-you can display YouTube, vimeo, dailymotion, soundcloud, mp3, gallery, Font Awesome icons on thumbnail area. linked to custom link on thumbnail image.
+* Filterable
+* Glossary
+* Carousel Slider
+* Collapsible
 
-* 29+ ready skin.
-* Query post by taxonomy(multiple) & terms(multiple).
-* support for WooCommerce, Easy Digital Downloads, WP eCommerce.
-* Display Meta Fields. Custom wrapper (HTML) for meta values display.
-* Display Short-code via Meta Fields.
-* Display YouTube, vimeo video, soundcloud, mp3, gallery, Font Awesome icons on thumbnail area.
-* Filterable Grid by custom taxonomy & terms.
-* Ajax load more.
-* Extend grid skin by filter hook.
-* Pagination custom Next , Previous text.
-* Add custom HTML(Shortcodes) via layout editor.
-* Create unlimited layout via layout editor.
-* Post grid for Archive page(category.php, tags.php , custom taxonomy & terms page).
-* Extra query parameter.
-* Create unlimited layout via layout editor.
-* Add custom HTML(Shortcodes) via layout editor.
+**Post grid for Archives**
+
+* category.php
+* tags.php
+* search.php
+* author.php
+* Custom taxonomy & terms page
+
+**Advance Pagination types**
+
+* Ajax Pagination
+* Next-Previous
+* Filterable pagination
+* Ajax Load More
+
+
+
+**Advance Media Sources**
+
+* First youtube video from content
+* Custom youtube video
+* First vimeo video from content
+* Custom vimeo video
+* First dailymotion video from content
+* Custom dailymotion video
+* First MP3 from content
+* Custom MP3
+* First SoundCloud from content
+* Custom SoundCloud
+* Custom Thumbnail
+* Font Awesome
+* Custom Video
+
+**Filterable Features**
+
+* Display navs by taxonomies & terms or Custom filters.
+* Navs style - Font size, Font color, Background color, Margin, display post count.
+* Navs view style -  Inline, Dropdown, Radio, Checkbox.
+* Custom text for All navs.
+* Custom default active filter
+* Single or group filter navs.
+* Sorting filter
+
+
+
+**Advance Post Query**
+
+* Meta query - Single field and multiple field query
+* Extra query parameter - you can provide your own query parameter like `post__in=1,2,3&post__not_in=1,2,3`
+* Permission parameters - Show posts if user has the appropriate capability
+* Sticky post query - Include sticky post or Exclude sticky post
+* Date parameters - by Exact date, Between two date.
+* Author parameters - Include authors by ids, Exclude authors by ids.
+* Password parameters - Display only password protected posts, Display only posts without passwords, Display only posts with and without passwords, Posts with particular password.
+
 
 ## 3rd party plugins support
 
@@ -201,7 +236,6 @@ Events Manager is another best event's manager plugin for WordPress and we added
 * Max Spaces
 * Cut-Off Date
 * Cut-Off time
-
 
 
 

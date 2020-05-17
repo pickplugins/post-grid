@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
-//add_action('the_content','post_grid_single_post');
+add_action('the_content','post_grid_single_post');
 
 function post_grid_single_post($content){
 
@@ -66,6 +66,61 @@ function post_grid_single_post($content){
 
 
 
+
+
+function post_grid_remove_post_title($post_title){
+
+    $post_id = get_the_ID();
+
+    $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+    $remove_post_title = isset($post_grid_post_settings['remove_post_title']) ? $post_grid_post_settings['remove_post_title'] : 'no';
+
+
+    if($remove_post_title =='yes' && in_the_loop()){
+
+        return '';
+    }
+    else{
+        return $post_title;
+    }
+
+}
+
+add_filter('the_title','post_grid_remove_post_title');
+
+
+function post_grid_remove_post_thumbnail($post_thumbnail){
+
+    $post_id = get_the_ID();
+
+    $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+    $remove_post_thumbnail = isset($post_grid_post_settings['remove_post_thumbnail']) ? $post_grid_post_settings['remove_post_thumbnail'] : 'no';
+
+
+    if(is_singular() && $remove_post_thumbnail == 'yes'){
+
+        return '';
+    }
+    else{
+        return $post_thumbnail;
+    }
+
+}
+
+add_filter('post_thumbnail_html','post_grid_remove_post_thumbnail');
+
+
+function post_grid_single_template($single_template) {
+    global $post;
+
+    if ($post->post_type == 'post') {
+
+        $single_template = post_grid_plugin_dir . 'templates/single/single-template-hook.php';
+
+    }
+    return $single_template;
+}
+//add_filter( 'single_template', 'post_grid_single_template' );
 
 
 

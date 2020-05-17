@@ -79,9 +79,70 @@ function post_grid_post_options_content_options($tab, $post_id){
 }
 
 
-add_action('post_grid_post_options_content_layouts', 'post_grid_post_options_content_layouts',10, 2);
 
-function post_grid_post_options_content_layouts($tab, $post_id){
+
+
+add_action('post_grid_post_options_content_post_template', 'post_grid_post_options_content_post_template',10, 2);
+
+function post_grid_post_options_content_post_template($tab, $post_id){
+
+    $settings_tabs_field = new settings_tabs_field();
+
+    $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+
+    $remove_post_title = !empty($post_grid_post_settings['remove_post_title']) ? $post_grid_post_settings['remove_post_title'] : '';
+    $remove_post_thumbnail = !empty($post_grid_post_settings['remove_post_thumbnail']) ? $post_grid_post_settings['remove_post_thumbnail'] : '';
+
+
+    ?>
+    <div class="section">
+        <div class="section-title">Post template</div>
+        <p class="description section-description">Customize post template settings, will applied to single post template for this post.</p>
+
+
+        <?php
+
+
+
+        $args = array(
+            'id'		=> 'remove_post_title',
+            'parent'		=> 'post_grid_post_settings',
+            'title'		=> __('Remove post title','post-grid'),
+            'details'	=> __('Remove default post title from single post template.','post-grid'),
+            'type'		=> 'radio',
+            'value'		=> $remove_post_title,
+            'default'		=> 'no',
+            'args'		=> array(
+                'yes'=>__('Yes','post-grid'),
+                'no'=>__('No','post-grid'),
+            ),
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+        $args = array(
+            'id'		=> 'remove_post_thumbnail',
+            'parent'		=> 'post_grid_post_settings',
+            'title'		=> __('Remove post thumbnail','post-grid'),
+            'details'	=> __('Remove default post thumbnail from single post template.','post-grid'),
+            'type'		=> 'radio',
+            'value'		=> $remove_post_thumbnail,
+            'default'		=> 'no',
+            'args'		=> array(
+                'yes'=>__('Yes','post-grid'),
+                'no'=>__('No','post-grid'),
+            ),
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
+        ?>
+    </div>
+    <?php
+
 
     //var_dump($post_id);
     $settings_tabs_field = new settings_tabs_field();
@@ -91,9 +152,6 @@ function post_grid_post_options_content_layouts($tab, $post_id){
 
     ?>
     <div class="section">
-        <div class="section-title"><?php echo __('Layouts', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose item layouts.', 'post-grid'); ?></p>
-
 
         <?php
 
@@ -161,8 +219,8 @@ function post_grid_post_options_content_layouts($tab, $post_id){
         $args = array(
             'id'		=> 'layout_id',
             'parent' => 'post_grid_post_settings',
-            'title'		=> __('Item layouts','post-grid'),
-            'details'	=> __('Choose grid item layout. When "Empty layout" is selecetd old layout data will be loaded.','post-grid'),
+            'title'		=> __('Post template layouts','post-grid'),
+            'details'	=> __('Choose layout for post template.','post-grid'),
             'type'		=> 'radio_image',
             'value'		=> $layout_id,
             'default'		=> '',
@@ -178,4 +236,7 @@ function post_grid_post_options_content_layouts($tab, $post_id){
     </div>
     <?php
 
+
+
 }
+

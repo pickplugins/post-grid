@@ -579,22 +579,30 @@ class post_grid_meta_boxs{
         wp_nonce_field( 'post_grid_post_settings_input', 'post_grid_post_settings_input_nonce' );
 
         $post_id = $post->ID;
+        $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
 
 
         $post_grid_settings_tab = array();
+        $current_tab = isset($post_grid_post_settings['current_tab']) ? $post_grid_post_settings['current_tab'] : 'options';
 
 
         $post_grid_settings_tab[] = array(
             'id' => 'options',
-            'title' => __('<i class="fas fas fa-tools"></i> Options','post-grid'),
+            'title' => sprintf(__('%s Options','post-grid'), '<i class="fas fas fa-tools"></i>'),
             'priority' => 1,
-            'active' => true,
+            'active' => ($current_tab == 'options') ? true : false,
         );
         $post_grid_settings_tab[] = array(
             'id' => 'layouts',
-            'title' => __('<i class="fas fa-qrcode"></i> Layouts','post-grid'),
+            'title' => sprintf(__('%s Layouts','post-grid'), '<i class="fas fa-qrcode"></i>'),
             'priority' => 2,
-            'active' => false,
+            'active' => ($current_tab == 'layouts') ? true : false,
+        );
+        $post_grid_settings_tab[] = array(
+            'id' => 'post_template',
+            'title' => sprintf(__('%s Post template','post-grid'), '<i class="fas fa-newspaper"></i>'),
+            'priority' => 2,
+            'active' => ($current_tab == 'post_template') ? true : false,
         );
 
 
@@ -612,6 +620,8 @@ class post_grid_meta_boxs{
         ?>
 
         <div class="settings-tabs vertical">
+            <input class="current_tab" type="hidden" name="post_grid_post_settings[current_tab]" value="<?php echo $current_tab; ?>">
+
             <ul class="tab-navs">
                 <?php
                 foreach ($post_grid_settings_tabs as $tab){

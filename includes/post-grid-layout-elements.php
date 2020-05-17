@@ -763,7 +763,12 @@ function post_grid_layout_element_title($args){
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
 
     $post_link = get_permalink($post_id);
-    $title = get_the_title($post_id);
+
+    $post = get_post( $post_id );
+    $title = isset( $post->post_title ) ? $post->post_title : '';
+
+
+    //$title = get_the_title($post_id);
 
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
@@ -1194,15 +1199,9 @@ function post_grid_layout_element_option_content($parameters){
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
-    $word_count = isset($element_data['word_count']) ? $element_data['word_count'] : 15;
-    $read_more_text = isset($element_data['read_more_text']) ? $element_data['read_more_text'] : __('Read more','post-grid');
-    $read_more_color = isset($element_data['read_more_color']) ? $element_data['read_more_color'] : '';
 
-    $color = isset($element_data['color']) ? $element_data['color'] : '';
-    $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
-    $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
     $css = isset($element_data['css']) ? $element_data['css'] : '';
@@ -1219,81 +1218,6 @@ function post_grid_layout_element_option_content($parameters){
         <div class="element-options options">
 
             <?php
-
-
-
-            $args = array(
-                'id'		=> 'word_count',
-                'css_id'		=> $element_index.'_word_count',
-                'parent' => $input_name.'[content]',
-                'title'		=> __('Word count','post-grid'),
-                'details'	=> __('Set word count.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $word_count,
-                'default'		=> '',
-                'placeholder'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'read_more_text',
-                'css_id'		=> $element_index.'_read_more_text',
-                'parent' => $input_name.'[content]',
-                'title'		=> __('Read more text','post-grid'),
-                'details'	=> __('Set custom read more text.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $read_more_text,
-                'default'		=> '',
-                'placeholder'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-            $args = array(
-                'id'		=> 'read_more_color',
-                'css_id'		=> $element_index.'_read_more_color',
-                'parent' => $input_name.'[content]',
-                'title'		=> __('Read more color','post-grid'),
-                'details'	=> __('Set custom read more color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $read_more_color,
-                'default'		=> '',
-                'placeholder'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-
-
-            $args = array(
-                'id'		=> 'color',
-                'css_id'		=> $element_index.'_content_color',
-                'parent' => $input_name.'[content]',
-                'title'		=> __('Color','post-grid'),
-                'details'	=> __('Title text color.','post-grid'),
-                'type'		=> 'colorpicker',
-                'value'		=> $color,
-                'default'		=> '',
-            );
-
-            $settings_tabs_field->generate_field($args);
-
-            $args = array(
-                'id'		=> 'font_size',
-                'css_id'		=> $element_index.'_font_size',
-                'parent' => $input_name.'[content]',
-                'title'		=> __('Font size','post-grid'),
-                'details'	=> __('Set font size.','post-grid'),
-                'type'		=> 'text',
-                'value'		=> $font_size,
-                'default'		=> '',
-                'placeholder'		=> '14px',
-            );
-
-            $settings_tabs_field->generate_field($args);
 
 
             $args = array(
@@ -1339,27 +1263,6 @@ function post_grid_layout_element_option_content($parameters){
 
             $settings_tabs_field->generate_field($args);
 
-
-
-            $args = array(
-                'id'		=> 'link_to',
-                'css_id'		=> $element_index.'_link_to',
-                'parent' => $input_name.'[content]',
-                'title'		=> __('Link to','post-grid'),
-                'details'	=> __('Choose option to product link.','post-grid'),
-                'type'		=> 'select',
-                'value'		=> $link_to,
-                'default'		=> 'product_link',
-                'args'		=> array(
-                    'none'=> __('None', 'post-grid'),
-                    'product_link'=> __('Product link', 'post-grid'),
-                    'external_product_url'=> __('External product', 'post-grid'),
-//                    'popup_box'=> __('Popup box', 'post-grid'),
-//                    'custom_link'=> __('Custom link', 'post-grid')
-                ),
-            );
-
-            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'css',
@@ -1434,17 +1337,14 @@ function post_grid_layout_element_content($args){
 
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
 
-    $post_content = get_the_content($post_id);
+    $post = get_post( $post_id );
+    $post_content = isset( $post->post_content ) ? $post->post_content : '';
+
+
+    //$post_content = get_the_content($post_id);
 
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
-    $char_limit = isset($element['char_limit']) ? (int) $element['char_limit'] : 0;
-    $char_end = isset($element['char_end']) ? $element['char_end'] : '...';
-
-
-    if($char_limit > 0){
-        $post_content = wp_trim_words($post_content, $char_limit, $char_end);
-    }
 
     $post_content = wpautop($post_content);
     $post_content = do_shortcode($post_content);
@@ -4123,7 +4023,12 @@ function post_grid_layout_element_author($args){
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
     $post_link = get_permalink($post_id);
-    $post_author = get_the_author();
+
+    $post = get_post($post_id);
+    $post_author = isset($post->post_author) ? $post->post_author : '';
+    $post_author_data = get_user_by('ID', $post_author);
+
+    $post_author = isset($post_author_data->display_name) ? $post_author_data->display_name : '';
 
     $post_author = sprintf($wrapper_html, $post_author);
 

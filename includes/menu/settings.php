@@ -13,19 +13,27 @@ $post_grid_settings_tab[] = array(
     'active' => ($current_tab == 'general') ? true : false,
 );
 
-
+$post_grid_settings_tab[] = array(
+    'id' => 'templates',
+    'title' => sprintf(__('%s Templates','post-grid'),'<i class="far fa-newspaper"></i>'),
+    'priority' => 3,
+    'active' => ($current_tab == 'templates') ? true : false,
+);
 
 $post_grid_settings_tab[] = array(
     'id' => 'help_support',
     'title' => sprintf(__('%s Help & support','post-grid'),'<i class="fas fa-hands-helping"></i>'),
-    'priority' => 3,
+    'priority' => 90,
     'active' => ($current_tab == 'help_support') ? true : false,
 );
+
+
+
 
 $post_grid_settings_tab[] = array(
     'id' => 'buy_pro',
     'title' => sprintf(__('%s Buy Pro','post-grid'),'<i class="fas fa-store"></i>'),
-    'priority' => 9,
+    'priority' => 95,
     'active' => ($current_tab == 'buy_pro') ? true : false,
 );
 

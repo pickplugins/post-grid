@@ -169,6 +169,34 @@ if(!function_exists('post_grid_settings_content_help_support')) {
 
 
 
+add_action('post_grid_settings_content_templates', 'post_grid_settings_content_templates');
+
+if(!function_exists('post_grid_settings_content_templates')) {
+    function post_grid_settings_content_templates($tab){
+
+        $settings_tabs_field = new settings_tabs_field();
+
+        ?>
+        <div class="section">
+            <div class="section-title"><?php echo __('Templates', 'post-grid'); ?></div>
+            <p class="description section-description"><?php echo __('Choose page templates for various page.', 'post-grid'); ?></p>
+
+            <?php
+
+
+
+
+            ?>
+
+
+        </div>
+        <?php
+
+
+    }
+}
+
+
 
 
 add_action('post_grid_settings_content_buy_pro', 'post_grid_settings_content_buy_pro');

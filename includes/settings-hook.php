@@ -10,8 +10,10 @@ function post_grid_settings_content_general(){
 
     $font_aw_version = isset($post_grid_settings['font_aw_version']) ? $post_grid_settings['font_aw_version'] : 'none';
     $post_grid_preview = isset($post_grid_settings['post_grid_preview']) ? $post_grid_settings['post_grid_preview'] : 'yes';
+    $post_options_post_types = isset($post_grid_settings['post_options_post_types']) ? $post_grid_settings['post_options_post_types'] : array();
 
     //echo '<pre>'.var_export($post_grid_settings, true).'</pre>';
+    $posttypes_array = post_grid_posttypes_array();
 
     ?>
     <div class="section">
@@ -20,7 +22,19 @@ function post_grid_settings_content_general(){
 
         <?php
 
+        $args = array(
+            'id'		=> 'post_options_post_types',
+            'parent'		=> 'post_grid_settings',
+            'title'		=> __('Post option by post types','post-grid'),
+            'details'	=> __('Enable post options for selected post types','post-grid'),
+            'type'		=> 'select',
+            'value'		=> $post_options_post_types,
+            'default'		=> array(),
+            'multiple'		=> true,
+            'args'		=> $posttypes_array,
+        );
 
+        $settings_tabs_field->generate_field($args);
 
         $args = array(
             'id'		=> 'font_aw_version',
@@ -196,6 +210,79 @@ if(!function_exists('post_grid_settings_content_buy_pro')) {
                     <td><i class="fas fa-times"></i></td>
                     <td><i class="fas fa-check"></i></td>
                 </tr>
+
+
+                <tr>
+                    <td colspan="3" class="col-features"><b><?php echo __('3rd Party Plugins','post-grid'); ?></b> </td>
+                </tr>
+
+                <tr>
+                    <td class="col-features"><?php echo __('kk Star Ratings','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+
+                <tr>
+                    <td class="col-features"><?php echo __('Multi Rating','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Rate my Post','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Rating-Widget','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('WP-PostRatings','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Yasr – Yet Another Stars Rating','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('YITH - Add to Wishlist','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+
+                <tr>
+                    <td class="col-features"><?php echo __('Advanced Custom Fields','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Easy Digital Download','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('WooCommerce','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

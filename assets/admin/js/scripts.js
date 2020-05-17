@@ -3,7 +3,7 @@ jQuery(document).ready(function($){
 		width: '360px',
 		allowClear: true
 	});
-	$(document).on('change', '#post_grid_metabox .select-layout-content', function(){
+	$(document).on('change', '#post-grid .select-layout-content', function(){
 			var layout = $(this).val();
 			jQuery.ajax({
 				type: 'POST',
@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 				data: {"action": "post_grid_layout_content_ajax","layout":layout},
 				success: function(data){
 							//jQuery(".layout-content").html(data);
-							jQuery("#post_grid_metabox .layer-content").html(data);
+							jQuery("#post-grid .layer-content").html(data);
 
 				}
 
@@ -19,7 +19,7 @@ jQuery(document).ready(function($){
 	})
 
 
-	$(document).on('change', '#post_grid_metabox #post_types', function(){
+	$(document).on('change', '#post-grid #post_types', function(){
 		post_types = $(this).val();
 		grid_id = $(this).attr('grid_id');
 		html = '<i class="fas fa-spin fa-spinner"></i>';

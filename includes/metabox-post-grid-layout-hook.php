@@ -212,6 +212,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                                 $group_items = isset($element_group['items']) ? $element_group['items'] : array();
                                 //$group_items = apply_filters('post_grid_layout_group_'.$group_index, $group_items);
 
+                            if(empty($group_items)) continue;
                                 ?>
                                 <div class="item">
                                     <div class="element-title header ">

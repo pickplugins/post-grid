@@ -3,7 +3,7 @@
 Plugin Name: Post Grid by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/
 Description: Awesome post grid for query post from any post type and display on grid.
-Version: 2.0.54
+Version: 2.0.57
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -21,33 +21,36 @@ if( !class_exists( 'PostGrid' )){
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid');
-            define('post_grid_version', '2.0.54');
+            define('post_grid_version', '2.0.57');
+
+
 
             include('includes/classes/class-post-types.php');
-            include('includes/functions/functions-settings-hook.php');
+            include('includes/classes/class-meta-boxes.php');
+            include('includes/classes/class-functions.php');
+            include('includes/classes/class-shortcodes.php');
+            include('includes/classes/class-settings.php');
+            include('includes/classes/class-settings-tabs.php');
+
+            include('includes/metabox-post-grid-layout-hook.php');
+            include('includes/metabox-post-grid-hook.php');
+            include('includes/metabox-post-options-hook.php');
+
+            include('includes/settings-hook.php');
             include('templates/post-grid-hook.php');
-            include('includes/functions/post-grid-layout-elements.php');
-            include('includes/functions/media-source-options.php');
+            include('includes/post-grid-layout-elements.php');
+            include('includes/media-source-options.php');
             include('includes/layout-elements/3rd-party.php');
 
 
-            include('includes/class-metabox-post-grid-layout.php');
-            include('includes/class-metabox-post-grid-layout-hook.php');
-            include('includes/functions-layout-hook.php');
             include('includes/functions-data-upgrade.php');
             include('includes/functions-single.php');
 
 
             include('includes/classes/class-post-grid-support.php');
             include('includes/data-update/class-post-grid-data-update.php');
-            include('includes/class-functions.php');
-            include('includes/class-shortcodes.php');
-            include('includes/class-settings.php');
-            include('includes/class-post-grid-meta-box.php');
-            include('includes/class-settings-tabs.php');
-            include('includes/functions/functions-post-grid-meta-box.php');
-            include('includes/post-grid-meta-box.php');
-            include('includes/functions/functions-post-grid.php');
+
+            include('includes/functions-post-grid.php');
             include('includes/functions.php');
             include('includes/shortcodes/shortcode-current_user_id.php');
 
@@ -136,7 +139,6 @@ if( !class_exists( 'PostGrid' )){
             wp_register_style('font-awesome-4', post_grid_plugin_url.'assets/global/css/font-awesome-4.css');
             wp_register_style('font-awesome-5', post_grid_plugin_url.'assets/global/css/font-awesome-5.css');
 
-            wp_register_style('jquery-ui',  post_grid_plugin_url.'assets/frontend/css/jquery-ui.css');
 
         }
 
@@ -154,6 +156,7 @@ if( !class_exists( 'PostGrid' )){
 
             wp_enqueue_style('post_grid_skin', post_grid_plugin_url . 'assets/global/css/style.skins.css');
 
+            wp_register_style('jquery-ui',  post_grid_plugin_url.'assets/admin/css/jquery-ui.css');
 
             wp_register_style('font-awesome-4', post_grid_plugin_url.'assets/global/css/font-awesome-4.css');
             wp_register_style('font-awesome-5', post_grid_plugin_url.'assets/global/css/font-awesome-5.css');

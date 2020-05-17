@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.54
+	Stable tag: 2.0.57
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,33 +76,174 @@ max height.
 * Lazy load - you can enable lazy load to hide grid on page load.
 * Featured image custom size selection.
 * Custom media source - there is 3 different source available in free version. Featured Image, First images from
-content,
- Empty thumbnail
+content, Empty thumbnail
 * Masonry style grid also available.
 
 
 
 ###Premium features
 
-<strong>Variety of media display</strong>
-you can display YouTube, vimeo, dailymotion, soundcloud, mp3, gallery, Font Awesome icons on thumbnail area. linked to custom link on thumbnail image.
+**View Type**
 
-* 29+ ready skin.
-* Query post by taxonomy(multiple) & terms(multiple).
-* support for WooCommerce, Easy Digital Downloads, WP eCommerce.
-* Display Meta Fields. Custom wrapper (HTML) for meta values display.
-* Display Short-code via Meta Fields.
-* Display YouTube, vimeo video, soundcloud, mp3, gallery, Font Awesome icons on thumbnail area.
-* Filterable Grid by custom taxonomy & terms.
-* Ajax load more.
-* Extend grid skin by filter hook.
-* Pagination custom Next , Previous text.
-* Add custom HTML(Shortcodes) via layout editor.
-* Create unlimited layout via layout editor.
-* Post grid for Archive page(category.php, tags.php , custom taxonomy & terms page).
-* Extra query parameter.
-* Create unlimited layout via layout editor.
-* Add custom HTML(Shortcodes) via layout editor.
+* Filterable
+* Glossary
+* Carousel Slider
+* Collapsible
+
+**Post grid for Archives**
+
+* category.php
+* tags.php
+* search.php
+* author.php
+* Custom taxonomy & terms page
+
+**Advance Pagination types**
+
+* Ajax Pagination
+* Next-Previous
+* Filterable pagination
+* Ajax Load More
+
+
+
+**Advance Media Sources**
+
+* First youtube video from content
+* Custom youtube video
+* First vimeo video from content
+* Custom vimeo video
+* First dailymotion video from content
+* Custom dailymotion video
+* First MP3 from content
+* Custom MP3
+* First SoundCloud from content
+* Custom SoundCloud
+* Custom Thumbnail
+* Font Awesome
+* Custom Video
+
+**Filterable Features**
+
+* Display navs by taxonomies & terms or Custom filters.
+* Navs style - Font size, Font color, Background color, Margin, display post count.
+* Navs view style -  Inline, Dropdown, Radio, Checkbox.
+* Custom text for All navs.
+* Custom default active filter
+* Single or group filter navs.
+* Sorting filter
+
+
+
+**Advance Query**
+
+* Meta query - Single field and multiple field query
+* Extra query parameter - you can provide your own query parameter like `post__in=1,2,3&post__not_in=1,2,3`
+* Permission parameters - Show posts if user has the appropriate capability
+* Sticky post query - Include sticky post or Exclude sticky post
+* Date parameters - by Exact date, Between two date.
+* Author parameters - Include authors by ids, Exclude authors by ids.
+* Password parameters - Display only password protected posts, Display only posts without passwords, Display only posts with and without passwords, Posts with particular password.
+
+
+## 3rd party plugins support
+
+**WooCommerce**
+WooCommerce is #1 ecommerce plugin for WordPress and we provide full support to display following elements for products on the post grid.
+
+* Add to cart
+* Full price
+* Sale price
+* Regular price
+* Star rating
+* Text rating
+* Product categories
+* Product tags
+* Product gallery
+* Product SKU
+
+
+**Easy Digital Download**
+Easy Digital Download is another best ecommerce for digital products and we provide full support to display following elements for downloads on the post grid.
+
+* Price
+* Variable prices
+* Sales stats
+* Earnings stats
+* Add to cart
+* Text rating
+* download categories
+* download tags
+
+
+**Advanced Custom Fields**
+Advanced Custom Fields is #1 custom field's plugin for WordPress and we added full support to display following meta fields for any post types.
+
+* Text
+* Textarea
+* Number
+* Range
+* Email
+* URL
+* Password
+* Link
+* Post object
+* Page link
+* Taxonomy
+* User
+* Relationship
+* Image
+* File
+* Wysiwyg
+* oEmbed
+* Select
+* Checkbox
+* Radio
+* Button group
+* True / False
+* Date picker
+* Time picker
+* Datetime picker
+* Google Map
+
+
+
+**The Events Calendar**
+The Events Calendar is #1 event's manager plugin for WordPress and we added full support to display following elements for event post type
+
+* Event categories
+* Event tags
+* Event start date
+* Event end date
+* Event URL
+* Event cost
+* Venue address
+* Venue city
+* Venue country
+* Venue province
+* Venue zip
+* Venue phone
+* Venue URL
+* Venue Map
+* Organizer Phone
+* Organizer Website
+* Organizer Email
+
+
+**Events Manager**
+Events Manager is another best event's manager plugin for WordPress and we added full support to display following elements for event post type
+
+* Event categories
+* Event tags
+* Event start date
+* Event end date
+* Event start time
+* Event end time
+* Event spaces
+* Max Spaces
+* Cut-Off Date
+* Cut-Off time
+
 
 
 <strong>Video Tutorial(with premium version interface)</strong>
@@ -139,8 +280,24 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 == Changelog ==
 
+	= 2.0.57 =
+    * 2020-05-15 fix - masonry center align issue fixed.
+    * 2020-05-15 add - media link target option added.
+    * 2020-05-15 fix - rate-my-post missing issue fixed.
+
+	= 2.0.56 =
+    * 2020-05-15 fix - Excerpt element output issue fixed.
+
 	= 2.0.55 =
     * 2020-05-4 fix - remove empty read more text to avoid conflict old layout.
+    * 2020-05-15 add - Element added for "kk Star Ratings" plugin
+    * 2020-05-15 add - Element added for "Multi Rating" plugin
+    * 2020-05-15 add - Element added for "Rate my Post" plugin
+    * 2020-05-15 add - Element added for "Rating-Widget" plugin
+    * 2020-05-15 add - Element added for "WP-PostRatings" plugin
+    * 2020-05-15 add - Elements visitor votes, overall rating added for "Yasr – Yet Another Stars Rating" plugin
+    * 2020-05-15 add - Element added for "YITH - Add to Wishlist" plugin
+
 
 	= 2.0.54 =
     * 2020-05-4 optimize - optimize layout element CSS generate

@@ -28,7 +28,10 @@ if ( is_plugin_active( 'kk-star-ratings/index.php' ) ) {
 }
 
 
+if ( is_plugin_active( 'rate-my-post/rate-my-post.php' ) ) {
 
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/rate-my-post/layout-elements.php');
+}
 
 
 if ( is_plugin_active( 'wp-postratings/wp-postratings.php' ) ) {

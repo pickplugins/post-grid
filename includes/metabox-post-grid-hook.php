@@ -74,7 +74,7 @@ function post_grid_metabox_tabs_content_shortcode($tab, $post_id){
         $html = ob_get_clean();
         $args = array(
             'id'		=> 'post_grid_shortcodes',
-            'title'		=> __('Post Grid Shortcode','post-grid'),
+            'title'		=> __('Post Grid Shortcode','woocommerce-products-slider'),
             'details'	=> '',
             'type'		=> 'custom_html',
             'html'		=> $html,
@@ -108,8 +108,8 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
 
     ?>
     <div class="section">
-        <div class="section-title"><?php echo __('Lazy load', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose lazy load options.', 'post-grid'); ?></p>
+        <div class="section-title"><?php echo __('Lazy load', 'woocommerce-products-slider'); ?></div>
+        <p class="description section-description"><?php echo __('Choose lazy load options.', 'woocommerce-products-slider'); ?></p>
 
         <?php
 
@@ -117,15 +117,15 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
         $args = array(
             'id'		=> 'lazy_load_enable',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Enable lazy load','post-grid'),
-            'details'	=> __('Choose enable or disable lazy load.','post-grid'),
+            'title'		=> __('Enable lazy load','woocommerce-products-slider'),
+            'details'	=> __('Choose enable or disable lazy load.','woocommerce-products-slider'),
             'type'		=> 'radio',
             'multiple'		=> true,
             'value'		=> $lazy_load_enable,
             'default'		=> 'no',
             'args'		=> array(
-                'no'=>__('No','post-grid'),
-                'yes'=>__('Yes','post-grid'),
+                'no'=>__('No','woocommerce-products-slider'),
+                'yes'=>__('Yes','woocommerce-products-slider'),
 
             ),
         );
@@ -136,8 +136,8 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
         $args = array(
             'id'		=> 'lazy_load_image_src',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Lazy load image source','post-grid'),
-            'details'	=> __('Set custom lazy load image source.','post-grid'),
+            'title'		=> __('Lazy load image source','woocommerce-products-slider'),
+            'details'	=> __('Set custom lazy load image source.','woocommerce-products-slider'),
             'type'		=> 'media_url',
             'value'		=> $lazy_load_image_src,
             'default'		=> '',
@@ -149,15 +149,15 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
         $args = array(
             'id'		=> 'load_fontawesome',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Load font awesome','post-grid'),
-            'details'	=> __('Choose enable or disable font-awesome load.','post-grid'),
+            'title'		=> __('Load font awesome','woocommerce-products-slider'),
+            'details'	=> __('Choose enable or disable font-awesome load.','woocommerce-products-slider'),
             'type'		=> 'radio',
             'multiple'		=> true,
             'value'		=> $load_fontawesome,
             'default'		=> 'no',
             'args'		=> array(
-                'no'=>__('No','post-grid'),
-                'yes'=>__('Yes','post-grid'),
+                'no'=>__('No','woocommerce-products-slider'),
+                'yes'=>__('Yes','woocommerce-products-slider'),
 
             ),
         );
@@ -175,8 +175,8 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
     </div>
 
     <div class="section">
-        <div class="section-title"><?php echo __('Container settings', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose container options.', 'post-grid'); ?></p>
+        <div class="section-title"><?php echo __('Container settings', 'woocommerce-products-slider'); ?></div>
+        <p class="description section-description"><?php echo __('Choose container options.', 'woocommerce-products-slider'); ?></p>
 
         <?php
 
@@ -184,8 +184,8 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
         $args = array(
             'id'		=> 'padding',
             'parent'		=> 'post_grid_meta_options[container]',
-            'title'		=> __('Container padding','post-grid'),
-            'details'	=> __('Set custom padding for grid container, ex: 10px 15px 10px 15px','post-grid'),
+            'title'		=> __('Container padding','woocommerce-products-slider'),
+            'details'	=> __('Set custom padding for grid container, ex: 10px 15px 10px 15px','woocommerce-products-slider'),
             'type'		=> 'text',
             'value'		=> $container_padding,
             'default'		=> '',
@@ -197,8 +197,8 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
         $args = array(
             'id'		=> 'bg_color',
             'parent'		=> 'post_grid_meta_options[container]',
-            'title'		=> __('Container background color','post-grid'),
-            'details'	=> __('Set custom background color for grid container.','post-grid'),
+            'title'		=> __('Container background color','woocommerce-products-slider'),
+            'details'	=> __('Set custom background color for grid container.','woocommerce-products-slider'),
             'type'		=> 'colorpicker',
             'value'		=> $container_bg_color,
             'default'		=> '',
@@ -210,8 +210,8 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
         $args = array(
             'id'		=> 'bg_image',
             'parent'		=> 'post_grid_meta_options[container]',
-            'title'		=> __('Container background color','post-grid'),
-            'details'	=> __('Set custom background color for grid container.','post-grid'),
+            'title'		=> __('Container background color','woocommerce-products-slider'),
+            'details'	=> __('Set custom background color for grid container.','woocommerce-products-slider'),
             'type'		=> 'media_url',
             'value'		=> $container_bg_image,
             'default'		=> '',
@@ -226,29 +226,23 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
     </div>
 
     <div class="section">
-        <div class="section-title"><?php echo __('Items wrapper settings', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose items wrapper options.', 'post-grid'); ?></p>
+        <div class="section-title"><?php echo __('Items wrapper settings', 'woocommerce-products-slider'); ?></div>
+        <p class="description section-description"><?php echo __('Choose items wrapper options.', 'woocommerce-products-slider'); ?></p>
 
         <?php
 
         $args = array(
             'id'		=> 'text_align',
             'parent'		=> 'post_grid_meta_options[items_wrapper]',
-            'title'		=> __('Text align','post-grid'),
-            'details'	=> __('Container text align.','post-grid'),
+            'title'		=> __('Text align','woocommerce-products-slider'),
+            'details'	=> __('Container text align.','woocommerce-products-slider'),
             'type'		=> 'select',
             'value'		=> $items_wrapper_text_align,
             'default'		=> 'center',
             'args'		=> array(
-                'left'=>__('Left','post-grid'),
-                'center'=>__('Center','post-grid'),
-                'right'=>__('Right','post-grid'),
-                'start'=>__('Start','post-grid'),
-                'end'=>__('End','post-grid'),
-                'initial'=>__('Initial','post-grid'),
-                'justify'=>__('Justify','post-grid'),
-
-
+                'left'=>__('Left','woocommerce-products-slider'),
+                'center'=>__('Center','woocommerce-products-slider'),
+                'right'=>__('Right','woocommerce-products-slider'),
             ),
         );
 
@@ -267,7 +261,7 @@ add_action('post_grid_metabox_tabs_content_query_post', 'post_grid_metabox_tabs_
 function post_grid_metabox_tabs_content_query_post($tab, $post_id){
 
     $settings_tabs_field = new settings_tabs_field();
-    $class_post_grid_meta_box = new class_post_grid_meta_box();
+    $class_post_grid_functions = new class_post_grid_functions();
 
 
     $post_grid_posttypes_array = post_grid_posttypes_array();
@@ -323,8 +317,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'post_types',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Post types','post-grid'),
-            'details'	=> __('Select your desired post types here you want to display post from, you can choose multiple post type.','post-grid'),
+            'title'		=> __('Post types','woocommerce-products-slider'),
+            'details'	=> __('Select your desired post types here you want to display post from, you can choose multiple post type.','woocommerce-products-slider'),
             'type'		=> 'select2',
             'multiple'		=> true,
             'value'		=> $post_types,
@@ -378,8 +372,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
                                     'id'		=> 'terms',
                                     'css_id'		=> 'terms-'.$taxonomyIndex,
                                     'parent'		=> 'post_grid_meta_options[taxonomies]['.$taxonomy.']',
-                                    'title'		=> __('Categories or Terms','post-grid'),
-                                    'details'	=> __('Select post terms or categories','post-grid'),
+                                    'title'		=> __('Categories or Terms','woocommerce-products-slider'),
+                                    'details'	=> __('Select post terms or categories','woocommerce-products-slider'),
                                     'type'		=> 'select2',
                                     'multiple'		=> true,
                                     'value'		=> $terms,
@@ -392,19 +386,19 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
                                 $args = array(
                                     'id'		=> 'terms_relation',
                                     'parent'		=> 'post_grid_meta_options[taxonomies]['.$taxonomy.']',
-                                    'title'		=> __('Terms relation','post-grid'),
-                                    'details'	=> __('Choose term relation. some option only available in pro','post-grid'),
+                                    'title'		=> __('Terms relation','woocommerce-products-slider'),
+                                    'details'	=> __('Choose term relation. some option only available in pro','woocommerce-products-slider'),
                                     'type'		=> 'radio',
                                     'for'		=> $taxonomy,
                                     'multiple'		=> true,
                                     'value'		=> $terms_relation,
                                     'default'		=> 'IN',
                                     'args'		=> array(
-                                        'IN'=>__('IN','post-grid'),
-                                        'NOT IN'=>__('NOT IN','post-grid'),
-                                        'AND'=>__('AND','post-grid'),
-                                        'EXISTS'=>__('EXISTS','post-grid'),
-                                        'NOT EXISTS'=>__('NOT EXISTS','post-grid'),
+                                        'IN'=>__('IN','woocommerce-products-slider'),
+                                        'NOT IN'=>__('NOT IN','woocommerce-products-slider'),
+                                        'AND'=>__('AND','woocommerce-products-slider'),
+                                        'EXISTS'=>__('EXISTS','woocommerce-products-slider'),
+                                        'NOT EXISTS'=>__('NOT EXISTS','woocommerce-products-slider'),
                                     ),
                                 );
 
@@ -414,11 +408,11 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
                         </div>
                         <?php
                     }else:
-                        echo __('Please choose at least one post types. save/update post grid','post-grid');
+                        echo __('Please choose at least one post types. save/update post grid','woocommerce-products-slider');
                     endif;
                     ?>
                 </div>
-                <p class="description"><?php echo __('Select post categories & terms.', 'post-grid'); ?></p>
+                <p class="description"><?php echo __('Select post categories & terms.', 'woocommerce-products-slider'); ?></p>
             </div>
         </div>
 
@@ -426,16 +420,16 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'categories_relation',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Taxonomies relation','post-grid'),
-            'details'	=> __('Choose Taxonomies relation.','post-grid'),
+            'title'		=> __('Taxonomies relation','woocommerce-products-slider'),
+            'details'	=> __('Choose Taxonomies relation.','woocommerce-products-slider'),
             'type'		=> 'radio',
             //'for'		=> $taxonomy,
             'multiple'		=> true,
             'value'		=> $categories_relation,
             'default'		=> 'IN',
             'args'		=> array(
-                'OR'=>__('OR','post-grid'),
-                'AND'=>__('AND','post-grid'),
+                'OR'=>__('OR','woocommerce-products-slider'),
+                'AND'=>__('AND','woocommerce-products-slider'),
             ),
         );
 
@@ -444,13 +438,13 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'post_status',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Post status','post-grid'),
-            'details'	=> __('Display post from following post status.','post-grid'),
+            'title'		=> __('Post status','woocommerce-products-slider'),
+            'details'	=> __('Display post from following post status.','woocommerce-products-slider'),
             'type'		=> 'select2',
             'multiple'		=> true,
             'value'		=> $post_status,
             'default'		=> array('publish'),
-            'args'		=> $class_post_grid_meta_box->get_post_status(),
+            'args'		=> $class_post_grid_functions->get_post_status(),
         );
 
         $settings_tabs_field->generate_field($args, $post_id);
@@ -459,16 +453,16 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'query_order',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Post query order','post-grid'),
-            'details'	=> __('Query order ascending or descending.','post-grid'),
+            'title'		=> __('Post query order','woocommerce-products-slider'),
+            'details'	=> __('Query order ascending or descending.','woocommerce-products-slider'),
             'type'		=> 'select',
             //'for'		=> $taxonomy,
             //'multiple'		=> true,
             'value'		=> $query_order,
             'default'		=> 'DESC',
             'args'		=> array(
-                'ASC'=>__('Ascending','post-grid'),
-                'DESC'=>__('Descending','post-grid'),
+                'ASC'=>__('Ascending','woocommerce-products-slider'),
+                'DESC'=>__('Descending','woocommerce-products-slider'),
             ),
         );
 
@@ -478,13 +472,13 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'query_orderby',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Post query orderby','post-grid'),
-            'details'	=> __('Select post query orderby','post-grid'),
+            'title'		=> __('Post query orderby','woocommerce-products-slider'),
+            'details'	=> __('Select post query orderby','woocommerce-products-slider'),
             'type'		=> 'select2',
             'multiple'		=> true,
             'value'		=> $query_orderby,
             'default'		=> array('date'),
-            'args'		=> $class_post_grid_meta_box->get_query_orderby(),
+            'args'		=> $class_post_grid_functions->get_query_orderby(),
         );
 
         $settings_tabs_field->generate_field($args, $post_id);
@@ -493,8 +487,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'query_orderby_meta_key',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Query orderby meta key','post-grid'),
-            'details'	=> __('You can use custom meta field key for orderby meta key','post-grid'),
+            'title'		=> __('Query orderby meta key','woocommerce-products-slider'),
+            'details'	=> __('You can use custom meta field key for orderby meta key','woocommerce-products-slider'),
             'type'		=> 'text',
             'value'		=> $query_orderby_meta_key,
             'default'		=> '',
@@ -506,8 +500,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'posts_per_page',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Posts per page','post-grid'),
-            'details'	=> __('Number of post each pagination. -1 to display all. default is 10 if you left empty.','post-grid'),
+            'title'		=> __('Posts per page','woocommerce-products-slider'),
+            'details'	=> __('Number of post each pagination. -1 to display all. default is 10 if you left empty.','woocommerce-products-slider'),
             'type'		=> 'text',
             'value'		=> $posts_per_page,
             'default'		=> '',
@@ -519,8 +513,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'offset',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Offset','post-grid'),
-            'details'	=> __('Display posts from the n\'th, if you set Posts per page to -1 will not work offset.','post-grid'),
+            'title'		=> __('Offset','woocommerce-products-slider'),
+            'details'	=> __('Display posts from the n\'th, if you set Posts per page to -1 will not work offset.','woocommerce-products-slider'),
             'type'		=> 'text',
             'value'		=> $offset,
             'default'		=> '',
@@ -533,8 +527,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'exclude_post_id',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Exclude by post ID','post-grid'),
-            'details'	=> __('You can exclude any post by ids here, use comma separate post id value, ex: 45,48','post-grid'),
+            'title'		=> __('Exclude by post ID','woocommerce-products-slider'),
+            'details'	=> __('You can exclude any post by ids here, use comma separate post id value, ex: 45,48','woocommerce-products-slider'),
             'type'		=> 'text',
             'value'		=> $exclude_post_id,
             'default'		=> '',
@@ -547,8 +541,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'include_post_id',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Include by post ID','post-grid'),
-            'details'	=> __('You can include any post by ids here, use comma separate post id value, ex: 45,48','post-grid'),
+            'title'		=> __('Include by post ID','woocommerce-products-slider'),
+            'details'	=> __('You can include any post by ids here, use comma separate post id value, ex: 45,48','woocommerce-products-slider'),
             'type'		=> 'text',
             'value'		=> $include_post_id,
             'default'		=> '',
@@ -560,8 +554,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'keyword',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('Search parameter','post-grid'),
-            'details'	=> __('Query post by search keyword, please follow the reference https://codex.wordpress.org/Class_Reference/WP_Query#Search_Parameter','post-grid'),
+            'title'		=> __('Search parameter','woocommerce-products-slider'),
+            'details'	=> __('Query post by search keyword, please follow the reference https://codex.wordpress.org/Class_Reference/WP_Query#Search_Parameter','woocommerce-products-slider'),
             'type'		=> 'text',
             'value'		=> $keyword,
             'default'		=> '',
@@ -574,8 +568,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
         $args = array(
             'id'		=> 'no_post_text',
             'parent'		=> 'post_grid_meta_options',
-            'title'		=> __('No post found text','post-grid'),
-            'details'	=> __('Custom text for no post found. default: No post found','post-grid'),
+            'title'		=> __('No post found text','woocommerce-products-slider'),
+            'details'	=> __('Custom text for no post found. default: No post found','woocommerce-products-slider'),
             'type'		=> 'text',
             'value'		=> $no_post_text,
             'default'		=> '',
@@ -612,8 +606,8 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id){
 
     ?>
     <div class="section">
-        <div class="section-title"><?php echo __('Layouts', 'post-grid'); ?></div>
-        <p class="description section-description"><?php echo __('Choose item layouts.', 'post-grid'); ?></p>
+        <div class="section-title"><?php echo __('Layouts', 'woocommerce-products-slider'); ?></div>
+        <p class="description section-description"><?php echo __('Choose item layouts.', 'woocommerce-products-slider'); ?></p>
 
 
         <?php
@@ -625,15 +619,15 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id){
         ob_start();
 
         ?>
-        <p><a target="_blank" class="button" href="<?php echo admin_url().'post-new.php?post_type=post_grid_layout'; ?>"><?php echo __('Create layout','post-grid'); ?></a> </p>
-        <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Manage layouts','post-grid'); ?></a> </p>
-        <p><a target="_blank" class="button" href="<?php echo $layout_convert_url; ?>"><?php echo __('Covert old layout to new layout','post-grid'); ?></a> for this post grid.</p>
+        <p><a target="_blank" class="button" href="<?php echo admin_url().'post-new.php?post_type=post_grid_layout'; ?>"><?php echo __('Create layout','woocommerce-products-slider'); ?></a> </p>
+        <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Manage layouts','woocommerce-products-slider'); ?></a> </p>
+        <p><a target="_blank" class="button" href="<?php echo $layout_convert_url; ?>"><?php echo __('Covert old layout to new layout','woocommerce-products-slider'); ?></a> for this post grid.</p>
         <?php
         if($import_layouts != 'done'):
 
 
             ?>
-            <p><a href="<?php echo admin_url().'edit.php?post_type=post_grid&page=import_layouts'; ?>" class="button import-default-layouts"><?php echo __('Import default layouts','post-grid'); ?></a> </p>
+            <p><a href="<?php echo admin_url().'edit.php?post_type=post_grid&page=import_layouts'; ?>" class="button import-default-layouts"><?php echo __('Import default layouts','woocommerce-products-slider'); ?></a> </p>
         <?php
         endif;
 
@@ -887,17 +881,17 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id){
 
             </div>
             <style type="text/css">
-                #post_grid_metabox .layout-list .idle, #post_grid_metabox .layout-list .hover {
+                #post-grid .layout-list .idle, #post-grid .layout-list .hover {
                     display: inline-block;
                     height: auto;
                     margin: 0 10px;
                     vertical-align: top;
                     width: 400px;
                 }
-                #post_grid_metabox .layout-list .hover {
+                #post-grid .layout-list .hover {
                     display: none;
                 }
-                #post_grid_metabox .layout-list .idle .name, #post_grid_metabox .layout-list .hover .name {
+                #post-grid .layout-list .idle .name, #post-grid .layout-list .hover .name {
                     background: rgb(240, 240, 240) none repeat scroll 0 0;
                     border-bottom: 1px solid rgb(153, 153, 153);
                     font-size: 20px;
@@ -905,7 +899,7 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id){
                     padding: 5px 0;
                     text-align: center;
                 }
-                #post_grid_metabox .layout-list .idle .name .edit-layout {
+                #post-grid .layout-list .idle .name .edit-layout {
                     background: #ddd none repeat scroll 0 0;
                     padding: 2px 10px;
                     text-decoration: none;
@@ -988,10 +982,12 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id){
             </div>
 
             <style type="text/css">
-                #post_grid_metabox .skin-list{
+                #post-grid .skin-list{
                     text-align: center;
                 }
-                #post_grid_metabox .skin-list .skin-container {
+
+
+                #post-grid .skin-list .skin-container {
                     display: inline-block;
                     margin: 10px;
                     width: 310px;
@@ -999,44 +995,44 @@ function post_grid_metabox_tabs_content_skin_layout($tab, $post_id){
                     vertical-align: top;
                     padding: 15px;
                 }
-                #post_grid_metabox .skin-list .skin-container .header {
+                #post-grid .skin-list .skin-container .header {
                     background: rgb(252, 110, 60) none repeat scroll 0 0;
                     padding: 3px 10px;
                     text-align: left;
                 }
-                #post_grid_metabox .skin-list .skin-container .header.selected {
+                #post-grid .skin-list .skin-container .header.selected {
                     background: rgb(58, 212, 127) none repeat scroll 0 0;
                 }
-                #post_grid_metabox .skin-list .edit-link {
+                #post-grid .skin-list .edit-link {
                     float: right;
                 }
-                #post_grid_metabox .skin-list .edit-link a{
+                #post-grid .skin-list .edit-link a{
                     color: #fff;
                     text-decoration: none;
                 }
-                #post_grid_metabox .skin-list .skin-container label {
+                #post-grid .skin-list .skin-container label {
                     color: rgb(255, 255, 255);
                 }
-                #post_grid_metabox .skin-list .skin {
+                #post-grid .skin-list .skin {
                     display: inline-block;
                     overflow: hidden;
                     vertical-align: top;
                 }
-                #post_grid_metabox .skin-list .skin .thumb img {
+                #post-grid .skin-list .skin .thumb img {
                     height: auto;
                     width: 100%;
                 }
-                #post_grid_metabox .skin-list .skin .title {
+                #post-grid .skin-list .skin .title {
                     font-size: 16px;
                     line-height: normal;
                     padding: 5px 0;
                 }
-                #post_grid_metabox .skin-list .skin .content {
+                #post-grid .skin-list .skin .content {
                     font-size: 13px;
                     line-height: normal;
                     padding: 5px 0;
                 }
-                #post_grid_metabox .skin-list .layer-content > div {
+                #post-grid .skin-list .layer-content > div {
                     padding: 5px 15px !important;
                 }
             </style>
@@ -1675,7 +1671,7 @@ add_action('post_grid_metabox_tabs_content_search', 'post_grid_metabox_tabs_cont
 
 function post_grid_metabox_tabs_content_search($tab, $post_id){
 
-    $class_post_grid_meta_box = new class_post_grid_meta_box();
+    $class_post_grid_functions = new class_post_grid_functions();
 
     $settings_tabs_field = new settings_tabs_field();
     $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
@@ -1782,7 +1778,7 @@ function post_grid_metabox_tabs_content_search($tab, $post_id){
             'multiple'		=> true,
             'value'		=> $query_orderby,
             'default'		=> array('date'),
-            'args'		=> $class_post_grid_meta_box->get_query_orderby(),
+            'args'		=> $class_post_grid_functions->get_query_orderby(),
         );
 
         $settings_tabs_field->generate_field($args, $post_id);

@@ -43,20 +43,20 @@ class class_post_grid_settings{
     }
 
 	public function settings(){
-		include('menu/settings.php');
+		include(post_grid_plugin_dir.'includes/menu/settings.php');
 	}
 
 	
 	public function layout_editor(){
-		include('menu/layout-editor.php');	
+		include(post_grid_plugin_dir.'includes/menu/layout-editor.php');
 	}
 
     public function data_update(){
-        include('menu/data-update.php');
+        include(post_grid_plugin_dir.'includes/menu/data-update.php');
     }
 
     public function import_layouts(){
-        include( 'menu/import-layouts.php' );
+        include( post_grid_plugin_dir.'includes/menu/import-layouts.php' );
 
     }
 	

@@ -3,15 +3,11 @@
 
 .post-grid{
 	overflow:hidden;
-	
-	}
-
-
+}
 .post-grid .grid-items {
   margin: 0 auto;
   overflow: hidden;
 }
-
 .post-grid .item {
   background: rgb(255, 255, 255) none repeat scroll 0 0;
   display: inline-block;
@@ -20,35 +16,23 @@
   word-break: break-word;
   margin: 0 auto;
 }
-
 .post-grid .no-post-found {
-  background: #fff none repeat scroll 0 0;
-  color: #666;
+  color: #999;
   text-align: center;
+  font-size: 18px;
 }
-
-
 .post-grid .item .layer-media {
   line-height: 0;
 }
-
 .post-grid .item .layer-media img {
   border-radius: 0;
   box-shadow: none;
   width: 100%;
 }
-
-
 .post-grid .item .layer-media iframe {
   width: 100% !important;
   height: auto;
 }
-
-
-.post-grid .owl-theme .owl-controls .owl-buttons div {
-  background: rgb(28, 155, 236) none repeat scroll 0 0;
-}
-
 
 
 /*navigation top*/
@@ -58,23 +42,6 @@
   margin-bottom: 30px;
 }
 
-.post-grid .grid-nav-top .nav-filter {
-  text-align: center;
-  padding: 20px 0;
-}
-.post-grid .grid-nav-top .nav-filter .filter {
-  background: rgba(220, 220, 220, 0.3) none repeat scroll 0 0;
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  margin: 5px 5px;
-  padding: 3px 15px;
-}
-
-.post-grid .grid-nav-top .nav-filter .filter.active {
-
-}
 
 /*nav-search*/
 .post-grid .grid-nav-top .nav-search {

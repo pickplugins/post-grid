@@ -1,0 +1,181 @@
+<?php
+
+/*
+* @Author 		PickPlugins
+*/
+
+if ( ! defined('ABSPATH')) exit;  // if direct access
+
+
+
+
+add_action('post_grid_post_options_content_options', 'post_grid_post_options_content_options',10, 2);
+
+function post_grid_post_options_content_options($tab, $post_id){
+
+    $settings_tabs_field = new settings_tabs_field();
+
+    $class_post_grid_functions = new class_post_grid_functions();
+    $post_grid_skins = $class_post_grid_functions->skins();
+
+    $skin_list = array();
+
+    foreach($post_grid_skins as $skin_key=>$skin_data){
+
+        $skin_list[$skin_key] = $skin_data['name'];
+    }
+
+
+    $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+
+    $post_skin = !empty($post_grid_post_settings['post_skin']) ? $post_grid_post_settings['post_skin'] : 'flat';
+    $custom_thumb_source = !empty($post_grid_post_settings['custom_thumb_source']) ? $post_grid_post_settings['custom_thumb_source'] : post_grid_plugin_url.'assets/frontend/images/placeholder.png';
+    $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : '';
+
+
+
+    ?>
+    <div class="section">
+        <div class="section-title">Options</div>
+        <p class="description section-description">Change post option here.</p>
+
+
+        <?php
+
+        $args = array(
+            'id'		=> 'custom_thumb_source',
+            'parent'		=> 'post_grid_post_settings',
+            'title'		=> __('Custom thumbnail image source','post-grid'),
+            'details'	=> __('You can use custom thumbnail image source.','post-grid'),
+            'type'		=> 'media_url',
+            'value'		=> $custom_thumb_source,
+            'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+        $args = array(
+            'id'		=> 'thumb_custom_url',
+            'parent'		=> 'post_grid_post_settings',
+            'title'		=> __('Custom link to this post','post-grid'),
+            'details'	=> __('You can use custom link to this post.','post-grid'),
+            'type'		=> 'text',
+            'value'		=> $thumb_custom_url,
+            'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
+
+
+
+
+        ?>
+    </div>
+    <?php
+}
+
+
+add_action('post_grid_post_options_content_layouts', 'post_grid_post_options_content_layouts',10, 2);
+
+function post_grid_post_options_content_layouts($tab, $post_id){
+
+    //var_dump($post_id);
+    $settings_tabs_field = new settings_tabs_field();
+    $post_grid_post_settings = get_post_meta($post_id,'post_grid_post_settings', true);
+    $layout_id = !empty($post_grid_post_settings['layout_id']) ? $post_grid_post_settings['layout_id'] : ''; //post_grid_get_first_post('post_grid_layout')
+
+
+    ?>
+    <div class="section">
+        <div class="section-title"><?php echo __('Layouts', 'post-grid'); ?></div>
+        <p class="description section-description"><?php echo __('Choose item layouts.', 'post-grid'); ?></p>
+
+
+        <?php
+
+
+
+        ob_start();
+
+        ?>
+        <p><a target="_blank" class="button" href="<?php echo admin_url().'post-new.php?post_type=post_grid_layout'; ?>"><?php echo __('Create layout','post-grid'); ?></a> </p>
+        <p><a target="_blank" class="button" href="<?php echo admin_url().'edit.php?post_type=post_grid_layout'; ?>"><?php echo __('Manage layouts','post-grid'); ?></a> </p>
+        <?php
+
+
+
+        $html = ob_get_clean();
+
+        $args = array(
+            'id'		=> 'post_grid_layout_create',
+            //'parent'		=> 'post_grid_post_settings',
+            'title'		=> __('Create layout','post-grid'),
+            'details'	=> __('Please follow the links to create layouts or manage.','post-grid'),
+            'type'		=> 'custom_html',
+            'html'		=> $html,
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+        $item_layout_args = array();
+
+        $query_args['post_type'] 		= array('post_grid_layout');
+        $query_args['post_status'] 		= array('publish');
+        $query_args['orderby']  		= 'date';
+        $query_args['order']  			= 'DESC';
+        $query_args['posts_per_page'] 	= -1;
+        $wp_query = new WP_Query($query_args);
+
+        $item_layout_args[''] = array('name'=>'Empty layout',  'thumb'=> 'https://i.imgur.com/JyurCtY.jpg', );
+
+
+        if ( $wp_query->have_posts() ) :
+
+
+            while ( $wp_query->have_posts() ) : $wp_query->the_post();
+
+                $post_id = get_the_id();
+                $layout_name = get_the_title();
+                $product_thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post_id), 'full' );
+                $product_thumb_url = isset($product_thumb['0']) ? esc_url_raw($product_thumb['0']) : '';
+
+                $layout_options = get_post_meta($post_id,'layout_options', true);
+                $layout_preview_img = !empty($layout_options['layout_preview_img']) ? $layout_options['layout_preview_img'] : 'https://i.imgur.com/JyurCtY.jpg';
+
+                $product_thumb_url = !empty( $product_thumb_url ) ? $product_thumb_url : $layout_preview_img;
+
+                $item_layout_args[$post_id] = array('name'=>$layout_name, 'link_text'=>'Edit', 'link'=> get_edit_post_link($post_id), 'thumb'=> $product_thumb_url, );
+
+            endwhile;
+        endif;
+
+
+
+
+
+        $args = array(
+            'id'		=> 'layout_id',
+            'parent' => 'post_grid_post_settings',
+            'title'		=> __('Item layouts','post-grid'),
+            'details'	=> __('Choose grid item layout. When "Empty layout" is selecetd old layout data will be loaded.','post-grid'),
+            'type'		=> 'radio_image',
+            'value'		=> $layout_id,
+            'default'		=> '',
+            'width'		=> '250px',
+            'args'		=> $item_layout_args,
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+
+        ?>
+    </div>
+    <?php
+
+}

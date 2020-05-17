@@ -87,9 +87,12 @@ add_action('post_grid_container', 'post_grid_container_search', 5);
 
 function post_grid_container_search($args){
 
+    $post_grid_settings = get_option('post_grid_settings');
 
     $grid_id = $args['grid_id'];
     $post_grid_options = $args['options'];
+
+    $font_aw_version = isset($post_grid_settings['font_aw_version']) ? $post_grid_settings['font_aw_version'] : 'v_5';
 
 
     $nav_top_search = isset($post_grid_options['nav_top']['search']) ? $post_grid_options['nav_top']['search'] : 'no';
@@ -97,9 +100,15 @@ function post_grid_container_search($args){
 
     if($nav_top_search !='yes') return;
 
-    $nav_top_search_placeholder = isset($post_grid_options['nav_top']['search_placeholder']) ? $post_grid_options['nav_top']['search_placeholder'] : __('Start typing', 'post-grid');
-    $nav_top_search_icon = isset($post_grid_options['nav_top']['search_icon']) ? $post_grid_options['nav_top']['search_icon'] : '<i class="fas fa-search"></i>';
 
+    if($font_aw_version == 'v_5'){
+        $nav_top_search_icon = '<i class="fas fa-search"></i>';
+    }elseif($font_aw_version == 'v_4'){
+        $nav_top_search_icon = '<i class="fa fa-search"></i>';
+    }
+
+    $nav_top_search_placeholder = isset($post_grid_options['nav_top']['search_placeholder']) ? $post_grid_options['nav_top']['search_placeholder'] : __('Start typing', 'post-grid');
+    $nav_top_search_icon = isset($post_grid_options['nav_top']['search_icon']) ? $post_grid_options['nav_top']['search_icon'] : $nav_top_search_icon;
 
 
     $keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : '';
@@ -531,7 +540,6 @@ function post_grid_container_old_layout_css($args){
     $layout_content = isset($post_grid_options['layout']['content']) ? $post_grid_options['layout']['content'] : 'flat';
 
     $class_post_grid_functions = new class_post_grid_functions();
-    $items_bg_color_values = $class_post_grid_functions->items_bg_color_values();
 
     $post_grid_layout_content = get_option( 'post_grid_layout_content' );
 
@@ -1100,8 +1108,10 @@ function post_grid_main_scripts($args){
                     var $container = $('#post-grid-<?php echo $grid_id; ?> .grid-items');
                     $container.masonry({
                         itemSelector: '.item',
-                        columnWidth: '.item',
-                        horizontalOrder: true, // new!
+                        columnWidth: '.item', //as you wish , you can use numeric
+                        isAnimated: true,
+                        isFitWidth: true,
+                        horizontalOrder: true,
                     });
                     $container.imagesLoaded().done( function() {
                         $container.masonry('layout');

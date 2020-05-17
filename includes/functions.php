@@ -28,41 +28,6 @@ function post_grid_get_first_post($post_type = 'post'){
 
 
 
-function post_grid_intermediate_image_sizes(){
-
-
-    $get_intermediate_image_sizes =  get_intermediate_image_sizes();
-    $get_intermediate_image_sizes = array_merge($get_intermediate_image_sizes,array('full'));
-
-    $all_sizes = array();
-
-    foreach($get_intermediate_image_sizes as $size_key){
-
-        $size_key_title = str_replace('_', ' ',$size_key);
-        $size_key_title = str_replace('-', ' ',$size_key_title);
-        $all_sizes[$size_key] = ucfirst($size_key_title);
-    }
-
-    return $all_sizes;
-
-
-}
-
-
-
-
-function post_grid_filter_layout_items_html($item_id, $item, $item_info){
-
-        
-        $item_key = $item_info['key'];
-
-        $item['dummy'] = '<div class="element element_'.$item_id.' '.$item_key.'"></div>';    
-        
-        return $item;
-    
-    }
-
-add_filter('post_grid_filter_layout_items_html','post_grid_filter_layout_items_html', 10, 3);
 
 
 
@@ -97,7 +62,7 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     $item_post_permalink = apply_filters('post_grid_item_post_permalink', get_permalink($item_post_id));
 
     $post_grid_post_settings = get_post_meta($item_post_id, 'post_grid_post_settings');
-    $item_thumb_placeholder = apply_filters('post_grid_item_thumb_placeholder', post_grid_plugin_url.'assets/frontend/css/images/placeholder.png');
+    $item_thumb_placeholder = apply_filters('post_grid_item_thumb_placeholder', post_grid_plugin_url.'assets/frontend/images/placeholder.png');
 
     $custom_thumb_source = isset($post_grid_post_settings[0]['custom_thumb_source']) ? $post_grid_post_settings[0]['custom_thumb_source'] : $item_thumb_placeholder;
     $thumb_custom_url = isset($post_grid_post_settings[0]['thumb_custom_url']) ? $post_grid_post_settings[0]['thumb_custom_url'] : '';
@@ -140,10 +105,10 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     elseif($media_source == 'empty_thumb'){
 
         if($thumb_linked=='yes'){
-            $html_thumb.= '<a class="custom" href="'.$item_post_permalink.'"><img src="'.post_grid_plugin_url.'assets/frontend/css/images/placeholder.png" /></a>';
+            $html_thumb.= '<a class="custom" href="'.$item_post_permalink.'"><img src="'.post_grid_plugin_url.'assets/frontend/images/placeholder.png" /></a>';
         }
         else{
-            $html_thumb.= '<img class="custom" src="'.post_grid_plugin_url.'assets/frontend/css/images/placeholder.png" />';
+            $html_thumb.= '<img class="custom" src="'.post_grid_plugin_url.'assets/frontend/images/placeholder.png" />';
         }
     }
     elseif($media_source == 'custom_thumb'){
@@ -515,6 +480,7 @@ function post_grid_media($post_id, $args ){
 
         $image_size = isset($source_args['image_size']) ? $source_args['image_size'] : 'large';
         $link_to = isset($source_args['link_to']) ? $source_args['link_to'] : 'post_link';
+        $link_target = isset($source_args['link_target']) ? $source_args['link_target'] : '';
 
         $thumb_custom_url = isset($post_settings['thumb_custom_url']) ? $post_settings['thumb_custom_url'] : '';
 
@@ -526,10 +492,10 @@ function post_grid_media($post_id, $args ){
         if(!empty($thumb_url)){
             if($link_to=='post_link'){
                 if(!empty($thumb_custom_url)){
-                    $html_thumb.= '<a href="'.$thumb_custom_url.'"><img alt="'.$alt_text.'" src="'.$thumb_url.'" /></a>';
+                    $html_thumb.= '<a target="'.$link_target.'" href="'.$thumb_custom_url.'"><img alt="'.$alt_text.'" src="'.$thumb_url.'" /></a>';
                 }
                 else{
-                    $html_thumb.= '<a href="'.$item_post_permalink.'"><img alt="'.$alt_text.'" src="'.$thumb_url.'" /></a>';
+                    $html_thumb.= '<a target="'.$link_target.'" href="'.$item_post_permalink.'"><img alt="'.$alt_text.'" src="'.$thumb_url.'" /></a>';
                 }
             }
             else{
@@ -546,11 +512,13 @@ function post_grid_media($post_id, $args ){
     elseif($source_id == 'empty_thumb'){
 
         $link_to = isset($source_args['link_to']) ? $source_args['link_to'] : 'post_link';
-        $default_thumb_src = isset($source_args['default_thumb_src']) ? $source_args['default_thumb_src'] : post_grid_plugin_url.'assets/frontend/css/images/placeholder.png';
+        $link_target = isset($source_args['link_target']) ? $source_args['link_target'] : '';
+
+        $default_thumb_src = isset($source_args['default_thumb_src']) ? $source_args['default_thumb_src'] : post_grid_plugin_url.'assets/frontend/images/placeholder.png';
 
 
         if($link_to=='post_link'){
-            $html_thumb.= '<a class="custom" href="'.$item_post_permalink.'"><img src="'.$default_thumb_src.'" /></a>';
+            $html_thumb.= '<a target="'.$link_target.'" class="custom" href="'.$item_post_permalink.'"><img src="'.$default_thumb_src.'" /></a>';
         }
         else{
             $html_thumb.= '<img class="custom" src="'.$default_thumb_src.'" />';
@@ -561,6 +529,7 @@ function post_grid_media($post_id, $args ){
     elseif($source_id == 'first_image'){
 
         $link_to = isset($source_args['link_to']) ? $source_args['link_to'] : 'post_link';
+        $link_target = isset($source_args['link_target']) ? $source_args['link_target'] : '';
 
 
         //global $post, $posts;
@@ -580,7 +549,7 @@ function post_grid_media($post_id, $args ){
         else{
 
             if($link_to=='post_link'){
-                $html_thumb.= '<a href="'.$item_post_permalink.'"><img src="'.$first_img.'" /></a>';
+                $html_thumb.= '<a target="'.$link_target.'" href="'.$item_post_permalink.'"><img src="'.$first_img.'" /></a>';
             }
             else{
                 $html_thumb.= '<img src="'.$first_img.'" />';
@@ -590,6 +559,7 @@ function post_grid_media($post_id, $args ){
     elseif($source_id == 'siteorigin_first_image'){
 
         $link_to = isset($source_args['link_to']) ? $source_args['link_to'] : 'post_link';
+        $link_target = isset($source_args['link_target']) ? $source_args['link_target'] : '';
 
         //global $post, $posts;
         $post = get_post($post_id);
@@ -656,7 +626,7 @@ function post_grid_media($post_id, $args ){
         else{
 
             if($link_to=='post_link'){
-                $html_thumb.= '<a href="'.$item_post_permalink.'"><img src="'.$first_img.'" /></a>';
+                $html_thumb.= '<a target="'.$link_target.'" href="'.$item_post_permalink.'"><img src="'.$first_img.'" /></a>';
             }
             else{
                 $html_thumb.= '<img src="'.$first_img.'" />';
@@ -722,77 +692,6 @@ function post_grid_term_slug_list($post_id){
 
 
 
-function post_grid_meta_query_args($meta_query){
-
-	foreach($meta_query as $key=>$meta_info){
-
-		?>
-		<div class="item">
-			<div class="header">
-            <span class="remove"><i class="fa fa-times"></i></span>
-			<span class="move " title="<?php echo __('Move', 'post-grid'); ?>"><i class="fas fa-bars"></i></span>
-            <span class="expand-collapse " title="<?php echo __('Expand or collapse', 'post-grid'); ?>">
-                <i class="fas fa-expand"></i>
-                <i class="fa fa-collapse"></i>
-            </span>
-
-			<?php echo $key; ?>
-
-            </div>
-			<div class="options">
-
-			<?php echo __('Key', 'post-grid'); ?><br />
-			<input type="text" name="post_grid_meta_options[meta_query][<?php echo $key; ?>][key]" value="<?php echo $meta_info['key']; ?>" /><br>
-			<?php echo __('Value', 'post-grid'); ?><br />
-			<input type="text" name="post_grid_meta_options[meta_query][<?php echo $key; ?>][value]" value="<?php echo $meta_info['value']; ?>" /><br>
-			<?php echo __('Compare', 'post-grid'); ?><br />
-			<input type="text" name="post_grid_meta_options[meta_query][<?php echo $key; ?>][compare]" value="<?php echo $meta_info['compare']; ?>" /><br>
-			<?php echo __('Type', 'post-grid'); ?><br />
-			<input type="text" name="post_grid_meta_options[meta_query][<?php echo $key; ?>][type]" value="<?php echo $meta_info['type']; ?>" /><br>
-
-			</div>
-		</div>
-		<?php
-
-		}
-
-
-	}
-
-
-
-
-
-
-function post_grid_posttypes($post_types){
-
-	$html = '';
-	$html .= '<select post_id="'.get_the_ID().'" class="post_types select2" multiple="multiple" size="6" name="post_grid_meta_options[post_types][]">';
-	
-		$post_types_all = get_post_types( '', 'names' ); 
-		foreach ( $post_types_all as $post_type ) {
-
-			global $wp_post_types;
-			$obj = $wp_post_types[$post_type];
-			
-			if(in_array($post_type,$post_types)){
-				$selected = 'selected';
-				}
-			else{
-				$selected = '';
-				}
-
-			$html .= '<option '.$selected.' value="'.$post_type.'" >'.$obj->labels->singular_name.'</option>';
-		}
-		
-	$html .= '</select>';
-	return $html;
-	}
-
-
-
-
-
 
 
 
@@ -815,9 +714,7 @@ function post_grid_layout_content_ajax(){
 			
 			}
 		
-		//$layout = $class_post_grid_functions->layout_content($layout_key);
-		
-		
+
 	
 		?>
 		<div class="<?php echo $layout_key; ?>">
@@ -826,8 +723,6 @@ function post_grid_layout_content_ajax(){
 			foreach($layout as $item_key=>$item_info){
 				$item_key = $item_info['key'];
 				?>
-				
-	
 					<div class="item <?php echo $item_key; ?>" style=" <?php echo $item_info['css']; ?> ">
 					
 					<?php
@@ -1014,27 +909,6 @@ function post_grid_layout_add_elements(){
 	
 		$class_post_grid_functions = new class_post_grid_functions();
         $layout_items_group = $class_post_grid_functions->layout_items();
-
-//
-//        foreach($layout_items_group as $group_key=>$group_data) {
-//
-//            $group_name = $group_data['name'];
-//            $group_items = $group_data['items'];
-//
-//            $layout_items_list = array();
-//
-//            foreach($group_items as $element_key=>$item_info){
-//
-//
-//                $layout_items_list[$element_key]['name'] = $item_info['name'];
-//                $layout_items_list[$element_key]['dummy_html'] = $item_info['dummy_html'];
-//                $layout_items_list[$element_key]['css'] = $item_info['css'];
-//
-//            }
-//        }
-//
-//
-//        update_option('hellO_option', $layout_items_list);
 
 
 		$item_name = $layout_items_group[$item_group]['items'][$item_key]['name'];

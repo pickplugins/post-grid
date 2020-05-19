@@ -206,6 +206,20 @@ Advanced Custom Fields is #1 custom field's plugin for WordPress and we added fu
 * Datetime picker
 * Google Map
 
+**Custom Field Suite**
+Custom Field Suite is another best custom field's plugin for WordPress and we added full support to display following meta fields for any post types.
+
+* Text
+* Textarea
+* Link
+* Taxonomy
+* User
+* Relationship
+* File
+* Wysiwyg
+* Select
+* True / False
+* Date picker
 
 
 **The Events Calendar**
@@ -246,6 +260,8 @@ Events Manager is another best event's manager plugin for WordPress and we added
 
 
 
+
+
 <strong>Video Tutorial(with premium version interface)</strong>
 
 * [All tutorials](https://www.youtube.com/watch?v=RKb-B_Q72Ak&list=PL2GPPfgLrfWxAZBQc10XCh5wzDSOfPrKB)
@@ -279,6 +295,13 @@ then paste this shortcode anywhere in your page to display grid<br />
 2. screenshot-2
 
 == Changelog ==
+
+	= 2.0.57 =
+    * 2020-05-19 add - Element added for "Like Button Rating" plugin
+    * 2020-05-19 add - Element added for "WP-PostViews" plugin
+    * 2020-05-19 add - Element added for "Post Views Counter" plugin
+    * 2020-05-19 add - Element added for "Page Views Count" plugin
+    * 2020-05-19 add - Element added for "Page Visit Counter" plugin
 
 	= 2.0.57 =
     * 2020-05-15 fix - masonry center align issue fixed.

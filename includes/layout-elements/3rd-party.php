@@ -45,22 +45,37 @@ if ( is_plugin_active( 'multi-rating/multi-rating.php' ) ) {
 }
 
 
+if ( is_plugin_active( 'likebtn-like-button/likebtn_like_button.php' ) ) {
+
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/likebtn-like-button/layout-elements.php');
+}
+
+if ( is_plugin_active( 'wp-postviews/wp-postviews.php' ) ) {
+
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/wp-postviews/layout-elements.php');
+}
+
+if ( is_plugin_active( 'post-views-counter/post-views-counter.php' ) ) {
+
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/post-views-counter/layout-elements.php');
+}
+
+if ( is_plugin_active( 'page-views-count/page-views-count.php' ) ) {
+
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/page-views-count/layout-elements.php');
+}
+
+if ( is_plugin_active( 'page-visit-counter/page-visit-counter.php' ) ) {
+
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/page-visit-counter/layout-elements.php');
+}
 
 
 
+if ( is_plugin_active( 'custom-field-suite/cfs.php' ) ) {
 
-
-
-
-
-
-
-
-
-
-
-
-
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/custom-field-suite/layout-elements.php');
+}
 
 
 

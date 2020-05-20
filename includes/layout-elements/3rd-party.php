@@ -78,7 +78,10 @@ if ( is_plugin_active( 'custom-field-suite/cfs.php' ) ) {
 }
 
 
+if ( is_plugin_active( 'cmb2/init.php' ) ) {
 
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/cmb2/layout-elements.php');
+}
 
 
 

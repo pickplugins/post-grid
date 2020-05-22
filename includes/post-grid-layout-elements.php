@@ -4415,6 +4415,10 @@ function post_grid_layout_element_option_categories($parameters){
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
     $max_count = isset($element_data['max_count']) ? $element_data['max_count'] : '';
+    $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
+    $separator = isset($element_data['separator']) ? $element_data['separator'] : '';
+
+
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
@@ -4422,7 +4426,6 @@ function post_grid_layout_element_option_categories($parameters){
     $link_color = isset($element_data['link_color']) ? $element_data['link_color'] : '';
     $text_color = isset($element_data['text_color']) ? $element_data['text_color'] : '';
 
-    $separator = isset($element_data['separator']) ? $element_data['separator'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
     $css = isset($element_data['css']) ? $element_data['css'] : '';
@@ -4470,6 +4473,26 @@ function post_grid_layout_element_option_categories($parameters){
             $settings_tabs_field->generate_field($args);
 
             $args = array(
+                'id'		=> 'link_target',
+                'css_id'		=> $element_index.'_link_target',
+                'parent' => $input_name.'[categories]',
+                'title'		=> __('Link target','post-grid'),
+                'details'	=> __('Choose option link target.','post-grid'),
+                'type'		=> 'select',
+                'value'		=> $link_target,
+                'default'		=> 'post_link',
+                'args'		=> array(
+                    '_blank'=> __('_blank', 'post-grid'),
+                    '_parent'=> __('_parent', 'post-grid'),
+                    '_self'=> __('_self', 'post-grid'),
+                    '_top'=> __('_top', 'post-grid'),
+
+                ),
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
                 'id'		=> 'wrapper_html',
                 'css_id'		=> $element_index.'_wrapper_html',
                 'parent' => $input_name.'[categories]',
@@ -4496,6 +4519,9 @@ function post_grid_layout_element_option_categories($parameters){
             );
 
             $settings_tabs_field->generate_field($args);
+
+
+
 
 
             $args = array(
@@ -4731,13 +4757,15 @@ function post_grid_layout_element_option_tags($parameters){
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
     $max_count = isset($element_data['max_count']) ? $element_data['max_count'] : '';
+    $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
+    $separator = isset($element_data['separator']) ? $element_data['separator'] : '';
+
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $wrapper_margin = isset($element_data['wrapper_margin']) ? $element_data['wrapper_margin'] : '';
     $link_color = isset($element_data['link_color']) ? $element_data['link_color'] : '';
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
-    $separator = isset($element_data['separator']) ? $element_data['separator'] : '';
 
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
@@ -4780,6 +4808,26 @@ function post_grid_layout_element_option_tags($parameters){
                 'default'		=> '',
                 'placeholder'		=> ', ',
 
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'		=> 'link_target',
+                'css_id'		=> $element_index.'_link_target',
+                'parent' => $input_name.'[tags]',
+                'title'		=> __('Link target','post-grid'),
+                'details'	=> __('Choose option link target.','post-grid'),
+                'type'		=> 'select',
+                'value'		=> $link_target,
+                'default'		=> 'post_link',
+                'args'		=> array(
+                    '_blank'=> __('_blank', 'post-grid'),
+                    '_parent'=> __('_parent', 'post-grid'),
+                    '_self'=> __('_self', 'post-grid'),
+                    '_top'=> __('_top', 'post-grid'),
+
+                ),
             );
 
             $settings_tabs_field->generate_field($args);

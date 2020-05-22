@@ -72,23 +72,23 @@ if ( is_plugin_active( 'page-visit-counter/page-visit-counter.php' ) ) {
 
 
 
-if ( is_plugin_active( 'custom-field-suite/cfs.php' ) ) {
+if ( is_plugin_active( 'wck-custom-fields-and-custom-post-types-creator/wck.php' ) ) {
 
-    require_once( post_grid_plugin_dir . 'includes/layout-elements/custom-field-suite/layout-elements.php');
-}
-
-
-if ( is_plugin_active( 'cmb2/init.php' ) ) {
-
-    require_once( post_grid_plugin_dir . 'includes/layout-elements/cmb2/layout-elements.php');
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/wck-custom-fields-and-custom-post-types-creator/layout-elements.php');
 }
 
 
 
+if ( is_plugin_active( 'wp-job-manager/wp-job-manager.php' ) ) {
+
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/wp-job-manager/layout-elements.php');
+}
 
 
+if ( is_plugin_active( 'simple-job-board/simple-job-board.php' ) ) {
 
-
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/simple-job-board/layout-elements.php');
+}
 
 
 

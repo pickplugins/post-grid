@@ -13,12 +13,12 @@ $post_grid_settings_tab[] = array(
     'active' => ($current_tab == 'general') ? true : false,
 );
 
-$post_grid_settings_tab[] = array(
-    'id' => 'templates',
-    'title' => sprintf(__('%s Templates','post-grid'),'<i class="far fa-newspaper"></i>'),
-    'priority' => 3,
-    'active' => ($current_tab == 'templates') ? true : false,
-);
+//$post_grid_settings_tab[] = array(
+//    'id' => 'templates',
+//    'title' => sprintf(__('%s Templates','post-grid'),'<i class="far fa-newspaper"></i>'),
+//    'priority' => 3,
+//    'active' => ($current_tab == 'templates') ? true : false,
+//);
 
 $post_grid_settings_tab[] = array(
     'id' => 'help_support',

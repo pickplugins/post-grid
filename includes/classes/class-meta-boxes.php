@@ -592,18 +592,18 @@ class post_grid_meta_boxs{
             'priority' => 1,
             'active' => ($current_tab == 'options') ? true : false,
         );
-        $post_grid_settings_tab[] = array(
-            'id' => 'layouts',
-            'title' => sprintf(__('%s Layouts','post-grid'), '<i class="fas fa-qrcode"></i>'),
-            'priority' => 2,
-            'active' => ($current_tab == 'layouts') ? true : false,
-        );
-        $post_grid_settings_tab[] = array(
-            'id' => 'post_template',
-            'title' => sprintf(__('%s Post template','post-grid'), '<i class="fas fa-newspaper"></i>'),
-            'priority' => 2,
-            'active' => ($current_tab == 'post_template') ? true : false,
-        );
+//        $post_grid_settings_tab[] = array(
+//            'id' => 'layouts',
+//            'title' => sprintf(__('%s Layouts','post-grid'), '<i class="fas fa-qrcode"></i>'),
+//            'priority' => 2,
+//            'active' => ($current_tab == 'layouts') ? true : false,
+//        );
+//        $post_grid_settings_tab[] = array(
+//            'id' => 'post_template',
+//            'title' => sprintf(__('%s Post template','post-grid'), '<i class="fas fa-newspaper"></i>'),
+//            'priority' => 2,
+//            'active' => ($current_tab == 'post_template') ? true : false,
+//        );
 
 
 

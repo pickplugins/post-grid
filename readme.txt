@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.57
+	Stable tag: 2.0.59
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -206,6 +206,24 @@ Advanced Custom Fields is #1 custom field's plugin for WordPress and we added fu
 * Datetime picker
 * Google Map
 
+
+
+**CMB2**
+CMB2 is another best custom field's plugin for WordPress and we added full support to display following meta fields for any post types.
+
+* Text
+* Email
+* URL
+* Money
+* Textarea
+* Select
+* Checkbox
+* Radio
+* Link
+* File
+* Wysiwyg
+* oEmbed
+
 **Custom Field Suite**
 Custom Field Suite is another best custom field's plugin for WordPress and we added full support to display following meta fields for any post types.
 
@@ -296,7 +314,15 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 == Changelog ==
 
-	= 2.0.57 =
+	= 2.0.59 =
+    * 2020-05-21 add - Elements added for "WCK - Custom Fields and Custom Post Types Creator" plugin
+    * 2020-05-21 add - Elements added for "WP Job Manager" plugin
+    * 2020-05-21 add - Elements added for "Simple Job Board" plugin
+    * 2020-05-21 add - Element "Categories" link target option added
+    * 2020-05-21 add - Element "Tags" link target option added
+
+
+	= 2.0.58 =
     * 2020-05-19 add - Element added for "Like Button Rating" plugin
     * 2020-05-19 add - Element added for "WP-PostViews" plugin
     * 2020-05-19 add - Element added for "Post Views Counter" plugin

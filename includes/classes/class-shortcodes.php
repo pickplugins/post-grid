@@ -50,6 +50,7 @@ class class_post_grid_shortcodes{
 
 
 
-	}
+
+}
 
 new class_post_grid_shortcodes();

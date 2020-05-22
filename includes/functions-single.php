@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
-add_action('the_content','post_grid_single_post');
+//add_action('the_content','post_grid_single_post');
 
 function post_grid_single_post($content){
 
@@ -86,7 +86,7 @@ function post_grid_remove_post_title($post_title){
 
 }
 
-add_filter('the_title','post_grid_remove_post_title');
+//add_filter('the_title','post_grid_remove_post_title');
 
 
 function post_grid_remove_post_thumbnail($post_thumbnail){
@@ -107,7 +107,7 @@ function post_grid_remove_post_thumbnail($post_thumbnail){
 
 }
 
-add_filter('post_thumbnail_html','post_grid_remove_post_thumbnail');
+//add_filter('post_thumbnail_html','post_grid_remove_post_thumbnail');
 
 
 function post_grid_single_template($single_template) {

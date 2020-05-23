@@ -28,6 +28,9 @@ class class_post_grid_settings{
         add_submenu_page('edit.php?post_type=post_grid', __('Layout Editor(Old)', 'post-grid'), __('Layout Editor(Old)', 'post-grid'), 'manage_options', 'layout_editor', array( $this, 'layout_editor' ));
 
         add_submenu_page('edit.php?post_type=post_grid', __('Settings', 'post-grid'), __('Settings', 'post-grid'), 'manage_options', 'post-grid-settings', array( $this, 'settings' ));
+        add_submenu_page('edit.php?post_type=post_grid', __('Addons', 'post-grid'), __('Addons', 'post-grid'), 'manage_options', 'post-grid-addons', array( $this, 'addons' ));
+
+
 
         if($import_layouts != 'done')
             add_submenu_page( 'edit.php?post_type=post_grid', __( 'Import layouts', 'post-grid' ), __( 'Import layouts', 'post-grid' ), 'manage_options', 'import_layouts', array( $this, 'import_layouts' ) );
@@ -46,7 +49,9 @@ class class_post_grid_settings{
 		include(post_grid_plugin_dir.'includes/menu/settings.php');
 	}
 
-	
+    public function addons(){
+        include(post_grid_plugin_dir.'includes/menu/addons.php');
+    }
 	public function layout_editor(){
 		include(post_grid_plugin_dir.'includes/menu/layout-editor.php');
 	}

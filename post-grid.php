@@ -44,7 +44,7 @@ if( !class_exists( 'PostGrid' )){
 
 
             include('includes/functions-data-upgrade.php');
-            include('includes/functions-single.php');
+            //include('includes/functions-single.php');
 
 
             include('includes/classes/class-post-grid-support.php');
@@ -169,6 +169,7 @@ if( !class_exists( 'PostGrid' )){
             wp_register_script('layout-editor', post_grid_plugin_url.'assets/admin/js/layout-editor.js', array('jquery'));
             wp_register_style('bootstrap-grid', post_grid_plugin_url.'assets/global/css/bootstrap-grid.css');
 
+            wp_register_style('post-grid-addons', post_grid_plugin_url.'assets/admin/css/addons.css');
 
             if ($screen->id == 'post_grid'){
 

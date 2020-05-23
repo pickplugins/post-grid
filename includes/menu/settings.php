@@ -29,13 +29,18 @@ $post_grid_settings_tab[] = array(
 
 
 
-
 $post_grid_settings_tab[] = array(
     'id' => 'buy_pro',
     'title' => sprintf(__('%s Buy Pro','post-grid'),'<i class="fas fa-store"></i>'),
     'priority' => 95,
     'active' => ($current_tab == 'buy_pro') ? true : false,
 );
+
+
+
+
+
+
 
 $post_grid_settings_tab = apply_filters('post_grid_settings_tabs', $post_grid_settings_tab);
 

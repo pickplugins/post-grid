@@ -145,6 +145,8 @@ jQuery(document).ready(function($){
         side_uploader.open();
 
     })
+
+
     $(document).on('click','.settings-tabs .field-media-url-wrapper .clear',function(e){
         $(this).parent().children('.media-preview-wrap').children('img').attr('src','');
         $(this).parent().children('input').val('');
@@ -183,7 +185,6 @@ jQuery(document).ready(function($){
 
 
     })
-
 
 
     jQuery(document).on("click", ".settings-tabs .field-repeatable-wrapper .collapsible .header .title-text", function() {

@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.59
+	Stable tag: 2.0.60
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -215,6 +215,10 @@ then paste this shortcode anywhere in your page to display grid<br />
 2. screenshot-2
 
 == Changelog ==
+
+	= 2.0.60 =
+    * 2020-05-24 add - addon "Search & Filter" added
+    * 2020-05-24 add - addon "Post/Page Templates" added
 
 	= 2.0.59 =
     * 2020-05-21 add - Elements added for "WCK - Custom Fields and Custom Post Types Creator" plugin

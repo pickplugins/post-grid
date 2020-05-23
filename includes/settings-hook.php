@@ -249,7 +249,43 @@ if(!function_exists('post_grid_settings_content_buy_pro')) {
                     <td><i class="fas fa-check"></i></td>
                     <td><i class="fas fa-check"></i></td>
                 </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Like Button Rating','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Page Views Count','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
 
+                <tr>
+                    <td class="col-features"><?php echo __('Page Visit Counter','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Post Views Counter','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Simple Job Board','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('WP Job Manager','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+
+                <tr>
+                    <td class="col-features"><?php echo __('WCK - Custom Fields Creator','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
                 <tr>
                     <td class="col-features"><?php echo __('Multi Rating','post-grid'); ?> </td>
                     <td><i class="fas fa-check"></i></td>
@@ -270,6 +306,12 @@ if(!function_exists('post_grid_settings_content_buy_pro')) {
                     <td><i class="fas fa-check"></i></td>
                     <td><i class="fas fa-check"></i></td>
                 </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('WP-PostViews','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+
                 <tr>
                     <td class="col-features"><?php echo __('Yasr – Yet Another Stars Rating','post-grid'); ?> </td>
                     <td><i class="fas fa-check"></i></td>
@@ -297,13 +339,33 @@ if(!function_exists('post_grid_settings_content_buy_pro')) {
                     <td><i class="fas fa-check"></i></td>
                 </tr>
 
+                <tr>
+                    <td class="col-features"><?php echo __('CMB2','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Custom Field Suite','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Events Manager','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
 
+                <tr>
+                    <td class="col-features"><?php echo __('Pods','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
 
-
-
-
-
-
+                <tr>
+                    <td class="col-features"><?php echo __('The Events Calendar','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
 
 
 

@@ -59,24 +59,17 @@ Post Grid has many support and input to display your desired post on the grid, y
 * Post order and
 * Order by, order by meta field value,
 * Custom number of posts per page, offset
-* Exclude post by ids, and
+* Exclude post by ids
+* Include post by ids
 * Display post grid based on keyword search.
-
-
-**Layout settings**
-You can customize grid item layout settings, following option avilable to customize
-
-* Grid item width, you can set custom width for grid item based on mobile, tablet and desktop device. you can also set %
- based column, like 30% will gives you 3 column in each row.
-* Grid item height - you can set custom height of grid item, based on device you can set auto height, fixed height or 
-max height.
+* Grid item width, you can set custom width for grid item based on mobile, tablet and desktop device. you can also set % based column, like 30% will gives you 3 column in each row.
+* Grid item height - you can set custom height of grid item, based on device you can set auto height, fixed height or max height.
 * Grid item background color.
 * Grid item padding.
 * Grid item margins.
 * Lazy load - you can enable lazy load to hide grid on page load.
 * Featured image custom size selection.
-* Custom media source - there is 3 different source available in free version. Featured Image, First images from
-content, Empty thumbnail
+* Custom media source - there is 3 different source available in free version. Featured Image, First images from content, Empty thumbnail
 * Masonry style grid also available.
 
 
@@ -151,132 +144,41 @@ content, Empty thumbnail
 **WooCommerce**
 WooCommerce is #1 ecommerce plugin for WordPress and we provide full support to display following elements for products on the post grid.
 
-* Add to cart
-* Full price
-* Sale price
-* Regular price
-* Star rating
-* Text rating
-* Product categories
-* Product tags
-* Product gallery
-* Product SKU
+Add to cart | Full price | Sale price | Regular price | Star rating | Text rating | Product categories | Product tags | Product gallery | Product SKU
 
 
 **Easy Digital Download**
 Easy Digital Download is another best ecommerce for digital products and we provide full support to display following elements for downloads on the post grid.
 
-* Price
-* Variable prices
-* Sales stats
-* Earnings stats
-* Add to cart
-* Text rating
-* download categories
-* download tags
+Price | Variable prices | Sales stats | Earnings stats | Add to cart | Text rating | download categories | download tags
 
 
 **Advanced Custom Fields**
 Advanced Custom Fields is #1 custom field's plugin for WordPress and we added full support to display following meta fields for any post types.
 
-* Text
-* Textarea
-* Number
-* Range
-* Email
-* URL
-* Password
-* Link
-* Post object
-* Page link
-* Taxonomy
-* User
-* Relationship
-* Image
-* File
-* Wysiwyg
-* oEmbed
-* Select
-* Checkbox
-* Radio
-* Button group
-* True / False
-* Date picker
-* Time picker
-* Datetime picker
-* Google Map
-
+Text | Textarea | Number | Range | Email | URL | Password | Link | Post object | Page link | Taxonomy | User | Relationship | Image | File | Wysiwyg | oEmbed | Select | Checkbox | Radio | Button group | True / False | Date picker | Time picker | Datetime picker | Google Map
 
 
 **CMB2**
 CMB2 is another best custom field's plugin for WordPress and we added full support to display following meta fields for any post types.
 
-* Text
-* Email
-* URL
-* Money
-* Textarea
-* Select
-* Checkbox
-* Radio
-* Link
-* File
-* Wysiwyg
-* oEmbed
+Text | Email | URL | Money | Textarea | Select | Checkbox | Radio | Link | File | Wysiwyg | oEmbed
 
 **Custom Field Suite**
 Custom Field Suite is another best custom field's plugin for WordPress and we added full support to display following meta fields for any post types.
 
-* Text
-* Textarea
-* Link
-* Taxonomy
-* User
-* Relationship
-* File
-* Wysiwyg
-* Select
-* True / False
-* Date picker
-
+Text | Textarea | Link | Taxonomy | User | Relationship | File | Wysiwyg | Select | True / False | Date picker
 
 **The Events Calendar**
 The Events Calendar is #1 event's manager plugin for WordPress and we added full support to display following elements for event post type
 
-* Event categories
-* Event tags
-* Event start date
-* Event end date
-* Event URL
-* Event cost
-* Venue address
-* Venue city
-* Venue country
-* Venue province
-* Venue zip
-* Venue phone
-* Venue URL
-* Venue Map
-* Organizer Phone
-* Organizer Website
-* Organizer Email
+Event categories | Event tags | Event start date | Event end date | Event URL | Event cost | Venue address | Venue city | Venue country | Venue province | Venue zip | Venue phone | Venue URL | Venue Map | Organizer Phone | Organizer Website | Organizer Email
 
 
 **Events Manager**
 Events Manager is another best event's manager plugin for WordPress and we added full support to display following elements for event post type
 
-* Event categories
-* Event tags
-* Event start date
-* Event end date
-* Event start time
-* Event end time
-* Event spaces
-* Max Spaces
-* Cut-Off Date
-* Cut-Off time
-
-
+Event categories | Event tags | Event start date | Event end date | Event start time | Event end time | Event spaces | Max Spaces | Cut-Off Date | Cut-Off time
 
 
 

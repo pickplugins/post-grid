@@ -6,33 +6,6 @@
 
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
-add_filter('post_grid_post_options_tabs', 'post_grid_pt_post_options_tabs');
-
-
-function post_grid_pt_post_options_tabs($tabs){
-
-    global $post;
-
-    $post_id = $post->ID;
-    $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
-
-
-    $post_grid_settings_tab = array();
-    $current_tab = isset($post_grid_post_settings['current_tab']) ? $post_grid_post_settings['current_tab'] : 'options';
-
-
-    $tabs[] = array(
-            'id' => 'post_template',
-            'title' => sprintf(__('%s Post template','post-grid'), '<i class="fas fa-newspaper"></i>'),
-            'priority' => 2,
-            'active' => ($current_tab == 'post_template') ? true : false,
-
-        );
-
-
-    return $tabs;
-
-}
 
 add_action('post_grid_post_options_content_options', 'post_grid_post_options_content_options',10, 2);
 

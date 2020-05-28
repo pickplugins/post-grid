@@ -55,6 +55,8 @@ class class_post_grid_functions{
 
     function addons_list(){
 
+        $args['pro'] = array('title' => __('Post Grid Pro','post-grid'), 'thumb'=> post_grid_plugin_url.'assets/admin/images/pro.png', 'item_link' => 'https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/?ref=dashboard');
+
         $args['search'] = array('title' => __('Search & Filter','post-grid'), 'thumb'=> post_grid_plugin_url.'assets/admin/images/search.png', 'item_link' => 'https://github.com/pickplugins/post-grid-search');
         $args['post-templates'] = array('title' => __('Post/Page Templates','post-grid'), 'thumb'=>post_grid_plugin_url.'assets/admin/images/post-templates.png',  'item_link' => 'https://github.com/pickplugins/post-grid-post-templates');
 

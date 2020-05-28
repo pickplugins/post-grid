@@ -86,12 +86,60 @@ if(!function_exists('post_grid_settings_content_help_support')) {
 
         $settings_tabs_field = new settings_tabs_field();
 
+        if (is_plugin_active('post-grid-pro/post-grid-pro.php')){
+            $layouts_pro_url = post_grid_pro_plugin_url.'sample-data/post-grid-layouts.xml';
+        }
+
+        $layouts_free_url = post_grid_plugin_url.'sample-data/post-grid-layouts.xml';
+
+
         ?>
         <div class="section">
             <div class="section-title"><?php echo __('Get support', 'post-grid'); ?></div>
             <p class="description section-description"><?php echo __('Use following to get help and support from our expert team.', 'post-grid'); ?></p>
 
             <?php
+
+            ob_start();
+            ?>
+
+            <p><b>Post Gird</b> provide some ready layouts to get started, please follow the steps bellow to import default layouts.</p>
+
+            <ul>
+                <li>Step - 1: Go to <a href="<?php echo admin_url(); ?>import.php">import</a> menu and install & activate <b>WordPress</b> Importer plugin. click to "Install Now" button to install.</li>
+                <li>Step - 2: Download following xml file by clicking button bellow, save the file on your local machine.</li>
+                <li>Step - 3: Go to importer page <a href="<?php echo admin_url(); ?>import.php?import=wordpress">Import WordPress</a> and chose the downloaded file and then click to <b>Upload file and import</b>.</li>
+                <li>Step - 4: Go to <a href="<?php echo admin_url(); ?>edit.php?post_type=post_grid_layout">Post Grid layouts</a> page to see imported layouts.</li>
+            </ul>
+
+            <p><?php echo __('Download free layouts', 'post-grid'); ?></p>
+            <a class="button" href="<?php echo $layouts_free_url; ?>"><?php echo __('Download XML', 'post-grid'); ?></a>
+
+            <?php
+            if($layouts_pro_url):
+                ?>
+                <p><?php echo __('Download premium layouts', 'post-grid'); ?></p>
+                <a class="button" href="<?php echo $layouts_pro_url; ?>"><?php echo __('Download Pro XML', 'post-grid'); ?></a>
+                <?php
+            endif;
+            ?>
+
+
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'import_layouts',
+                //'parent'		=> '',
+                'title'		=> __('Import layouts','post-grid'),
+                'details'	=> '',
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
 
 
             ob_start();

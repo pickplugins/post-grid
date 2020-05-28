@@ -20,7 +20,6 @@ function post_grid_main_lazy($atts){
     ?>
     <div id="post-grid-lazy-<?php echo $grid_id; ?>" class="post-grid-lazy"><img src="<?php echo $lazy_load_image_src; ?>"/></div>
     <script>
-
         jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
             jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').fadeOut();
             jQuery('#post-grid-<?php echo $grid_id; ?>').fadeIn();
@@ -1089,47 +1088,33 @@ function post_grid_main_scripts($args){
             ?>
         </style>
     <?php endif; ?>
+    <script>
+        <?php
+        if(!empty($custom_js)): ?>
+            <?php echo $custom_js; ?>
+        <?php
+        endif;
 
+        $masonry_load = apply_filters('post_grid_masonry_load', true, $args);
 
-        <script>
-            <?php
-            if(!empty($custom_js)): ?>
-                <?php echo $custom_js; ?>
-            <?php
-            endif;
+        if($masonry_enable=='yes' && $masonry_load == true ):
             ?>
-            <?php
-
-               $masonry_load = apply_filters('post_grid_masonry_load', true, $args);
-
-            if($masonry_enable=='yes' && $masonry_load == true ):
-                ?>
-                jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
-                    var $container = $('#post-grid-<?php echo $grid_id; ?> .grid-items');
-                    $container.masonry({
-                        itemSelector: '.item',
-                        columnWidth: '.item', //as you wish , you can use numeric
-                        isAnimated: true,
-                        isFitWidth: true,
-                        horizontalOrder: true,
-                    });
-                    $container.imagesLoaded().done( function() {
-                        $container.masonry('layout');
-                    });
-                })
-            <?php endif; ?>
-
-        </script>
-
+            jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
+                var $container = $('#post-grid-<?php echo $grid_id; ?> .grid-items');
+                $container.masonry({
+                    itemSelector: '.item',
+                    columnWidth: '.item', //as you wish , you can use numeric
+                    isAnimated: true,
+                    isFitWidth: true,
+                    horizontalOrder: true,
+                });
+                $container.imagesLoaded().done( function() {
+                    $container.masonry('layout');
+                });
+            })
+        <?php endif; ?>
+    </script>
     <?php
-
-
-
-
-    // layout custom css
-
-
-
 
 }
 

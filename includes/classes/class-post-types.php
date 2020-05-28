@@ -98,10 +98,11 @@ class class_post_grid_post_types{
                 'exclude_from_search' 	=> false,
                 'hierarchical' 			=> false,
                 'query_var' 			=> true,
-                'supports' 				=> array( 'title' ),
+                'supports' 				=> array( 'title' ), // 'editor'
                 'show_in_nav_menus' 	=> false,
                 'show_in_menu' 	=> 'edit.php?post_type=post_grid',
                 'menu_icon' => 'dashicons-businessman',
+                //'show_in_rest' => true,
 
             ) )
         );

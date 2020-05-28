@@ -19,7 +19,7 @@ class class_post_grid_settings{
     public function post_grid_menu_init() {
 
         $post_grid_info = get_option('post_grid_info');
-        $import_layouts = isset($post_grid_info['import_layouts']) ? $post_grid_info['import_layouts'] : '';
+        //$import_layouts = isset($post_grid_info['import_layouts']) ? $post_grid_info['import_layouts'] : '';
 
 
         $data_update_status = isset($post_grid_info['data_update_status']) ? $post_grid_info['data_update_status'] : 'pending';
@@ -32,8 +32,8 @@ class class_post_grid_settings{
 
 
 
-        if($import_layouts != 'done')
-            add_submenu_page( 'edit.php?post_type=post_grid', __( 'Import layouts', 'post-grid' ), __( 'Import layouts', 'post-grid' ), 'manage_options', 'import_layouts', array( $this, 'import_layouts' ) );
+        //if($import_layouts != 'done')
+            //add_submenu_page( 'edit.php?post_type=post_grid', __( 'Import layouts', 'post-grid' ), __( 'Import layouts', 'post-grid' ), 'manage_options', 'import_layouts', array( $this, 'import_layouts' ) );
 
         if($data_update_status == 'pending'):
             add_submenu_page('edit.php?post_type=post_grid', __('Data Update', 'post-grid'), __('Data Update', 'post-grid'), 'manage_options', 'data-update', array( $this, 'data_update' ));

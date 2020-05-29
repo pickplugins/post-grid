@@ -295,10 +295,22 @@ jQuery(document).ready(function($){
 
     })
 
+    // radio-img
+
+    $(document).on("click", ".radio-img label", function () {
+        if($(this).hasClass('disabled')){
+            return;
+        }
+
+        $(this).parent().children("label").removeClass("active");
+        $(this).addClass("active");
+
+    })
+
+    $(function() {
+        $('.lazy').Lazy();
+    });
 
 
-
-
- 		
 
 });

@@ -36,6 +36,9 @@ class settings_tabs_field{
         wp_enqueue_script( 'code-editor' );
         wp_enqueue_style( 'code-editor' );
 
+        wp_enqueue_script( 'jquery.lazy' );
+
+
         wp_enqueue_editor();
     }
 
@@ -1581,7 +1584,7 @@ class settings_tabs_field{
                     if(!empty($thumb)):
 
                         ?>
-                        <img  alt="<?php echo $name; ?>" src="<?php echo $thumb; ?>">
+                        <img class="lazy"  alt="<?php echo $name; ?>" data-src="<?php echo $thumb; ?>" src="https://i.imgur.com/72Z8sfU.gif">
                         <div style="padding: 5px;" class="name"><?php echo $name; ?></div>
 
                         <?php
@@ -1603,19 +1606,6 @@ class settings_tabs_field{
             endforeach;
             ?>
         </div>
-        <script>
-            jQuery(document).ready(function($){
-                $(document).on("click", ".radio-img label", function () {
-                    if($(this).hasClass('disabled')){
-                        return;
-                    }
-
-                    $(this).parent().children("label").removeClass("active");
-                    $(this).addClass("active");
-
-                })
-            })
-        </script>
 
         <style type="text/css">
             .radio-img{}

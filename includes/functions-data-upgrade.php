@@ -1232,4 +1232,91 @@ function post_grid_layout_css($layout){
 
 }
 
+add_shortcode('post_grid_import_xml_layouts', 'post_grid_import_xml_layouts');
 
+function post_grid_import_xml_layouts(){
+
+    $response = array();
+    $user_id = get_current_user_id();
+    $source = sanitize_text_field($_POST['source']);
+    //$xml_source = 'http://localhost/wp/wp-content/plugins/post-grid/sample-data/post-grid-layouts.json';
+
+
+
+
+    $json_obj = file_get_contents($source);
+
+    //$xml_json = json_encode($html_obj);
+    $xml_arr = json_decode($json_obj, true);
+
+
+    $items = $xml_arr['rss']['channel']['item'];
+
+    foreach ($items as $item){
+
+        $post_title = isset($item['title']) ? $item['title'] : '';
+        $postmeta = isset($item['postmeta']) ? $item['postmeta'] : array();
+
+        $post_id = wp_insert_post(
+            array(
+                'post_title'    => $post_title,
+                'post_content'  => '',
+                'post_status'   => 'draft',
+                'post_type'   	=> 'post_grid_layout',
+                'post_author'   => $user_id,
+            )
+        );
+
+//            echo '<br>';
+//            echo $post_title. ' Created';
+//            echo '<br>';
+
+
+        foreach ($postmeta as $meta){
+
+            $meta_key = isset($meta['meta_key']['__cdata']) ? $meta['meta_key']['__cdata'] : '';
+            $meta_value = isset($meta['meta_value']['__cdata']) ? $meta['meta_value']['__cdata'] : '';
+
+//            echo '<br>';
+//            //var_dump(unserialize($meta_value));
+//            echo '<br>';
+
+
+
+            if($meta_key == 'layout_options' || $meta_key == 'layout_elements_data' || $meta_key == 'custom_scripts' ){
+                //var_dump($meta_value);
+
+                update_post_meta($post_id, $meta_key, unserialize($meta_value));
+            }
+
+
+        }
+
+
+
+
+    }
+
+
+    $response['success'] = __('Import done','post-grid');
+
+    $post_grid_info = get_option('post_grid_info');
+
+    if(strpos($source, 'post-grid-pro')){
+        $post_grid_info['import_pro_layouts'] = 'done';
+    }else{
+        $post_grid_info['import_layouts'] = 'done';
+    }
+
+
+    update_option('post_grid_info', $post_grid_info);
+
+
+
+    echo json_encode($response);
+    die();
+
+
+}
+
+add_action('wp_ajax_post_grid_import_xml_layouts', 'post_grid_import_xml_layouts');

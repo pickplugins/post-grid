@@ -41,6 +41,48 @@ jQuery(document).ready(function($){
 				}
 			});
 	})
+
+
+	$(document).on('click', '.post-grid-import-layouts', function(event){
+
+		event.preventDefault();
+
+		xml_source = $(this).attr('href');
+		$(this).html('Please wait...');
+
+
+		console.log(xml_source);
+
+		jQuery.ajax(
+			{
+				type: 'POST',
+				context: this,
+				url: post_grid_ajax.post_grid_ajaxurl,
+				data: {"action": "post_grid_import_xml_layouts","source": xml_source },
+				success: function(response) {
+					var data = JSON.parse( response );
+
+					success = data['success'];
+
+					$(this).html(success);
+
+					console.log(success);
+
+				}
+			});
+
+	})
+
+
+
+
+
+
+
+
+
+
+
 });
 
 

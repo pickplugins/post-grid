@@ -88,9 +88,12 @@ if(!function_exists('post_grid_settings_content_help_support')) {
 
         if (is_plugin_active('post-grid-pro/post-grid-pro.php')){
             $layouts_pro_url = post_grid_pro_plugin_url.'sample-data/post-grid-layouts.xml';
+            $layouts_pro_url_json = post_grid_pro_plugin_url.'sample-data/post-grid-layouts.json';
+
         }
 
         $layouts_free_url = post_grid_plugin_url.'sample-data/post-grid-layouts.xml';
+        $layouts_free_url_json = post_grid_plugin_url.'sample-data/post-grid-layouts.json';
 
 
         ?>
@@ -105,6 +108,11 @@ if(!function_exists('post_grid_settings_content_help_support')) {
 
             <p><b>Post Gird</b> provide some ready layouts to get started, please follow the steps bellow to import default layouts.</p>
 
+            <a class="button post-grid-import-layouts"  href="<?php echo esc_url_raw($layouts_free_url_json); ?>"><?php echo __('Import automatically', 'post-grid'); ?></a>
+
+
+            <p>Import manually</p>
+
             <ul>
                 <li>Step - 1: Go to <a href="<?php echo admin_url(); ?>import.php">import</a> menu and install & activate <b>WordPress</b> Importer plugin. click to "Install Now" button to install.</li>
                 <li>Step - 2: Download following xml file by clicking button bellow, save the file on your local machine.</li>
@@ -113,14 +121,17 @@ if(!function_exists('post_grid_settings_content_help_support')) {
             </ul>
 
             <p><?php echo __('Download free layouts', 'post-grid'); ?></p>
-            <a class="button" href="<?php echo $layouts_free_url; ?>"><?php echo __('Download XML', 'post-grid'); ?></a>
+            <a class="button" href="<?php echo esc_url_raw($layouts_free_url); ?>"><?php echo __('Download XML', 'post-grid'); ?></a>
+
 
             <?php
             if($layouts_pro_url):
                 ?>
                 <p><?php echo __('Download premium layouts', 'post-grid'); ?></p>
-                <a class="button" href="<?php echo $layouts_pro_url; ?>"><?php echo __('Download Pro XML', 'post-grid'); ?></a>
-                <?php
+                <a class="button" href="<?php echo esc_url_raw($layouts_pro_url); ?>"><?php echo __('Download Pro XML', 'post-grid'); ?></a>
+                <a class="button post-grid-import-layouts" href="<?php echo esc_url_raw($layouts_pro_url_json); ?>"><?php echo __('Import automatically', 'post-grid'); ?></a>
+
+            <?php
             endif;
             ?>
 
@@ -140,6 +151,35 @@ if(!function_exists('post_grid_settings_content_help_support')) {
             );
 
             $settings_tabs_field->generate_field($args);
+
+
+
+            ob_start();
+            ?>
+            <ul>
+                <li>Step - 1: Go to Tools > <a href="<?php echo admin_url(); ?>export.php">Export</a> menu.</li>
+                <li>Step - 2: Choose "Layouts" post types from list.</li>
+                <li>Step - 3: Then click to "Download Export File' button.</li>
+                <li>Step - 4: Save the file on your local machine.</li>
+            </ul>
+
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'		=> 'export_layouts',
+                //'parent'		=> '',
+                'title'		=> __('Export layouts','post-grid'),
+                'details'	=> '',
+                'type'		=> 'custom_html',
+                'html'		=> $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
 
 
             ob_start();

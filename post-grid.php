@@ -3,7 +3,7 @@
 Plugin Name: Post Grid by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/
 Description: Awesome post grid for query post from any post type and display on grid.
-Version: 2.0.59
+Version: 2.0.60
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -21,7 +21,7 @@ if( !class_exists( 'PostGrid' )){
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid');
-            define('post_grid_version', '2.0.59');
+            define('post_grid_version', '2.0.60');
 
 
 
@@ -31,6 +31,7 @@ if( !class_exists( 'PostGrid' )){
             include('includes/classes/class-shortcodes.php');
             include('includes/classes/class-settings.php');
             include('includes/classes/class-settings-tabs.php');
+            include('includes/classes/class-admin-notices.php');
 
             include('includes/metabox-post-grid-layout-hook.php');
             include('includes/metabox-post-grid-hook.php');
@@ -154,6 +155,9 @@ if( !class_exists( 'PostGrid' )){
             wp_register_script('select2', post_grid_plugin_url.'assets/admin/js/select2.full.js', array('jquery'));
             wp_register_style(  'select2', post_grid_plugin_url . 'assets/admin/css/select2.min.css');
 
+            wp_register_script('jquery.lazy', post_grid_plugin_url.'assets/admin/js/jquery.lazy.js', array('jquery'));
+
+
             wp_enqueue_style('post_grid_skin', post_grid_plugin_url . 'assets/global/css/style.skins.css');
 
             wp_register_style('jquery-ui',  post_grid_plugin_url.'assets/admin/css/jquery-ui.css');
@@ -207,6 +211,12 @@ if( !class_exists( 'PostGrid' )){
 
 
             if ($screen->id == 'post_grid_page_post-grid-settings'){
+
+                wp_enqueue_script('post_grid_admin_js');
+                wp_localize_script('post_grid_admin_js', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
+                wp_enqueue_style('select2');
+                wp_enqueue_script('select2');
+
                 $settings_tabs_field = new settings_tabs_field();
                 $settings_tabs_field->admin_scripts();
             }

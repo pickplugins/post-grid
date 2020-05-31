@@ -167,6 +167,8 @@ if( !class_exists( 'PostGrid' )){
 
             wp_register_script('layout-builder', post_grid_plugin_url.'assets/frontend/js/layout-builder.js', array('jquery'));
 
+            wp_register_style('bootstrap', post_grid_plugin_url.'assets/global/css/bootstrap.min.css');
+            wp_register_style('bootstrap-grid', post_grid_plugin_url.'assets/global/css/bootstrap-grid.css');
 
 
         }
@@ -209,6 +211,7 @@ if( !class_exists( 'PostGrid' )){
                 wp_localize_script('post_grid_admin_js', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
 
                 wp_enqueue_style('post_grid_skin');
+
 
 
                 wp_enqueue_style('select2');

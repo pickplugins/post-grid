@@ -2,36 +2,68 @@ templateData = [
     {
         elType: "container",
         elName: "Container 1",
-        class: "pglb-container container",
+        class: "pglb-container container p-1 m-1",
         id: "id",
         children: [
             {
                 elType: "row",
                 elName: "row 11",
-                class: "class",
+                class: "pglb-row row",
                 id: "id",
                 children: [],
             },
             {
                 elType: "row",
                 elName: "row 12",
-                class: "pglb-row row",
+                class: "pglb-row row p-1 m-1",
                 id: "id",
                 children: [
                     {
                         elType: "column",
                         elName: "column 121",
-                        class: "pglb-column column",
+                        class: "pglb-column col-md-3 p-1 m-1",
                         id: "id",
-                        children: [],
+                        children: [
+                            {
+                                elType: "text",
+                                elName: "Text 122",
+                                class: "pglb-text text",
+                                id: "id",
+                                children: [],
+                            }
+                        ],
                     },
                     {
                         elType: "column",
                         elName: "column 122",
-                        class: "pglb-column column",
+                        class: "pglb-column col-md-3 p-1 m-1",
                         id: "id",
-                        children: [],
-                    }
+                        children: [
+                            {
+                                elType: "text",
+                                elName: "Text 122",
+                                class: "pglb-text text",
+                                id: "id",
+                                children: [],
+                            }
+                        ],
+                    },
+                    {
+                        elType: "column",
+                        elName: "column 122",
+                        class: "pglb-column col-md-3 p-1 m-1",
+                        id: "id",
+                        children: [
+                            {
+                                elType: "text",
+                                elName: "Text 122",
+                                class: "pglb-text text",
+                                id: "id",
+                                children: [],
+                            }
+                        ],
+                    },
+
 
                 ],
             }],
@@ -45,15 +77,23 @@ templateData = [
             {
                 elType: "row",
                 elName: "row 21",
-                class: "pglb-row row",
+                class: "pglb-row row p-1 m-1",
                 id: "id",
                 children: [
                     {
                         elType: "column",
                         elName: "column 211",
-                        class: "pglb-column column",
+                        class: "pglb-column col-md-3 p-1 m-1",
                         id: "id",
-                        children: [],
+                        children: [
+                            {
+                                elType: "text",
+                                elName: "Text 122",
+                                class: "pglb-text text",
+                                id: "id",
+                                children: [],
+                            }
+                        ],
                     }
                 ],
             }
@@ -251,7 +291,9 @@ function generateElHtmlcontainer(element){
     children = element.children;
 
     html += '<div id="'+elId+'" class="'+elClass+'">';
-    html += '{{el_container}}';
+    html += '<div class="containerSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+
+    // html += '{{el_container}}';
     // html += '</div>';
 
 
@@ -270,7 +312,9 @@ function generateElHtmlrow(element){
     children = element.children;
 
     html += '<div id="'+elId+'" class="'+elClass+'">';
-    html += '{{el_row}}';
+    html += '<div class="rowSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+
+    // html += '{{el_row}}';
     // html += '</div>';
 
 
@@ -289,7 +333,8 @@ function generateElHtmlcolumn(element){
     children = element.children;
 
     html += '<div id="'+elId+'" class="'+elClass+'">';
-    html += '{{el_column}}';
+    html += '<div class="columnSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+    // html += '{{el_column}}';
     // html += '</div>';
 
 

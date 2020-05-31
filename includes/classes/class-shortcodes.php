@@ -7,6 +7,7 @@ class class_post_grid_shortcodes{
     public function __construct(){
 		
 		add_shortcode( 'post_grid', array( $this, 'post_grid_new_display' ) );
+        add_shortcode( 'post_grid_layout_builder', array( $this, 'post_grid_layout_builder' ) );
 
     }
 
@@ -47,6 +48,47 @@ class class_post_grid_shortcodes{
 
 
     }
+
+
+    public function post_grid_layout_builder($atts, $content = null ){
+
+        $atts = shortcode_atts(
+            array(
+                'id' => "",
+            ),
+            $atts
+        );
+
+        $atts = apply_filters('post_grid_atts',$atts);
+
+        $grid_id = $atts['id'];
+
+
+
+
+        //wp_reset_postdata();
+
+        ob_start();
+
+        do_action('post_grid_layout_builder', $atts);
+
+
+
+
+        return ob_get_clean();
+
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -108,7 +108,10 @@ if(!function_exists('post_grid_settings_content_help_support')) {
 
             <p><b>Post Gird</b> provide some ready layouts to get started, please follow the steps bellow to import default layouts.</p>
 
+            <p><?php echo __('Import free layouts', 'post-grid'); ?></p>
+
             <a class="button post-grid-import-layouts"  href="<?php echo esc_url_raw($layouts_free_url_json); ?>"><?php echo __('Import automatically', 'post-grid'); ?></a>
+            <a class="button" href="<?php echo esc_url_raw($layouts_free_url); ?>"><?php echo __('Download XML', 'post-grid'); ?></a>
 
 
             <p>Import manually</p>
@@ -120,8 +123,6 @@ if(!function_exists('post_grid_settings_content_help_support')) {
                 <li>Step - 4: Go to <a href="<?php echo admin_url(); ?>edit.php?post_type=post_grid_layout">Post Grid layouts</a> page to see imported layouts.</li>
             </ul>
 
-            <p><?php echo __('Download free layouts', 'post-grid'); ?></p>
-            <a class="button" href="<?php echo esc_url_raw($layouts_free_url); ?>"><?php echo __('Download XML', 'post-grid'); ?></a>
 
 
             <?php

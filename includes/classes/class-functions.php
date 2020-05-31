@@ -59,6 +59,7 @@ class class_post_grid_functions{
 
         $args['search'] = array('title' => __('Search & Filter','post-grid'), 'thumb'=> post_grid_plugin_url.'assets/admin/images/search.png', 'item_link' => 'https://github.com/pickplugins/post-grid-search');
         $args['post-templates'] = array('title' => __('Post/Page Templates','post-grid'), 'thumb'=>post_grid_plugin_url.'assets/admin/images/post-templates.png',  'item_link' => 'https://github.com/pickplugins/post-grid-post-templates');
+        $args['loop-ads'] = array('title' => __('Loop ads','post-grid'), 'thumb'=> post_grid_plugin_url.'assets/admin/images/loop-ads.png', 'item_link' => 'https://github.com/pickplugins/post-grid-loop-ads');
 
 
 

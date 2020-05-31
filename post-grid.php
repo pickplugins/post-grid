@@ -42,6 +42,8 @@ if( !class_exists( 'PostGrid' )){
 
             include('includes/settings-hook.php');
             include('templates/post-grid-hook.php');
+            include('templates/layout-builder-hook.php');
+
             include('includes/post-grid-layout-elements.php');
             include('includes/media-source-options.php');
             include('includes/layout-elements/3rd-party.php');
@@ -57,6 +59,7 @@ if( !class_exists( 'PostGrid' )){
             include('includes/functions-post-grid.php');
             include('includes/functions.php');
             include('includes/shortcodes/shortcode-current_user_id.php');
+            include('includes/duplicate-post.php');
 
 
             add_action('wp_enqueue_scripts', array($this, '_scripts_front'));
@@ -80,6 +83,13 @@ if( !class_exists( 'PostGrid' )){
            new settings_tabs_reviews($args);
 
            //echo $settings_tabs_reviews;
+
+
+            $args = array(
+                'post_types' => array('post_grid', 'post_grid_layout'),
+            );
+
+            new PPduplicatePost($args);
 
         }
 
@@ -154,6 +164,9 @@ if( !class_exists( 'PostGrid' )){
 
             wp_register_style('font-awesome-4', post_grid_plugin_url.'assets/global/css/font-awesome-4.css');
             wp_register_style('font-awesome-5', post_grid_plugin_url.'assets/global/css/font-awesome-5.css');
+
+            wp_register_script('layout-builder', post_grid_plugin_url.'assets/frontend/js/layout-builder.js', array('jquery'));
+
 
 
         }

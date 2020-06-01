@@ -104,7 +104,7 @@ templateData = [
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text",
                                 id: "id",
-                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
@@ -120,7 +120,7 @@ templateData = [
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text",
                                 id: "id",
-                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
@@ -136,7 +136,7 @@ templateData = [
                                 elName: "Text 123",
                                 class: "pglb-text pglb-element text",
                                 id: "id",
-                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
@@ -169,7 +169,7 @@ templateData = [
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text my-3",
                                 id: "id",
-                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
                             {
@@ -177,7 +177,7 @@ templateData = [
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text my-3",
                                 id: "id",
-                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
 
@@ -197,7 +197,7 @@ templateData = [
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text my-3",
                                 id: "id",
-                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
                             {
@@ -205,7 +205,7 @@ templateData = [
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text my-3",
                                 id: "id",
-                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
 
@@ -223,7 +223,7 @@ templateData = [
                                 elName: "Text 123",
                                 class: "pglb-text pglb-element text",
                                 id: "id",
-                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
                             {
@@ -231,7 +231,7 @@ templateData = [
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text my-3",
                                 id: "id",
-                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
 
@@ -272,15 +272,7 @@ elementsData = {
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text",
                                 id: "id",
-                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                children: [],
-                            },
-                            {
-                                elType: "image",
-                                elName: "image 211",
-                                class: "pglb-image p-1 m-1",
-                                id: "id",
-                                src: 'https://i.imgur.com/QheX3ut.jpg',
+                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
                         ],
@@ -306,7 +298,7 @@ elementsData = {
                         elName: "Text 122",
                         class: "pglb-text pglb-element text",
                         id: "id",
-                        innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                        innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                         children: [],
                     }
                 ],
@@ -322,33 +314,46 @@ elementsData = {
             {
                 elType: "text",
                 elName: "Text 122",
-                class: "pglb-text element text",
+                class: "pglb-text pglb-element text",
                 id: "id",
-                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                 children: [],
             }
         ],
     },
-    header:{
-        elType: "header",
-        elName: "header 211",
-        class: "pglb-header p-1 m-1",
+    heading:{
+        elType: "heading",
+        elName: "heading 211",
+        class: "pglb-heading pglb-element p-1 m-1",
         id: "id",
-        innerHtml: 'Header text 1',
+        innerHtml: 'The heading element',
+        children: [],
     },
-    paragraph:{
-        elType: "paragraph",
-        elName: "paragraph 211",
-        class: "pglb-paragraph p-1 m-1",
+    text:{
+        elType: "text",
+        elName: "text 211",
+        class: "pglb-text pglb-element p-1 m-1",
         id: "id",
-        innerHtml: 'Paragraph text 1',
+        innerHtml: 'The paragraph element is the default element type. It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.',
+        children: [],
+    },
+    link:{
+        elType: "link",
+        elName: "link 211",
+        class: "pglb-link pglb-element p-1 m-1",
+        id: "id",
+        innerHtml: 'Link text',
+        target: '_blank',
+        href: '#url',
+        children: [],
     },
     image:{
         elType: "image",
         elName: "image 211",
-        class: "pglb-image p-1 m-1",
+        class: "pglb-image pglb-element p-1 m-1",
         id: "id",
         src: 'https://i.imgur.com/QheX3ut.jpg',
+        children: [],
     },
 
 
@@ -448,9 +453,16 @@ function  elementStartTag( element) {
     else if(elType == 'text'){
         return generateElHtmltext(element);
     }
+    else if(elType == 'heading'){
+        return generateElHtmlheading(element);
+    }
     else if(elType == 'image'){
         return generateElHtmlimage(element);
     }
+    else if(elType == 'link'){
+        return generateElHtmllink(element);
+    }
+
 
 
     else{
@@ -472,8 +484,16 @@ function  elementEndTag( element) {
     else if(elType == 'text'){
         return '</div>';
     }
+    else if(elType == 'heading'){
+        return '</div>';
+    }
 
-
+    else if(elType == 'image'){
+        return '</div>';
+    }
+    else if(elType == 'link'){
+        return '</div>';
+    }
 
     else{
         return "";
@@ -573,7 +593,53 @@ function generateElHtmltext(element){
     html += innerHtml;
     // html += '</div>';
 
+    return html;
 
+}
+function generateElHtmllink(element){
+
+    html = "";
+
+    elId = element.id;
+    elClass = element.class;
+    innerHtml = element.innerHtml;
+    href = element.href;
+    target = element.target;
+
+
+    index = element.index;
+
+    children = element.children;
+
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'">';
+    html += '<div class="elementSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+
+    html += '<a target="'+target+'" href="'+href+'">';
+    html += innerHtml;
+    html += '</a>';
+
+
+    // html += '</div>';
+
+    return html;
+
+}
+function generateElHtmlheading(element){
+
+    html = "";
+
+    elId = element.id;
+    elClass = element.class;
+    innerHtml = element.innerHtml;
+    index = element.index;
+
+    children = element.children;
+
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'">';
+    html += '<div class="elementSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+
+    html += innerHtml;
+    // html += '</div>';
 
     return html;
 
@@ -589,8 +655,9 @@ function generateElHtmlimage(element){
     index = element.index;
     src = element.src;
 
-
-    html += '<img id="'+elId+'" index="'+index+'" class="'+elClass+'" src="'+src+'" />';
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'">';
+    html += '<div class="elementSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<img src="'+src+'" />';
     //html += '{{el_text}}';
     // html += '</div>';
 

@@ -48,6 +48,7 @@ function post_grid_layout_builder(){
                         <div class="toggle-content">
                             <div class="element-list">
 
+                                General content
                             </div>
 
                         </div>
@@ -68,29 +69,13 @@ function post_grid_layout_builder(){
                     <div class="tools-toggle">
                         <div class="toggle-header">General</div>
                         <div class="toggle-content">
-                            <div class="element-list">
-                                <div class="layoutElement">Header</div>
-                                <div class="layoutElement">Paragraph</div>
-                                <div class="layoutElement">Image</div>
-                                <div class="layoutElement">Link</div>
-                            </div>
+
+                            General content
 
                         </div>
 
                     </div>
-                    <div class="tools-toggle">
-                        <div class="toggle-header">General</div>
-                        <div class="toggle-content">
-                            <div class="element-list">
-                                <div class="layoutElement">Header</div>
-                                <div class="layoutElement">Paragraph</div>
-                                <div class="layoutElement">Image</div>
-                                <div class="layoutElement">Link</div>
-                            </div>
 
-                        </div>
-
-                    </div>
                 </div>
 
             </div>
@@ -155,7 +140,7 @@ function post_grid_layout_builder_css(){
 
 
         .pglb .containerSettings span{
-            padding: 4px 7px;
+            padding: 2px 7px;
             border-left: 1px solid #46617b;
             cursor: pointer;
         }
@@ -183,7 +168,7 @@ function post_grid_layout_builder_css(){
 
 
         .pglb .rowSettings span{
-            padding: 4px 7px;
+            padding: 2px 7px;
             border-left: 1px solid #46617b;
             cursor: pointer;
         }
@@ -216,7 +201,7 @@ function post_grid_layout_builder_css(){
 
 
         .pglb .columnSettings span{
-            padding: 4px 7px;
+            padding: 2px 7px;
             border-left: 1px solid #46617b;
             cursor: pointer;
         }
@@ -255,7 +240,7 @@ function post_grid_layout_builder_css(){
 
 
         .pglb .elementSettings span{
-            padding: 4px 7px;
+            padding: 2px 7px;
             border-left: 1px solid #46617b;
             cursor: pointer;
         }

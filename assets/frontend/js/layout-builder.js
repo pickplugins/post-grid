@@ -1,3 +1,85 @@
+
+editorSettings = {
+    activeTab: 0,
+    activeElPath: [],
+}
+
+tabNavs = document.querySelectorAll('.tab-navs .nav');
+tabsContent = document.querySelectorAll('.tab-content');
+toolsToggle = document.querySelectorAll('.tools-toggle');
+
+defaultActiveTab = editorSettings.activeTab;
+
+
+
+i = 0;
+tabNavs.forEach((tabNav) => {
+    content = tabsContent[i]
+
+
+    if(i == defaultActiveTab){
+        tabNav.classList.add("active");
+        content.classList.add("active");
+    }else{
+        tabNav.classList.add("inactive");
+        content.classList.add("inactive");
+    }
+    i++;
+});
+
+// Listen click event for tabs
+
+tabNavs.forEach((nav) => {
+    nav.addEventListener('click', () => {
+
+        dataId = nav.getAttribute('data-id');
+        data_id_nav = 'data-id-'+dataId;
+
+        tabNavs.forEach((navItem) => {
+            navClasses = navItem.className;
+            navItem.classList.remove("active");
+
+            nav.classList.add("active");
+        })
+
+        tabsContent.forEach((tabContent) => {
+            tabContentClasses = tabContent.className;
+
+            if(tabContentClasses.indexOf(data_id_nav) < 0){
+                tabContent.style.display = 'none';
+            }else{
+                tabContent.style.display = 'block';
+            }
+
+        });
+
+    });
+});
+
+
+
+toolsToggle.forEach((toggle) => {
+
+    header = toggle.querySelectorAll('.toggle-header');
+
+
+    header[0].addEventListener('click', () => {
+        toggleClasses = toggle.className;
+
+        if(toggleClasses.indexOf('active') < 0){
+
+            toggle.classList.add("active");
+
+        }else{
+
+            toggle.classList.remove("active");
+        }
+
+    })
+})
+
+
+
 templateData = [
     {
         elType: "container",
@@ -7,13 +89,6 @@ templateData = [
         children: [
             {
                 elType: "row",
-                elName: "row 11",
-                class: "pglb-row row",
-                id: "id",
-                children: [],
-            },
-            {
-                elType: "row",
                 elName: "row 12",
                 class: "pglb-row row p-1 m-1",
                 id: "id",
@@ -21,14 +96,15 @@ templateData = [
                     {
                         elType: "column",
                         elName: "column 121",
-                        class: "pglb-column col-md-3 p-1 m-1",
+                        class: "pglb-column col p-1 m-1",
                         id: "id",
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 122",
-                                class: "pglb-text text",
+                                class: "pglb-text pglb-element text",
                                 id: "id",
+                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
@@ -36,14 +112,15 @@ templateData = [
                     {
                         elType: "column",
                         elName: "column 122",
-                        class: "pglb-column col-md-3 p-1 m-1",
+                        class: "pglb-column col p-1 m-1",
                         id: "id",
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 122",
-                                class: "pglb-text text",
+                                class: "pglb-text pglb-element text",
                                 id: "id",
+                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
@@ -51,14 +128,15 @@ templateData = [
                     {
                         elType: "column",
                         elName: "column 122",
-                        class: "pglb-column col-md-3 p-1 m-1",
+                        class: "pglb-column col p-1 m-1",
                         id: "id",
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 122",
-                                class: "pglb-text text",
+                                elName: "Text 123",
+                                class: "pglb-text pglb-element text",
                                 id: "id",
+                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
@@ -69,6 +147,109 @@ templateData = [
             }],
     },
     {
+        elType: "container",
+        elName: "Container 1",
+        class: "pglb-container container p-1 m-1",
+        id: "id",
+        children: [
+            {
+                elType: "row",
+                elName: "row 12",
+                class: "pglb-row row p-1 m-1",
+                id: "id",
+                children: [
+                    {
+                        elType: "column",
+                        elName: "column 121",
+                        class: "pglb-column col p-1 m-1",
+                        id: "id",
+                        children: [
+                            {
+                                elType: "text",
+                                elName: "Text 122",
+                                class: "pglb-text pglb-element text my-3",
+                                id: "id",
+                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                children: [],
+                            },
+                            {
+                                elType: "text",
+                                elName: "Text 122",
+                                class: "pglb-text pglb-element text my-3",
+                                id: "id",
+                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                children: [],
+                            },
+
+
+
+
+                        ],
+                    },
+                    {
+                        elType: "column",
+                        elName: "column 122",
+                        class: "pglb-column col p-1 m-1",
+                        id: "id",
+                        children: [
+                            {
+                                elType: "text",
+                                elName: "Text 122",
+                                class: "pglb-text pglb-element text my-3",
+                                id: "id",
+                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                children: [],
+                            },
+                            {
+                                elType: "text",
+                                elName: "Text 122",
+                                class: "pglb-text pglb-element text my-3",
+                                id: "id",
+                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                children: [],
+                            },
+
+
+                        ],
+                    },
+                    {
+                        elType: "column",
+                        elName: "column 122",
+                        class: "pglb-column col p-1 m-1",
+                        id: "id",
+                        children: [
+                            {
+                                elType: "text",
+                                elName: "Text 123",
+                                class: "pglb-text pglb-element text",
+                                id: "id",
+                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                children: [],
+                            },
+                            {
+                                elType: "text",
+                                elName: "Text 122",
+                                class: "pglb-text pglb-element text my-3",
+                                id: "id",
+                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                children: [],
+                            },
+
+
+                        ],
+                    },
+
+
+                ],
+            }],
+    },
+
+
+];
+
+
+elementsData = {
+    container:{
         elType: "container",
         elName: "Container 2",
         class: "pglb-container container",
@@ -83,26 +264,95 @@ templateData = [
                     {
                         elType: "column",
                         elName: "column 211",
-                        class: "pglb-column col-md-3 p-1 m-1",
+                        class: "pglb-column col p-1 m-1",
                         id: "id",
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 122",
-                                class: "pglb-text text",
+                                class: "pglb-text pglb-element text",
                                 id: "id",
+                                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
-                            }
+                            },
+                            {
+                                elType: "image",
+                                elName: "image 211",
+                                class: "pglb-image p-1 m-1",
+                                id: "id",
+                                src: 'https://i.imgur.com/QheX3ut.jpg',
+                                children: [],
+                            },
                         ],
                     }
                 ],
             }
         ],
+    },
+    row:{
+        elType: "row",
+        elName: "row 21",
+        class: "pglb-row row p-1 m-1",
+        id: "id",
+        children: [
+            {
+                elType: "column",
+                elName: "column 211",
+                class: "pglb-column col p-1 m-1",
+                id: "id",
+                children: [
+                    {
+                        elType: "text",
+                        elName: "Text 122",
+                        class: "pglb-text pglb-element text",
+                        id: "id",
+                        innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                        children: [],
+                    }
+                ],
+            }
+        ],
+    },
+    column:{
+        elType: "column",
+        elName: "column 211",
+        class: "pglb-column col p-1 m-1",
+        id: "id",
+        children: [
+            {
+                elType: "text",
+                elName: "Text 122",
+                class: "pglb-text element text",
+                id: "id",
+                innerHtml: "The paragraph block is the default block type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                children: [],
+            }
+        ],
+    },
+    header:{
+        elType: "header",
+        elName: "header 211",
+        class: "pglb-header p-1 m-1",
+        id: "id",
+        innerHtml: 'Header text 1',
+    },
+    paragraph:{
+        elType: "paragraph",
+        elName: "paragraph 211",
+        class: "pglb-paragraph p-1 m-1",
+        id: "id",
+        innerHtml: 'Paragraph text 1',
+    },
+    image:{
+        elType: "image",
+        elName: "image 211",
+        class: "pglb-image p-1 m-1",
+        id: "id",
+        src: 'https://i.imgur.com/QheX3ut.jpg',
+    },
 
 
-    }
-
-];
+}
 
 
 
@@ -110,124 +360,73 @@ templateData = [
 
 
 
-
-objTree = [];
-html = '';
 
 
 function elTreeView(data) {
 
-    //console.log(data.length);
-    //console.log(typeof data);
+    html = '';
 
     for (var index in data){
-
-        //console.log( index);
 
         element = data[index];
         elName = element.elName;
         elType = element.elType;
 
-        console.log( elType);
+
+        children = element.children;
+        element.path = index;
+        element.id = elType+"-"+index;
+
+
+        args = {parentPath: [index]};
+
+        console.log(elType+": "+ index);
 
         html += elementStartTag(element);
 
-        children = data[index].children;
-
         if(children.length > 0){
-            generateChildHtml(children);
-            //console.log( children.length);
+            generateChildHtml(children, args);
         }
         html += elementEndTag(element);
 
 
     }
 
+    return html;
 
 
-    // j = 0;
-    // for (var i in data){
-    //
-    //     element = data[i];
-    //     elType = element.elType;
-    //     elName = element.elName;
-    //
-    //     if(typeof elType !== 'undefined' && elType == 'container'){
-    //         objTree.push(elName);
-    //     }
-    //
-    //     if (element !== null && typeof(element) == "object") {
-    //         //elTreeView(data[i]);
-    //     }
-    // }
 }
 
 
 elTreeView(templateData);
-//console.log(objTree);
 
-function generateChildHtml(data){
+function generateChildHtml(data, args){
 
-
+    parentPath = args.parentPath;
 
     for (var index in data){
         element = data[index];
         elName = element.elName;
         elType = element.elType;
+        children = element.children;
 
-        console.log( elName);
+        element.id = elType+"-"+index;
+        element.index = index;
+
+
         html += elementStartTag(element);
 
-        children = data[index].children;
+        if(  children.length > 0){
 
-        if(children.length > 0){
-            generateChildHtml(children);
-            //console.log( children.length);
+            parentPath.push(index);
+            console.log('parentPath '+elType+': '+ parentPath);
+
+            generateChildHtml(children, args);
         }
 
         html += elementEndTag(element);
-
     }
-
 }
-
-//console.log("#############");
-
-// templateTree = [];
-//
-// html = '';
-//
-// function elTemplateView(data) {
-//
-//
-//     j = 0;
-//     for (var i in data){
-//
-//         element = data[i];
-//         elType = element.elType;
-//         elName = element.elName;
-//         children = element.children;
-//
-//         if(typeof elType !== 'undefined'){
-//
-//             //if(elType == 'container'){
-//                 html += generateHtml(elType, element);
-//             //}
-//
-//             templateTree.push(elType);
-//         }
-//
-//         if (element !== null && typeof(element) == "object") {
-//             elTemplateView(data[i]);
-//         }
-//     }
-// }
-//
-//
-// elTemplateView(templateData);
-
-
-//console.log(templateTree);
 
 
 templatePreview = document.getElementById('template-preview');
@@ -249,6 +448,10 @@ function  elementStartTag( element) {
     else if(elType == 'text'){
         return generateElHtmltext(element);
     }
+    else if(elType == 'image'){
+        return generateElHtmlimage(element);
+    }
+
 
     else{
         return "";
@@ -270,6 +473,8 @@ function  elementEndTag( element) {
         return '</div>';
     }
 
+
+
     else{
         return "";
     }
@@ -288,10 +493,13 @@ function generateElHtmlcontainer(element){
 
     elId = element.id;
     elClass = element.class;
+    path = element.path;
     children = element.children;
 
-    html += '<div id="'+elId+'" class="'+elClass+'">';
-    html += '<div class="containerSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+    //console.log(index);
+
+    html += '<div path="['+path+']" id="'+elId+'" class="'+elClass+'">';
+    html += '<div  class="containerSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_container}}';
     // html += '</div>';
@@ -309,9 +517,13 @@ function generateElHtmlrow(element){
 
     elId = element.id;
     elClass = element.class;
+    path = element.path;
+    index = element.index;
+
+
     children = element.children;
 
-    html += '<div id="'+elId+'" class="'+elClass+'">';
+    html += '<div path="['+path+']" index="'+index+'" id="'+elId+'" class="'+elClass+'">';
     html += '<div class="rowSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_row}}';
@@ -331,8 +543,9 @@ function generateElHtmlcolumn(element){
     elId = element.id;
     elClass = element.class;
     children = element.children;
+    index = element.index;
 
-    html += '<div id="'+elId+'" class="'+elClass+'">';
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'">';
     html += '<div class="columnSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
     // html += '{{el_column}}';
     // html += '</div>';
@@ -349,10 +562,15 @@ function generateElHtmltext(element){
 
     elId = element.id;
     elClass = element.class;
+    innerHtml = element.innerHtml;
+    index = element.index;
+
     children = element.children;
 
-    html += '<div id="'+elId+'" class="'+elClass+'">';
-    html += '{{el_text}}';
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'">';
+    html += '<div class="elementSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+
+    html += innerHtml;
     // html += '</div>';
 
 
@@ -360,3 +578,52 @@ function generateElHtmltext(element){
     return html;
 
 }
+
+
+function generateElHtmlimage(element){
+
+    html = "";
+
+    elId = element.id;
+    elClass = element.class;
+    index = element.index;
+    src = element.src;
+
+
+    html += '<img id="'+elId+'" index="'+index+'" class="'+elClass+'" src="'+src+'" />';
+    //html += '{{el_text}}';
+    // html += '</div>';
+
+
+
+    return html;
+
+}
+
+
+
+
+
+
+
+
+function addElement(event, element){
+
+    event.stopPropagation();
+
+    //activeObjectType = editorSettings.activeObjectType;
+
+    console.log('add element');
+
+
+    elType = element.elType;
+
+    console.log(elementsData[elType]);
+
+    templateData.push(elementsData[elType]);
+
+    templatePreview.innerHTML = elTreeView(templateData);
+    //templatePreview.innerHTML = html;
+
+}
+

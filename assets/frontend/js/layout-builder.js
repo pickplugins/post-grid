@@ -1,12 +1,84 @@
 
 editorSettings = {
     activeTab: 0,
-    activeElPath: [],
+    selectedElement: {path:[], elType: ''},
+    selectedPath: '',
+    selectedelType: '',
+
 }
 
 tabNavs = document.querySelectorAll('.tab-navs .nav');
 tabsContent = document.querySelectorAll('.tab-content');
 toolsToggle = document.querySelectorAll('.tools-toggle');
+
+
+function selectElement(currentEl, event){
+
+    //console.log(currentEl.parentNode);
+
+
+    event.stopPropagation();
+
+    el = currentEl;
+
+    elId = el.getAttribute('id');
+    elIndex = el.getAttribute('index');
+    elClass = el.getAttribute('class');
+
+
+    // console.log(elId);
+    // console.log(elIndex);
+    // console.log(elClass);
+
+    var els = [];
+    var Indexes = [elIndex];
+
+
+    while (el) {
+        els.unshift(el);
+        el = el.parentNode;
+
+        elId = el.getAttribute('id');
+        elIndex = el.getAttribute('index');
+        elClass = el.getAttribute('class');
+
+        // console.log(elId);
+        // console.log(elIndex);
+        // console.log(elClass);
+
+        if(elIndex !== null)
+        Indexes.push(elIndex);
+
+
+        if(elId == 'template-preview') break;
+
+
+
+    }
+
+    Indexes.reverse();
+
+
+    var Indexes = Indexes.filter(function (item) {
+        return item != null;
+    });
+
+    console.log(Indexes);
+
+    currentEl.parentNode.parentNode.setAttribute("path", Indexes);
+
+    elType = currentEl.parentNode.parentNode.getAttribute('elType');
+
+
+    editorSettings.selectedPath = Indexes;
+    editorSettings.selectedelType = elType;
+
+    editorSettings.selectedElement.path = Indexes;
+    editorSettings.selectedElement.elType = elType;
+
+
+    console.log(editorSettings);
+}
 
 defaultActiveTab = editorSettings.activeTab;
 
@@ -58,6 +130,8 @@ tabNavs.forEach((nav) => {
 
 
 
+
+
 toolsToggle.forEach((toggle) => {
 
     header = toggle.querySelectorAll('.toggle-header');
@@ -80,30 +154,48 @@ toolsToggle.forEach((toggle) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 templateData = [
     {
         elType: "container",
         elName: "Container 1",
         class: "pglb-container container p-1 m-1",
-        id: "id",
+        id: "",
         children: [
             {
                 elType: "row",
                 elName: "row 12",
                 class: "pglb-row row p-1 m-1",
-                id: "id",
+                id: "",
                 children: [
                     {
                         elType: "column",
                         elName: "column 121",
                         class: "pglb-column col p-1 m-1",
-                        id: "id",
+                        id: "",
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text",
-                                id: "id",
+                                id: "",
                                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -113,13 +205,13 @@ templateData = [
                         elType: "column",
                         elName: "column 122",
                         class: "pglb-column col p-1 m-1",
-                        id: "id",
+                        id: "",
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text",
-                                id: "id",
+                                id: "",
                                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -129,13 +221,13 @@ templateData = [
                         elType: "column",
                         elName: "column 122",
                         class: "pglb-column col p-1 m-1",
-                        id: "id",
+                        id: "",
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 123",
                                 class: "pglb-text pglb-element text",
-                                id: "id",
+                                id: "",
                                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -150,25 +242,25 @@ templateData = [
         elType: "container",
         elName: "Container 1",
         class: "pglb-container container p-1 m-1",
-        id: "id",
+        id: "",
         children: [
             {
                 elType: "row",
                 elName: "row 12",
                 class: "pglb-row row p-1 m-1",
-                id: "id",
+                id: "",
                 children: [
                     {
                         elType: "column",
                         elName: "column 121",
                         class: "pglb-column col p-1 m-1",
-                        id: "id",
+                        id: "",
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text my-3",
-                                id: "id",
+                                id: "",
                                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
@@ -176,7 +268,7 @@ templateData = [
                                 elType: "text",
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text my-3",
-                                id: "id",
+                                id: "",
                                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
@@ -190,13 +282,13 @@ templateData = [
                         elType: "column",
                         elName: "column 122",
                         class: "pglb-column col p-1 m-1",
-                        id: "id",
+                        id: "",
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text my-3",
-                                id: "id",
+                                id: "",
                                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
@@ -204,7 +296,7 @@ templateData = [
                                 elType: "text",
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text my-3",
-                                id: "id",
+                                id: "",
                                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
@@ -216,13 +308,13 @@ templateData = [
                         elType: "column",
                         elName: "column 122",
                         class: "pglb-column col p-1 m-1",
-                        id: "id",
+                        id: "",
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 123",
-                                class: "pglb-text pglb-element text",
-                                id: "id",
+                                class: "pglb-text pglb-element text my-3",
+                                id: "",
                                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
@@ -230,7 +322,7 @@ templateData = [
                                 elType: "text",
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text my-3",
-                                id: "id",
+                                id: "",
                                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
@@ -253,25 +345,25 @@ elementsData = {
         elType: "container",
         elName: "Container 2",
         class: "pglb-container container",
-        id: "id",
+        id: "",
         children: [
             {
                 elType: "row",
                 elName: "row 21",
                 class: "pglb-row row p-1 m-1",
-                id: "id",
+                id: "",
                 children: [
                     {
                         elType: "column",
                         elName: "column 211",
                         class: "pglb-column col p-1 m-1",
-                        id: "id",
+                        id: "",
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 122",
                                 class: "pglb-text pglb-element text",
-                                id: "id",
+                                id: "",
                                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             },
@@ -285,19 +377,19 @@ elementsData = {
         elType: "row",
         elName: "row 21",
         class: "pglb-row row p-1 m-1",
-        id: "id",
+        id: "",
         children: [
             {
                 elType: "column",
                 elName: "column 211",
                 class: "pglb-column col p-1 m-1",
-                id: "id",
+                id: "",
                 children: [
                     {
                         elType: "text",
                         elName: "Text 122",
                         class: "pglb-text pglb-element text",
-                        id: "id",
+                        id: "",
                         innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                         children: [],
                     }
@@ -309,13 +401,13 @@ elementsData = {
         elType: "column",
         elName: "column 211",
         class: "pglb-column col p-1 m-1",
-        id: "id",
+        id: "",
         children: [
             {
                 elType: "text",
                 elName: "Text 122",
                 class: "pglb-text pglb-element text",
-                id: "id",
+                id: "",
                 innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                 children: [],
             }
@@ -325,7 +417,7 @@ elementsData = {
         elType: "heading",
         elName: "heading 211",
         class: "pglb-heading pglb-element p-1 m-1",
-        id: "id",
+        id: "",
         innerHtml: 'The heading element',
         children: [],
     },
@@ -333,7 +425,7 @@ elementsData = {
         elType: "text",
         elName: "text 211",
         class: "pglb-text pglb-element p-1 m-1",
-        id: "id",
+        id: "",
         innerHtml: 'The paragraph element is the default element type. It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.',
         children: [],
     },
@@ -341,7 +433,7 @@ elementsData = {
         elType: "link",
         elName: "link 211",
         class: "pglb-link pglb-element p-1 m-1",
-        id: "id",
+        id: "",
         innerHtml: 'Link text',
         target: '_blank',
         href: '#url',
@@ -351,7 +443,7 @@ elementsData = {
         elType: "image",
         elName: "image 211",
         class: "pglb-image pglb-element p-1 m-1",
-        id: "id",
+        id: "",
         src: 'https://i.imgur.com/QheX3ut.jpg',
         children: [],
     },
@@ -379,13 +471,13 @@ function elTreeView(data) {
 
 
         children = element.children;
-        element.path = index;
+        element.index = index;
         element.id = elType+"-"+index;
 
 
-        args = {parentPath: [index]};
+        args = {};
 
-        console.log(elType+": "+ index);
+        //console.log(elType+": "+ index);
 
         html += elementStartTag(element);
 
@@ -407,15 +499,16 @@ elTreeView(templateData);
 
 function generateChildHtml(data, args){
 
-    parentPath = args.parentPath;
 
     for (var index in data){
         element = data[index];
         elName = element.elName;
         elType = element.elType;
+        id = element.id;
+
         children = element.children;
 
-        element.id = elType+"-"+index;
+        element.id = (id) ? id : '';
         element.index = index;
 
 
@@ -423,8 +516,6 @@ function generateChildHtml(data, args){
 
         if(  children.length > 0){
 
-            parentPath.push(index);
-            console.log('parentPath '+elType+': '+ parentPath);
 
             generateChildHtml(children, args);
         }
@@ -513,13 +604,15 @@ function generateElHtmlcontainer(element){
 
     elId = element.id;
     elClass = element.class;
-    path = element.path;
+    elType = element.elType;
+
+    index = element.index;
     children = element.children;
 
     //console.log(index);
 
-    html += '<div path="['+path+']" id="'+elId+'" class="'+elClass+'">';
-    html += '<div  class="containerSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div  class="containerSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_container}}';
     // html += '</div>';
@@ -537,14 +630,14 @@ function generateElHtmlrow(element){
 
     elId = element.id;
     elClass = element.class;
-    path = element.path;
+    elType = element.elType;
     index = element.index;
 
 
     children = element.children;
 
-    html += '<div path="['+path+']" index="'+index+'" id="'+elId+'" class="'+elClass+'">';
-    html += '<div class="rowSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div class="rowSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_row}}';
     // html += '</div>';
@@ -562,11 +655,12 @@ function generateElHtmlcolumn(element){
 
     elId = element.id;
     elClass = element.class;
+    elType = element.elType;
     children = element.children;
     index = element.index;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'">';
-    html += '<div class="columnSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div class="columnSettings"><span onclick="selectElement(this, event)" ><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
     // html += '{{el_column}}';
     // html += '</div>';
 
@@ -582,13 +676,14 @@ function generateElHtmltext(element){
 
     elId = element.id;
     elClass = element.class;
+    elType = element.elType;
     innerHtml = element.innerHtml;
     index = element.index;
 
     children = element.children;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'">';
-    html += '<div class="elementSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div class="elementSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
 
     html += innerHtml;
     // html += '</div>';
@@ -602,6 +697,7 @@ function generateElHtmllink(element){
 
     elId = element.id;
     elClass = element.class;
+    elType = element.elType;
     innerHtml = element.innerHtml;
     href = element.href;
     target = element.target;
@@ -611,8 +707,8 @@ function generateElHtmllink(element){
 
     children = element.children;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'">';
-    html += '<div class="elementSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div class="elementSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
 
     html += '<a target="'+target+'" href="'+href+'">';
     html += innerHtml;
@@ -630,13 +726,14 @@ function generateElHtmlheading(element){
 
     elId = element.id;
     elClass = element.class;
+    elType = element.elType;
     innerHtml = element.innerHtml;
     index = element.index;
 
     children = element.children;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'">';
-    html += '<div class="elementSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div class="elementSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
 
     html += innerHtml;
     // html += '</div>';
@@ -652,11 +749,12 @@ function generateElHtmlimage(element){
 
     elId = element.id;
     elClass = element.class;
+    elType = element.elType;
     index = element.index;
     src = element.src;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'">';
-    html += '<div class="elementSettings"><span class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div class="elementSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span class="remove"><i class="fas fa-times"></i></span></div>';
     html += '<img src="'+src+'" />';
     //html += '{{el_text}}';
     // html += '</div>';

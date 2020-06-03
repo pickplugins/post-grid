@@ -81,6 +81,7 @@ function post_grid_layout_builder(){
             </div>
         </div>
         <div class="" id="template-preview"></div>
+
     </div>
 
 

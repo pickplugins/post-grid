@@ -11,6 +11,7 @@ tabNavs = document.querySelectorAll('.tab-navs .nav');
 tabsContent = document.querySelectorAll('.tab-content');
 toolsToggle = document.querySelectorAll('.tools-toggle');
 templatePreview = document.getElementById('template-preview');
+codeDisplay = document.getElementById('codeDisplay');
 
 
 function selectElement(currentEl, event){
@@ -269,25 +270,38 @@ function removeElement(currentEl, event){
     //console.log(Indexes);
 
     if(indexCount == 1){
-        delete templateData[Indexes[0]];
+        //delete templateData[Indexes[0]];
+        templateData.splice(Indexes[0], 1);
 
         templatePreview.innerHTML = elTreeView(templateData);
 
     }else{
+
+        console.log(Indexes);
+
         containerIndex = Indexes[0];
+        console.log(containerIndex);
         //delete Indexes[0];
-        Indexes.shift();
+        Indexes.splice(0, 1);
 
         console.log(templateData[containerIndex]);
+        console.log(Indexes);
 
-        //console.log(Indexes[0]);
 
         containerData = deletetemplateData(Indexes, templateData[containerIndex]);
-        templateData[containerIndex] = containerData;
-        templatePreview.innerHTML = elTreeView(templateData);
+
+        //console.log(typeof containerData);
+
+        if(typeof containerData !== 'undefined' && containerData !== null){
+            console.log(containerData);
+
+            templateData[containerIndex] = containerData;
+            templatePreview.innerHTML = elTreeView(templateData);
+        }
+
     }
 
-
+    //console.log(typeof templateData);
 
 
 }
@@ -297,27 +311,27 @@ function removeElement(currentEl, event){
 function  deletetemplateData(index, templateData) {
 
 
-    console.log(index);
-    console.log(templateData);
+    // console.log(index);
+    // console.log(templateData);
+
+
     indexCount = index.length;
 
-    console.log("indexCount");
-    console.log(indexCount);
+    // console.log("indexCount");
+    // console.log(indexCount);
     // console.log(index[0]);
 
 
     if(indexCount > 1){
 
         newData = templateData.children[index[0]];
-        console.log(newData);
+        //console.log(newData);
 
-        delete index[0];
-        var index = index.filter(function (el) {
-            return el != null;
-        });
+        //delete index[0];
+        index.splice(0,1);
 
 
-        console.log(index);
+        //console.log(index);
 
         templateData = deletetemplateData(index, newData);
 
@@ -326,9 +340,12 @@ function  deletetemplateData(index, templateData) {
 
     }else{
 
-        delete templateData.children[index[0]];
+        //delete templateData.children[index[0]];
 
-        console.log(templateData);
+        templateData.children.splice(index[0], 1);
+
+        //console.log(templateData);
+
 
         return templateData;
     }
@@ -457,54 +474,54 @@ templateData = [
         children: [
             {
                 elType: "row",
-                elName: "row 12",
+                elName: "row 11",
                 class: "pglb-row row p-1 m-1",
                 id: "",
                 children: [
                     {
                         elType: "column",
-                        elName: "column 121",
+                        elName: "column 111",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 122",
+                                elName: "Text 111",
                                 class: "pglb-text pglb-element text",
                                 id: "",
-                                innerHtml: "1 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "111 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
                     },
                     {
                         elType: "column",
-                        elName: "column 122",
+                        elName: "column 112",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 122",
+                                elName: "Text 112",
                                 class: "pglb-text pglb-element text",
                                 id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "112 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
                     },
                     {
                         elType: "column",
-                        elName: "column 122",
+                        elName: "column 113",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 123",
+                                elName: "Text 113",
                                 class: "pglb-text pglb-element text",
                                 id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "113 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
@@ -516,157 +533,60 @@ templateData = [
     },
     {
         elType: "container",
-        elName: "Container 1",
+        elName: "Container 2",
         class: "pglb-container container p-1 m-1",
         id: "",
         children: [
             {
                 elType: "row",
-                elName: "row 12",
+                elName: "row 21",
                 class: "pglb-row row p-1 m-1",
                 id: "",
                 children: [
                     {
                         elType: "column",
-                        elName: "column 121",
+                        elName: "column 211",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 122",
-                                class: "pglb-text pglb-element text my-3",
-                                id: "",
-                                innerHtml: "2 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                children: [],
-                            },
-                            {
-                                elType: "text",
-                                elName: "Text 122",
-                                class: "pglb-text pglb-element text my-3",
-                                id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                children: [],
-                            },
-
-
-
-
-                        ],
-                    },
-                    {
-                        elType: "column",
-                        elName: "column 122",
-                        class: "pglb-column col p-1 m-1",
-                        id: "",
-                        children: [
-                            {
-                                elType: "text",
-                                elName: "Text 122",
-                                class: "pglb-text pglb-element text my-3",
-                                id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                children: [],
-                            },
-                            {
-                                elType: "text",
-                                elName: "Text 122",
-                                class: "pglb-text pglb-element text my-3",
-                                id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                children: [],
-                            },
-
-
-                        ],
-                    },
-                    {
-                        elType: "column",
-                        elName: "column 122",
-                        class: "pglb-column col p-1 m-1",
-                        id: "",
-                        children: [
-                            {
-                                elType: "text",
-                                elName: "Text 123",
-                                class: "pglb-text pglb-element text my-3",
-                                id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                children: [],
-                            },
-                            {
-                                elType: "text",
-                                elName: "Text 122",
-                                class: "pglb-text pglb-element text my-3",
-                                id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                children: [],
-                            },
-
-
-                        ],
-                    },
-
-
-                ],
-            }],
-    },
-    {
-        elType: "container",
-        elName: "Container 1",
-        class: "pglb-container container p-1 m-1",
-        id: "",
-        children: [
-            {
-                elType: "row",
-                elName: "row 12",
-                class: "pglb-row row p-1 m-1",
-                id: "",
-                children: [
-                    {
-                        elType: "column",
-                        elName: "column 121",
-                        class: "pglb-column col p-1 m-1",
-                        id: "",
-                        children: [
-                            {
-                                elType: "text",
-                                elName: "Text 122",
+                                elName: "Text 211",
                                 class: "pglb-text pglb-element text",
                                 id: "",
-                                innerHtml: "3 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "211 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
                     },
                     {
                         elType: "column",
-                        elName: "column 122",
+                        elName: "column 212",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 122",
+                                elName: "Text 212",
                                 class: "pglb-text pglb-element text",
                                 id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "212 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
                     },
                     {
                         elType: "column",
-                        elName: "column 122",
+                        elName: "column 213",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 123",
+                                elName: "Text 213",
                                 class: "pglb-text pglb-element text",
                                 id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "213 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
@@ -678,60 +598,60 @@ templateData = [
     },
     {
         elType: "container",
-        elName: "Container 1",
+        elName: "Container 3",
         class: "pglb-container container p-1 m-1",
         id: "",
         children: [
             {
                 elType: "row",
-                elName: "row 12",
+                elName: "row 31",
                 class: "pglb-row row p-1 m-1",
                 id: "",
                 children: [
                     {
                         elType: "column",
-                        elName: "column 121",
+                        elName: "column 311",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 122",
+                                elName: "Text 311",
                                 class: "pglb-text pglb-element text",
                                 id: "",
-                                innerHtml: " 4 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "311 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
                     },
                     {
                         elType: "column",
-                        elName: "column 122",
+                        elName: "column 312",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 122",
+                                elName: "Text 312",
                                 class: "pglb-text pglb-element text",
                                 id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "312 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
                     },
                     {
                         elType: "column",
-                        elName: "column 122",
+                        elName: "column 313",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 123",
+                                elName: "Text 313",
                                 class: "pglb-text pglb-element text",
                                 id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                innerHtml: "313 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
                         ],
@@ -875,8 +795,8 @@ function elTreeView(data) {
     for (var index in data){
 
         element = data[index];
-        elName = element.elName;
-        elType = element.elType;
+        elName = (element.elName !== 'undefined') ? element.elName : '';
+        elType = (element.elType) ? element.elType : '';
 
 
         children = element.children;
@@ -897,6 +817,8 @@ function elTreeView(data) {
 
 
     }
+
+
 
     return html;
 
@@ -939,7 +861,7 @@ templatePreview.innerHTML = html;
 
 
 
-function  elementStartTag( element) {
+    function  elementStartTag( element) {
 
     if(elType == 'container'){
         return generateElHtmlcontainer(element);

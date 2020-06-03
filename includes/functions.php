@@ -474,6 +474,8 @@ function post_grid_media($post_id, $args ){
 
     $html_thumb = '';
 
+    ob_start();
+
 
     if($source_id == 'featured_image'){
 
@@ -634,10 +636,14 @@ function post_grid_media($post_id, $args ){
         }
 
 
+    }else{
+        do_action('post_grid_media', $post_id, $args);
     }
 
 
+    echo $html_thumb;
 
+    $html_thumb = ob_get_clean();
 
     return $html_thumb;
 

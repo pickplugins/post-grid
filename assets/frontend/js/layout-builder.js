@@ -113,14 +113,7 @@ templateData = [
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         children: [
-                            {
-                                elType: "text",
-                                elName: "Text 111",
-                                class: "pglb-text pglb-element text",
-                                id: "",
-                                innerHtml: "111 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                children: [],
-                            }
+
                         ],
                     },
                     {
@@ -306,72 +299,21 @@ elementsData = {
         elName: "Container 2",
         class: "pglb-container container",
         id: "",
-        children: [
-            {
-                elType: "row",
-                elName: "row 21",
-                class: "pglb-row row p-1 m-1",
-                id: "",
-                children: [
-                    {
-                        elType: "column",
-                        elName: "column 211",
-                        class: "pglb-column col p-1 m-1",
-                        id: "",
-                        children: [
-                            {
-                                elType: "text",
-                                elName: "Text 122",
-                                class: "pglb-text pglb-element text",
-                                id: "",
-                                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                children: [],
-                            },
-                        ],
-                    }
-                ],
-            }
-        ],
+        children: [],
     },
     row:{
         elType: "row",
         elName: "row 21",
         class: "pglb-row row p-1 m-1",
         id: "",
-        children: [
-            {
-                elType: "column",
-                elName: "column 211",
-                class: "pglb-column col p-1 m-1",
-                id: "",
-                children: [
-                    {
-                        elType: "text",
-                        elName: "Text 122",
-                        class: "pglb-text pglb-element text",
-                        id: "",
-                        innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                        children: [],
-                    }
-                ],
-            }
-        ],
+        children: [],
     },
     column:{
         elType: "column",
         elName: "column 211",
         class: "pglb-column col p-1 m-1",
         id: "",
-        children: [
-            {
-                elType: "text",
-                elName: "Text 122",
-                class: "pglb-text pglb-element text",
-                id: "",
-                innerHtml: "The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                children: [],
-            }
-        ],
+        children: [],
     },
     heading:{
         elType: "heading",
@@ -390,6 +332,33 @@ elementsData = {
         innerHtml: 'The paragraph element is the default element type. It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.',
         children: [],
     },
+
+    emptyRow:{
+        elType: "emptyRow",
+        elName: "empty 211",
+        class: "pglb-empty text-center w-100 p-1 m-1",
+        id: "",
+        innerHtml: '<i class="far fa-plus-square"></i> Add Row',
+        children: [],
+    },
+    emptyColumn:{
+        elType: "emptyColumn",
+        elName: "empty 211",
+        class: "pglb-empty text-center w-100 p-1 m-1",
+        id: "",
+        innerHtml: '<i class="far fa-plus-square"></i> Add Column',
+        children: [],
+    },
+
+    empty:{
+        elType: "empty",
+        elName: "empty 211",
+        class: "pglb-empty text-center w-100 p-1 m-1",
+        id: "",
+        innerHtml: '<i class="far fa-plus-square"></i> Add Elements',
+        children: [],
+    },
+
     link:{
         elType: "link",
         elName: "link 211",
@@ -479,6 +448,8 @@ function generateChildHtml(data, args){
             generateChildHtml(children, args);
         }
 
+
+
         html += elementEndTag(element);
     }
 }
@@ -514,8 +485,12 @@ function  elementStartTag( element) {
     else if(elType == 'empty'){
         return generateElHtmlempty(element);
     }
-
-
+    else if(elType == 'emptyColumn'){
+        return generateElHtmlemptyColumn(element);
+    }
+    else if(elType == 'emptyRow'){
+        return generateElHtmlemptyRow(element);
+    }
     else{
         return "";
     }
@@ -548,6 +523,12 @@ function  elementEndTag( element) {
     else if(elType == 'empty'){
         return '</div>';
     }
+    else if(elType == 'emptyColumn'){
+        return '</div>';
+    }
+    else if(elType == 'emptyRow'){
+        return '</div>';
+    }
 
 
     else{
@@ -571,7 +552,7 @@ function generateElHtmlcontainer(element){
     elType = element.elType;
 
     index = element.index;
-    children = element.children;
+    children = (children.length != 0) ? element.children : [elementsData.emptyRow];
 
     //console.log(index);
 
@@ -597,8 +578,7 @@ function generateElHtmlrow(element){
     elType = element.elType;
     index = element.index;
 
-
-    children = element.children;
+    children = (children.length != 0) ? element.children : [elementsData.emptyColumn];
 
     html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
     html += '<div class="rowSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
@@ -620,13 +600,26 @@ function generateElHtmlcolumn(element){
     elId = element.id;
     elClass = element.class;
     elType = element.elType;
-    children = element.children;
+    children = (children.length != 0) ? element.children : [elementsData.empty];
+
+
+
+
     index = element.index;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
     html += '<div class="columnSettings"><span onclick="selectElement(this, event)" ><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+
+    if(children.length == 0){
+        html += '<i class="far fa-plus-square"></i>';
+    }
+
+
     // html += '{{el_column}}';
     // html += '</div>';
+
+
+
 
 
 
@@ -669,12 +662,59 @@ function generateElHtmlempty(element){
     children = element.children;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-
-    html += '<i class="far fa-plus-square"></i>';
+    html += innerHtml;
     // html += '</div>';
 
     return html;
 }
+
+
+function generateElHtmlemptyRow(element){
+
+    html = "";
+
+    elId = element.id;
+    elClass = element.class;
+    elType = element.elType;
+    innerHtml = element.innerHtml;
+    index = element.index;
+
+    children = element.children;
+
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+    html += innerHtml;
+    // html += '</div>';
+
+    return html;
+}
+
+
+function generateElHtmlemptyColumn(element){
+
+    html = "";
+
+    elId = element.id;
+    elClass = element.class;
+    elType = element.elType;
+    innerHtml = element.innerHtml;
+    index = element.index;
+
+    children = element.children;
+
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+    html += innerHtml;
+    // html += '</div>';
+
+    return html;
+}
+
+
+
+
+
+
+
+
 
 function generateElHtmllink(element){
 

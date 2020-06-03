@@ -2511,7 +2511,6 @@ function post_grid_layout_element_option_media($parameters){
             'first_image'=>__('First images from content','post-grid'),
             'empty_thumb'=>__('Empty thumbnail','post-grid'),
             'siteorigin_first_image'=>__('SiteOrigin first image','post-grid'),
-
         )
     );
 

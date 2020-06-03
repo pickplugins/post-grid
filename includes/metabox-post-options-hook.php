@@ -27,7 +27,7 @@ function post_grid_post_options_content_options($tab, $post_id){
     $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
 
     $post_skin = !empty($post_grid_post_settings['post_skin']) ? $post_grid_post_settings['post_skin'] : 'flat';
-    $custom_thumb_source = !empty($post_grid_post_settings['custom_thumb_source']) ? $post_grid_post_settings['custom_thumb_source'] : post_grid_plugin_url.'assets/frontend/images/placeholder.png';
+    $custom_thumb_source = !empty($post_grid_post_settings['custom_thumb_source']) ? $post_grid_post_settings['custom_thumb_source'] : '';
     $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : '';
 
 

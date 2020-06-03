@@ -7,7 +7,7 @@ add_action('post_grid_layout_builder', 'post_grid_layout_builder');
 
 function post_grid_layout_builder(){
     wp_enqueue_script('layout-builder');
-    wp_enqueue_style('bootstrap');
+    //wp_enqueue_style('bootstrap');
     //wp_enqueue_style('bootstrap-grid');
 
 

@@ -476,8 +476,6 @@ function generateChildHtml(data, args){
         html += elementStartTag(element);
 
         if(  children.length > 0){
-
-
             generateChildHtml(children, args);
         }
 
@@ -513,7 +511,9 @@ function  elementStartTag( element) {
     else if(elType == 'link'){
         return generateElHtmllink(element);
     }
-
+    else if(elType == 'empty'){
+        return generateElHtmlempty(element);
+    }
 
 
     else{
@@ -545,6 +545,10 @@ function  elementEndTag( element) {
     else if(elType == 'link'){
         return '</div>';
     }
+    else if(elType == 'empty'){
+        return '</div>';
+    }
+
 
     else{
         return "";
@@ -649,8 +653,29 @@ function generateElHtmltext(element){
     // html += '</div>';
 
     return html;
-
 }
+
+
+function generateElHtmlempty(element){
+
+    html = "";
+
+    elId = element.id;
+    elClass = element.class;
+    elType = element.elType;
+    innerHtml = element.innerHtml;
+    index = element.index;
+
+    children = element.children;
+
+    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+
+    html += '<i class="far fa-plus-square"></i>';
+    // html += '</div>';
+
+    return html;
+}
+
 function generateElHtmllink(element){
 
     html = "";

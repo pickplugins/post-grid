@@ -90,7 +90,10 @@ if ( is_plugin_active( 'simple-job-board/simple-job-board.php' ) ) {
     require_once( post_grid_plugin_dir . 'includes/layout-elements/simple-job-board/layout-elements.php');
 }
 
+if ( is_plugin_active( 'site-reviews/site-reviews.php' ) ) {
 
+    require_once( post_grid_plugin_dir . 'includes/layout-elements/site-reviews/layout-elements.php');
+}
 
 
 

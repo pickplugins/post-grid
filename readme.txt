@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.61
+	Stable tag: 2.0.62
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -215,6 +215,10 @@ then paste this shortcode anywhere in your page to display grid<br />
 2. screenshot-2
 
 == Changelog ==
+
+	= 2.0.62 =
+    * 2020-06-03 fix - elements wrapper custom css class issue fixed.
+    * 2020-06-03 add - Element added for "Site Reviews" plugin
 
 	= 2.0.61 =
     * 2020-05-29 add - reviews request popup box added.

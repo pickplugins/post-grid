@@ -284,6 +284,7 @@ function post_grid_layout_element_option_custom_text($parameters){
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
     $text = isset($element_data['text']) ? $element_data['text'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
@@ -307,6 +308,21 @@ function post_grid_layout_element_option_custom_text($parameters){
         <div class="element-options options">
 
             <?php
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[custom_text]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             $args = array(
                 'id'		=> 'text',
@@ -533,6 +549,7 @@ function post_grid_layout_element_option_title($parameters){
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
@@ -560,6 +577,21 @@ function post_grid_layout_element_option_title($parameters){
         <div class="element-options options">
 
             <?php
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[title]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             $args = array(
                 'id'		=> 'link_to',
@@ -868,6 +900,7 @@ function post_grid_layout_element_option_title_link($parameters){
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $color = isset($element_data['color']) ? $element_data['color'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
@@ -896,6 +929,19 @@ function post_grid_layout_element_option_title_link($parameters){
 
             <?php
 
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[title_link]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'link_to',
@@ -1199,6 +1245,7 @@ function post_grid_layout_element_option_content($parameters){
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
@@ -1219,6 +1266,19 @@ function post_grid_layout_element_option_content($parameters){
 
             <?php
 
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[content]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'font_family',
@@ -1367,6 +1427,8 @@ function post_grid_layout_element_option_excerpt($parameters){
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
+
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $font_family = isset($element_data['font_family']) ? $element_data['font_family'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
@@ -1394,6 +1456,20 @@ function post_grid_layout_element_option_excerpt($parameters){
         <div class="element-options options">
 
             <?php
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[excerpt]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'excerpt_source',
@@ -1734,6 +1810,7 @@ function post_grid_layout_element_option_excerpt_read_more($parameters){
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
     $excerpt_source = isset($element_data['excerpt_source']) ? $element_data['excerpt_source'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : 0;
@@ -1763,9 +1840,24 @@ function post_grid_layout_element_option_excerpt_read_more($parameters){
             <?php
 
             $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[excerpt_read_more]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+            $args = array(
                 'id'		=> 'excerpt_source',
                 'css_id'		=> $element_index.'_excerpt_source',
-                'parent' => $input_name.'[excerpt]',
+                'parent' => $input_name.'[excerpt_read_more]',
                 'title'		=> __('Excerpt source','post-grid'),
                 'details'	=> __('Choose excerpt source.','post-grid'),
                 'type'		=> 'select',
@@ -2085,6 +2177,7 @@ function post_grid_layout_element_option_read_more($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
@@ -2114,6 +2207,21 @@ function post_grid_layout_element_option_read_more($parameters){
         <div class="element-options options">
 
             <?php
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[read_more]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             $args = array(
                 'id'		=> 'read_more_text',
@@ -2391,6 +2499,7 @@ function post_grid_layout_element_option_media($parameters){
     $media_source = isset($element_data['media_source']) ? $element_data['media_source'] : array();
     $padding = isset($element_data['padding']) ? $element_data['padding'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
@@ -2416,6 +2525,22 @@ function post_grid_layout_element_option_media($parameters){
         </div>
         <div class="element-options options">
             <?php
+
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[media]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'media-css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             ob_start();
 
@@ -2835,6 +2960,7 @@ function post_grid_layout_element_option_thumb($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $thumb_size = isset($element_data['thumb_size']) ? $element_data['thumb_size'] : '';
     $default_thumb_src = isset($element_data['default_thumb_src']) ? $element_data['default_thumb_src'] : '';
@@ -2864,6 +2990,21 @@ function post_grid_layout_element_option_thumb($parameters){
         <div class="element-options options">
 
             <?php
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[thumb]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             $thumbnail_sizes = array();
             $thumbnail_sizes['full'] = __('Full', '');
@@ -3176,6 +3317,7 @@ function post_grid_layout_element_option_thumb_link($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $thumb_size = isset($element_data['thumb_size']) ? $element_data['thumb_size'] : '';
     $default_thumb_src = isset($element_data['default_thumb_src']) ? $element_data['default_thumb_src'] : '';
@@ -3205,6 +3347,20 @@ function post_grid_layout_element_option_thumb_link($parameters){
         <div class="element-options options">
 
             <?php
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[thumb_link]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             $thumbnail_sizes = array();
             $thumbnail_sizes['full'] = __('Full', '');
@@ -3522,6 +3678,7 @@ function post_grid_layout_element_option_post_date($parameters){
 
     $date_format = isset($element_data['date_format']) ? $element_data['date_format'] : '';
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
 
@@ -3546,6 +3703,21 @@ function post_grid_layout_element_option_post_date($parameters){
         <div class="element-options options">
 
             <?php
+
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[post_date]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'date_format',
@@ -3834,6 +4006,7 @@ function post_grid_layout_element_option_author($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
@@ -3858,6 +4031,19 @@ function post_grid_layout_element_option_author($parameters){
 
             <?php
 
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[author]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'link_to',
@@ -4127,6 +4313,7 @@ function post_grid_layout_element_option_author_link($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
@@ -4151,6 +4338,21 @@ function post_grid_layout_element_option_author_link($parameters){
         <div class="element-options options">
 
             <?php
+
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[author_link]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'link_to',
@@ -4413,6 +4615,7 @@ function post_grid_layout_element_option_categories($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $max_count = isset($element_data['max_count']) ? $element_data['max_count'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
@@ -4443,6 +4646,22 @@ function post_grid_layout_element_option_categories($parameters){
         <div class="element-options options">
 
             <?php
+
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[categories]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             $args = array(
                 'id'		=> 'max_count',
@@ -4755,6 +4974,7 @@ function post_grid_layout_element_option_tags($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $max_count = isset($element_data['max_count']) ? $element_data['max_count'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
@@ -4782,7 +5002,19 @@ function post_grid_layout_element_option_tags($parameters){
         <div class="element-options options">
 
             <?php
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[tags]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
 
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'max_count',
@@ -5059,6 +5291,7 @@ function post_grid_layout_element_option_comments_count($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $wrapper_html = isset($element_data['wrapper_html']) ? $element_data['wrapper_html'] : '';
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
@@ -5081,6 +5314,21 @@ function post_grid_layout_element_option_comments_count($parameters){
         <div class="element-options options">
 
             <?php
+
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[comments_count]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
 
             $args = array(
                 'id'		=> 'wrapper_html',
@@ -5333,6 +5581,7 @@ function post_grid_layout_element_option_share_button($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $icon_color = isset($element_data['icon_color']) ? $element_data['icon_color'] : '';
@@ -5354,8 +5603,19 @@ function post_grid_layout_element_option_share_button($parameters){
             <?php
 
 
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[share_button]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
 
-
+            $settings_tabs_field->generate_field($args);
 
 
             $args = array(
@@ -5567,6 +5827,7 @@ function post_grid_layout_element_option_hr($parameters){
     $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $background_color = isset($element_data['background_color']) ? $element_data['background_color'] : '';
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
@@ -5587,8 +5848,19 @@ function post_grid_layout_element_option_hr($parameters){
 
             <?php
 
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[hr]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
 
-
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'		=> 'background_color',
@@ -5760,6 +6032,7 @@ function post_grid_layout_element_option_five_star($parameters){
     $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
     $element_index = isset($parameters['index']) ? $parameters['index'] : '';
 
+    $custom_class = isset($element_data['custom_class']) ? $element_data['custom_class'] : '';
 
     $font_size = isset($element_data['font_size']) ? $element_data['font_size'] : '';
     $color = isset($element_data['color']) ? $element_data['color'] : '';
@@ -5782,8 +6055,19 @@ function post_grid_layout_element_option_five_star($parameters){
 
             <?php
 
+            $args = array(
+                'id'		=> 'custom_class',
+                'css_id'		=> $element_index.'_custom_class',
+                'parent' => $input_name.'[five_star]',
+                'title'		=> __('Wrapper custom class','post-grid'),
+                'details'	=> __('Set custom class.','post-grid'),
+                'type'		=> 'text',
+                'value'		=> $custom_class,
+                'default'		=> '',
+                'placeholder'		=> 'css-class',
+            );
 
-
+            $settings_tabs_field->generate_field($args);
             $args = array(
                 'id'		=> 'color',
                 'css_id'		=> $element_index.'_color',

@@ -14,363 +14,6 @@ templatePreview = document.getElementById('template-preview');
 codeDisplay = document.getElementById('codeDisplay');
 
 
-function selectElement(currentEl, event){
-
-    //console.log(currentEl.parentNode);
-
-
-    event.stopPropagation();
-
-    el = currentEl;
-
-    elId = el.getAttribute('id');
-    elIndex = el.getAttribute('index');
-    elClass = el.getAttribute('class');
-
-
-    // console.log(elId);
-    // console.log(elIndex);
-    // console.log(elClass);
-
-    var els = [];
-    var Indexes = [elIndex];
-
-
-    while (el) {
-        els.unshift(el);
-        el = el.parentNode;
-
-        elId = el.getAttribute('id');
-        elIndex = el.getAttribute('index');
-        elClass = el.getAttribute('class');
-
-        // console.log(elId);
-        // console.log(elIndex);
-        // console.log(elClass);
-
-        if(elIndex !== null)
-        Indexes.push(elIndex);
-
-
-        if(elId == 'template-preview') break;
-
-
-
-    }
-
-    Indexes.reverse();
-
-
-    var Indexes = Indexes.filter(function (item) {
-        return item != null;
-    });
-
-    console.log(Indexes);
-
-    currentEl.parentNode.parentNode.setAttribute("path", Indexes);
-    elType = currentEl.parentNode.parentNode.getAttribute('elType');
-
-
-    editorSettings.selectedPath = Indexes;
-    editorSettings.selectedelType = elType;
-
-    editorSettings.selectedElement.path = Indexes;
-    editorSettings.selectedElement.elType = elType;
-
-
-    console.log(editorSettings);
-}
-
-
-function addElement(event, element ){
-
-    event.stopPropagation();
-
-    var elType = element.elType;
-
-    //console.log(element);
-    //console.log(elementsData[elType]);
-
-
-
-
-
-    selectedElement = editorSettings.selectedElement;
-    //console.log(selectedElement.path);
-
-
-    selectedelType = (selectedElement.elType) ? selectedElement.elType : 'container';
-    selectedPath = (selectedElement.path.length != 0) ? selectedElement.path : ["0"];
-
-
-    // console.log('elType: '+elType);
-    //
-    // console.log('selectedelType: '+selectedelType);
-    // console.log('selectedPath: ');
-    // console.log(selectedPath);
-
-
-    // console.log(templateData);
-    // console.log(templateData);
-
-    if(selectedelType == 'container'){
-
-        if(elType == 'container'){
-            containerIndex = selectedPath[0];
-            templateData.push(elementsData[elType]);
-
-        }else if(elType == 'row'){
-            containerIndex = selectedPath[0];
-            rowIndex = selectedPath[1];
-
-            //console.log(templateData[containerIndex]);
-
-            templateData[containerIndex].children.push(elementsData[elType]);
-
-
-            //templateData.push(elementsData[elType]);
-        }else if(elType == 'column'){
-            containerIndex = selectedPath[0];
-            rowIndex = selectedPath[1];
-            columnIndex = selectedPath[2];
-
-            templateData[containerIndex].children[rowIndex].children.push(elementsData[elType]);
-
-            //templateData.push(elementsData[elType]);
-        }else {
-            containerIndex = selectedPath[0];
-            rowIndex = selectedPath[1];
-            columnIndex = selectedPath[2];
-            index = selectedPath[3];
-
-            templateData.push(elementsData[elType]);
-
-        }
-
-
-
-
-    }else if(selectedelType == 'row'){
-
-        if(elType == 'column'){
-            containerIndex = selectedPath[0];
-            rowIndex = selectedPath[1];
-            columnIndex = selectedPath[2];
-
-            templateData[containerIndex].children[rowIndex].children.push(elementsData[elType]);
-
-            //templateData.push(elementsData[elType]);
-        }
-
-    }else if(selectedelType == 'column'){
-
-
-        if(elType == 'container'){
-            containerIndex = selectedPath[0];
-            templateData.push(elementsData[elType]);
-
-        }else if(elType == 'row'){
-            containerIndex = selectedPath[0];
-            rowIndex = selectedPath[1];
-
-            //console.log(templateData[containerIndex]);
-
-            templateData[containerIndex].children.push(elementsData[elType]);
-
-
-            //templateData.push(elementsData[elType]);
-        }else if(elType == 'column'){
-            containerIndex = selectedPath[0];
-            rowIndex = selectedPath[1];
-            columnIndex = selectedPath[2];
-
-            templateData[containerIndex].children[rowIndex].children.push(elementsData[elType]);
-
-            //templateData.push(elementsData[elType]);
-        }else {
-            containerIndex = selectedPath[0];
-            rowIndex = selectedPath[1];
-            columnIndex = selectedPath[2];
-            index = selectedPath[3];
-
-            templateData[containerIndex].children[rowIndex].children[columnIndex].children.push(elementsData[elType]);
-
-
-            //templateData.push(elementsData[elType]);
-
-        }
-
-    }else{
-
-    }
-
-    //console.log(templateData);
-    templatePreview.innerHTML = elTreeView(templateData);
-
-
-
-}
-
-
-
-function removeElement(currentEl, event){
-
-    //console.log(currentEl.parentNode);
-
-
-    event.stopPropagation();
-
-    el = currentEl;
-
-    elId = el.getAttribute('id');
-    elIndex = el.getAttribute('index');
-    elClass = el.getAttribute('class');
-
-
-    // console.log(elId);
-    // console.log(elIndex);
-    // console.log(elClass);
-
-    var els = [];
-    var Indexes = [elIndex];
-
-
-    while (el) {
-        els.unshift(el);
-        el = el.parentNode;
-
-        elId = el.getAttribute('id');
-        elIndex = el.getAttribute('index');
-        elClass = el.getAttribute('class');
-
-        // console.log(elId);
-        // console.log(elIndex);
-        // console.log(elClass);
-
-        if(elIndex !== null)
-            Indexes.push(elIndex);
-
-
-        if(elId == 'template-preview') break;
-
-
-
-    }
-
-    Indexes.reverse();
-
-
-    var Indexes = Indexes.filter(function (item) {
-        return item != null;
-    });
-
-
-    indexCount = Indexes.length;
-
-    //console.log(Indexes);
-
-    if(indexCount == 1){
-        //delete templateData[Indexes[0]];
-        templateData.splice(Indexes[0], 1);
-
-        templatePreview.innerHTML = elTreeView(templateData);
-
-    }else{
-
-        console.log(Indexes);
-
-        containerIndex = Indexes[0];
-        console.log(containerIndex);
-        //delete Indexes[0];
-        Indexes.splice(0, 1);
-
-        console.log(templateData[containerIndex]);
-        console.log(Indexes);
-
-
-        containerData = deletetemplateData(Indexes, templateData[containerIndex]);
-
-        //console.log(typeof containerData);
-
-        if(typeof containerData !== 'undefined' && containerData !== null){
-            console.log(containerData);
-
-            templateData[containerIndex] = containerData;
-            templatePreview.innerHTML = elTreeView(templateData);
-        }
-
-    }
-
-    //console.log(typeof templateData);
-
-
-}
-
-
-
-function  deletetemplateData(index, templateData) {
-
-
-    // console.log(index);
-    // console.log(templateData);
-
-
-    indexCount = index.length;
-
-    // console.log("indexCount");
-    // console.log(indexCount);
-    // console.log(index[0]);
-
-
-    if(indexCount > 1){
-
-        newData = templateData.children[index[0]];
-        //console.log(newData);
-
-        //delete index[0];
-        index.splice(0,1);
-
-
-        //console.log(index);
-
-        templateData = deletetemplateData(index, newData);
-
-
-
-
-    }else{
-
-        //delete templateData.children[index[0]];
-
-        templateData.children.splice(index[0], 1);
-
-        //console.log(templateData);
-
-
-        return templateData;
-    }
-
-
-
-    //console.log(templateData);
-
-    //delete templateData.children[0].children[1];
-
-    //for (i = 0; i<indexCount; i++){
-        //if(i > 0){
-            //newData = deletetemplateData(index, templateData.children[index[i]]);
-        //}
-
-    //}
-    //delete templateData;
-
-
-
-
-}
-
-
-
 
 
 defaultActiveTab = editorSettings.activeTab;
@@ -444,20 +87,6 @@ toolsToggle.forEach((toggle) => {
 
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -749,6 +378,7 @@ elementsData = {
         elName: "heading 211",
         class: "pglb-heading pglb-element p-1 m-1",
         id: "",
+        tag: "h2",
         innerHtml: 'The heading element',
         children: [],
     },
@@ -861,7 +491,7 @@ templatePreview.innerHTML = html;
 
 
 
-    function  elementStartTag( element) {
+function  elementStartTag( element) {
 
     if(elType == 'container'){
         return generateElHtmlcontainer(element);
@@ -1057,6 +687,7 @@ function generateElHtmlheading(element){
     elId = element.id;
     elClass = element.class;
     elType = element.elType;
+    tag = element.tag;
     innerHtml = element.innerHtml;
     index = element.index;
 
@@ -1064,8 +695,9 @@ function generateElHtmlheading(element){
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
     html += '<div class="elementSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
-
+    html += '<'+tag+'>';
     html += innerHtml;
+    html += '</'+tag+'>';
     // html += '</div>';
 
     return html;
@@ -1096,11 +728,370 @@ function generateElHtmlimage(element){
 }
 
 
+console.log(templateData);
+
+
+
+
+function removeElement(currentEl, event){
+
+    //console.log(currentEl);
+
+
+    newtemplateData = templateData;
+    console.log(newtemplateData);
+
+
+    event.stopPropagation();
+
+    el = currentEl;
+
+    elId = el.getAttribute('id');
+    elIndex = el.getAttribute('index');
+    elClass = el.getAttribute('class');
+
+
+    // console.log(elId);
+    // console.log(elIndex);
+    // console.log(elClass);
+
+    var els = [];
+    var Indexes = [elIndex];
+
+
+    while (el) {
+        els.unshift(el);
+        el = el.parentNode;
+
+        elId = el.getAttribute('id');
+        elIndex = el.getAttribute('index');
+        elClass = el.getAttribute('class');
+
+        // console.log(elId);
+        // console.log(elIndex);
+        // console.log(elClass);
+
+        if(elIndex !== null)
+            Indexes.push(elIndex);
+
+
+        if(elId == 'template-preview') break;
+
+
+
+    }
+
+    Indexes.reverse();
+
+
+    var Indexes = Indexes.filter(function (item) {
+        return item != null;
+    });
+
+
+    indexCount = Indexes.length;
+
+    //console.log(Indexes);
+
+    if(indexCount == 1){
+        //delete templateData[Indexes[0]];
+        newtemplateData.splice(Indexes[0], 1);
+
+        templatePreview.innerHTML = elTreeView(newtemplateData);
+
+    }else{
+
+        //console.log(Indexes);
+
+        containerIndex = Indexes[0];
+        //console.log(containerIndex);
+        //delete Indexes[0];
+        Indexes.splice(0, 1);
+
+        // console.log(newtemplateData[containerIndex]);
+        // console.log(Indexes);
+
+
+        newData = deletetemplateData(Indexes, newtemplateData[containerIndex]);
+        templatePreview.innerHTML = elTreeView(newtemplateData);
+
+        // console.log(typeof newData);
+        //
+        // if(typeof newData !== 'undefined' && newData !== null){
+        //     console.log(newData);
+        //
+        //     templateData[containerIndex] = newData;
+        // }
+
+    }
+
+    //console.log(typeof templateData);
+
+
+}
+
+
+
+
+function  deletetemplateData(index, data) {
+
+    console.log("##################");
+
+    console.log(index);
+    console.log(data);
+
+
+    indexCount = index.length;
+
+    // console.log("indexCount");
+    // console.log(indexCount);
+    // console.log(index[0]);
+
+
+    if(indexCount > 1){
+
+        newData = data.children[index[0]];
+        //console.log(newData);
+
+        //delete index[0];
+        index.splice(0,1);
+
+
+        //console.log(index);
+
+        data = deletetemplateData(index, newData);
+
+
+
+
+    }else{
+
+        //delete templateData.children[index[0]];
+
+        data.children.splice(index[0], 1);
+
+        //console.log(templateData);
+
+
+        return data;
+    }
+
+
+
+    //console.log(templateData);
+
+    //delete templateData.children[0].children[1];
+
+    //for (i = 0; i<indexCount; i++){
+    //if(i > 0){
+    //newData = deletetemplateData(index, templateData.children[index[i]]);
+    //}
+
+    //}
+    //delete templateData;
+
+
+
+
+}
+
+
+
+
+function selectElement(currentEl, event){
+
+    //console.log(currentEl.parentNode);
+
+
+    event.stopPropagation();
+
+    el = currentEl;
+
+    elId = el.getAttribute('id');
+    elIndex = el.getAttribute('index');
+    elClass = el.getAttribute('class');
+
+
+    // console.log(elId);
+    // console.log(elIndex);
+    // console.log(elClass);
+
+    var els = [];
+    var Indexes = [elIndex];
+
+
+    while (el) {
+        els.unshift(el);
+        el = el.parentNode;
+
+        elId = el.getAttribute('id');
+        elIndex = el.getAttribute('index');
+        elClass = el.getAttribute('class');
+
+        // console.log(elId);
+        // console.log(elIndex);
+        // console.log(elClass);
+
+        if(elIndex !== null)
+            Indexes.push(elIndex);
+
+
+        if(elId == 'template-preview') break;
+
+
+
+    }
+
+    Indexes.reverse();
+
+
+    var Indexes = Indexes.filter(function (item) {
+        return item != null;
+    });
+
+    console.log(Indexes);
+
+    currentEl.parentNode.parentNode.setAttribute("path", Indexes);
+    elType = currentEl.parentNode.parentNode.getAttribute('elType');
+
+
+    editorSettings.selectedPath = Indexes;
+    editorSettings.selectedelType = elType;
+
+    editorSettings.selectedElement.path = Indexes;
+    editorSettings.selectedElement.elType = elType;
+
+
+    console.log(editorSettings);
+}
+
+
+function addElement(event, element ){
+
+    event.stopPropagation();
+
+    var elType = element.elType;
+
+    //console.log(element);
+    //console.log(elementsData[elType]);
 
 
 
 
 
+    selectedElement = editorSettings.selectedElement;
+    //console.log(selectedElement.path);
 
 
+    selectedelType = (selectedElement.elType) ? selectedElement.elType : 'container';
+    selectedPath = (selectedElement.path.length != 0) ? selectedElement.path : ["0"];
+
+
+    // console.log('elType: '+elType);
+    //
+    // console.log('selectedelType: '+selectedelType);
+    // console.log('selectedPath: ');
+    // console.log(selectedPath);
+
+
+    // console.log(templateData);
+    // console.log(templateData);
+
+    if(selectedelType == 'container'){
+
+        if(elType == 'container'){
+            containerIndex = selectedPath[0];
+            templateData.push(elementsData[elType]);
+
+        }else if(elType == 'row'){
+            containerIndex = selectedPath[0];
+            rowIndex = selectedPath[1];
+
+            //console.log(templateData[containerIndex]);
+
+            templateData[containerIndex].children.push(elementsData[elType]);
+
+
+            //templateData.push(elementsData[elType]);
+        }else if(elType == 'column'){
+            containerIndex = selectedPath[0];
+            rowIndex = selectedPath[1];
+            columnIndex = selectedPath[2];
+
+            templateData[containerIndex].children[rowIndex].children.push(elementsData[elType]);
+
+            //templateData.push(elementsData[elType]);
+        }else {
+            containerIndex = selectedPath[0];
+            rowIndex = selectedPath[1];
+            columnIndex = selectedPath[2];
+            index = selectedPath[3];
+
+            templateData.push(elementsData[elType]);
+
+        }
+
+
+
+
+    }else if(selectedelType == 'row'){
+
+        if(elType == 'column'){
+            containerIndex = selectedPath[0];
+            rowIndex = selectedPath[1];
+            columnIndex = selectedPath[2];
+
+            templateData[containerIndex].children[rowIndex].children.push(elementsData[elType]);
+
+            //templateData.push(elementsData[elType]);
+        }
+
+    }else if(selectedelType == 'column'){
+
+
+        if(elType == 'container'){
+            containerIndex = selectedPath[0];
+            templateData.push(elementsData[elType]);
+
+        }else if(elType == 'row'){
+            containerIndex = selectedPath[0];
+            rowIndex = selectedPath[1];
+
+            //console.log(templateData[containerIndex]);
+
+            templateData[containerIndex].children.push(elementsData[elType]);
+
+
+            //templateData.push(elementsData[elType]);
+        }else if(elType == 'column'){
+            containerIndex = selectedPath[0];
+            rowIndex = selectedPath[1];
+            columnIndex = selectedPath[2];
+
+            templateData[containerIndex].children[rowIndex].children.push(elementsData[elType]);
+
+            //templateData.push(elementsData[elType]);
+        }else {
+            containerIndex = selectedPath[0];
+            rowIndex = selectedPath[1];
+            columnIndex = selectedPath[2];
+            index = selectedPath[3];
+
+            templateData[containerIndex].children[rowIndex].children[columnIndex].children.push(elementsData[elType]);
+
+
+            //templateData.push(elementsData[elType]);
+
+        }
+
+    }else{
+
+    }
+
+    //console.log(templateData);
+    templatePreview.innerHTML = elTreeView(templateData);
+
+
+
+}
 

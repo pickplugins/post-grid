@@ -1,4 +1,8 @@
-
+/*
+* Author: PickPlugins
+* Copyright:
+*
+* */
 editorSettings = {
     activeTab: 0,
     selectedElement: {path:[], elType: ''},
@@ -100,18 +104,21 @@ templateData = [
         elName: "Container 1",
         class: "pglb-container container p-1 m-1",
         id: "",
+        isActive: false,
         children: [
             {
                 elType: "row",
                 elName: "row 11",
                 class: "pglb-row row p-1 m-1",
                 id: "",
+                isActive: false,
                 children: [
                     {
                         elType: "column",
                         elName: "column 111",
                         class: "pglb-column col p-1 m-1",
                         id: "",
+                        isActive: false,
                         children: [
 
                         ],
@@ -121,12 +128,14 @@ templateData = [
                         elName: "column 112",
                         class: "pglb-column col p-1 m-1",
                         id: "",
+                        isActive: false,
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 112",
                                 class: "pglb-text pglb-element text",
                                 id: "",
+                                isActive: false,
                                 innerHtml: "112 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -137,12 +146,14 @@ templateData = [
                         elName: "column 113",
                         class: "pglb-column col p-1 m-1",
                         id: "",
+                        isActive: false,
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 113",
                                 class: "pglb-text pglb-element text",
                                 id: "",
+                                isActive: false,
                                 innerHtml: "113 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -158,24 +169,28 @@ templateData = [
         elName: "Container 2",
         class: "pglb-container container p-1 m-1",
         id: "",
+        isActive: false,
         children: [
             {
                 elType: "row",
                 elName: "row 21",
                 class: "pglb-row row p-1 m-1",
                 id: "",
+                isActive: false,
                 children: [
                     {
                         elType: "column",
                         elName: "column 211",
                         class: "pglb-column col p-1 m-1",
                         id: "",
+                        isActive: false,
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 211",
                                 class: "pglb-text pglb-element text",
                                 id: "",
+                                isActive: false,
                                 innerHtml: "211 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -186,12 +201,14 @@ templateData = [
                         elName: "column 212",
                         class: "pglb-column col p-1 m-1",
                         id: "",
+                        isActive: false,
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 212",
                                 class: "pglb-text pglb-element text",
                                 id: "",
+                                isActive: false,
                                 innerHtml: "212 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -202,12 +219,14 @@ templateData = [
                         elName: "column 213",
                         class: "pglb-column col p-1 m-1",
                         id: "",
+                        isActive: false,
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 213",
                                 class: "pglb-text pglb-element text",
                                 id: "",
+                                isActive: false,
                                 innerHtml: "213 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -223,24 +242,28 @@ templateData = [
         elName: "Container 3",
         class: "pglb-container container p-1 m-1",
         id: "",
+        isActive: false,
         children: [
             {
                 elType: "row",
                 elName: "row 31",
                 class: "pglb-row row p-1 m-1",
                 id: "",
+                isActive: false,
                 children: [
                     {
                         elType: "column",
                         elName: "column 311",
                         class: "pglb-column col p-1 m-1",
                         id: "",
+                        isActive: false,
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 311",
                                 class: "pglb-text pglb-element text",
                                 id: "",
+                                isActive: false,
                                 innerHtml: "311 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -251,12 +274,14 @@ templateData = [
                         elName: "column 312",
                         class: "pglb-column col p-1 m-1",
                         id: "",
+                        isActive: false,
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 312",
                                 class: "pglb-text pglb-element text",
                                 id: "",
+                                isActive: false,
                                 innerHtml: "312 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -267,12 +292,14 @@ templateData = [
                         elName: "column 313",
                         class: "pglb-column col p-1 m-1",
                         id: "",
+                        isActive: false,
                         children: [
                             {
                                 elType: "text",
                                 elName: "Text 313",
                                 class: "pglb-text pglb-element text",
                                 id: "",
+                                isActive: false,
                                 innerHtml: "313 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                                 children: [],
                             }
@@ -299,6 +326,7 @@ elementsData = {
         elName: "Container 2",
         class: "pglb-container container",
         id: "",
+        isActive: false,
         children: [],
     },
     row:{
@@ -306,6 +334,7 @@ elementsData = {
         elName: "row 21",
         class: "pglb-row row p-1 m-1",
         id: "",
+        isActive: false,
         children: [],
     },
     column:{
@@ -313,6 +342,7 @@ elementsData = {
         elName: "column 211",
         class: "pglb-column col p-1 m-1",
         id: "",
+        isActive: false,
         children: [],
     },
     heading:{
@@ -320,6 +350,7 @@ elementsData = {
         elName: "heading 211",
         class: "pglb-heading pglb-element p-1 m-1",
         id: "",
+        isActive: false,
         tag: "h2",
         innerHtml: 'The heading element',
         children: [],
@@ -329,6 +360,7 @@ elementsData = {
         elName: "text 211",
         class: "pglb-text pglb-element p-1 m-1",
         id: "",
+        isActive: false,
         innerHtml: 'The paragraph element is the default element type. It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.',
         children: [],
     },
@@ -338,6 +370,7 @@ elementsData = {
         elName: "empty 211",
         class: "pglb-empty text-center w-100 p-1 m-1",
         id: "",
+        isActive: false,
         innerHtml: '<i class="far fa-plus-square"></i> Add Row',
         children: [],
     },
@@ -346,6 +379,7 @@ elementsData = {
         elName: "empty 211",
         class: "pglb-empty text-center w-100 p-1 m-1",
         id: "",
+        isActive: false,
         innerHtml: '<i class="far fa-plus-square"></i> Add Column',
         children: [],
     },
@@ -355,6 +389,7 @@ elementsData = {
         elName: "empty 211",
         class: "pglb-empty text-center w-100 p-1 m-1",
         id: "",
+        isActive: false,
         innerHtml: '<i class="far fa-plus-square"></i> Add Elements',
         children: [],
     },
@@ -364,6 +399,7 @@ elementsData = {
         elName: "link 211",
         class: "pglb-link pglb-element p-1 m-1",
         id: "",
+        isActive: false,
         innerHtml: 'Link text',
         target: '_blank',
         href: '#url',
@@ -374,6 +410,7 @@ elementsData = {
         elName: "image 211",
         class: "pglb-image pglb-element p-1 m-1",
         id: "",
+        isActive: false,
         src: 'https://i.imgur.com/QheX3ut.jpg',
         children: [],
     },
@@ -389,6 +426,11 @@ elementsData = {
 
 function elTreeView(data) {
 
+
+    selectedPath = (editorSettings.selectedPath.length != 0) ? editorSettings.selectedPath : [0,0,0];
+
+    console.log(selectedPath);
+
     html = '';
 
     for (var index in data){
@@ -401,6 +443,8 @@ function elTreeView(data) {
         children = element.children;
         element.index = index;
         element.id = elType+"-"+index;
+        element.isActive = (selectedPath[0] == index) ? true : false;
+
 
 
         args = {};
@@ -410,6 +454,11 @@ function elTreeView(data) {
         html += elementStartTag(element);
 
         if(children.length > 0){
+
+            selectedPath.splice(0,1);
+            //console.log(selectedPath);
+            args.selectedPath = selectedPath;
+
             generateChildHtml(children, args);
         }
         html += elementEndTag(element);
@@ -435,6 +484,12 @@ function generateChildHtml(data, args){
         elName = element.elName;
         elType = element.elType;
         id = element.id;
+        selectedPath = args.selectedPath;
+
+        //console.log(selectedPath);
+
+        element.isActive = (selectedPath[0] == index) ? true : false;
+
 
         children = element.children;
 
@@ -550,13 +605,17 @@ function generateElHtmlcontainer(element){
     elId = element.id;
     elClass = element.class;
     elType = element.elType;
+    isActive = element.isActive;
+    isActiveClass = (isActive) ? 'active' : '';
 
     index = element.index;
     children = (children.length != 0) ? element.children : [elementsData.emptyRow];
 
+
+
     //console.log(index);
 
-    html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div isActive="'+isActiveClass+'"  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
     html += '<div  class="containerSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event )" class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_container}}';
@@ -992,10 +1051,14 @@ function selectElement(currentEl, event){
         elId = el.getAttribute('id');
         elIndex = el.getAttribute('index');
         elClass = el.getAttribute('class');
+        //el.setAttribute('isActive','active');
+
+        //el.addClass('active');
+        //console.log(el);
 
         // console.log(elId);
         // console.log(elIndex);
-        // console.log(elClass);
+         //console.log(elClass);
 
         if(elIndex !== null)
             Indexes.push(elIndex);

@@ -7,7 +7,7 @@ add_action('post_grid_layout_builder', 'post_grid_layout_builder');
 
 function post_grid_layout_builder(){
     wp_enqueue_script('layout-builder');
-    //wp_enqueue_style('bootstrap');
+    wp_enqueue_style('bootstrap');
     //wp_enqueue_style('bootstrap-grid');
 
 
@@ -116,6 +116,10 @@ function post_grid_layout_builder_css(){
         .pglb .pglb-container.active, .pglb .pglb-row.active,.pglb .pglb-column.active, .pglb .pglb-element.active {
             border: 1px dashed #007bff;
         }
+
+        /*.pglb .pglb-container[isactive="active"], .pglb .pglb-row[isactive="active"],.pglb .pglb-column[isactive="active"], .pglb .pglb-element[isactive="active"] {*/
+        /*    border: 1px dashed #007bff;*/
+        /*}*/
 
         .pglb .pglb-container, .pglb .pglb-row,.pglb .pglb-column, .pglb .pglb-element{
             border: 1px dashed rgba(0,0,0,0);

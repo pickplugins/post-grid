@@ -4,7 +4,7 @@
 *
 * */
 editorSettings = {
-    activeTab: 2,
+    activeTab: 0,
     selectedElement: {path:[], elType: ''},
     selectedPath: '',
     selectedelType: '',

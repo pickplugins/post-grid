@@ -44,21 +44,100 @@ function post_grid_layout_builder(){
                     </div>
 
                     <div class="tools-toggle">
-                        <div class="toggle-header">General</div>
+                        <div class="toggle-header">Post Elements</div>
                         <div class="toggle-content">
                             <div class="element-list">
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_title'})" >Post Title</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_featured_image'})" >Post Thumbnail</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_excerpt'})" >Post Excerpt</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_date'})" >Post Date</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_author'})">Post Author</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_categories'})">Post Categories</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_tags'})">Post Tags</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_terms'})">Post Terms</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_comments_count'})">Comments Count</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_comments'})">Post Comments</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_edit_link'})" >Post Edit Link</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'next_post_link'})">Next Post Link</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'previous_post_link'})">Previous Post Link</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'related_posts'})">Related posts</div>
 
-                                General content
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_id'})" >Post ID</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_is_sticky'})" >Post Sticky</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_status'})" >Post Status</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_format'})" >Post Format</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'post_type'})" >Post Type</div>
+
                             </div>
 
                         </div>
 
                     </div>
 
+                    <div class="tools-toggle">
+                        <div class="toggle-header">Archive Elements</div>
+                        <div class="toggle-content">
+                            <div class="element-list">
+                                <div class="layoutElement" onclick="addElement(event, {elType:'author_name'})" >Author Name</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'author_avatar'})" >Author Avatar</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'term_title'})" >Term Title</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'term_id'})" >Term ID</div>
+
+                                <div class="layoutElement" onclick="addElement(event, {elType:'term_edit_link'})" >Term Edit Link</div>
+
+                                <div class="layoutElement" onclick="addElement(event, {elType:'term_description'})" >Term Description</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'date_title'})">Date Title</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'month_title'})">Month Title</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'year_title'})">Year Title</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'search_query'})">Search Query</div>
+
+                                <div class="layoutElement" onclick="addElement(event, {elType:'next_posts_link'})">Next Posts Link</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'previous_posts_link'})">Previous Posts Link</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="tools-toggle">
+                        <div class="toggle-header">Global Elements</div>
+                        <div class="toggle-content">
+                            <div class="element-list">
+                                <div class="layoutElement" onclick="addElement(event, {elType:'site_title'})" >Site Tile</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'author_avatar'})" >Author Avatar</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'term_title'})" >Term Title</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'term_edit_link'})" >Term Edit Link</div>
+
+                                <div class="layoutElement" onclick="addElement(event, {elType:'term_description'})" >Term Description</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'date_title'})">Date Title</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'month_title'})">Month Title</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'year_title'})">Year Title</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'search_query'})">Search Query</div>
+
+                                <div class="layoutElement" onclick="addElement(event, {elType:'next_posts_link'})">Next Posts Link</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'previous_posts_link'})">Previous Posts Link</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
                 </div>
                 <div class="tab-content data-id-2" >
                     Settings
-                    <div id="selectedObjectSettings"></div>
+                    <div id="selectedObjectSettings">
+
+
+
+                    </div>
 
                 </div>
 
@@ -113,9 +192,9 @@ function post_grid_layout_builder_css(){
 
         /*pglb-container*/
 
-        .pglb .pglb-container.active, .pglb .pglb-row.active,.pglb .pglb-column.active, .pglb .pglb-element.active {
-            border: 1px dashed #007bff;
-        }
+        /*.pglb .pglb-container.active, .pglb .pglb-row.active,.pglb .pglb-column.active, .pglb .pglb-element.active {*/
+        /*    border: 1px dashed #007bff;*/
+        /*}*/
 
         /*.pglb .pglb-container[isactive="active"], .pglb .pglb-row[isactive="active"],.pglb .pglb-column[isactive="active"], .pglb .pglb-element[isactive="active"] {*/
         /*    border: 1px dashed #007bff;*/

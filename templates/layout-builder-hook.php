@@ -147,7 +147,7 @@ function post_grid_layout_builder_css(){
 
         .pglb .containerSettings span{
             padding: 2px 7px;
-            border-left: 1px solid #46617b;
+            border-left: 1px solid #7892ab;
             cursor: pointer;
         }
 
@@ -175,7 +175,7 @@ function post_grid_layout_builder_css(){
 
         .pglb .rowSettings span{
             padding: 2px 7px;
-            border-left: 1px solid #46617b;
+            border-left: 1px solid #7892ab;
             cursor: pointer;
         }
 
@@ -208,7 +208,7 @@ function post_grid_layout_builder_css(){
 
         .pglb .columnSettings span{
             padding: 2px 7px;
-            border-left: 1px solid #46617b;
+            border-left: 1px solid #7892ab;
             cursor: pointer;
         }
 
@@ -247,7 +247,7 @@ function post_grid_layout_builder_css(){
 
         .pglb .elementSettings span{
             padding: 2px 7px;
-            border-left: 1px solid #46617b;
+            border-left: 1px solid #7892ab;
             cursor: pointer;
         }
 

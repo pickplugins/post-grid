@@ -4,10 +4,11 @@
 *
 * */
 editorSettings = {
-    activeTab: 0,
+    activeTab: 2,
     selectedElement: {path:[], elType: ''},
     selectedPath: '',
     selectedelType: '',
+    breakpoints:{mobile:'576px', tablet:'992px', desktop:'1200px'}
 
 }
 
@@ -20,24 +21,44 @@ codeDisplay = document.getElementById('codeDisplay');
 
 
 
-defaultActiveTab = editorSettings.activeTab;
+
+tools_tabs_switch(editorSettings);
+
+function tools_tabs_switch(editorSettings){
+    activeTab = editorSettings.activeTab;
+
+    console.log('activeTab');
+    console.log(activeTab);
+
+    i = 0;
+    tabNavs.forEach((tabNav) => {
+        content = tabsContent[i]
+
+        //console.log(content);
+        tabNav.classList.remove("active");
+        tabNav.classList.remove("inactive");
+
+        content.classList.remove("active");
+        content.classList.remove("inactive");
 
 
+        if(i == activeTab){
 
-i = 0;
-tabNavs.forEach((tabNav) => {
-    content = tabsContent[i]
+            tabNav.classList.add("active");
+            content.classList.add("active");
+            content.style.display = 'block';
+
+        }else{
+            tabNav.classList.add("inactive");
+            content.classList.add("inactive");
+            content.style.display = 'none';
+        }
+        i++;
+    });
+
+}
 
 
-    if(i == defaultActiveTab){
-        tabNav.classList.add("active");
-        content.classList.add("active");
-    }else{
-        tabNav.classList.add("inactive");
-        content.classList.add("inactive");
-    }
-    i++;
-});
 
 // Listen click event for tabs
 
@@ -120,7 +141,15 @@ templateData = [
                         id: "",
                         isActive: false,
                         children: [
-
+                            {
+                                elType: "text",
+                                elName: "Text 111",
+                                class: "pglb-text pglb-element text",
+                                id: "",
+                                isActive: false,
+                                innerHtml: "111 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                children: [],
+                            }
                         ],
                     },
                     {
@@ -353,6 +382,22 @@ elementsData = {
         isActive: false,
         tag: "h2",
         innerHtml: 'The heading element',
+        style:{
+            color: {'576px': '', '992px': '', '1200px': ''},
+            hoverColor: {'576px': '', '992px': '', '1200px': ''},
+            fontSize: {'576px': '', '992px': '', '1200px': ''},
+            fontFamily: {'576px': '', '992px': '', '1200px': ''},
+            textAlign: {'576px': '', '992px': '', '1200px': ''},
+            fontWeight: {'576px': '', '992px': '', '1200px': ''},
+            textTransform: {'576px': '', '992px': '', '1200px': ''},
+            textDecoration: {'576px': '', '992px': '', '1200px': ''},
+            fontStyle: {'576px': '', '992px': '', '1200px': ''},
+            lineHeight: {'576px': '', '992px': '', '1200px': ''},
+            letterSpacing: {'576px': '', '992px': '', '1200px': ''},
+            zIndex: {'576px': '', '992px': '', '1200px': ''},
+            margin: {'576px': {top:'', right:'', bottom:'', left: ''}, '992px': {top:'', right:'', bottom:'', left: ''}, '1200px': {top:'', right:'', bottom:'', left: ''}},
+            padding: {'576px': {top:'', right:'', bottom:'', left: ''}, '992px': {top:'', right:'', bottom:'', left: ''}, '1200px': {top:'', right:'', bottom:'', left: ''}},
+        },
         children: [],
     },
     text:{
@@ -362,6 +407,22 @@ elementsData = {
         id: "",
         isActive: false,
         innerHtml: 'The paragraph element is the default element type. It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.',
+        style:{
+            color: {'576px': '', '992px': '', '1200px': ''},
+            hoverColor: {'576px': '', '992px': '', '1200px': ''},
+            fontSize: {'576px': '', '992px': '', '1200px': ''},
+            fontFamily: {'576px': '', '992px': '', '1200px': ''},
+            textAlign: {'576px': '', '992px': '', '1200px': ''},
+            fontWeight: {'576px': '', '992px': '', '1200px': ''},
+            textTransform: {'576px': '', '992px': '', '1200px': ''},
+            textDecoration: {'576px': '', '992px': '', '1200px': ''},
+            fontStyle: {'576px': '', '992px': '', '1200px': ''},
+            lineHeight: {'576px': '', '992px': '', '1200px': ''},
+            letterSpacing: {'576px': '', '992px': '', '1200px': ''},
+            zIndex: {'576px': '', '992px': '', '1200px': ''},
+            margin: {'576px': {top:'', right:'', bottom:'', left: ''}, '992px': {top:'', right:'', bottom:'', left: ''}, '1200px': {top:'', right:'', bottom:'', left: ''}},
+            padding: {'576px': {top:'', right:'', bottom:'', left: ''}, '992px': {top:'', right:'', bottom:'', left: ''}, '1200px': {top:'', right:'', bottom:'', left: ''}},
+        },
         children: [],
     },
 
@@ -403,6 +464,22 @@ elementsData = {
         innerHtml: 'Link text',
         target: '_blank',
         href: '#url',
+        style:{
+            color: {'576px': '', '992px': '', '1200px': ''},
+            hoverColor: {'576px': '', '992px': '', '1200px': ''},
+            fontSize: {'576px': '', '992px': '', '1200px': ''},
+            fontFamily: {'576px': '', '992px': '', '1200px': ''},
+            textAlign: {'576px': '', '992px': '', '1200px': ''},
+            fontWeight: {'576px': '', '992px': '', '1200px': ''},
+            textTransform: {'576px': '', '992px': '', '1200px': ''},
+            textDecoration: {'576px': '', '992px': '', '1200px': ''},
+            fontStyle: {'576px': '', '992px': '', '1200px': ''},
+            lineHeight: {'576px': '', '992px': '', '1200px': ''},
+            letterSpacing: {'576px': '', '992px': '', '1200px': ''},
+            zIndex: {'576px': '', '992px': '', '1200px': ''},
+            margin: {'576px': {top:'', right:'', bottom:'', left: ''}, '992px': {top:'', right:'', bottom:'', left: ''}, '1200px': {top:'', right:'', bottom:'', left: ''}},
+            padding: {'576px': {top:'', right:'', bottom:'', left: ''}, '992px': {top:'', right:'', bottom:'', left: ''}, '1200px': {top:'', right:'', bottom:'', left: ''}},
+        },
         children: [],
     },
     image:{
@@ -412,6 +489,12 @@ elementsData = {
         id: "",
         isActive: false,
         src: 'https://i.imgur.com/QheX3ut.jpg',
+        style:{
+            width: {'576px': '', '992px': '', '1200px': ''},
+            height: {'576px': '', '992px': '', '1200px': ''},
+            margin: {'576px': '', '992px': '', '1200px': ''},
+            padding: {'576px': '', '992px': '', '1200px': ''},
+        },
         children: [],
     },
 
@@ -429,7 +512,7 @@ function elTreeView(data) {
 
     selectedPath = (editorSettings.selectedPath.length != 0) ? editorSettings.selectedPath : [0,0,0];
 
-    console.log(selectedPath);
+    //console.log(selectedPath);
 
     html = '';
 
@@ -616,7 +699,7 @@ function generateElHtmlcontainer(element){
     //console.log(index);
 
     html += '<div isActive="'+isActiveClass+'"  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div  class="containerSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event )" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div  class="containerSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event )" class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_container}}';
     // html += '</div>';
@@ -640,7 +723,7 @@ function generateElHtmlrow(element){
     children = (children.length != 0) ? element.children : [elementsData.emptyColumn];
 
     html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="rowSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="rowSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_row}}';
     // html += '</div>';
@@ -667,7 +750,7 @@ function generateElHtmlcolumn(element){
     index = element.index;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="columnSettings"><span onclick="selectElement(this, event)" ><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="columnSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" ><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     if(children.length == 0){
         html += '<i class="far fa-plus-square"></i>';
@@ -699,7 +782,7 @@ function generateElHtmltext(element){
     children = element.children;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     html += innerHtml;
     // html += '</div>';
@@ -792,7 +875,7 @@ function generateElHtmllink(element){
     children = element.children;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     html += '<a target="'+target+'" href="'+href+'">';
     html += innerHtml;
@@ -818,7 +901,7 @@ function generateElHtmlheading(element){
     children = element.children;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
     html += '<'+tag+'>';
     html += innerHtml;
     html += '</'+tag+'>';
@@ -840,7 +923,7 @@ function generateElHtmlimage(element){
     src = element.src;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
     html += '<img src="'+src+'" />';
     //html += '{{el_text}}';
     // html += '</div>';
@@ -852,7 +935,7 @@ function generateElHtmlimage(element){
 }
 
 
-console.log(templateData);
+//console.log(templateData);
 
 
 
@@ -863,7 +946,7 @@ function removeElement(currentEl, event){
 
 
     newtemplateData = templateData;
-    console.log(newtemplateData);
+    //console.log(newtemplateData);
 
 
     event.stopPropagation();
@@ -1019,8 +1102,19 @@ function  deletetemplateData(index, data) {
 
 }
 
+function customizeElement(currentEl, event) {
+
+    //console.log(currentEl.parentNode);
+    editorSettings.activeTab = 1;
+    tools_tabs_switch(editorSettings)
+
+    event.stopPropagation();
+    el = currentEl;
 
 
+    console.log(editorSettings);
+
+}
 
 function selectElement(currentEl, event){
 

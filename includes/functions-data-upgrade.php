@@ -1235,13 +1235,30 @@ function post_grid_layout_css($layout){
 add_shortcode('post_grid_import_xml_layouts', 'post_grid_import_xml_layouts');
 
 function post_grid_import_xml_layouts(){
+    $post_grid_info = get_option('post_grid_info');
 
     $response = array();
     $user_id = get_current_user_id();
     $source = sanitize_text_field($_POST['source']);
+    $skip = sanitize_text_field($_POST['skip']);
+
     //$xml_source = 'http://localhost/wp/wp-content/plugins/post-grid/sample-data/post-grid-layouts.json';
 
 
+    if($skip == 'yes'){
+
+        if(strpos($source, 'post-grid-pro')){
+            $post_grid_info['import_pro_layouts'] = 'done';
+        }else{
+            $post_grid_info['import_layouts'] = 'done';
+        }
+
+        $response['skip_success'] = __('Import skipped','post-grid');
+        update_option('post_grid_info', $post_grid_info);
+
+        echo json_encode($response);
+        die();
+    }
 
 
     $json_obj = file_get_contents($source);
@@ -1300,7 +1317,6 @@ function post_grid_import_xml_layouts(){
 
     $response['success'] = __('Import done','post-grid');
 
-    $post_grid_info = get_option('post_grid_info');
 
     if(strpos($source, 'post-grid-pro')){
         $post_grid_info['import_pro_layouts'] = 'done';

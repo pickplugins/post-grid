@@ -48,6 +48,8 @@ jQuery(document).ready(function($){
 		event.preventDefault();
 
 		xml_source = $(this).attr('href');
+		skip = $(this).attr('skip');
+
 		$(this).html('Please wait...');
 
 
@@ -58,13 +60,16 @@ jQuery(document).ready(function($){
 				type: 'POST',
 				context: this,
 				url: post_grid_ajax.post_grid_ajaxurl,
-				data: {"action": "post_grid_import_xml_layouts","source": xml_source },
+				data: {"action": "post_grid_import_xml_layouts","source": xml_source,"skip": skip },
 				success: function(response) {
 					var data = JSON.parse( response );
 
 					success = data['success'];
+					skip_success = data['skip_success'];
 
 					$(this).html(success);
+					$(this).html(skip_success);
+
 
 					console.log(success);
 

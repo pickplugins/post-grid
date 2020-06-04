@@ -110,8 +110,10 @@ if(!function_exists('post_grid_settings_content_help_support')) {
 
             <p><?php echo __('Import free layouts', 'post-grid'); ?></p>
 
-            <a class="button post-grid-import-layouts"  href="<?php echo esc_url_raw($layouts_free_url_json); ?>"><?php echo __('Import automatically', 'post-grid'); ?></a>
             <a class="button" href="<?php echo esc_url_raw($layouts_free_url); ?>"><?php echo __('Download XML', 'post-grid'); ?></a>
+            <a class="button post-grid-import-layouts"  href="<?php echo esc_url_raw($layouts_free_url_json); ?>"><?php echo __('Import automatically', 'post-grid'); ?></a>
+            <a class="button post-grid-import-layouts" skip="yes"  href="<?php echo esc_url_raw($layouts_free_url_json); ?>"><?php echo __('Skip', 'post-grid'); ?></a>
+
 
 
             <p>Import manually</p>
@@ -131,6 +133,7 @@ if(!function_exists('post_grid_settings_content_help_support')) {
                 <p><?php echo __('Download premium layouts', 'post-grid'); ?></p>
                 <a class="button" href="<?php echo esc_url_raw($layouts_pro_url); ?>"><?php echo __('Download Pro XML', 'post-grid'); ?></a>
                 <a class="button post-grid-import-layouts" href="<?php echo esc_url_raw($layouts_pro_url_json); ?>"><?php echo __('Import automatically', 'post-grid'); ?></a>
+                <a class="button post-grid-import-layouts" skip="yes"  href="<?php echo esc_url_raw($layouts_pro_url_json); ?>"><?php echo __('Skip', 'post-grid'); ?></a>
 
             <?php
             endif;

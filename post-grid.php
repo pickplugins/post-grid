@@ -167,7 +167,7 @@ if( !class_exists( 'PostGrid' )){
 
             wp_register_script('layout-builder', post_grid_plugin_url.'assets/frontend/js/layout-builder.js', array('jquery'), time());
 
-            wp_register_style('bootstrap', post_grid_plugin_url.'assets/global/css/bootstrap.min.css');
+            //wp_register_style('bootstrap', post_grid_plugin_url.'assets/global/css/bootstrap.min.css');
             //wp_register_style('bootstrap-grid', post_grid_plugin_url.'assets/global/css/bootstrap-grid.css');
 
 

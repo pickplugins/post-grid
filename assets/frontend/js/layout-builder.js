@@ -144,7 +144,7 @@ templateData = [
                             {
                                 elType: "text",
                                 elName: "Text 111",
-                                class: "pglb-text pglb-element text",
+                                class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
                                 innerHtml: "111 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
@@ -162,7 +162,7 @@ templateData = [
                             {
                                 elType: "text",
                                 elName: "Text 112",
-                                class: "pglb-text pglb-element text",
+                                class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
                                 innerHtml: "112 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
@@ -180,7 +180,7 @@ templateData = [
                             {
                                 elType: "text",
                                 elName: "Text 113",
-                                class: "pglb-text pglb-element text",
+                                class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
                                 innerHtml: "113 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
@@ -217,7 +217,7 @@ templateData = [
                             {
                                 elType: "text",
                                 elName: "Text 211",
-                                class: "pglb-text pglb-element text",
+                                class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
                                 innerHtml: "211 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
@@ -235,7 +235,7 @@ templateData = [
                             {
                                 elType: "text",
                                 elName: "Text 212",
-                                class: "pglb-text pglb-element text",
+                                class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
                                 innerHtml: "212 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
@@ -253,7 +253,7 @@ templateData = [
                             {
                                 elType: "text",
                                 elName: "Text 213",
-                                class: "pglb-text pglb-element text",
+                                class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
                                 innerHtml: "213 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
@@ -290,7 +290,7 @@ templateData = [
                             {
                                 elType: "text",
                                 elName: "Text 311",
-                                class: "pglb-text pglb-element text",
+                                class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
                                 innerHtml: "311 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
@@ -308,7 +308,7 @@ templateData = [
                             {
                                 elType: "text",
                                 elName: "Text 312",
-                                class: "pglb-text pglb-element text",
+                                class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
                                 innerHtml: "312 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
@@ -326,7 +326,7 @@ templateData = [
                             {
                                 elType: "text",
                                 elName: "Text 313",
-                                class: "pglb-text pglb-element text",
+                                class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
                                 innerHtml: "313 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
@@ -339,10 +339,6 @@ templateData = [
                 ],
             }],
     },
-
-
-
-
 
 
 
@@ -699,7 +695,7 @@ function generateElHtmlcontainer(element){
     //console.log(index);
 
     html += '<div isActive="'+isActiveClass+'"  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div  class="containerSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event )" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div  class="containerSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class="selectElement"><i class="fas fa-check"></i></span><span onclick="removeElement(this, event )" class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_container}}';
     // html += '</div>';
@@ -723,7 +719,7 @@ function generateElHtmlrow(element){
     children = (children.length != 0) ? element.children : [elementsData.emptyColumn];
 
     html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="rowSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="rowSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class="selectElement"><i class="fas fa-check"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_row}}';
     // html += '</div>';
@@ -750,7 +746,7 @@ function generateElHtmlcolumn(element){
     index = element.index;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="columnSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" ><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="columnSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class="selectElement" ><i class="fas fa-check"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     if(children.length == 0){
         html += '<i class="far fa-plus-square"></i>';
@@ -782,7 +778,7 @@ function generateElHtmltext(element){
     children = element.children;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     html += innerHtml;
     // html += '</div>';
@@ -875,7 +871,7 @@ function generateElHtmllink(element){
     children = element.children;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     html += '<a target="'+target+'" href="'+href+'">';
     html += innerHtml;
@@ -901,7 +897,7 @@ function generateElHtmlheading(element){
     children = element.children;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
     html += '<'+tag+'>';
     html += innerHtml;
     html += '</'+tag+'>';
@@ -923,7 +919,7 @@ function generateElHtmlimage(element){
     src = element.src;
 
     html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class=""><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class=""><i class="fas fa-cog"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
     html += '<img src="'+src+'" />';
     //html += '{{el_text}}';
     // html += '</div>';
@@ -1110,6 +1106,7 @@ function customizeElement(currentEl, event) {
 
     event.stopPropagation();
     el = currentEl;
+    selectElement(currentEl, event);
 
 
     console.log(editorSettings);
@@ -1185,6 +1182,10 @@ function selectElement(currentEl, event){
 
 
     console.log(editorSettings);
+}
+
+function getElementByIndex(index){
+    
 }
 
 

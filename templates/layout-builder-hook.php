@@ -255,8 +255,12 @@ function post_grid_layout_builder_css(){
             background: #ff4b03;
         }
 
-
-
+        .pglb .selectElement:hover{
+            background: #22af61;
+        }
+        .pglb .customizeElement:hover{
+            background: #308ad2;
+        }
 
 
 

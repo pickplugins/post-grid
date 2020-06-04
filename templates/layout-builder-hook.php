@@ -25,7 +25,7 @@ function post_grid_layout_builder(){
                 </ul>
 
                 <div class="tab-content  data-id-1" >
-                    Elements
+
                     <div class="tools-toggle">
                         <div class="toggle-header">Layout</div>
                         <div class="toggle-content">
@@ -33,6 +33,16 @@ function post_grid_layout_builder(){
                                 <div class="layoutElement" onclick="addElement(event, {elType:'container'})" >Container</div>
                                 <div class="layoutElement" onclick="addElement(event, {elType:'row'})" >Row</div>
                                 <div class="layoutElement" onclick="addElement(event, {elType:'column'})" >Column</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="tools-toggle">
+                        <div class="toggle-header">General</div>
+                        <div class="toggle-content">
+                            <div class="element-list">
                                 <div class="layoutElement" onclick="addElement(event, {elType:'heading'})">Heading</div>
                                 <div class="layoutElement" onclick="addElement(event, {elType:'text'})">Text</div>
                                 <div class="layoutElement" onclick="addElement(event, {elType:'image'})">Image</div>
@@ -40,7 +50,6 @@ function post_grid_layout_builder(){
                             </div>
 
                         </div>
-
                     </div>
 
                     <div class="tools-toggle">
@@ -104,9 +113,14 @@ function post_grid_layout_builder(){
                         <div class="toggle-header">Global Elements</div>
                         <div class="toggle-content">
                             <div class="element-list">
+                                <div class="layoutElement" onclick="addElement(event, {elType:'site_header'})" >Site header</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'site_footer'})" >Site footer</div>
+
                                 <div class="layoutElement" onclick="addElement(event, {elType:'site_title'})" >Site Tile</div>
-                                <div class="layoutElement" onclick="addElement(event, {elType:'author_avatar'})" >Author Avatar</div>
-                                <div class="layoutElement" onclick="addElement(event, {elType:'term_title'})" >Term Title</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'search_form'})" >Search form</div>
+
+                                <div class="layoutElement" onclick="addElement(event, {elType:'breadcrumb'})" >Breadcrumb</div>
+                                <div class="layoutElement" onclick="addElement(event, {elType:'nav_menu'})" >Nav  Menu</div>
                                 <div class="layoutElement" onclick="addElement(event, {elType:'term_edit_link'})" >Term Edit Link</div>
 
                                 <div class="layoutElement" onclick="addElement(event, {elType:'term_description'})" >Term Description</div>
@@ -132,19 +146,14 @@ function post_grid_layout_builder(){
 
                 </div>
                 <div class="tab-content data-id-2" >
-                    Settings
+
                     <div id="selectedObjectSettings">
-
-
-
                     </div>
 
                 </div>
 
                 <div class="tab-content data-id-3" >
 
-
-                    Library
                     <div class="tools-toggle">
                         <div class="toggle-header">General</div>
                         <div class="toggle-content">

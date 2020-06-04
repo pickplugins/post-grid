@@ -17,8 +17,7 @@ tabsContent = document.querySelectorAll('.tab-content');
 toolsToggle = document.querySelectorAll('.tools-toggle');
 templatePreview = document.getElementById('template-preview');
 codeDisplay = document.getElementById('codeDisplay');
-
-
+selectedObjectSettings = document.getElementById('selectedObjectSettings');
 
 
 
@@ -91,8 +90,6 @@ tabNavs.forEach((nav) => {
 
 
 
-
-
 toolsToggle.forEach((toggle) => {
 
     header = toggle.querySelectorAll('.toggle-header');
@@ -112,6 +109,11 @@ toolsToggle.forEach((toggle) => {
 
     })
 })
+
+
+
+
+
 
 
 
@@ -1098,18 +1100,44 @@ function  deletetemplateData(index, data) {
 
 }
 
+function generateElementSettings(elType) {
+
+
+
+    html = '';
+
+
+    html += 'Hello '+elType;
+
+
+
+    selectedObjectSettings.innerHTML = html;
+
+    toolsToggle = document.querySelectorAll('.tools-toggle');
+
+    console.log(toolsToggle);
+
+
+}
+
+
 function customizeElement(currentEl, event) {
 
     //console.log(currentEl.parentNode);
     editorSettings.activeTab = 1;
-    tools_tabs_switch(editorSettings)
+    tools_tabs_switch(editorSettings);
 
     event.stopPropagation();
     el = currentEl;
     selectElement(currentEl, event);
 
+    elType = editorSettings.selectedelType;
+    path = editorSettings.selectedElement.path;
 
-    console.log(editorSettings);
+
+    console.log(elementsData[elType]);
+    generateElementSettings(elType);
+
 
 }
 

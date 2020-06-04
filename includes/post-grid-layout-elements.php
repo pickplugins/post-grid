@@ -781,6 +781,7 @@ function post_grid_layout_element_option_title($parameters){
 }
 
 
+
 add_action('post_grid_layout_element_title', 'post_grid_layout_element_title');
 
 function post_grid_layout_element_title($args){
@@ -1436,6 +1437,8 @@ function post_grid_layout_element_option_excerpt($parameters){
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
     $excerpt_source = isset($element_data['excerpt_source']) ? $element_data['excerpt_source'] : '';
+//    $remove_html = isset($element_data['remove_html']) ? $element_data['remove_html'] : '';
+//    $remove_shortcodes = isset($element_data['remove_shortcodes']) ? $element_data['remove_shortcodes'] : '';
 
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
     $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : 0;
@@ -1504,6 +1507,45 @@ function post_grid_layout_element_option_excerpt($parameters){
             );
 
             $settings_tabs_field->generate_field($args);
+
+//
+//            $args = array(
+//                'id'		=> 'remove_html',
+//                'css_id'		=> $element_index.'_remove_html',
+//                'parent' => $input_name.'[excerpt]',
+//                'title'		=> __('Remove HTML','post-grid'),
+//                'details'	=> __('Choose option to remove html on excerpt.','post-grid'),
+//                'type'		=> 'select',
+//                'value'		=> $remove_html,
+//                'default'		=> 'yes',
+//                'args'		=> array(
+//                    'yes'=> __('Yes', 'post-grid'),
+//                    'no'=> __('No', 'post-grid'),
+//
+//
+//                ),
+//            );
+//
+//            $settings_tabs_field->generate_field($args);
+//
+//
+//            $args = array(
+//                'id'		=> 'remove_shortcodes',
+//                'css_id'		=> $element_index.'_remove_shortcodes',
+//                'parent' => $input_name.'[excerpt]',
+//                'title'		=> __('Remove shortcodes','post-grid'),
+//                'details'	=> __('Choose option to remove shortcodes on excerpt.','post-grid'),
+//                'type'		=> 'select',
+//                'value'		=> $remove_shortcodes,
+//                'default'		=> 'yes',
+//                'args'		=> array(
+//                    'yes'=> __('Yes', 'post-grid'),
+//                    'no'=> __('No', 'post-grid'),
+//                ),
+//            );
+//
+//            $settings_tabs_field->generate_field($args);
+
 
             $args = array(
                 'id'		=> 'read_more_text',

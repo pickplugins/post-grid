@@ -115,7 +115,6 @@ templateData = [
         children: [
             {
                 elType: "text",
-                elName: "Text 111",
                 class: "pglb-text pglb-element text p-1 m-1",
                 id: "",
                 isActive: false,
@@ -124,7 +123,6 @@ templateData = [
             },
             {
                 elType: "link",
-                elName: "link 1",
                 class: "pglb-link pglb-element p-1 m-1",
                 id: "",
                 isActive: false,
@@ -151,14 +149,12 @@ templateData = [
             },
             {
                 elType: "column",
-                elName: "column 2",
                 class: "pglb-column col p-1 m-1",
                 id: "",
                 isActive: false,
                 children: [
                     {
                         elType: "text",
-                        elName: "Text 20",
                         class: "pglb-text pglb-element text p-1 m-1",
                         id: "",
                         isActive: false,
@@ -170,21 +166,18 @@ templateData = [
             },
             {
                 elType: "row",
-                elName: "row 3",
                 class: "pglb-row row p-1 m-1",
                 id: "",
                 isActive: false,
                 children: [
                     {
                         elType: "column",
-                        elName: "column 30",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         isActive: false,
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 300",
                                 class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
@@ -196,14 +189,12 @@ templateData = [
                     },
                     {
                         elType: "column",
-                        elName: "column 31",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         isActive: false,
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 310",
                                 class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
@@ -214,14 +205,12 @@ templateData = [
                     },
                     {
                         elType: "column",
-                        elName: "column 32",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         isActive: false,
                         children: [
                             {
                                 elType: "text",
-                                elName: "Text 320",
                                 class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
@@ -236,28 +225,24 @@ templateData = [
             },
             {
                 elType: "container",
-                    elName: "Container 4",
                     class: "pglb-container container",
                     id: "",
                     isActive: false,
                     children: [
                         {
                             elType: "row",
-                            elName: "row 40",
                             class: "pglb-row row p-1 m-1",
                             id: "",
                             isActive: false,
                             children: [
                                 {
                                     elType: "column",
-                                    elName: "column 400",
                                     class: "pglb-column col p-1 m-1",
                                     id: "",
                                     isActive: false,
                                     children: [
                                         {
                                             elType: "text",
-                                            elName: "Text 4000",
                                             class: "pglb-text pglb-element text p-1 m-1",
                                             id: "",
                                             isActive: false,
@@ -268,14 +253,12 @@ templateData = [
                                 },
                                 {
                                     elType: "column",
-                                    elName: "column 410",
                                     class: "pglb-column col p-1 m-1",
                                     id: "",
                                     isActive: false,
                                     children: [
                                         {
                                             elType: "text",
-                                            elName: "Text 4100",
                                             class: "pglb-text pglb-element text p-1 m-1",
                                             id: "",
                                             isActive: false,
@@ -286,14 +269,12 @@ templateData = [
                                 },
                                 {
                                     elType: "column",
-                                    elName: "column 420",
                                     class: "pglb-column col p-1 m-1",
                                     id: "",
                                     isActive: false,
                                     children: [
                                         {
                                             elType: "text",
-                                            elName: "Text 4200",
                                             class: "pglb-text pglb-element text p-1 m-1",
                                             id: "",
                                             isActive: false,
@@ -310,7 +291,6 @@ templateData = [
             },
             {
                 elType: "image",
-                elName: "image 5",
                 class: "pglb-image pglb-element p-1 m-1",
                 id: "",
                 isActive: false,
@@ -335,7 +315,6 @@ templateData = [
 elementsData = {
     container:{
         elType: "container",
-        elName: "Container 2",
         class: "pglb-container container",
         id: "",
         isActive: false,
@@ -343,7 +322,6 @@ elementsData = {
     },
     row:{
         elType: "row",
-        elName: "row 21",
         class: "pglb-row row p-1 m-1",
         id: "",
         isActive: false,
@@ -351,7 +329,6 @@ elementsData = {
     },
     column:{
         elType: "column",
-        elName: "column 211",
         class: "pglb-column col p-1 m-1",
         id: "",
         isActive: false,
@@ -359,7 +336,6 @@ elementsData = {
     },
     heading:{
         elType: "heading",
-        elName: "heading 211",
         class: "pglb-heading pglb-element p-1 m-1",
         id: "",
         isActive: false,
@@ -383,9 +359,17 @@ elementsData = {
         },
         children: [],
     },
+    div:{
+        elType: "div",
+        class: "pglb-div pglb-element p-1 m-1",
+        id: "",
+        isActive: false,
+        innerHtml: 'Div element',
+        children: [],
+    },
+
     text:{
         elType: "text",
-        elName: "text 211",
         class: "pglb-text pglb-element p-1 m-1",
         id: "",
         isActive: false,
@@ -411,7 +395,6 @@ elementsData = {
 
     emptyRow:{
         elType: "emptyRow",
-        elName: "empty 211",
         class: "pglb-empty text-center w-100 p-1 m-1",
         id: "",
         isActive: false,
@@ -420,7 +403,6 @@ elementsData = {
     },
     emptyColumn:{
         elType: "emptyColumn",
-        elName: "empty 211",
         class: "pglb-empty text-center w-100 p-1 m-1",
         id: "",
         isActive: false,
@@ -430,7 +412,6 @@ elementsData = {
 
     empty:{
         elType: "empty",
-        elName: "empty 211",
         class: "pglb-empty text-center w-100 p-1 m-1",
         id: "",
         isActive: false,
@@ -440,7 +421,6 @@ elementsData = {
 
     link:{
         elType: "link",
-        elName: "link 211",
         class: "pglb-link pglb-element p-1 m-1",
         id: "",
         isActive: false,
@@ -467,7 +447,6 @@ elementsData = {
     },
     image:{
         elType: "image",
-        elName: "image 211",
         class: "pglb-image pglb-element p-1 m-1",
         id: "",
         isActive: false,
@@ -493,24 +472,27 @@ elementsData = {
 function elTreeView(data) {
 
 
-    selectedPath = (editorSettings.selectedElement.path.length != 0) ? editorSettings.selectedElement.path : [0,0,0];
+    selectedPath = (editorSettings.selectedElement.path.length != 0) ? editorSettings.selectedElement.path : [0];
 
-    //console.log(data);
+    childrenMain = data[0].children;
+
 
     html = '';
 
-    for (var index in data){
-
-        element = data[index];
-        elName = (element.elName !== 'undefined') ? element.elName : '';
+    for (var index in childrenMain){
+        element = childrenMain[index];
         elType = (element.elType) ? element.elType : '';
-
-
-        children = element.children;
         element.index = index;
         element.id = elType+"-"+index;
+        element.elPath = [index];
 
 
+        console.log(element);
+
+        console.log([index]);
+        console.log('#####');
+
+        children = element.children;
 
         args = {};
 
@@ -521,6 +503,8 @@ function elTreeView(data) {
 
             selectedPath.splice(0,1);
             args.selectedPath = selectedPath;
+            args.elPath = [index];
+
 
             generateChildHtml(children, args);
         }
@@ -528,6 +512,7 @@ function elTreeView(data) {
 
 
     }
+
 
 
 
@@ -541,10 +526,13 @@ elTreeView(templateData);
 
 function generateChildHtml(data, args){
 
+    elPath = args.elPath;
+
+    childPath = [];
+
 
     for (var index in data){
         element = data[index];
-        elName = element.elName;
         elType = element.elType;
         id = element.id;
         selectedPath = args.selectedPath;
@@ -556,9 +544,19 @@ function generateChildHtml(data, args){
         element.index = index;
 
 
+        childPath.push(index);
+        console.log(childPath);
+
+
+
         html += elementStartTag(element);
 
         if(  children.length > 0){
+
+            //args.elPath = elPath.push(index);
+            //elPath.push(childPath);
+
+
             generateChildHtml(children, args);
         }
 
@@ -664,14 +662,19 @@ function generateElHtmlcontainer(element){
     elId = element.id;
     elClass = element.class;
     elType = element.elType;
+    elPath = (element.elPath != 'undefined') ? element.elPath : '';
+
 
     index = element.index;
     children = (children.length != 0) ? element.children : [elementsData.emptyRow];
 
 
+    elData = {elType:elType,index:index,elId:elId,elClass: elClass };
 
 
-    html += '<div   index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
+
+
+    html += "<div index="+index+" id="+elId+" class="+elClass+" elType="+elType+" elData='"+JSON.stringify(elData)+"'>";
     html += '<div  class="containerSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class="selectElement"><i class="fas fa-check"></i></span><span onclick="removeElement(this, event )" class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_container}}';
@@ -692,6 +695,9 @@ function generateElHtmlrow(element){
     elClass = element.class;
     elType = element.elType;
     index = element.index;
+    elPath = (element.elPath != 'undefined') ? element.elPath : '';
+
+
 
     children = (children.length != 0) ? element.children : [elementsData.emptyColumn];
 
@@ -715,6 +721,10 @@ function generateElHtmlcolumn(element){
     elId = element.id;
     elClass = element.class;
     elType = element.elType;
+    elPath = (element.elPath != 'undefined') ? element.elPath : '';
+
+
+
     children = (children.length != 0) ? element.children : [elementsData.empty];
 
 
@@ -722,21 +732,15 @@ function generateElHtmlcolumn(element){
 
     index = element.index;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
     html += '<div class="columnSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class="selectElement" ><i class="fas fa-check"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     if(children.length == 0){
         html += '<i class="far fa-plus-square"></i>';
     }
 
-
     // html += '{{el_column}}';
     // html += '</div>';
-
-
-
-
-
 
     return html;
 
@@ -751,11 +755,14 @@ function generateElHtmltext(element){
     elType = element.elType;
     innerHtml = element.innerHtml;
     index = element.index;
+    elPath = (element.elPath != 'undefined') ? element.elPath : '';
+
+
 
     children = element.children;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+    html += '<div index="'+index+'"  id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class="selectElement" ><i class="fas fa-check"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     html += innerHtml;
     // html += '</div>';
@@ -773,10 +780,13 @@ function generateElHtmlempty(element){
     elType = element.elType;
     innerHtml = element.innerHtml;
     index = element.index;
+    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
     children = element.children;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+
+
+    html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
     html += innerHtml;
     // html += '</div>';
 
@@ -793,10 +803,13 @@ function generateElHtmlemptyRow(element){
     elType = element.elType;
     innerHtml = element.innerHtml;
     index = element.index;
+    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
     children = element.children;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+
+
+    html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
     html += innerHtml;
     // html += '</div>';
 
@@ -813,10 +826,13 @@ function generateElHtmlemptyColumn(element){
     elType = element.elType;
     innerHtml = element.innerHtml;
     index = element.index;
+    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
     children = element.children;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
+
+
+    html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
     html += innerHtml;
     // html += '</div>';
 
@@ -841,14 +857,17 @@ function generateElHtmllink(element){
     innerHtml = element.innerHtml;
     href = element.href;
     target = element.target;
+    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
 
     index = element.index;
 
     children = element.children;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+
+
+    html += '<div index="'+index+'"  id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class="selectElement" ><i class="fas fa-check"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
 
     html += '<a target="'+target+'" href="'+href+'">';
     html += innerHtml;
@@ -870,11 +889,16 @@ function generateElHtmlheading(element){
     tag = element.tag;
     innerHtml = element.innerHtml;
     index = element.index;
+    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
     children = element.children;
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+
+
+
+
+    html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class="selectElement" ><i class="fas fa-check"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
     html += '<'+tag+'>';
     html += innerHtml;
     html += '</'+tag+'>';
@@ -894,9 +918,13 @@ function generateElHtmlimage(element){
     elType = element.elType;
     index = element.index;
     src = element.src;
+    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
-    html += '<div id="'+elId+'" index="'+index+'" class="'+elClass+'" elType="'+elType+'">';
-    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
+
+
+
+    html += '<div  index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
+    html += '<div class="elementSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class="selectElement" ><i class="fas fa-check"></i></span><span onclick="removeElement(this, event)" class="remove"><i class="fas fa-times"></i></span></div>';
     html += '<img src="'+src+'" />';
     //html += '{{el_text}}';
     // html += '</div>';
@@ -1085,7 +1113,7 @@ function getElementByIndex(templateData, index){
 
         //console.log('Retunred element');
         //console.log(templateData[index[0]]);
-        editorSettings.editElementData.data = templateData[index[0]];
+        //editorSettings.editElementData.data = templateData[index[0]];
 
         //console.log(editorSettings);
 
@@ -1118,9 +1146,6 @@ function getElementByIndex(templateData, index){
 
 
 function selectElement(currentEl, event){
-
-
-
     event.stopPropagation();
 
     el = currentEl;
@@ -1143,7 +1168,9 @@ function selectElement(currentEl, event){
         elIndex = el.getAttribute('index');
         elClass = el.getAttribute('class');
 
-        //el.addClass('active');
+        elData = el.getAttribute('elData');
+
+        console.log(elData);
 
 
         if(elIndex !== null)
@@ -1176,10 +1203,10 @@ function selectElement(currentEl, event){
     //console.log('Main data: ');
     //console.log(templateData[0].children);
 
-    getElementByIndex( templateData[0].children, Indexes);
+    selectedElementData = getElementByIndex( templateData[0].children, Indexes);
 
 
-    console.log(editorSettings);
+    console.log(selectedElementData);
 
 
 }

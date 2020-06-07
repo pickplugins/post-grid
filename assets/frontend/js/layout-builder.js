@@ -8,6 +8,7 @@ editorSettings = {
     selectedElement: {path:[], elType: '', data: []},
     breakpoints:{mobile:'576px', tablet:'992px', desktop:'1200px'},
     editElementData: [],
+    elementTree:[],
 
 }
 
@@ -17,6 +18,10 @@ toolsToggle = document.querySelectorAll('.tools-toggle');
 templatePreview = document.getElementById('template-preview');
 codeDisplay = document.getElementById('codeDisplay');
 selectedObjectSettings = document.getElementById('selectedObjectSettings');
+elementTreeWrap = document.getElementById('tree-list');
+searchElement = document.getElementById('searchElement');
+elementListWrap = document.getElementById('elementListWrap');
+searchResults = document.getElementById('searchResults');
 
 
 
@@ -53,7 +58,66 @@ function tools_tabs_switch(editorSettings){
 
 }
 
+searchElement.addEventListener('keyup', () => {
 
+    keyword = searchElement.value.toLowerCase();
+    console.log(keyword);
+
+    results = [];
+
+    toolsToggle = document.querySelectorAll('#elementListWrap > .tools-toggle');
+    toolsToggle.forEach((item) => {
+
+        item.classList.add("active");
+        item.children[0].style.display = 'none';
+
+            elementList = item.children[1].children[0];
+            elements = elementList.children;
+
+            //console.log(typeof elements);
+
+            for(index in elements){
+                element = elements[index];
+
+                if(typeof(element.innerText) == 'string'){
+                    elName = element.innerText.toLowerCase();
+
+                    //console.log(elName);
+
+                    n = elName.indexOf(keyword);
+                    if(n<0){
+                        //element.hide();
+                        //console.log('hide');
+                        element.style.display = 'none';
+                    }else{
+                        //console.log('show');
+                        //element.show();
+                        element.style.display = 'inline-block';
+                        //searchResults.html(element);
+                        results.push(element);
+                    }
+
+                }
+
+            }
+
+    })
+
+    for(index in results){
+
+        item = results[index];
+
+        console.log(item);
+
+        searchResults.append(item);
+    }
+
+    //searchResults
+
+
+    console.log(results);
+
+});
 
 // Listen click event for tabs
 
@@ -115,6 +179,7 @@ templateData = [
         children: [
             {
                 elType: "text",
+                elName: "Text",
                 class: "pglb-text pglb-element text p-1 m-1",
                 id: "",
                 isActive: false,
@@ -124,12 +189,14 @@ templateData = [
 
             {
                 elType: "column",
+                elName: "Column",
                 class: "pglb-column col p-1 m-1",
                 id: "",
                 isActive: false,
                 children: [
                     {
                         elType: "text",
+                        elName: "Text",
                         class: "pglb-text pglb-element text p-1 m-1",
                         id: "",
                         isActive: false,
@@ -141,18 +208,21 @@ templateData = [
             },
             {
                 elType: "row",
+                elName: "Row",
                 class: "pglb-row row p-1 m-1",
                 id: "",
                 isActive: false,
                 children: [
                     {
                         elType: "column",
+                        elName: "Column",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         isActive: false,
                         children: [
                             {
                                 elType: "text",
+                                elName: "Text",
                                 class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
@@ -164,12 +234,14 @@ templateData = [
                     },
                     {
                         elType: "column",
+                        elName: "Column",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         isActive: false,
                         children: [
                             {
                                 elType: "text",
+                                elName: "Text",
                                 class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
@@ -180,12 +252,14 @@ templateData = [
                     },
                     {
                         elType: "column",
+                        elName: "Column",
                         class: "pglb-column col p-1 m-1",
                         id: "",
                         isActive: false,
                         children: [
                             {
                                 elType: "text",
+                                elName: "Text",
                                 class: "pglb-text pglb-element text p-1 m-1",
                                 id: "",
                                 isActive: false,
@@ -198,7 +272,81 @@ templateData = [
 
                 ],
             },
+            {
+            elType: "container",
+            class: "pglb-container container",
+            id: "",
+            elName: "Container",
+            isActive: false,
+            children: [
+                {
+                    elType: "row",
+                    elName: "Row",
+                    class: "pglb-row row p-1 m-1",
+                    id: "",
+                    isActive: false,
+                    children: [
+                        {
+                            elType: "column",
+                            elName: "Column",
+                            class: "pglb-column col p-1 m-1",
+                            id: "",
+                            isActive: false,
+                            children: [
+                                {
+                                    elType: "text",
+                                    elName: "Text",
+                                    class: "pglb-text pglb-element text p-1 m-1",
+                                    id: "",
+                                    isActive: false,
+                                    innerHtml: "300 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                    children: [],
+                                },
 
+                            ],
+                        },
+                        {
+                            elType: "column",
+                            elName: "Column",
+                            class: "pglb-column col p-1 m-1",
+                            id: "",
+                            isActive: false,
+                            children: [
+                                {
+                                    elType: "text",
+                                    elName: "Text",
+                                    class: "pglb-text pglb-element text p-1 m-1",
+                                    id: "",
+                                    isActive: false,
+                                    innerHtml: "310 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                    children: [],
+                                }
+                            ],
+                        },
+                        {
+                            elType: "column",
+                            elName: "Column",
+                            class: "pglb-column col p-1 m-1",
+                            id: "",
+                            isActive: false,
+                            children: [
+                                {
+                                    elType: "text",
+                                    elName: "Text",
+                                    class: "pglb-text pglb-element text p-1 m-1",
+                                    id: "",
+                                    isActive: false,
+                                    innerHtml: "320 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
+                                    children: [],
+                                }
+                            ],
+                        },
+
+
+                    ],
+                },
+            ],
+            },
         ]
     }
 ]
@@ -359,6 +507,71 @@ elementsData = {
 
 }
 
+html = '';
+
+function elementTree(templateData, elementTreeList) {
+
+    count = 0;
+
+    html += '<ul>';
+
+    for (var index in templateData){
+
+        element = templateData[index];
+        elType = (element.elType) ? element.elType : '';
+        elName = (element.elName) ? element.elName : '';
+
+        children = element.children;
+        html += '<li>';
+        html += '<span>'+elName+'</span>';
+
+        elementTreeList.push([index, elName]);
+
+        //console.log(elementTreeList);
+
+
+
+        if(children.length > 0){
+            elementTree(children, elementTreeList);
+        }
+        html += '</li>';
+    }
+    html += '</ul>';
+
+    //console.log(html);
+
+    return html;
+
+}
+
+
+elementTreeList = [];
+
+html = elementTree(templateData[0].children, elementTreeList);
+//console.log(elementTreeList);
+elementTreeWrap.innerHTML = html;
+
+
+function elementTreeHTMl() {
+    elementTree = editorSettings.elementTree;
+    html = '';
+
+
+    for(index in elementTree){
+        elName = elementTree[index];
+
+        html += '<li>';
+        html += '<span>'+elName+'</span>';
+        html += '</li>';
+    }
+
+
+
+    elementTreeWrap.getElementsByTagName('ul')[0].innerHTML = html;
+
+}
+//elementTreeHTMl();
+
 
 
 
@@ -373,6 +586,7 @@ function elTreeView(data) {
     childrenMain = data[0].children;
 
 
+
     html = '';
 
     for (var index in childrenMain){
@@ -383,13 +597,16 @@ function elTreeView(data) {
 
         children = element.children;
 
+
+
+
         args = {};
 
 
-        console.log('#############: ');
-        console.log( [index]);
-        console.log('elType: '+ elType);
-        console.log( element );
+        // console.log('#############: ');
+        // console.log( [index]);
+        // console.log('elType: '+ elType);
+        // console.log( element );
 
 
 
@@ -410,6 +627,7 @@ function elTreeView(data) {
 
 
     }
+
 
 
 
@@ -438,10 +656,10 @@ function generateChildHtml(data, args){
 
 
         //childPath.push(index);
-        console.log('--#############: ');
-        console.log( [index]);
-        console.log('elType: '+ elType);
-        console.log( element );
+        // console.log('----#############: ');
+        // console.log( [index]);
+        // console.log('elType: '+ elType);
+        // console.log( element );
 
 
 

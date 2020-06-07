@@ -61,15 +61,14 @@ function tools_tabs_switch(editorSettings){
 searchElement.addEventListener('keyup', () => {
 
     keyword = searchElement.value.toLowerCase();
-    console.log(keyword);
-
+    //console.log(typeof  keyword);
     results = [];
 
-    toolsToggle = document.querySelectorAll('#elementListWrap > .tools-toggle');
-    toolsToggle.forEach((item) => {
+    if(keyword.length > 0){
 
-        item.classList.add("active");
-        item.children[0].style.display = 'none';
+
+        toolsToggle = document.querySelectorAll('#elementListWrap > .tools-toggle');
+        toolsToggle.forEach((item) => {
 
             elementList = item.children[1].children[0];
             elements = elementList.children;
@@ -82,18 +81,11 @@ searchElement.addEventListener('keyup', () => {
                 if(typeof(element.innerText) == 'string'){
                     elName = element.innerText.toLowerCase();
 
-                    //console.log(elName);
-
                     n = elName.indexOf(keyword);
                     if(n<0){
-                        //element.hide();
-                        //console.log('hide');
-                        element.style.display = 'none';
+
                     }else{
-                        //console.log('show');
-                        //element.show();
-                        element.style.display = 'inline-block';
-                        //searchResults.html(element);
+
                         results.push(element);
                     }
 
@@ -101,21 +93,33 @@ searchElement.addEventListener('keyup', () => {
 
             }
 
-    })
+        })
 
-    for(index in results){
 
-        item = results[index];
+        for(i in results){
 
-        console.log(item);
+            item = results[i];
 
-        searchResults.append(item);
+            searchResults.append(item);
+        }
+
+        //searchResults
+
+
+        //console.log(results);
+
+        searchResults.style.display = 'block';
+
+    }else{
+
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'none';
     }
 
-    //searchResults
 
 
-    console.log(results);
+
+
 
 });
 

@@ -511,6 +511,9 @@ function post_grid_layout_builder_css(){
             width: 100%;
             padding: 5px;
         }
+        #searchResults{
+            margin: 10px;
+        }
 
     </style>
     <?php

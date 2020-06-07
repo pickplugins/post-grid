@@ -121,32 +121,7 @@ templateData = [
                 innerHtml: "0 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
                 children: [],
             },
-            {
-                elType: "link",
-                class: "pglb-link pglb-element p-1 m-1",
-                id: "",
-                isActive: false,
-                innerHtml: '1 Link text',
-                target: '_blank',
-                href: '#url',
-                style:{
-                    color: {'576px': '', '992px': '', '1200px': ''},
-                    hoverColor: {'576px': '', '992px': '', '1200px': ''},
-                    fontSize: {'576px': '', '992px': '', '1200px': ''},
-                    fontFamily: {'576px': '', '992px': '', '1200px': ''},
-                    textAlign: {'576px': '', '992px': '', '1200px': ''},
-                    fontWeight: {'576px': '', '992px': '', '1200px': ''},
-                    textTransform: {'576px': '', '992px': '', '1200px': ''},
-                    textDecoration: {'576px': '', '992px': '', '1200px': ''},
-                    fontStyle: {'576px': '', '992px': '', '1200px': ''},
-                    lineHeight: {'576px': '', '992px': '', '1200px': ''},
-                    letterSpacing: {'576px': '', '992px': '', '1200px': ''},
-                    zIndex: {'576px': '', '992px': '', '1200px': ''},
-                    margin: {'576px': {top:'', right:'', bottom:'', left: ''}, '992px': {top:'', right:'', bottom:'', left: ''}, '1200px': {top:'', right:'', bottom:'', left: ''}},
-                    padding: {'576px': {top:'', right:'', bottom:'', left: ''}, '992px': {top:'', right:'', bottom:'', left: ''}, '1200px': {top:'', right:'', bottom:'', left: ''}},
-                },
-                children: [],
-            },
+
             {
                 elType: "column",
                 class: "pglb-column col p-1 m-1",
@@ -223,86 +198,7 @@ templateData = [
 
                 ],
             },
-            {
-                elType: "container",
-                    class: "pglb-container container",
-                    id: "",
-                    isActive: false,
-                    children: [
-                        {
-                            elType: "row",
-                            class: "pglb-row row p-1 m-1",
-                            id: "",
-                            isActive: false,
-                            children: [
-                                {
-                                    elType: "column",
-                                    class: "pglb-column col p-1 m-1",
-                                    id: "",
-                                    isActive: false,
-                                    children: [
-                                        {
-                                            elType: "text",
-                                            class: "pglb-text pglb-element text p-1 m-1",
-                                            id: "",
-                                            isActive: false,
-                                            innerHtml: "4000 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                            children: [],
-                                        }
-                                    ],
-                                },
-                                {
-                                    elType: "column",
-                                    class: "pglb-column col p-1 m-1",
-                                    id: "",
-                                    isActive: false,
-                                    children: [
-                                        {
-                                            elType: "text",
-                                            class: "pglb-text pglb-element text p-1 m-1",
-                                            id: "",
-                                            isActive: false,
-                                            innerHtml: "4100 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                            children: [],
-                                        }
-                                    ],
-                                },
-                                {
-                                    elType: "column",
-                                    class: "pglb-column col p-1 m-1",
-                                    id: "",
-                                    isActive: false,
-                                    children: [
-                                        {
-                                            elType: "text",
-                                            class: "pglb-text pglb-element text p-1 m-1",
-                                            id: "",
-                                            isActive: false,
-                                            innerHtml: "4200 The paragraph element is the default element type.  It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love.",
-                                            children: [],
-                                        }
-                                    ],
-                                },
 
-
-                            ],
-                        }
-                    ],
-            },
-            {
-                elType: "image",
-                class: "pglb-image pglb-element p-1 m-1",
-                id: "",
-                isActive: false,
-                src: 'http://localhost/wp/wp-content/uploads/2018/11/Untitled-1.png',
-                style:{
-                    width: {'576px': '', '992px': '', '1200px': ''},
-                    height: {'576px': '', '992px': '', '1200px': ''},
-                    margin: {'576px': '', '992px': '', '1200px': ''},
-                    padding: {'576px': '', '992px': '', '1200px': ''},
-                },
-                children: [],
-            },
         ]
     }
 ]
@@ -484,17 +380,20 @@ function elTreeView(data) {
         elType = (element.elType) ? element.elType : '';
         element.index = index;
         element.id = elType+"-"+index;
-        element.elPath = [index];
-
-
-        console.log(element);
-
-        console.log([index]);
-        console.log('#####');
 
         children = element.children;
 
         args = {};
+
+
+        console.log('#############: ');
+        console.log( [index]);
+        console.log('elType: '+ elType);
+        console.log( element );
+
+
+
+
 
 
         html += elementStartTag(element);
@@ -503,7 +402,6 @@ function elTreeView(data) {
 
             selectedPath.splice(0,1);
             args.selectedPath = selectedPath;
-            args.elPath = [index];
 
 
             generateChildHtml(children, args);
@@ -526,36 +424,32 @@ elTreeView(templateData);
 
 function generateChildHtml(data, args){
 
-    elPath = args.elPath;
-
-    childPath = [];
-
 
     for (var index in data){
         element = data[index];
         elType = element.elType;
         id = element.id;
+
         selectedPath = args.selectedPath;
-
-
         children = element.children;
 
         element.id = (id) ? id : '';
         element.index = index;
 
 
-        childPath.push(index);
-        console.log(childPath);
+        //childPath.push(index);
+        console.log('--#############: ');
+        console.log( [index]);
+        console.log('elType: '+ elType);
+        console.log( element );
+
+
 
 
 
         html += elementStartTag(element);
 
         if(  children.length > 0){
-
-            //args.elPath = elPath.push(index);
-            //elPath.push(childPath);
-
 
             generateChildHtml(children, args);
         }
@@ -662,7 +556,6 @@ function generateElHtmlcontainer(element){
     elId = element.id;
     elClass = element.class;
     elType = element.elType;
-    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
 
     index = element.index;
@@ -674,7 +567,7 @@ function generateElHtmlcontainer(element){
 
 
 
-    html += "<div index="+index+" id="+elId+" class="+elClass+" elType="+elType+" elData='"+JSON.stringify(elData)+"'>";
+    html += '<div index="'+index+'" id="'+elId+'" class="'+elClass+'" elType="'+elType+'">';
     html += '<div  class="containerSettings"><span onclick="customizeElement(this, event)" class="customizeElement"><i class="far fa-edit"></i></span><span onclick="selectElement(this, event)" class="selectElement"><i class="fas fa-check"></i></span><span onclick="removeElement(this, event )" class="remove"><i class="fas fa-times"></i></span></div>';
 
     // html += '{{el_container}}';
@@ -695,7 +588,6 @@ function generateElHtmlrow(element){
     elClass = element.class;
     elType = element.elType;
     index = element.index;
-    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
 
 
@@ -721,7 +613,6 @@ function generateElHtmlcolumn(element){
     elId = element.id;
     elClass = element.class;
     elType = element.elType;
-    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
 
 
@@ -755,7 +646,6 @@ function generateElHtmltext(element){
     elType = element.elType;
     innerHtml = element.innerHtml;
     index = element.index;
-    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
 
 
@@ -780,7 +670,6 @@ function generateElHtmlempty(element){
     elType = element.elType;
     innerHtml = element.innerHtml;
     index = element.index;
-    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
     children = element.children;
 
@@ -803,7 +692,6 @@ function generateElHtmlemptyRow(element){
     elType = element.elType;
     innerHtml = element.innerHtml;
     index = element.index;
-    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
     children = element.children;
 
@@ -826,7 +714,6 @@ function generateElHtmlemptyColumn(element){
     elType = element.elType;
     innerHtml = element.innerHtml;
     index = element.index;
-    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
     children = element.children;
 
@@ -857,7 +744,6 @@ function generateElHtmllink(element){
     innerHtml = element.innerHtml;
     href = element.href;
     target = element.target;
-    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
 
     index = element.index;
@@ -889,7 +775,6 @@ function generateElHtmlheading(element){
     tag = element.tag;
     innerHtml = element.innerHtml;
     index = element.index;
-    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
     children = element.children;
 
@@ -918,7 +803,6 @@ function generateElHtmlimage(element){
     elType = element.elType;
     index = element.index;
     src = element.src;
-    elPath = (element.elPath != 'undefined') ? element.elPath : '';
 
 
 

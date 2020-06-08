@@ -97,12 +97,6 @@ function post_grid_layout_builder(){
                                 <div class="element-list">
                                     <div class="layoutElement" onclick="addElement(event, {elType:'author_name'})" >Author Name</div>
                                     <div class="layoutElement" onclick="addElement(event, {elType:'author_avatar'})" >Author Avatar</div>
-                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_title'})" >Term Title</div>
-                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_id'})" >Term ID</div>
-
-                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_edit_link'})" >Term Edit Link</div>
-
-                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_description'})" >Term Description</div>
                                     <div class="layoutElement" onclick="addElement(event, {elType:'date_title'})">Date Title</div>
                                     <div class="layoutElement" onclick="addElement(event, {elType:'month_title'})">Month Title</div>
                                     <div class="layoutElement" onclick="addElement(event, {elType:'year_title'})">Year Title</div>
@@ -116,6 +110,28 @@ function post_grid_layout_builder(){
                             </div>
 
                         </div>
+
+
+                        <div class="tools-toggle">
+                            <div class="toggle-header">Taxonomy Elements</div>
+                            <div class="toggle-content">
+                                <div class="element-list">
+                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_title'})" >Term Title</div>
+                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_id'})" >Term ID</div>
+                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_edit_link'})" >Term Edit Link</div>
+                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_description'})" >Term Description</div>
+                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_ancestors'})" >Term Ancestors</div>
+                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_parent'})" >Term Parent</div>
+                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_parent'})" >Term Parent</div>
+                                    <div class="layoutElement" onclick="addElement(event, {elType:'term_slug'})" >Term Slug</div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
 
                         <div class="tools-toggle">
                             <div class="toggle-header">Global Elements</div>

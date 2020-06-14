@@ -82,7 +82,7 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     if($media_source == 'featured_image'){
         $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($item_post_id), $featured_img_size );
         $alt_text = get_post_meta(get_post_thumbnail_id($item_post_id), '_wp_attachment_image_alt', true);
-        $thumb_url = $thumb['0'];
+        $thumb_url = isset($thumb['0']) ? $thumb['0'] : '';
 
         if(!empty($thumb_url)){
             if($thumb_linked=='yes'){

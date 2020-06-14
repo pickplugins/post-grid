@@ -287,6 +287,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
 
     $posts_per_page = !empty($post_grid_meta_options['posts_per_page']) ? $post_grid_meta_options['posts_per_page'] : 10;
     $offset = isset($post_grid_meta_options['offset']) ? $post_grid_meta_options['offset'] : '0';
+    $ignore_paged = isset($post_grid_meta_options['ignore_paged']) ? $post_grid_meta_options['ignore_paged'] : 'no';
+
     $exclude_post_id = isset($post_grid_meta_options['exclude_post_id']) ? $post_grid_meta_options['exclude_post_id'] : '';
     $include_post_id = isset($post_grid_meta_options['include_post_id']) ? $post_grid_meta_options['include_post_id'] : '';
 
@@ -519,6 +521,24 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id){
             'value'		=> $offset,
             'default'		=> '',
             'placeholder'		=> '3',
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+        $args = array(
+            'id'		=> 'ignore_paged',
+            'parent'		=> 'post_grid_meta_options',
+            'title'		=> __('Ignore paged/page query','woocommerce-products-slider'),
+            'details'	=> __('Ignore paged/page variable from query.','woocommerce-products-slider'),
+            'type'		=> 'select',
+            //'for'		=> $taxonomy,
+            //'multiple'		=> true,
+            'value'		=> $ignore_paged,
+            'default'		=> 'no',
+            'args'		=> array(
+                'no'=>__('No','woocommerce-products-slider'),
+                'yes'=>__('Yes','woocommerce-products-slider'),
+            ),
         );
 
         $settings_tabs_field->generate_field($args, $post_id);

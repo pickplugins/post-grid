@@ -159,6 +159,7 @@ function post_grid_posts_loop($args){
     $offset = isset($post_grid_options['offset']) ? (int)$post_grid_options['offset'] : '';
     $posts_per_page = isset($post_grid_options['posts_per_page']) ? $post_grid_options['posts_per_page'] : 10;
     $query_orderby_meta_key = isset($post_grid_options['query_orderby_meta_key']) ? $post_grid_options['query_orderby_meta_key'] : '';
+    $ignore_paged = isset($post_grid_options['ignore_paged']) ? $post_grid_options['ignore_paged'] : 'no';
 
 
     $taxonomies = !empty($post_grid_options['taxonomies']) ? $post_grid_options['taxonomies'] : array();
@@ -217,6 +218,9 @@ function post_grid_posts_loop($args){
         $paged = 1;
     }
 
+    if($ignore_paged == 'yes'){
+        $paged = 1;
+    }
 
 
 

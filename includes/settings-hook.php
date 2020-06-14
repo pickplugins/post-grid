@@ -86,6 +86,9 @@ if(!function_exists('post_grid_settings_content_help_support')) {
 
         $settings_tabs_field = new settings_tabs_field();
 
+        $layouts_pro_url = '';
+        $layouts_pro_url_json = '';
+
         if (is_plugin_active('post-grid-pro/post-grid-pro.php')){
             $layouts_pro_url = post_grid_pro_plugin_url.'sample-data/post-grid-layouts.xml';
             $layouts_pro_url_json = post_grid_pro_plugin_url.'sample-data/post-grid-layouts.json';

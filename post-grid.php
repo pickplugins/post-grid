@@ -3,7 +3,7 @@
 Plugin Name: Post Grid by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/
 Description: Awesome post grid for query post from any post type and display on grid.
-Version: 2.0.64
+Version: 2.0.65
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -21,7 +21,7 @@ if( !class_exists( 'PostGrid' )){
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid');
-            define('post_grid_version', '2.0.64');
+            define('post_grid_version', '2.0.65');
 
 
 
@@ -42,7 +42,6 @@ if( !class_exists( 'PostGrid' )){
 
             include('includes/settings-hook.php');
             include('templates/post-grid-hook.php');
-            include('templates/layout-builder-hook.php');
 
             include('includes/post-grid-layout-elements.php');
             include('includes/media-source-options.php');
@@ -164,12 +163,6 @@ if( !class_exists( 'PostGrid' )){
 
             wp_register_style('font-awesome-4', post_grid_plugin_url.'assets/global/css/font-awesome-4.css');
             wp_register_style('font-awesome-5', post_grid_plugin_url.'assets/global/css/font-awesome-5.css');
-
-            wp_register_script('layout-builder', post_grid_plugin_url.'assets/frontend/js/layout-builder.js', array('jquery'), time());
-
-            wp_register_style('bootstrap', post_grid_plugin_url.'assets/global/css/bootstrap.min.css');
-            //wp_register_style('bootstrap-grid', post_grid_plugin_url.'assets/global/css/bootstrap-grid.css');
-
 
         }
 

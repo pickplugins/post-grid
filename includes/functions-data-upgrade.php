@@ -1239,10 +1239,8 @@ function post_grid_import_xml_layouts(){
 
     $response = array();
     $user_id = get_current_user_id();
-    $source = sanitize_text_field($_POST['source']);
-    $skip = sanitize_text_field($_POST['skip']);
-
-    //$xml_source = 'http://localhost/wp/wp-content/plugins/post-grid/sample-data/post-grid-layouts.json';
+    $source = isset($_POST['source']) ? sanitize_text_field($_POST['source']) : '';
+    $skip = isset($_POST['skip']) ? sanitize_text_field($_POST['skip']) : '';
 
 
     if($skip == 'yes'){
@@ -1260,15 +1258,21 @@ function post_grid_import_xml_layouts(){
         die();
     }
 
+    if(!empty($source)){
+        $json_obj = file_get_contents($source);
+    }else{
+        $json_obj = '';
+    }
 
-    $json_obj = file_get_contents($source);
+
 
     //$xml_json = json_encode($html_obj);
     $xml_arr = json_decode($json_obj, true);
 
 
-    $items = $xml_arr['rss']['channel']['item'];
+    $items = isset($xml_arr['rss']['channel']['item']) ? $xml_arr['rss']['channel']['item'] : array();
 
+    if(!empty($items))
     foreach ($items as $item){
 
         $post_title = isset($item['title']) ? $item['title'] : '';

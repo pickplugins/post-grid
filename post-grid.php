@@ -3,7 +3,7 @@
 Plugin Name: Post Grid by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/
 Description: Awesome post grid for query post from any post type and display on grid.
-Version: 2.0.66
+Version: 2.0.67
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -21,7 +21,7 @@ if( !class_exists( 'PostGrid' )){
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid');
-            define('post_grid_version', '2.0.66');
+            define('post_grid_version', '2.0.67');
 
 
 
@@ -31,7 +31,6 @@ if( !class_exists( 'PostGrid' )){
             include('includes/classes/class-shortcodes.php');
             include('includes/classes/class-settings.php');
             include('includes/classes/class-settings-tabs.php');
-            include('includes/classes/class-settings-tabs-reviews.php');
 
 
             include('includes/classes/class-admin-notices.php');
@@ -70,18 +69,7 @@ if( !class_exists( 'PostGrid' )){
             register_activation_hook(__FILE__, array($this, '_activation'));
             register_deactivation_hook(__FILE__, array($this, '_deactivation'));
 
-            $args = array(
-                'title' => 'Hope you enjoy <b>post grid</b> plugin ',
-                'option' => 'post_grid_info',
-                'review_link' => 'https://wordpress.org/support/plugin/post-grid/reviews/#new-post',
-                'support_link' => 'https://www.pickplugins.com/forum/',
-                'documentation_link' => 'https://www.pickplugins.com/documentation/post-grid/',
-                'tutorials_link' => 'https://www.youtube.com/playlist?list=PL0QP7T2SN94Yut5Y0MSVg1wqmqWz0UYpt',
-            );
 
-           new settings_tabs_reviews($args);
-
-           //echo $settings_tabs_reviews;
 
 
             $args = array(

@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.66
+	Stable tag: 2.0.67
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -216,15 +216,17 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 == Changelog ==
 
+	= 2.0.67 =
+    * 2020-06-16 remove - remove request popup for reviews.
+
 	= 2.0.66 =
     * 2020-06-16 fix - undefined index issue fixed. functions.php line 85
     * 2020-06-16 fix - undefined function excerpt_remove_blocks issue fixed.
-
-
+    * 2020-06-16 remove - remove popup for reviews.
 
 
 	= 2.0.65 =
-    * 2020-06-14 add - Ignore paged/page variable from query to display same posts on paginated page.
+    * 2020-06-04 add - Ignore paged/page variable from query to display same posts on paginated page.
 
 	= 2.0.64 =
     * 2020-06-04 fix - layout import skip added.

@@ -20,14 +20,9 @@ class class_post_grid_shortcodes{
             $atts
         );
 
-        $atts = apply_filters('post_grid_atts',$atts);
+        $atts = apply_filters('post_grid_atts', $atts);
 
         $grid_id = $atts['id'];
-
-
-
-
-        //wp_reset_postdata();
 
         ob_start();
 

@@ -545,27 +545,6 @@ class post_grid_meta_boxs{
             <a class="button" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" target="_blank">Submit Reviews</a> <a class="button" href="https://wordpress.org/support/plugin/post-grid/#new-topic-0" target="_blank">Ask wordpress.org</a><p>We spent thousand+ hours to development on this plugin, please submit your reviews wisely.</p><p>If you have any issue with this plugin please submit our forums or contact our support first.</p><p class="description">Your feedback and reviews are most important things to keep our development on track. If you have time please submit us five star <a href="https://wordpress.org/support/plugin/post-grid/reviews/"><span style="color: orange"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></a> reviews.</p>
 
 
-
-
-            <h3>Video Tutorials</h3>
-            <p class="description">Some tutorial contain pro features.</p>
-            <div class="faq">
-                <?php
-
-
-                ?>
-
-            </div>
-
-
-
-
-
-
-
-
-
-
         </div>
         <?php
 

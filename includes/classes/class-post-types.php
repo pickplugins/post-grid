@@ -71,7 +71,7 @@ class class_post_grid_post_types{
 
 
         register_post_type( "post_grid_layout",
-            apply_filters( "wcps_posttype_post_grid_layout", array(
+            apply_filters( "post_grid_posttype_post_grid_layout", array(
                 'labels' => array(
                     'name' 					=> $plural,
                     'singular_name' 		=> $singular,

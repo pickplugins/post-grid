@@ -3,6 +3,8 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
+
+
 function post_grid_get_first_post($post_type = 'post'){
 
     $args = array(
@@ -20,7 +22,6 @@ function post_grid_get_first_post($post_type = 'post'){
             $product_id = get_the_id();
             return $product_id;
         endwhile;
-    else:
 
     endif;
 }

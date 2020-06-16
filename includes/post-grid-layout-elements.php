@@ -1743,7 +1743,12 @@ function post_grid_layout_element_excerpt($args){
         $the_post = get_post($post_id);
         $post_content = isset($the_post->post_content) ? $the_post->post_content : '';
         $post_content = strip_shortcodes( $post_content );
-        $post_excerpt = excerpt_remove_blocks( $post_content );
+
+        if(function_exists('excerpt_remove_blocks')){
+            $post_excerpt = excerpt_remove_blocks( $post_content );
+        }
+
+
 
     }elseif($excerpt_source == 'excerpt_content'){
 
@@ -1753,7 +1758,10 @@ function post_grid_layout_element_excerpt($args){
 
         $post_excerpt = !empty($post_excerpt) ? $post_excerpt : $post_content;
         $post_excerpt = strip_shortcodes( $post_excerpt );
-        $post_excerpt = excerpt_remove_blocks( $post_excerpt );
+        if(function_exists('excerpt_remove_blocks')){
+            $post_excerpt = excerpt_remove_blocks( $post_excerpt );
+        }
+
 
     }
 
@@ -2118,7 +2126,10 @@ function post_grid_layout_element_excerpt_read_more($args){
         $the_post = get_post($post_id);
         $post_content = isset($the_post->post_content) ? $the_post->post_content : '';
         $post_content = strip_shortcodes( $post_content );
-        $post_excerpt = excerpt_remove_blocks( $post_content );
+        if(function_exists('excerpt_remove_blocks')){
+            $post_excerpt = excerpt_remove_blocks( $post_content );
+        }
+
 
     }elseif($excerpt_source == 'excerpt_content'){
 
@@ -2128,7 +2139,10 @@ function post_grid_layout_element_excerpt_read_more($args){
 
         $post_excerpt = !empty($post_excerpt) ? $post_excerpt : $post_content;
         $post_excerpt = strip_shortcodes( $post_excerpt );
-        $post_excerpt = excerpt_remove_blocks( $post_excerpt );
+        if(function_exists('excerpt_remove_blocks')){
+            $post_excerpt = excerpt_remove_blocks( $post_excerpt );
+        }
+
 
     }
 
@@ -5789,7 +5803,7 @@ function post_grid_layout_element_share_button($args){
 			<a target="'.$link_target.'" href="https://twitter.com/intent/tweet?url='.$post_link.'&text='.$post_title.'"><i class="fab fa-twitter-square"></i></a>
 		</span>';
 
-    $share_button_html = apply_filters('post_grid_filter_share_buttons', $share_button_html);
+    $share_button_html = apply_filters('post_grid_share_buttons', $share_button_html);
 
     ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> share_button ">

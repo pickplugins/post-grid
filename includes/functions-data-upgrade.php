@@ -1261,7 +1261,7 @@ function post_grid_import_xml_layouts(){
             array(
                 'post_title'    => $post_title,
                 'post_content'  => '',
-                'post_status'   => 'draft',
+                'post_status'   => 'publish',
                 'post_type'   	=> 'post_grid_layout',
                 'post_author'   => $user_id,
             )

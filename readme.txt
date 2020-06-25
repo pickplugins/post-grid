@@ -216,10 +216,13 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 == Changelog ==
 
+	= 2.0.61 =
+    * 2020-05-29 add - reviews request popup box added.
+
 	= 2.0.60 =
     * 2020-05-24 add - addon "Search & Filter" added
     * 2020-05-24 add - addon "Post/Page Templates" added
-    * 2020-05-24 add - import layouts notice added.
+    * 2020-05-29 add - import layouts notice added.
 
 
 	= 2.0.59 =

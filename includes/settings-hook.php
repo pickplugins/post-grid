@@ -391,7 +391,46 @@ if(!function_exists('post_grid_settings_content_buy_pro')) {
                 </tr>
 
 
+                <tr>
+                    <td colspan="3" class="col-features">
+                        <h3><?php echo __('Layouts library','post-grid'); ?></h3>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td class="col-features"><?php echo __('5 free layouts','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+
+                <tr>
+                    <td class="col-features"><?php echo __('32 pro layouts','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+
+                <tr>
+                    <td class="col-features"><?php echo __('20+ elements','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+
+                <tr>
+                    <td class="col-features"><?php echo __('Element - Custom meta field','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+
+                <tr>
+                    <td class="col-features"><?php echo __('Element - Custom HTML','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="col-features"><?php echo __('Element - Taxonomy & terms','post-grid'); ?> </td>
+                    <td><i class="fas fa-times"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
 
 
 
@@ -516,19 +555,17 @@ if(!function_exists('post_grid_settings_content_buy_pro')) {
                 </tr>
 
 
-
-
-
-
-
-
                 <tr>
                     <td colspan="3" class="col-features">
                         <h3><?php echo __('View Types','post-grid'); ?></h3>
                     </td>
                 </tr>
 
-
+                <tr>
+                    <td class="col-features"><?php echo __('Normal Grid','post-grid'); ?> </td>
+                    <td><i class="fas fa-check"></i></td>
+                    <td><i class="fas fa-check"></i></td>
+                </tr>
                 <tr>
                     <td class="col-features"><?php echo __('Filterable','post-grid'); ?> </td>
                     <td><i class="fas fa-times"></i></td>
@@ -775,6 +812,7 @@ if(!function_exists('post_grid_settings_content_buy_pro')) {
                     <td><i class="fas fa-times"></i></td>
                     <td><i class="fas fa-check"></i></td>
                 </tr>
+
                 <tr>
                     <td class="col-features"><?php echo __('WooCommerce','post-grid'); ?> </td>
                     <td><i class="fas fa-times"></i></td>

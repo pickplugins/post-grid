@@ -22,6 +22,8 @@ if( !class_exists( 'PostGrid' )){
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid');
             define('post_grid_version', '2.0.67');
+            //define('post_grid_server_url', 'http://localhost/wp/');
+            define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
 
 
 
@@ -45,6 +47,7 @@ if( !class_exists( 'PostGrid' )){
             include('includes/post-grid-layout-elements.php');
             include('includes/media-source-options.php');
             include('includes/layout-elements/3rd-party.php');
+            include('includes/functions-layout-api.php');
 
 
             include('includes/functions-data-upgrade.php');
@@ -185,6 +188,14 @@ if( !class_exists( 'PostGrid' )){
             wp_register_style('bootstrap-grid', post_grid_plugin_url.'assets/global/css/bootstrap-grid.css');
 
             wp_register_style('post-grid-addons', post_grid_plugin_url.'assets/admin/css/addons.css');
+
+            wp_register_script('post_grid_layouts', post_grid_plugin_url.'assets/admin/js/scripts-layouts.js', array('jquery'));
+
+            wp_localize_script('post_grid_layouts', 'post_grid_ajax', array(
+                    'post_grid_ajaxurl' => admin_url('admin-ajax.php'),
+                    'ajax_nonce' => wp_create_nonce('post_grid_ajax_nonce'),
+                )
+            );
 
             if ($screen->id == 'post_grid'){
 

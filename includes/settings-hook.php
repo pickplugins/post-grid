@@ -106,59 +106,6 @@ if(!function_exists('post_grid_settings_content_help_support')) {
 
             <?php
 
-            ob_start();
-            ?>
-
-            <p><b>Post Gird</b> provide some ready layouts to get started, please follow the steps bellow to import default layouts.</p>
-
-            <p><?php echo __('Import free layouts', 'post-grid'); ?></p>
-
-            <a class="button" href="<?php echo esc_url_raw($layouts_free_url); ?>"><?php echo __('Download XML', 'post-grid'); ?></a>
-            <a class="button post-grid-import-layouts"  href="<?php echo esc_url_raw($layouts_free_url_json); ?>"><?php echo __('Import automatically', 'post-grid'); ?></a>
-            <a class="button post-grid-import-layouts" skip="yes"  href="<?php echo esc_url_raw($layouts_free_url_json); ?>"><?php echo __('Skip', 'post-grid'); ?></a>
-
-
-
-            <p>Import manually</p>
-
-            <ul>
-                <li>Step - 1: Go to <a href="<?php echo admin_url(); ?>import.php">import</a> menu and install & activate <b>WordPress</b> Importer plugin. click to "Install Now" button to install.</li>
-                <li>Step - 2: Download following xml file by clicking button bellow, save the file on your local machine.</li>
-                <li>Step - 3: Go to importer page <a href="<?php echo admin_url(); ?>import.php?import=wordpress">Import WordPress</a> and chose the downloaded file and then click to <b>Upload file and import</b>.</li>
-                <li>Step - 4: Go to <a href="<?php echo admin_url(); ?>edit.php?post_type=post_grid_layout">Post Grid layouts</a> page to see imported layouts.</li>
-            </ul>
-
-
-
-            <?php
-            if($layouts_pro_url):
-                ?>
-                <p><?php echo __('Download premium layouts', 'post-grid'); ?></p>
-                <a class="button" href="<?php echo esc_url_raw($layouts_pro_url); ?>"><?php echo __('Download Pro XML', 'post-grid'); ?></a>
-                <a class="button post-grid-import-layouts" href="<?php echo esc_url_raw($layouts_pro_url_json); ?>"><?php echo __('Import automatically', 'post-grid'); ?></a>
-                <a class="button post-grid-import-layouts" skip="yes"  href="<?php echo esc_url_raw($layouts_pro_url_json); ?>"><?php echo __('Skip', 'post-grid'); ?></a>
-
-            <?php
-            endif;
-            ?>
-
-
-            <?php
-
-            $html = ob_get_clean();
-
-            $args = array(
-                'id'		=> 'import_layouts',
-                //'parent'		=> '',
-                'title'		=> __('Import layouts','post-grid'),
-                'details'	=> '',
-                'type'		=> 'custom_html',
-                'html'		=> $html,
-
-            );
-
-            $settings_tabs_field->generate_field($args);
-
 
 
             ob_start();

@@ -5243,11 +5243,12 @@ function post_grid_layout_element_tags($args){
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
     $max_count = isset($element['max_count']) ? (int) $element['max_count'] : 3;
-    $wrapper_html = isset($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
+    $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
     $separator = isset($element['separator']) ? $element['separator'] : ', ';
 
 
     $term_list = wp_get_post_terms( $post_id, 'post_tag', array( 'fields' => 'all' ) );
+
 
     $categories_html = '';
     $term_total_count = count($term_list);

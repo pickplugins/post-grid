@@ -346,7 +346,7 @@ class post_grid_meta_boxs{
                 $args = array(
                     'id'		=> 'grid_type',
                     'parent'		=> 'post_grid_meta_options',
-                    'title'		=> __('View Type','team'),
+                    'title'		=> __('View Type','post-grid'),
                     'details'	=> '',
                     'type'		=> 'radio',
                     'value'		=> $grid_type,

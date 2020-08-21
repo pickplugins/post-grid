@@ -370,7 +370,7 @@ else
                                                 ?>
                                                 <br />
                                                 <?php _e('CSS:', 'post-grid' ); ?> <br />
-                                                <a target="_blank" href="http://www.pickplugins.com/demo/post-grid/sample-css-for-layout-editor/"><?php _e('Sample css', 'post-grid' ); ?></a><br />
+                                                <a target="_blank" href="https://www.pickplugins.com/demo/post-grid/sample-css-for-layout-editor/"><?php _e('Sample css', 'post-grid' ); ?></a><br />
                                                 <textarea autocorrect="off" autocapitalize="off" spellcheck="false"  style="width:100%" class="custom_css" item_id="<?php echo $key; ?>" name="post_grid_layout_content[<?php echo $layout_content; ?>][<?php echo $i; ?>][<?php echo $item_key; ?>]"><?php echo str_replace(array("\n", "\r"), '', $item_info); ?></textarea><br />
 
 

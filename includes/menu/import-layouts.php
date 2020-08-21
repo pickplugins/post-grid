@@ -19,15 +19,15 @@ wp_enqueue_script('post_grid_layouts');
 
 ?>
 <div class="wrap">
-    <h2><?php _e('Post Grid - Import Layouts', 'woocommerce-products-slider'); ?></h2>
+    <h2><?php _e('Post Grid - Layouts library', 'post-grid'); ?></h2>
 
     <div class="wpblockhub-search">
 
         <div class="wp-filter">
             <ul class="filter-links">
-                <li class=""><a href="<?php echo $_SERVER['REQUEST_URI']; ?>&tabs=latest" class="<?php if($tabs == 'latest') echo 'current'; ?>" aria-current="page"><?php _e('Latest', 'woocommerce-products-slider'); ?></a> </li>
-                <li class=""><a href="<?php echo $_SERVER['REQUEST_URI']; ?>&tabs=free" class="<?php if($tabs == 'free') echo 'current'; ?>" aria-current="page"><?php _e('Free', 'woocommerce-products-slider'); ?></a> </li>
-                <li class=""><a href="<?php echo $_SERVER['REQUEST_URI']; ?>&tabs=pro" class="<?php if($tabs == 'pro') echo 'current'; ?>" aria-current="page"><?php _e('Premium', 'woocommerce-products-slider'); ?></a> </li>
+                <li class=""><a href="<?php echo $_SERVER['REQUEST_URI']; ?>&tabs=latest" class="<?php if($tabs == 'latest') echo 'current'; ?>" aria-current="page"><?php _e('Latest', 'post-grid'); ?></a> </li>
+                <li class=""><a href="<?php echo $_SERVER['REQUEST_URI']; ?>&tabs=free" class="<?php if($tabs == 'free') echo 'current'; ?>" aria-current="page"><?php _e('Free', 'post-grid'); ?></a> </li>
+                <li class=""><a href="<?php echo $_SERVER['REQUEST_URI']; ?>&tabs=pro" class="<?php if($tabs == 'pro') echo 'current'; ?>" aria-current="page"><?php _e('Premium', 'post-grid'); ?></a> </li>
             </ul>
             <form class="block-search-form">
                 <span class="loading"></span>
@@ -60,8 +60,8 @@ wp_enqueue_script('post_grid_layouts');
             ?>
             <div class="return-empty">
                 <ul>
-                    <li><?php echo __("Unexpected Error! The query returned with an error.", 'woocommerce-products-slider'); ?></li>
-                    <li><?php echo __("Make sure your internet connection is up.", 'woocommerce-products-slider'); ?></li>
+                    <li><?php echo __("Unexpected Error! The query returned with an error.", 'post-grid'); ?></li>
+                    <li><?php echo __("Make sure your internet connection is up.", 'post-grid'); ?></li>
                 </ul>
             </div>
             <?php
@@ -92,7 +92,7 @@ wp_enqueue_script('post_grid_layouts');
                     //var_dump($item);
 
                     $post_id      = isset($item->post_id) ? $item->post_id : '';
-                    $block_title        = isset($item->title) ? $item->title : __('No title', 'woocommerce-products-slider');
+                    $block_title        = isset($item->title) ? $item->title : __('No title', 'post-grid');
                     $post_url           = isset($item->post_url) ? $item->post_url : '';
                     $download_count           = isset($item->download_count) ? $item->download_count : 0;
 

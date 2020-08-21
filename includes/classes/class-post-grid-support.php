@@ -12,19 +12,19 @@ class class_post_grid_support{
         $our_plugins = array(
             array(
                 'title'=>'Post Grid',
-                'link'=>'http://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/',
+                'link'=>'https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/',
                 'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2015/12/3814-post-grid-thumb-500x262.jpg',
             ),
 
             array(
                 'title'=>'Woocommerce Products Slider',
-                'link'=>'http://www.pickplugins.com/item/woocommerce-products-slider-for-wordpress/',
+                'link'=>'https://www.pickplugins.com/item/woocommerce-products-slider-for-wordpress/',
                 'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2016/03/4357-woocommerce-products-slider-thumb-500x250.jpg',
             ),
 
             array(
                 'title'=>'Team Showcase',
-                'link'=>'http://www.pickplugins.com/item/team-responsive-meet-the-team-grid-for-wordpress/',
+                'link'=>'https://www.pickplugins.com/item/team-responsive-meet-the-team-grid-for-wordpress/',
                 'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2016/06/5145-team-thumb-500x250.jpg',
             ),
 

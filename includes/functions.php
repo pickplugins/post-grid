@@ -2,6 +2,26 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
+//add_image_size( 'custom-size', 435, 435, true );
+//add_image_size( 'center-435', 220, 220, array( 'center', 'center' ) );
+
+add_action('post_grid_loop', 'post_grid_loop_count', 0);
+
+function post_grid_loop_count($args){
+
+    $loop_count = isset($args['loop_count']) ? $args['loop_count'] : '';
+    $paged = isset($args['paged']) ? $args['paged'] : '';
+    $posts_per_page = isset($args['posts_per_page']) ? $args['posts_per_page'] : '';
+
+    $loop_count_start = ($paged-1)*$posts_per_page;
+    $loop_count_start = $loop_count_start +1;
+
+    $loop_count = $loop_count_start+$loop_count;
+
+    echo '<div>'.$loop_count.'</div>';
+
+}
+
 
 
 
@@ -1022,7 +1042,7 @@ function post_grid_layout_add_elements(){
 		<input type="hidden" value="'.$item_key.'" name="post_grid_layout_content['.$layout.']['.$unique_id.'][key]" />
 		<input type="hidden" value="'.$item_name.'" name="post_grid_layout_content['.$layout.']['.$unique_id.'][name]" />
 		CSS: <br />
-		<a target="_blank" href="http://www.pickplugins.com/demo/post-grid/sample-css-for-layout-editor/">Sample css</a><br />
+		<a target="_blank" href="https://www.pickplugins.com/demo/post-grid/sample-css-for-layout-editor/">Sample css</a><br />
 		<textarea class="custom_css" item_id="'.$unique_id.'" name="post_grid_layout_content['.$layout.']['.$unique_id.'][css]"  style="width:100%" spellcheck="false" autocapitalize="off" autocorrect="off">'.$item_css.'</textarea><br /><br />
 		
 		CSS Hover: <br />

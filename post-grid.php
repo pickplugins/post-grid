@@ -3,7 +3,7 @@
 Plugin Name: Post Grid by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/
 Description: Awesome post grid for query post from any post type and display on grid.
-Version: 2.0.67
+Version: 2.0.71
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -21,7 +21,7 @@ if( !class_exists( 'PostGrid' )){
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid');
-            define('post_grid_version', '2.0.67');
+            define('post_grid_version', '2.0.71');
             //define('post_grid_server_url', 'http://localhost/wp/');
             define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
 
@@ -214,7 +214,15 @@ if( !class_exists( 'PostGrid' )){
 
             }
 
+            if ($screen->id == 'post_grid_layout'){
 
+                wp_enqueue_style('select2');
+                wp_enqueue_script('select2');
+
+                $settings_tabs_field = new settings_tabs_field();
+                $settings_tabs_field->admin_scripts();
+
+            }
 
             if ($screen->id == 'post_grid_page_layout_editor'){
 

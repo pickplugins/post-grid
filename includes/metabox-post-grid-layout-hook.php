@@ -190,7 +190,7 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                             console.log(id);
 
                             tag_options_html = layout_elements_option[tag_id];
-                            var res = tag_options_html.replace("{input_name}", input_name+'['+id+']');
+                            var res = tag_options_html.replace(/{input_name}/g, input_name+'['+id+']');
 
                             $('.layout-elements').append(res);
 

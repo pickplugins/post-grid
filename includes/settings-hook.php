@@ -262,7 +262,7 @@ if(!function_exists('post_grid_settings_content_buy_pro')) {
 
             <p><?php echo __('If you love our plugin and want more feature please consider to buy pro version.', 'post-grid'); ?></p>
             <a class="button" href="https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/?ref=dashobard"><?php echo __('Buy premium', 'post-grid'); ?></a>
-            <a class="button" href="http://www.pickplugins.com/demo/post-grid/?ref=dashobard"><?php echo __('See all demo', 'post-grid'); ?></a>
+            <a class="button" href="https://www.pickplugins.com/demo/post-grid/?ref=dashobard"><?php echo __('See all demo', 'post-grid'); ?></a>
 
             <h2><?php echo __('See the differences','post-grid'); ?></h2>
 

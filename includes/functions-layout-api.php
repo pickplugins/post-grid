@@ -2,7 +2,7 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
-
+add_shortcode('post_grid_ajax_fetch_block_hub_by_id', 'post_grid_ajax_fetch_block_hub_by_id');
 
 /*
  * Ajax Function to fetch block from http://post_grid.com/ server
@@ -19,7 +19,7 @@ function post_grid_ajax_fetch_block_hub_by_id(){
 
     $responses = array();
 
-    $post_id = isset($_POST['post_id']) ? sanitize_text_field($_POST['post_id']) : 0;
+    $post_id = isset($_POST['post_id']) ? sanitize_text_field($_POST['post_id']) : 51616;
 
     $post_grid_settings = get_option('post_grid_license');
     $license_key = isset($post_grid_settings['license_key']) ? $post_grid_settings['license_key'] : '';
@@ -43,25 +43,29 @@ function post_grid_ajax_fetch_block_hub_by_id(){
      *
      * */
     if (is_wp_error($server_response)){
-        $responses['error'] = __('There is a server error', 'woocommerce-products-slider');
+        $responses['error'] = __('There is a server error', 'post-grid');
     }
     else{
 
-        $response_data = unserialize(wp_remote_retrieve_body($server_response));
+        $response_data = json_decode(wp_remote_retrieve_body($server_response), true);
 
         //$response_data = json_decode($response_data);
+        //error_log(serialize($response_data));
+
+
+
+
 
         $post_title = isset($response_data['post_title']) ? ($response_data['post_title']) : '';
-        $post_id = isset($response_data['post_id']) ? ($response_data['post_id']) : '';
-
 
         $layout_elements_data = isset($response_data['layout_elements_data']) ? ($response_data['layout_elements_data']) : array();
         $custom_scripts = isset($response_data['custom_scripts']) ? ($response_data['custom_scripts']) : array();
         $layout_options = isset($response_data['layout_options']) ? ($response_data['layout_options']) : array();
         $post_found = isset($response_data['post_found']) ? ($response_data['post_found']) : 'no';
 
+        //echo '<pre>'.var_export($post_found, true).'</pre>';
 
-        //error_log(serialize($layout_elements_data));
+        //error_log(serialize($post_title));
 
 
 //        $post_found = isset($response_data->post_found) ? sanitize_text_field($response_data->post_found) : 'no';

@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.4
-	Stable tag: 2.0.67
+	Stable tag: 2.0.71
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Almost everything is ready to create post grid from any post types, with few cli
 
 ### Post Grid by  [http://pickplugins.com](http://pickplugins.com)
 
-* [See the Live demo](http://www.pickplugins.com/demo/post-grid/?ref=wordpress.org)
+* [See the Live demo](https://www.pickplugins.com/demo/post-grid/?ref=wordpress.org)
 * [Buy Premium](https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/?ref=wordpress.org)
 * [Documentation](http://pickplugins.com/documentation/post-grid/?ref=wordpress.org)
 * [Support](https://www.pickplugins.com/support/?ref=wordpress.org)
@@ -213,8 +213,27 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 1. screenshot-1
 2. screenshot-2
+3. screenshot-3
+4. screenshot-4
+5. screenshot-5
+6. screenshot-6
+7. screenshot-7
+8. screenshot-8
 
 == Changelog ==
+
+	= 2.0.71 =
+    * 2020-08-17 fix - post grid elements action hook order issue fixed.
+
+	= 2.0.70 =
+    * 2020-08-08 fix - layout editor lazy load issue fixed.
+
+	= 2.0.69 =
+    * 2020-07-05 fix - Layouts editor saving issue fixed.
+
+
+	= 2.0.68 =
+    * 2020-07-04 add - Layouts library added.
 
 	= 2.0.67 =
     * 2020-06-16 remove - remove request popup for reviews.

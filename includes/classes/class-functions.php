@@ -70,9 +70,9 @@ class class_post_grid_functions{
 		
 						$media_source = array(
 
-						    'featured_image' =>array('id'=>'featured_image','title'=>__('Featured Image', 'woocommerce-products-slider'),'checked'=>'yes'),
-                            'first_image'=>array('id'=>'first_image','title'=>__('First images from content', 'woocommerce-products-slider'),'checked'=>'yes'),
-                            'empty_thumb'=>array('id'=>'empty_thumb','title'=>__('Empty thumbnail', 'woocommerce-products-slider'),'checked'=>'yes'),
+						    'featured_image' =>array('id'=>'featured_image','title'=>__('Featured Image', 'post-grid'),'checked'=>'yes'),
+                            'first_image'=>array('id'=>'first_image','title'=>__('First images from content', 'post-grid'),'checked'=>'yes'),
+                            'empty_thumb'=>array('id'=>'empty_thumb','title'=>__('Empty thumbnail', 'post-grid'),'checked'=>'yes'),
 
 
 						);

@@ -4,7 +4,7 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-add_action('post_grid_main', 'post_grid_main_lazy', 90);
+add_action('post_grid_main', 'post_grid_main_lazy', 5);
 
 function post_grid_main_lazy($atts){
 
@@ -39,7 +39,7 @@ function post_grid_main_lazy($atts){
 
 
 
-add_action('post_grid_main', 'post_grid_main_container', 90);
+add_action('post_grid_main', 'post_grid_main_container', 10);
 
 function post_grid_main_container($atts){
 
@@ -134,7 +134,7 @@ function post_grid_container_search($args){
 
 
 
-add_action('post_grid_container', 'post_grid_posts_loop');
+add_action('post_grid_container', 'post_grid_posts_loop', 10);
 
 function post_grid_posts_loop($args){
 
@@ -289,10 +289,14 @@ function post_grid_posts_loop($args){
             <?php
             do_action('post_grid_before_loop', $args);
 
+            //echo '<pre>'.var_export($post_grid_wp_query, true).'</pre>';
+
             while ( $post_grid_wp_query->have_posts() ) : $post_grid_wp_query->the_post();
                 $post_id = get_the_ID();
                 $args['post_id'] = $post_id;
                 $args['loop_count'] = $loop_count;
+                $args['paged'] = $paged;
+                $args['posts_per_page'] = $posts_per_page;
 
                 //echo '####'.$loop_count;
 
@@ -323,7 +327,7 @@ function post_grid_posts_loop($args){
 
 }
 
-add_action('post_grid_loop_no_post', 'post_grid_loop_no_post');
+add_action('post_grid_loop_no_post', 'post_grid_loop_no_post', 10);
 
 function post_grid_loop_no_post($args){
 
@@ -341,7 +345,7 @@ function post_grid_loop_no_post($args){
 
 
 
-add_action('post_grid_loop', 'post_grid_loop');
+add_action('post_grid_loop', 'post_grid_loop', 10);
 
 function post_grid_loop($args){
 
@@ -412,7 +416,7 @@ function post_grid_loop($args){
 
 
 
-add_action('post_grid_item_layout', 'post_grid_item_layout_media');
+add_action('post_grid_item_layout', 'post_grid_item_layout_media', 10);
 
 function post_grid_item_layout_media($args){
 
@@ -466,7 +470,7 @@ function post_grid_item_layout_media($args){
 
 
 
-add_action('post_grid_item_layout', 'post_grid_item_layout_content');
+add_action('post_grid_item_layout', 'post_grid_item_layout_content', 20);
 
 function post_grid_item_layout_content($args){
 
@@ -527,7 +531,7 @@ function post_grid_item_layout_content($args){
 
 }
 
-add_action('post_grid_container', 'post_grid_container_old_layout_css');
+add_action('post_grid_container', 'post_grid_container_old_layout_css', 20);
 
 function post_grid_container_old_layout_css($args){
 
@@ -613,7 +617,7 @@ function post_grid_container_old_layout_css($args){
 
 }
 
-add_action('post_grid_item_layout', 'post_grid_item_layout_new');
+add_action('post_grid_item_layout', 'post_grid_item_layout_new', 30);
 
 function post_grid_item_layout_new($args){
 
@@ -997,7 +1001,7 @@ function post_grid_view_type_css_grid($args){
 
 
 
-add_action('post_grid_container', 'post_grid_main_scripts', 90);
+add_action('post_grid_container', 'post_grid_main_scripts', 80);
 
 function post_grid_main_scripts($args){
     $post_grid_options = $args['options'];

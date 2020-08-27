@@ -59,6 +59,8 @@ function post_grid_main_container($atts){
     $masonry_enable = !empty($post_grid_options['masonry_enable']) ? $post_grid_options['masonry_enable'] : 'no';
     $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
 
+
+
     $post_grid_js_args = array(
         'id' => $grid_id,
         'lazy_load' => $lazy_load_enable,
@@ -807,6 +809,8 @@ function post_grid_view_type_css_grid($args){
     }else{
         $items_height = '220px';
     }
+
+
 
     if($items_media_height_style == 'auto_height'){
         $items_media_height = 'auto';

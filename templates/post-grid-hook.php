@@ -378,10 +378,15 @@ function post_grid_loop($args){
 
     }
 
+
+    $custom_class = !empty($post_options['custom_class']) ? $post_options['custom_class'] : '';
+
     $item_css_class = array();
 
     $item_css_class['item'] = 'item';
     $item_css_class['item_id'] = 'item-'.$post_id;
+    $item_css_class['custom_class'] = $custom_class;
+
 
     $item_css_class['skin'] = 'skin '.$skin;
     $item_css_class['odd_even'] = $odd_even_class;

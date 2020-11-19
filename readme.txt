@@ -3,8 +3,8 @@
 	Donate link: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/?ref=wordpress.org
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
-	Tested up to: 5.4
-	Stable tag: 2.0.71
+	Tested up to: 5.5
+	Stable tag: 2.0.74
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -221,6 +221,16 @@ then paste this shortcode anywhere in your page to display grid<br />
 8. screenshot-8
 
 == Changelog ==
+
+	= 2.0.74 =
+    * 2020-11-19 add - filter hook post_grid_link_to_args added
+    * 2020-11-19 add - filter hook post_grid_author_link_to_args added
+
+	= 2.0.73 =
+    * 2020-09-17 fix - unnecessary function removed
+
+	= 2.0.72 =
+    * 2020-09-17 fix - security issue fixed.
 
 	= 2.0.71 =
     * 2020-08-17 fix - post grid elements action hook order issue fixed.

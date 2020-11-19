@@ -49,6 +49,7 @@ wp_enqueue_script('post_grid_layouts');
         $response = wp_remote_get(add_query_arg($api_params, post_grid_server_url), array('timeout' => 20, 'sslverify' => false));
 
 
+        //echo '<pre>'.var_export($response, true).'</pre>';
 
         /*
          * Check is there any server error occurred
@@ -70,11 +71,11 @@ wp_enqueue_script('post_grid_layouts');
         else{
 
             $response_data = json_decode(wp_remote_retrieve_body($response));
-
             $post_data = isset($response_data->posts) ? $response_data->posts : array();
             $post_found = isset($response_data->post_found) ? sanitize_text_field($response_data->post_found) : array();
             $max_num_pages = isset($response_data->max_num_pages) ? sanitize_text_field($response_data->max_num_pages) : 0;
 
+            //echo '<pre>'.var_export($response_data, true).'</pre>';
             //var_dump($response_data->ajax_nonce);
         }
 

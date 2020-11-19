@@ -18,7 +18,7 @@ function post_grid_main_lazy($atts){
 
 
     ?>
-    <div id="post-grid-lazy-<?php echo $grid_id; ?>" class="post-grid-lazy"><img alt="<?php echo __('Post Grid lazy loading','post-grid'); ?>" src="<?php echo $lazy_load_image_src; ?>"/></div>
+    <div id="post-grid-lazy-<?php echo $grid_id; ?>" class="post-grid-lazy"><img src="<?php echo $lazy_load_image_src; ?>"/></div>
     <script>
         jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
             jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').fadeOut();
@@ -58,8 +58,6 @@ function post_grid_main_container($atts){
     $lazy_load_enable = isset($post_grid_options['lazy_load_enable']) ? $post_grid_options['lazy_load_enable'] : 'grid';
     $masonry_enable = !empty($post_grid_options['masonry_enable']) ? $post_grid_options['masonry_enable'] : 'no';
     $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
-
-
 
     $post_grid_js_args = array(
         'id' => $grid_id,
@@ -291,14 +289,10 @@ function post_grid_posts_loop($args){
             <?php
             do_action('post_grid_before_loop', $args);
 
-            //echo '<pre>'.var_export($post_grid_wp_query, true).'</pre>';
-
             while ( $post_grid_wp_query->have_posts() ) : $post_grid_wp_query->the_post();
                 $post_id = get_the_ID();
                 $args['post_id'] = $post_id;
                 $args['loop_count'] = $loop_count;
-                $args['paged'] = $paged;
-                $args['posts_per_page'] = $posts_per_page;
 
                 //echo '####'.$loop_count;
 
@@ -378,15 +372,10 @@ function post_grid_loop($args){
 
     }
 
-
-    $custom_class = !empty($post_options['custom_class']) ? $post_options['custom_class'] : '';
-
     $item_css_class = array();
 
     $item_css_class['item'] = 'item';
     $item_css_class['item_id'] = 'item-'.$post_id;
-    $item_css_class['custom_class'] = $custom_class;
-
 
     $item_css_class['skin'] = 'skin '.$skin;
     $item_css_class['odd_even'] = $odd_even_class;
@@ -814,8 +803,6 @@ function post_grid_view_type_css_grid($args){
     }else{
         $items_height = '220px';
     }
-
-
 
     if($items_media_height_style == 'auto_height'){
         $items_media_height = 'auto';

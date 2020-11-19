@@ -29,7 +29,6 @@ function post_grid_post_options_content_options($tab, $post_id){
     $post_skin = !empty($post_grid_post_settings['post_skin']) ? $post_grid_post_settings['post_skin'] : 'flat';
     $custom_thumb_source = !empty($post_grid_post_settings['custom_thumb_source']) ? $post_grid_post_settings['custom_thumb_source'] : '';
     $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : '';
-    $custom_class = !empty($post_grid_post_settings['custom_class']) ? $post_grid_post_settings['custom_class'] : '';
 
 
 
@@ -66,17 +65,6 @@ function post_grid_post_options_content_options($tab, $post_id){
         $settings_tabs_field->generate_field($args, $post_id);
 
 
-        $args = array(
-            'id'		=> 'custom_class',
-            'parent'		=> 'post_grid_post_settings',
-            'title'		=> __('Custom classes','post-grid'),
-            'details'	=> __('You can add custom classes for this post.','post-grid'),
-            'type'		=> 'text',
-            'value'		=> $custom_class,
-            'default'		=> '',
-        );
-
-        $settings_tabs_field->generate_field($args, $post_id);
 
 
 

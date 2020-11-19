@@ -602,9 +602,11 @@ function post_grid_layout_element_option_title($parameters){
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'post_link',
-                'args'		=> array(
-                    'post_link'=> __('Post link', 'post-grid'),
-                    'none'=> __('None', 'post-grid'),
+                'args'		=> apply_filters('post_grid_link_to_args',
+					array(
+						'post_link'=> __('Post link', 'post-grid'),
+						'none'=> __('None', 'post-grid'),
+					)
                 ),
             );
 
@@ -814,11 +816,23 @@ function post_grid_layout_element_title($args){
         $title = wp_trim_words($title, $char_limit, $char_end);
     }
 
+
     ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title ">
         <?php if($link_to == 'post_link'): ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($title); ?></a>
-        <?php else: ?>
+
+		<?php elseif($link_to == 'custom_link'):
+
+            $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+			$thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
+
+			//var_dump($thumb_custom_url);
+
+            ?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($thumb_custom_url); ?>"><?php echo esc_html($title); ?></a>
+
+		<?php else: ?>
             <?php echo esc_html($title); ?>
         <?php endif; ?>
 
@@ -953,11 +967,12 @@ function post_grid_layout_element_option_title_link($parameters){
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
-                'args'		=> array(
-                    'post_link'=> __('Post link', 'post-grid'),
-                    //'meta_value'=> __('Meta value', 'post-grid'),
-                    'none'=> __('None', 'post-grid'),
-                ),
+                'args'		=> apply_filters('post_grid_link_to_args',
+					array(
+						'post_link'=> __('Post link', 'post-grid'),
+						'none'=> __('None', 'post-grid'),
+					)
+				),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1165,6 +1180,15 @@ function post_grid_layout_element_title_link($args){
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title_link ">
         <?php if($link_to == 'post_link'): ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($title); ?></a>
+		<?php elseif($link_to == 'custom_link'):
+
+			$post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+			$thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
+
+			//var_dump($thumb_custom_url);
+
+			?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($thumb_custom_url); ?>"><?php echo esc_html($title); ?></a>
         <?php else: ?>
             <?php echo esc_html($title); ?>
         <?php endif; ?>
@@ -2303,11 +2327,12 @@ function post_grid_layout_element_option_read_more($parameters){
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
-                'args'		=> array(
-                    'post_link'=> __('Post link', 'post-grid'),
-                    //'meta_value'=> __('Meta value', 'post-grid'),
-                    'none'=> __('None', 'post-grid'),
-                ),
+                'args'		=> apply_filters('post_grid_link_to_args',
+					array(
+						'post_link'=> __('Post link', 'post-grid'),
+						'none'=> __('None', 'post-grid'),
+					)
+				),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -2469,6 +2494,13 @@ function post_grid_layout_element_read_more($args){
     ?>
     <?php if($link_to == 'post_link'): ?>
         <a class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more " target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
+	<?php elseif($link_to == 'custom_link'):
+
+		$post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+		$thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
+
+		?>
+        <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($thumb_custom_url); ?>"><?php echo esc_html($title); ?></a>
     <?php else: ?>
         <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> read_more ">
             <?php echo esc_html($read_more_text); ?>
@@ -3099,10 +3131,12 @@ function post_grid_layout_element_option_thumb($parameters){
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
-                'args'		=> array(
-                    'post_link'=> __('Post link', 'post-grid'),
-                    'none'=> __('None', 'post-grid'),
-                ),
+                'args'		=> apply_filters('post_grid_link_to_args',
+					array(
+						'post_link'=> __('Post link', 'post-grid'),
+						'none'=> __('None', 'post-grid'),
+					)
+				),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3292,6 +3326,16 @@ function post_grid_layout_element_thumb($args){
         if($link_to == 'post_link'):
             ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><img src="<?php echo esc_url_raw($thumb_url); ?>"></a>
+		<?php elseif($link_to == 'custom_link'):
+
+			$post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+			$thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
+
+			//var_dump($thumb_custom_url);
+
+			?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($thumb_custom_url); ?>"><img src="<?php echo esc_url_raw($thumb_url); ?>"></a>
+
         <?php
         else:
             ?>
@@ -3454,11 +3498,12 @@ function post_grid_layout_element_option_thumb_link($parameters){
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
-                'args'		=> array(
-                    'post_link'=> __('Post link', 'post-grid'),
-                    //'meta_value'=> __('Meta value', 'post-grid'),
-                    'none'=> __('None', 'post-grid'),
-                ),
+                'args'		=> apply_filters('post_grid_link_to_args',
+					array(
+						'post_link'=> __('Post link', 'post-grid'),
+						'none'=> __('None', 'post-grid'),
+					)
+				),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3647,6 +3692,18 @@ function post_grid_layout_element_thumb_link($args){
         if($link_to == 'post_link'):
             ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><img src="<?php echo esc_url_raw($thumb_url); ?>"></a>
+
+		<?php elseif($link_to == 'custom_link'):
+
+			$post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+			$thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
+
+			//var_dump($thumb_custom_url);
+
+			?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($thumb_custom_url); ?>"><img src="<?php echo esc_url_raw($thumb_url); ?>"></a>
+
+
         <?php
         else:
             ?>
@@ -3814,10 +3871,12 @@ function post_grid_layout_element_option_post_date($parameters){
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
-                'args'		=> array(
-                    'post_link'=> __('Post link', 'post-grid'),
-                    'none'=> __('None', 'post-grid'),
-                ),
+                'args'		=> apply_filters('post_grid_link_to_args',
+					array(
+						'post_link'=> __('Post link', 'post-grid'),
+						'none'=> __('None', 'post-grid'),
+					)
+				),
             );
 
             $settings_tabs_field->generate_field($args);
@@ -3978,7 +4037,19 @@ function post_grid_layout_element_post_date($args){
         if($link_to == 'post_link'):
             ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($post_date); ?></a>
-            <?php
+
+		<?php elseif($link_to == 'custom_link'):
+
+			$post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+			$thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
+
+			//var_dump($thumb_custom_url);
+
+			?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($thumb_custom_url); ?>"><?php echo esc_html($post_date); ?></a>
+
+
+        <?php
         else:
             ?>
             <?php echo esc_html($post_date); ?>
@@ -4109,12 +4180,18 @@ function post_grid_layout_element_option_author($parameters){
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
-                'args'		=> array(
-                    'post_link'=> __('Post link', 'post-grid'),
-                    'author_posts_link'=> __('Author posts link', 'post-grid'),
-                    'none'=> __('None', 'post-grid'),
-                ),
+
+				'args'		=> apply_filters('post_grid_author_link_to_args',
+					array(
+						'post_link'=> __('Post link', 'post-grid'),
+						'author_posts_link'=> __('Author posts link', 'post-grid'),
+						'none'=> __('None', 'post-grid'),
+					)
+				),
+
             );
+
+
 
             $settings_tabs_field->generate_field($args);
 
@@ -4279,7 +4356,21 @@ function post_grid_layout_element_author($args){
         if($link_to == 'post_link'):
             ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($post_author); ?></a>
-        <?php
+
+		<?php elseif($link_to == 'custom_link'):
+
+			$post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+			$thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
+
+			//var_dump($thumb_custom_url);
+
+			?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
+
+
+
+
+		<?php
         elseif($link_to == 'author_posts_link'):
             $post_author_link = get_author_posts_url( get_the_author_meta( 'ID' ) ) ;
 
@@ -4418,12 +4509,14 @@ function post_grid_layout_element_option_author_link($parameters){
                 'type'		=> 'select',
                 'value'		=> $link_to,
                 'default'		=> 'none',
-                'args'		=> array(
-                    'post_link'=> __('Post link', 'post-grid'),
-                    'author_posts_link'=> __('Author posts link', 'post-grid'),
-                    'none'=> __('None', 'post-grid'),
-                ),
-            );
+				'args'		=> apply_filters('post_grid_author_link_to_args',
+					array(
+						'post_link'=> __('Post link', 'post-grid'),
+						'author_posts_link'=> __('Author posts link', 'post-grid'),
+						'none'=> __('None', 'post-grid'),
+					)
+				),
+			);
 
             $settings_tabs_field->generate_field($args);
 
@@ -4583,7 +4676,21 @@ function post_grid_layout_element_author_link($args){
         if($link_to == 'post_link'):
             ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($post_link); ?>"><?php echo esc_html($post_author); ?></a>
-        <?php
+
+
+		<?php elseif($link_to == 'custom_link'):
+
+			$post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
+			$thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
+
+			//var_dump($thumb_custom_url);
+
+			?>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url_raw($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
+
+
+
+		<?php
         elseif($link_to == 'author_posts_link'):
             $post_author_link = get_author_posts_url( get_the_author_meta( 'ID' ) ) ;
 

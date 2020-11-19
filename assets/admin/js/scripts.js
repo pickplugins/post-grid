@@ -43,49 +43,6 @@ jQuery(document).ready(function($){
 	})
 
 
-	$(document).on('click', '.post-grid-import-layouts', function(event){
-
-		event.preventDefault();
-
-		xml_source = $(this).attr('href');
-		skip = $(this).attr('skip');
-
-		$(this).html('Please wait...');
-
-
-		console.log(xml_source);
-
-		jQuery.ajax(
-			{
-				type: 'POST',
-				context: this,
-				url: post_grid_ajax.post_grid_ajaxurl,
-				data: {"action": "post_grid_import_xml_layouts","source": xml_source,"skip": skip },
-				success: function(response) {
-					var data = JSON.parse( response );
-
-					success = data['success'];
-					skip_success = data['skip_success'];
-
-					$(this).html(success);
-					$(this).html(skip_success);
-
-
-					console.log(success);
-
-				}
-			});
-
-	})
-
-
-
-
-
-
-
-
-
 
 
 });

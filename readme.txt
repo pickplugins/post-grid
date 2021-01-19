@@ -3,7 +3,7 @@
 	Donate link: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/?ref=wordpress.org
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
-	Tested up to: 5.5
+	Tested up to: 5.6
 	Stable tag: 2.0.74
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html

@@ -59,12 +59,29 @@ function post_grid_main_container($atts){
     $masonry_enable = !empty($post_grid_options['masonry_enable']) ? $post_grid_options['masonry_enable'] : 'no';
     $grid_type = isset($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
 
-    $post_grid_js_args = array(
-        'id' => $grid_id,
-        'lazy_load' => $lazy_load_enable,
-        'masonry_enable' => $masonry_enable,
-        'view_type' => $grid_type,
-    );
+    $page_type = '';
+
+    $post_grid_js_args = array();
+
+    if(is_category() || is_tag() || is_tax()){
+        $term = get_queried_object();
+        $taxonomy = $term->taxonomy;
+        $term_id = $term->term_id;
+
+        $post_grid_js_args['page_type'] = 'taxonomy';
+        $post_grid_js_args['page_taxonomy'] = $taxonomy;
+        $post_grid_js_args['page_tax_term'] = $term_id;
+
+    }
+
+
+    $post_grid_js_args['id'] = $grid_id;
+    $post_grid_js_args['lazy_load'] = $lazy_load_enable;
+    $post_grid_js_args['masonry_enable'] = $masonry_enable;
+    $post_grid_js_args['view_type'] = $grid_type;
+
+
+
 
     $post_grid_js_args = apply_filters('post_grid_js_args', $post_grid_js_args, $args);
 
@@ -138,7 +155,7 @@ add_action('post_grid_container', 'post_grid_posts_loop', 10);
 
 function post_grid_posts_loop($args){
 
-   global $wp_query;
+    global $wp_query;
 
     $post_grid_options = $args['options'];
     $grid_id = $args['grid_id'];

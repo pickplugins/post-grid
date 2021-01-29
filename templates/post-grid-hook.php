@@ -640,6 +640,7 @@ function post_grid_item_layout_new($args){
 
     if(empty($layout_id)) return;
 
+    $layout_id = apply_filters('post_grid_item_layout_id', $layout_id);
 
     $layout_elements_data = get_post_meta( $layout_id, 'layout_elements_data', true );
 

@@ -235,16 +235,16 @@ class post_grid_meta_boxs{
             'active' => ($current_tab == 'query_post') ? true : false,
         );
 
-        $settings_tabs[] = array(
-            'id' => 'skin_layout',
-            'title' => sprintf(__('%s Skin & Layout (Old)','post-grid'), '<i class="fas fa-magic"></i>'),
-            'priority' => 20,
-            'active' => ($current_tab == 'skin_layout') ? true : false,
-        );
+//        $settings_tabs[] = array(
+//            'id' => 'skin_layout',
+//            'title' => sprintf(__('%s Skin & Layout (Old)','post-grid'), '<i class="fas fa-magic"></i>'),
+//            'priority' => 20,
+//            'active' => ($current_tab == 'skin_layout') ? true : false,
+//        );
 
         $settings_tabs[] = array(
             'id' => 'layouts',
-            'title' => sprintf(__('%s Layouts (New)','post-grid'),'<i class="fas fa-qrcode"></i>'),
+            'title' => sprintf(__('%s Layouts','post-grid'),'<i class="fas fa-qrcode"></i>'),
             'priority' => 30,
             'active' => ($current_tab == 'layouts') ? true : false,
         );
@@ -256,7 +256,7 @@ class post_grid_meta_boxs{
             'title' => sprintf(__('%s Grid settings','post-grid'), '<i class="fas fa-th"></i>'),
             'priority' => 35,
             'active' => ($current_tab == 'grid_settings') ? true : false,
-            'data_visible' => 'grid',
+            'data_visible' => 'grid filterable',
             'hidden' => ($grid_type == 'grid')? false : true ,
         );
 

@@ -18,7 +18,7 @@ function post_grid_main_lazy($atts){
 
 
     ?>
-    <div id="post-grid-lazy-<?php echo $grid_id; ?>" class="post-grid-lazy"><img src="<?php echo $lazy_load_image_src; ?>"/></div>
+    <div id="post-grid-lazy-<?php echo $grid_id; ?>" class="post-grid-lazy"><img alt="<?php echo __('Post Grid lazy load', 'post-grid');?>" src="<?php echo $lazy_load_image_src; ?>"/></div>
     <script>
         jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
             jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').fadeOut();
@@ -640,7 +640,6 @@ function post_grid_item_layout_new($args){
 
     if(empty($layout_id)) return;
 
-    $layout_id = apply_filters('post_grid_item_layout_id', $layout_id);
 
     $layout_elements_data = get_post_meta( $layout_id, 'layout_elements_data', true );
 

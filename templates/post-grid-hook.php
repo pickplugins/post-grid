@@ -14,25 +14,29 @@ function post_grid_main_lazy($atts){
 
     $lazy_load_enable = isset($post_grid_options['lazy_load_enable']) ? $post_grid_options['lazy_load_enable'] : 'grid';
     $lazy_load_image_src = isset($post_grid_options['lazy_load_image_src']) ? $post_grid_options['lazy_load_image_src'] : '';
+    $lazy_load_alt_text = isset($post_grid_options['lazy_load_alt_text']) ? $post_grid_options['lazy_load_alt_text'] : '';
 
 
 
     ?>
-    <div id="post-grid-lazy-<?php echo $grid_id; ?>" class="post-grid-lazy"><img alt="<?php echo __('Post Grid lazy load', 'post-grid');?>" src="<?php echo $lazy_load_image_src; ?>"/></div>
-    <script>
-        jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
-            jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').fadeOut();
-            jQuery('#post-grid-<?php echo $grid_id; ?>').fadeIn();
-        })
-    </script>
-    <style type="text/css">
-        #post-grid-<?php echo $grid_id; ?>{display: none;}
-        .post-grid-lazy{
-            text-align: center;
-        }
-    </style>
     <?php
-
+    if($lazy_load_enable == 'yes'):
+        ?>
+        <div id="post-grid-lazy-<?php echo $grid_id; ?>" class="post-grid-lazy"><img alt="<?php echo $lazy_load_alt_text; ?>" src="<?php echo $lazy_load_image_src; ?>"/></div>
+        <script>
+            jQuery('#post-grid-lazy-<?php echo $grid_id; ?>').ready(function($){
+                $('#post-grid-lazy-<?php echo $grid_id; ?>').fadeOut();
+                $('#post-grid-<?php echo $grid_id; ?>').fadeIn();
+            })
+        </script>
+        <style type="text/css">
+            #post-grid-<?php echo $grid_id; ?>{display: none;}
+            .post-grid-lazy{
+                text-align: center;
+            }
+        </style>
+        <?php
+    endif;
 
 
 }

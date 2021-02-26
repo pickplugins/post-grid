@@ -38,10 +38,10 @@ class settings_tabs_field{
 
         wp_enqueue_script( 'jquery.lazy' );
 
-
         if (function_exists('wp_enqueue_editor')) {
             wp_enqueue_editor();
         }
+
 
     }
 

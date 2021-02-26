@@ -97,6 +97,8 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
 
     $lazy_load_enable = !empty($post_grid_meta_options['lazy_load_enable']) ? $post_grid_meta_options['lazy_load_enable'] : 'yes';
     $lazy_load_image_src = !empty($post_grid_meta_options['lazy_load_image_src']) ? $post_grid_meta_options['lazy_load_image_src'] : '';
+    $lazy_load_alt_text = !empty($post_grid_meta_options['lazy_load_alt_text']) ? $post_grid_meta_options['lazy_load_alt_text'] : '';
+
     $load_fontawesome = !empty($post_grid_meta_options['load_fontawesome']) ? $post_grid_meta_options['load_fontawesome'] : '';
 
     $container_padding = !empty($post_grid_meta_options['container']['padding']) ? $post_grid_meta_options['container']['padding'] : '10px';
@@ -144,6 +146,20 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
         );
 
         $settings_tabs_field->generate_field($args, $post_id);
+
+        $args = array(
+            'id'		=> 'lazy_load_alt_text',
+            'parent'		=> 'post_grid_meta_options',
+            'title'		=> __('Lazy load image alt text','post-grid'),
+            'details'	=> __('Set custom lazy load image alt text.','post-grid'),
+            'type'		=> 'text',
+            'value'		=> $lazy_load_alt_text,
+            'placeholder'		=> 'Post Grid lazy load',
+            'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
 
 
         $args = array(

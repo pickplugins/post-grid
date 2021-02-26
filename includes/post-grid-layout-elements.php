@@ -798,6 +798,7 @@ function post_grid_layout_element_title($args){
     $layout_id  = isset($args['layout_id']) ? $args['layout_id'] : '';
 
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_title_permalink', $post_link, $args);
 
     $post = get_post( $post_id );
     $title = isset( $post->post_title ) ? $post->post_title : '';
@@ -1163,6 +1164,7 @@ function post_grid_layout_element_title_link($args){
 
     $title = get_the_title($post_id);
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_title_link_permalink', $post_link, $args);
 
     $link_to = isset($element['link_to']) ? $element['link_to'] : 'post_link';
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
@@ -1744,6 +1746,8 @@ function post_grid_layout_element_excerpt($args){
 
 
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_excerpt_permalink', $post_link, $args);
+
     $excerpt_source = !empty($element['excerpt_source']) ? $element['excerpt_source'] : 'excerpt_content';
 
     $link_target = isset($element['link_target']) ? $element['link_target'] : '';
@@ -2128,6 +2132,7 @@ function post_grid_layout_element_excerpt_read_more($args){
 
 
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_excerpt_read_more_permalink', $post_link, $args);
 
     $excerpt_source = !empty($element['excerpt_source']) ? $element['excerpt_source'] : 'excerpt_content';
 
@@ -2483,6 +2488,7 @@ function post_grid_layout_element_read_more($args){
     if(empty($post_id)) return;
 
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_read_more_permalink', $post_link, $args);
 
 
     $custom_class = isset($element['custom_class']) ? $element['custom_class'] : '';
@@ -3317,6 +3323,7 @@ function post_grid_layout_element_thumb($args){
 
 
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_thumb_permalink', $post_link, $args);
 
 
 
@@ -3683,6 +3690,7 @@ function post_grid_layout_element_thumb_link($args){
 
 
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_thumb_link_permalink', $post_link, $args);
 
 
 
@@ -4027,6 +4035,8 @@ function post_grid_layout_element_post_date($args){
 
 
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_post_date_permalink', $post_link, $args);
+
     $post_date = get_the_date($date_format, $post_id);
 
     $post_date = sprintf($wrapper_html,$post_date);
@@ -4341,6 +4351,7 @@ function post_grid_layout_element_author($args){
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_author_permalink', $post_link, $args);
 
     $post = get_post($post_id);
     $post_author = isset($post->post_author) ? $post->post_author : '';
@@ -4666,6 +4677,8 @@ function post_grid_layout_element_author_link($args){
     $wrapper_html = !empty($element['wrapper_html']) ? $element['wrapper_html'] : '%s';
 
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_author_link_permalink', $post_link, $args);
+
     $post_author = get_the_author();
 
     $post_author = sprintf($wrapper_html, $post_author);
@@ -5900,6 +5913,7 @@ function post_grid_layout_element_share_button($args){
 
     $post_title = get_the_title($post_id);
     $post_link = get_permalink($post_id);
+    $post_link = apply_filters('post_grid_layout_element_share_button_permalink', $post_link, $args);
 
     $share_button_html = '';
 

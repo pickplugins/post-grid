@@ -25,7 +25,7 @@ if(empty($_POST['post_grid_hidden']))
 else
 	{	
 	
-		$nonce = $_POST['_wpnonce'];
+		$nonce = sanitize_text_field($_POST['_wpnonce']);
 	
 		if(wp_verify_nonce( $nonce, 'nonce_layout_content' ) && $_POST['post_grid_hidden'] == 'Y') {
 			//Form data sent

@@ -153,7 +153,7 @@ class post_grid_meta_boxs{
         if (!isset($_POST['post_grid_nonce_check_value']))
             return $post_id;
 
-        $nonce = $_POST['post_grid_nonce_check_value'];
+        $nonce = sanitize_text_field($_POST['post_grid_nonce_check_value']);
 
         // Verify that the nonce is valid.
         if (!wp_verify_nonce($nonce, 'post_grid_nonce_check'))
@@ -422,7 +422,7 @@ class post_grid_meta_boxs{
         if ( ! isset( $_POST['meta_boxes_post_grid_input_nonce'] ) )
             return $post_id;
 
-        $nonce = $_POST['meta_boxes_post_grid_input_nonce'];
+        $nonce = sanitize_text_field($_POST['meta_boxes_post_grid_input_nonce']);
 
         // Verify that the nonce is valid.
         if ( ! wp_verify_nonce( $nonce, 'meta_boxes_post_grid_input' ) )
@@ -639,7 +639,7 @@ class post_grid_meta_boxs{
         if ( ! isset( $_POST['post_grid_post_settings_input_nonce'] ) )
             return $post_id;
 
-        $nonce = $_POST['post_grid_post_settings_input_nonce'];
+        $nonce = sanitize_text_field($_POST['post_grid_post_settings_input_nonce']);
 
         // Verify that the nonce is valid.
         if ( ! wp_verify_nonce( $nonce, 'post_grid_post_settings_input' ) )

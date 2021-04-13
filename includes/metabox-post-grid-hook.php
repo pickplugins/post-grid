@@ -1961,8 +1961,8 @@ function post_grid_update_taxonomies_terms_by_posttypes(){
     //if(current_user_can('manage_options')){
 
 
-    $post_types = isset($_POST['post_types']) ? $_POST['post_types']: array();
-    $grid_id = isset($_POST['grid_id']) ? $_POST['grid_id']: '';
+    $post_types = isset($_POST['post_types']) ? stripslashes_deep($_POST['post_types']): array();
+    $grid_id = isset($_POST['grid_id']) ? sanitize_text_field($_POST['grid_id']): '';
 
 
     $post_grid_meta_options = get_post_meta($grid_id, 'post_grid_meta_options', true);

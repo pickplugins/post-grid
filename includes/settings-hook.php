@@ -906,6 +906,6 @@ add_action('post_grid_settings_save', 'post_grid_settings_save');
 
 function post_grid_settings_save(){
 
-    $post_grid_settings = isset($_POST['post_grid_settings']) ?  stripslashes_deep($_POST['post_grid_settings']) : array();
+    $post_grid_settings = isset($_POST['post_grid_settings']) ?  post_grid_recursive_sanitize_arr($_POST['post_grid_settings']) : array();
     update_option('post_grid_settings', $post_grid_settings);
 }

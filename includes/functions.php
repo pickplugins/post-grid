@@ -35,7 +35,19 @@ function post_grid_get_first_post($post_type = 'post'){
 
 
 
+function post_grid_recursive_sanitize_arr($array) {
 
+    foreach ( $array as $key => &$value ) {
+        if ( is_array( $value ) ) {
+            $value = post_grid_recursive_sanitize_arr($value);
+        }
+        else {
+            $value = sanitize_text_field( $value );
+        }
+    }
+
+    return $array;
+}
 
 
 

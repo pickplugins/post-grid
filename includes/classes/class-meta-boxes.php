@@ -179,7 +179,7 @@ class post_grid_meta_boxs{
         /* OK, its safe for us to save the data now. */
 
         // Sanitize the user input.
-        //$grid_item_layout = stripslashes_deep($_POST['grid_item_layout']);
+        //$grid_item_layout = post_grid_recursive_sanitize_arr($_POST['grid_item_layout']);
 
 
         // Update the meta field.
@@ -440,7 +440,7 @@ class post_grid_meta_boxs{
         //$post_grid_collapsible = sanitize_text_field( $_POST['post_grid_collapsible'] );
 
 
-        $post_grid_meta_options = stripslashes_deep( $_POST['post_grid_meta_options'] );
+        $post_grid_meta_options = post_grid_recursive_sanitize_arr( $_POST['post_grid_meta_options'] );
         update_post_meta( $post_id, 'post_grid_meta_options', $post_grid_meta_options );
 
 
@@ -652,7 +652,7 @@ class post_grid_meta_boxs{
         /* OK, its safe for us to save the data now. */
 
         // Sanitize user input.
-        $post_grid_post_settings = stripslashes_deep( $_POST['post_grid_post_settings'] );
+        $post_grid_post_settings = post_grid_recursive_sanitize_arr( $_POST['post_grid_post_settings'] );
         update_post_meta( $post_id, 'post_grid_post_settings', $post_grid_post_settings );
 
 

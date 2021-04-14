@@ -3,7 +3,7 @@
 Plugin Name: Post Grid by PickPlugins
 Plugin URI: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/
 Description: Awesome post grid for query post from any post type and display on grid.
-Version: 2.1.2
+Version: 2.1.3
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -21,7 +21,7 @@ if( !class_exists( 'PostGrid' )){
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid');
-            define('post_grid_version', '2.1.2');
+            define('post_grid_version', '2.1.3');
             define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
 
 
@@ -184,7 +184,6 @@ if( !class_exists( 'PostGrid' )){
 
             wp_register_style('layout-editor', post_grid_plugin_url.'assets/admin/css/layout-editor.css');
             wp_register_script('layout-editor', post_grid_plugin_url.'assets/admin/js/layout-editor.js', array('jquery'));
-            wp_register_style('bootstrap-grid', post_grid_plugin_url.'assets/global/css/bootstrap-grid.css');
 
             wp_register_style('post-grid-addons', post_grid_plugin_url.'assets/admin/css/addons.css');
 
@@ -223,22 +222,6 @@ if( !class_exists( 'PostGrid' )){
                 $settings_tabs_field = new settings_tabs_field();
                 $settings_tabs_field->admin_scripts();
 
-            }
-
-            if ($screen->id == 'post_grid_page_layout_editor'){
-
-                $settings_tabs_field = new settings_tabs_field();
-                $settings_tabs_field->admin_scripts();
-
-                wp_enqueue_script('post_grid_admin_js');
-                wp_localize_script('post_grid_admin_js', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
-                wp_enqueue_style('bootstrap-grid');
-
-                wp_enqueue_style('layout-editor');
-                wp_enqueue_script('layout-editor');
-
-                wp_enqueue_style('select2');
-                wp_enqueue_script('select2');
             }
 
 

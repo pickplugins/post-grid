@@ -141,6 +141,8 @@ function post_grid_metabox_tabs_content_general($tab, $post_id){
             'title'		=> __('Lazy load image source','post-grid'),
             'details'	=> __('Set custom lazy load image source.','post-grid'),
             'type'		=> 'media_url',
+            'placeholder'		=> '',
+            'placeholder_img'		=> '',
             'value'		=> $lazy_load_image_src,
             'default'		=> '',
         );
@@ -692,7 +694,7 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id){
         $query_args['posts_per_page'] 	= -1;
         $wp_query = new WP_Query($query_args);
 
-        $item_layout_args[''] = array('name'=>'Empty layout',  'thumb'=> 'https://i.imgur.com/JyurCtY.jpg', );
+        $item_layout_args[''] = array('name'=>'Empty layout',  'thumb'=> post_grid_plugin_url.'assets/admin/images/placeholder.jpg', );
 
 
         if ( $wp_query->have_posts() ) :
@@ -706,7 +708,7 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id){
                 $product_thumb_url = isset($product_thumb['0']) ? esc_url_raw($product_thumb['0']) : '';
 
                 $layout_options = get_post_meta($post_id,'layout_options', true);
-                $layout_preview_img = !empty($layout_options['layout_preview_img']) ? $layout_options['layout_preview_img'] : 'https://i.imgur.com/JyurCtY.jpg';
+                $layout_preview_img = !empty($layout_options['layout_preview_img']) ? $layout_options['layout_preview_img'] : post_grid_plugin_url.'assets/admin/images/placeholder.jpg';
 
                 $product_thumb_url = !empty( $product_thumb_url ) ? $product_thumb_url : $layout_preview_img;
 
@@ -728,6 +730,8 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id){
             'value'		=> $layout_id,
             'default'		=> '',
             'width'		=> '250px',
+            'lazy_load_img'		=> post_grid_plugin_url.'assets/admin/images/loading.gif',
+
             'args'		=> $item_layout_args,
         );
 
@@ -1398,6 +1402,7 @@ add_action('post_grid_metabox_tabs_content_grid_settings', 'post_grid_metabox_ta
 
 function post_grid_metabox_tabs_content_grid_settings($tab, $post_id){
 
+
     $settings_tabs_field = new settings_tabs_field();
     $class_post_grid_functions = new class_post_grid_functions();
 
@@ -1446,6 +1451,8 @@ function post_grid_metabox_tabs_content_grid_settings($tab, $post_id){
                 'value'		=> $grid_layout_name,
                 'default'		=> '',
                 'width'		=> '100px',
+                'lazy_load_img'		=> post_grid_plugin_url.'assets/admin/images/loading.gif',
+
                 'args'		=> $grid_layout_args,
             );
 

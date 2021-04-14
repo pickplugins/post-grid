@@ -7,58 +7,6 @@ class class_post_grid_support{
 
 	}
 
-    public function our_plugins(){
-
-        $our_plugins = array(
-            array(
-                'title'=>'Post Grid',
-                'link'=>'https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/',
-                'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2015/12/3814-post-grid-thumb-500x262.jpg',
-            ),
-
-            array(
-                'title'=>'Woocommerce Products Slider',
-                'link'=>'https://www.pickplugins.com/item/woocommerce-products-slider-for-wordpress/',
-                'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2016/03/4357-woocommerce-products-slider-thumb-500x250.jpg',
-            ),
-
-            array(
-                'title'=>'Team Showcase',
-                'link'=>'https://www.pickplugins.com/item/team-responsive-meet-the-team-grid-for-wordpress/',
-                'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2016/06/5145-team-thumb-500x250.jpg',
-            ),
-
-            array(
-                'title'=>'Job Board Manager',
-                'link'=>'https://wordpress.org/plugins/job-board-manager/',
-                'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2015/08/3466-job-board-manager-thumb-500x250.png',
-            ),
-
-            array(
-                'title'=>'Wishlist for WooCommerce',
-                'link'=>'https://www.pickplugins.com/item/woocommerce-wishlist/',
-                'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2017/10/12047-woocommerce-wishlist.png',
-            ),
-
-            array(
-                'title'=>'Breadcrumb',
-                'link'=>'https://www.pickplugins.com/item/breadcrumb-awesome-breadcrumbs-style-navigation-for-wordpress/',
-                'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2016/03/4242-breadcrumb-500x252.png',
-            ),
-
-            array(
-                'title'=>'Pricing Table',
-                'link'=>'https://www.pickplugins.com/item/pricing-table/',
-                'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2016/10/7042-pricing-table-thumbnail-500x250.png',
-            ),
-
-        );
-
-        return apply_filters('post_grid_our_plugins', $our_plugins);
-
-
-    }
-
 
     public function video_tutorials(){
 

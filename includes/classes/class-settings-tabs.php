@@ -4,7 +4,7 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 if( ! class_exists( 'settings_tabs_field' ) ) {
 class settings_tabs_field{
 
-//    public $asset_dir_url = '';
+    //public $asset_dir_url = '';
     public $textdomain = 'settings-tabs';
 
     public function __construct(){
@@ -424,6 +424,8 @@ class settings_tabs_field{
         $parent 			= isset( $option['parent'] ) ? $option['parent'] : "";
         $field_template 	= isset( $option['field_template'] ) ? $option['field_template'] : $this->field_template($option);
         $title			= isset( $option['title'] ) ? $option['title'] : "";
+        $placeholder	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
+
         $details 			= isset( $option['details'] ) ? $option['details'] : "";
 
         $is_pro 	= isset( $option['is_pro'] ) ? $option['is_pro'] : false;
@@ -439,14 +441,11 @@ class settings_tabs_field{
 
 
         $media_url = !empty($media_url) ? $media_url : $default;
-
-        $placeholder = 'https://i.imgur.com/qOPTTdQ.jpg';
         $media_url = !empty($media_url) ? $media_url : $placeholder;
         $media_basename = wp_basename($media_type);
 
         $field_name     = !empty( $field_name ) ? $field_name : $id;
         $field_name = !empty($parent) ? $parent.'['.$field_name.']' : $field_name;
-
 
 
 
@@ -518,6 +517,8 @@ class settings_tabs_field{
         $field_name 	= isset( $option['field_name'] ) ? $option['field_name'] : $id;
         $parent 			= isset( $option['parent'] ) ? $option['parent'] : "";
         $placeholder	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
+        $placeholder_img	= isset( $option['placeholder_img'] ) ? $option['placeholder_img'] : "";
+
         $field_template 	= isset( $option['field_template'] ) ? $option['field_template'] : $this->field_template($option);
         $title			= isset( $option['title'] ) ? $option['title'] : "";
         $details 			= isset( $option['details'] ) ? $option['details'] : "";
@@ -533,6 +534,7 @@ class settings_tabs_field{
         $media_type	= get_post_mime_type( $value );
         $media_title= get_the_title( $value );
         $media_url = !empty($media_url) ? $media_url : '';
+        $media_url = !empty($media_url) ? $media_url : $placeholder_img;
 
         $field_name     = !empty( $field_name ) ? $field_name : $id;
         $field_name = !empty($parent) ? $parent.'['.$field_name.']' : $field_name;
@@ -1546,6 +1548,7 @@ class settings_tabs_field{
         //$args			= is_array( $args ) ? $args : $this->generate_args_from_string( $args );
         $option_value 	= isset( $option['value'] ) ? $option['value'] : '';
         $default 	= isset( $option['default'] ) ? $option['default'] : '';
+        $lazy_load_img 	= isset( $option['lazy_load_img'] ) ? $option['lazy_load_img'] : '';
 
         $is_pro 	= isset( $option['is_pro'] ) ? $option['is_pro'] : false;
         $pro_text 	= isset( $option['pro_text'] ) ? $option['pro_text'] : '';
@@ -1587,7 +1590,7 @@ class settings_tabs_field{
                     if(!empty($thumb)):
 
                         ?>
-                        <img class="lazy"  alt="<?php echo $name; ?>" data-src="<?php echo $thumb; ?>" src="https://i.imgur.com/72Z8sfU.gif">
+                        <img class="lazy"  alt="<?php echo $name; ?>" data-src="<?php echo $thumb; ?>" src="<?php echo $lazy_load_img; ?>">
                         <div style="padding: 5px;" class="name"><?php echo $name; ?></div>
 
                         <?php

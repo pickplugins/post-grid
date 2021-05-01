@@ -42,7 +42,7 @@ function post_grid_recursive_sanitize_arr($array) {
             $value = post_grid_recursive_sanitize_arr($value);
         }
         else {
-            $value = sanitize_text_field( $value );
+            $value = wp_kses_post( $value );
         }
     }
 

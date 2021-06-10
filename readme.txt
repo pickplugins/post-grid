@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 5.7
-	Stable tag: 2.1.3
+	Stable tag: 2.1.5
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -221,6 +221,12 @@ then paste this shortcode anywhere in your page to display grid<br />
 8. screenshot-8
 
 == Changelog ==
+
+    = 2.1.5 =
+    * 2021-05-05 fix - php error issue fixed for old layouts users.
+
+    = 2.1.4 =
+    * 2021-05-03 fix - escaping issue fixed.
 
 	= 2.1.3 =
     * 2021-04-14 remove - unnecessary css library file removed

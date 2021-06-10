@@ -29,7 +29,7 @@ jQuery(document).ready(function($){
         }
         else{
             var is_reset = 'no';
-            if(keyword.length>3){
+            if(keyword.length>3 || keyword.length == 0){
                 $('#post-grid-'+grid_id+' .search-icon').html('<i class="fas fa-spin fa-spinner"></i>');
 
                 $('.pagination').fadeOut();

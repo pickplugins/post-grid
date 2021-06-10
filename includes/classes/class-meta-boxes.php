@@ -469,7 +469,7 @@ class post_grid_meta_boxs{
                     $keywords = isset($item['keywords']) ? $item['keywords'] : '';
 
                     ?>
-                    <li keywords="<?php echo $keywords; ?>" class="item">
+                    <li keywords="<?php echo esc_attr($keywords); ?>" class="item">
                         <a target="_blank" href="<?php echo $url; ?>"><i class="far fa-dot-circle"></i> <?php echo $title; ?></a>
 
                     </li>

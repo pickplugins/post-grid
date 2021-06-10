@@ -97,7 +97,7 @@ array_multisort($tabs_sorted, SORT_ASC, $post_grid_settings_tabs);
     ?>
 
 
-    <form  method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+    <form  method="post" action="<?php echo str_replace( '%7E', '~', esc_url_raw($_SERVER['REQUEST_URI'])); ?>">
         <input type="hidden" name="post_grid_hidden" value="Y">
 
 

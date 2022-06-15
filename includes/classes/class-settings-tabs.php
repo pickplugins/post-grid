@@ -145,7 +145,7 @@ if (!class_exists('settings_tabs_field')) {
 
 ?>
             <div <?php if (!empty($depends)) { ?> data-depends="[<?php echo esc_attr($depends); ?>]" <?php } ?> class="setting-field <?php if ($is_error) echo 'field-error';  ?> <?php echo esc_attr($wraper_class); ?> <?php if (!empty($depends)) echo 'dependency-field'; ?>">
-                <div class="field-lable">%s</div>
+                <div class="field-lable ">%s</div>
                 <div class="field-input">%s
                     <p class="description">%s</p>
                     <?php if ($is_error && !empty($error_details)) : ?>
@@ -1534,6 +1534,9 @@ if (!class_exists('settings_tabs_field')) {
             $details         = isset($option['details']) ? $option['details'] : "";
             $for         = isset($option['for']) ? $option['for'] : "";
             $args            = isset($option['args']) ? $option['args'] : array();
+            $style            = isset($option['style']) ? $option['style'] : array();
+            $style_inline            = isset($style['inline']) ? $style['inline'] : true;
+
 
             $is_pro     = isset($option['is_pro']) ? $option['is_pro'] : false;
             $pro_text     = isset($option['pro_text']) ? $option['pro_text'] : '';
@@ -1553,8 +1556,13 @@ if (!class_exists('settings_tabs_field')) {
                     $for = !empty($for) ? $for . '-' . $css_id . "-" . $key : $css_id . "-" . $key;
             ?>
                 <label for="<?php echo esc_attr($for); ?>"><input name="<?php echo esc_attr($field_name); ?>" type="radio" id="<?php echo esc_attr($for); ?>" value="<?php echo esc_attr($key); ?>" <?php echo esc_attr($checked); ?>><span><?php echo esc_html($value); ?></span></label>
+                <?php
 
+                    if (!$style_inline) {
+                ?>
+                    <br>
             <?php
+                    }
                 endforeach;
 
             $input_html = ob_get_clean();

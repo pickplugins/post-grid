@@ -16,7 +16,7 @@ class BlockPostGrid
     {
         wp_register_style('editor_style', PREFIX_PLUGIN_PATH . 'src/blocks/post-grid/index.css');
         wp_register_script('editor_script', PREFIX_PLUGIN_PATH . 'src/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
-        register_block_type('prefix-blocks/post-grid', array(
+        register_block_type('post-grid/post-grid', array(
             'editor_script' => 'editor_script',
             'editor_style' => 'editor_style',
             'render_callback' => array($this, 'theHTML')

@@ -8,7 +8,7 @@ import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@w
 //var el = element.createElement;
 
 
-registerBlockType('prefix-blocks/paragraph', {
+registerBlockType('post-grid/paragraph', {
     title: __('Paragraph Block'),
     icon: 'editor-paragraph',
     category: 'common',

@@ -775,7 +775,7 @@ __webpack_require__.r(__webpack_exports__);
 
  //var el = element.createElement;
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('prefix-blocks/paragraph', {
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('post-grid/paragraph', {
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Paragraph Block'),
   icon: 'editor-paragraph',
   category: 'common',
@@ -944,7 +944,7 @@ background-image: ${props => {
   return 'url(' + props.cssData.container.bgImg.url + ')';
 }};
 `;
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)("prefix-blocks/post-grid", {
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)("post-grid/post-grid", {
   title: "Post Grid",
   icon: "grid-view",
   attributes: {
@@ -3894,7 +3894,7 @@ background-color: red;
       className: "no-posts text-center"
     }, "No Post found"), postsQuery && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
       className: "text-center"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Spinner, null)), "Hello", postsQuery == false && posts.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomCss, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Spinner, null)), postsQuery == false && posts.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomCss, {
       cssData: props.attributes,
       className: ""
     }, posts.map((x, i) => {
@@ -3912,72 +3912,6 @@ background-color: red;
     }, "loadmore Pagination"), pagination.type == 'infinite' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
       className: "pagination"
     }, "infinite Pagination")))];
-  },
-  save: function (props) {
-    // to make a truly dynamic block, we're handling front end by render_callback under index.php file
-    return null;
-  }
-});
-
-/***/ }),
-
-/***/ "./src/blocks/post-title/index.js":
-/*!****************************************!*\
-  !*** ./src/blocks/post-title/index.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-
-
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)("prefix-blocks/blockxyz-post-title", {
-  title: "Post Title",
-  icon: "grid-view",
-  attributes: {
-    dummyName: {
-      type: 'string',
-      default: 'Post Grid'
-    },
-    dummyAuthor: {
-      type: 'string',
-      default: 'author'
-    },
-    dummyVersion: {
-      type: 'string',
-      default: '2.1.20'
-    }
-  },
-  category: "common",
-  edit: function (props) {
-    var attributes = props.attributes;
-    var setAttributes = props.setAttributes;
-    var dummyName = attributes.dummyName;
-    const title = wp.data.select("core/editor").getEditedPostAttribute('title');
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InspectorControls, {
-      key: "general"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "blockxyz"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-      title: "Custom Scripts",
-      initialOpen: false
-    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "post-title"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, title))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
@@ -4007,7 +3941,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)('prefix-blocks/blockxyz-recent-posts', {
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)('post-grid/blockxyz-recent-posts', {
   apiVersion: 2,
   title: 'Example: last post',
   icon: 'megaphone',
@@ -4132,7 +4066,7 @@ background-image: ${props => {
   return 'url(' + props.cssData.container.bgImg.url + ')';
 }};
 `;
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)("prefix-blocks/section-2-cols", {
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)("post-grid/section-2-cols", {
   title: "Section 2 Column Item List",
   icon: "grid-view",
   attributes: {
@@ -4370,7 +4304,7 @@ __webpack_require__.r(__webpack_exports__);
 
  //var el = element.createElement;
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('prefix-blocks/testimonials', {
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('post-grid/testimonials', {
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('testimonials Block dfgfg'),
   icon: 'editor-testimonials',
   category: 'common',
@@ -5750,10 +5684,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_paragraph__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./blocks/paragraph */ "./src/blocks/paragraph/index.js");
 /* harmony import */ var _blocks_testimonials__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./blocks/testimonials */ "./src/blocks/testimonials/index.js");
 /* harmony import */ var _blocks_post_grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./blocks/post-grid */ "./src/blocks/post-grid/index.js");
-/* harmony import */ var _blocks_post_title__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blocks/post-title */ "./src/blocks/post-title/index.js");
-/* harmony import */ var _blocks_recent_posts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./blocks/recent-posts */ "./src/blocks/recent-posts/index.js");
-/* harmony import */ var _blocks_section_2_cols__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./blocks/section-2-cols */ "./src/blocks/section-2-cols/index.js");
-
+/* harmony import */ var _blocks_recent_posts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blocks/recent-posts */ "./src/blocks/recent-posts/index.js");
+/* harmony import */ var _blocks_section_2_cols__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./blocks/section-2-cols */ "./src/blocks/section-2-cols/index.js");
 
 
 

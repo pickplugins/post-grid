@@ -95,7 +95,7 @@ background-image: ${(props) => { return 'url(' + props.cssData.container.bgImg.u
 
 
 
-registerBlockType("prefix-blocks/post-grid", {
+registerBlockType("post-grid/post-grid", {
   title: "Post Grid",
   icon: "grid-view",
   attributes: {
@@ -2373,7 +2373,7 @@ background-color: red;
               }
 
 
-              Hello
+
 
               {postsQuery == false && posts.length > 0 &&
                 (

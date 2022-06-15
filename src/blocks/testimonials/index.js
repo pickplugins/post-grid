@@ -8,7 +8,7 @@ import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@w
 //var el = element.createElement;
 
 
-registerBlockType('prefix-blocks/testimonials', {
+registerBlockType('post-grid/testimonials', {
     title: __('testimonials Block dfgfg'),
     icon: 'editor-testimonials',
     category: 'common',

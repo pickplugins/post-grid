@@ -2,7 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { useSelect } from '@wordpress/data';
 import { useBlockProps } from '@wordpress/block-editor';
 
-registerBlockType('prefix-blocks/blockxyz-recent-posts', {
+registerBlockType('post-grid/blockxyz-recent-posts', {
   apiVersion: 2,
   title: 'Example: last post',
   icon: 'megaphone',

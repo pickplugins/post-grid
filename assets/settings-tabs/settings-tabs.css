@@ -4,21 +4,22 @@
 
 /*General CSS*/
 
-.settings-tabs .float-right{
+.settings-tabs .float-right {
     float: right;
 }
 
-.settings-tabs .float-left{
+.settings-tabs .float-left {
     float: right;
 }
 
-.settings-tabs .float-none{
+.settings-tabs .float-none {
     float: right;
 }
 
 
-.settings-tabs .loading{}
-.settings-tabs .submit{
+.settings-tabs .loading {}
+
+.settings-tabs .submit {
     padding: 15px 20px;
 }
 
@@ -26,27 +27,28 @@
 
 /* Collapsible */
 
-.settings-tabs .collapsible{
+.settings-tabs .collapsible {
     margin-bottom: 2px;
 }
-.settings-tabs .collapsible .header{
+
+.settings-tabs .collapsible .header {
     background: #eee;
     padding: 8px 10px;
 }
 
-.settings-tabs .collapsible .header span{
+.settings-tabs .collapsible .header span {
     display: inline-block;
     vertical-align: middle;
 }
 
-.settings-tabs .collapsible .content{
+.settings-tabs .collapsible .content {
     display: none;
     padding: 10px;
     background: #f1f1f1;
 }
 
 
-.settings-tabs .collapsible.active .content{
+.settings-tabs .collapsible.active .content {
     display: block;
 }
 
@@ -56,33 +58,35 @@
 
 
 
-.settings-tabs{
+.settings-tabs {
     background: #fff;
     margin: 25px 0;
 }
 
-.settings-tabs.vertical{
+.settings-tabs.vertical {
     position: relative;
 }
-.settings-tabs .tab-navs{
+
+.settings-tabs .tab-navs {
     float: left;
     margin: 0;
     padding: 0;
     position: sticky;
     top: 32px;
 }
-.settings-tabs .tab-nav{
-    width: 200px;
+
+.settings-tabs .tab-nav {
+    width: 250px;
     padding: 12px 10px;
     background: #f1f1f1;
     margin: 0;
     border-bottom: 1px solid #eee;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 16px;
 }
 
-.settings-tabs .tab-nav.active{
-    background:#f1f1f159;
+.settings-tabs .tab-nav.active {
+    background: #f1f1f159;
 }
 
 .settings-tabs .tab-nav .pro-feature {
@@ -94,30 +98,30 @@
     width: 25px;
     color: #b7b7b7;
 }
+
 .tab-nav.active i {
     color: #333;
 }
-.settings-tabs .tab-content{
-    margin-left: 220px;
+
+.settings-tabs .tab-content {
+    margin-left: 250px;
     padding: 0px 0;
     background: #f1f1f159;
     display: none;
 }
 
-.settings-tabs .tab-content.active{
+.settings-tabs .tab-content.active {
     display: block;
 }
 
-.settings-tabs.has-right-panel{
-
-}
+.settings-tabs.has-right-panel {}
 
 .settings-tabs.has-right-panel .tab-content {
     margin-right: 280px;
 }
 
 
-.settings-tabs-right-panel{
+.settings-tabs-right-panel {
     width: 250px;
     float: right;
     padding: 15px;
@@ -125,41 +129,39 @@
     background: #fff;
 }
 
-.settings-tabs-right-panel .right-panel-content{
+.settings-tabs-right-panel .right-panel-content {
     display: none;
 }
 
-.settings-tabs-right-panel .right-panel-content.active{
+.settings-tabs-right-panel .right-panel-content.active {
     display: block;
 }
 
 
 /*horizontal*/
 
-.settings-tabs.horizontal{
+.settings-tabs.horizontal {}
 
-}
-
-.settings-tabs.horizontal .tab-navs{
+.settings-tabs.horizontal .tab-navs {
     float: none;
     position: relative;
     top: 0;
     padding: 0 20px;
 }
 
-.settings-tabs.horizontal .tab-navs .tab-nav{
+.settings-tabs.horizontal .tab-navs .tab-nav {
     display: inline-block;
     float: left;
     width: auto;
     border-right: 1px solid #ddd;
 }
 
-.settings-tabs.horizontal .tab-navs .tab-nav:last-child{
-    border-right: 1px solid rgba(0,0,0,0);
+.settings-tabs.horizontal .tab-navs .tab-nav:last-child {
+    border-right: 1px solid rgba(0, 0, 0, 0);
 }
 
 
-.settings-tabs.horizontal .tab-content{
+.settings-tabs.horizontal .tab-content {
     margin-left: 0;
     /*clear: both;*/
     padding: 0 20px;
@@ -180,76 +182,127 @@
 
 
 
-.settings-tabs .section{
+.settings-tabs .section {
     margin: 0;
     padding: 15px 0;
 }
-.settings-tabs .section-title{
+
+.settings-tabs .section-title {
     padding: 0 15px;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
 }
 
-.settings-tabs .section-description{
+.settings-tabs .section-description {
     padding: 0 15px;
     margin-bottom: 25px;
+    font-size: 16px;
+
 }
 
 
 
-.settings-tabs .setting-field{
+.settings-tabs .setting-field {
     border-bottom: 1px solid #eee;
     padding: 15px;
 }
-.settings-tabs .setting-field:last-child{
+
+.settings-tabs input[type="text"],
+.settings-tabs .range-slider,
+.settings-tabs input[type="email"],
+.settings-tabs textarea,
+.settings-tabs select,
+.settings-tabs input[type="range"] {
+    border: 2px solid #2563eb69;
+    border-radius: 0;
+    padding: 5px 10px;
 
 }
 
+.settings-tabs input[type=radio],
+.settings-tabs input[type=checkbox] {
+    background: #fff;
+    padding: 5px 10px;
+    border: 1px solid #2563eb69;
 
 
-.settings-tabs .setting-field .field-lable{
+}
+
+.settings-tabs input[type=radio]:checked {
+    background: #2563eb69;
+    padding: 5px 10px;
+
+}
+
+.settings-tabs input[type=radio]:checked::before {
+    border: 3px solid #fff;
+    background: #2563eb69;
+}
+
+
+.settings-tabs input[type=checkbox] {
+    border-radius: 0;
+}
+
+.settings-tabs input[type=checkbox]:checked {}
+
+.settings-tabs input[type=checkbox]:checked::before {}
+
+.settings-tabs .setting-field:last-child {}
+
+
+
+.settings-tabs .setting-field .field-lable {
     width: 270px;
     float: left;
-    font-size: 14px;
+    font-size: 18px;
     word-break: break-word;
-}
-.settings-tabs .setting-field .field-input{
-    margin-left: 270px;
-}
-.settings-tabs .setting-field .description{
-    word-break: break-word;
+    font-weight: 600;
 }
 
-.settings-tabs .setting-field .setting-field{
+.settings-tabs .setting-field .field-input {
+    margin-left: 270px;
+}
+
+.settings-tabs .setting-field .description {
+    word-break: break-word;
+    font-size: 16px;
+    margin: 10px 0;
+
+}
+
+.settings-tabs .setting-field .setting-field {
     padding: 0 15px 15px 0px;
 }
-.settings-tabs .setting-field .setting-field .field-lable{
+
+.settings-tabs .setting-field .setting-field .field-lable {
 
     float: none;
 }
 
-.settings-tabs .setting-field .setting-field .field-input{
+.settings-tabs .setting-field .setting-field .field-input {
     margin-left: 0px;
 }
 
 
-.settings-tabs .expandable .setting-field{
+.settings-tabs .expandable .setting-field {
     padding: 10px 0;
     margin: 10px 0;
 }
-.settings-tabs .expandable .setting-field .field-lable{
+
+.settings-tabs .expandable .setting-field .field-lable {
     float: left;
 }
 
-.settings-tabs .expandable .setting-field .field-input{
+.settings-tabs .expandable .setting-field .field-input {
     margin-left: 270px;
 }
 
-.settings-tabs .expandable .setting-field .setting-field .field-lable{
+.settings-tabs .expandable .setting-field .setting-field .field-lable {
     float: none;
 }
 
-.settings-tabs .expandable .setting-field .setting-field .field-input{
+.settings-tabs .expandable .setting-field .setting-field .field-input {
     margin-left: 0px;
 }
 
@@ -257,33 +310,34 @@
     background: #ff3f3f1a;
 }
 
-.settings-tabs .field-error .error-details{
+.settings-tabs .field-error .error-details {
     color: #c11f1f;
 }
 
 /*field-repeatable-wrapper*/
 
-.settings-tabs .field-media-wrapper .media-upload, .field-media-wrapper .clear {
+.settings-tabs .field-media-wrapper .media-upload,
+.field-media-wrapper .clear {
     display: inline-block;
     background: #ddd;
     padding: 2px 10px;
     border-radius: 3px;
     border: 1px solid #999;
 }
-.ppof-settings .repeatable .item-wrap{
+
+.ppof-settings .repeatable .item-wrap {
     margin-bottom: 5px;
     padding-bottom: 0px;
 }
 
 
-.field-repeatable-wrapper .field-list{
+.field-repeatable-wrapper .field-list {
     margin-top: 18px;
 }
-.field-repeatable-wrapper .button{
 
-}
+.field-repeatable-wrapper .button {}
 
-.field-repeatable-wrapper .sort{
+.field-repeatable-wrapper .sort {
     background: rgba(87, 99, 117, 0.48) none repeat scroll 0 0;
     color: rgb(255, 255, 255);
     cursor: n-resize;
@@ -292,7 +346,7 @@
     border-radius: 3px;
 }
 
-.field-repeatable-wrapper .remove{
+.field-repeatable-wrapper .remove {
     background: rgb(228, 65, 8) none repeat scroll 0 0;
     color: rgb(255, 255, 255);
     cursor: pointer;
@@ -300,11 +354,12 @@
     padding: 5px 10px;
     border-radius: 3px;
 }
-.field-repeatable-wrapper .title-text{
+
+.field-repeatable-wrapper .title-text {
     cursor: pointer;
 }
 
-.field-repeatable-wrapper .add-repeat-field{
+.field-repeatable-wrapper .add-repeat-field {
     background: rgba(87, 99, 117, 0.48) none repeat scroll 0 0;
     color: rgb(255, 255, 255);
     cursor: pointer;
@@ -316,7 +371,8 @@
 }
 
 
-.settings-tabs .field-media-wrapper .media-upload, .field-media-wrapper .clear {
+.settings-tabs .field-media-wrapper .media-upload,
+.field-media-wrapper .clear {
     display: inline-block;
     background: #ddd;
     padding: 2px 10px;
@@ -327,32 +383,45 @@
 
 /*input*/
 
-.settings-tabs input[type="text"], .settings-tabs .range-slider, .settings-tabs input[type="email"],.settings-tabs textarea, .settings-tabs select, .settings-tabs input[type="range"]{
+.settings-tabs input[type="text"],
+.settings-tabs .range-slider,
+.settings-tabs input[type="email"],
+.settings-tabs textarea,
+.settings-tabs select,
+.settings-tabs input[type="range"] {
     width: 360px;
-    background: #f1f1f1;
+    background: #ffffff;
 }
 
 
-@media (max-width: 1170px){
-    .settings-tabs input[type="text"],     .settings-tabs input[type="email"],.settings-tabs textarea, .settings-tabs select, .settings-tabs input[type="range"], .settings-tabs .select2{
+@media (max-width: 1170px) {
+
+    .settings-tabs input[type="text"],
+    .settings-tabs input[type="email"],
+    .settings-tabs textarea,
+    .settings-tabs select,
+    .settings-tabs input[type="range"],
+    .settings-tabs .select2 {
         width: 100% !important;
 
     }
 }
 
 
-@media (max-width: 1440px){
+@media (max-width: 1440px) {
 
-    .settings-tabs .setting-field .field-lable{
+    .settings-tabs .setting-field .field-lable {
         width: auto;
         float: none;
         font-size: 14px;
         margin-bottom: 10px;
     }
-    .settings-tabs .setting-field .field-input{
+
+    .settings-tabs .setting-field .field-input {
         margin-left: 0px;
     }
-    .settings-tabs .setting-field .description{}
+
+    .settings-tabs .setting-field .description {}
 
     /*.settings-tabs-right-panel {*/
     /*    width: 95%;*/
@@ -368,14 +437,15 @@
 
 }
 
-@media (max-width: 1700px){
+@media (max-width: 1700px) {
 
-    .settings-tabs .setting-field .setting-field .field-lable{
+    .settings-tabs .setting-field .setting-field .field-lable {
         width: auto;
         float: none;
         font-size: 14px;
     }
-    .settings-tabs .setting-field .setting-field .field-input{
+
+    .settings-tabs .setting-field .setting-field .field-input {
         margin-left: 0px;
     }
 
@@ -430,7 +500,7 @@
 
 }
 
-.settings-tabs .expandable  .options.active {
+.settings-tabs .expandable .options.active {
     display: block;
 }
 
@@ -442,9 +512,11 @@
 .settings-tabs .item .expand .fa-compress {
     display: none;
 }
+
 .settings-tabs .item.active .expand .fa-compress {
     display: inline-block;
 }
+
 .settings-tabs .item.active .expand .fa-expand {
     display: none;
 }
@@ -472,7 +544,7 @@
     border-radius: 3px;
 }
 
-.settings-tabs .expandable .sort  {
+.settings-tabs .expandable .sort {
     background: rgba(87, 99, 117, 0.48) none repeat scroll 0 0;
     color: rgb(255, 255, 255);
     cursor: n-resize;
@@ -484,7 +556,7 @@
 
 
 
-.settings-tabs .pro-feature{
+.settings-tabs .pro-feature {
     background: #ffd87f;
     padding: 0 5px;
 }
@@ -493,15 +565,16 @@
 
 /*3rd Party*/
 
-.settings-tabs .field-input .CodeMirror{
+.settings-tabs .field-input .CodeMirror {
     background: #f1f1f1;
 }
 
 
 /*.accordion*/
 
-.settings-tabs .accordion{}
-.settings-tabs .accordion .accordion-title{
+.settings-tabs .accordion {}
+
+.settings-tabs .accordion .accordion-title {
     padding: 10px;
     background: #f1f1f1;
     margin: 2px 0;
@@ -509,34 +582,31 @@
     font-weight: normal;
     font-size: 14px;
 }
-.settings-tabs .accordion .accordion-content{
+
+.settings-tabs .accordion .accordion-content {
     padding: 10px;
     background: #f5f4f4a6;
 }
 
 
 
-@media only screen and (min-width: 1024px ){
+@media only screen and (min-width: 1024px) {}
 
-}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {}
 
-@media only screen and ( min-width: 768px ) and ( max-width: 1023px ) {
-
-}
-
-@media only screen and ( min-width: 0px ) and ( max-width: 767px ){
+@media only screen and (min-width: 0px) and (max-width: 767px) {
 
 
 
 
-    .settings-tabs .tab-navs{
+    .settings-tabs .tab-navs {
         float: none;
         position: relative;
         top: 0;
         padding: 0 20px;
     }
 
-    .settings-tabs .tab-navs .tab-nav{
+    .settings-tabs .tab-navs .tab-nav {
         display: inline-block;
         float: left;
         width: auto;
@@ -544,12 +614,12 @@
         padding: 10px 20px;
     }
 
-    .settings-tabs .tab-navs .tab-nav:last-child{
-        border-right: 1px solid rgba(0,0,0,0);
+    .settings-tabs .tab-navs .tab-nav:last-child {
+        border-right: 1px solid rgba(0, 0, 0, 0);
     }
 
 
-    .settings-tabs .tab-content{
+    .settings-tabs .tab-content {
         margin-left: 0;
         /*clear: both;*/
         padding: 0 20px;
@@ -570,7 +640,8 @@
         margin-right: 0px;
     }
 
-    input[type=checkbox], input[type=radio] {
+    input[type=checkbox],
+    input[type=radio] {
         margin: 6px 7px 0 0;
     }
 
@@ -583,12 +654,3 @@
 
 
 }
-
-
-
-
-
-
-
-
-

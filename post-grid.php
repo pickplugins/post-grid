@@ -247,7 +247,7 @@ if (!class_exists('PostGrid')) {
             }
 
 
-            if ($screen->id == 'post_grid_page_post-grid-settings') {
+            if ($screen->id == 'post-grid_page_post-grid-settings') {
 
                 wp_enqueue_script('post_grid_admin_js');
                 wp_localize_script('post_grid_admin_js', 'post_grid_ajax', array('post_grid_ajaxurl' => admin_url('admin-ajax.php')));
@@ -257,7 +257,7 @@ if (!class_exists('PostGrid')) {
 
                 wp_enqueue_style(
                     'prefix-editor',
-                    post_grid_plugin_url . '/dist/output.css',
+                    post_grid_plugin_url . 'dist/output.css',
                     [],
                     time(),
                     'all'

@@ -98,7 +98,7 @@ background-image: ${(props) => { return 'url(' + props.cssData.container.bgImg.u
 
 
 
-registerBlockType("prefix-blocks/section-2-cols", {
+registerBlockType("post-grid/section-2-cols", {
   title: "Section 2 Column Item List",
   icon: "grid-view",
   attributes: {

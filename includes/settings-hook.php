@@ -24,61 +24,6 @@ function post_grid_settings_content_general()
 
 
 
-        $args = array(
-            'id'        => 'post_options_post_types',
-            'parent'        => 'post_grid_settings',
-            'title'        => __('Post option by post types', 'post-grid'),
-            'details'    => __('Enable post options for selected post types', 'post-grid'),
-            'type'        => 'text',
-            'value'        => '',
-            'default'        => 'asdfasdsa',
-        );
-
-        $settings_tabs_field->generate_field($args);
-
-
-        $args = array(
-            'id'        => 'post_options_post_types',
-            'parent'        => 'post_grid_settings',
-            'title'        => __('Post option by post types', 'post-grid'),
-            'details'    => __('Enable post options for selected post types', 'post-grid'),
-            'type'        => 'textarea',
-            'value'        => '',
-            'default'        => 'asdfasdsa',
-        );
-
-        $settings_tabs_field->generate_field($args);
-        $args = array(
-            'id'        => 'post_options_post_types',
-            'parent'        => 'post_grid_settings',
-            'title'        => __('Post option by post types', 'post-grid'),
-            'details'    => __('Enable post options for selected post types', 'post-grid'),
-            'type'        => 'radio',
-            'value'        => $post_options_post_types,
-            'default'        => array(),
-            'style'        => ['inline' => false],
-
-            'args'        => $posttypes_array,
-        );
-
-        $settings_tabs_field->generate_field($args);
-
-
-        $args = array(
-            'id'        => 'post_options_post_types',
-            'parent'        => 'post_grid_settings',
-            'title'        => __('Post option by post types', 'post-grid'),
-            'details'    => __('Enable post options for selected post types', 'post-grid'),
-            'type'        => 'checkbox',
-            'value'        => $post_options_post_types,
-            'default'        => array(),
-            'style'        => ['inline' => false],
-
-            'args'        => $posttypes_array,
-        );
-
-        $settings_tabs_field->generate_field($args);
-
 
 
         $args = array(
@@ -287,7 +232,7 @@ if (!function_exists('post_grid_settings_content_disable_blocks')) {
 
             <?php
 
-            $blocks_list = ['post-grid' => 'Post Grid', 'post-grid-carusel' => 'Post Grid Carusel'];
+            $blocks_list = ['post-grid/post-grid' => 'Post Grid', 'post-grid-carusel' => 'Post Grid Carusel'];
 
             $args = array(
                 'id'        => 'block_list',

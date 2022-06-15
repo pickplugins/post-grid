@@ -24,24 +24,18 @@ class class_post_grid_settings
 
         add_menu_page(__('Post Grid - Overview', 'breadcrumb'), __('Post Grid', 'breadcrumb'), 'manage_options', 'post-grid', array($this, 'post_grid'), post_grid_plugin_url . 'assets/admin/images/post-grid-20.png');
 
-        $data_update_status = isset($post_grid_info['data_update_status']) ? $post_grid_info['data_update_status'] : 'pending';
+
 
         add_submenu_page('post-grid', __('Settings', 'post-grid'), __('Settings', 'post-grid'), 'manage_options', 'post-grid-settings', array($this, 'settings'));
 
+        add_submenu_page('post-grid', __('Layouts library', 'post-grid'), __('Layouts library', 'post-grid'), 'manage_options', 'import_layouts', array($this, 'import_layouts'));
 
-
-        add_submenu_page('edit.php?post_type=post_grid', __('Addons', 'post-grid'), __('Addons', 'post-grid'), 'manage_options', 'post-grid-addons', array($this, 'addons'));
-
-        add_submenu_page('edit.php?post_type=post_grid', __('Layouts library', 'post-grid'), __('Layouts library', 'post-grid'), 'manage_options', 'import_layouts', array($this, 'import_layouts'));
-
-
-        if ($data_update_status == 'pending') :
-            add_submenu_page('edit.php?post_type=post_grid', __('Data Update', 'post-grid'), __('Data Update', 'post-grid'), 'manage_options', 'data-update', array($this, 'data_update'));
-
-        endif;
+        add_submenu_page('post-grid', __('Overview', 'post-grid'), __('Overview', 'post-grid'), 'manage_options', 'overview', array($this, 'overview'));
+        //add_submenu_page('post-grid', __('Post Grid', 'post-grid'), __('All Post Grid', 'post-grid'), 'manage_options', 'edit.php?post_type=post_grid',);
+        //add_submenu_page('post-grid', __('Layouts', 'post-grid'), __('All Layouts', 'post-grid'), 'manage_options', 'edit.php?post_type=post_grid_layout',);
     }
 
-    public function post_grid()
+    public function overview()
     {
         include(post_grid_plugin_dir . 'includes/menu/overview.php');
     }

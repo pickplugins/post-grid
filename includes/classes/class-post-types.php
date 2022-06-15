@@ -54,8 +54,10 @@ class class_post_grid_post_types
                 'hierarchical'             => false,
                 'query_var'             => true,
                 'supports'                 => array('title'),
-                'show_in_nav_menus'     => false,
+                'show_in_nav_menus'     => true,
                 'menu_icon' => 'dashicons-grid-view',
+                'show_in_menu'     => 'post-grid',
+
 
             ))
         );
@@ -104,7 +106,7 @@ class class_post_grid_post_types
                 'query_var'             => true,
                 'supports'                 => array('title'), // 'editor'
                 'show_in_nav_menus'     => false,
-                'show_in_menu'     => 'edit.php?post_type=post_grid',
+                'show_in_menu'     => 'post-grid',
                 'menu_icon' => 'dashicons-businessman',
                 'show_in_rest' => true,
 
@@ -142,6 +144,7 @@ class class_post_grid_post_types
                 'show_ui'                 => true,
                 'public'                  => true,
                 'show_in_rest' => true,
+                'show_in_menu'     => 'post-grid',
 
                 'rewrite' => array(
                     'slug' => 'layout_cat', // This controls the base slug that will display before each term

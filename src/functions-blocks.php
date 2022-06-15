@@ -25,23 +25,15 @@ function post_grid_block_categories($categories, $post)
 
 
 
-function post_grid_allowed_block_types()
+function post_grid_allowed_block_types($allowed_block_types, $editor_context)
 {
 
     $post_grid_settings = get_option('post_grid_settings');
 
     $block_list = isset($post_grid_settings['block_list']) ? $post_grid_settings['block_list'] : [];
 
+    error_log(serialize($block_list));
 
-
-
-
-
-
-    return array(
-        'core/paragraph', // Paragraph Block
-        'core/image', // Image Block
-        'core/freeform', // Classic Editor Block
-    );
+    return $allowed_block_types;
 }
-add_filter('allowed_block_types', 'wpcc_allowed_block_types');
+add_filter('allowed_block_types_all', 'post_grid_allowed_block_types', 99, 2);

@@ -8,13 +8,7 @@ $class_post_grid_functions = new class_post_grid_functions();
 $addons_list = $class_post_grid_functions->addons_list();
 
 
-wp_enqueue_style(
-    'prefix-editor',
-    post_grid_plugin_url . '/dist/output.css',
-    [],
-    false,
-    'all'
-);
+wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], false, 'all');
 
 
 ?>

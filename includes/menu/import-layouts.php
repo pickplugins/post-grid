@@ -1,7 +1,7 @@
 <?php
-if ( ! defined('ABSPATH')) exit;  // if direct access
+if (!defined('ABSPATH')) exit;  // if direct access
 
-if(!current_user_can('manage_options')) return;
+if (!current_user_can('manage_options')) return;
 
 $keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : '';
 $paged = isset($_GET['paged']) ? sanitize_text_field($_GET['paged']) : '';
@@ -13,6 +13,7 @@ $license_key = isset($post_grid_settings['license_key']) ? $post_grid_settings['
 $max_num_pages = 0;
 
 wp_enqueue_script('post_grid_layouts');
+wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], false, 'all');
 
 
 
@@ -20,18 +21,21 @@ wp_enqueue_script('post_grid_layouts');
 <div class="wrap">
     <h2><?php _e('Post Grid - Layouts library', 'post-grid'); ?></h2>
 
+
+    <div class="bg-red-500 px-5 py-2 text-lg text-white">Old Layout is about to depricated but you can still use and it works fine, we will longer update, please try Gutenberg Post Grid block instaed, we have added some exciting feature with gutenberg block.</div>
+
+
     <div class="wpblockhub-search">
 
         <div class="wp-filter">
             <ul class="filter-links">
-                <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=latest" class="<?php if($tabs == 'latest') echo 'current'; ?>" aria-current="page"><?php _e('Latest', 'post-grid'); ?></a> </li>
-                <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=free" class="<?php if($tabs == 'free') echo 'current'; ?>" aria-current="page"><?php _e('Free', 'post-grid'); ?></a> </li>
-                <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=pro" class="<?php if($tabs == 'pro') echo 'current'; ?>" aria-current="page"><?php _e('Premium', 'post-grid'); ?></a> </li>
+                <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=latest" class="<?php if ($tabs == 'latest') echo 'current'; ?>" aria-current="page"><?php _e('Latest', 'post-grid'); ?></a> </li>
+                <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=free" class="<?php if ($tabs == 'free') echo 'current'; ?>" aria-current="page"><?php _e('Free', 'post-grid'); ?></a> </li>
+                <li class=""><a href="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>&tabs=pro" class="<?php if ($tabs == 'pro') echo 'current'; ?>" aria-current="page"><?php _e('Premium', 'post-grid'); ?></a> </li>
             </ul>
             <form class="block-search-form">
                 <span class="loading"></span>
-                <input id="block-keyword" type="search" placeholder="<?php _e('Start typing...', 'wp-block-hub'); ?>"
-                       value="<?php echo esc_attr($keyword); ?>">
+                <input id="block-keyword" type="search" placeholder="<?php _e('Start typing...', 'wp-block-hub'); ?>" value="<?php echo esc_attr($keyword); ?>">
             </form>
         </div>
 
@@ -53,26 +57,24 @@ wp_enqueue_script('post_grid_layouts');
          * Check is there any server error occurred
          *
          * */
-        if (is_wp_error($response)){
+        if (is_wp_error($response)) {
 
-            ?>
+        ?>
             <div class="return-empty">
                 <ul>
                     <li><?php echo __("Unexpected Error! The query returned with an error.", 'post-grid'); ?></li>
                     <li><?php echo __("Make sure your internet connection is up.", 'post-grid'); ?></li>
                 </ul>
             </div>
-            <?php
+        <?php
 
 
-        }
-        else{
+        } else {
 
             $response_data = json_decode(wp_remote_retrieve_body($response));
             $post_data = isset($response_data->posts) ? $response_data->posts : array();
             $post_found = isset($response_data->post_found) ? sanitize_text_field($response_data->post_found) : array();
             $max_num_pages = isset($response_data->max_num_pages) ? sanitize_text_field($response_data->max_num_pages) : 0;
-
         }
 
         ?>
@@ -80,9 +82,9 @@ wp_enqueue_script('post_grid_layouts');
         <div class="block-list-items">
             <?php
 
-            if(!empty($post_data)):
+            if (!empty($post_data)) :
 
-                foreach ($post_data as $item_index=>$item):
+                foreach ($post_data as $item_index => $item) :
 
 
                     //var_dump($item);
@@ -100,12 +102,12 @@ wp_enqueue_script('post_grid_layouts');
 
 
 
-                    ?>
+            ?>
 
                     <div class="item">
                         <div class="item-top-area">
 
-                            <?php if(!empty($layout_preview_img)):?>
+                            <?php if (!empty($layout_preview_img)) : ?>
                                 <div class="block-thumb">
                                     <img src="<?php echo esc_url($layout_preview_img); ?>">
                                 </div>
@@ -120,19 +122,18 @@ wp_enqueue_script('post_grid_layouts');
 
                                 <?php
                                 if ($is_pro == 'yes' && empty($license_key)) {
-
-                                }else{
-                                    ?>
-                                    <span class="button  import-layout"  post_id="<?php echo esc_attr($post_id); ?>"><i class="fas fa-download"></i> Import (<?php echo esc_html($download_count); ?>)</span>
-                                    <?php
+                                } else {
+                                ?>
+                                    <span class="button  import-layout" post_id="<?php echo esc_attr($post_id); ?>"><i class="fas fa-download"></i> Import (<?php echo esc_html($download_count); ?>)</span>
+                                <?php
                                 }
 
                                 ?>
 
 
-                                <?php if($is_pro == 'yes'): ?>
+                                <?php if ($is_pro == 'yes') : ?>
                                     <span title="Enter license key to import" class="is_pro button"><i class="fas fa-crown"></i> Pro</span>
-                                <?php else: ?>
+                                <?php else : ?>
                                     <span class="is_free button"><i class="far fa-lightbulb"></i> Free</span>
                                 <?php endif; ?>
 
@@ -142,10 +143,10 @@ wp_enqueue_script('post_grid_layouts');
                         </div>
                         <div class="clear"></div>
                     </div>
-                <?php
+            <?php
                 endforeach;
 
-            else:
+            else :
 
                 echo 'Server return empty. please try again later.';
             endif;
@@ -171,14 +172,15 @@ wp_enqueue_script('post_grid_layouts');
                     'base' => preg_replace('/\?.*/', '', get_pagenum_link()) . '%_%',
                     //'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
                     'format' => '?paged=%#%',
-                    'current' => max( 1, $paged ),
-                    'total' => $max_num_pages ,
+                    'current' => max(1, $paged),
+                    'total' => $max_num_pages,
                     'prev_text'          => '« Previous',
                     'next_text'          => 'Next »',
 
 
 
-                ));
+                )
+            );
             ?>
         </div>
 
@@ -191,16 +193,16 @@ wp_enqueue_script('post_grid_layouts');
 <script>
     jQuery(document).ready(function($) {
 
-        var delay = (function(){
+        var delay = (function() {
             var timer = 0;
-            return function(callback, ms){
-                clearTimeout (timer);
+            return function(callback, ms) {
+                clearTimeout(timer);
                 timer = setTimeout(callback, ms);
             };
         })();
 
 
-        $(document).on('keyup','#block-keyword',function(){
+        $(document).on('keyup', '#block-keyword', function() {
             _this = this;
             keyword = $(this).val();
 
@@ -209,14 +211,14 @@ wp_enqueue_script('post_grid_layouts');
             var url = new URL(url);
 
 
-            delay(function(){
+            delay(function() {
                 $(_this).parent().children('.loading').addClass('button updating-message');
 
                 url.searchParams.append('keyword', keyword);
                 url.searchParams.delete('paged');
                 window.location.href = url.href;
 
-            }, 1000 );
+            }, 1000);
 
 
         })
@@ -224,18 +226,23 @@ wp_enqueue_script('post_grid_layouts');
 </script>
 
 <style type="text/css">
-
-    .block-search-form{
+    .block-search-form {
         float: right;
         padding: 10px;
     }
-    .block-search-form input[type="search"]{
+
+    .block-search-form input[type="search"] {
         width: 225px;
         padding: 0 10px;
     }
-    .block-list-items{}
-    .block-list-items a{ text-decoration: none}
-    .block-list-items .item{
+
+    .block-list-items {}
+
+    .block-list-items a {
+        text-decoration: none
+    }
+
+    .block-list-items .item {
         display: inline-block;
         vertical-align: top;
         width: 18%;
@@ -245,7 +252,7 @@ wp_enqueue_script('post_grid_layouts');
 
     @media (max-width: 1199.98px) {
 
-        .block-list-items .item{
+        .block-list-items .item {
             width: 46%;
 
         }
@@ -253,7 +260,7 @@ wp_enqueue_script('post_grid_layouts');
 
     @media (max-width: 767.98px) {
 
-        .block-list-items .item{
+        .block-list-items .item {
             width: 46%;
 
         }
@@ -261,7 +268,7 @@ wp_enqueue_script('post_grid_layouts');
     }
 
     @media (max-width: 575.98px) {
-        .block-list-items .item{
+        .block-list-items .item {
             width: 95%;
 
         }
@@ -271,57 +278,66 @@ wp_enqueue_script('post_grid_layouts');
 
 
 
-    .block-list-items .item-top-area{}
-    .block-list-items .block-thumb{
+    .block-list-items .item-top-area {}
+
+    .block-list-items .block-thumb {
         /* float: left; */
         overflow: hidden;
         /* margin-right: 15px; */
         height: 280px;
         border-bottom: 1px solid #ddd;
     }
-    .block-list-items .block-thumb img{
+
+    .block-list-items .block-thumb img {
         width: 100%;
     }
 
-    .block-list-items .block-name{
+    .block-list-items .block-name {
         font-weight: 600;
         font-size: 18px;
     }
-    .block-list-items .block-content{
+
+    .block-list-items .block-content {
         padding: 15px;
     }
-    .item .actions{
+
+    .item .actions {
         margin: 10px;
     }
 
-    .item .is_pro{
+    .item .is_pro {
         background: #3f51b5;
         color: #fff;
     }
-    .item .is_free{
+
+    .item .is_free {
         background: #449862;
         color: #fff;
     }
 
-    .block-save{}
-    .block-save.saved{
+    .block-save {}
+
+    .block-save.saved {
         color: #00a04f;
     }
 
-    .block-save span{
+    .block-save span {
         line-height: normal;
         display: inline-block;
     }
 
-    .block-list-items .demo-wrap{}
-    .block-list-items .block-action{
+    .block-list-items .demo-wrap {}
+
+    .block-list-items .block-action {
         float: right;
         display: inline-block;
         padding: 15px;
         text-align: right;
     }
-    .plugin-required{}
-    .plugin-required a{
+
+    .plugin-required {}
+
+    .plugin-required a {
         text-decoration: none;
     }
 
@@ -336,47 +352,53 @@ wp_enqueue_script('post_grid_layouts');
 
 
 
-    .block-list-items .item-bottom-area{
+    .block-list-items .item-bottom-area {
         padding: 10px;
         background: #f7f7f7;
         border-top: 1px solid #ddd;
     }
-    .item-bottom-area .col-left{
+
+    .item-bottom-area .col-left {
         width: 49%;
         display: inline-block;
         vertical-align: top;
     }
-    .item-bottom-area .col-right{
+
+    .item-bottom-area .col-right {
         width: 49%;
         display: inline-block;
         text-align: right;
     }
-    .item-bottom-area .col-left .star-rate{
+
+    .item-bottom-area .col-left .star-rate {
         margin-bottom: 10px;
     }
-    .item-bottom-area .col-left .star-rate .dashicons{
+
+    .item-bottom-area .col-left .star-rate .dashicons {
         color: #ffb900;
     }
-    .item-bottom-area .col-left .download-count{}
 
-    .item-bottom-area .col-right .author-link{
+    .item-bottom-area .col-left .download-count {}
+
+    .item-bottom-area .col-right .author-link {
         margin-bottom: 10px;
     }
 
 
 
-    .paginate{
+    .paginate {
         text-align: center;
         margin: 40px;
     }
 
-    .paginate .page-numbers{
+    .paginate .page-numbers {
         background: #f7f7f7;
         padding: 10px 15px;
         margin: 5px;
         text-decoration: none;
     }
-    .paginate .page-numbers.current{
+
+    .paginate .page-numbers.current {
         background: #e4e4e4;
     }
 
@@ -392,19 +414,22 @@ wp_enqueue_script('post_grid_layouts');
 
     /*wpblockhub-import-container*/
 
-    .wpblockhub-import-container{
+    .wpblockhub-import-container {
         position: relative;
     }
-    .wpblockhub-import-btn{}
+
+    .wpblockhub-import-btn {}
+
     .wpblockhub-import-container button {
         background: #3f51b5;
         color: #fff;
     }
-    .wpblockhub-import-container .item-list-wrap.active{
+
+    .wpblockhub-import-container .item-list-wrap.active {
         display: block;
     }
 
-    .item-list-wrap{
+    .item-list-wrap {
         position: absolute;
         width: 300px;
         background: #fff;
@@ -428,8 +453,9 @@ wp_enqueue_script('post_grid_layouts');
         transition: ease all 1s;
     }
 
-    .item-list-wrap .item img{}
-    .item-list-wrap .item:hover img{}
+    .item-list-wrap .item img {}
+
+    .item-list-wrap .item:hover img {}
 
     /*.item-list-wrap .item img:before {*/
     /*    transition: ease all 1s;*/
@@ -459,40 +485,46 @@ wp_enqueue_script('post_grid_layouts');
         z-index: 99999;
     }
 
-    .item-list-wrap .item:hover .item-import{
+    .item-list-wrap .item:hover .item-import {
 
         display: block;
     }
 
-    .item-list-wrap .item img{
+    .item-list-wrap .item img {
         transition: ease all 1s;
     }
-    .item-list-wrap .item:hover img{
+
+    .item-list-wrap .item:hover img {
         opacity: 0.3;
     }
 
-    .item-list-wrap .item.loading{}
+    .item-list-wrap .item.loading {}
+
     .item-list-wrap .item.loading:before {
         content: "Loading...";
     }
-    .item-list-wrap .categories{
+
+    .item-list-wrap .categories {
         width: 100%;
         margin-bottom: 10px;
     }
-    .item-list-wrap .keyword, .item-list-wrap .loading{
+
+    .item-list-wrap .keyword,
+    .item-list-wrap .loading {
         width: 100%;
     }
 
 
 
-    .item-list-wrap .load-more{
+    .item-list-wrap .load-more {
         width: 100%;
         text-align: center;
     }
 
 
-    .item-list-wrap .plugins-required{}
-    .item-list-wrap .plugins-required a{
+    .item-list-wrap .plugins-required {}
+
+    .item-list-wrap .plugins-required a {
         text-decoration: none;
     }
 
@@ -500,12 +532,11 @@ wp_enqueue_script('post_grid_layouts');
 
     /*Sidebar .wpblockhub-import-wrap*/
 
-    .wpblockhub-import-wrap{}
-    .wpblockhub-import-header-wrap{
+    .wpblockhub-import-wrap {}
+
+    .wpblockhub-import-header-wrap {
         padding: 15px;
     }
 
-    .wpblockhub-import-header{
-
-    }
+    .wpblockhub-import-header {}
 </style>

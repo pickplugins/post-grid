@@ -18,7 +18,7 @@ const { RawHTML } = wp.element;
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 import { createElement, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, Spinner, CustomSelectControl } from '@wordpress/components'
+import { PanelBody, RangeControl, Button, ButtonGroup, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, Spinner, CustomSelectControl } from '@wordpress/components'
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 
@@ -176,6 +176,17 @@ registerBlockType("post-grid/post-grid", {
     var queryArgs = attributes.queryArgs;
 
     //console.log(blockProps);
+
+
+
+    const [layoutSource, setLayoutSource] = useState('library'); // Using the hook.
+
+
+
+
+
+
+
 
     const postQueryPresets = [
       {
@@ -581,9 +592,6 @@ background-color: red;
 
       var blocks = parse(post_content);
 
-      // console.log(post_content);
-
-      // console.log(layout);
 
       setAttributes({ layout: { id: id, data: blocks, rawData: post_content } })
 
@@ -620,9 +628,9 @@ background-color: red;
 
 
 
-    const [queryLayouts, setQueryLayouts] = useState(false);
+    const [queryLayouts, setQueryLayouts] = useState({ loading: false });
     var [layoutList, setLayoutList] = useState({ items: [] });
-    var [layoutData, setLayoutData] = useState({ keyword: '', category: '', categories: [] });
+    var [layoutData, setLayoutData] = useState({ source: 'library', keyword: '', page: 1, category: '', categories: [] });
 
     useEffect(() => {
 
@@ -657,7 +665,7 @@ background-color: red;
 
     function fetchLayouts() {
 
-      setQueryLayouts(true);
+      setQueryLayouts({ loading: true });
 
       // apiFetch({
       //   path: '/blockxyz/v2/get_posts_layout',
@@ -688,7 +696,7 @@ background-color: red;
 
               console.log(data);
               setLayoutList({ items: data.posts })
-              setQueryLayouts(false);
+              setQueryLayouts({ loading: false });
 
             });
           }
@@ -712,18 +720,18 @@ background-color: red;
 
     function fetchLayoutData() {
 
-      setQueryLayouts(true);
+      setQueryLayouts({ loading: true });
 
       apiFetch({
         path: '/blockxyz/v2/get_posts_layout',
         method: 'POST',
-        data: { category: layoutData.category, keyword: layoutData.keyword },
+        data: { category: layoutData.category, source: layoutData.source, page: layoutData.page, keyword: layoutData.keyword },
       }).then((res) => {
 
         //console.log(res);
 
-        setLayoutData({ keyword: layoutData.keyword, category: layoutData.category, categories: res.terms })
-        setQueryLayouts(false);
+        setLayoutData({ keyword: layoutData.keyword, source: layoutData.source, page: layoutData.page, category: layoutData.category, categories: res.terms })
+        setQueryLayouts({ loading: false });
 
 
       });
@@ -1764,7 +1772,26 @@ background-color: red;
               </PanelBody>
               <PanelBody title="Layouts" initialOpen={false}>
 
+                {JSON.stringify(layoutData)}
 
+                <div className='text-white cursor-pointer'>
+
+
+                  <div className={(layoutSource == 'library') ? 'bg-blue-500 w-1/2 inline-block px-3 py-2' : 'bg-blue-300  inline-block px-3 py-2 w-1/2'}
+                    onClick={(ev) => {
+
+                      setLayoutSource('library')
+                      setLayoutData({ keyword: layoutData.keyword, source: 'library', page: layoutData.page, category: layoutData.category, categories: layoutData.categories })
+                    }}
+
+                  >Library</div>
+                  <div className={(layoutSource == 'saved') ? 'bg-blue-500 w-1/2 inline-block px-3 py-2' : 'bg-blue-300 inline-block px-3 py-2 w-1/2 '} onClick={(ev) => {
+
+                    setLayoutSource('saved')
+                    setLayoutData({ keyword: layoutData.keyword, source: 'saved', page: layoutData.page, category: layoutData.category, categories: layoutData.categories })
+                  }}>Saved</div>
+
+                </div>
 
                 <PanelRow>
                   <InputControl
@@ -1776,7 +1803,7 @@ background-color: red;
                       console.log(newVal);
 
 
-                      setLayoutData({ keyword: newVal, category: layoutData.category, categories: layoutData.categories })
+                      setLayoutData({ keyword: newVal, source: layoutData.source, page: layoutData.page, category: layoutData.category, categories: layoutData.categories })
                       //fetchLayouts();
                     }}
 
@@ -1791,7 +1818,7 @@ background-color: red;
                       console.log(newVal);
 
 
-                      setLayoutData({ keyword: layoutData.keyword, category: newVal, categories: layoutData.categories })
+                      setLayoutData({ keyword: layoutData.keyword, source: layoutData.source, page: layoutData.page, category: newVal, categories: layoutData.categories })
 
 
 
@@ -1810,21 +1837,18 @@ background-color: red;
 
 
 
-                {queryLayouts == true && <div className='text-center'>
+                {queryLayouts.loading == true && <div className='text-center'>
 
                   <Spinner />
                 </div>}
 
 
-                {queryLayouts == false && layoutList.items.length > 0 && layoutList.items.map(x => {
+                {queryLayouts.loading == false && layoutList.items.length > 0 && layoutList.items.map(x => {
                   return (
                     <div className='my-3  ' >
 
                       <div className='relative cursor-pointer' onClick={(ev) => {
                         selectLayout(x.post_id, x.post_content)
-
-
-
                       }}>
                         <img src={x.thumb_url} />
 
@@ -1865,6 +1889,9 @@ background-color: red;
                   )
                 })}
 
+                <div onClick={(ev) => {
+                  loadLayout()
+                }}>Load More</div>
 
                 <PanelRow>
 

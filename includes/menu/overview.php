@@ -8,7 +8,7 @@ $class_post_grid_functions = new class_post_grid_functions();
 $addons_list = $class_post_grid_functions->addons_list();
 
 
-wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], false, 'all');
+wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
 
 
 ?>
@@ -31,10 +31,10 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
             </div>
             <div class="col-span-6 text-right">
 
-                <a href="" class="inline-block px-4 py-2 rounded-sm bg-blue-600 text-white text-lg mx-2 hover:text-white ">Create Support</a>
+                <a href="" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Create Support</a>
 
 
-                <a href="" class="inline-block px-4 py-2 rounded-sm bg-blue-600 text-white text-lg mx-2 hover:text-white ">Documentation</a>
+                <a href="" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Documentation</a>
 
 
 
@@ -56,8 +56,8 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
 
                     <div class="text-center">
 
-                        <a href="" class="inline-block mt-5 px-6 py-1 rounded-sm  text-center border-4 border-indigo-600	 text-gray-600  text-lg mx-2  ">Live Demo</a>
-                        <a href="" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-600	 text-white text-lg mx-2 hover:text-white ">Plugin Details</a>
+                        <a href="" class="inline-block mt-5 px-6 py-1 rounded-sm  text-center border-4 border-indigo-600 hover:border-indigo-400	 text-gray-600  text-lg mx-2  ">Live Demo</a>
+                        <a href="" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-600	hover:bg-indigo-400 text-white text-lg mx-2 hover:text-white ">Plugin Details</a>
 
                     </div>
 
@@ -87,7 +87,7 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
                         <li><span class="dashicons dashicons-yes-alt align-middle"></span> Advance Grid Layout Builder </li>
                         <li><span class="dashicons dashicons-yes-alt align-middle"></span> Advance Grid Layout Presets <span class="text-rose-700 font-bold">[Pro]</span></li>
 
-                        <li><span class="dashicons dashicons-format-status align-middle"></span> Comming More Blocks... </li>
+                        <li><span class="dashicons dashicons-format-status align-middle"></span> More Blocks Comming... </li>
 
 
 
@@ -99,7 +99,7 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
 
 
 
-                    <a href="" class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-amber-500		 text-white text-lg hover:text-white "><span class="text-2xl mr-3 dashicons dashicons-cart"></span> Buy Pro Version</a>
+                    <a href="" class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-amber-500 hover:bg-amber-600		 text-white text-lg hover:text-white "><span class="text-2xl mr-3 dashicons dashicons-cart"></span> Buy Pro Version</a>
                 </div>
 
             </div>
@@ -129,7 +129,7 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
                     <p class="text-[16px]">We create ready post layout templates for you. so that you don't have to wast time for creating complex and advance layout by own. Our designer and developer team continuesly sketch, build new layouts everyday, just take a search and pick the best templates that you need.</p>
 
 
-                    <a href="" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-500		 text-white text-lg hover:text-white "><span class="dashicons dashicons-buddicons-groups align-middle"></span> See Layouts Library</a>
+                    <a href="" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-500	hover:bg-indigo-400	 text-white text-lg hover:text-white "><span class="dashicons dashicons-buddicons-groups align-middle"></span> See Layouts Library</a>
 
                 </div>
             </div>
@@ -153,7 +153,7 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
                     <p class="text-[16px]">Our Post Grid plugin is master for creating advance and complex layout for grid. We use most advantage for grid CSS to build beautifull and complex grid layout, Hope it will save your time and help you to create post grid quickly.</p>
 
 
-                    <a href="" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-500		 text-white text-lg hover:text-white "><span class="dashicons dashicons-buddicons-groups align-middle"></span> See Grid Layout Presets</a>
+                    <a href="" class="inline-block mt-5 px-4 py-2 rounded-sm  text-center bg-indigo-500	hover:bg-indigo-400	 text-white text-lg hover:text-white "><span class="dashicons dashicons-buddicons-groups align-middle"></span> See Grid Layout Presets</a>
 
                 </div>
             </div>
@@ -382,6 +382,30 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
     </div>
 
 
+    <div class=" my-10 container mx-auto">
+        <div class="grid grid-cols-12 max-w-6xl mx-auto just">
+            <div class="col-span-4 bg-white ">
+                <div class="p-5">
+
+                    <h3 class="text-lg inline-block mr-12 font-bold">Follow Us</h3>
+                    <div class="inline-block  "><a class="p-2 " href=""><span class="dashicons   dashicons-facebook"></span></a></div>
+                    <div class="inline-block "><a class="p-2 " href=""><span class="dashicons  dashicons-twitter"></span></a></div>
+                    <div class="inline-block "><a class="p-2 " href=""><span class="dashicons  dashicons-pinterest"></span></a></div>
+                    <div class="inline-block "><a class="p-2 " href=""><span class="dashicons  dashicons-linkedin"></span></a></div>
+
+                </div>
+            </div>
+            <div class="col-span-8 bg-white ">
+                <div class="p-5">
+
+                    <a class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white " href="">Join Our Facebook Group</a>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
 
     <div class=" my-10 container mx-auto">
         <div class="grid grid-cols-12 gap-4 max-w-6xl mx-auto">

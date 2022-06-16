@@ -84,7 +84,7 @@ if (!class_exists('PostGrid')) {
 
 
             $args = array(
-                'post_types' => array('post_grid', 'post_grid_layout'),
+                'post_types' => array('post_grid', 'post_grid_layout', 'post_grid_template'),
             );
 
             new PPduplicatePost($args);
@@ -305,7 +305,8 @@ if (!class_exists('PostGrid')) {
                     'wp-components',
                     'wp-data'
 
-                ]
+                ],
+                time()
 
             );
         }

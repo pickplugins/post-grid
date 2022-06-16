@@ -7,7 +7,7 @@ class class_post_grid_notices
     public function __construct()
     {
 
-        add_action('admin_notices', array($this, 'layout_depricated'));
+        //add_action('admin_notices', array($this, 'layout_depricated'));
 
 
         //add_action('admin_notices', array( $this, 'import_layouts' ));

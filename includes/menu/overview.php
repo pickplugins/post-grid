@@ -13,9 +13,7 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
 
 ?>
 <div class="wrap">
-
-
-    <div class="p-5 bg-white">
+    <div class="p-5 bg-white ">
         <div class="grid grid-cols-12 gap-3">
             <div class="col-span-6 ">
 
@@ -39,10 +37,11 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
 
 
             </div>
-
         </div>
-
     </div>
+
+
+
 
 
     <div class=" my-10 container mx-auto">
@@ -109,6 +108,61 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
         </div>
 
     </div>
+
+
+    <div class="p-5 ">
+
+
+        <div class="p-5 max-w-6xl mx-auto my-10">
+            <h2 class=" text-center text-3xl font-bold">Available Blocks</h2>
+        </div>
+
+        <div class="grid grid-cols-12 gap-3 max-w-6xl mx-auto text-center">
+            <div class="col-span-4 bg-white">
+                <div class="p-5 ">
+                    <h3 class="text-3xl mb-5 font-bold text-gray-600">
+                        Post Grid
+                    </h3>
+                </div>
+            </div>
+            <div class="col-span-4 bg-white">
+                <div class="p-5 ">
+                    <h3 class="text-3xl mb-5 font-bold text-gray-600">
+                        Post Grid - Filterable
+                    </h3>
+                </div>
+            </div>
+            <div class="col-span-4 bg-white">
+                <div class="p-5 ">
+                    <h3 class="text-3xl mb-5 font-bold text-gray-600">
+                        Post Grid - Glossary
+                    </h3>
+                </div>
+            </div>
+            <div class="col-span-4 bg-white">
+                <div class="p-5 ">
+                    <h3 class="text-3xl mb-5 font-bold text-gray-600">
+                        Post Carusel
+                    </h3>
+                </div>
+            </div>
+            <div class="col-span-4 bg-white">
+                <div class="p-5 ">
+                    <h3 class="text-3xl mb-5 font-bold text-gray-600">
+                        Category Grid
+                    </h3>
+                </div>
+            </div>
+            <div class="col-span-4 bg-white">
+                <div class="p-5 ">
+                    <h3 class="text-3xl mb-5 font-bold text-gray-600">
+                        Category Carusel
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class=" my-10 container mx-auto">
         <div class="grid grid-cols-12 max-w-6xl mx-auto">

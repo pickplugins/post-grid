@@ -13,8 +13,21 @@ class BlockPostGridRest
 
     public function register_routes()
     {
+
+
         register_rest_route(
-            'blockxyz/v2',
+            'post-grid/v2',
+            '/get_license',
+            array(
+                'methods'  => 'POST',
+                'callback' => array($this, 'get_license'),
+                'permission_callback' => '__return_true',
+            )
+        );
+
+
+        register_rest_route(
+            'post-grid/v2',
             '/get_terms',
             array(
                 'methods'  => 'POST',
@@ -24,7 +37,7 @@ class BlockPostGridRest
         );
 
         register_rest_route(
-            'blockxyz/v2',
+            'post-grid/v2',
             '/post_types',
             array(
                 'methods'  => 'POST',
@@ -36,7 +49,7 @@ class BlockPostGridRest
 
 
         register_rest_route(
-            'blockxyz/v2',
+            'post-grid/v2',
             '/post_type_objects',
             array(
                 'methods'  => 'POST',
@@ -47,7 +60,7 @@ class BlockPostGridRest
 
 
         register_rest_route(
-            'blockxyz/v2',
+            'post-grid/v2',
             '/get_posts',
             array(
                 'methods'  => 'POST',
@@ -58,7 +71,7 @@ class BlockPostGridRest
 
 
         register_rest_route(
-            'blockxyz/v2',
+            'post-grid/v2',
             '/get_posts_layout',
             array(
                 'methods'  => 'POST',
@@ -68,7 +81,7 @@ class BlockPostGridRest
         );
 
         register_rest_route(
-            'blockxyz/v2',
+            'post-grid/v2',
             '/get_tax_terms',
             array(
                 'methods'  => 'POST',
@@ -100,7 +113,7 @@ class BlockPostGridRest
 
 
         $query_args = [];
-        $query_args['post_type'] = 'post_grid_layout';
+        $query_args['post_type'] = 'post_grid_template';
 
         if (!empty($keyword)) {
             $query_args['s'] = $keyword;
@@ -109,7 +122,7 @@ class BlockPostGridRest
 
         if (!empty($category)) {
             $tax_query[] = array(
-                'taxonomy' => 'layout_cat',
+                'taxonomy' => 'template_cat',
                 'field'    => 'term_id',
                 'terms'    => $category,
             );
@@ -183,7 +196,7 @@ class BlockPostGridRest
 
         $terms = get_terms(
             array(
-                'taxonomy'   => 'layout_cat',
+                'taxonomy'   => 'template_cat',
                 'hide_empty' => true,
                 'post_type'  => 'post_grid_layout',
             )
@@ -470,6 +483,27 @@ class BlockPostGridRest
         die(wp_json_encode($terms));
     }
 
+    /**
+     * Return license info.
+     *
+     * @since 1.0.0
+     *
+     * @param WP_REST_Request $tax_data The tax data.
+     */
+    public function get_license($request)
+    {
+
+
+        $response = [];
+        $post_grid_license = get_option('post_grid_license');
+        $response['license_key'] = isset($post_grid_license['license_key']) ? $post_grid_license['license_key'] : '';
+        $response['license_status'] = isset($post_grid_license['license_status']) ? $post_grid_license['license_status'] : '';
+
+
+
+
+        die(wp_json_encode($response));
+    }
 
 
     /**

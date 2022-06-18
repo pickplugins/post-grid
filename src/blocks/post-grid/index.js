@@ -175,12 +175,8 @@ registerBlockType("post-grid/post-grid", {
     var layout = attributes.layout;
     var queryArgs = attributes.queryArgs;
 
-    //console.log(blockProps);
 
-
-
-    const [layoutSource, setLayoutSource] = useState('library'); // Using the hook.
-
+    var [debounce, setDebounce] = useState(null); // Using the hook.
 
 
 
@@ -235,9 +231,26 @@ registerBlockType("post-grid/post-grid", {
     ];
 
 
+    var [license, setLicense] = useState({ license_status: '', license_key: '' }); // Using the hook.
 
 
+    function fetchLicenseInfo() {
 
+
+      apiFetch({
+        path: '/post-grid/v2/get_license',
+        method: 'POST',
+        data: {},
+      }).then((res) => {
+
+        console.log(res);
+
+        setLicense(res);
+
+
+      });
+
+    }
 
 
     function MyCustomSelectControl() {
@@ -247,27 +260,33 @@ registerBlockType("post-grid/post-grid", {
 
 
       return (
-        <CustomSelectControl
-          className='w-full'
-          label="Query Presets"
-          options={postQueryPresets}
 
-          onChange={(newVal) => {
-
-            console.log(newVal.selectedItem)
+        <div >
+          <CustomSelectControl
 
 
-            queryArgs.items = newVal.selectedItem.value.items;
-            setAttributes({ queryArgs: { items: queryArgs.items } })
-            setFontSize(newVal.selectedItem)
-            fetchPosts()
+            className='w-full'
+            label="Query Presets"
+            options={postQueryPresets}
 
-            console.log(postQueryPresets.find((option) => option.key === fontSize.key))
+            onChange={(newVal) => {
+
+              console.log(newVal.selectedItem)
 
 
-          }}
-          value={postQueryPresets.find((option) => option.key === fontSize.key)}
-        />
+              queryArgs.items = newVal.selectedItem.value.items;
+              setAttributes({ queryArgs: { items: queryArgs.items } })
+              setFontSize(newVal.selectedItem)
+              fetchPosts()
+
+              console.log(postQueryPresets.find((option) => option.key === fontSize.key))
+
+
+            }}
+            value={postQueryPresets.find((option) => option.key === fontSize.key)}
+          /></div>
+
+
       );
     }
 
@@ -281,68 +300,68 @@ registerBlockType("post-grid/post-grid", {
 
     const gridLayout = [
       {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '2 Col, 1 Rows, 0 Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "0", "unit": "em" }, "colGap": { "val": "0", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '2 Col, 1 Rows, 0 Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "0", "unit": "em" }, "colGap": { "val": "0", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
       },
 
       {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '2 Col, 1 Rows, 1EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "1", "unit": "em" }, "colGap": { "val": "1", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '2 Col, 1 Rows, 1EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "1", "unit": "em" }, "colGap": { "val": "1", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
       },
       {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '2 Col, 1 Rows, 2EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "2", "unit": "em" }, "colGap": { "val": "2", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '2 Col, 1 Rows, 2EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "2", "unit": "em" }, "colGap": { "val": "2", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
       },
       {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '2 Col, 1 Rows, 3EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "3", "unit": "em" }, "colGap": { "val": "3", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '2 Col, 1 Rows, 3EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "3", "unit": "em" }, "colGap": { "val": "3", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
       },
       {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '2 Col, 1 Rows, 3px Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "3", "unit": "px" }, "colGap": { "val": "3", "unit": "px" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '2 Col, 1 Rows, 3px Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "3", "unit": "px" }, "colGap": { "val": "3", "unit": "px" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
       },
       {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '2 Col, 1 Rows, 10px Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "10", "unit": "px" }, "colGap": { "val": "10", "unit": "px" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
-      },
-
-
-      {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '2 Col, 2 Rows, 1st Spec 10px Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": "60", "unit": "%" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "10", "unit": "px" }, "colGap": { "val": "10", "unit": "px" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [{ "grid-column-start": "1", "grid-column-end": "", "grid-row-start": "1", "grid-row-end": "3" }] }
-
-      },
-
-
-
-
-
-      {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '3 Col, 2 Rows, 0 Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "0", "unit": "em" }, "colGap": { "val": "0", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
-      },
-      {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '3 Col, 2 Rows, 1EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "1", "unit": "em" }, "colGap": { "val": "1", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
-      },
-      {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '3 Col, 2 Rows, 2EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "2", "unit": "em" }, "colGap": { "val": "2", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
-      },
-      {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '3 Col, 2 Rows, 3EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "3", "unit": "em" }, "colGap": { "val": "3", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
-      },
-      {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '3 Col, 2 Rows, 3px Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "3", "unit": "px" }, "colGap": { "val": "3", "unit": "px" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
-      },
-      {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '3 Col, 2 Rows, 10px Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "10", "unit": "px" }, "colGap": { "val": "10", "unit": "px" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
-      },
-
-
-
-      {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '3 Col, 2nd Large 1 Rows, 1EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": 1, "unit": "em" }, "colGap": { "val": 1, "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [{ "grid-column-start": "", "grid-column-end": "", "grid-row-start": "", "grid-row-end": "" }, { "grid-column-start": "2", "grid-column-end": "4", "grid-row-start": "", "grid-row-end": "" }] }
-
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '2 Col, 1 Rows, 10px Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "10", "unit": "px" }, "colGap": { "val": "10", "unit": "px" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
       },
 
 
       {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '3 Col, 1st Large 2 Rows, 0 Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "0", "unit": "em" }, "colGap": { "val": "0", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [{ "grid-column-start": "1", "grid-column-end": "3", "grid-row-start": "", "grid-row-end": "" }] }
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '2 Col, 2 Rows, 1st Spec 10px Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": "60", "unit": "%" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "10", "unit": "px" }, "colGap": { "val": "10", "unit": "px" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [{ "grid-column-start": "1", "grid-column-end": "", "grid-row-start": "1", "grid-row-end": "3" }] }
+
+      },
+
+
+
+
+
+      {
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '3 Col, 2 Rows, 0 Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "0", "unit": "em" }, "colGap": { "val": "0", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+      },
+      {
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '3 Col, 2 Rows, 1EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "1", "unit": "em" }, "colGap": { "val": "1", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+      },
+      {
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '3 Col, 2 Rows, 2EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "2", "unit": "em" }, "colGap": { "val": "2", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+      },
+      {
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '3 Col, 2 Rows, 3EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "3", "unit": "em" }, "colGap": { "val": "3", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+      },
+      {
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '3 Col, 2 Rows, 3px Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "3", "unit": "px" }, "colGap": { "val": "3", "unit": "px" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+      },
+      {
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '3 Col, 2 Rows, 10px Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "10", "unit": "px" }, "colGap": { "val": "10", "unit": "px" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [] }
+      },
+
+
+
+      {
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '3 Col, 2nd Large 1 Rows, 1EM Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": 1, "unit": "em" }, "colGap": { "val": 1, "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [{ "grid-column-start": "", "grid-column-end": "", "grid-row-start": "", "grid-row-end": "" }, { "grid-column-start": "2", "grid-column-end": "4", "grid-row-start": "", "grid-row-end": "" }] }
+
+      },
+
+
+      {
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '3 Col, 1st Large 2 Rows, 0 Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "0", "unit": "em" }, "colGap": { "val": "0", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [{ "grid-column-start": "1", "grid-column-end": "3", "grid-row-start": "", "grid-row-end": "" }] }
       },
 
       {
-        thumb: 'http://localhost/wp/wp-content/plugins/blockxyz/assets/images/placeholder.png', title: '3 Col, 2th Large 2 Rows, 0 Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "0", "unit": "em" }, "colGap": { "val": "0", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [{ "grid-column-start": "", "grid-column-end": "", "grid-row-start": "", "grid-row-end": "" }, { "grid-column-start": "2", "grid-column-end": "4", "grid-row-start": "", "grid-row-end": "" }] }
+        thumb: 'http://localhost/wordpress/wp-content/plugins/post-grid/assets/frontend/images/placeholder.png', title: '3 Col, 2th Large 2 Rows, 0 Gap', data: { "gridTemplateRows": [{ "val": 1, "unit": "fr" }], "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "rowGap": { "val": "0", "unit": "em" }, "colGap": { "val": "0", "unit": "em" }, "padding": { "val": 1, "unit": "em" }, "itemCss": [{ "grid-column-start": "", "grid-column-end": "", "grid-row-start": "", "grid-row-end": "" }, { "grid-column-start": "2", "grid-column-end": "4", "grid-row-start": "", "grid-row-end": "" }] }
 
       },
 
@@ -480,14 +499,14 @@ background-color: red;
       })
 
       apiFetch({
-        path: '/blockxyz/v2/get_posts',
+        path: '/post-grid/v2/get_posts',
         method: 'POST',
         data: { queryArgs: arg, rawData: layout.rawData },
       }).then((res) => {
 
         setPostsQuery(false);
 
-        //console.log(res)
+        console.log(res)
 
         setPosts(res)
 
@@ -575,6 +594,7 @@ background-color: red;
       fetchLayouts();
       fetchLayoutData();
       //console.log('asdasd');
+      fetchLicenseInfo();
 
 
     }, [container]);
@@ -628,19 +648,19 @@ background-color: red;
 
 
 
-    const [queryLayouts, setQueryLayouts] = useState({ loading: false });
+    const [queryLayouts, setQueryLayouts] = useState({ keyword: '', page: 1, category: '', });
     var [layoutList, setLayoutList] = useState({ items: [] });
-    var [layoutData, setLayoutData] = useState({ source: 'library', keyword: '', page: 1, category: '', categories: [] });
+    var [layoutData, setLayoutData] = useState({ source: 'saved', });
+    var [layoutLoading, setLayoutLoading] = useState(false);
+    var [layoutCats, setLayoutCats] = useState([]);
+
 
     useEffect(() => {
 
-      var keywordLength = layoutData.keyword.length;
-
-
+      console.log('Listening layoutData: ', layoutData);
+      var keywordLength = queryLayouts.keyword.length;
 
       if (keywordLength != 0) {
-        //console.log('Listening layoutData: ', layoutData);
-        //console.log('Gretter');
 
         if (keywordLength >= 4) {
           fetchLayouts();
@@ -650,61 +670,103 @@ background-color: red;
 
 
       } else {
-        //console.log('Gretter: 0');
 
         fetchLayouts();
       }
 
-
-
-      //console.log('asdasd');
-
-
     }, [layoutData]);
+
+
+
+    useEffect(() => {
+
+      console.log('Listening queryLayouts: ', queryLayouts);
+      var keywordLength = queryLayouts.keyword.length;
+
+      if (keywordLength != 0) {
+
+        if (keywordLength >= 4) {
+          fetchLayouts();
+        } else {
+        }
+
+
+
+      } else {
+
+        fetchLayouts();
+      }
+
+    }, [queryLayouts]);
+
+
+
+
+
+
+
+
+
+
+
 
 
     function fetchLayouts() {
 
-      setQueryLayouts({ loading: true });
+      setLayoutLoading(true);
 
-      // apiFetch({
-      //   path: '/blockxyz/v2/get_posts_layout',
-      //   method: 'POST',
-      //   data: { category: layoutData.category, keyword: layoutData.keyword },
-      // }).then((res) => {
+      if (layoutData.source == 'saved') {
 
-      //   console.log(res);
+        apiFetch({
+          path: '/post-grid/v2/get_posts_layout',
+          method: 'POST',
+          data: { category: queryLayouts.category, page: queryLayouts.page, keyword: queryLayouts.keyword },
+        }).then((res) => {
 
-      //   setLayoutList({ items: res.posts })
+          console.log(res);
 
-      //   setQueryLayouts(false);
+          setLayoutList({ items: res.posts })
 
-
-      // });
-
+          setLayoutCats(res.terms)
 
 
-      fetch("https://getpostgrid.com/wp-json/postlayout/v2/get_post_layouts", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-      })
-        .then((response) => {
-          if (response.ok && response.status < 400) {
-            response.json().then((data) => {
+          setLayoutLoading(false);
 
-              console.log(data);
-              setLayoutList({ items: data.posts })
-              setQueryLayouts({ loading: false });
 
-            });
-          }
-        })
-        .catch((error) => {
-          //this.saveAsStatus = 'error';
-          // handle the error
+
         });
+
+      } else {
+
+        fetch("https://getpostgrid.com/wp-json/postlayout/v2/get_post_layouts?category=" + queryLayouts.category + "&page=" + queryLayouts.page + "&keyword=" + queryLayouts.keyword, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+        })
+          .then((response) => {
+            if (response.ok && response.status < 400) {
+              response.json().then((data) => {
+
+                console.log(data);
+                setLayoutList({ items: data.posts })
+                setLayoutCats(data.terms)
+
+
+                setLayoutLoading(false);
+
+
+              });
+            }
+          })
+          .catch((error) => {
+            //this.saveAsStatus = 'error';
+            // handle the error
+          });
+
+      }
+
+
 
 
 
@@ -720,18 +782,18 @@ background-color: red;
 
     function fetchLayoutData() {
 
-      setQueryLayouts({ loading: true });
+      setQueryLayouts({ keyword: queryLayouts.keyword, page: queryLayouts.page, category: queryLayouts.category, });
 
       apiFetch({
-        path: '/blockxyz/v2/get_posts_layout',
+        path: '/post-grid/v2/get_posts_layout',
         method: 'POST',
-        data: { category: layoutData.category, source: layoutData.source, page: layoutData.page, keyword: layoutData.keyword },
+        data: { category: queryLayouts.category, source: queryLayouts.source, page: queryLayouts.page, keyword: queryLayouts.keyword },
       }).then((res) => {
 
         //console.log(res);
 
-        setLayoutData({ keyword: layoutData.keyword, source: layoutData.source, page: layoutData.page, category: layoutData.category, categories: res.terms })
-        setQueryLayouts({ loading: false });
+        setLayoutData({ source: layoutData.source, })
+        setQueryLayouts({ keyword: queryLayouts.keyword, page: queryLayouts.page, category: queryLayouts.category, });
 
 
       });
@@ -977,6 +1039,13 @@ background-color: red;
 
             {item.id == 'metaQuery' &&
               <div>
+                {(license.license_status != 'active') && (
+
+                  <div className='bg-amber-400 my-3 px-3 py-2'>
+                    <p>Only avilable in Premium </p>
+                    <a className='font-bold' href="">Get Premium</a>
+                  </div>
+                )}
                 <div
                   className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
                   onClick={(ev) => {
@@ -1150,8 +1219,32 @@ background-color: red;
             }
 
 
+            {item.id == 'dateQuery' &&
+              <div>
+                {(license.license_status != 'active') && (
+
+                  <div className='bg-amber-400 my-3 px-3 py-2'>
+                    <p>Only avilable in Premium </p>
+                    <a className='font-bold' href="">Get Premium</a>
+                  </div>
+                )}
+
+              </div>
+            }
+
             {item.id == 'taxQuery' &&
               <div>
+                {(license.license_status != 'active') && (
+
+                  <div className='bg-amber-400 my-3 px-3 py-2'>
+                    <p>Only avilable in Premium </p>
+                    <a className='font-bold' href="">Get Premium</a>
+                  </div>
+                )}
+
+
+
+
                 <div
                   className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
                   onClick={(ev) => {
@@ -1356,6 +1449,16 @@ background-color: red;
             {(item.id == 'postNameIn' || item.id == 'postNotIn' || item.id == 'postIn' || item.id == 'postParentNotIn' || item.id == 'tagNotIn' || item.id == 'tagAnd' || item.id == 'tagIn' || item.id == 'postParentIn' || item.id == 'tagSlugIn' || item.id == 'tagSlugAnd' || item.id == 'categoryNotIn' || item.id == 'categoryIn' || item.id == 'categoryAnd') &&
 
               <div >
+
+                {(license.license_status != 'active') && (
+
+                  <div className='bg-amber-400 my-3 px-3 py-2'>
+                    <p>Only avilable in Premium </p>
+                    <a className='font-bold' href="">Get Premium</a>
+                  </div>
+                )}
+
+
                 <InputControl
                   value={item.val}
                   placeholder="Comma separated"
@@ -1565,7 +1668,7 @@ background-color: red;
         <div>
           <InspectorControls key="general">
 
-            <div className='blockxyz'>
+            <div className='post-grid'>
 
 
               <PanelBody title="General" initialOpen={false}>
@@ -1730,8 +1833,20 @@ background-color: red;
               <PanelBody title="Query Post" initialOpen={false}>
                 <div className='mb-5'>
 
+                  {(license.license_status != 'active') && (
 
-                  <MyCustomSelectControl />
+                    <div className='bg-amber-400 mt-5 px-3 py-2'>
+                      <p>Only avilable in Premium </p>
+                      <a className='font-bold' href="">Get Premium</a>
+                    </div>
+                  )}
+
+                  <div className={(license.license_status != 'active') ? 'opacity-25' : ''
+                  }>
+
+                    <MyCustomSelectControl /></div>
+
+
 
 
 
@@ -1747,8 +1862,6 @@ background-color: red;
                   onChange={(newVal) => addQueryPram(newVal)}
 
                 />
-
-
 
 
                 {queryArgs.items.map((item, index) => {
@@ -1772,38 +1885,44 @@ background-color: red;
               </PanelBody>
               <PanelBody title="Layouts" initialOpen={false}>
 
-                {JSON.stringify(layoutData)}
 
                 <div className='text-white cursor-pointer'>
 
 
-                  <div className={(layoutSource == 'library') ? 'bg-blue-500 w-1/2 inline-block px-3 py-2' : 'bg-blue-300  inline-block px-3 py-2 w-1/2'}
+                  <div className={(layoutData.source == 'library') ? 'bg-blue-500 w-1/2 inline-block px-3 py-2' : 'bg-blue-300  inline-block px-3 py-2 w-1/2'}
                     onClick={(ev) => {
 
-                      setLayoutSource('library')
-                      setLayoutData({ keyword: layoutData.keyword, source: 'library', page: layoutData.page, category: layoutData.category, categories: layoutData.categories })
+                      setLayoutData({ source: 'library', })
+
+
                     }}
 
                   >Library</div>
-                  <div className={(layoutSource == 'saved') ? 'bg-blue-500 w-1/2 inline-block px-3 py-2' : 'bg-blue-300 inline-block px-3 py-2 w-1/2 '} onClick={(ev) => {
+                  <div className={(layoutData.source == 'saved') ? 'bg-blue-500 w-1/2 inline-block px-3 py-2' : 'bg-blue-300 inline-block px-3 py-2 w-1/2 '} onClick={(ev) => {
 
-                    setLayoutSource('saved')
-                    setLayoutData({ keyword: layoutData.keyword, source: 'saved', page: layoutData.page, category: layoutData.category, categories: layoutData.categories })
+                    setLayoutData({ source: 'saved' })
                   }}>Saved</div>
 
                 </div>
 
                 <PanelRow>
                   <InputControl
-                    value={layoutData.keyword}
+                    value={queryLayouts.keyword}
                     type="text"
-                    placeholder="Search Here..."
+                    placeholder="Search Layouts..."
                     onChange={(newVal) => {
 
-                      console.log(newVal);
+
+                      clearTimeout(debounce);
+                      debounce = setTimeout(() => {
+
+                        setQueryLayouts({ keyword: newVal, page: queryLayouts.page, category: queryLayouts.category })
+                      }, 1000);
 
 
-                      setLayoutData({ keyword: newVal, source: layoutData.source, page: layoutData.page, category: layoutData.category, categories: layoutData.categories })
+                      setDebounce(debounce)
+
+
                       //fetchLayouts();
                     }}
 
@@ -1811,14 +1930,14 @@ background-color: red;
                   <SelectControl
                     style={{ margin: 0 }}
                     label=""
-                    value={layoutData.category}
-                    options={layoutData.categories}
+                    value={queryLayouts.category}
+                    options={layoutCats}
                     onChange={(newVal) => {
 
                       console.log(newVal);
 
 
-                      setLayoutData({ keyword: layoutData.keyword, source: layoutData.source, page: layoutData.page, category: newVal, categories: layoutData.categories })
+                      setQueryLayouts({ keyword: queryLayouts.keyword, page: queryLayouts.page, category: newVal })
 
 
 
@@ -1837,13 +1956,15 @@ background-color: red;
 
 
 
-                {queryLayouts.loading == true && <div className='text-center'>
+                {layoutLoading == true && <div className='text-center'>
 
                   <Spinner />
                 </div>}
 
+                {/* {JSON.stringify(layoutList)} */}
 
-                {queryLayouts.loading == false && layoutList.items.length > 0 && layoutList.items.map(x => {
+
+                {layoutLoading == false && layoutList.items.length > 0 && layoutList.items.map(x => {
                   return (
                     <div className='my-3  ' >
 
@@ -1858,8 +1979,6 @@ background-color: red;
 
                       <div className='my-3'>
                         <span className='mx-2' >#{x.post_id}</span>
-
-
 
 
                         {x.sale_price > 0 &&
@@ -1889,9 +2008,20 @@ background-color: red;
                   )
                 })}
 
-                <div onClick={(ev) => {
-                  loadLayout()
-                }}>Load More</div>
+                <div className='w-full py-2 bg-blue-500 cursor-pointer my-3 text-center text-white' onClick={(ev) => {
+
+                  var page = queryLayouts.page + 1;
+
+                  setQueryLayouts({ keyword: queryLayouts.keyword, page: page, category: queryLayouts.category, });
+
+                }}>
+                  {layoutLoading.loading == true && <span className='text-center'>
+
+                    <Spinner />
+                  </span>}
+
+
+                  Load More</div>
 
                 <PanelRow>
 
@@ -2051,133 +2181,143 @@ background-color: red;
 
                 </PanelRow>
 
-                <PanelRow>
+                {(license.license_status != 'active') && (
 
-                  <label for="">N'th Item CSS</label>
-                  <Button className='my-3' variant="secondary"
-                    onClick={(newVal) => {
+                  <div className='bg-amber-400 mt-5 px-3 py-2'>
+                    <p>Only avilable in Premium </p>
+                    <a className='font-bold' href="">Get Premium</a>
+                  </div>
+                )}
 
-                      var itemCss = grid.itemCss.concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
+                <div className={(license.license_status != 'active') ? 'opacity-25' : ''}>
 
-                      setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: itemCss, } })
+                  <PanelRow>
 
-                    }}
+                    <label for="">N'th Item CSS</label>
+                    <Button className='my-3' variant="secondary"
+                      onClick={(newVal) => {
 
-                  >Add</Button>
-                </PanelRow>
+                        var itemCss = grid.itemCss.concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
+
+                        setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: itemCss, } })
+
+                      }}
+
+                    >Add</Button>
+                  </PanelRow>
 
 
 
 
 
-                {
-                  grid.itemCss.map((x, i) => {
+                  {
+                    grid.itemCss.map((x, i) => {
 
-                    return (
+                      return (
 
-                      <PanelBody title={(i + 1) + '\'th Item'} initialOpen={false} >
+                        <PanelBody title={(i + 1) + '\'th Item'} initialOpen={false} >
 
-                        <Button icon="no-alt" variant="secondary"
-                          onClick={(ev) => {
+                          <Button icon="no-alt" variant="secondary"
+                            onClick={(ev) => {
 
-                            grid.itemCss.splice(i, 1);
-                            setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: grid.itemCss, } })
-
-                          }}
-
-                        >Delete</Button>
-
-                        <PanelRow>
-                          <label for="">grid-column-start</label>
-                          <InputControl
-                            value={x['grid-column-start']}
-                            type="number"
-                            onChange={(newVal) => {
-                              grid.itemCss[i]['grid-column-start'] = newVal;
+                              grid.itemCss.splice(i, 1);
                               setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: grid.itemCss, } })
+
                             }}
-                          />
-                        </PanelRow>
+
+                          >Delete</Button>
+
+                          <PanelRow>
+                            <label for="">grid-column-start</label>
+                            <InputControl
+                              value={x['grid-column-start']}
+                              type="number"
+                              onChange={(newVal) => {
+                                grid.itemCss[i]['grid-column-start'] = newVal;
+                                setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: grid.itemCss, } })
+                              }}
+                            />
+                          </PanelRow>
 
 
-                        <PanelRow>
-                          <label for="">grid-column-end</label>
-                          <InputControl
-                            value={x['grid-column-end']}
-                            type="number"
-                            onChange={(newVal) => {
-                              grid.itemCss[i]['grid-column-end'] = newVal;
-                              setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: grid.itemCss, } })
-                            }}
-                          />
-                        </PanelRow>
+                          <PanelRow>
+                            <label for="">grid-column-end</label>
+                            <InputControl
+                              value={x['grid-column-end']}
+                              type="number"
+                              onChange={(newVal) => {
+                                grid.itemCss[i]['grid-column-end'] = newVal;
+                                setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: grid.itemCss, } })
+                              }}
+                            />
+                          </PanelRow>
 
-                        <PanelRow>
-                          <label for="">grid-row-start</label>
-                          <InputControl
-                            value={x['grid-row-start']}
-                            type="number"
-                            onChange={(newVal) => {
-                              grid.itemCss[i]['grid-row-start'] = newVal;
-                              setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: grid.itemCss, } })
-                            }}
-                          />
-                        </PanelRow>
-
-
-                        <PanelRow>
-                          <label for="">grid-row-end</label>
-                          <InputControl
-                            value={x['grid-row-end']}
-                            type="number"
-                            onChange={(newVal) => {
-                              grid.itemCss[i]['grid-row-end'] = newVal;
-                              setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: grid.itemCss, } })
-                            }}
-                          />
-                        </PanelRow>
+                          <PanelRow>
+                            <label for="">grid-row-start</label>
+                            <InputControl
+                              value={x['grid-row-start']}
+                              type="number"
+                              onChange={(newVal) => {
+                                grid.itemCss[i]['grid-row-start'] = newVal;
+                                setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: grid.itemCss, } })
+                              }}
+                            />
+                          </PanelRow>
 
 
+                          <PanelRow>
+                            <label for="">grid-row-end</label>
+                            <InputControl
+                              value={x['grid-row-end']}
+                              type="number"
+                              onChange={(newVal) => {
+                                grid.itemCss[i]['grid-row-end'] = newVal;
+                                setAttributes({ grid: { gridTemplateRows: grid.gridTemplateRows, gridTemplateColumns: grid.gridTemplateColumns, rowGap: grid.rowGap, colGap: grid.colGap, padding: grid.padding, itemCss: grid.itemCss, } })
+                              }}
+                            />
+                          </PanelRow>
 
 
 
 
 
-                      </PanelBody>
-
-                    )
-
-                  })
-
-                }
 
 
+                        </PanelBody>
 
-                {
+                      )
 
-                  gridLayout.map((x, i) => {
+                    })
 
-                    return (
-
-                      <div className='cursor-pointer relative my-3' onClick={(ev) => {
-
-                        setAttributes({ grid: x.data })
-
-                      }}>
+                  }
 
 
-                        <img src={x.thumb} />
-                        <div className='text-[16px] p-2 bg-blue-600 text-white bg-opacity-90 text-bold absolute bottom-0 w-full text-center'>{x.title}</div>
-                      </div>
 
-                    )
+                  {
 
-                  })
+                    gridLayout.map((x, i) => {
+
+                      return (
+
+                        <div className='cursor-pointer relative my-3' onClick={(ev) => {
+
+                          setAttributes({ grid: x.data })
+
+                        }}>
 
 
-                }
+                          <img src={x.thumb} />
+                          <div className='text-[16px] p-2 bg-blue-600 text-white bg-opacity-90 text-bold absolute bottom-0 w-full text-center'>{x.title}</div>
+                        </div>
+
+                      )
+
+                    })
 
 
+                  }
+
+                </div>
 
 
               </PanelBody>
@@ -2386,7 +2526,7 @@ background-color: red;
               {postsQuery == false && posts.length == 0 &&
 
                 (
-                  <div className='no-posts text-center'>No Post found</div>
+                  <div className='no-posts  asd text-center'>No Post found</div>
 
                 )
               }

@@ -44,7 +44,12 @@ $post_grid_settings_tab[] = array(
     'active' => ($current_tab == 'disable_blocks') ? true : false,
 );
 
-
+$post_grid_settings_tab[] = array(
+    'id' => 'license_free',
+    'title' => __('<i class="fas fa-laptop-code"></i> License', 'post-grid'),
+    'priority' => 90,
+    'active' => ($current_tab == 'license_free') ? true : false,
+);
 
 
 
@@ -75,7 +80,6 @@ $post_grid_settings = get_option('post_grid_settings');
                     - 3.0.0
                 </div>
 
-                <p class="text-lg">Welcome to Post Grid, Create Beautiful and Advance Grid and Post Loop Without Coding.</p>
 
 
             </div>

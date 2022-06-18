@@ -22,7 +22,7 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
     <h2><?php _e('Post Grid - Layouts library', 'post-grid'); ?></h2>
 
 
-    <div class="bg-red-500 px-5 py-2 text-lg text-white">Old Layout is about to depricated but you can still use and it works fine, we will longer update, please try Gutenberg Post Grid block instaed, we have added some exciting feature with gutenberg block.</div>
+    <div class="bg-red-500 px-5 py-2 text-lg text-white">Old Layout is about to depricated but you can still use and it works fine, we will no longer update, please try Gutenberg Post Grid block instaed, we have added some exciting feature with gutenberg block.</div>
 
 
     <div class="wpblockhub-search">

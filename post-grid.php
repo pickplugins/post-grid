@@ -29,6 +29,9 @@ if (!class_exists('PostGrid')) {
             define('post_grid_version', '2.1.23');
             define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
 
+
+            define('post_grid_lic_server_url', 'https://www.pickplugins.com');
+
             require_once(post_grid_plugin_dir . 'src/functions-blocks.php');
 
             require_once(post_grid_plugin_dir . 'src/blocks/post-grid/index.php');
@@ -41,6 +44,7 @@ if (!class_exists('PostGrid')) {
             include('includes/classes/class-shortcodes.php');
             include('includes/classes/class-settings.php');
             include('includes/classes/class-settings-tabs.php');
+            include('includes/classes/class-post-grid-license.php');
 
 
             include('includes/classes/class-admin-notices.php');

@@ -6,12 +6,50 @@ class class_post_grid_notices
 
     public function __construct()
     {
+        add_action('admin_notices', array($this, 'license_expired'));
 
         //add_action('admin_notices', array($this, 'layout_depricated'));
-
-
         //add_action('admin_notices', array( $this, 'import_layouts' ));
 
+    }
+
+
+    public function license_expired()
+    {
+
+        $post_grid_license = get_option('post_grid_license');
+        $license_status = isset($post_grid_license['license_status']) ? $post_grid_license['license_status'] : '';
+        $license_key = isset($post_grid_license['license_key']) ? $post_grid_license['license_key'] : '';
+
+        $screen = get_current_screen();
+
+        //var_dump($screen);
+
+
+        if ($screen->id == 'edit-post_grid_layout' || $screen->id == 'post_grid_layout' || $screen->id == 'dashboard'  || $screen->id == 'edit-post_grid' || $screen->id == 'post-grid_page_overview'  || $screen->id == 'post_grid' || $screen->id == 'edit-post_grid_template' || $screen->id == 'post_grid_template' || $screen->id == 'post-grid_page_post-grid-settings' || $screen->id == 'post-grid_page_import_layouts') :
+
+            ob_start();
+
+            if ($license_status == 'expired') :
+
+                wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
+
+?>
+                <div class="p-3 bg-white my-10">
+                    <p class="text-lg">
+                        <span class="dashicons dashicons-warning align-middle text-red-600"></span> Your license for Post Grid plugin has expried, please <a target="_blank" class="bg-blue-600 rounded-sm text-white hover:text-white hover:bg-blue-700 px-5 py-1" href="https://pickplugins.com/renew-license?renew_license_key=<?php echo $license_key; ?>">Renew</a>
+
+                        <span class="bg-amber-500 rounded-sm text-white hover:text-white hover:bg-amber-400 px-5 py-1">Grab 25% Off</span>
+
+                        <span class="bg-red-600 cursor-pointer float-right rounded-sm text-white hover:text-white hover:bg-red-400 px-5 py-1"><span class="align-middle dashicons dashicons-no"></span> Hide this</span>
+
+                    </p>
+                </div>
+            <?php
+            endif;
+        endif;
+
+        echo (ob_get_clean());
     }
 
     public function layout_depricated()
@@ -31,7 +69,7 @@ class class_post_grid_notices
         ob_start();
 
         if ($screen->id == 'edit-post_grid_layout' || $screen->id == 'post_grid_layout') :
-?>
+            ?>
             <div class="notice notice-error is-dismissible">
                 <p>Old Layout is about to depricated but you can still use and it works fine, we will longer update, please try Gutenberg Post Grid block instaed, we have added some exciting feature with gutenberg block.</p>
             </div>
@@ -41,6 +79,10 @@ class class_post_grid_notices
 
         echo (ob_get_clean());
     }
+
+
+
+
     public function import_layouts()
     {
 

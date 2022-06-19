@@ -13,7 +13,7 @@ const queryPrams = [
 
 
   // Date Parameters
-  { val: '', multiple: false, id: 'dateQuery', label: 'Date Query ', description: "Post query by date" },
+  { val: [], multiple: false, id: 'dateQuery', label: 'Date Query ', description: "Post query by date" },
   { val: '', multiple: false, id: 'year', label: 'Year', description: "Post query by year" },
   { val: '', multiple: false, id: 'monthnum', label: 'Month', description: "Post query by month" },
   { val: '', multiple: false, id: 'w', label: 'Week', description: "Post query by week" },

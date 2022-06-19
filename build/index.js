@@ -2076,6 +2076,8 @@ background-color: red;
       });
     }
 
+    function generateDateQueryArgs(args) {}
+
     function updateLazyLoadsrcUrl(url, id) {
       setAttributes({
         lazyLoad: {
@@ -2484,6 +2486,8 @@ background-color: red;
         className: "font-bold",
         href: ""
       }, "Get Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
+        className: license.license_status != 'active' ? 'opacity-25' : ''
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
         className: "cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm",
         onClick: ev => {
           var itemData = queryArgs.items[index];
@@ -2639,9 +2643,6 @@ background-color: red;
               label: 'NOT IN',
               value: 'NOT IN'
             }, {
-              label: 'AND',
-              value: 'AND'
-            }, {
               label: 'EXISTS',
               value: 'EXISTS'
             }, {
@@ -2678,17 +2679,309 @@ background-color: red;
             });
           }
         }, "Add")));
-      })), item.id == 'dateQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, license.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
+      }))), item.id == 'dateQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, license.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
         className: "bg-amber-400 my-3 px-3 py-2"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("p", null, "Only avilable in Premium "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", {
         className: "font-bold",
         href: ""
-      }, "Get Premium"))), item.id == 'taxQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, license.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
+      }, "Get Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("label", null, "Add Arguments"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+        options: [{
+          "value": "",
+          "label": "Select..."
+        }, {
+          "value": "year",
+          "label": "Year"
+        }, {
+          "value": "month",
+          "label": "Month"
+        }, {
+          "value": "week",
+          "label": "Week"
+        }, {
+          "value": "day",
+          "label": "Day"
+        }, {
+          "value": "hour",
+          "label": "Hour"
+        }, {
+          "value": "minute",
+          "label": "Minute"
+        }, {
+          "value": "second",
+          "label": "Second"
+        }, {
+          "value": "after",
+          "label": "After"
+        }, {
+          "value": "before",
+          "label": "Before"
+        }, {
+          "value": "inclusive",
+          "label": "Inclusive"
+        }, {
+          "value": "compare",
+          "label": "Compare"
+        }, {
+          "value": "column",
+          "label": "Column"
+        }, {
+          "value": "relation",
+          "label": "Relation"
+        }],
+        onChange: newVal => {
+          var itemData = queryArgs.items[index];
+          console.log(itemData);
+
+          if (newVal == 'year') {
+            var xx = itemData.val.concat({
+              id: 'year',
+              value: '',
+              compare: ''
+            });
+          }
+
+          if (newVal == 'month') {
+            var xx = itemData.val.concat({
+              id: 'month',
+              value: '',
+              compare: ''
+            });
+          }
+
+          if (newVal == 'week') {
+            var xx = itemData.val.concat({
+              id: 'week',
+              value: '',
+              compare: ''
+            });
+          }
+
+          if (newVal == 'day') {
+            var xx = itemData.val.concat({
+              id: 'day',
+              value: '',
+              compare: ''
+            });
+          }
+
+          if (newVal == 'hour') {
+            var xx = itemData.val.concat({
+              id: 'hour',
+              value: '',
+              compare: ''
+            });
+          }
+
+          if (newVal == 'minute') {
+            var xx = itemData.val.concat({
+              id: 'minute',
+              value: '',
+              compare: ''
+            });
+          }
+
+          if (newVal == 'second') {
+            var xx = itemData.val.concat({
+              id: 'second',
+              value: '',
+              compare: ''
+            });
+          }
+
+          if (newVal == 'inclusive') {
+            var xx = itemData.val.concat({
+              id: 'inclusive',
+              value: true
+            });
+          }
+
+          if (newVal == 'compare') {
+            var xx = itemData.val.concat({
+              id: 'compare',
+              value: ''
+            });
+          }
+
+          if (newVal == 'column') {
+            var xx = itemData.val.concat({
+              id: 'column',
+              value: ''
+            });
+          }
+
+          if (newVal == 'relation') {
+            var xx = itemData.val.concat({
+              id: 'relation',
+              value: ''
+            });
+          }
+
+          if (newVal == 'before') {
+            var xx = itemData.val.concat({
+              id: 'before',
+              value: '',
+              year: '',
+              month: '',
+              day: ''
+            });
+          }
+
+          if (newVal == 'after') {
+            var xx = itemData.val.concat({
+              id: 'after',
+              value: '',
+              year: '',
+              month: '',
+              day: ''
+            });
+          }
+
+          queryArgs.items[index].val = xx;
+          console.log(xx);
+          setAttributes({
+            queryArgs: {
+              items: queryArgs.items
+            }
+          });
+        }
+      })), item.val.map(x => {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+          title: x.id,
+          initialOpen: false
+        }, (x.id == 'after' || x.id == 'before') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("label", null, "Year"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+          placeholder: "",
+          onChange: newVal => {}
+        })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("label", null, "Month"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+          placeholder: "",
+          onChange: newVal => {}
+        })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("label", null, "Day"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+          placeholder: "",
+          onChange: newVal => {}
+        }))), x.id == 'inclusive' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+          style: {
+            margin: 0
+          },
+          options: [{
+            label: 'True',
+            value: true
+          }, {
+            label: 'False',
+            value: false
+          }],
+          onChange: newVal => {}
+        })), x.id == 'compare' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+          style: {
+            margin: 0
+          },
+          options: [{
+            label: '=',
+            value: '='
+          }, {
+            label: '!=',
+            value: '!='
+          }, {
+            label: '>',
+            value: '>'
+          }, {
+            label: '>=',
+            value: '>='
+          }, {
+            label: '<',
+            value: '<'
+          }, {
+            label: '<=',
+            value: '<='
+          }, {
+            label: 'IN',
+            value: 'IN'
+          }, {
+            label: 'NOT IN',
+            value: 'NOT IN'
+          }, {
+            label: 'EXISTS',
+            value: 'EXISTS'
+          }, {
+            label: 'NOT EXISTS',
+            value: 'NOT EXISTS'
+          }, {
+            label: 'BETWEEN',
+            value: 'BETWEEN'
+          }, {
+            label: 'NOT BETWEEN',
+            value: 'NOT BETWEEN'
+          }],
+          onChange: newVal => {}
+        })), x.id == 'column' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+          placeholder: "",
+          onChange: newVal => {}
+        })), x.id == 'relation' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+          style: {
+            margin: 0
+          },
+          options: [{
+            label: 'OR',
+            value: 'OR'
+          }, {
+            label: 'AND',
+            value: 'AND'
+          }],
+          onChange: newVal => {}
+        })), (x.id == 'year' || x.id == 'month' || x.id == 'week' || x.id == 'day' || x.id == 'hour' || x.id == 'minute' || x.id == 'second') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+          label: "Value",
+          placeholder: "",
+          onChange: newVal => {}
+        }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+          style: {
+            margin: 0
+          },
+          label: "compare ",
+          options: [{
+            label: '=',
+            value: '='
+          }, {
+            label: '!=',
+            value: '!='
+          }, {
+            label: '>',
+            value: '>'
+          }, {
+            label: '>=',
+            value: '>='
+          }, {
+            label: '<',
+            value: '<'
+          }, {
+            label: '<=',
+            value: '<='
+          }, {
+            label: 'IN',
+            value: 'IN'
+          }, {
+            label: 'NOT IN',
+            value: 'NOT IN'
+          }, {
+            label: 'EXISTS',
+            value: 'EXISTS'
+          }, {
+            label: 'NOT EXISTS',
+            value: 'NOT EXISTS'
+          }, {
+            label: 'BETWEEN',
+            value: 'BETWEEN'
+          }, {
+            label: 'NOT BETWEEN',
+            value: 'NOT BETWEEN'
+          }],
+          onChange: newVal => {}
+        }))));
+      })), item.id == 'taxQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, license.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
         className: "bg-amber-400 my-3 px-3 py-2"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("p", null, "Only avilable in Premium "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", {
         className: "font-bold",
         href: ""
       }, "Get Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
+        className: license.license_status != 'active' ? 'opacity-25' : ''
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
         className: "cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm",
         onClick: ev => {
           var itemData = queryArgs.items[index];
@@ -2868,12 +3161,18 @@ background-color: red;
             });
           }
         }, "Add")));
-      })), (item.id == 'metaKey' || item.id == 's' || item.id == 'metaValue' || item.id == 'metaValueNum' || item.id == 'metaCompare' || item.id == 'year' || item.id == 'monthnum' || item.id == 'w' || item.id == 'day' || item.id == 'hour' || item.id == 'minute' || item.id == 'second' || item.id == 'm' || item.id == 'author' || item.id == 'authorName' || item.id == 'tag' || item.id == 'tagId' || item.id == 'cat' || item.id == 'categoryName' || item.id == 'p' || item.id == 'name' || item.id == 'pageId' || item.id == 'pagename' || item.id == 'postParent' || item.id == 'postPassword' || item.id == 'postsPerPage' || item.id == 'paged' || item.id == 'offset' || item.id == 'postsPerArchivePage' || item.id == 'perm') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      }))), (item.id == 'metaKey' || item.id == 's' || item.id == 'metaValue' || item.id == 'metaValueNum' || item.id == 'metaCompare' || item.id == 'year' || item.id == 'monthnum' || item.id == 'w' || item.id == 'day' || item.id == 'hour' || item.id == 'minute' || item.id == 'second' || item.id == 'm' || item.id == 'author' || item.id == 'authorName' || item.id == 'tag' || item.id == 'tagId' || item.id == 'cat' || item.id == 'categoryName' || item.id == 'p' || item.id == 'name' || item.id == 'pageId' || item.id == 'pagename' || item.id == 'postParent' || item.id == 'postsPerPage' || item.id == 'paged' || item.id == 'offset' || item.id == 'postsPerArchivePage' || item.id == 'perm') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
         value: item.val,
         onChange: newVal => updateQueryPram(newVal, index)
-      })), item.id == 'authorIn' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
-        className: item.id == 'authorIn' ? '' : 'hidden'
-      }, JSON.stringify(item.val), generateQueryFieldAuthorIn(item)), (item.id == 'postNameIn' || item.id == 'postNotIn' || item.id == 'postIn' || item.id == 'postParentNotIn' || item.id == 'tagNotIn' || item.id == 'tagAnd' || item.id == 'tagIn' || item.id == 'postParentIn' || item.id == 'tagSlugIn' || item.id == 'tagSlugAnd' || item.id == 'categoryNotIn' || item.id == 'categoryIn' || item.id == 'categoryAnd') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, license.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
+      })), (item.id == 'postParent' || item.id == 'postPassword') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, license.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
+        className: "bg-amber-400 my-3 px-3 py-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("p", null, "Only avilable in Premium "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", {
+        className: "font-bold",
+        href: ""
+      }, "Get Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+        value: item.val,
+        onChange: newVal => updateQueryPram(newVal, index)
+      })), (item.id == 'postNameIn' || item.id == 'authorIn' || item.id == 'authorNotIn' || item.id == 'postNotIn' || item.id == 'postIn' || item.id == 'postParentNotIn' || item.id == 'tagNotIn' || item.id == 'tagAnd' || item.id == 'tagIn' || item.id == 'postParentIn' || item.id == 'tagSlugIn' || item.id == 'tagSlugAnd' || item.id == 'categoryNotIn' || item.id == 'categoryIn' || item.id == 'categoryAnd') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, license.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
         className: "bg-amber-400 my-3 px-3 py-2"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("p", null, "Only avilable in Premium "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", {
         className: "font-bold",
@@ -2956,7 +3255,26 @@ background-color: red;
           value: 'bmp'
         }],
         onChange: newVal => updateQueryPram(newVal, index)
-      })), (item.id == 'cacheResults' || item.id == 'nopaging' || item.id == 'hasPassword' || item.id == 'ignoreStickyPosts' || item.id == 'updatePostMetaCache' || item.id == 'updatePostTermCache') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      })), (item.id == 'cacheResults' || item.id == 'nopaging' || item.id == 'hasPassword' || item.id == 'updatePostMetaCache' || item.id == 'updatePostTermCache') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+        style: {
+          margin: 0
+        },
+        label: "",
+        value: item.val,
+        options: [{
+          label: 'True',
+          value: true
+        }, {
+          label: 'False',
+          value: false
+        }],
+        onChange: newVal => updateQueryPram(newVal, index)
+      })), item.id == 'ignoreStickyPosts' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, license.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
+        className: "bg-amber-400 my-3 px-3 py-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("p", null, "Only avilable in Premium "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", {
+        className: "font-bold",
+        href: ""
+      }, "Get Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
         style: {
           margin: 0
         },
@@ -3998,7 +4316,7 @@ background-color: red;
       initialOpen: false
     })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
       className: "my-custom-block"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(RawHTML, null, ItemNthCssadasd2), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(ContainerCss, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(RawHTML, null, ItemNthCssadasd2), JSON.stringify(queryArgs), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(ContainerCss, {
       cssData: props.attributes
     }, lazyLoad.enable == 'yes' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
       className: "lazyLoad"
@@ -4589,7 +4907,7 @@ const queryPrams = [{
   description: "Post query by meta fields key"
 }, // Date Parameters
 {
-  val: '',
+  val: [],
   multiple: false,
   id: 'dateQuery',
   label: 'Date Query ',

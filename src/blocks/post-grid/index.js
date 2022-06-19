@@ -475,7 +475,9 @@ background-color: red;
     }
 
 
+    function generateDateQueryArgs(args) {
 
+    }
 
 
 
@@ -919,6 +921,7 @@ background-color: red;
 
             {item.id == 'postType' && <div className={item.id == 'postType' ? '' : 'hidden'}>
 
+
               <SelectControl
                 style={{ height: '75px' }}
                 label=""
@@ -1046,175 +1049,177 @@ background-color: red;
                     <a className='font-bold' href="">Get Premium</a>
                   </div>
                 )}
-                <div
-                  className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
-                  onClick={(ev) => {
-                    var itemData = queryArgs.items[index];
-                    var xx = itemData.val.concat({ fields: [{ key: '', value: '', type: '', compare: '' }], relation: 'OR' });
-                    queryArgs.items[index].val = xx;
-                    setAttributes({ queryArgs: { items: queryArgs.items } });
-                  }}
+                <div className={(license.license_status != 'active') ? 'opacity-25' : ''}>
+                  <div
+                    className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
+                    onClick={(ev) => {
+                      var itemData = queryArgs.items[index];
+                      var xx = itemData.val.concat({ fields: [{ key: '', value: '', type: '', compare: '' }], relation: 'OR' });
+                      queryArgs.items[index].val = xx;
+                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                    }}
 
-                >Add</div>
-                {
-                  item.val.map((x, j) => {
-                    return (
-                      <div>
-                        <PanelBody title="Meta Field" initialOpen={false}>
+                  >Add</div>
+                  {
+                    item.val.map((x, j) => {
+                      return (
+                        <div>
+                          <PanelBody title="Meta Field" initialOpen={false}>
 
-                          <div
-                            className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm'
-                            onClick={(ev) => {
+                            <div
+                              className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm'
+                              onClick={(ev) => {
 
-                              var itemData = queryArgs.items[index];
-                              var xx = itemData.val.splice(j, 1);
-                              queryArgs.items[index].val = itemData.val;
-                              setAttributes({ queryArgs: { items: queryArgs.items } });
-                            }}
-
-                          >Remove</div>
-
-
-                          <PanelRow>
-                            <div>Relation</div>
-                            <SelectControl
-                              style={{ margin: 0 }}
-                              label=""
-                              value={x.relation}
-                              options={[
-                                { label: 'OR', value: 'OR' },
-                                { label: 'AND', value: 'AND' },
-                              ]}
-                              onChange={(newVal) => {
                                 var itemData = queryArgs.items[index];
-
-                                //itemData.val.relation = newVal;
-                                itemData.val[j].relation = newVal;
-
-                                //var term = itemData.val[j].fields[k]
-                                //term.taxonomy = newVal;
-                                //console.log(itemData.val[j].relation);
-
-                                //console.log(newVal);
-                                //console.log(j);
-
+                                var xx = itemData.val.splice(j, 1);
                                 queryArgs.items[index].val = itemData.val;
                                 setAttributes({ queryArgs: { items: queryArgs.items } });
                               }}
-                            />
-                          </PanelRow>
-                          {x.fields.map((y, k) => {
-                            return (
 
-                              <div className='border-b border-solid border-gray-300 py-3'>
-
-                                <InputControl
-                                  label="Custom field key"
-                                  value={y.key}
-                                  placeholder="meta_key"
-                                  onChange={(newVal) => {
-                                    var itemData = queryArgs.items[index];
+                            >Remove</div>
 
 
-                                    var term = itemData.val[j].fields[k]
-                                    term.key = newVal;
+                            <PanelRow>
+                              <div>Relation</div>
+                              <SelectControl
+                                style={{ margin: 0 }}
+                                label=""
+                                value={x.relation}
+                                options={[
+                                  { label: 'OR', value: 'OR' },
+                                  { label: 'AND', value: 'AND' },
+                                ]}
+                                onChange={(newVal) => {
+                                  var itemData = queryArgs.items[index];
 
-                                    queryArgs.items[index].val = itemData.val;
-                                    setAttributes({ queryArgs: { items: queryArgs.items } });
-                                  }}
-                                />
+                                  //itemData.val.relation = newVal;
+                                  itemData.val[j].relation = newVal;
 
-                                <InputControl
-                                  label="Meta Value "
-                                  value={y.value}
-                                  placeholder="25"
-                                  onChange={(newVal) => {
-                                    var itemData = queryArgs.items[index];
+                                  //var term = itemData.val[j].fields[k]
+                                  //term.taxonomy = newVal;
+                                  //console.log(itemData.val[j].relation);
 
+                                  //console.log(newVal);
+                                  //console.log(j);
 
-                                    var term = itemData.val[j].fields[k]
-                                    term.value = newVal;
+                                  queryArgs.items[index].val = itemData.val;
+                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                                }}
+                              />
+                            </PanelRow>
+                            {x.fields.map((y, k) => {
+                              return (
 
-                                    queryArgs.items[index].val = itemData.val;
-                                    setAttributes({ queryArgs: { items: queryArgs.items } });
-                                  }}
-                                />
+                                <div className='border-b border-solid border-gray-300 py-3'>
 
-                                <PanelRow>
-                                  <SelectControl
-                                    style={{ margin: 0 }}
-                                    label="Custom field type"
-                                    value={y.type}
-                                    options={[
-                                      { label: 'NUMERIC', value: 'NUMERIC' },
-                                      { label: 'BINARY', value: 'BINARY' },
-                                      { label: 'CHAR', value: 'CHAR' },
-                                      { label: 'DATE', value: 'DATE' },
-                                      { label: 'DATETIME', value: 'DATETIME' },
-                                      { label: 'DECIMAL', value: 'DECIMAL' },
-                                      { label: 'SIGNED', value: 'SIGNED' },
-                                      { label: 'TIME', value: 'TIME' },
-                                      { label: 'UNSIGNED', value: 'UNSIGNED' },
-
-
-                                    ]}
+                                  <InputControl
+                                    label="Custom field key"
+                                    value={y.key}
+                                    placeholder="meta_key"
                                     onChange={(newVal) => {
                                       var itemData = queryArgs.items[index];
 
 
                                       var term = itemData.val[j].fields[k]
-                                      term.type = newVal;
+                                      term.key = newVal;
 
                                       queryArgs.items[index].val = itemData.val;
                                       setAttributes({ queryArgs: { items: queryArgs.items } });
                                     }}
-
                                   />
-                                  <SelectControl
-                                    style={{ margin: 0 }}
-                                    label="compare "
-                                    value={y.compare}
-                                    options={[
-                                      { label: 'IN', value: 'IN' },
-                                      { label: 'NOT IN', value: 'NOT IN' },
-                                      { label: 'AND', value: 'AND' },
-                                      { label: 'EXISTS', value: 'EXISTS' },
-                                      { label: 'NOT EXISTS', value: 'NOT EXISTS' },
-                                    ]}
+
+                                  <InputControl
+                                    label="Meta Value "
+                                    value={y.value}
+                                    placeholder="25"
                                     onChange={(newVal) => {
                                       var itemData = queryArgs.items[index];
 
 
                                       var term = itemData.val[j].fields[k]
-                                      term.compare = newVal;
+                                      term.value = newVal;
 
                                       queryArgs.items[index].val = itemData.val;
                                       setAttributes({ queryArgs: { items: queryArgs.items } });
                                     }}
                                   />
-                                </PanelRow>
-                              </div>
-                            )
-                          })}
-                          <div
-                            className='cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm'
-                            onClick={(ev) => {
 
-                              var itemData = queryArgs.items[index];
+                                  <PanelRow>
+                                    <SelectControl
+                                      style={{ margin: 0 }}
+                                      label="Custom field type"
+                                      value={y.type}
+                                      options={[
+                                        { label: 'NUMERIC', value: 'NUMERIC' },
+                                        { label: 'BINARY', value: 'BINARY' },
+                                        { label: 'CHAR', value: 'CHAR' },
+                                        { label: 'DATE', value: 'DATE' },
+                                        { label: 'DATETIME', value: 'DATETIME' },
+                                        { label: 'DECIMAL', value: 'DECIMAL' },
+                                        { label: 'SIGNED', value: 'SIGNED' },
+                                        { label: 'TIME', value: 'TIME' },
+                                        { label: 'UNSIGNED', value: 'UNSIGNED' },
 
-                              var xx = itemData.val[j].fields.concat({ key: '', value: '', type: '', compare: '' });
-                              queryArgs.items[index].val[j].fields = xx;
 
-                              setAttributes({ queryArgs: { items: queryArgs.items } });
-                            }}
-                          >Add</div>
-                        </PanelBody>
-                      </div>
-                    )
+                                      ]}
+                                      onChange={(newVal) => {
+                                        var itemData = queryArgs.items[index];
 
-                  })
-                }
 
+                                        var term = itemData.val[j].fields[k]
+                                        term.type = newVal;
+
+                                        queryArgs.items[index].val = itemData.val;
+                                        setAttributes({ queryArgs: { items: queryArgs.items } });
+                                      }}
+
+                                    />
+                                    <SelectControl
+                                      style={{ margin: 0 }}
+                                      label="compare "
+                                      value={y.compare}
+                                      options={[
+
+
+                                        { label: 'IN', value: 'IN' },
+                                        { label: 'NOT IN', value: 'NOT IN' },
+                                        { label: 'EXISTS', value: 'EXISTS' },
+                                        { label: 'NOT EXISTS', value: 'NOT EXISTS' },
+                                      ]}
+                                      onChange={(newVal) => {
+                                        var itemData = queryArgs.items[index];
+
+
+                                        var term = itemData.val[j].fields[k]
+                                        term.compare = newVal;
+
+                                        queryArgs.items[index].val = itemData.val;
+                                        setAttributes({ queryArgs: { items: queryArgs.items } });
+                                      }}
+                                    />
+                                  </PanelRow>
+                                </div>
+                              )
+                            })}
+                            <div
+                              className='cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm'
+                              onClick={(ev) => {
+
+                                var itemData = queryArgs.items[index];
+
+                                var xx = itemData.val[j].fields.concat({ key: '', value: '', type: '', compare: '' });
+                                queryArgs.items[index].val[j].fields = xx;
+
+                                setAttributes({ queryArgs: { items: queryArgs.items } });
+                              }}
+                            >Add</div>
+                          </PanelBody>
+                        </div>
+                      )
+
+                    })
+                  }
+                </div>
               </div>
             }
 
@@ -1228,12 +1233,292 @@ background-color: red;
                     <a className='font-bold' href="">Get Premium</a>
                   </div>
                 )}
+                <PanelRow>
+                  <label>Add Arguments</label>
+                  <SelectControl
+                    options={[
+                      { "value": "", "label": "Select..." },
+
+                      { "value": "year", "label": "Year" },
+                      { "value": "month", "label": "Month" },
+                      { "value": "week", "label": "Week" },
+                      { "value": "day", "label": "Day" },
+                      { "value": "hour", "label": "Hour" },
+                      { "value": "minute", "label": "Minute" },
+                      { "value": "second", "label": "Second" },
+                      { "value": "after", "label": "After" },
+                      { "value": "before", "label": "Before" },
+                      { "value": "inclusive", "label": "Inclusive" },
+                      { "value": "compare", "label": "Compare" },
+                      { "value": "column", "label": "Column" },
+                      { "value": "relation", "label": "Relation" },
+                    ]}
+                    onChange={(newVal) => {
+
+                      var itemData = queryArgs.items[index];
+
+                      console.log(itemData);
+
+
+                      if (newVal == 'year') {
+                        var xx = itemData.val.concat({ id: 'year', value: '', compare: '', });
+                      }
+                      if (newVal == 'month') {
+                        var xx = itemData.val.concat({ id: 'month', value: '', compare: '', });
+                      }
+                      if (newVal == 'week') {
+                        var xx = itemData.val.concat({ id: 'week', value: '', compare: '', });
+                      }
+                      if (newVal == 'day') {
+                        var xx = itemData.val.concat({ id: 'day', value: '', compare: '', });
+                      }
+                      if (newVal == 'hour') {
+                        var xx = itemData.val.concat({ id: 'hour', value: '', compare: '', });
+                      }
+                      if (newVal == 'minute') {
+                        var xx = itemData.val.concat({ id: 'minute', value: '', compare: '', });
+                      }
+                      if (newVal == 'second') {
+                        var xx = itemData.val.concat({ id: 'second', value: '', compare: '', });
+                      }
+                      if (newVal == 'inclusive') {
+                        var xx = itemData.val.concat({ id: 'inclusive', value: true, });
+                      }
+                      if (newVal == 'compare') {
+                        var xx = itemData.val.concat({ id: 'compare', value: '', });
+                      }
+                      if (newVal == 'column') {
+                        var xx = itemData.val.concat({ id: 'column', value: '', });
+                      }
+                      if (newVal == 'relation') {
+                        var xx = itemData.val.concat({ id: 'relation', value: '', });
+                      }
+                      if (newVal == 'before') {
+                        var xx = itemData.val.concat({ id: 'before', value: '', year: '', month: '', day: '' });
+
+                      }
+
+                      if (newVal == 'after') {
+                        var xx = itemData.val.concat({ id: 'after', value: '', year: '', month: '', day: '' });
+
+                      }
+
+                      queryArgs.items[index].val = xx;
+
+
+
+                      console.log(xx);
+
+                      setAttributes({ queryArgs: { items: queryArgs.items } });
+
+                    }}
+                  />
+
+                </PanelRow>
+
+
+                {item.val.map(x => {
+
+                  return (
+
+
+                    <div>
+
+
+                      <PanelBody title={x.id} initialOpen={false}>
+
+
+
+
+                        {(x.id == 'after' || x.id == 'before') && (
+
+                          <div>
+                            <PanelRow>
+                              <label>Year</label>
+                              <InputControl
+                                placeholder=""
+                                onChange={(newVal) => {
+
+                                }}
+                              />
+                            </PanelRow>
+
+                            <PanelRow>
+                              <label>Month</label>
+                              <InputControl
+                                placeholder=""
+                                onChange={(newVal) => {
+
+                                }}
+                              />
+                            </PanelRow>
+
+                            <PanelRow>
+                              <label>Day</label>
+                              <InputControl
+                                placeholder=""
+                                onChange={(newVal) => {
+
+                                }}
+                              />
+                            </PanelRow>
+
+                          </div>
+                        )}
+
+
+                        {x.id == 'inclusive' && (
+
+                          <div>
+                            <SelectControl
+                              style={{ margin: 0 }}
+
+                              options={[
+                                { label: 'True', value: true },
+                                { label: 'False', value: false },
+
+                              ]}
+                              onChange={(newVal) => {
+
+                              }}
+                            />
+
+
+                          </div>
+                        )}
+
+
+
+
+                        {x.id == 'compare' && (
+
+                          <div>
+
+                            <SelectControl
+                              style={{ margin: 0 }}
+
+                              options={[
+                                { label: '=', value: '=' },
+                                { label: '!=', value: '!=' },
+                                { label: '>', value: '>' },
+                                { label: '>=', value: '>=' },
+                                { label: '<', value: '<' },
+                                { label: '<=', value: '<=' },
+                                { label: 'IN', value: 'IN' },
+                                { label: 'NOT IN', value: 'NOT IN' },
+                                { label: 'EXISTS', value: 'EXISTS' },
+                                { label: 'NOT EXISTS', value: 'NOT EXISTS' },
+                                { label: 'BETWEEN', value: 'BETWEEN' },
+                                { label: 'NOT BETWEEN', value: 'NOT BETWEEN' },
+
+                              ]}
+                              onChange={(newVal) => {
+
+                              }}
+                            />
+
+                          </div>
+                        )}
+                        {x.id == 'column' && (
+
+                          <div>
+                            <InputControl
+                              placeholder=""
+                              onChange={(newVal) => {
+
+                              }}
+                            />
+
+
+                          </div>
+                        )}
+
+                        {x.id == 'relation' && (
+
+                          <div>
+
+                            <SelectControl
+                              style={{ margin: 0 }}
+
+                              options={[
+                                { label: 'OR', value: 'OR' },
+                                { label: 'AND', value: 'AND' },
+                              ]}
+                              onChange={(newVal) => {
+
+                              }}
+                            />
+
+                          </div>
+                        )}
+
+
+                        {
+
+
+                          ((x.id == 'year' || x.id == 'month' || x.id == 'week' || x.id == 'day' || x.id == 'hour' || x.id == 'minute' || x.id == 'second') && (
+
+                            <div>
+                              <InputControl
+                                label="Value"
+                                placeholder=""
+                                onChange={(newVal) => {
+
+                                }}
+                              />
+
+                              <SelectControl
+                                style={{ margin: 0 }}
+                                label="compare "
+
+                                options={[
+                                  { label: '=', value: '=' },
+                                  { label: '!=', value: '!=' },
+                                  { label: '>', value: '>' },
+                                  { label: '>=', value: '>=' },
+                                  { label: '<', value: '<' },
+                                  { label: '<=', value: '<=' },
+                                  { label: 'IN', value: 'IN' },
+                                  { label: 'NOT IN', value: 'NOT IN' },
+                                  { label: 'EXISTS', value: 'EXISTS' },
+                                  { label: 'NOT EXISTS', value: 'NOT EXISTS' },
+                                  { label: 'BETWEEN', value: 'BETWEEN' },
+                                  { label: 'NOT BETWEEN', value: 'NOT BETWEEN' },
+                                ]}
+                                onChange={(newVal) => {
+
+                                }}
+                              />
+
+
+
+                            </div>
+
+                          ))
+
+
+
+
+
+                        }
+
+
+
+
+                      </PanelBody>
+                    </div>
+
+                  )
+
+                })}
+
+
 
               </div>
             }
 
             {item.id == 'taxQuery' &&
-              <div>
+              <div >
                 {(license.license_status != 'active') && (
 
                   <div className='bg-amber-400 my-3 px-3 py-2'>
@@ -1242,172 +1527,172 @@ background-color: red;
                   </div>
                 )}
 
+                <div className={(license.license_status != 'active') ? 'opacity-25' : ''}>
 
 
+                  <div
+                    className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
+                    onClick={(ev) => {
+                      var itemData = queryArgs.items[index];
+                      var xx = itemData.val.concat({ terms: [{ taxonomy: '', field: '', terms: '', operator: '' }], relation: 'OR' });
+                      queryArgs.items[index].val = xx;
+                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                    }}
 
-                <div
-                  className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
-                  onClick={(ev) => {
-                    var itemData = queryArgs.items[index];
-                    var xx = itemData.val.concat({ terms: [{ taxonomy: '', field: '', terms: '', operator: '' }], relation: 'OR' });
-                    queryArgs.items[index].val = xx;
-                    setAttributes({ queryArgs: { items: queryArgs.items } });
-                  }}
+                  >Add</div>
+                  {
+                    item.val.map((x, j) => {
+                      return (
+                        <div>
+                          <PanelBody title="Term" initialOpen={false}>
 
-                >Add</div>
-                {
-                  item.val.map((x, j) => {
-                    return (
-                      <div>
-                        <PanelBody title="Term" initialOpen={false}>
+                            <div
+                              className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm'
+                              onClick={(ev) => {
 
-                          <div
-                            className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm'
-                            onClick={(ev) => {
-
-                              var itemData = queryArgs.items[index];
-                              var xx = itemData.val.splice(j, 1);
-                              queryArgs.items[index].val = itemData.val;
-                              setAttributes({ queryArgs: { items: queryArgs.items } });
-                            }}
-
-                          >Remove</div>
-
-
-                          <PanelRow>
-                            <div>Terms Relation</div>
-                            <SelectControl
-                              style={{ margin: 0 }}
-                              label=""
-                              value={x.relation}
-                              options={[
-                                { label: 'OR', value: 'OR' },
-                                { label: 'AND', value: 'AND' },
-                              ]}
-                              onChange={(newVal) => {
                                 var itemData = queryArgs.items[index];
-
-                                //itemData.val.relation = newVal;
-                                itemData.val[j].relation = newVal;
-
-                                //var term = itemData.val[j].terms[k]
-                                //term.taxonomy = newVal;
-                                //console.log(itemData.val[j].relation);
-
-                                //console.log(newVal);
-                                //console.log(j);
-
+                                var xx = itemData.val.splice(j, 1);
                                 queryArgs.items[index].val = itemData.val;
                                 setAttributes({ queryArgs: { items: queryArgs.items } });
                               }}
-                            />
-                          </PanelRow>
-                          {x.terms.map((y, k) => {
-                            return (
 
-                              <div className='border-b border-solid border-gray-300 py-3'>
-
-                                <InputControl
-                                  label="Taxonomy"
-                                  value={y.taxonomy}
-                                  placeholder="Taxonomy"
-                                  onChange={(newVal) => {
-                                    var itemData = queryArgs.items[index];
+                            >Remove</div>
 
 
-                                    var term = itemData.val[j].terms[k]
-                                    term.taxonomy = newVal;
+                            <PanelRow>
+                              <div>Terms Relation</div>
+                              <SelectControl
+                                style={{ margin: 0 }}
+                                label=""
+                                value={x.relation}
+                                options={[
+                                  { label: 'OR', value: 'OR' },
+                                  { label: 'AND', value: 'AND' },
+                                ]}
+                                onChange={(newVal) => {
+                                  var itemData = queryArgs.items[index];
 
-                                    queryArgs.items[index].val = itemData.val;
-                                    setAttributes({ queryArgs: { items: queryArgs.items } });
-                                  }}
-                                />
+                                  //itemData.val.relation = newVal;
+                                  itemData.val[j].relation = newVal;
 
-                                <InputControl
-                                  label="Terms"
-                                  value={y.terms}
-                                  placeholder="Comma separated"
-                                  onChange={(newVal) => {
-                                    var itemData = queryArgs.items[index];
+                                  //var term = itemData.val[j].terms[k]
+                                  //term.taxonomy = newVal;
+                                  //console.log(itemData.val[j].relation);
 
+                                  //console.log(newVal);
+                                  //console.log(j);
 
-                                    var term = itemData.val[j].terms[k]
-                                    term.terms = newVal;
+                                  queryArgs.items[index].val = itemData.val;
+                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                                }}
+                              />
+                            </PanelRow>
+                            {x.terms.map((y, k) => {
+                              return (
 
-                                    queryArgs.items[index].val = itemData.val;
-                                    setAttributes({ queryArgs: { items: queryArgs.items } });
-                                  }}
-                                />
+                                <div className='border-b border-solid border-gray-300 py-3'>
 
-                                <PanelRow>
-                                  <SelectControl
-                                    style={{ margin: 0 }}
-                                    label="Fields"
-                                    value={y.field}
-                                    options={[
-                                      { label: 'Term ID', value: 'term_id' },
-                                      { label: 'Name', value: 'name' },
-                                      { label: 'Slug', value: 'slug' },
-                                      { label: 'Term taxonomy id', value: 'term_taxonomy_id' },
-
-                                    ]}
+                                  <InputControl
+                                    label="Taxonomy"
+                                    value={y.taxonomy}
+                                    placeholder="Taxonomy"
                                     onChange={(newVal) => {
                                       var itemData = queryArgs.items[index];
 
 
                                       var term = itemData.val[j].terms[k]
-                                      term.field = newVal;
+                                      term.taxonomy = newVal;
 
                                       queryArgs.items[index].val = itemData.val;
                                       setAttributes({ queryArgs: { items: queryArgs.items } });
                                     }}
-
                                   />
-                                  <SelectControl
-                                    style={{ margin: 0 }}
-                                    label="Operator"
-                                    value={y.operator}
-                                    options={[
-                                      { label: 'IN', value: 'IN' },
-                                      { label: 'NOT IN', value: 'NOT IN' },
-                                      { label: 'AND', value: 'AND' },
-                                      { label: 'EXISTS', value: 'EXISTS' },
-                                      { label: 'NOT EXISTS', value: 'NOT EXISTS' },
-                                    ]}
+
+                                  <InputControl
+                                    label="Terms"
+                                    value={y.terms}
+                                    placeholder="Comma separated"
                                     onChange={(newVal) => {
                                       var itemData = queryArgs.items[index];
 
 
                                       var term = itemData.val[j].terms[k]
-                                      term.operator = newVal;
+                                      term.terms = newVal;
 
                                       queryArgs.items[index].val = itemData.val;
                                       setAttributes({ queryArgs: { items: queryArgs.items } });
                                     }}
                                   />
-                                </PanelRow>
-                              </div>
-                            )
-                          })}
-                          <div
-                            className='cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm'
-                            onClick={(ev) => {
 
-                              var itemData = queryArgs.items[index];
+                                  <PanelRow>
+                                    <SelectControl
+                                      style={{ margin: 0 }}
+                                      label="Fields"
+                                      value={y.field}
+                                      options={[
+                                        { label: 'Term ID', value: 'term_id' },
+                                        { label: 'Name', value: 'name' },
+                                        { label: 'Slug', value: 'slug' },
+                                        { label: 'Term taxonomy id', value: 'term_taxonomy_id' },
 
-                              var xx = itemData.val[j].terms.concat({ taxonomy: '', field: '', terms: '', operator: '' });
-                              queryArgs.items[index].val[j].terms = xx;
+                                      ]}
+                                      onChange={(newVal) => {
+                                        var itemData = queryArgs.items[index];
 
-                              setAttributes({ queryArgs: { items: queryArgs.items } });
-                            }}
-                          >Add</div>
-                        </PanelBody>
-                      </div>
-                    )
 
-                  })
-                }
+                                        var term = itemData.val[j].terms[k]
+                                        term.field = newVal;
 
+                                        queryArgs.items[index].val = itemData.val;
+                                        setAttributes({ queryArgs: { items: queryArgs.items } });
+                                      }}
+
+                                    />
+                                    <SelectControl
+                                      style={{ margin: 0 }}
+                                      label="Operator"
+                                      value={y.operator}
+                                      options={[
+                                        { label: 'IN', value: 'IN' },
+                                        { label: 'NOT IN', value: 'NOT IN' },
+                                        { label: 'AND', value: 'AND' },
+                                        { label: 'EXISTS', value: 'EXISTS' },
+                                        { label: 'NOT EXISTS', value: 'NOT EXISTS' },
+                                      ]}
+                                      onChange={(newVal) => {
+                                        var itemData = queryArgs.items[index];
+
+
+                                        var term = itemData.val[j].terms[k]
+                                        term.operator = newVal;
+
+                                        queryArgs.items[index].val = itemData.val;
+                                        setAttributes({ queryArgs: { items: queryArgs.items } });
+                                      }}
+                                    />
+                                  </PanelRow>
+                                </div>
+                              )
+                            })}
+                            <div
+                              className='cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm'
+                              onClick={(ev) => {
+
+                                var itemData = queryArgs.items[index];
+
+                                var xx = itemData.val[j].terms.concat({ taxonomy: '', field: '', terms: '', operator: '' });
+                                queryArgs.items[index].val[j].terms = xx;
+
+                                setAttributes({ queryArgs: { items: queryArgs.items } });
+                              }}
+                            >Add</div>
+                          </PanelBody>
+                        </div>
+                      )
+
+                    })
+                  }
+                </div>
               </div>
             }
 
@@ -1415,7 +1700,7 @@ background-color: red;
 
 
 
-            {(item.id == 'metaKey' || item.id == 's' || item.id == 'metaValue' || item.id == 'metaValueNum' || item.id == 'metaCompare' || item.id == 'year' || item.id == 'monthnum' || item.id == 'w' || item.id == 'day' || item.id == 'hour' || item.id == 'minute' || item.id == 'second' || item.id == 'm' || item.id == 'author' || item.id == 'authorName' || item.id == 'tag' || item.id == 'tagId' || item.id == 'cat' || item.id == 'categoryName' || item.id == 'p' || item.id == 'name' || item.id == 'pageId' || item.id == 'pagename' || item.id == 'postParent' || item.id == 'postPassword' || item.id == 'postsPerPage' || item.id == 'paged' || item.id == 'offset' || item.id == 'postsPerArchivePage' || item.id == 'perm') &&
+            {(item.id == 'metaKey' || item.id == 's' || item.id == 'metaValue' || item.id == 'metaValueNum' || item.id == 'metaCompare' || item.id == 'year' || item.id == 'monthnum' || item.id == 'w' || item.id == 'day' || item.id == 'hour' || item.id == 'minute' || item.id == 'second' || item.id == 'm' || item.id == 'author' || item.id == 'authorName' || item.id == 'tag' || item.id == 'tagId' || item.id == 'cat' || item.id == 'categoryName' || item.id == 'p' || item.id == 'name' || item.id == 'pageId' || item.id == 'pagename' || item.id == 'postParent' || item.id == 'postsPerPage' || item.id == 'paged' || item.id == 'offset' || item.id == 'postsPerArchivePage' || item.id == 'perm') &&
 
               <div >
                 <InputControl
@@ -1427,26 +1712,32 @@ background-color: red;
               </div>
 
             }
-            {item.id == 'authorIn' &&
-              <div className={item.id == 'authorIn' ? '' : 'hidden'}>
 
 
-                {JSON.stringify(item.val)}
+            {(item.id == 'postParent' || item.id == 'postPassword') &&
 
-                {
+              <div >
 
-                  generateQueryFieldAuthorIn(item)
+                {(license.license_status != 'active') && (
 
-                }
+                  <div className='bg-amber-400 my-3 px-3 py-2'>
+                    <p>Only avilable in Premium </p>
+                    <a className='font-bold' href="">Get Premium</a>
+                  </div>
+                )}
+
+                <InputControl
+                  value={item.val}
+                  onChange={(newVal) => updateQueryPram(newVal, index)}
+                />
+
 
               </div>
+
             }
 
 
-
-
-
-            {(item.id == 'postNameIn' || item.id == 'postNotIn' || item.id == 'postIn' || item.id == 'postParentNotIn' || item.id == 'tagNotIn' || item.id == 'tagAnd' || item.id == 'tagIn' || item.id == 'postParentIn' || item.id == 'tagSlugIn' || item.id == 'tagSlugAnd' || item.id == 'categoryNotIn' || item.id == 'categoryIn' || item.id == 'categoryAnd') &&
+            {(item.id == 'postNameIn' || item.id == 'authorIn' || item.id == 'authorNotIn' || item.id == 'postNotIn' || item.id == 'postIn' || item.id == 'postParentNotIn' || item.id == 'tagNotIn' || item.id == 'tagAnd' || item.id == 'tagIn' || item.id == 'postParentIn' || item.id == 'tagSlugIn' || item.id == 'tagSlugAnd' || item.id == 'categoryNotIn' || item.id == 'categoryIn' || item.id == 'categoryAnd') &&
 
               <div >
 
@@ -1538,7 +1829,7 @@ background-color: red;
                 />
 
               </div>}
-            {(item.id == 'cacheResults' || item.id == 'nopaging' || item.id == 'hasPassword' || item.id == 'ignoreStickyPosts' || item.id == 'updatePostMetaCache' || item.id == 'updatePostTermCache') &&
+            {(item.id == 'cacheResults' || item.id == 'nopaging' || item.id == 'hasPassword' || item.id == 'updatePostMetaCache' || item.id == 'updatePostTermCache') &&
               <div >
                 <SelectControl
                   style={{ margin: 0 }}
@@ -1556,6 +1847,34 @@ background-color: red;
             }
 
 
+
+
+            {(item.id == 'ignoreStickyPosts') &&
+              <div >
+
+                {(license.license_status != 'active') && (
+
+                  <div className='bg-amber-400 my-3 px-3 py-2'>
+                    <p>Only avilable in Premium </p>
+                    <a className='font-bold' href="">Get Premium</a>
+                  </div>
+                )}
+
+
+                <SelectControl
+                  style={{ margin: 0 }}
+                  label=""
+
+                  value={item.val}
+                  options={[
+                    { label: 'True', value: true },
+                    { label: 'False', value: false },
+
+                  ]}
+                  onChange={(newVal) => updateQueryPram(newVal, index)}
+                />
+              </div>
+            }
 
 
 
@@ -2498,7 +2817,9 @@ background-color: red;
 
           <RawHTML>{ItemNthCssadasd2}</RawHTML>
 
-
+          {
+            JSON.stringify(queryArgs)
+          }
 
 
           <ContainerCss cssData={props.attributes}>
@@ -2531,7 +2852,8 @@ background-color: red;
                 )
               }
 
-              {postsQuery &&
+              {
+                postsQuery &&
 
                 (
                   <div className='text-center'><Spinner /></div>

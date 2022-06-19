@@ -1317,7 +1317,7 @@ background-color: red;
                 </PanelRow>
 
 
-                {item.val.map(x => {
+                {item.val.map((x, j) => {
 
                   return (
 
@@ -1339,6 +1339,8 @@ background-color: red;
                                 placeholder=""
                                 onChange={(newVal) => {
 
+                                  queryArgs.items[index].val[j].year = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgs.items } });
                                 }}
                               />
                             </PanelRow>
@@ -1348,7 +1350,8 @@ background-color: red;
                               <InputControl
                                 placeholder=""
                                 onChange={(newVal) => {
-
+                                  queryArgs.items[index].val[j].month = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgs.items } });
                                 }}
                               />
                             </PanelRow>
@@ -1358,7 +1361,8 @@ background-color: red;
                               <InputControl
                                 placeholder=""
                                 onChange={(newVal) => {
-
+                                  queryArgs.items[index].val[j].day = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgs.items } });
                                 }}
                               />
                             </PanelRow>
@@ -1379,7 +1383,8 @@ background-color: red;
 
                               ]}
                               onChange={(newVal) => {
-
+                                queryArgs.items[index].val[j].value = newVal;
+                                setAttributes({ queryArgs: { items: queryArgs.items } });
                               }}
                             />
 
@@ -1413,7 +1418,8 @@ background-color: red;
 
                               ]}
                               onChange={(newVal) => {
-
+                                queryArgs.items[index].val[j].value = newVal;
+                                setAttributes({ queryArgs: { items: queryArgs.items } });
                               }}
                             />
 
@@ -1425,7 +1431,8 @@ background-color: red;
                             <InputControl
                               placeholder=""
                               onChange={(newVal) => {
-
+                                queryArgs.items[index].val[j].value = newVal;
+                                setAttributes({ queryArgs: { items: queryArgs.items } });
                               }}
                             />
 
@@ -1445,7 +1452,8 @@ background-color: red;
                                 { label: 'AND', value: 'AND' },
                               ]}
                               onChange={(newVal) => {
-
+                                queryArgs.items[index].val[j].value = newVal;
+                                setAttributes({ queryArgs: { items: queryArgs.items } });
                               }}
                             />
 
@@ -1463,7 +1471,8 @@ background-color: red;
                                 label="Value"
                                 placeholder=""
                                 onChange={(newVal) => {
-
+                                  queryArgs.items[index].val[j].value = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgs.items } });
                                 }}
                               />
 
@@ -1486,7 +1495,8 @@ background-color: red;
                                   { label: 'NOT BETWEEN', value: 'NOT BETWEEN' },
                                 ]}
                                 onChange={(newVal) => {
-
+                                  queryArgs.items[index].val[j].compare = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgs.items } });
                                 }}
                               />
 

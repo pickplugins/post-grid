@@ -2844,19 +2844,40 @@ background-color: red;
             }
           });
         }
-      })), item.val.map(x => {
+      })), item.val.map((x, j) => {
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
           title: x.id,
           initialOpen: false
         }, (x.id == 'after' || x.id == 'before') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("label", null, "Year"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
           placeholder: "",
-          onChange: newVal => {}
+          onChange: newVal => {
+            queryArgs.items[index].val[j].year = newVal;
+            setAttributes({
+              queryArgs: {
+                items: queryArgs.items
+              }
+            });
+          }
         })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("label", null, "Month"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
           placeholder: "",
-          onChange: newVal => {}
+          onChange: newVal => {
+            queryArgs.items[index].val[j].month = newVal;
+            setAttributes({
+              queryArgs: {
+                items: queryArgs.items
+              }
+            });
+          }
         })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("label", null, "Day"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
           placeholder: "",
-          onChange: newVal => {}
+          onChange: newVal => {
+            queryArgs.items[index].val[j].day = newVal;
+            setAttributes({
+              queryArgs: {
+                items: queryArgs.items
+              }
+            });
+          }
         }))), x.id == 'inclusive' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
           style: {
             margin: 0
@@ -2868,7 +2889,14 @@ background-color: red;
             label: 'False',
             value: false
           }],
-          onChange: newVal => {}
+          onChange: newVal => {
+            queryArgs.items[index].val[j].value = newVal;
+            setAttributes({
+              queryArgs: {
+                items: queryArgs.items
+              }
+            });
+          }
         })), x.id == 'compare' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
           style: {
             margin: 0
@@ -2910,10 +2938,24 @@ background-color: red;
             label: 'NOT BETWEEN',
             value: 'NOT BETWEEN'
           }],
-          onChange: newVal => {}
+          onChange: newVal => {
+            queryArgs.items[index].val[j].value = newVal;
+            setAttributes({
+              queryArgs: {
+                items: queryArgs.items
+              }
+            });
+          }
         })), x.id == 'column' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
           placeholder: "",
-          onChange: newVal => {}
+          onChange: newVal => {
+            queryArgs.items[index].val[j].value = newVal;
+            setAttributes({
+              queryArgs: {
+                items: queryArgs.items
+              }
+            });
+          }
         })), x.id == 'relation' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
           style: {
             margin: 0
@@ -2925,11 +2967,25 @@ background-color: red;
             label: 'AND',
             value: 'AND'
           }],
-          onChange: newVal => {}
+          onChange: newVal => {
+            queryArgs.items[index].val[j].value = newVal;
+            setAttributes({
+              queryArgs: {
+                items: queryArgs.items
+              }
+            });
+          }
         })), (x.id == 'year' || x.id == 'month' || x.id == 'week' || x.id == 'day' || x.id == 'hour' || x.id == 'minute' || x.id == 'second') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
           label: "Value",
           placeholder: "",
-          onChange: newVal => {}
+          onChange: newVal => {
+            queryArgs.items[index].val[j].value = newVal;
+            setAttributes({
+              queryArgs: {
+                items: queryArgs.items
+              }
+            });
+          }
         }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
           style: {
             margin: 0
@@ -2972,7 +3028,14 @@ background-color: red;
             label: 'NOT BETWEEN',
             value: 'NOT BETWEEN'
           }],
-          onChange: newVal => {}
+          onChange: newVal => {
+            queryArgs.items[index].val[j].compare = newVal;
+            setAttributes({
+              queryArgs: {
+                items: queryArgs.items
+              }
+            });
+          }
         }))));
       })), item.id == 'taxQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, license.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
         className: "bg-amber-400 my-3 px-3 py-2"

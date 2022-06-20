@@ -1,10 +1,10 @@
-const breakPoints = [
-  { name: 'Small', id: 'sm', min: 0, max: 640 },
-  { name: 'Medium', id: 'md', min: 641, max: 768 },
-  { name: 'Large', id: 'lg', min: 769, max: 1024 },
-  { name: 'Extra-Large', id: 'xl', min: 1025, max: 1280 },
-  { name: '2 Extra-Large', id: '2xl', min: 1281, max: 1536 },
-];
+const breakPoints = {
+  sm: { name: 'Small', id: 'sm', icon: '<span class="icon-mobile-phone"></span>', min: 0, max: 640 },
+  md: { name: 'Medium', id: 'md', icon: '<span class="icon-tablet"></span>', min: 641, max: 768 },
+  lg: { name: 'Large', id: 'lg', icon: '<span class="icon-laptop"></span>', min: 769, max: 1024 },
+  xl: { name: 'Extra-Large', id: 'xl', icon: '<span class="icon-desktop"></span>', min: 1025, max: 1280 },
+  xl2: { name: '2 Extra-Large', id: 'xl2', icon: '<span class="icon-television"></span>', min: 1281, max: 1536 }
+};
 
 
 export default breakPoints;

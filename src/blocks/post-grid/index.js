@@ -592,6 +592,16 @@ background-color: red;
     }, [layout]);
 
     useEffect(() => {
+      console.log('Listening queryArgs: ', queryArgs);
+      fetchPosts();
+
+
+
+    }, [queryArgs]);
+
+
+
+    useEffect(() => {
       //console.log('Listening container: ', container);
       fetchLayouts();
       fetchLayoutData();
@@ -1233,9 +1243,10 @@ background-color: red;
                     <a className='font-bold' href="">Get Premium</a>
                   </div>
                 )}
-                <PanelRow>
+                <PanelRow className='my-3'>
                   <label>Add Arguments</label>
                   <SelectControl
+
                     options={[
                       { "value": "", "label": "Select..." },
 
@@ -1307,7 +1318,7 @@ background-color: red;
 
 
 
-                      console.log(xx);
+                      //console.log(xx);
 
                       setAttributes({ queryArgs: { items: queryArgs.items } });
 
@@ -1325,9 +1336,30 @@ background-color: red;
                     <div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                       <PanelBody title={x.id} initialOpen={false}>
 
+                        <span
+                          className='cursor-pointer px-3 py-1 text-white bg-red-600 text-sm my-2 inline-block'
+                          onClick={(ev) => {
 
+                            queryArgs.items[index].val.splice(j, 1);
+                            setAttributes({ queryArgs: { items: queryArgs.items } });
+
+                          }}
+
+                        >Delete</span>
 
 
                         {(x.id == 'after' || x.id == 'before') && (
@@ -1339,8 +1371,19 @@ background-color: red;
                                 placeholder=""
                                 onChange={(newVal) => {
 
+
+
+                                  //clearTimeout(debounce);
+                                  // debounce = setTimeout(() => {
+
                                   queryArgs.items[index].val[j].year = newVal;
                                   setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  //}, 1000);
+
+
+
+
+
                                 }}
                               />
                             </PanelRow>
@@ -1350,8 +1393,17 @@ background-color: red;
                               <InputControl
                                 placeholder=""
                                 onChange={(newVal) => {
+
+
+                                  // clearTimeout(debounce);
+                                  //debounce = setTimeout(() => {
+
                                   queryArgs.items[index].val[j].month = newVal;
                                   setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  //}, 1000);
+
+
+
                                 }}
                               />
                             </PanelRow>
@@ -1361,8 +1413,18 @@ background-color: red;
                               <InputControl
                                 placeholder=""
                                 onChange={(newVal) => {
-                                  queryArgs.items[index].val[j].day = newVal;
-                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+
+
+                                  clearTimeout(debounce);
+                                  debounce = setTimeout(() => {
+
+                                    queryArgs.items[index].val[j].day = newVal;
+                                    setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  }, 1000);
+
+
+
+
                                 }}
                               />
                             </PanelRow>
@@ -1431,8 +1493,18 @@ background-color: red;
                             <InputControl
                               placeholder=""
                               onChange={(newVal) => {
-                                queryArgs.items[index].val[j].value = newVal;
-                                setAttributes({ queryArgs: { items: queryArgs.items } });
+
+
+
+                                clearTimeout(debounce);
+                                debounce = setTimeout(() => {
+
+                                  queryArgs.items[index].val[j].value = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                                }, 1000);
+
+
+
                               }}
                             />
 
@@ -1471,8 +1543,17 @@ background-color: red;
                                 label="Value"
                                 placeholder=""
                                 onChange={(newVal) => {
+
+
+
+                                  //clearTimeout(debounce);
+                                  //debounce = setTimeout(() => {
+
                                   queryArgs.items[index].val[j].value = newVal;
                                   setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  //}, 1000);
+
+
                                 }}
                               />
 
@@ -1715,7 +1796,17 @@ background-color: red;
               <div >
                 <InputControl
                   value={item.val}
-                  onChange={(newVal) => updateQueryPram(newVal, index)}
+                  onChange={(newVal) => {
+
+
+                    clearTimeout(debounce);
+                    debounce = setTimeout(() => {
+
+                      updateQueryPram(newVal, index)
+
+                    }, 1000);
+
+                  }}
                 />
 
 
@@ -2249,7 +2340,6 @@ background-color: red;
                       }, 1000);
 
 
-                      setDebounce(debounce)
 
 
                       //fetchLayouts();

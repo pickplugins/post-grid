@@ -245,6 +245,12 @@ class BlockPostGridRest
             $id = isset($item['id']) ? $item['id'] : '';
             $val = isset($item['val']) ? $item['val'] : '';
 
+            //error_log(serialize($id));
+            //error_log('################################');
+
+            //error_log(serialize($val));
+
+
             if ($val) {
                 if ($id == 'postType') {
                     $query_args['post_type'] = $val;
@@ -257,8 +263,53 @@ class BlockPostGridRest
                 } elseif ($id == 'metaKey') {
                     $query_args['meta_key'] = $val;
                 } elseif ($id == 'dateQuery') {
-                    $query_args['date_query'] = $val;
+
+
+                    $date_query = [];
+
+                    foreach ($val as $arg) {
+                        $id = isset($arg['id']) ? $arg['id'] : '';
+                        $value = isset($arg['value']) ? $arg['value'] : '';
+
+
+                        if ($id == 'year' || $id == 'month' || $id == 'week' || $id == 'day' || $id == 'hour' || $id == 'minute' || $id == 'second') {
+                            $compare = isset($arg['compare']) ? $arg['compare'] : '';
+
+                            if (!empty($value))
+                                $date_query[] = [$id => $value, 'compare' => $compare,];
+                        }
+
+
+                        if ($id == 'inclusive'  || $id == 'compare'  || $id == 'relation') {
+
+                            if (!empty($value))
+                                $date_query[$id] = $value;
+                        }
+
+                        if ($id == 'after' || $id == 'before') {
+                            $year = isset($arg['year']) ? $arg['year'] : '';
+                            $month = isset($arg['month']) ? $arg['month'] : '';
+                            $day = isset($arg['day']) ? $arg['day'] : '';
+
+                            if (!empty($year))
+                                $date_query[$id]['year'] = $year;
+
+                            if (!empty($month))
+                                $date_query[$id]['month'] =  $month;
+
+                            if (!empty($day))
+                                $date_query[$id]['day'] = $day;
+                        }
+                    }
+
+                    error_log(serialize($date_query));
+
+
+                    $query_args['date_query'] = $date_query;
                 } elseif ($id == 'year') {
+
+
+
                     $query_args['year'] = $val;
                 } elseif ($id == 'monthnum') {
                     $query_args['monthnum'] = $val;

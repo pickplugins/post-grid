@@ -295,7 +295,13 @@ if (!class_exists('PostGrid')) {
                 'all'
             );
 
-
+            wp_enqueue_style(
+                'PostGrid-v1.0',
+                post_grid_plugin_url . '/assets/PostGrid-v1.0/style.css',
+                [],
+                false,
+                'all'
+            );
 
 
             wp_enqueue_script(

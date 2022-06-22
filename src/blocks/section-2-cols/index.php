@@ -36,7 +36,7 @@ class BlockPostGrid
             wp_enqueue_style('blk_post_grid', post_grid_plugin_dir . 'src/blocks/post-grid/index.css');
         }
 
-        //error_log(serialize($attributes['layout']['data']));
+        ////error_log(serialize($attributes['layout']['data']));
 
 
         $blocks = parse_blocks('<!-- wp:paragraph --><p>paragraph one</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>then two</p><!-- /wp:paragraph -->');

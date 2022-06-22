@@ -14,14 +14,16 @@ class BlockPostTitle
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('editor_style', post_grid_plugin_dir . 'src/blocks/post-title/index.css');
-        wp_register_script('editor_script', post_grid_plugin_dir . 'src/blocks/post-title/index.js', array('wp-blocks', 'wp-element'));
+        wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/post-title/index.css');
+        wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-title/index.js', array('wp-blocks', 'wp-element'));
+
+
         register_block_type('post-grid/post-title', array(
             'editor_script' => 'editor_script',
             'editor_style' => 'editor_style',
-            'style' => 'front_style',
-            'view_script' => 'front_script',
+            //'script' => 'front_script',
             'uses_context' =>  ["postId", "postType", "queryId"],
+            //'style' => 'editor_style',
 
             'render_callback' => array($this, 'theHTML')
         ));
@@ -29,9 +31,13 @@ class BlockPostTitle
 
     function front_script($attributes)
     {
+
+
+        var_dump('asdasdasd');
     }
     function front_style($attributes)
     {
+        var_dump('asdasdasd');
     }
 
     // front-end output from the gutenberg editor 
@@ -39,6 +45,7 @@ class BlockPostTitle
     {
 
 
+        global $postGridCss;
 
 
 
@@ -48,7 +55,7 @@ class BlockPostTitle
 
             //wp_enqueue_script('blk_post_grid', post_grid_plugin_dir . 'src/blocks/post-title/index.js', array('wp-element'));
 
-            wp_enqueue_style('blk_post_grid', post_grid_plugin_dir . 'src/blocks/post-title/index.css');
+            // wp_enqueue_style('blk_post_grid', post_grid_plugin_url . 'src/blocks/post-title/index.css');
         }
 
 
@@ -56,20 +63,24 @@ class BlockPostTitle
         $post_ID = $block->context['postId'];
         $post_url = get_the_permalink($post_ID);
 
-        $isLink = $attributes['isLink'];
-        $linkTarget = $attributes['linkTarget'];
-        $linkAttr = $attributes['linkAttr'];
-        $rel = $attributes['rel'];
+        $isLink = isset($attributes['isLink']) ? $attributes['isLink'] : '';
+        $linkTarget = isset($attributes['linkTarget']) ? $attributes['linkTarget'] : '';
+        $linkAttr = isset($attributes['linkAttr']) ? $attributes['linkAttr'] : [];
+        $rel = isset($attributes['rel']) ? $attributes['rel'] : '';
+        $textAlign = isset($attributes['textAlign']) ? $attributes['textAlign'] : '';
+        $color = isset($attributes['color']) ? $attributes['color'] : ['val' => '', 'responsive' => ''];
+        $bgColor = isset($attributes['bgColor']) ? $attributes['bgColor'] : ['val' => '', 'responsive' => ''];
 
-        $textAlign = $attributes['textAlign'];
+
+        $postGridCss[] = ['attr' => 'color', 'id' => '.pg-postTitle-' . $post_ID . ' a', 'default' => $color['val'], 'reponsive' => $color['responsive']];
+
+        $postGridCss[] = ['attr' => 'background-color', 'id' => '.pg-postTitle-' . $post_ID . ' a', 'default' => $bgColor['val'], 'reponsive' => $bgColor['responsive']];
+
         $tag = isset($attributes['tag']) ? $attributes['tag'] : 'h2';
-        $color = $attributes['color'];
-        $bgColor = $attributes['bgColor'];
 
 
         $linkAttrStr = '';
 
-        //var_dump($linkAttr);
 
 
         if (!empty($linkAttr))
@@ -80,13 +91,20 @@ class BlockPostTitle
             }
 
 
-        global $postGridCss;
-
-        $postGridCss[] = ['id' => 'post-title-' . $post_ID, 'style' => 'color:' . $color['val']];
 
 
 
-        ob_start(); ?>
+
+
+        ob_start();
+
+
+
+
+?>
+
+
+
 
         <<?php echo $tag; ?> class="pg-postTitle pg-postTitle-<?php echo $post_ID; ?>">
             <?php if ($isLink) : ?>
@@ -95,6 +113,8 @@ class BlockPostTitle
                 <?php echo get_the_title($post_ID); ?>
             <?php endif; ?>
         </<?php echo $tag; ?>>
+
+
 
 <?php return ob_get_clean();
     }

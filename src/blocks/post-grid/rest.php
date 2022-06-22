@@ -108,8 +108,7 @@ class BlockPostGridRest
 
 
 
-        error_log(serialize($category));
-        error_log(serialize($keyword));
+
 
 
         $query_args = [];
@@ -134,7 +133,6 @@ class BlockPostGridRest
 
 
 
-        error_log(serialize($query_args));
 
 
         $posts = [];
@@ -178,14 +176,14 @@ class BlockPostGridRest
 
 
 
-            //error_log(serialize($thumb_url));
+            ////error_log(serialize($thumb_url));
 
 
             endwhile;
             wp_reset_query();
             wp_reset_postdata();
 
-            error_log('################');
+        //error_log('################');
 
 
         endif;
@@ -245,10 +243,10 @@ class BlockPostGridRest
             $id = isset($item['id']) ? $item['id'] : '';
             $val = isset($item['val']) ? $item['val'] : '';
 
-            //error_log(serialize($id));
-            //error_log('################################');
+            ////error_log(serialize($id));
+            ////error_log('################################');
 
-            //error_log(serialize($val));
+            ////error_log(serialize($val));
 
 
             if ($val) {
@@ -302,7 +300,7 @@ class BlockPostGridRest
                         }
                     }
 
-                    error_log(serialize($date_query));
+                    //error_log(serialize($date_query));
 
 
                     $query_args['date_query'] = $date_query;
@@ -421,7 +419,7 @@ class BlockPostGridRest
             }
         }
 
-        //error_log(serialize($query_args));
+        ////error_log(serialize($query_args));
 
 
         $posts = [];
@@ -461,7 +459,7 @@ class BlockPostGridRest
                 $posts[]            = $post;
 
 
-            //error_log(serialize($thumb_url));
+            ////error_log(serialize($thumb_url));
 
 
             endwhile;
@@ -501,7 +499,7 @@ class BlockPostGridRest
 
         foreach ($taxonomies as $taxonomy) {
 
-            //error_log(serialize($taxonomy));
+            ////error_log(serialize($taxonomy));
 
             $terms_results = get_terms($taxonomy, array(
                 'hide_empty' => false,
@@ -513,7 +511,7 @@ class BlockPostGridRest
                 $terms[] = ['name' => '--- ' . $taxonomy . ' ---', 'slug' => '', 'term_id' => ''];
 
                 foreach ($terms_results as $term) {
-                    //error_log($term->name);
+                    ////error_log($term->name);
                     $terms[] = [
                         'name' => $term->name,
                         'slug' => $term->slug,
@@ -527,7 +525,7 @@ class BlockPostGridRest
         }
 
 
-        error_log(serialize($terms));
+        //error_log(serialize($terms));
 
 
 
@@ -580,7 +578,7 @@ class BlockPostGridRest
             $post_types[$post_type] = $obj->labels->singular_name;
         }
 
-        error_log(serialize($post_types));
+        //error_log(serialize($post_types));
 
 
         die(wp_json_encode($post_types));

@@ -97,7 +97,7 @@ class BlockPostGridRest
         $rawData      = isset($post_data['rawData']) ? $post_data['rawData'] : $rawData;
 
 
-        //error_log(serialize($queryArgs));
+        ////error_log(serialize($queryArgs));
 
 
         $query_args = [];
@@ -234,7 +234,7 @@ class BlockPostGridRest
             }
         }
 
-        error_log(serialize($query_args));
+        //error_log(serialize($query_args));
 
 
         $posts = [];
@@ -272,7 +272,7 @@ class BlockPostGridRest
 
 
 
-                error_log(get_the_title(get_the_id()));
+                //error_log(get_the_title(get_the_id()));
 
 
 
@@ -291,14 +291,14 @@ class BlockPostGridRest
 
 
 
-            //error_log(serialize($thumb_url));
+            ////error_log(serialize($thumb_url));
 
 
             endwhile;
             wp_reset_query();
             wp_reset_postdata();
 
-            error_log('################');
+        //error_log('################');
 
 
         endif;
@@ -323,7 +323,7 @@ class BlockPostGridRest
 
         foreach ($queryArgs as $item) {
 
-            error_log(serialize($item));
+            //error_log(serialize($item));
 
 
             $id = isset($item['id']) ? $item['id'] : '';
@@ -337,7 +337,7 @@ class BlockPostGridRest
         }
 
 
-        error_log(serialize($query_args));
+        //error_log(serialize($query_args));
 
         $posts = [];
 
@@ -366,7 +366,7 @@ class BlockPostGridRest
                 $posts[]            = $post;
 
 
-            //error_log(serialize($thumb_url));
+            ////error_log(serialize($thumb_url));
 
 
             endwhile;
@@ -406,7 +406,7 @@ class BlockPostGridRest
 
         foreach ($taxonomies as $taxonomy) {
 
-            //error_log(serialize($taxonomy));
+            ////error_log(serialize($taxonomy));
 
             $terms_results = get_terms($taxonomy, array(
                 'hide_empty' => false,
@@ -418,7 +418,7 @@ class BlockPostGridRest
                 $terms[] = ['name' => '--- ' . $taxonomy . ' ---', 'slug' => '', 'term_id' => ''];
 
                 foreach ($terms_results as $term) {
-                    //error_log($term->name);
+                    ////error_log($term->name);
                     $terms[] = [
                         'name' => $term->name,
                         'slug' => $term->slug,
@@ -432,7 +432,7 @@ class BlockPostGridRest
         }
 
 
-        error_log(serialize($terms));
+        //error_log(serialize($terms));
 
 
 
@@ -464,7 +464,7 @@ class BlockPostGridRest
             $post_types[$post_type] = $obj->labels->singular_name;
         }
 
-        error_log(serialize($post_types));
+        //error_log(serialize($post_types));
 
 
         die(wp_json_encode($post_types));

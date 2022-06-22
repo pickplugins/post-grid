@@ -4683,13 +4683,13 @@ const {
       onChange: newVal => setAttributes({
         linkTarget: newVal
       })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("label", {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       label: "",
       value: tag,
       options: [{
-        label: 'Select...',
+        label: 'No Wrapper',
         value: ''
       }, {
         label: 'H1',
@@ -4836,9 +4836,9 @@ const {
           }
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
+    }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
       className: ['pg-postTitle pg-postTitle-' + postId]
-    }, JSON.stringify(attributes), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomTag, null, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
+    }, tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomTag, null, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: post.link,
       rel: rel,
       target: linkTarget

@@ -281,219 +281,8 @@ registerBlockType("post-grid/post-title", {
                     />
                   </PanelRow>
 
-                  <PanelRow>
-                    <label for="">Wrapper Tag</label>
 
-                    <SelectControl
-                      label=""
-                      value={tag}
-                      options={[
-                        { label: 'Select...', value: '' },
 
-                        { label: 'H1', value: 'h1' },
-                        { label: 'H2', value: 'h2' },
-                        { label: 'H3', value: 'h3' },
-                        { label: 'H4', value: 'h4' },
-                        { label: 'H5', value: 'h5' },
-                        { label: 'H6', value: 'h6' },
-                        { label: 'span', value: 'SPAN' },
-                        { label: 'div', value: 'DIV' },
-                        { label: 'P', value: 'p' },
-
-
-                      ]}
-                      onChange={(newVal) => setAttributes({ tag: newVal })}
-                    />
-                  </PanelRow>
-
-
-                  <PanelRow>
-                    <label for="">rel</label>
-
-                    <InputControl
-                      value={rel}
-                      onChange={(newVal) => setAttributes({ rel: newVal })}
-                    />
-                  </PanelRow>
-
-
-                  <PanelRow>
-                    <label for="">Custom Attributes</label>
-                    <div
-                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                      onClick={(ev) => {
-
-                        var sdsd = linkAttr.concat({ id: '', val: '' })
-
-                        setAttributes({ linkAttr: sdsd })
-                        linkAttrObj()
-                      }}
-
-                    >Add</div>
-
-
-
-                  </PanelRow>
-                  <div>
-
-
-
-
-                    {
-                      linkAttr.map((x, i) => {
-
-                        return (
-
-                          <div className='my-2'>
-                            <PanelRow>
-                              <InputControl
-                                className='mr-2'
-                                value={linkAttr[i].id}
-                                onChange={(newVal) => {
-
-                                  linkAttr[i].id = newVal;
-
-
-                                  var ssdsd = linkAttr.concat([]);
-
-                                  setAttributes({ linkAttr: ssdsd })
-
-                                }}
-                              />
-
-                              <InputControl
-                                className='mr-2'
-                                value={x.val}
-                                onChange={(newVal) => {
-                                  linkAttr[i].val = newVal
-                                  var ssdsd = linkAttr.concat([]);
-
-
-                                  setAttributes({ linkAttr: ssdsd })
-
-                                }}
-                              />
-                              <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                                onClick={(ev) => {
-
-                                  linkAttr.splice(i, 1);
-
-                                  var ssdsd = linkAttr.concat([]);
-
-                                  setAttributes({ linkAttr: ssdsd })
-                                }}
-
-                              ></span>
-                            </PanelRow>
-
-
-
-
-                          </div>
-
-                        )
-
-                      })
-                    }
-
-                  </div>
-
-
-
-                  <div>
-
-
-                    <PanelRow>
-                      <label for="">Color</label>
-
-                      <div className='my-3'>
-
-
-                        <MyDropdown />
-                      </div>
-
-
-                    </PanelRow>
-
-                    {breakPoint && (
-                      <div>
-
-                        <ColorPalette
-                          color={color.responsive[breakPoint]}
-                          colors={colors}
-                          enableAlpha
-                          onChange={(newVal) => {
-
-                            var responsive = color.responsive;
-                            responsive[breakPoint] = newVal;
-
-                            setAttributes({ color: { val: color.val, responsive: responsive } })
-                          }}
-                        />
-                      </div>
-
-                    )}
-                    {!breakPoint && (
-                      <ColorPalette
-                        color={color.val}
-                        colors={colors}
-                        enableAlpha
-                        onChange={(newVal) => {
-                          setAttributes({ color: { val: newVal, responsive: color.responsive } })
-
-                        }}
-                      />
-
-                    )}
-
-                    <PanelRow>
-                      <label for="">Background Color</label>
-
-                      <div className='my-3'>
-
-
-                        <MyDropdown />
-                      </div>
-
-
-                    </PanelRow>
-
-                    {breakPoint && (
-                      <div>
-
-                        <ColorPalette
-                          color={bgColor.responsive[breakPoint]}
-                          colors={colors}
-                          enableAlpha
-                          onChange={(newVal) => {
-
-                            var responsive = bgColor.responsive;
-                            responsive[breakPoint] = newVal;
-
-                            setAttributes({ bgColor: { val: bgColor.val, responsive: responsive } })
-                          }}
-                        />
-                      </div>
-
-                    )}
-                    {!breakPoint && (
-                      <ColorPalette
-                        color={bgColor.val}
-                        colors={colors}
-                        enableAlpha
-                        onChange={(newVal) => {
-                          setAttributes({ bgColor: { val: newVal, responsive: bgColor.responsive } })
-
-                        }}
-                      />
-
-                    )}
-
-
-
-
-                  </div>
 
 
                 </div>
@@ -502,6 +291,223 @@ registerBlockType("post-grid/post-title", {
 
               )}
 
+
+              <PanelRow>
+                <label for="">Wrapper Tag</label>
+
+                <SelectControl
+                  label=""
+                  value={tag}
+                  options={[
+                    { label: 'No Wrapper', value: '' },
+
+                    { label: 'H1', value: 'h1' },
+                    { label: 'H2', value: 'h2' },
+                    { label: 'H3', value: 'h3' },
+                    { label: 'H4', value: 'h4' },
+                    { label: 'H5', value: 'h5' },
+                    { label: 'H6', value: 'h6' },
+                    { label: 'span', value: 'SPAN' },
+                    { label: 'div', value: 'DIV' },
+                    { label: 'P', value: 'p' },
+
+
+                  ]}
+                  onChange={(newVal) => setAttributes({ tag: newVal })}
+                />
+              </PanelRow>
+
+
+              <PanelRow>
+                <label for="">rel</label>
+
+                <InputControl
+                  value={rel}
+                  onChange={(newVal) => setAttributes({ rel: newVal })}
+                />
+              </PanelRow>
+
+
+              <PanelRow>
+                <label for="">Custom Attributes</label>
+                <div
+                  className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                  onClick={(ev) => {
+
+                    var sdsd = linkAttr.concat({ id: '', val: '' })
+
+                    setAttributes({ linkAttr: sdsd })
+                    linkAttrObj()
+                  }}
+
+                >Add</div>
+
+
+
+              </PanelRow>
+
+
+
+              <div>
+
+
+
+
+                {
+                  linkAttr.map((x, i) => {
+
+                    return (
+
+                      <div className='my-2'>
+                        <PanelRow>
+                          <InputControl
+                            className='mr-2'
+                            value={linkAttr[i].id}
+                            onChange={(newVal) => {
+
+                              linkAttr[i].id = newVal;
+
+
+                              var ssdsd = linkAttr.concat([]);
+
+                              setAttributes({ linkAttr: ssdsd })
+
+                            }}
+                          />
+
+                          <InputControl
+                            className='mr-2'
+                            value={x.val}
+                            onChange={(newVal) => {
+                              linkAttr[i].val = newVal
+                              var ssdsd = linkAttr.concat([]);
+
+
+                              setAttributes({ linkAttr: ssdsd })
+
+                            }}
+                          />
+                          <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                            onClick={(ev) => {
+
+                              linkAttr.splice(i, 1);
+
+                              var ssdsd = linkAttr.concat([]);
+
+                              setAttributes({ linkAttr: ssdsd })
+                            }}
+
+                          ></span>
+                        </PanelRow>
+
+
+
+
+                      </div>
+
+                    )
+
+                  })
+                }
+
+              </div>
+
+
+
+              <div>
+
+
+                <PanelRow>
+                  <label for="">Color</label>
+
+                  <div className='my-3'>
+
+
+                    <MyDropdown />
+                  </div>
+
+
+                </PanelRow>
+
+                {breakPoint && (
+                  <div>
+
+                    <ColorPalette
+                      color={color.responsive[breakPoint]}
+                      colors={colors}
+                      enableAlpha
+                      onChange={(newVal) => {
+
+                        var responsive = color.responsive;
+                        responsive[breakPoint] = newVal;
+
+                        setAttributes({ color: { val: color.val, responsive: responsive } })
+                      }}
+                    />
+                  </div>
+
+                )}
+                {!breakPoint && (
+                  <ColorPalette
+                    color={color.val}
+                    colors={colors}
+                    enableAlpha
+                    onChange={(newVal) => {
+                      setAttributes({ color: { val: newVal, responsive: color.responsive } })
+
+                    }}
+                  />
+
+                )}
+
+                <PanelRow>
+                  <label for="">Background Color</label>
+
+                  <div className='my-3'>
+
+
+                    <MyDropdown />
+                  </div>
+
+
+                </PanelRow>
+
+                {breakPoint && (
+                  <div>
+
+                    <ColorPalette
+                      color={bgColor.responsive[breakPoint]}
+                      colors={colors}
+                      enableAlpha
+                      onChange={(newVal) => {
+
+                        var responsive = bgColor.responsive;
+                        responsive[breakPoint] = newVal;
+
+                        setAttributes({ bgColor: { val: bgColor.val, responsive: responsive } })
+                      }}
+                    />
+                  </div>
+
+                )}
+                {!breakPoint && (
+                  <ColorPalette
+                    color={bgColor.val}
+                    colors={colors}
+                    enableAlpha
+                    onChange={(newVal) => {
+                      setAttributes({ bgColor: { val: newVal, responsive: bgColor.responsive } })
+
+                    }}
+                  />
+
+                )}
+
+
+
+
+              </div>
 
 
 
@@ -519,20 +525,24 @@ registerBlockType("post-grid/post-title", {
 
         <div className={['pg-postTitle pg-postTitle-' + postId]} >
 
-          {JSON.stringify(attributes)}
 
-          <CustomTag>
-            {isLink && (
+          {tag && (
+            <CustomTag>
+              {isLink && (
+                <a {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{post.title.rendered}</a>
 
-              <a {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{post.title.rendered}</a>
+              )}
+              {!isLink && (
 
-            )}
-            {!isLink && (
+                post.title.rendered
 
-              post.title.rendered
+              )}
+            </CustomTag>
+          )}
 
-            )}
-          </CustomTag>
+
+
+
 
 
 

@@ -155,7 +155,21 @@ registerBlockType("post-grid/post-title", {
     }, [])
 
     useEffect(() => {
-      //console.log('Listening breakPoint: ', breakPoint);
+      console.log('Listening breakPoint: ', breakPoint);
+
+
+      const iframe = document.getElementsByTagName("iframe")[0];
+
+      console.log(iframe);
+
+
+      var wrap = document.getElementsByClassName('is-desktop-preview');
+      var wpfooter = document.getElementById('wpfooter');
+
+
+      var str = '<style>.pg-postTitle a{color:#f00}</style>';
+
+      wpfooter.insertAdjacentHTML('beforeend', str);
 
 
 

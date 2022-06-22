@@ -4603,7 +4603,14 @@ const {
       } = wp.data.dispatch('core/edit-post');
       setPreviewDeviceType(screen);
     }, []);
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {//console.log('Listening breakPoint: ', breakPoint);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
+      console.log('Listening breakPoint: ', breakPoint);
+      const iframe = document.getElementsByTagName("iframe")[0];
+      console.log(iframe);
+      var wrap = document.getElementsByClassName('is-desktop-preview');
+      var wpfooter = document.getElementById('wpfooter');
+      var str = '<style>.pg-postTitle a{color:#f00}</style>';
+      wpfooter.insertAdjacentHTML('beforeend', str);
     }, [breakPoint]);
     const post = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => select('core').getEntityRecord('postType', context['postType'], context['postId'])); //console.log(post);
 

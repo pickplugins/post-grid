@@ -62,17 +62,21 @@ class BlockPostTitle
         $rel = $attributes['rel'];
 
         $textAlign = $attributes['textAlign'];
-        $tag = $attributes['tag'];
+        $tag = isset($attributes['tag']) ? $attributes['tag'] : 'h2';
         $color = $attributes['color'];
         $bgColor = $attributes['bgColor'];
 
 
-        $linkAttrStr = 'asdas';
+        $linkAttrStr = '';
+
+        //var_dump($linkAttr);
+
 
         if (!empty($linkAttr))
             foreach ($linkAttr as $attr) {
 
-                $linkAttrStr .= $attr->id . '=' . $attr->val . ' ';
+                if (!empty($attr['val']))
+                    $linkAttrStr .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
             }
 
 
@@ -81,27 +85,16 @@ class BlockPostTitle
         $postGridCss[] = ['id' => 'post-title-' . $post_ID, 'style' => 'color:' . $color['val']];
 
 
-        var_dump($linkAttrStr);
-
 
         ob_start(); ?>
 
-        <div class="pg-postTitle pg-postTitle-<?php echo $post_ID; ?>">
-
+        <<?php echo $tag; ?> class="pg-postTitle pg-postTitle-<?php echo $post_ID; ?>">
             <?php if ($isLink) : ?>
                 <a href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>><?php echo get_the_title($post_ID); ?></a>
             <?php else : ?>
                 <?php echo get_the_title($post_ID); ?>
             <?php endif; ?>
-
-
-
-
-            <pre><code><?php echo var_export(($attributes));
-                        ?></code></pre>
-
-
-        </div>
+        </<?php echo $tag; ?>>
 
 <?php return ob_get_clean();
     }

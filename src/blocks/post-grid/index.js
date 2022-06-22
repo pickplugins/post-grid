@@ -2899,7 +2899,7 @@ background-color: red;
 
 
               </PanelBody>
-              <PanelBody title="Custom Scripts" initialOpen={false}></PanelBody>
+              <PanelBody title="Custom Scripts" icon='dashicons-menu-alt3' initialOpen={false}></PanelBody>
 
 
 

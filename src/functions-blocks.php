@@ -2,6 +2,19 @@
 if (!defined('ABSPATH')) exit;  // if direct access
 
 
+function post_grid_global_css()
+{
+
+    global $postGridCss;
+
+    //$postGridCss .= 'asdasdasd';
+    echo serialize($postGridCss);
+
+    //echo $postGridCss;
+}
+add_action('wp_footer', 'post_grid_global_css');
+
+
 
 add_filter('block_categories_all', 'post_grid_block_categories', 10, 2);
 

@@ -37,6 +37,14 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/post-grid/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-grid/rest.php');
 
+            require_once(post_grid_plugin_dir . 'src/blocks/post-title/index.php');
+
+
+            $postGridCss = [];
+
+            global $postGridCss;
+
+
 
             include('includes/classes/class-post-types.php');
             include('includes/classes/class-meta-boxes.php');

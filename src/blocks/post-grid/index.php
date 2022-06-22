@@ -24,8 +24,10 @@ class BlockPostGrid
     }
 
     // front-end output from the gutenberg editor 
-    function theHTML($attributes)
+    function theHTML($attributes, $content, $block)
     {
+
+
         if (!is_admin()) {
 
             wp_enqueue_script('blk_post_grid', post_grid_plugin_dir . 'build/index.js', array('wp-element'));

@@ -2,7 +2,7 @@ import { registerBlockType } from '@wordpress/blocks'
 import { __ } from '@wordpress/i18n'
 import { useSelect } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
-import { createElement, memo, useMemo, useState, useEffect } from '@wordpress/element'
+import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem } from '@wordpress/components'
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -23,12 +23,24 @@ registerBlockType("post-grid/post-title", {
     textAlign: {
       "type": "string"
     },
+    tag: {
+      "type": "string",
+      "default": 'h2'
+    },
+    postId: {
+      type: 'number',
+    },
     level: {
       "type": "number",
       "default": 2
     },
 
     color: {
+      type: 'object',
+      default: { val: '', responsive: {} },
+    },
+
+    bgColor: {
       type: 'object',
       default: { val: '', responsive: {} },
     },
@@ -42,12 +54,18 @@ registerBlockType("post-grid/post-title", {
       "attribute": "rel",
       "default": ""
     },
+
+    linkAttr: {
+      "type": "array",
+      "default": []
+    },
     linkTarget: {
       "type": "string",
       "default": "_self"
-    }
+    },
   },
   usesContext: ["postId", "postType", "queryId"],
+
   supports: {
     "align": ["wide", "full"],
 
@@ -65,6 +83,9 @@ registerBlockType("post-grid/post-title", {
     var linkTarget = attributes.linkTarget;
     var rel = attributes.rel;
     var color = attributes.color;
+    var bgColor = attributes.bgColor;
+    var tag = attributes.tag;
+    var linkAttr = attributes.linkAttr;
 
     var breakPointList = [{ label: 'Select..', value: '' }];
 
@@ -72,6 +93,35 @@ registerBlockType("post-grid/post-title", {
 
       var item = breakPoints[x];
       breakPointList.push({ label: item.icon, icon: item.icon, value: item.id })
+
+    }
+
+    var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
+
+
+
+    useEffect(() => {
+      //console.log('Listening linkAttr: ', linkAttr);
+      linkAttrObj();
+
+
+
+    }, [linkAttr]);
+
+    var linkAttrObj = () => {
+
+      var sdsd = {};
+
+      linkAttr.map(x => {
+
+        if (x.val)
+          sdsd[x.id] = x.val;
+
+      })
+
+      //console.log(sdsd);
+      setlinkAttrItems(sdsd);
+      //return sdsd;
 
     }
 
@@ -87,18 +137,42 @@ registerBlockType("post-grid/post-title", {
 
 
 
+
+
+    const changeScreen = useCallback(screen => {
+
+
+
+      const {
+        __experimentalSetPreviewDeviceType: setPreviewDeviceType,
+      } = wp.data.dispatch('core/edit-post')
+
+      setPreviewDeviceType(screen)
+    }, [])
+
+    useEffect(() => {
+      //console.log('Listening breakPoint: ', breakPoint);
+
+
+
+
+
+    }, [breakPoint]);
+
     const post = useSelect((select) =>
       select('core').getEntityRecord('postType', context['postType'], context['postId'])
     );
 
     //console.log(post);
 
+    const CustomTag = `${tag}`;
 
     const MyDropdown = () => (
       <Dropdown
         position="bottom"
         renderToggle={({ isOpen, onToggle }) => (
           <Button
+            title={(breakPoints[breakPoint] != undefined) ? breakPoints[breakPoint].name : ''}
             variant="secondary"
             onClick={onToggle}
             aria-expanded={isOpen}
@@ -113,16 +187,30 @@ registerBlockType("post-grid/post-title", {
 
             return (
 
-              <div className='p-1 text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer' onClick={(newVal) => {
+              <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(newVal) => {
 
                 console.log(x);
 
                 //if (x.value) {
                 setBreakPoint(x.value)
-
+                changeScreen(x.value)
                 //}
 
-              }}><RawHTML>{x.icon}</RawHTML></div>
+              }}>
+
+                {!x.value && (
+
+                  <div><span class="icon-close"></span></div>
+
+                )}
+
+                {x.value && (
+
+                  <RawHTML>{x.icon}</RawHTML>
+
+                )}
+
+              </div>
 
             )
 
@@ -131,30 +219,11 @@ registerBlockType("post-grid/post-title", {
       />
     );
 
-    function BreakPointControl() {
-
-      console.log(breakPointList);
-
-      return (
-        <div>
-          <SelectControl
-            label=""
-            options={breakPointList}
-            onChange={(newVal) => {
-
-              if (newVal) {
-                setBreakPoint(newVal)
-
-              }
-
-            }}
-          />
-        </div>
-
-      )
 
 
-    }
+
+
+
 
 
     return (
@@ -175,31 +244,6 @@ registerBlockType("post-grid/post-title", {
 
           <InspectorControls key="general">
             <div className='px-3' title="General" initialOpen={false}>
-              <div className='my-5 '>
-                <PanelRow >
-                  <label for="">Break Point</label>
-
-                  <SelectControl
-                    label=""
-                    options={breakPointList}
-                    onChange={(newVal) => {
-
-                      if (newVal) {
-                        setBreakPoint(newVal)
-
-                      }
-
-                    }}
-                  />
-                </PanelRow>
-
-              </div>
-
-
-
-
-
-
 
               <ToggleControl
                 label="Linked with post?"
@@ -234,6 +278,32 @@ registerBlockType("post-grid/post-title", {
                   </PanelRow>
 
                   <PanelRow>
+                    <label for="">Wrapper Tag</label>
+
+                    <SelectControl
+                      label=""
+                      value={tag}
+                      options={[
+                        { label: 'Select...', value: '' },
+
+                        { label: 'H1', value: 'h1' },
+                        { label: 'H2', value: 'h2' },
+                        { label: 'H3', value: 'h3' },
+                        { label: 'H4', value: 'h4' },
+                        { label: 'H5', value: 'h5' },
+                        { label: 'H6', value: 'h6' },
+                        { label: 'span', value: 'SPAN' },
+                        { label: 'div', value: 'DIV' },
+                        { label: 'P', value: 'p' },
+
+
+                      ]}
+                      onChange={(newVal) => setAttributes({ tag: newVal })}
+                    />
+                  </PanelRow>
+
+
+                  <PanelRow>
                     <label for="">rel</label>
 
                     <InputControl
@@ -241,6 +311,91 @@ registerBlockType("post-grid/post-title", {
                       onChange={(newVal) => setAttributes({ rel: newVal })}
                     />
                   </PanelRow>
+
+
+                  <PanelRow>
+                    <label for="">Custom Attributes</label>
+                    <div
+                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                      onClick={(ev) => {
+
+                        var sdsd = linkAttr.concat({ id: '', val: '' })
+
+                        setAttributes({ linkAttr: sdsd })
+                        linkAttrObj()
+                      }}
+
+                    >Add</div>
+
+
+
+                  </PanelRow>
+                  <div>
+
+
+
+
+                    {
+                      linkAttr.map((x, i) => {
+
+                        return (
+
+                          <div className='my-2'>
+                            <PanelRow>
+                              <InputControl
+                                className='mr-2'
+                                value={linkAttr[i].id}
+                                onChange={(newVal) => {
+
+                                  linkAttr[i].id = newVal;
+
+
+                                  var ssdsd = linkAttr.concat([]);
+
+                                  setAttributes({ linkAttr: ssdsd })
+
+                                }}
+                              />
+
+                              <InputControl
+                                className='mr-2'
+                                value={x.val}
+                                onChange={(newVal) => {
+                                  linkAttr[i].val = newVal
+                                  var ssdsd = linkAttr.concat([]);
+
+
+                                  setAttributes({ linkAttr: ssdsd })
+
+                                }}
+                              />
+                              <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                                onClick={(ev) => {
+
+                                  linkAttr.splice(i, 1);
+
+                                  var ssdsd = linkAttr.concat([]);
+
+                                  setAttributes({ linkAttr: ssdsd })
+                                }}
+
+                              ></span>
+                            </PanelRow>
+
+
+
+
+                          </div>
+
+                        )
+
+                      })
+                    }
+
+                  </div>
+
+
 
                   <div>
 
@@ -258,7 +413,8 @@ registerBlockType("post-grid/post-title", {
                     </PanelRow>
 
                     {breakPoint && (
-                      <div>responsive
+                      <div>
+
                         <ColorPalette
                           color={color.responsive[breakPoint]}
                           colors={colors}
@@ -266,17 +422,7 @@ registerBlockType("post-grid/post-title", {
                           onChange={(newVal) => {
 
                             var responsive = color.responsive;
-
-                            var breakVal = responsive[breakPoint];
-
-                            //if (breakVal == undefined) {
                             responsive[breakPoint] = newVal;
-                            //}
-                            console.log(breakVal)
-                            console.log(newVal)
-                            console.log(responsive)
-
-                            console.log(breakPoint)
 
                             setAttributes({ color: { val: color.val, responsive: responsive } })
                           }}
@@ -291,6 +437,49 @@ registerBlockType("post-grid/post-title", {
                         enableAlpha
                         onChange={(newVal) => {
                           setAttributes({ color: { val: newVal, responsive: color.responsive } })
+
+                        }}
+                      />
+
+                    )}
+
+                    <PanelRow>
+                      <label for="">Background Color</label>
+
+                      <div className='my-3'>
+
+
+                        <MyDropdown />
+                      </div>
+
+
+                    </PanelRow>
+
+                    {breakPoint && (
+                      <div>
+
+                        <ColorPalette
+                          color={bgColor.responsive[breakPoint]}
+                          colors={colors}
+                          enableAlpha
+                          onChange={(newVal) => {
+
+                            var responsive = bgColor.responsive;
+                            responsive[breakPoint] = newVal;
+
+                            setAttributes({ bgColor: { val: bgColor.val, responsive: responsive } })
+                          }}
+                        />
+                      </div>
+
+                    )}
+                    {!breakPoint && (
+                      <ColorPalette
+                        color={bgColor.val}
+                        colors={colors}
+                        enableAlpha
+                        onChange={(newVal) => {
+                          setAttributes({ bgColor: { val: newVal, responsive: bgColor.responsive } })
 
                         }}
                       />
@@ -327,23 +516,21 @@ registerBlockType("post-grid/post-title", {
         <div className="post-title">
 
 
-          <pre>{JSON.stringify(color)}</pre>
-          <pre>{JSON.stringify(breakPoint)}</pre>
-          <pre>{JSON.stringify(breakPoints)}</pre>
-          <pre>{JSON.stringify(breakPoints[breakPoint])}</pre>
+          {breakPoint}
 
 
-          {isLink && (
+          <CustomTag>
+            {isLink && (
 
-            <a href={post.link} rel={rel} target={linkTarget}>{post.title.rendered}</a>
+              <a {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{post.title.rendered}</a>
 
-          )}
-          {!isLink && (
+            )}
+            {!isLink && (
 
-            post.title.rendered
+              post.title.rendered
 
-          )}
-
+            )}
+          </CustomTag>
 
 
 

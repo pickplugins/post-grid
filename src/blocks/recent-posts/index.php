@@ -14,9 +14,9 @@ class BlockRecentPost
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('editor_style', PREFIX_PLUGIN_PATH . 'src/blocks/recent-posts/index.css');
-        wp_register_script('editor_script', PREFIX_PLUGIN_PATH . 'src/blocks/blockxyz-recent-posts/index.js', array('wp-blocks', 'wp-element'));
-        register_block_type('prefix-blocks/blockxyz-recent-posts', array(
+        wp_register_style('editor_style', post_grid_plugin_dir . 'src/blocks/recent-posts/index.css');
+        wp_register_script('editor_script', post_grid_plugin_dir . 'src/blocks/recent-posts/index.js', array('wp-blocks', 'wp-element'));
+        register_block_type('post-grid/recent-posts', array(
             'editor_script' => 'editor_script',
             'editor_style' => 'editor_style',
             'render_callback' => array($this, 'theHTML')

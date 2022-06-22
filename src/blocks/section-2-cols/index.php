@@ -14,8 +14,8 @@ class BlockPostGrid
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('editor_style', PREFIX_PLUGIN_PATH . 'src/blocks/post-grid/index.css');
-        wp_register_script('editor_script', PREFIX_PLUGIN_PATH . 'src/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
+        wp_register_style('editor_style', post_grid_plugin_dir . 'src/blocks/post-grid/index.css');
+        wp_register_script('editor_script', post_grid_plugin_dir . 'src/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
         register_block_type('post-grid/post-grid', array(
             'editor_script' => 'editor_script',
             'editor_style' => 'editor_style',
@@ -28,12 +28,12 @@ class BlockPostGrid
     {
         if (!is_admin()) {
 
-            wp_enqueue_script('blk_post_grid', PREFIX_PLUGIN_PATH . 'build/index.js', array('wp-element'));
+            wp_enqueue_script('blk_post_grid', post_grid_plugin_dir . 'build/index.js', array('wp-element'));
 
-            //wp_enqueue_script('blk_post_grid', PREFIX_PLUGIN_PATH . 'src/blocks/post-grid/index.js', array('wp-element'));
+            //wp_enqueue_script('blk_post_grid', post_grid_plugin_dir . 'src/blocks/post-grid/index.js', array('wp-element'));
 
 
-            wp_enqueue_style('blk_post_grid', PREFIX_PLUGIN_PATH . 'src/blocks/post-grid/index.css');
+            wp_enqueue_style('blk_post_grid', post_grid_plugin_dir . 'src/blocks/post-grid/index.css');
         }
 
         //error_log(serialize($attributes['layout']['data']));

@@ -4605,8 +4605,14 @@ const {
     }, []);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
       console.log('Listening breakPoint: ', breakPoint);
-      const iframe = document.getElementsByTagName("iframe")[0];
-      console.log(iframe);
+      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
+
+      if (iframe) {
+        var body = iframe.contentDocument.body;
+        var str = '<style>.pg-postTitle a{color:#f00}</style>';
+        body.insertAdjacentHTML('beforeend', str);
+      }
+
       var wrap = document.getElementsByClassName('is-desktop-preview');
       var wpfooter = document.getElementById('wpfooter');
       var str = '<style>.pg-postTitle a{color:#f00}</style>';

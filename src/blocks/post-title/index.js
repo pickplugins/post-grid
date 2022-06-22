@@ -157,10 +157,16 @@ registerBlockType("post-grid/post-title", {
     useEffect(() => {
       console.log('Listening breakPoint: ', breakPoint);
 
+      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
 
-      const iframe = document.getElementsByTagName("iframe")[0];
+      if (iframe) {
+        var body = iframe.contentDocument.body;
 
-      console.log(iframe);
+        var str = '<style>.pg-postTitle a{color:#f00}</style>';
+
+        body.insertAdjacentHTML('beforeend', str);
+
+      }
 
 
       var wrap = document.getElementsByClassName('is-desktop-preview');

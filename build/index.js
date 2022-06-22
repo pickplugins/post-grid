@@ -4520,7 +4520,7 @@ const {
     },
     isLink: {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     rel: {
       "type": "string",
@@ -4553,6 +4553,7 @@ const {
     var bgColor = attributes.bgColor;
     var tag = attributes.tag;
     var linkAttr = attributes.linkAttr;
+    var postId = context['postId'];
     var breakPointList = [{
       label: 'Select..',
       value: ''
@@ -4836,8 +4837,8 @@ const {
         });
       }
     })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
-      className: "post-title"
-    }, breakPoint, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomTag, null, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
+      className: ['pg-postTitle pg-postTitle-' + postId]
+    }, JSON.stringify(attributes), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomTag, null, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: post.link,
       rel: rel,
       target: linkTarget

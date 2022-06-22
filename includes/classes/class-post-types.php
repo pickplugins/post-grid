@@ -193,7 +193,7 @@ class class_post_grid_post_types
                     'parent'                 => sprintf(__('Parent %s', 'post-grid'), $singular)
                 ),
                 'description' => sprintf(__('This is where you can create and manage %s.', 'post-grid'), $plural),
-                'public'                 => false,
+                'public'                 => true,
                 'show_ui'                 => true,
                 'capability_type'         => 'post',
                 'map_meta_cap'          => true,

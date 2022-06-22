@@ -47,7 +47,7 @@ registerBlockType("post-grid/post-title", {
 
     isLink: {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     rel: {
       "type": "string",
@@ -86,6 +86,10 @@ registerBlockType("post-grid/post-title", {
     var bgColor = attributes.bgColor;
     var tag = attributes.tag;
     var linkAttr = attributes.linkAttr;
+
+
+    var postId = context['postId'];
+
 
     var breakPointList = [{ label: 'Select..', value: '' }];
 
@@ -513,11 +517,9 @@ registerBlockType("post-grid/post-title", {
         ,
 
 
-        <div className="post-title">
+        <div className={['pg-postTitle pg-postTitle-' + postId]} >
 
-
-          {breakPoint}
-
+          {JSON.stringify(attributes)}
 
           <CustomTag>
             {isLink && (

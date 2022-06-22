@@ -67,7 +67,7 @@ class BlockPostTitle
         $bgColor = $attributes['bgColor'];
 
 
-        $linkAttrStr = '';
+        $linkAttrStr = 'asdas';
 
         if (!empty($linkAttr))
             foreach ($linkAttr as $attr) {

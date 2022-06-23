@@ -1,9 +1,10 @@
 import { registerBlockType } from '@wordpress/blocks'
 import { __ } from '@wordpress/i18n'
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem } from '@wordpress/components'
+
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 import breakPoints from '../../breakpoints'
@@ -27,6 +28,12 @@ registerBlockType("post-grid/post-title", {
       "type": "string",
       "default": 'h2'
     },
+
+    breakPointX: {
+      "type": "string",
+      "default": 'Desktop'
+    },
+
     postId: {
       type: 'number',
     },
@@ -59,6 +66,11 @@ registerBlockType("post-grid/post-title", {
       "type": "array",
       "default": []
     },
+    blockCss: {
+      "type": "object",
+      "default": { items: {} }
+    },
+
     linkTarget: {
       "type": "string",
       "default": "_self"
@@ -86,6 +98,8 @@ registerBlockType("post-grid/post-title", {
     var bgColor = attributes.bgColor;
     var tag = attributes.tag;
     var linkAttr = attributes.linkAttr;
+    var breakPointX = attributes.breakPointX;
+    var blockCss = attributes.blockCss;
 
 
     var postId = context['postId'];
@@ -100,8 +114,183 @@ registerBlockType("post-grid/post-title", {
 
     }
 
+
+    function generateBlockCss() {
+
+
+      var defaultCss = '';
+
+      var reponsiveCssGroups = {};
+      var reponsiveCss = '';
+
+
+      console.log(blockCss.items)
+
+
+      for (var x in blockCss.items) {
+
+        var item = blockCss.items[x];
+
+        console.log(item)
+
+        var attr = x;
+        var id = '.pg-postTitle-' + postId + ' a';
+        var defaultVal = item.val;
+        var responsive = item.responsive;
+
+        defaultCss += id + '{' + attr + ':' + defaultVal + '}';
+
+        var jjj = 0;
+
+        for (var device in responsive) {
+
+          var valY = responsive[device];
+
+          console.log(attr);
+
+          console.log(device);
+          console.log(valY);
+
+
+          if (reponsiveCssGroups[device] == undefined) {
+            reponsiveCssGroups[device] = []
+            //asdsds.push({ 'attr': attr, 'val': valY })
+
+          }
+
+          reponsiveCssGroups[device].push({ 'attr': attr, 'val': valY });
+
+        }
+
+
+      }
+
+
+      for (var device in reponsiveCssGroups) {
+
+
+        var item = reponsiveCssGroups[device];
+
+        console.log(item)
+
+
+        if (device === 'Mobile') {
+          reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+        }
+        if (device === 'Tablet') {
+          reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+        }
+        if (device === 'Desktop') {
+          reponsiveCss += '@media only screen and (min-width: 781px) and (max-width: 1024px){';
+        }
+
+
+        for (var index in item) {
+          var attr = item[index].attr;
+          var defaultVal = item[index].val;
+
+          var id = '.pg-postTitle-' + postId + ' a';
+
+          reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
+          reponsiveCss += '}';
+        }
+
+
+
+
+      }
+
+
+      console.log(reponsiveCss);
+
+      var cssWraId = 'css-block-pgTitle';
+
+
+      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
+
+      if (iframe) {
+
+        var iframeDocument = iframe.contentDocument;
+        var body = iframeDocument.body;
+
+        //var str = '<style>' + defaultCss + '</style>';
+
+        //body.insertAdjacentHTML('beforeend', str);
+
+
+
+
+        var divWrap = iframeDocument.getElementById("css-block-pgTitle");
+
+        if (divWrap != undefined) {
+          iframeDocument.getElementById("css-block-pgTitle").outerHTML = "";
+
+        }
+
+        var divWrap = '<div id="css-block-pgTitle"></div>';
+        body.insertAdjacentHTML('beforeend', divWrap);
+
+
+        var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
+        var str = '<style>' + reponsiveCss + '</style>';
+
+        csswrappg.insertAdjacentHTML('beforeend', str);
+
+        //body.insertAdjacentHTML('beforeend', str);
+
+
+
+
+
+
+      } else {
+
+        var wrap = document.getElementsByClassName('is-desktop-preview');
+        var wpfooter = document.getElementById('wpfooter');
+
+        var divWrap = document.getElementById("css-block-pgTitle");
+
+        if (divWrap != undefined) {
+          document.getElementById("css-block-pgTitle").outerHTML = "";
+
+        }
+
+        var divWrap = '<div id="css-block-pgTitle"></div>';
+        wpfooter.insertAdjacentHTML('beforeend', divWrap);
+
+
+        var csswrappg = document.getElementById('css-block-pgTitle');
+        var str = '<style>' + defaultCss + '</style>';
+
+        csswrappg.insertAdjacentHTML('beforeend', str);
+
+
+
+      }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
     var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
+
+
+    useEffect(() => {
+      console.log('Listening blockCss: ', blockCss);
+
+      generateBlockCss()
+
+    }, [blockCss]);
 
 
     useEffect(() => {
@@ -111,6 +300,10 @@ registerBlockType("post-grid/post-title", {
 
 
     }, [linkAttr]);
+
+
+
+
 
     var linkAttrObj = () => {
 
@@ -139,45 +332,28 @@ registerBlockType("post-grid/post-title", {
 
     var [breakPoint, setBreakPoint] = useState(''); // Using the hook.
 
+    //const [blockCss, setBlockCss] = useState({ items: {} });
+
+    const [setSome, setSomeState] = useState({});
+    const [stateX, setStateX] = useState('Old Value');
 
 
 
 
-    const changeScreen = useCallback(screen => {
 
 
 
-      const {
-        __experimentalSetPreviewDeviceType: setPreviewDeviceType,
-      } = wp.data.dispatch('core/edit-post')
+    const {
+      __experimentalSetPreviewDeviceType: setPreviewDeviceType,
 
-      setPreviewDeviceType(screen)
-    }, [])
+    } = wp.data.dispatch('core/edit-post')
+
+
 
     useEffect(() => {
       console.log('Listening breakPoint: ', breakPoint);
 
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        var body = iframe.contentDocument.body;
-
-        var str = '<style>.pg-postTitle a{color:#f00}</style>';
-
-        body.insertAdjacentHTML('beforeend', str);
-
-      }
-
-
-      var wrap = document.getElementsByClassName('is-desktop-preview');
-      var wpfooter = document.getElementById('wpfooter');
-
-
-      var str = '<style>.pg-postTitle a{color:#f00}</style>';
-
-      wpfooter.insertAdjacentHTML('beforeend', str);
-
-
+      //changeScreen(breakPoint)
 
 
 
@@ -192,55 +368,88 @@ registerBlockType("post-grid/post-title", {
     const CustomTag = `${tag}`;
 
     const MyDropdown = () => (
-      <Dropdown
-        position="bottom"
-        renderToggle={({ isOpen, onToggle }) => (
-          <Button
-            title={(breakPoints[breakPoint] != undefined) ? breakPoints[breakPoint].name : ''}
-            variant="secondary"
-            onClick={onToggle}
-            aria-expanded={isOpen}
-          >
-            <RawHTML className="text-lg ">{(breakPoints[breakPoint] != undefined) ? breakPoints[breakPoint].icon : '<span class="icon-responsive font-bold"></span>'}</RawHTML>
-          </Button>
-        )}
-        renderContent={() => <div>
 
-          {breakPointList.map(x => {
+      <div>
 
 
-            return (
+        <SelectControl
+          label=""
+          options={breakPointList}
+          value={breakPoint}
+          onChange={(newVal) => {
 
-              <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(newVal) => {
+            console.log('Current Value: ' + newVal);
+            console.log(blockCss);
 
-                console.log(x);
 
-                //if (x.value) {
-                setBreakPoint(x.value)
-                changeScreen(x.value)
-                //}
 
-              }}>
+            setBreakPoint(newVal)
+            setAttributes({ breakPointX: newVal })
+            setPreviewDeviceType(newVal)
 
-                {!x.value && (
 
-                  <div><span class="icon-close"></span></div>
 
-                )}
+          }}
+        />
 
-                {x.value && (
+        <Dropdown
+          position="bottom"
+          renderToggle={({ isOpen, onToggle }) => (
+            <Button
+              title={(breakPoints[breakPoint] != undefined) ? breakPoints[breakPoint].name : ''}
+              variant="secondary"
+              onClick={onToggle}
+              aria-expanded={isOpen}
+            >
+              <RawHTML className="text-lg ">{(breakPoints[breakPoint] != undefined) ? breakPoints[breakPoint].icon : '<span class="icon-responsive font-bold"></span>'}</RawHTML>
 
-                  <RawHTML>{x.icon}</RawHTML>
 
-                )}
+            </Button>
+          )}
+          renderContent={() => <div>
 
-              </div>
+            {breakPointList.map(x => {
 
-            )
 
-          })}
-        </div>}
-      />
+              return (
+
+                <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(newVal) => {
+                  console.log(x);
+                  console.log(newVal);
+                  console.log(breakPoint);
+
+
+
+
+
+                  //if (x.value) {
+                  setBreakPoint(x.value)
+                  setAttributes({ setBreakPointX: x.value })
+
+                  //}
+
+                }}>
+
+                  {!x.value && (
+
+                    <div><span class="icon-close"></span></div>
+
+                  )}
+
+                  {x.value && (
+
+                    <RawHTML>{x.icon}</RawHTML>
+
+                  )}
+
+                </div>
+
+              )
+
+            })}
+          </div>}
+        />
+      </div>
     );
 
 
@@ -268,6 +477,8 @@ registerBlockType("post-grid/post-title", {
 
           <InspectorControls key="general">
             <div className='px-3' title="General" initialOpen={false}>
+
+
 
               <ToggleControl
                 label="Linked with post?"
@@ -462,7 +673,18 @@ registerBlockType("post-grid/post-title", {
                         var responsive = color.responsive;
                         responsive[breakPoint] = newVal;
 
+
                         setAttributes({ color: { val: color.val, responsive: responsive } })
+
+
+
+                        blockCss.items['color'] = { val: color.val, responsive: responsive };
+                        setAttributes({ blockCss: { items: blockCss.items } });
+
+
+
+
+
                       }}
                     />
                   </div>
@@ -475,6 +697,19 @@ registerBlockType("post-grid/post-title", {
                     enableAlpha
                     onChange={(newVal) => {
                       setAttributes({ color: { val: newVal, responsive: color.responsive } })
+                      var responsive = color.responsive;
+
+
+                      // setSomeState(prev => ({ ...prev, color: { val: newVal, responsive: color.responsive } }));
+
+
+
+
+                      blockCss.items['color'] = { val: newVal, responsive: responsive };
+                      setAttributes({ blockCss: { items: blockCss.items } });
+
+
+
 
                     }}
                   />
@@ -506,6 +741,10 @@ registerBlockType("post-grid/post-title", {
                         responsive[breakPoint] = newVal;
 
                         setAttributes({ bgColor: { val: bgColor.val, responsive: responsive } })
+
+                        blockCss.items['background-color'] = { val: bgColor.val, responsive: responsive };
+                        setAttributes({ blockCss: { items: blockCss.items } });
+
                       }}
                     />
                   </div>
@@ -518,6 +757,14 @@ registerBlockType("post-grid/post-title", {
                     enableAlpha
                     onChange={(newVal) => {
                       setAttributes({ bgColor: { val: newVal, responsive: bgColor.responsive } })
+
+                      var responsive = bgColor.responsive;
+
+
+                      blockCss.items['background-color'] = { val: newVal, responsive: responsive };
+                      setAttributes({ blockCss: { items: blockCss.items } });
+
+
 
                     }}
                   />
@@ -544,6 +791,15 @@ registerBlockType("post-grid/post-title", {
 
 
         <div className={['pg-postTitle pg-postTitle-' + postId]} >
+
+
+          blockCss: {JSON.stringify(blockCss)}
+          <br />
+          <br />
+          color: {JSON.stringify(color)}
+          <br />
+          <br />
+          breakPoint: {JSON.stringify(breakPoint)}
 
 
           {tag && (

@@ -8,9 +8,9 @@
 
 
 const breakPoints = {
-  sm: { name: 'Mobile', id: 'Mobile', icon: '<span class="icon-mobile-phone"></span>', min: 0, max: 360 },
-  md: { name: 'Tablet', id: 'Tablet', icon: '<span class="icon-tablet"></span>', min: 361, max: 780 },
-  lg: { name: 'Desktop', id: 'Desktop', icon: '<span class="icon-desktop"></span>', min: 781, max: 1024 },
+  Mobile: { name: 'Mobile', id: 'Mobile', icon: '<span class="icon-mobile-phone"></span>', min: 0, max: 360 },
+  Tablet: { name: 'Tablet', id: 'Tablet', icon: '<span class="icon-tablet"></span>', min: 361, max: 780 },
+  Desktop: { name: 'Desktop', id: 'Desktop', icon: '<span class="icon-desktop"></span>', min: 781, max: 1024 },
 
 };
 

@@ -4497,6 +4497,10 @@ const {
       "type": "string",
       "default": 'h2'
     },
+    breakPointX: {
+      "type": "string",
+      "default": 'Desktop'
+    },
     postId: {
       type: 'number'
     },
@@ -4531,6 +4535,12 @@ const {
       "type": "array",
       "default": []
     },
+    blockCss: {
+      "type": "object",
+      "default": {
+        items: {}
+      }
+    },
     linkTarget: {
       "type": "string",
       "default": "_self"
@@ -4553,6 +4563,8 @@ const {
     var bgColor = attributes.bgColor;
     var tag = attributes.tag;
     var linkAttr = attributes.linkAttr;
+    var breakPointX = attributes.breakPointX;
+    var blockCss = attributes.blockCss;
     var postId = context['postId'];
     var breakPointList = [{
       label: 'Select..',
@@ -4568,8 +4580,107 @@ const {
       });
     }
 
+    function generateBlockCss() {
+      var defaultCss = '';
+      var reponsiveCssGroups = {};
+      var reponsiveCss = '';
+      console.log(blockCss.items);
+
+      for (var x in blockCss.items) {
+        var item = blockCss.items[x];
+        console.log(item);
+        var attr = x;
+        var id = '.pg-postTitle-' + postId + ' a';
+        var defaultVal = item.val;
+        var responsive = item.responsive;
+        defaultCss += id + '{' + attr + ':' + defaultVal + '}';
+        var jjj = 0;
+
+        for (var device in responsive) {
+          var valY = responsive[device];
+          console.log(attr);
+          console.log(device);
+          console.log(valY);
+
+          if (reponsiveCssGroups[device] == undefined) {
+            reponsiveCssGroups[device] = []; //asdsds.push({ 'attr': attr, 'val': valY })
+          }
+
+          reponsiveCssGroups[device].push({
+            'attr': attr,
+            'val': valY
+          });
+        }
+      }
+
+      for (var device in reponsiveCssGroups) {
+        var item = reponsiveCssGroups[device];
+        console.log(item);
+
+        if (device === 'Mobile') {
+          reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+        }
+
+        if (device === 'Tablet') {
+          reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+        }
+
+        if (device === 'Desktop') {
+          reponsiveCss += '@media only screen and (min-width: 781px) and (max-width: 1024px){';
+        }
+
+        for (var index in item) {
+          var attr = item[index].attr;
+          var defaultVal = item[index].val;
+          var id = '.pg-postTitle-' + postId + ' a';
+          reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
+          reponsiveCss += '}';
+        }
+      }
+
+      console.log(reponsiveCss);
+      var cssWraId = 'css-block-pgTitle';
+      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
+
+      if (iframe) {
+        var iframeDocument = iframe.contentDocument;
+        var body = iframeDocument.body; //var str = '<style>' + defaultCss + '</style>';
+        //body.insertAdjacentHTML('beforeend', str);
+
+        var divWrap = iframeDocument.getElementById("css-block-pgTitle");
+
+        if (divWrap != undefined) {
+          iframeDocument.getElementById("css-block-pgTitle").outerHTML = "";
+        }
+
+        var divWrap = '<div id="css-block-pgTitle"></div>';
+        body.insertAdjacentHTML('beforeend', divWrap);
+        var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
+        var str = '<style>' + reponsiveCss + '</style>';
+        csswrappg.insertAdjacentHTML('beforeend', str); //body.insertAdjacentHTML('beforeend', str);
+      } else {
+        var wrap = document.getElementsByClassName('is-desktop-preview');
+        var wpfooter = document.getElementById('wpfooter');
+        var divWrap = document.getElementById("css-block-pgTitle");
+
+        if (divWrap != undefined) {
+          document.getElementById("css-block-pgTitle").outerHTML = "";
+        }
+
+        var divWrap = '<div id="css-block-pgTitle"></div>';
+        wpfooter.insertAdjacentHTML('beforeend', divWrap);
+        var csswrappg = document.getElementById('css-block-pgTitle');
+        var str = '<style>' + defaultCss + '</style>';
+        csswrappg.insertAdjacentHTML('beforeend', str);
+      }
+    }
+
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
 
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
+      console.log('Listening blockCss: ', blockCss);
+      generateBlockCss();
+    }, [blockCss]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
       //console.log('Listening linkAttr: ', linkAttr);
       linkAttrObj();
@@ -4596,33 +4707,34 @@ const {
       color: '#00f'
     }];
     var [breakPoint, setBreakPoint] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(''); // Using the hook.
+    //const [blockCss, setBlockCss] = useState({ items: {} });
 
-    const changeScreen = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(screen => {
-      const {
-        __experimentalSetPreviewDeviceType: setPreviewDeviceType
-      } = wp.data.dispatch('core/edit-post');
-      setPreviewDeviceType(screen);
-    }, []);
+    const [setSome, setSomeState] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({});
+    const [stateX, setStateX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)('Old Value');
+    const {
+      __experimentalSetPreviewDeviceType: setPreviewDeviceType
+    } = wp.data.dispatch('core/edit-post');
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
-      console.log('Listening breakPoint: ', breakPoint);
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        var body = iframe.contentDocument.body;
-        var str = '<style>.pg-postTitle a{color:#f00}</style>';
-        body.insertAdjacentHTML('beforeend', str);
-      }
-
-      var wrap = document.getElementsByClassName('is-desktop-preview');
-      var wpfooter = document.getElementById('wpfooter');
-      var str = '<style>.pg-postTitle a{color:#f00}</style>';
-      wpfooter.insertAdjacentHTML('beforeend', str);
+      console.log('Listening breakPoint: ', breakPoint); //changeScreen(breakPoint)
     }, [breakPoint]);
     const post = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => select('core').getEntityRecord('postType', context['postType'], context['postId'])); //console.log(post);
 
     const CustomTag = `${tag}`;
 
-    const MyDropdown = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Dropdown, {
+    const MyDropdown = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      label: "",
+      options: breakPointList,
+      value: breakPoint,
+      onChange: newVal => {
+        console.log('Current Value: ' + newVal);
+        console.log(blockCss);
+        setBreakPoint(newVal);
+        setAttributes({
+          breakPointX: newVal
+        });
+        setPreviewDeviceType(newVal);
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Dropdown, {
       position: "bottom",
       renderToggle: _ref => {
         let {
@@ -4642,16 +4754,20 @@ const {
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
           className: ' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer',
           onClick: newVal => {
-            console.log(x); //if (x.value) {
+            console.log(x);
+            console.log(newVal);
+            console.log(breakPoint); //if (x.value) {
 
             setBreakPoint(x.value);
-            changeScreen(x.value); //}
+            setAttributes({
+              setBreakPointX: x.value
+            }); //}
           }
         }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("span", {
           class: "icon-close"
         })), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(RawHTML, null, x.icon));
       }))
-    });
+    }));
 
     return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.AlignmentToolbar, {
       value: textAlign,
@@ -4806,6 +4922,15 @@ const {
             responsive: responsive
           }
         });
+        blockCss.items['color'] = {
+          val: color.val,
+          responsive: responsive
+        };
+        setAttributes({
+          blockCss: {
+            items: blockCss.items
+          }
+        });
       }
     })), !breakPoint && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: color.val,
@@ -4816,6 +4941,17 @@ const {
           color: {
             val: newVal,
             responsive: color.responsive
+          }
+        });
+        var responsive = color.responsive; // setSomeState(prev => ({ ...prev, color: { val: newVal, responsive: color.responsive } }));
+
+        blockCss.items['color'] = {
+          val: newVal,
+          responsive: responsive
+        };
+        setAttributes({
+          blockCss: {
+            items: blockCss.items
           }
         });
       }
@@ -4836,6 +4972,15 @@ const {
             responsive: responsive
           }
         });
+        blockCss.items['background-color'] = {
+          val: bgColor.val,
+          responsive: responsive
+        };
+        setAttributes({
+          blockCss: {
+            items: blockCss.items
+          }
+        });
       }
     })), !breakPoint && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: bgColor.val,
@@ -4848,10 +4993,20 @@ const {
             responsive: bgColor.responsive
           }
         });
+        var responsive = bgColor.responsive;
+        blockCss.items['background-color'] = {
+          val: newVal,
+          responsive: responsive
+        };
+        setAttributes({
+          blockCss: {
+            items: blockCss.items
+          }
+        });
       }
     }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
       className: ['pg-postTitle pg-postTitle-' + postId]
-    }, tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomTag, null, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
+    }, "blockCss: ", JSON.stringify(blockCss), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("br", null), "color: ", JSON.stringify(color), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("br", null), "breakPoint: ", JSON.stringify(breakPoint), tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomTag, null, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: post.link,
       rel: rel,
       target: linkTarget
@@ -5330,21 +5485,21 @@ __webpack_require__.r(__webpack_exports__);
 //   xl2: { name: '2 Extra-Large', id: 'xl2', icon: '<span class="icon-television"></span>', min: 1281, max: 1536 }
 // };
 const breakPoints = {
-  sm: {
+  Mobile: {
     name: 'Mobile',
     id: 'Mobile',
     icon: '<span class="icon-mobile-phone"></span>',
     min: 0,
     max: 360
   },
-  md: {
+  Tablet: {
     name: 'Tablet',
     id: 'Tablet',
     icon: '<span class="icon-tablet"></span>',
     min: 361,
     max: 780
   },
-  lg: {
+  Desktop: {
     name: 'Desktop',
     id: 'Desktop',
     icon: '<span class="icon-desktop"></span>',

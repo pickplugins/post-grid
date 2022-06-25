@@ -5019,11 +5019,15 @@ console.log(myStore.getBreakPoint()); //console.log(wp.data.select('my-shop').se
       }
     }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
       className: ['pg-postTitle pg-postTitle-' + postId]
-    }, tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomTag, null, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
+    }, tag, tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomTag, null, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: post.link,
       rel: rel,
       target: linkTarget
-    }), post.title.rendered), !isLink && post.title.rendered, "- ", breakPointX))];
+    }), post.title.rendered), !isLink && post.title.rendered, "- ", breakPointX), tag.length == 0 && isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
+      href: post.link,
+      rel: rel,
+      target: linkTarget
+    }), post.title.rendered))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file

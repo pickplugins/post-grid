@@ -833,6 +833,7 @@ registerBlockType("post-grid/post-title", {
 
         <div className={['pg-postTitle pg-postTitle-' + postId]} >
 
+{tag}
 
 
           {tag && (
@@ -850,6 +851,12 @@ registerBlockType("post-grid/post-title", {
             </CustomTag>
           )}
 
+{tag.length == 0 && (
+
+(
+isLink && (<a {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{post.title.rendered}</a> )
+)
+)}
 
 
 

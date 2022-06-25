@@ -5027,7 +5027,7 @@ console.log(myStore.getBreakPoint()); //console.log(wp.data.select('my-shop').se
       href: post.link,
       rel: rel,
       target: linkTarget
-    }), post.title.rendered))];
+    }), post.title.rendered), tag.length == 0 && !isLink && post.title.rendered)];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file

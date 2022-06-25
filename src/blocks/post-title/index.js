@@ -858,7 +858,12 @@ isLink && (<a {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>
 )
 )}
 
+{tag.length == 0 && !isLink && (
 
+
+ post.title.rendered
+
+)}
 
 
 

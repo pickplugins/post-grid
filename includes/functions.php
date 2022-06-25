@@ -6,9 +6,53 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 //add_image_size( 'center-435', 220, 220, array( 'center', 'center' ) );
 
 
+function eventQuery(){
+
+
+$meta_query = array(
+'relation' => 'OR',
+array (
+      'key' => 'event_date',
+      'value' => 20220623,
+      'compare' => '<',
+      'type' => 'DATE',
+    )
+);
+
+
+$args = array(
+    'post_type'    => 'post',
+
+    'meta_query' => $meta_query,
+
+
+);
 
 
 
+
+$query = new WP_Query( $args );
+
+
+$html = ob_start();
+echo '<pre>'.var_export($query->found_posts, true).'</pre>';
+
+echo '<pre>'.var_export($args, true).'</pre>';
+
+ while ( $query->have_posts() ) : $query->the_post();
+                $post_id = get_the_ID();
+
+$title = get_the_title($post_id);
+
+echo $title;
+echo '<br/>';
+endwhile;
+
+return ob_get_clean();
+
+}
+
+add_shortcode('eventQuery', 'eventQuery');
 
 
 

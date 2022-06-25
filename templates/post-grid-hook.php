@@ -356,15 +356,34 @@ function post_grid_posts_loop($args){
 
 
 
+
+
+
+
     $query_args = apply_filters('post_grid_filter_query_args', $query_args, $grid_id);
     $query_args = apply_filters('post_grid_query_args', $query_args, $args);
 
 
 
+unset($query_args['tax_query']);
+unset($query_args['post__not_in']);
+unset($query_args['post_status']);
+unset($query_args['orderby']);
+unset($query_args['posts_per_page']);
+unset($query_args['order']);
+unset($query_args['paged']);
+
+$query_args['post_type'] = 'post';
+
+
+
+echo '<pre>'.var_export($query_args, true).'</pre>';
+
     $post_grid_wp_query = new WP_Query($query_args);
 
     $wp_query = $post_grid_wp_query;
 
+echo '<pre>'.var_export($wp_query->found_posts, true).'</pre>';
 
 
     $loop_count = 0;

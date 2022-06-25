@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks'
 import { __ } from '@wordpress/i18n'
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem } from '@wordpress/components'
@@ -9,9 +9,18 @@ import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@w
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
+import { store } from '../../store'
+
+var myStore = wp.data.select('my-shop');
+
+//console.log(wp.data.select('my-shop').getBreakPoint('food'))
+console.log(myStore.getBreakPoint());
 
 
 
+
+//console.log(wp.data.select('my-shop').setPrice('food', 98))
+//console.log()
 
 
 
@@ -27,11 +36,6 @@ registerBlockType("post-grid/post-title", {
     tag: {
       "type": "string",
       "default": 'h2'
-    },
-
-    breakPointX: {
-      "type": "string",
-      "default": 'Desktop'
     },
 
     postId: {
@@ -98,20 +102,42 @@ registerBlockType("post-grid/post-title", {
     var bgColor = attributes.bgColor;
     var tag = attributes.tag;
     var linkAttr = attributes.linkAttr;
-    var breakPointX = attributes.breakPointX;
     var blockCss = attributes.blockCss;
 
 
     var postId = context['postId'];
 
+    const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 
-    var breakPointList = [{ label: 'Select..', value: '' }];
+
+    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
     for (var x in breakPoints) {
 
       var item = breakPoints[x];
-      breakPointList.push({ label: item.icon, icon: item.icon, value: item.id })
+      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
+    }
+
+
+
+
+
+
+    function setpriceOnclick(va) {
+
+      console.log(va);
+
+      var asdsdsd = wp.data.dispatch('my-shop').setPrice('food', va)
+
+      asdsdsd.then((res) => {
+
+        //console.log(res.price);
+        getpriceOnclick();
+        //setLicense(res);
+
+
+      });
     }
 
 
@@ -299,6 +325,8 @@ registerBlockType("post-grid/post-title", {
 
 
 
+
+
     }, [linkAttr]);
 
 
@@ -371,21 +399,35 @@ registerBlockType("post-grid/post-title", {
 
       <div>
 
+        {JSON.stringify(breakPointX)}
 
         <SelectControl
           label=""
           options={breakPointList}
-          value={breakPoint}
+          value={breakPointX}
           onChange={(newVal) => {
 
             console.log('Current Value: ' + newVal);
-            console.log(blockCss);
-
-
-
-            setBreakPoint(newVal)
-            setAttributes({ breakPointX: newVal })
+            //console.log(blockCss);
             setPreviewDeviceType(newVal)
+            var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(newVal)
+
+            asdsdsd.then((res) => {
+
+              console.log(res.breakpoint);
+              setBreakPointX(res.breakpoint);
+
+
+              //getpriceOnclick();
+              //setLicense(res);
+
+              //getBreakPoint()
+
+
+            });
+
+            //setBreakPoint(newVal)
+
 
 
 
@@ -424,7 +466,6 @@ registerBlockType("post-grid/post-title", {
 
                   //if (x.value) {
                   setBreakPoint(x.value)
-                  setAttributes({ setBreakPointX: x.value })
 
                   //}
 
@@ -793,14 +834,6 @@ registerBlockType("post-grid/post-title", {
         <div className={['pg-postTitle pg-postTitle-' + postId]} >
 
 
-          blockCss: {JSON.stringify(blockCss)}
-          <br />
-          <br />
-          color: {JSON.stringify(color)}
-          <br />
-          <br />
-          breakPoint: {JSON.stringify(breakPoint)}
-
 
           {tag && (
             <CustomTag>
@@ -813,6 +846,7 @@ registerBlockType("post-grid/post-title", {
                 post.title.rendered
 
               )}
+              - {breakPointX}
             </CustomTag>
           )}
 

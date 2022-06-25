@@ -4473,6 +4473,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../store */ "./src/store.js");
 
 
 
@@ -4486,6 +4487,12 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
+var myStore = wp.data.select('my-shop'); //console.log(wp.data.select('my-shop').getBreakPoint('food'))
+
+console.log(myStore.getBreakPoint()); //console.log(wp.data.select('my-shop').setPrice('food', 98))
+//console.log()
+
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)("post-grid/post-title", {
   title: "Post Title",
   icon: "grid-view",
@@ -4496,10 +4503,6 @@ const {
     tag: {
       "type": "string",
       "default": 'h2'
-    },
-    breakPointX: {
-      "type": "string",
-      "default": 'Desktop'
     },
     postId: {
       type: 'number'
@@ -4563,20 +4566,30 @@ const {
     var bgColor = attributes.bgColor;
     var tag = attributes.tag;
     var linkAttr = attributes.linkAttr;
-    var breakPointX = attributes.breakPointX;
     var blockCss = attributes.blockCss;
     var postId = context['postId'];
+    const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(myStore.getBreakPoint());
     var breakPointList = [{
       label: 'Select..',
+      icon: '',
       value: ''
     }];
 
     for (var x in _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"]) {
       var item = _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][x];
       breakPointList.push({
-        label: item.icon,
+        label: item.name,
         icon: item.icon,
         value: item.id
+      });
+    }
+
+    function setpriceOnclick(va) {
+      console.log(va);
+      var asdsdsd = wp.data.dispatch('my-shop').setPrice('food', va);
+      asdsdsd.then(res => {
+        //console.log(res.price);
+        getpriceOnclick(); //setLicense(res);
       });
     }
 
@@ -4721,18 +4734,21 @@ const {
 
     const CustomTag = `${tag}`;
 
-    const MyDropdown = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    const MyDropdown = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, JSON.stringify(breakPointX), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       label: "",
       options: breakPointList,
-      value: breakPoint,
+      value: breakPointX,
       onChange: newVal => {
-        console.log('Current Value: ' + newVal);
-        console.log(blockCss);
-        setBreakPoint(newVal);
-        setAttributes({
-          breakPointX: newVal
-        });
+        console.log('Current Value: ' + newVal); //console.log(blockCss);
+
         setPreviewDeviceType(newVal);
+        var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(newVal);
+        asdsdsd.then(res => {
+          console.log(res.breakpoint);
+          setBreakPointX(res.breakpoint); //getpriceOnclick();
+          //setLicense(res);
+          //getBreakPoint()
+        }); //setBreakPoint(newVal)
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Dropdown, {
       position: "bottom",
@@ -4758,10 +4774,7 @@ const {
             console.log(newVal);
             console.log(breakPoint); //if (x.value) {
 
-            setBreakPoint(x.value);
-            setAttributes({
-              setBreakPointX: x.value
-            }); //}
+            setBreakPoint(x.value); //}
           }
         }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("span", {
           class: "icon-close"
@@ -5006,11 +5019,11 @@ const {
       }
     }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("div", {
       className: ['pg-postTitle pg-postTitle-' + postId]
-    }, "blockCss: ", JSON.stringify(blockCss), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("br", null), "color: ", JSON.stringify(color), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("br", null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("br", null), "breakPoint: ", JSON.stringify(breakPoint), tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomTag, null, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
+    }, tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)(CustomTag, null, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: post.link,
       rel: rel,
       target: linkTarget
-    }), post.title.rendered), !isLink && post.title.rendered))];
+    }), post.title.rendered), !isLink && post.title.rendered, "- ", breakPointX))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
@@ -5910,6 +5923,144 @@ const queryPrams = [{
   description: ""
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (queryPrams);
+
+/***/ }),
+
+/***/ "./src/store.js":
+/*!**********************!*\
+  !*** ./src/store.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "store": () => (/* binding */ store)
+/* harmony export */ });
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const DEFAULT_STATE = {
+  prices: {},
+  discountPercent: 5656,
+  choko: 'Milk Candy',
+  breakPoint: 'Desktop',
+  price: 123
+};
+const actions = {
+  setBreakPoint(breakpoint) {
+    return {
+      type: 'SET_BREAKPOINT',
+      breakpoint
+    };
+  },
+
+  setPrice(item, price) {
+    return {
+      type: 'SET_PRICE',
+      item,
+      price
+    };
+  },
+
+  startSale(discountPercent) {
+    return {
+      type: 'START_SALE',
+      discountPercent
+    };
+  },
+
+  fetchFromAPI(path) {
+    return {
+      type: 'FETCH_FROM_API',
+      path
+    };
+  }
+
+};
+const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.createReduxStore)('my-shop', {
+  reducer() {
+    let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_STATE;
+    let action = arguments.length > 1 ? arguments[1] : undefined;
+
+    switch (action.type) {
+      case 'SET_BREAKPOINT':
+        return { ...state,
+          breakPoint: action.breakpoint
+        };
+
+      case 'SET_PRICE':
+        return { ...state,
+          price: action.price
+        };
+
+      case 'START_SALE':
+        return { ...state,
+          discountPercent: action.discountPercent
+        };
+    }
+
+    return state;
+  },
+
+  actions,
+  selectors: {
+    getBreakPoint(state) {
+      const {
+        breakPoint
+      } = state; //return price * (1 - 0.01 * discountPercent);
+
+      return breakPoint;
+    },
+
+    getPrice(state, item) {
+      const {
+        price,
+        discountPercent
+      } = state; //const price = prices[item];
+      //return price * (1 - 0.01 * discountPercent);
+
+      return price;
+    },
+
+    getData(state, item) {
+      console.log(state);
+      console.log(item);
+      const {
+        prices,
+        discountPercent
+      } = state;
+      const price = prices[item]; //return price * (1 - 0.01 * discountPercent);
+
+      return 234234;
+    }
+
+  },
+  controls: {
+    FETCH_FROM_API(action) {
+      return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
+        path: action.path
+      });
+    }
+
+  },
+  resolvers: {
+    *getPrice(item) {
+      const path = '/wp/v2/prices/' + item;
+      const price = yield actions.fetchFromAPI(path);
+      return actions.setPrice(item, price);
+    }
+
+  }
+});
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.register)(store);
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.subscribe)(() => {
+  var breakPoint = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.select)('my-shop').getBreakPoint(); //console.log('Subscribe: ' + breakPoint)
+});
+
 
 /***/ }),
 

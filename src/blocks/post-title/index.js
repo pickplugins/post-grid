@@ -463,6 +463,7 @@ registerBlockType("post-grid/post-title", {
       select('core').getEntityRecord('postType', context['postType'], context['postId'])
     );
 
+    console.log('Hello');
     ////console.log(post);
 
     const CustomTag = `${tag}`;

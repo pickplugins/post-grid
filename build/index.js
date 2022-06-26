@@ -4780,7 +4780,8 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     const {
       __experimentalSetPreviewDeviceType: setPreviewDeviceType
     } = wp.data.dispatch('core/edit-post');
-    const post = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => select('core').getEntityRecord('postType', context['postType'], context['postId'])); ////console.log(post);
+    const post = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => select('core').getEntityRecord('postType', context['postType'], context['postId']));
+    console.log('Hello'); ////console.log(post);
 
     const CustomTag = `${tag}`;
 

@@ -13,14 +13,14 @@ import { store } from '../../store'
 
 var myStore = wp.data.select('my-shop');
 
-//console.log(wp.data.select('my-shop').getBreakPoint('food'))
-console.log(myStore.getBreakPoint());
+////console.log(wp.data.select('my-shop').getBreakPoint('food'))
+//console.log(myStore.getBreakPoint());
 
 
 
 
-//console.log(wp.data.select('my-shop').setPrice('food', 98))
-//console.log()
+////console.log(wp.data.select('my-shop').setPrice('food', 98))
+////console.log()
 
 
 
@@ -126,13 +126,13 @@ registerBlockType("post-grid/post-title", {
 
     function setpriceOnclick(va) {
 
-      console.log(va);
+      //console.log(va);
 
       var asdsdsd = wp.data.dispatch('my-shop').setPrice('food', va)
 
       asdsdsd.then((res) => {
 
-        //console.log(res.price);
+        ////console.log(res.price);
         getpriceOnclick();
         //setLicense(res);
 
@@ -150,21 +150,25 @@ registerBlockType("post-grid/post-title", {
       var reponsiveCss = '';
 
 
-      console.log(blockCss.items)
+      // console.log(blockCss.items)
 
 
       for (var x in blockCss.items) {
 
         var item = blockCss.items[x];
 
-        console.log(item)
+        //console.log(item)
 
         var attr = x;
         var id = '.pg-postTitle-' + postId + ' a';
         var defaultVal = item.val;
         var responsive = item.responsive;
 
-        defaultCss += id + '{' + attr + ':' + defaultVal + '}';
+        if (defaultVal)
+          defaultCss += id + '{' + attr + ':' + defaultVal + '}';
+
+        //console.log(defaultCss);
+
 
         var jjj = 0;
 
@@ -172,10 +176,10 @@ registerBlockType("post-grid/post-title", {
 
           var valY = responsive[device];
 
-          console.log(attr);
+          //console.log(attr);
 
-          console.log(device);
-          console.log(valY);
+          //console.log(device);
+          //console.log(valY);
 
 
           if (reponsiveCssGroups[device] == undefined) {
@@ -192,42 +196,102 @@ registerBlockType("post-grid/post-title", {
       }
 
 
-      for (var device in reponsiveCssGroups) {
+      // for (var device in reponsiveCssGroups) {
+
+      //   var item = reponsiveCssGroups[device];
 
 
-        var item = reponsiveCssGroups[device];
+      //   if (device === 'Mobile') {
+      //     reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+      //   }
+      //   if (device === 'Tablet') {
+      //     reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+      //   }
+      //   if (device === 'Desktop') {
+      //     reponsiveCss += '@media only screen and (min-width: 781px){';
+      //   }
 
-        console.log(item)
+      //   for (var index in item) {
+      //     var attr = item[index].attr;
+      //     var defaultVal = item[index].val;
+      //     var id = '.pg-postTitle-' + postId + ' a';
+      //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
+      //     reponsiveCss += '}';
+      //   }
+
+      // }
 
 
-        if (device === 'Mobile') {
-          reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-        }
-        if (device === 'Tablet') {
-          reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-        }
-        if (device === 'Desktop') {
-          reponsiveCss += '@media only screen and (min-width: 781px) and (max-width: 1024px){';
-        }
+      reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+
+      for (var ii in reponsiveCssGroups['Mobile']) {
+
+        var item = reponsiveCssGroups['Mobile'][ii];
+
+        console.log(item);
 
 
-        for (var index in item) {
-          var attr = item[index].attr;
-          var defaultVal = item[index].val;
+        for (var i in item) {
+          var attr = item.attr;
+          var defaultVal = item.val;
+
+          console.log(item.val);
+
 
           var id = '.pg-postTitle-' + postId + ' a';
-
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
-          reponsiveCss += '}';
         }
 
+      }
+      reponsiveCss += '}';
+      reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+
+      for (var jj in reponsiveCssGroups['Tablet']) {
 
 
+        var item = reponsiveCssGroups['Tablet'][jj];
+
+        for (var j in item) {
+          var attr = item.attr;
+          var defaultVal = item.val;
+          var id = '.pg-postTitle-' + postId + ' a';
+          reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
+        }
+
+      }
+      reponsiveCss += '}';
+      reponsiveCss += '@media only screen and (min-width: 781px){';
+
+      for (var kk in reponsiveCssGroups['Desktop']) {
+        var item = reponsiveCssGroups['Desktop'][kk];
+
+        for (var k in item) {
+          var attr = item.attr;
+          var defaultVal = item.val;
+          var id = '.pg-postTitle-' + postId + ' a';
+          reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
+
+        }
 
       }
 
+      reponsiveCss += '}';
 
-      console.log(reponsiveCss);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      //console.log(reponsiveCss);
 
       var cssWraId = 'css-block-pgTitle';
 
@@ -236,8 +300,7 @@ registerBlockType("post-grid/post-title", {
 
       if (iframe) {
 
-        var iframeDocument = iframe.contentDocument;
-        var body = iframeDocument.body;
+
 
         //var str = '<style>' + defaultCss + '</style>';
 
@@ -245,22 +308,29 @@ registerBlockType("post-grid/post-title", {
 
 
 
+        setTimeout(() => {
+          var iframeDocument = iframe.contentDocument;
+          var body = iframeDocument.body;
+          var divWrap = iframeDocument.getElementById("css-block-pgTitle");
 
-        var divWrap = iframeDocument.getElementById("css-block-pgTitle");
+          if (divWrap != undefined) {
+            iframeDocument.getElementById("css-block-pgTitle").outerHTML = "";
 
-        if (divWrap != undefined) {
-          iframeDocument.getElementById("css-block-pgTitle").outerHTML = "";
+          }
 
-        }
-
-        var divWrap = '<div id="css-block-pgTitle"></div>';
-        body.insertAdjacentHTML('beforeend', divWrap);
+          var divWrap = '<div id="css-block-pgTitle"></div>';
+          body.insertAdjacentHTML('beforeend', divWrap);
 
 
-        var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
-        var str = '<style>' + reponsiveCss + '</style>';
+          var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
+          var str = '<style>' + reponsiveCss + '</style>';
 
-        csswrappg.insertAdjacentHTML('beforeend', str);
+          console.log(str);
+
+          csswrappg.insertAdjacentHTML('beforeend', str);
+        }, 200)
+
+
 
         //body.insertAdjacentHTML('beforeend', str);
 
@@ -270,6 +340,7 @@ registerBlockType("post-grid/post-title", {
 
 
       } else {
+
 
         var wrap = document.getElementsByClassName('is-desktop-preview');
         var wpfooter = document.getElementById('wpfooter');
@@ -286,7 +357,10 @@ registerBlockType("post-grid/post-title", {
 
 
         var csswrappg = document.getElementById('css-block-pgTitle');
-        var str = '<style>' + defaultCss + '</style>';
+        var str = '<style>' + reponsiveCss + '</style>';
+        //var str = '<style>' + defaultCss + '</style>';
+
+        console.log(str);
 
         csswrappg.insertAdjacentHTML('beforeend', str);
 
@@ -312,7 +386,7 @@ registerBlockType("post-grid/post-title", {
 
 
     useEffect(() => {
-      console.log('Listening blockCss: ', blockCss);
+      //console.log('Listening blockCss: ', blockCss);
 
       generateBlockCss()
 
@@ -320,7 +394,7 @@ registerBlockType("post-grid/post-title", {
 
 
     useEffect(() => {
-      //console.log('Listening linkAttr: ', linkAttr);
+      ////console.log('Listening linkAttr: ', linkAttr);
       linkAttrObj();
 
 
@@ -344,21 +418,26 @@ registerBlockType("post-grid/post-title", {
 
       })
 
-      //console.log(sdsd);
+      ////console.log(sdsd);
       setlinkAttrItems(sdsd);
       //return sdsd;
 
     }
 
-    //console.log(breakPointList);
+    ////console.log(breakPointList);
     const colors = [
-      { name: 'red', color: '#f00' },
-      { name: 'white', color: '#fff' },
-      { name: 'blue', color: '#00f' },
+      { name: '9DD6DF', color: '#9DD6DF' },
+      { name: '18978F', color: '#18978F' },
+      { name: 'A084CF', color: '#A084CF' },
+      { name: 'DFBB9D', color: '#DFBB9D' },
+      { name: '774360', color: '#774360' },
+      { name: '3AB0FF', color: '#3AB0FF' },
+      { name: '51557E', color: '#51557E' },
+
+
     ];
 
 
-    var [breakPoint, setBreakPoint] = useState(''); // Using the hook.
 
     //const [blockCss, setBlockCss] = useState({ items: {} });
 
@@ -378,20 +457,13 @@ registerBlockType("post-grid/post-title", {
 
 
 
-    useEffect(() => {
-      console.log('Listening breakPoint: ', breakPoint);
 
-      //changeScreen(breakPoint)
-
-
-
-    }, [breakPoint]);
 
     const post = useSelect((select) =>
       select('core').getEntityRecord('postType', context['postType'], context['postId'])
     );
 
-    //console.log(post);
+    ////console.log(post);
 
     const CustomTag = `${tag}`;
 
@@ -399,51 +471,18 @@ registerBlockType("post-grid/post-title", {
 
       <div>
 
-        {JSON.stringify(breakPointX)}
 
-        <SelectControl
-          label=""
-          options={breakPointList}
-          value={breakPointX}
-          onChange={(newVal) => {
-
-            console.log('Current Value: ' + newVal);
-            //console.log(blockCss);
-            setPreviewDeviceType(newVal)
-            var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(newVal)
-
-            asdsdsd.then((res) => {
-
-              console.log(res.breakpoint);
-              setBreakPointX(res.breakpoint);
-
-
-              //getpriceOnclick();
-              //setLicense(res);
-
-              //getBreakPoint()
-
-
-            });
-
-            //setBreakPoint(newVal)
-
-
-
-
-          }}
-        />
 
         <Dropdown
           position="bottom"
           renderToggle={({ isOpen, onToggle }) => (
             <Button
-              title={(breakPoints[breakPoint] != undefined) ? breakPoints[breakPoint].name : ''}
+              title={(breakPoints[breakPointX] != undefined) ? breakPoints[breakPointX].name : ''}
               variant="secondary"
               onClick={onToggle}
               aria-expanded={isOpen}
             >
-              <RawHTML className="text-lg ">{(breakPoints[breakPoint] != undefined) ? breakPoints[breakPoint].icon : '<span class="icon-responsive font-bold"></span>'}</RawHTML>
+              <RawHTML className="text-lg ">{(breakPoints[breakPointX] != undefined) ? breakPoints[breakPointX].icon : '<span class="icon-responsive font-bold"></span>'}</RawHTML>
 
 
             </Button>
@@ -455,19 +494,22 @@ registerBlockType("post-grid/post-title", {
 
               return (
 
-                <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(newVal) => {
-                  console.log(x);
-                  console.log(newVal);
-                  console.log(breakPoint);
+                <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
 
+                  //console.log(x.value);
+
+                  setPreviewDeviceType(x.value)
+                  var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value)
+
+                  asdsdsd.then((res) => {
+
+                    setBreakPointX(res.breakpoint);
+                    generateBlockCss();
+
+                  });
 
 
-
-                  //if (x.value) {
-                  setBreakPoint(x.value)
-
-                  //}
 
                 }}>
 
@@ -554,8 +596,34 @@ registerBlockType("post-grid/post-title", {
                   </PanelRow>
 
 
+                  <PanelRow>
+                    <label for="">rel</label>
+
+                    <InputControl
+                      value={rel}
+                      onChange={(newVal) => setAttributes({ rel: newVal })}
+                    />
+                  </PanelRow>
 
 
+                  <PanelRow>
+                    <label for="">Custom Attributes</label>
+                    <div
+                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                      onClick={(ev) => {
+
+                        var sdsd = linkAttr.concat({ id: '', val: '' })
+
+                        setAttributes({ linkAttr: sdsd })
+                        linkAttrObj()
+                      }}
+
+                    >Add</div>
+
+
+
+                  </PanelRow>
 
                 </div>
 
@@ -590,34 +658,9 @@ registerBlockType("post-grid/post-title", {
               </PanelRow>
 
 
-              <PanelRow>
-                <label for="">rel</label>
-
-                <InputControl
-                  value={rel}
-                  onChange={(newVal) => setAttributes({ rel: newVal })}
-                />
-              </PanelRow>
-
-
-              <PanelRow>
-                <label for="">Custom Attributes</label>
-                <div
-                  className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                  onClick={(ev) => {
-
-                    var sdsd = linkAttr.concat({ id: '', val: '' })
-
-                    setAttributes({ linkAttr: sdsd })
-                    linkAttrObj()
-                  }}
-
-                >Add</div>
 
 
 
-              </PanelRow>
 
 
 
@@ -702,17 +745,17 @@ registerBlockType("post-grid/post-title", {
 
                 </PanelRow>
 
-                {breakPoint && (
+                {breakPointX && (
                   <div>
 
                     <ColorPalette
-                      color={color.responsive[breakPoint]}
+                      value={color.responsive[breakPointX]}
                       colors={colors}
                       enableAlpha
                       onChange={(newVal) => {
 
                         var responsive = color.responsive;
-                        responsive[breakPoint] = newVal;
+                        responsive[breakPointX] = newVal;
 
 
                         setAttributes({ color: { val: color.val, responsive: responsive } })
@@ -731,9 +774,9 @@ registerBlockType("post-grid/post-title", {
                   </div>
 
                 )}
-                {!breakPoint && (
+                {!breakPointX && (
                   <ColorPalette
-                    color={color.val}
+                    value={color.val}
                     colors={colors}
                     enableAlpha
                     onChange={(newVal) => {
@@ -769,17 +812,17 @@ registerBlockType("post-grid/post-title", {
 
                 </PanelRow>
 
-                {breakPoint && (
+                {breakPointX && (
                   <div>
 
                     <ColorPalette
-                      color={bgColor.responsive[breakPoint]}
+                      value={bgColor.responsive[breakPointX]}
                       colors={colors}
                       enableAlpha
                       onChange={(newVal) => {
 
                         var responsive = bgColor.responsive;
-                        responsive[breakPoint] = newVal;
+                        responsive[breakPointX] = newVal;
 
                         setAttributes({ bgColor: { val: bgColor.val, responsive: responsive } })
 
@@ -791,9 +834,10 @@ registerBlockType("post-grid/post-title", {
                   </div>
 
                 )}
-                {!breakPoint && (
+                {!breakPointX && (
                   <ColorPalette
-                    color={bgColor.val}
+                    value={bgColor.val}
+
                     colors={colors}
                     enableAlpha
                     onChange={(newVal) => {
@@ -831,13 +875,15 @@ registerBlockType("post-grid/post-title", {
         ,
 
 
-        <div className={['pg-postTitle pg-postTitle-' + postId]} >
+        <>
 
-{tag}
+          {JSON.stringify(breakPointX)}
+          <br />
+          {JSON.stringify(blockCss)}
 
 
           {tag && (
-            <CustomTag>
+            <CustomTag className={['pg-postTitle pg-postTitle-' + postId]}>
               {isLink && (
                 <a {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{post.title.rendered}</a>
 
@@ -851,28 +897,20 @@ registerBlockType("post-grid/post-title", {
             </CustomTag>
           )}
 
-{tag.length == 0 && (
+          {tag.length == 0 && (
 
-(
-isLink && (<a {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{post.title.rendered}</a> )
-)
-)}
+            (
+              isLink && (<a className={['pg-postTitle pg-postTitle-' + postId]} {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{post.title.rendered}</a>)
+            )
+          )}
 
-{tag.length == 0 && !isLink && (
+          {tag.length == 0 && !isLink && (
+            <p>{post.title.rendered}</p>
 
+          )}
 
- post.title.rendered
-
-)}
-
-
-
-
-        </div>
+        </>
       ]
-
-
-
 
     )
   },

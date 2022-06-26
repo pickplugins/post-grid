@@ -1863,7 +1863,6 @@ background-color: red;
             }
 
             <div className={item.id == 'postNameIndd' ? '' : 'hidden'}>
-              {JSON.stringify(item.val)}
               <div
                 className='cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm'
                 onClick={(ev) => {
@@ -2380,7 +2379,6 @@ background-color: red;
                   <Spinner />
                 </div>}
 
-                {/* {JSON.stringify(layoutList)} */}
 
 
                 {layoutLoading == false && layoutList.items.length > 0 && layoutList.items.map(x => {
@@ -2916,10 +2914,6 @@ background-color: red;
 
 
           <RawHTML>{ItemNthCssadasd2}</RawHTML>
-
-          {
-            JSON.stringify(queryArgs)
-          }
 
 
           <ContainerCss cssData={props.attributes}>

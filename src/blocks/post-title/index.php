@@ -22,7 +22,7 @@ class BlockPostTitle
             'editor_script' => 'editor_script',
             'editor_style' => 'editor_style',
             //'script' => 'front_script',
-            'uses_context' =>  ["postId", "postType", "queryId"],
+            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'editor_style',
 
             'render_callback' => array($this, 'theHTML')

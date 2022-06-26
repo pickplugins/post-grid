@@ -12,6 +12,10 @@ import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
 import { store } from '../../store'
 
+import IconToggle from '../../components/icon-toggle'
+
+
+
 var myStore = wp.data.select('my-shop');
 
 ////console.log(wp.data.select('my-shop').getBreakPoint('food'))
@@ -43,6 +47,11 @@ registerBlockType("post-grid/post-title", {
       "default": ''
     },
     postfix: {
+      "type": "string",
+      "default": ''
+    },
+
+    asdasd: {
       "type": "string",
       "default": ''
     },
@@ -129,6 +138,7 @@ registerBlockType("post-grid/post-title", {
     var margin = attributes.margin;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
+    var asdasd = attributes.asdasd;
 
 
     var postId = context['postId'];
@@ -522,7 +532,11 @@ registerBlockType("post-grid/post-title", {
     );
 
 
+    function MyonChange(x) {
 
+      console.log(x);
+
+    }
 
 
 
@@ -547,7 +561,11 @@ registerBlockType("post-grid/post-title", {
           <InspectorControls key="general">
             <div className='px-3' title="General" initialOpen={false}>
 
+              {JSON.stringify(breakPointList)}
 
+
+
+              <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="buttonTitle sdfsdf" activeIcon='<span class="icon-responsive font-bold"></span>' onChange={(x) => { MyonChange(x) }} value={asdasd} />
 
               <ToggleControl
                 label="Linked with post?"
@@ -852,7 +870,7 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
-          {JSON.stringify(margin)}
+          {JSON.stringify(asdasd)}
           {tag && (
             <CustomTag className={['pg-postTitle pg-postTitle-' + postId]}>
               {isLink && (

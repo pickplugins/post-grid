@@ -4485,6 +4485,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const {
   RawHTML
 } = wp.element;
@@ -4505,6 +4506,14 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       "type": "string",
       "default": 'h2'
     },
+    prefix: {
+      "type": "string",
+      "default": ''
+    },
+    postfix: {
+      "type": "string",
+      "default": ''
+    },
     postId: {
       type: 'number'
     },
@@ -4515,14 +4524,24 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     color: {
       type: 'object',
       default: {
-        val: '',
         responsive: {}
       }
     },
     bgColor: {
       type: 'object',
       default: {
-        val: '',
+        responsive: {}
+      }
+    },
+    padding: {
+      type: 'object',
+      default: {
+        responsive: {}
+      }
+    },
+    margin: {
+      type: 'object',
+      default: {
         responsive: {}
       }
     },
@@ -4550,7 +4569,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       "default": "_self"
     }
   },
-  usesContext: ["postId", "postType", "queryId"],
+  usesContext: ["postId", "loopIndex", "postType", "queryId"],
   supports: {
     "align": ["wide", "full"]
   },
@@ -4568,6 +4587,10 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     var tag = attributes.tag;
     var linkAttr = attributes.linkAttr;
     var blockCss = attributes.blockCss;
+    var padding = attributes.padding;
+    var margin = attributes.margin;
+    var prefix = attributes.prefix;
+    var postfix = attributes.postfix;
     var postId = context['postId'];
     const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore.getBreakPoint());
     var breakPointList = [{
@@ -4585,6 +4608,54 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       });
     }
 
+    const PaddingControl = () => {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+        label: "Padding",
+        values: padding.responsive[breakPointX],
+        onChange: nextValues => {
+          var responsive = padding.responsive;
+          responsive[breakPointX] = nextValues;
+          setAttributes({
+            padding: {
+              responsive: responsive
+            }
+          });
+          blockCss.items['padding'] = {
+            responsive: responsive
+          };
+          setAttributes({
+            blockCss: {
+              items: blockCss.items
+            }
+          });
+        }
+      });
+    };
+
+    const MarginControl = () => {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+        label: "Margin",
+        values: margin.responsive[breakPointX],
+        onChange: nextValues => {
+          var responsive = margin.responsive;
+          responsive[breakPointX] = nextValues;
+          setAttributes({
+            margin: {
+              responsive: responsive
+            }
+          });
+          blockCss.items['margin'] = {
+            responsive: responsive
+          };
+          setAttributes({
+            blockCss: {
+              items: blockCss.items
+            }
+          });
+        }
+      });
+    };
+
     function setpriceOnclick(va) {
       //console.log(va);
       var asdsdsd = wp.data.dispatch('my-shop').setPrice('food', va);
@@ -4595,28 +4666,20 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }
 
     function generateBlockCss() {
-      var defaultCss = '';
       var reponsiveCssGroups = {};
-      var reponsiveCss = ''; // console.log(blockCss.items)
+      var reponsiveCss = '';
 
       for (var x in blockCss.items) {
-        var item = blockCss.items[x]; //console.log(item)
-
+        var item = blockCss.items[x];
         var attr = x;
         var id = '.pg-postTitle-' + postId + ' a';
-        var defaultVal = item.val;
         var responsive = item.responsive;
-        if (defaultVal) defaultCss += id + '{' + attr + ':' + defaultVal + '}'; //console.log(defaultCss);
-
-        var jjj = 0;
 
         for (var device in responsive) {
-          var valY = responsive[device]; //console.log(attr);
-          //console.log(device);
-          //console.log(valY);
+          var valY = responsive[device];
 
           if (reponsiveCssGroups[device] == undefined) {
-            reponsiveCssGroups[device] = []; //asdsds.push({ 'attr': attr, 'val': valY })
+            reponsiveCssGroups[device] = [];
           }
 
           reponsiveCssGroups[device].push({
@@ -4649,12 +4712,10 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
 
       for (var ii in reponsiveCssGroups['Mobile']) {
         var item = reponsiveCssGroups['Mobile'][ii];
-        console.log(item);
 
         for (var i in item) {
           var attr = item.attr;
           var defaultVal = item.val;
-          console.log(item.val);
           var id = '.pg-postTitle-' + postId + ' a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
         }
@@ -4688,14 +4749,10 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         }
       }
 
-      reponsiveCss += '}'; //console.log(reponsiveCss);
-
-      var cssWraId = 'css-block-pgTitle';
+      reponsiveCss += '}';
       var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
 
       if (iframe) {
-        //var str = '<style>' + defaultCss + '</style>';
-        //body.insertAdjacentHTML('beforeend', str);
         setTimeout(() => {
           var iframeDocument = iframe.contentDocument;
           var body = iframeDocument.body;
@@ -4709,11 +4766,9 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
           body.insertAdjacentHTML('beforeend', divWrap);
           var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
           var str = '<style>' + reponsiveCss + '</style>';
-          console.log(str);
           csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200); //body.insertAdjacentHTML('beforeend', str);
+        }, 200);
       } else {
-        var wrap = document.getElementsByClassName('is-desktop-preview');
         var wpfooter = document.getElementById('wpfooter');
         var divWrap = document.getElementById("css-block-pgTitle");
 
@@ -4724,9 +4779,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         var divWrap = '<div id="css-block-pgTitle"></div>';
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
         var csswrappg = document.getElementById('css-block-pgTitle');
-        var str = '<style>' + reponsiveCss + '</style>'; //var str = '<style>' + defaultCss + '</style>';
-
-        console.log(str);
+        var str = '<style>' + reponsiveCss + '</style>';
         csswrappg.insertAdjacentHTML('beforeend', str);
       }
     }
@@ -4780,8 +4833,8 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     const {
       __experimentalSetPreviewDeviceType: setPreviewDeviceType
     } = wp.data.dispatch('core/edit-post');
-    const post = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => select('core').getEntityRecord('postType', context['postType'], context['postId']));
-    console.log('Hello'); ////console.log(post);
+    const post = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => select('core').getEntityRecord('postType', context['postType'], context['postId'])); //console.log('Hello');
+    ////console.log(post);
 
     const CustomTag = `${tag}`;
 
@@ -4868,6 +4921,20 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       value: rel,
       onChange: newVal => setAttributes({
         rel: newVal
+      })
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Prefix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      value: prefix,
+      onChange: newVal => setAttributes({
+        prefix: newVal
+      })
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Postfix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      value: postfix,
+      onChange: newVal => setAttributes({
+        postfix: newVal
       })
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
@@ -4968,12 +5035,10 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         responsive[breakPointX] = newVal;
         setAttributes({
           color: {
-            val: color.val,
             responsive: responsive
           }
         });
         blockCss.items['color'] = {
-          val: color.val,
           responsive: responsive
         };
         setAttributes({
@@ -4982,30 +5047,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
           }
         });
       }
-    })), !breakPointX && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: color.val,
-      colors: colors,
-      enableAlpha: true,
-      onChange: newVal => {
-        setAttributes({
-          color: {
-            val: newVal,
-            responsive: color.responsive
-          }
-        });
-        var responsive = color.responsive; // setSomeState(prev => ({ ...prev, color: { val: newVal, responsive: color.responsive } }));
-
-        blockCss.items['color'] = {
-          val: newVal,
-          responsive: responsive
-        };
-        setAttributes({
-          blockCss: {
-            items: blockCss.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "my-3"
@@ -5018,12 +5060,10 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         responsive[breakPointX] = newVal;
         setAttributes({
           bgColor: {
-            val: bgColor.val,
             responsive: responsive
           }
         });
         blockCss.items['background-color'] = {
-          val: bgColor.val,
           responsive: responsive
         };
         setAttributes({
@@ -5032,41 +5072,25 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
           }
         });
       }
-    })), !breakPointX && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: bgColor.val,
-      colors: colors,
-      enableAlpha: true,
-      onChange: newVal => {
-        setAttributes({
-          bgColor: {
-            val: newVal,
-            responsive: bgColor.responsive
-          }
-        });
-        var responsive = bgColor.responsive;
-        blockCss.items['background-color'] = {
-          val: newVal,
-          responsive: responsive
-        };
-        setAttributes({
-          blockCss: {
-            items: blockCss.items
-          }
-        });
-      }
-    }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, JSON.stringify(breakPointX), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("br", null), JSON.stringify(blockCss), tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+      title: "Padding",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PaddingControl, null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+      title: "Margin",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(MarginControl, null)))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, JSON.stringify(margin), tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
       className: ['pg-postTitle pg-postTitle-' + postId]
     }, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: post.link,
       rel: rel,
       target: linkTarget
-    }), post.title.rendered), !isLink && post.title.rendered, "- ", breakPointX), tag.length == 0 && isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    }), prefix, post.title.rendered, postfix), !isLink && post.title.rendered), tag.length == 0 && isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: ['pg-postTitle pg-postTitle-' + postId]
     }, linkAttrItems, {
       href: post.link,
       rel: rel,
       target: linkTarget
-    }), post.title.rendered), tag.length == 0 && !isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, post.title.rendered))];
+    }), prefix, post.title.rendered, postfix), tag.length == 0 && !isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, post.title.rendered))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file

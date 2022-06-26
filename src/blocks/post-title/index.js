@@ -4,6 +4,7 @@ import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem } from '@wordpress/components'
+import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -37,6 +38,14 @@ registerBlockType("post-grid/post-title", {
       "type": "string",
       "default": 'h2'
     },
+    prefix: {
+      "type": "string",
+      "default": ''
+    },
+    postfix: {
+      "type": "string",
+      "default": ''
+    },
 
     postId: {
       type: 'number',
@@ -48,12 +57,25 @@ registerBlockType("post-grid/post-title", {
 
     color: {
       type: 'object',
-      default: { val: '', responsive: {} },
+      default: { responsive: {} },
     },
 
     bgColor: {
       type: 'object',
-      default: { val: '', responsive: {} },
+      default: { responsive: {} },
+    },
+
+    padding: {
+      type: 'object',
+      default: {
+        responsive: {}
+      },
+    },
+    margin: {
+      type: 'object',
+      default: {
+        responsive: {}
+      },
     },
 
     isLink: {
@@ -80,7 +102,7 @@ registerBlockType("post-grid/post-title", {
       "default": "_self"
     },
   },
-  usesContext: ["postId", "postType", "queryId"],
+  usesContext: ["postId", "loopIndex", "postType", "queryId"],
 
   supports: {
     "align": ["wide", "full"],
@@ -103,6 +125,10 @@ registerBlockType("post-grid/post-title", {
     var tag = attributes.tag;
     var linkAttr = attributes.linkAttr;
     var blockCss = attributes.blockCss;
+    var padding = attributes.padding;
+    var margin = attributes.margin;
+    var prefix = attributes.prefix;
+    var postfix = attributes.postfix;
 
 
     var postId = context['postId'];
@@ -119,10 +145,54 @@ registerBlockType("post-grid/post-title", {
 
     }
 
+    const PaddingControl = () => {
+
+      return (
+        <BoxControl
+          label="Padding"
+          values={padding.responsive[breakPointX]}
+          onChange={(nextValues) => {
+
+
+            var responsive = padding.responsive;
+            responsive[breakPointX] = nextValues;
+
+            setAttributes({ padding: { responsive: responsive } })
+
+            blockCss.items['padding'] = { responsive: responsive };
+            setAttributes({ blockCss: { items: blockCss.items } });
 
 
 
+          }}
+        />
+      );
+    };
 
+
+    const MarginControl = () => {
+
+      return (
+        <BoxControl
+          label="Margin"
+          values={margin.responsive[breakPointX]}
+          onChange={(nextValues) => {
+
+
+            var responsive = margin.responsive;
+            responsive[breakPointX] = nextValues;
+
+            setAttributes({ margin: { responsive: responsive } })
+
+            blockCss.items['margin'] = { responsive: responsive };
+            setAttributes({ blockCss: { items: blockCss.items } });
+
+
+
+          }}
+        />
+      );
+    };
 
     function setpriceOnclick(va) {
 
@@ -144,55 +214,27 @@ registerBlockType("post-grid/post-title", {
     function generateBlockCss() {
 
 
-      var defaultCss = '';
-
       var reponsiveCssGroups = {};
       var reponsiveCss = '';
-
-
-      // console.log(blockCss.items)
-
 
       for (var x in blockCss.items) {
 
         var item = blockCss.items[x];
 
-        //console.log(item)
-
         var attr = x;
         var id = '.pg-postTitle-' + postId + ' a';
-        var defaultVal = item.val;
         var responsive = item.responsive;
 
-        if (defaultVal)
-          defaultCss += id + '{' + attr + ':' + defaultVal + '}';
-
-        //console.log(defaultCss);
-
-
-        var jjj = 0;
 
         for (var device in responsive) {
-
           var valY = responsive[device];
-
-          //console.log(attr);
-
-          //console.log(device);
-          //console.log(valY);
-
 
           if (reponsiveCssGroups[device] == undefined) {
             reponsiveCssGroups[device] = []
-            //asdsds.push({ 'attr': attr, 'val': valY })
-
           }
 
           reponsiveCssGroups[device].push({ 'attr': attr, 'val': valY });
-
         }
-
-
       }
 
 
@@ -225,18 +267,11 @@ registerBlockType("post-grid/post-title", {
       reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
 
       for (var ii in reponsiveCssGroups['Mobile']) {
-
         var item = reponsiveCssGroups['Mobile'][ii];
-
-        console.log(item);
-
 
         for (var i in item) {
           var attr = item.attr;
           var defaultVal = item.val;
-
-          console.log(item.val);
-
 
           var id = '.pg-postTitle-' + postId + ' a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
@@ -247,8 +282,6 @@ registerBlockType("post-grid/post-title", {
       reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
 
       for (var jj in reponsiveCssGroups['Tablet']) {
-
-
         var item = reponsiveCssGroups['Tablet'][jj];
 
         for (var j in item) {
@@ -259,6 +292,7 @@ registerBlockType("post-grid/post-title", {
         }
 
       }
+
       reponsiveCss += '}';
       reponsiveCss += '@media only screen and (min-width: 781px){';
 
@@ -277,36 +311,9 @@ registerBlockType("post-grid/post-title", {
 
       reponsiveCss += '}';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      //console.log(reponsiveCss);
-
-      var cssWraId = 'css-block-pgTitle';
-
-
       var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
 
       if (iframe) {
-
-
-
-        //var str = '<style>' + defaultCss + '</style>';
-
-        //body.insertAdjacentHTML('beforeend', str);
-
-
 
         setTimeout(() => {
           var iframeDocument = iframe.contentDocument;
@@ -321,47 +328,27 @@ registerBlockType("post-grid/post-title", {
           var divWrap = '<div id="css-block-pgTitle"></div>';
           body.insertAdjacentHTML('beforeend', divWrap);
 
-
           var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
           var str = '<style>' + reponsiveCss + '</style>';
-
-          console.log(str);
 
           csswrappg.insertAdjacentHTML('beforeend', str);
         }, 200)
 
 
-
-        //body.insertAdjacentHTML('beforeend', str);
-
-
-
-
-
-
       } else {
 
-
-        var wrap = document.getElementsByClassName('is-desktop-preview');
         var wpfooter = document.getElementById('wpfooter');
-
         var divWrap = document.getElementById("css-block-pgTitle");
 
         if (divWrap != undefined) {
           document.getElementById("css-block-pgTitle").outerHTML = "";
-
         }
 
         var divWrap = '<div id="css-block-pgTitle"></div>';
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
 
-
         var csswrappg = document.getElementById('css-block-pgTitle');
         var str = '<style>' + reponsiveCss + '</style>';
-        //var str = '<style>' + defaultCss + '</style>';
-
-        console.log(str);
-
         csswrappg.insertAdjacentHTML('beforeend', str);
 
 
@@ -463,7 +450,7 @@ registerBlockType("post-grid/post-title", {
       select('core').getEntityRecord('postType', context['postType'], context['postId'])
     );
 
-    console.log('Hello');
+    //console.log('Hello');
     ////console.log(post);
 
     const CustomTag = `${tag}`;
@@ -471,8 +458,6 @@ registerBlockType("post-grid/post-title", {
     const MyDropdown = () => (
 
       <div>
-
-
 
         <Dropdown
           position="bottom"
@@ -603,6 +588,24 @@ registerBlockType("post-grid/post-title", {
                     <InputControl
                       value={rel}
                       onChange={(newVal) => setAttributes({ rel: newVal })}
+                    />
+                  </PanelRow>
+
+                  <PanelRow>
+                    <label for="">Prefix</label>
+
+                    <InputControl
+                      value={prefix}
+                      onChange={(newVal) => setAttributes({ prefix: newVal })}
+                    />
+                  </PanelRow>
+
+                  <PanelRow>
+                    <label for="">Postfix</label>
+
+                    <InputControl
+                      value={postfix}
+                      onChange={(newVal) => setAttributes({ postfix: newVal })}
                     />
                   </PanelRow>
 
@@ -759,11 +762,11 @@ registerBlockType("post-grid/post-title", {
                         responsive[breakPointX] = newVal;
 
 
-                        setAttributes({ color: { val: color.val, responsive: responsive } })
+                        setAttributes({ color: { responsive: responsive } })
 
 
 
-                        blockCss.items['color'] = { val: color.val, responsive: responsive };
+                        blockCss.items['color'] = { responsive: responsive };
                         setAttributes({ blockCss: { items: blockCss.items } });
 
 
@@ -775,31 +778,13 @@ registerBlockType("post-grid/post-title", {
                   </div>
 
                 )}
-                {!breakPointX && (
-                  <ColorPalette
-                    value={color.val}
-                    colors={colors}
-                    enableAlpha
-                    onChange={(newVal) => {
-                      setAttributes({ color: { val: newVal, responsive: color.responsive } })
-                      var responsive = color.responsive;
-
-
-                      // setSomeState(prev => ({ ...prev, color: { val: newVal, responsive: color.responsive } }));
 
 
 
 
-                      blockCss.items['color'] = { val: newVal, responsive: responsive };
-                      setAttributes({ blockCss: { items: blockCss.items } });
 
 
 
-
-                    }}
-                  />
-
-                )}
 
                 <PanelRow>
                   <label for="">Background Color</label>
@@ -825,9 +810,9 @@ registerBlockType("post-grid/post-title", {
                         var responsive = bgColor.responsive;
                         responsive[breakPointX] = newVal;
 
-                        setAttributes({ bgColor: { val: bgColor.val, responsive: responsive } })
+                        setAttributes({ bgColor: { responsive: responsive } })
 
-                        blockCss.items['background-color'] = { val: bgColor.val, responsive: responsive };
+                        blockCss.items['background-color'] = { responsive: responsive };
                         setAttributes({ blockCss: { items: blockCss.items } });
 
                       }}
@@ -835,28 +820,17 @@ registerBlockType("post-grid/post-title", {
                   </div>
 
                 )}
-                {!breakPointX && (
-                  <ColorPalette
-                    value={bgColor.val}
-
-                    colors={colors}
-                    enableAlpha
-                    onChange={(newVal) => {
-                      setAttributes({ bgColor: { val: newVal, responsive: bgColor.responsive } })
-
-                      var responsive = bgColor.responsive;
 
 
-                      blockCss.items['background-color'] = { val: newVal, responsive: responsive };
-                      setAttributes({ blockCss: { items: blockCss.items } });
+                <PanelBody title="Padding" initialOpen={false}>
+                  <PaddingControl />
 
+                </PanelBody>
 
+                <PanelBody title="Margin" initialOpen={false}>
+                  <MarginControl />
 
-                    }}
-                  />
-
-                )}
-
+                </PanelBody>
 
 
 
@@ -878,15 +852,11 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
-          {JSON.stringify(breakPointX)}
-          <br />
-          {JSON.stringify(blockCss)}
-
-
+          {JSON.stringify(margin)}
           {tag && (
             <CustomTag className={['pg-postTitle pg-postTitle-' + postId]}>
               {isLink && (
-                <a {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{post.title.rendered}</a>
+                <a {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{prefix}{post.title.rendered}{postfix}</a>
 
               )}
               {!isLink && (
@@ -894,14 +864,14 @@ registerBlockType("post-grid/post-title", {
                 post.title.rendered
 
               )}
-              - {breakPointX}
+
             </CustomTag>
           )}
 
           {tag.length == 0 && (
 
             (
-              isLink && (<a className={['pg-postTitle pg-postTitle-' + postId]} {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{post.title.rendered}</a>)
+              isLink && (<a className={['pg-postTitle pg-postTitle-' + postId]} {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{prefix}{post.title.rendered}{postfix}</a>)
             )
           )}
 

@@ -77,6 +77,8 @@ class BlockPostTitle
         $postGridCss[] = ['attr' => 'background-color', 'id' => '.pg-postTitle-' . $post_ID . ' a', 'default' => $bgColor['val'], 'reponsive' => $bgColor['responsive']];
 
         $tag = isset($attributes['tag']) ? $attributes['tag'] : 'h2';
+        $prefix = isset($attributes['prefix']) ? $attributes['prefix'] : '';
+        $postfix = isset($attributes['postfix']) ? $attributes['postfix'] : '';
 
 
         $linkAttrStr = '';
@@ -108,7 +110,7 @@ class BlockPostTitle
 
         <<?php echo $tag; ?> class="pg-postTitle pg-postTitle-<?php echo $post_ID; ?>">
             <?php if ($isLink) : ?>
-                <a href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>><?php echo get_the_title($post_ID); ?></a>
+                <a href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>><?php echo $prefix; ?><?php echo get_the_title($post_ID); ?><?php echo $postfix; ?></a>
             <?php else : ?>
                 <?php echo get_the_title($post_ID); ?>
             <?php endif; ?>

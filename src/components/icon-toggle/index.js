@@ -1,7 +1,7 @@
 
 
 const { Component, RawHTML } = wp.element;
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem } from '@wordpress/components'
+import { Button, Dropdown } from '@wordpress/components'
 
 
 class IconToggle extends Component {
@@ -11,10 +11,10 @@ class IconToggle extends Component {
     const {
       position,
       variant,
-      iconList,
+      iconList, //[{"label":"Select..","icon":"","value":""}]
       buttonTitle,
-      activeIcon,
       onChange,
+      activeIcon,
       value,
 
 
@@ -25,9 +25,6 @@ class IconToggle extends Component {
 
     return (
       <div>
-
-
-        {JSON.stringify(value)}
 
         <Dropdown
           position={position}
@@ -45,17 +42,17 @@ class IconToggle extends Component {
           )}
           renderContent={() => <div>
 
-            {iconList.map(x => {
+            {iconList.map((x, index) => {
 
 
               return (
 
-                <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(x) => {
+                <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
 
-                  onChange(x)
+                  onChange(x, index)
+                  console.log('Icon Toggle');
 
-                  console.log(value);
 
                 }}>
 

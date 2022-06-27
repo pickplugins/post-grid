@@ -236,7 +236,6 @@ registerBlockType("post-grid/post-grid", {
 
     function fetchLicenseInfo() {
 
-
       apiFetch({
         path: '/post-grid/v2/get_license',
         method: 'POST',
@@ -2934,9 +2933,7 @@ background-color: red;
 
 
 
-            <div >
-
-
+            <div>
 
               {postsQuery == false && posts.length == 0 &&
 

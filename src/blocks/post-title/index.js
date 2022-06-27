@@ -13,6 +13,7 @@ const { RawHTML } = wp.element;
 import { store } from '../../store'
 
 import IconToggle from '../../components/icon-toggle'
+import BreakpointToggle from '../../components/breakpoint-toggle'
 
 
 
@@ -51,10 +52,6 @@ registerBlockType("post-grid/post-title", {
       "default": ''
     },
 
-    asdasd: {
-      "type": "string",
-      "default": ''
-    },
 
     postId: {
       type: 'number',
@@ -118,6 +115,8 @@ registerBlockType("post-grid/post-title", {
 
   },
   category: "post-grid",
+
+
   edit: function (props) {
 
 
@@ -138,12 +137,12 @@ registerBlockType("post-grid/post-title", {
     var margin = attributes.margin;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
-    var asdasd = attributes.asdasd;
 
 
     var postId = context['postId'];
 
     const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
+    const [license, setLicense] = useState(myStore.getLicense());
 
 
     var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
@@ -155,11 +154,13 @@ registerBlockType("post-grid/post-title", {
 
     }
 
+
+
     const PaddingControl = () => {
 
       return (
         <BoxControl
-          label="Padding"
+          label=""
           values={padding.responsive[breakPointX]}
           onChange={(nextValues) => {
 
@@ -167,14 +168,48 @@ registerBlockType("post-grid/post-title", {
             var responsive = padding.responsive;
             responsive[breakPointX] = nextValues;
 
+            //console.log(nextValues);
+
             setAttributes({ padding: { responsive: responsive } })
 
-            blockCss.items['padding'] = { responsive: responsive };
+
+            //blockCss.items['padding'] = { responsive: responsive };
+
+            if (nextValues.top != undefined) {
+              var paddingTop = (blockCss.items['padding-top'] !== undefined) ? blockCss.items['padding-top'] : { responsive: {} };
+              paddingTop.responsive[breakPointX] = nextValues.top
+              blockCss.items['padding-top'] = paddingTop;
+            }
+
+
+            if (nextValues.right != undefined) {
+              var paddingRight = (blockCss.items['padding-right'] !== undefined) ? blockCss.items['padding-right'] : { responsive: {} };
+              paddingRight.responsive[breakPointX] = nextValues.right
+              blockCss.items['padding-right'] = paddingRight;
+            }
+
+            if (nextValues.bottom != undefined) {
+              var paddingBottom = (blockCss.items['padding-bottom'] !== undefined) ? blockCss.items['padding-bottom'] : { responsive: {} };
+              paddingBottom.responsive[breakPointX] = nextValues.bottom
+              blockCss.items['padding-bottom'] = paddingBottom;
+            }
+
+            if (nextValues.left != undefined) {
+              var paddingLeft = (blockCss.items['padding-left'] !== undefined) ? blockCss.items['padding-left'] : { responsive: {} };
+              paddingLeft.responsive[breakPointX] = nextValues.left
+              blockCss.items['padding-left'] = paddingLeft;
+            }
+
+
+
+
+
             setAttributes({ blockCss: { items: blockCss.items } });
 
 
 
-          }}
+          }
+          }
         />
       );
     };
@@ -184,7 +219,7 @@ registerBlockType("post-grid/post-title", {
 
       return (
         <BoxControl
-          label="Margin"
+          label=""
           values={margin.responsive[breakPointX]}
           onChange={(nextValues) => {
 
@@ -194,7 +229,51 @@ registerBlockType("post-grid/post-title", {
 
             setAttributes({ margin: { responsive: responsive } })
 
-            blockCss.items['margin'] = { responsive: responsive };
+            //blockCss.items['margin'] = { responsive: responsive };
+
+
+
+
+
+            if (nextValues.top != undefined) {
+              var marginTop = (blockCss.items['margin-top'] !== undefined) ? blockCss.items['margin-top'] : { responsive: {} };
+              marginTop.responsive[breakPointX] = nextValues.top
+              blockCss.items['margin-top'] = marginTop;
+            }
+
+
+            if (nextValues.right != undefined) {
+              var marginRight = (blockCss.items['margin-right'] !== undefined) ? blockCss.items['margin-right'] : { responsive: {} };
+              marginRight.responsive[breakPointX] = nextValues.right
+              blockCss.items['margin-right'] = marginRight;
+            }
+
+            if (nextValues.bottom != undefined) {
+              var marginBottom = (blockCss.items['margin-bottom'] !== undefined) ? blockCss.items['margin-bottom'] : { responsive: {} };
+              marginBottom.responsive[breakPointX] = nextValues.bottom
+              blockCss.items['margin-bottom'] = marginBottom;
+            }
+
+            if (nextValues.left != undefined) {
+              var marginLeft = (blockCss.items['margin-left'] !== undefined) ? blockCss.items['margin-left'] : { responsive: {} };
+              marginLeft.responsive[breakPointX] = nextValues.left
+              blockCss.items['margin-left'] = marginLeft;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             setAttributes({ blockCss: { items: blockCss.items } });
 
 
@@ -532,14 +611,29 @@ registerBlockType("post-grid/post-title", {
     );
 
 
-    function MyonChange(x) {
+
+
+    function onChangeBreakPoint(x, index) {
 
       console.log(x);
+      console.log(index);
+      console.log('Post Title');
+
+
+
+      setPreviewDeviceType(x.value)
+      var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value)
+
+      asdsdsd.then((res) => {
+
+        setBreakPointX(res.breakpoint);
+        generateBlockCss();
+
+      });
+
+
 
     }
-
-
-
 
 
     return (
@@ -561,11 +655,11 @@ registerBlockType("post-grid/post-title", {
           <InspectorControls key="general">
             <div className='px-3' title="General" initialOpen={false}>
 
-              {JSON.stringify(breakPointList)}
+
+              {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
 
 
 
-              <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="buttonTitle sdfsdf" activeIcon='<span class="icon-responsive font-bold"></span>' onChange={(x) => { MyonChange(x) }} value={asdasd} />
 
               <ToggleControl
                 label="Linked with post?"
@@ -755,97 +849,89 @@ registerBlockType("post-grid/post-title", {
               <div>
 
 
-                <PanelRow>
-                  <label for="">Color</label>
 
-                  <div className='my-3'>
+                <PanelBody title="Color" initialOpen={false}>
+                  <PanelRow>
+                    <label>Color</label>
+                    {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
 
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
 
-                    <MyDropdown />
-                  </div>
+                  <ColorPalette
+                    value={color.responsive[breakPointX]}
+                    colors={colors}
+                    enableAlpha
+                    onChange={(newVal) => {
 
-
-                </PanelRow>
-
-                {breakPointX && (
-                  <div>
-
-                    <ColorPalette
-                      value={color.responsive[breakPointX]}
-                      colors={colors}
-                      enableAlpha
-                      onChange={(newVal) => {
-
-                        var responsive = color.responsive;
-                        responsive[breakPointX] = newVal;
+                      var responsive = color.responsive;
+                      responsive[breakPointX] = newVal;
 
 
-                        setAttributes({ color: { responsive: responsive } })
+                      setAttributes({ color: { responsive: responsive } })
 
 
 
-                        blockCss.items['color'] = { responsive: responsive };
-                        setAttributes({ blockCss: { items: blockCss.items } });
+                      blockCss.items['color'] = { responsive: responsive };
+                      setAttributes({ blockCss: { items: blockCss.items } });
 
 
 
 
 
-                      }}
-                    />
-                  </div>
-
-                )}
+                    }}
+                  />
+                </PanelBody>
 
 
 
 
 
+                <PanelBody title="Background Color" initialOpen={false}>
+                  <PanelRow>
+                    <label>Background Color</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
 
 
 
-                <PanelRow>
-                  <label for="">Background Color</label>
 
-                  <div className='my-3'>
+                  </PanelRow>
 
+                  <ColorPalette
+                    value={bgColor.responsive[breakPointX]}
+                    colors={colors}
+                    enableAlpha
+                    onChange={(newVal) => {
 
-                    <MyDropdown />
-                  </div>
+                      var responsive = bgColor.responsive;
+                      responsive[breakPointX] = newVal;
 
+                      setAttributes({ bgColor: { responsive: responsive } })
 
-                </PanelRow>
+                      blockCss.items['background-color'] = { responsive: responsive };
+                      setAttributes({ blockCss: { items: blockCss.items } });
 
-                {breakPointX && (
-                  <div>
+                    }}
+                  />
+                </PanelBody>
 
-                    <ColorPalette
-                      value={bgColor.responsive[breakPointX]}
-                      colors={colors}
-                      enableAlpha
-                      onChange={(newVal) => {
-
-                        var responsive = bgColor.responsive;
-                        responsive[breakPointX] = newVal;
-
-                        setAttributes({ bgColor: { responsive: responsive } })
-
-                        blockCss.items['background-color'] = { responsive: responsive };
-                        setAttributes({ blockCss: { items: blockCss.items } });
-
-                      }}
-                    />
-                  </div>
-
-                )}
 
 
                 <PanelBody title="Padding" initialOpen={false}>
+                  <PanelRow>
+                    <label>Padding</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+
                   <PaddingControl />
 
                 </PanelBody>
 
                 <PanelBody title="Margin" initialOpen={false}>
+                  <PanelRow>
+                    <label>Margin</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
                   <MarginControl />
 
                 </PanelBody>
@@ -870,7 +956,7 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
-          {JSON.stringify(asdasd)}
+
           {tag && (
             <CustomTag className={['pg-postTitle pg-postTitle-' + postId]}>
               {isLink && (

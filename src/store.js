@@ -8,12 +8,18 @@ const DEFAULT_STATE = {
   prices: {},
   discountPercent: 5656,
   choko: 'Milk Candy',
-  breakPoint: 'Desktop',
   price: 123,
+
+
+  breakPoint: 'Desktop',
+  license: { license_status: '', license_key: '' },
+
 
 };
 
 const actions = {
+
+
 
 
   setBreakPoint(breakpoint) {
@@ -22,6 +28,18 @@ const actions = {
       breakpoint,
     };
   },
+
+
+  setLicense(license) {
+
+    return {
+      type: 'SET_LICENSE',
+      license,
+    };
+
+  },
+
+
 
   setPrice(item, price) {
     return {
@@ -44,6 +62,16 @@ const actions = {
       path,
     };
   },
+
+  fetchLicense(path) {
+    return {
+      type: 'FETCH_LICENSE_FROM_API',
+      path,
+    };
+  },
+
+
+
 };
 
 const store = createReduxStore('my-shop', {
@@ -56,6 +84,15 @@ const store = createReduxStore('my-shop', {
           ...state,
           breakPoint: action.breakpoint,
         };
+
+      case 'SET_LICENSE':
+
+        return {
+          ...state,
+          license: action.license,
+        };
+
+
       case 'SET_PRICE':
         return {
           ...state,
@@ -84,6 +121,24 @@ const store = createReduxStore('my-shop', {
 
     },
 
+    getLicense(state) {
+      const { license } = state;
+
+      //console.log(license);
+
+      //return price * (1 - 0.01 * discountPercent);
+      return license;
+
+    },
+
+
+
+
+
+
+
+
+
     getPrice(state, item) {
       const { price, discountPercent } = state;
       //const price = prices[item];
@@ -94,8 +149,8 @@ const store = createReduxStore('my-shop', {
     },
     getData(state, item) {
 
-      console.log(state);
-      console.log(item);
+      //console.log(state);
+      //console.log(item);
 
       const { prices, discountPercent } = state;
       const price = prices[item];
@@ -116,6 +171,11 @@ const store = createReduxStore('my-shop', {
     FETCH_FROM_API(action) {
       return apiFetch({ path: action.path });
     },
+    FETCH_LICENSE_FROM_API(action) {
+      return apiFetch({ path: action.path, method: 'POST', data: {}, });
+    },
+
+
   },
 
   resolvers: {
@@ -124,6 +184,17 @@ const store = createReduxStore('my-shop', {
       const price = yield actions.fetchFromAPI(path);
       return actions.setPrice(item, price);
     },
+    *getLicense() {
+      const path = '/post-grid/v2/get_license';
+      const res = yield actions.fetchLicense(path);
+
+      //console.log(res);
+
+      return actions.setLicense(res);
+    },
+
+
+
   },
 });
 
@@ -132,8 +203,10 @@ register(store);
 
 subscribe(() => {
 
-  var breakPoint = select('my-shop').getBreakPoint()
-  //console.log('Subscribe: ' + breakPoint)
+  var breakPoint = select('my-shop').getBreakPoint();
+  //var license = select('my-shop').getLicense();
+
+  ////console.log('Subscribe: ' + breakPoint)
 
 
 })

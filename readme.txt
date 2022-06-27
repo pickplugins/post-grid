@@ -1,4 +1,4 @@
-=== Post Grid ===
+=== Post Grid Combo ===
 	Contributors: PickPlugins
 	Donate link: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/?ref=wordpress.org
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,

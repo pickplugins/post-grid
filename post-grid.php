@@ -33,11 +33,14 @@ if (!class_exists('PostGrid')) {
             define('post_grid_lic_server_url', 'https://www.pickplugins.com');
 
             require_once(post_grid_plugin_dir . 'src/functions-blocks.php');
+            require_once(post_grid_plugin_dir . 'src/functions-rest.php');
 
             require_once(post_grid_plugin_dir . 'src/blocks/post-grid/index.php');
-            require_once(post_grid_plugin_dir . 'src/blocks/post-grid/rest.php');
+            //require_once(post_grid_plugin_dir . 'src/blocks/post-grid/rest.php');
 
             require_once(post_grid_plugin_dir . 'src/blocks/post-title/index.php');
+
+
 
 
             $postGridCss = [];

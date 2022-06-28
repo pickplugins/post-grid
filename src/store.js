@@ -10,6 +10,7 @@ const DEFAULT_STATE = {
   choko: 'Milk Candy',
   price: 123,
 
+  proUrl: 'http://getpostgrid.com/',
 
   breakPoint: 'Desktop',
   license: { license_status: '', license_key: '' },
@@ -112,6 +113,16 @@ const store = createReduxStore('my-shop', {
   actions,
 
   selectors: {
+
+
+    getProurl(state) {
+      const { proUrl } = state;
+
+      //return price * (1 - 0.01 * discountPercent);
+      return proUrl;
+
+    },
+
 
     getBreakPoint(state) {
       const { breakPoint } = state;

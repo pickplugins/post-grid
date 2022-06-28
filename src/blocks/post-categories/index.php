@@ -14,11 +14,11 @@ class BlockPostTitle
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/post-title/index.css');
-        wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-title/index.js', array('wp-blocks', 'wp-element'));
+        wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/post-categories/index.css');
+        wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-categories/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/post-title', array(
+        register_block_type('post-grid/post-categories', array(
             'editor_script' => 'editor_script',
             'editor_style' => 'editor_style',
             //'script' => 'front_script',
@@ -33,11 +33,11 @@ class BlockPostTitle
     {
 
 
-        var_dump('asdasdasd');
+        //var_dump('asdasdasd');
     }
     function front_style($attributes)
     {
-        var_dump('asdasdasd');
+        //var_dump('asdasdasd');
     }
 
     // front-end output from the gutenberg editor 
@@ -53,9 +53,9 @@ class BlockPostTitle
         if (!is_admin()) {
 
 
-            //wp_enqueue_script('blk_post_grid', post_grid_plugin_dir . 'src/blocks/post-title/index.js', array('wp-element'));
+            //wp_enqueue_script('blk_post_grid', post_grid_plugin_dir . 'src/blocks/post-categories/index.js', array('wp-element'));
 
-            // wp_enqueue_style('blk_post_grid', post_grid_plugin_url . 'src/blocks/post-title/index.css');
+            // wp_enqueue_style('blk_post_grid', post_grid_plugin_url . 'src/blocks/post-categories/index.css');
         }
 
 

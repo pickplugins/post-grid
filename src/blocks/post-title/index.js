@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem } from '@wordpress/components'
+import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
@@ -52,6 +52,14 @@ registerBlockType("post-grid/post-title", {
       "default": ''
     },
 
+    customCss: {
+      "type": "string",
+      "default": ''
+    },
+    customUrl: {
+      "type": "string",
+      "default": ''
+    },
 
     postId: {
       type: 'number',
@@ -136,6 +144,8 @@ registerBlockType("post-grid/post-title", {
     var margin = attributes.margin;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
+    var customCss = attributes.customCss;
+    var customUrl = attributes.customUrl;
 
 
     var postId = context['postId'];
@@ -538,6 +548,9 @@ registerBlockType("post-grid/post-title", {
       select('core').getEntityRecord('postType', context['postType'], context['postId'])
     );
 
+
+    var postUrl = (customUrl.length > 0) ? customUrl : post.link;
+
     //console.log('Hello');
     ////console.log(post);
 
@@ -694,7 +707,7 @@ registerBlockType("post-grid/post-title", {
 
 
                   <PanelRow>
-                    <label for="">rel</label>
+                    <label for="">Rel Attribute</label>
 
                     <InputControl
                       value={rel}
@@ -719,6 +732,17 @@ registerBlockType("post-grid/post-title", {
                       onChange={(newVal) => setAttributes({ postfix: newVal })}
                     />
                   </PanelRow>
+
+                  <PanelRow>
+                    <label for="">Custom Url</label>
+
+                    <InputControl
+                      value={customUrl}
+                      onChange={(newVal) => setAttributes({ customUrl: newVal })}
+                    />
+                  </PanelRow>
+
+
 
 
                   <PanelRow>
@@ -936,21 +960,45 @@ registerBlockType("post-grid/post-title", {
                 </PanelBody>
 
                 <PanelBody title="Custom Style" initialOpen={false}>
+
+                  <p>Please use following class selector to apply your custom CSS</p>
+                  <div className='my-3'>
+                    <p className='font-bold'>No link</p>
+                    <p><code>.pg-postTitle{'{}'}</code></p>
+                    <p><code>.pg-postTitle-{postId}{'{}'}</code></p>
+                  </div>
+
+                  <div className='my-3'>
+                    <p className='font-bold'>With link</p>
+                    <p><code>.pg-postTitle a{'{}'} </code></p>
+                    <p><code>.pg-postTitle-{postId} a{'{}'}</code></p>
+                  </div>
+
+
+                  <TextareaControl
+                    label="Custom CSS"
+                    help="Do not use 'style' tag"
+                    value={customCss}
+                    onChange={(value) => {
+                      setAttributes({ customCss: value })
+
+                    }}
+                  />
                 </PanelBody>
 
               </div>
 
 
 
-            </div>
+            </div >
 
 
 
 
 
 
-          </InspectorControls>
-        </div>
+          </InspectorControls >
+        </div >
         ,
 
 
@@ -960,7 +1008,7 @@ registerBlockType("post-grid/post-title", {
           {tag && (
             <CustomTag className={['pg-postTitle pg-postTitle-' + postId]}>
               {isLink && (
-                <a {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{prefix}{post.title.rendered}{postfix}</a>
+                <a {...linkAttrItems} href={postUrl} rel={rel} target={linkTarget}>{prefix}{post.title.rendered}{postfix}</a>
 
               )}
               {!isLink && (
@@ -975,7 +1023,7 @@ registerBlockType("post-grid/post-title", {
           {tag.length == 0 && (
 
             (
-              isLink && (<a className={['pg-postTitle pg-postTitle-' + postId]} {...linkAttrItems} href={post.link} rel={rel} target={linkTarget}>{prefix}{post.title.rendered}{postfix}</a>)
+              isLink && (<a className={['pg-postTitle pg-postTitle-' + postId]} {...linkAttrItems} href={postUrl} rel={rel} target={linkTarget}>{prefix}{post.title.rendered}{postfix}</a>)
             )
           )}
 

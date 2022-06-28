@@ -112,7 +112,6 @@ registerBlockType("post-grid/post-title", {
 
   supports: {
     "align": ["wide", "full"],
-
   },
   category: "post-grid",
 
@@ -936,7 +935,8 @@ registerBlockType("post-grid/post-title", {
 
                 </PanelBody>
 
-
+                <PanelBody title="Custom Style" initialOpen={false}>
+                </PanelBody>
 
               </div>
 

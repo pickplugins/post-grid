@@ -78,7 +78,7 @@ registerBlockType("post-grid/post-categories", {
     },
     blockCssY: {
       "type": "object",
-      "default": { items: {} }
+      "default": {}
     },
 
   },
@@ -156,10 +156,31 @@ registerBlockType("post-grid/post-categories", {
 
             //blockCss.items['padding'] = { responsive: responsive };
 
+            blockCssY[itemSelector] = (blockCssY[itemSelector] != undefined) ? blockCssY[itemSelector] : {};
+
+
+            console.log(blockCssY[itemSelector]);
+
+
             if (nextValues.top != undefined) {
               var paddingTop = (blockCss.items['padding-top'] !== undefined) ? blockCss.items['padding-top'] : { responsive: {} };
               paddingTop.responsive[breakPointX] = nextValues.top
               blockCss.items['padding-top'] = paddingTop;
+
+
+
+
+              var paddingTop = (blockCssY[itemSelector]['padding-top'] != undefined) ? blockCss[itemSelector]['padding-top'] : {};
+              paddingTop[breakPointX] = nextValues.left
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-top': paddingTop };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
+
+
             }
 
 
@@ -167,18 +188,53 @@ registerBlockType("post-grid/post-categories", {
               var paddingRight = (blockCss.items['padding-right'] !== undefined) ? blockCss.items['padding-right'] : { responsive: {} };
               paddingRight.responsive[breakPointX] = nextValues.right
               blockCss.items['padding-right'] = paddingRight;
+
+
+
+
+              var paddingRight = (blockCssY[itemSelector]['padding-right'] !== undefined) ? blockCss[itemSelector]['padding-right'] : {};
+              paddingRight[breakPointX] = nextValues.left
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-right': paddingRight };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
             }
 
             if (nextValues.bottom != undefined) {
               var paddingBottom = (blockCss.items['padding-bottom'] !== undefined) ? blockCss.items['padding-bottom'] : { responsive: {} };
               paddingBottom.responsive[breakPointX] = nextValues.bottom
               blockCss.items['padding-bottom'] = paddingBottom;
+
+
+
+              var paddingBottom = (blockCssY[itemSelector]['padding-bottom'] !== undefined) ? blockCss[itemSelector]['padding-bottom'] : {};
+              paddingBottom[breakPointX] = nextValues.left
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-bottom': paddingBottom };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
             }
 
             if (nextValues.left != undefined) {
               var paddingLeft = (blockCss.items['padding-left'] !== undefined) ? blockCss.items['padding-left'] : { responsive: {} };
               paddingLeft.responsive[breakPointX] = nextValues.left
               blockCss.items['padding-left'] = paddingLeft;
+
+
+
+              var paddingLeft = (blockCssY[itemSelector]['padding-left'] !== undefined) ? blockCss[itemSelector]['padding-left'] : {};
+              paddingLeft[breakPointX] = nextValues.left
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-left': paddingLeft };
+              setAttributes({ blockCssY: blockCssY });
+
+
             }
 
 
@@ -330,7 +386,7 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      console.log('Listening maxCount: ', items.maxCount);
+      //console.log('Listening maxCount: ', items.maxCount);
 
       if (postData.category != undefined) {
 
@@ -352,6 +408,202 @@ registerBlockType("post-grid/post-categories", {
 
 
 
+
+    function generateBlockCssY() {
+
+
+      var reponsiveCssGroups = {};
+      var reponsiveCss = '';
+
+      for (var selector in blockCssY) {
+
+        var attrs = blockCssY[selector];
+
+        // var attr = x;
+        // var id = '.pg-postCategories a';
+        ///var responsive = item.responsive;
+        console.log(selector);
+        console.log(attrs);
+
+
+        for (var attr in attrs) {
+          var breakpoints = attrs[attr];
+
+          console.log(attr);
+          console.log(breakpoints);
+
+          for (var device in breakpoints) {
+
+            var attrValue = breakpoints[device];
+
+            console.log(device);
+            console.log(attrValue);
+
+
+            if (reponsiveCssGroups[device] == undefined) {
+              reponsiveCssGroups[device] = []
+            }
+
+            if (reponsiveCssGroups[device][selector] == undefined) {
+              reponsiveCssGroups[device][selector] = []
+            }
+
+            reponsiveCssGroups[device][selector].push({ 'attr': attr, 'val': attrValue });
+
+          }
+
+
+        }
+      }
+
+      console.log(reponsiveCssGroups);
+
+
+
+
+      // for (var device in reponsiveCssGroups) {
+
+      //   var item = reponsiveCssGroups[device];
+
+
+      //   if (device === 'Mobile') {
+      //     reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+      //   }
+      //   if (device === 'Tablet') {
+      //     reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+      //   }
+      //   if (device === 'Desktop') {
+      //     reponsiveCss += '@media only screen and (min-width: 781px){';
+      //   }
+
+      //   for (var index in item) {
+      //     var attr = item[index].attr;
+      //     var defaultVal = item[index].val;
+      //     var id = '.pg-postCategories-' + postId + ' a';
+      //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
+      //     reponsiveCss += '}';
+      //   }
+
+      // }
+
+      if (reponsiveCssGroups['Mobile'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+
+        for (var selector in reponsiveCssGroups['Mobile']) {
+          var attrs = reponsiveCssGroups['Mobile'][selector];
+
+          reponsiveCss += selector + '{';
+          for (var index in attrs) {
+            var attr = attrs[index]
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+          reponsiveCss += '}';
+        }
+        reponsiveCss += '}';
+
+      }
+
+
+
+
+      if (reponsiveCssGroups['Tablet'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+
+        for (var selector in reponsiveCssGroups['Tablet']) {
+          var attrs = reponsiveCssGroups['Tablet'][selector];
+
+          reponsiveCss += selector + '{';
+          for (var index in attrs) {
+            var attr = attrs[index]
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+          reponsiveCss += '}';
+        }
+
+        reponsiveCss += '}';
+      }
+
+
+
+      if (reponsiveCssGroups['Desktop'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 781px){';
+
+        for (var selector in reponsiveCssGroups['Desktop']) {
+          var attrs = reponsiveCssGroups['Desktop'][selector];
+
+
+          reponsiveCss += selector + '{';
+          for (var index in attrs) {
+            var attr = attrs[index]
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+          reponsiveCss += '}';
+
+
+        }
+        reponsiveCss += '}';
+      }
+
+
+
+
+
+      console.log(reponsiveCss);
+
+
+      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
+
+      if (iframe) {
+
+        setTimeout(() => {
+          var iframeDocument = iframe.contentDocument;
+          var body = iframeDocument.body;
+          var divWrap = iframeDocument.getElementById("css-block-pgTitle");
+
+          if (divWrap != undefined) {
+            iframeDocument.getElementById("css-block-pgTitle").outerHTML = "";
+
+          }
+
+          var divWrap = '<div id="css-block-pgTitle"></div>';
+          body.insertAdjacentHTML('beforeend', divWrap);
+
+          var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
+          var str = '<style>' + reponsiveCss + '</style>';
+
+          csswrappg.insertAdjacentHTML('beforeend', str);
+        }, 200)
+
+
+      } else {
+
+        var wpfooter = document.getElementById('wpfooter');
+        var divWrap = document.getElementById("css-block-pgTitle");
+
+        if (divWrap != undefined) {
+          document.getElementById("css-block-pgTitle").outerHTML = "";
+        }
+
+        var divWrap = '<div id="css-block-pgTitle"></div>';
+        wpfooter.insertAdjacentHTML('beforeend', divWrap);
+
+        var csswrappg = document.getElementById('css-block-pgTitle');
+        var str = '<style>' + reponsiveCss + '</style>';
+        csswrappg.insertAdjacentHTML('beforeend', str);
+
+
+
+      }
+
+
+
+    }
 
 
 
@@ -522,11 +774,25 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
+      console.log('Listening blockCssY: ', blockCssY);
+
+
+
+    }, [blockCssY]);
+
+
+    useEffect(() => {
       console.log('Listening blockCss: ', blockCss);
 
       generateBlockCss()
+      generateBlockCssY()
+
 
     }, [blockCss]);
+
+
+
+
 
 
     useEffect(() => {
@@ -716,12 +982,36 @@ registerBlockType("post-grid/post-categories", {
               value={wrapper.textAlign}
               onChange={(nextAlign) => {
                 setAttributes({ wrapper: { textAlign: nextAlign, color: wrapper.color, bgColor: wrapper.bgColor, padding: wrapper.padding, margin: wrapper.margin } });
+
+
+
+
               }}
             />
           </BlockControls>
 
 
           <InspectorControls key="general">
+
+
+            <PanelBody title="Items Wrapper" initialOpen={false}>
+
+              <PanelRow>
+                <label for="">Wrapper Class</label>
+
+                <InputControl
+                  value={wrapper.class}
+                  onChange={(newVal) => {
+
+                    setAttributes({ wrapper: { textAlign: wrapper.textAlign, class: newVal, color: wrapper.color, bgColor: wrapper.bgColor, padding: wrapper.padding, margin: wrapper.margin } });
+
+
+                  }}
+                />
+              </PanelRow>
+
+            </PanelBody>
+
 
 
             <PanelBody title="Items" initialOpen={true}>
@@ -954,6 +1244,12 @@ registerBlockType("post-grid/post-categories", {
                   setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: responsive, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
 
                   blockCss.items['color'] = { responsive: responsive };
+
+                  blockCssY[itemSelector] = { ...blockCssY[itemSelector], color: responsive };
+                  setAttributes({ blockCssY: blockCssY });
+
+                  generateBlockCssY()
+
                   setAttributes({ blockCss: { items: blockCss.items } });
 
 
@@ -985,6 +1281,10 @@ registerBlockType("post-grid/post-categories", {
 
                   setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: responsive, padding: items.padding, margin: items.margin } });
 
+                  blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'background-color': responsive };
+                  setAttributes({ blockCssY: blockCssY });
+
+                  generateBlockCssY()
 
 
                   blockCss.items['background-color'] = { responsive: responsive };
@@ -1115,6 +1415,11 @@ registerBlockType("post-grid/post-categories", {
 
         <>
 
+
+          <div className='my-3'><code>{JSON.stringify(items)}</code></div>
+
+
+          <div><code>{JSON.stringify(blockCssY)}</code></div>
 
           {postData.category == undefined && ('Loading')}
 

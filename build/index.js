@@ -888,9 +888,7 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
     },
     blockCssY: {
       "type": "object",
-      "default": {
-        items: {}
-      }
+      "default": {}
     }
   },
   usesContext: ["postId", "loopIndex", "postType", "queryId"],
@@ -957,12 +955,23 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
             }
           }); //blockCss.items['padding'] = { responsive: responsive };
 
+          blockCssY[itemSelector] = blockCssY[itemSelector] != undefined ? blockCssY[itemSelector] : {};
+          console.log(blockCssY[itemSelector]);
+
           if (nextValues.top != undefined) {
             var paddingTop = blockCss.items['padding-top'] !== undefined ? blockCss.items['padding-top'] : {
               responsive: {}
             };
             paddingTop.responsive[breakPointX] = nextValues.top;
             blockCss.items['padding-top'] = paddingTop;
+            var paddingTop = blockCssY[itemSelector]['padding-top'] != undefined ? blockCss[itemSelector]['padding-top'] : {};
+            paddingTop[breakPointX] = nextValues.left;
+            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+              'padding-top': paddingTop
+            };
+            setAttributes({
+              blockCssY: blockCssY
+            });
           }
 
           if (nextValues.right != undefined) {
@@ -971,6 +980,14 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
             };
             paddingRight.responsive[breakPointX] = nextValues.right;
             blockCss.items['padding-right'] = paddingRight;
+            var paddingRight = blockCssY[itemSelector]['padding-right'] !== undefined ? blockCss[itemSelector]['padding-right'] : {};
+            paddingRight[breakPointX] = nextValues.left;
+            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+              'padding-right': paddingRight
+            };
+            setAttributes({
+              blockCssY: blockCssY
+            });
           }
 
           if (nextValues.bottom != undefined) {
@@ -979,6 +996,14 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
             };
             paddingBottom.responsive[breakPointX] = nextValues.bottom;
             blockCss.items['padding-bottom'] = paddingBottom;
+            var paddingBottom = blockCssY[itemSelector]['padding-bottom'] !== undefined ? blockCss[itemSelector]['padding-bottom'] : {};
+            paddingBottom[breakPointX] = nextValues.left;
+            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+              'padding-bottom': paddingBottom
+            };
+            setAttributes({
+              blockCssY: blockCssY
+            });
           }
 
           if (nextValues.left != undefined) {
@@ -987,6 +1012,14 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
             };
             paddingLeft.responsive[breakPointX] = nextValues.left;
             blockCss.items['padding-left'] = paddingLeft;
+            var paddingLeft = blockCssY[itemSelector]['padding-left'] !== undefined ? blockCss[itemSelector]['padding-left'] : {};
+            paddingLeft[breakPointX] = nextValues.left;
+            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+              'padding-left': paddingLeft
+            };
+            setAttributes({
+              blockCssY: blockCssY
+            });
           }
 
           setAttributes({
@@ -1106,14 +1139,166 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
       }
     }, [postData]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      console.log('Listening maxCount: ', items.maxCount);
-
+      //console.log('Listening maxCount: ', items.maxCount);
       if (postData.category != undefined) {
         const categories = postData.category.slice(0, items.maxCount);
         setPostCategories(categories);
         setcategoryCount(categories.length - 1);
       }
     }, [items]);
+
+    function generateBlockCssY() {
+      var reponsiveCssGroups = {};
+      var reponsiveCss = '';
+
+      for (var selector in blockCssY) {
+        var attrs = blockCssY[selector]; // var attr = x;
+        // var id = '.pg-postCategories a';
+        ///var responsive = item.responsive;
+
+        console.log(selector);
+        console.log(attrs);
+
+        for (var attr in attrs) {
+          var breakpoints = attrs[attr];
+          console.log(attr);
+          console.log(breakpoints);
+
+          for (var device in breakpoints) {
+            var attrValue = breakpoints[device];
+            console.log(device);
+            console.log(attrValue);
+
+            if (reponsiveCssGroups[device] == undefined) {
+              reponsiveCssGroups[device] = [];
+            }
+
+            if (reponsiveCssGroups[device][selector] == undefined) {
+              reponsiveCssGroups[device][selector] = [];
+            }
+
+            reponsiveCssGroups[device][selector].push({
+              'attr': attr,
+              'val': attrValue
+            });
+          }
+        }
+      }
+
+      console.log(reponsiveCssGroups); // for (var device in reponsiveCssGroups) {
+      //   var item = reponsiveCssGroups[device];
+      //   if (device === 'Mobile') {
+      //     reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+      //   }
+      //   if (device === 'Tablet') {
+      //     reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+      //   }
+      //   if (device === 'Desktop') {
+      //     reponsiveCss += '@media only screen and (min-width: 781px){';
+      //   }
+      //   for (var index in item) {
+      //     var attr = item[index].attr;
+      //     var defaultVal = item[index].val;
+      //     var id = '.pg-postCategories-' + postId + ' a';
+      //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
+      //     reponsiveCss += '}';
+      //   }
+      // }
+
+      if (reponsiveCssGroups['Mobile'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+
+        for (var selector in reponsiveCssGroups['Mobile']) {
+          var attrs = reponsiveCssGroups['Mobile'][selector];
+          reponsiveCss += selector + '{';
+
+          for (var index in attrs) {
+            var attr = attrs[index];
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+
+          reponsiveCss += '}';
+        }
+
+        reponsiveCss += '}';
+      }
+
+      if (reponsiveCssGroups['Tablet'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+
+        for (var selector in reponsiveCssGroups['Tablet']) {
+          var attrs = reponsiveCssGroups['Tablet'][selector];
+          reponsiveCss += selector + '{';
+
+          for (var index in attrs) {
+            var attr = attrs[index];
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+
+          reponsiveCss += '}';
+        }
+
+        reponsiveCss += '}';
+      }
+
+      if (reponsiveCssGroups['Desktop'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 781px){';
+
+        for (var selector in reponsiveCssGroups['Desktop']) {
+          var attrs = reponsiveCssGroups['Desktop'][selector];
+          reponsiveCss += selector + '{';
+
+          for (var index in attrs) {
+            var attr = attrs[index];
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+
+          reponsiveCss += '}';
+        }
+
+        reponsiveCss += '}';
+      }
+
+      console.log(reponsiveCss);
+      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
+
+      if (iframe) {
+        setTimeout(() => {
+          var iframeDocument = iframe.contentDocument;
+          var body = iframeDocument.body;
+          var divWrap = iframeDocument.getElementById("css-block-pgTitle");
+
+          if (divWrap != undefined) {
+            iframeDocument.getElementById("css-block-pgTitle").outerHTML = "";
+          }
+
+          var divWrap = '<div id="css-block-pgTitle"></div>';
+          body.insertAdjacentHTML('beforeend', divWrap);
+          var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
+          var str = '<style>' + reponsiveCss + '</style>';
+          csswrappg.insertAdjacentHTML('beforeend', str);
+        }, 200);
+      } else {
+        var wpfooter = document.getElementById('wpfooter');
+        var divWrap = document.getElementById("css-block-pgTitle");
+
+        if (divWrap != undefined) {
+          document.getElementById("css-block-pgTitle").outerHTML = "";
+        }
+
+        var divWrap = '<div id="css-block-pgTitle"></div>';
+        wpfooter.insertAdjacentHTML('beforeend', divWrap);
+        var csswrappg = document.getElementById('css-block-pgTitle');
+        var str = '<style>' + reponsiveCss + '</style>';
+        csswrappg.insertAdjacentHTML('beforeend', str);
+      }
+    }
 
     function generateBlockCss() {
       var reponsiveCssGroups = {};
@@ -1237,8 +1422,12 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+      console.log('Listening blockCssY: ', blockCssY);
+    }, [blockCssY]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       console.log('Listening blockCss: ', blockCss);
       generateBlockCss();
+      generateBlockCssY();
     }, [blockCss]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       //////console.log('Listening linkAttr: ', linkAttr);
@@ -1350,6 +1539,25 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+      title: "Items Wrapper",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Wrapper Class"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
+      value: wrapper.class,
+      onChange: newVal => {
+        setAttributes({
+          wrapper: {
+            textAlign: wrapper.textAlign,
+            class: newVal,
+            color: wrapper.color,
+            bgColor: wrapper.bgColor,
+            padding: wrapper.padding,
+            margin: wrapper.margin
+          }
+        });
+      }
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Items",
       initialOpen: true
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ToggleControl, {
@@ -1619,6 +1827,13 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
         blockCss.items['color'] = {
           responsive: responsive
         };
+        blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+          color: responsive
+        };
+        setAttributes({
+          blockCssY: blockCssY
+        });
+        generateBlockCssY();
         setAttributes({
           blockCss: {
             items: blockCss.items
@@ -1655,6 +1870,13 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
             margin: items.margin
           }
         });
+        blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+          'background-color': responsive
+        };
+        setAttributes({
+          blockCssY: blockCssY
+        });
+        generateBlockCssY();
         blockCss.items['background-color'] = {
           responsive: responsive
         };
@@ -1746,7 +1968,9 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
           customCss: value
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postData.category == undefined && 'Loading', postData.category !== undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, JSON.stringify(items))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, JSON.stringify(blockCssY))), postData.category == undefined && 'Loading', postData.category !== undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "pg-postCategories"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: "frontText inline-block"

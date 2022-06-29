@@ -51,7 +51,7 @@ registerBlockType("post-grid/post-categories", {
     },
     items: {
       type: 'object',
-      default: { prefix: '', postfix: '', maxCount: 3, postCount: false, class: '', linkTarget: '', linkAttr: [], color: {}, bgColor: {}, padding: {}, margin: {} },
+      default: { prefix: '', postfix: '', maxCount: 3, postCount: false, class: 'item', linkTarget: '', linkAttr: [], color: {}, bgColor: {}, padding: {}, margin: {} },
     },
     separator: {
       type: 'object',

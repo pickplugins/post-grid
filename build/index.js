@@ -844,7 +844,7 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
         postfix: '',
         maxCount: 3,
         postCount: false,
-        class: '',
+        class: 'item',
         linkTarget: '',
         linkAttr: [],
         color: {},

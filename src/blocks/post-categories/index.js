@@ -35,88 +35,52 @@ var myStore = wp.data.select('my-shop');
 
 registerBlockType("post-grid/post-categories", {
   title: "Post Categories",
-  icon: "grid-view",
+  icon: {
+    // Specifying a background color to appear with the icon e.g.: in the inserter.
+    background: '#7e70af',
+    // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
+    foreground: '#fff',
+    // Specifying an icon for the block
+    src: <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M20 4H4v1.5h16V4zm-2 9h-3c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zm.5 5c0 .3-.2.5-.5.5h-3c-.3 0-.5-.2-.5-.5v-3c0-.3.2-.5.5-.5h3c.3 0 .5.2.5.5v3zM4 9.5h9V8H4v1.5zM9 13H6c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zm.5 5c0 .3-.2.5-.5.5H6c-.3 0-.5-.2-.5-.5v-3c0-.3.2-.5.5-.5h3c.3 0 .5.2.5.5v3z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>,
+  },
   attributes: {
 
-    textAlign: {
-      "type": "string"
+    wrapper: {
+      type: 'object',
+      default: { textAlign: '', class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
-    tag: {
-      "type": "string",
-      "default": 'h2'
+    items: {
+      type: 'object',
+      default: { prefix: '', postfix: '', maxCount: 3, postCount: false, class: '', linkTarget: '', linkAttr: [], color: {}, bgColor: {}, padding: {}, margin: {} },
     },
-    prefix: {
-      "type": "string",
-      "default": ''
+    separator: {
+      type: 'object',
+      default: { text: ', ', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
-    postfix: {
-      "type": "string",
-      "default": ''
+    frontText: {
+      type: 'object',
+      default: { text: 'Categories: ', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
+
 
     customCss: {
       "type": "string",
       "default": ''
     },
-    customUrl: {
-      "type": "string",
-      "default": ''
-    },
-
     postId: {
       type: 'number',
     },
-    level: {
-      "type": "number",
-      "default": 2
-    },
 
-    color: {
-      type: 'object',
-      default: { responsive: {} },
-    },
 
-    bgColor: {
-      type: 'object',
-      default: { responsive: {} },
-    },
-
-    padding: {
-      type: 'object',
-      default: {
-        responsive: {}
-      },
-    },
-    margin: {
-      type: 'object',
-      default: {
-        responsive: {}
-      },
-    },
-
-    isLink: {
-      "type": "boolean",
-      "default": false
-    },
-    rel: {
-      "type": "string",
-      "attribute": "rel",
-      "default": ""
-    },
-
-    linkAttr: {
-      "type": "array",
-      "default": []
-    },
     blockCss: {
       "type": "object",
       "default": { items: {} }
     },
-
-    linkTarget: {
-      "type": "string",
-      "default": "_self"
+    blockCssY: {
+      "type": "object",
+      "default": { items: {} }
     },
+
   },
   usesContext: ["postId", "loopIndex", "postType", "queryId"],
 
@@ -133,27 +97,32 @@ registerBlockType("post-grid/post-categories", {
     var setAttributes = props.setAttributes;
     var context = props.context;
 
-    var textAlign = attributes.textAlign;
-    var isLink = attributes.isLink;
-    var linkTarget = attributes.linkTarget;
-    var rel = attributes.rel;
-    var color = attributes.color;
-    var bgColor = attributes.bgColor;
-    var tag = attributes.tag;
-    var linkAttr = attributes.linkAttr;
+
+    var wrapper = attributes.wrapper;
+    var items = attributes.items;
+    var separator = attributes.separator;
+    var frontText = attributes.frontText;
+
+
+
     var blockCss = attributes.blockCss;
-    var padding = attributes.padding;
-    var margin = attributes.margin;
-    var prefix = attributes.prefix;
-    var postfix = attributes.postfix;
+    var blockCssY = attributes.blockCssY;
+
     var customCss = attributes.customCss;
-    var customUrl = attributes.customUrl;
 
 
     var postId = context['postId'];
 
     const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
     const [license, setLicense] = useState(myStore.getLicense());
+
+
+    // Wrapper CSS Class Selectors
+    const itemWrapSelector = '.pg-postCategories';
+    const itemSelector = '.pg-postCategories .item';
+    const itemSeparatorSelector = '.pg-postCategories .separator';
+    const frontTextSelector = '.pg-postCategories .frontText';
+    const postCountSelector = '.pg-postCategories .postCount';
 
 
     var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
@@ -172,17 +141,18 @@ registerBlockType("post-grid/post-categories", {
       return (
         <BoxControl
           label=""
-          values={padding.responsive[breakPointX]}
+          values={items.padding[breakPointX]}
           onChange={(nextValues) => {
 
 
-            var responsive = padding.responsive;
+            var responsive = items.padding;
             responsive[breakPointX] = nextValues;
 
             ////console.log(nextValues);
 
-            setAttributes({ padding: { responsive: responsive } })
 
+
+            setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: responsive, margin: items.margin } });
 
             //blockCss.items['padding'] = { responsive: responsive };
 
@@ -231,18 +201,17 @@ registerBlockType("post-grid/post-categories", {
       return (
         <BoxControl
           label=""
-          values={margin.responsive[breakPointX]}
+          values={items.margin[breakPointX]}
           onChange={(nextValues) => {
 
 
-            var responsive = margin.responsive;
+            var responsive = items.margin;
             responsive[breakPointX] = nextValues;
 
-            setAttributes({ margin: { responsive: responsive } })
 
             //blockCss.items['margin'] = { responsive: responsive };
 
-
+            setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: responsive } });
 
 
 
@@ -303,6 +272,10 @@ registerBlockType("post-grid/post-categories", {
 
 
     const [postData, setPostData] = useState({}); // Using the hook.
+    const [postCategories, setPostCategories] = useState([]); // Using the hook.
+    const [categoryCount, setcategoryCount] = useState(0); // Using the hook.
+
+
 
 
     function fetchPostData() {
@@ -339,10 +312,38 @@ registerBlockType("post-grid/post-categories", {
     }, [postId]);
 
 
+    useEffect(() => {
+      console.log('Listening postData: ', postData);
+
+      if (postData.category != undefined) {
+
+        const categories = postData.category.slice(0, items.maxCount);
+
+        setPostCategories(categories);
+        setcategoryCount(categories.length - 1);
+
+      }
 
 
 
+    }, [postData]);
 
+
+    useEffect(() => {
+      console.log('Listening maxCount: ', items.maxCount);
+
+      if (postData.category != undefined) {
+
+        const categories = postData.category.slice(0, items.maxCount);
+
+        setPostCategories(categories);
+        setcategoryCount(categories.length - 1);
+
+      }
+
+
+
+    }, [items]);
 
 
 
@@ -370,7 +371,7 @@ registerBlockType("post-grid/post-categories", {
         var item = blockCss.items[x];
 
         var attr = x;
-        var id = '.pg-categories a';
+        var id = '.pg-postCategories a';
         var responsive = item.responsive;
 
 
@@ -404,7 +405,7 @@ registerBlockType("post-grid/post-categories", {
       //   for (var index in item) {
       //     var attr = item[index].attr;
       //     var defaultVal = item[index].val;
-      //     var id = '.pg-categories-' + postId + ' a';
+      //     var id = '.pg-postCategories-' + postId + ' a';
       //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
       //     reponsiveCss += '}';
       //   }
@@ -421,7 +422,7 @@ registerBlockType("post-grid/post-categories", {
           var attr = item.attr;
           var defaultVal = item.val;
 
-          var id = '.pg-categories a';
+          var id = '.pg-postCategories a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
         }
 
@@ -435,7 +436,7 @@ registerBlockType("post-grid/post-categories", {
         for (var j in item) {
           var attr = item.attr;
           var defaultVal = item.val;
-          var id = '.pg-categories a';
+          var id = '.pg-postCategories a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
         }
 
@@ -450,7 +451,7 @@ registerBlockType("post-grid/post-categories", {
         for (var k in item) {
           var attr = item.attr;
           var defaultVal = item.val;
-          var id = '.pg-categories a';
+          var id = '.pg-postCategories a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
 
         }
@@ -536,7 +537,7 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-    }, [linkAttr]);
+    }, [items]);
 
 
 
@@ -546,7 +547,7 @@ registerBlockType("post-grid/post-categories", {
 
       var sdsd = {};
 
-      linkAttr.map(x => {
+      items.linkAttr.map(x => {
 
         if (x.val)
           sdsd[x.id] = x.val;
@@ -608,12 +609,9 @@ registerBlockType("post-grid/post-categories", {
     //console.log(termstaxonomy);
 
 
-    var postUrl = (customUrl.length > 0) ? customUrl : post.link;
-
     ////console.log('Hello');
     //console.log(post);
 
-    const CustomTag = `${tag}`;
 
     const MyDropdown = () => (
 
@@ -715,144 +713,146 @@ registerBlockType("post-grid/post-categories", {
 
           <BlockControls >
             <AlignmentToolbar
-              value={textAlign}
+              value={wrapper.textAlign}
               onChange={(nextAlign) => {
-                setAttributes({ textAlign: nextAlign });
+                setAttributes({ wrapper: { textAlign: nextAlign, color: wrapper.color, bgColor: wrapper.bgColor, padding: wrapper.padding, margin: wrapper.margin } });
               }}
             />
           </BlockControls>
 
 
           <InspectorControls key="general">
-            <div className='px-3' title="General" initialOpen={false}>
 
 
-              {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
-
-
-
+            <PanelBody title="Items" initialOpen={true}>
 
               <ToggleControl
-                label="Linked with post?"
-                help={isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
-                checked={isLink ? true : false}
+                label="Display Post Count"
+                help={items.postCount ? 'Post Count Enabled' : 'Post Count Disabled'}
+                checked={items.postCount ? true : false}
                 onChange={(e) => {
 
-                  setAttributes({ isLink: isLink ? false : true });
+
+                  setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: postCount ? false : true, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+
 
                 }}
               />
 
-              {isLink && (
+              <PanelRow>
+                <label for="">Item Class</label>
 
-                <div>
-                  <PanelRow>
-                    <label for="">Link Target</label>
+                <InputControl
+                  value={items.class}
+                  onChange={(newVal) => {
 
-                    <SelectControl
-                      label=""
-                      value={linkTarget}
-                      options={[
-                        { label: '_self', value: '_self' },
-                        { label: '_blank', value: '_blank' },
-                        { label: '_parent', value: '_parent' },
-                        { label: '_top', value: '_top' },
+                    setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: newVal, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
 
 
-                      ]}
-                      onChange={(newVal) => setAttributes({ linkTarget: newVal })}
-                    />
-                  </PanelRow>
-
-
-                  <PanelRow>
-                    <label for="">Rel Attribute</label>
-
-                    <InputControl
-                      value={rel}
-                      onChange={(newVal) => setAttributes({ rel: newVal })}
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label for="">Prefix</label>
-
-                    <InputControl
-                      value={prefix}
-                      onChange={(newVal) => setAttributes({ prefix: newVal })}
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label for="">Postfix</label>
-
-                    <InputControl
-                      value={postfix}
-                      onChange={(newVal) => setAttributes({ postfix: newVal })}
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label for="">Custom Url</label>
-
-                    <InputControl
-                      value={customUrl}
-                      onChange={(newVal) => setAttributes({ customUrl: newVal })}
-                    />
-                  </PanelRow>
-
-
-
-
-                  <PanelRow>
-                    <label for="">Custom Attributes</label>
-                    <div
-                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                      onClick={(ev) => {
-
-                        var sdsd = linkAttr.concat({ id: '', val: '' })
-
-                        setAttributes({ linkAttr: sdsd })
-                        linkAttrObj()
-                      }}
-
-                    >Add</div>
-
-
-
-                  </PanelRow>
-
-                </div>
-
-
-
-              )}
-
+                  }}
+                />
+              </PanelRow>
 
               <PanelRow>
-                <label for="">Wrapper Tag</label>
+                <label for="">Max Count</label>
+
+                <InputControl
+                  value={items.maxCount}
+                  onChange={(newVal) => {
+
+
+                    setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: newVal, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+                  }
+
+
+
+
+                  }
+                />
+              </PanelRow>
+
+              <PanelRow>
+                <label for="">Link Target</label>
 
                 <SelectControl
                   label=""
-                  value={tag}
+                  value={items.linkTarget}
                   options={[
-                    { label: 'No Wrapper', value: '' },
-
-                    { label: 'H1', value: 'h1' },
-                    { label: 'H2', value: 'h2' },
-                    { label: 'H3', value: 'h3' },
-                    { label: 'H4', value: 'h4' },
-                    { label: 'H5', value: 'h5' },
-                    { label: 'H6', value: 'h6' },
-                    { label: 'span', value: 'SPAN' },
-                    { label: 'div', value: 'DIV' },
-                    { label: 'P', value: 'p' },
+                    { label: '_self', value: '_self' },
+                    { label: '_blank', value: '_blank' },
+                    { label: '_parent', value: '_parent' },
+                    { label: '_top', value: '_top' },
 
 
                   ]}
-                  onChange={(newVal) => setAttributes({ tag: newVal })}
+                  onChange={(newVal) => {
+
+                    setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: newVal, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+                  }
+
+
+                  }
                 />
+              </PanelRow>
+
+
+
+
+              <PanelRow>
+                <label for="">Prefix</label>
+
+                <InputControl
+                  value={items.prefix}
+                  onChange={(newVal) => {
+
+
+                    setAttributes({ items: { prefix: newVal, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+                  }
+                  }
+                />
+              </PanelRow>
+
+              <PanelRow>
+                <label for="">Postfix</label>
+                <InputControl
+                  value={items.postfix}
+                  onChange={(newVal) => {
+                    setAttributes({ items: { prefix: items.prefix, postfix: newVal, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+                  }}
+                />
+              </PanelRow>
+
+
+
+
+
+
+
+
+
+
+              <PanelRow>
+                <label for="">Custom Attributes</label>
+                <div
+                  className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                  onClick={(ev) => {
+
+                    var sdsd = items.linkAttr.concat({ id: '', val: '' })
+
+                    setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: sdsd, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+                    linkAttrObj()
+                  }}
+
+                >Add</div>
+
+
+
               </PanelRow>
 
 
@@ -868,7 +868,7 @@ registerBlockType("post-grid/post-categories", {
 
 
                 {
-                  linkAttr.map((x, i) => {
+                  items.linkAttr.map((x, i) => {
 
                     return (
 
@@ -876,15 +876,16 @@ registerBlockType("post-grid/post-categories", {
                         <PanelRow>
                           <InputControl
                             className='mr-2'
-                            value={linkAttr[i].id}
+                            value={items.linkAttr[i].id}
                             onChange={(newVal) => {
 
-                              linkAttr[i].id = newVal;
+                              items.linkAttr[i].id = newVal;
 
 
-                              var ssdsd = linkAttr.concat([]);
+                              var ssdsd = items.linkAttr.concat([]);
 
-                              setAttributes({ linkAttr: ssdsd })
+                              setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: ssdsd, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
 
                             }}
                           />
@@ -893,22 +894,27 @@ registerBlockType("post-grid/post-categories", {
                             className='mr-2'
                             value={x.val}
                             onChange={(newVal) => {
-                              linkAttr[i].val = newVal
-                              var ssdsd = linkAttr.concat([]);
+                              items.linkAttr[i].val = newVal
+                              var ssdsd = items.linkAttr.concat([]);
 
 
-                              setAttributes({ linkAttr: ssdsd })
+
+                              setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: ssdsd, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
 
                             }}
                           />
                           <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
                             onClick={(ev) => {
 
-                              linkAttr.splice(i, 1);
+                              items.linkAttr.splice(i, 1);
 
-                              var ssdsd = linkAttr.concat([]);
+                              var ssdsd = items.linkAttr.concat([]);
 
-                              setAttributes({ linkAttr: ssdsd })
+                              setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: ssdsd, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+
+
                             }}
 
                           ></span>
@@ -927,110 +933,156 @@ registerBlockType("post-grid/post-categories", {
               </div>
 
 
+              <PanelRow>
+                <label>Color</label>
+                {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
+
+                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+              </PanelRow>
+
+              <ColorPalette
+                value={items.color[breakPointX]}
+                colors={colors}
+                enableAlpha
+                onChange={(newVal) => {
+
+                  var responsive = items.color;
+                  responsive[breakPointX] = newVal;
+
+
+
+                  setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: responsive, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+                  blockCss.items['color'] = { responsive: responsive };
+                  setAttributes({ blockCss: { items: blockCss.items } });
+
+
+
+
+
+                }}
+              />
+
+
+              <PanelRow>
+                <label>Background Color</label>
+                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+
+
+
+
+              </PanelRow>
+
+              <ColorPalette
+                value={items.bgColor[breakPointX]}
+                colors={colors}
+                enableAlpha
+                onChange={(newVal) => {
+
+                  var responsive = items.bgColor;
+                  responsive[breakPointX] = newVal;
+
+
+                  setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: responsive, padding: items.padding, margin: items.margin } });
+
+
+
+                  blockCss.items['background-color'] = { responsive: responsive };
+                  setAttributes({ blockCss: { items: blockCss.items } });
+
+                }}
+              />
+
+              <PanelRow>
+                <label>Padding</label>
+                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+              </PanelRow>
+
+              <PaddingControl />
+
+              <PanelRow>
+                <label>Margin</label>
+                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+              </PanelRow>
+              <MarginControl />
+
+
+
+
+            </PanelBody>
+
+            <PanelBody title="Front Text" initialOpen={false}>
+
+
+
+              <PanelRow>
+                <label for="">Front Text</label>
+
+                <InputControl
+                  value={frontText.text}
+                  onChange={(newVal) => setAttributes({ frontText: { text: newVal, color: frontText.color, bgColor: frontText.bgColor, padding: frontText.padding, margin: frontText.margin } })}
+                />
+              </PanelRow>
+
+
+            </PanelBody>
+            <PanelBody title="Separator" initialOpen={false}>
+
+              <PanelRow>
+                <label for="">Separator</label>
+                <InputControl
+                  value={separator.text}
+                  onChange={(newVal) => setAttributes({ separator: { text: newVal, color: separator.color, bgColor: separator.bgColor, padding: separator.padding, margin: separator.margin } })}
+                />
+              </PanelRow>
+
+            </PanelBody>
+
+            <div className=''>
+
+
+              {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
+
+
+
+
+
+
+
+
 
               <div>
 
 
 
-                <PanelBody title="Color" initialOpen={false}>
-                  <PanelRow>
-                    <label>Color</label>
-                    {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
-
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <ColorPalette
-                    value={color.responsive[breakPointX]}
-                    colors={colors}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-                      var responsive = color.responsive;
-                      responsive[breakPointX] = newVal;
-
-
-                      setAttributes({ color: { responsive: responsive } })
-
-
-
-                      blockCss.items['color'] = { responsive: responsive };
-                      setAttributes({ blockCss: { items: blockCss.items } });
-
-
-
-
-
-                    }}
-                  />
-                </PanelBody>
-
-
-
-
-
-                <PanelBody title="Background Color" initialOpen={false}>
-                  <PanelRow>
-                    <label>Background Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-                  <ColorPalette
-                    value={bgColor.responsive[breakPointX]}
-                    colors={colors}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-                      var responsive = bgColor.responsive;
-                      responsive[breakPointX] = newVal;
-
-                      setAttributes({ bgColor: { responsive: responsive } })
-
-                      blockCss.items['background-color'] = { responsive: responsive };
-                      setAttributes({ blockCss: { items: blockCss.items } });
-
-                    }}
-                  />
-                </PanelBody>
-
-
-
-                <PanelBody title="Padding" initialOpen={false}>
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PaddingControl />
-
-                </PanelBody>
-
-                <PanelBody title="Margin" initialOpen={false}>
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <MarginControl />
-
-                </PanelBody>
 
                 <PanelBody title="Custom Style" initialOpen={false}>
 
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
-                    <p className='font-bold'>No link</p>
-                    <p><code>.pg-categories{'{}'}</code></p>
-                    <p><code>.pg-categories-{postId}{'{}'}</code></p>
+                    <p className='font-bold'>Items Wrapper</p>
+                    <p><code>{itemWrapSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>
-                    <p className='font-bold'>With link</p>
-                    <p><code>.pg-categories a{'{}'} </code></p>
-                    <p><code>.pg-categories-{postId} a{'{}'}</code></p>
+                    <p className='font-bold'>Caetgory Items</p>
+                    <p><code>{itemSelector}{'{}'} </code></p>
+                    <p><code>.pg-postCategories a{'{/* your CSS here*/}'}</code></p>
+                  </div>
+
+                  <div className='my-3'>
+                    <p className='font-bold'>Separator</p>
+                    <p><code>{itemSeparatorSelector}{'{/* your CSS here*/}'} </code></p>
+                  </div>
+
+                  <div className='my-3'>
+                    <p className='font-bold'>Front Text</p>
+                    <p><code>{frontTextSelector}{'{/* your CSS here*/}'} </code></p>
+                  </div>
+
+                  <div className='my-3'>
+                    <p className='font-bold'>Post Count</p>
+                    <p><code>{postCountSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
 
@@ -1063,22 +1115,33 @@ registerBlockType("post-grid/post-categories", {
 
         <>
 
+
           {postData.category == undefined && ('Loading')}
 
           {postData.category !== undefined && (
 
-            <div className='pg-categories'>
-              {postData.category.map(x => {
+            <div className='pg-postCategories'>
+              <span className='frontText inline-block'>
+                <RawHTML>{frontText.text}</RawHTML>
+
+              </span>
+              {postCategories.map((x, index) => {
+
 
                 return (
 
 
+                  <a target={items.linkTarget} title={x.name} {...linkAttrItems} className={items.class} href={x.url}>
+                    <span >{items.prefix}{x.name}{items.postfix}</span>
 
-                  <a target={linkTarget} rel={rel} {...linkAttrItems} className='inline-block mx-2' href={x.url}>{prefix}{x.name}{postfix}</a>
+                    {items.postCount == true && (<span className='postCount'>({x.count})</span>)}
 
-
+                    {categoryCount != index && (<span className='separator'>{separator.text}</span>)}
+                  </a>
 
                 )
+
+
 
               })}
 

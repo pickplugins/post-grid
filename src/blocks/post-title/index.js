@@ -33,7 +33,17 @@ var myStore = wp.data.select('my-shop');
 
 registerBlockType("post-grid/post-title", {
   title: "Post Title",
-  icon: "grid-view",
+
+  icon: {
+    // Specifying a background color to appear with the icon e.g.: in the inserter.
+    background: '#7e70af',
+    // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
+    foreground: '#fff',
+    // Specifying an icon for the block
+    src: <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M4 14.5h16V16H4zM4 18.5h9V20H4zM4 4h3c2 0 3 .86 3 2.583 0 .891-.253 1.554-.76 1.988-.505.435-1.24.652-2.204.652H5.542V12H4V4zm2.855 4c.53 0 .924-.114 1.18-.343.266-.228.398-.579.398-1.051 0-.473-.132-.82-.397-1.04-.265-.229-.67-.343-1.217-.343H5.542V8h1.313z"></path></svg>,
+  },
+
+
   attributes: {
 
     textAlign: {

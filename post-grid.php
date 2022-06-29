@@ -294,7 +294,7 @@ if (!class_exists('PostGrid')) {
                 'prefix-editor',
                 post_grid_plugin_url . '/dist/output.css',
                 [],
-                false,
+                time(),
                 'all'
             );
 
@@ -304,7 +304,7 @@ if (!class_exists('PostGrid')) {
                 'prefix-custom',
                 post_grid_plugin_url . '/dist/custom.css',
                 [],
-                false,
+                time(),
                 'all'
             );
 
@@ -312,7 +312,7 @@ if (!class_exists('PostGrid')) {
                 'PostGrid-v1.0',
                 post_grid_plugin_url . '/assets/PostGrid-v1.0/style.css',
                 [],
-                false,
+                time(),
                 'all'
             );
 

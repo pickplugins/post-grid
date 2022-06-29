@@ -1,3 +1,5 @@
+import apiFetch from '@wordpress/api-fetch';
+
 import { registerBlockType } from '@wordpress/blocks'
 import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
@@ -19,20 +21,20 @@ import BreakpointToggle from '../../components/breakpoint-toggle'
 
 var myStore = wp.data.select('my-shop');
 
-////console.log(wp.data.select('my-shop').getBreakPoint('food'))
-//console.log(myStore.getBreakPoint());
+//////console.log(wp.data.select('my-shop').getBreakPoint('food'))
+////console.log(myStore.getBreakPoint());
 
 
 
 
-////console.log(wp.data.select('my-shop').setPrice('food', 98))
-////console.log()
+//////console.log(wp.data.select('my-shop').setPrice('food', 98))
+//////console.log()
 
 
 
 
-registerBlockType("post-grid/post-title", {
-  title: "Post Title",
+registerBlockType("post-grid/post-categories", {
+  title: "Post Categories",
   icon: "grid-view",
   attributes: {
 
@@ -177,7 +179,7 @@ registerBlockType("post-grid/post-title", {
             var responsive = padding.responsive;
             responsive[breakPointX] = nextValues;
 
-            //console.log(nextValues);
+            ////console.log(nextValues);
 
             setAttributes({ padding: { responsive: responsive } })
 
@@ -270,19 +272,6 @@ registerBlockType("post-grid/post-title", {
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             setAttributes({ blockCss: { items: blockCss.items } });
 
 
@@ -294,19 +283,80 @@ registerBlockType("post-grid/post-title", {
 
     function setpriceOnclick(va) {
 
-      //console.log(va);
+      ////console.log(va);
 
       var asdsdsd = wp.data.dispatch('my-shop').setPrice('food', va)
 
       asdsdsd.then((res) => {
 
-        ////console.log(res.price);
+        //////console.log(res.price);
         getpriceOnclick();
         //setLicense(res);
 
 
       });
     }
+
+
+
+
+
+
+    const [postData, setPostData] = useState({}); // Using the hook.
+
+
+    function fetchPostData() {
+
+
+
+
+      apiFetch({
+        path: '/post-grid/v2/get_post_data',
+        method: 'POST',
+        data: { postId: postId, fields: [] },
+      }).then((res) => {
+
+
+        console.log(res)
+
+        setPostData(res)
+
+      });
+
+    }
+
+
+
+
+
+
+    useEffect(() => {
+      //console.log('Listening postId: ', postId);
+      fetchPostData();
+
+
+
+    }, [postId]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     function generateBlockCss() {
@@ -320,7 +370,7 @@ registerBlockType("post-grid/post-title", {
         var item = blockCss.items[x];
 
         var attr = x;
-        var id = '.pg-postTitle-' + postId + ' a';
+        var id = '.pg-categories a';
         var responsive = item.responsive;
 
 
@@ -354,7 +404,7 @@ registerBlockType("post-grid/post-title", {
       //   for (var index in item) {
       //     var attr = item[index].attr;
       //     var defaultVal = item[index].val;
-      //     var id = '.pg-postTitle-' + postId + ' a';
+      //     var id = '.pg-categories-' + postId + ' a';
       //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
       //     reponsiveCss += '}';
       //   }
@@ -371,7 +421,7 @@ registerBlockType("post-grid/post-title", {
           var attr = item.attr;
           var defaultVal = item.val;
 
-          var id = '.pg-postTitle-' + postId + ' a';
+          var id = '.pg-categories a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
         }
 
@@ -385,7 +435,7 @@ registerBlockType("post-grid/post-title", {
         for (var j in item) {
           var attr = item.attr;
           var defaultVal = item.val;
-          var id = '.pg-postTitle-' + postId + ' a';
+          var id = '.pg-categories a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
         }
 
@@ -400,7 +450,7 @@ registerBlockType("post-grid/post-title", {
         for (var k in item) {
           var attr = item.attr;
           var defaultVal = item.val;
-          var id = '.pg-postTitle-' + postId + ' a';
+          var id = '.pg-categories a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
 
         }
@@ -471,7 +521,7 @@ registerBlockType("post-grid/post-title", {
 
 
     useEffect(() => {
-      //console.log('Listening blockCss: ', blockCss);
+      console.log('Listening blockCss: ', blockCss);
 
       generateBlockCss()
 
@@ -479,7 +529,7 @@ registerBlockType("post-grid/post-title", {
 
 
     useEffect(() => {
-      ////console.log('Listening linkAttr: ', linkAttr);
+      //////console.log('Listening linkAttr: ', linkAttr);
       linkAttrObj();
 
 
@@ -503,13 +553,13 @@ registerBlockType("post-grid/post-title", {
 
       })
 
-      ////console.log(sdsd);
+      //////console.log(sdsd);
       setlinkAttrItems(sdsd);
       //return sdsd;
 
     }
 
-    ////console.log(breakPointList);
+    //////console.log(breakPointList);
     const colors = [
       { name: '9DD6DF', color: '#9DD6DF' },
       { name: '18978F', color: '#18978F' },
@@ -548,11 +598,20 @@ registerBlockType("post-grid/post-title", {
       select('core').getEntityRecord('postType', context['postType'], context['postId'])
     );
 
+    const termstaxonomy = useSelect((select) =>
+      select('core').getEntityRecords('taxonomy', 'category')
+
+    );
+
+
+
+    //console.log(termstaxonomy);
+
 
     var postUrl = (customUrl.length > 0) ? customUrl : post.link;
 
-    //console.log('Hello');
-    ////console.log(post);
+    ////console.log('Hello');
+    //console.log(post);
 
     const CustomTag = `${tag}`;
 
@@ -584,7 +643,7 @@ registerBlockType("post-grid/post-title", {
                 <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
 
-                  //console.log(x.value);
+                  ////console.log(x.value);
 
                   setPreviewDeviceType(x.value)
                   var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value)
@@ -627,9 +686,9 @@ registerBlockType("post-grid/post-title", {
 
     function onChangeBreakPoint(x, index) {
 
-      console.log(x);
-      console.log(index);
-      console.log('Post Title');
+      //console.log(x);
+      //console.log(index);
+      //console.log('Post Title');
 
 
 
@@ -964,14 +1023,14 @@ registerBlockType("post-grid/post-title", {
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
                     <p className='font-bold'>No link</p>
-                    <p><code>.pg-postTitle{'{}'}</code></p>
-                    <p><code>.pg-postTitle-{postId}{'{}'}</code></p>
+                    <p><code>.pg-categories{'{}'}</code></p>
+                    <p><code>.pg-categories-{postId}{'{}'}</code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>With link</p>
-                    <p><code>.pg-postTitle a{'{}'} </code></p>
-                    <p><code>.pg-postTitle-{postId} a{'{}'}</code></p>
+                    <p><code>.pg-categories a{'{}'} </code></p>
+                    <p><code>.pg-categories-{postId} a{'{}'}</code></p>
                   </div>
 
 
@@ -1004,33 +1063,31 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
+          {postData.category == undefined && ('Loading')}
 
-          {tag && (
-            <CustomTag className={['pg-postTitle pg-postTitle-' + postId]}>
-              {isLink && (
-                <a {...linkAttrItems} href={postUrl} rel={rel} target={linkTarget}>{prefix}{post.title.rendered}{postfix}</a>
+          {postData.category !== undefined && (
 
-              )}
-              {!isLink && (
+            <div className='pg-categories'>
+              {postData.category.map(x => {
 
-                post.title.rendered
+                return (
 
-              )}
 
-            </CustomTag>
-          )}
 
-          {tag.length == 0 && (
+                  <a target={linkTarget} rel={rel} {...linkAttrItems} className='inline-block mx-2' href={x.url}>{prefix}{x.name}{postfix}</a>
 
-            (
-              isLink && (<a className={['pg-postTitle pg-postTitle-' + postId]} {...linkAttrItems} href={postUrl} rel={rel} target={linkTarget}>{prefix}{post.title.rendered}{postfix}</a>)
-            )
-          )}
 
-          {tag.length == 0 && !isLink && (
-            <p>{post.title.rendered}</p>
+
+                )
+
+              })}
+
+            </div>
+
 
           )}
+
+
 
         </>
       ]

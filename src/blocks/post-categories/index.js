@@ -733,7 +733,7 @@ registerBlockType("post-grid/post-categories", {
                 onChange={(e) => {
 
 
-                  setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: postCount ? false : true, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+                  setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount ? false : true, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
 
 
 

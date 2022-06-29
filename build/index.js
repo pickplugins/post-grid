@@ -1362,7 +1362,7 @@ var myStore = wp.data.select('my-shop'); //////console.log(wp.data.select('my-sh
             prefix: items.prefix,
             postfix: items.postfix,
             maxCount: items.maxCount,
-            postCount: postCount ? false : true,
+            postCount: items.postCount ? false : true,
             class: items.class,
             linkTarget: items.linkTarget,
             linkAttr: items.linkAttr,

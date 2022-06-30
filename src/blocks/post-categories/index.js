@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl } from '@wordpress/components'
+import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
@@ -17,18 +17,18 @@ import { store } from '../../store'
 import IconToggle from '../../components/icon-toggle'
 import BreakpointToggle from '../../components/breakpoint-toggle'
 
+const { isSavingPost, getCurrentPost } = select('core/editor');
 
 
 var myStore = wp.data.select('my-shop');
 
-//////console.log(wp.data.select('my-shop').getBreakPoint('food'))
-////console.log(myStore.getBreakPoint());
+////////console.log(wp.data.select('my-shop').getBreakPoint('food'))
+//////console.log(myStore.getBreakPoint());
 
 
 
 
-//////console.log(wp.data.select('my-shop').setPrice('food', 98))
-//////console.log()
+////////console.log(wp.data.select('my-shop').setPrice('food', 98))
 
 
 
@@ -96,14 +96,13 @@ registerBlockType("post-grid/post-categories", {
     var attributes = props.attributes;
     var setAttributes = props.setAttributes;
     var context = props.context;
+    var clientId = props.clientId;
 
 
     var wrapper = attributes.wrapper;
     var items = attributes.items;
     var separator = attributes.separator;
     var frontText = attributes.frontText;
-
-
 
     var blockCss = attributes.blockCss;
     var blockCssY = attributes.blockCssY;
@@ -125,7 +124,10 @@ registerBlockType("post-grid/post-categories", {
     const postCountSelector = '.pg-postCategories .postCount';
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+
+
+
+    var breakPointList = [];
 
     for (var x in breakPoints) {
 
@@ -148,7 +150,7 @@ registerBlockType("post-grid/post-categories", {
             var responsive = items.padding;
             responsive[breakPointX] = nextValues;
 
-            ////console.log(nextValues);
+            //////console.log(nextValues);
 
 
 
@@ -159,7 +161,7 @@ registerBlockType("post-grid/post-categories", {
             blockCssY[itemSelector] = (blockCssY[itemSelector] != undefined) ? blockCssY[itemSelector] : {};
 
 
-            console.log(blockCssY[itemSelector]);
+            //console.log(blockCssY[itemSelector]);
 
 
             if (nextValues.top != undefined) {
@@ -170,8 +172,8 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var paddingTop = (blockCssY[itemSelector]['padding-top'] != undefined) ? blockCss[itemSelector]['padding-top'] : {};
-              paddingTop[breakPointX] = nextValues.left
+              var paddingTop = (blockCssY[itemSelector]['padding-top'] != undefined) ? blockCssY[itemSelector]['padding-top'] : {};
+              paddingTop[breakPointX] = nextValues.top
 
 
               blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-top': paddingTop };
@@ -192,8 +194,8 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var paddingRight = (blockCssY[itemSelector]['padding-right'] !== undefined) ? blockCss[itemSelector]['padding-right'] : {};
-              paddingRight[breakPointX] = nextValues.left
+              var paddingRight = (blockCssY[itemSelector]['padding-right'] != undefined) ? blockCssY[itemSelector]['padding-right'] : {};
+              paddingRight[breakPointX] = nextValues.right
 
 
               blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-right': paddingRight };
@@ -210,8 +212,8 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var paddingBottom = (blockCssY[itemSelector]['padding-bottom'] !== undefined) ? blockCss[itemSelector]['padding-bottom'] : {};
-              paddingBottom[breakPointX] = nextValues.left
+              var paddingBottom = (blockCssY[itemSelector]['padding-bottom'] != undefined) ? blockCssY[itemSelector]['padding-bottom'] : {};
+              paddingBottom[breakPointX] = nextValues.bottom
 
 
               blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-bottom': paddingBottom };
@@ -228,7 +230,7 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var paddingLeft = (blockCssY[itemSelector]['padding-left'] !== undefined) ? blockCss[itemSelector]['padding-left'] : {};
+              var paddingLeft = (blockCssY[itemSelector]['padding-left'] != undefined) ? blockCssY[itemSelector]['padding-left'] : {};
               paddingLeft[breakPointX] = nextValues.left
 
               blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-left': paddingLeft };
@@ -270,11 +272,27 @@ registerBlockType("post-grid/post-categories", {
             setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: responsive } });
 
 
+            blockCssY[itemSelector] = (blockCssY[itemSelector] != undefined) ? blockCssY[itemSelector] : {};
+
 
             if (nextValues.top != undefined) {
               var marginTop = (blockCss.items['margin-top'] !== undefined) ? blockCss.items['margin-top'] : { responsive: {} };
               marginTop.responsive[breakPointX] = nextValues.top
               blockCss.items['margin-top'] = marginTop;
+
+
+
+              var marginTop = (blockCssY[itemSelector]['margin-top'] != undefined) ? blockCssY[itemSelector]['margin-top'] : {};
+              marginTop[breakPointX] = nextValues.top
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-top': marginTop };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
+
+
             }
 
 
@@ -282,18 +300,74 @@ registerBlockType("post-grid/post-categories", {
               var marginRight = (blockCss.items['margin-right'] !== undefined) ? blockCss.items['margin-right'] : { responsive: {} };
               marginRight.responsive[breakPointX] = nextValues.right
               blockCss.items['margin-right'] = marginRight;
+
+
+
+
+
+
+
+              var marginRight = (blockCssY[itemSelector]['margin-right'] !== undefined) ? blockCssY[itemSelector]['margin-right'] : {};
+              marginRight[breakPointX] = nextValues.right
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-right': marginRight };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
+
+
+
+
             }
 
             if (nextValues.bottom != undefined) {
               var marginBottom = (blockCss.items['margin-bottom'] !== undefined) ? blockCss.items['margin-bottom'] : { responsive: {} };
               marginBottom.responsive[breakPointX] = nextValues.bottom
               blockCss.items['margin-bottom'] = marginBottom;
+
+
+
+
+
+
+              var marginBottom = (blockCssY[itemSelector]['margin-bottom'] !== undefined) ? blockCssY[itemSelector]['margin-bottom'] : {};
+              marginBottom[breakPointX] = nextValues.bottom
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-bottom': marginBottom };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
+
+
+
+
+
+
+
+
+
             }
 
             if (nextValues.left != undefined) {
               var marginLeft = (blockCss.items['margin-left'] !== undefined) ? blockCss.items['margin-left'] : { responsive: {} };
               marginLeft.responsive[breakPointX] = nextValues.left
               blockCss.items['margin-left'] = marginLeft;
+
+
+
+
+              var marginLeft = (blockCssY[itemSelector]['margin-left'] !== undefined) ? blockCssY[itemSelector]['margin-left'] : {};
+              marginLeft[breakPointX] = nextValues.left
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-left': marginLeft };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
             }
 
 
@@ -308,13 +382,13 @@ registerBlockType("post-grid/post-categories", {
 
     function setpriceOnclick(va) {
 
-      ////console.log(va);
+      //////console.log(va);
 
       var asdsdsd = wp.data.dispatch('my-shop').setPrice('food', va)
 
       asdsdsd.then((res) => {
 
-        //////console.log(res.price);
+        ////////console.log(res.price);
         getpriceOnclick();
         //setLicense(res);
 
@@ -346,7 +420,7 @@ registerBlockType("post-grid/post-categories", {
       }).then((res) => {
 
 
-        console.log(res)
+        //console.log(res)
 
         setPostData(res)
 
@@ -360,7 +434,7 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      //console.log('Listening postId: ', postId);
+      ////console.log('Listening postId: ', postId);
       fetchPostData();
 
 
@@ -369,7 +443,16 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      console.log('Listening postData: ', postData);
+      console.log('Listening isSavingPost: ', postId);
+
+
+
+    }, [isSavingPost()]);
+
+
+
+    useEffect(() => {
+      //console.log('Listening postData: ', postData);
 
       if (postData.category != undefined) {
 
@@ -386,7 +469,10 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      //console.log('Listening maxCount: ', items.maxCount);
+      ////console.log('Listening maxCount: ', items.maxCount);
+
+      fetchPostData();
+
 
       if (postData.category != undefined) {
 
@@ -396,6 +482,9 @@ registerBlockType("post-grid/post-categories", {
         setcategoryCount(categories.length - 1);
 
       }
+
+      console.log(postData.category);
+      console.log(wp.data.select('core/editor').getCurrentPost())
 
 
 
@@ -422,22 +511,22 @@ registerBlockType("post-grid/post-categories", {
         // var attr = x;
         // var id = '.pg-postCategories a';
         ///var responsive = item.responsive;
-        console.log(selector);
-        console.log(attrs);
+        //console.log(selector);
+        //console.log(attrs);
 
 
         for (var attr in attrs) {
           var breakpoints = attrs[attr];
 
-          console.log(attr);
-          console.log(breakpoints);
+          //console.log(attr);
+          //console.log(breakpoints);
 
           for (var device in breakpoints) {
 
             var attrValue = breakpoints[device];
 
-            console.log(device);
-            console.log(attrValue);
+            //console.log(device);
+            //console.log(attrValue);
 
 
             if (reponsiveCssGroups[device] == undefined) {
@@ -456,7 +545,7 @@ registerBlockType("post-grid/post-categories", {
         }
       }
 
-      console.log(reponsiveCssGroups);
+      //console.log(reponsiveCssGroups);
 
 
 
@@ -554,7 +643,7 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-      console.log(reponsiveCss);
+      //console.log(reponsiveCss);
 
 
       var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
@@ -564,17 +653,17 @@ registerBlockType("post-grid/post-categories", {
         setTimeout(() => {
           var iframeDocument = iframe.contentDocument;
           var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-pgTitle");
+          var divWrap = iframeDocument.getElementById("css-block-postCategories");
 
           if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-pgTitle").outerHTML = "";
+            iframeDocument.getElementById("css-block-postCategories").outerHTML = "";
 
           }
 
-          var divWrap = '<div id="css-block-pgTitle"></div>';
+          var divWrap = '<div id="css-block-postCategories"></div>';
           body.insertAdjacentHTML('beforeend', divWrap);
 
-          var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
+          var csswrappg = iframeDocument.getElementById('css-block-postCategories');
           var str = '<style>' + reponsiveCss + '</style>';
 
           csswrappg.insertAdjacentHTML('beforeend', str);
@@ -584,16 +673,16 @@ registerBlockType("post-grid/post-categories", {
       } else {
 
         var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-pgTitle");
+        var divWrap = document.getElementById("css-block-postCategories");
 
         if (divWrap != undefined) {
-          document.getElementById("css-block-pgTitle").outerHTML = "";
+          document.getElementById("css-block-postCategories").outerHTML = "";
         }
 
-        var divWrap = '<div id="css-block-pgTitle"></div>';
+        var divWrap = '<div id="css-block-postCategories"></div>';
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
 
-        var csswrappg = document.getElementById('css-block-pgTitle');
+        var csswrappg = document.getElementById('css-block-postCategories');
         var str = '<style>' + reponsiveCss + '</style>';
         csswrappg.insertAdjacentHTML('beforeend', str);
 
@@ -712,6 +801,10 @@ registerBlockType("post-grid/post-categories", {
 
       reponsiveCss += '}';
 
+      reponsiveCss += customCss;
+
+
+
       var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
 
       if (iframe) {
@@ -719,17 +812,17 @@ registerBlockType("post-grid/post-categories", {
         setTimeout(() => {
           var iframeDocument = iframe.contentDocument;
           var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-pgTitle");
+          var divWrap = iframeDocument.getElementById("css-block-postCategories");
 
           if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-pgTitle").outerHTML = "";
+            iframeDocument.getElementById("css-block-postCategories").outerHTML = "";
 
           }
 
-          var divWrap = '<div id="css-block-pgTitle"></div>';
+          var divWrap = '<div id="css-block-postCategories"></div>';
           body.insertAdjacentHTML('beforeend', divWrap);
 
-          var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
+          var csswrappg = iframeDocument.getElementById('css-block-postCategories');
           var str = '<style>' + reponsiveCss + '</style>';
 
           csswrappg.insertAdjacentHTML('beforeend', str);
@@ -739,16 +832,16 @@ registerBlockType("post-grid/post-categories", {
       } else {
 
         var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-pgTitle");
+        var divWrap = document.getElementById("css-block-postCategories");
 
         if (divWrap != undefined) {
-          document.getElementById("css-block-pgTitle").outerHTML = "";
+          document.getElementById("css-block-postCategories").outerHTML = "";
         }
 
-        var divWrap = '<div id="css-block-pgTitle"></div>';
+        var divWrap = '<div id="css-block-postCategories"></div>';
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
 
-        var csswrappg = document.getElementById('css-block-pgTitle');
+        var csswrappg = document.getElementById('css-block-postCategories');
         var str = '<style>' + reponsiveCss + '</style>';
         csswrappg.insertAdjacentHTML('beforeend', str);
 
@@ -774,7 +867,7 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      console.log('Listening blockCssY: ', blockCssY);
+      //console.log('Listening blockCssY: ', blockCssY);
 
 
 
@@ -782,7 +875,7 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      console.log('Listening blockCss: ', blockCss);
+      //console.log('Listening blockCss: ', blockCss);
 
       generateBlockCss()
       generateBlockCssY()
@@ -796,7 +889,7 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      //////console.log('Listening linkAttr: ', linkAttr);
+      ////////console.log('Listening linkAttr: ', linkAttr);
       linkAttrObj();
 
 
@@ -820,13 +913,13 @@ registerBlockType("post-grid/post-categories", {
 
       })
 
-      //////console.log(sdsd);
+      ////////console.log(sdsd);
       setlinkAttrItems(sdsd);
       //return sdsd;
 
     }
 
-    //////console.log(breakPointList);
+    ////////console.log(breakPointList);
     const colors = [
       { name: '9DD6DF', color: '#9DD6DF' },
       { name: '18978F', color: '#18978F' },
@@ -866,17 +959,39 @@ registerBlockType("post-grid/post-categories", {
     );
 
     const termstaxonomy = useSelect((select) =>
-      select('core').getEntityRecords('taxonomy', 'category')
+      select('core').getEntityRecords('taxonomy', 'category', [4, 5])
 
     );
 
+    useEffect(() => {
+      console.log('Inserted');
+
+    }, [post]);
+
+    console.log(post);
 
 
-    //console.log(termstaxonomy);
+    function fetchCategories() {
+
+      apiFetch({
+        path: '/post-grid/v2/get_license',
+        method: 'POST',
+        data: {},
+      }).then((res) => {
+
+        console.log(res);
+
+        setLicense(res);
 
 
-    ////console.log('Hello');
-    //console.log(post);
+      });
+
+    }
+
+
+
+    //////console.log('Hello');
+    ////console.log(post);
 
 
     const MyDropdown = () => (
@@ -907,7 +1022,7 @@ registerBlockType("post-grid/post-categories", {
                 <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
 
-                  ////console.log(x.value);
+                  //////console.log(x.value);
 
                   setPreviewDeviceType(x.value)
                   var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value)
@@ -950,9 +1065,9 @@ registerBlockType("post-grid/post-categories", {
 
     function onChangeBreakPoint(x, index) {
 
-      //console.log(x);
-      //console.log(index);
-      //console.log('Post Title');
+      ////console.log(x);
+      ////console.log(index);
+      ////console.log('Post Title');
 
 
 
@@ -1223,7 +1338,7 @@ registerBlockType("post-grid/post-categories", {
               </div>
 
 
-              <PanelRow>
+              <PanelRow className='my-3'>
                 <label>Color</label>
                 {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
 
@@ -1248,7 +1363,6 @@ registerBlockType("post-grid/post-categories", {
                   blockCssY[itemSelector] = { ...blockCssY[itemSelector], color: responsive };
                   setAttributes({ blockCssY: blockCssY });
 
-                  generateBlockCssY()
 
                   setAttributes({ blockCss: { items: blockCss.items } });
 
@@ -1260,7 +1374,7 @@ registerBlockType("post-grid/post-categories", {
               />
 
 
-              <PanelRow>
+              <PanelRow className='my-3'>
                 <label>Background Color</label>
                 <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
 
@@ -1284,7 +1398,6 @@ registerBlockType("post-grid/post-categories", {
                   blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'background-color': responsive };
                   setAttributes({ blockCssY: blockCssY });
 
-                  generateBlockCssY()
 
 
                   blockCss.items['background-color'] = { responsive: responsive };
@@ -1293,14 +1406,14 @@ registerBlockType("post-grid/post-categories", {
                 }}
               />
 
-              <PanelRow>
+              <PanelRow className='my-3'>
                 <label>Padding</label>
                 <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
               </PanelRow>
 
               <PaddingControl />
 
-              <PanelRow>
+              <PanelRow className='my-3'>
                 <label>Margin</label>
                 <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
               </PanelRow>
@@ -1415,13 +1528,7 @@ registerBlockType("post-grid/post-categories", {
 
         <>
 
-
-          <div className='my-3'><code>{JSON.stringify(items)}</code></div>
-
-
-          <div><code>{JSON.stringify(blockCssY)}</code></div>
-
-          {postData.category == undefined && ('Loading')}
+          {postData.category == undefined && (<Spinner />)}
 
           {postData.category !== undefined && (
 

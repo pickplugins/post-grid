@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl } from '@wordpress/components'
+import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
@@ -17,106 +17,70 @@ import { store } from '../../store'
 import IconToggle from '../../components/icon-toggle'
 import BreakpointToggle from '../../components/breakpoint-toggle'
 
+const { isSavingPost, getCurrentPost } = select('core/editor');
 
 
 var myStore = wp.data.select('my-shop');
 
-//////console.log(wp.data.select('my-shop').getBreakPoint('food'))
-////console.log(myStore.getBreakPoint());
+////////console.log(wp.data.select('my-shop').getBreakPoint('food'))
+//////console.log(myStore.getBreakPoint());
 
 
 
 
-//////console.log(wp.data.select('my-shop').setPrice('food', 98))
-//////console.log()
+////////console.log(wp.data.select('my-shop').setPrice('food', 98))
 
 
 
 
 registerBlockType("post-grid/post-categories", {
   title: "Post Categories",
-  icon: "grid-view",
+  icon: {
+    // Specifying a background color to appear with the icon e.g.: in the inserter.
+    background: '#7e70af',
+    // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
+    foreground: '#fff',
+    // Specifying an icon for the block
+    src: <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M20 4H4v1.5h16V4zm-2 9h-3c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zm.5 5c0 .3-.2.5-.5.5h-3c-.3 0-.5-.2-.5-.5v-3c0-.3.2-.5.5-.5h3c.3 0 .5.2.5.5v3zM4 9.5h9V8H4v1.5zM9 13H6c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zm.5 5c0 .3-.2.5-.5.5H6c-.3 0-.5-.2-.5-.5v-3c0-.3.2-.5.5-.5h3c.3 0 .5.2.5.5v3z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>,
+  },
   attributes: {
 
-    textAlign: {
-      "type": "string"
+    wrapper: {
+      type: 'object',
+      default: { textAlign: '', class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
-    tag: {
-      "type": "string",
-      "default": 'h2'
+    items: {
+      type: 'object',
+      default: { prefix: '', postfix: '', maxCount: 3, postCount: false, class: 'item', linkTarget: '', linkAttr: [], color: {}, bgColor: {}, padding: {}, margin: {} },
     },
-    prefix: {
-      "type": "string",
-      "default": ''
+    separator: {
+      type: 'object',
+      default: { text: ', ', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
-    postfix: {
-      "type": "string",
-      "default": ''
+    frontText: {
+      type: 'object',
+      default: { text: 'Categories: ', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
+
 
     customCss: {
       "type": "string",
       "default": ''
     },
-    customUrl: {
-      "type": "string",
-      "default": ''
-    },
-
     postId: {
       type: 'number',
     },
-    level: {
-      "type": "number",
-      "default": 2
-    },
 
-    color: {
-      type: 'object',
-      default: { responsive: {} },
-    },
 
-    bgColor: {
-      type: 'object',
-      default: { responsive: {} },
-    },
-
-    padding: {
-      type: 'object',
-      default: {
-        responsive: {}
-      },
-    },
-    margin: {
-      type: 'object',
-      default: {
-        responsive: {}
-      },
-    },
-
-    isLink: {
-      "type": "boolean",
-      "default": false
-    },
-    rel: {
-      "type": "string",
-      "attribute": "rel",
-      "default": ""
-    },
-
-    linkAttr: {
-      "type": "array",
-      "default": []
-    },
     blockCss: {
       "type": "object",
       "default": { items: {} }
     },
-
-    linkTarget: {
-      "type": "string",
-      "default": "_self"
+    blockCssY: {
+      "type": "object",
+      "default": {}
     },
+
   },
   usesContext: ["postId", "loopIndex", "postType", "queryId"],
 
@@ -132,22 +96,18 @@ registerBlockType("post-grid/post-categories", {
     var attributes = props.attributes;
     var setAttributes = props.setAttributes;
     var context = props.context;
+    var clientId = props.clientId;
 
-    var textAlign = attributes.textAlign;
-    var isLink = attributes.isLink;
-    var linkTarget = attributes.linkTarget;
-    var rel = attributes.rel;
-    var color = attributes.color;
-    var bgColor = attributes.bgColor;
-    var tag = attributes.tag;
-    var linkAttr = attributes.linkAttr;
+
+    var wrapper = attributes.wrapper;
+    var items = attributes.items;
+    var separator = attributes.separator;
+    var frontText = attributes.frontText;
+
     var blockCss = attributes.blockCss;
-    var padding = attributes.padding;
-    var margin = attributes.margin;
-    var prefix = attributes.prefix;
-    var postfix = attributes.postfix;
+    var blockCssY = attributes.blockCssY;
+
     var customCss = attributes.customCss;
-    var customUrl = attributes.customUrl;
 
 
     var postId = context['postId'];
@@ -156,7 +116,18 @@ registerBlockType("post-grid/post-categories", {
     const [license, setLicense] = useState(myStore.getLicense());
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+    // Wrapper CSS Class Selectors
+    const itemWrapSelector = '.pg-postCategories';
+    const itemSelector = '.pg-postCategories .item';
+    const itemSeparatorSelector = '.pg-postCategories .separator';
+    const frontTextSelector = '.pg-postCategories .frontText';
+    const postCountSelector = '.pg-postCategories .postCount';
+
+
+
+
+
+    var breakPointList = [];
 
     for (var x in breakPoints) {
 
@@ -172,24 +143,46 @@ registerBlockType("post-grid/post-categories", {
       return (
         <BoxControl
           label=""
-          values={padding.responsive[breakPointX]}
+          values={items.padding[breakPointX]}
           onChange={(nextValues) => {
 
 
-            var responsive = padding.responsive;
+            var responsive = items.padding;
             responsive[breakPointX] = nextValues;
 
-            ////console.log(nextValues);
+            //////console.log(nextValues);
 
-            setAttributes({ padding: { responsive: responsive } })
 
+
+            setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: responsive, margin: items.margin } });
 
             //blockCss.items['padding'] = { responsive: responsive };
+
+            blockCssY[itemSelector] = (blockCssY[itemSelector] != undefined) ? blockCssY[itemSelector] : {};
+
+
+            //console.log(blockCssY[itemSelector]);
+
 
             if (nextValues.top != undefined) {
               var paddingTop = (blockCss.items['padding-top'] !== undefined) ? blockCss.items['padding-top'] : { responsive: {} };
               paddingTop.responsive[breakPointX] = nextValues.top
               blockCss.items['padding-top'] = paddingTop;
+
+
+
+
+              var paddingTop = (blockCssY[itemSelector]['padding-top'] != undefined) ? blockCssY[itemSelector]['padding-top'] : {};
+              paddingTop[breakPointX] = nextValues.top
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-top': paddingTop };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
+
+
             }
 
 
@@ -197,18 +190,53 @@ registerBlockType("post-grid/post-categories", {
               var paddingRight = (blockCss.items['padding-right'] !== undefined) ? blockCss.items['padding-right'] : { responsive: {} };
               paddingRight.responsive[breakPointX] = nextValues.right
               blockCss.items['padding-right'] = paddingRight;
+
+
+
+
+              var paddingRight = (blockCssY[itemSelector]['padding-right'] != undefined) ? blockCssY[itemSelector]['padding-right'] : {};
+              paddingRight[breakPointX] = nextValues.right
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-right': paddingRight };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
             }
 
             if (nextValues.bottom != undefined) {
               var paddingBottom = (blockCss.items['padding-bottom'] !== undefined) ? blockCss.items['padding-bottom'] : { responsive: {} };
               paddingBottom.responsive[breakPointX] = nextValues.bottom
               blockCss.items['padding-bottom'] = paddingBottom;
+
+
+
+              var paddingBottom = (blockCssY[itemSelector]['padding-bottom'] != undefined) ? blockCssY[itemSelector]['padding-bottom'] : {};
+              paddingBottom[breakPointX] = nextValues.bottom
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-bottom': paddingBottom };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
             }
 
             if (nextValues.left != undefined) {
               var paddingLeft = (blockCss.items['padding-left'] !== undefined) ? blockCss.items['padding-left'] : { responsive: {} };
               paddingLeft.responsive[breakPointX] = nextValues.left
               blockCss.items['padding-left'] = paddingLeft;
+
+
+
+              var paddingLeft = (blockCssY[itemSelector]['padding-left'] != undefined) ? blockCssY[itemSelector]['padding-left'] : {};
+              paddingLeft[breakPointX] = nextValues.left
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-left': paddingLeft };
+              setAttributes({ blockCssY: blockCssY });
+
+
             }
 
 
@@ -231,25 +259,40 @@ registerBlockType("post-grid/post-categories", {
       return (
         <BoxControl
           label=""
-          values={margin.responsive[breakPointX]}
+          values={items.margin[breakPointX]}
           onChange={(nextValues) => {
 
 
-            var responsive = margin.responsive;
+            var responsive = items.margin;
             responsive[breakPointX] = nextValues;
 
-            setAttributes({ margin: { responsive: responsive } })
 
             //blockCss.items['margin'] = { responsive: responsive };
 
+            setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: responsive } });
 
 
+            blockCssY[itemSelector] = (blockCssY[itemSelector] != undefined) ? blockCssY[itemSelector] : {};
 
 
             if (nextValues.top != undefined) {
               var marginTop = (blockCss.items['margin-top'] !== undefined) ? blockCss.items['margin-top'] : { responsive: {} };
               marginTop.responsive[breakPointX] = nextValues.top
               blockCss.items['margin-top'] = marginTop;
+
+
+
+              var marginTop = (blockCssY[itemSelector]['margin-top'] != undefined) ? blockCssY[itemSelector]['margin-top'] : {};
+              marginTop[breakPointX] = nextValues.top
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-top': marginTop };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
+
+
             }
 
 
@@ -257,18 +300,74 @@ registerBlockType("post-grid/post-categories", {
               var marginRight = (blockCss.items['margin-right'] !== undefined) ? blockCss.items['margin-right'] : { responsive: {} };
               marginRight.responsive[breakPointX] = nextValues.right
               blockCss.items['margin-right'] = marginRight;
+
+
+
+
+
+
+
+              var marginRight = (blockCssY[itemSelector]['margin-right'] !== undefined) ? blockCssY[itemSelector]['margin-right'] : {};
+              marginRight[breakPointX] = nextValues.right
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-right': marginRight };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
+
+
+
+
             }
 
             if (nextValues.bottom != undefined) {
               var marginBottom = (blockCss.items['margin-bottom'] !== undefined) ? blockCss.items['margin-bottom'] : { responsive: {} };
               marginBottom.responsive[breakPointX] = nextValues.bottom
               blockCss.items['margin-bottom'] = marginBottom;
+
+
+
+
+
+
+              var marginBottom = (blockCssY[itemSelector]['margin-bottom'] !== undefined) ? blockCssY[itemSelector]['margin-bottom'] : {};
+              marginBottom[breakPointX] = nextValues.bottom
+
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-bottom': marginBottom };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
+
+
+
+
+
+
+
+
+
             }
 
             if (nextValues.left != undefined) {
               var marginLeft = (blockCss.items['margin-left'] !== undefined) ? blockCss.items['margin-left'] : { responsive: {} };
               marginLeft.responsive[breakPointX] = nextValues.left
               blockCss.items['margin-left'] = marginLeft;
+
+
+
+
+              var marginLeft = (blockCssY[itemSelector]['margin-left'] !== undefined) ? blockCssY[itemSelector]['margin-left'] : {};
+              marginLeft[breakPointX] = nextValues.left
+
+              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-left': marginLeft };
+              setAttributes({ blockCssY: blockCssY });
+
+
+
             }
 
 
@@ -283,13 +382,13 @@ registerBlockType("post-grid/post-categories", {
 
     function setpriceOnclick(va) {
 
-      ////console.log(va);
+      //////console.log(va);
 
       var asdsdsd = wp.data.dispatch('my-shop').setPrice('food', va)
 
       asdsdsd.then((res) => {
 
-        //////console.log(res.price);
+        ////////console.log(res.price);
         getpriceOnclick();
         //setLicense(res);
 
@@ -303,6 +402,10 @@ registerBlockType("post-grid/post-categories", {
 
 
     const [postData, setPostData] = useState({}); // Using the hook.
+    const [postCategories, setPostCategories] = useState([]); // Using the hook.
+    const [categoryCount, setcategoryCount] = useState(0); // Using the hook.
+
+
 
 
     function fetchPostData() {
@@ -317,7 +420,7 @@ registerBlockType("post-grid/post-categories", {
       }).then((res) => {
 
 
-        console.log(res)
+        //console.log(res)
 
         setPostData(res)
 
@@ -331,7 +434,7 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      //console.log('Listening postId: ', postId);
+      ////console.log('Listening postId: ', postId);
       fetchPostData();
 
 
@@ -339,6 +442,53 @@ registerBlockType("post-grid/post-categories", {
     }, [postId]);
 
 
+    useEffect(() => {
+      console.log('Listening isSavingPost: ', postId);
+
+
+
+    }, [isSavingPost()]);
+
+
+
+    useEffect(() => {
+      //console.log('Listening postData: ', postData);
+
+      if (postData.category != undefined) {
+
+        const categories = postData.category.slice(0, items.maxCount);
+
+        setPostCategories(categories);
+        setcategoryCount(categories.length - 1);
+
+      }
+
+
+
+    }, [postData]);
+
+
+    useEffect(() => {
+      ////console.log('Listening maxCount: ', items.maxCount);
+
+      fetchPostData();
+
+
+      if (postData.category != undefined) {
+
+        const categories = postData.category.slice(0, items.maxCount);
+
+        setPostCategories(categories);
+        setcategoryCount(categories.length - 1);
+
+      }
+
+      console.log(postData.category);
+      console.log(wp.data.select('core/editor').getCurrentPost())
+
+
+
+    }, [items]);
 
 
 
@@ -348,9 +498,201 @@ registerBlockType("post-grid/post-categories", {
 
 
 
+    function generateBlockCssY() {
+
+
+      var reponsiveCssGroups = {};
+      var reponsiveCss = '';
+
+      for (var selector in blockCssY) {
+
+        var attrs = blockCssY[selector];
+
+        // var attr = x;
+        // var id = '.pg-postCategories a';
+        ///var responsive = item.responsive;
+        //console.log(selector);
+        //console.log(attrs);
+
+
+        for (var attr in attrs) {
+          var breakpoints = attrs[attr];
+
+          //console.log(attr);
+          //console.log(breakpoints);
+
+          for (var device in breakpoints) {
+
+            var attrValue = breakpoints[device];
+
+            //console.log(device);
+            //console.log(attrValue);
+
+
+            if (reponsiveCssGroups[device] == undefined) {
+              reponsiveCssGroups[device] = []
+            }
+
+            if (reponsiveCssGroups[device][selector] == undefined) {
+              reponsiveCssGroups[device][selector] = []
+            }
+
+            reponsiveCssGroups[device][selector].push({ 'attr': attr, 'val': attrValue });
+
+          }
+
+
+        }
+      }
+
+      //console.log(reponsiveCssGroups);
 
 
 
+
+      // for (var device in reponsiveCssGroups) {
+
+      //   var item = reponsiveCssGroups[device];
+
+
+      //   if (device === 'Mobile') {
+      //     reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+      //   }
+      //   if (device === 'Tablet') {
+      //     reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+      //   }
+      //   if (device === 'Desktop') {
+      //     reponsiveCss += '@media only screen and (min-width: 781px){';
+      //   }
+
+      //   for (var index in item) {
+      //     var attr = item[index].attr;
+      //     var defaultVal = item[index].val;
+      //     var id = '.pg-postCategories-' + postId + ' a';
+      //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
+      //     reponsiveCss += '}';
+      //   }
+
+      // }
+
+      if (reponsiveCssGroups['Mobile'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+
+        for (var selector in reponsiveCssGroups['Mobile']) {
+          var attrs = reponsiveCssGroups['Mobile'][selector];
+
+          reponsiveCss += selector + '{';
+          for (var index in attrs) {
+            var attr = attrs[index]
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+          reponsiveCss += '}';
+        }
+        reponsiveCss += '}';
+
+      }
+
+
+
+
+      if (reponsiveCssGroups['Tablet'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+
+        for (var selector in reponsiveCssGroups['Tablet']) {
+          var attrs = reponsiveCssGroups['Tablet'][selector];
+
+          reponsiveCss += selector + '{';
+          for (var index in attrs) {
+            var attr = attrs[index]
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+          reponsiveCss += '}';
+        }
+
+        reponsiveCss += '}';
+      }
+
+
+
+      if (reponsiveCssGroups['Desktop'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 781px){';
+
+        for (var selector in reponsiveCssGroups['Desktop']) {
+          var attrs = reponsiveCssGroups['Desktop'][selector];
+
+
+          reponsiveCss += selector + '{';
+          for (var index in attrs) {
+            var attr = attrs[index]
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+          reponsiveCss += '}';
+
+
+        }
+        reponsiveCss += '}';
+      }
+
+
+
+
+
+      //console.log(reponsiveCss);
+
+
+      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
+
+      if (iframe) {
+
+        setTimeout(() => {
+          var iframeDocument = iframe.contentDocument;
+          var body = iframeDocument.body;
+          var divWrap = iframeDocument.getElementById("css-block-postCategories");
+
+          if (divWrap != undefined) {
+            iframeDocument.getElementById("css-block-postCategories").outerHTML = "";
+
+          }
+
+          var divWrap = '<div id="css-block-postCategories"></div>';
+          body.insertAdjacentHTML('beforeend', divWrap);
+
+          var csswrappg = iframeDocument.getElementById('css-block-postCategories');
+          var str = '<style>' + reponsiveCss + '</style>';
+
+          csswrappg.insertAdjacentHTML('beforeend', str);
+        }, 200)
+
+
+      } else {
+
+        var wpfooter = document.getElementById('wpfooter');
+        var divWrap = document.getElementById("css-block-postCategories");
+
+        if (divWrap != undefined) {
+          document.getElementById("css-block-postCategories").outerHTML = "";
+        }
+
+        var divWrap = '<div id="css-block-postCategories"></div>';
+        wpfooter.insertAdjacentHTML('beforeend', divWrap);
+
+        var csswrappg = document.getElementById('css-block-postCategories');
+        var str = '<style>' + reponsiveCss + '</style>';
+        csswrappg.insertAdjacentHTML('beforeend', str);
+
+
+
+      }
+
+
+
+    }
 
 
 
@@ -370,7 +712,7 @@ registerBlockType("post-grid/post-categories", {
         var item = blockCss.items[x];
 
         var attr = x;
-        var id = '.pg-categories a';
+        var id = '.pg-postCategories a';
         var responsive = item.responsive;
 
 
@@ -404,7 +746,7 @@ registerBlockType("post-grid/post-categories", {
       //   for (var index in item) {
       //     var attr = item[index].attr;
       //     var defaultVal = item[index].val;
-      //     var id = '.pg-categories-' + postId + ' a';
+      //     var id = '.pg-postCategories-' + postId + ' a';
       //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
       //     reponsiveCss += '}';
       //   }
@@ -421,7 +763,7 @@ registerBlockType("post-grid/post-categories", {
           var attr = item.attr;
           var defaultVal = item.val;
 
-          var id = '.pg-categories a';
+          var id = '.pg-postCategories a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
         }
 
@@ -435,7 +777,7 @@ registerBlockType("post-grid/post-categories", {
         for (var j in item) {
           var attr = item.attr;
           var defaultVal = item.val;
-          var id = '.pg-categories a';
+          var id = '.pg-postCategories a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
         }
 
@@ -450,7 +792,7 @@ registerBlockType("post-grid/post-categories", {
         for (var k in item) {
           var attr = item.attr;
           var defaultVal = item.val;
-          var id = '.pg-categories a';
+          var id = '.pg-postCategories a';
           reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
 
         }
@@ -459,6 +801,10 @@ registerBlockType("post-grid/post-categories", {
 
       reponsiveCss += '}';
 
+      reponsiveCss += customCss;
+
+
+
       var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
 
       if (iframe) {
@@ -466,17 +812,17 @@ registerBlockType("post-grid/post-categories", {
         setTimeout(() => {
           var iframeDocument = iframe.contentDocument;
           var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-pgTitle");
+          var divWrap = iframeDocument.getElementById("css-block-postCategories");
 
           if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-pgTitle").outerHTML = "";
+            iframeDocument.getElementById("css-block-postCategories").outerHTML = "";
 
           }
 
-          var divWrap = '<div id="css-block-pgTitle"></div>';
+          var divWrap = '<div id="css-block-postCategories"></div>';
           body.insertAdjacentHTML('beforeend', divWrap);
 
-          var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
+          var csswrappg = iframeDocument.getElementById('css-block-postCategories');
           var str = '<style>' + reponsiveCss + '</style>';
 
           csswrappg.insertAdjacentHTML('beforeend', str);
@@ -486,16 +832,16 @@ registerBlockType("post-grid/post-categories", {
       } else {
 
         var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-pgTitle");
+        var divWrap = document.getElementById("css-block-postCategories");
 
         if (divWrap != undefined) {
-          document.getElementById("css-block-pgTitle").outerHTML = "";
+          document.getElementById("css-block-postCategories").outerHTML = "";
         }
 
-        var divWrap = '<div id="css-block-pgTitle"></div>';
+        var divWrap = '<div id="css-block-postCategories"></div>';
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
 
-        var csswrappg = document.getElementById('css-block-pgTitle');
+        var csswrappg = document.getElementById('css-block-postCategories');
         var str = '<style>' + reponsiveCss + '</style>';
         csswrappg.insertAdjacentHTML('beforeend', str);
 
@@ -521,22 +867,36 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      console.log('Listening blockCss: ', blockCss);
+      //console.log('Listening blockCssY: ', blockCssY);
+
+
+
+    }, [blockCssY]);
+
+
+    useEffect(() => {
+      //console.log('Listening blockCss: ', blockCss);
 
       generateBlockCss()
+      generateBlockCssY()
+
 
     }, [blockCss]);
 
 
+
+
+
+
     useEffect(() => {
-      //////console.log('Listening linkAttr: ', linkAttr);
+      ////////console.log('Listening linkAttr: ', linkAttr);
       linkAttrObj();
 
 
 
 
 
-    }, [linkAttr]);
+    }, [items]);
 
 
 
@@ -546,20 +906,20 @@ registerBlockType("post-grid/post-categories", {
 
       var sdsd = {};
 
-      linkAttr.map(x => {
+      items.linkAttr.map(x => {
 
         if (x.val)
           sdsd[x.id] = x.val;
 
       })
 
-      //////console.log(sdsd);
+      ////////console.log(sdsd);
       setlinkAttrItems(sdsd);
       //return sdsd;
 
     }
 
-    //////console.log(breakPointList);
+    ////////console.log(breakPointList);
     const colors = [
       { name: '9DD6DF', color: '#9DD6DF' },
       { name: '18978F', color: '#18978F' },
@@ -599,21 +959,40 @@ registerBlockType("post-grid/post-categories", {
     );
 
     const termstaxonomy = useSelect((select) =>
-      select('core').getEntityRecords('taxonomy', 'category')
+      select('core').getEntityRecords('taxonomy', 'category', [4, 5])
 
     );
 
+    useEffect(() => {
+      console.log('Inserted');
+
+    }, [post]);
+
+    console.log(post);
 
 
-    //console.log(termstaxonomy);
+    function fetchCategories() {
+
+      apiFetch({
+        path: '/post-grid/v2/get_license',
+        method: 'POST',
+        data: {},
+      }).then((res) => {
+
+        console.log(res);
+
+        setLicense(res);
 
 
-    var postUrl = (customUrl.length > 0) ? customUrl : post.link;
+      });
 
-    ////console.log('Hello');
-    //console.log(post);
+    }
 
-    const CustomTag = `${tag}`;
+
+
+    //////console.log('Hello');
+    ////console.log(post);
+
 
     const MyDropdown = () => (
 
@@ -643,7 +1022,7 @@ registerBlockType("post-grid/post-categories", {
                 <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
 
-                  ////console.log(x.value);
+                  //////console.log(x.value);
 
                   setPreviewDeviceType(x.value)
                   var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value)
@@ -686,9 +1065,9 @@ registerBlockType("post-grid/post-categories", {
 
     function onChangeBreakPoint(x, index) {
 
-      //console.log(x);
-      //console.log(index);
-      //console.log('Post Title');
+      ////console.log(x);
+      ////console.log(index);
+      ////console.log('Post Title');
 
 
 
@@ -715,144 +1094,170 @@ registerBlockType("post-grid/post-categories", {
 
           <BlockControls >
             <AlignmentToolbar
-              value={textAlign}
+              value={wrapper.textAlign}
               onChange={(nextAlign) => {
-                setAttributes({ textAlign: nextAlign });
+                setAttributes({ wrapper: { textAlign: nextAlign, color: wrapper.color, bgColor: wrapper.bgColor, padding: wrapper.padding, margin: wrapper.margin } });
+
+
+
+
               }}
             />
           </BlockControls>
 
 
           <InspectorControls key="general">
-            <div className='px-3' title="General" initialOpen={false}>
 
 
-              {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
+            <PanelBody title="Items Wrapper" initialOpen={false}>
+
+              <PanelRow>
+                <label for="">Wrapper Class</label>
+
+                <InputControl
+                  value={wrapper.class}
+                  onChange={(newVal) => {
+
+                    setAttributes({ wrapper: { textAlign: wrapper.textAlign, class: newVal, color: wrapper.color, bgColor: wrapper.bgColor, padding: wrapper.padding, margin: wrapper.margin } });
+
+
+                  }}
+                />
+              </PanelRow>
+
+            </PanelBody>
 
 
 
+            <PanelBody title="Items" initialOpen={true}>
 
               <ToggleControl
-                label="Linked with post?"
-                help={isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
-                checked={isLink ? true : false}
+                label="Display Post Count"
+                help={items.postCount ? 'Post Count Enabled' : 'Post Count Disabled'}
+                checked={items.postCount ? true : false}
                 onChange={(e) => {
 
-                  setAttributes({ isLink: isLink ? false : true });
+
+                  setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount ? false : true, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+
 
                 }}
               />
 
-              {isLink && (
+              <PanelRow>
+                <label for="">Item Class</label>
 
-                <div>
-                  <PanelRow>
-                    <label for="">Link Target</label>
+                <InputControl
+                  value={items.class}
+                  onChange={(newVal) => {
 
-                    <SelectControl
-                      label=""
-                      value={linkTarget}
-                      options={[
-                        { label: '_self', value: '_self' },
-                        { label: '_blank', value: '_blank' },
-                        { label: '_parent', value: '_parent' },
-                        { label: '_top', value: '_top' },
+                    setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: newVal, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
 
 
-                      ]}
-                      onChange={(newVal) => setAttributes({ linkTarget: newVal })}
-                    />
-                  </PanelRow>
-
-
-                  <PanelRow>
-                    <label for="">Rel Attribute</label>
-
-                    <InputControl
-                      value={rel}
-                      onChange={(newVal) => setAttributes({ rel: newVal })}
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label for="">Prefix</label>
-
-                    <InputControl
-                      value={prefix}
-                      onChange={(newVal) => setAttributes({ prefix: newVal })}
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label for="">Postfix</label>
-
-                    <InputControl
-                      value={postfix}
-                      onChange={(newVal) => setAttributes({ postfix: newVal })}
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label for="">Custom Url</label>
-
-                    <InputControl
-                      value={customUrl}
-                      onChange={(newVal) => setAttributes({ customUrl: newVal })}
-                    />
-                  </PanelRow>
-
-
-
-
-                  <PanelRow>
-                    <label for="">Custom Attributes</label>
-                    <div
-                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                      onClick={(ev) => {
-
-                        var sdsd = linkAttr.concat({ id: '', val: '' })
-
-                        setAttributes({ linkAttr: sdsd })
-                        linkAttrObj()
-                      }}
-
-                    >Add</div>
-
-
-
-                  </PanelRow>
-
-                </div>
-
-
-
-              )}
-
+                  }}
+                />
+              </PanelRow>
 
               <PanelRow>
-                <label for="">Wrapper Tag</label>
+                <label for="">Max Count</label>
+
+                <InputControl
+                  value={items.maxCount}
+                  onChange={(newVal) => {
+
+
+                    setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: newVal, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+                  }
+
+
+
+
+                  }
+                />
+              </PanelRow>
+
+              <PanelRow>
+                <label for="">Link Target</label>
 
                 <SelectControl
                   label=""
-                  value={tag}
+                  value={items.linkTarget}
                   options={[
-                    { label: 'No Wrapper', value: '' },
-
-                    { label: 'H1', value: 'h1' },
-                    { label: 'H2', value: 'h2' },
-                    { label: 'H3', value: 'h3' },
-                    { label: 'H4', value: 'h4' },
-                    { label: 'H5', value: 'h5' },
-                    { label: 'H6', value: 'h6' },
-                    { label: 'span', value: 'SPAN' },
-                    { label: 'div', value: 'DIV' },
-                    { label: 'P', value: 'p' },
+                    { label: '_self', value: '_self' },
+                    { label: '_blank', value: '_blank' },
+                    { label: '_parent', value: '_parent' },
+                    { label: '_top', value: '_top' },
 
 
                   ]}
-                  onChange={(newVal) => setAttributes({ tag: newVal })}
+                  onChange={(newVal) => {
+
+                    setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: newVal, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+                  }
+
+
+                  }
                 />
+              </PanelRow>
+
+
+
+
+              <PanelRow>
+                <label for="">Prefix</label>
+
+                <InputControl
+                  value={items.prefix}
+                  onChange={(newVal) => {
+
+
+                    setAttributes({ items: { prefix: newVal, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+                  }
+                  }
+                />
+              </PanelRow>
+
+              <PanelRow>
+                <label for="">Postfix</label>
+                <InputControl
+                  value={items.postfix}
+                  onChange={(newVal) => {
+                    setAttributes({ items: { prefix: items.prefix, postfix: newVal, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+                  }}
+                />
+              </PanelRow>
+
+
+
+
+
+
+
+
+
+
+              <PanelRow>
+                <label for="">Custom Attributes</label>
+                <div
+                  className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                  onClick={(ev) => {
+
+                    var sdsd = items.linkAttr.concat({ id: '', val: '' })
+
+                    setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: sdsd, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+                    linkAttrObj()
+                  }}
+
+                >Add</div>
+
+
+
               </PanelRow>
 
 
@@ -868,7 +1273,7 @@ registerBlockType("post-grid/post-categories", {
 
 
                 {
-                  linkAttr.map((x, i) => {
+                  items.linkAttr.map((x, i) => {
 
                     return (
 
@@ -876,15 +1281,16 @@ registerBlockType("post-grid/post-categories", {
                         <PanelRow>
                           <InputControl
                             className='mr-2'
-                            value={linkAttr[i].id}
+                            value={items.linkAttr[i].id}
                             onChange={(newVal) => {
 
-                              linkAttr[i].id = newVal;
+                              items.linkAttr[i].id = newVal;
 
 
-                              var ssdsd = linkAttr.concat([]);
+                              var ssdsd = items.linkAttr.concat([]);
 
-                              setAttributes({ linkAttr: ssdsd })
+                              setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: ssdsd, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
 
                             }}
                           />
@@ -893,22 +1299,27 @@ registerBlockType("post-grid/post-categories", {
                             className='mr-2'
                             value={x.val}
                             onChange={(newVal) => {
-                              linkAttr[i].val = newVal
-                              var ssdsd = linkAttr.concat([]);
+                              items.linkAttr[i].val = newVal
+                              var ssdsd = items.linkAttr.concat([]);
 
 
-                              setAttributes({ linkAttr: ssdsd })
+
+                              setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: ssdsd, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
 
                             }}
                           />
                           <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
                             onClick={(ev) => {
 
-                              linkAttr.splice(i, 1);
+                              items.linkAttr.splice(i, 1);
 
-                              var ssdsd = linkAttr.concat([]);
+                              var ssdsd = items.linkAttr.concat([]);
 
-                              setAttributes({ linkAttr: ssdsd })
+                              setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: ssdsd, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+
+
                             }}
 
                           ></span>
@@ -927,110 +1338,164 @@ registerBlockType("post-grid/post-categories", {
               </div>
 
 
+              <PanelRow className='my-3'>
+                <label>Color</label>
+                {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
+
+                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+              </PanelRow>
+
+              <ColorPalette
+                value={items.color[breakPointX]}
+                colors={colors}
+                enableAlpha
+                onChange={(newVal) => {
+
+                  var responsive = items.color;
+                  responsive[breakPointX] = newVal;
+
+
+
+                  setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: responsive, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
+
+                  blockCss.items['color'] = { responsive: responsive };
+
+                  blockCssY[itemSelector] = { ...blockCssY[itemSelector], color: responsive };
+                  setAttributes({ blockCssY: blockCssY });
+
+
+                  setAttributes({ blockCss: { items: blockCss.items } });
+
+
+
+
+
+                }}
+              />
+
+
+              <PanelRow className='my-3'>
+                <label>Background Color</label>
+                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+
+
+
+
+              </PanelRow>
+
+              <ColorPalette
+                value={items.bgColor[breakPointX]}
+                colors={colors}
+                enableAlpha
+                onChange={(newVal) => {
+
+                  var responsive = items.bgColor;
+                  responsive[breakPointX] = newVal;
+
+
+                  setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: responsive, padding: items.padding, margin: items.margin } });
+
+                  blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'background-color': responsive };
+                  setAttributes({ blockCssY: blockCssY });
+
+
+
+                  blockCss.items['background-color'] = { responsive: responsive };
+                  setAttributes({ blockCss: { items: blockCss.items } });
+
+                }}
+              />
+
+              <PanelRow className='my-3'>
+                <label>Padding</label>
+                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+              </PanelRow>
+
+              <PaddingControl />
+
+              <PanelRow className='my-3'>
+                <label>Margin</label>
+                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+              </PanelRow>
+              <MarginControl />
+
+
+
+
+            </PanelBody>
+
+            <PanelBody title="Front Text" initialOpen={false}>
+
+
+
+              <PanelRow>
+                <label for="">Front Text</label>
+
+                <InputControl
+                  value={frontText.text}
+                  onChange={(newVal) => setAttributes({ frontText: { text: newVal, color: frontText.color, bgColor: frontText.bgColor, padding: frontText.padding, margin: frontText.margin } })}
+                />
+              </PanelRow>
+
+
+            </PanelBody>
+            <PanelBody title="Separator" initialOpen={false}>
+
+              <PanelRow>
+                <label for="">Separator</label>
+                <InputControl
+                  value={separator.text}
+                  onChange={(newVal) => setAttributes({ separator: { text: newVal, color: separator.color, bgColor: separator.bgColor, padding: separator.padding, margin: separator.margin } })}
+                />
+              </PanelRow>
+
+            </PanelBody>
+
+            <div className=''>
+
+
+              {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
+
+
+
+
+
+
+
+
 
               <div>
 
 
 
-                <PanelBody title="Color" initialOpen={false}>
-                  <PanelRow>
-                    <label>Color</label>
-                    {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
-
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <ColorPalette
-                    value={color.responsive[breakPointX]}
-                    colors={colors}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-                      var responsive = color.responsive;
-                      responsive[breakPointX] = newVal;
-
-
-                      setAttributes({ color: { responsive: responsive } })
-
-
-
-                      blockCss.items['color'] = { responsive: responsive };
-                      setAttributes({ blockCss: { items: blockCss.items } });
-
-
-
-
-
-                    }}
-                  />
-                </PanelBody>
-
-
-
-
-
-                <PanelBody title="Background Color" initialOpen={false}>
-                  <PanelRow>
-                    <label>Background Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-                  <ColorPalette
-                    value={bgColor.responsive[breakPointX]}
-                    colors={colors}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-                      var responsive = bgColor.responsive;
-                      responsive[breakPointX] = newVal;
-
-                      setAttributes({ bgColor: { responsive: responsive } })
-
-                      blockCss.items['background-color'] = { responsive: responsive };
-                      setAttributes({ blockCss: { items: blockCss.items } });
-
-                    }}
-                  />
-                </PanelBody>
-
-
-
-                <PanelBody title="Padding" initialOpen={false}>
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PaddingControl />
-
-                </PanelBody>
-
-                <PanelBody title="Margin" initialOpen={false}>
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <MarginControl />
-
-                </PanelBody>
 
                 <PanelBody title="Custom Style" initialOpen={false}>
 
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
-                    <p className='font-bold'>No link</p>
-                    <p><code>.pg-categories{'{}'}</code></p>
-                    <p><code>.pg-categories-{postId}{'{}'}</code></p>
+                    <p className='font-bold'>Items Wrapper</p>
+                    <p><code>{itemWrapSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>
-                    <p className='font-bold'>With link</p>
-                    <p><code>.pg-categories a{'{}'} </code></p>
-                    <p><code>.pg-categories-{postId} a{'{}'}</code></p>
+                    <p className='font-bold'>Caetgory Items</p>
+                    <p><code>{itemSelector}{'{}'} </code></p>
+                    <p><code>.pg-postCategories a{'{/* your CSS here*/}'}</code></p>
+                  </div>
+
+                  <div className='my-3'>
+                    <p className='font-bold'>Separator</p>
+                    <p><code>{itemSeparatorSelector}{'{/* your CSS here*/}'} </code></p>
+                  </div>
+
+                  <div className='my-3'>
+                    <p className='font-bold'>Front Text</p>
+                    <p><code>{frontTextSelector}{'{/* your CSS here*/}'} </code></p>
+                  </div>
+
+                  <div className='my-3'>
+                    <p className='font-bold'>Post Count</p>
+                    <p><code>{postCountSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
 
@@ -1063,22 +1528,32 @@ registerBlockType("post-grid/post-categories", {
 
         <>
 
-          {postData.category == undefined && ('Loading')}
+          {postData.category == undefined && (<Spinner />)}
 
           {postData.category !== undefined && (
 
-            <div className='pg-categories'>
-              {postData.category.map(x => {
+            <div className='pg-postCategories'>
+              <span className='frontText inline-block'>
+                <RawHTML>{frontText.text}</RawHTML>
+
+              </span>
+              {postCategories.map((x, index) => {
+
 
                 return (
 
 
+                  <a target={items.linkTarget} title={x.name} {...linkAttrItems} className={items.class} href={x.url}>
+                    <span >{items.prefix}{x.name}{items.postfix}</span>
 
-                  <a target={linkTarget} rel={rel} {...linkAttrItems} className='inline-block mx-2' href={x.url}>{prefix}{x.name}{postfix}</a>
+                    {items.postCount == true && (<span className='postCount'>({x.count})</span>)}
 
-
+                    {categoryCount != index && (<span className='separator'>{separator.text}</span>)}
+                  </a>
 
                 )
+
+
 
               })}
 

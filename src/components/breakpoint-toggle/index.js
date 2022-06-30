@@ -59,7 +59,7 @@ class BreakpointToggle extends Component {
     }
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+    var breakPointList = [];
 
     for (var x in breakPoints) {
 

@@ -270,6 +270,8 @@ class BlockPostGridRest
                         $termsData[$index]['term_id'] = $term->term_id;
                         $termsData[$index]['name'] = $term->name;
                         $termsData[$index]['slug'] = $term->slug;
+                        $termsData[$index]['count'] = $term->count;
+
                         $termsData[$index]['url'] = get_term_link($term->term_id);
                     }
 

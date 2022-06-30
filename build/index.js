@@ -885,7 +885,9 @@ var myStore = wp.data.select('my-shop');
     },
     blockCssY: {
       "type": "object",
-      "default": {}
+      "default": {
+        items: {}
+      }
     }
   },
   usesContext: ["postId", "loopIndex", "postType", "queryId"],
@@ -948,9 +950,8 @@ var myStore = wp.data.select('my-shop');
               padding: responsive,
               margin: items.margin
             }
-          }); //blockCss.items['padding'] = { responsive: responsive };
-
-          blockCssY[itemSelector] = blockCssY[itemSelector] != undefined ? blockCssY[itemSelector] : {}; //console.log(blockCssY[itemSelector]);
+          });
+          blockCssY.items[itemSelector] = blockCssY.items[itemSelector] != undefined ? blockCssY.items[itemSelector] : {};
 
           if (nextValues.top != undefined) {
             var paddingTop = blockCss.items['padding-top'] !== undefined ? blockCss.items['padding-top'] : {
@@ -958,9 +959,9 @@ var myStore = wp.data.select('my-shop');
             };
             paddingTop.responsive[breakPointX] = nextValues.top;
             blockCss.items['padding-top'] = paddingTop;
-            var paddingTop = blockCssY[itemSelector]['padding-top'] != undefined ? blockCssY[itemSelector]['padding-top'] : {};
+            var paddingTop = blockCssY.items[itemSelector]['padding-top'] != undefined ? blockCssY.items[itemSelector]['padding-top'] : {};
             paddingTop[breakPointX] = nextValues.top;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+            blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
               'padding-top': paddingTop
             };
           }
@@ -971,9 +972,9 @@ var myStore = wp.data.select('my-shop');
             };
             paddingRight.responsive[breakPointX] = nextValues.right;
             blockCss.items['padding-right'] = paddingRight;
-            var paddingRight = blockCssY[itemSelector]['padding-right'] != undefined ? blockCssY[itemSelector]['padding-right'] : {};
+            var paddingRight = blockCssY.items[itemSelector]['padding-right'] != undefined ? blockCssY.items[itemSelector]['padding-right'] : {};
             paddingRight[breakPointX] = nextValues.right;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+            blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
               'padding-right': paddingRight
             };
           }
@@ -984,9 +985,9 @@ var myStore = wp.data.select('my-shop');
             };
             paddingBottom.responsive[breakPointX] = nextValues.bottom;
             blockCss.items['padding-bottom'] = paddingBottom;
-            var paddingBottom = blockCssY[itemSelector]['padding-bottom'] != undefined ? blockCssY[itemSelector]['padding-bottom'] : {};
+            var paddingBottom = blockCssY.items[itemSelector]['padding-bottom'] != undefined ? blockCssY.items[itemSelector]['padding-bottom'] : {};
             paddingBottom[breakPointX] = nextValues.bottom;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+            blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
               'padding-bottom': paddingBottom
             };
           }
@@ -997,9 +998,9 @@ var myStore = wp.data.select('my-shop');
             };
             paddingLeft.responsive[breakPointX] = nextValues.left;
             blockCss.items['padding-left'] = paddingLeft;
-            var paddingLeft = blockCssY[itemSelector]['padding-left'] != undefined ? blockCssY[itemSelector]['padding-left'] : {};
+            var paddingLeft = blockCssY.items[itemSelector]['padding-left'] != undefined ? blockCssY.items[itemSelector]['padding-left'] : {};
             paddingLeft[breakPointX] = nextValues.left;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+            blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
               'padding-left': paddingLeft
             };
           }
@@ -1008,9 +1009,12 @@ var myStore = wp.data.select('my-shop');
             blockCss: {
               items: blockCss.items
             }
-          });
+          }); // setAttributes({ blockCssY: blockCssY });
+
           setAttributes({
-            blockCssY: blockCssY
+            blockCssY: {
+              items: blockCssY.items
+            }
           });
         }
       });
@@ -1039,7 +1043,7 @@ var myStore = wp.data.select('my-shop');
               margin: responsive
             }
           });
-          blockCssY[itemSelector] = blockCssY[itemSelector] != undefined ? blockCssY[itemSelector] : {};
+          blockCssY.items[itemSelector] = blockCssY.items[itemSelector] != undefined ? blockCssY.items[itemSelector] : {};
 
           if (nextValues.top != undefined) {
             var marginTop = blockCss.items['margin-top'] !== undefined ? blockCss.items['margin-top'] : {
@@ -1047,9 +1051,9 @@ var myStore = wp.data.select('my-shop');
             };
             marginTop.responsive[breakPointX] = nextValues.top;
             blockCss.items['margin-top'] = marginTop;
-            var marginTop = blockCssY[itemSelector]['margin-top'] != undefined ? blockCssY[itemSelector]['margin-top'] : {};
+            var marginTop = blockCssY.items[itemSelector]['margin-top'] != undefined ? blockCssY.items[itemSelector]['margin-top'] : {};
             marginTop[breakPointX] = nextValues.top;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+            blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
               'margin-top': marginTop
             };
           }
@@ -1060,9 +1064,9 @@ var myStore = wp.data.select('my-shop');
             };
             marginRight.responsive[breakPointX] = nextValues.right;
             blockCss.items['margin-right'] = marginRight;
-            var marginRight = blockCssY[itemSelector]['margin-right'] !== undefined ? blockCssY[itemSelector]['margin-right'] : {};
+            var marginRight = blockCssY.items[itemSelector]['margin-right'] !== undefined ? blockCssY.items[itemSelector]['margin-right'] : {};
             marginRight[breakPointX] = nextValues.right;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+            blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
               'margin-right': marginRight
             };
           }
@@ -1073,9 +1077,9 @@ var myStore = wp.data.select('my-shop');
             };
             marginBottom.responsive[breakPointX] = nextValues.bottom;
             blockCss.items['margin-bottom'] = marginBottom;
-            var marginBottom = blockCssY[itemSelector]['margin-bottom'] !== undefined ? blockCssY[itemSelector]['margin-bottom'] : {};
+            var marginBottom = blockCssY.items[itemSelector]['margin-bottom'] !== undefined ? blockCssY.items[itemSelector]['margin-bottom'] : {};
             marginBottom[breakPointX] = nextValues.bottom;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+            blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
               'margin-bottom': marginBottom
             };
           }
@@ -1086,9 +1090,9 @@ var myStore = wp.data.select('my-shop');
             };
             marginLeft.responsive[breakPointX] = nextValues.left;
             blockCss.items['margin-left'] = marginLeft;
-            var marginLeft = blockCssY[itemSelector]['margin-left'] !== undefined ? blockCssY[itemSelector]['margin-left'] : {};
+            var marginLeft = blockCssY.items[itemSelector]['margin-left'] !== undefined ? blockCssY.items[itemSelector]['margin-left'] : {};
             marginLeft[breakPointX] = nextValues.left;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+            blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
               'margin-left': marginLeft
             };
           }
@@ -1097,9 +1101,12 @@ var myStore = wp.data.select('my-shop');
             blockCss: {
               items: blockCss.items
             }
-          });
+          }); // setAttributes({ blockCssY: blockCssY });
+
           setAttributes({
-            blockCssY: blockCssY
+            blockCssY: {
+              items: blockCssY.items
+            }
           });
         }
       });
@@ -1133,22 +1140,21 @@ var myStore = wp.data.select('my-shop');
       }
     }, [postCategoriesX]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      console.log('Listening maxCount: ', items.maxCount);
-      console.log(postCategoriesX);
-
       if (postCategoriesX.length > 0) {
         setcategoryCount(postCategoriesX.length - 1);
         var asdasd = postCategoriesData.slice(0, items.maxCount);
         setCategories(asdasd);
       }
+
+      generateBlockCssY();
     }, [items]);
 
     function generateBlockCssY() {
       var reponsiveCssGroups = {};
       var reponsiveCss = '';
 
-      for (var selector in blockCssY) {
-        var attrs = blockCssY[selector];
+      for (var selector in blockCssY.items) {
+        var attrs = blockCssY.items[selector];
 
         for (var attr in attrs) {
           var breakpoints = attrs[attr];
@@ -1170,27 +1176,7 @@ var myStore = wp.data.select('my-shop');
             });
           }
         }
-      } //console.log(reponsiveCssGroups);
-      // for (var device in reponsiveCssGroups) {
-      //   var item = reponsiveCssGroups[device];
-      //   if (device === 'Mobile') {
-      //     reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-      //   }
-      //   if (device === 'Tablet') {
-      //     reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-      //   }
-      //   if (device === 'Desktop') {
-      //     reponsiveCss += '@media only screen and (min-width: 781px){';
-      //   }
-      //   for (var index in item) {
-      //     var attr = item[index].attr;
-      //     var defaultVal = item[index].val;
-      //     var id = '.pg-postCategories-' + postId + ' a';
-      //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
-      //     reponsiveCss += '}';
-      //   }
-      // }
-
+      }
 
       if (reponsiveCssGroups['Mobile'] != undefined) {
         reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
@@ -1290,7 +1276,6 @@ var myStore = wp.data.select('my-shop');
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      //console.log('Listening blockCssY: ', blockCssY);
       generateBlockCssY();
     }, [blockCssY]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
@@ -1694,11 +1679,13 @@ var myStore = wp.data.select('my-shop');
             items: blockCss.items
           }
         });
-        blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
           color: responsive
         };
         setAttributes({
-          blockCssY: blockCssY
+          blockCssY: {
+            items: blockCssY.items
+          }
         });
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
@@ -1733,18 +1720,20 @@ var myStore = wp.data.select('my-shop');
             margin: items.margin
           }
         });
-        blockCssY[itemSelector] = { ...blockCssY[itemSelector],
-          'background-color': responsive
-        };
-        setAttributes({
-          blockCssY: blockCssY
-        });
         blockCss.items['background-color'] = {
           responsive: responsive
         };
         setAttributes({
           blockCss: {
             items: blockCss.items
+          }
+        });
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+          'background-color': responsive
+        };
+        setAttributes({
+          blockCssY: {
+            items: blockCssY.items
           }
         });
       }
@@ -1834,7 +1823,7 @@ var myStore = wp.data.select('my-shop');
           customCss: value
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, categories.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null), categories.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, JSON.stringify(items), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, "#########"), JSON.stringify(blockCssY), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, "#########"), JSON.stringify(blockCss), categories.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null), categories.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "pg-postCategories"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: "frontText inline-block"

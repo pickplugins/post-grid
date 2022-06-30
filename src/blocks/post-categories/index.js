@@ -70,7 +70,7 @@ registerBlockType("post-grid/post-categories", {
     },
     blockCssY: {
       "type": "object",
-      "default": {}
+      "default": { items: {} }
     },
 
   },
@@ -153,12 +153,9 @@ registerBlockType("post-grid/post-categories", {
 
             setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: responsive, margin: items.margin } });
 
-            //blockCss.items['padding'] = { responsive: responsive };
 
-            blockCssY[itemSelector] = (blockCssY[itemSelector] != undefined) ? blockCssY[itemSelector] : {};
+            blockCssY.items[itemSelector] = (blockCssY.items[itemSelector] != undefined) ? blockCssY.items[itemSelector] : {};
 
-
-            //console.log(blockCssY[itemSelector]);
 
 
             if (nextValues.top != undefined) {
@@ -169,11 +166,11 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var paddingTop = (blockCssY[itemSelector]['padding-top'] != undefined) ? blockCssY[itemSelector]['padding-top'] : {};
+              var paddingTop = (blockCssY.items[itemSelector]['padding-top'] != undefined) ? blockCssY.items[itemSelector]['padding-top'] : {};
               paddingTop[breakPointX] = nextValues.top
 
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-top': paddingTop };
+              blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-top': paddingTop };
 
 
 
@@ -190,11 +187,11 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var paddingRight = (blockCssY[itemSelector]['padding-right'] != undefined) ? blockCssY[itemSelector]['padding-right'] : {};
+              var paddingRight = (blockCssY.items[itemSelector]['padding-right'] != undefined) ? blockCssY.items[itemSelector]['padding-right'] : {};
               paddingRight[breakPointX] = nextValues.right
 
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-right': paddingRight };
+              blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-right': paddingRight };
 
 
 
@@ -207,11 +204,11 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var paddingBottom = (blockCssY[itemSelector]['padding-bottom'] != undefined) ? blockCssY[itemSelector]['padding-bottom'] : {};
+              var paddingBottom = (blockCssY.items[itemSelector]['padding-bottom'] != undefined) ? blockCssY.items[itemSelector]['padding-bottom'] : {};
               paddingBottom[breakPointX] = nextValues.bottom
 
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-bottom': paddingBottom };
+              blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-bottom': paddingBottom };
 
 
 
@@ -224,10 +221,10 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var paddingLeft = (blockCssY[itemSelector]['padding-left'] != undefined) ? blockCssY[itemSelector]['padding-left'] : {};
+              var paddingLeft = (blockCssY.items[itemSelector]['padding-left'] != undefined) ? blockCssY.items[itemSelector]['padding-left'] : {};
               paddingLeft[breakPointX] = nextValues.left
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-left': paddingLeft };
+              blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-left': paddingLeft };
 
 
             }
@@ -237,9 +234,9 @@ registerBlockType("post-grid/post-categories", {
 
 
             setAttributes({ blockCss: { items: blockCss.items } });
-            setAttributes({ blockCssY: blockCssY });
+            // setAttributes({ blockCssY: blockCssY });
 
-
+            setAttributes({ blockCssY: { items: blockCssY.items } });
 
           }
           }
@@ -266,7 +263,7 @@ registerBlockType("post-grid/post-categories", {
             setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: responsive } });
 
 
-            blockCssY[itemSelector] = (blockCssY[itemSelector] != undefined) ? blockCssY[itemSelector] : {};
+            blockCssY.items[itemSelector] = (blockCssY.items[itemSelector] != undefined) ? blockCssY.items[itemSelector] : {};
 
 
             if (nextValues.top != undefined) {
@@ -276,11 +273,11 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var marginTop = (blockCssY[itemSelector]['margin-top'] != undefined) ? blockCssY[itemSelector]['margin-top'] : {};
+              var marginTop = (blockCssY.items[itemSelector]['margin-top'] != undefined) ? blockCssY.items[itemSelector]['margin-top'] : {};
               marginTop[breakPointX] = nextValues.top
 
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-top': marginTop };
+              blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-top': marginTop };
 
 
 
@@ -300,11 +297,11 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var marginRight = (blockCssY[itemSelector]['margin-right'] !== undefined) ? blockCssY[itemSelector]['margin-right'] : {};
+              var marginRight = (blockCssY.items[itemSelector]['margin-right'] !== undefined) ? blockCssY.items[itemSelector]['margin-right'] : {};
               marginRight[breakPointX] = nextValues.right
 
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-right': marginRight };
+              blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-right': marginRight };
 
 
 
@@ -324,11 +321,11 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var marginBottom = (blockCssY[itemSelector]['margin-bottom'] !== undefined) ? blockCssY[itemSelector]['margin-bottom'] : {};
+              var marginBottom = (blockCssY.items[itemSelector]['margin-bottom'] !== undefined) ? blockCssY.items[itemSelector]['margin-bottom'] : {};
               marginBottom[breakPointX] = nextValues.bottom
 
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-bottom': marginBottom };
+              blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-bottom': marginBottom };
 
 
 
@@ -351,10 +348,10 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-              var marginLeft = (blockCssY[itemSelector]['margin-left'] !== undefined) ? blockCssY[itemSelector]['margin-left'] : {};
+              var marginLeft = (blockCssY.items[itemSelector]['margin-left'] !== undefined) ? blockCssY.items[itemSelector]['margin-left'] : {};
               marginLeft[breakPointX] = nextValues.left
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-left': marginLeft };
+              blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-left': marginLeft };
 
 
 
@@ -362,8 +359,13 @@ registerBlockType("post-grid/post-categories", {
 
 
             setAttributes({ blockCss: { items: blockCss.items } });
-            setAttributes({ blockCssY: blockCssY });
+            // setAttributes({ blockCssY: blockCssY });
 
+
+
+
+
+            setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
           }}
@@ -432,9 +434,6 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      console.log('Listening maxCount: ', items.maxCount);
-      console.log(postCategoriesX);
-
 
       if (postCategoriesX.length > 0) {
         setcategoryCount(postCategoriesX.length - 1);
@@ -443,7 +442,7 @@ registerBlockType("post-grid/post-categories", {
         setCategories(asdasd);
       }
 
-
+      generateBlockCssY()
 
 
     }, [items]);
@@ -462,9 +461,9 @@ registerBlockType("post-grid/post-categories", {
       var reponsiveCssGroups = {};
       var reponsiveCss = '';
 
-      for (var selector in blockCssY) {
+      for (var selector in blockCssY.items) {
 
-        var attrs = blockCssY[selector];
+        var attrs = blockCssY.items[selector];
 
 
         for (var attr in attrs) {
@@ -489,36 +488,6 @@ registerBlockType("post-grid/post-categories", {
 
         }
       }
-
-      //console.log(reponsiveCssGroups);
-
-
-
-
-      // for (var device in reponsiveCssGroups) {
-
-      //   var item = reponsiveCssGroups[device];
-
-
-      //   if (device === 'Mobile') {
-      //     reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-      //   }
-      //   if (device === 'Tablet') {
-      //     reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-      //   }
-      //   if (device === 'Desktop') {
-      //     reponsiveCss += '@media only screen and (min-width: 781px){';
-      //   }
-
-      //   for (var index in item) {
-      //     var attr = item[index].attr;
-      //     var defaultVal = item[index].val;
-      //     var id = '.pg-postCategories-' + postId + ' a';
-      //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
-      //     reponsiveCss += '}';
-      //   }
-
-      // }
 
       if (reponsiveCssGroups['Mobile'] != undefined) {
         reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
@@ -658,7 +627,6 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      //console.log('Listening blockCssY: ', blockCssY);
 
       generateBlockCssY()
 
@@ -1114,8 +1082,8 @@ registerBlockType("post-grid/post-categories", {
                   setAttributes({ blockCss: { items: blockCss.items } });
 
 
-                  blockCssY[itemSelector] = { ...blockCssY[itemSelector], color: responsive };
-                  setAttributes({ blockCssY: blockCssY });
+                  blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], color: responsive };
+                  setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
 
@@ -1148,13 +1116,19 @@ registerBlockType("post-grid/post-categories", {
 
                   setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: responsive, padding: items.padding, margin: items.margin } });
 
-                  blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'background-color': responsive };
-                  setAttributes({ blockCssY: blockCssY });
-
-
 
                   blockCss.items['background-color'] = { responsive: responsive };
                   setAttributes({ blockCss: { items: blockCss.items } });
+
+
+
+
+
+                  blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'background-color': responsive };
+                  setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
 
                 }}
               />
@@ -1281,7 +1255,12 @@ registerBlockType("post-grid/post-categories", {
 
         <>
 
-          {/* {JSON.stringify(categories)} */}
+          {JSON.stringify(items)}
+          <div>#########</div>
+          {JSON.stringify(blockCssY)}
+
+          <div>#########</div>
+          {JSON.stringify(blockCss)}
 
           {categories.length == 0 && (<Spinner />)}
 

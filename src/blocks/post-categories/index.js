@@ -375,6 +375,7 @@ registerBlockType("post-grid/post-categories", {
     const [categoryCount, setcategoryCount] = useState(0); // Using the hook.
     const [postCategoriesData, setPostCategoriesData] = useState([]); // Using the hook.
 
+    const [categories, setCategories] = useState([]); // Using the hook.
 
     const [
       postCategoriesX,
@@ -392,8 +393,6 @@ registerBlockType("post-grid/post-categories", {
       setcategoryCount(postCategoriesX.length - 1);
 
 
-
-
       for (x in postCategoriesX) {
 
         var catId = postCategoriesX[x]
@@ -409,7 +408,7 @@ registerBlockType("post-grid/post-categories", {
             //console.log(res)
             setPostCategoriesData(current => [...current, res]);
 
-
+            setCategories(current => [...current, res]);
 
           });
 
@@ -441,7 +440,7 @@ registerBlockType("post-grid/post-categories", {
         setcategoryCount(postCategoriesX.length - 1);
         var asdasd = postCategoriesData.slice(0, items.maxCount);
 
-        setPostCategoriesData(asdasd);
+        setCategories(asdasd);
       }
 
 
@@ -1282,18 +1281,18 @@ registerBlockType("post-grid/post-categories", {
 
         <>
 
-          {JSON.stringify(blockCssY)}
+          {/* {JSON.stringify(categories)} */}
 
-          {postCategoriesData.length == 0 && (<Spinner />)}
+          {categories.length == 0 && (<Spinner />)}
 
-          {postCategoriesData.length > 0 && (
+          {categories.length > 0 && (
 
             <div className='pg-postCategories'>
               <span className='frontText inline-block'>
                 <RawHTML>{frontText.text}</RawHTML>
 
               </span>
-              {postCategoriesData.map((x, index) => {
+              {categories.map((x, index) => {
 
 
                 return (

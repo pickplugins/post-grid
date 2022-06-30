@@ -1109,6 +1109,8 @@ var myStore = wp.data.select('my-shop');
 
     const [postCategoriesData, setPostCategoriesData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)([]); // Using the hook.
 
+    const [categories, setCategories] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)([]); // Using the hook.
+
     const [postCategoriesX, setPostCategoriesX] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_3__.useEntityProp)('postType', postType, 'categories', postId);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       //console.log('Listening postCategoriesX: ', postCategoriesX);
@@ -1125,6 +1127,7 @@ var myStore = wp.data.select('my-shop');
           }).then(res => {
             //console.log(res)
             setPostCategoriesData(current => [...current, res]);
+            setCategories(current => [...current, res]);
           });
         }
       }
@@ -1136,7 +1139,7 @@ var myStore = wp.data.select('my-shop');
       if (postCategoriesX.length > 0) {
         setcategoryCount(postCategoriesX.length - 1);
         var asdasd = postCategoriesData.slice(0, items.maxCount);
-        setPostCategoriesData(asdasd);
+        setCategories(asdasd);
       }
     }, [items]);
 
@@ -1831,11 +1834,11 @@ var myStore = wp.data.select('my-shop');
           customCss: value
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, JSON.stringify(blockCssY), postCategoriesData.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null), postCategoriesData.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, categories.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null), categories.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "pg-postCategories"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: "frontText inline-block"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RawHTML, null, frontText.text)), postCategoriesData.map((x, index) => {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RawHTML, null, frontText.text)), categories.map((x, index) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
         target: items.linkTarget,
         title: x.name

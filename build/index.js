@@ -827,7 +827,7 @@ var myStore = wp.data.select('my-shop');
       type: 'object',
       default: {
         textAlign: '',
-        class: '',
+        class: 'inline-block',
         color: {},
         bgColor: {},
         padding: {},
@@ -839,9 +839,9 @@ var myStore = wp.data.select('my-shop');
       default: {
         prefix: '',
         postfix: '',
-        maxCount: 3,
+        maxCount: 99,
         postCount: false,
-        class: 'item',
+        class: 'item inline-block',
         linkTarget: '',
         linkAttr: [],
         color: {},
@@ -853,6 +853,7 @@ var myStore = wp.data.select('my-shop');
     separator: {
       type: 'object',
       default: {
+        class: 'inline-block',
         text: ', ',
         color: {},
         bgColor: {},
@@ -864,6 +865,7 @@ var myStore = wp.data.select('my-shop');
       type: 'object',
       default: {
         text: 'Categories: ',
+        class: 'inline-block',
         color: {},
         bgColor: {},
         padding: {},
@@ -874,18 +876,11 @@ var myStore = wp.data.select('my-shop');
       "type": "string",
       "default": ''
     },
-    postId: {
-      type: 'number'
-    },
-    blockCss: {
+    blockCssY: {
       "type": "object",
       "default": {
         items: {}
       }
-    },
-    blockCssY: {
-      "type": "object",
-      "default": {}
     }
   },
   usesContext: ["postId", "loopIndex", "postType", "queryId"],
@@ -902,7 +897,6 @@ var myStore = wp.data.select('my-shop');
     var items = attributes.items;
     var separator = attributes.separator;
     var frontText = attributes.frontText;
-    var blockCss = attributes.blockCss;
     var blockCssY = attributes.blockCssY;
     var customCss = attributes.customCss;
     var postId = context['postId'];
@@ -926,184 +920,124 @@ var myStore = wp.data.select('my-shop');
       });
     }
 
-    const PaddingControl = () => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
-        label: "",
-        values: items.padding[breakPointX],
-        onChange: nextValues => {
-          var responsive = items.padding;
-          responsive[breakPointX] = nextValues; //console.log(nextValues);
+    function paddingControl(nextValues) {
+      var responsive = items.padding;
+      responsive[breakPointX] = nextValues; //console.log(nextValues);
 
-          setAttributes({
-            items: {
-              prefix: items.prefix,
-              postfix: items.postfix,
-              maxCount: items.maxCount,
-              postCount: items.postCount,
-              class: items.class,
-              linkTarget: items.linkTarget,
-              linkAttr: items.linkAttr,
-              color: items.color,
-              bgColor: items.bgColor,
-              padding: responsive,
-              margin: items.margin
-            }
-          }); //blockCss.items['padding'] = { responsive: responsive };
-
-          blockCssY[itemSelector] = blockCssY[itemSelector] != undefined ? blockCssY[itemSelector] : {}; //console.log(blockCssY[itemSelector]);
-
-          if (nextValues.top != undefined) {
-            var paddingTop = blockCss.items['padding-top'] !== undefined ? blockCss.items['padding-top'] : {
-              responsive: {}
-            };
-            paddingTop.responsive[breakPointX] = nextValues.top;
-            blockCss.items['padding-top'] = paddingTop;
-            var paddingTop = blockCssY[itemSelector]['padding-top'] != undefined ? blockCssY[itemSelector]['padding-top'] : {};
-            paddingTop[breakPointX] = nextValues.top;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
-              'padding-top': paddingTop
-            };
-          }
-
-          if (nextValues.right != undefined) {
-            var paddingRight = blockCss.items['padding-right'] !== undefined ? blockCss.items['padding-right'] : {
-              responsive: {}
-            };
-            paddingRight.responsive[breakPointX] = nextValues.right;
-            blockCss.items['padding-right'] = paddingRight;
-            var paddingRight = blockCssY[itemSelector]['padding-right'] != undefined ? blockCssY[itemSelector]['padding-right'] : {};
-            paddingRight[breakPointX] = nextValues.right;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
-              'padding-right': paddingRight
-            };
-          }
-
-          if (nextValues.bottom != undefined) {
-            var paddingBottom = blockCss.items['padding-bottom'] !== undefined ? blockCss.items['padding-bottom'] : {
-              responsive: {}
-            };
-            paddingBottom.responsive[breakPointX] = nextValues.bottom;
-            blockCss.items['padding-bottom'] = paddingBottom;
-            var paddingBottom = blockCssY[itemSelector]['padding-bottom'] != undefined ? blockCssY[itemSelector]['padding-bottom'] : {};
-            paddingBottom[breakPointX] = nextValues.bottom;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
-              'padding-bottom': paddingBottom
-            };
-          }
-
-          if (nextValues.left != undefined) {
-            var paddingLeft = blockCss.items['padding-left'] !== undefined ? blockCss.items['padding-left'] : {
-              responsive: {}
-            };
-            paddingLeft.responsive[breakPointX] = nextValues.left;
-            blockCss.items['padding-left'] = paddingLeft;
-            var paddingLeft = blockCssY[itemSelector]['padding-left'] != undefined ? blockCssY[itemSelector]['padding-left'] : {};
-            paddingLeft[breakPointX] = nextValues.left;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
-              'padding-left': paddingLeft
-            };
-          }
-
-          setAttributes({
-            blockCss: {
-              items: blockCss.items
-            }
-          });
-          setAttributes({
-            blockCssY: blockCssY
-          });
+      setAttributes({
+        items: {
+          prefix: items.prefix,
+          postfix: items.postfix,
+          maxCount: items.maxCount,
+          postCount: items.postCount,
+          class: items.class,
+          linkTarget: items.linkTarget,
+          linkAttr: items.linkAttr,
+          color: items.color,
+          bgColor: items.bgColor,
+          padding: responsive,
+          margin: items.margin
         }
       });
-    };
+      blockCssY.items[itemSelector] = blockCssY.items[itemSelector] != undefined ? blockCssY.items[itemSelector] : {};
 
-    const MarginControl = () => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
-        label: "",
-        values: items.margin[breakPointX],
-        onChange: nextValues => {
-          var responsive = items.margin;
-          responsive[breakPointX] = nextValues; //blockCss.items['margin'] = { responsive: responsive };
+      if (nextValues.top != undefined) {
+        var paddingTop = blockCssY.items[itemSelector]['padding-top'] != undefined ? blockCssY.items[itemSelector]['padding-top'] : {};
+        paddingTop[breakPointX] = nextValues.top;
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+          'padding-top': paddingTop
+        };
+      }
 
-          setAttributes({
-            items: {
-              prefix: items.prefix,
-              postfix: items.postfix,
-              maxCount: items.maxCount,
-              postCount: items.postCount,
-              class: items.class,
-              linkTarget: items.linkTarget,
-              linkAttr: items.linkAttr,
-              color: items.color,
-              bgColor: items.bgColor,
-              padding: items.padding,
-              margin: responsive
-            }
-          });
-          blockCssY[itemSelector] = blockCssY[itemSelector] != undefined ? blockCssY[itemSelector] : {};
+      if (nextValues.right != undefined) {
+        var paddingRight = blockCssY.items[itemSelector]['padding-right'] != undefined ? blockCssY.items[itemSelector]['padding-right'] : {};
+        paddingRight[breakPointX] = nextValues.right;
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+          'padding-right': paddingRight
+        };
+      }
 
-          if (nextValues.top != undefined) {
-            var marginTop = blockCss.items['margin-top'] !== undefined ? blockCss.items['margin-top'] : {
-              responsive: {}
-            };
-            marginTop.responsive[breakPointX] = nextValues.top;
-            blockCss.items['margin-top'] = marginTop;
-            var marginTop = blockCssY[itemSelector]['margin-top'] != undefined ? blockCssY[itemSelector]['margin-top'] : {};
-            marginTop[breakPointX] = nextValues.top;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
-              'margin-top': marginTop
-            };
-          }
+      if (nextValues.bottom != undefined) {
+        var paddingBottom = blockCssY.items[itemSelector]['padding-bottom'] != undefined ? blockCssY.items[itemSelector]['padding-bottom'] : {};
+        paddingBottom[breakPointX] = nextValues.bottom;
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+          'padding-bottom': paddingBottom
+        };
+      }
 
-          if (nextValues.right != undefined) {
-            var marginRight = blockCss.items['margin-right'] !== undefined ? blockCss.items['margin-right'] : {
-              responsive: {}
-            };
-            marginRight.responsive[breakPointX] = nextValues.right;
-            blockCss.items['margin-right'] = marginRight;
-            var marginRight = blockCssY[itemSelector]['margin-right'] !== undefined ? blockCssY[itemSelector]['margin-right'] : {};
-            marginRight[breakPointX] = nextValues.right;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
-              'margin-right': marginRight
-            };
-          }
+      if (nextValues.left != undefined) {
+        var paddingLeft = blockCssY.items[itemSelector]['padding-left'] != undefined ? blockCssY.items[itemSelector]['padding-left'] : {};
+        paddingLeft[breakPointX] = nextValues.left;
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+          'padding-left': paddingLeft
+        };
+      }
 
-          if (nextValues.bottom != undefined) {
-            var marginBottom = blockCss.items['margin-bottom'] !== undefined ? blockCss.items['margin-bottom'] : {
-              responsive: {}
-            };
-            marginBottom.responsive[breakPointX] = nextValues.bottom;
-            blockCss.items['margin-bottom'] = marginBottom;
-            var marginBottom = blockCssY[itemSelector]['margin-bottom'] !== undefined ? blockCssY[itemSelector]['margin-bottom'] : {};
-            marginBottom[breakPointX] = nextValues.bottom;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
-              'margin-bottom': marginBottom
-            };
-          }
-
-          if (nextValues.left != undefined) {
-            var marginLeft = blockCss.items['margin-left'] !== undefined ? blockCss.items['margin-left'] : {
-              responsive: {}
-            };
-            marginLeft.responsive[breakPointX] = nextValues.left;
-            blockCss.items['margin-left'] = marginLeft;
-            var marginLeft = blockCssY[itemSelector]['margin-left'] !== undefined ? blockCssY[itemSelector]['margin-left'] : {};
-            marginLeft[breakPointX] = nextValues.left;
-            blockCssY[itemSelector] = { ...blockCssY[itemSelector],
-              'margin-left': marginLeft
-            };
-          }
-
-          setAttributes({
-            blockCss: {
-              items: blockCss.items
-            }
-          });
-          setAttributes({
-            blockCssY: blockCssY
-          });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
         }
       });
-    };
+    }
+
+    function marginControl(nextValues) {
+      var responsive = items.margin;
+      responsive[breakPointX] = nextValues;
+      setAttributes({
+        items: {
+          prefix: items.prefix,
+          postfix: items.postfix,
+          maxCount: items.maxCount,
+          postCount: items.postCount,
+          class: items.class,
+          linkTarget: items.linkTarget,
+          linkAttr: items.linkAttr,
+          color: items.color,
+          bgColor: items.bgColor,
+          padding: items.padding,
+          margin: responsive
+        }
+      });
+      blockCssY.items[itemSelector] = blockCssY.items[itemSelector] != undefined ? blockCssY.items[itemSelector] : {};
+
+      if (nextValues.top != undefined) {
+        var marginTop = blockCssY.items[itemSelector]['margin-top'] != undefined ? blockCssY.items[itemSelector]['margin-top'] : {};
+        marginTop[breakPointX] = nextValues.top;
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+          'margin-top': marginTop
+        };
+      }
+
+      if (nextValues.right != undefined) {
+        var marginRight = blockCssY.items[itemSelector]['margin-right'] !== undefined ? blockCssY.items[itemSelector]['margin-right'] : {};
+        marginRight[breakPointX] = nextValues.right;
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+          'margin-right': marginRight
+        };
+      }
+
+      if (nextValues.bottom != undefined) {
+        var marginBottom = blockCssY.items[itemSelector]['margin-bottom'] !== undefined ? blockCssY.items[itemSelector]['margin-bottom'] : {};
+        marginBottom[breakPointX] = nextValues.bottom;
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+          'margin-bottom': marginBottom
+        };
+      }
+
+      if (nextValues.left != undefined) {
+        var marginLeft = blockCssY.items[itemSelector]['margin-left'] !== undefined ? blockCssY.items[itemSelector]['margin-left'] : {};
+        marginLeft[breakPointX] = nextValues.left;
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+          'margin-left': marginLeft
+        };
+      }
+
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
 
     const [categoryCount, setcategoryCount] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(0); // Using the hook.
 
@@ -1113,12 +1047,15 @@ var myStore = wp.data.select('my-shop');
 
     const [postCategoriesX, setPostCategoriesX] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_3__.useEntityProp)('postType', postType, 'categories', postId);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      //console.log('Listening postCategoriesX: ', postCategoriesX);
+      console.log('Listening postCategoriesX: ', postCategoriesX);
       setPostCategoriesData([]);
-      setcategoryCount(postCategoriesX.length - 1);
+      setCategories([]);
+      setcategoryCount(categories.length - 1);
 
       for (x in postCategoriesX) {
         var catId = postCategoriesX[x];
+        console.log(x);
+        var assd = x;
 
         if (x) {
           _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
@@ -1127,17 +1064,21 @@ var myStore = wp.data.select('my-shop');
           }).then(res => {
             //console.log(res)
             setPostCategoriesData(current => [...current, res]);
+            console.log(assd);
             setCategories(current => [...current, res]);
           });
         }
       }
+
+      console.log(postCategoriesData);
     }, [postCategoriesX]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      console.log('Listening maxCount: ', items.maxCount);
-      console.log(postCategoriesX);
-
+      var asdasd = postCategoriesData.slice(0, items.maxCount);
+      setCategories(asdasd);
+    }, [postCategoriesData]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       if (postCategoriesX.length > 0) {
-        setcategoryCount(postCategoriesX.length - 1);
+        setcategoryCount(categories.length - 1);
         var asdasd = postCategoriesData.slice(0, items.maxCount);
         setCategories(asdasd);
       }
@@ -1147,8 +1088,8 @@ var myStore = wp.data.select('my-shop');
       var reponsiveCssGroups = {};
       var reponsiveCss = '';
 
-      for (var selector in blockCssY) {
-        var attrs = blockCssY[selector];
+      for (var selector in blockCssY.items) {
+        var attrs = blockCssY.items[selector];
 
         for (var attr in attrs) {
           var breakpoints = attrs[attr];
@@ -1170,27 +1111,7 @@ var myStore = wp.data.select('my-shop');
             });
           }
         }
-      } //console.log(reponsiveCssGroups);
-      // for (var device in reponsiveCssGroups) {
-      //   var item = reponsiveCssGroups[device];
-      //   if (device === 'Mobile') {
-      //     reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-      //   }
-      //   if (device === 'Tablet') {
-      //     reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-      //   }
-      //   if (device === 'Desktop') {
-      //     reponsiveCss += '@media only screen and (min-width: 781px){';
-      //   }
-      //   for (var index in item) {
-      //     var attr = item[index].attr;
-      //     var defaultVal = item[index].val;
-      //     var id = '.pg-postCategories-' + postId + ' a';
-      //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
-      //     reponsiveCss += '}';
-      //   }
-      // }
-
+      }
 
       if (reponsiveCssGroups['Mobile'] != undefined) {
         reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
@@ -1290,7 +1211,6 @@ var myStore = wp.data.select('my-shop');
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      //console.log('Listening blockCssY: ', blockCssY);
       generateBlockCssY();
     }, [blockCssY]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
@@ -1686,19 +1606,13 @@ var myStore = wp.data.select('my-shop');
             margin: items.margin
           }
         });
-        blockCss.items['color'] = {
-          responsive: responsive
-        };
-        setAttributes({
-          blockCss: {
-            items: blockCss.items
-          }
-        });
-        blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
           color: responsive
         };
         setAttributes({
-          blockCssY: blockCssY
+          blockCssY: {
+            items: blockCssY.items
+          }
         });
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
@@ -1733,18 +1647,12 @@ var myStore = wp.data.select('my-shop');
             margin: items.margin
           }
         });
-        blockCssY[itemSelector] = { ...blockCssY[itemSelector],
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
           'background-color': responsive
         };
         setAttributes({
-          blockCssY: blockCssY
-        });
-        blockCss.items['background-color'] = {
-          responsive: responsive
-        };
-        setAttributes({
-          blockCss: {
-            items: blockCss.items
+          blockCssY: {
+            items: blockCssY.items
           }
         });
       }
@@ -1758,7 +1666,13 @@ var myStore = wp.data.select('my-shop');
       onChange: onChangeBreakPoint,
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PaddingControl, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
+      label: "",
+      values: items.padding[breakPointX],
+      onChange: nextValues => {
+        paddingControl(nextValues);
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
@@ -1768,7 +1682,13 @@ var myStore = wp.data.select('my-shop');
       onChange: onChangeBreakPoint,
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(MarginControl, null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
+      label: "",
+      values: items.margin[breakPointX],
+      onChange: nextValues => {
+        marginControl(nextValues);
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Front Text",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
@@ -1834,7 +1754,9 @@ var myStore = wp.data.select('my-shop');
           customCss: value
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, categories.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null), categories.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: "my-5"
+    }), categories.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null), categories.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "pg-postCategories"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: "frontText inline-block"

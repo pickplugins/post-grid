@@ -39,19 +39,19 @@ registerBlockType("post-grid/post-categories", {
 
     wrapper: {
       type: 'object',
-      default: { textAlign: '', class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
+      default: { textAlign: '', class: 'inline-block', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
     items: {
       type: 'object',
-      default: { prefix: '', postfix: '', maxCount: 3, postCount: false, class: 'item', linkTarget: '', linkAttr: [], color: {}, bgColor: {}, padding: {}, margin: {} },
+      default: { prefix: '', postfix: '', maxCount: 99, postCount: false, class: 'item inline-block', linkTarget: '', linkAttr: [], color: {}, bgColor: {}, padding: {}, margin: {} },
     },
     separator: {
       type: 'object',
-      default: { text: ', ', color: {}, bgColor: {}, padding: {}, margin: {} },
+      default: { class: 'inline-block', text: ', ', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
     frontText: {
       type: 'object',
-      default: { text: 'Categories: ', color: {}, bgColor: {}, padding: {}, margin: {} },
+      default: { text: 'Categories: ', class: 'inline-block', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
 
 
@@ -59,18 +59,10 @@ registerBlockType("post-grid/post-categories", {
       "type": "string",
       "default": ''
     },
-    postId: {
-      type: 'number',
-    },
 
-
-    blockCss: {
-      "type": "object",
-      "default": { items: {} }
-    },
     blockCssY: {
       "type": "object",
-      "default": {}
+      "default": { items: {} }
     },
 
   },
@@ -96,7 +88,6 @@ registerBlockType("post-grid/post-categories", {
     var separator = attributes.separator;
     var frontText = attributes.frontText;
 
-    var blockCss = attributes.blockCss;
     var blockCssY = attributes.blockCssY;
 
     var customCss = attributes.customCss;
@@ -133,243 +124,127 @@ registerBlockType("post-grid/post-categories", {
 
     }
 
+    function paddingControl(nextValues) {
 
 
-    const PaddingControl = () => {
+      var responsive = items.padding;
+      responsive[breakPointX] = nextValues;
 
-      return (
-        <BoxControl
-          label=""
-          values={items.padding[breakPointX]}
-          onChange={(nextValues) => {
+      //console.log(nextValues);
 
 
-            var responsive = items.padding;
-            responsive[breakPointX] = nextValues;
 
-            //console.log(nextValues);
+      setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: responsive, margin: items.margin } });
 
 
+      blockCssY.items[itemSelector] = (blockCssY.items[itemSelector] != undefined) ? blockCssY.items[itemSelector] : {};
 
-            setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: responsive, margin: items.margin } });
 
-            //blockCss.items['padding'] = { responsive: responsive };
 
-            blockCssY[itemSelector] = (blockCssY[itemSelector] != undefined) ? blockCssY[itemSelector] : {};
+      if (nextValues.top != undefined) {
 
+        var paddingTop = (blockCssY.items[itemSelector]['padding-top'] != undefined) ? blockCssY.items[itemSelector]['padding-top'] : {};
+        paddingTop[breakPointX] = nextValues.top
 
-            //console.log(blockCssY[itemSelector]);
 
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-top': paddingTop };
 
-            if (nextValues.top != undefined) {
-              var paddingTop = (blockCss.items['padding-top'] !== undefined) ? blockCss.items['padding-top'] : { responsive: {} };
-              paddingTop.responsive[breakPointX] = nextValues.top
-              blockCss.items['padding-top'] = paddingTop;
 
 
 
 
-              var paddingTop = (blockCssY[itemSelector]['padding-top'] != undefined) ? blockCssY[itemSelector]['padding-top'] : {};
-              paddingTop[breakPointX] = nextValues.top
+      }
 
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-top': paddingTop };
+      if (nextValues.right != undefined) {
 
+        var paddingRight = (blockCssY.items[itemSelector]['padding-right'] != undefined) ? blockCssY.items[itemSelector]['padding-right'] : {};
+        paddingRight[breakPointX] = nextValues.right
 
 
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-right': paddingRight };
 
 
-            }
 
+      }
 
-            if (nextValues.right != undefined) {
-              var paddingRight = (blockCss.items['padding-right'] !== undefined) ? blockCss.items['padding-right'] : { responsive: {} };
-              paddingRight.responsive[breakPointX] = nextValues.right
-              blockCss.items['padding-right'] = paddingRight;
+      if (nextValues.bottom != undefined) {
 
+        var paddingBottom = (blockCssY.items[itemSelector]['padding-bottom'] != undefined) ? blockCssY.items[itemSelector]['padding-bottom'] : {};
+        paddingBottom[breakPointX] = nextValues.bottom
 
 
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-bottom': paddingBottom };
 
-              var paddingRight = (blockCssY[itemSelector]['padding-right'] != undefined) ? blockCssY[itemSelector]['padding-right'] : {};
-              paddingRight[breakPointX] = nextValues.right
 
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-right': paddingRight };
+      }
 
+      if (nextValues.left != undefined) {
 
+        var paddingLeft = (blockCssY.items[itemSelector]['padding-left'] != undefined) ? blockCssY.items[itemSelector]['padding-left'] : {};
+        paddingLeft[breakPointX] = nextValues.left
 
-            }
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-left': paddingLeft };
 
-            if (nextValues.bottom != undefined) {
-              var paddingBottom = (blockCss.items['padding-bottom'] !== undefined) ? blockCss.items['padding-bottom'] : { responsive: {} };
-              paddingBottom.responsive[breakPointX] = nextValues.bottom
-              blockCss.items['padding-bottom'] = paddingBottom;
 
+      }
 
 
-              var paddingBottom = (blockCssY[itemSelector]['padding-bottom'] != undefined) ? blockCssY[itemSelector]['padding-bottom'] : {};
-              paddingBottom[breakPointX] = nextValues.bottom
+      setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-bottom': paddingBottom };
 
+    }
 
 
-            }
 
-            if (nextValues.left != undefined) {
-              var paddingLeft = (blockCss.items['padding-left'] !== undefined) ? blockCss.items['padding-left'] : { responsive: {} };
-              paddingLeft.responsive[breakPointX] = nextValues.left
-              blockCss.items['padding-left'] = paddingLeft;
+    function marginControl(nextValues) {
 
+      var responsive = items.margin;
+      responsive[breakPointX] = nextValues;
 
+      setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: responsive } });
 
-              var paddingLeft = (blockCssY[itemSelector]['padding-left'] != undefined) ? blockCssY[itemSelector]['padding-left'] : {};
-              paddingLeft[breakPointX] = nextValues.left
+      blockCssY.items[itemSelector] = (blockCssY.items[itemSelector] != undefined) ? blockCssY.items[itemSelector] : {};
 
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'padding-left': paddingLeft };
+      if (nextValues.top != undefined) {
+        var marginTop = (blockCssY.items[itemSelector]['margin-top'] != undefined) ? blockCssY.items[itemSelector]['margin-top'] : {};
+        marginTop[breakPointX] = nextValues.top
 
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-top': marginTop };
+      }
 
-            }
 
+      if (nextValues.right != undefined) {
 
+        var marginRight = (blockCssY.items[itemSelector]['margin-right'] !== undefined) ? blockCssY.items[itemSelector]['margin-right'] : {};
+        marginRight[breakPointX] = nextValues.right
 
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-right': marginRight };
 
+      }
 
-            setAttributes({ blockCss: { items: blockCss.items } });
-            setAttributes({ blockCssY: blockCssY });
+      if (nextValues.bottom != undefined) {
 
+        var marginBottom = (blockCssY.items[itemSelector]['margin-bottom'] !== undefined) ? blockCssY.items[itemSelector]['margin-bottom'] : {};
+        marginBottom[breakPointX] = nextValues.bottom
 
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-bottom': marginBottom };
 
-          }
-          }
-        />
-      );
-    };
+      }
 
+      if (nextValues.left != undefined) {
 
-    const MarginControl = () => {
+        var marginLeft = (blockCssY.items[itemSelector]['margin-left'] !== undefined) ? blockCssY.items[itemSelector]['margin-left'] : {};
+        marginLeft[breakPointX] = nextValues.left
 
-      return (
-        <BoxControl
-          label=""
-          values={items.margin[breakPointX]}
-          onChange={(nextValues) => {
+        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-left': marginLeft };
 
+      }
 
-            var responsive = items.margin;
-            responsive[breakPointX] = nextValues;
-
-
-            //blockCss.items['margin'] = { responsive: responsive };
-
-            setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: items.bgColor, padding: items.padding, margin: responsive } });
-
-
-            blockCssY[itemSelector] = (blockCssY[itemSelector] != undefined) ? blockCssY[itemSelector] : {};
-
-
-            if (nextValues.top != undefined) {
-              var marginTop = (blockCss.items['margin-top'] !== undefined) ? blockCss.items['margin-top'] : { responsive: {} };
-              marginTop.responsive[breakPointX] = nextValues.top
-              blockCss.items['margin-top'] = marginTop;
-
-
-
-              var marginTop = (blockCssY[itemSelector]['margin-top'] != undefined) ? blockCssY[itemSelector]['margin-top'] : {};
-              marginTop[breakPointX] = nextValues.top
-
-
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-top': marginTop };
-
-
-
-
-
-            }
-
-
-            if (nextValues.right != undefined) {
-              var marginRight = (blockCss.items['margin-right'] !== undefined) ? blockCss.items['margin-right'] : { responsive: {} };
-              marginRight.responsive[breakPointX] = nextValues.right
-              blockCss.items['margin-right'] = marginRight;
-
-
-
-
-
-
-
-              var marginRight = (blockCssY[itemSelector]['margin-right'] !== undefined) ? blockCssY[itemSelector]['margin-right'] : {};
-              marginRight[breakPointX] = nextValues.right
-
-
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-right': marginRight };
-
-
-
-
-
-
-
-            }
-
-            if (nextValues.bottom != undefined) {
-              var marginBottom = (blockCss.items['margin-bottom'] !== undefined) ? blockCss.items['margin-bottom'] : { responsive: {} };
-              marginBottom.responsive[breakPointX] = nextValues.bottom
-              blockCss.items['margin-bottom'] = marginBottom;
-
-
-
-
-
-
-              var marginBottom = (blockCssY[itemSelector]['margin-bottom'] !== undefined) ? blockCssY[itemSelector]['margin-bottom'] : {};
-              marginBottom[breakPointX] = nextValues.bottom
-
-
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-bottom': marginBottom };
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-            if (nextValues.left != undefined) {
-              var marginLeft = (blockCss.items['margin-left'] !== undefined) ? blockCss.items['margin-left'] : { responsive: {} };
-              marginLeft.responsive[breakPointX] = nextValues.left
-              blockCss.items['margin-left'] = marginLeft;
-
-
-
-
-              var marginLeft = (blockCssY[itemSelector]['margin-left'] !== undefined) ? blockCssY[itemSelector]['margin-left'] : {};
-              marginLeft[breakPointX] = nextValues.left
-
-              blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'margin-left': marginLeft };
-
-
-
-            }
-
-
-            setAttributes({ blockCss: { items: blockCss.items } });
-            setAttributes({ blockCssY: blockCssY });
-
-
-
-          }}
-        />
-      );
-    };
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
 
 
     const [categoryCount, setcategoryCount] = useState(0); // Using the hook.
@@ -385,17 +260,21 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      //console.log('Listening postCategoriesX: ', postCategoriesX);
+      console.log('Listening postCategoriesX: ', postCategoriesX);
 
 
       setPostCategoriesData([]);
+      setCategories([]);
 
-      setcategoryCount(postCategoriesX.length - 1);
-
+      setcategoryCount(categories.length - 1);
 
       for (x in postCategoriesX) {
 
         var catId = postCategoriesX[x]
+
+        console.log(x)
+
+        var assd = x;
 
         if (x) {
 
@@ -407,7 +286,7 @@ registerBlockType("post-grid/post-categories", {
 
             //console.log(res)
             setPostCategoriesData(current => [...current, res]);
-
+            console.log(assd)
             setCategories(current => [...current, res]);
 
           });
@@ -417,7 +296,7 @@ registerBlockType("post-grid/post-categories", {
 
       }
 
-
+      console.log(postCategoriesData);
 
     }, [postCategoriesX]);
 
@@ -425,19 +304,22 @@ registerBlockType("post-grid/post-categories", {
 
 
 
+    useEffect(() => {
 
+      var asdasd = postCategoriesData.slice(0, items.maxCount);
+
+      setCategories(asdasd);
+
+    }, [postCategoriesData]);
 
 
 
 
 
     useEffect(() => {
-      console.log('Listening maxCount: ', items.maxCount);
-      console.log(postCategoriesX);
-
 
       if (postCategoriesX.length > 0) {
-        setcategoryCount(postCategoriesX.length - 1);
+        setcategoryCount(categories.length - 1);
         var asdasd = postCategoriesData.slice(0, items.maxCount);
 
         setCategories(asdasd);
@@ -462,9 +344,9 @@ registerBlockType("post-grid/post-categories", {
       var reponsiveCssGroups = {};
       var reponsiveCss = '';
 
-      for (var selector in blockCssY) {
+      for (var selector in blockCssY.items) {
 
-        var attrs = blockCssY[selector];
+        var attrs = blockCssY.items[selector];
 
 
         for (var attr in attrs) {
@@ -489,36 +371,6 @@ registerBlockType("post-grid/post-categories", {
 
         }
       }
-
-      //console.log(reponsiveCssGroups);
-
-
-
-
-      // for (var device in reponsiveCssGroups) {
-
-      //   var item = reponsiveCssGroups[device];
-
-
-      //   if (device === 'Mobile') {
-      //     reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-      //   }
-      //   if (device === 'Tablet') {
-      //     reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-      //   }
-      //   if (device === 'Desktop') {
-      //     reponsiveCss += '@media only screen and (min-width: 781px){';
-      //   }
-
-      //   for (var index in item) {
-      //     var attr = item[index].attr;
-      //     var defaultVal = item[index].val;
-      //     var id = '.pg-postCategories-' + postId + ' a';
-      //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
-      //     reponsiveCss += '}';
-      //   }
-
-      // }
 
       if (reponsiveCssGroups['Mobile'] != undefined) {
         reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
@@ -658,7 +510,6 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      //console.log('Listening blockCssY: ', blockCssY);
 
       generateBlockCssY()
 
@@ -1110,12 +961,9 @@ registerBlockType("post-grid/post-categories", {
 
                   setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: responsive, bgColor: items.bgColor, padding: items.padding, margin: items.margin } });
 
-                  blockCss.items['color'] = { responsive: responsive };
-                  setAttributes({ blockCss: { items: blockCss.items } });
 
-
-                  blockCssY[itemSelector] = { ...blockCssY[itemSelector], color: responsive };
-                  setAttributes({ blockCssY: blockCssY });
+                  blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], color: responsive };
+                  setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
 
@@ -1148,13 +996,12 @@ registerBlockType("post-grid/post-categories", {
 
                   setAttributes({ items: { prefix: items.prefix, postfix: items.postfix, maxCount: items.maxCount, postCount: items.postCount, class: items.class, linkTarget: items.linkTarget, linkAttr: items.linkAttr, color: items.color, bgColor: responsive, padding: items.padding, margin: items.margin } });
 
-                  blockCssY[itemSelector] = { ...blockCssY[itemSelector], 'background-color': responsive };
-                  setAttributes({ blockCssY: blockCssY });
+
+                  blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'background-color': responsive };
+                  setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
 
-                  blockCss.items['background-color'] = { responsive: responsive };
-                  setAttributes({ blockCss: { items: blockCss.items } });
 
                 }}
               />
@@ -1164,15 +1011,23 @@ registerBlockType("post-grid/post-categories", {
                 <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
               </PanelRow>
 
-              <PaddingControl />
+              <BoxControl
+                label=""
+                values={items.padding[breakPointX]}
+                onChange={(nextValues) => { paddingControl(nextValues) }}
+              />
+
 
               <PanelRow className='my-3'>
                 <label>Margin</label>
                 <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
               </PanelRow>
-              <MarginControl />
 
-
+              <BoxControl
+                label=""
+                values={items.margin[breakPointX]}
+                onChange={(nextValues) => { marginControl(nextValues) }}
+              />
 
 
             </PanelBody>
@@ -1281,7 +1136,7 @@ registerBlockType("post-grid/post-categories", {
 
         <>
 
-          {/* {JSON.stringify(categories)} */}
+          <div className='my-5'></div>
 
           {categories.length == 0 && (<Spinner />)}
 

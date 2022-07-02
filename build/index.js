@@ -6921,7 +6921,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     // Wrapper CSS Class Selectors
 
     const titleWrapperSelector = '.pg-postTitle';
-    const titleLinkSelector = '.pg-postTitle a';
+    const titleLinkSelector = postTitle.isLink ? '.pg-postTitle a' : '.pg-postTitle';
     const titlePrefixSelector = '.pg-postTitle .prefix';
     const titlePostfixSelector = '.pg-postTitle .postfix';
     var breakPointList = [{
@@ -7611,11 +7611,11 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
       className: "font-bold"
-    }, "No link"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, ".pg-postTitle", '{}')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, ".pg-postTitle-", postId, '{}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, "No link"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, ".pg-postTitle", '{}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
       className: "font-bold"
-    }, "With link"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, ".pg-postTitle a", '{}', " ")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, ".pg-postTitle-", postId, " a", '{}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.TextareaControl, {
+    }, "With link"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, ".pg-postTitle a", '{}', " "))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.TextareaControl, {
       label: "Custom CSS",
       help: "Do not use 'style' tag",
       value: customCss,
@@ -7625,7 +7625,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         });
       }
     })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, JSON.stringify(blockCssY), wrapper.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
-      className: ['pg-postTitle pg-postTitle-' + postId]
+      className: ['pg-postTitle']
     }, postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: postUrl,
       target: postTitle.linkTarget
@@ -7634,7 +7634,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }, prefix.text), currentPostTitle, postfix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: postfix.class
     }, postfix.text)), !postTitle.isLink && currentPostTitle), wrapper.tag.length == 0 && postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-      className: ['pg-postTitle pg-postTitle-' + postId]
+      className: ['pg-postTitle']
     }, linkAttrItems, {
       href: postUrl,
       target: postTitle.linkTarget
@@ -7642,7 +7642,9 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       className: "prefix"
     }, prefix.text), currentPostTitle, postfix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: "postfix"
-    }, postfix.text)), wrapper.tag.length == 0 && !postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, prefix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, postfix.text)), wrapper.tag.length == 0 && !postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
+      className: 'pg-postTitle'
+    }, prefix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: "prefix"
     }, prefix.text), currentPostTitle, postfix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: "postfix"

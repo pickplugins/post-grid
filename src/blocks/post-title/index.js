@@ -140,7 +140,7 @@ registerBlockType("post-grid/post-title", {
 
     // Wrapper CSS Class Selectors
     const titleWrapperSelector = '.pg-postTitle';
-    const titleLinkSelector = '.pg-postTitle a';
+    const titleLinkSelector = postTitle.isLink ? '.pg-postTitle a' : '.pg-postTitle';
     const titlePrefixSelector = '.pg-postTitle .prefix';
     const titlePostfixSelector = '.pg-postTitle .postfix';
 
@@ -992,13 +992,11 @@ registerBlockType("post-grid/post-title", {
                   <div className='my-3'>
                     <p className='font-bold'>No link</p>
                     <p><code>.pg-postTitle{'{}'}</code></p>
-                    <p><code>.pg-postTitle-{postId}{'{}'}</code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>With link</p>
                     <p><code>.pg-postTitle a{'{}'} </code></p>
-                    <p><code>.pg-postTitle-{postId} a{'{}'}</code></p>
                   </div>
 
 
@@ -1031,7 +1029,7 @@ registerBlockType("post-grid/post-title", {
           {JSON.stringify(blockCssY)}
 
           {wrapper.tag && (
-            <CustomTag className={['pg-postTitle pg-postTitle-' + postId]}>
+            <CustomTag className={['pg-postTitle']}>
               {postTitle.isLink && (
                 <a {...linkAttrItems} href={postUrl} target={postTitle.linkTarget}>
 
@@ -1059,7 +1057,7 @@ registerBlockType("post-grid/post-title", {
           {wrapper.tag.length == 0 && (
 
             (
-              postTitle.isLink && (<a className={['pg-postTitle pg-postTitle-' + postId]} {...linkAttrItems} href={postUrl} target={postTitle.linkTarget}>
+              postTitle.isLink && (<a className={['pg-postTitle']} {...linkAttrItems} href={postUrl} target={postTitle.linkTarget}>
 
                 {prefix.text && (
                   <span className='prefix'>{prefix.text}</span>
@@ -1073,7 +1071,7 @@ registerBlockType("post-grid/post-title", {
           )}
 
           {wrapper.tag.length == 0 && !postTitle.isLink && (
-            <p>
+            <p className={'pg-postTitle'}>
               {prefix.text && (
                 <span className='prefix'>{prefix.text}</span>
               )}

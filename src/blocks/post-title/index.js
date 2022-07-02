@@ -697,7 +697,7 @@ registerBlockType("post-grid/post-title", {
 
 
 
-                <PanelBody title="Post Title" initialOpen={false}>
+                <PanelBody title="Post Title" initialOpen={true}>
 
 
 
@@ -988,16 +988,31 @@ registerBlockType("post-grid/post-title", {
 
                 <PanelBody title="Custom Style" initialOpen={false}>
 
+
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
-                    <p className='font-bold'>No link</p>
-                    <p><code>.pg-postTitle{'{}'}</code></p>
+                    <p className='font-bold'>Title Wrapper</p>
+                    <p><code>{titleWrapperSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>
-                    <p className='font-bold'>With link</p>
-                    <p><code>.pg-postTitle a{'{}'} </code></p>
+                    <p className='font-bold'>Title link</p>
+                    <p><code>{titleLinkSelector}{'{}'} </code></p>
+                    <p><code>.pg-postCategories a{'{/* your CSS here*/}'}</code></p>
                   </div>
+
+                  <div className='my-3'>
+                    <p className='font-bold'>Prefix</p>
+                    <p><code>{titlePrefixSelector}{'{/* your CSS here*/}'} </code></p>
+                  </div>
+
+                  <div className='my-3'>
+                    <p className='font-bold'>Postfix</p>
+                    <p><code>{titlePostfixSelector}{'{/* your CSS here*/}'} </code></p>
+                  </div>
+
+
+
 
 
                   <TextareaControl
@@ -1025,7 +1040,6 @@ registerBlockType("post-grid/post-title", {
 
 
         <>
-
 
           {wrapper.tag && (
             <CustomTag className={['pg-postTitle']}>

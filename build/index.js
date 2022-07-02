@@ -6798,6 +6798,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const {
   RawHTML
 } = wp.element;
@@ -6829,68 +6830,53 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }))
   },
   attributes: {
-    textAlign: {
-      "type": "string"
+    wrapper: {
+      type: 'object',
+      default: {
+        textAlign: '',
+        tag: 'h2',
+        class: '',
+        color: {},
+        bgColor: {},
+        padding: {},
+        margin: {}
+      }
     },
-    tag: {
-      "type": "string",
-      "default": 'h2'
+    postTitle: {
+      type: 'object',
+      default: {
+        textAlign: '',
+        isLink: true,
+        linkTarget: '',
+        customUrl: '',
+        class: '',
+        color: {},
+        bgColor: {},
+        padding: {},
+        margin: {}
+      }
     },
     prefix: {
-      "type": "string",
-      "default": ''
+      "type": "object",
+      "default": {
+        text: '',
+        class: '',
+        color: {},
+        bgColor: {}
+      }
     },
     postfix: {
-      "type": "string",
-      "default": ''
+      "type": "object",
+      "default": {
+        text: '',
+        class: '',
+        color: {},
+        bgColor: {}
+      }
     },
     customCss: {
       "type": "string",
       "default": ''
-    },
-    customUrl: {
-      "type": "string",
-      "default": ''
-    },
-    postId: {
-      type: 'number'
-    },
-    level: {
-      "type": "number",
-      "default": 2
-    },
-    color: {
-      type: 'object',
-      default: {
-        responsive: {}
-      }
-    },
-    bgColor: {
-      type: 'object',
-      default: {
-        responsive: {}
-      }
-    },
-    padding: {
-      type: 'object',
-      default: {
-        responsive: {}
-      }
-    },
-    margin: {
-      type: 'object',
-      default: {
-        responsive: {}
-      }
-    },
-    isLink: {
-      "type": "boolean",
-      "default": false
-    },
-    rel: {
-      "type": "string",
-      "attribute": "rel",
-      "default": ""
     },
     linkAttr: {
       "type": "array",
@@ -6902,9 +6888,11 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         items: {}
       }
     },
-    linkTarget: {
-      "type": "string",
-      "default": "_self"
+    blockCssY: {
+      "type": "object",
+      "default": {
+        items: {}
+      }
     }
   },
   usesContext: ["postId", "loopIndex", "postType", "queryId"],
@@ -6916,24 +6904,26 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     var attributes = props.attributes;
     var setAttributes = props.setAttributes;
     var context = props.context;
-    var textAlign = attributes.textAlign;
-    var isLink = attributes.isLink;
-    var linkTarget = attributes.linkTarget;
-    var rel = attributes.rel;
-    var color = attributes.color;
-    var bgColor = attributes.bgColor;
-    var tag = attributes.tag;
+    var postTitle = attributes.postTitle;
+    var wrapper = attributes.wrapper;
     var linkAttr = attributes.linkAttr;
     var blockCss = attributes.blockCss;
-    var padding = attributes.padding;
-    var margin = attributes.margin;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
     var customCss = attributes.customCss;
-    var customUrl = attributes.customUrl;
+    var blockCssY = attributes.blockCssY;
     var postId = context['postId'];
+    var postType = context['postType'];
     const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore.getBreakPoint());
     const [license, setLicense] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore.getLicense());
+    const [currentPostTitle, setCurrentPostTitle] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'title', postId);
+    const [currentPostUrl, setCurrentPostUrl] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'link', postId); //console.log(postTitle);
+    // Wrapper CSS Class Selectors
+
+    const titleWrapperSelector = '.pg-postTitle';
+    const titleLinkSelector = '.pg-postTitle a';
+    const titlePrefixSelector = '.pg-postTitle .prefix';
+    const titlePostfixSelector = '.pg-postTitle .postfix';
     var breakPointList = [{
       label: 'Select..',
       icon: '',
@@ -6949,238 +6939,234 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       });
     }
 
-    const PaddingControl = () => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-        label: "",
-        values: padding.responsive[breakPointX],
-        onChange: nextValues => {
-          var responsive = padding.responsive;
-          responsive[breakPointX] = nextValues; //console.log(nextValues);
+    function paddingControl(nextValues) {
+      var responsive = postTitle.padding;
+      responsive[breakPointX] = nextValues; //console.log(nextValues);
 
-          setAttributes({
-            padding: {
-              responsive: responsive
-            }
-          }); //blockCss.items['padding'] = { responsive: responsive };
-
-          if (nextValues.top != undefined) {
-            var paddingTop = blockCss.items['padding-top'] !== undefined ? blockCss.items['padding-top'] : {
-              responsive: {}
-            };
-            paddingTop.responsive[breakPointX] = nextValues.top;
-            blockCss.items['padding-top'] = paddingTop;
-          }
-
-          if (nextValues.right != undefined) {
-            var paddingRight = blockCss.items['padding-right'] !== undefined ? blockCss.items['padding-right'] : {
-              responsive: {}
-            };
-            paddingRight.responsive[breakPointX] = nextValues.right;
-            blockCss.items['padding-right'] = paddingRight;
-          }
-
-          if (nextValues.bottom != undefined) {
-            var paddingBottom = blockCss.items['padding-bottom'] !== undefined ? blockCss.items['padding-bottom'] : {
-              responsive: {}
-            };
-            paddingBottom.responsive[breakPointX] = nextValues.bottom;
-            blockCss.items['padding-bottom'] = paddingBottom;
-          }
-
-          if (nextValues.left != undefined) {
-            var paddingLeft = blockCss.items['padding-left'] !== undefined ? blockCss.items['padding-left'] : {
-              responsive: {}
-            };
-            paddingLeft.responsive[breakPointX] = nextValues.left;
-            blockCss.items['padding-left'] = paddingLeft;
-          }
-
-          setAttributes({
-            blockCss: {
-              items: blockCss.items
-            }
-          });
+      setAttributes({
+        postTitle: {
+          textAlign: postTitle.textAlign,
+          class: postTitle.class,
+          color: postTitle.color,
+          bgColor: postTitle.bgColor,
+          padding: responsive,
+          margin: postTitle.margin
         }
       });
-    };
+      blockCssY.items[titleLinkSelector] = blockCssY.items[titleLinkSelector] != undefined ? blockCssY.items[titleLinkSelector] : {};
 
-    const MarginControl = () => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-        label: "",
-        values: margin.responsive[breakPointX],
-        onChange: nextValues => {
-          var responsive = margin.responsive;
-          responsive[breakPointX] = nextValues;
-          setAttributes({
-            margin: {
-              responsive: responsive
-            }
-          }); //blockCss.items['margin'] = { responsive: responsive };
+      if (nextValues.top != undefined) {
+        var paddingTop = blockCssY.items[titleLinkSelector]['padding-top'] != undefined ? blockCssY.items[titleLinkSelector]['padding-top'] : {};
+        paddingTop[breakPointX] = nextValues.top;
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
+          'padding-top': paddingTop
+        };
+      }
 
-          if (nextValues.top != undefined) {
-            var marginTop = blockCss.items['margin-top'] !== undefined ? blockCss.items['margin-top'] : {
-              responsive: {}
-            };
-            marginTop.responsive[breakPointX] = nextValues.top;
-            blockCss.items['margin-top'] = marginTop;
-          }
+      if (nextValues.right != undefined) {
+        var paddingRight = blockCssY.items[titleLinkSelector]['padding-right'] != undefined ? blockCssY.items[titleLinkSelector]['padding-right'] : {};
+        paddingRight[breakPointX] = nextValues.right;
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
+          'padding-right': paddingRight
+        };
+      }
 
-          if (nextValues.right != undefined) {
-            var marginRight = blockCss.items['margin-right'] !== undefined ? blockCss.items['margin-right'] : {
-              responsive: {}
-            };
-            marginRight.responsive[breakPointX] = nextValues.right;
-            blockCss.items['margin-right'] = marginRight;
-          }
+      if (nextValues.bottom != undefined) {
+        var paddingBottom = blockCssY.items[titleLinkSelector]['padding-bottom'] != undefined ? blockCssY.items[titleLinkSelector]['padding-bottom'] : {};
+        paddingBottom[breakPointX] = nextValues.bottom;
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
+          'padding-bottom': paddingBottom
+        };
+      }
 
-          if (nextValues.bottom != undefined) {
-            var marginBottom = blockCss.items['margin-bottom'] !== undefined ? blockCss.items['margin-bottom'] : {
-              responsive: {}
-            };
-            marginBottom.responsive[breakPointX] = nextValues.bottom;
-            blockCss.items['margin-bottom'] = marginBottom;
-          }
+      if (nextValues.left != undefined) {
+        var paddingLeft = blockCssY.items[titleLinkSelector]['padding-left'] != undefined ? blockCssY.items[titleLinkSelector]['padding-left'] : {};
+        paddingLeft[breakPointX] = nextValues.left;
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
+          'padding-left': paddingLeft
+        };
+      }
 
-          if (nextValues.left != undefined) {
-            var marginLeft = blockCss.items['margin-left'] !== undefined ? blockCss.items['margin-left'] : {
-              responsive: {}
-            };
-            marginLeft.responsive[breakPointX] = nextValues.left;
-            blockCss.items['margin-left'] = marginLeft;
-          }
-
-          setAttributes({
-            blockCss: {
-              items: blockCss.items
-            }
-          });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
         }
-      });
-    };
-
-    function setpriceOnclick(va) {
-      //console.log(va);
-      var asdsdsd = wp.data.dispatch('my-shop').setPrice('food', va);
-      asdsdsd.then(res => {
-        ////console.log(res.price);
-        getpriceOnclick(); //setLicense(res);
       });
     }
 
-    function generateBlockCss() {
+    function marginControl(nextValues) {
+      var responsive = postTitle.margin;
+      responsive[breakPointX] = nextValues;
+      setAttributes({
+        postTitle: {
+          textAlign: postTitle.textAlign,
+          class: postTitle.class,
+          color: postTitle.color,
+          bgColor: postTitle.bgColor,
+          padding: postTitle.padding,
+          margin: responsive
+        }
+      });
+      blockCssY.items[titleLinkSelector] = blockCssY.items[titleLinkSelector] != undefined ? blockCssY.items[titleLinkSelector] : {};
+
+      if (nextValues.top != undefined) {
+        var marginTop = blockCssY.items[titleLinkSelector]['margin-top'] != undefined ? blockCssY.items[titleLinkSelector]['margin-top'] : {};
+        marginTop[breakPointX] = nextValues.top;
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
+          'margin-top': marginTop
+        };
+      }
+
+      if (nextValues.right != undefined) {
+        var marginRight = blockCssY.items[titleLinkSelector]['margin-right'] !== undefined ? blockCssY.items[titleLinkSelector]['margin-right'] : {};
+        marginRight[breakPointX] = nextValues.right;
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
+          'margin-right': marginRight
+        };
+      }
+
+      if (nextValues.bottom != undefined) {
+        var marginBottom = blockCssY.items[titleLinkSelector]['margin-bottom'] !== undefined ? blockCssY.items[titleLinkSelector]['margin-bottom'] : {};
+        marginBottom[breakPointX] = nextValues.bottom;
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
+          'margin-bottom': marginBottom
+        };
+      }
+
+      if (nextValues.left != undefined) {
+        var marginLeft = blockCssY.items[titleLinkSelector]['margin-left'] !== undefined ? blockCssY.items[titleLinkSelector]['margin-left'] : {};
+        marginLeft[breakPointX] = nextValues.left;
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
+          'margin-left': marginLeft
+        };
+      }
+
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function generateBlockCssY() {
       var reponsiveCssGroups = {};
       var reponsiveCss = '';
 
-      for (var x in blockCss.items) {
-        var item = blockCss.items[x];
-        var attr = x;
-        var id = '.pg-postTitle-' + postId + ' a';
-        var responsive = item.responsive;
+      for (var selector in blockCssY.items) {
+        var attrs = blockCssY.items[selector];
 
-        for (var device in responsive) {
-          var valY = responsive[device];
+        for (var attr in attrs) {
+          var breakpoints = attrs[attr];
 
-          if (reponsiveCssGroups[device] == undefined) {
-            reponsiveCssGroups[device] = [];
+          for (var device in breakpoints) {
+            var attrValue = breakpoints[device];
+
+            if (reponsiveCssGroups[device] == undefined) {
+              reponsiveCssGroups[device] = [];
+            }
+
+            if (reponsiveCssGroups[device][selector] == undefined) {
+              reponsiveCssGroups[device][selector] = [];
+            }
+
+            reponsiveCssGroups[device][selector].push({
+              'attr': attr,
+              'val': attrValue
+            });
+          }
+        }
+      }
+
+      if (reponsiveCssGroups['Mobile'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+
+        for (var selector in reponsiveCssGroups['Mobile']) {
+          var attrs = reponsiveCssGroups['Mobile'][selector];
+          reponsiveCss += selector + '{';
+
+          for (var index in attrs) {
+            var attr = attrs[index];
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
           }
 
-          reponsiveCssGroups[device].push({
-            'attr': attr,
-            'val': valY
-          });
+          reponsiveCss += '}';
         }
-      } // for (var device in reponsiveCssGroups) {
-      //   var item = reponsiveCssGroups[device];
-      //   if (device === 'Mobile') {
-      //     reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-      //   }
-      //   if (device === 'Tablet') {
-      //     reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-      //   }
-      //   if (device === 'Desktop') {
-      //     reponsiveCss += '@media only screen and (min-width: 781px){';
-      //   }
-      //   for (var index in item) {
-      //     var attr = item[index].attr;
-      //     var defaultVal = item[index].val;
-      //     var id = '.pg-postTitle-' + postId + ' a';
-      //     reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
-      //     reponsiveCss += '}';
-      //   }
-      // }
 
-
-      reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-      for (var ii in reponsiveCssGroups['Mobile']) {
-        var item = reponsiveCssGroups['Mobile'][ii];
-
-        for (var i in item) {
-          var attr = item.attr;
-          var defaultVal = item.val;
-          var id = '.pg-postTitle-' + postId + ' a';
-          reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
-        }
+        reponsiveCss += '}';
       }
 
-      reponsiveCss += '}';
-      reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+      if (reponsiveCssGroups['Tablet'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
 
-      for (var jj in reponsiveCssGroups['Tablet']) {
-        var item = reponsiveCssGroups['Tablet'][jj];
+        for (var selector in reponsiveCssGroups['Tablet']) {
+          var attrs = reponsiveCssGroups['Tablet'][selector];
+          reponsiveCss += selector + '{';
 
-        for (var j in item) {
-          var attr = item.attr;
-          var defaultVal = item.val;
-          var id = '.pg-postTitle-' + postId + ' a';
-          reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
+          for (var index in attrs) {
+            var attr = attrs[index];
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+
+          reponsiveCss += '}';
         }
+
+        reponsiveCss += '}';
       }
 
-      reponsiveCss += '}';
-      reponsiveCss += '@media only screen and (min-width: 781px){';
+      if (reponsiveCssGroups['Desktop'] != undefined) {
+        reponsiveCss += '@media only screen and (min-width: 781px){';
 
-      for (var kk in reponsiveCssGroups['Desktop']) {
-        var item = reponsiveCssGroups['Desktop'][kk];
+        for (var selector in reponsiveCssGroups['Desktop']) {
+          var attrs = reponsiveCssGroups['Desktop'][selector];
+          reponsiveCss += selector + '{';
 
-        for (var k in item) {
-          var attr = item.attr;
-          var defaultVal = item.val;
-          var id = '.pg-postTitle-' + postId + ' a';
-          reponsiveCss += id + '{' + attr + ':' + defaultVal + '}';
+          for (var index in attrs) {
+            var attr = attrs[index];
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCss += attrName + ':' + attrValue + ';';
+          }
+
+          reponsiveCss += '}';
         }
-      }
 
-      reponsiveCss += '}';
+        reponsiveCss += '}';
+      } //console.log(reponsiveCss);
+
+
       var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
 
       if (iframe) {
         setTimeout(() => {
           var iframeDocument = iframe.contentDocument;
           var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-pgTitle");
+          var divWrap = iframeDocument.getElementById("css-block-postCategories");
 
           if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-pgTitle").outerHTML = "";
+            iframeDocument.getElementById("css-block-postCategories").outerHTML = "";
           }
 
-          var divWrap = '<div id="css-block-pgTitle"></div>';
+          var divWrap = '<div id="css-block-postCategories"></div>';
           body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-pgTitle');
+          var csswrappg = iframeDocument.getElementById('css-block-postCategories');
           var str = '<style>' + reponsiveCss + '</style>';
           csswrappg.insertAdjacentHTML('beforeend', str);
         }, 200);
       } else {
         var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-pgTitle");
+        var divWrap = document.getElementById("css-block-postCategories");
 
         if (divWrap != undefined) {
-          document.getElementById("css-block-pgTitle").outerHTML = "";
+          document.getElementById("css-block-postCategories").outerHTML = "";
         }
 
-        var divWrap = '<div id="css-block-pgTitle"></div>';
+        var divWrap = '<div id="css-block-postCategories"></div>';
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-pgTitle');
+        var csswrappg = document.getElementById('css-block-postCategories');
         var str = '<style>' + reponsiveCss + '</style>';
         csswrappg.insertAdjacentHTML('beforeend', str);
       }
@@ -7190,8 +7176,11 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       //console.log('Listening blockCss: ', blockCss);
-      generateBlockCss();
-    }, [blockCss]);
+      generateBlockCssY();
+    }, [blockCssY]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+      console.log('Listening currentPostTitle: ', currentPostTitle);
+    }, [currentPostTitle]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       ////console.log('Listening linkAttr: ', linkAttr);
       linkAttrObj();
@@ -7235,11 +7224,9 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     const {
       __experimentalSetPreviewDeviceType: setPreviewDeviceType
     } = wp.data.dispatch('core/edit-post');
-    const post = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => select('core').getEntityRecord('postType', context['postType'], context['postId']));
-    var postUrl = customUrl.length > 0 ? customUrl : post.link; //console.log('Hello');
-    ////console.log(post);
+    var postUrl = postTitle.customUrl != undefined && postTitle.customUrl.length > 0 ? postTitle.customUrl : currentPostUrl; //console.log('Hello');
 
-    const CustomTag = `${tag}`;
+    const CustomTag = `${wrapper.tag}`;
 
     const MyDropdown = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Dropdown, {
       position: "bottom",
@@ -7266,7 +7253,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
             var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value);
             asdsdsd.then(res => {
               setBreakPointX(res.breakpoint);
-              generateBlockCss();
+              generateBlockCssY();
             });
           }
         }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
@@ -7276,22 +7263,29 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }));
 
     function onChangeBreakPoint(x, index) {
-      console.log(x);
-      console.log(index);
-      console.log('Post Title');
       setPreviewDeviceType(x.value);
       var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value);
       asdsdsd.then(res => {
         setBreakPointX(res.breakpoint);
-        generateBlockCss();
+        generateBlockCssY();
       });
     }
 
     return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.AlignmentToolbar, {
-      value: textAlign,
+      value: postTitle.textAlign,
       onChange: nextAlign => {
         setAttributes({
-          textAlign: nextAlign
+          postTitle: {
+            textAlign: nextAlign,
+            isLink: postTitle.isLink,
+            linkTarget: postTitle.linkTarget,
+            customUrl: postTitle.customUrl,
+            class: postTitle.class,
+            color: postTitle.color,
+            bgColor: postTitle.bgColor,
+            padding: postTitle.padding,
+            margin: postTitle.margin
+          }
         });
       }
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
@@ -7300,83 +7294,14 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       className: "px-3",
       title: "General",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
-      label: "Linked with post?",
-      help: isLink ? 'Linked with post URL' : 'Not linked to post URL.',
-      checked: isLink ? true : false,
-      onChange: e => {
-        setAttributes({
-          isLink: isLink ? false : true
-        });
-      }
-    }), isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Link Target"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-      label: "",
-      value: linkTarget,
-      options: [{
-        label: '_self',
-        value: '_self'
-      }, {
-        label: '_blank',
-        value: '_blank'
-      }, {
-        label: '_parent',
-        value: '_parent'
-      }, {
-        label: '_top',
-        value: '_top'
-      }],
-      onChange: newVal => setAttributes({
-        linkTarget: newVal
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Rel Attribute"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: rel,
-      onChange: newVal => setAttributes({
-        rel: newVal
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Prefix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: prefix,
-      onChange: newVal => setAttributes({
-        prefix: newVal
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Postfix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: postfix,
-      onChange: newVal => setAttributes({
-        postfix: newVal
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Custom Url"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: customUrl,
-      onChange: newVal => setAttributes({
-        customUrl: newVal
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Custom Attributes"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: " cursor-pointer px-3 text-white py-1 bg-blue-600",
-      onClick: ev => {
-        var sdsd = linkAttr.concat({
-          id: '',
-          val: ''
-        });
-        setAttributes({
-          linkAttr: sdsd
-        });
-        linkAttrObj();
-      }
-    }, "Add"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+      title: "Wrapper",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       label: "",
-      value: tag,
+      value: wrapper.tag,
       options: [{
         label: 'No Wrapper',
         value: ''
@@ -7408,10 +7333,109 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         label: 'P',
         value: 'p'
       }],
-      onChange: newVal => setAttributes({
-        tag: newVal
-      })
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, linkAttr.map((x, i) => {
+      onChange: newVal => {
+        {
+          setAttributes({
+            wrapper: {
+              textAlign: wrapper.textAlign,
+              tag: newVal,
+              color: wrapper.color,
+              bgColor: wrapper.bgColor,
+              padding: wrapper.padding,
+              margin: wrapper.margin
+            }
+          });
+        }
+      }
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+      title: "Post Title",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
+      label: "Linked with post?",
+      help: postTitle.isLink ? 'Linked with post URL' : 'Not linked to post URL.',
+      checked: postTitle.isLink ? true : false,
+      onChange: e => {
+        setAttributes({
+          postTitle: {
+            textAlign: postTitle.textAlign,
+            isLink: postTitle.isLink ? false : true,
+            linkTarget: postTitle.linkTarget,
+            customUrl: postTitle.customUrl,
+            class: postTitle.class,
+            color: postTitle.color,
+            bgColor: postTitle.bgColor,
+            padding: postTitle.padding,
+            margin: postTitle.margin
+          }
+        });
+      }
+    }), postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Link Target"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      label: "",
+      value: postTitle.linkTarget,
+      options: [{
+        label: '_self',
+        value: '_self'
+      }, {
+        label: '_blank',
+        value: '_blank'
+      }, {
+        label: '_parent',
+        value: '_parent'
+      }, {
+        label: '_top',
+        value: '_top'
+      }],
+      onChange: newVal => {
+        setAttributes({
+          postTitle: {
+            textAlign: postTitle.textAlign,
+            isLink: postTitle.isLink,
+            linkTarget: newVal,
+            customUrl: postTitle.customUrl,
+            class: postTitle.class,
+            color: postTitle.color,
+            bgColor: postTitle.bgColor,
+            padding: postTitle.padding,
+            margin: postTitle.margin
+          }
+        });
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Custom Url"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      value: postTitle.customUrl,
+      onChange: newVal => {
+        setAttributes({
+          postTitle: {
+            textAlign: postTitle.textAlign,
+            isLink: postTitle.isLink,
+            linkTarget: postTitle.linkTarget,
+            customUrl: newVal,
+            class: postTitle.class,
+            color: postTitle.color,
+            bgColor: postTitle.bgColor,
+            padding: postTitle.padding,
+            margin: postTitle.margin
+          }
+        });
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Custom Attributes"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: " cursor-pointer px-3 text-white py-1 bg-blue-600",
+      onClick: ev => {
+        var sdsd = linkAttr.concat({
+          id: '',
+          val: ''
+        });
+        setAttributes({
+          linkAttr: sdsd
+        });
+        linkAttrObj();
+      }
+    }, "Add")), linkAttr.map((x, i) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "my-2"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
@@ -7444,10 +7468,9 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
           });
         }
       })));
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
-      title: "Color",
-      initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
@@ -7456,30 +7479,35 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: color.responsive[breakPointX],
+      value: postTitle.color[breakPointX],
       colors: colors,
       enableAlpha: true,
       onChange: newVal => {
-        var responsive = color.responsive;
+        var responsive = postTitle.color;
         responsive[breakPointX] = newVal;
         setAttributes({
-          color: {
-            responsive: responsive
+          postTitle: {
+            textAlign: postTitle.textAlign,
+            isLink: postTitle.isLink,
+            class: postTitle.class,
+            color: responsive,
+            bgColor: postTitle.bgColor,
+            padding: postTitle.padding,
+            margin: postTitle.margin
           }
         });
-        blockCss.items['color'] = {
-          responsive: responsive
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
+          'color': responsive
         };
         setAttributes({
-          blockCss: {
-            items: blockCss.items
+          blockCssY: {
+            items: blockCssY.items
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
-      title: "Background Color",
-      initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
@@ -7488,49 +7516,95 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: bgColor.responsive[breakPointX],
+      value: postTitle.bgColor[breakPointX],
       colors: colors,
       enableAlpha: true,
       onChange: newVal => {
-        var responsive = bgColor.responsive;
+        var responsive = postTitle.bgColor;
         responsive[breakPointX] = newVal;
         setAttributes({
-          bgColor: {
-            responsive: responsive
+          postTitle: {
+            textAlign: postTitle.textAlign,
+            isLink: postTitle.isLink,
+            class: postTitle.class,
+            color: postTitle.color,
+            bgColor: responsive,
+            padding: postTitle.padding,
+            margin: postTitle.margin
           }
         });
-        blockCss.items['background-color'] = {
-          responsive: responsive
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
+          'background-color': responsive
         };
         setAttributes({
-          blockCss: {
-            items: blockCss.items
+          blockCssY: {
+            items: blockCssY.items
           }
         });
       }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+      label: "",
+      values: postTitle.padding[breakPointX],
+      onChange: nextValues => {
+        paddingControl(nextValues);
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+      label: "",
+      values: postTitle.margin[breakPointX],
+      onChange: nextValues => {
+        marginControl(nextValues);
+      }
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
-      title: "Padding",
+      title: "Postfix",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(PaddingControl, null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
-      title: "Margin",
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Prefix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      value: prefix.text,
+      onChange: newVal => {
+        setAttributes({
+          prefix: {
+            text: newVal,
+            class: prefix.class,
+            color: prefix.color,
+            bgColor: prefix.bgColor
+          }
+        });
+      }
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+      title: "Postfix",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(MarginControl, null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Postfix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      value: postfix.text,
+      onChange: newVal => {
+        setAttributes({
+          postfix: {
+            text: newVal,
+            class: prefix.class,
+            color: postfix.color,
+            bgColor: postfix.bgColor
+          }
+        });
+      }
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, "Please use following class selector to apply your custom CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -7550,19 +7624,29 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
           customCss: value
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, JSON.stringify(blockCssY), wrapper.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
       className: ['pg-postTitle pg-postTitle-' + postId]
-    }, isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
+    }, postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: postUrl,
-      rel: rel,
-      target: linkTarget
-    }), prefix, post.title.rendered, postfix), !isLink && post.title.rendered), tag.length == 0 && isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      target: postTitle.linkTarget
+    }), prefix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: prefix.class
+    }, prefix.text), currentPostTitle, postfix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: postfix.class
+    }, postfix.text)), !postTitle.isLink && currentPostTitle), wrapper.tag.length == 0 && postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: ['pg-postTitle pg-postTitle-' + postId]
     }, linkAttrItems, {
       href: postUrl,
-      rel: rel,
-      target: linkTarget
-    }), prefix, post.title.rendered, postfix), tag.length == 0 && !isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, post.title.rendered))];
+      target: postTitle.linkTarget
+    }), prefix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: "prefix"
+    }, prefix.text), currentPostTitle, postfix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: "postfix"
+    }, postfix.text)), wrapper.tag.length == 0 && !postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, prefix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: "prefix"
+    }, prefix.text), currentPostTitle, postfix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: "postfix"
+    }, postfix.text)))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file

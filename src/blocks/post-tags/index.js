@@ -25,15 +25,15 @@ var myStore = wp.data.select('my-shop');
 
 
 
-registerBlockType("post-grid/post-categories", {
-  title: "Post Categories",
+registerBlockType("post-grid/post-tags", {
+  title: "Post Tags",
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: '#7e70af',
     // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
     foreground: '#fff',
     // Specifying an icon for the block
-    src: <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M20 4H4v1.5h16V4zm-2 9h-3c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zm.5 5c0 .3-.2.5-.5.5h-3c-.3 0-.5-.2-.5-.5v-3c0-.3.2-.5.5-.5h3c.3 0 .5.2.5.5v3zM4 9.5h9V8H4v1.5zM9 13H6c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zm.5 5c0 .3-.2.5-.5.5H6c-.3 0-.5-.2-.5-.5v-3c0-.3.2-.5.5-.5h3c.3 0 .5.2.5.5v3z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>,
+    src: <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M8.1 12.3c.1.1.3.3.5.3.2.1.4.1.6.1.2 0 .4 0 .6-.1.2-.1.4-.2.5-.3l3-3c.3-.3.5-.7.5-1.1 0-.4-.2-.8-.5-1.1L9.7 3.5c-.1-.2-.3-.3-.5-.3H5c-.4 0-.8.4-.8.8v4.2c0 .2.1.4.2.5l3.7 3.6zM5.8 4.8h3.1l3.4 3.4v.1l-3 3 .5.5-.7-.5-3.3-3.4V4.8zM4 20h9v-1.5H4V20zm0-5.5V16h16v-1.5H4z"></path></svg>,
   },
   attributes: {
 
@@ -51,7 +51,7 @@ registerBlockType("post-grid/post-categories", {
     },
     frontText: {
       type: 'object',
-      default: { text: 'Categories: ', class: 'inline-block', color: {}, bgColor: {}, padding: {}, margin: {} },
+      default: { text: 'Tags: ', class: 'inline-block', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
 
 
@@ -255,7 +255,7 @@ registerBlockType("post-grid/post-categories", {
     const [
       postCategoriesX,
       setPostCategoriesX,
-    ] = useEntityProp('postType', postType, 'categories', postId);
+    ] = useEntityProp('postType', postType, 'tags', postId);
 
 
 
@@ -279,7 +279,7 @@ registerBlockType("post-grid/post-categories", {
         if (x) {
 
           apiFetch({
-            path: '/wp/v2/categories/' + catId,
+            path: '/wp/v2/tags/' + catId,
             method: 'GET',
           }).then((res) => {
 

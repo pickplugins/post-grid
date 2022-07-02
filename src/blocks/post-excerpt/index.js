@@ -32,8 +32,8 @@ var myStore = wp.data.select('my-shop');
 
 
 
-registerBlockType("post-grid/post-title", {
-  title: "Post Title",
+registerBlockType("post-grid/post-excerpt", {
+  title: "Post Excerpt",
 
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
@@ -41,7 +41,7 @@ registerBlockType("post-grid/post-title", {
     // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
     foreground: '#fff',
     // Specifying an icon for the block
-    src: <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M4 14.5h16V16H4zM4 18.5h9V20H4zM4 4h3c2 0 3 .86 3 2.583 0 .891-.253 1.554-.76 1.988-.505.435-1.24.652-2.204.652H5.542V12H4V4zm2.855 4c.53 0 .924-.114 1.18-.343.266-.228.398-.579.398-1.051 0-.473-.132-.82-.397-1.04-.265-.229-.67-.343-1.217-.343H5.542V8h1.313z"></path></svg>,
+    src: <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.75 9.333c0 .521-.102.977-.327 1.354-.23.386-.555.628-.893.774-.545.234-1.183.227-1.544.222l-.12-.001v-1.5h.123c.414.001.715.002.948-.099a.395.395 0 00.199-.166c.05-.083.114-.253.114-.584V7.2H8.8V4h3.95v5.333zM7.95 9.333c0 .521-.102.977-.327 1.354-.23.386-.555.628-.893.774-.545.234-1.183.227-1.544.222l-.12-.001v-1.5h.123c.414.001.715.002.948-.099a.394.394 0 00.198-.166c.05-.083.115-.253.115-.584V7.2H4V4h3.95v5.333zM13 20H4v-1.5h9V20zM20 16H4v-1.5h16V16z"></path></svg>,
   },
 
 
@@ -50,12 +50,18 @@ registerBlockType("post-grid/post-title", {
 
     wrapper: {
       type: 'object',
-      default: { textAlign: '', tag: 'h2', class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
+      default: { textAlign: '', tag: 'p', class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
-    postTitle: {
+    postExcerpt: {
       type: 'object',
-      default: { textAlign: '', isLink: true, linkTarget: '', customUrl: '', class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
+      default: { text: '', isLink: true, linkTarget: '', customUrl: '', linkAttr: [], class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
+
+    readMore: {
+      "type": "object",
+      "default": { text: 'Read More', isLink: true, linkTarget: '', customUrl: '', linkAttr: [], class: '', color: {}, bgColor: {} }
+    },
+
     prefix: {
       "type": "object",
       "default": { text: '', class: '', color: {}, bgColor: {} }
@@ -73,10 +79,6 @@ registerBlockType("post-grid/post-title", {
     linkAttr: {
       "type": "array",
       "default": []
-    },
-    blockCss: {
-      "type": "object",
-      "default": { items: {} }
     },
 
     blockCssY: {
@@ -101,12 +103,12 @@ registerBlockType("post-grid/post-title", {
     var setAttributes = props.setAttributes;
     var context = props.context;
 
-    var postTitle = attributes.postTitle;
+    var postExcerpt = attributes.postExcerpt;
     var wrapper = attributes.wrapper;
+    var readMore = attributes.readMore;
 
 
     var linkAttr = attributes.linkAttr;
-    var blockCss = attributes.blockCss;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
     var customCss = attributes.customCss;
@@ -124,7 +126,7 @@ registerBlockType("post-grid/post-title", {
     const [
       currentPostTitle,
       setCurrentPostTitle,
-    ] = useEntityProp('postType', postType, 'title', postId);
+    ] = useEntityProp('postType', postType, 'excerpt', postId);
 
 
     const [
@@ -134,15 +136,15 @@ registerBlockType("post-grid/post-title", {
 
 
 
-    //console.log(postTitle);
+    //console.log(postExcerpt);
 
 
 
     // Wrapper CSS Class Selectors
-    const titleWrapperSelector = '.pg-postTitle';
-    const titleLinkSelector = postTitle.isLink ? '.pg-postTitle a' : '.pg-postTitle';
-    const titlePrefixSelector = '.pg-postTitle .prefix';
-    const titlePostfixSelector = '.pg-postTitle .postfix';
+    const excerptWrapperSelector = '.pg-postExcerpt';
+    const excerptSelector = postExcerpt.isLink ? '.pg-postExcerpt a' : '.pg-postExcerpt';
+    const redmoreSelector = '.pg-postExcerpt .readmore';
+
 
 
 
@@ -160,37 +162,38 @@ registerBlockType("post-grid/post-title", {
     function paddingControl(nextValues) {
 
 
-      var responsive = postTitle.padding;
+      var responsive = postExcerpt.padding;
       responsive[breakPointX] = nextValues;
 
-      //console.log(nextValues);
+      console.log(nextValues);
+      console.log(responsive);
 
-      setAttributes({ postTitle: { textAlign: postTitle.textAlign, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: responsive, margin: postTitle.margin } });
+      setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink, linkTarget: postExcerpt.linkTarget, customUrl: postExcerpt.customUrl, linkAttr: postExcerpt.linkAttr, class: postExcerpt.class, color: postExcerpt.color, bgColor: postExcerpt.bgColor, padding: responsive, margin: postExcerpt.margin } });
 
 
 
-      blockCssY.items[titleLinkSelector] = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector] : {};
+      blockCssY.items[excerptSelector] = (blockCssY.items[excerptSelector] != undefined) ? blockCssY.items[excerptSelector] : {};
 
 
 
       if (nextValues.top != undefined) {
 
-        var paddingTop = (blockCssY.items[titleLinkSelector]['padding-top'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-top'] : {};
+        var paddingTop = (blockCssY.items[excerptSelector]['padding-top'] != undefined) ? blockCssY.items[excerptSelector]['padding-top'] : {};
         paddingTop[breakPointX] = nextValues.top
 
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-top': paddingTop };
+        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'padding-top': paddingTop };
 
       }
 
 
       if (nextValues.right != undefined) {
 
-        var paddingRight = (blockCssY.items[titleLinkSelector]['padding-right'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-right'] : {};
+        var paddingRight = (blockCssY.items[excerptSelector]['padding-right'] != undefined) ? blockCssY.items[excerptSelector]['padding-right'] : {};
         paddingRight[breakPointX] = nextValues.right
 
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-right': paddingRight };
+        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'padding-right': paddingRight };
 
 
 
@@ -198,11 +201,11 @@ registerBlockType("post-grid/post-title", {
 
       if (nextValues.bottom != undefined) {
 
-        var paddingBottom = (blockCssY.items[titleLinkSelector]['padding-bottom'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-bottom'] : {};
+        var paddingBottom = (blockCssY.items[excerptSelector]['padding-bottom'] != undefined) ? blockCssY.items[excerptSelector]['padding-bottom'] : {};
         paddingBottom[breakPointX] = nextValues.bottom
 
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-bottom': paddingBottom };
+        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'padding-bottom': paddingBottom };
 
 
 
@@ -210,10 +213,10 @@ registerBlockType("post-grid/post-title", {
 
       if (nextValues.left != undefined) {
 
-        var paddingLeft = (blockCssY.items[titleLinkSelector]['padding-left'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-left'] : {};
+        var paddingLeft = (blockCssY.items[excerptSelector]['padding-left'] != undefined) ? blockCssY.items[excerptSelector]['padding-left'] : {};
         paddingLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-left': paddingLeft };
+        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'padding-left': paddingLeft };
 
 
       }
@@ -231,51 +234,47 @@ registerBlockType("post-grid/post-title", {
 
     function marginControl(nextValues) {
 
-      var responsive = postTitle.margin;
+      var responsive = postExcerpt.margin;
       responsive[breakPointX] = nextValues;
 
 
-      setAttributes({ postTitle: { textAlign: postTitle.textAlign, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: responsive } });
+      setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink, linkTarget: postExcerpt.linkTarget, customUrl: postExcerpt.customUrl, linkAttr: postExcerpt.linkAttr, class: postExcerpt.class, color: postExcerpt.color, bgColor: postExcerpt.bgColor, padding: postExcerpt.padding, margin: responsive } });
 
 
-
-
-
-
-      blockCssY.items[titleLinkSelector] = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector] : {};
+      blockCssY.items[excerptSelector] = (blockCssY.items[excerptSelector] != undefined) ? blockCssY.items[excerptSelector] : {};
 
       if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[titleLinkSelector]['margin-top'] != undefined) ? blockCssY.items[titleLinkSelector]['margin-top'] : {};
+        var marginTop = (blockCssY.items[excerptSelector]['margin-top'] != undefined) ? blockCssY.items[excerptSelector]['margin-top'] : {};
         marginTop[breakPointX] = nextValues.top
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-top': marginTop };
+        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'margin-top': marginTop };
       }
 
 
       if (nextValues.right != undefined) {
 
-        var marginRight = (blockCssY.items[titleLinkSelector]['margin-right'] !== undefined) ? blockCssY.items[titleLinkSelector]['margin-right'] : {};
+        var marginRight = (blockCssY.items[excerptSelector]['margin-right'] !== undefined) ? blockCssY.items[excerptSelector]['margin-right'] : {};
         marginRight[breakPointX] = nextValues.right
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-right': marginRight };
+        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'margin-right': marginRight };
 
       }
 
       if (nextValues.bottom != undefined) {
 
-        var marginBottom = (blockCssY.items[titleLinkSelector]['margin-bottom'] !== undefined) ? blockCssY.items[titleLinkSelector]['margin-bottom'] : {};
+        var marginBottom = (blockCssY.items[excerptSelector]['margin-bottom'] !== undefined) ? blockCssY.items[excerptSelector]['margin-bottom'] : {};
         marginBottom[breakPointX] = nextValues.bottom
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-bottom': marginBottom };
+        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'margin-bottom': marginBottom };
 
       }
 
       if (nextValues.left != undefined) {
 
-        var marginLeft = (blockCssY.items[titleLinkSelector]['margin-left'] !== undefined) ? blockCssY.items[titleLinkSelector]['margin-left'] : {};
+        var marginLeft = (blockCssY.items[excerptSelector]['margin-left'] !== undefined) ? blockCssY.items[excerptSelector]['margin-left'] : {};
         marginLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-left': marginLeft };
+        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'margin-left': marginLeft };
 
       }
 
@@ -453,7 +452,6 @@ registerBlockType("post-grid/post-title", {
 
 
     useEffect(() => {
-      //console.log('Listening blockCss: ', blockCss);
 
       generateBlockCssY()
 
@@ -516,7 +514,7 @@ registerBlockType("post-grid/post-title", {
 
 
 
-    //const [blockCss, setBlockCss] = useState({ items: {} });
+
 
     const [setSome, setSomeState] = useState({});
     const [stateX, setStateX] = useState('Old Value');
@@ -533,7 +531,7 @@ registerBlockType("post-grid/post-title", {
     } = wp.data.dispatch('core/edit-post')
 
 
-    var postUrl = (postTitle.customUrl != undefined && postTitle.customUrl.length > 0) ? postTitle.customUrl : currentPostUrl;
+    var postUrl = (postExcerpt.customUrl != undefined && postExcerpt.customUrl.length > 0) ? postExcerpt.customUrl : currentPostUrl;
 
     //console.log('Hello');
 
@@ -634,9 +632,9 @@ registerBlockType("post-grid/post-title", {
 
           <BlockControls >
             <AlignmentToolbar
-              value={postTitle.textAlign}
+              value={postExcerpt.textAlign}
               onChange={(nextAlign) => {
-                setAttributes({ postTitle: { textAlign: nextAlign, isLink: postTitle.isLink, linkTarget: postTitle.linkTarget, customUrl: postTitle.customUrl, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
+                setAttributes({ postExcerpt: { textAlign: nextAlign, isLink: postExcerpt.isLink, linkTarget: postExcerpt.linkTarget, customUrl: postExcerpt.customUrl, class: postExcerpt.class, color: postExcerpt.color, bgColor: postExcerpt.bgColor, padding: postExcerpt.padding, margin: postExcerpt.margin } });
               }}
             />
           </BlockControls>
@@ -697,23 +695,32 @@ registerBlockType("post-grid/post-title", {
 
 
 
-                <PanelBody title="Post Title" initialOpen={true}>
+                <PanelBody title="Post Excerpt" initialOpen={false}>
+
 
 
 
                   <ToggleControl
                     label="Linked with post?"
-                    help={postTitle.isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
-                    checked={postTitle.isLink ? true : false}
+                    help={postExcerpt.isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
+                    checked={postExcerpt.isLink ? true : false}
                     onChange={(e) => {
 
 
-                      setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.isLink ? false : true, linkTarget: postTitle.linkTarget, customUrl: postTitle.customUrl, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
+
+
+
+
+                      setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink ? false : true, linkTarget: postExcerpt.linkTarget, customUrl: postExcerpt.customUrl, linkAttr: postExcerpt.linkAttr, class: postExcerpt.class, color: postExcerpt.color, bgColor: postExcerpt.bgColor, padding: postExcerpt.padding, margin: postExcerpt.margin } })
+
+
+
+
 
                     }}
                   />
 
-                  {postTitle.isLink && (
+                  {readMore.isLink && (
 
                     <div>
                       <PanelRow>
@@ -721,7 +728,7 @@ registerBlockType("post-grid/post-title", {
 
                         <SelectControl
                           label=""
-                          value={postTitle.linkTarget}
+                          value={readMore.linkTarget}
                           options={[
                             { label: '_self', value: '_self' },
                             { label: '_blank', value: '_blank' },
@@ -732,7 +739,13 @@ registerBlockType("post-grid/post-title", {
                           ]}
                           onChange={(newVal) => {
 
-                            setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.isLink, linkTarget: newVal, customUrl: postTitle.customUrl, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
+
+
+
+                            setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink, linkTarget: newVal, customUrl: postExcerpt.customUrl, linkAttr: postExcerpt.linkAttr, class: postExcerpt.class, color: postExcerpt.color, bgColor: postExcerpt.bgColor, padding: postExcerpt.padding, margin: postExcerpt.margin } })
+
+
+
                           }
 
 
@@ -748,10 +761,12 @@ registerBlockType("post-grid/post-title", {
                         <label for="">Custom Url</label>
 
                         <InputControl
-                          value={postTitle.customUrl}
+                          value={postExcerpt.customUrl}
                           onChange={(newVal) => {
 
-                            setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.isLink, linkTarget: postTitle.linkTarget, customUrl: newVal, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
+
+                            setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink, linkTarget: postExcerpt.linkTarget, customUrl: newVal, linkAttr: postExcerpt.linkAttr, class: postExcerpt.class, color: postExcerpt.color, bgColor: postExcerpt.bgColor, padding: postExcerpt.padding, margin: postExcerpt.margin } })
+
 
                           }
                           }
@@ -768,9 +783,15 @@ registerBlockType("post-grid/post-title", {
 
                           onClick={(ev) => {
 
-                            var sdsd = linkAttr.concat({ id: '', val: '' })
+                            var sdsd = postExcerpt.linkAttr != undefined ? postExcerpt.linkAttr.concat({ id: '', val: '' }) : [];
 
-                            setAttributes({ linkAttr: sdsd })
+
+
+
+                            setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink, linkTarget: postExcerpt.linkTarget, customUrl: postExcerpt.customUrl, linkAttr: sdsd, class: postExcerpt.class, color: postExcerpt.color, bgColor: postExcerpt.bgColor, padding: postExcerpt.padding, margin: postExcerpt.margin } })
+
+
+
                             linkAttrObj()
                           }}
 
@@ -783,7 +804,7 @@ registerBlockType("post-grid/post-title", {
 
 
                       {
-                        linkAttr.map((x, i) => {
+                        postExcerpt.linkAttr != undefined && postExcerpt.linkAttr.map((x, i) => {
 
                           return (
 
@@ -791,15 +812,21 @@ registerBlockType("post-grid/post-title", {
                               <PanelRow>
                                 <InputControl
                                   className='mr-2'
-                                  value={linkAttr[i].id}
+                                  value={postExcerpt.linkAttr[i].id}
                                   onChange={(newVal) => {
 
-                                    linkAttr[i].id = newVal;
+                                    postExcerpt.linkAttr[i].id = newVal;
 
 
-                                    var ssdsd = linkAttr.concat([]);
+                                    var ssdsd = postExcerpt.linkAttr.concat([]);
 
-                                    setAttributes({ linkAttr: ssdsd })
+
+
+
+                                    setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink, linkTarget: postExcerpt.linkTarget, customUrl: postExcerpt.customUrl, linkAttr: ssdsd, class: postExcerpt.class, color: postExcerpt.color, bgColor: postExcerpt.bgColor, padding: postExcerpt.padding, margin: postExcerpt.margin } })
+
+
+
 
                                   }}
                                 />
@@ -808,22 +835,29 @@ registerBlockType("post-grid/post-title", {
                                   className='mr-2'
                                   value={x.val}
                                   onChange={(newVal) => {
-                                    linkAttr[i].val = newVal
-                                    var ssdsd = linkAttr.concat([]);
+                                    postExcerpt.linkAttr[i].val = newVal
+                                    var ssdsd = postExcerpt.linkAttr.concat([]);
 
 
-                                    setAttributes({ linkAttr: ssdsd })
+
+                                    setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink, linkTarget: postExcerpt.linkTarget, customUrl: postExcerpt.customUrl, linkAttr: ssdsd, class: postExcerpt.class, color: postExcerpt.color, bgColor: postExcerpt.bgColor, padding: postExcerpt.padding, margin: postExcerpt.margin } })
+
+
 
                                   }}
                                 />
                                 <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
                                   onClick={(ev) => {
 
-                                    linkAttr.splice(i, 1);
+                                    postExcerpt.linkAttr.splice(i, 1);
 
-                                    var ssdsd = linkAttr.concat([]);
+                                    var ssdsd = postExcerpt.linkAttr.concat([]);
 
-                                    setAttributes({ linkAttr: ssdsd })
+
+                                    setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink, linkTarget: postExcerpt.linkTarget, customUrl: postExcerpt.customUrl, linkAttr: ssdsd, class: postExcerpt.class, color: postExcerpt.color, bgColor: postExcerpt.bgColor, padding: postExcerpt.padding, margin: postExcerpt.margin } })
+
+
+
                                   }}
 
                                 ></span>
@@ -848,7 +882,6 @@ registerBlockType("post-grid/post-title", {
 
 
 
-
                   <PanelRow className='my-3'>
                     <label>Color</label>
                     <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
@@ -859,19 +892,23 @@ registerBlockType("post-grid/post-title", {
                   </PanelRow>
 
                   <ColorPalette
-                    value={postTitle.color[breakPointX]}
+                    value={postExcerpt.color[breakPointX]}
                     colors={colors}
                     enableAlpha
                     onChange={(newVal) => {
 
-                      var responsive = postTitle.color;
+                      var responsive = postExcerpt.color;
                       responsive[breakPointX] = newVal;
 
 
-                      setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.isLink, class: postTitle.class, color: responsive, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
 
 
-                      blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'color': responsive };
+
+                      setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink, linkTarget: postExcerpt.linkTarget, customUrl: postExcerpt.customUrl, linkAttr: postExcerpt.linkAttr, class: postExcerpt.class, color: responsive, bgColor: postExcerpt.bgColor, padding: postExcerpt.padding, margin: postExcerpt.margin } })
+
+
+
+                      blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'color': responsive };
                       setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
@@ -892,19 +929,20 @@ registerBlockType("post-grid/post-title", {
                   </PanelRow>
 
                   <ColorPalette
-                    value={postTitle.bgColor[breakPointX]}
+                    value={postExcerpt.bgColor[breakPointX]}
                     colors={colors}
                     enableAlpha
                     onChange={(newVal) => {
 
-                      var responsive = postTitle.bgColor;
+                      var responsive = postExcerpt.bgColor;
                       responsive[breakPointX] = newVal;
 
 
-                      setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.isLink, class: postTitle.class, color: postTitle.color, bgColor: responsive, padding: postTitle.padding, margin: postTitle.margin } });
+                      setAttributes({ postExcerpt: { text: postExcerpt.text, isLink: postExcerpt.isLink, linkTarget: postExcerpt.linkTarget, customUrl: postExcerpt.customUrl, linkAttr: postExcerpt.linkAttr, class: postExcerpt.class, color: postExcerpt.color, bgColor: responsive, padding: postExcerpt.padding, margin: postExcerpt.margin } })
 
 
-                      blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': responsive };
+
+                      blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'background-color': responsive };
                       setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
@@ -926,25 +964,272 @@ registerBlockType("post-grid/post-title", {
                     <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </PanelRow>
                   <BoxControl
-                    label=""
-                    values={postTitle.padding[breakPointX]}
+                    label=''
+                    values={postExcerpt.padding[breakPointX]}
                     onChange={(nextValues) => { paddingControl(nextValues) }}
                   />
 
-
+                  {/* 
                   <PanelRow>
                     <label>Margin</label>
                     <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </PanelRow>
                   <BoxControl
                     label=""
-                    values={postTitle.margin[breakPointX]}
+                    values={postExcerpt.margin[breakPointX]}
                     onChange={(nextValues) => { marginControl(nextValues) }}
-                  />
+                  /> */}
 
 
                 </PanelBody>
 
+                <PanelBody title="Read More" initialOpen={false}>
+                  <PanelRow>
+                    <label for="">Read More Text</label>
+
+                    <InputControl
+                      value={readMore.text}
+                      onChange={(newVal) => {
+
+                        setAttributes({ readMore: { text: newVal, isLink: readMore.isLink, linkTarget: readMore.linkTarget, customUrl: readMore.customUrl, linkAttr: readMore.linkAttr, class: readMore.class, color: readMore.color, bgColor: readMore.bgColor } })
+                      }
+                      }
+                    />
+                  </PanelRow>
+
+
+                  <ToggleControl
+                    label="Linked with post?"
+                    help={readMore.isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
+                    checked={readMore.isLink ? true : false}
+                    onChange={(e) => {
+
+
+
+
+
+                      setAttributes({ readMore: { text: readMore.text, isLink: readMore.isLink ? false : true, linkTarget: readMore.linkTarget, customUrl: readMore.customUrl, linkAttr: readMore.linkAttr, class: readMore.class, color: readMore.color, bgColor: readMore.bgColor } })
+
+
+
+                    }}
+                  />
+
+                  {readMore.isLink && (
+
+                    <div>
+                      <PanelRow>
+                        <label for="">Link Target</label>
+
+                        <SelectControl
+                          label=""
+                          value={readMore.linkTarget}
+                          options={[
+                            { label: '_self', value: '_self' },
+                            { label: '_blank', value: '_blank' },
+                            { label: '_parent', value: '_parent' },
+                            { label: '_top', value: '_top' },
+
+
+                          ]}
+                          onChange={(newVal) => {
+
+
+
+                            setAttributes({ readMore: { text: readMore.text, isLink: readMore.isLink, linkTarget: newVal, customUrl: readMore.customUrl, linkAttr: readMore.linkAttr, class: readMore.class, color: readMore.color, bgColor: readMore.bgColor } })
+
+
+
+                          }
+
+
+
+                          }
+                        />
+                      </PanelRow>
+
+
+
+
+                      <PanelRow>
+                        <label for="">Custom Url</label>
+
+                        <InputControl
+                          value={readMore.customUrl}
+                          onChange={(newVal) => {
+
+
+                            setAttributes({ readMore: { text: readMore.text, isLink: readMore.isLink, linkTarget: readMore.linkTarget, customUrl: newVal, linkAttr: readMore.linkAttr, class: readMore.class, color: readMore.color, bgColor: readMore.bgColor } })
+
+
+                          }
+                          }
+                        />
+                      </PanelRow>
+
+
+
+
+                      <PanelRow>
+                        <label for="">Custom Attributes</label>
+                        <div
+                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                          onClick={(ev) => {
+
+                            var sdsd = readMore.linkAttr.concat({ id: '', val: '' })
+
+                            setAttributes({ readMore: { text: readMore.text, isLink: readMore.isLink, linkTarget: readMore.linkTarget, customUrl: readMore.customUrl, linkAttr: sdsd, class: readMore.class, color: readMore.color, bgColor: readMore.bgColor } })
+
+
+                            linkAttrObj()
+                          }}
+
+                        >Add</div>
+
+
+
+                      </PanelRow>
+
+
+
+                      {
+                        readMore.linkAttr != undefined && readMore.linkAttr.map((x, i) => {
+
+                          return (
+
+                            <div className='my-2'>
+                              <PanelRow>
+                                <InputControl
+                                  className='mr-2'
+                                  value={readMore.linkAttr[i].id}
+                                  onChange={(newVal) => {
+
+                                    readMore.linkAttr[i].id = newVal;
+
+
+                                    var ssdsd = readMore.linkAttr.concat([]);
+
+                                    setAttributes({ readMore: { text: readMore.text, isLink: readMore.isLink, linkTarget: readMore.linkTarget, customUrl: readMore.customUrl, linkAttr: ssdsd, class: readMore.class, color: readMore.color, bgColor: readMore.bgColor } })
+
+                                  }}
+                                />
+
+                                <InputControl
+                                  className='mr-2'
+                                  value={x.val}
+                                  onChange={(newVal) => {
+                                    readMore.linkAttr[i].val = newVal
+                                    var ssdsd = readMore.linkAttr.concat([]);
+
+
+
+
+                                    setAttributes({ readMore: { text: readMore.text, isLink: readMore.isLink, linkTarget: readMore.linkTarget, customUrl: readMore.customUrl, linkAttr: ssdsd, class: readMore.class, color: readMore.color, bgColor: readMore.bgColor } })
+
+                                  }}
+                                />
+                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                                  onClick={(ev) => {
+
+                                    readMore.linkAttr.splice(i, 1);
+
+                                    var ssdsd = readMore.linkAttr.concat([]);
+
+
+                                    setAttributes({ readMore: { text: readMore.text, isLink: readMore.isLink, linkTarget: readMore.linkTarget, customUrl: readMore.customUrl, linkAttr: ssdsd, class: readMore.class, color: readMore.color, bgColor: readMore.bgColor } })
+                                  }}
+
+                                ></span>
+                              </PanelRow>
+
+
+
+
+                            </div>
+
+                          )
+
+                        })
+                      }
+
+
+                    </div>
+
+
+
+                  )}
+
+
+                  <PanelRow className='my-3'>
+                    <label>Color</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+
+
+
+
+                  </PanelRow>
+
+                  <ColorPalette
+                    value={readMore.color[breakPointX]}
+                    colors={colors}
+                    enableAlpha
+                    onChange={(newVal) => {
+
+                      var responsive = readMore.color;
+                      responsive[breakPointX] = newVal;
+
+
+                      setAttributes({ readMore: { text: readMore.text, isLink: readMore.isLink, linkTarget: readMore.linkTarget, customUrl: readMore.customUrl, linkAttr: readMore.linkAttr, class: readMore.class, color: responsive, bgColor: readMore.bgColor } })
+
+                      blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector], 'color': responsive };
+                      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+                    }}
+                  />
+
+
+
+                  <PanelRow className='my-3'>
+                    <label>Background Color</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+
+
+
+
+                  </PanelRow>
+
+                  <ColorPalette
+                    value={readMore.bgColor[breakPointX]}
+                    colors={colors}
+                    enableAlpha
+                    onChange={(newVal) => {
+
+                      var responsive = readMore.bgColor;
+                      responsive[breakPointX] = newVal;
+
+
+
+
+
+                      setAttributes({ readMore: { text: readMore.text, isLink: readMore.isLink, linkTarget: readMore.linkTarget, customUrl: readMore.customUrl, linkAttr: readMore.linkAttr, class: readMore.class, color: readMore.color, bgColor: responsive } })
+
+                      blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector], 'background-color': responsive };
+                      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+                    }}
+                  />
+
+
+
+
+                </PanelBody>
 
                 <PanelBody title="Prefix" initialOpen={false}>
                   <PanelRow>
@@ -991,25 +1276,23 @@ registerBlockType("post-grid/post-title", {
 
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
-                    <p className='font-bold'>Title Wrapper</p>
-                    <p><code>{titleWrapperSelector}{'{/* your CSS here*/}'}</code></p>
+                    <p className='font-bold'>Excerpt Wrapper</p>
+                    <p><code>{excerptWrapperSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>
-                    <p className='font-bold'>Title link</p>
-                    <p><code>{titleLinkSelector}{'{}'} </code></p>
-                    <p><code>.pg-postCategories a{'{/* your CSS here*/}'}</code></p>
+                    <p className='font-bold'>Excerpt - With Link</p>
+                    <p><code>{excerptSelector}{'{}'} </code></p>
                   </div>
 
-                  <div className='my-3'>
-                    <p className='font-bold'>Prefix</p>
-                    <p><code>{titlePrefixSelector}{'{/* your CSS here*/}'} </code></p>
-                  </div>
+
 
                   <div className='my-3'>
-                    <p className='font-bold'>Postfix</p>
-                    <p><code>{titlePostfixSelector}{'{/* your CSS here*/}'} </code></p>
+                    <p className='font-bold'>Read More</p>
+                    <p><code>{redmoreSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
+
+
 
 
 
@@ -1041,10 +1324,26 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
+
+
+
+          ###############
+          <div>
+            {JSON.stringify(postExcerpt.padding[breakPointX])}
+          </div>
+
+
+          ###############
+          <div>
+            {JSON.stringify(postExcerpt)}
+          </div>
+
+
+
           {wrapper.tag && (
-            <CustomTag className={['pg-postTitle']}>
-              {postTitle.isLink && (
-                <a {...linkAttrItems} href={postUrl} target={postTitle.linkTarget}>
+            <CustomTag className={['pg-postExcerpt']}>
+              {postExcerpt.isLink && (
+                <a className='' {...linkAttrItems} href={postUrl} >
 
                   {prefix.text && (
                     <span className={prefix.class}>{prefix.text}</span>
@@ -1055,8 +1354,10 @@ registerBlockType("post-grid/post-title", {
 
                 </a>
 
+
+
               )}
-              {!postTitle.isLink && (
+              {!postExcerpt.isLink && (
 
                 (
 
@@ -1064,13 +1365,22 @@ registerBlockType("post-grid/post-title", {
 
               )}
 
+              {readMore.isLink && (
+
+                <a className='readmore' target={postExcerpt.linkTarget} href={postUrl}> {readMore.text}</a>
+              )}
+
+
+
+
+
             </CustomTag>
           )}
 
           {wrapper.tag.length == 0 && (
 
             (
-              postTitle.isLink && (<a className={['pg-postTitle']} {...linkAttrItems} href={postUrl} target={postTitle.linkTarget}>
+              postExcerpt.isLink && (<a className={['pg-postExcerpt']} {...linkAttrItems} href={postUrl} target={postExcerpt.linkTarget}>
 
                 {prefix.text && (
                   <span className='prefix'>{prefix.text}</span>
@@ -1083,8 +1393,11 @@ registerBlockType("post-grid/post-title", {
             )
           )}
 
-          {wrapper.tag.length == 0 && !postTitle.isLink && (
-            <p className={'pg-postTitle'}>
+
+
+
+          {wrapper.tag.length == 0 && !postExcerpt.isLink && (
+            <p className={'pg-postExcerpt'}>
               {prefix.text && (
                 <span className='prefix'>{prefix.text}</span>
               )}

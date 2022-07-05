@@ -4,8 +4,6 @@ if (!defined('ABSPATH')) exit;  // if direct access
 
 
 
-
-
 function post_grid_global_css()
 {
 

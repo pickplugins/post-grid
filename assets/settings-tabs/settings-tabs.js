@@ -309,7 +309,7 @@
         })
 
         $(function () {
-            $('.lazy').Lazy();
+            //$('.lazy').Lazy();
         });
 
 

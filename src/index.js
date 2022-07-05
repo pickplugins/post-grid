@@ -9,7 +9,6 @@ import './blocks/post-excerpt'
 import './blocks/post-categories'
 import './blocks/post-tags'
 
-import './blocks/post-exc'
 
 // import './blocks/paragraph'
 // import './blocks/testimonials'

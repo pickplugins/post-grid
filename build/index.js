@@ -6702,7 +6702,7 @@ var myStore = wp.data.select('my-shop');
   attributes: {
     template: {
       "type": "string",
-      "default": 'hello <%= metaValue.url %>!'
+      "default": '<%= metaValue %>'
     },
     wrapper: {
       type: 'object',
@@ -6802,14 +6802,13 @@ var myStore = wp.data.select('my-shop');
         //console.log(res);
         setMetaValue(res.meta_value);
 
-        var compiled = lodash_es__WEBPACK_IMPORTED_MODULE_12___default().template(template);
+        var compiled = lodash_es__WEBPACK_IMPORTED_MODULE_12___default().template(template); //console.log(compiled({ 'metaValue': res.meta_value }));
 
-        console.log(compiled({
+
+        var html = compiled({
           'metaValue': res.meta_value
-        }));
-        setMetaHtml(compiled({
-          'metaValue': res.meta_value
-        }));
+        });
+        setMetaHtml(html);
       });
     }, [meta]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -7232,6 +7231,7 @@ var myStore = wp.data.select('my-shop');
         });
       }
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      className: "my-3",
       for: ""
     }, "Template"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.TextareaControl, {
       value: template,
@@ -7240,11 +7240,13 @@ var myStore = wp.data.select('my-shop');
           template: newVal
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("small", null, "Please check the documentaiton https://lodash.com/docs/4.17.15#template"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Response"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", {
       className: "break-words"
-    }, JSON.stringify(metaValue)))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }, JSON.stringify(metaValue))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Wrapper",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
@@ -7334,11 +7336,7 @@ var myStore = wp.data.select('my-shop');
           customCss: value
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", {
-      className: "break-words"
-    }, JSON.stringify(metaValue)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "my-5"
-    }), meta.key.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, meta.key.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
       value: meta.key,
       onChange: newVal => {
         setAttributes({

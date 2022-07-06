@@ -9,10 +9,9 @@ import './blocks/post-excerpt'
 import './blocks/post-categories'
 import './blocks/post-tags'
 import './blocks/post-terms'
-
+import './blocks/post-meta'
 
 // import './blocks/paragraph'
 // import './blocks/testimonials'
-
 // import './blocks/section-2-cols'
 

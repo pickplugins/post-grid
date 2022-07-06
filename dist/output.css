@@ -792,6 +792,10 @@ video {
   gap: 1rem;
 }
 
+.break-words {
+  overflow-wrap: break-word;
+}
+
 .rounded-sm {
   border-radius: 0.125rem;
 }

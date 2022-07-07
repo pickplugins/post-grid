@@ -10,6 +10,11 @@ import './blocks/post-categories'
 import './blocks/post-tags'
 import './blocks/post-terms'
 import './blocks/post-meta'
+import './blocks/heading'
+import './blocks/link'
+
+
+
 
 // import './blocks/paragraph'
 // import './blocks/testimonials'

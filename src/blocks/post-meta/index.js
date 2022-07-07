@@ -40,7 +40,7 @@ registerBlockType("post-grid/post-meta", {
   attributes: {
     template: {
       "type": "string",
-      "default": 'hello <%= metaValue.url %>!'
+      "default": '<%= metaValue %>'
     },
     wrapper: {
       type: 'object',
@@ -135,9 +135,11 @@ registerBlockType("post-grid/post-meta", {
         setMetaValue(res.meta_value)
 
         var compiled = _.template(template);
-        console.log(compiled({ 'metaValue': res.meta_value }));
+        //console.log(compiled({ 'metaValue': res.meta_value }));
 
-        setMetaHtml(compiled({ 'metaValue': res.meta_value }));
+        var html = compiled({ 'metaValue': res.meta_value });
+
+        setMetaHtml(html);
 
       });
 
@@ -145,7 +147,6 @@ registerBlockType("post-grid/post-meta", {
 
 
     useEffect(() => {
-
 
 
       if (metaValue != null) {
@@ -756,10 +757,11 @@ registerBlockType("post-grid/post-meta", {
 
 
 
-              <label for="">Template</label>
+              <label className='my-3' for="">Template</label>
 
 
               <TextareaControl
+
                 value={template}
                 onChange={(newVal) => {
 
@@ -769,9 +771,16 @@ registerBlockType("post-grid/post-meta", {
                 }}
               />
 
-              <label for="">Response</label>
-              <div>
-                <code className='break-words'>{JSON.stringify(metaValue)}</code>
+              <small>Please check the documentaiton https://lodash.com/docs/4.17.15#template</small>
+
+
+              <div className='my-3'>
+
+                <label for="">Response</label>
+                <div>
+                  <code className='break-words'>{JSON.stringify(metaValue)}</code>
+                </div>
+
               </div>
 
 
@@ -909,9 +918,6 @@ registerBlockType("post-grid/post-meta", {
 
         <>
 
-          <code className='break-words'>{JSON.stringify(metaValue)}</code>
-
-          <div className='my-5'></div>
 
           {meta.key.length == 0 && (<InputControl
             value={meta.key}

@@ -5,6 +5,8 @@ window.PostGridPluginData = [];
 import './blocks/post-grid'
 import './blocks/post-title'
 import './blocks/post-excerpt'
+import './blocks/post-author'
+
 import './blocks/read-more'
 
 

@@ -2702,6 +2702,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       "type": "object",
       "default": {
         size: '',
+        default: '',
         class: '',
         padding: '',
         margin: ''
@@ -2788,7 +2789,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     var postType = context['postType'];
     const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(myStore.getBreakPoint());
     const [license, setLicense] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(myStore.getLicense());
-    const [postAuthor, setPostAuthor] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+    const [postAuthor, setPostAuthor] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({});
     const [html, setHtml] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({});
     const [currentPostTitle, setCurrentPostTitle] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_6__.useEntityProp)('postType', postType, 'author', postId);
     const [postAuthorId, setPostAuthorId] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_6__.useEntityProp)('postType', postType, 'author', postId);
@@ -2803,29 +2804,41 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       });
     }, [postAuthorId]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-      var htmlX = 'hello Name';
-      html.name = htmlX;
-      console.log(html);
+      var htmlName = `<div>${postAuthor.name != undefined ? postAuthor.name : ''}</div>`;
+      html.name = htmlName;
+      var htmlDesc = `<div>${postAuthor.description != undefined ? postAuthor.description : ''}</div>`;
+      html.description = htmlDesc;
+      var htmlId = `<div>${postAuthor.id != undefined ? postAuthor.id : ''}</div>`;
+      html.id = htmlId;
+      var htmlAvatar = `<img src="${postAuthor.avatar_urls != undefined ? postAuthor.avatar_urls[48] : ''}" />`;
+      html.avatar = htmlAvatar; //console.log(html);
+
       setHtml(html);
-    }, [name]);
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-      var htmlX = 'hello description';
-      html.description = htmlX;
-      console.log(html);
-      setHtml(html);
-    }, [description]);
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-      var htmlX = 'hello avatar';
-      html.avatar = htmlX;
-      console.log(html);
-      setHtml(html);
-    }, [avatar]);
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-      var htmlX = 'hello id';
-      html.id = htmlX;
-      console.log(html);
-      setHtml(html);
-    }, [id]); //console.log(postTitle);
+    }, [postAuthor]); // useEffect(() => {
+    //   var htmlName = `<div>${(postAuthor.name != undefined) ? postAuthor.name : ''}</div>`;
+    //   html.name = htmlName
+    //   console.log(html);
+    //   setHtml(html);
+    // }, [name]);
+    // useEffect(() => {
+    //   var htmlX = 'hello description';
+    //   html.description = htmlX
+    //   console.log(html);
+    //   setHtml(html);
+    // }, [description]);
+    // useEffect(() => {
+    //   var htmlX = 'hello avatar';
+    //   html.avatar = htmlX
+    //   console.log(html);
+    //   setHtml(html);
+    // }, [avatar]);
+    // useEffect(() => {
+    //   var htmlX = 'hello id';
+    //   html.id = htmlX
+    //   console.log(html);
+    //   setHtml(html);
+    // }, [id]);
+    //console.log(postTitle);
     // Wrapper CSS Class Selectors
 
     const titleWrapperSelector = '.pg-postTitle';
@@ -3314,21 +3327,21 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      value: postTitle.color[breakPointX],
+      value: name.color[breakPointX],
       colors: colors,
       enableAlpha: true,
       onChange: newVal => {
-        var responsive = postTitle.color;
+        var responsive = name.color;
         responsive[breakPointX] = newVal;
         setAttributes({
-          postTitle: {
-            textAlign: postTitle.textAlign,
-            isLink: postTitle.isLink,
-            class: postTitle.class,
+          name: {
+            textAlign: name.textAlign,
+            isLink: name.isLink,
+            class: name.class,
             color: responsive,
-            bgColor: postTitle.bgColor,
-            padding: postTitle.padding,
-            margin: postTitle.margin
+            bgColor: name.bgColor,
+            padding: name.padding,
+            margin: name.margin
           }
         });
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
@@ -3351,21 +3364,21 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      value: postTitle.bgColor[breakPointX],
+      value: name.bgColor[breakPointX],
       colors: colors,
       enableAlpha: true,
       onChange: newVal => {
-        var responsive = postTitle.bgColor;
+        var responsive = name.bgColor;
         responsive[breakPointX] = newVal;
         setAttributes({
-          postTitle: {
-            textAlign: postTitle.textAlign,
-            isLink: postTitle.isLink,
-            class: postTitle.class,
-            color: postTitle.color,
+          name: {
+            textAlign: name.textAlign,
+            isLink: name.isLink,
+            class: name.class,
+            color: name.color,
             bgColor: responsive,
-            padding: postTitle.padding,
-            margin: postTitle.margin
+            padding: name.padding,
+            margin: name.margin
           }
         });
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
@@ -3387,7 +3400,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
       label: "",
-      values: postTitle.padding[breakPointX],
+      values: name.padding[breakPointX],
       onChange: nextValues => {
         paddingControl(nextValues);
       }
@@ -3401,7 +3414,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
       label: "",
-      values: postTitle.margin[breakPointX],
+      values: name.margin[breakPointX],
       onChange: nextValues => {
         marginControl(nextValues);
       }
@@ -3468,10 +3481,10 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "ID",
       initialOpen: false
-    }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, JSON.stringify(html), elements.items.map(x => {
+    }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "adasd", elements.items.map(x => {
       console.log(x.id);
       console.log(html[x.id]);
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, x.active ? html[x.id] : '');
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RawHTML, null, x.active ? html[x.id] : '');
     }))];
   },
   save: function (props) {

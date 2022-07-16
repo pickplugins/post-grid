@@ -70,7 +70,7 @@ registerBlockType("post-grid/post-author", {
 
     avatar: {
       "type": "object",
-      "default": { class: 'avatar', size: '48', default: '', display: {}, padding: '', margin: '', }
+      "default": { class: 'avatar', size: '48', default: '', display: {}, padding: {}, margin: {}, }
     },
 
     name: {
@@ -903,7 +903,7 @@ registerBlockType("post-grid/post-author", {
                         onChange={(newVal) => {
 
 
-                          setAttributes({ avatar: { class: avatar.class, size: newVal, default: avatar.default, padding: avatar.padding, margin: avatar.margin } });
+                          setAttributes({ avatar: { class: avatar.class, size: newVal, default: avatar.default, display: avatar.display, padding: avatar.padding, margin: avatar.margin } });
 
 
                         }

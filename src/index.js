@@ -21,7 +21,3 @@ import './blocks/link'
 
 
 
-// import './blocks/paragraph'
-// import './blocks/testimonials'
-// import './blocks/section-2-cols'
-

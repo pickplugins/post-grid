@@ -2686,8 +2686,8 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         size: '48',
         default: '',
         display: {},
-        padding: '',
-        margin: ''
+        padding: {},
+        margin: {}
       }
     },
     name: {
@@ -3296,6 +3296,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
             class: avatar.class,
             size: newVal,
             default: avatar.default,
+            display: avatar.display,
             padding: avatar.padding,
             margin: avatar.margin
           }
@@ -23301,9 +23302,7 @@ window.PostGridPluginData = [];
 
 
 
- // import './blocks/paragraph'
-// import './blocks/testimonials'
-// import './blocks/section-2-cols'
+
 })();
 
 /******/ })()

@@ -54,18 +54,14 @@ registerBlockType("post-grid/post-author", {
       type: 'object',
       default: { textAlign: '', tag: 'h2', class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
-    postTitle: {
-      type: 'object',
-      default: { textAlign: '', isLink: true, linkTarget: '', customUrl: '', class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
-    },
+
     elements: {
       "type": "object",
       "default": {
         items: [
-          { id: 'avatar', name: "Avatar", active: false, },
+          { id: 'avatar', name: "Avatar", active: true, },
           { id: 'name', name: "Name", active: true, },
           { id: 'description', name: "Description", active: false, },
-          { id: 'id', name: "ID", active: false, },
 
         ],
       } // avatar, name, description, id
@@ -74,20 +70,16 @@ registerBlockType("post-grid/post-author", {
 
     avatar: {
       "type": "object",
-      "default": { size: '', default: '', class: '', padding: '', margin: '', }
+      "default": { class: 'avatar', size: '48', default: '', display: {}, padding: '', margin: '', }
     },
 
     name: {
       "type": "object",
-      "default": { class: '', prefix: '', postfix: '', color: {}, bgColor: {}, padding: {}, margin: {} }
+      "default": { class: 'name', prefix: '', postfix: '', linkTo: '', display: {}, color: {}, bgColor: {}, padding: {}, margin: {} }
     },
     description: {
       "type": "object",
-      "default": { class: '', prefix: '', postfix: '', color: {}, bgColor: {}, padding: {}, margin: {} }
-    },
-    id: {
-      "type": "object",
-      "default": { class: '', prefix: '', postfix: '', color: {}, bgColor: {}, padding: {}, margin: {} }
+      "default": { class: 'description', prefix: '', postfix: '', display: {}, color: {}, bgColor: {}, padding: {}, margin: {} }
     },
 
 
@@ -127,13 +119,11 @@ registerBlockType("post-grid/post-author", {
     var setAttributes = props.setAttributes;
     var context = props.context;
 
-    var postTitle = attributes.postTitle;
     var wrapper = attributes.wrapper;
     var elements = attributes.elements;
     var avatar = attributes.avatar;
     var description = attributes.description;
     var name = attributes.name;
-    var id = attributes.id;
 
 
     var linkAttr = attributes.linkAttr;
@@ -151,11 +141,6 @@ registerBlockType("post-grid/post-author", {
 
     const [html, setHtml] = useState({});
 
-
-    const [
-      currentPostTitle,
-      setCurrentPostTitle,
-    ] = useEntityProp('postType', postType, 'author', postId);
 
     const [
       postAuthorId,
@@ -188,92 +173,127 @@ registerBlockType("post-grid/post-author", {
     }, [postAuthorId]);
 
 
+    function generatehtml() {
+
+
+      var nameHtml = (postAuthor.name != undefined) ? postAuthor.name : 'Author Name';
+
+      if (name.linkTo == 'postUrl') {
+
+        nameHtml = `<a href="${currentPostUrl}">${(postAuthor.name != undefined) ? postAuthor.name : 'Author Name'}</a>`
+
+      }
+
+      if (name.linkTo == 'authorUrl') {
+
+        nameHtml = `<a href="${postAuthor.url}">${(postAuthor.name != undefined) ? postAuthor.name : 'Author Name'}</a>`
+
+      }
+
+      if (name.linkTo == 'authorLink') {
+
+        nameHtml = `<a href="${postAuthor.link}">${(postAuthor.name != undefined) ? postAuthor.name : 'Author Name'}</a>`
+
+      }
+
+      if (name.linkTo == 'authorMeta') {
+
+        nameHtml = `<a href="${postAuthor.link}">${(postAuthor.name != undefined) ? postAuthor.name : 'Author Name'}</a>`
+
+      }
+
+
+
+      if (name.linkTo == 'customUrl') {
+
+        nameHtml = `<a href="${name.customUrl}">${(postAuthor.name != undefined) ? postAuthor.name : 'Author Name'}</a>`
+
+      }
+
+
+
+
+
+
+
+
+
+
+      html.name = <RawHTML class={name.class}>{(nameHtml) ? nameHtml : 'Author Name'}</RawHTML>
+
+
+      html.description = <RawHTML class={description.class}>{(postAuthor.description != undefined) ? postAuthor.description : 'Author description'}</RawHTML>;
+
+
+
+
+
+      if (postAuthor.avatar_urls != undefined) {
+        var avatarHtml = `<img class='${avatar.class}' alt='' src=${(postAuthor.avatar_urls != undefined) ? postAuthor.avatar_urls[avatar.size] : ''} />`
+
+
+        html.avatar = <RawHTML class={avatar.class}>{avatarHtml}</RawHTML>
+
+      }
+
+
+      setHtml(html);
+
+    }
 
 
     useEffect(() => {
 
 
 
-      var htmlName = `<div>${(postAuthor.name != undefined) ? postAuthor.name : ''}</div>`;
-      html.name = htmlName
 
-      var htmlDesc = `<div>${(postAuthor.description != undefined) ? postAuthor.description : ''}</div>`;
+      generatehtml()
 
 
-      html.description = htmlDesc
-
-      var htmlId = `<div>${(postAuthor.id != undefined) ? postAuthor.id : ''}</div>`;
-
-      html.id = htmlId
-
-
-      var htmlAvatar = `<img src="${(postAuthor.avatar_urls != undefined) ? postAuthor.avatar_urls[48] : ''}" />`;
-
-      html.avatar = htmlAvatar
-
-      //console.log(html);
-      setHtml(html);
 
     }, [postAuthor]);
 
 
 
-    // useEffect(() => {
+    useEffect(() => {
 
 
-    //   var htmlName = `<div>${(postAuthor.name != undefined) ? postAuthor.name : ''}</div>`;
-    //   html.name = htmlName
+      generatehtml()
 
-
-    //   console.log(html);
-    //   setHtml(html);
-
-    // }, [name]);
+    }, [name]);
 
 
 
-    // useEffect(() => {
+    useEffect(() => {
+
+      generatehtml()
+
+    }, [description]);
+
+    useEffect(() => {
+
+      console.log(avatar);
 
 
-    //   var htmlX = 'hello description';
-    //   html.description = htmlX
-    //   console.log(html);
-    //   setHtml(html);
+      generatehtml()
 
-    // }, [description]);
-
-    // useEffect(() => {
+      console.log(html);
 
 
-    //   var htmlX = 'hello avatar';
-    //   html.avatar = htmlX
 
-    //   console.log(html);
-
-    //   setHtml(html);
-
-    // }, [avatar]);
+    }, [avatar]);
 
 
-    // useEffect(() => {
 
 
-    //   var htmlX = 'hello id';
-    //   html.id = htmlX
-
-    //   console.log(html);
-
-    //   setHtml(html);
-
-    // }, [id]);
-
-    //console.log(postTitle);
 
 
 
     // Wrapper CSS Class Selectors
-    const titleWrapperSelector = '.pg-postTitle';
-    const titleLinkSelector = postTitle.isLink ? '.pg-postTitle a' : '.pg-postTitle';
+    const authorWrapperSelector = '.pg-postAuthor';
+    const authorNameSelector = '.pg-postAuthor .name';
+    const authorDescriptionSelector = '.pg-postAuthor .description';
+    const authorAvatarSelector = '.pg-postAuthor .avatar';
 
 
 
@@ -291,37 +311,40 @@ registerBlockType("post-grid/post-author", {
     function paddingControl(nextValues) {
 
 
-      var responsive = postTitle.padding;
+      var responsive = name.padding;
       responsive[breakPointX] = nextValues;
 
       //console.log(nextValues);
 
-      setAttributes({ postTitle: { textAlign: postTitle.textAlign, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: responsive, margin: postTitle.margin } });
 
 
 
-      blockCssY.items[titleLinkSelector] = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector] : {};
+      setAttributes({ name: { class: name.class, postfix: name.postfix, prefix: name.prefix, linkTo: name.linkTo, linkToMeta: name.linkToMeta, customUrl: name.customUrl, display: name.display, color: name.color, bgColor: name.bgColor, padding: responsive, margin: name.margin } });
+
+
+
+      blockCssY.items[authorNameSelector] = (blockCssY.items[authorNameSelector] != undefined) ? blockCssY.items[authorNameSelector] : {};
 
 
 
       if (nextValues.top != undefined) {
 
-        var paddingTop = (blockCssY.items[titleLinkSelector]['padding-top'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-top'] : {};
+        var paddingTop = (blockCssY.items[authorNameSelector]['padding-top'] != undefined) ? blockCssY.items[authorNameSelector]['padding-top'] : {};
         paddingTop[breakPointX] = nextValues.top
 
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-top': paddingTop };
+        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'padding-top': paddingTop };
 
       }
 
 
       if (nextValues.right != undefined) {
 
-        var paddingRight = (blockCssY.items[titleLinkSelector]['padding-right'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-right'] : {};
+        var paddingRight = (blockCssY.items[authorNameSelector]['padding-right'] != undefined) ? blockCssY.items[authorNameSelector]['padding-right'] : {};
         paddingRight[breakPointX] = nextValues.right
 
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-right': paddingRight };
+        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'padding-right': paddingRight };
 
 
 
@@ -329,11 +352,11 @@ registerBlockType("post-grid/post-author", {
 
       if (nextValues.bottom != undefined) {
 
-        var paddingBottom = (blockCssY.items[titleLinkSelector]['padding-bottom'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-bottom'] : {};
+        var paddingBottom = (blockCssY.items[authorNameSelector]['padding-bottom'] != undefined) ? blockCssY.items[authorNameSelector]['padding-bottom'] : {};
         paddingBottom[breakPointX] = nextValues.bottom
 
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-bottom': paddingBottom };
+        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'padding-bottom': paddingBottom };
 
 
 
@@ -341,10 +364,10 @@ registerBlockType("post-grid/post-author", {
 
       if (nextValues.left != undefined) {
 
-        var paddingLeft = (blockCssY.items[titleLinkSelector]['padding-left'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-left'] : {};
+        var paddingLeft = (blockCssY.items[authorNameSelector]['padding-left'] != undefined) ? blockCssY.items[authorNameSelector]['padding-left'] : {};
         paddingLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-left': paddingLeft };
+        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'padding-left': paddingLeft };
 
 
       }
@@ -362,51 +385,51 @@ registerBlockType("post-grid/post-author", {
 
     function marginControl(nextValues) {
 
-      var responsive = postTitle.margin;
+      var responsive = name.margin;
       responsive[breakPointX] = nextValues;
 
 
-      setAttributes({ postTitle: { textAlign: postTitle.textAlign, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: responsive } });
 
 
 
+      setAttributes({ name: { class: name.class, postfix: name.postfix, prefix: name.prefix, linkTo: name.linkTo, linkToMeta: name.linkToMeta, customUrl: name.customUrl, display: name.display, color: name.color, bgColor: name.bgColor, padding: name.padding, margin: responsive } });
 
 
 
-      blockCssY.items[titleLinkSelector] = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector] : {};
+      blockCssY.items[authorNameSelector] = (blockCssY.items[authorNameSelector] != undefined) ? blockCssY.items[authorNameSelector] : {};
 
       if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[titleLinkSelector]['margin-top'] != undefined) ? blockCssY.items[titleLinkSelector]['margin-top'] : {};
+        var marginTop = (blockCssY.items[authorNameSelector]['margin-top'] != undefined) ? blockCssY.items[authorNameSelector]['margin-top'] : {};
         marginTop[breakPointX] = nextValues.top
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-top': marginTop };
+        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'margin-top': marginTop };
       }
 
 
       if (nextValues.right != undefined) {
 
-        var marginRight = (blockCssY.items[titleLinkSelector]['margin-right'] !== undefined) ? blockCssY.items[titleLinkSelector]['margin-right'] : {};
+        var marginRight = (blockCssY.items[authorNameSelector]['margin-right'] !== undefined) ? blockCssY.items[authorNameSelector]['margin-right'] : {};
         marginRight[breakPointX] = nextValues.right
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-right': marginRight };
+        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'margin-right': marginRight };
 
       }
 
       if (nextValues.bottom != undefined) {
 
-        var marginBottom = (blockCssY.items[titleLinkSelector]['margin-bottom'] !== undefined) ? blockCssY.items[titleLinkSelector]['margin-bottom'] : {};
+        var marginBottom = (blockCssY.items[authorNameSelector]['margin-bottom'] !== undefined) ? blockCssY.items[authorNameSelector]['margin-bottom'] : {};
         marginBottom[breakPointX] = nextValues.bottom
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-bottom': marginBottom };
+        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'margin-bottom': marginBottom };
 
       }
 
       if (nextValues.left != undefined) {
 
-        var marginLeft = (blockCssY.items[titleLinkSelector]['margin-left'] !== undefined) ? blockCssY.items[titleLinkSelector]['margin-left'] : {};
+        var marginLeft = (blockCssY.items[authorNameSelector]['margin-left'] !== undefined) ? blockCssY.items[authorNameSelector]['margin-left'] : {};
         marginLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-left': marginLeft };
+        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'margin-left': marginLeft };
 
       }
 
@@ -527,17 +550,17 @@ registerBlockType("post-grid/post-author", {
         setTimeout(() => {
           var iframeDocument = iframe.contentDocument;
           var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-postCategories");
+          var divWrap = iframeDocument.getElementById("css-block-postAuthor");
 
           if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-postCategories").outerHTML = "";
+            iframeDocument.getElementById("css-block-postAuthor").outerHTML = "";
 
           }
 
-          var divWrap = '<div id="css-block-postCategories"></div>';
+          var divWrap = '<div id="css-block-postAuthor"></div>';
           body.insertAdjacentHTML('beforeend', divWrap);
 
-          var csswrappg = iframeDocument.getElementById('css-block-postCategories');
+          var csswrappg = iframeDocument.getElementById('css-block-postAuthor');
           var str = '<style>' + reponsiveCss + '</style>';
 
           csswrappg.insertAdjacentHTML('beforeend', str);
@@ -547,16 +570,16 @@ registerBlockType("post-grid/post-author", {
       } else {
 
         var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-postCategories");
+        var divWrap = document.getElementById("css-block-postAuthor");
 
         if (divWrap != undefined) {
-          document.getElementById("css-block-postCategories").outerHTML = "";
+          document.getElementById("css-block-postAuthor").outerHTML = "";
         }
 
-        var divWrap = '<div id="css-block-postCategories"></div>';
+        var divWrap = '<div id="css-block-postAuthor"></div>';
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
 
-        var csswrappg = document.getElementById('css-block-postCategories');
+        var csswrappg = document.getElementById('css-block-postAuthor');
         var str = '<style>' + reponsiveCss + '</style>';
         csswrappg.insertAdjacentHTML('beforeend', str);
 
@@ -592,17 +615,11 @@ registerBlockType("post-grid/post-author", {
 
 
 
-    useEffect(() => {
-      console.log('Listening currentPostTitle: ', currentPostTitle);
 
-
-
-    }, [currentPostTitle]);
 
 
 
     useEffect(() => {
-      ////console.log('Listening linkAttr: ', linkAttr);
       linkAttrObj();
 
 
@@ -626,13 +643,11 @@ registerBlockType("post-grid/post-author", {
 
       })
 
-      ////console.log(sdsd);
       setlinkAttrItems(sdsd);
       //return sdsd;
 
     }
 
-    ////console.log(breakPointList);
     const colors = [
       { name: '9DD6DF', color: '#9DD6DF' },
       { name: '18978F', color: '#18978F' },
@@ -664,9 +679,8 @@ registerBlockType("post-grid/post-author", {
     } = wp.data.dispatch('core/edit-post')
 
 
-    var postUrl = (postTitle.customUrl != undefined && postTitle.customUrl.length > 0) ? postTitle.customUrl : currentPostUrl;
 
-    //console.log('Hello');
+
 
     const CustomTag = `${wrapper.tag}`;
 
@@ -698,7 +712,6 @@ registerBlockType("post-grid/post-author", {
                 <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
 
-                  //console.log(x.value);
 
                   setPreviewDeviceType(x.value)
                   var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value)
@@ -764,12 +777,7 @@ registerBlockType("post-grid/post-author", {
         <div>
 
           <BlockControls >
-            <AlignmentToolbar
-              value={postTitle.textAlign}
-              onChange={(nextAlign) => {
-                setAttributes({ postTitle: { textAlign: nextAlign, isLink: postTitle.isLink, linkTarget: postTitle.linkTarget, customUrl: postTitle.customUrl, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
-              }}
-            />
+
           </BlockControls>
 
 
@@ -834,7 +842,6 @@ registerBlockType("post-grid/post-author", {
 
                   <ReactSortable list={elements.items} setList={(item) => {
 
-                    console.log(item);
 
                     setAttributes({ elements: { items: item } });
 
@@ -849,12 +856,12 @@ registerBlockType("post-grid/post-author", {
                           checked={item.active ? true : false}
                           onChange={(e) => {
 
-                            console.log(item.active);
+                            //console.log(item.active);
 
 
                             var isActive = elements.items[index].active ? false : true;
                             elements.items[index].active = isActive;
-                            console.log(elements.items[index]);
+                            //console.log(elements.items[index]);
 
                             setAttributes({ elements: { items: elements.items } });
 
@@ -878,18 +885,99 @@ registerBlockType("post-grid/post-author", {
                 {elements.items.find(x => x.name === 'Avatar').active && (
                   <PanelBody title="Avatar" initialOpen={false}>
                     <PanelRow>
-                      <label for="">avatar Class</label>
+                      <label for="">Avatar Size</label>
+
+                      <SelectControl
+                        label=""
+                        value={avatar.size}
+                        options={[
+                          { label: 'Select..', value: '' },
+
+                          { label: '24', value: '24' },
+                          { label: '48', value: '48' },
+                          { label: '96', value: '96' },
+
+
+
+                        ]}
+                        onChange={(newVal) => {
+
+
+                          setAttributes({ avatar: { class: avatar.class, size: newVal, default: avatar.default, padding: avatar.padding, margin: avatar.margin } });
+
+
+                        }
+
+                        }
+                      />
+                    </PanelRow>
+
+
+                    <PanelRow>
+                      <label for="">Avatar Class</label>
 
                       <InputControl
                         value={avatar.class}
                         onChange={(newVal) => {
 
-                          setAttributes({ avatar: { class: newVal, size: avatar.size, padding: avatar.padding, margin: avatar.margin } });
+                          setAttributes({ avatar: { class: newVal, size: avatar.size, default: avatar.default, display: avatar.display, padding: avatar.padding, margin: avatar.margin } });
 
 
                         }}
                       />
                     </PanelRow>
+
+
+                    <PanelRow className='my-3'>
+                      <label>Display</label>
+                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+
+
+
+
+                    </PanelRow>
+
+
+                    <PanelRow>
+
+                      <SelectControl
+                        label=""
+                        value={avatar.display[breakPointX]}
+
+                        options={[
+                          { label: 'Select..', value: '' },
+
+                          { label: 'inline', value: 'inline' },
+                          { label: 'inline-block', value: 'inline-block' },
+                          { label: 'block', value: 'block' },
+
+
+
+                        ]}
+                        onChange={(newVal) => {
+
+
+
+                          var responsive = avatar.display;
+                          responsive[breakPointX] = newVal;
+
+
+                          setAttributes({ avatar: { class: avatar.class, size: avatar.size, default: avatar.default, display: responsive, padding: avatar.padding, margin: avatar.margin } });
+
+
+                          blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'display': responsive };
+                          setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+                        }
+
+                        }
+                      />
+                    </PanelRow>
+
+
 
                   </PanelBody>
                 )}
@@ -897,6 +985,155 @@ registerBlockType("post-grid/post-author", {
 
                 {elements.items.find(x => x.name === 'Name').active && (
                   <PanelBody title="Name" initialOpen={false}>
+
+
+                    <PanelRow>
+                      <label for="">Name Class</label>
+
+                      <InputControl
+                        value={name.class}
+                        onChange={(newVal) => {
+
+                          setAttributes({ name: { class: newVal, postfix: name.postfix, prefix: name.prefix, linkTo: name.linkTo, linkToMeta: name.linkToMeta, customUrl: name.customUrl, display: name.display, color: name.color, bgColor: name.bgColor, padding: name.padding, margin: name.margin } });
+
+
+                        }}
+                      />
+                    </PanelRow>
+
+
+
+                    <PanelRow>
+                      <label for="">Link To</label>
+
+                      <SelectControl
+                        label=""
+                        value={name.linkTo}
+
+                        options={[
+                          { label: 'Select..', value: '' },
+
+                          { label: 'Post URL', value: 'postUrl' },
+                          { label: 'Author URL', value: 'authorUrl' },
+                          { label: 'Author Profile', value: 'authorLink' },
+                          // { label: 'Author Meta', value: 'authorMeta' },
+                          { label: 'Custom URL', value: 'customUrl' },
+
+
+
+                        ]}
+                        onChange={(newVal) => {
+
+
+                          setAttributes({ name: { class: name.class, prefix: name.prefix, postfix: name.postfix, linkTo: newVal, linkToMeta: name.linkToMeta, customUrl: name.customUrl, display: name.display, color: name.color, bgColor: name.bgColor, padding: name.padding, margin: name.margin } });
+
+
+                        }
+
+                        }
+                      />
+
+                    </PanelRow>
+
+
+
+                    {name.linkTo == 'authorMeta' && (
+
+                      <PanelRow>
+                        <label for="">Link Meta Key</label>
+
+                        <InputControl
+                          value={name.linkToMeta}
+                          onChange={(newVal) => {
+
+                            setAttributes({ name: { class: name.class, postfix: name.postfix, prefix: name.prefix, linkTo: name.linkTo, linkToMeta: newVal, customUrl: name.customUrl, display: name.display, color: name.color, bgColor: name.bgColor, padding: name.padding, margin: name.margin } });
+
+
+                          }}
+                        />
+
+                      </PanelRow>
+
+                    )}
+
+
+
+                    {name.linkTo == 'customUrl' && (
+
+                      <PanelRow>
+                        <label for="">Custom Url</label>
+
+                        <InputControl
+                          value={name.customUrl}
+                          onChange={(newVal) => {
+
+                            setAttributes({ name: { class: name.class, postfix: name.postfix, prefix: name.prefix, linkTo: name.linkTo, linkToMeta: name.linkToMeta, customUrl: name.customUrl, customUrl: newVal, display: name.display, color: name.color, bgColor: name.bgColor, padding: name.padding, margin: name.margin } });
+
+
+                          }}
+                        />
+
+                      </PanelRow>
+
+                    )}
+
+
+
+
+
+
+                    <PanelRow className='my-3'>
+                      <label>Display</label>
+                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+
+
+
+
+                    </PanelRow>
+
+
+                    <div className='px-3'>
+
+                      <SelectControl
+                        label=""
+                        value={name.display[breakPointX]}
+
+                        options={[
+                          { label: 'Select..', value: '' },
+
+                          { label: 'inline', value: 'inline' },
+                          { label: 'inline-block', value: 'inline-block' },
+                          { label: 'block', value: 'block' },
+
+
+
+                        ]}
+                        onChange={(newVal) => {
+
+
+
+                          var responsive = name.display;
+                          responsive[breakPointX] = newVal;
+
+
+
+
+
+                          setAttributes({ name: { class: name.class, prefix: name.prefix, postfix: name.postfix, linkTo: name.linkTo, linkToMeta: name.linkToMeta, customUrl: name.customUrl, display: responsive, color: name.color, bgColor: name.bgColor, padding: name.padding, margin: name.margin } });
+
+
+                          blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'display': responsive };
+                          setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+                        }
+
+                        }
+                      />
+                    </div>
+
 
 
                     <PanelRow className='my-3'>
@@ -918,10 +1155,12 @@ registerBlockType("post-grid/post-author", {
                         responsive[breakPointX] = newVal;
 
 
-                        setAttributes({ name: { textAlign: name.textAlign, isLink: name.isLink, class: name.class, color: responsive, bgColor: name.bgColor, padding: name.padding, margin: name.margin } });
 
 
-                        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'color': responsive };
+                        setAttributes({ name: { class: name.class, prefix: name.prefix, postfix: name.postfix, linkTo: name.linkTo, linkToMeta: name.linkToMeta, customUrl: name.customUrl, display: name.display, color: responsive, bgColor: name.bgColor, padding: name.padding, margin: name.margin } });
+
+
+                        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'color': responsive };
                         setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
@@ -951,10 +1190,11 @@ registerBlockType("post-grid/post-author", {
                         responsive[breakPointX] = newVal;
 
 
-                        setAttributes({ name: { textAlign: name.textAlign, isLink: name.isLink, class: name.class, color: name.color, bgColor: responsive, padding: name.padding, margin: name.margin } });
+
+                        setAttributes({ name: { class: name.class, prefix: name.prefix, postfix: name.postfix, linkTo: name.linkTo, linkToMeta: name.linkToMeta, customUrl: name.customUrl, display: name.display, color: name.color, bgColor: responsive, padding: name.padding, margin: name.margin } });
 
 
-                        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': responsive };
+                        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'background-color': responsive };
                         setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
@@ -1009,7 +1249,7 @@ registerBlockType("post-grid/post-author", {
                         value={description.class}
                         onChange={(newVal) => {
 
-                          setAttributes({ description: { class: newVal, postfix: description.postfix, prefix: description.prefix, color: description.color, bgColor: description.bgColor, padding: description.padding, margin: description.margin } });
+                          setAttributes({ description: { class: newVal, postfix: description.postfix, prefix: description.prefix, display: name.display, color: description.color, bgColor: description.bgColor, padding: description.padding, margin: description.margin } });
 
 
                         }}
@@ -1020,27 +1260,6 @@ registerBlockType("post-grid/post-author", {
                   </PanelBody>
                 )}
 
-                {elements.items.find(x => x.name === 'ID').active && (
-                  <PanelBody title="ID" initialOpen={false}>
-
-
-                    <PanelRow>
-                      <label for="">Description Class</label>
-
-                      <InputControl
-                        value={id.class}
-                        onChange={(newVal) => {
-
-                          setAttributes({ id: { class: newVal, postfix: id.postfix, prefix: id.prefix, color: id.color, bgColor: id.bgColor, padding: id.padding, margin: id.margin } });
-
-
-                        }}
-                      />
-                    </PanelRow>
-
-
-                  </PanelBody>
-                )}
 
 
 
@@ -1052,15 +1271,28 @@ registerBlockType("post-grid/post-author", {
 
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
-                    <p className='font-bold'>Title Wrapper</p>
-                    <p><code>{titleWrapperSelector}{'{/* your CSS here*/}'}</code></p>
+                    <p className='font-bold'>Wrapper Selector</p>
+                    <p><code>{authorWrapperSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>
-                    <p className='font-bold'>Title link</p>
-                    <p><code>{titleLinkSelector}{'{}'} </code></p>
-                    <p><code>.pg-postCategories a{'{/* your CSS here*/}'}</code></p>
+                    <p className='font-bold'>Name Selector</p>
+                    <p><code>{authorNameSelector}{'{}'} </code></p>
                   </div>
+
+
+
+                  <div className='my-3'>
+                    <p className='font-bold'>Description Selector</p>
+                    <p><code>{authorDescriptionSelector}{'{}'} </code></p>
+                  </div>
+
+                  <div className='my-3'>
+                    <p className='font-bold'>Avatar Selector </p>
+                    <p><code>{authorAvatarSelector}{'{}'} </code></p>
+                  </div>
+
+
 
 
                   <TextareaControl
@@ -1074,11 +1306,7 @@ registerBlockType("post-grid/post-author", {
                   />
                 </PanelBody>
 
-                <PanelBody title="ID" initialOpen={false}>
 
-
-
-                </PanelBody>
               </div>
             </div>
 
@@ -1092,24 +1320,27 @@ registerBlockType("post-grid/post-author", {
         ,
 
 
-        <>
+        <div className='pg-postAuthor'>
 
-          {/* {JSON.stringify(postAuthor)} */}
-          adasd
+
+
           {elements.items.map(x => {
 
-            console.log(x.id);
-            console.log(html[x.id]);
+            //console.log('ID: ' + x.id);
+            //console.log(html[x.id]);
 
-            return (
-              <RawHTML>{x.active ? html[x.id] : ''}</RawHTML>
+            return (x.active && (
+              (
+                html[x.id]
 
-            )
+              )
+
+            ))
+
+
 
           })}
-
-
-        </>
+        </div>
       ]
 
     )

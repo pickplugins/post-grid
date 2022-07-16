@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) exit();
 
 
 
-class BlockPostTitle
+class PGBlockPostTitle
 {
     function __construct()
     {
@@ -23,7 +23,7 @@ class BlockPostTitle
             'editor_style' => 'editor_style',
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'editor_style',
+            //'style' => 'front_style',
 
             'render_callback' => array($this, 'theHTML')
         ));
@@ -31,13 +31,9 @@ class BlockPostTitle
 
     function front_script($attributes)
     {
-
-
-        var_dump('asdasdasd');
     }
     function front_style($attributes)
     {
-        var_dump('asdasdasd');
     }
 
     // front-end output from the gutenberg editor 
@@ -49,36 +45,51 @@ class BlockPostTitle
 
 
 
-
-        if (!is_admin()) {
-
-
-            //wp_enqueue_script('blk_post_grid', post_grid_plugin_dir . 'src/blocks/post-title/index.js', array('wp-element'));
-
-            // wp_enqueue_style('blk_post_grid', post_grid_plugin_url . 'src/blocks/post-title/index.css');
-        }
-
-
-
         $post_ID = $block->context['postId'];
         $post_url = get_the_permalink($post_ID);
 
-        $isLink = isset($attributes['isLink']) ? $attributes['isLink'] : '';
-        $linkTarget = isset($attributes['linkTarget']) ? $attributes['linkTarget'] : '';
-        $linkAttr = isset($attributes['linkAttr']) ? $attributes['linkAttr'] : [];
-        $rel = isset($attributes['rel']) ? $attributes['rel'] : '';
-        $textAlign = isset($attributes['textAlign']) ? $attributes['textAlign'] : '';
-        $color = isset($attributes['color']) ? $attributes['color'] : ['val' => '', 'responsive' => ''];
-        $bgColor = isset($attributes['bgColor']) ? $attributes['bgColor'] : ['val' => '', 'responsive' => ''];
+        $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : '';
+        $wrapperTag = isset($wrapper['tag']) ? $wrapper['tag'] : '';
 
 
-        $postGridCss[] = ['attr' => 'color', 'id' => '.pg-postTitle-' . $post_ID . ' a', 'default' => $color['val'], 'reponsive' => $color['responsive']];
+        $postTitle = isset($attributes['postTitle']) ? $attributes['postTitle'] : '';
+        $postTitleIsLink = isset($postTitle['isLink']) ? $postTitle['isLink'] : '';
+        $linkTarget = isset($postTitle['linkTarget']) ? $postTitle['linkTarget'] : '';
+        $linkAttr = isset($postTitle['linkAttr']) ? $postTitle['linkAttr'] : [];
+        $rel = isset($postTitle['rel']) ? $postTitle['rel'] : '';
+        $postTitleColor = isset($postTitle['color']) ? $postTitle['color'] : [];
+        $postTitlebgColor = isset($postTitle['bgColor']) ? $postTitle['bgColor'] : [];
 
-        $postGridCss[] = ['attr' => 'background-color', 'id' => '.pg-postTitle-' . $post_ID . ' a', 'default' => $bgColor['val'], 'reponsive' => $bgColor['responsive']];
 
-        $tag = isset($attributes['tag']) ? $attributes['tag'] : 'h2';
         $prefix = isset($attributes['prefix']) ? $attributes['prefix'] : '';
+        $prefixText = isset($prefix['text']) ? $prefix['text'] : '';
+        $prefixClass = isset($prefix['class']) ? $prefix['class'] : 'prefix';
+
         $postfix = isset($attributes['postfix']) ? $attributes['postfix'] : '';
+        $postfixText = isset($postfix['text']) ? $postfix['text'] : '';
+        $postfixClass = isset($postfix['class']) ? $postfix['class'] : 'postfix';
+
+
+
+        if (empty($wrapperTag)) :
+
+            $postGridCss['.pg-postTitle'] = [
+                'color' => $postTitleColor,
+                'background-color' => $postTitlebgColor
+            ];
+
+
+        else :
+            $postGridCss['.pg-postTitle a'] = [
+                'color' => $postTitleColor,
+                'background-color' => $postTitlebgColor
+            ];
+
+
+        endif;
+
+
+
 
 
         $linkAttrStr = '';
@@ -101,20 +112,59 @@ class BlockPostTitle
         ob_start();
 
 
-
-
 ?>
+        <?php
 
+        if (!empty($wrapperTag)) :
 
+        ?>
+            <<?php echo $wrapperTag; ?> class="pg-postTitle">
+                <?php if ($postTitleIsLink) : ?>
+                    <a href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                        <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                        <?php echo get_the_title($post_ID); ?>
+                        <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                    </a>
+                <?php else : ?>
+                    <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                    <?php echo get_the_title($post_ID); ?>
+                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
 
+                <?php endif; ?>
+            </<?php echo $wrapperTag; ?>>
+        <?php
 
-        <<?php echo $tag; ?> class="pg-postTitle pg-postTitle-<?php echo $post_ID; ?>">
-            <?php if ($isLink) : ?>
-                <a href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>><?php echo $prefix; ?><?php echo get_the_title($post_ID); ?><?php echo $postfix; ?></a>
+        endif;
+
+        if (empty($wrapperTag)) :
+
+        ?>
+
+            <?php if ($postTitleIsLink) : ?>
+                <a class="pg-postTitle pg-postTitle-<?php echo $post_ID; ?>" href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+
+                    <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                    <?php echo get_the_title($post_ID); ?>
+                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                </a>
             <?php else : ?>
+                <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
                 <?php echo get_the_title($post_ID); ?>
+                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
             <?php endif; ?>
-        </<?php echo $tag; ?>>
+
+        <?php
+
+        endif;
+
+        ?>
+        <pre><?php echo var_export($postTitle, true); ?></pre>
+
+
+
+
+
+
 
 
 
@@ -122,4 +172,4 @@ class BlockPostTitle
     }
 }
 
-$BlockPostGrid = new BlockPostTitle();
+$BlockPostGrid = new PGBlockPostTitle();

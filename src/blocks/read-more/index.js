@@ -1062,6 +1062,7 @@ registerBlockType("post-grid/read-more", {
 
 
         <>
+          <pre>{JSON.stringify(blockCssY)}</pre>
 
 
           {wrapper.tag && (

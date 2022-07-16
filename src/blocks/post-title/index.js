@@ -58,11 +58,11 @@ registerBlockType("post-grid/post-title", {
     },
     prefix: {
       "type": "object",
-      "default": { text: '', class: '', color: {}, bgColor: {} }
+      "default": { text: '', class: 'prefix', color: {}, bgColor: {} }
     },
     postfix: {
       "type": "object",
-      "default": { text: '', class: '', color: {}, bgColor: {} }
+      "default": { text: '', class: 'postfix', color: {}, bgColor: {} }
     },
 
     customCss: {
@@ -997,8 +997,7 @@ registerBlockType("post-grid/post-title", {
 
                   <div className='my-3'>
                     <p className='font-bold'>Title link</p>
-                    <p><code>{titleLinkSelector}{'{}'} </code></p>
-                    <p><code>.pg-postCategories a{'{/* your CSS here*/}'}</code></p>
+                    <p><code>{titleLinkSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
                   <div className='my-3'>
@@ -1041,27 +1040,27 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
+          <pre>{JSON.stringify(blockCssY)}</pre>
+
           {wrapper.tag && (
             <CustomTag className={['pg-postTitle']}>
               {postTitle.isLink && (
                 <a {...linkAttrItems} href={postUrl} target={postTitle.linkTarget}>
 
-                  {prefix.text && (
-                    <span className={prefix.class}>{prefix.text}</span>
-                  )}
-                  {currentPostTitle}
-                  {postfix.text &&
-                    (<span className={postfix.class}>{postfix.text}</span>)}
+                  {(prefix.text && (<span className={prefix.class}>{prefix.text}</span>))}
+                  {(currentPostTitle)}
+                  {(postfix.text && (<span className={postfix.class}>{postfix.text}</span>))}
 
                 </a>
 
               )}
               {!postTitle.isLink && (
 
-                (
-
-                  currentPostTitle)
-
+                <>
+                  {(prefix.text && (<span className={prefix.class}>{prefix.text}</span>))}
+                  {(currentPostTitle)}
+                  {(postfix.text && (<span className={postfix.class}>{postfix.text}</span>))}
+                </>
               )}
 
             </CustomTag>
@@ -1072,12 +1071,9 @@ registerBlockType("post-grid/post-title", {
             (
               postTitle.isLink && (<a className={['pg-postTitle']} {...linkAttrItems} href={postUrl} target={postTitle.linkTarget}>
 
-                {prefix.text && (
-                  <span className='prefix'>{prefix.text}</span>
-                )}
-                {currentPostTitle}
-                {postfix.text &&
-                  (<span className='postfix'>{postfix.text}</span>)}
+                {(prefix.text && (<span className={prefix.class}>{prefix.text}</span>))}
+                {(currentPostTitle)}
+                {(postfix.text && (<span className={postfix.class}>{postfix.text}</span>))}
 
               </a>)
             )
@@ -1085,12 +1081,9 @@ registerBlockType("post-grid/post-title", {
 
           {wrapper.tag.length == 0 && !postTitle.isLink && (
             <p className={'pg-postTitle'}>
-              {prefix.text && (
-                <span className='prefix'>{prefix.text}</span>
-              )}
-              {currentPostTitle}
-              {postfix.text &&
-                (<span className='postfix'>{postfix.text}</span>)}
+              {(prefix.text && (<span className={prefix.class}>{prefix.text}</span>))}
+              {(currentPostTitle)}
+              {(postfix.text && (<span className={postfix.class}>{postfix.text}</span>))}
             </p>
 
           )}

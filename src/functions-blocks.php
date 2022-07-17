@@ -25,13 +25,26 @@ function post_grid_global_css()
             foreach ($reponsive as $device => $value) {
 
 
-                if (!empty($value))
-                    $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $value];
+                if (!empty($value)) {
+
+                    if ($attr == 'padding' || $attr == 'margin') {
+
+                        $valHtml = '';
+                        foreach ($value as $val) {
+                            $valHtml .= $val . ' ';
+                        }
+
+                        $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $valHtml];
+                    } else {
+                        $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $value];
+                    }
+                }
             }
         }
     }
 
 
+    echo '<pre>' . var_export($reponsiveCssGroups, true) . '</pre>';
 
 
 
@@ -106,7 +119,6 @@ function post_grid_global_css()
 
 
 
-    echo '<pre>' . var_export($reponsiveCss, true) . '</pre>';
 
 
 

@@ -48,26 +48,41 @@ class PGBlockPostTitle
         $post_ID = $block->context['postId'];
         $post_url = get_the_permalink($post_ID);
 
-        $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : '';
-        $wrapperTag = isset($wrapper['tag']) ? $wrapper['tag'] : '';
+        $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
+        $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
+
+        $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : '';
 
 
-        $postTitle = isset($attributes['postTitle']) ? $attributes['postTitle'] : '';
-        $postTitleIsLink = isset($postTitle['isLink']) ? $postTitle['isLink'] : '';
-        $linkTarget = isset($postTitle['linkTarget']) ? $postTitle['linkTarget'] : '';
-        $linkAttr = isset($postTitle['linkAttr']) ? $postTitle['linkAttr'] : [];
-        $rel = isset($postTitle['rel']) ? $postTitle['rel'] : '';
-        $postTitleColor = isset($postTitle['color']) ? $postTitle['color'] : [];
-        $postTitlebgColor = isset($postTitle['bgColor']) ? $postTitle['bgColor'] : [];
+        $postTitle = isset($attributes['postTitle']) ? $attributes['postTitle'] : [];
+        $postTitleOptions = isset($postTitle['options']) ? $postTitle['options'] : '';
+        $postTitleStyles = isset($postTitle['styles']) ? $postTitle['styles'] : '';
+
+
+        $postTitleIsLink = isset($postTitleOptions['isLink']) ? $postTitleOptions['isLink'] : '';
+        $linkTarget = isset($postTitleOptions['linkTarget']) ? $postTitleOptions['linkTarget'] : '';
+        $linkAttr = isset($postTitleOptions['linkAttr']) ? $postTitleOptions['linkAttr'] : [];
+        $rel = isset($postTitleOptions['rel']) ? $postTitleOptions['rel'] : '';
+
+
+        $postTitleColor = isset($postTitleStyles['color']) ? $postTitleStyles['color'] : [];
+        $postTitlebgColor = isset($postTitleStyles['bgColor']) ? $postTitleStyles['bgColor'] : [];
+        $postTitlePadding = isset($postTitleStyles['padding']) ? $postTitleStyles['padding'] : [];
+        $postTitleMargin = isset($postTitleStyles['margin']) ? $postTitleStyles['margin'] : [];
 
 
         $prefix = isset($attributes['prefix']) ? $attributes['prefix'] : '';
-        $prefixText = isset($prefix['text']) ? $prefix['text'] : '';
-        $prefixClass = isset($prefix['class']) ? $prefix['class'] : 'prefix';
+        $prefixOptions = isset($prefix['options']) ? $prefix['options'] : '';
+
+
+        $prefixText = isset($prefixOptions['text']) ? $prefixOptions['text'] : '';
+        $prefixClass = isset($prefixOptions['class']) ? $prefixOptions['class'] : 'prefix';
 
         $postfix = isset($attributes['postfix']) ? $attributes['postfix'] : '';
-        $postfixText = isset($postfix['text']) ? $postfix['text'] : '';
-        $postfixClass = isset($postfix['class']) ? $postfix['class'] : 'postfix';
+        $postfixOptions = isset($postfix['options']) ? $postfix['options'] : '';
+
+        $postfixText = isset($postfixOptions['text']) ? $postfixOptions['text'] : '';
+        $postfixClass = isset($postfixOptions['class']) ? $postfixOptions['class'] : 'postfix';
 
 
 
@@ -75,14 +90,20 @@ class PGBlockPostTitle
 
             $postGridCss['.pg-postTitle'] = [
                 'color' => $postTitleColor,
-                'background-color' => $postTitlebgColor
+                'background-color' => $postTitlebgColor,
+                'padding' => $postTitlePadding,
+                'margin' => $postTitleMargin,
+
+
             ];
 
 
         else :
             $postGridCss['.pg-postTitle a'] = [
                 'color' => $postTitleColor,
-                'background-color' => $postTitlebgColor
+                'background-color' => $postTitlebgColor,
+                'padding' => $postTitlePadding,
+                'margin' => $postTitleMargin,
             ];
 
 
@@ -110,6 +131,7 @@ class PGBlockPostTitle
 
 
         ob_start();
+
 
 
 ?>
@@ -158,7 +180,6 @@ class PGBlockPostTitle
         endif;
 
         ?>
-        <pre><?php echo var_export($postTitle, true); ?></pre>
 
 
 

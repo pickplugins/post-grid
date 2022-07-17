@@ -12508,11 +12508,7 @@ const {
 
 
 
-var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop').getBreakPoint('food'))
-//console.log(myStore.getBreakPoint());
-////console.log(wp.data.select('my-shop').setPrice('food', 98))
-////console.log()
-
+var myStore = wp.data.select('my-shop');
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__.registerBlockType)("post-grid/post-title", {
   title: "Post Title",
   icon: {
@@ -12536,60 +12532,67 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     wrapper: {
       type: 'object',
       default: {
-        textAlign: '',
-        tag: 'h2',
-        class: '',
-        color: {},
-        bgColor: {},
-        padding: {},
-        margin: {}
+        options: {
+          tag: 'h2',
+          class: 'h2'
+        },
+        styles: {
+          textAlign: {},
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {}
+        }
       }
     },
     postTitle: {
       type: 'object',
       default: {
-        textAlign: '',
-        isLink: true,
-        linkTarget: '',
-        customUrl: '',
-        class: '',
-        color: {},
-        bgColor: {},
-        padding: {},
-        margin: {}
+        options: {
+          isLink: true,
+          linkTarget: '',
+          linkAttr: [],
+          customUrl: '',
+          class: ''
+        },
+        styles: {
+          textAlign: {},
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {}
+        }
       }
     },
     prefix: {
-      "type": "object",
-      "default": {
-        text: '',
-        class: '',
-        color: {},
-        bgColor: {}
+      type: 'object',
+      default: {
+        options: {
+          text: '',
+          class: 'prefix'
+        },
+        styles: {
+          color: {},
+          bgColor: {}
+        }
       }
     },
     postfix: {
-      "type": "object",
-      "default": {
-        text: '',
-        class: '',
-        color: {},
-        bgColor: {}
+      type: 'object',
+      default: {
+        options: {
+          text: '',
+          class: 'prefix'
+        },
+        styles: {
+          color: {},
+          bgColor: {}
+        }
       }
     },
     customCss: {
       "type": "string",
       "default": ''
-    },
-    linkAttr: {
-      "type": "array",
-      "default": []
-    },
-    blockCss: {
-      "type": "object",
-      "default": {
-        items: {}
-      }
     },
     blockCssY: {
       "type": "object",
@@ -12609,8 +12612,6 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     var context = props.context;
     var postTitle = attributes.postTitle;
     var wrapper = attributes.wrapper;
-    var linkAttr = attributes.linkAttr;
-    var blockCss = attributes.blockCss;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
     var customCss = attributes.customCss;
@@ -12620,11 +12621,10 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore.getBreakPoint());
     const [license, setLicense] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore.getLicense());
     const [currentPostTitle, setCurrentPostTitle] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'title', postId);
-    const [currentPostUrl, setCurrentPostUrl] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'link', postId); //console.log(postTitle);
-    // Wrapper CSS Class Selectors
+    const [currentPostUrl, setCurrentPostUrl] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'link', postId); // Wrapper CSS Class Selectors
 
     const titleWrapperSelector = '.pg-postTitle';
-    const titleLinkSelector = postTitle.isLink ? '.pg-postTitle a' : '.pg-postTitle';
+    const titleLinkSelector = postTitle.options.isLink ? '.pg-postTitle a' : '.pg-postTitle';
     const titlePrefixSelector = '.pg-postTitle .prefix';
     const titlePostfixSelector = '.pg-postTitle .postfix';
     var breakPointList = [{
@@ -12643,17 +12643,15 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }
 
     function paddingControl(nextValues) {
-      var responsive = postTitle.padding;
-      responsive[breakPointX] = nextValues; //console.log(nextValues);
-
+      var responsive = postTitle.styles.padding;
+      responsive[breakPointX] = nextValues;
+      var styles = { ...postTitle.styles,
+        padding: responsive
+      };
       setAttributes({
         postTitle: {
-          textAlign: postTitle.textAlign,
-          class: postTitle.class,
-          color: postTitle.color,
-          bgColor: postTitle.bgColor,
-          padding: responsive,
-          margin: postTitle.margin
+          options: postTitle.options,
+          styles: styles
         }
       });
       blockCssY.items[titleLinkSelector] = blockCssY.items[titleLinkSelector] != undefined ? blockCssY.items[titleLinkSelector] : {};
@@ -12698,16 +12696,15 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }
 
     function marginControl(nextValues) {
-      var responsive = postTitle.margin;
+      var responsive = postTitle.styles.margin;
       responsive[breakPointX] = nextValues;
+      var styles = { ...postTitle.styles,
+        margin: responsive
+      };
       setAttributes({
         postTitle: {
-          textAlign: postTitle.textAlign,
-          class: postTitle.class,
-          color: postTitle.color,
-          bgColor: postTitle.bgColor,
-          padding: postTitle.padding,
-          margin: responsive
+          options: postTitle.options,
+          styles: styles
         }
       });
       blockCssY.items[titleLinkSelector] = blockCssY.items[titleLinkSelector] != undefined ? blockCssY.items[titleLinkSelector] : {};
@@ -12838,8 +12835,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         }
 
         reponsiveCss += '}';
-      } //console.log(reponsiveCss);
-
+      }
 
       var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
 
@@ -12878,26 +12874,19 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      //console.log('Listening blockCss: ', blockCss);
       generateBlockCssY();
     }, [blockCssY]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      console.log('Listening currentPostTitle: ', currentPostTitle);
-    }, [currentPostTitle]);
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      ////console.log('Listening linkAttr: ', linkAttr);
       linkAttrObj();
-    }, [linkAttr]);
+    }, [postTitle]);
 
     var linkAttrObj = () => {
       var sdsd = {};
-      linkAttr.map(x => {
+      postTitle.options.linkAttr.map(x => {
         if (x.val) sdsd[x.id] = x.val;
-      }); ////console.log(sdsd);
-
-      setlinkAttrItems(sdsd); //return sdsd;
-    }; ////console.log(breakPointList);
-
+      });
+      setlinkAttrItems(sdsd);
+    };
 
     const colors = [{
       name: '9DD6DF',
@@ -12920,16 +12909,14 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }, {
       name: '51557E',
       color: '#51557E'
-    }]; //const [blockCss, setBlockCss] = useState({ items: {} });
-
+    }];
     const [setSome, setSomeState] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({});
     const [stateX, setStateX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('Old Value');
     const {
       __experimentalSetPreviewDeviceType: setPreviewDeviceType
     } = wp.data.dispatch('core/edit-post');
-    var postUrl = postTitle.customUrl != undefined && postTitle.customUrl.length > 0 ? postTitle.customUrl : currentPostUrl; //console.log('Hello');
-
-    const CustomTag = `${wrapper.tag}`;
+    var postUrl = postTitle.options.customUrl != undefined && postTitle.options.customUrl.length > 0 ? postTitle.options.customUrl : currentPostUrl;
+    const CustomTag = `${wrapper.options.tag}`;
 
     const MyDropdown = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Dropdown, {
       position: "bottom",
@@ -12951,7 +12938,6 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
           className: ' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer',
           onClick: ev => {
-            //console.log(x.value);
             setPreviewDeviceType(x.value);
             var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value);
             asdsdsd.then(res => {
@@ -12975,19 +12961,25 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }
 
     return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.AlignmentToolbar, {
-      value: postTitle.textAlign,
+      value: wrapper.styles.textAlign,
       onChange: nextAlign => {
+        var textAlign = wrapper.styles.textAlign;
+        textAlign[breakPointX] = nextAlign;
+        var styles = { ...wrapper.styles,
+          textAlign: textAlign
+        };
         setAttributes({
-          postTitle: {
-            textAlign: nextAlign,
-            isLink: postTitle.isLink,
-            linkTarget: postTitle.linkTarget,
-            customUrl: postTitle.customUrl,
-            class: postTitle.class,
-            color: postTitle.color,
-            bgColor: postTitle.bgColor,
-            padding: postTitle.padding,
-            margin: postTitle.margin
+          wrapper: {
+            options: wrapper.options,
+            styles: styles
+          }
+        });
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector],
+          'text-align': textAlign
+        };
+        setAttributes({
+          blockCssY: {
+            items: blockCssY.items
           }
         });
       }
@@ -13004,7 +12996,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       label: "",
-      value: wrapper.tag,
+      value: wrapper.options.tag,
       options: [{
         label: 'No Wrapper',
         value: ''
@@ -13037,46 +13029,39 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         value: 'p'
       }],
       onChange: newVal => {
-        {
-          setAttributes({
-            wrapper: {
-              textAlign: wrapper.textAlign,
-              tag: newVal,
-              color: wrapper.color,
-              bgColor: wrapper.bgColor,
-              padding: wrapper.padding,
-              margin: wrapper.margin
-            }
-          });
-        }
+        var options = { ...wrapper.options,
+          tag: newVal
+        };
+        setAttributes({
+          wrapper: {
+            styles: wrapper.styles,
+            options: options
+          }
+        });
       }
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Post Title",
       initialOpen: true
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
       label: "Linked with post?",
-      help: postTitle.isLink ? 'Linked with post URL' : 'Not linked to post URL.',
-      checked: postTitle.isLink ? true : false,
+      help: postTitle.options.isLink ? 'Linked with post URL' : 'Not linked to post URL.',
+      checked: postTitle.options.isLink ? true : false,
       onChange: e => {
+        var options = { ...postTitle.options,
+          isLink: postTitle.options.isLink ? false : true
+        };
         setAttributes({
           postTitle: {
-            textAlign: postTitle.textAlign,
-            isLink: postTitle.isLink ? false : true,
-            linkTarget: postTitle.linkTarget,
-            customUrl: postTitle.customUrl,
-            class: postTitle.class,
-            color: postTitle.color,
-            bgColor: postTitle.bgColor,
-            padding: postTitle.padding,
-            margin: postTitle.margin
+            styles: postTitle.styles,
+            options: options
           }
-        });
+        }); // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink ? false : true, linkTarget: postTitle.options.linkTarget, customUrl: postTitle.customUrl, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
       }
-    }), postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    }), postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Link Target"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       label: "",
-      value: postTitle.linkTarget,
+      value: postTitle.options.linkTarget,
       options: [{
         label: '_self',
         value: '_self'
@@ -13091,84 +13076,101 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         value: '_top'
       }],
       onChange: newVal => {
+        var options = { ...postTitle.options,
+          linkTarget: newVal
+        };
         setAttributes({
           postTitle: {
-            textAlign: postTitle.textAlign,
-            isLink: postTitle.isLink,
-            linkTarget: newVal,
-            customUrl: postTitle.customUrl,
-            class: postTitle.class,
-            color: postTitle.color,
-            bgColor: postTitle.bgColor,
-            padding: postTitle.padding,
-            margin: postTitle.margin
+            styles: postTitle.styles,
+            options: options
           }
-        });
+        }); // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink, linkTarget: newVal, customUrl: postTitle.customUrl, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
       }
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Custom Url"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: postTitle.customUrl,
+      value: postTitle.options.customUrl,
       onChange: newVal => {
+        var options = { ...postTitle.options,
+          customUrl: newVal
+        };
         setAttributes({
           postTitle: {
-            textAlign: postTitle.textAlign,
-            isLink: postTitle.isLink,
-            linkTarget: postTitle.linkTarget,
-            customUrl: newVal,
-            class: postTitle.class,
-            color: postTitle.color,
-            bgColor: postTitle.bgColor,
-            padding: postTitle.padding,
-            margin: postTitle.margin
+            styles: postTitle.styles,
+            options: options
           }
-        });
+        }); // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink, linkTarget: postTitle.options.linkTarget, customUrl: newVal, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
       }
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Custom Attributes"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: " cursor-pointer px-3 text-white py-1 bg-blue-600",
       onClick: ev => {
-        var sdsd = linkAttr.concat({
+        var sdsd = postTitle.options.linkAttr.concat({
           id: '',
           val: ''
         });
-        setAttributes({
+        var options = { ...postTitle.options,
           linkAttr: sdsd
-        });
+        };
+        setAttributes({
+          postTitle: {
+            styles: postTitle.styles,
+            options: options
+          }
+        }); // setAttributes({ linkAttr: sdsd })
+
         linkAttrObj();
       }
-    }, "Add")), linkAttr.map((x, i) => {
+    }, "Add")), postTitle.options.linkAttr.map((x, i) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "my-2"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
         className: "mr-2",
-        value: linkAttr[i].id,
+        value: postTitle.options.linkAttr[i].id,
         onChange: newVal => {
-          linkAttr[i].id = newVal;
-          var ssdsd = linkAttr.concat([]);
-          setAttributes({
+          postTitle.options.linkAttr[i].id = newVal;
+          var ssdsd = postTitle.options.linkAttr.concat([]);
+          var options = { ...postTitle.options,
             linkAttr: ssdsd
-          });
+          };
+          setAttributes({
+            postTitle: {
+              styles: postTitle.styles,
+              options: options
+            }
+          }); //setAttributes({ linkAttr: ssdsd })
         }
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
         className: "mr-2",
         value: x.val,
         onChange: newVal => {
-          linkAttr[i].val = newVal;
-          var ssdsd = linkAttr.concat([]);
-          setAttributes({
+          postTitle.options.linkAttr[i].val = newVal;
+          var ssdsd = postTitle.options.linkAttr.concat([]);
+          var options = { ...postTitle.options,
             linkAttr: ssdsd
-          });
+          };
+          setAttributes({
+            postTitle: {
+              styles: postTitle.styles,
+              options: options
+            }
+          }); //setAttributes({ linkAttr: ssdsd })
         }
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
         className: "text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close",
         onClick: ev => {
-          linkAttr.splice(i, 1);
-          var ssdsd = linkAttr.concat([]);
-          setAttributes({
+          postTitle.options.linkAttr.splice(i, 1);
+          var ssdsd = postTitle.options.linkAttr.concat([]);
+          var options = { ...postTitle.options,
             linkAttr: ssdsd
-          });
+          };
+          setAttributes({
+            postTitle: {
+              styles: postTitle.styles,
+              options: options
+            }
+          }); //setAttributes({ linkAttr: ssdsd })
         }
       })));
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
@@ -13182,25 +13184,26 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: postTitle.color[breakPointX],
+      value: postTitle.styles.color[breakPointX],
       colors: colors,
       enableAlpha: true,
       onChange: newVal => {
-        var responsive = postTitle.color;
-        responsive[breakPointX] = newVal;
+        var color = postTitle.styles.color;
+        color[breakPointX] = newVal;
+        var styles = { ...postTitle.styles,
+          color: color
+        };
         setAttributes({
           postTitle: {
-            textAlign: postTitle.textAlign,
-            isLink: postTitle.isLink,
-            class: postTitle.class,
-            color: responsive,
-            bgColor: postTitle.bgColor,
-            padding: postTitle.padding,
-            margin: postTitle.margin
+            options: postTitle.options,
+            styles: styles
           }
-        });
+        }); // var responsive = postTitle.color;
+        // responsive[breakPointX] = newVal;
+        // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink, class: postTitle.class, color: responsive, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
+
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
-          'color': responsive
+          'color': color
         };
         setAttributes({
           blockCssY: {
@@ -13219,25 +13222,26 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: postTitle.bgColor[breakPointX],
+      value: postTitle.styles.bgColor[breakPointX],
       colors: colors,
       enableAlpha: true,
       onChange: newVal => {
-        var responsive = postTitle.bgColor;
-        responsive[breakPointX] = newVal;
+        var bgColor = postTitle.styles.bgColor;
+        bgColor[breakPointX] = newVal;
+        var styles = { ...postTitle.styles,
+          bgColor: bgColor
+        };
         setAttributes({
           postTitle: {
-            textAlign: postTitle.textAlign,
-            isLink: postTitle.isLink,
-            class: postTitle.class,
-            color: postTitle.color,
-            bgColor: responsive,
-            padding: postTitle.padding,
-            margin: postTitle.margin
+            options: postTitle.options,
+            styles: styles
           }
-        });
+        }); // var responsive = postTitle.bgColor;
+        // responsive[breakPointX] = newVal;
+        // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink, class: postTitle.class, color: postTitle.color, bgColor: responsive, padding: postTitle.padding, margin: postTitle.margin } });
+
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
-          'background-color': responsive
+          'background-color': bgColor
         };
         setAttributes({
           blockCssY: {
@@ -13255,7 +13259,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
-      values: postTitle.padding[breakPointX],
+      values: postTitle.styles.padding[breakPointX],
       onChange: nextValues => {
         paddingControl(nextValues);
       }
@@ -13269,7 +13273,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
-      values: postTitle.margin[breakPointX],
+      values: postTitle.styles.margin[breakPointX],
       onChange: nextValues => {
         marginControl(nextValues);
       }
@@ -13279,16 +13283,17 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Prefix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: prefix.text,
+      value: prefix.options.text,
       onChange: newVal => {
+        var options = { ...prefix.options,
+          text: newVal
+        };
         setAttributes({
           prefix: {
-            text: newVal,
-            class: prefix.class,
-            color: prefix.color,
-            bgColor: prefix.bgColor
+            styles: prefix.styles,
+            options: options
           }
-        });
+        }); // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, bgColor: prefix.bgColor } })
       }
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Postfix",
@@ -13296,16 +13301,17 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Postfix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: postfix.text,
+      value: postfix.options.text,
       onChange: newVal => {
+        var options = { ...postfix.options,
+          text: newVal
+        };
         setAttributes({
           postfix: {
-            text: newVal,
-            class: prefix.class,
-            color: postfix.color,
-            bgColor: postfix.bgColor
+            styles: postfix.styles,
+            options: options
           }
-        });
+        }); // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, bgColor: postfix.bgColor } })
       }
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Custom Style",
@@ -13318,7 +13324,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
       className: "font-bold"
-    }, "Title link"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, titleLinkSelector, '{}', " ")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, ".pg-postCategories a", '{/* your CSS here*/}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, "Title link"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, titleLinkSelector, '{/* your CSS here*/}', " "))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
       className: "font-bold"
@@ -13335,31 +13341,35 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
           customCss: value
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, wrapper.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
       className: ['pg-postTitle']
-    }, postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
+    }, postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: postUrl,
-      target: postTitle.linkTarget
-    }), prefix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: prefix.class
-    }, prefix.text), currentPostTitle, postfix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: postfix.class
-    }, postfix.text)), !postTitle.isLink && currentPostTitle), wrapper.tag.length == 0 && postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      target: postTitle.options.linkTarget
+    }), prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: prefix.options.class
+    }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: postfix.options.class
+    }, postfix.options.text)), !postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: prefix.options.class
+    }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: postfix.options.class
+    }, postfix.options.text))), wrapper.options.tag.length == 0 && postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: ['pg-postTitle']
     }, linkAttrItems, {
       href: postUrl,
-      target: postTitle.linkTarget
-    }), prefix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: "prefix"
-    }, prefix.text), currentPostTitle, postfix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: "postfix"
-    }, postfix.text)), wrapper.tag.length == 0 && !postTitle.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
+      target: postTitle.options.linkTarget
+    }), prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: prefix.options.class
+    }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: postfix.options.class
+    }, postfix.options.text)), wrapper.options.tag.length == 0 && !postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
       className: 'pg-postTitle'
-    }, prefix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: "prefix"
-    }, prefix.text), currentPostTitle, postfix.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: "postfix"
-    }, postfix.text)))];
+    }, prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: prefix.options.class
+    }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: postfix.options.class
+    }, postfix.options.text)))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
@@ -14280,7 +14290,7 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
           customCss: value
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, wrapper.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("pre", null, JSON.stringify(blockCssY)), wrapper.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
       className: ['pg-readMore']
     }, readMore.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: postUrl,
@@ -23280,11 +23290,11 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _blocks_post_grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./blocks/post-grid */ "./src/blocks/post-grid/index.js");
-/* harmony import */ var _blocks_post_title__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./blocks/post-title */ "./src/blocks/post-title/index.js");
+/* harmony import */ var _blocks_post_title__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./blocks/post-title */ "./src/blocks/post-title/index.js");
+/* harmony import */ var _blocks_post_grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./blocks/post-grid */ "./src/blocks/post-grid/index.js");
 /* harmony import */ var _blocks_post_excerpt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./blocks/post-excerpt */ "./src/blocks/post-excerpt/index.js");
-/* harmony import */ var _blocks_post_author__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blocks/post-author */ "./src/blocks/post-author/index.js");
-/* harmony import */ var _blocks_read_more__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./blocks/read-more */ "./src/blocks/read-more/index.js");
+/* harmony import */ var _blocks_read_more__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blocks/read-more */ "./src/blocks/read-more/index.js");
+/* harmony import */ var _blocks_post_author__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./blocks/post-author */ "./src/blocks/post-author/index.js");
 /* harmony import */ var _blocks_post_categories__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./blocks/post-categories */ "./src/blocks/post-categories/index.js");
 /* harmony import */ var _blocks_post_tags__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./blocks/post-tags */ "./src/blocks/post-tags/index.js");
 /* harmony import */ var _blocks_post_terms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./blocks/post-terms */ "./src/blocks/post-terms/index.js");

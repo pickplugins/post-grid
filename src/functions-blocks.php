@@ -2,14 +2,147 @@
 if (!defined('ABSPATH')) exit;  // if direct access
 
 
-
-
 function post_grid_global_css()
 {
 
     global $postGridCss;
 
-    //var_dump($postGridCss);
+
+
+    $reponsiveCssGroups = [];
+    $reponsiveCss = '';
+
+
+    foreach ($postGridCss as $selector => $attrs) {
+
+
+        $attr = isset($arg['attr']) ? $arg['attr'] : '';
+        $reponsive = isset($arg['reponsive']) ? $arg['reponsive'] : '';
+
+        foreach ($attrs as $attr => $reponsive) {
+
+
+            foreach ($reponsive as $device => $value) {
+
+
+                if (!empty($value)) {
+
+                    if ($attr == 'padding' || $attr == 'margin') {
+
+                        $valHtml = '';
+                        foreach ($value as $val) {
+                            $valHtml .= $val . ' ';
+                        }
+
+                        $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $valHtml];
+                    } else {
+                        $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $value];
+                    }
+                }
+            }
+        }
+    }
+
+
+    echo '<pre>' . var_export($reponsiveCssGroups, true) . '</pre>';
+
+
+
+    if ($reponsiveCssGroups['Mobile']) {
+        $reponsiveCss .= '@media only screen and (min-width: 0px) and (max-width: 360px){';
+
+        foreach ($reponsiveCssGroups['Mobile'] as $selector => $atts) {
+
+            $reponsiveCss .= $selector . '{';
+
+            foreach ($atts as  $arg) {
+
+                $attr = isset($arg['attr']) ? $arg['attr'] : '';
+                $val = isset($arg['val']) ? $arg['val'] : '';
+
+                if (!empty($val))
+                    $reponsiveCss .=  $attr . ':' . $val . ';';
+            }
+            $reponsiveCss .= '}';
+        }
+
+
+
+        $reponsiveCss .= '}';
+    }
+    if ($reponsiveCssGroups['Tablet']) {
+        $reponsiveCss .= '@media only screen and (min-width: 361px) and (max-width: 780px){';
+
+
+        foreach ($reponsiveCssGroups['Tablet'] as $selector => $atts) {
+
+            $reponsiveCss .= $selector . '{';
+
+            foreach ($atts as  $arg) {
+
+                $attr = isset($arg['attr']) ? $arg['attr'] : '';
+                $val = isset($arg['val']) ? $arg['val'] : '';
+
+                if (!empty($val))
+                    $reponsiveCss .=  $attr . ':' . $val . ';';
+            }
+            $reponsiveCss .= '}';
+        }
+
+
+        $reponsiveCss .= '}';
+    }
+    if ($reponsiveCssGroups['Desktop']) {
+        $reponsiveCss .= '@media only screen and (min-width: 781px){';
+
+
+        foreach ($reponsiveCssGroups['Desktop'] as $selector => $atts) {
+
+            $reponsiveCss .= $selector . '{';
+
+            foreach ($atts as  $arg) {
+
+                $attr = isset($arg['attr']) ? $arg['attr'] : '';
+                $val = isset($arg['val']) ? $arg['val'] : '';
+
+                if (!empty($val))
+                    $reponsiveCss .=  $attr . ':' . $val . ';';
+            }
+            $reponsiveCss .= '}';
+        }
+
+
+
+
+        $reponsiveCss .= '}';
+    }
+
+
+
+
+
+
+
+?>
+    <style>
+        <?php echo $reponsiveCss; ?>
+    </style>
+
+<?php
+
+    //$postGridCss .= 'asdasdasd';
+    //echo serialize($postGridCss);
+
+    //echo $postGridCss;
+}
+
+
+function post_grid_global_cssX()
+{
+
+    global $postGridCss;
+
+    echo '<pre>' . var_export($postGridCss, true) . '</pre>';
 
 
     $defaultCss = '';
@@ -78,11 +211,7 @@ function post_grid_global_css()
 
 ?>
     <style>
-        <?php echo $defaultCss; ?>
-    </style>
-
-    <style>
-        <?php echo $reponsiveCss; ?>
+        <?php echo $defaultCss; ?><?php echo $reponsiveCss; ?>
     </style>
 
 <?php

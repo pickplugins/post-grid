@@ -18,7 +18,11 @@
   },
   "dependencies": {
     "@wordpress/api-fetch": "^6.6.0",
+    "classnames": "^2.3.1",
+    "gutenberg-sortable": "^1.0.5",
     "masonry-layout": "^4.2.2",
+    "react-sortablejs": "^6.1.4",
+    "sortablejs": "^1.15.0",
     "styled-components": "^5.3.5"
   }
 }

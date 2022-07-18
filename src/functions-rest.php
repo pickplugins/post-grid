@@ -25,6 +25,15 @@ class BlockPostGridRest
             )
         );
 
+        register_rest_route(
+            'post-grid/v2',
+            '/get_post_meta',
+            array(
+                'methods'  => 'POST',
+                'callback' => array($this, 'get_post_meta'),
+                'permission_callback' => '__return_true',
+            )
+        );
 
         register_rest_route(
             'post-grid/v2',
@@ -296,6 +305,53 @@ class BlockPostGridRest
 
         die(wp_json_encode($response));
     }
+
+
+
+
+    /**
+     * Return _post_meta
+     *
+     * @since 1.0.0
+     * @param WP_REST_Request $post_data Post data.
+     */
+    public function get_post_meta($post_data)
+    {
+
+        $postId      = isset($post_data['postId']) ? $post_data['postId'] : '';
+        $meta_key    = isset($post_data['meta_key']) ? $post_data['meta_key'] : [];
+
+        $response = new stdClass();
+
+
+        $post_meta = get_post_meta($postId, $meta_key, true);
+
+        $response->meta_value = $post_meta;
+        $response->meta_key = $meta_key;
+
+
+
+
+
+        error_log(serialize($response));
+
+        die(wp_json_encode($response));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Return Posts
      *

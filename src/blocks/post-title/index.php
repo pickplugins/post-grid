@@ -24,7 +24,6 @@ class PGBlockPostTitle
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
-
             'render_callback' => array($this, 'theHTML')
         ));
     }
@@ -41,12 +40,19 @@ class PGBlockPostTitle
     {
 
 
+
+
+        //var_dump($block);
+
         global $postGridCss;
 
 
 
         $post_ID = $block->context['postId'];
         $post_url = get_the_permalink($post_ID);
+
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
@@ -88,7 +94,7 @@ class PGBlockPostTitle
 
         if (empty($wrapperTag)) :
 
-            $postGridCss['.pg-postTitle'] = [
+            $postGridCss['.' . $blockId] = [
                 'color' => $postTitleColor,
                 'background-color' => $postTitlebgColor,
                 'padding' => $postTitlePadding,
@@ -99,7 +105,7 @@ class PGBlockPostTitle
 
 
         else :
-            $postGridCss['.pg-postTitle a'] = [
+            $postGridCss['.' . $blockId . ' a'] = [
                 'color' => $postTitleColor,
                 'background-color' => $postTitlebgColor,
                 'padding' => $postTitlePadding,
@@ -140,7 +146,7 @@ class PGBlockPostTitle
         if (!empty($wrapperTag)) :
 
         ?>
-            <<?php echo $wrapperTag; ?> class="pg-postTitle">
+            <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
                 <?php if ($postTitleIsLink) : ?>
                     <a href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
                         <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
@@ -163,7 +169,7 @@ class PGBlockPostTitle
         ?>
 
             <?php if ($postTitleIsLink) : ?>
-                <a class="pg-postTitle pg-postTitle-<?php echo $post_ID; ?>" href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                <a class="<?php echo $blockId; ?>" href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
                     <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
                     <?php echo get_the_title($post_ID); ?>

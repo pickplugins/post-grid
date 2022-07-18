@@ -57,7 +57,6 @@ registerBlockType("post-grid/post-title", {
       type: 'object',
       default: { textAlign: '', isLink: true, linkTarget: '', customUrl: '', class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
-    linkObject: { type: "object" },
     prefix: {
       "type": "object",
       "default": { text: '', class: '', color: {}, bgColor: {} }
@@ -629,10 +628,9 @@ registerBlockType("post-grid/post-title", {
     }
 
     function handleLinkChange(newVal){
-      // props.setAttributes({linkObject: newLink})
-      console.log(newVal)
       setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.isLink, linkTarget: postTitle.linkTarget, customUrl: newVal, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
     }
+
 
     function buttonHandler(){
       setIsLinkPickerVisible(prev => !prev)

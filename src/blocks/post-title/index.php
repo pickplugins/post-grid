@@ -58,23 +58,20 @@ class BlockPostTitle
             // wp_enqueue_style('blk_post_grid', post_grid_plugin_url . 'src/blocks/post-title/index.css');
         }
 
-        // echo "<pre>";
-        // var_dump($attributes["postTitle"]["isLink"]);
-        // echo "</pre>";
         
-
         $post_ID = $block->context['postId'];
         $post_url = get_the_permalink($post_ID);
-
+        
         $isLink = isset($attributes["postTitle"]["isLink"]) ? $attributes["postTitle"]["isLink"] : '';
-        $linkTarget = isset($attributes['linkTarget']) ? $attributes['linkTarget'] : '';
-        $linkAttr = isset($attributes['linkAttr']) ? $attributes['linkAttr'] : [];
-        $rel = isset($attributes['rel']) ? $attributes['rel'] : '';
-        $textAlign = isset($attributes['textAlign']) ? $attributes['textAlign'] : '';
-        $color = isset($attributes['color']) ? $attributes['color'] : ['val' => '', 'responsive' => ''];
-        $bgColor = isset($attributes['bgColor']) ? $attributes['bgColor'] : ['val' => '', 'responsive' => ''];
-
-
+        $linkTarget = isset($attributes["postTitle"]['linkTarget']) ? $attributes["postTitle"]['linkTarget'] : '';
+        $linkAttr = isset($attributes["postTitle"]['linkAttr']) ? $attributes["postTitle"]['linkAttr'] : [];
+        $rel = isset($attributes["postTitle"]['rel']) ? $attributes["postTitle"]['rel'] : '';
+        $textAlign = isset($attributes["postTitle"]['textAlign']) ? $attributes["postTitle"]['textAlign'] : '';
+        $color = isset($attributes["postTitle"]['color']) ? $attributes["postTitle"]['color'] : ['val' => '', 'responsive' => ''];
+        $bgColor = isset($attributes["postTitle"]['bgColor']) ? $attributes["postTitle"]['bgColor'] : ['val' => '', 'responsive' => ''];
+        
+        
+        
         $postGridCss[] = ['attr' => 'color', 'id' => '.pg-postTitle-' . $post_ID . ' a', 'default' => $color['val'], 'reponsive' => $color['responsive']];
 
         $postGridCss[] = ['attr' => 'background-color', 'id' => '.pg-postTitle-' . $post_ID . ' a', 'default' => $bgColor['val'], 'reponsive' => $bgColor['responsive']];

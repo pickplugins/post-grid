@@ -8099,9 +8099,6 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
         margin: {}
       }
     },
-    linkObject: {
-      type: "object"
-    },
     prefix: {
       "type": "object",
       "default": {
@@ -8519,8 +8516,6 @@ var myStore = wp.data.select('my-shop'); ////console.log(wp.data.select('my-shop
     }
 
     function handleLinkChange(newVal) {
-      // props.setAttributes({linkObject: newLink})
-      console.log(newVal);
       setAttributes({
         postTitle: {
           textAlign: postTitle.textAlign,

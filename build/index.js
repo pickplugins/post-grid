@@ -12529,6 +12529,15 @@ var myStore = wp.data.select('my-shop');
     }))
   },
   attributes: {
+    asdasd: {
+      type: 'object',
+      default: {
+        tag: {
+          adas: 'h2'
+        },
+        class: 'h2'
+      }
+    },
     wrapper: {
       type: 'object',
       default: {
@@ -12594,6 +12603,10 @@ var myStore = wp.data.select('my-shop');
       "type": "string",
       "default": ''
     },
+    blockId: {
+      "type": "string",
+      "default": ''
+    },
     blockCssY: {
       "type": "object",
       "default": {
@@ -12610,8 +12623,13 @@ var myStore = wp.data.select('my-shop');
     var attributes = props.attributes;
     var setAttributes = props.setAttributes;
     var context = props.context;
+    var clientId = props.clientId;
+    var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
+    var blockClass = '.' + blockIdX;
     var postTitle = attributes.postTitle;
     var wrapper = attributes.wrapper;
+    var blockId = attributes.blockId;
+    var asdasd = attributes.asdasd;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
     var customCss = attributes.customCss;
@@ -12621,12 +12639,18 @@ var myStore = wp.data.select('my-shop');
     const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore.getBreakPoint());
     const [license, setLicense] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore.getLicense());
     const [currentPostTitle, setCurrentPostTitle] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'title', postId);
-    const [currentPostUrl, setCurrentPostUrl] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'link', postId); // Wrapper CSS Class Selectors
+    const [currentPostUrl, setCurrentPostUrl] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'link', postId);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+      setAttributes({
+        blockId: blockIdX
+      });
+      generateBlockCssY();
+    }, [clientId]); // Wrapper CSS Class Selectors
 
-    const titleWrapperSelector = '.pg-postTitle';
-    const titleLinkSelector = postTitle.options.isLink ? '.pg-postTitle a' : '.pg-postTitle';
-    const titlePrefixSelector = '.pg-postTitle .prefix';
-    const titlePostfixSelector = '.pg-postTitle .postfix';
+    const titleWrapperSelector = blockClass;
+    const titleLinkSelector = postTitle.options.isLink ? blockClass + ' a' : blockClass;
+    const titlePrefixSelector = blockClass + ' .prefix';
+    const titlePostfixSelector = blockClass + ' .postfix';
     var breakPointList = [{
       label: 'Select..',
       icon: '',
@@ -12749,8 +12773,7 @@ var myStore = wp.data.select('my-shop');
     }
 
     function generateBlockCssY() {
-      var reponsiveCssGroups = {};
-      var reponsiveCss = '';
+      var reponsiveCssGroups = {}; // var reponsiveCss = '';
 
       for (var selector in blockCssY.items) {
         var attrs = blockCssY.items[selector];
@@ -12777,95 +12800,103 @@ var myStore = wp.data.select('my-shop');
         }
       }
 
+      var reponsiveCssMobile = '';
+
       if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
 
         for (var selector in reponsiveCssGroups['Mobile']) {
           var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCss += selector + '{';
+          reponsiveCssMobile += selector + '{';
 
           for (var index in attrs) {
             var attr = attrs[index];
             var attrName = attr.attr;
             var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
+            reponsiveCssMobile += attrName + ':' + attrValue + ';';
           }
 
-          reponsiveCss += '}';
+          reponsiveCssMobile += '}';
         }
 
-        reponsiveCss += '}';
+        reponsiveCssMobile += '}';
       }
 
+      var reponsiveCssTablet = '';
+
       if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
 
         for (var selector in reponsiveCssGroups['Tablet']) {
           var attrs = reponsiveCssGroups['Tablet'][selector];
-          reponsiveCss += selector + '{';
+          reponsiveCssTablet += selector + '{';
 
           for (var index in attrs) {
             var attr = attrs[index];
             var attrName = attr.attr;
             var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
+            reponsiveCssTablet += attrName + ':' + attrValue + ';';
           }
 
-          reponsiveCss += '}';
+          reponsiveCssTablet += '}';
         }
 
-        reponsiveCss += '}';
+        reponsiveCssTablet += '}';
       }
 
+      var reponsiveCssDesktop = '';
+
       if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 781px){';
+        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
 
         for (var selector in reponsiveCssGroups['Desktop']) {
           var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCss += selector + '{';
+          reponsiveCssDesktop += selector + '{';
 
           for (var index in attrs) {
             var attr = attrs[index];
             var attrName = attr.attr;
             var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
+            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
           }
 
-          reponsiveCss += '}';
+          reponsiveCssDesktop += '}';
         }
 
-        reponsiveCss += '}';
+        reponsiveCssDesktop += '}';
+        console.log(reponsiveCssDesktop);
       }
 
+      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
       var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
 
       if (iframe) {
         setTimeout(() => {
           var iframeDocument = iframe.contentDocument;
           var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-postCategories");
+          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
 
           if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-postCategories").outerHTML = "";
+            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
           }
 
-          var divWrap = '<div id="css-block-postCategories"></div>';
+          var divWrap = '<div id="css-block-' + blockId + '"></div>';
           body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-postCategories');
+          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
           var str = '<style>' + reponsiveCss + '</style>';
           csswrappg.insertAdjacentHTML('beforeend', str);
         }, 200);
       } else {
         var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-postCategories");
+        var divWrap = document.getElementById("css-block-" + blockId);
 
         if (divWrap != undefined) {
-          document.getElementById("css-block-postCategories").outerHTML = "";
+          document.getElementById("css-block-" + blockId).outerHTML = "";
         }
 
-        var divWrap = '<div id="css-block-postCategories"></div>';
+        var divWrap = '<div id="css-block-' + blockId + '"></div>';
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-postCategories');
+        var csswrappg = document.getElementById('css-block-' + blockId);
         var str = '<style>' + reponsiveCss + '</style>';
         csswrappg.insertAdjacentHTML('beforeend', str);
       }
@@ -13042,7 +13073,19 @@ var myStore = wp.data.select('my-shop');
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Post Title",
       initialOpen: true
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      value: asdasd.tag.adas,
+      onChange: newVal => {
+        setAttributes({
+          asdasd: {
+            tag: {
+              adas: newVal
+            },
+            class: asdasd.class
+          }
+        });
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
       label: "Linked with post?",
       help: postTitle.options.isLink ? 'Linked with post URL' : 'Not linked to post URL.',
       checked: postTitle.options.isLink ? true : false,
@@ -13173,7 +13216,7 @@ var myStore = wp.data.select('my-shop');
           }); //setAttributes({ linkAttr: ssdsd })
         }
       })));
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, JSON.stringify(blockId)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, JSON.stringify(blockIdX)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, JSON.stringify(postTitle)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
       position: "bottom",
@@ -13183,33 +13226,34 @@ var myStore = wp.data.select('my-shop');
       onChange: onChangeBreakPoint,
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+    })), JSON.stringify(breakPointX), JSON.stringify(postTitle.styles.color[breakPointX]), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       value: postTitle.styles.color[breakPointX],
       colors: colors,
       enableAlpha: true,
       onChange: newVal => {
-        var color = postTitle.styles.color;
-        color[breakPointX] = newVal;
+        var colorX = postTitle.styles.color;
+        colorX[breakPointX] = newVal;
         var styles = { ...postTitle.styles,
-          color: color
+          color: colorX
         };
         setAttributes({
           postTitle: {
             options: postTitle.options,
             styles: styles
           }
-        }); // var responsive = postTitle.color;
-        // responsive[breakPointX] = newVal;
-        // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink, class: postTitle.class, color: responsive, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
-
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
-          'color': color
+        });
+        console.log(blockCssY.items);
+        console.log(titleLinkSelector);
+        blockCssY.items[titleLinkSelector] = {
+          'color': colorX
         };
+        console.log(blockCssY.items);
         setAttributes({
           blockCssY: {
             items: blockCssY.items
           }
         });
+        console.log('###############');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
       className: "my-3"
@@ -13236,7 +13280,8 @@ var myStore = wp.data.select('my-shop');
             options: postTitle.options,
             styles: styles
           }
-        }); // var responsive = postTitle.bgColor;
+        });
+        console.log(blockClass); // var responsive = postTitle.bgColor;
         // responsive[breakPointX] = newVal;
         // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink, class: postTitle.class, color: postTitle.color, bgColor: responsive, padding: postTitle.padding, margin: postTitle.margin } });
 
@@ -13341,8 +13386,8 @@ var myStore = wp.data.select('my-shop');
           customCss: value
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
-      className: ['pg-postTitle']
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, "blockClass"), JSON.stringify(blockClass), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, "blockIdX"), JSON.stringify(blockIdX), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, "blockId"), JSON.stringify(blockId), wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
+      className: [blockId]
     }, postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: postUrl,
       target: postTitle.options.linkTarget
@@ -13355,7 +13400,7 @@ var myStore = wp.data.select('my-shop');
     }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: postfix.options.class
     }, postfix.options.text))), wrapper.options.tag.length == 0 && postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-      className: ['pg-postTitle']
+      className: [blockId]
     }, linkAttrItems, {
       href: postUrl,
       target: postTitle.options.linkTarget
@@ -13364,7 +13409,7 @@ var myStore = wp.data.select('my-shop');
     }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: postfix.options.class
     }, postfix.options.text)), wrapper.options.tag.length == 0 && !postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
-      className: 'pg-postTitle'
+      className: blockId
     }, prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: prefix.options.class
     }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {

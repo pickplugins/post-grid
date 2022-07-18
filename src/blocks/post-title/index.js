@@ -36,6 +36,15 @@ registerBlockType("post-grid/post-title", {
   attributes: {
 
 
+    asdasd: {
+      type: 'object',
+      default: {
+        tag: { adas: 'h2' }, class: 'h2'
+
+      },
+    },
+
+
     wrapper: {
       type: 'object',
       default: {
@@ -106,7 +115,10 @@ registerBlockType("post-grid/post-title", {
     },
 
 
-
+    blockId: {
+      "type": "string",
+      "default": ''
+    },
     blockCssY: {
       "type": "object",
       "default": { items: {} }
@@ -128,10 +140,16 @@ registerBlockType("post-grid/post-title", {
     var attributes = props.attributes;
     var setAttributes = props.setAttributes;
     var context = props.context;
+    var clientId = props.clientId;
+
+    var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
+    var blockClass = '.' + blockIdX;
 
     var postTitle = attributes.postTitle;
     var wrapper = attributes.wrapper;
+    var blockId = attributes.blockId;
 
+    var asdasd = attributes.asdasd;
 
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
@@ -139,12 +157,12 @@ registerBlockType("post-grid/post-title", {
     var blockCssY = attributes.blockCssY;
 
 
+
     var postId = context['postId'];
     var postType = context['postType'];
 
     const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
     const [license, setLicense] = useState(myStore.getLicense());
-
 
 
     const [
@@ -159,13 +177,17 @@ registerBlockType("post-grid/post-title", {
     ] = useEntityProp('postType', postType, 'link', postId);
 
 
+    useEffect(() => {
+      setAttributes({ blockId: blockIdX });
 
+      generateBlockCssY()
+    }, [clientId]);
 
     // Wrapper CSS Class Selectors
-    const titleWrapperSelector = '.pg-postTitle';
-    const titleLinkSelector = postTitle.options.isLink ? '.pg-postTitle a' : '.pg-postTitle';
-    const titlePrefixSelector = '.pg-postTitle .prefix';
-    const titlePostfixSelector = '.pg-postTitle .postfix';
+    const titleWrapperSelector = blockClass;
+    const titleLinkSelector = postTitle.options.isLink ? blockClass + ' a' : blockClass;
+    const titlePrefixSelector = blockClass + ' .prefix';
+    const titlePostfixSelector = blockClass + ' .postfix';
 
 
 
@@ -310,9 +332,12 @@ registerBlockType("post-grid/post-title", {
 
 
       var reponsiveCssGroups = {};
-      var reponsiveCss = '';
+      // var reponsiveCss = '';
+
 
       for (var selector in blockCssY.items) {
+
+
 
         var attrs = blockCssY.items[selector];
 
@@ -335,74 +360,91 @@ registerBlockType("post-grid/post-title", {
             reponsiveCssGroups[device][selector].push({ 'attr': attr, 'val': attrValue });
 
           }
-
-
         }
       }
 
+
+
+
+
+
+
+      var reponsiveCssMobile = '';
+
       if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+
+        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
 
         for (var selector in reponsiveCssGroups['Mobile']) {
           var attrs = reponsiveCssGroups['Mobile'][selector];
 
-          reponsiveCss += selector + '{';
+          reponsiveCssMobile += selector + '{';
           for (var index in attrs) {
             var attr = attrs[index]
             var attrName = attr.attr;
             var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
+            reponsiveCssMobile += attrName + ':' + attrValue + ';';
           }
-          reponsiveCss += '}';
+          reponsiveCssMobile += '}';
         }
-        reponsiveCss += '}';
+        reponsiveCssMobile += '}';
 
       }
 
 
 
+      var reponsiveCssTablet = '';
 
       if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
 
         for (var selector in reponsiveCssGroups['Tablet']) {
           var attrs = reponsiveCssGroups['Tablet'][selector];
 
-          reponsiveCss += selector + '{';
+          reponsiveCssTablet += selector + '{';
           for (var index in attrs) {
             var attr = attrs[index]
             var attrName = attr.attr;
             var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
+            reponsiveCssTablet += attrName + ':' + attrValue + ';';
           }
-          reponsiveCss += '}';
+          reponsiveCssTablet += '}';
         }
 
-        reponsiveCss += '}';
+        reponsiveCssTablet += '}';
       }
 
+      var reponsiveCssDesktop = '';
 
 
       if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 781px){';
+        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
 
         for (var selector in reponsiveCssGroups['Desktop']) {
           var attrs = reponsiveCssGroups['Desktop'][selector];
 
 
-          reponsiveCss += selector + '{';
+          reponsiveCssDesktop += selector + '{';
           for (var index in attrs) {
             var attr = attrs[index]
             var attrName = attr.attr;
             var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
+            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
           }
-          reponsiveCss += '}';
+          reponsiveCssDesktop += '}';
 
 
         }
-        reponsiveCss += '}';
+        reponsiveCssDesktop += '}';
+
+
+        console.log(reponsiveCssDesktop);
+
       }
+
+
+      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
+
 
 
       var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
@@ -412,17 +454,17 @@ registerBlockType("post-grid/post-title", {
         setTimeout(() => {
           var iframeDocument = iframe.contentDocument;
           var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-postCategories");
+          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
 
           if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-postCategories").outerHTML = "";
+            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
 
           }
 
-          var divWrap = '<div id="css-block-postCategories"></div>';
+          var divWrap = '<div id="css-block-' + blockId + '"></div>';
           body.insertAdjacentHTML('beforeend', divWrap);
 
-          var csswrappg = iframeDocument.getElementById('css-block-postCategories');
+          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
           var str = '<style>' + reponsiveCss + '</style>';
 
           csswrappg.insertAdjacentHTML('beforeend', str);
@@ -431,17 +473,19 @@ registerBlockType("post-grid/post-title", {
 
       } else {
 
+
+
         var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-postCategories");
+        var divWrap = document.getElementById("css-block-" + blockId);
 
         if (divWrap != undefined) {
-          document.getElementById("css-block-postCategories").outerHTML = "";
+          document.getElementById("css-block-" + blockId).outerHTML = "";
         }
 
-        var divWrap = '<div id="css-block-postCategories"></div>';
+        var divWrap = '<div id="css-block-' + blockId + '"></div>';
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
 
-        var csswrappg = document.getElementById('css-block-postCategories');
+        var csswrappg = document.getElementById('css-block-' + blockId);
         var str = '<style>' + reponsiveCss + '</style>';
         csswrappg.insertAdjacentHTML('beforeend', str);
 
@@ -627,12 +671,10 @@ registerBlockType("post-grid/post-title", {
 
         <div>
 
-          <BlockControls >
+          <BlockControls>
             <AlignmentToolbar
               value={wrapper.styles.textAlign}
               onChange={(nextAlign) => {
-
-
 
                 var textAlign = wrapper.styles.textAlign;
                 textAlign[breakPointX] = nextAlign;
@@ -656,9 +698,6 @@ registerBlockType("post-grid/post-title", {
 
 
               <div>
-
-
-
 
                 <PanelBody title="Wrapper" initialOpen={false}>
 
@@ -695,16 +734,39 @@ registerBlockType("post-grid/post-title", {
                       }
                     />
                   </PanelRow>
-
-
-
-
                 </PanelBody>
 
-
-
-
                 <PanelBody title="Post Title" initialOpen={true}>
+
+
+
+
+                  <InputControl
+                    value={asdasd.tag.adas}
+                    onChange={(newVal) => {
+
+
+
+                      setAttributes({ asdasd: { tag: { adas: newVal }, class: asdasd.class } });
+
+
+                    }
+                    }
+                  />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -892,7 +954,10 @@ registerBlockType("post-grid/post-title", {
 
                   )}
 
+                  <code>{JSON.stringify(blockId)}</code>
+                  <code>{JSON.stringify(blockIdX)}</code>
 
+                  <code>{JSON.stringify(postTitle)}</code>
 
 
                   <PanelRow className='my-3'>
@@ -903,6 +968,11 @@ registerBlockType("post-grid/post-title", {
 
 
                   </PanelRow>
+                  {JSON.stringify(breakPointX)}
+
+
+                  {JSON.stringify(postTitle.styles.color[breakPointX])}
+
 
                   <ColorPalette
                     value={postTitle.styles.color[breakPointX]}
@@ -910,38 +980,23 @@ registerBlockType("post-grid/post-title", {
                     enableAlpha
                     onChange={(newVal) => {
 
+                      var colorX = postTitle.styles.color;
+                      colorX[breakPointX] = newVal;
 
-
-
-                      var color = postTitle.styles.color;
-                      color[breakPointX] = newVal;
-
-                      var styles = { ...postTitle.styles, color: color };
+                      var styles = { ...postTitle.styles, color: colorX, };
                       setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
 
 
+                      console.log(blockCssY.items);
+                      console.log(titleLinkSelector);
+
+                      blockCssY.items[titleLinkSelector] = { 'color': colorX };
+                      console.log(blockCssY.items);
 
 
-
-
-
-
-
-
-
-
-
-
-                      // var responsive = postTitle.color;
-                      // responsive[breakPointX] = newVal;
-
-
-                      // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink, class: postTitle.class, color: responsive, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
-
-
-                      blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'color': color };
                       setAttributes({ blockCssY: { items: blockCssY.items } });
 
+                      console.log('###############');
 
 
 
@@ -975,7 +1030,7 @@ registerBlockType("post-grid/post-title", {
 
 
 
-
+                      console.log(blockClass);
 
 
 
@@ -1134,11 +1189,18 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
+          <div>blockClass</div>
+          {JSON.stringify(blockClass)}
+          <div>blockIdX</div>
 
+          {JSON.stringify(blockIdX)}
+          <div>blockId</div>
+
+          {JSON.stringify(blockId)}
 
 
           {wrapper.options.tag && (
-            <CustomTag className={['pg-postTitle']}>
+            <CustomTag className={[blockId]}>
               {postTitle.options.isLink && (
                 <a {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
 
@@ -1164,7 +1226,7 @@ registerBlockType("post-grid/post-title", {
           {wrapper.options.tag.length == 0 && (
 
             (
-              postTitle.options.isLink && (<a className={['pg-postTitle']} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
+              postTitle.options.isLink && (<a className={[blockId]} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
 
                 {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
                 {(currentPostTitle)}
@@ -1175,7 +1237,7 @@ registerBlockType("post-grid/post-title", {
           )}
 
           {wrapper.options.tag.length == 0 && !postTitle.options.isLink && (
-            <p className={'pg-postTitle'}>
+            <p className={blockId}>
               {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
               {(currentPostTitle)}
               {(postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}

@@ -58,12 +58,15 @@ class BlockPostTitle
             // wp_enqueue_style('blk_post_grid', post_grid_plugin_url . 'src/blocks/post-title/index.css');
         }
 
-
+        // echo "<pre>";
+        // var_dump($attributes["postTitle"]["isLink"]);
+        // echo "</pre>";
+        
 
         $post_ID = $block->context['postId'];
         $post_url = get_the_permalink($post_ID);
 
-        $isLink = isset($attributes['isLink']) ? $attributes['isLink'] : '';
+        $isLink = isset($attributes["postTitle"]["isLink"]) ? $attributes["postTitle"]["isLink"] : '';
         $linkTarget = isset($attributes['linkTarget']) ? $attributes['linkTarget'] : '';
         $linkAttr = isset($attributes['linkAttr']) ? $attributes['linkAttr'] : [];
         $rel = isset($attributes['rel']) ? $attributes['rel'] : '';
@@ -110,7 +113,7 @@ class BlockPostTitle
 
         <<?php echo $tag; ?> class="pg-postTitle pg-postTitle-<?php echo $post_ID; ?>">
             <?php if ($isLink) : ?>
-                <a href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>><?php echo $prefix; ?><?php echo get_the_title($post_ID); ?><?php echo $postfix; ?></a>
+                <a href="<?php echo $attributes["postTitle"]["customUrl"]["url"]; ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>><?php echo $prefix; ?><?php echo get_the_title($post_ID); ?><?php echo $postfix; ?></a>
             <?php else : ?>
                 <?php echo get_the_title($post_ID); ?>
             <?php endif; ?>

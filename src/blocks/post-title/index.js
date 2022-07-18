@@ -2,12 +2,13 @@ import { registerBlockType } from '@wordpress/blocks'
 import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
+import { link } from "@wordpress/icons";
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl } from '@wordpress/components'
+import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, ToolbarGroup, ToolbarButton, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 
-import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
+import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
@@ -56,6 +57,7 @@ registerBlockType("post-grid/post-title", {
       type: 'object',
       default: { textAlign: '', isLink: true, linkTarget: '', customUrl: '', class: '', color: {}, bgColor: {}, padding: {}, margin: {} },
     },
+    linkObject: { type: "object" },
     prefix: {
       "type": "object",
       "default": { text: '', class: '', color: {}, bgColor: {} }
@@ -95,6 +97,7 @@ registerBlockType("post-grid/post-title", {
 
 
   edit: function (props) {
+    const [isLinkPickerVisible, setIsLinkPickerVisible] = useState(false);
 
 
     var attributes = props.attributes;
@@ -625,6 +628,15 @@ registerBlockType("post-grid/post-title", {
 
     }
 
+    function handleLinkChange(newVal){
+      // props.setAttributes({linkObject: newLink})
+      console.log(newVal)
+      setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.isLink, linkTarget: postTitle.linkTarget, customUrl: newVal, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
+    }
+
+    function buttonHandler(){
+      setIsLinkPickerVisible(prev => !prev)
+    }
 
     return (
       [
@@ -639,6 +651,9 @@ registerBlockType("post-grid/post-title", {
                 setAttributes({ postTitle: { textAlign: nextAlign, isLink: postTitle.isLink, linkTarget: postTitle.linkTarget, customUrl: postTitle.customUrl, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
               }}
             />
+            <ToolbarGroup>
+              <ToolbarButton onClick={buttonHandler} icon={link} />
+            </ToolbarGroup>
           </BlockControls>
 
 
@@ -745,9 +760,9 @@ registerBlockType("post-grid/post-title", {
 
 
                       <PanelRow>
-                        <label for="">Custom Url</label>
-
-                        <InputControl
+                        <label for="">Custom Url </label>
+                        <Button icon={link} onClick={buttonHandler}></Button>
+                        {/* <InputControl
                           value={postTitle.customUrl}
                           onChange={(newVal) => {
 
@@ -755,7 +770,7 @@ registerBlockType("post-grid/post-title", {
 
                           }
                           }
-                        />
+                        /> */}
                       </PanelRow>
 
 
@@ -1093,6 +1108,13 @@ registerBlockType("post-grid/post-title", {
                 (<span className='postfix'>{postfix.text}</span>)}
             </p>
 
+          )}
+
+          {isLinkPickerVisible && (
+            <Popover position="middle center">
+              <LinkControl settings={[]} value={props.attributes.postTitle.customUrl} onChange={handleLinkChange} />
+              <Button variant="primary" onClick={() => setIsLinkPickerVisible(false)} style={{display: "block", width: "100%"}}>Confirm Link</Button>
+            </Popover>
           )}
 
         </>

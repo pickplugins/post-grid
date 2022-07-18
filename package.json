@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@wordpress/api-fetch": "^6.6.0",
+    "@wordpress/icons": "^9.4.0",
     "masonry-layout": "^4.2.2",
     "styled-components": "^5.3.5"
   }

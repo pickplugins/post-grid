@@ -36,13 +36,7 @@ registerBlockType("post-grid/post-title", {
   attributes: {
 
 
-    asdasd: {
-      type: 'object',
-      default: {
-        tag: { adas: 'h2' }, class: 'h2'
 
-      },
-    },
 
 
     wrapper: {
@@ -69,6 +63,9 @@ registerBlockType("post-grid/post-title", {
         styles:
         {
           textAlign: {},
+          display: {},
+          width: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -145,11 +142,10 @@ registerBlockType("post-grid/post-title", {
     var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
     var blockClass = '.' + blockIdX;
 
-    var postTitle = attributes.postTitle;
+    let postTitle = attributes.postTitle;
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
-    var asdasd = attributes.asdasd;
 
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
@@ -178,6 +174,7 @@ registerBlockType("post-grid/post-title", {
 
 
     useEffect(() => {
+
       setAttributes({ blockId: blockIdX });
 
       generateBlockCssY()
@@ -202,12 +199,44 @@ registerBlockType("post-grid/post-title", {
     }
 
 
+    function updateColor(newVal) {
+
+
+      console.log(postTitle.styles.color);
+
+
+      var newValuesObj = {};
+      console.log(postTitle.styles.color[breakPointX]);
+
+      if (postTitle.styles.color[breakPointX].length != 0) {
+        newValuesObj = postTitle.styles.color;
+
+        console.log(newValuesObj);
+
+
+      }
+
+      newValuesObj[breakPointX] = newVal;
+
+      var styles = { ...postTitle.styles, color: newValuesObj };
+      setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
+
+
+      blockCssY.items[titleLinkSelector] = { 'color': newValuesObj };
+      //console.log(blockCssY.items);
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
     function paddingControl(nextValues) {
 
 
       var responsive = postTitle.styles.padding;
       responsive[breakPointX] = nextValues;
 
+      //console.log(nextValues);
 
 
       var styles = { ...postTitle.styles, padding: responsive };
@@ -332,7 +361,6 @@ registerBlockType("post-grid/post-title", {
 
 
       var reponsiveCssGroups = {};
-      // var reponsiveCss = '';
 
 
       for (var selector in blockCssY.items) {
@@ -353,6 +381,10 @@ registerBlockType("post-grid/post-title", {
               reponsiveCssGroups[device] = []
             }
 
+            if (reponsiveCssGroups[device] == undefined) {
+              reponsiveCssGroups[device] = []
+            }
+
             if (reponsiveCssGroups[device][selector] == undefined) {
               reponsiveCssGroups[device][selector] = []
             }
@@ -364,9 +396,9 @@ registerBlockType("post-grid/post-title", {
       }
 
 
+      console.log(reponsiveCssGroups);
 
-
-
+      //return false;
 
 
       var reponsiveCssMobile = '';
@@ -438,7 +470,7 @@ registerBlockType("post-grid/post-title", {
         reponsiveCssDesktop += '}';
 
 
-        console.log(reponsiveCssDesktop);
+        //console.log(reponsiveCssDesktop);
 
       }
 
@@ -581,68 +613,6 @@ registerBlockType("post-grid/post-title", {
 
     const CustomTag = `${wrapper.options.tag}`;
 
-    const MyDropdown = () => (
-
-      <div>
-
-        <Dropdown
-          position="bottom"
-          renderToggle={({ isOpen, onToggle }) => (
-            <Button
-              title={(breakPoints[breakPointX] != undefined) ? breakPoints[breakPointX].name : ''}
-              variant="secondary"
-              onClick={onToggle}
-              aria-expanded={isOpen}
-            >
-              <RawHTML className="text-lg ">{(breakPoints[breakPointX] != undefined) ? breakPoints[breakPointX].icon : '<span class="icon-responsive font-bold"></span>'}</RawHTML>
-
-
-            </Button>
-          )}
-          renderContent={() => <div>
-
-            {breakPointList.map(x => {
-
-
-              return (
-
-                <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
-
-                  setPreviewDeviceType(x.value)
-                  var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value)
-
-                  asdsdsd.then((res) => {
-
-                    setBreakPointX(res.breakpoint);
-                    generateBlockCssY();
-
-                  });
-
-
-
-                }}>
-
-                  {!x.value && (
-
-                    <div><span class="icon-close"></span></div>
-
-                  )}
-
-                  {x.value && (
-
-                    <RawHTML>{x.icon}</RawHTML>
-
-                  )}
-
-                </div>
-
-              )
-
-            })}
-          </div>}
-        />
-      </div>
-    );
 
 
 
@@ -741,35 +711,6 @@ registerBlockType("post-grid/post-title", {
 
 
 
-                  <InputControl
-                    value={asdasd.tag.adas}
-                    onChange={(newVal) => {
-
-
-
-                      setAttributes({ asdasd: { tag: { adas: newVal }, class: asdasd.class } });
-
-
-                    }
-                    }
-                  />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                   <ToggleControl
                     label="Linked with post?"
                     help={postTitle.options.isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
@@ -845,6 +786,12 @@ registerBlockType("post-grid/post-title", {
                           }
                         />
                       </PanelRow>
+
+
+
+
+
+
 
 
 
@@ -954,10 +901,9 @@ registerBlockType("post-grid/post-title", {
 
                   )}
 
-                  <code>{JSON.stringify(blockId)}</code>
-                  <code>{JSON.stringify(blockIdX)}</code>
 
-                  <code>{JSON.stringify(postTitle)}</code>
+
+
 
 
                   <PanelRow className='my-3'>
@@ -968,10 +914,6 @@ registerBlockType("post-grid/post-title", {
 
 
                   </PanelRow>
-                  {JSON.stringify(breakPointX)}
-
-
-                  {JSON.stringify(postTitle.styles.color[breakPointX])}
 
 
                   <ColorPalette
@@ -980,24 +922,36 @@ registerBlockType("post-grid/post-title", {
                     enableAlpha
                     onChange={(newVal) => {
 
-                      var colorX = postTitle.styles.color;
-                      colorX[breakPointX] = newVal;
+                      var newValuesObj = {};
 
-                      var styles = { ...postTitle.styles, color: colorX, };
+
+                      if (Object.keys(postTitle.styles.color).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = postTitle.styles.color;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...postTitle.styles, color: newValuesObj };
                       setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
 
 
-                      console.log(blockCssY.items);
-                      console.log(titleLinkSelector);
-
-                      blockCssY.items[titleLinkSelector] = { 'color': colorX };
-                      console.log(blockCssY.items);
 
 
+
+                      blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'color': newValuesObj };
                       setAttributes({ blockCssY: { items: blockCssY.items } });
 
-                      console.log('###############');
 
+
+
+
+
+
+
+
+                      // blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'color': newValuesObj };
+                      // setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
                     }}
@@ -1008,10 +962,6 @@ registerBlockType("post-grid/post-title", {
                   <PanelRow className='my-3'>
                     <label>Background Color</label>
                     <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
                   </PanelRow>
 
                   <ColorPalette
@@ -1021,28 +971,31 @@ registerBlockType("post-grid/post-title", {
                     onChange={(newVal) => {
 
 
-                      var bgColor = postTitle.styles.bgColor;
-                      bgColor[breakPointX] = newVal;
+                      var newValuesObj = {};
 
-                      var styles = { ...postTitle.styles, bgColor: bgColor };
+
+                      if (Object.keys(postTitle.styles.bgColor).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = postTitle.styles.bgColor;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+
+                      var styles = { ...postTitle.styles, bgColor: newValuesObj };
                       setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
 
-
-
-
-                      console.log(blockClass);
-
-
-
-                      // var responsive = postTitle.bgColor;
-                      // responsive[breakPointX] = newVal;
-
-
-                      // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink, class: postTitle.class, color: postTitle.color, bgColor: responsive, padding: postTitle.padding, margin: postTitle.margin } });
-
-
-                      blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': bgColor };
+                      blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': newValuesObj };
                       setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1051,9 +1004,56 @@ registerBlockType("post-grid/post-title", {
                   />
 
 
+                  <PanelRow className='my-3'>
+                    <label>Display</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+
+                  <PanelRow>
+
+                    <SelectControl
+                      label=""
+                      value={postTitle.styles.display[breakPointX]}
+
+                      options={[
+                        { label: 'Select..', value: '' },
+
+                        { label: 'inline', value: 'inline' },
+                        { label: 'inline-block', value: 'inline-block' },
+                        { label: 'block', value: 'block' },
 
 
 
+                      ]}
+                      onChange={(newVal) => {
+
+
+
+                        var newValuesObj = {};
+
+
+                        if (Object.keys(postTitle.styles.display).length == 0) {
+                          newValuesObj[breakPointX] = newVal;
+                        } else {
+                          newValuesObj = postTitle.styles.display;
+                          newValuesObj[breakPointX] = newVal;
+                        }
+
+
+                        var styles = { ...postTitle.styles, display: newValuesObj };
+                        setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
+
+                        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'display': newValuesObj };
+                        setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+                      }
+
+                      }
+                    />
+                  </PanelRow>
 
 
 
@@ -1188,17 +1188,6 @@ registerBlockType("post-grid/post-title", {
 
 
         <>
-
-          <div>blockClass</div>
-          {JSON.stringify(blockClass)}
-          <div>blockIdX</div>
-
-          {JSON.stringify(blockIdX)}
-          <div>blockId</div>
-
-          {JSON.stringify(blockId)}
-
-
           {wrapper.options.tag && (
             <CustomTag className={[blockId]}>
               {postTitle.options.isLink && (

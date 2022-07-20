@@ -997,7 +997,6 @@ registerBlockType("post-grid/heading", {
                   <div className='my-3'>
                     <p className='font-bold'>Title link</p>
                     <p><code>{headingSelector}{'{}'} </code></p>
-                    <p><code>.pg-postCategories a{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>

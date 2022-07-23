@@ -14,6 +14,8 @@ const { RawHTML } = wp.element;
 import { store } from '../../store'
 
 import IconToggle from '../../components/icon-toggle'
+import Typography from '../../components/typography'
+
 import BreakpointToggle from '../../components/breakpoint-toggle'
 
 
@@ -35,15 +37,27 @@ registerBlockType("post-grid/post-title", {
 
   attributes: {
 
+    typo: {
+      type: 'object',
+      default: {
+        fontSize: { val: '18', unit: 'px' },
+        lineHeight: { val: '18', unit: 'px' },
+        letterSpacing: { val: '18', unit: 'px' },
+        fontFamily: '',
+        fontWeight: '',
+        textDecoration: [], //overline, line-through, underline
+        textTransform: '',
 
+      },
+    },
 
 
 
     wrapper: {
       type: 'object',
       default: {
-        options:
-          { tag: 'h2', class: 'h2' },
+        options: { tag: 'h2', class: 'h2' },
+
         styles:
         {
           textAlign: {},
@@ -58,14 +72,27 @@ registerBlockType("post-grid/post-title", {
     postTitle: {
       type: 'object',
       default: {
-        options:
-          { isLink: true, linkTarget: '', linkAttr: [], customUrl: '', class: '', },
+        options: {
+          isLink: true,
+          linkTarget: '',
+          linkAttr: [],
+          customUrl: '',
+          class: '',
+        },
+        typo: {
+          fontSize: {}, //{ val: '18', unit: 'px' }
+          lineHeight: {}, // { val: '18', unit: 'px' }
+          letterSpacing: {}, // { val: '18', unit: 'px' }
+          fontFamily: {},
+          fontWeight: {},
+          textDecoration: {}, //overline, line-through, underline
+          textTransform: {},
+        },
         styles:
         {
           textAlign: {},
           display: {},
           width: {},
-
           color: {},
           bgColor: {},
           padding: {},
@@ -127,6 +154,7 @@ registerBlockType("post-grid/post-title", {
 
   supports: {
     "align": ["wide", "full"],
+
   },
   category: "post-grid",
 
@@ -146,6 +174,7 @@ registerBlockType("post-grid/post-title", {
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
+    var typo = attributes.typo;
 
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
@@ -396,7 +425,6 @@ registerBlockType("post-grid/post-title", {
       }
 
 
-      console.log(reponsiveCssGroups);
 
       //return false;
 
@@ -615,7 +643,34 @@ registerBlockType("post-grid/post-title", {
 
 
 
+    function onChangeTypo(typoX) {
+      console.log(typoX);
 
+
+
+
+      setAttributes({ postTitle: { ...postTitle, typo: typoX } });
+
+
+      console.log(typoX);
+
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 
     function onChangeBreakPoint(x, index) {
 
@@ -633,6 +688,17 @@ registerBlockType("post-grid/post-title", {
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
     return (
@@ -663,7 +729,7 @@ registerBlockType("post-grid/post-title", {
 
 
           <InspectorControls key="general">
-            <div className='px-3' title="General" initialOpen={false}>
+            <div className='px-3' initialOpen={false}>
 
 
 
@@ -933,22 +999,10 @@ registerBlockType("post-grid/post-title", {
                       }
 
                       var styles = { ...postTitle.styles, color: newValuesObj };
-                      setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
-
-
-
-
+                      setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
                       blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'color': newValuesObj };
                       setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-
-
-
-
 
                       // blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'color': newValuesObj };
                       // setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -958,18 +1012,21 @@ registerBlockType("post-grid/post-title", {
                   />
 
 
-
                   <PanelRow className='my-3'>
                     <label>Background Color</label>
                     <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+
+
+
+
                   </PanelRow>
+
 
                   <ColorPalette
                     value={postTitle.styles.bgColor[breakPointX]}
                     colors={colors}
                     enableAlpha
                     onChange={(newVal) => {
-
 
                       var newValuesObj = {};
 
@@ -981,28 +1038,25 @@ registerBlockType("post-grid/post-title", {
                         newValuesObj[breakPointX] = newVal;
                       }
 
-
                       var styles = { ...postTitle.styles, bgColor: newValuesObj };
-                      setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
+                      setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
                       blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': newValuesObj };
                       setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
-
-
-
-
-
-
-
-
-
-
-
                     }}
                   />
 
+
+                  <PanelRow>
+                    <div className='font-bold'>Typography</div>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+
+                  <Typography typo={postTitle.typo} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} postTitleX={postTitle} />
+
+                  {JSON.stringify(postTitle.typo)}
 
                   <PanelRow className='my-3'>
                     <label>Display</label>
@@ -1188,6 +1242,14 @@ registerBlockType("post-grid/post-title", {
 
 
         <>
+
+
+          <code>{JSON.stringify(postTitle.typo)}</code>
+          <div>###################</div>
+          <code>{JSON.stringify(postTitle.styles)}</code>
+
+
+
           {wrapper.options.tag && (
             <CustomTag className={[blockId]}>
               {postTitle.options.isLink && (

@@ -12488,7 +12488,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../store */ "./src/store.js");
 /* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
-/* harmony import */ var _components_breakpoint_toggle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/breakpoint-toggle */ "./src/components/breakpoint-toggle/index.js");
+/* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
+/* harmony import */ var _components_breakpoint_toggle__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/breakpoint-toggle */ "./src/components/breakpoint-toggle/index.js");
 
 
 
@@ -12505,6 +12506,7 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
 
 
 
@@ -12529,6 +12531,28 @@ var myStore = wp.data.select('my-shop');
     }))
   },
   attributes: {
+    typo: {
+      type: 'object',
+      default: {
+        fontSize: {
+          val: '18',
+          unit: 'px'
+        },
+        lineHeight: {
+          val: '18',
+          unit: 'px'
+        },
+        letterSpacing: {
+          val: '18',
+          unit: 'px'
+        },
+        fontFamily: '',
+        fontWeight: '',
+        textDecoration: [],
+        //overline, line-through, underline
+        textTransform: ''
+      }
+    },
     wrapper: {
       type: 'object',
       default: {
@@ -12554,6 +12578,19 @@ var myStore = wp.data.select('my-shop');
           linkAttr: [],
           customUrl: '',
           class: ''
+        },
+        typo: {
+          fontSize: {},
+          //{ val: '18', unit: 'px' }
+          lineHeight: {},
+          // { val: '18', unit: 'px' }
+          letterSpacing: {},
+          // { val: '18', unit: 'px' }
+          fontFamily: {},
+          fontWeight: {},
+          textDecoration: {},
+          //overline, line-through, underline
+          textTransform: {}
         },
         styles: {
           textAlign: {},
@@ -12622,6 +12659,7 @@ var myStore = wp.data.select('my-shop');
     let postTitle = attributes.postTitle;
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
+    var typo = attributes.typo;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
     var customCss = attributes.customCss;
@@ -12826,9 +12864,8 @@ var myStore = wp.data.select('my-shop');
             });
           }
         }
-      }
+      } //return false;
 
-      console.log(reponsiveCssGroups); //return false;
 
       var reponsiveCssMobile = '';
 
@@ -12978,6 +13015,21 @@ var myStore = wp.data.select('my-shop');
     var postUrl = postTitle.options.customUrl != undefined && postTitle.options.customUrl.length > 0 ? postTitle.options.customUrl : currentPostUrl;
     const CustomTag = `${wrapper.options.tag}`;
 
+    function onChangeTypo(typoX) {
+      console.log(typoX);
+      setAttributes({
+        postTitle: { ...postTitle,
+          typo: typoX
+        }
+      });
+      console.log(typoX);
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
     function onChangeBreakPoint(x, index) {
       setPreviewDeviceType(x.value);
       var asdsdsd = wp.data.dispatch('my-shop').setBreakPoint(x.value);
@@ -13014,7 +13066,6 @@ var myStore = wp.data.select('my-shop');
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "px-3",
-      title: "General",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Wrapper",
@@ -13228,8 +13279,7 @@ var myStore = wp.data.select('my-shop');
           color: newValuesObj
         };
         setAttributes({
-          postTitle: {
-            options: postTitle.options,
+          postTitle: { ...postTitle,
             styles: styles
           }
         });
@@ -13271,8 +13321,7 @@ var myStore = wp.data.select('my-shop');
           bgColor: newValuesObj
         };
         setAttributes({
-          postTitle: {
-            options: postTitle.options,
+          postTitle: { ...postTitle,
             styles: styles
           }
         });
@@ -13285,7 +13334,23 @@ var myStore = wp.data.select('my-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: "font-bold"
+    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      typo: postTitle.typo,
+      breakPointX: breakPointX,
+      onChange: onChangeTypo,
+      setAttributes: setAttributes,
+      postTitleX: postTitle
+    }), JSON.stringify(postTitle.typo), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
       position: "bottom",
@@ -13431,7 +13496,7 @@ var myStore = wp.data.select('my-shop');
           customCss: value
         });
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, JSON.stringify(postTitle.typo)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, "###################"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, JSON.stringify(postTitle.styles)), wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
       className: [blockId]
     }, postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       href: postUrl,
@@ -14636,6 +14701,432 @@ class IconToggle extends Component {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (IconToggle);
+
+/***/ }),
+
+/***/ "./src/components/typography/index.js":
+/*!********************************************!*\
+  !*** ./src/components/typography/index.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
+const {
+  Component,
+  RawHTML
+} = wp.element;
+
+
+
+class Typography extends Component {
+  render() {
+    var {
+      typo,
+      breakPointX,
+      onChange,
+      setAttributes,
+      postTitleX
+    } = this.props;
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Font Family")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      value: typo.fontFamily[breakPointX] != undefined ? typo.fontFamily[breakPointX] : '',
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.fontFamily).length == 0) {
+          newValuesObj[breakPointX] = newVal;
+        } else {
+          newValuesObj = postTitleX.typo.fontFamily;
+          newValuesObj[breakPointX] = newVal;
+        }
+
+        var typoX = { ...postTitleX.typo,
+          fontFamily: newValuesObj
+        };
+        onChange(typoX);
+      }
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Font Size")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      type: "number",
+      value: typo.fontSize[breakPointX] != undefined ? typo.fontSize[breakPointX].val : '',
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.fontSize).length == 0) {
+          newValuesObj[breakPointX] = { ...postTitleX.typo.fontSize[breakPointX],
+            val: newVal
+          };
+        } else {
+          newValuesObj = postTitleX.typo.fontSize;
+          newValuesObj[breakPointX] = { ...postTitleX.typo.fontSize[breakPointX],
+            val: newVal
+          };
+        }
+
+        var typoX = { ...postTitleX.typo,
+          fontSize: newValuesObj
+        };
+        onChange(typoX);
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+      label: "",
+      value: typo.fontSize[breakPointX] != undefined ? typo.fontSize[breakPointX].unit : '',
+      options: [{
+        label: 'Select Unit',
+        value: ''
+      }, {
+        label: 'px',
+        value: 'px'
+      }, {
+        label: '%',
+        value: '%'
+      }, {
+        label: 'em',
+        value: 'em'
+      }, {
+        label: 'ex',
+        value: 'ex'
+      }, {
+        label: 'rem',
+        value: 'rem'
+      }, {
+        label: 'vh',
+        value: 'vh'
+      }, {
+        label: 'vw',
+        value: 'vw'
+      }, {
+        label: 'pt',
+        value: 'pt'
+      }, {
+        label: 'pc',
+        value: 'pc'
+      }, {
+        label: 'ch',
+        value: 'ch'
+      }],
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.fontSize).length == 0) {
+          newValuesObj[breakPointX] = { ...postTitleX.typo.fontSize[breakPointX],
+            unit: newVal
+          };
+        } else {
+          newValuesObj = postTitleX.typo.fontSize;
+          newValuesObj[breakPointX] = { ...postTitleX.typo.fontSize[breakPointX],
+            unit: newVal
+          };
+        }
+
+        var typoX = { ...postTitleX.typo,
+          fontSize: newValuesObj
+        };
+        onChange(typoX);
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Line Height")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      type: "number",
+      value: typo.lineHeight[breakPointX] != undefined ? typo.lineHeight[breakPointX].val : '',
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.lineHeight).length == 0) {
+          newValuesObj[breakPointX] = { ...postTitleX.typo.lineHeight[breakPointX],
+            val: newVal
+          };
+        } else {
+          newValuesObj = postTitleX.typo.lineHeight;
+          newValuesObj[breakPointX] = { ...postTitleX.typo.lineHeight[breakPointX],
+            val: newVal
+          };
+        }
+
+        var typoX = { ...postTitleX.typo,
+          lineHeight: newValuesObj
+        };
+        onChange(typoX);
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+      label: "",
+      value: typo.lineHeight[breakPointX] != undefined ? typo.lineHeight[breakPointX].unit : '',
+      options: [{
+        label: 'Select Unit',
+        value: ''
+      }, {
+        label: 'px',
+        value: 'px'
+      }, {
+        label: '%',
+        value: '%'
+      }, {
+        label: 'em',
+        value: 'em'
+      }, {
+        label: 'ex',
+        value: 'ex'
+      }, {
+        label: 'rem',
+        value: 'rem'
+      }, {
+        label: 'vh',
+        value: 'vh'
+      }, {
+        label: 'vw',
+        value: 'vw'
+      }, {
+        label: 'pt',
+        value: 'pt'
+      }, {
+        label: 'pc',
+        value: 'pc'
+      }, {
+        label: 'ch',
+        value: 'ch'
+      }],
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.lineHeight).length == 0) {
+          newValuesObj[breakPointX] = { ...postTitleX.typo.lineHeight[breakPointX],
+            unit: newVal
+          };
+        } else {
+          newValuesObj = postTitleX.typo.lineHeight;
+          newValuesObj[breakPointX] = { ...postTitleX.typo.lineHeight[breakPointX],
+            unit: newVal
+          };
+        }
+
+        var typoX = { ...postTitleX.typo,
+          lineHeight: newValuesObj
+        };
+        onChange(typoX);
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Letter Spacing")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      type: "number",
+      value: typo.letterSpacing[breakPointX] != undefined ? typo.letterSpacing[breakPointX].val : '',
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.letterSpacing).length == 0) {
+          newValuesObj[breakPointX] = { ...postTitleX.typo.letterSpacing[breakPointX],
+            val: newVal
+          };
+        } else {
+          newValuesObj = postTitleX.typo.letterSpacing;
+          newValuesObj[breakPointX] = { ...postTitleX.typo.letterSpacing[breakPointX],
+            val: newVal
+          };
+        }
+
+        var typoX = { ...postTitleX.typo,
+          letterSpacing: newValuesObj
+        };
+        onChange(typoX);
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+      label: "",
+      value: typo.letterSpacing[breakPointX] != undefined ? typo.letterSpacing[breakPointX].unit : '',
+      options: [{
+        label: 'Select Unit',
+        value: ''
+      }, {
+        label: 'px',
+        value: 'px'
+      }, {
+        label: '%',
+        value: '%'
+      }, {
+        label: 'em',
+        value: 'em'
+      }, {
+        label: 'ex',
+        value: 'ex'
+      }, {
+        label: 'rem',
+        value: 'rem'
+      }, {
+        label: 'vh',
+        value: 'vh'
+      }, {
+        label: 'vw',
+        value: 'vw'
+      }, {
+        label: 'pt',
+        value: 'pt'
+      }, {
+        label: 'pc',
+        value: 'pc'
+      }, {
+        label: 'ch',
+        value: 'ch'
+      }],
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.letterSpacing).length == 0) {
+          newValuesObj[breakPointX] = { ...postTitleX.typo.letterSpacing[breakPointX],
+            unit: newVal
+          };
+        } else {
+          newValuesObj = postTitleX.typo.letterSpacing;
+          newValuesObj[breakPointX] = { ...postTitleX.typo.letterSpacing[breakPointX],
+            unit: newVal
+          };
+        }
+
+        var typoX = { ...postTitleX.typo,
+          letterSpacing: newValuesObj
+        };
+        onChange(typoX);
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Font Weight")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+      label: "",
+      value: typo.fontWeight[breakPointX] != undefined ? typo.fontWeight[breakPointX] : '',
+      options: [{
+        label: 'Select...',
+        value: ''
+      }, {
+        label: 'bold',
+        value: 'bold'
+      }, {
+        label: 'bolder',
+        value: 'bolder'
+      }, {
+        label: 'lighter',
+        value: 'lighter'
+      }, {
+        label: '100',
+        value: '100'
+      }, {
+        label: '200',
+        value: '200'
+      }, {
+        label: '300',
+        value: '300'
+      }, {
+        label: '400',
+        value: '400'
+      }, {
+        label: '500',
+        value: '500'
+      }, {
+        label: '600',
+        value: '600'
+      }, {
+        label: '700',
+        value: '700'
+      }, {
+        label: '800',
+        value: '800'
+      }, {
+        label: '900',
+        value: '900'
+      }],
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.fontWeight).length == 0) {
+          newValuesObj[breakPointX] = newVal;
+        } else {
+          newValuesObj = postTitleX.typo.fontWeight;
+          newValuesObj[breakPointX] = newVal;
+        }
+
+        var typoX = { ...postTitleX.typo,
+          fontWeight: newValuesObj
+        };
+        onChange(typoX);
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Text Transform")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+      label: "",
+      value: typo.textTransform[breakPointX] != undefined ? typo.textTransform[breakPointX] : '',
+      options: [{
+        label: 'Select...',
+        value: ''
+      }, {
+        label: 'Uppercase',
+        value: 'uppercase'
+      }, {
+        label: 'Lowercase',
+        value: 'lowercase'
+      }, {
+        label: 'Capitalize',
+        value: 'capitalize'
+      }],
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.textTransform).length == 0) {
+          newValuesObj[breakPointX] = newVal;
+        } else {
+          newValuesObj = postTitleX.typo.textTransform;
+          newValuesObj[breakPointX] = newVal;
+        }
+
+        var typoX = { ...postTitleX.typo,
+          textTransform: newValuesObj
+        };
+        onChange(typoX);
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Text Decoration")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+      label: "",
+      value: typo.textDecoration[breakPointX],
+      options: [{
+        label: 'Select...',
+        value: ''
+      }, {
+        label: 'Overline',
+        value: 'overline'
+      }, {
+        label: 'Line-through',
+        value: 'line-through'
+      }, {
+        label: 'Underline',
+        value: 'underline'
+      }],
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.textDecoration).length == 0) {
+          newValuesObj[breakPointX] = newVal;
+        } else {
+          newValuesObj = postTitleX.typo.textDecoration;
+          newValuesObj[breakPointX] = newVal;
+        }
+
+        var typoX = { ...postTitleX.typo,
+          textDecoration: newValuesObj
+        };
+        onChange(typoX);
+      }
+    })));
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Typography);
 
 /***/ }),
 

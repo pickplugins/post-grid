@@ -1228,7 +1228,7 @@ function post_grid_main_scripts($args){
     <?php if(!empty($custom_css)): ?>
         <style type="text/css">
             <?php
-            echo wp_strip_all_tags($custom_css);
+            echo htmlspecialchars_decode($custom_css, ENT_QUOTES);
             ?>
         </style>
     <?php endif; ?>
@@ -1237,7 +1237,7 @@ function post_grid_main_scripts($args){
     <?php if(!empty($layout_custom_css)): ?>
         <style type="text/css">
             <?php
-            echo wp_strip_all_tags(str_replace('__ID__', 'layout-'.esc_attr($layout_id), ($layout_custom_css)));
+            echo htmlspecialchars_decode(wp_strip_all_tags(str_replace('__ID__', 'layout-'.esc_attr($layout_id), ($layout_custom_css))), ENT_QUOTES);
             ?>
         </style>
     <?php endif; ?>

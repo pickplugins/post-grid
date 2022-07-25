@@ -37,21 +37,6 @@ registerBlockType("post-grid/post-title", {
 
   attributes: {
 
-    typo: {
-      type: 'object',
-      default: {
-        fontSize: { val: '18', unit: 'px' },
-        lineHeight: { val: '18', unit: 'px' },
-        letterSpacing: { val: '18', unit: 'px' },
-        fontFamily: '',
-        fontWeight: '',
-        textDecoration: [], //overline, line-through, underline
-        textTransform: '',
-
-      },
-    },
-
-
 
     wrapper: {
       type: 'object',
@@ -174,7 +159,6 @@ registerBlockType("post-grid/post-title", {
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
-    var typo = attributes.typo;
 
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
@@ -228,36 +212,6 @@ registerBlockType("post-grid/post-title", {
     }
 
 
-    function updateColor(newVal) {
-
-
-      console.log(postTitle.styles.color);
-
-
-      var newValuesObj = {};
-      console.log(postTitle.styles.color[breakPointX]);
-
-      if (postTitle.styles.color[breakPointX].length != 0) {
-        newValuesObj = postTitle.styles.color;
-
-        console.log(newValuesObj);
-
-
-      }
-
-      newValuesObj[breakPointX] = newVal;
-
-      var styles = { ...postTitle.styles, color: newValuesObj };
-      setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
-
-
-      blockCssY.items[titleLinkSelector] = { 'color': newValuesObj };
-      //console.log(blockCssY.items);
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-    }
 
     function paddingControl(nextValues) {
 
@@ -269,7 +223,7 @@ registerBlockType("post-grid/post-title", {
 
 
       var styles = { ...postTitle.styles, padding: responsive };
-      setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
+      setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
 
       blockCssY.items[titleLinkSelector] = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector] : {};
@@ -322,7 +276,7 @@ registerBlockType("post-grid/post-title", {
       }
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      //setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
 
@@ -340,7 +294,7 @@ registerBlockType("post-grid/post-title", {
 
 
       var styles = { ...postTitle.styles, margin: responsive };
-      setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
+      setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
 
 
@@ -381,7 +335,7 @@ registerBlockType("post-grid/post-title", {
 
       }
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      //setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 
@@ -644,29 +598,86 @@ registerBlockType("post-grid/post-title", {
 
 
     function onChangeTypo(typoX) {
-      console.log(typoX);
-
-
-
+      //console.log(typoX);
 
       setAttributes({ postTitle: { ...postTitle, typo: typoX } });
 
+      var newValuesObjX = {};
+
 
       console.log(typoX);
 
 
 
+      if (typoX.fontFamily[breakPointX] != undefined) {
+
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-family': typoX.fontFamily };
+
+      }
+
+
+      if (typoX.fontSize[breakPointX] != undefined) {
+
+        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
+        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
+
+
+        var fontSizeX = (blockCssY.items[titleLinkSelector]['font-size'] != undefined) ? blockCssY.items[titleLinkSelector]['font-size'] : {};
+
+        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-size': fontSizeX };
+
+      }
+
+      if (typoX.lineHeight[breakPointX] != undefined) {
+
+
+        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 16;
+        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
+
+
+        var lineHeightX = (blockCssY.items[titleLinkSelector]['line-height'] != undefined) ? blockCssY.items[titleLinkSelector]['line-height'] : {};
+
+        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
+
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'line-height': lineHeightX };
+      }
+
+
+      if (typoX.letterSpacing[breakPointX] != undefined) {
+
+        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 16;
+        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
+
+
+
+        var letterSpacingX = (blockCssY.items[titleLinkSelector]['letter-spacing'] != undefined) ? blockCssY.items[titleLinkSelector]['letter-spacing'] : {};
+
+        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
+
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'letter-spacing': letterSpacingX };
+      }
+
+      if (typoX.fontWeight[breakPointX] != undefined) {
+
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-weight': typoX.fontWeight };
+
+      }
+
+
+      if (typoX.textDecoration[breakPointX] != undefined) {
+
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'text-decoration': typoX.textDecoration };
+
+      }
+      if (typoX.textTransform[breakPointX] != undefined) {
+
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'text-transform': typoX.textTransform };
+
+
+      }
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -717,6 +728,14 @@ registerBlockType("post-grid/post-title", {
 
                 var styles = { ...wrapper.styles, textAlign: textAlign };
                 setAttributes({ wrapper: { options: wrapper.options, styles: styles } });
+
+
+
+
+
+
+
+
 
 
                 blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'text-align': textAlign };
@@ -786,13 +805,9 @@ registerBlockType("post-grid/post-title", {
 
 
                       var options = { ...postTitle.options, isLink: postTitle.options.isLink ? false : true };
-                      setAttributes({ postTitle: { styles: postTitle.styles, options: options } });
+                      setAttributes({ postTitle: { ...postTitle, options: options } });
 
 
-
-
-
-                      // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink ? false : true, linkTarget: postTitle.options.linkTarget, customUrl: postTitle.customUrl, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
 
                     }}
                   />
@@ -819,10 +834,10 @@ registerBlockType("post-grid/post-title", {
 
 
                             var options = { ...postTitle.options, linkTarget: newVal };
-                            setAttributes({ postTitle: { styles: postTitle.styles, options: options } });
+                            setAttributes({ postTitle: { ...postTitle, options: options } });
 
 
-                            // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink, linkTarget: newVal, customUrl: postTitle.customUrl, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
+
                           }
 
 
@@ -843,10 +858,7 @@ registerBlockType("post-grid/post-title", {
 
 
                             var options = { ...postTitle.options, customUrl: newVal };
-                            setAttributes({ postTitle: { styles: postTitle.styles, options: options } });
-
-
-                            // setAttributes({ postTitle: { textAlign: postTitle.textAlign, isLink: postTitle.options.isLink, linkTarget: postTitle.options.linkTarget, customUrl: newVal, class: postTitle.class, color: postTitle.color, bgColor: postTitle.bgColor, padding: postTitle.padding, margin: postTitle.margin } });
+                            setAttributes({ postTitle: { ...postTitle, options: options } });
 
                           }
                           }
@@ -873,12 +885,8 @@ registerBlockType("post-grid/post-title", {
 
 
                             var options = { ...postTitle.options, linkAttr: sdsd };
-                            setAttributes({ postTitle: { styles: postTitle.styles, options: options } });
+                            setAttributes({ postTitle: { ...postTitle, options: options } });
 
-
-
-
-                            // setAttributes({ linkAttr: sdsd })
                             linkAttrObj()
                           }}
 
@@ -910,9 +918,7 @@ registerBlockType("post-grid/post-title", {
 
 
                                     var options = { ...postTitle.options, linkAttr: ssdsd };
-                                    setAttributes({ postTitle: { styles: postTitle.styles, options: options } });
-
-                                    //setAttributes({ linkAttr: ssdsd })
+                                    setAttributes({ postTitle: { ...postTitle, options: options } });
 
                                   }}
                                 />
@@ -927,9 +933,7 @@ registerBlockType("post-grid/post-title", {
 
 
                                     var options = { ...postTitle.options, linkAttr: ssdsd };
-                                    setAttributes({ postTitle: { styles: postTitle.styles, options: options } });
-
-                                    //setAttributes({ linkAttr: ssdsd })
+                                    setAttributes({ postTitle: { ...postTitle, options: options } });
 
                                   }}
                                 />
@@ -943,8 +947,6 @@ registerBlockType("post-grid/post-title", {
 
                                     var options = { ...postTitle.options, linkAttr: ssdsd };
                                     setAttributes({ postTitle: { styles: postTitle.styles, options: options } });
-
-                                    //setAttributes({ linkAttr: ssdsd })
                                   }}
 
                                 ></span>
@@ -1001,12 +1003,24 @@ registerBlockType("post-grid/post-title", {
                       var styles = { ...postTitle.styles, color: newValuesObj };
                       setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
-                      blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'color': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+                      var newValuesObjX = {};
+                      if (blockCssY.items[titleLinkSelector] == undefined) {
+
+                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], color: newValuesObj };
+
+                      } else {
+
+                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], color: newValuesObj };
+                      }
+
+
+                      setAttributes({ blockCssY: { items: newValuesObjX } });
 
                       // blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'color': newValuesObj };
                       // setAttributes({ blockCssY: { items: blockCssY.items } });
-
 
                     }}
                   />
@@ -1041,8 +1055,28 @@ registerBlockType("post-grid/post-title", {
                       var styles = { ...postTitle.styles, bgColor: newValuesObj };
                       setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
-                      blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+
+
+                      var newValuesObjX = {};
+                      if (blockCssY.items[titleLinkSelector] == undefined) {
+
+                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': newValuesObj };
+
+                      } else {
+
+                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': newValuesObj };
+                      }
+
+
+                      setAttributes({ blockCssY: { items: newValuesObjX } });
+
+
+                      //blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': newValuesObj };
+                      //setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
                     }}
@@ -1056,7 +1090,6 @@ registerBlockType("post-grid/post-title", {
 
                   <Typography typo={postTitle.typo} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} postTitleX={postTitle} />
 
-                  {JSON.stringify(postTitle.typo)}
 
                   <PanelRow className='my-3'>
                     <label>Display</label>
@@ -1095,10 +1128,37 @@ registerBlockType("post-grid/post-title", {
 
 
                         var styles = { ...postTitle.styles, display: newValuesObj };
-                        setAttributes({ postTitle: { options: postTitle.options, styles: styles } });
+                        setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
-                        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'display': newValuesObj };
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+
+
+
+
+                        var newValuesObjX = {};
+                        if (blockCssY.items[titleLinkSelector] == undefined) {
+
+                          newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], display: newValuesObj };
+
+                        } else {
+
+                          newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], display: newValuesObj };
+                        }
+
+
+                        setAttributes({ blockCssY: { items: newValuesObjX } });
+
+
+
+
+
+
+
+                        //blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'display': newValuesObj };
+                        //setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
 
@@ -1242,13 +1302,6 @@ registerBlockType("post-grid/post-title", {
 
 
         <>
-
-
-          <code>{JSON.stringify(postTitle.typo)}</code>
-          <div>###################</div>
-          <code>{JSON.stringify(postTitle.styles)}</code>
-
-
 
           {wrapper.options.tag && (
             <CustomTag className={[blockId]}>

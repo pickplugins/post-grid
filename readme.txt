@@ -1,10 +1,10 @@
-=== Post Grid Combo ===
+=== Post Grid ===
 	Contributors: PickPlugins
 	Donate link: https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/?ref=wordpress.org
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
-	Tested up to: 5.9
-	Stable tag: 2.1.23
+	Tested up to: 6.0
+	Stable tag: 2.1.24
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -223,6 +223,8 @@ then paste this shortcode anywhere in your page to display grid<br />
 == Changelog ==
 
 
+	= 2.1.24 =
+    * 2022-07-24 - fix - Custom CSS character issue fixed.
 
 	= 2.1.23 =
     * 2022-04-23 - fix - Custom scripts & CSS field issue fixed.

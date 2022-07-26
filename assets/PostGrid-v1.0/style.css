@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'PostGrid';
-  src:  url('fonts/PostGrid.eot?mlk1ce');
-  src:  url('fonts/PostGrid.eot?mlk1ce#iefix') format('embedded-opentype'),
-    url('fonts/PostGrid.ttf?mlk1ce') format('truetype'),
-    url('fonts/PostGrid.woff?mlk1ce') format('woff'),
-    url('fonts/PostGrid.svg?mlk1ce#PostGrid') format('svg');
+  src:  url('fonts/PostGrid.eot?ev611m');
+  src:  url('fonts/PostGrid.eot?ev611m#iefix') format('embedded-opentype'),
+    url('fonts/PostGrid.ttf?ev611m') format('truetype'),
+    url('fonts/PostGrid.woff?ev611m') format('woff'),
+    url('fonts/PostGrid.svg?ev611m#PostGrid') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-strikethrough:before {
+  content: "\e908";
+}
+.icon-underline:before {
+  content: "\e909";
+}
+.icon-overline:before {
+  content: "\e90a";
+}
 .icon-close:before {
   content: "\e907";
 }

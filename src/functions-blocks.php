@@ -35,6 +35,11 @@ function post_grid_global_css()
                         }
 
                         $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $valHtml];
+                    } elseif ($attr == 'font-size' || $attr == 'line-height' || $attr == 'letter-spacing') {
+
+
+
+                        $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $value['val'] . $value['unit']];
                     } else {
                         $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $value];
                     }

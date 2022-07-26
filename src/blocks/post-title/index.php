@@ -39,9 +39,6 @@ class PGBlockPostTitle
     function theHTML($attributes, $content, $block)
     {
 
-
-
-
         //var_dump($block);
 
         global $postGridCss;
@@ -57,15 +54,16 @@ class PGBlockPostTitle
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
-        $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : '';
+        $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'h2';
 
 
         $postTitle = isset($attributes['postTitle']) ? $attributes['postTitle'] : [];
-        $postTitleOptions = isset($postTitle['options']) ? $postTitle['options'] : '';
-        $postTitleStyles = isset($postTitle['styles']) ? $postTitle['styles'] : '';
+        $postTitleOptions = isset($postTitle['options']) ? $postTitle['options'] : [];
+        $postTitleStyles = isset($postTitle['styles']) ? $postTitle['styles'] : [];
+        $postTitleTypo = isset($postTitle['typo']) ? $postTitle['typo'] : [];
 
 
-        $postTitleIsLink = isset($postTitleOptions['isLink']) ? $postTitleOptions['isLink'] : '';
+        $postTitleIsLink = isset($postTitleOptions['isLink']) ? $postTitleOptions['isLink'] : true;
         $linkTarget = isset($postTitleOptions['linkTarget']) ? $postTitleOptions['linkTarget'] : '';
         $linkAttr = isset($postTitleOptions['linkAttr']) ? $postTitleOptions['linkAttr'] : [];
         $rel = isset($postTitleOptions['rel']) ? $postTitleOptions['rel'] : '';
@@ -75,6 +73,19 @@ class PGBlockPostTitle
         $postTitlebgColor = isset($postTitleStyles['bgColor']) ? $postTitleStyles['bgColor'] : [];
         $postTitlePadding = isset($postTitleStyles['padding']) ? $postTitleStyles['padding'] : [];
         $postTitleMargin = isset($postTitleStyles['margin']) ? $postTitleStyles['margin'] : [];
+
+        $postTitleFontSize = isset($postTitleTypo['fontSize']) ? $postTitleTypo['fontSize'] : [];
+        $postTitleFontFamily = isset($postTitleTypo['fontFamily']) ? $postTitleTypo['fontFamily'] : [];
+        $postTitleLineHeight = isset($postTitleTypo['lineHeight']) ? $postTitleTypo['lineHeight'] : [];
+        $postTitleLetterSpacing = isset($postTitleTypo['letterSpacing']) ? $postTitleTypo['letterSpacing'] : [];
+        $postTitleFontWeight = isset($postTitleTypo['fontWeight']) ? $postTitleTypo['fontWeight'] : [];
+        $postTitleTextDecoration = isset($postTitleTypo['textDecoration']) ? $postTitleTypo['textDecoration'] : [];
+        $postTitleTextTransform = isset($postTitleTypo['textTransform']) ? $postTitleTypo['textTransform'] : [];
+
+
+        // var_dump($postTitle);
+        // var_dump('#############');
+        // var_dump($wrapper);
 
 
         $prefix = isset($attributes['prefix']) ? $attributes['prefix'] : '';
@@ -99,8 +110,13 @@ class PGBlockPostTitle
                 'background-color' => $postTitlebgColor,
                 'padding' => $postTitlePadding,
                 'margin' => $postTitleMargin,
-
-
+                'font-size' => $postTitleFontSize,
+                'font-family' => $postTitleFontFamily,
+                'font-weight' => $postTitleFontWeight,
+                'line-height' => $postTitleLineHeight,
+                'letter-spacing' => $postTitleLetterSpacing,
+                'text-decoration' => $postTitleTextDecoration,
+                'text-transform' => $postTitleTextTransform,
             ];
 
 
@@ -110,6 +126,13 @@ class PGBlockPostTitle
                 'background-color' => $postTitlebgColor,
                 'padding' => $postTitlePadding,
                 'margin' => $postTitleMargin,
+                'font-size' => $postTitleFontSize,
+                'font-family' => $postTitleFontFamily,
+                'font-weight' => $postTitleFontWeight,
+                'line-height' => $postTitleLineHeight,
+                'letter-spacing' => $postTitleLetterSpacing,
+                'text-decoration' => $postTitleTextDecoration,
+                'text-transform' => $postTitleTextTransform,
             ];
 
 

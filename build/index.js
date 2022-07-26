@@ -12536,7 +12536,7 @@ var myStore = wp.data.select('my-shop');
       default: {
         options: {
           tag: 'h2',
-          class: 'h2'
+          class: ''
         },
         styles: {
           textAlign: {},
@@ -12650,6 +12650,10 @@ var myStore = wp.data.select('my-shop');
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       setAttributes({
         blockId: blockIdX
+      });
+      console.log(wrapper);
+      setAttributes({
+        wrapper: wrapper
       });
       generateBlockCssY();
     }, [clientId]); // Wrapper CSS Class Selectors
@@ -12975,9 +12979,17 @@ var myStore = wp.data.select('my-shop');
         };
       }
 
+      if (typoX.lineHeight[breakPointX] != undefined) {//var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 16;
+        //var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
+        // var lineHeightX = (blockCssY.items[titleLinkSelector]['line-height'] != undefined) ? blockCssY.items[titleLinkSelector]['line-height'] : {};
+        // lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
+        // blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'line-height': lineHeightX };
+      }
+
       if (typoX.lineHeight[breakPointX] != undefined) {
         var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 16;
         var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
+        console.log(lineHeightUnit);
         var lineHeightX = blockCssY.items[titleLinkSelector]['line-height'] != undefined ? blockCssY.items[titleLinkSelector]['line-height'] : {};
         lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
@@ -13002,8 +13014,13 @@ var myStore = wp.data.select('my-shop');
       }
 
       if (typoX.textDecoration[breakPointX] != undefined) {
+        var str = {};
+        var textDecorationX = typoX.textDecoration[breakPointX];
+        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
+        str[breakPointX] = textDecorationXStr; //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
+
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
-          'text-decoration': typoX.textDecoration
+          'text-decoration': str
         };
       }
 
@@ -15008,7 +15025,7 @@ class Typography extends Component {
       }
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
-    }, "Font Weight")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+    }, "Font Weight"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
       label: "",
       value: typo.fontWeight[breakPointX] != undefined ? typo.fontWeight[breakPointX] : '',
       options: [{
@@ -15068,7 +15085,7 @@ class Typography extends Component {
       }
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
-    }, "Text Transform")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+    }, "Text Transform"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
       label: "",
       value: typo.textTransform[breakPointX] != undefined ? typo.textTransform[breakPointX] : '',
       options: [{
@@ -15101,30 +15118,24 @@ class Typography extends Component {
       }
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
-    }, "Text Decoration")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-      label: "",
-      value: typo.textDecoration[breakPointX],
-      options: [{
-        label: 'Select...',
-        value: ''
-      }, {
-        label: 'Overline',
-        value: 'overline'
-      }, {
-        label: 'Line-through',
-        value: 'line-through'
-      }, {
-        label: 'Underline',
-        value: 'underline'
-      }],
-      onChange: newVal => {
+    }, "Text Decoration"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      className: postTitleX.typo.textDecoration[breakPointX] != undefined && postTitleX.typo.textDecoration[breakPointX].indexOf('underline') !== -1 ? '!bg-blue-300 ' : '',
+      variant: "secondary",
+      onClick: ev => {
+        var newVal = 'underline';
         var newValuesObj = {};
 
         if (Object.keys(postTitleX.typo.textDecoration).length == 0) {
-          newValuesObj[breakPointX] = newVal;
+          newValuesObj[breakPointX] = [newVal];
         } else {
           newValuesObj = postTitleX.typo.textDecoration;
-          newValuesObj[breakPointX] = newVal;
+
+          if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
+            var arr = newValuesObj[breakPointX].filter(item => item !== newVal);
+            newValuesObj[breakPointX] = arr;
+          } else {
+            newValuesObj[breakPointX].push(newVal);
+          }
         }
 
         var typoX = { ...postTitleX.typo,
@@ -15132,7 +15143,63 @@ class Typography extends Component {
         };
         onChange(typoX);
       }
-    })));
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      class: "icon-underline"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      className: postTitleX.typo.textDecoration[breakPointX] != undefined && postTitleX.typo.textDecoration[breakPointX].indexOf('line-through') !== -1 ? '!bg-blue-300 ' : '',
+      variant: "secondary",
+      onClick: ev => {
+        var newVal = 'line-through';
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.textDecoration).length == 0) {
+          newValuesObj[breakPointX] = [newVal];
+        } else {
+          newValuesObj = postTitleX.typo.textDecoration;
+
+          if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
+            var arr = newValuesObj[breakPointX].filter(item => item !== newVal);
+            newValuesObj[breakPointX] = arr;
+          } else {
+            newValuesObj[breakPointX].push(newVal);
+          }
+        }
+
+        var typoX = { ...postTitleX.typo,
+          textDecoration: newValuesObj
+        };
+        onChange(typoX);
+      }
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      class: "icon-strikethrough"
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      className: postTitleX.typo.textDecoration[breakPointX] != undefined && postTitleX.typo.textDecoration[breakPointX].indexOf('overline') !== -1 ? '!bg-blue-300 ' : '',
+      variant: "secondary",
+      onClick: ev => {
+        var newVal = 'overline';
+        var newValuesObj = {};
+
+        if (Object.keys(postTitleX.typo.textDecoration).length == 0) {
+          newValuesObj[breakPointX] = [newVal];
+        } else {
+          newValuesObj = postTitleX.typo.textDecoration;
+
+          if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
+            var arr = newValuesObj[breakPointX].filter(item => item !== newVal);
+            newValuesObj[breakPointX] = arr;
+          } else {
+            newValuesObj[breakPointX].push(newVal);
+          }
+        }
+
+        var typoX = { ...postTitleX.typo,
+          textDecoration: newValuesObj
+        };
+        onChange(typoX);
+      }
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      class: "icon-overline"
+    })))));
   }
 
 }

@@ -256,11 +256,9 @@ class Typography extends Component {
           />
         </PanelRow>
 
+
         <PanelRow>
           <label for="">Font Weight</label>
-
-        </PanelRow>
-        <PanelRow>
 
           <SelectControl
             label=""
@@ -305,13 +303,10 @@ class Typography extends Component {
         </PanelRow>
 
 
+
+
         <PanelRow>
           <label for="">Text Transform</label>
-
-        </PanelRow>
-
-
-        <PanelRow>
 
           <SelectControl
             label=""
@@ -349,43 +344,102 @@ class Typography extends Component {
         <PanelRow>
           <label for="">Text Decoration</label>
 
-        </PanelRow>
 
 
-        <PanelRow>
+          <div>
 
-          <SelectControl
-            label=""
-            value={typo.textDecoration[breakPointX]}
-            options={[
-              { label: 'Select...', value: '' },
+            <Button className={(postTitleX.typo.textDecoration[breakPointX] != undefined && postTitleX.typo.textDecoration[breakPointX].indexOf('underline') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
 
-              { label: 'Overline', value: 'overline' },
-              { label: 'Line-through', value: 'line-through' },
-              { label: 'Underline', value: 'underline' },
 
-            ]}
-            onChange={(newVal) => {
+              var newVal = 'underline';
 
               var newValuesObj = {};
               if (Object.keys(postTitleX.typo.textDecoration).length == 0) {
-                newValuesObj[breakPointX] = newVal;
+
+                newValuesObj[breakPointX] = [newVal];
               } else {
                 newValuesObj = postTitleX.typo.textDecoration;
-                newValuesObj[breakPointX] = newVal;
+
+                if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
+                  var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
+
+                  newValuesObj[breakPointX] = arr;
+
+                } else {
+                  newValuesObj[breakPointX].push(newVal)
+                }
+
               }
               var typoX = { ...postTitleX.typo, textDecoration: newValuesObj };
 
               onChange(typoX)
 
-            }
-            }
-          />
+
+
+            }}><span class="icon-underline"></span></Button>
+
+            <Button className={(postTitleX.typo.textDecoration[breakPointX] != undefined && postTitleX.typo.textDecoration[breakPointX].indexOf('line-through') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
+
+
+              var newVal = 'line-through';
+
+              var newValuesObj = {};
+              if (Object.keys(postTitleX.typo.textDecoration).length == 0) {
+
+                newValuesObj[breakPointX] = [newVal];
+              } else {
+                newValuesObj = postTitleX.typo.textDecoration;
+
+                if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
+                  var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
+
+                  newValuesObj[breakPointX] = arr;
+
+                } else {
+                  newValuesObj[breakPointX].push(newVal)
+                }
+
+              }
+              var typoX = { ...postTitleX.typo, textDecoration: newValuesObj };
+
+              onChange(typoX)
+
+
+
+            }}><span class="icon-strikethrough"></span></Button>
+
+            <Button className={(postTitleX.typo.textDecoration[breakPointX] != undefined && postTitleX.typo.textDecoration[breakPointX].indexOf('overline') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
+
+
+              var newVal = 'overline';
+
+              var newValuesObj = {};
+              if (Object.keys(postTitleX.typo.textDecoration).length == 0) {
+
+                newValuesObj[breakPointX] = [newVal];
+              } else {
+                newValuesObj = postTitleX.typo.textDecoration;
+
+                if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
+                  var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
+
+                  newValuesObj[breakPointX] = arr;
+
+                } else {
+                  newValuesObj[breakPointX].push(newVal)
+                }
+
+              }
+              var typoX = { ...postTitleX.typo, textDecoration: newValuesObj };
+
+              onChange(typoX)
+
+
+            }}><span class="icon-overline"></span></Button>
+
+
+          </div>
         </PanelRow>
-
-
-
-
 
 
       </div>

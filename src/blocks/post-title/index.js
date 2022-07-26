@@ -41,7 +41,7 @@ registerBlockType("post-grid/post-title", {
     wrapper: {
       type: 'object',
       default: {
-        options: { tag: 'h2', class: 'h2' },
+        options: { tag: 'h2', class: '' },
 
         styles:
         {
@@ -73,8 +73,7 @@ registerBlockType("post-grid/post-title", {
           textDecoration: {}, //overline, line-through, underline
           textTransform: {},
         },
-        styles:
-        {
+        styles: {
           textAlign: {},
           display: {},
           width: {},
@@ -189,6 +188,11 @@ registerBlockType("post-grid/post-title", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
+
+      console.log(wrapper);
+
+      setAttributes({ wrapper: wrapper });
+
 
       generateBlockCssY()
     }, [clientId]);
@@ -632,9 +636,25 @@ registerBlockType("post-grid/post-title", {
       if (typoX.lineHeight[breakPointX] != undefined) {
 
 
+        //var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 16;
+        //var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
+
+
+        // var lineHeightX = (blockCssY.items[titleLinkSelector]['line-height'] != undefined) ? blockCssY.items[titleLinkSelector]['line-height'] : {};
+        // lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
+        // blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'line-height': lineHeightX };
+
+
+
+
+      }
+
+      if (typoX.lineHeight[breakPointX] != undefined) {
+
         var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 16;
         var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
 
+        console.log(lineHeightUnit)
 
         var lineHeightX = (blockCssY.items[titleLinkSelector]['line-height'] != undefined) ? blockCssY.items[titleLinkSelector]['line-height'] : {};
 
@@ -642,8 +662,6 @@ registerBlockType("post-grid/post-title", {
 
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'line-height': lineHeightX };
       }
-
-
       if (typoX.letterSpacing[breakPointX] != undefined) {
 
         var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 16;
@@ -667,7 +685,16 @@ registerBlockType("post-grid/post-title", {
 
       if (typoX.textDecoration[breakPointX] != undefined) {
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'text-decoration': typoX.textDecoration };
+        var str = {};
+
+        var textDecorationX = typoX.textDecoration[breakPointX];
+        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
+
+        str[breakPointX] = textDecorationXStr;
+
+        //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
+
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'text-decoration': str };
 
       }
       if (typoX.textTransform[breakPointX] != undefined) {
@@ -1307,23 +1334,18 @@ registerBlockType("post-grid/post-title", {
             <CustomTag className={[blockId]}>
               {postTitle.options.isLink && (
                 <a {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
-
                   {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
                   {(currentPostTitle)}
                   {(postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
-
                 </a>
-
               )}
               {!postTitle.options.isLink && (
-
                 <>
                   {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
                   {(currentPostTitle)}
                   {(postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
                 </>
               )}
-
             </CustomTag>
           )}
 

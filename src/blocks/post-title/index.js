@@ -279,6 +279,13 @@ registerBlockType("post-grid/post-title", {
     }
 
 
+    function handleLinkClick(ev) {
+
+      //console.log(ev)
+      ev.stopPropagation();
+      ev.preventDefault();
+      return false;
+    }
 
     function paddingControl(nextValues) {
 
@@ -1400,10 +1407,11 @@ registerBlockType("post-grid/post-title", {
 
 
         <>
+
           {wrapper.options.tag && (
             <CustomTag className={[blockId]}>
               {postTitle.options.isLink && (
-                <a {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
+                <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>ffs
                   {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
                   {(currentPostTitle)}
                   {(postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
@@ -1422,7 +1430,7 @@ registerBlockType("post-grid/post-title", {
           {wrapper.options.tag.length == 0 && (
 
             (
-              postTitle.options.isLink && (<a className={[blockId]} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
+              postTitle.options.isLink && (<a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>ff
 
                 {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
                 {(currentPostTitle)}

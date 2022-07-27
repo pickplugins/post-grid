@@ -12713,6 +12713,13 @@ var myStore = wp.data.select('my-shop');
       });
     }
 
+    function handleLinkClick(ev) {
+      //console.log(ev)
+      ev.stopPropagation();
+      ev.preventDefault();
+      return false;
+    }
+
     function paddingControl(nextValues) {
       var responsive = postTitle.styles.padding;
       responsive[breakPointX] = nextValues; //console.log(nextValues);
@@ -13568,10 +13575,12 @@ var myStore = wp.data.select('my-shop');
       }
     })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
       className: [blockId]
-    }, postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
+    }, postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      onClick: handleLinkClick
+    }, linkAttrItems, {
       href: postUrl,
       target: postTitle.options.linkTarget
-    }), prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }), "ffs", prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: prefix.options.class
     }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: postfix.options.class
@@ -13580,11 +13589,12 @@ var myStore = wp.data.select('my-shop');
     }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: postfix.options.class
     }, postfix.options.text))), wrapper.options.tag.length == 0 && postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      onClick: handleLinkClick,
       className: [blockId]
     }, linkAttrItems, {
       href: postUrl,
       target: postTitle.options.linkTarget
-    }), prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }), "ff", prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: prefix.options.class
     }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: postfix.options.class

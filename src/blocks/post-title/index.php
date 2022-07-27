@@ -65,6 +65,8 @@ class PGBlockPostTitle
 
         $postTitleIsLink = isset($postTitleOptions['isLink']) ? $postTitleOptions['isLink'] : true;
         $linkTarget = isset($postTitleOptions['linkTarget']) ? $postTitleOptions['linkTarget'] : '';
+        $customUrl = isset($postTitleOptions['customUrl']) ? $postTitleOptions['customUrl'] : '';
+
         $linkAttr = isset($postTitleOptions['linkAttr']) ? $postTitleOptions['linkAttr'] : [];
         $rel = isset($postTitleOptions['rel']) ? $postTitleOptions['rel'] : '';
 
@@ -171,9 +173,11 @@ class PGBlockPostTitle
         ?>
             <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
                 <?php if ($postTitleIsLink) : ?>
-                    <a href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                    <a href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
                         <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
-                        <?php echo get_the_title($post_ID); ?>
+
+                        <?php echo  get_the_title($post_ID); ?>
+
                         <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
                     </a>
                 <?php else : ?>
@@ -192,10 +196,12 @@ class PGBlockPostTitle
         ?>
 
             <?php if ($postTitleIsLink) : ?>
-                <a class="<?php echo $blockId; ?>" href="<?php echo esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                <a class="<?php echo $blockId; ?>" href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
                     <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+
                     <?php echo get_the_title($post_ID); ?>
+
                     <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
                 </a>
             <?php else : ?>

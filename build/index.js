@@ -12645,17 +12645,53 @@ var myStore = wp.data.select('my-shop');
     var postType = context['postType'];
     const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore.getBreakPoint());
     const [license, setLicense] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore.getLicense());
+    const [customTags, setCustomTags] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({});
     const [currentPostTitle, setCurrentPostTitle] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'title', postId);
     const [currentPostUrl, setCurrentPostUrl] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'link', postId);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       setAttributes({
         blockId: blockIdX
       });
-      console.log(wrapper);
-      setAttributes({
-        wrapper: wrapper
-      });
       generateBlockCssY();
+      customTags['currentYear'] = '2022';
+      customTags['currentMonth'] = '07';
+      customTags['currentDay'] = '27';
+      customTags['currentDate'] = '27';
+      customTags['currentTime'] = '27';
+      customTags['postPublishDate'] = '123';
+      customTags['postModifiedDate'] = '123';
+      customTags['termId'] = '';
+      customTags['termTitle'] = '';
+      customTags['termDescription'] = '';
+      customTags['termPostCount'] = '';
+      customTags['postTagTitle'] = 'First Tag Title';
+      customTags['postTagsTitle'] = 'First Tag Title';
+      customTags['postCategoryTitle'] = 'First Category Title';
+      customTags['postCategoriesTitle'] = 'First Categories Title';
+      customTags['postTermTitle'] = 'First Term Title';
+      customTags['postTermsTitle'] = 'List of all terms title';
+      customTags['postId'] = '123';
+      customTags['postStatus'] = '123';
+      customTags['authorId'] = '123';
+      customTags['authorName'] = 'Nur Hasan';
+      customTags['authorFirstName'] = 'Nur';
+      customTags['authorLastName'] = 'Hasan';
+      customTags['authorDescription'] = 'Hasan';
+      customTags['excerpt'] = 'Here is the post excerpt';
+      customTags['rankmathTitle'] = 'Hasan';
+      customTags['rankmathPermalink'] = 'Hasan';
+      customTags['rankmathExcerpt'] = 'Hasan';
+      customTags['rankmathFocusKeyword'] = 'Hasan';
+      customTags['rankmathFocusKeywords'] = 'Hasan';
+      customTags['rankmathOrgname'] = 'Hasan';
+      customTags['rankmathOrgurl'] = 'Hasan';
+      customTags['rankmathOrglogo'] = 'Hasan';
+      customTags['siteTitle'] = '';
+      customTags['siteDescription'] = '';
+      customTags['postMeta'] = '';
+      customTags['separator'] = '';
+      customTags['searchTerms'] = '';
+      customTags['counter'] = '1';
     }, [clientId]); // Wrapper CSS Class Selectors
 
     const titleWrapperSelector = blockClass;
@@ -12887,7 +12923,7 @@ var myStore = wp.data.select('my-shop');
           var divWrap = '<div id="css-block-' + blockId + '"></div>';
           body.insertAdjacentHTML('beforeend', divWrap);
           var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + '</style>';
+          var str = '<style>' + reponsiveCss + customCss + '</style>';
           csswrappg.insertAdjacentHTML('beforeend', str);
         }, 200);
       } else {
@@ -12901,7 +12937,7 @@ var myStore = wp.data.select('my-shop');
         var divWrap = '<div id="css-block-' + blockId + '"></div>';
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
         var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + '</style>';
+        var str = '<style>' + reponsiveCss + customCss + '</style>';
         csswrappg.insertAdjacentHTML('beforeend', str);
       }
     }
@@ -12911,6 +12947,12 @@ var myStore = wp.data.select('my-shop');
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       generateBlockCssY();
     }, [blockCssY]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+      setAttributes({
+        customCss: customCss
+      });
+      generateBlockCssY();
+    }, [customCss]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       linkAttrObj();
     }, [postTitle]);

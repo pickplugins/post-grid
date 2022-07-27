@@ -172,6 +172,9 @@ registerBlockType("post-grid/post-title", {
     const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
     const [license, setLicense] = useState(myStore.getLicense());
 
+    const [customTags, setCustomTags] = useState({});
+
+
 
     const [
       currentPostTitle,
@@ -189,12 +192,72 @@ registerBlockType("post-grid/post-title", {
 
       setAttributes({ blockId: blockIdX });
 
-      console.log(wrapper);
-
-      setAttributes({ wrapper: wrapper });
-
-
       generateBlockCssY()
+
+
+      customTags['currentYear'] = '2022';
+      customTags['currentMonth'] = '07';
+      customTags['currentDay'] = '27';
+      customTags['currentDate'] = '27';
+      customTags['currentTime'] = '27';
+
+      customTags['postPublishDate'] = '123';
+      customTags['postModifiedDate'] = '123';
+
+      customTags['termId'] = '';
+      customTags['termTitle'] = '';
+      customTags['termDescription'] = '';
+      customTags['termPostCount'] = '';
+
+      customTags['postTagTitle'] = 'First Tag Title';
+      customTags['postTagsTitle'] = 'First Tag Title';
+
+      customTags['postCategoryTitle'] = 'First Category Title';
+      customTags['postCategoriesTitle'] = 'First Categories Title';
+
+
+      customTags['postTermTitle'] = 'First Term Title';
+      customTags['postTermsTitle'] = 'List of all terms title';
+
+
+
+      customTags['postId'] = '123';
+      customTags['postStatus'] = '123';
+
+
+      customTags['authorId'] = '123';
+      customTags['authorName'] = 'Nur Hasan';
+      customTags['authorFirstName'] = 'Nur';
+      customTags['authorLastName'] = 'Hasan';
+      customTags['authorDescription'] = 'Hasan';
+
+      customTags['excerpt'] = 'Here is the post excerpt';
+
+      customTags['rankmathTitle'] = 'Hasan';
+      customTags['rankmathPermalink'] = 'Hasan';
+      customTags['rankmathExcerpt'] = 'Hasan';
+      customTags['rankmathFocusKeyword'] = 'Hasan';
+      customTags['rankmathFocusKeywords'] = 'Hasan';
+
+      customTags['rankmathOrgname'] = 'Hasan';
+      customTags['rankmathOrgurl'] = 'Hasan';
+      customTags['rankmathOrglogo'] = 'Hasan';
+
+
+
+      customTags['siteTitle'] = '';
+      customTags['siteDescription'] = '';
+      customTags['postMeta'] = '';
+
+      customTags['separator'] = '';
+      customTags['searchTerms'] = '';
+
+
+
+      customTags['counter'] = '1';
+
+
+
     }, [clientId]);
 
     // Wrapper CSS Class Selectors
@@ -483,7 +546,7 @@ registerBlockType("post-grid/post-title", {
           body.insertAdjacentHTML('beforeend', divWrap);
 
           var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + '</style>';
+          var str = '<style>' + reponsiveCss + customCss + '</style>';
 
           csswrappg.insertAdjacentHTML('beforeend', str);
         }, 200)
@@ -504,7 +567,8 @@ registerBlockType("post-grid/post-title", {
         wpfooter.insertAdjacentHTML('beforeend', divWrap);
 
         var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + '</style>';
+        var str = '<style>' + reponsiveCss + customCss + '</style>';
+
         csswrappg.insertAdjacentHTML('beforeend', str);
 
 
@@ -536,6 +600,16 @@ registerBlockType("post-grid/post-title", {
 
     }, [blockCssY]);
 
+
+    useEffect(() => {
+
+
+      setAttributes({ customCss: customCss });
+
+
+      generateBlockCssY()
+
+    }, [customCss]);
 
 
 
@@ -1118,6 +1192,7 @@ registerBlockType("post-grid/post-title", {
                   <Typography typo={postTitle.typo} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} postTitleX={postTitle} />
 
 
+
                   <PanelRow className='my-3'>
                     <label>Display</label>
                     <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
@@ -1319,17 +1394,12 @@ registerBlockType("post-grid/post-title", {
             </div>
 
 
-
-
-
-
           </InspectorControls >
         </div >
         ,
 
 
         <>
-
           {wrapper.options.tag && (
             <CustomTag className={[blockId]}>
               {postTitle.options.isLink && (

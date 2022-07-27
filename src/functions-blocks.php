@@ -37,9 +37,10 @@ function post_grid_global_css()
                         $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $valHtml];
                     } elseif ($attr == 'font-size' || $attr == 'line-height' || $attr == 'letter-spacing') {
 
+                        $val = isset($value['val']) ? $value['val'] : 18;
+                        $unit = isset($value['unit']) ? $value['unit'] : 'px';
 
-
-                        $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $value['val'] . $value['unit']];
+                        $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $val . $unit];
                     } else {
                         $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $value];
                     }
@@ -49,7 +50,6 @@ function post_grid_global_css()
     }
 
 
-    echo '<pre>' . var_export($reponsiveCssGroups, true) . '</pre>';
 
 
 

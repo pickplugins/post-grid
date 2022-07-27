@@ -13580,7 +13580,7 @@ var myStore = wp.data.select('my-shop');
     }, linkAttrItems, {
       href: postUrl,
       target: postTitle.options.linkTarget
-    }), "ffs", prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }), prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: prefix.options.class
     }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: postfix.options.class
@@ -13594,7 +13594,7 @@ var myStore = wp.data.select('my-shop');
     }, linkAttrItems, {
       href: postUrl,
       target: postTitle.options.linkTarget
-    }), "ff", prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }), prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: prefix.options.class
     }, prefix.options.text), currentPostTitle, postfix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: postfix.options.class

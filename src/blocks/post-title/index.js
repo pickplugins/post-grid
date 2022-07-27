@@ -1411,7 +1411,7 @@ registerBlockType("post-grid/post-title", {
           {wrapper.options.tag && (
             <CustomTag className={[blockId]}>
               {postTitle.options.isLink && (
-                <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>ffs
+                <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
                   {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
                   {(currentPostTitle)}
                   {(postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
@@ -1430,7 +1430,7 @@ registerBlockType("post-grid/post-title", {
           {wrapper.options.tag.length == 0 && (
 
             (
-              postTitle.options.isLink && (<a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>ff
+              postTitle.options.isLink && (<a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
 
                 {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
                 {(currentPostTitle)}

@@ -41,6 +41,10 @@ function post_grid_global_css()
                         $unit = isset($value['unit']) ? $value['unit'] : 'px';
 
                         $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $val . $unit];
+                    } elseif ($attr == 'text-decoration') {
+
+
+                        $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => implode(' ', $value)];
                     } else {
                         $reponsiveCssGroups[$device][$selector][] = ['attr' => $attr,  'val' => $value];
                     }

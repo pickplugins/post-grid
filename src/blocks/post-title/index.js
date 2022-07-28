@@ -1407,7 +1407,6 @@ registerBlockType("post-grid/post-title", {
 
 
         <>
-
           {wrapper.options.tag && (
             <CustomTag className={[blockId]}>
               {postTitle.options.isLink && (

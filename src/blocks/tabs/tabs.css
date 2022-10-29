@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/**
+ * Accordion v3.3.2
+ * Lightweight and accessible accordion module created in pure Javascript
+ * https://github.com/michu2k/Accordion
+ *
+ * Copyright (c) Michał Strumpf
+ * Published under MIT License
+ */
+
+.PGBlockTabs .tab-nav {
+  display: inline-block;
+  cursor: pointer;
+  float: left;
+}
+
+
+.PGBlockTabs .tabs-panels {
+  clear: both;
+}
+
+.PGBlockTabs .tabs-panel {
+  display: none;
+}
+
+.PGBlockTabs .tabs-panel.active {
+  display: block;
+}

@@ -1,0 +1,17 @@
+.pg-accordion-header {
+
+    cursor: pointer;
+}
+
+.pg-accordion-content {
+    /* display: none; */
+}
+
+.float-right {
+    float: right;
+}
+
+.icon-toggled {
+
+    display: none;
+}

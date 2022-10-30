@@ -2056,6 +2056,7 @@ registerBlockType("post-grid/post-featured-image", {
 
         <>
 
+          {JSON.stringify(postImage)}
           {wrapper.options.useAsBackground == 'yes' && (
             <CustomTag className={[blockId]}></CustomTag>
 

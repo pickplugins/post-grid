@@ -56,7 +56,7 @@ class PGBlockFeaturedImage
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
         $wrapperStyles = isset($wrapper['styles']) ? $wrapper['styles'] : [];
 
-        $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'h2';
+        $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
         $useAsBackground = isset($wrapperOptions['useAsBackground']) ? $wrapperOptions['useAsBackground'] : 'no';
 
         $wrapperTextAlign = isset($wrapperStyles['textAlign']) ? $wrapperStyles['textAlign'] : '';
@@ -80,7 +80,7 @@ class PGBlockFeaturedImage
 
         $linkAttr = isset($featuredImageOptions['linkAttr']) ? $featuredImageOptions['linkAttr'] : [];
         $rel = isset($featuredImageOptions['rel']) ? $featuredImageOptions['rel'] : '';
-        $size = isset($featuredImageOptions['size']) ? $featuredImageOptions['size'] : '';
+        $size = isset($featuredImageOptions['size']) ? $featuredImageOptions['size']['Desktop'] : '';
 
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
@@ -113,14 +113,21 @@ class PGBlockFeaturedImage
         $post_title = get_the_title($post_ID);
 
         $thumb_id = get_post_thumbnail_id($post_ID);
-        $image_src = wp_get_attachment_image_src($thumb_id);
+        $image_srcs = wp_get_attachment_image_src($thumb_id, $size);
+        $image_src_url = isset($image_srcs[0]) ? $image_srcs[0] : '';
+        $image_src_w = isset($image_srcs[1]) ? $image_srcs[1] : '';
+        $image_src_h = isset($image_srcs[2]) ? $image_srcs[2] : '';
+
         $attachment_url = wp_get_attachment_url($thumb_id);
         $attachment_post = get_post($thumb_id);
 
         $image_srcset = wp_get_attachment_image_srcset($thumb_id);
         $attachment_metadata = wp_get_attachment_metadata($thumb_id);
 
-        //var_dump($attachment_metadata);
+
+
+        //$thumb = wp_get_attachment_image_src($thumb_id, $size);
+
 
 
         if ($featuredImageLinkTo == 'postUrl') {
@@ -174,29 +181,31 @@ class PGBlockFeaturedImage
 
 
 
-
-
-
-
-
-
-
         ob_start();
 
 
 
         if (!empty($wrapperTag) && $useAsBackground == 'no') :
 
+
+
+
 ?>
+
+
+
+
+
+
             <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
                 <?php if (!empty($featuredImageLinkTo)) : ?>
                     <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
-                        <img src="<?php echo $attachment_url; ?>" alt="<?php echo esc_attr($altText); ?>">
+                        <img srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>" width="<?php echo esc_attr($image_src_w); ?>" height="<?php echo esc_attr($image_src_h); ?>" alt="<?php echo esc_attr($altText); ?>">
 
                     </a>
                 <?php else : ?>
-                    <img src="<?php echo $attachment_url; ?>" alt="<?php echo esc_attr($altText); ?>">
+                    <img srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>" width="<?php echo esc_attr($image_src_w); ?>" height="<?php echo esc_attr($image_src_h); ?>" alt="<?php echo esc_attr($altText); ?>">
 
                 <?php endif; ?>
             </<?php echo $wrapperTag; ?>>

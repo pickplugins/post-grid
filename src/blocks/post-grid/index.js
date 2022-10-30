@@ -792,7 +792,7 @@ registerBlockType("post-grid/post-grid", {
 
 
     var [debounce, setDebounce] = useState(null); // Using the hook.
-    const [breakPointX, setBreakPointX] = useState((myStore != null )? myStore.getBreakPoint() : 'Desktop');
+    const [breakPointX, setBreakPointX] = useState((myStore != null) ? myStore.getBreakPoint() : 'Desktop');
     const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
 
 
@@ -816,7 +816,7 @@ registerBlockType("post-grid/post-grid", {
     //       { label: 'Infinite Load', value: 'infinite', isPro: true },
     //     ]
 
-    var clientDataX = (myStore != null ) ? myStore.getclientdata() : '';
+    var clientDataX = (myStore != null) ? myStore.getclientdata() : '';
 
 
     useEffect(() => {
@@ -2058,7 +2058,9 @@ registerBlockType("post-grid/post-grid", {
 
 
 
+      var allLinks = document.querySelectorAll('#' + blockId + '');
 
+      console.log(allLinks);
 
 
       //console.log(wp.data.select('core/block-editor').getBlocks());

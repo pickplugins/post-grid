@@ -2056,7 +2056,7 @@ registerBlockType("post-grid/post-featured-image", {
 
         <>
 
-          {JSON.stringify(postImage)}
+
           {wrapper.options.useAsBackground == 'yes' && (
             <CustomTag className={[blockId]}></CustomTag>
 
@@ -2074,14 +2074,41 @@ registerBlockType("post-grid/post-featured-image", {
             <CustomTag className={[blockId]}>
               {featuredImage.options.linkTo.length > 0 && (
                 <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={featuredImage.options.linkTarget}>
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+
+
+                  {featuredImage.options.size[breakPointX] != undefined && (
+                    <>
+                      {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+                    </>
+                  )}
+
+                  {postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] == undefined && (
+                    <>
+                      No Image size found
+                    </>
+                  )}
+
 
                 </a>
               )}
               {featuredImage.options.linkTo.length == 0 && (
                 <>
 
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                  {featuredImage.options.size[breakPointX] != undefined && (
+                    <>
+                      {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+                    </>
+                  )}
+
+                  {postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] == undefined && (
+                    <>
+                      No Image size found
+                    </>
+                  )}
+
+
+
+
 
                 </>
               )}

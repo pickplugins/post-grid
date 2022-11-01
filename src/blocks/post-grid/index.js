@@ -2058,9 +2058,6 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-      var allLinks = document.querySelectorAll('#' + blockId + '');
-
-      console.log(allLinks);
 
 
       //console.log(wp.data.select('core/block-editor').getBlocks());

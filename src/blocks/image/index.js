@@ -86,17 +86,19 @@ registerBlockType("post-grid/image", {
       },
     },
 
-    featuredImage: {
+    image: {
       type: 'object',
       default: {
         options: {
+          imgSrcType: 'media', /*media, customField, customUrl, imgId */
+          imgSrcMetaKey: '',
+
           srcUrl: '',
           srcId: '',
           tag: 'div',
           linkTo: '', // postUrl, customField, authorUrl, authorLink, homeUrl, custom
-          customUrl: '',
           linkToMetaKey: '',
-
+          linkTocustomUrl: '',
           altTextSrc: 'imgAltText', // imgAltText, imgTitle, imgCaption, imgDescription imgName, imgSlug, postTitle, excerpt, postSlug, customField, custom
           altTextCustom: '',
           altTextMetaKey: '',
@@ -166,7 +168,7 @@ registerBlockType("post-grid/image", {
 
 
 
-    let featuredImage = attributes.featuredImage;
+    let image = attributes.image;
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
@@ -186,9 +188,13 @@ registerBlockType("post-grid/image", {
     const [customTags, setCustomTags] = useState({});
 
     const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
+    const [linkPickerSrcUrl, setlinkPickerSrcUrl] = useState(false);
+
     const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
 
     const [postImage, setPostImage] = useState(null);
+    const [imageObj, setImageObj] = useState({}); //{src:'', altText:'', sizes:{}}
+
     const [imageSizes, setImageSizes] = useState([]);
     const [filterArgs, setfilterArgs] = useState([
       { label: 'Blur', value: 'blur', val: '', unit: 'px' },
@@ -216,7 +222,7 @@ registerBlockType("post-grid/image", {
 
 
 
-    const [currentPostImageId, setCurrentPostImageId] = useState(featuredImage.options.srcId);
+    const [currentPostImageId, setCurrentPostImageId] = useState(image.options.srcId);
 
 
     const [
@@ -270,19 +276,19 @@ registerBlockType("post-grid/image", {
 
       var filterObj = {};
 
-      if (featuredImage.styles.filter[breakPointX] != undefined) {
-        featuredImage.styles.filter[breakPointX].push(option)
+      if (image.styles.filter[breakPointX] != undefined) {
+        image.styles.filter[breakPointX].push(option)
 
       } else {
 
-        featuredImage.styles.filter[breakPointX] = [];
-        featuredImage.styles.filter[breakPointX].push(option)
+        image.styles.filter[breakPointX] = [];
+        image.styles.filter[breakPointX].push(option)
       }
 
 
 
-      var styles = { ...featuredImage.styles, filter: featuredImage.styles.filter };
-      setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+      var styles = { ...image.styles, filter: image.styles.filter };
+      setAttributes({ image: { ...image, styles: styles } });
 
     }
 
@@ -292,7 +298,7 @@ registerBlockType("post-grid/image", {
       var filterStr = {};
 
       filterStr[breakPointX] = '';
-      (featuredImage.styles.filter[breakPointX] != undefined && featuredImage.styles.filter[breakPointX].map(x => {
+      (image.styles.filter[breakPointX] != undefined && image.styles.filter[breakPointX].map(x => {
 
         filterStr[breakPointX] += x.value + '(' + x.val + x.unit + ') ';
 
@@ -308,7 +314,7 @@ registerBlockType("post-grid/image", {
 
 
 
-    }, [featuredImage]);
+    }, [image]);
 
 
     function setFeaturedImageSize(option, index) {
@@ -316,15 +322,15 @@ registerBlockType("post-grid/image", {
       var newValuesObj = {};
 
 
-      if (Object.keys(featuredImage.options.size).length == 0) {
+      if (Object.keys(image.options.size).length == 0) {
         newValuesObj[breakPointX] = option.value;
       } else {
-        newValuesObj = featuredImage.options.size;
+        newValuesObj = image.options.size;
         newValuesObj[breakPointX] = option.value;
       }
 
-      var options = { ...featuredImage.options, size: newValuesObj };
-      setAttributes({ featuredImage: { ...featuredImage, options: options } });
+      var options = { ...image.options, size: newValuesObj };
+      setAttributes({ image: { ...image, options: options } });
 
     }
 
@@ -333,7 +339,7 @@ registerBlockType("post-grid/image", {
 
       setAttributes({ blockId: blockIdX });
 
-      // setAttributes({ featuredImage: featuredImage });
+      // setAttributes({ image: image });
       // setAttributes({ wrapper: wrapper });
 
       generateBlockCssY()
@@ -345,8 +351,8 @@ registerBlockType("post-grid/image", {
       customTags['currentDate'] = '27';
       customTags['currentTime'] = '27';
 
-      customTags['postPublishDate'] = '123';
-      customTags['postModifiedDate'] = '123';
+      customTags['postPublishDate'] = '';
+      customTags['postModifiedDate'] = '';
 
       customTags['termId'] = '';
       customTags['termTitle'] = '';
@@ -365,11 +371,11 @@ registerBlockType("post-grid/image", {
 
 
 
-      customTags['postId'] = '123';
-      customTags['postStatus'] = '123';
+      customTags['postId'] = '';
+      customTags['postStatus'] = '';
 
 
-      customTags['authorId'] = '123';
+      customTags['authorId'] = '';
       customTags['authorName'] = 'Nur Hasan';
       customTags['authorFirstName'] = 'Nur';
       customTags['authorLastName'] = 'Hasan';
@@ -415,7 +421,7 @@ registerBlockType("post-grid/image", {
 
     if (wrapper.options.tag.length != 0) {
 
-      if (featuredImage.options.linkTo.length > 0) {
+      if (image.options.linkTo.length > 0) {
         linkSelector = blockClass + ' a';
       } else {
         linkSelector = blockClass;
@@ -451,10 +457,10 @@ registerBlockType("post-grid/image", {
           <span className='cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1' onClick={ev => {
 
 
-            featuredImage.styles.filter[breakPointX].splice(args.index, 1);
-            var styles = featuredImage.styles;
+            image.styles.filter[breakPointX].splice(args.index, 1);
+            var styles = image.styles;
 
-            setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+            setAttributes({ image: { ...image, styles: styles } });
 
           }}><Icon icon={close} /></span>
           <span className='mx-2'>{title}</span>
@@ -475,11 +481,11 @@ registerBlockType("post-grid/image", {
 
 
 
-      var responsive = featuredImage.styles.padding;
+      var responsive = image.styles.padding;
       responsive[breakPointX] = nextValues;
 
-      var styles = { ...featuredImage.styles, padding: responsive };
-      setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+      var styles = { ...image.styles, padding: responsive };
+      setAttributes({ image: { ...image, styles: styles } });
 
 
       blockCssY.items[linkSelector] = (blockCssY.items[linkSelector] != undefined) ? blockCssY.items[linkSelector] : {};
@@ -553,12 +559,12 @@ registerBlockType("post-grid/image", {
     function marginControl(nextValues) {
 
 
-      var responsive = featuredImage.styles.margin;
+      var responsive = image.styles.margin;
       responsive[breakPointX] = nextValues;
 
 
-      var styles = { ...featuredImage.styles, margin: responsive };
-      setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+      var styles = { ...image.styles, margin: responsive };
+      setAttributes({ image: { ...image, styles: styles } });
 
       nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
       nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
@@ -816,7 +822,7 @@ registerBlockType("post-grid/image", {
     useEffect(() => {
       linkAttrObj();
 
-    }, [featuredImage]);
+    }, [image]);
 
 
 
@@ -827,7 +833,7 @@ registerBlockType("post-grid/image", {
 
       var sdsd = {};
 
-      featuredImage.options.linkAttr.map(x => {
+      image.options.linkAttr.map(x => {
 
         if (x.val)
           sdsd[x.id] = x.val;
@@ -868,11 +874,11 @@ registerBlockType("post-grid/image", {
     } = wp.data.dispatch('core/edit-post')
 
 
-    var postUrl = (featuredImage.options.customUrl != undefined && featuredImage.options.customUrl.length > 0) ? featuredImage.options.customUrl : currentPostUrl;
+    var postUrl = (image.options.linkTocustomUrl != undefined && image.options.linkTocustomUrl.length > 0) ? image.options.linkTocustomUrl : currentPostUrl;
 
 
     const CustomTag = `${wrapper.options.tag}`;
-    const CustomTagPostTitle = `${featuredImage.options.tag}`;
+    const CustomTagPostTitle = `${image.options.tag}`;
 
 
 
@@ -1487,60 +1493,215 @@ registerBlockType("post-grid/image", {
 
             <PanelBody title="Image" initialOpen={false}>
 
+              <PanelRow>
+                <label for="">Image Src</label>
+                <SelectControl
+                  label=""
+                  value={image.options.imgSrcType}
+                  options={[
+                    { label: 'Media', value: 'media' },
+                    { label: 'Custom Field', value: 'customField' },
+                    { label: 'Image Source URL', value: 'customUrl' },
+                    { label: 'Image ID', value: 'imgId' },
 
-              <label for="">Choose Image</label>
 
-              {featuredImage.options.srcUrl.length > 0 && (
-                <img src={featuredImage.options.srcUrl} alt="" />
+                  ]}
+                  onChange={(newVal) => {
+                    var options = { ...image.options, imgSrcType: newVal };
+                    setAttributes({ image: { ...image, options: options } });
+                  }
+
+                  }
+                />
+              </PanelRow>
+
+
+              {image.options.srcUrl.length > 0 && (
+                <img src={image.options.srcUrl} alt="" />
               )}
 
-              {featuredImage.options.srcUrl.length == 0 && (
+              {image.options.srcUrl.length == 0 && (
                 <img src={MyImage} alt="" />
               )}
 
 
-              <MediaUploadCheck>
-                <MediaUpload
-                  onSelect={(media) => {
-                    // media.id
-                    setCurrentPostImageId(media.id)
 
-                    var options = { ...featuredImage.options, srcUrl: media.url, srcId: media.id };
-                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
+              {image.options.imgSrcType == 'media' && (
 
+                <>
 
-                  }
+                  <label for="">Choose Image</label>
 
+                  <MediaUploadCheck>
+                    <MediaUpload
+                      class="bg-blue-500"
+                      onSelect={(media) => {
+                        // media.id
+                        setCurrentPostImageId(media.id)
 
-                  }
-                  onClose={() => {
-                  }
-
-
-                  }
-
-                  allowedTypes={ALLOWED_MEDIA_TYPES}
-                  value={featuredImage.options.srcId}
-                  render={({ open }) => (
-
-                    <Button className='my-3 border border-solid border-gray-300 text-center w-full' onClick={open}>Open Media Library</Button>
+                        var options = { ...image.options, srcUrl: media.url, srcId: media.id };
+                        setAttributes({ image: { ...image, options: options } });
 
 
-                  )}
-                />
-              </MediaUploadCheck>
+                      }
+
+
+                      }
+                      onClose={() => {
+                      }
+
+
+                      }
+
+                      allowedTypes={ALLOWED_MEDIA_TYPES}
+                      value={image.options.srcId}
+                      render={({ open }) => (
+
+                        <Button className='my-3 border border-solid border-gray-300 text-center w-full' onClick={open}>Open Media Library</Button>
+
+
+                      )}
+                    />
+                  </MediaUploadCheck>
+
+                </>
+
+              )}
+
+
+
+              {image.options.imgSrcType == 'customField' && (
+                <PanelRow>
+                  <label for="">Custom Field Key</label>
+                  <InputControl
+                    className='mr-2'
+                    value={image.options.imgSrcMetaKey}
+                    onChange={(newVal) => {
+                      var options = { ...image.options, imgSrcMetaKey: newVal };
+                      setAttributes({ image: { ...image, options: options } });
+                    }}
+                  />
+                </PanelRow>
+              )}
+
+
+              {image.options.imgSrcType == 'customUrl' && (
+
+                <>
+                  <PanelRow>
+                    <label for="">Image URL</label>
+
+                    <div className='relative'>
+                      <Button className={(linkPickerSrcUrl) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                        setlinkPickerSrcUrl(prev => !prev);
+
+                      }}></Button>
+                      {image.options.srcUrl.length > 0 && (
+                        <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                          var options = { ...image.options, srcUrl: '' };
+                          setAttributes({ image: { ...image, options: options } });
+                          setlinkPickerSrcUrl(false);
+
+
+
+
+
+                        }}></Button>
+
+                      )}
+                      {linkPickerSrcUrl && (
+                        <Popover position="bottom right">
+                          <LinkControl settings={[]} value={image.options.srcUrl} onChange={newVal => {
+
+                            var options = { ...image.options, srcUrl: newVal.url };
+                            setAttributes({ image: { ...image, options: options } });
+
+
+                            setImageObj({ ...imageObj, src: newVal.url });
+
+
+                          }} />
+
+                          <div className='p-2'><span className='font-bold'>Linked to:</span> {(image.options.srcUrl.length != 0) ? image.options.srcUrl : 'No link'} </div>
+                        </Popover>
+
+                      )}
+
+
+                    </div>
+                  </PanelRow>
+
+                </>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              )}
+
+
+              {image.options.imgSrcType == 'imgId' && (
+                <PanelRow>
+                  <label for="">Image ID</label>
+                  <InputControl
+                    className='mr-2'
+                    value={image.options.srcId}
+                    onChange={(newVal) => {
+                      var options = { ...image.options, srcId: newVal };
+                      setAttributes({ image: { ...image, options: options } });
+                    }}
+                  />
+                </PanelRow>
+              )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
               <PanelRow className='mb-4'>
                 <label for="">Thumbnail Size</label>
-                <PGDropdown position="bottom right" variant="secondary" options={imageSizes} buttonTitle="Choose" onChange={setFeaturedImageSize} values={featuredImage.options.size[breakPointX]}></PGDropdown>
+                <PGDropdown position="bottom right" variant="secondary" options={imageSizes} buttonTitle="Choose" onChange={setFeaturedImageSize} values={image.options.size[breakPointX]}></PGDropdown>
               </PanelRow>
 
 
-              {featuredImage.options.size[breakPointX] != undefined && (
+              {image.options.size[breakPointX] != undefined && (
 
-                <div className='bg-gray-400 text-white px-3 py-2 my-3' > {featuredImage.options.size[breakPointX]}</div>
+                <div className='bg-gray-400 text-white px-3 py-2 my-3' > {image.options.size[breakPointX]}</div>
 
               )}
+
 
 
 
@@ -1550,7 +1711,7 @@ registerBlockType("post-grid/image", {
                 <label for="">Link To</label>
                 <SelectControl
                   label=""
-                  value={featuredImage.options.linkTo}
+                  value={image.options.linkTo}
                   options={[
                     { label: 'No Link', value: '' },
                     { label: 'Post URL', value: 'postUrl' },
@@ -1562,15 +1723,15 @@ registerBlockType("post-grid/image", {
 
                   ]}
                   onChange={(newVal) => {
-                    var options = { ...featuredImage.options, linkTo: newVal };
-                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                    var options = { ...image.options, linkTo: newVal };
+                    setAttributes({ image: { ...image, options: options } });
                   }
 
                   }
                 />
               </PanelRow>
 
-              {featuredImage.options.linkTo == 'customField' && (
+              {image.options.linkTo == 'customField' && (
 
 
 
@@ -1578,12 +1739,12 @@ registerBlockType("post-grid/image", {
                   <label for="">Custom Field Key</label>
                   <InputControl
                     className='mr-2'
-                    value={featuredImage.options.linkToMetaKey}
+                    value={image.options.linkToMetaKey}
                     onChange={(newVal) => {
 
 
-                      var options = { ...featuredImage.options, linkToMetaKey: newVal };
-                      setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                      var options = { ...image.options, linkToMetaKey: newVal };
+                      setAttributes({ image: { ...image, options: options } });
 
                     }}
                   />
@@ -1594,10 +1755,10 @@ registerBlockType("post-grid/image", {
 
 
 
-              {(featuredImage.options.customUrl.length > 0) && (
+              {(image.options.linkTocustomUrl.length > 0) && (
 
                 (postGridData.license_status != 'active') && (
-                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postFeaturedImage&utm_campaign=pluginPostGrid&utm_medium=postFeaturedImage-customUrl"}>
+                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postFeaturedImage&utm_campaign=pluginPostGrid&utm_medium=postFeaturedImage-linkTocustomUrl"}>
                     <p><span className='underline'>Custom URL</span> feature only avilable in pro version</p>
                   </PGproWrapper>
                 )
@@ -1605,7 +1766,7 @@ registerBlockType("post-grid/image", {
               )}
 
 
-              {featuredImage.options.linkTo == 'custom' && (
+              {image.options.linkTo == 'custom' && (
 
                 <PanelRow>
                   <label for="">Custom URL</label>
@@ -1616,11 +1777,11 @@ registerBlockType("post-grid/image", {
                       setLinkPickerPosttitle(prev => !prev);
 
                     }}></Button>
-                    {featuredImage.options.customUrl.length > 0 && (
+                    {image.options.linkTocustomUrl.length > 0 && (
                       <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
 
-                        var options = { ...featuredImage.options, customUrl: '' };
-                        setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                        var options = { ...image.options, linkTocustomUrl: '' };
+                        setAttributes({ image: { ...image, options: options } });
                         setLinkPickerPosttitle(false);
 
                       }}></Button>
@@ -1628,15 +1789,15 @@ registerBlockType("post-grid/image", {
                     )}
                     {linkPickerPosttitle && (
                       <Popover position="bottom right">
-                        <LinkControl settings={[]} value={featuredImage.options.customUrl} onChange={newVal => {
+                        <LinkControl settings={[]} value={image.options.linkTocustomUrl} onChange={newVal => {
 
-                          var options = { ...featuredImage.options, customUrl: newVal.url };
+                          var options = { ...image.options, linkTocustomUrl: newVal.url };
 
-                          setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                          setAttributes({ image: { ...image, options: options } });
 
                         }} />
 
-                        <div className='p-2'><span className='font-bold'>Linked to:</span> {(featuredImage.options.customUrl.length != 0) ? featuredImage.options.customUrl : 'No link'} </div>
+                        <div className='p-2'><span className='font-bold'>Linked to:</span> {(image.options.linkTocustomUrl.length != 0) ? image.options.linkTocustomUrl : 'No link'} </div>
                       </Popover>
 
                     )}
@@ -1648,7 +1809,7 @@ registerBlockType("post-grid/image", {
               )}
 
 
-              {featuredImage.options.linkTo.length == 0 && (
+              {image.options.linkTo.length == 0 && (
 
 
 
@@ -1656,7 +1817,7 @@ registerBlockType("post-grid/image", {
                   <label for="">Custom Tag</label>
                   <SelectControl
                     label=""
-                    value={featuredImage.options.tag}
+                    value={image.options.tag}
                     options={[
                       { label: 'H1', value: 'h1' },
                       { label: 'H2', value: 'h2' },
@@ -1669,8 +1830,8 @@ registerBlockType("post-grid/image", {
                       { label: 'P', value: 'p' },
                     ]}
                     onChange={(newVal) => {
-                      var options = { ...featuredImage.options, tag: newVal };
-                      setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                      var options = { ...image.options, tag: newVal };
+                      setAttributes({ image: { ...image, options: options } });
                     }
 
                     }
@@ -1681,7 +1842,7 @@ registerBlockType("post-grid/image", {
 
 
 
-              {featuredImage.options.linkTo.length > 0 && (
+              {image.options.linkTo.length > 0 && (
 
                 <div>
                   <PanelRow>
@@ -1689,7 +1850,7 @@ registerBlockType("post-grid/image", {
 
                     <SelectControl
                       label=""
-                      value={featuredImage.options.linkTarget}
+                      value={image.options.linkTarget}
                       options={[
                         { label: 'Choose...', value: '' },
 
@@ -1704,8 +1865,8 @@ registerBlockType("post-grid/image", {
 
 
 
-                        var options = { ...featuredImage.options, linkTarget: newVal };
-                        setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                        var options = { ...image.options, linkTarget: newVal };
+                        setAttributes({ image: { ...image, options: options } });
 
 
 
@@ -1731,11 +1892,11 @@ registerBlockType("post-grid/image", {
 
                       onClick={(ev) => {
 
-                        var sdsd = featuredImage.options.linkAttr.concat({ id: '', val: '' })
+                        var sdsd = image.options.linkAttr.concat({ id: '', val: '' })
 
 
-                        var options = { ...featuredImage.options, linkAttr: sdsd };
-                        setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                        var options = { ...image.options, linkAttr: sdsd };
+                        setAttributes({ image: { ...image, options: options } });
 
                         linkAttrObj()
                       }}
@@ -1749,7 +1910,7 @@ registerBlockType("post-grid/image", {
 
 
                   {
-                    featuredImage.options.linkAttr.map((x, i) => {
+                    image.options.linkAttr.map((x, i) => {
 
                       return (
 
@@ -1757,18 +1918,18 @@ registerBlockType("post-grid/image", {
                           <PanelRow>
                             <InputControl
                               className='mr-2'
-                              value={featuredImage.options.linkAttr[i].id}
+                              value={image.options.linkAttr[i].id}
                               onChange={(newVal) => {
 
-                                featuredImage.options.linkAttr[i].id = newVal;
+                                image.options.linkAttr[i].id = newVal;
 
 
-                                var ssdsd = featuredImage.options.linkAttr.concat([]);
+                                var ssdsd = image.options.linkAttr.concat([]);
 
 
 
-                                var options = { ...featuredImage.options, linkAttr: ssdsd };
-                                setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                                var options = { ...image.options, linkAttr: ssdsd };
+                                setAttributes({ image: { ...image, options: options } });
 
                               }}
                             />
@@ -1777,26 +1938,26 @@ registerBlockType("post-grid/image", {
                               className='mr-2'
                               value={x.val}
                               onChange={(newVal) => {
-                                featuredImage.options.linkAttr[i].val = newVal
-                                var ssdsd = featuredImage.options.linkAttr.concat([]);
+                                image.options.linkAttr[i].val = newVal
+                                var ssdsd = image.options.linkAttr.concat([]);
 
 
 
-                                var options = { ...featuredImage.options, linkAttr: ssdsd };
-                                setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                                var options = { ...image.options, linkAttr: ssdsd };
+                                setAttributes({ image: { ...image, options: options } });
 
                               }}
                             />
                             <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
                               onClick={(ev) => {
 
-                                featuredImage.options.linkAttr.splice(i, 1);
+                                image.options.linkAttr.splice(i, 1);
 
-                                var ssdsd = featuredImage.options.linkAttr.concat([]);
+                                var ssdsd = image.options.linkAttr.concat([]);
 
 
-                                var options = { ...featuredImage.options, linkAttr: ssdsd };
-                                setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                                var options = { ...image.options, linkAttr: ssdsd };
+                                setAttributes({ image: { ...image, options: options } });
                               }}
 
                             ></span>
@@ -1825,7 +1986,7 @@ registerBlockType("post-grid/image", {
                 <label for="">Alt Text Source</label>
                 <SelectControl
                   label=""
-                  value={featuredImage.options.altTextSrc}
+                  value={image.options.altTextSrc}
                   options={[
                     { label: 'No Link', value: '' },
                     { label: 'Image Alt Text', value: 'imgAltText' },
@@ -1842,8 +2003,8 @@ registerBlockType("post-grid/image", {
 
                   ]}
                   onChange={(newVal) => {
-                    var options = { ...featuredImage.options, altTextSrc: newVal };
-                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                    var options = { ...image.options, altTextSrc: newVal };
+                    setAttributes({ image: { ...image, options: options } });
                   }
 
                   }
@@ -1852,7 +2013,7 @@ registerBlockType("post-grid/image", {
 
 
 
-              {featuredImage.options.altTextSrc == 'customField' && (
+              {image.options.altTextSrc == 'customField' && (
 
 
 
@@ -1860,12 +2021,12 @@ registerBlockType("post-grid/image", {
                   <label for="">Custom Field Key</label>
                   <InputControl
                     className='mr-2'
-                    value={featuredImage.options.altTextMetaKey}
+                    value={image.options.altTextMetaKey}
                     onChange={(newVal) => {
 
 
-                      var options = { ...featuredImage.options, altTextMetaKey: newVal };
-                      setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                      var options = { ...image.options, altTextMetaKey: newVal };
+                      setAttributes({ image: { ...image, options: options } });
 
                     }}
                   />
@@ -1875,7 +2036,7 @@ registerBlockType("post-grid/image", {
               )}
 
 
-              {featuredImage.options.altTextSrc == 'custom' && (
+              {image.options.altTextSrc == 'custom' && (
 
 
 
@@ -1883,12 +2044,12 @@ registerBlockType("post-grid/image", {
                   <label for="">Custom Alt Text</label>
                   <InputControl
                     className='mr-2'
-                    value={featuredImage.options.altTextCustom}
+                    value={image.options.altTextCustom}
                     onChange={(newVal) => {
 
 
-                      var options = { ...featuredImage.options, altTextCustom: newVal };
-                      setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                      var options = { ...image.options, altTextCustom: newVal };
+                      setAttributes({ image: { ...image, options: options } });
 
                     }}
                   />
@@ -1903,7 +2064,7 @@ registerBlockType("post-grid/image", {
 
 
 
-              {featuredImage.styles.filter[breakPointX] != undefined && postGridData.license_status != 'active' && (
+              {image.styles.filter[breakPointX] != undefined && postGridData.license_status != 'active' && (
 
                 <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postFeaturedImage&utm_campaign=pluginPostGrid&utm_medium=postFeaturedImage-filters"}>
                   <p>Filters feature only avilable in pro version</p>
@@ -1922,11 +2083,11 @@ registerBlockType("post-grid/image", {
               <div className='my-5'>
 
                 {
-                  featuredImage.styles.filter[breakPointX] != undefined && (
+                  image.styles.filter[breakPointX] != undefined && (
 
 
 
-                    featuredImage.styles.filter[breakPointX].map((arg, index) => {
+                    image.styles.filter[breakPointX].map((arg, index) => {
 
                       return (
                         <div>
@@ -1941,10 +2102,10 @@ registerBlockType("post-grid/image", {
                                 onChange={(newVal) => {
                                   arg.val = newVal;
 
-                                  featuredImage.styles.filter[breakPointX][index] = arg;
-                                  var styles = featuredImage.styles;
+                                  image.styles.filter[breakPointX][index] = arg;
+                                  var styles = image.styles;
 
-                                  setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+                                  setAttributes({ image: { ...image, styles: styles } });
                                 }}
                                 min={0}
                                 max={100}
@@ -1978,7 +2139,7 @@ registerBlockType("post-grid/image", {
 
               <SelectControl
                 className='my-3'
-                value={featuredImage.styles.objectFit[breakPointX]}
+                value={image.styles.objectFit[breakPointX]}
                 options={[
                   { label: 'Fill', value: 'fill' },
                   { label: 'Contain', value: 'contain' },
@@ -1994,15 +2155,15 @@ registerBlockType("post-grid/image", {
 
                   var newValuesObj = {};
 
-                  if (Object.keys(featuredImage.styles.objectFit).length == 0) {
+                  if (Object.keys(image.styles.objectFit).length == 0) {
                     newValuesObj[breakPointX] = newVal;
                   } else {
-                    newValuesObj = featuredImage.styles.objectFit;
+                    newValuesObj = image.styles.objectFit;
                     newValuesObj[breakPointX] = newVal;
                   }
 
-                  var styles = { ...featuredImage.styles, objectFit: newValuesObj };
-                  setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+                  var styles = { ...image.styles, objectFit: newValuesObj };
+                  setAttributes({ image: { ...image, styles: styles } });
 
                   blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'object-fit': newValuesObj };
 
@@ -2020,23 +2181,23 @@ registerBlockType("post-grid/image", {
 
               <PanelRow>
                 <InputControl
-                  value={(featuredImage.styles.width[breakPointX] != undefined ? featuredImage.styles.width[breakPointX].val : 10)}
+                  value={(image.styles.width[breakPointX] != undefined ? image.styles.width[breakPointX].val : 10)}
                   type="number"
                   onChange={(newVal) => {
 
                     var newValuesObj = {};
-                    if (Object.keys(featuredImage.styles.width).length == 0) {
+                    if (Object.keys(image.styles.width).length == 0) {
                       newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
                     } else {
-                      newValuesObj = featuredImage.styles.width;
+                      newValuesObj = image.styles.width;
                       var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'em';
 
                       newValuesObj[breakPointX] = { val: newVal, unit: unit };
                     }
 
 
-                    var styles = { ...featuredImage.styles, width: newValuesObj };
-                    setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+                    var styles = { ...image.styles, width: newValuesObj };
+                    setAttributes({ image: { ...image, styles: styles } });
 
 
 
@@ -2057,7 +2218,7 @@ registerBlockType("post-grid/image", {
                 />
 
                 <SelectControl className='mb-0'
-                  value={(featuredImage.styles.width[breakPointX] != undefined) ? featuredImage.styles.width[breakPointX].unit : 'em'}
+                  value={(image.styles.width[breakPointX] != undefined) ? image.styles.width[breakPointX].unit : 'em'}
                   options={[
                     { label: 'fr', value: 'fr' },
                     { label: 'px', value: 'px' },
@@ -2068,18 +2229,18 @@ registerBlockType("post-grid/image", {
 
 
                     var newValuesObj = {};
-                    if (Object.keys(featuredImage.styles.width).length == 0) {
+                    if (Object.keys(image.styles.width).length == 0) {
                       newValuesObj[breakPointX] = { val: 10, unit: newVal };
                     } else {
-                      newValuesObj = featuredImage.styles.width;
+                      newValuesObj = image.styles.width;
                       var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 10;
 
                       newValuesObj[breakPointX] = { val: val, unit: newVal };
                     }
 
 
-                    var styles = { ...featuredImage.styles, width: newValuesObj };
-                    setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+                    var styles = { ...image.styles, width: newValuesObj };
+                    setAttributes({ image: { ...image, styles: styles } });
 
 
 
@@ -2110,23 +2271,23 @@ registerBlockType("post-grid/image", {
 
               <PanelRow>
                 <InputControl
-                  value={(featuredImage.styles.height[breakPointX] != undefined ? featuredImage.styles.height[breakPointX].val : 10)}
+                  value={(image.styles.height[breakPointX] != undefined ? image.styles.height[breakPointX].val : 10)}
                   type="number"
                   onChange={(newVal) => {
 
                     var newValuesObj = {};
-                    if (Object.keys(featuredImage.styles.height).length == 0) {
+                    if (Object.keys(image.styles.height).length == 0) {
                       newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
                     } else {
-                      newValuesObj = featuredImage.styles.height;
+                      newValuesObj = image.styles.height;
                       var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'em';
 
                       newValuesObj[breakPointX] = { val: newVal, unit: unit };
                     }
 
 
-                    var styles = { ...featuredImage.styles, height: newValuesObj };
-                    setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+                    var styles = { ...image.styles, height: newValuesObj };
+                    setAttributes({ image: { ...image, styles: styles } });
 
 
 
@@ -2147,7 +2308,7 @@ registerBlockType("post-grid/image", {
                 />
 
                 <SelectControl className='mb-0'
-                  value={(featuredImage.styles.height[breakPointX] != undefined) ? featuredImage.styles.height[breakPointX].unit : 'em'}
+                  value={(image.styles.height[breakPointX] != undefined) ? image.styles.height[breakPointX].unit : 'em'}
                   options={[
                     { label: 'fr', value: 'fr' },
                     { label: 'px', value: 'px' },
@@ -2158,18 +2319,18 @@ registerBlockType("post-grid/image", {
 
 
                     var newValuesObj = {};
-                    if (Object.keys(featuredImage.styles.height).length == 0) {
+                    if (Object.keys(image.styles.height).length == 0) {
                       newValuesObj[breakPointX] = { val: 10, unit: newVal };
                     } else {
-                      newValuesObj = featuredImage.styles.height;
+                      newValuesObj = image.styles.height;
                       var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 10;
 
                       newValuesObj[breakPointX] = { val: val, unit: newVal };
                     }
 
 
-                    var styles = { ...featuredImage.styles, height: newValuesObj };
-                    setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+                    var styles = { ...image.styles, height: newValuesObj };
+                    setAttributes({ image: { ...image, styles: styles } });
 
 
 
@@ -2198,7 +2359,7 @@ registerBlockType("post-grid/image", {
               </PanelRow>
               <BoxControl
                 label=""
-                values={featuredImage.styles.padding[breakPointX]}
+                values={image.styles.padding[breakPointX]}
                 onChange={(nextValues) => { paddingControl(nextValues) }}
               />
 
@@ -2209,7 +2370,7 @@ registerBlockType("post-grid/image", {
               </PanelRow>
               <BoxControl
                 label=""
-                values={featuredImage.styles.margin[breakPointX]}
+                values={image.styles.margin[breakPointX]}
                 onChange={(nextValues) => { marginControl(nextValues) }}
               />
 
@@ -2259,31 +2420,80 @@ registerBlockType("post-grid/image", {
 
 
         <>
+
+          <code>{JSON.stringify(imageObj)}</code>
+
+
           {wrapper.options.useAsBackground == 'yes' && (
             <CustomTag className={[blockId]}></CustomTag>
-
           )}
 
-          {postImage == null && (
+          {postImage == null && image.options.srcUrl == undefined && (
             <div>
               <img src={MyImage} alt="Default Featured Image" />
-
             </div>
 
           )}
 
           {wrapper.options.useAsBackground == 'no' && wrapper.options.tag && (
-            <CustomTag className={[blockId]}>
-              {featuredImage.options.linkTo.length > 0 && (
-                <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={featuredImage.options.linkTarget}>
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+            <CustomTag className={[blockId]}>A
+              {image.options.linkTo.length > 0 && (
+                <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
+
+                  {image.options.imgSrcType == 'media' && (
+                    <>
+                      {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                    </>
+                  )}
+
+                  {image.options.imgSrcType == 'customField' && (
+                    <>
+                      {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                    </>
+                  )}
+
+                  {image.options.imgSrcType == 'customUrl' && (
+                    <>
+                      <img src={image.options.srcUrl} alt={image.options.altTextCustom} />
+                    </>
+                  )}
+
+                  {image.options.imgSrcType == 'imgId' && (
+                    <>
+                      {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                    </>
+                  )}
 
                 </a>
               )}
-              {featuredImage.options.linkTo.length == 0 && (
+              {image.options.linkTo.length == 0 && (
                 <>
 
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+
+                  {image.options.imgSrcType == 'media' && (
+                    <>
+                      {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                    </>
+                  )}
+
+                  {image.options.imgSrcType == 'customField' && (
+                    <>
+                      {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                    </>
+                  )}
+
+                  {image.options.imgSrcType == 'customUrl' && (
+                    <>
+                      <img src={image.options.srcUrl} alt={image.options.altTextCustom} />
+                    </>
+                  )}
+
+                  {image.options.imgSrcType == 'imgId' && (
+                    <>
+                      {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                    </>
+                  )}
+
 
                 </>
               )}
@@ -2293,8 +2503,8 @@ registerBlockType("post-grid/image", {
           {wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && (
 
             (
-              featuredImage.options.linkTo.length > 0 && (
-                <a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={featuredImage.options.linkTarget}>
+              image.options.linkTo.length > 0 && (
+                <a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>C
 
 
                   {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
@@ -2304,20 +2514,20 @@ registerBlockType("post-grid/image", {
             )
           )}
 
-          {wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && featuredImage.options.linkTo.length == 0 && (
+          {wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && image.options.linkTo.length == 0 && (
 
 
-            <>
-              {featuredImage.options.tag.length > 0 && (
-                <CustomTagPostTitle className={blockId}>
+            <>D
+              {image.options.tag.length > 0 && (
+                <CustomTagPostTitle className={blockId}>3
 
                   {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
 
                 </CustomTagPostTitle>
 
               )}
-              {featuredImage.options.tag.length == 0 && (
-                <div className={blockId}>
+              {image.options.tag.length == 0 && (
+                <div className={blockId}>E
 
                   {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
 

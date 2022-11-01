@@ -66,8 +66,12 @@ class PGBlockImage
         $featuredImageOptions = isset($featuredImage['options']) ? $featuredImage['options'] : [];
         $featuredImageStyles = isset($featuredImage['styles']) ? $featuredImage['styles'] : [];
 
-        $featuredImagesrcId = isset($featuredImageOptions['srcId']) ? $featuredImageOptions['srcId'] : '';
+        $featuredImageSrcType = isset($featuredImageOptions['imgSrcType']) ? $featuredImageOptions['imgSrcType'] : '';
+        $featuredImageSrcMetaKey = isset($featuredImageOptions['imgSrcMetaKey']) ? $featuredImageOptions['imgSrcMetaKey'] : '';
 
+        $featuredImagesrcUrl = isset($featuredImageOptions['srcUrl']) ? $featuredImageOptions['srcUrl'] : '';
+
+        $featuredImagesrcId = isset($featuredImageOptions['srcId']) ? $featuredImageOptions['srcId'] : '';
         $featuredImageLinkTo = isset($featuredImageOptions['linkTo']) ? $featuredImageOptions['linkTo'] : '';
         $featuredImageLinkToMetaKey = isset($featuredImageOptions['linkToMetaKey']) ? $featuredImageOptions['linkToMetaKey'] : '';
 
@@ -126,6 +130,14 @@ class PGBlockImage
         $image_srcset = wp_get_attachment_image_srcset($thumb_id);
         $attachment_metadata = wp_get_attachment_metadata($thumb_id);
 
+        if ($featuredImageSrcType == 'customField') {
+            $attachment_url = get_post_meta($post_ID, $featuredImageSrcMetaKey, true);
+        } elseif ($featuredImageSrcType == 'customUrl') {
+            $attachment_url = $featuredImagesrcUrl;
+        } elseif ($featuredImageSrcType == 'imgId') {
+            $attachment_url = wp_get_attachment_url($featuredImagesrcId);
+        }
+
 
 
         if ($featuredImageLinkTo == 'postUrl') {
@@ -175,7 +187,6 @@ class PGBlockImage
 
 
 
-        //var_dump($wrapperTag);
 
 
 
@@ -197,11 +208,11 @@ class PGBlockImage
                 <?php if (!empty($featuredImageLinkTo)) : ?>
                     <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
-                        <img src="<?php echo $attachment_url; ?>" alt="<?php echo esc_attr($altText); ?>">
+                        <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>">
 
                     </a>
                 <?php else : ?>
-                    <img src="<?php echo $attachment_url; ?>" alt="<?php echo esc_attr($altText); ?>">
+                    <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>">
 
                 <?php endif; ?>
             </<?php echo $wrapperTag; ?>>
@@ -217,11 +228,11 @@ class PGBlockImage
                 <a class="<?php echo $blockId; ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
 
-                    <img src="<?php echo $attachment_url; ?>" alt="<?php echo esc_attr($altText); ?>">
+                    <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>">
 
                 </a>
             <?php else : ?>
-                <img src="<?php echo $attachment_url; ?>" alt="<?php echo esc_attr($altText); ?>">
+                <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>">
             <?php endif; ?>
 
         <?php

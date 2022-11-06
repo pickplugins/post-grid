@@ -54,7 +54,7 @@ class PGDropdown extends Component {
             setPickerOpen(prev => !prev);
 
           }}>
-            <Button variant={variant} >{buttonTitle}</Button>
+            <Button variant={variant} >{options[value] != undefined ? options[value].label : buttonTitle}</Button>
           </div>
 
 

@@ -193,10 +193,6 @@ class PGBlockImage
 
 
 
-
-
-
-
         ob_start();
 
 

@@ -1177,6 +1177,8 @@ registerBlockType("post-grid/layers", {
                         { label: 'inline', value: 'inline' },
                         { label: 'inline-block', value: 'inline-block' },
                         { label: 'block', value: 'block' },
+                        { label: 'flex', value: 'flex' },
+
 
                       ]}
                       onChange={(newVal) => {

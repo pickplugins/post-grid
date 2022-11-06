@@ -27,8 +27,8 @@ var myStore = wp.data.select('postgrid-shop');
 
 
 
-registerBlockType("post-grid/post-meta", {
-  title: "Post Meta",
+registerBlockType("post-grid/shortcode", {
+  title: "Shortcode",
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: '#2563eb',
@@ -40,10 +40,6 @@ registerBlockType("post-grid/post-meta", {
   attributes: {
 
 
-    template: {
-      "type": "string",
-      "default": '<div>Output HTML: {metaValue}</div>'
-    },
     wrapper: {
       type: 'object',
       default: {
@@ -56,40 +52,18 @@ registerBlockType("post-grid/post-meta", {
 
       },
     },
-    meta: {
+    shortcode: {
       type: 'object',
       default: {
         options: {
-          key: '', type: 'string', /*string, acfImage, acfFile, , , , acfUser*/ prefix: '', postfix: '',
+          key: '', prefix: '', postfix: '', prams: {},
         },
         styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
 
       },
     },
-    separator: {
-      type: 'object',
-      default: {
-
-        options: {
-          class: 'inline-block',
-        },
-        styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
 
 
-      },
-    },
-    frontText: {
-      type: 'object',
-      default: {
-
-        options: {
-          text: 'Meta Value: ', class: 'inline-block',
-        },
-        styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
-
-
-      },
-    },
 
 
     customCss: {
@@ -124,15 +98,12 @@ registerBlockType("post-grid/post-meta", {
     var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
     var blockClass = '.' + blockIdX;
 
-    var meta = attributes.meta;
-    var template = attributes.template;
+    var shortcode = attributes.shortcode;
 
 
 
     var wrapper = attributes.wrapper;
     var items = attributes.items;
-    var separator = attributes.separator;
-    var frontText = attributes.frontText;
 
     var blockCssY = attributes.blockCssY;
 
@@ -152,20 +123,26 @@ registerBlockType("post-grid/post-meta", {
     // Wrapper CSS Class Selectors
     const itemWrapSelector = blockClass;
     const itemSelector = blockClass + ' .item';
-    const itemSeparatorSelector = blockClass + ' .separator';
-    const frontTextSelector = blockClass + ' .frontText';
     const postCountSelector = blockClass + ' .postCount';
 
-    const [filterArgs, setfilterArgs] = useState({
-      string: { label: 'String', value: 'string', },
-      acfImage: { label: 'ACF Image', value: 'acfImage', },
-      acfFile: { label: 'ACF File', value: 'acfFile', },
-      acfTaxonomy: { label: 'ACF Taxonomy', value: 'acfTaxonomy', },
-      acfPostObject: { label: 'ACF Post Object', value: 'acfPostObject', },
-      acfPageLink: { label: 'ACF Page Link', value: 'acfPageLink', },
-      acfLink: { label: 'ACF Link', value: 'acfLink', },
-      acfUser: { label: 'ACF User', value: 'acfUser', },
-      acfButtonGroup: { label: 'ACF Button Group', value: 'acfButtonGroup', },
+    const [shortcodes, setshortcodes] = useState({
+      yith_wcwl_add_to_wishlist: { label: 'YITH - Add to Wishlist', value: 'yith_wcwl_add_to_wishlist', args: { product_id: '' } },
+      yasr_overall_rating: { label: 'YASR- overall rating', value: 'yasr_overall_rating', args: { size: '', postid: '' } },
+      yasr_visitor_votes: { label: 'YASR - visitor votes', value: 'yasr_visitor_votes', args: { size: '', postid: '' } },
+      wp_postviews: { label: 'WP-PostViews', value: 'views', args: { id: '' } },
+      wp_postratings: { label: 'WP-PostRatings', value: 'wp_postratings', args: { id: '' } },
+      site_reviews_summary: { label: 'Site Reviews - Summary', value: 'site_reviews_summary', args: { hide: '', assigned_to: '', class: '' } },
+      ratingwidget: { label: 'Rating-Widget', value: 'ratingwidget', args: { post_id: '' } },
+      ratemypostresult: { label: 'Rate my Post - Result', value: 'ratemypost-result', args: { post_id: '' } },
+      ratemypost: { label: 'Rate my Post', value: 'ratemypost', args: { id: '' } },
+      postviews: { label: 'Post Views Counter', value: 'post-views', args: { id: '' } },
+      pvcp_1: { label: 'Page Visit Counter', value: 'pvcp_1', args: { postid: '' } },
+      pvc_stats: { label: 'Page Views Count', value: 'pvc_stats', args: { postid: '' } },
+      mr_rating_result: { label: 'Multi Rating - Result', value: 'mr_rating_result', args: { post_id: '' } },
+      mr_rating_form: { label: 'Multi Rating', value: 'mr_rating_form', args: { post_id: '' } },
+      likebtn: { label: 'Like Button Rating', value: 'likebtn', args: {} },
+      kkratings: { label: 'KK Star Ratings', value: 'kkratings', args: { size: '', id: '' } },
+
 
 
     });
@@ -173,46 +150,25 @@ registerBlockType("post-grid/post-meta", {
     useEffect(() => {
 
 
-      apiFetch({
-        path: '/post-grid/v2/get_post_meta',
-        method: 'POST',
-        data: { postId: postId, meta_key: meta.options.key, type: meta.options.type, template: template },
-      }).then((res) => {
+      // apiFetch({
+      //   path: '/post-grid/v2/get_post_meta',
+      //   method: 'POST',
+      //   data: { postId: postId, meta_key: shortcode.options.key, prams: shortcode.options.prams, },
+      // }).then((res) => {
 
-        console.log(res);
-
-        if (meta.options.type == 'acfImage' || meta.options.type == 'acfFile') {
-          setMetaHtml(res.html);
-          setMetaArgs(res.args);
-
-        } else {
-
-          setMetaHtml(res.html);
-          setMetaArgs(res.args);
-        }
+      //   console.log(res);
 
 
 
-      });
+      //   setMetaHtml(res.html);
+      //   setMetaArgs(res.args);
 
-    }, [meta, template]);
+      // });
 
-
-    useEffect(() => {
-
-
-      if (metaValue != null) {
-
-        if (meta.options.type == 'string') {
-          setMetaValue(res.meta_value)
-        } else if (meta.options.type == 'acfImage') {
-          setMetaHtml(res.html);
-        }
-
-      }
+    }, [shortcode]);
 
 
-    }, [template]);
+
 
 
     var breakPointList = [];
@@ -644,56 +600,43 @@ registerBlockType("post-grid/post-meta", {
 
             </div>
 
-            <PanelBody title="Meta Key" initialOpen={true}>
+            <PanelBody title="shortcode Key" initialOpen={true}>
+              <PanelRow>
+                <label>Choose Shortcode </label>
+                <PGDropdown position="bottom right" variant="secondary" options={shortcodes} buttonTitle="Choose" onChange={(option, index) => {
 
+                  console.log(option);
+
+
+                  var options = { ...shortcode.options, key: option.value };
+                  setAttributes({ shortcode: { ...shortcode, options: options } });
+
+
+                }} values="" value={shortcode.options.key}></PGDropdown>
+
+              </PanelRow>
 
               <PanelRow>
-                <label for="">Meta Key</label>
+                <label for="">shortcode Key</label>
 
                 <InputControl
-                  placeholder="Meta key"
-                  value={meta.options.key}
+                  placeholder="shortcode key"
+                  value={shortcode.options.key}
                   onChange={(newVal) => {
 
 
-                    var options = { ...meta.options, key: newVal }
-                    setAttributes({ meta: { ...meta, options: options } });
+                    var options = { ...shortcode.options, key: newVal }
+                    setAttributes({ shortcode: { ...shortcode, options: options } });
 
 
                   }}
                 />
               </PanelRow>
 
-              <PanelRow>
-                <label>Meta Key Type </label>
-                <PGDropdown position="bottom right" variant="secondary" options={filterArgs} buttonTitle="Choose" onChange={(option, index) => {
-
-                  console.log(option);
-
-
-                  var options = { ...meta.options, type: option.value };
-                  setAttributes({ meta: { ...meta, options: options } });
-
-
-                }} values="" value={meta.options.type}></PGDropdown>
-
-              </PanelRow>
 
 
 
-              <label className='my-3' for="">Template</label>
 
-
-              <TextareaControl
-
-                value={template}
-                onChange={(newVal) => {
-
-                  setAttributes({ template: newVal });
-
-
-                }}
-              />
 
 
               <div className='my-3'>
@@ -755,61 +698,9 @@ registerBlockType("post-grid/post-meta", {
 
 
 
-            <PanelBody title="Front Text" initialOpen={false}>
 
 
 
-              <PanelRow>
-                <label for="">Front Text</label>
-
-                <InputControl
-                  value={frontText.options.text}
-                  onChange={(newVal) => {
-
-                    var options = { ...frontText.options, text: newVal }
-                    setAttributes({ frontText: { ...frontText, options: options } });
-
-                  }
-
-                  }
-                />
-              </PanelRow>
-
-
-            </PanelBody>
-            <PanelBody title="Separator" initialOpen={false}>
-
-              <PanelRow>
-                <label for="">Separator</label>
-                <InputControl
-                  value={separator.options.text}
-                  onChange={(newVal) => {
-
-                    var options = { ...separator.options, text: newVal }
-                    setAttributes({ separator: { ...separator, options: options } });
-
-
-                  }
-
-                  }
-                />
-              </PanelRow>
-
-            </PanelBody>
-
-
-            <PanelBody title="Meta Value Return" initialOpen={true}>
-
-              <div className='p-3'>
-
-
-
-
-
-
-              </div>
-
-            </PanelBody>
 
 
             <div className=''>
@@ -834,15 +725,7 @@ registerBlockType("post-grid/post-meta", {
                     <p><code>.pg-postMeta a{'{/* your CSS here*/}'}</code></p>
                   </div>
 
-                  <div className='my-3'>
-                    <p className='font-bold'>Separator</p>
-                    <p><code>{itemSeparatorSelector}{'{/* your CSS here*/}'} </code></p>
-                  </div>
 
-                  <div className='my-3'>
-                    <p className='font-bold'>Front Text</p>
-                    <p><code>{frontTextSelector}{'{/* your CSS here*/}'} </code></p>
-                  </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>Post Count</p>
@@ -880,26 +763,23 @@ registerBlockType("post-grid/post-meta", {
         <>
 
 
-          {meta.options.key.length == 0 && (<InputControl
-            placeholder="Meta key"
-            value={meta.options.key}
-            onChange={(newVal) => {
+          {shortcode.options.key.length == 0 && (<PGDropdown position="bottom right" variant="secondary" options={shortcodes} buttonTitle="Choose" onChange={(option, index) => {
 
-              var options = { ...meta.options, key: newVal }
-              setAttributes({ meta: { ...meta, options: options } });
+            console.log(option);
 
-            }}
-          />)}
+
+            var options = { ...shortcode.options, key: option.value };
+            setAttributes({ shortcode: { ...shortcode, options: options } });
+
+
+          }} values="" value={shortcode.options.key}></PGDropdown>)}
 
 
 
 
 
           <div className='pg-postMeta'>
-            <span className='frontText inline-block'>
-              <RawHTML>{frontText.text}</RawHTML>
 
-            </span>
 
             <RawHTML>{metaHtml}</RawHTML>
 

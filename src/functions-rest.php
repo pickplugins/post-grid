@@ -525,6 +525,31 @@ class BlockPostGridRest
 
 
 
+    function nestedToSingle($array, $slug = '')
+    {
+        $singleDimArray = [];
+
+
+
+        if (is_array($array))
+            foreach ($array as $index =>  $item) {
+
+
+
+                if (is_array($item)) {
+                    $singleDimArray = array_merge($singleDimArray, $this->nestedToSingle((array) $item, $index));
+                } else if (is_object($item)) {
+                    $singleDimArray = array_merge($singleDimArray, $this->nestedToSingle((array) $item, $index));
+                } else {
+                    $index1 = !empty($slug) ? $slug . '-' . $index : $index;
+
+
+                    $singleDimArray['{' . $index1 . '}'] = $item;
+                }
+            }
+
+        return $singleDimArray;
+    }
 
 
     /**
@@ -537,18 +562,61 @@ class BlockPostGridRest
     {
 
         $postId      = isset($post_data['postId']) ? $post_data['postId'] : '';
-        $meta_key    = isset($post_data['meta_key']) ? $post_data['meta_key'] : [];
+        $meta_key    = isset($post_data['meta_key']) ? $post_data['meta_key'] : '';
+        $meta_type    = isset($post_data['type']) ? $post_data['type'] : '';
+        $template    = isset($post_data['template']) ? $post_data['template'] : '';
 
         $response = new stdClass();
+        $response->meta_key = $meta_key;
 
-        if (!empty($meta_key)) {
+
+        if (empty($meta_key)) {
+            //die(wp_json_encode($response));
+        }
+
+
+
+
+
+        if ($meta_type == 'acfImage' || $meta_type == 'acfFile' || $meta_type == 'acfButtonGroup') {
+
+            $acf_value = get_field($meta_key, $postId);
+            if (is_array($acf_value)) {
+                $singleArray = $this->nestedToSingle($acf_value);
+                $response->html = strtr($template, (array)$singleArray);
+                $response->args = $singleArray;
+            }
+
+
             $post_meta = get_post_meta($postId, $meta_key, true);
+
+            $response->meta_value = $acf_value;
+            $response->meta_key = $meta_key;
+        } else if ($meta_type == 'acfTaxonomy' || $meta_type == 'acfPostObject' || $meta_type == 'acfPageLink' || $meta_type == 'acfUser' || $meta_type == 'acfLink') {
+
+            $acf_value = get_field($meta_key, $postId);
+            if (is_array($acf_value)) {
+                $singleArray = $this->nestedToSingle($acf_value);
+                $response->html = strtr($template, (array)$singleArray);
+                $response->args = $singleArray;
+            }
+
+
+            $post_meta = get_post_meta($postId, $meta_key, true);
+
+            $response->meta_value = $acf_value;
+            $response->meta_key = $meta_key;
+        } else {
+            $post_meta = get_post_meta($postId, $meta_key, true);
+
+            $singleArray = ['{metaValue}' => $post_meta];
+
+            $response->args = $singleArray;
+            $response->html = strtr($template, (array)$singleArray);
 
             $response->meta_value = $post_meta;
             $response->meta_key = $meta_key;
         }
-
-
 
 
 

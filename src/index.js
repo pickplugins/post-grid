@@ -54,6 +54,7 @@ import './blocks/post-categories'
 import './blocks/post-tags'
 import './blocks/post-taxonomies'
 import './blocks/post-date'
+import './blocks/post-meta'
 import './blocks/read-more'
 
 
@@ -67,7 +68,7 @@ import './blocks/tabs'
 import './blocks/list'
 import './blocks/icon'
 
-// import './blocks/post-meta'
+//import './blocks/shortcode'
 
 // import './blocks/link'
 // import './blocks/query'

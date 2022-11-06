@@ -14,11 +14,11 @@ class BlockPostMeta
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/post-meta/index.css');
-        wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-meta/index.js', array('wp-blocks', 'wp-element'));
+        wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/shortcode/index.css');
+        wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/shortcode/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/post-meta', array(
+        register_block_type('post-grid/shortcode', array(
             'editor_script' => 'editor_script',
             'editor_style' => 'editor_style',
             //'script' => 'front_script',
@@ -41,25 +41,7 @@ class BlockPostMeta
     }
 
 
-    function nestedToSingle($array, $slug = '')
-    {
-        $singleDimArray = [];
 
-        if (is_array($array))
-            foreach ($array as $index => $item) {
-
-                if (is_array($item)) {
-                    $singleDimArray = array_merge($singleDimArray, $this->nestedToSingle($item, $index));
-                } else {
-                    $index1 = !empty($slug) ? $slug . '-' . $index : $index;
-
-
-                    $singleDimArray['{' . $index1 . '}'] = $item;
-                }
-            }
-
-        return $singleDimArray;
-    }
 
     // front-end output from the gutenberg editor 
     function theHTML($attributes, $content, $block)
@@ -106,11 +88,6 @@ class BlockPostMeta
 
 
 
-        $acf_value = get_field($metaKey, $post_ID);
-
-
-        echo '<pre style="text-align: left">' . var_export($acf_value, true) . '</pre>';
-
 
 
 
@@ -132,17 +109,6 @@ class BlockPostMeta
 
 
 
-
-        //echo strtr($templateFront, $vars);
-
-        if (is_array($acf_value)) {
-
-
-            $singleArrayForCategory = $this->nestedToSingle($acf_value,);
-            //echo '<pre style="text-align: left">' . var_export($singleArrayForCategory, true) . '</pre>';
-
-            //echo strtr($templateFront, (array)$singleArrayForCategory);
-        }
 
 
 

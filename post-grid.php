@@ -59,6 +59,7 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/image/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/list/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/icon/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/post-meta/index.php');
 
 
             $postGridCss = [];

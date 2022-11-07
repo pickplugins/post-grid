@@ -1024,15 +1024,9 @@ class BlockPostGridRest
     {
 
         $post_types  = isset($request['postTypes']) ? $request['postTypes'] : ['post'];
-
         $search  = isset($request['search']) ? $request['search'] : '';
 
-
-
         $taxonomies = get_object_taxonomies($post_types);
-
-
-
         $terms = [];
         $taxonomiesArr = [];
 
@@ -1273,10 +1267,13 @@ class BlockPostGridRest
     public function get_tax_terms($tax_data)
     {
         $taxonomy = $tax_data['taxonomy'];
+        $search = $tax_data['search'];
+
         $terms    = get_terms(
             array(
                 'taxonomy'   => $taxonomy,
-                'hide_empty' => true,
+                'search'   => $search,
+                'hide_empty' => false,
             )
         );
         if (is_wp_error($terms)) {

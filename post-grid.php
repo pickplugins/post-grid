@@ -61,6 +61,9 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/icon/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-meta/index.php');
 
+            require_once(post_grid_plugin_dir . 'src/blocks/post-grid-filterable/index.php');
+
+
 
             $postGridCss = [];
             $postGridCssY = [];

@@ -1553,7 +1553,7 @@ registerBlockType("post-grid/image", {
                     { label: 'Media', value: 'media' },
                     { label: 'Custom Field', value: 'customField' },
                     { label: 'Image Source URL', value: 'customUrl' },
-                    { label: 'Image ID', value: 'imgId' },
+                    // { label: 'Image ID', value: 'imgId' },
                   ]}
                   onChange={(newVal) => {
                     var options = { ...image.options, imgSrcType: newVal };

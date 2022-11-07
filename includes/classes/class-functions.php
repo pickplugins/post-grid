@@ -34,6 +34,7 @@ class class_post_grid_functions
         $args['meta_value_num'] = __('Meta Value(number)', 'post-grid');
         $args['post__in'] = __('post__in', 'post-grid');
         $args['post_name__in'] = __('post_name__in', 'post-grid');
+        // $args['tec_event_start_date'] = __('tec_event_start_date', 'post-grid');
 
         return apply_filters('post_grid_orderby', $args);
     }
@@ -50,6 +51,14 @@ class class_post_grid_functions
         $args['inherit'] = __('Inherit', 'post-grid');
         $args['trash'] = __('Trash', 'post-grid');
         $args['any'] = __('Any', 'post-grid');
+        // $args['tribe-ea-success'] = __('tribe-ea-success', 'post-grid');
+        // $args['tribe-ea-failed'] = __('tribe-ea-failed', 'post-grid');
+        // $args['tribe-ea-schedule'] = __('tribe-ea-schedule', 'post-grid');
+        // $args['tribe-ea-pending'] = __('tribe-ea-pending', 'post-grid');
+        // $args['tribe-ea-draft'] = __('tribe-ea-draft', 'post-grid');
+
+
+
 
 
         return apply_filters('post_grid_post_status', $args);

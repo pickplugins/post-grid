@@ -76,4 +76,5 @@ import './blocks/icon'
 // import './blocks/innerblocks'
 
 
+ import './blocks/post-grid-filterable'
 

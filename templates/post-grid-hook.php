@@ -683,7 +683,7 @@ function post_grid_container_old_layout_css($args)
             $item_key = isset($item_info['key']) ? $item_info['key'] : '';
 
             if ($item_key == 'categories' || $item_key == 'tags') {
-        ?>#post-grid-<?php echo esc_attr($grid_id); ?> .element_<?php echo esc_attr($item_id); ?>a {
+        ?>#post-grid-<?php echo esc_attr($grid_id); ?>.element_<?php echo esc_attr($item_id); ?>a {
             <?php echo esc_attr($item_css); ?>
         }
 
@@ -691,11 +691,11 @@ function post_grid_container_old_layout_css($args)
             } elseif ($item_key == 'down_arrow') {
                 $arrow_size = $item_info['arrow_size'];
                 $arrow_bg_color = $item_info['arrow_bg_color'];
-        ?>#post-grid-<?php echo esc_attr($grid_id); ?> .element_<?php echo esc_attr($item_id); ?> {
+        ?>#post-grid-<?php echo esc_attr($grid_id); ?>.element_<?php echo esc_attr($item_id); ?> {
             <?php echo esc_attr($item_css); ?>
         }
 
-        #post-grid-<?php echo esc_attr($grid_id); ?> .element_<?php echo esc_attr($item_id); ?> {
+        #post-grid-<?php echo esc_attr($grid_id); ?>.element_<?php echo esc_attr($item_id); ?> {
             border-left: <?php echo esc_attr($arrow_size); ?> solid rgba(0, 0, 0, 0);
             border-right: <?php echo esc_attr($arrow_size); ?> solid rgba(0, 0, 0, 0);
             border-top: <?php echo esc_attr($arrow_size); ?> solid <?php echo esc_attr($arrow_bg_color); ?>;
@@ -708,11 +708,11 @@ function post_grid_container_old_layout_css($args)
             } elseif ($item_key == 'up_arrow') {
                 $arrow_size = $item_info['arrow_size'];
                 $arrow_bg_color = $item_info['arrow_bg_color'];
-        ?>#post-grid-<?php echo esc_attr($grid_id); ?> .element_<?php echo esc_attr($item_id); ?> {
+        ?>#post-grid-<?php echo esc_attr($grid_id); ?>.element_<?php echo esc_attr($item_id); ?> {
             <?php echo esc_attr($item_css); ?>
         }
 
-        #post-grid-<?php echo esc_attr($grid_id); ?> .element_<?php echo esc_attr($item_id); ?> {
+        #post-grid-<?php echo esc_attr($grid_id); ?>.element_<?php echo esc_attr($item_id); ?> {
             border-bottom: <?php echo esc_attr($arrow_size); ?> solid <?php echo esc_attr($arrow_bg_color); ?>;
             border-left: <?php echo esc_attr($arrow_size); ?> solid transparent;
             border-right: <?php echo esc_attr($arrow_size); ?> solid transparent;
@@ -722,7 +722,7 @@ function post_grid_container_old_layout_css($args)
 
         <?php
             } else {
-        ?>#post-grid-<?php echo esc_attr($grid_id); ?> .element_<?php echo esc_attr($item_id); ?> {
+        ?>#post-grid-<?php echo esc_attr($grid_id); ?>.element_<?php echo esc_attr($item_id); ?> {
             <?php echo esc_attr($item_css); ?>
         }
 
@@ -847,14 +847,14 @@ function post_grid_pagination_normal($args, $post_grid_wp_query)
         ?>
     </div>
     <style type="text/css">
-        #post-grid-<?php echo esc_attr($grid_id); ?> .pagination .page-numbers {
+        #post-grid-<?php echo esc_attr($grid_id); ?>.pagination .page-numbers {
             font-size: <?php echo esc_attr($pagination_font_size); ?>;
             color: <?php echo esc_attr($pagination_font_color); ?>;
             background: <?php echo esc_attr($pagination_bg_color); ?>;
         }
 
-        #post-grid-<?php echo esc_attr($grid_id); ?> .pagination .page-numbers:hover,
-        #post-grid-<?php echo esc_attr($grid_id); ?> .pagination .page-numbers.current {
+        #post-grid-<?php echo esc_attr($grid_id); ?>.pagination .page-numbers:hover,
+        #post-grid-<?php echo esc_attr($grid_id); ?>.pagination .page-numbers.current {
             background: <?php echo esc_attr($pagination_active_bg_color); ?>;
         }
     </style>
@@ -952,7 +952,7 @@ function post_grid_view_type_css_grid($args)
 
 ?>
     <style type="text/css">
-        #post-grid-<?php echo esc_attr($grid_id); ?>  {
+        #post-grid-<?php echo esc_attr($grid_id); ?> {
             <?php if (!empty($container_padding)) : ?>padding: <?php echo esc_attr($container_padding); ?>;
             <?php endif; ?><?php if (!empty($container_bg_color)) : ?>background-color: <?php echo esc_attr($container_bg_color); ?>;
             <?php endif; ?><?php if (!empty($container_bg_image)) : ?>background-image: url(<?php echo esc_attr($container_bg_image); ?>);
@@ -960,9 +960,9 @@ function post_grid_view_type_css_grid($args)
             <?php endif; ?>
         }
 
-        #post-grid-<?php echo esc_attr($grid_id); ?> .grid-items {}
+        #post-grid-<?php echo esc_attr($grid_id); ?>.grid-items {}
 
-        #post-grid-<?php echo esc_attr($grid_id); ?> .item {
+        #post-grid-<?php echo esc_attr($grid_id); ?>.item {
             /* <?php //if(!empty($items_margin)): 
                 ?>
             margin:<?php //echo esc_attr($items_margin); 
@@ -974,7 +974,7 @@ function post_grid_view_type_css_grid($args)
             <?php endif; ?>
         }
 
-        #post-grid-<?php echo esc_attr($grid_id); ?> .item .layer-media {
+        #post-grid-<?php echo esc_attr($grid_id); ?>.item .layer-media {
             <?php
             if ($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height') {
                 echo 'height:' . esc_attr($items_media_height) . ';';
@@ -988,7 +988,7 @@ function post_grid_view_type_css_grid($args)
 
         @media only screen and (min-width: 0px) and (max-width: 767px) {
 
-            #post-grid-<?php echo esc_attr($grid_id); ?> .grid-items {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.grid-items {
 
 
                 <?php if (is_integer($items_width_mobile)) : ?><?php
@@ -1003,7 +1003,7 @@ function post_grid_view_type_css_grid($args)
             }
 
 
-            #post-grid-<?php echo esc_attr($grid_id); ?> .item {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.item {
                 <?php if (!empty($items_width_mobile) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_mobile); ?>;
                 margin: <?php echo esc_attr($items_margin); ?>;
                 display: inline-block;
@@ -1023,7 +1023,7 @@ function post_grid_view_type_css_grid($args)
         }
 
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            #post-grid-<?php echo esc_attr($grid_id); ?> .grid-items {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.grid-items {
                 <?php if (is_integer($items_width_tablet)) : ?><?php
                                                                 $column_html = '';
                                                                 for ($i = 1; $i <= $items_width_tablet; $i++) {
@@ -1035,7 +1035,7 @@ function post_grid_view_type_css_grid($args)
                 row-gap: <?php echo esc_attr($items_margin); ?> <?php endif; ?>
             }
 
-            #post-grid-<?php echo esc_attr($grid_id); ?> .item {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.item {
                 <?php if (!empty($items_width_tablet) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_tablet); ?>;
                 margin: <?php echo esc_attr($items_margin); ?>;
                 display: inline-block;
@@ -1056,7 +1056,7 @@ function post_grid_view_type_css_grid($args)
 
         @media only screen and (min-width: 1024px) {
 
-            #post-grid-<?php echo esc_attr($grid_id); ?> .grid-items {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.grid-items {
                 <?php if (is_integer($items_width_desktop)) : ?><?php
                                                                 $column_html = '';
                                                                 for ($i = 1; $i <= $items_width_desktop; $i++) {
@@ -1069,7 +1069,7 @@ function post_grid_view_type_css_grid($args)
             }
 
 
-            #post-grid-<?php echo esc_attr($grid_id); ?> .item {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.item {
                 <?php if (!empty($items_width_desktop) && !is_integer($items_width_desktop)) : ?>width: <?php echo esc_attr($items_width_desktop); ?>;
                 display: inline-block;
                 margin: <?php echo esc_attr($items_margin); ?>;
@@ -1097,7 +1097,7 @@ function post_grid_view_type_css_grid($args)
             $width = intval((int)$items_width_desktop * $grid_layout_col_multi) + intval((int)$items_margin * 2 * ($grid_layout_col_multi - 1));
 
         ?>@media only screen and (min-width: 1024px) {
-            #post-grid-<?php echo esc_attr($grid_id); ?> .item:first-child {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.item:first-child {
                 width: <?php echo esc_attr($width); ?>px;
             }
         }
@@ -1109,7 +1109,7 @@ function post_grid_view_type_css_grid($args)
 
 
         ?>@media only screen and (min-width: 1024px) {
-            #post-grid-<?php echo esc_attr($grid_id); ?> .item:last-child {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.item:last-child {
                 width: <?php echo esc_attr($width); ?>px;
             }
         }
@@ -1118,11 +1118,11 @@ function post_grid_view_type_css_grid($args)
         } elseif ($grid_layout_name == 'layout_3') {
             $width = intval($items_width_desktop) + intval($items_margin);
         ?>@media only screen and (min-width: 1024px) {
-            #post-grid-<?php echo esc_attr($grid_id); ?> .item:first-child {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.item:first-child {
                 float: left;
             }
 
-            #post-grid-<?php echo esc_attr($grid_id); ?> .item {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.item {
                 float: right;
             }
         }
@@ -1130,7 +1130,7 @@ function post_grid_view_type_css_grid($args)
         <?php
         } elseif ($grid_layout_name == 'layout_L_R') {
         ?>@media only screen and (min-width: 1024px) {
-            #post-grid-<?php echo esc_attr($grid_id); ?> .item.odd .layer-media {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.item.odd .layer-media {
                 float: right;
             }
         }
@@ -1140,8 +1140,8 @@ function post_grid_view_type_css_grid($args)
             $width = intval((int)$items_width_desktop * $grid_layout_col_multi) + intval((int)$items_margin * 2 * ($grid_layout_col_multi - 1));
         ?>@media only screen and (min-width: 1024px) {
 
-            #post-grid-<?php echo esc_attr($grid_id); ?> .item:nth-child(1),
-            #post-grid-<?php echo esc_attr($grid_id); ?> .item:nth-child(<?php echo esc_attr($grid_layout_col_multi + 2); ?>) {
+            #post-grid-<?php echo esc_attr($grid_id); ?>.item:nth-child(1),
+            #post-grid-<?php echo esc_attr($grid_id); ?>.item:nth-child(<?php echo esc_attr($grid_layout_col_multi + 2); ?>) {
                 width: <?php echo esc_attr($width); ?>px;
             }
         }

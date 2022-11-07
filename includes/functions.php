@@ -1165,6 +1165,3 @@ function post_grid_ajax_search()
 
 add_action('wp_ajax_post_grid_ajax_search', 'post_grid_ajax_search');
 add_action('wp_ajax_nopriv_post_grid_ajax_search', 'post_grid_ajax_search');
-
-
-

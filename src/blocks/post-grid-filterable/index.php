@@ -518,19 +518,26 @@ class PGBlockPostGridFilterable
                         $groupType = isset($filterGroup['type']) ? $filterGroup['type'] : '';
                         $groupLogic = isset($filterGroup['logic']) ? $filterGroup['logic'] : '';
                         $groupshowPostCount = isset($filterGroup['showPostCount']) ? $filterGroup['showPostCount'] : '';
-                        $groupshowitems = isset($filterGroup['items']) ? $filterGroup['items'] : [];
+                        $groupitems = isset($filterGroup['items']) ? $filterGroup['items'] : [];
 
 
 
 
-                        if (!empty($groupshowitems)) {
+                        if (!empty($groupitems)) {
 
                 ?>
 
-                            <div class="filter-group">
+                            <div class="filterable-group">
+
+                                <span class="filterable-group-title">
+                                    <?php echo esc_html($groupTitle); ?>
+                                </span>
+
                                 <?php
 
-                                foreach ($groupshowitems as $item) {
+
+
+                                foreach ($groupitems as $item) {
                                     $itemId = isset($item['id']) ? $item['id'] : '';
                                     $itemSlug = isset($item['slug']) ? $item['slug'] : '';
                                     $itemTitle = isset($item['title']) ? $item['title'] : '';

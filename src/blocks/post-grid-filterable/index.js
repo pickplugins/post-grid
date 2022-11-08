@@ -211,7 +211,7 @@ registerBlockType("post-grid/post-grid-filterable", {
       default: {
 
         options: {
-          filters: [{ groupTitle: '', type: '', logic: '', showPostCount: '', items: [] }], allText: 'All', showSort: '', activeFilter: '',
+          filters: [{ groupTitle: '', type: '', logic: '', showPostCount: '', items: [], styles: {} }], allText: 'All', showSort: '', activeFilter: '',
         },
         styles:
         {
@@ -225,6 +225,42 @@ registerBlockType("post-grid/post-grid-filterable", {
 
       },
     },
+
+    activeFilter: {
+      type: 'object',
+      default: {
+        options: {},
+        styles:
+        {
+          textAlign: {},
+          color: {},
+          bgColor: {},
+          wordBreak: {},
+          padding: {},
+          margin: {}
+        },
+
+      },
+    },
+
+    filterGroup: {
+      type: 'object',
+      default: {
+        options: {},
+        styles:
+        {
+          textAlign: {},
+          color: {},
+          bgColor: {},
+          wordBreak: {},
+          padding: {},
+          margin: {}
+        },
+
+      },
+    },
+
+
     noPostsWrap: {
       type: 'object',
       default: {
@@ -460,6 +496,8 @@ registerBlockType("post-grid/post-grid-filterable", {
     var noPostsWrap = attributes.noPostsWrap;
     var spinnerWrap = attributes.spinnerWrap;
     var filterable = attributes.filterable;
+    var activeFilter = attributes.activeFilter;
+    var filterGroup = attributes.filterGroup;
 
     var grid = attributes.grid;
     var layout = attributes.layout;
@@ -480,9 +518,11 @@ registerBlockType("post-grid/post-grid-filterable", {
     const loopItemsWrapSelector = blockClass + ' .items-loop';
     const loopItemSelector = blockClass + ' .item';
 
-    const filterGroupSelector = blockClass + ' .filter-group';
+    const filterGroupSelector = blockClass + ' .filterable-group';
+    const filterGroupTitleSelector = blockClass + ' .filterable-group-title';
 
-    const filterItemSelector = blockClass + ' .filter';
+    const filterSelector = blockClass + ' .pg-filter';
+    const filterActiveSelector = blockClass + ' .pg-filter.active';
 
 
     const noPostsSelector = blockClass + ' .no-posts';
@@ -4892,12 +4932,405 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
+                <PanelBody title="Filters Style" initialOpen={false} >
+
+                  <label for="">Text Color</label>
+
+                  <ColorPalette
+                    color={filterable.styles.color[breakPointX]}
+                    colors={colorsPresets}
+                    enableAlpha
+                    onChange={(newVal) => {
+
+                      var newValuesObj = {};
+
+
+                      if (Object.keys(filterable.styles.color).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = filterable.styles.color;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...filterable.styles, color: newValuesObj };
+                      setAttributes({ filterable: { ...filterable, styles: styles } });
+
+
+
+
+                      var itemsX = { ...blockCssY.items };
+                      itemsX[filterSelector] = { ...blockCssY.items[filterSelector], 'color': newValuesObj };
+
+                      setAttributes({ blockCssY: { items: itemsX } });
+
+
+                    }}
+                  />
+
+
+
+                  <label for="">Background Color</label>
+
+
+                  <ColorPalette
+                    color={filterable.styles.bgColor[breakPointX]}
+                    colors={colorsPresets}
+                    enableAlpha
+                    onChange={(newVal) => {
+
+                      var newValuesObj = {};
+
+
+                      if (Object.keys(filterable.styles.bgColor).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = filterable.styles.bgColor;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...filterable.styles, bgColor: newValuesObj };
+                      setAttributes({ filterable: { ...filterable, styles: styles } });
+
+
+
+
+                      var itemsX = { ...blockCssY.items };
+                      itemsX[filterSelector] = { ...blockCssY.items[filterSelector], 'background-color': newValuesObj };
+
+                      setAttributes({ blockCssY: { items: itemsX } });
+
+
+
+
+                    }}
+                  />
 
 
 
 
 
+                  <PanelRow>
+                    <label>Text Align</label>
+                    <PGcssTextAlign val={filterable.styles.textAlign[breakPointX]} onChange={(newVal => {
 
+
+                      var newValuesObj = {};
+
+                      if (Object.keys(filterable.styles.textAlign).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = filterable.styles.textAlign;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...filterable.styles, textAlign: newValuesObj };
+                      setAttributes({ filterable: { ...filterable, styles: styles } });
+
+                      blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'text-align': newValuesObj };
+                      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+                    })} />
+                  </PanelRow>
+
+
+
+                  <PanelRow>
+                    <label>Padding</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+                  <BoxControl
+                    label=''
+                    values={filterable.styles.padding[breakPointX]}
+                    onChange={(nextValues) => { paginationPaddingControl(nextValues) }}
+                  />
+
+
+
+
+
+                  <PanelRow>
+                    <label>Margin</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+                  <BoxControl
+                    label=""
+                    values={filterable.styles.margin[breakPointX]}
+                    onChange={(nextValues) => { paginationMarginControl(nextValues) }}
+                  />
+
+
+                </PanelBody>
+
+
+
+                <PanelBody title="Active Filter Style" initialOpen={false} >
+
+                  <label for="">Text Color</label>
+
+                  <ColorPalette
+                    color={activeFilter.styles.color[breakPointX]}
+                    colors={colorsPresets}
+                    enableAlpha
+                    onChange={(newVal) => {
+
+                      var newValuesObj = {};
+
+
+                      if (Object.keys(activeFilter.styles.color).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = activeFilter.styles.color;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...activeFilter.styles, color: newValuesObj };
+                      setAttributes({ activeFilter: { ...activeFilter, styles: styles } });
+
+
+
+
+                      var itemsX = { ...blockCssY.items };
+                      itemsX[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'color': newValuesObj };
+
+                      setAttributes({ blockCssY: { items: itemsX } });
+
+
+                    }}
+                  />
+
+
+
+                  <label for="">Background Color</label>
+
+
+                  <ColorPalette
+                    color={activeFilter.styles.bgColor[breakPointX]}
+                    colors={colorsPresets}
+                    enableAlpha
+                    onChange={(newVal) => {
+
+                      var newValuesObj = {};
+
+
+                      if (Object.keys(activeFilter.styles.bgColor).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = activeFilter.styles.bgColor;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...activeFilter.styles, bgColor: newValuesObj };
+                      setAttributes({ activeFilter: { ...activeFilter, styles: styles } });
+
+
+
+
+                      var itemsX = { ...blockCssY.items };
+                      itemsX[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'background-color': newValuesObj };
+
+                      setAttributes({ blockCssY: { items: itemsX } });
+
+
+
+
+                    }}
+                  />
+
+
+
+
+
+                  <PanelRow>
+                    <label>Text Align</label>
+                    <PGcssTextAlign val={activeFilter.styles.textAlign[breakPointX]} onChange={(newVal => {
+
+
+                      var newValuesObj = {};
+
+                      if (Object.keys(activeFilter.styles.textAlign).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = activeFilter.styles.textAlign;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...activeFilter.styles, textAlign: newValuesObj };
+                      setAttributes({ activeFilter: { ...activeFilter, styles: styles } });
+
+                      blockCssY.items[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'text-align': newValuesObj };
+                      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+                    })} />
+                  </PanelRow>
+
+
+
+                  <PanelRow>
+                    <label>Padding</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+                  <BoxControl
+                    label=''
+                    values={activeFilter.styles.padding[breakPointX]}
+                    onChange={(nextValues) => { paginationPaddingControl(nextValues) }}
+                  />
+
+
+
+
+
+                  <PanelRow>
+                    <label>Margin</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+                  <BoxControl
+                    label=""
+                    values={activeFilter.styles.margin[breakPointX]}
+                    onChange={(nextValues) => { paginationMarginControl(nextValues) }}
+                  />
+
+
+                </PanelBody>
+
+
+
+                <PanelBody title="Filter Group" initialOpen={false} >
+
+                  <label for="">Text Color</label>
+
+                  <ColorPalette
+                    color={filterGroup.styles.color[breakPointX]}
+                    colors={colorsPresets}
+                    enableAlpha
+                    onChange={(newVal) => {
+
+                      var newValuesObj = {};
+
+
+                      if (Object.keys(filterGroup.styles.color).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = filterGroup.styles.color;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...filterGroup.styles, color: newValuesObj };
+                      setAttributes({ filterGroup: { ...filterGroup, styles: styles } });
+
+
+
+
+                      var itemsX = { ...blockCssY.items };
+                      itemsX[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'color': newValuesObj };
+
+                      setAttributes({ blockCssY: { items: itemsX } });
+
+
+                    }}
+                  />
+
+
+
+                  <label for="">Background Color</label>
+
+
+                  <ColorPalette
+                    color={filterGroup.styles.bgColor[breakPointX]}
+                    colors={colorsPresets}
+                    enableAlpha
+                    onChange={(newVal) => {
+
+                      var newValuesObj = {};
+
+
+                      if (Object.keys(filterGroup.styles.bgColor).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = filterGroup.styles.bgColor;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...filterGroup.styles, bgColor: newValuesObj };
+                      setAttributes({ filterGroup: { ...filterGroup, styles: styles } });
+
+
+
+
+                      var itemsX = { ...blockCssY.items };
+                      itemsX[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'background-color': newValuesObj };
+
+                      setAttributes({ blockCssY: { items: itemsX } });
+
+
+
+
+                    }}
+                  />
+
+
+
+
+
+                  <PanelRow>
+                    <label>Text Align</label>
+                    <PGcssTextAlign val={filterGroup.styles.textAlign[breakPointX]} onChange={(newVal => {
+
+
+                      var newValuesObj = {};
+
+                      if (Object.keys(filterGroup.styles.textAlign).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = filterGroup.styles.textAlign;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...filterGroup.styles, textAlign: newValuesObj };
+                      setAttributes({ filterGroup: { ...filterGroup, styles: styles } });
+
+                      blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'text-align': newValuesObj };
+                      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+                    })} />
+                  </PanelRow>
+
+
+
+                  <PanelRow>
+                    <label>Padding</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+                  <BoxControl
+                    label=''
+                    values={filterGroup.styles.padding[breakPointX]}
+                    onChange={(nextValues) => { paginationPaddingControl(nextValues) }}
+                  />
+
+
+
+
+
+                  <PanelRow>
+                    <label>Margin</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+                  <BoxControl
+                    label=""
+                    values={filterGroup.styles.margin[breakPointX]}
+                    onChange={(nextValues) => { paginationMarginControl(nextValues) }}
+                  />
+
+
+                </PanelBody>
 
 
 
@@ -5544,7 +5977,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
-          <div>
+          <>
 
             {(lazyLoad.options.enable == 'yes' && isBusy) &&
               (
@@ -5557,7 +5990,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
             <div className='filterable-navs'>
-              <div className='pg-filter-group mx-3 inline-block'>
+              <div className='filterable-group  '>
 
                 <div className='filter cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter='all'>All</div>
               </div>
@@ -5567,25 +6000,23 @@ registerBlockType("post-grid/post-grid-filterable", {
 
                   return (
 
-                    <div className='pg-filter-group mx-3 inline-block' data-logic={x.logic}>
+                    <div className='filterable-group ' data-logic={x.logic}>
 
                       {x.groupTitle && (
-                        <div className='filter-group-title px-4 py-2 m-2 inline-block mx-2'>{x.groupTitle}</div>
+                        <div className='filterable-group-title px-4 py-2 m-2 inline-block mx-2'>{x.groupTitle}</div>
                       )}
 
 
-                      <div className='filter-group-items inline-block'>
-                        {x.items.map(y => {
+                      {x.items.map(y => {
 
-                          return (
+                        return (
 
-                            <div className='filter cursor-pointer cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' terms-id={y.id} data-filter={'.' + y.slug}>{y.title} {x.showPostCount == 'yes' ? '(' + y.count + ')' : ''}</div>
+                          <div className='pg-filter cursor-pointer cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' terms-id={y.id} data-filter={'.' + y.slug}>{y.title} {x.showPostCount == 'yes' ? '(' + y.count + ')' : ''}</div>
 
-                          )
+                        )
 
-                        })}
+                      })}
 
-                      </div>
 
 
                     </div>
@@ -5612,32 +6043,32 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
+
+
+            {postsQuery == false && posts == null &&
+
+              (
+                <div className={noPostsWrap.options.class}>No Post found</div>
+
+              )
+            }
+
+            {
+              postsQuery &&
+
+              (
+                <div className={spinnerWrap.options.class}><Spinner /></div>
+              )
+
+            }
+
+
+            {(isBusy) &&
+              (
+                <div className="text-center"><Spinner /></div>
+              )
+            }
             <div>
-
-              {postsQuery == false && posts == null &&
-
-                (
-                  <div className={noPostsWrap.options.class}>No Post found</div>
-
-                )
-              }
-
-              {
-                postsQuery &&
-
-                (
-                  <div className={spinnerWrap.options.class}><Spinner /></div>
-                )
-
-              }
-
-
-              {(isBusy) &&
-                (
-                  <div className="text-center"><Spinner /></div>
-                )
-              }
-
               {postsQuery == false && posts != null && posts.length > 0 &&
                 (
                   <div className={itemsWrap.options.class}>
@@ -5767,7 +6198,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
             </div>
 
-          </div>
+          </>
 
 
 

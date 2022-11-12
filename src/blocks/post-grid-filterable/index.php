@@ -18,7 +18,10 @@ class PGBlockPostGridFilterable
         wp_register_style('pgpostgrid_front_style', post_grid_plugin_url . 'src/blocks/post-grid-filterable/index.css');
 
         wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'src/blocks/post-grid-filterable/index.js', array('wp-blocks', 'wp-element'));
-        wp_register_script('pgpostgrid_front_script', post_grid_plugin_url . 'src/blocks/post-grid-filterable/front-scripts.js', []);
+        wp_register_script('pgpostgridfilterable_front_script', post_grid_plugin_url . 'src/blocks/post-grid-filterable/front-scripts.js', []);
+        wp_register_script('pgpostgridfilterable_mixitup', post_grid_plugin_url . 'src/blocks/post-grid-filterable/mixitup.js', []);
+        wp_register_script('pgpostgridfilterable_mixitup_multifilter', post_grid_plugin_url . 'src/blocks/post-grid-filterable/mixitup-multifilter.js', []);
+        wp_register_script('pgpostgridfilterable_mixitup_pagination', post_grid_plugin_url . 'src/blocks/post-grid-filterable/mixitup-pagination.js', []);
 
         //wp_register_script('anime.min', post_grid_plugin_url . 'assets/global/js/anime.min.js', []);
 
@@ -28,7 +31,7 @@ class PGBlockPostGridFilterable
             'editor_script' => 'pgpostgrid_editor_script',
             //'style' => 'pgpostgrid_front_style',
             //'editor_style' => 'pgpostgrid_editor_style',
-            'script' => 'pgpostgrid_front_script',
+            'script' => 'pgpostgridfilterable_front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'render_callback' => array($this, 'theHTML')
         ));
@@ -249,6 +252,11 @@ class PGBlockPostGridFilterable
     {
         wp_enqueue_style('font-awesome-5');
         //wp_enqueue_script('anime.min');
+        wp_enqueue_script('pgpostgridfilterable_mixitup');
+        wp_enqueue_script('pgpostgridfilterable_mixitup_multifilter');
+        wp_enqueue_script('pgpostgridfilterable_mixitup_pagination');
+
+
 
         global $postGridCss;
         global $postGridCustomCss;
@@ -364,7 +372,6 @@ class PGBlockPostGridFilterable
 
 
 
-
         $postGridScriptData[$blockId]['queryArgs'] = isset($queryArgs['items']) ? $queryArgs['items'] : [];
         $postGridScriptData[$blockId]['layout']['id'] = isset($layout['id']) ? $layout['id'] : '';
         $postGridScriptData[$blockId]['layout']['rawData'] = isset($layout['rawData']) ? $layout['rawData'] : '';
@@ -474,11 +481,7 @@ class PGBlockPostGridFilterable
 
 
 ?>
-        <pre>
 
-<?php echo var_export($filterable, true); ?>
-
-</pre>
 
         <?php if ($lazyLoadEnable == 'yes') : ?>
             <div class=" PGBlockPostGrid-lazyload" id="lazyload-<?php echo $blockId; ?>">
@@ -508,6 +511,11 @@ class PGBlockPostGridFilterable
             <div class="loop-loading"></div>
 
             <div class="filters-wrap">
+
+                <div class="filterable-group" data-filter-group data-logic="and">
+                    <span class="pg-filter pg-filter-<?php echo esc_attr($blockId); ?>" data-filter="all"><?php echo 'All'; ?></span>
+                </div>
+
 
                 <?php
 
@@ -545,7 +553,7 @@ class PGBlockPostGridFilterable
 
                                 ?>
 
-                                    <span class="filter" data-filter="<?php echo  '.' . esc_attr($itemSlug); ?>">
+                                    <span class="pg-filter pg-filter-<?php echo  esc_attr($blockId); ?>" data-filter="<?php echo  '.' . esc_attr($itemSlug); ?>">
                                         <?php echo esc_html($itemTitle) ?>
 
                                         <?php echo ($groupshowPostCount == 'yes') ?  '(' . esc_html($itemCount) . ')' : '' ?>
@@ -580,9 +588,14 @@ class PGBlockPostGridFilterable
             <div class="items-loop" id="items-loop-<?php echo $blockId; ?>">
                 <?php
                 if (!empty($responses['posts'])) {
-                    foreach ($responses['posts'] as $post) {
+                    foreach ($responses['posts'] as $postId => $post) {
+
+                        $slug = post_grid_term_slug_list($postId)
+
                 ?>
-                        <div class="item">
+
+                        <div class="item mix <?php echo esc_attr($slug);
+                                                ?>">
                             <?php echo $post; ?>
                         </div>
                 <?php
@@ -593,88 +606,7 @@ class PGBlockPostGridFilterable
 
             <?php if ($paginationType != 'none') : ?>
                 <div id="pagination-<?php echo $blockId; ?>" class="pagination PGBlockPostGrid-pagination <?php echo esc_attr($paginationType); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
-                    <?php if ($paginationType == 'normal') : ?>
-                        <?php
-                        $big = 999999999; // need an unlikely integer
-                        $pagination_max_num_pages = isset($responses['max_num_pages']) ? $responses['max_num_pages'] : 0;
-
-                        $pages = paginate_links(
-                            array(
-                                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                                'format' => '?paged=%#%',
-                                'current' => max(1, $paged),
-                                'total'                 => $pagination_max_num_pages,
-                                'prev_text'          => $prevText,
-                                'next_text'          => $nextText,
-                                'type'          => 'array',
-
-                            )
-                        );
-
-                        if (!empty($pages)) :
-                            foreach ($pages as $page) {
-                                echo $page;
-                            }
-                        endif;
-                        ?>
-                    <?php endif; ?>
-
-
-                    <?php if ($paginationType == 'ajax') : ?>
-                        <?php
-                        $big = 999999999; // need an unlikely integer
-                        $pagination_max_num_pages = $responses['max_num_pages'];
-
-
-
-                        $pages = paginate_links(
-                            array(
-                                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                                'format' => '?paged=%#%',
-                                'current' => max(1, $paged),
-                                'total'                 => $pagination_max_num_pages,
-                                'prev_text'          => $prevText,
-                                'next_text'          => $nextText,
-                                'type'          => 'array',
-
-                            )
-                        );
-
-                        if (!empty($pages)) :
-                            foreach ($pages as $page) {
-                                //$links = str_replace('<a ', '<a blockArgs="' . esc_attr(json_encode($blockArgs)) . '" ', $page);
-                                echo $page;
-                            }
-                        endif;
-                        ?>
-                    <?php endif; ?>
-
-
-                    <?php if ($paginationType == 'next_previous') : ?>
-                        <a class="page-numbers" href="<?php echo esc_url_raw(get_previous_posts_page_link()); ?>">
-                            <?php echo $prevText; ?>
-                        </a>
-                        <a class="page-numbers" href="<?php echo esc_url_raw(get_next_posts_page_link()); ?>">
-                            <?php echo $nextText; ?>
-                        </a>
-                    <?php endif; ?>
-
-                    <?php if ($paginationType == 'loadmore') : ?>
-
-                        <div class="page-numbers">
-                            <?php echo $loadMoreText; ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if ($paginationType == 'infinite') : ?>
-
-                        <div class="infinite-loader box">Loading...</div>
-
-
-                    <?php endif; ?>
-
-
-
+                    <div class="pager-list mixitup-page-list pager-list-<?php echo $blockId; ?>"></div>
 
                 </div>
             <?php endif; ?>

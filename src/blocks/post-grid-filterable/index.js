@@ -220,7 +220,9 @@ registerBlockType("post-grid/post-grid-filterable", {
           bgColor: {},
           wordBreak: {},
           padding: {},
-          margin: {}
+          margin: {},
+          display: { "Desktop": "inline-block" },
+
         },
 
       },
@@ -237,7 +239,7 @@ registerBlockType("post-grid/post-grid-filterable", {
           bgColor: {},
           wordBreak: {},
           padding: {},
-          margin: {}
+          margin: {},
         },
 
       },
@@ -250,11 +252,13 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
           textAlign: {},
-          color: {},
-          bgColor: {},
+          color: { "Desktop": "#18978F" },
+          bgColor: { "Desktop": "#9DD6DF" },
           wordBreak: {},
           padding: {},
-          margin: {}
+          margin: {},
+          display: { "Desktop": "inline-block" },
+
         },
 
       },
@@ -341,8 +345,8 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
           textAlign: { "Desktop": "center" },
-          color: {},
-          bgColor: {},
+          color: { "Desktop": "#18978F" },
+          bgColor: { "Desktop": "#9DD6DF" },
           padding: {},
           margin: {},
 
@@ -464,7 +468,7 @@ registerBlockType("post-grid/post-grid-filterable", {
           { val: ['publish'], multiple: false, id: 'postStatus', label: 'Post status', description: "Query post by post status" },
           { val: 'DESC', multiple: false, id: 'order', label: 'Order', description: "Post query order" },
           { val: ['date'], multiple: false, id: 'orderby', label: 'Orderby', description: "Post query orderby" },
-          { val: 10, multiple: false, id: 'postsPerPage', label: 'Posts Per Page', description: "Number of post to show per page" },
+          { val: -1, multiple: false, id: 'postsPerPage', label: 'Posts Per Page', description: "Number of post to show per page" },
           { val: 1, multiple: false, id: 'paged', label: 'Paged', description: "Pagination start with" },
 
         ]
@@ -522,7 +526,7 @@ registerBlockType("post-grid/post-grid-filterable", {
     const filterGroupTitleSelector = blockClass + ' .filterable-group-title';
 
     const filterSelector = blockClass + ' .pg-filter';
-    const filterActiveSelector = blockClass + ' .pg-filter.active';
+    const filterActiveSelector = blockClass + ' .pg-filter.mixitup-control-active';
 
 
     const noPostsSelector = blockClass + ' .no-posts';
@@ -531,7 +535,7 @@ registerBlockType("post-grid/post-grid-filterable", {
     const spinnerSelector = blockClass + ' .spinner';
     const paginationWrapSelector = blockClass + ' .pagination';
     const paginationItemSelector = blockClass + ' .pagination .page-numbers';
-    const paginationItemActiveSelector = blockClass + ' .pagination .page-numbers.current';
+    const paginationItemActiveSelector = blockClass + ' .pagination .page-numbers.mixitup-control-active';
 
 
     var tutorialsLinks = [
@@ -1263,8 +1267,143 @@ registerBlockType("post-grid/post-grid-filterable", {
 
     }
 
+    function activeFilterPaddingControl(nextValues) {
 
 
+      var responsive = activeFilter.styles.padding;
+      responsive[breakPointX] = nextValues;
+
+
+      var styles = { ...activeFilter.styles, padding: responsive };
+      setAttributes({ activeFilter: { ...activeFilter, styles: styles } });
+
+
+      var itemsX = { ...blockCssY.items };
+
+      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
+      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
+      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
+      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
+
+
+      blockCssY.items[filterActiveSelector] = (blockCssY.items[filterActiveSelector] != undefined) ? blockCssY.items[filterActiveSelector] : {};
+
+
+
+      if (nextValues.top != undefined) {
+
+        var paddingTop = (blockCssY.items[filterActiveSelector]['padding-top'] != undefined) ? blockCssY.items[filterActiveSelector]['padding-top'] : {};
+        paddingTop[breakPointX] = nextValues.top
+
+
+        blockCssY.items[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'padding-top': paddingTop };
+
+      }
+
+
+      if (nextValues.right != undefined) {
+
+        var paddingRight = (blockCssY.items[filterActiveSelector]['padding-right'] != undefined) ? blockCssY.items[filterActiveSelector]['padding-right'] : {};
+        paddingRight[breakPointX] = nextValues.right
+
+        blockCssY.items[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'padding-right': paddingRight };
+
+
+
+      }
+
+      if (nextValues.bottom != undefined) {
+
+        var paddingBottom = (blockCssY.items[filterActiveSelector]['padding-bottom'] != undefined) ? blockCssY.items[filterActiveSelector]['padding-bottom'] : {};
+        paddingBottom[breakPointX] = nextValues.bottom
+
+        blockCssY.items[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'padding-bottom': paddingBottom };
+
+      }
+
+      if (nextValues.left != undefined) {
+
+        var paddingLeft = (blockCssY.items[filterActiveSelector]['padding-left'] != undefined) ? blockCssY.items[filterActiveSelector]['padding-left'] : {};
+        paddingLeft[breakPointX] = nextValues.left
+
+        blockCssY.items[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'padding-left': paddingLeft };
+
+
+      }
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+    function filterablePaddingControl(nextValues) {
+
+
+      var responsive = filterable.styles.padding;
+      responsive[breakPointX] = nextValues;
+
+
+      var styles = { ...filterable.styles, padding: responsive };
+      setAttributes({ filterable: { ...filterable, styles: styles } });
+
+
+      var itemsX = { ...blockCssY.items };
+
+      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
+      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
+      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
+      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
+
+
+      blockCssY.items[filterSelector] = (blockCssY.items[filterSelector] != undefined) ? blockCssY.items[filterSelector] : {};
+
+
+
+      if (nextValues.top != undefined) {
+
+        var paddingTop = (blockCssY.items[filterSelector]['padding-top'] != undefined) ? blockCssY.items[filterSelector]['padding-top'] : {};
+        paddingTop[breakPointX] = nextValues.top
+
+
+        blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'padding-top': paddingTop };
+
+      }
+
+
+      if (nextValues.right != undefined) {
+
+        var paddingRight = (blockCssY.items[filterSelector]['padding-right'] != undefined) ? blockCssY.items[filterSelector]['padding-right'] : {};
+        paddingRight[breakPointX] = nextValues.right
+
+        blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'padding-right': paddingRight };
+
+
+
+      }
+
+      if (nextValues.bottom != undefined) {
+
+        var paddingBottom = (blockCssY.items[filterSelector]['padding-bottom'] != undefined) ? blockCssY.items[filterSelector]['padding-bottom'] : {};
+        paddingBottom[breakPointX] = nextValues.bottom;
+
+        blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'padding-bottom': paddingBottom };
+
+      }
+
+      if (nextValues.left != undefined) {
+
+        var paddingLeft = (blockCssY.items[filterSelector]['padding-left'] != undefined) ? blockCssY.items[filterSelector]['padding-left'] : {};
+        paddingLeft[breakPointX] = nextValues.left
+
+        blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'padding-left': paddingLeft };
+
+
+      }
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
 
 
     function paginationPaddingControl(nextValues) {
@@ -1297,7 +1436,6 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
         blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-top': paddingTop };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-top': paddingTop };
 
       }
 
@@ -1307,9 +1445,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         var paddingRight = (blockCssY.items[paginationWrapSelector]['padding-right'] != undefined) ? blockCssY.items[paginationWrapSelector]['padding-right'] : {};
         paddingRight[breakPointX] = nextValues.right
 
-
         blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-right': paddingRight };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-right': paddingRight };
 
 
 
@@ -1320,11 +1456,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         var paddingBottom = (blockCssY.items[paginationWrapSelector]['padding-bottom'] != undefined) ? blockCssY.items[paginationWrapSelector]['padding-bottom'] : {};
         paddingBottom[breakPointX] = nextValues.bottom
 
-
         blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-bottom': paddingBottom };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-bottom': paddingBottom };
-
-
 
       }
 
@@ -1334,16 +1466,12 @@ registerBlockType("post-grid/post-grid-filterable", {
         paddingLeft[breakPointX] = nextValues.left
 
         blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-left': paddingLeft };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-left': paddingLeft };
 
 
       }
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
-
-
 
     }
 
@@ -1415,16 +1543,12 @@ registerBlockType("post-grid/post-grid-filterable", {
         paddingLeft[breakPointX] = nextValues.left
 
         blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-left': paddingLeft };
-        //itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-left': paddingLeft };
 
 
       }
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
-
-
 
     }
 
@@ -1506,18 +1630,262 @@ registerBlockType("post-grid/post-grid-filterable", {
     }
 
 
+    function filterGroupPaddingControl(nextValues) {
+
+
+      var responsive = filterGroup.styles.padding;
+      responsive[breakPointX] = nextValues;
+
+
+      var styles = { ...filterGroup.styles, padding: responsive };
+      setAttributes({ filterGroup: { ...filterGroup, styles: styles } });
+
+
+      var itemsX = { ...blockCssY.items };
+
+      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
+      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
+      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
+      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
+
+
+      blockCssY.items[filterGroupSelector] = (blockCssY.items[filterGroupSelector] != undefined) ? blockCssY.items[filterGroupSelector] : {};
+
+
+
+      if (nextValues.top != undefined) {
+
+        var paddingTop = (blockCssY.items[filterGroupSelector]['padding-top'] != undefined) ? blockCssY.items[filterGroupSelector]['padding-top'] : {};
+        paddingTop[breakPointX] = nextValues.top
+
+
+        blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'padding-top': paddingTop };
+
+      }
+
+
+      if (nextValues.right != undefined) {
+
+        var paddingRight = (blockCssY.items[filterGroupSelector]['padding-right'] != undefined) ? blockCssY.items[filterGroupSelector]['padding-right'] : {};
+        paddingRight[breakPointX] = nextValues.right
+
+
+        blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'padding-right': paddingRight };
+
+
+
+      }
+
+      if (nextValues.bottom != undefined) {
+
+        var paddingBottom = (blockCssY.items[filterGroupSelector]['padding-bottom'] != undefined) ? blockCssY.items[filterGroupSelector]['padding-bottom'] : {};
+        paddingBottom[breakPointX] = nextValues.bottom
+
+
+        blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'padding-bottom': paddingBottom };
+
+
+
+      }
+
+      if (nextValues.left != undefined) {
+
+        var paddingLeft = (blockCssY.items[filterGroupSelector]['padding-left'] != undefined) ? blockCssY.items[filterGroupSelector]['padding-left'] : {};
+        paddingLeft[breakPointX] = nextValues.left
+
+        blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'padding-left': paddingLeft };
+
+
+      }
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      //setAttributes({ blockCssY: { items: itemsX } });
+
+
+
+    }
+
+
+    function activeFilterMarginControl(nextValues) {
+
+      var responsive = activeFilter.styles.margin;
+      responsive[breakPointX] = nextValues;
+
+      var styles = { ...activeFilter.styles, margin: responsive };
+      setAttributes({ activeFilter: { ...activeFilter, styles: styles } });
+
+      var itemsX = { ...blockCssY.items };
+
+
+
+
+      blockCssY.items[filterActiveSelector] = (blockCssY.items[filterActiveSelector] != undefined) ? blockCssY.items[filterActiveSelector] : {};
+
+      if (nextValues.top != undefined) {
+        var marginTop = (blockCssY.items[filterActiveSelector]['margin-top'] != undefined) ? blockCssY.items[filterActiveSelector]['margin-top'] : {};
+        marginTop[breakPointX] = nextValues.top
+
+        blockCssY.items[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'margin-top': marginTop };
+
+      }
+
+
+      if (nextValues.right != undefined) {
+
+        var marginRight = (blockCssY.items[filterActiveSelector]['margin-right'] !== undefined) ? blockCssY.items[filterActiveSelector]['margin-right'] : {};
+        marginRight[breakPointX] = nextValues.right
+
+        blockCssY.items[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'margin-right': marginRight };
+
+      }
+
+      if (nextValues.bottom != undefined) {
+
+        var marginBottom = (blockCssY.items[filterActiveSelector]['margin-bottom'] !== undefined) ? blockCssY.items[filterActiveSelector]['margin-bottom'] : {};
+        marginBottom[breakPointX] = nextValues.bottom
+
+        blockCssY.items[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'margin-bottom': marginBottom };
+
+      }
+
+      if (nextValues.left != undefined) {
+
+        var marginLeft = (blockCssY.items[filterActiveSelector]['margin-left'] !== undefined) ? blockCssY.items[filterActiveSelector]['margin-left'] : {};
+        marginLeft[breakPointX] = nextValues.left
+
+        blockCssY.items[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'margin-left': marginLeft };
+
+      }
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function filterableMarginControl(nextValues) {
+
+      var responsive = filterable.styles.margin;
+      responsive[breakPointX] = nextValues;
+
+      var styles = { ...filterable.styles, margin: responsive };
+      setAttributes({ filterable: { ...filterable, styles: styles } });
+
+      var itemsX = { ...blockCssY.items };
+
+
+
+
+      blockCssY.items[filterSelector] = (blockCssY.items[filterSelector] != undefined) ? blockCssY.items[filterSelector] : {};
+
+      if (nextValues.top != undefined) {
+        var marginTop = (blockCssY.items[filterSelector]['margin-top'] != undefined) ? blockCssY.items[filterSelector]['margin-top'] : {};
+        marginTop[breakPointX] = nextValues.top
+
+        blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'margin-top': marginTop };
+
+      }
+
+
+      if (nextValues.right != undefined) {
+
+        var marginRight = (blockCssY.items[filterSelector]['margin-right'] !== undefined) ? blockCssY.items[filterSelector]['margin-right'] : {};
+        marginRight[breakPointX] = nextValues.right
+
+        blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'margin-right': marginRight };
+
+      }
+
+      if (nextValues.bottom != undefined) {
+
+        var marginBottom = (blockCssY.items[filterSelector]['margin-bottom'] !== undefined) ? blockCssY.items[filterSelector]['margin-bottom'] : {};
+        marginBottom[breakPointX] = nextValues.bottom
+
+        blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'margin-bottom': marginBottom };
+
+      }
+
+      if (nextValues.left != undefined) {
+
+        var marginLeft = (blockCssY.items[filterSelector]['margin-left'] !== undefined) ? blockCssY.items[filterSelector]['margin-left'] : {};
+        marginLeft[breakPointX] = nextValues.left
+
+        blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'margin-left': marginLeft };
+
+      }
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+
+    function filterGroupMarginControl(nextValues) {
+
+      var responsive = filterGroup.styles.margin;
+      responsive[breakPointX] = nextValues;
+
+      var styles = { ...filterGroup.styles, margin: responsive };
+      setAttributes({ filterGroup: { ...filterGroup, styles: styles } });
+
+      var itemsX = { ...blockCssY.items };
+
+
+
+
+      blockCssY.items[filterGroupSelector] = (blockCssY.items[filterGroupSelector] != undefined) ? blockCssY.items[filterGroupSelector] : {};
+
+      if (nextValues.top != undefined) {
+        var marginTop = (blockCssY.items[filterGroupSelector]['margin-top'] != undefined) ? blockCssY.items[filterGroupSelector]['margin-top'] : {};
+        marginTop[breakPointX] = nextValues.top
+
+        blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'margin-top': marginTop };
+
+      }
+
+
+      if (nextValues.right != undefined) {
+
+        var marginRight = (blockCssY.items[filterGroupSelector]['margin-right'] !== undefined) ? blockCssY.items[filterGroupSelector]['margin-right'] : {};
+        marginRight[breakPointX] = nextValues.right
+
+        blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'margin-right': marginRight };
+
+      }
+
+      if (nextValues.bottom != undefined) {
+
+        var marginBottom = (blockCssY.items[filterGroupSelector]['margin-bottom'] !== undefined) ? blockCssY.items[filterGroupSelector]['margin-bottom'] : {};
+        marginBottom[breakPointX] = nextValues.bottom
+
+        blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'margin-bottom': marginBottom };
+
+      }
+
+      if (nextValues.left != undefined) {
+
+        var marginLeft = (blockCssY.items[filterGroupSelector]['margin-left'] !== undefined) ? blockCssY.items[filterGroupSelector]['margin-left'] : {};
+        marginLeft[breakPointX] = nextValues.left
+
+        blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'margin-left': marginLeft };
+
+      }
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+
+
+
     function paginationMarginControl(nextValues) {
 
       var responsive = pagination.styles.margin;
       responsive[breakPointX] = nextValues;
 
-
-
       var styles = { ...pagination.styles, margin: responsive };
       setAttributes({ pagination: { ...pagination, styles: styles } });
-
-
-
 
       var itemsX = { ...blockCssY.items };
 
@@ -1531,7 +1899,6 @@ registerBlockType("post-grid/post-grid-filterable", {
         marginTop[breakPointX] = nextValues.top
 
         blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-top': marginTop };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-top': marginTop };
 
       }
 
@@ -1542,7 +1909,6 @@ registerBlockType("post-grid/post-grid-filterable", {
         marginRight[breakPointX] = nextValues.right
 
         blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-right': marginRight };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-right': marginRight };
 
       }
 
@@ -1552,7 +1918,6 @@ registerBlockType("post-grid/post-grid-filterable", {
         marginBottom[breakPointX] = nextValues.bottom
 
         blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-bottom': marginBottom };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-bottom': marginBottom };
 
       }
 
@@ -1562,12 +1927,10 @@ registerBlockType("post-grid/post-grid-filterable", {
         marginLeft[breakPointX] = nextValues.left
 
         blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-left': marginLeft };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-left': marginLeft };
 
       }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
 
     }
 
@@ -4789,9 +5152,41 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
-                        <label for="" className='my-3 font-bold'>Terms</label>
+                        <label for="" className='my-3 font-bold'>Search Terms</label>
+
+                        <p>To add custom filter please use following format and hit Enter</p>
+                        <code>Filter Name|filter-slug|15</code>
+                        <InputControl
+                          className="my-3"
+                          placeholder="Search Categories or terms"
+
+                          value=''
+                          onKeyPress={ev => {
+
+                            console.log(ev.target.value);
+
+                            if (ev.key === 'Enter') {
+                              var filterParts = ev.target.value.split('|');
+
+                              var ss = filterable.options.filters[i].items.concat({ id: 0, slug: filterParts[1], title: filterParts[0], count: filterParts[2] });
+                              filterable.options.filters[i].items = ss
 
 
+                              var options = { ...filterable.options, filters: filterable.options.filters }
+                              setAttributes({ filterable: { ...filterable, options: options } })
+
+
+                            }
+
+
+                            console.log('Hello');
+
+                          }}
+                          onChange={(newVal) => {
+                            fetchPostTypeTerms(newVal);
+
+                          }}
+                        />
 
                         {x.items.length == 0 && (
                           <div className='my-1'>No terms added.</div>
@@ -4824,16 +5219,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
-                        <InputControl
 
-                          placeholder="Search Categories or terms"
-
-                          value=''
-                          onChange={(newVal) => {
-                            fetchPostTypeTerms(newVal);
-
-                          }}
-                        />
 
 
                         {/* {filterablTerms.length == 0 && (
@@ -5008,32 +5394,30 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
-
                   <PanelRow>
-                    <label>Text Align</label>
-                    <PGcssTextAlign val={filterable.styles.textAlign[breakPointX]} onChange={(newVal => {
+                    <label>Display</label>
+                    <PGcssDisplay val={filterable.styles.display[breakPointX]} onChange={(newVal => {
 
 
                       var newValuesObj = {};
 
-                      if (Object.keys(filterable.styles.textAlign).length == 0) {
+                      if (Object.keys(filterable.styles.display).length == 0) {
                         newValuesObj[breakPointX] = newVal;
                       } else {
-                        newValuesObj = filterable.styles.textAlign;
+                        newValuesObj = filterable.styles.display;
                         newValuesObj[breakPointX] = newVal;
                       }
 
-                      var styles = { ...filterable.styles, textAlign: newValuesObj };
+                      var styles = { ...filterable.styles, display: newValuesObj };
                       setAttributes({ filterable: { ...filterable, styles: styles } });
 
-                      blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'text-align': newValuesObj };
+                      blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'display': newValuesObj };
                       setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
 
                     })} />
                   </PanelRow>
+
+
 
 
 
@@ -5044,7 +5428,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                   <BoxControl
                     label=''
                     values={filterable.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paginationPaddingControl(nextValues) }}
+                    onChange={(nextValues) => { filterablePaddingControl(nextValues) }}
                   />
 
 
@@ -5058,7 +5442,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                   <BoxControl
                     label=""
                     values={filterable.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { paginationMarginControl(nextValues) }}
+                    onChange={(nextValues) => { filterableMarginControl(nextValues) }}
                   />
 
 
@@ -5143,32 +5527,6 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
-                  <PanelRow>
-                    <label>Text Align</label>
-                    <PGcssTextAlign val={activeFilter.styles.textAlign[breakPointX]} onChange={(newVal => {
-
-
-                      var newValuesObj = {};
-
-                      if (Object.keys(activeFilter.styles.textAlign).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = activeFilter.styles.textAlign;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...activeFilter.styles, textAlign: newValuesObj };
-                      setAttributes({ activeFilter: { ...activeFilter, styles: styles } });
-
-                      blockCssY.items[filterActiveSelector] = { ...blockCssY.items[filterActiveSelector], 'text-align': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-                    })} />
-                  </PanelRow>
-
 
 
                   <PanelRow>
@@ -5178,7 +5536,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                   <BoxControl
                     label=''
                     values={activeFilter.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paginationPaddingControl(nextValues) }}
+                    onChange={(nextValues) => { activeFilterPaddingControl(nextValues) }}
                   />
 
 
@@ -5192,7 +5550,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                   <BoxControl
                     label=""
                     values={activeFilter.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { paginationMarginControl(nextValues) }}
+                    onChange={(nextValues) => { activeFilterMarginControl(nextValues) }}
                   />
 
 
@@ -5274,34 +5632,29 @@ registerBlockType("post-grid/post-grid-filterable", {
                   />
 
 
-
-
-
                   <PanelRow>
-                    <label>Text Align</label>
-                    <PGcssTextAlign val={filterGroup.styles.textAlign[breakPointX]} onChange={(newVal => {
+                    <label>Display</label>
+                    <PGcssDisplay val={filterGroup.styles.display[breakPointX]} onChange={(newVal => {
 
 
                       var newValuesObj = {};
 
-                      if (Object.keys(filterGroup.styles.textAlign).length == 0) {
+                      if (Object.keys(filterGroup.styles.display).length == 0) {
                         newValuesObj[breakPointX] = newVal;
                       } else {
-                        newValuesObj = filterGroup.styles.textAlign;
+                        newValuesObj = filterGroup.styles.display;
                         newValuesObj[breakPointX] = newVal;
                       }
 
-                      var styles = { ...filterGroup.styles, textAlign: newValuesObj };
+                      var styles = { ...filterGroup.styles, display: newValuesObj };
                       setAttributes({ filterGroup: { ...filterGroup, styles: styles } });
 
-                      blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'text-align': newValuesObj };
+                      blockCssY.items[filterGroupSelector] = { ...blockCssY.items[filterGroupSelector], 'display': newValuesObj };
                       setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
 
                     })} />
                   </PanelRow>
+
 
 
 
@@ -5312,7 +5665,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                   <BoxControl
                     label=''
                     values={filterGroup.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paginationPaddingControl(nextValues) }}
+                    onChange={(nextValues) => { filterGroupPaddingControl(nextValues) }}
                   />
 
 
@@ -5326,17 +5679,11 @@ registerBlockType("post-grid/post-grid-filterable", {
                   <BoxControl
                     label=""
                     values={filterGroup.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { paginationMarginControl(nextValues) }}
+                    onChange={(nextValues) => { filterGroupMarginControl(nextValues) }}
                   />
 
 
                 </PanelBody>
-
-
-
-
-
-
 
               </PanelBody>
 
@@ -5992,7 +6339,7 @@ registerBlockType("post-grid/post-grid-filterable", {
             <div className='filterable-navs'>
               <div className='filterable-group  '>
 
-                <div className='filter cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter='all'>All</div>
+                <div className='pg-filter mixitup-control-active cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter='all'>All</div>
               </div>
               {
 
@@ -6003,7 +6350,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                     <div className='filterable-group ' data-logic={x.logic}>
 
                       {x.groupTitle && (
-                        <div className='filterable-group-title px-4 py-2 m-2 inline-block mx-2'>{x.groupTitle}</div>
+                        <div className='filterable-group-title '>{x.groupTitle}</div>
                       )}
 
 
@@ -6011,7 +6358,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
                         return (
 
-                          <div className='pg-filter cursor-pointer cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' terms-id={y.id} data-filter={'.' + y.slug}>{y.title} {x.showPostCount == 'yes' ? '(' + y.count + ')' : ''}</div>
+                          <div className='pg-filter cursor-pointer  ' terms-id={y.id} data-filter={'.' + y.slug}>{y.title} {x.showPostCount == 'yes' ? '(' + y.count + ')' : ''}</div>
 
                         )
 

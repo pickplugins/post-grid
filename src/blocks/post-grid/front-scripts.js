@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             var postgridargsObj = JSON.parse(postgridargs);
             var blockId = postgridargsObj.blockId
 
-            console.log(postgridargsObj);
 
 
             var lazyLoad = postgridargsObj.lazyLoad
@@ -31,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             }
 
-            console.log(postgridargsObj);
 
         })
     }
@@ -197,7 +195,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     //this.saveAsStatus = 'error';
                     // handle the error
 
-                    //console.log(_error);
                 });
 
         }, 500)
@@ -336,7 +333,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         //this.saveAsStatus = 'error';
                         // handle the error
 
-                        //console.log(_error);
                     });
 
 
@@ -407,8 +403,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             })
 
-            console.log(blockargsObj);
-
 
             loadMorewrapparent.setAttribute('blockargs', JSON.stringify(blockargsObj))
 
@@ -462,7 +456,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     //this.saveAsStatus = 'error';
                     // handle the error
 
-                    //console.log(_error);
                 });
 
         }, 500)

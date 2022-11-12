@@ -634,7 +634,7 @@ function post_grid_term_slug_list($post_id)
 
     foreach ($post_taxonomies as $taxonomy) {
 
-        $term_list[] = wp_get_post_terms(get_the_ID(), $taxonomy, array("fields" => "all"));
+        $term_list[] = wp_get_post_terms($post_id, $taxonomy, array("fields" => "all"));
     }
 
     if (!empty($term_list)) {

@@ -339,7 +339,7 @@ class PGBlockPostGrid
         $queryArgs = isset($attributes['queryArgs']) ? $attributes['queryArgs'] : [];
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : [];
         $scripts = isset($attributes['scripts']) ? $attributes['scripts'] : [];
-        $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : ['items'=>[]];
+        $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : ['items' => []];
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
 
 

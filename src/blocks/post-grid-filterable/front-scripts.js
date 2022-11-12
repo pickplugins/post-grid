@@ -1,3 +1,7 @@
+//import mixitup from 'mixitup';
+
+//console.log(mixitup);
+
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
@@ -17,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             var postgridargsObj = JSON.parse(postgridargs);
             var blockId = postgridargsObj.blockId
 
-            console.log(postgridargsObj);
 
 
             var lazyLoad = postgridargsObj.lazyLoad
@@ -31,7 +34,59 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             }
 
-            console.log(postgridargsObj);
+
+
+
+            console.log(blockId);
+
+
+
+            var containerEl = document.querySelector('.items-loop');
+            var mixer = mixitup(containerEl, {
+                selectors: {
+                    control: '.pg-filter-' + blockId,
+                    target: '.item',
+                    pageList: '.pager-list-' + blockId,
+
+                },
+
+                pagination: {
+                    limit: 3,
+
+                },
+                templates: {
+                    pagerPrev: '<span class="page-numbers pg-filter-' + blockId + ' ${classNames}" data-page="prev">Prev</span>',
+                    pagerNext: '<span class="page-numbers pg-filter-' + blockId + ' ${classNames}" data-page="next">Next</span>',
+                    pager: '<span class="page-numbers pg-filter-' + blockId + ' ${classNames}" data-page="${pageNumber}">${pageNumber}</span>',
+                },
+
+                multifilter: {
+                    enable: true,
+                    //logicWithinGroup: 'and',
+                    //logicBetweenGroups: 'and',
+                },
+
+                load: {
+                    filter: ".decor"
+                },
+
+
+            });
+
+            console.log(mixer);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         })
     }
@@ -470,6 +525,37 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
     });
+
+
+
+
+
+
+
+
+
+
+
+    /*##############################*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -291,6 +291,11 @@ class PGBlockPostGridFilterable
         $filterableOptions = isset($filterable['options']) ? $filterable['options'] : [];
         $filterableFilters = isset($filterableOptions['filters']) ? $filterableOptions['filters'] : [];
 
+
+        $activeFilter = isset($attributes['activeFilter']) ? $attributes['activeFilter'] : [];
+        $activeFilterOptions = isset($activeFilter['options']) ? $activeFilter['options'] : [];
+        $activeFilterSlug = isset($activeFilterOptions['slug']) ? $activeFilterOptions['slug'] : 'all';
+
         /*#########$noPostsWrap#########*/
         $noPostsWrap = isset($attributes['noPostsWrap']) ? $attributes['noPostsWrap'] : [];
         $noPostsWrapOptions = isset($noPostsWrap['options']) ? $noPostsWrap['options'] : [];
@@ -470,6 +475,8 @@ class PGBlockPostGridFilterable
         $postGridArgs = [
             'blockId' => $blockId,
             'lazyLoad' => ['enable' => $lazyLoadEnable],
+            'activeFilter' => ['slug' => $activeFilterSlug],
+
         ];
 
 

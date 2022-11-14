@@ -35,9 +35,9 @@ class PGBlockAccordion
         ));
     }
 
-    // function front_script($attributes)
-    // {
-    // }
+    function front_script($attributes)
+    {
+    }
     function front_style($attributes)
     {
     }

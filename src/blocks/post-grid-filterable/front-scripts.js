@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
             var blockId = postgridargsObj.blockId
 
 
+            var activeFilter = postgridargsObj.activeFilter
+            var activeFilterSlug = activeFilter.slug
+
+            activeFilterSlug = (activeFilterSlug == 'all') ? activeFilterSlug : '.' + activeFilterSlug;
 
             var lazyLoad = postgridargsObj.lazyLoad
             var lazyLoadEnable = lazyLoad.enable
@@ -37,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-            console.log(blockId);
+            console.log(activeFilterSlug);
 
 
 
@@ -51,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 },
 
                 pagination: {
-                    limit: 3,
+                    limit: 6,
 
                 },
                 templates: {
@@ -67,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 },
 
                 load: {
-                    filter: ".decor"
+                    filter: activeFilterSlug
                 },
 
 

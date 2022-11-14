@@ -231,7 +231,7 @@ registerBlockType("post-grid/post-grid-filterable", {
     activeFilter: {
       type: 'object',
       default: {
-        options: {},
+        options: { slug: 'all' },
         styles:
         {
           textAlign: {},
@@ -5179,8 +5179,6 @@ registerBlockType("post-grid/post-grid-filterable", {
                             }
 
 
-                            console.log('Hello');
-
                           }}
                           onChange={(newVal) => {
                             fetchPostTypeTerms(newVal);
@@ -5192,26 +5190,51 @@ registerBlockType("post-grid/post-grid-filterable", {
                           <div className='my-1'>No terms added.</div>
                         )}
 
+                        {JSON.stringify(activeFilter)}
+
+
                         {x.items.map((y, j) => {
 
                           return (
-                            <PanelRow className='my-1 border-b border-gray-400'>
-                              {y.title}
+                            <div className='py-2 my-1 border-b border-gray-400 flex justify-between'>
+                              <div>{y.title}</div>
 
-                              <span
-                                onClick={(ev) => {
+                              <div>
 
-                                  filterable.options.filters[i].items.splice(j, 1);
+                                <span
+                                  onClick={(ev) => {
 
-
-                                  var options = { ...filterable.options, filters: filterable.options.filters }
-                                  setAttributes({ filterable: { ...filterable, options: options } })
-
+                                    var options = { ...activeFilter.options, slug: y.slug }
+                                    setAttributes({ activeFilter: { ...activeFilter, options: options } })
 
 
-                                }}
-                                className='cursor-pointer p-1   text-white bg-red-600 text-sm'><span className='dashicon dashicons dashicons-no-alt'></span></span>
-                            </PanelRow>
+
+                                  }}
+                                  className={[(activeFilter.options.slug) == y.slug ? "bg-blue-600 cursor-pointer p-1   text-white  text-sm" : "bg-gray-400 cursor-pointer p-1   text-white  text-sm"]}>
+
+                                  <span class="dashicons dashicons-yes-alt"></span>
+                                </span>
+
+                                <span
+                                  onClick={(ev) => {
+
+                                    filterable.options.filters[i].items.splice(j, 1);
+
+
+                                    var options = { ...filterable.options, filters: filterable.options.filters }
+                                    setAttributes({ filterable: { ...filterable, options: options } })
+
+
+
+                                  }}
+                                  className='cursor-pointer p-1   text-white bg-red-600 text-sm'>
+
+                                  <span className='dashicon dashicons dashicons-no-alt'></span>
+                                </span>
+                              </div>
+
+
+                            </div>
                           )
                         })
                         }

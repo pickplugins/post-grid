@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             var activeFilter = postgridargsObj.activeFilter
             var activeFilterSlug = activeFilter.slug
 
-            activeFilterSlug = (activeFilterSlug == 'all') ? activeFilterSlug : '.' + activeFilterSlug;
+            activeFilterSlug = (activeFilterSlug.length == 0) ? 'all' : '.' + activeFilterSlug;
 
             var lazyLoad = postgridargsObj.lazyLoad
             var lazyLoadEnable = lazyLoad.enable
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 multifilter: {
                     enable: true,
-                    //logicWithinGroup: 'and',
+                    logicWithinGroup: 'and',
                     //logicBetweenGroups: 'and',
                 },
 

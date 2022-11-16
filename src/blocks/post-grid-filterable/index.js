@@ -39,6 +39,9 @@ import PGContactSupport from '../../components/contact-support'
 import PGStyles from '../../components/styles'
 import PGcssTextAlign from '../../components/css-text-align'
 import PGcssDisplay from '../../components/css-display'
+import PGcssCursor from '../../components/css-cursor'
+
+
 import PGTutorials from '../../components/tutorials'
 
 import PGcssPadding from '../../components/css-padding'
@@ -211,7 +214,7 @@ registerBlockType("post-grid/post-grid-filterable", {
       default: {
 
         options: {
-          filters: [{ groupTitle: '', type: '', logic: '', showPostCount: '', items: [], styles: {} }], allText: 'All', showSort: '', activeFilter: '',
+          filters: [{ "groupTitle": "", "type": "inline", "logic": "OR", "showPostCount": "yes", "items": [], "styles": {} }, { groupTitle: '', type: '', logic: '', showPostCount: '', items: [], styles: {} }], allText: 'All', showSort: '', showRandom: '', showAll: '', showClear: '', activeFilter: '',
         },
         styles:
         {
@@ -222,6 +225,7 @@ registerBlockType("post-grid/post-grid-filterable", {
           padding: {},
           margin: {},
           display: { "Desktop": "inline-block" },
+          cursor: { "Desktop": "inline-block" },
 
         },
 
@@ -933,11 +937,8 @@ registerBlockType("post-grid/post-grid-filterable", {
     const [clientData, setClientData] = useState({});
     const paginationTypes = {
       none: { label: 'None', value: 'none', isPro: false },
-      normal: { label: 'Normal Pagination', value: 'normal', isPro: false },
-      ajax: { label: 'Ajax Pagination', value: 'ajax', isPro: true },
-      next_previous: { label: 'Next-Previous', value: 'next_previous', isPro: true },
-      loadmore: { label: 'Load More', value: 'loadmore', isPro: true },
-      infinite: { label: 'Infinite Load', value: 'infinite', isPro: true },
+      filterable: { label: 'Filterable', value: 'filterable', isPro: true },
+
     };
 
     // [
@@ -5007,7 +5008,6 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
                 <div>
-
                   <Button
                     variant="secondary"
                     className='mb-2'
@@ -5023,6 +5023,15 @@ registerBlockType("post-grid/post-grid-filterable", {
                     }}
 
                   >Add Filter Group</Button>
+
+
+                  {filterable.options.filters.length > 1 && (
+                    <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-multifilter"}>
+                      <p> <span className='underline'>Multi Filter</span> Only avilable in Premium</p>
+                    </PGproWrapper>
+                  )}
+
+
 
                   {filterable.options.filters.map((x, i) => {
 
@@ -5190,9 +5199,6 @@ registerBlockType("post-grid/post-grid-filterable", {
                           <div className='my-1'>No terms added.</div>
                         )}
 
-                        {JSON.stringify(activeFilter)}
-
-
                         {x.items.map((y, j) => {
 
                           return (
@@ -5204,7 +5210,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                                 <span
                                   onClick={(ev) => {
 
-                                    var options = { ...activeFilter.options, slug: y.slug }
+                                    var options = { ...activeFilter.options, slug: (activeFilter.options.slug == y.slug) ? "" : y.slug }
                                     setAttributes({ activeFilter: { ...activeFilter, options: options } })
 
 
@@ -5308,7 +5314,6 @@ registerBlockType("post-grid/post-grid-filterable", {
                 <PanelRow >
                   <label for="">Show Sort Filter </label>
 
-
                   <SelectControl
                     label=""
                     value={filterable.options.showSort}
@@ -5321,23 +5326,73 @@ registerBlockType("post-grid/post-grid-filterable", {
 
                       var options = { ...filterable.options, showSort: newVal }
                       setAttributes({ filterable: { ...filterable, options: options } })
-
                     }
-
-
                     }
-
-
-
-
-
                   />
-
-
-
-
                 </PanelRow>
 
+
+
+                <PanelRow >
+                  <label for="">Show Random Filter </label>
+
+                  <SelectControl
+                    label=""
+                    value={filterable.options.showRandom}
+                    options={[
+                      { label: 'No', value: 'no' },
+                      { label: 'Yes', value: 'yes' },
+
+                    ]}
+                    onChange={(newVal) => {
+
+                      var options = { ...filterable.options, showRandom: newVal }
+                      setAttributes({ filterable: { ...filterable, options: options } })
+                    }
+                    }
+                  />
+                </PanelRow>
+
+                <PanelRow >
+                  <label for="">Show Clear Filter </label>
+
+                  <SelectControl
+                    label=""
+                    value={filterable.options.showClear}
+                    options={[
+                      { label: 'No', value: 'no' },
+                      { label: 'Yes', value: 'yes' },
+
+                    ]}
+                    onChange={(newVal) => {
+
+                      var options = { ...filterable.options, showClear: newVal }
+                      setAttributes({ filterable: { ...filterable, options: options } })
+                    }
+                    }
+                  />
+                </PanelRow>
+
+
+                <PanelRow >
+                  <label for="">Show All Filter </label>
+
+                  <SelectControl
+                    label=""
+                    value={filterable.options.showAll}
+                    options={[
+                      { label: 'No', value: 'no' },
+                      { label: 'Yes', value: 'yes' },
+
+                    ]}
+                    onChange={(newVal) => {
+
+                      var options = { ...filterable.options, showAll: newVal }
+                      setAttributes({ filterable: { ...filterable, options: options } })
+                    }
+                    }
+                  />
+                </PanelRow>
 
 
 
@@ -5420,8 +5475,6 @@ registerBlockType("post-grid/post-grid-filterable", {
                   <PanelRow>
                     <label>Display</label>
                     <PGcssDisplay val={filterable.styles.display[breakPointX]} onChange={(newVal => {
-
-
                       var newValuesObj = {};
 
                       if (Object.keys(filterable.styles.display).length == 0) {
@@ -5440,7 +5493,26 @@ registerBlockType("post-grid/post-grid-filterable", {
                     })} />
                   </PanelRow>
 
+                  <PanelRow>
+                    <label>Cursor</label>
+                    <PGcssCursor val={filterable.styles.cursor[breakPointX]} onChange={(newVal => {
+                      var newValuesObj = {};
 
+                      if (Object.keys(filterable.styles.cursor).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = filterable.styles.cursor;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...filterable.styles, cursor: newValuesObj };
+                      setAttributes({ filterable: { ...filterable, styles: styles } });
+
+                      blockCssY.items[filterSelector] = { ...blockCssY.items[filterSelector], 'cursor': newValuesObj };
+                      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+                    })} />
+                  </PanelRow>
 
 
 

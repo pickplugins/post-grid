@@ -854,10 +854,6 @@ video {
   max-width: 72rem;
 }
 
-.flex-auto {
-  flex: 1 1 auto;
-}
-
 .border-collapse {
   border-collapse: collapse;
 }
@@ -894,10 +890,6 @@ video {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.content-around {
-  align-content: space-around;
-}
-
 .items-center {
   align-items: center;
 }
@@ -908,10 +900,6 @@ video {
 
 .justify-between {
   justify-content: space-between;
-}
-
-.justify-around {
-  justify-content: space-around;
 }
 
 .justify-items-stretch {

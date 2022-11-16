@@ -5800,11 +5800,11 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
-                {((pagination.options.type == 'ajax' || pagination.options.type == 'next_previous' || pagination.options.type == 'loadmore' || pagination.options.type == 'infinite')) && (
+                {((pagination.options.type == 'filterable')) && (
 
 
                   <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-pagination_type"}>
-                    <p> <span className='underline'>Ajax, Next Previous, Load More, Infinite</span> Only avilable in Premium</p>
+                    <p> <span className='underline'>Filterable pagination</span> Only avilable in Premium</p>
                   </PGproWrapper>
 
 
@@ -6432,9 +6432,16 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
             <div className='filterable-navs'>
+
+              <div className='filterable-group'>
+                {filterable.options.showAll == 'yes' && (
+                  <>
+                    <div className='pg-filter mixitup-control-active cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter='all'>All</div>
+                  </>
+                )}
+              </div>
               <div className='filterable-group  '>
 
-                <div className='pg-filter mixitup-control-active cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter='all'>All</div>
               </div>
               {
 
@@ -6451,9 +6458,12 @@ registerBlockType("post-grid/post-grid-filterable", {
 
                       {x.items.map(y => {
 
+                        console.log(y);
+                        console.log(activeFilter.options.slug);
+
                         return (
 
-                          <div className='pg-filter cursor-pointer  ' terms-id={y.id} data-filter={'.' + y.slug}>{y.title} {x.showPostCount == 'yes' ? '(' + y.count + ')' : ''}</div>
+                          <div className={[(activeFilter.options.slug == y.slug) ? 'mixitup-control-active pg-filter cursor-pointer' : 'pg-filter cursor-pointer']} terms-id={y.id} data-filter={'.' + y.slug}>{y.title} {x.showPostCount == 'yes' ? '(' + y.count + ')' : ''}</div>
 
                         )
 
@@ -6469,6 +6479,40 @@ registerBlockType("post-grid/post-grid-filterable", {
                 })
 
               }
+
+
+              <div className='filterable-group'>
+                {filterable.options.showSort == 'yes' && (
+
+                  <>
+                    <div className='pg-filter mixitup-control-active cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter=''>ASC</div>
+                    <div className='pg-filter  cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter=''>DESC</div>
+                  </>
+
+                )}
+
+                {filterable.options.showRandom == 'yes' && (
+                  <>
+                    <div className='pg-filter  cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter=''>Random</div>
+                  </>
+                )}
+
+                {filterable.options.showClear == 'yes' && (
+                  <>
+                    <div className='pg-filter  cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter=''>Clear</div>                  </>
+                )}
+
+
+
+
+              </div>
+
+
+
+
+
+
+
             </div>
 
 

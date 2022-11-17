@@ -16,6 +16,7 @@ import { store } from '../../store'
 import { link, linkOff } from "@wordpress/icons";
 
 import PGproWrapper from '../../components/pro-wrapper'
+import PGcssTextAlign from '../../components/css-text-align'
 
 import IconToggle from '../../components/icon-toggle'
 import Typography from '../../components/typography'
@@ -843,9 +844,8 @@ registerBlockType("post-grid/post-title", {
         var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
 
 
-        var fontSizeX = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector]['font-size'] : {};
+        var fontSizeX = (blockCssY.items[titleLinkSelector]['font-size'] != undefined) ? blockCssY.items[titleLinkSelector]['font-size'] : {};
 
-        console.log(fontSizeX);
 
 
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
@@ -1044,6 +1044,8 @@ registerBlockType("post-grid/post-title", {
 
                     })} />
                   </PanelRow>
+
+
 
 
                 </PanelBody>
@@ -1643,8 +1645,37 @@ registerBlockType("post-grid/post-title", {
                     />
                   </PanelRow>
 
+                  <PanelRow className='my-3'>
+                    <label>Text Align</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+
+                  <PanelRow>
+                    <label></label>
+                    <PGcssTextAlign val={postTitle.styles.textAlign[breakPointX]} onChange={(newVal => {
+
+                      console.log(newVal);
+
+                      var newValuesObj = {};
+
+                      if (Object.keys(postTitle.styles.textAlign).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = postTitle.styles.textAlign;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...postTitle.styles, textAlign: newValuesObj };
+                      setAttributes({ postTitle: { ...postTitle, styles: styles } });
+
+                      blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'text-align': newValuesObj };
+                      setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
+
+
+                    })} />
+                  </PanelRow>
 
                   <PanelRow>
                     <label>Padding</label>

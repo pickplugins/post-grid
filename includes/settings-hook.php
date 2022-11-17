@@ -230,7 +230,7 @@ if (!function_exists('post_grid_settings_content_disable_blocks')) {
         $settings_tabs_field = new settings_tabs_field();
         $post_grid_settings = get_option('post_grid_settings');
 
-        $block_list = isset($post_grid_settings['block_list']) ? $post_grid_settings['block_list'] : [];
+        $disable_blocks = isset($post_grid_settings['disable_blocks']) ? $post_grid_settings['disable_blocks'] : [];
     ?>
         <div class="section">
             <div class="section-title"><?php echo __('Disable/Enable Blocks', 'post-grid'); ?></div>
@@ -239,31 +239,36 @@ if (!function_exists('post_grid_settings_content_disable_blocks')) {
             <?php
 
             $blocks_list = [
-
-                'post-grid/post-title' => 'Post Title',
-                'post-grid/post-excerpt' => 'Post Excerpt',
-                'post-grid/read-more' => 'Read More',
-                'post-grid/text' => 'Adavnce Text',
                 'post-grid/post-grid' => 'Post Grid',
-                // 'post-grid/post-carusel' => 'Post Carusel',
-                // 'post-grid/post-grid-filterable' => 'Post Grid Filterable',
-                // 'post-grid/post-grid-glossary' => 'Post Grid Glossary',
-                // 'post-grid/post-grid-masonry' => 'Post Grid Masonry',
-
-                // 'post-grid/category-grid' => 'Category  Carusel',
-                // 'post-grid/category-carousel' => 'Category  Carusel',
-
-
-
+                'post-grid/post-grid-filterable' => 'Post grid filterable',
+                'post-grid/post-title' => 'Post title',
+                'post-grid/post-excerpt' => 'Post excerpt',
+                'post-grid/post-author' => 'Post author',
+                'post-grid/post-author-fields' => 'Post author fields',
+                'post-grid/post-featured-image' => 'Post featured image',
+                'post-grid/image' => 'Image',
+                'post-grid/post-categories' => 'Post categories',
+                'post-grid/post-tags' => 'Post tags',
+                'post-grid/post-taxonomies' => 'Post taxonomies',
+                'post-grid/post-date' => 'Post date',
+                'post-grid/post-meta' => 'Post meta',
+                'post-grid/read-more' => 'Read more',
+                'post-grid/layers' => 'Layers',
+                'post-grid/layer' => 'Layer',
+                'post-grid/accordion' => 'Accordion',
+                'post-grid/tabs' => 'Tabs',
+                'post-grid/list' => 'List',
+                'post-grid/icon' => 'Icon',
+                'post-grid/text' => 'Text',
             ];
 
             $args = array(
-                'id'        => 'block_list',
+                'id'        => 'disable_blocks',
                 'parent'        => 'post_grid_settings',
                 'title'        => __('Disbale/Enable Blocks', 'post-grid'),
                 'details'    => __('Enable or disable blocks from here.', 'post-grid'),
                 'type'        => 'checkbox',
-                'value'        => $block_list,
+                'value'        => $disable_blocks,
                 'default'        => array(),
                 'multiple'        => true,
                 'style'        => ['inline' => false],

@@ -80,7 +80,7 @@ class PGBlockFeaturedImage
 
         $linkAttr = isset($featuredImageOptions['linkAttr']) ? $featuredImageOptions['linkAttr'] : [];
         $rel = isset($featuredImageOptions['rel']) ? $featuredImageOptions['rel'] : '';
-        $size = isset($featuredImageOptions['size']) ? $featuredImageOptions['size']['Desktop'] : '';
+        $size = isset($featuredImageOptions['size']['Desktop']) ? $featuredImageOptions['size']['Desktop'] : '';
 
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];

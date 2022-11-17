@@ -58,7 +58,8 @@ $admin_email = get_option('admin_email');
 
                 <div class="p-5">
 
-                    <iframe width="100%" height="415" src="https://www.youtube.com/embed/5IJFpmTOFfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <img src="<?php echo esc_url_raw(post_grid_plugin_url . 'assets/overview.png') ?>" alt="">
+                    <!-- <iframe width="100%" height="415" src="https://www.youtube.com/embed/5IJFpmTOFfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
 
                     <div class="text-center">
@@ -306,19 +307,11 @@ $admin_email = get_option('admin_email');
                     <h3 class="text-3xl mb-5 font-bold text-gray-600">
                         Post Grid - Filterable
                     </h3>
-                    <span class="absolute bottom-0 right-0 bg-orange-400 px-3 py-1 text-white">Comming soon</span>
+                    <span class="absolute bottom-0 right-0 bg-lime-600 px-3 py-1 text-white">Released</span>
 
                 </div>
             </div>
-            <div class="col-span-4 bg-white">
-                <div class="p-5 relative">
-                    <h3 class="text-3xl mb-5 font-bold text-gray-600">
-                        Post Grid - Glossary
-                    </h3>
-                    <span class="absolute bottom-0 right-0 bg-orange-400 px-3 py-1 text-white">Comming soon</span>
 
-                </div>
-            </div>
             <div class="col-span-4 bg-white">
                 <div class="p-5 relative">
                     <h3 class="text-3xl mb-5 font-bold text-gray-600">

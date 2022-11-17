@@ -609,7 +609,13 @@ class BlockPostGridRest
         } else {
             $post_meta = get_post_meta($postId, $meta_key, true);
 
+            error_log($postId);
+            error_log($meta_key);
+            error_log($post_meta);
+
             $singleArray = ['{metaValue}' => $post_meta];
+
+
 
             $response->args = $singleArray;
             $response->html = strtr($template, (array)$singleArray);

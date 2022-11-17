@@ -237,44 +237,50 @@ registerBlockType("post-grid/image", {
 
     useEffect(() => {
 
-      setLoading(true);
 
-      apiFetch({
-        path: '/wp/v2/media/' + currentPostImageId,
-        method: 'POST',
-        data: { id: currentPostImageId },
-      }).then((res) => {
-        console.log(res);
-
-        setPostImage(res);
-
-        var options = { ...image.options, srcUrl: res.source_url, srcId: res.id };
-        setAttributes({ image: { ...image, options: options } });
-
-        setLoading(false);
-
-      });
-
-      apiFetch({
-        path: '/post-grid/v2/get_image_sizes',
-        method: 'POST',
-        data: {},
-      }).then((res) => {
-
-        var imgSizes = [];
-
-        Object.keys(res).map(x => {
-
-          var height = res[x].height
-          var width = res[x].width
-          var crop = res[x].crop
-
-          imgSizes.push({ label: x + "(" + width + "*" + height + ")", value: x, height: height, width: width, crop: crop });
-        })
+      if (currentPostImageId.length != 0) {
+        setLoading(true);
 
 
-        setImageSizes(imgSizes)
-      });
+        apiFetch({
+          path: '/wp/v2/media/' + currentPostImageId,
+          method: 'POST',
+          data: { id: currentPostImageId },
+        }).then((res) => {
+          console.log(res);
+
+          setPostImage(res);
+
+          var options = { ...image.options, srcUrl: res.source_url, srcId: res.id };
+          setAttributes({ image: { ...image, options: options } });
+
+          setLoading(false);
+
+        });
+
+        apiFetch({
+          path: '/post-grid/v2/get_image_sizes',
+          method: 'POST',
+          data: {},
+        }).then((res) => {
+
+          var imgSizes = [];
+
+          Object.keys(res).map(x => {
+
+            var height = res[x].height
+            var width = res[x].width
+            var crop = res[x].crop
+
+            imgSizes.push({ label: x + "(" + width + "*" + height + ")", value: x, height: height, width: width, crop: crop });
+          })
+
+
+          setImageSizes(imgSizes)
+        });
+
+
+      }
 
 
 
@@ -287,26 +293,41 @@ registerBlockType("post-grid/image", {
     useEffect(() => {
 
       console.log(image.options.imgSrcMetaKey);
-      setLoading(true);
+      console.log(image.options.imgSrcMetaKeyType);
+      console.log(postId);
+
+      if (image.options.imgSrcMetaKey.length != 0) {
+
+        setLoading(true);
 
 
-      apiFetch({
-        path: '/post-grid/v2/get_post_meta',
-        method: 'POST',
-        data: { postId: postId, meta_key: image.options.imgSrcMetaKey, type: 'string', template: '' },
-      }).then((res) => {
+        apiFetch({
+          path: '/post-grid/v2/get_post_meta',
+          method: 'POST',
+          data: { postId: postId, meta_key: image.options.imgSrcMetaKey, type: 'string', template: '' },
+        }).then((res) => {
 
-        var metaKeyType = (image.options.imgSrcMetaKeyType != undefined) ? image.options.imgSrcMetaKeyType : 'ID'
-        if (metaKeyType == 'ID') {
-          setCurrentPostImageId(res.meta_value)
-        } else {
-          //setPostImage(res)
-
-        }
-        setLoading(false);
+          console.log(res);
 
 
-      });
+          var metaKeyType = (image.options.imgSrcMetaKeyType != undefined) ? image.options.imgSrcMetaKeyType : 'ID'
+          if (metaKeyType == 'ID') {
+            setCurrentPostImageId(res.meta_value)
+
+            console.log(res.meta_value);
+
+
+          } else {
+            //setPostImage(res)
+
+          }
+          setLoading(false);
+
+
+        });
+      }
+
+
 
     }, [image.options.imgSrcMetaKey, image.options.imgSrcMetaKeyType, image.options.imgSrcType]);
 

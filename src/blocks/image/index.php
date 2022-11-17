@@ -62,12 +62,13 @@ class PGBlockImage
         $wrapperTextAlign = isset($wrapperStyles['textAlign']) ? $wrapperStyles['textAlign'] : '';
 
 
-        $featuredImage = isset($attributes['featuredImage']) ? $attributes['featuredImage'] : [];
+        $featuredImage = isset($attributes['image']) ? $attributes['image'] : [];
         $featuredImageOptions = isset($featuredImage['options']) ? $featuredImage['options'] : [];
         $featuredImageStyles = isset($featuredImage['styles']) ? $featuredImage['styles'] : [];
 
         $featuredImageSrcType = isset($featuredImageOptions['imgSrcType']) ? $featuredImageOptions['imgSrcType'] : '';
         $featuredImageSrcMetaKey = isset($featuredImageOptions['imgSrcMetaKey']) ? $featuredImageOptions['imgSrcMetaKey'] : '';
+        $featuredImageSrcMetaKeyType = isset($featuredImageOptions['imgSrcMetaKeyType']) ? $featuredImageOptions['imgSrcMetaKeyType'] : '';
 
         $featuredImagesrcUrl = isset($featuredImageOptions['srcUrl']) ? $featuredImageOptions['srcUrl'] : '';
 
@@ -90,8 +91,6 @@ class PGBlockImage
 
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
-
-
         $postGridCssY[] = $blockCssY['items'];
 
 
@@ -99,7 +98,9 @@ class PGBlockImage
         $postGridCustomCss .= $customCss;
 
 
-
+        // echo '<pre>' . var_export($featuredImageSrcType, true) . '</pre>';
+        // echo '<pre>' . var_export($featuredImageSrcMetaKey, true) . '</pre>';
+        // echo '<pre>' . var_export($featuredImageSrcMetaKeyType, true) . '</pre>';
 
 
 
@@ -131,7 +132,20 @@ class PGBlockImage
         $attachment_metadata = wp_get_attachment_metadata($thumb_id);
 
         if ($featuredImageSrcType == 'customField') {
-            $attachment_url = get_post_meta($post_ID, $featuredImageSrcMetaKey, true);
+
+            if ($featuredImageSrcMetaKeyType == 'ID') {
+
+                $thumb_id = get_post_meta($post_ID, $featuredImageSrcMetaKey, true);
+                //echo '<pre>' . var_export($thumb_id, true) . '</pre>';
+
+
+                $attachment_url = wp_get_attachment_url($thumb_id);
+                $attachment_post = get_post($thumb_id);
+
+                $image_srcset = wp_get_attachment_image_srcset($thumb_id);
+            } else {
+                $attachment_url = get_post_meta($post_ID, $featuredImageSrcMetaKey, true);
+            }
         } elseif ($featuredImageSrcType == 'customUrl') {
             $attachment_url = $featuredImagesrcUrl;
         } elseif ($featuredImageSrcType == 'imgId') {

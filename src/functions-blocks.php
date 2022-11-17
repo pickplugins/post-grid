@@ -319,9 +319,39 @@ function post_grid_allowed_block_types($allowed_block_types, $editor_context)
 
     $post_grid_settings = get_option('post_grid_settings');
 
-    $block_list = isset($post_grid_settings['block_list']) ? $post_grid_settings['block_list'] : [];
+    $disable_blocks = isset($post_grid_settings['disable_blocks']) ? $post_grid_settings['disable_blocks'] : [];
 
-    ////error_log(serialize($block_list));
+    error_log(serialize($allowed_block_types));
+
+    $blocks_list = [
+        'post-grid/post-grid' => 'Post Grid',
+        'post-grid/post-grid-filterable' => 'Post grid filterable',
+        'post-grid/post-title' => 'Post title',
+        'post-grid/post-excerpt' => 'Post excerpt',
+        'post-grid/post-author' => 'Post author',
+        'post-grid/post-author-fields' => 'Post author fields',
+        'post-grid/post-featured-image' => 'Post featured image',
+        'post-grid/image' => 'Image',
+        'post-grid/post-categories' => 'Post categories',
+        'post-grid/post-tags' => 'Post tags',
+        'post-grid/post-taxonomies' => 'Post taxonomies',
+        'post-grid/post-date' => 'Post date',
+        'post-grid/post-meta' => 'Post meta',
+        'post-grid/read-more' => 'Read more',
+        'post-grid/layers' => 'Layers',
+        'post-grid/layer' => 'Layer',
+        'post-grid/accordion' => 'Accordion',
+        'post-grid/tabs' => 'Tabs',
+        'post-grid/list' => 'List',
+        'post-grid/icon' => 'Icon',
+        'post-grid/text' => 'Text',
+    ];
+
+
+    foreach ($disable_blocks as $block) {
+    }
+
+
 
     return $allowed_block_types;
 }

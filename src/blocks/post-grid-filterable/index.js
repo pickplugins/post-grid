@@ -6446,6 +6446,7 @@ registerBlockType("post-grid/post-grid-filterable", {
               {
 
                 filterable.options.filters.length > 0 && filterable.options.filters.map(x => {
+                  console.log(x);
 
                   return (
 
@@ -6458,8 +6459,6 @@ registerBlockType("post-grid/post-grid-filterable", {
 
                       {x.items.map(y => {
 
-                        console.log(y);
-                        console.log(activeFilter.options.slug);
 
                         return (
 

@@ -230,6 +230,23 @@ then paste this shortcode anywhere in your page to display grid<br />
     * 2022-08-13 - add - "Post Excerpt" block added. 
     * 2022-08-13 - add - "Read More" block added. 
     * 2022-08-13 - add - "Advance Text" block added. 
+    * 2022-11-17 - add - "Post Author" block added. 
+    * 2022-11-17 - add - "Post Author Fields" block added. 
+    * 2022-11-17 - add - "Featured Image" block added. 
+    * 2022-11-17 - add - "Image" block added. 
+    * 2022-11-17 - add - "Post Categories" block added. 
+    * 2022-11-17 - add - "Post Tags" block added. 
+    * 2022-11-17 - add - "Post Terms" block added. 
+    * 2022-11-17 - add - "Post Date" block added. 
+    * 2022-11-17 - add - "Read More" block added. 
+    * 2022-11-17 - add - "Advance Text" block added. 
+    * 2022-11-17 - add - "Post Grid" block added. 
+    * 2022-11-17 - add - "List Items" block added. 
+    * 2022-11-17 - add - "Icons" block added. 
+    * 2022-11-17 - add - "Layers" block added. 
+    * 2022-11-17 - add - "Accordion" block added. 
+    * 2022-11-17 - add - "Tabs" block added. 
+    * 2022-11-17 - add - "Post Grid - Filterable" block added. 
 
 
 

@@ -21,6 +21,7 @@ import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
 import BreakpointToggle from '../../components/breakpoint-toggle'
 import colorsPresets from '../../colors-presets'
+import PGcssTextAlign from '../../components/css-text-align'
 
 
 
@@ -68,7 +69,6 @@ registerBlockType("post-grid/text", {
           padding: {},
           margin: {},
           display: {},
-
           fontSize: {}, //{ val: '18', unit: 'px' }
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
@@ -118,6 +118,9 @@ registerBlockType("post-grid/text", {
     var context = props.context;
     var clientId = props.clientId;
 
+    console.log(clientId);
+
+
 
     var blockId = attributes.blockId;
 
@@ -158,6 +161,14 @@ registerBlockType("post-grid/text", {
       generateBlockCssY()
 
     }, [customCss]);
+
+
+
+    useEffect(() => {
+
+      generateBlockCssY();
+
+    }, [blockId]);
 
 
     var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
@@ -724,7 +735,7 @@ registerBlockType("post-grid/text", {
 
 
           <InspectorControls key="general">
-            <div className='px-3' title="General" initialOpen={false}>
+            <div className='px-3' title="Text" initialOpen={false}>
 
 
 
@@ -734,7 +745,19 @@ registerBlockType("post-grid/text", {
 
                 <PanelBody title="Text" initialOpen={false}>
 
+                  <PanelRow>
+                    <label for="">Block ID</label>
 
+                    <InputControl
+                      value={blockId}
+                      onChange={(newVal) => {
+
+                        setAttributes({ blockId: newVal });
+
+                      }}
+                    />
+
+                  </PanelRow>
 
                   <PanelRow>
                     <label for="">Wrapper Tag</label>
@@ -770,7 +793,32 @@ registerBlockType("post-grid/text", {
                     />
                   </PanelRow>
 
+                  <PanelRow>
+                    <label></label>
+                    <PGcssTextAlign val={text.styles.textAlign[breakPointX]} onChange={(newVal => {
 
+                      console.log(newVal);
+
+                      var newValuesObj = {};
+
+                      if (Object.keys(text.styles.textAlign).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = text.styles.textAlign;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...text.styles, textAlign: newValuesObj };
+                      setAttributes({ text: { ...text, styles: styles } });
+
+                      blockCssY.items[textSelector] = { ...blockCssY.items[textSelector], 'text-align': newValuesObj };
+                      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+                    })} />
+                  </PanelRow>
 
                   <PanelRow className='my-3'>
                     <label>Color</label>

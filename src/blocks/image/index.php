@@ -249,6 +249,30 @@ class PGBlockImage
 
         endif;
 
+
+
+        if (!empty($wrapperTag) && $useAsBackground == 'yes') :
+
+        ?>
+
+            <?php if (!empty($featuredImageLinkTo)) : ?>
+                <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                    <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+
+                    </<?php echo $wrapperTag; ?>>
+                </a>
+            <?php else : ?>
+
+                <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+
+                </<?php echo $wrapperTag; ?>>
+            <?php endif; ?>
+
+        <?php
+
+        endif;
+
+
         ?>
 
 

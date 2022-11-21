@@ -5462,7 +5462,9 @@ var myStore = wp.data.select('postgrid-shop');
           linkAttr: [],
           class: '',
           size: {
-            "Desktop": "full"
+            "Desktop": "full",
+            "Tablet": "full",
+            "Mobile": "full"
           }
         },
         styles: {
@@ -6936,7 +6938,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    })), (image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
       className: "mb-4"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
@@ -6949,7 +6951,7 @@ var myStore = wp.data.select('postgrid-shop');
       values: image.options.size[breakPointX]
     })), image.options.size[breakPointX] != undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "bg-gray-400 text-white px-3 py-2 my-3"
-    }, " ", image.options.size[breakPointX]), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    }, " ", image.options.size[breakPointX])), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Link To"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       label: "",
@@ -22121,7 +22123,9 @@ var myStore = wp.data.select('postgrid-shop');
           linkAttr: [],
           class: '',
           size: {
-            "Desktop": "full"
+            "Desktop": "thumbnail",
+            "Tablet": "full",
+            "Mobile": "full"
           }
         },
         styles: {
@@ -22240,7 +22244,6 @@ var myStore = wp.data.select('postgrid-shop');
           id: currentPostImageId
         }
       }).then(res => {
-        console.log(res.media_details.sizes);
         setPostImage(res);
         var imgSizes = [];
         Object.keys(res.media_details.sizes).map(x => {
@@ -22261,7 +22264,6 @@ var myStore = wp.data.select('postgrid-shop');
       //   data: {},
       // }).then((res) => {
       //   var imgSizes = [];
-      //   console.log(res);
       //   Object.keys(res).map(x => {
       //     var height = res[x].height
       //     var width = res[x].width
@@ -22274,7 +22276,6 @@ var myStore = wp.data.select('postgrid-shop');
     }, [currentPostImageId]);
 
     function addfilterArgs(option, index) {
-      console.log(option);
       var filterObj = {};
 
       if (featuredImage.styles.filter[breakPointX] != undefined) {
@@ -22284,7 +22285,6 @@ var myStore = wp.data.select('postgrid-shop');
         featuredImage.styles.filter[breakPointX].push(option);
       }
 
-      console.log(filterObj);
       var styles = { ...featuredImage.styles,
         filter: featuredImage.styles.filter
       };
@@ -22299,7 +22299,6 @@ var myStore = wp.data.select('postgrid-shop');
       var filterStr = {};
       filterStr[breakPointX] = '';
       featuredImage.styles.filter[breakPointX] != undefined && featuredImage.styles.filter[breakPointX].map(x => {
-        console.log(x);
         filterStr[breakPointX] += x.value + '(' + x.val + x.unit + ') ';
       });
       blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
@@ -22418,7 +22417,6 @@ var myStore = wp.data.select('postgrid-shop');
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
         className: "cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1",
         onClick: ev => {
-          console.log(args);
           featuredImage.styles.filter[breakPointX].splice(args.index, 1);
           var styles = featuredImage.styles;
           setAttributes({
@@ -22441,7 +22439,6 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function paddingControl(nextValues) {
-      //console.log(nextValues);
       var responsive = featuredImage.styles.padding;
       responsive[breakPointX] = nextValues;
       var styles = { ...featuredImage.styles,
@@ -22456,7 +22453,7 @@ var myStore = wp.data.select('postgrid-shop');
       nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
       nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
       nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left; //console.log(nextValues);
+      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
 
       if (nextValues.top != undefined) {
         var paddingTop = blockCssY.items[linkSelector]['padding-top'] != undefined ? blockCssY.items[linkSelector]['padding-top'] : {};
@@ -23182,7 +23179,6 @@ var myStore = wp.data.select('postgrid-shop');
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_19__["default"], {
       val: wrapper.styles.display[breakPointX],
       onChange: newVal => {
-        console.log(newVal);
         var newValuesObj = {};
 
         if (Object.keys(wrapper.styles.display).length == 0) {
@@ -42865,6 +42861,119 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
+    function paddingControlWrapper(nextValues) {
+      //console.log(nextValues);
+      var responsive = wrapper.styles.padding;
+      responsive[breakPointX] = nextValues;
+      var styles = { ...wrapper.styles,
+        padding: responsive
+      };
+      setAttributes({
+        wrapper: { ...wrapper,
+          styles: styles
+        }
+      });
+      blockCssY.items[titleWrapperSelector] = blockCssY.items[titleWrapperSelector] != undefined ? blockCssY.items[titleWrapperSelector] : {};
+      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
+      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
+      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
+      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left; //console.log(nextValues);
+
+      if (nextValues.top != undefined) {
+        var paddingTop = blockCssY.items[titleWrapperSelector]['padding-top'] != undefined ? blockCssY.items[titleWrapperSelector]['padding-top'] : {};
+        paddingTop[breakPointX] = nextValues.top;
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector],
+          'padding-top': paddingTop
+        };
+      }
+
+      if (nextValues.right != undefined) {
+        var paddingRight = blockCssY.items[titleWrapperSelector]['padding-right'] != undefined ? blockCssY.items[titleWrapperSelector]['padding-right'] : {};
+        paddingRight[breakPointX] = nextValues.right;
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector],
+          'padding-right': paddingRight
+        };
+      }
+
+      if (nextValues.bottom != undefined) {
+        var paddingBottom = blockCssY.items[titleWrapperSelector]['padding-bottom'] != undefined ? blockCssY.items[titleWrapperSelector]['padding-bottom'] : {};
+        paddingBottom[breakPointX] = nextValues.bottom;
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector],
+          'padding-bottom': paddingBottom
+        };
+      }
+
+      if (nextValues.left != undefined) {
+        var paddingLeft = blockCssY.items[titleWrapperSelector]['padding-left'] != undefined ? blockCssY.items[titleWrapperSelector]['padding-left'] : {};
+        paddingLeft[breakPointX] = nextValues.left;
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector],
+          'padding-left': paddingLeft
+        };
+      }
+
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function marginControlWrapper(nextValues) {
+      var responsive = wrapper.styles.margin;
+      responsive[breakPointX] = nextValues;
+      var styles = { ...wrapper.styles,
+        margin: responsive
+      };
+      setAttributes({
+        wrapper: { ...wrapper,
+          styles: styles
+        }
+      });
+      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
+      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
+      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
+      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
+      blockCssY.items[titleWrapperSelector] = blockCssY.items[titleWrapperSelector] != undefined ? blockCssY.items[titleWrapperSelector] : {};
+
+      if (nextValues.top != undefined) {
+        var marginTop = blockCssY.items[titleWrapperSelector]['margin-top'] != undefined ? blockCssY.items[titleWrapperSelector]['margin-top'] : {};
+        marginTop[breakPointX] = nextValues.top;
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector],
+          'margin-top': marginTop
+        };
+      }
+
+      if (nextValues.right != undefined) {
+        var marginRight = blockCssY.items[titleWrapperSelector]['margin-right'] !== undefined ? blockCssY.items[titleWrapperSelector]['margin-right'] : {};
+        marginRight[breakPointX] = nextValues.right;
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector],
+          'margin-right': marginRight
+        };
+      }
+
+      if (nextValues.bottom != undefined) {
+        var marginBottom = blockCssY.items[titleWrapperSelector]['margin-bottom'] !== undefined ? blockCssY.items[titleWrapperSelector]['margin-bottom'] : {};
+        marginBottom[breakPointX] = nextValues.bottom;
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector],
+          'margin-bottom': marginBottom
+        };
+      }
+
+      if (nextValues.left != undefined) {
+        var marginLeft = blockCssY.items[titleWrapperSelector]['margin-left'] !== undefined ? blockCssY.items[titleWrapperSelector]['margin-left'] : {};
+        marginLeft[breakPointX] = nextValues.left;
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector],
+          'margin-left': marginLeft
+        };
+      }
+
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
     function generateBlockCssY() {
       var reponsiveCssGroups = {};
 
@@ -43070,7 +43179,7 @@ var myStore = wp.data.select('postgrid-shop');
       if (typoX.fontSize[breakPointX] != undefined) {
         var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
         var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[titleLinkSelector]['font-size'] != undefined ? blockCssY.items[titleLinkSelector]['font-size'] : {};
+        var fontSizeX = blockCssY.items[titleLinkSelector] != undefined ? blockCssY.items[titleLinkSelector]['font-size'] : {};
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit; //blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-size': fontSizeX };
 
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector],
@@ -43225,7 +43334,6 @@ var myStore = wp.data.select('postgrid-shop');
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_18__["default"], {
       val: wrapper.styles.display[breakPointX],
       onChange: newVal => {
-        console.log(newVal);
         var newValuesObj = {};
 
         if (Object.keys(wrapper.styles.display).length == 0) {
@@ -43252,7 +43360,35 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+      label: "",
+      values: wrapper.styles.padding[breakPointX],
+      onChange: nextValues => {
+        paddingControlWrapper(nextValues);
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+      label: "",
+      values: wrapper.styles.margin[breakPointX],
+      onChange: nextValues => {
+        marginControlWrapper(nextValues);
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Post Title",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {

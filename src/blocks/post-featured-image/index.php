@@ -80,7 +80,7 @@ class PGBlockFeaturedImage
 
         $linkAttr = isset($featuredImageOptions['linkAttr']) ? $featuredImageOptions['linkAttr'] : [];
         $rel = isset($featuredImageOptions['rel']) ? $featuredImageOptions['rel'] : '';
-        $size = isset($featuredImageOptions['size']['Desktop']) ? $featuredImageOptions['size']['Desktop'] : '';
+        $size = isset($featuredImageOptions['size']['Desktop']) ? $featuredImageOptions['size']['Desktop'] : 'full';
 
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
@@ -94,7 +94,7 @@ class PGBlockFeaturedImage
 
 
 
-
+        //var_dump($size);
 
 
         $linkAttrStr = '';
@@ -187,15 +187,7 @@ class PGBlockFeaturedImage
 
         if (!empty($wrapperTag) && $useAsBackground == 'no') :
 
-
-
-
 ?>
-
-
-
-
-
 
             <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
                 <?php if (!empty($featuredImageLinkTo)) : ?>
@@ -231,6 +223,29 @@ class PGBlockFeaturedImage
         <?php
 
         endif;
+
+
+        if (!empty($wrapperTag) && $useAsBackground == 'yes') :
+
+        ?>
+
+            <?php if (!empty($featuredImageLinkTo)) : ?>
+                <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                    <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+
+                    </<?php echo $wrapperTag; ?>>
+                </a>
+            <?php else : ?>
+
+                <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+
+                </<?php echo $wrapperTag; ?>>
+            <?php endif; ?>
+
+        <?php
+
+        endif;
+
 
         ?>
 

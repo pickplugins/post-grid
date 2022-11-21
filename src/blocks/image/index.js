@@ -109,7 +109,7 @@ registerBlockType("post-grid/image", {
           linkTarget: '_blank',
           linkAttr: [],
           class: '',
-          size: { "Desktop": "full" },
+          size: { "Desktop": "full", "Tablet": "full", "Mobile": "full" },
 
         },
 
@@ -1770,24 +1770,26 @@ registerBlockType("post-grid/image", {
 
 
 
-              {image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField' && (
+              {(image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && (
 
-                <PanelRow className='mb-4'>
-                  <label for="">Thumbnail Size</label>
-                  <PGDropdown position="bottom right" variant="secondary" options={imageSizes} buttonTitle="Choose" onChange={setFeaturedImageSize} values={image.options.size[breakPointX]}></PGDropdown>
-                </PanelRow>
+                <>
+                  <PanelRow className='mb-4'>
+                    <label for="">Thumbnail Size</label>
+                    <PGDropdown position="bottom right" variant="secondary" options={imageSizes} buttonTitle="Choose" onChange={setFeaturedImageSize} values={image.options.size[breakPointX]}></PGDropdown>
+                  </PanelRow>
+                  {image.options.size[breakPointX] != undefined && (
 
+                    <div className='bg-gray-400 text-white px-3 py-2 my-3' > {image.options.size[breakPointX]}</div>
+
+                  )}
+                </>
               )}
 
 
 
 
 
-              {image.options.size[breakPointX] != undefined && (
 
-                <div className='bg-gray-400 text-white px-3 py-2 my-3' > {image.options.size[breakPointX]}</div>
-
-              )}
 
 
 

@@ -101,7 +101,7 @@ registerBlockType("post-grid/post-featured-image", {
           linkTarget: '_blank',
           linkAttr: [],
           class: '',
-          size: { "Desktop": "full" },
+          size: { "Desktop": "thumbnail", "Tablet": "full", "Mobile": "full" },
 
         },
 
@@ -234,7 +234,6 @@ registerBlockType("post-grid/post-featured-image", {
         data: { id: currentPostImageId },
       }).then((res) => {
 
-        console.log(res.media_details.sizes);
 
         setPostImage(res);
         var imgSizes = [];
@@ -263,7 +262,6 @@ registerBlockType("post-grid/post-featured-image", {
 
       //   var imgSizes = [];
 
-      //   console.log(res);
 
 
       //   Object.keys(res).map(x => {
@@ -290,7 +288,6 @@ registerBlockType("post-grid/post-featured-image", {
 
     function addfilterArgs(option, index) {
 
-      console.log(option);
 
       var filterObj = {};
 
@@ -303,7 +300,6 @@ registerBlockType("post-grid/post-featured-image", {
         featuredImage.styles.filter[breakPointX].push(option)
       }
 
-      console.log(filterObj);
 
 
       var styles = { ...featuredImage.styles, filter: featuredImage.styles.filter };
@@ -321,7 +317,6 @@ registerBlockType("post-grid/post-featured-image", {
       filterStr[breakPointX] = '';
       (featuredImage.styles.filter[breakPointX] != undefined && featuredImage.styles.filter[breakPointX].map(x => {
 
-        console.log(x);
 
         filterStr[breakPointX] += x.value + '(' + x.val + x.unit + ') ';
 
@@ -480,7 +475,6 @@ registerBlockType("post-grid/post-featured-image", {
         <>
           <span className='cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1' onClick={ev => {
 
-            console.log(args);
 
             featuredImage.styles.filter[breakPointX].splice(args.index, 1);
             var styles = featuredImage.styles;
@@ -508,7 +502,6 @@ registerBlockType("post-grid/post-featured-image", {
 
     function paddingControl(nextValues) {
 
-      //console.log(nextValues);
 
 
       var responsive = featuredImage.styles.padding;
@@ -526,7 +519,6 @@ registerBlockType("post-grid/post-featured-image", {
       nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
-      //console.log(nextValues);
 
 
 
@@ -1322,7 +1314,6 @@ registerBlockType("post-grid/post-featured-image", {
                 <label>Display</label>
                 <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
 
-                  console.log(newVal);
 
                   var newValuesObj = {};
 

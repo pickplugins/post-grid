@@ -554,6 +554,143 @@ registerBlockType("post-grid/post-title", {
     }
 
 
+    function paddingControlWrapper(nextValues) {
+
+      //console.log(nextValues);
+
+
+      var responsive = wrapper.styles.padding;
+      responsive[breakPointX] = nextValues;
+
+      var styles = { ...wrapper.styles, padding: responsive };
+      setAttributes({ wrapper: { ...wrapper, styles: styles } });
+
+
+      blockCssY.items[titleWrapperSelector] = (blockCssY.items[titleWrapperSelector] != undefined) ? blockCssY.items[titleWrapperSelector] : {};
+
+
+      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
+      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
+      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
+      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
+
+      //console.log(nextValues);
+
+
+
+
+      if (nextValues.top != undefined) {
+
+        var paddingTop = (blockCssY.items[titleWrapperSelector]['padding-top'] != undefined) ? blockCssY.items[titleWrapperSelector]['padding-top'] : {};
+        paddingTop[breakPointX] = nextValues.top
+
+
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'padding-top': paddingTop };
+
+      }
+
+
+      if (nextValues.right != undefined) {
+
+        var paddingRight = (blockCssY.items[titleWrapperSelector]['padding-right'] != undefined) ? blockCssY.items[titleWrapperSelector]['padding-right'] : {};
+        paddingRight[breakPointX] = nextValues.right
+
+
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'padding-right': paddingRight };
+
+
+
+      }
+
+      if (nextValues.bottom != undefined) {
+
+        var paddingBottom = (blockCssY.items[titleWrapperSelector]['padding-bottom'] != undefined) ? blockCssY.items[titleWrapperSelector]['padding-bottom'] : {};
+        paddingBottom[breakPointX] = nextValues.bottom
+
+
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'padding-bottom': paddingBottom };
+
+
+
+      }
+
+      if (nextValues.left != undefined) {
+
+        var paddingLeft = (blockCssY.items[titleWrapperSelector]['padding-left'] != undefined) ? blockCssY.items[titleWrapperSelector]['padding-left'] : {};
+        paddingLeft[breakPointX] = nextValues.left
+
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'padding-left': paddingLeft };
+
+
+      }
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+    }
+
+
+
+
+
+    function marginControlWrapper(nextValues) {
+
+
+      var responsive = wrapper.styles.margin;
+      responsive[breakPointX] = nextValues;
+
+
+      var styles = { ...wrapper.styles, margin: responsive };
+      setAttributes({ wrapper: { ...wrapper, styles: styles } });
+
+      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
+      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
+      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
+      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
+
+
+      blockCssY.items[titleWrapperSelector] = (blockCssY.items[titleWrapperSelector] != undefined) ? blockCssY.items[titleWrapperSelector] : {};
+
+      if (nextValues.top != undefined) {
+        var marginTop = (blockCssY.items[titleWrapperSelector]['margin-top'] != undefined) ? blockCssY.items[titleWrapperSelector]['margin-top'] : {};
+        marginTop[breakPointX] = nextValues.top
+
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'margin-top': marginTop };
+      }
+
+
+      if (nextValues.right != undefined) {
+
+        var marginRight = (blockCssY.items[titleWrapperSelector]['margin-right'] !== undefined) ? blockCssY.items[titleWrapperSelector]['margin-right'] : {};
+        marginRight[breakPointX] = nextValues.right
+
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'margin-right': marginRight };
+
+      }
+
+      if (nextValues.bottom != undefined) {
+
+        var marginBottom = (blockCssY.items[titleWrapperSelector]['margin-bottom'] !== undefined) ? blockCssY.items[titleWrapperSelector]['margin-bottom'] : {};
+        marginBottom[breakPointX] = nextValues.bottom
+
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'margin-bottom': marginBottom };
+
+      }
+
+      if (nextValues.left != undefined) {
+
+        var marginLeft = (blockCssY.items[titleWrapperSelector]['margin-left'] !== undefined) ? blockCssY.items[titleWrapperSelector]['margin-left'] : {};
+        marginLeft[breakPointX] = nextValues.left
+
+        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'margin-left': marginLeft };
+
+      }
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
 
     function generateBlockCssY() {
 
@@ -844,9 +981,7 @@ registerBlockType("post-grid/post-title", {
         var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
 
 
-        var fontSizeX = (blockCssY.items[titleLinkSelector]['font-size'] != undefined) ? blockCssY.items[titleLinkSelector]['font-size'] : {};
-
-
+        var fontSizeX = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector]['font-size'] : {};
 
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
         //blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-size': fontSizeX };
@@ -1025,7 +1160,6 @@ registerBlockType("post-grid/post-title", {
                     <label>Display</label>
                     <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
 
-                      console.log(newVal);
 
                       var newValuesObj = {};
 
@@ -1045,6 +1179,27 @@ registerBlockType("post-grid/post-title", {
                     })} />
                   </PanelRow>
 
+
+                  <PanelRow>
+                    <label>Padding</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+                  <BoxControl
+                    label=""
+                    values={wrapper.styles.padding[breakPointX]}
+                    onChange={(nextValues) => { paddingControlWrapper(nextValues) }}
+                  />
+
+
+                  <PanelRow>
+                    <label>Margin</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+                  <BoxControl
+                    label=""
+                    values={wrapper.styles.margin[breakPointX]}
+                    onChange={(nextValues) => { marginControlWrapper(nextValues) }}
+                  />
 
 
 

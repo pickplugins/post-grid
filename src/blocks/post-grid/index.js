@@ -430,6 +430,10 @@ registerBlockType("post-grid/post-grid", {
 
     var setAttributes = props.setAttributes;
 
+
+    console.log(attributes);
+
+
     var lazyLoad = attributes.lazyLoad;
     var container = attributes.container;
     var pagination = attributes.pagination;
@@ -5336,6 +5340,10 @@ registerBlockType("post-grid/post-grid", {
   },
   save: function (_props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
+
+    var attributes = _props.attributes;
+
+
     return null;
   }
 })

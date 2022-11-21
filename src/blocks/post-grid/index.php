@@ -58,7 +58,7 @@ class PGBlockPostGrid
 
             if ($val) {
                 if ($id == 'postType') {
-                    $query_args['post_type'] = !empty($val) ? $val : ['post'];
+                    $query_args['post_type'] = $val;
                 } elseif ($id == 'postStatus') {
                     $query_args['post_status'] = $val;
                 } elseif ($id == 'order') {
@@ -239,8 +239,6 @@ class PGBlockPostGrid
         if (!empty($paged))
             $query_args['paged'] = $paged;
 
-        var_dump($query_args);
-
 
         return $query_args;
     }
@@ -390,6 +388,7 @@ class PGBlockPostGrid
 
 
         $query_args = $this->parse_query_prams(isset($queryArgs['items']) ? $queryArgs['items'] : []);
+
 
         if (get_query_var('paged')) {
             $paged = get_query_var('paged');

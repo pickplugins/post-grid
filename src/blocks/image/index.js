@@ -109,7 +109,7 @@ registerBlockType("post-grid/image", {
           linkTarget: '_blank',
           linkAttr: [],
           class: '',
-          size: {},
+          size: { "Desktop": "full" },
 
         },
 
@@ -256,28 +256,44 @@ registerBlockType("post-grid/image", {
 
           setLoading(false);
 
-        });
-
-        apiFetch({
-          path: '/post-grid/v2/get_image_sizes',
-          method: 'POST',
-          data: {},
-        }).then((res) => {
 
           var imgSizes = [];
 
-          Object.keys(res).map(x => {
+          Object.keys(res.media_details.sizes).map(x => {
 
-            var height = res[x].height
-            var width = res[x].width
-            var crop = res[x].crop
+            var height = res.media_details.sizes[x].height
+            var width = res.media_details.sizes[x].width
+            //var crop = res[x].crop
 
-            imgSizes.push({ label: x + "(" + width + "*" + height + ")", value: x, height: height, width: width, crop: crop });
+            imgSizes.push({ label: x + "(" + width + "*" + height + ")", value: x, height: height, width: width });
           })
 
-
           setImageSizes(imgSizes)
+
+
+
         });
+
+        // apiFetch({
+        //   path: '/post-grid/v2/get_image_sizes',
+        //   method: 'POST',
+        //   data: {},
+        // }).then((res) => {
+
+        //   var imgSizes = [];
+
+        //   Object.keys(res).map(x => {
+
+        //     var height = res[x].height
+        //     var width = res[x].width
+        //     var crop = res[x].crop
+
+        //     imgSizes.push({ label: x + "(" + width + "*" + height + ")", value: x, height: height, width: width, crop: crop });
+        //   })
+
+
+        //   setImageSizes(imgSizes)
+        // });
 
 
       }
@@ -1754,25 +1770,17 @@ registerBlockType("post-grid/image", {
 
 
 
+              {image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField' && (
+
+                <PanelRow className='mb-4'>
+                  <label for="">Thumbnail Size</label>
+                  <PGDropdown position="bottom right" variant="secondary" options={imageSizes} buttonTitle="Choose" onChange={setFeaturedImageSize} values={image.options.size[breakPointX]}></PGDropdown>
+                </PanelRow>
+
+              )}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-              <PanelRow className='mb-4'>
-                <label for="">Thumbnail Size</label>
-                <PGDropdown position="bottom right" variant="secondary" options={imageSizes} buttonTitle="Choose" onChange={setFeaturedImageSize} values={image.options.size[breakPointX]}></PGDropdown>
-              </PanelRow>
 
 
               {image.options.size[breakPointX] != undefined && (
@@ -2502,7 +2510,6 @@ registerBlockType("post-grid/image", {
 
           {loading && <Spinner />}
 
-
           {wrapper.options.useAsBackground == 'yes' && (
             <CustomTag className={[blockId]}></CustomTag>
           )}
@@ -2519,7 +2526,7 @@ registerBlockType("post-grid/image", {
               {image.options.linkTo.length > 0 && (
                 <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
 
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                  {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
                 </a>
               )}
@@ -2528,7 +2535,7 @@ registerBlockType("post-grid/image", {
 
                   {(image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && (
                     <>
-                      {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                      {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
                     </>
                   )}
 
@@ -2552,7 +2559,7 @@ registerBlockType("post-grid/image", {
                 <a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
 
 
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                  {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
 
                 </a>)
@@ -2564,9 +2571,9 @@ registerBlockType("post-grid/image", {
 
             <>
               {image.options.tag.length > 0 && (
-                <CustomTagPostTitle className={blockId}>3
+                <CustomTagPostTitle className={blockId}>
 
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                  {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
                 </CustomTagPostTitle>
 
@@ -2574,7 +2581,7 @@ registerBlockType("post-grid/image", {
               {image.options.tag.length == 0 && (
                 <div className={blockId}>
 
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                  {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
                 </div>
 

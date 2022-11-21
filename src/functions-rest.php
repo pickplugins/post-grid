@@ -1002,7 +1002,12 @@ class BlockPostGridRest
 
         global $_wp_additional_image_sizes;
 
+        error_log(serialize($_wp_additional_image_sizes));
+
         $default_image_sizes = get_intermediate_image_sizes();
+
+        error_log(serialize($default_image_sizes));
+
 
         foreach ($default_image_sizes as $size) {
             $image_sizes[$size]['width'] = intval(get_option("{$size}_size_w"));

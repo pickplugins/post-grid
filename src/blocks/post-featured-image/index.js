@@ -101,7 +101,7 @@ registerBlockType("post-grid/post-featured-image", {
           linkTarget: '_blank',
           linkAttr: [],
           class: '',
-          size: {},
+          size: { "Desktop": "full" },
 
         },
 
@@ -233,29 +233,53 @@ registerBlockType("post-grid/post-featured-image", {
         method: 'POST',
         data: { id: currentPostImageId },
       }).then((res) => {
-        setPostImage(res)
-      });
 
-      apiFetch({
-        path: '/post-grid/v2/get_image_sizes',
-        method: 'POST',
-        data: {},
-      }).then((res) => {
+        console.log(res.media_details.sizes);
 
+        setPostImage(res);
         var imgSizes = [];
 
-        Object.keys(res).map(x => {
+        Object.keys(res.media_details.sizes).map(x => {
 
-          var height = res[x].height
-          var width = res[x].width
-          var crop = res[x].crop
+          var height = res.media_details.sizes[x].height
+          var width = res.media_details.sizes[x].width
+          //var crop = res[x].crop
 
-          imgSizes.push({ label: x + "(" + width + "*" + height + ")", value: x, height: height, width: width, crop: crop });
+          imgSizes.push({ label: x + "(" + width + "*" + height + ")", value: x, height: height, width: width });
         })
 
-
         setImageSizes(imgSizes)
+
+
       });
+
+
+
+      // apiFetch({
+      //   path: '/post-grid/v2/get_image_sizes',
+      //   method: 'POST',
+      //   data: {},
+      // }).then((res) => {
+
+      //   var imgSizes = [];
+
+      //   console.log(res);
+
+
+      //   Object.keys(res).map(x => {
+
+      //     var height = res[x].height
+      //     var width = res[x].width
+      //     var crop = res[x].crop
+
+      //     imgSizes.push({ label: x + "(" + width + "*" + height + ")", value: x, height: height, width: width, crop: crop });
+      //   })
+
+      //   imgSizes.push({ label: "Full(**)", value: 'full', height: '', width: '', crop: true });
+
+
+      //   setImageSizes(imgSizes)
+      // });
 
 
 
@@ -317,8 +341,6 @@ registerBlockType("post-grid/post-featured-image", {
 
 
     function setFeaturedImageSize(option, index) {
-
-      console.log(index);
 
 
       var newValuesObj = {};

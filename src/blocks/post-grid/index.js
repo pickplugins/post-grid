@@ -21,6 +21,8 @@ import { PanelBody, RangeControl, Button, ButtonGroup, Panel, PanelRow, Dropdown
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 
+import { __experimentalBorderControl as BorderControl } from '@wordpress/components';
+
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 
 import { useSelect } from '@wordpress/data';
@@ -42,6 +44,9 @@ import PGcssDisplay from '../../components/css-display'
 import PGTutorials from '../../components/tutorials'
 
 import PGcssPadding from '../../components/css-padding'
+import PGcssOutline from '../../components/css-outline'
+import PGcssBorder from '../../components/css-border'
+import PGcssBoxShadow from '../../components/css-box-shadow'
 
 import breakPoints from '../../breakpoints'
 import queryPrams from '../../queryprams'
@@ -188,6 +193,9 @@ registerBlockType("post-grid/post-grid", {
           bgColor: {},
           wordBreak: {},
           padding: {},
+          outline: {},
+          border: {},
+          boxShadow: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }
           lineHeight: {}, // { val: '18', unit: 'px' }
@@ -1302,6 +1310,28 @@ registerBlockType("post-grid/post-grid", {
 
 
     }
+
+    function onChangeItemBorder(nextValues) {
+
+      console.log(nextValues);
+
+
+      var width = (nextValues.width == undefined) ? '0px' : nextValues.width;
+      var style = (nextValues.style == undefined) ? 'solid' : nextValues.style;
+      var color = (nextValues.color == undefined) ? '#ddd' : nextValues.color;
+
+
+      var responsive = itemWrap.styles.border;
+      responsive[breakPointX] = width + ' ' + style + ' ' + color;
+
+
+      var styles = { ...itemWrap.styles, border: responsive };
+      setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
+
+
+
+    }
+
 
 
     function itemwrapPaddingControl(nextValues) {
@@ -4347,6 +4377,67 @@ registerBlockType("post-grid/post-grid", {
                   values={itemWrap.styles.margin[breakPointX]}
                   onChange={(nextValues) => { itemwrapMarginControl(nextValues) }}
                 /> */}
+
+
+
+
+
+                <PanelRow>
+                  <label>Border</label>
+                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                </PanelRow>
+
+                <PanelRow>
+                  <PGcssBorder val={itemWrap.styles.border[breakPointX]} onChange={(newVal => {
+
+
+                    var newValuesObj = {};
+
+                    if (Object.keys(itemWrap.styles.border).length == 0) {
+                      newValuesObj[breakPointX] = newVal;
+                    } else {
+                      newValuesObj = itemWrap.styles.border;
+                      newValuesObj[breakPointX] = newVal;
+                    }
+
+                    var styles = { ...itemWrap.styles, border: newValuesObj };
+                    setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
+
+                    blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'border': newValuesObj };
+                    setAttributes({ blockCssY: { items: blockCssY.items } });
+
+                  })} />
+                </PanelRow>
+
+
+
+                <PanelRow>
+                  <label>Box Shadow</label>
+                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                </PanelRow>
+
+                <PanelRow>
+                  <PGcssBoxShadow val={itemWrap.styles.boxShadow[breakPointX]} onChange={(newVal => {
+
+
+                    var newValuesObj = {};
+
+                    if (Object.keys(itemWrap.styles.boxShadow).length == 0) {
+                      newValuesObj[breakPointX] = newVal;
+                    } else {
+                      newValuesObj = itemWrap.styles.boxShadow;
+                      newValuesObj[breakPointX] = newVal;
+                    }
+
+                    var styles = { ...itemWrap.styles, boxShadow: newValuesObj };
+                    setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
+
+                    blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'box-shadow': newValuesObj };
+                    setAttributes({ blockCssY: { items: blockCssY.items } });
+
+                  })} />
+                </PanelRow>
+
 
 
 

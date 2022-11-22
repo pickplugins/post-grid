@@ -29,11 +29,6 @@ class PGcssOutline extends Component {
     };
 
 
-
-
-
-
-
     var outlineStyleArgs = {
       none: { "label": "None", "value": "none" },
       hidden: { "label": "Hidden", "value": "hidden" },

@@ -56,7 +56,7 @@ class PGBlockPostGrid
             $val = isset($item['val']) ? $item['val'] : '';
 
 
-            if ($val) {
+            if (isset($item['val'])) {
                 if ($id == 'postType') {
                     $query_args['post_type'] = $val;
                 } elseif ($id == 'postStatus') {

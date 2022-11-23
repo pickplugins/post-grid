@@ -60,7 +60,9 @@ registerBlockType("post-grid/icon", {
     wrapper: {
       type: 'object',
       default: {
-        options: { tag: 'div', class: '' },
+        options: {
+          tag: 'div', class: '', attr: [],
+        },
         styles:
         {
           textAlign: {},
@@ -71,6 +73,13 @@ registerBlockType("post-grid/icon", {
           display: {},
           borderRadius: {},
 
+          fontSize: {}, //{ val: '18', unit: 'px' }
+          lineHeight: {}, // { val: '18', unit: 'px' }
+          letterSpacing: {}, // { val: '18', unit: 'px' }
+          fontFamily: {},
+          fontWeight: { "Desktop": "700" },
+          textDecoration: {}, //overline, line-through, underline
+          textTransform: {},
 
         },
       },
@@ -216,7 +225,6 @@ registerBlockType("post-grid/icon", {
     var icon = attributes.icon;
 
 
-    var linkAttr = attributes.linkAttr;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
     var customCss = attributes.customCss;
@@ -552,6 +560,112 @@ registerBlockType("post-grid/icon", {
 
 
     }
+
+    function onChangeWrapTypo(typoX) {
+
+
+      setAttributes({ wrapper: { ...wrapper, styles: typoX } });
+
+      var newValuesObjX = {};
+      var itemsX = blockCssY.items;
+
+
+      if (typoX.fontFamily[breakPointX] != undefined) {
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'font-family': typoX.fontFamily };
+
+
+      } else {
+
+        //typoX.fontFamily[breakPointX] = {};
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'font-family': typoX.fontFamily };
+
+      }
+
+
+      if (typoX.fontSize[breakPointX] != undefined) {
+
+        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
+        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
+
+
+        var fontSizeX = (blockCssY.items[wrapperSelector]['font-size'] != undefined) ? blockCssY.items[wrapperSelector]['font-size'] : {};
+
+        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
+        //blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'font-size': fontSizeX };
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'font-size': fontSizeX };
+
+      }
+
+
+      if (typoX.lineHeight[breakPointX] != undefined) {
+
+        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 16;
+        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
+
+
+        var lineHeightX = (blockCssY.items[wrapperSelector]['line-height'] != undefined) ? blockCssY.items[wrapperSelector]['line-height'] : {};
+
+        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
+
+        //blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'line-height': lineHeightX };
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'line-height': lineHeightX };
+
+      }
+      if (typoX.letterSpacing[breakPointX] != undefined) {
+
+        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
+        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
+
+
+
+        var letterSpacingX = (blockCssY.items[wrapperSelector]['letter-spacing'] != undefined) ? blockCssY.items[wrapperSelector]['letter-spacing'] : {};
+
+        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
+
+        //blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'letter-spacing': letterSpacingX };
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'letter-spacing': letterSpacingX };
+
+      }
+
+      if (typoX.fontWeight[breakPointX] != undefined) {
+
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'font-weight': typoX.fontWeight };
+
+      }
+
+
+      if (typoX.textDecoration[breakPointX] != undefined) {
+
+        var str = {};
+
+        var textDecorationX = typoX.textDecoration[breakPointX];
+        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
+
+        str[breakPointX] = textDecorationXStr;
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-decoration': str };
+
+
+
+      }
+      if (typoX.textTransform[breakPointX] != undefined) {
+
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-transform': typoX.textTransform };
+
+
+      }
+
+
+
+      //setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ blockCssY: { items: itemsX } });
+
+
+
+    }
+
+
+
+
     function paddingControlWrapper(nextValues) {
 
 
@@ -944,17 +1058,8 @@ registerBlockType("post-grid/icon", {
 
 
 
-
-
-
-
-
-
-
-
-
-    var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
     var [linkAttrItemsText, setlinkAttrItemsText] = useState({}); // Using the hook.
+    var [wrapAttrItems, setwrapAttrItems] = useState({}); // Using the hook.
 
 
 
@@ -971,22 +1076,26 @@ registerBlockType("post-grid/icon", {
 
 
     useEffect(() => {
-
       var sdsd = {};
-
       text.options.linkAttr.map(x => {
-
         if (x.val)
           sdsd[x.id] = x.val;
-
       })
 
       setlinkAttrItemsText(sdsd);
-
-
     }, [text]);
 
+    useEffect(() => {
+      var sdsd = {};
+      if (wrapper.options.attr != undefined) {
+        wrapper.options.attr.map(x => {
+          if (x.val)
+            sdsd[x.id] = x.val;
+        })
+      }
 
+      setwrapAttrItems(sdsd);
+    }, [wrapper]);
 
 
 
@@ -1121,12 +1230,26 @@ registerBlockType("post-grid/icon", {
 
           <BlockControls >
             <AlignmentToolbar
-              value={text.styles.textAlign}
+              value={wrapper.styles.textAlign}
               onChange={(nextAlign) => {
 
 
-                var styles = { ...text.styles, textAlign: nextAlign };
-                setAttributes({ text: { ...text, styles: styles } });
+
+                var newValuesObj = {};
+
+                if (Object.keys(wrapper.styles.textAlign).length == 0) {
+                  newValuesObj[breakPointX] = nextAlign;
+                } else {
+                  newValuesObj = wrapper.styles.textAlign;
+                  newValuesObj[breakPointX] = nextAlign;
+                }
+
+                var styles = { ...wrapper.styles, textAlign: newValuesObj };
+                setAttributes({ wrapper: { ...wrapper, styles: styles } });
+
+                blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-align': newValuesObj };
+                setAttributes({ blockCssY: { items: blockCssY.items } });
+
 
 
 
@@ -1193,11 +1316,122 @@ registerBlockType("post-grid/icon", {
                     />
                   </PanelRow>
 
+
+
+                  <div>
+
+
+
+
+                    <PanelRow>
+                      <label for="">Custom Attributes</label>
+                      <div
+                        className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                        onClick={(ev) => {
+
+                          if (wrapper.options.attr == undefined) {
+                            wrapper.options.attr = {};
+                          }
+                          var sdsd = wrapper.options.attr.concat({ id: '', val: '' })
+
+
+
+                          var options = { ...wrapper.options, attr: sdsd };
+                          setAttributes({ wrapper: { ...wrapper, options: options } });
+
+
+
+
+
+
+                        }}
+
+                      >Add</div>
+
+
+
+                    </PanelRow>
+
+
+
+                    {
+                      wrapper.options.attr != undefined && wrapper.options.attr.map((x, i) => {
+
+                        return (
+
+                          <div className='my-2'>
+                            <PanelRow>
+                              <InputControl
+                                className='mr-2'
+                                value={wrapper.options.attr[i].id}
+                                onChange={(newVal) => {
+
+                                  wrapper.options.attr[i].id = newVal;
+
+
+                                  var ssdsd = wrapper.options.attr.concat([]);
+
+
+
+                                  var options = { ...wrapper.options, attr: ssdsd };
+                                  setAttributes({ wrapper: { ...wrapper, options: options } });
+
+
+
+                                }}
+                              />
+
+                              <InputControl
+                                className='mr-2'
+                                value={x.val}
+                                onChange={(newVal) => {
+                                  wrapper.options.attr[i].val = newVal
+                                  var ssdsd = wrapper.options.attr.concat([]);
+
+
+
+                                  var options = { ...wrapper.options, attr: ssdsd };
+                                  setAttributes({ wrapper: { ...wrapper, options: options } });
+
+
+                                }}
+                              />
+                              <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                                onClick={(ev) => {
+
+                                  wrapper.options.attr.splice(i, 1);
+
+                                  var ssdsd = wrapper.options.attr.concat([]);
+
+
+
+
+                                  var options = { ...wrapper.options, attr: ssdsd };
+                                  setAttributes({ wrapper: { ...wrapper, options: options } });
+
+
+                                }}
+
+                              ></span>
+                            </PanelRow>
+
+
+
+
+                          </div>
+
+                        )
+
+                      })
+                    }
+
+
+                  </div>
+
                   <PanelRow>
                     <label>Display</label>
                     <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
-
-                      console.log(newVal);
 
                       var newValuesObj = {};
 
@@ -1368,7 +1602,12 @@ registerBlockType("post-grid/icon", {
 
 
 
+                  <PanelRow>
+                    <div className='font-bold'>Typography</div>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
 
+                  <Typography typo={wrapper.styles} breakPointX={breakPointX} onChange={onChangeWrapTypo} setAttributes={setAttributes} obj={wrapper} />
 
 
 
@@ -2324,7 +2563,7 @@ registerBlockType("post-grid/icon", {
         <>
 
           {wrapper.options.tag && (
-            <CustomTag className={[blockId]}>
+            <CustomTag className={[blockId]} {...wrapAttrItems}>
 
               {icon.options.position == 'beforePrefix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
@@ -2389,7 +2628,7 @@ registerBlockType("post-grid/icon", {
               )}
 
               {text.options.isLink && (
-                <a className='text' onClick={handleLinkClick}  {...linkAttrItemstext} target={text.options.linkTarget} href={postUrl}>
+                <a className='text' onClick={handleLinkClick}  {...linkAttrItemsText} target={text.options.linkTarget} href={postUrl}>
 
                   {icon.options.position == 'beforeText' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />

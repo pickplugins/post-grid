@@ -53,9 +53,6 @@ class PGcssBorder extends Component {
       var colorVal = valParts[2];
 
 
-      console.log(widthVal);
-      console.log(styleVal);
-      console.log(colorVal);
 
 
 
@@ -72,11 +69,6 @@ class PGcssBorder extends Component {
 
       const [widthValY, setwidthVal] = useState(widthValX);
       const [widthUnitY, setwidthUnit] = useState(widthUnitX);
-
-      console.log(widthValY);
-      console.log(widthUnitY);
-
-
 
 
       const [outlineWidthVal, setoutlineWidthVal] = useState(widthVal);
@@ -99,7 +91,7 @@ class PGcssBorder extends Component {
                 onChange={(newVal) => {
 
                   setwidthVal(newVal);
-                  onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+                  onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'border');
 
 
                 }}
@@ -131,7 +123,7 @@ class PGcssBorder extends Component {
                         <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                           setwidthUnit(x.value);
-                          onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+                          onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'border');
 
 
                         }}>
@@ -187,7 +179,7 @@ class PGcssBorder extends Component {
 
                     <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
-                      onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'outline');
+                      onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'border');
 
 
                     }}>
@@ -222,7 +214,7 @@ class PGcssBorder extends Component {
               enableAlpha
               onChange={(newVal) => {
 
-                onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'outline');
+                onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'border');
 
 
               }}

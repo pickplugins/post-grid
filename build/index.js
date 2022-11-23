@@ -3303,7 +3303,8 @@ var myStore = wp.data.select('postgrid-shop');
       default: {
         options: {
           tag: 'div',
-          class: ''
+          class: '',
+          attr: []
         },
         styles: {
           textAlign: {},
@@ -3312,7 +3313,20 @@ var myStore = wp.data.select('postgrid-shop');
           padding: {},
           margin: {},
           display: {},
-          borderRadius: {}
+          borderRadius: {},
+          fontSize: {},
+          //{ val: '18', unit: 'px' }
+          lineHeight: {},
+          // { val: '18', unit: 'px' }
+          letterSpacing: {},
+          // { val: '18', unit: 'px' }
+          fontFamily: {},
+          fontWeight: {
+            "Desktop": "700"
+          },
+          textDecoration: {},
+          //overline, line-through, underline
+          textTransform: {}
         }
       }
     },
@@ -3449,7 +3463,6 @@ var myStore = wp.data.select('postgrid-shop');
     var wrapper = attributes.wrapper;
     var text = attributes.text;
     var icon = attributes.icon;
-    var linkAttr = attributes.linkAttr;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
     var customCss = attributes.customCss;
@@ -3717,6 +3730,89 @@ var myStore = wp.data.select('postgrid-shop');
 
       if (typoX.textTransform[breakPointX] != undefined) {
         itemsX[textSelector] = { ...blockCssY.items[textSelector],
+          'text-transform': typoX.textTransform
+        };
+      } //setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+      setAttributes({
+        blockCssY: {
+          items: itemsX
+        }
+      });
+    }
+
+    function onChangeWrapTypo(typoX) {
+      setAttributes({
+        wrapper: { ...wrapper,
+          styles: typoX
+        }
+      });
+      var newValuesObjX = {};
+      var itemsX = blockCssY.items;
+
+      if (typoX.fontFamily[breakPointX] != undefined) {
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
+          'font-family': typoX.fontFamily
+        };
+      } else {
+        //typoX.fontFamily[breakPointX] = {};
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
+          'font-family': typoX.fontFamily
+        };
+      }
+
+      if (typoX.fontSize[breakPointX] != undefined) {
+        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
+        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
+        var fontSizeX = blockCssY.items[wrapperSelector]['font-size'] != undefined ? blockCssY.items[wrapperSelector]['font-size'] : {};
+        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit; //blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'font-size': fontSizeX };
+
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
+          'font-size': fontSizeX
+        };
+      }
+
+      if (typoX.lineHeight[breakPointX] != undefined) {
+        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 16;
+        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
+        var lineHeightX = blockCssY.items[wrapperSelector]['line-height'] != undefined ? blockCssY.items[wrapperSelector]['line-height'] : {};
+        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit; //blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'line-height': lineHeightX };
+
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
+          'line-height': lineHeightX
+        };
+      }
+
+      if (typoX.letterSpacing[breakPointX] != undefined) {
+        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
+        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
+        var letterSpacingX = blockCssY.items[wrapperSelector]['letter-spacing'] != undefined ? blockCssY.items[wrapperSelector]['letter-spacing'] : {};
+        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit; //blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'letter-spacing': letterSpacingX };
+
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
+          'letter-spacing': letterSpacingX
+        };
+      }
+
+      if (typoX.fontWeight[breakPointX] != undefined) {
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
+          'font-weight': typoX.fontWeight
+        };
+      }
+
+      if (typoX.textDecoration[breakPointX] != undefined) {
+        var str = {};
+        var textDecorationX = typoX.textDecoration[breakPointX];
+        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
+        str[breakPointX] = textDecorationXStr;
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
+          'text-decoration': str
+        };
+      }
+
+      if (typoX.textTransform[breakPointX] != undefined) {
+        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
           'text-transform': typoX.textTransform
         };
       } //setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -4084,9 +4180,9 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }
 
-    var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
-
     var [linkAttrItemsText, setlinkAttrItemsText] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
+
+    var [wrapAttrItems, setwrapAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       generateBlockCssY();
@@ -4098,6 +4194,17 @@ var myStore = wp.data.select('postgrid-shop');
       });
       setlinkAttrItemsText(sdsd);
     }, [text]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+      var sdsd = {};
+
+      if (wrapper.options.attr != undefined) {
+        wrapper.options.attr.map(x => {
+          if (x.val) sdsd[x.id] = x.val;
+        });
+      }
+
+      setwrapAttrItems(sdsd);
+    }, [wrapper]);
     const colors = [{
       name: '9DD6DF',
       color: '#9DD6DF'
@@ -4171,14 +4278,31 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.AlignmentToolbar, {
-      value: text.styles.textAlign,
+      value: wrapper.styles.textAlign,
       onChange: nextAlign => {
-        var styles = { ...text.styles,
-          textAlign: nextAlign
+        var newValuesObj = {};
+
+        if (Object.keys(wrapper.styles.textAlign).length == 0) {
+          newValuesObj[breakPointX] = nextAlign;
+        } else {
+          newValuesObj = wrapper.styles.textAlign;
+          newValuesObj[breakPointX] = nextAlign;
+        }
+
+        var styles = { ...wrapper.styles,
+          textAlign: newValuesObj
         };
         setAttributes({
-          text: { ...text,
+          wrapper: { ...wrapper,
             styles: styles
+          }
+        });
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
+          'text-align': newValuesObj
+        };
+        setAttributes({
+          blockCssY: {
+            items: blockCssY.items
           }
         });
       }
@@ -4237,10 +4361,79 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Custom Attributes"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: " cursor-pointer px-3 text-white py-1 bg-blue-600",
+      onClick: ev => {
+        if (wrapper.options.attr == undefined) {
+          wrapper.options.attr = {};
+        }
+
+        var sdsd = wrapper.options.attr.concat({
+          id: '',
+          val: ''
+        });
+        var options = { ...wrapper.options,
+          attr: sdsd
+        };
+        setAttributes({
+          wrapper: { ...wrapper,
+            options: options
+          }
+        });
+      }
+    }, "Add")), wrapper.options.attr != undefined && wrapper.options.attr.map((x, i) => {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+        className: "my-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+        className: "mr-2",
+        value: wrapper.options.attr[i].id,
+        onChange: newVal => {
+          wrapper.options.attr[i].id = newVal;
+          var ssdsd = wrapper.options.attr.concat([]);
+          var options = { ...wrapper.options,
+            attr: ssdsd
+          };
+          setAttributes({
+            wrapper: { ...wrapper,
+              options: options
+            }
+          });
+        }
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+        className: "mr-2",
+        value: x.val,
+        onChange: newVal => {
+          wrapper.options.attr[i].val = newVal;
+          var ssdsd = wrapper.options.attr.concat([]);
+          var options = { ...wrapper.options,
+            attr: ssdsd
+          };
+          setAttributes({
+            wrapper: { ...wrapper,
+              options: options
+            }
+          });
+        }
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+        className: "text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close",
+        onClick: ev => {
+          wrapper.options.attr.splice(i, 1);
+          var ssdsd = wrapper.options.attr.concat([]);
+          var options = { ...wrapper.options,
+            attr: ssdsd
+          };
+          setAttributes({
+            wrapper: { ...wrapper,
+              options: options
+            }
+          });
+        }
+      })));
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_18__["default"], {
       val: wrapper.styles.display[breakPointX],
       onChange: newVal => {
-        console.log(newVal);
         var newValuesObj = {};
 
         if (Object.keys(wrapper.styles.display).length == 0) {
@@ -4420,6 +4613,22 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: "font-bold"
+    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      typo: wrapper.styles,
+      breakPointX: breakPointX,
+      onChange: onChangeWrapTypo,
+      setAttributes: setAttributes,
+      obj: wrapper
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Text",
       initialOpen: false
@@ -5217,9 +5426,9 @@ var myStore = wp.data.select('postgrid-shop');
         utm_campaign: 'PostGridCombo',
         utm_content: 'BlockOptions'
       }
-    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: [blockId]
-    }, icon.options.position == 'beforePrefix' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, wrapAttrItems), icon.options.position == 'beforePrefix' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: icon.options.class,
       dangerouslySetInnerHTML: {
         __html: iconHtml
@@ -5274,7 +5483,7 @@ var myStore = wp.data.select('postgrid-shop');
     }), text.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       className: "text",
       onClick: handleLinkClick
-    }, linkAttrItemstext, {
+    }, linkAttrItemsText, {
       target: text.options.linkTarget,
       href: postUrl
     }), icon.options.position == 'beforeText' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
@@ -32869,6 +33078,7 @@ var myStore = wp.data.select('postgrid-shop');
           outline: {},
           border: {},
           boxShadow: {},
+          borderRadius: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
           lineHeight: {},
@@ -33182,7 +33392,6 @@ var myStore = wp.data.select('postgrid-shop');
     var attributes = props.attributes;
     var clientId = props.clientId;
     var setAttributes = props.setAttributes;
-    console.log(attributes);
     var lazyLoad = attributes.lazyLoad;
     var container = attributes.container;
     var pagination = attributes.pagination;
@@ -36749,7 +36958,7 @@ var myStore = wp.data.select('postgrid-shop');
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_border__WEBPACK_IMPORTED_MODULE_22__["default"], {
-      val: itemWrap.styles.border[breakPointX],
+      val: itemWrap.styles.border != undefined ? itemWrap.styles.border[breakPointX] : '',
       onChange: newVal => {
         var newValuesObj = {};
 
@@ -36786,8 +36995,9 @@ var myStore = wp.data.select('postgrid-shop');
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_box_shadow__WEBPACK_IMPORTED_MODULE_23__["default"], {
-      val: itemWrap.styles.boxShadow[breakPointX],
+      val: itemWrap.styles.boxShadow != undefined ? itemWrap.styles.boxShadow[breakPointX] : '',
       onChange: newVal => {
+        //console.log(newVal);
         var newValuesObj = {};
 
         if (Object.keys(itemWrap.styles.boxShadow).length == 0) {
@@ -36814,7 +37024,46 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Border Radius"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+      label: "",
+      values: itemWrap.styles.borderRadius != undefined ? itemWrap.styles.borderRadius[breakPointX] : '',
+      onChange: nextValues => {
+        var newValuesObj = {};
+
+        if (Object.keys(itemWrap.styles.borderRadius).length == 0) {
+          newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
+        } else {
+          newValuesObj = itemWrap.styles.borderRadius;
+          newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
+          ;
+        }
+
+        var styles = { ...itemWrap.styles,
+          borderRadius: newValuesObj
+        };
+        setAttributes({
+          itemWrap: { ...itemWrap,
+            styles: styles
+          }
+        });
+        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
+          'border-radius': newValuesObj
+        };
+        setAttributes({
+          blockCssY: {
+            items: blockCssY.items
+          }
+        });
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "font-bold"
     }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
       position: "bottom",
@@ -49944,9 +50193,6 @@ class PGcssBorder extends Component {
       var widthVal = valParts[0];
       var styleVal = valParts[1];
       var colorVal = valParts[2];
-      console.log(widthVal);
-      console.log(styleVal);
-      console.log(colorVal);
       var unitArgs = {
         px: {
           "label": "PX",
@@ -49965,8 +50211,6 @@ class PGcssBorder extends Component {
       var widthUnitX = widthVal != undefined ? widthVal.match(/[a-zA-Z]+/g)[0] : 'px';
       const [widthValY, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
       const [widthUnitY, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
-      console.log(widthValY);
-      console.log(widthUnitY);
       const [outlineWidthVal, setoutlineWidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthVal);
       const [outlineStyleVal, setoutlineStyleVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(styleVal);
       const [outlineColorVal, setoutlineColorVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(colorVal);
@@ -49981,7 +50225,7 @@ class PGcssBorder extends Component {
         type: "number",
         onChange: newVal => {
           setwidthVal(newVal);
-          onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+          onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'border');
         }
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
         position: "bottom right",
@@ -50007,7 +50251,7 @@ class PGcssBorder extends Component {
             className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
             onClick: ev => {
               setwidthUnit(x.value);
-              onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+              onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'border');
             }
           }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
         }))
@@ -50038,7 +50282,7 @@ class PGcssBorder extends Component {
           return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
             onClick: ev => {
-              onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'outline');
+              onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'border');
             }
           }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
         }))
@@ -50051,7 +50295,7 @@ class PGcssBorder extends Component {
         colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
         enableAlpha: true,
         onChange: newVal => {
-          onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'outline');
+          onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'border');
         }
       })));
     }
@@ -50195,78 +50439,15 @@ class PGcssBoxShadow extends Component {
       val,
       onChange
     } = this.props;
-    var args = {
-      fill: {
-        "label": "fill",
-        "value": "fill"
-      },
-      contain: {
-        "label": "contain",
-        "value": "contain"
-      },
-      cover: {
-        "label": "cover",
-        "value": "cover"
-      },
-      'scale-down': {
-        "label": "scale-down",
-        "value": "scale-down"
-      },
-      none: {
-        "label": "none",
-        "value": "none"
-      }
-    };
-    var outlineStyleArgs = {
-      none: {
-        "label": "None",
-        "value": "none"
-      },
-      hidden: {
-        "label": "Hidden",
-        "value": "hidden"
-      },
-      dotted: {
-        "label": "Dotted",
-        "value": "dotted"
-      },
-      dashed: {
-        "label": "Dashed",
-        "value": "dashed"
-      },
-      solid: {
-        "label": "Solid",
-        "value": "solid"
-      },
-      double: {
-        "label": "Double",
-        "value": "double"
-      },
-      groove: {
-        "label": "Groove",
-        "value": "groove"
-      },
-      ridge: {
-        "label": "Ridge",
-        "value": "ridge"
-      },
-      inset: {
-        "label": "Inset",
-        "value": "inset"
-      },
-      outset: {
-        "label": "Outset",
-        "value": "outset"
-      }
-    };
 
     function Html() {
-      var valParts = val != undefined ? val.split(" ") : ['1px', '1px', '5px', '#000000', 'inset'];
+      var valParts = val != undefined ? val.split(" ") : ['0px', '1px', '0px', '0px', '#000000'];
       var hOffsetVal = valParts[0];
       var vOffsetVal = valParts[1];
       var blurVal = valParts[2];
-      var colorVal = valParts[3];
-      var styleVal = valParts[4];
+      var spreadVal = valParts[3];
+      var colorVal = valParts[4];
+      var insetVal = valParts[5] != undefined && valParts[5].length > 0 ? 'inset' : '';
       var unitArgs = {
         px: {
           "label": "PX",
@@ -50289,21 +50470,28 @@ class PGcssBoxShadow extends Component {
       var vOffsetUnitX = vOffsetVal != undefined ? vOffsetVal.match(/[a-zA-Z]+/g)[0] : 'px';
       const [vOffsetValY, setvOffsetVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(vOffsetValX);
       const [vOffsetUnitY, setvOffsetUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(vOffsetUnitX);
-      const [outlinehOffsetVal, setoutlinehOffsetVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(hOffsetVal);
-      const [outlineStyleVal, setoutlineStyleVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(styleVal);
-      const [outlineColorVal, setoutlineColorVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(colorVal);
+      var blurValX = blurVal != undefined ? blurVal.match(/\d+/g)[0] : 1;
+      var blurUnitX = blurVal != undefined ? blurVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      const [blurValY, setblurVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(blurValX);
+      const [blurUnitY, setblurUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(blurUnitX);
+      var spreadValX = spreadVal != undefined ? spreadVal.match(/\d+/g)[0] : 1;
+      var spreadUnitX = spreadVal != undefined ? spreadVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      const [spreadValY, setspreadVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(spreadValX);
+      const [spreadUnitY, setspreadUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(spreadUnitX);
+      const [colorValY, setColorValY] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(colorVal);
+      const [insetValY, setInsetValY] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(insetVal);
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "my-2"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
         for: ""
-      }, "h-offset"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      }, "H-offset"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex justify-between items-center"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
         value: hOffsetValY,
         type: "number",
         onChange: newVal => {
           sethOffsetVal(newVal);
-          onChange(newVal + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+          onChange(newVal + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
         }
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
         position: "bottom right",
@@ -50328,9 +50516,8 @@ class PGcssBoxShadow extends Component {
           return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
             onClick: ev => {
-              sethOffsetUnit(x.value); // onChange(hOffsetValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
-
-              onChange(hOffsetValY + x.value + ' ' + vOffsetValY + vOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+              sethOffsetUnit(x.value);
+              onChange(hOffsetValY + x.value + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
             }
           }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
         }))
@@ -50338,14 +50525,14 @@ class PGcssBoxShadow extends Component {
         className: "my-2"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
         for: ""
-      }, "v-offset"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      }, "V-offset"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex justify-between items-center"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
         value: vOffsetValY,
         type: "number",
         onChange: newVal => {
           setvOffsetVal(newVal);
-          onChange(hOffsetValY + hOffsetUnitY + ' ' + newVal + vOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+          onChange(hOffsetValY + hOffsetUnitY + ' ' + newVal + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
         }
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
         position: "bottom right",
@@ -50370,9 +50557,8 @@ class PGcssBoxShadow extends Component {
           return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
             onClick: ev => {
-              setvOffsetUnit(x.value); // onChange(vOffsetValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
-
-              onChange(hOffsetValY + hOffsetUnitY + ' ' + x.value + vOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+              setvOffsetUnit(x.value);
+              onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + x.value + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
             }
           }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
         }))
@@ -50383,11 +50569,11 @@ class PGcssBoxShadow extends Component {
       }, "Blur"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex justify-between items-center"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
-        value: hOffsetValY,
+        value: blurValY,
         type: "number",
         onChange: newVal => {
-          sethOffsetVal(newVal);
-          onChange(newVal + hOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+          setblurVal(newVal);
+          onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + newVal + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
         }
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
         position: "bottom right",
@@ -50412,8 +50598,8 @@ class PGcssBoxShadow extends Component {
           return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
             className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
             onClick: ev => {
-              sethOffsetUnit(x.value);
-              onChange(hOffsetValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+              setblurUnit(x.value);
+              onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + x.value + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
             }
           }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
         }))
@@ -50421,14 +50607,14 @@ class PGcssBoxShadow extends Component {
         className: "my-2"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
         for: ""
-      }, "spread"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      }, "Spread"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "flex justify-between items-center"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
-        value: hOffsetValY,
+        value: spreadValY,
         type: "number",
         onChange: newVal => {
           sethOffsetVal(newVal);
-          onChange(newVal + hOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+          onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + newVal + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
         }
       }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
         position: "bottom right",
@@ -50454,7 +50640,7 @@ class PGcssBoxShadow extends Component {
             className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
             onClick: ev => {
               sethOffsetUnit(x.value);
-              onChange(hOffsetValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+              onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + x.value + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
             }
           }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
         }))
@@ -50463,43 +50649,39 @@ class PGcssBoxShadow extends Component {
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
         for: ""
       }, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
-        value: outlineColorVal,
+        value: colorValY,
         colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
         enableAlpha: true,
         onChange: newVal => {
-          onChange(outlinehOffsetVal + ' ' + outlineStyleVal + ' ' + newVal, 'outline');
+          setColorValY(newVal);
+          onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + newVal + ' ' + insetValY, 'boxShadow');
         }
       })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "my-2 flex justify-between items-center"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
         for: ""
-      }, "inset"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
-        position: "bottom right",
-        renderToggle: _ref5 => {
-          let {
-            isOpen,
-            onToggle
-          } = _ref5;
-          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-            title: "Clear",
-            onClick: onToggle,
-            "aria-expanded": isOpen
-          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-            className: " "
-          }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : 'Select...'));
+      }, "Inset"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+        style: {
+          margin: 0
         },
-        renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "w-32"
-        }, Object.entries(outlineStyleArgs).map(arg => {
-          var index = arg[0];
-          var x = arg[1];
-          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-            className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
-            onClick: ev => {
-              onChange(outlinehOffsetVal + ' ' + x.value + ' ' + outlineColorVal, 'outline');
-            }
-          }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
-        }))
+        label: "",
+        value: insetValY,
+        options: [{
+          label: 'Yes',
+          value: 'yes'
+        }, {
+          label: 'No',
+          value: 'no'
+        }],
+        onChange: newVal => {
+          setInsetValY(newVal);
+
+          if (newVal == 'yes') {
+            onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + 'inset', 'boxShadow');
+          } else {
+            onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY, 'boxShadow');
+          }
+        }
       })));
     }
 

@@ -196,6 +196,8 @@ registerBlockType("post-grid/post-grid", {
           outline: {},
           border: {},
           boxShadow: {},
+          borderRadius: {},
+
 
           fontSize: {}, //{ val: '18', unit: 'px' }
           lineHeight: {}, // { val: '18', unit: 'px' }
@@ -439,7 +441,6 @@ registerBlockType("post-grid/post-grid", {
     var setAttributes = props.setAttributes;
 
 
-    console.log(attributes);
 
 
     var lazyLoad = attributes.lazyLoad;
@@ -4388,7 +4389,7 @@ registerBlockType("post-grid/post-grid", {
                 </PanelRow>
 
                 <PanelRow>
-                  <PGcssBorder val={itemWrap.styles.border[breakPointX]} onChange={(newVal => {
+                  <PGcssBorder val={(itemWrap.styles.border != undefined) ? itemWrap.styles.border[breakPointX] : ''} onChange={(newVal => {
 
 
                     var newValuesObj = {};
@@ -4409,16 +4410,15 @@ registerBlockType("post-grid/post-grid", {
                   })} />
                 </PanelRow>
 
-
-
                 <PanelRow>
                   <label>Box Shadow</label>
                   <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                 </PanelRow>
 
                 <PanelRow>
-                  <PGcssBoxShadow val={itemWrap.styles.boxShadow[breakPointX]} onChange={(newVal => {
+                  <PGcssBoxShadow val={(itemWrap.styles.boxShadow != undefined) ? itemWrap.styles.boxShadow[breakPointX] : ''} onChange={(newVal => {
 
+                    //console.log(newVal);
 
                     var newValuesObj = {};
 
@@ -4439,6 +4439,38 @@ registerBlockType("post-grid/post-grid", {
                 </PanelRow>
 
 
+
+                <PanelRow>
+                  <label>Border Radius</label>
+                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                </PanelRow>
+                <BoxControl
+                  label=""
+                  values={(itemWrap.styles.borderRadius != undefined) ? itemWrap.styles.borderRadius[breakPointX] : ''}
+                  onChange={(nextValues) => {
+
+
+                    var newValuesObj = {};
+
+                    if (Object.keys(itemWrap.styles.borderRadius).length == 0) {
+                      newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
+                    } else {
+                      newValuesObj = itemWrap.styles.borderRadius;
+                      newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;;
+                    }
+
+                    var styles = { ...itemWrap.styles, borderRadius: newValuesObj };
+                    setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
+
+                    blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'border-radius': newValuesObj };
+                    setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+
+                  }}
+                />
 
 
 

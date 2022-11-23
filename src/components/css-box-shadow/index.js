@@ -1,7 +1,7 @@
 
 
 const { Component, RawHTML } = wp.element;
-import { Button, Dropdown } from '@wordpress/components'
+import { Button, Dropdown, SelectControl } from '@wordpress/components'
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import colorsPresets from '../../colors-presets'
 import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
@@ -20,40 +20,19 @@ class PGcssBoxShadow extends Component {
     } = this.props;
 
 
-    var args = {
-      fill: { "label": "fill", "value": "fill" },
-      contain: { "label": "contain", "value": "contain" },
-      cover: { "label": "cover", "value": "cover" },
-      'scale-down': { "label": "scale-down", "value": "scale-down" },
-      none: { "label": "none", "value": "none" },
-    };
-
-
-    var outlineStyleArgs = {
-      none: { "label": "None", "value": "none" },
-      hidden: { "label": "Hidden", "value": "hidden" },
-      dotted: { "label": "Dotted", "value": "dotted" },
-      dashed: { "label": "Dashed", "value": "dashed" },
-      solid: { "label": "Solid", "value": "solid" },
-      double: { "label": "Double", "value": "double" },
-      groove: { "label": "Groove", "value": "groove" },
-      ridge: { "label": "Ridge", "value": "ridge" },
-      inset: { "label": "Inset", "value": "inset" },
-      outset: { "label": "Outset", "value": "outset" },
-    };
-
-
 
     function Html() {
 
-      var valParts = (val != undefined) ? val.split(" ") : ['1px', '1px', '5px', '#000000', 'inset'];
+      var valParts = (val != undefined) ? val.split(" ") : ['0px', '1px', '0px', '0px', '#000000'];
 
       var hOffsetVal = valParts[0];
       var vOffsetVal = valParts[1];
       var blurVal = valParts[2];
 
-      var colorVal = valParts[3];
-      var styleVal = valParts[4];
+      var spreadVal = valParts[3];
+      var colorVal = valParts[4];
+
+      var insetVal = (valParts[5] != undefined && valParts[5].length > 0) ? 'inset' : '';
 
 
       var unitArgs = {
@@ -76,12 +55,24 @@ class PGcssBoxShadow extends Component {
       const [vOffsetUnitY, setvOffsetUnit] = useState(vOffsetUnitX);
 
 
+      var blurValX = blurVal != undefined ? blurVal.match(/\d+/g)[0] : 1;
+      var blurUnitX = blurVal != undefined ? blurVal.match(/[a-zA-Z]+/g)[0] : 'px';
+
+
+      const [blurValY, setblurVal] = useState(blurValX);
+      const [blurUnitY, setblurUnit] = useState(blurUnitX);
+
+      var spreadValX = spreadVal != undefined ? spreadVal.match(/\d+/g)[0] : 1;
+      var spreadUnitX = spreadVal != undefined ? spreadVal.match(/[a-zA-Z]+/g)[0] : 'px';
+
+      const [spreadValY, setspreadVal] = useState(spreadValX);
+      const [spreadUnitY, setspreadUnit] = useState(spreadUnitX);
 
 
 
-      const [outlinehOffsetVal, setoutlinehOffsetVal] = useState(hOffsetVal);
-      const [outlineStyleVal, setoutlineStyleVal] = useState(styleVal);
-      const [outlineColorVal, setoutlineColorVal] = useState(colorVal);
+      const [colorValY, setColorValY] = useState(colorVal);
+
+      const [insetValY, setInsetValY] = useState(insetVal);
 
 
 
@@ -89,7 +80,7 @@ class PGcssBoxShadow extends Component {
 
         <div>
           <div className='my-2'>
-            <label for="">h-offset</label>
+            <label for="">H-offset</label>
             <div className='flex justify-between items-center'>
 
 
@@ -99,7 +90,8 @@ class PGcssBoxShadow extends Component {
                 onChange={(newVal) => {
 
                   sethOffsetVal(newVal);
-                  onChange(newVal + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+
+                  onChange(newVal + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
 
 
                 }}
@@ -131,9 +123,7 @@ class PGcssBoxShadow extends Component {
                         <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                           sethOffsetUnit(x.value);
-                          // onChange(hOffsetValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
-                          onChange(hOffsetValY + x.value + ' ' + vOffsetValY + vOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
-
+                          onChange(hOffsetValY + x.value + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
 
                         }}>
 
@@ -157,7 +147,7 @@ class PGcssBoxShadow extends Component {
 
           </div>
           <div className='my-2'>
-            <label for="">v-offset</label>
+            <label for="">V-offset</label>
             <div className='flex justify-between items-center'>
 
 
@@ -167,8 +157,8 @@ class PGcssBoxShadow extends Component {
                 onChange={(newVal) => {
 
                   setvOffsetVal(newVal);
-                  onChange(hOffsetValY + hOffsetUnitY + ' ' + newVal + vOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
 
+                  onChange(hOffsetValY + hOffsetUnitY + ' ' + newVal + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
 
                 }}
               />
@@ -199,11 +189,8 @@ class PGcssBoxShadow extends Component {
                         <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                           setvOffsetUnit(x.value);
-                          // onChange(vOffsetValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
 
-                          onChange(hOffsetValY + hOffsetUnitY + ' ' + x.value + vOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
-
-
+                          onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + x.value + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
 
                         }}>
 
@@ -234,12 +221,14 @@ class PGcssBoxShadow extends Component {
 
 
               <InputControl
-                value={hOffsetValY}
+                value={blurValY}
                 type="number"
                 onChange={(newVal) => {
 
-                  sethOffsetVal(newVal);
-                  onChange(newVal + hOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+                  setblurVal(newVal);
+
+                  onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + newVal + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
+
 
 
                 }}
@@ -270,8 +259,9 @@ class PGcssBoxShadow extends Component {
 
                         <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
-                          sethOffsetUnit(x.value);
-                          onChange(hOffsetValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+                          setblurUnit(x.value);
+
+                          onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + x.value + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
 
 
                         }}>
@@ -298,17 +288,18 @@ class PGcssBoxShadow extends Component {
 
 
           <div className='my-2'>
-            <label for="">spread</label>
+            <label for="">Spread</label>
             <div className='flex justify-between items-center'>
 
 
               <InputControl
-                value={hOffsetValY}
+                value={spreadValY}
                 type="number"
                 onChange={(newVal) => {
 
                   sethOffsetVal(newVal);
-                  onChange(newVal + hOffsetUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+
+                  onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + newVal + spreadUnitY + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
 
 
                 }}
@@ -340,8 +331,8 @@ class PGcssBoxShadow extends Component {
                         <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                           sethOffsetUnit(x.value);
-                          onChange(hOffsetValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
 
+                          onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + x.value + ' ' + colorValY + ' ' + insetValY, 'boxShadow');
 
                         }}>
 
@@ -371,13 +362,15 @@ class PGcssBoxShadow extends Component {
             <label for="">Color</label>
 
             <ColorPalette
-              value={outlineColorVal}
+              value={colorValY}
               colors={colorsPresets}
               enableAlpha
               onChange={(newVal) => {
+                setColorValY(newVal);
 
-                onChange(outlinehOffsetVal + ' ' + outlineStyleVal + ' ' + newVal, 'outline');
 
+
+                onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + newVal + ' ' + insetValY, 'boxShadow');
 
               }}
             />
@@ -387,58 +380,37 @@ class PGcssBoxShadow extends Component {
           <div className='my-2 flex justify-between items-center'>
 
 
-            <label for="">inset</label>
+            <label for="">Inset</label>
+
+            <SelectControl
+              style={{ margin: 0 }}
+              label=""
+
+              value={insetValY}
+              options={[
+                { label: 'Yes', value: 'yes' },
+                { label: 'No', value: 'no' },
+
+              ]}
+              onChange={(newVal) => {
+
+
+                setInsetValY(newVal);
+
+                if (newVal == 'yes') {
+                  onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY + ' ' + 'inset', 'boxShadow');
+                } else {
+                  onChange(hOffsetValY + hOffsetUnitY + ' ' + vOffsetValY + vOffsetUnitY + ' ' + blurValY + blurUnitY + ' ' + spreadValY + spreadUnitY + ' ' + colorValY, 'boxShadow');
+
+                }
 
 
 
-            <Dropdown
-              position="bottom right"
-              renderToggle={({ isOpen, onToggle }) => (
-                <Button
-                  title="Clear"
 
-                  onClick={onToggle}
-                  aria-expanded={isOpen}
-                >
-                  <div className=" ">{outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : 'Select...'}</div>
-
-
-                </Button>
-              )}
-              renderContent={() => <div className='w-32'>
-
-                {Object.entries(outlineStyleArgs).map((arg) => {
-
-                  var index = arg[0]
-                  var x = arg[1]
-                  return (
-
-                    <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
-
-                      onChange(outlinehOffsetVal + ' ' + x.value + ' ' + outlineColorVal, 'outline');
-
-
-                    }}>
-
-                      {!x.value && (
-
-                        <div>Reset</div>
-
-                      )}
-
-                      {x.value && (
-
-                        <>{x.label}</>
-
-                      )}
-
-                    </div>
-
-                  )
-
-                })}
-              </div>}
+              }}
             />
+
+
           </div>
 
 

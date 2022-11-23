@@ -70,6 +70,7 @@ class PGBlockIcon
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
+        $wrapperAttr = isset($wrapperOptions['attr']) ? $wrapperOptions['attr'] : [];
 
         $text = isset($attributes['text']) ? $attributes['text'] : [];
         $textOptions = isset($text['options']) ? $text['options'] : [];
@@ -136,13 +137,21 @@ class PGBlockIcon
 
         $linkAttrStrText = '';
 
-
-
         if (!empty($textLinkAttr))
             foreach ($textLinkAttr as $attr) {
 
                 if (!empty($attr['val']))
                     $linkAttrStrText .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
+            }
+
+
+        $wrapperAttrText = '';
+
+        if (!empty($wrapperAttr))
+            foreach ($wrapperAttr as $attr) {
+
+                if (!empty($attr['val']))
+                    $wrapperAttrText .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
             }
 
 
@@ -155,12 +164,10 @@ class PGBlockIcon
         ob_start();
 
 
-
-
         if (!empty($wrapperTag)) :
 
 ?>
-            <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+            <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>" <?php echo esc_attr($wrapperAttrText); ?>>
 
 
                 <?php if ($iconPosition == 'beforePrefix') : ?>
@@ -174,8 +181,18 @@ class PGBlockIcon
                 <?php if ($iconPosition == 'afterPrefix') : ?>
                     <?php echo $fontIconHtml; ?>
                 <?php endif; ?>
+                <?php if ($textIsLink) : ?>
+                    <a class='text' <?php echo esc_attr($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
+                        <?php if ($iconPosition == 'beforeText') : ?>
+                            <?php echo $fontIconHtml; ?>
+                        <?php endif; ?>
+                        <?php echo $textText; ?>
+                        <?php if ($iconPosition == 'afterText') : ?>
+                            <?php echo $fontIconHtml; ?>
+                        <?php endif; ?>
+                    </a>
 
-                <a class='text' <?php echo esc_attr($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
+                <?php else : ?>
                     <?php if ($iconPosition == 'beforeText') : ?>
                         <?php echo $fontIconHtml; ?>
                     <?php endif; ?>
@@ -183,7 +200,8 @@ class PGBlockIcon
                     <?php if ($iconPosition == 'afterText') : ?>
                         <?php echo $fontIconHtml; ?>
                     <?php endif; ?>
-                </a>
+                <?php endif; ?>
+
 
 
 
@@ -206,15 +224,47 @@ class PGBlockIcon
         if (empty($wrapperTag)) :
 
         ?>
-            <?php if ($prefixText) : ?>
-                <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
-            <?php endif; ?>
-            <a class='text' <?php echo esc_attr($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo $textText; ?></a>
 
 
-            <?php if ($postfixText) : ?>
-                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+            <?php if (!$textIsLink) : ?>
+                <?php if ($prefixText) : ?>
+                    <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                <?php endif; ?>
+
+
+                <?php if ($iconPosition == 'beforeText') : ?>
+                    <?php echo $fontIconHtml; ?>
+                <?php endif; ?>
+                <?php echo $textText; ?>
+                <?php if ($iconPosition == 'afterText') : ?>
+                    <?php echo $fontIconHtml; ?>
+                <?php endif; ?>
+
+
+                <?php if ($postfixText) : ?>
+                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                <?php endif; ?>
+            <?php else : ?>
+                <?php if ($prefixText) : ?>
+                    <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                <?php endif; ?>
+                <a class='text' <?php echo esc_attr($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
+
+                    <?php if ($iconPosition == 'beforeText') : ?>
+                        <?php echo $fontIconHtml; ?>
+                    <?php endif; ?>
+                    <?php echo $textText; ?>
+                    <?php if ($iconPosition == 'afterText') : ?>
+                        <?php echo $fontIconHtml; ?>
+                    <?php endif; ?>
+
+                </a>
+                <?php if ($postfixText) : ?>
+                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                <?php endif; ?>
             <?php endif; ?>
+
+
         <?php
 
         endif;

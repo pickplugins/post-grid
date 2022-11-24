@@ -29,14 +29,6 @@ import PGcssDisplay from '../../components/css-display'
 
 var myStore = wp.data.select('postgrid-shop');
 
-//////console.log(wp.data.select('postgrid-shop').getBreakPoint('food'))
-
-
-
-
-//////console.log(wp.data.select('postgrid-shop').setPrice('food', 98))
-//////console.log()
-
 
 
 
@@ -242,6 +234,9 @@ registerBlockType("post-grid/post-author", {
     var [html, setHtml] = useState({});
     var [loading, setLoading] = useState(false);
 
+    console.log(html);
+
+
 
     var [
       postAuthorId,
@@ -313,7 +308,9 @@ registerBlockType("post-grid/post-author", {
 
     function generatehtml() {
 
-      console.log(postAuthor.name);
+      //console.log(postAuthor.name);
+
+      //console.log(name.options);
 
 
       var nameHtml = (postAuthor.name != undefined) ? `<span className='prefix'>${name.options.prefix}</span>${postAuthor.name}<span className='postfix'>${name.options.postfix}</span>` : 'Author Name 1';
@@ -350,6 +347,7 @@ registerBlockType("post-grid/post-author", {
 
       }
 
+      //console.log(nameHtml);
 
 
 
@@ -370,11 +368,13 @@ registerBlockType("post-grid/post-author", {
 
       }
 
-      // console.log(nameHtml);
+      //console.log(html);
 
 
 
-      setHtml(html);
+      setTimeout(x => {
+        setHtml(html);
+      }, 100)
 
     }
 
@@ -382,7 +382,7 @@ registerBlockType("post-grid/post-author", {
 
     useEffect(() => {
 
-      console.log('postAuthor', postAuthor);
+      //console.log('postAuthor', postAuthor);
 
       setTimeout(() => {
         generatehtml();
@@ -394,8 +394,10 @@ registerBlockType("post-grid/post-author", {
 
     useEffect(() => {
 
+      //console.log(name);
 
-      generatehtml()
+
+      generatehtml();
 
     }, [name]);
 
@@ -441,7 +443,7 @@ registerBlockType("post-grid/post-author", {
       var responsive = name.styles.padding;
       responsive[breakPointX] = nextValues;
 
-      ////console.log(nextValues);
+      //////console.log(nextValues);
 
       var styles = { ...name.styles, padding: responsive };
       setAttributes({ name: { ...name, styles: styles } });
@@ -508,7 +510,7 @@ registerBlockType("post-grid/post-author", {
       var responsive = avatar.styles.borderRadius;
       responsive[breakPointX] = nextValues;
 
-      console.log(responsive);
+      //console.log(responsive);
 
       var styles = { ...avatar.styles, borderRadius: responsive };
       setAttributes({ avatar: { ...avatar, styles: styles } });
@@ -554,7 +556,7 @@ registerBlockType("post-grid/post-author", {
       var responsive = avatar.styles.padding;
       responsive[breakPointX] = nextValues;
 
-      ////console.log(nextValues);
+      //////console.log(nextValues);
 
       var styles = { ...avatar.styles, padding: responsive };
       setAttributes({ avatar: { ...avatar, styles: styles } });
@@ -626,7 +628,7 @@ registerBlockType("post-grid/post-author", {
       var responsive = description.styles.padding;
       responsive[breakPointX] = nextValues;
 
-      ////console.log(nextValues);
+      //////console.log(nextValues);
 
       var styles = { ...description.styles, padding: responsive };
       setAttributes({ description: { ...description, styles: styles } });
@@ -692,7 +694,7 @@ registerBlockType("post-grid/post-author", {
 
     function marginControlAvatar(nextValues) {
 
-      var responsive = avatar.styles.margin;
+      var responsive = avatar.styles.padding;
       responsive[breakPointX] = nextValues;
 
 
@@ -749,10 +751,13 @@ registerBlockType("post-grid/post-author", {
       responsive[breakPointX] = nextValues;
 
 
-      var styles = { ...name.styles, padding: responsive };
+      var styles = { ...name.styles, margin: responsive };
       setAttributes({ name: { ...name, styles: styles } });
 
-
+      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
+      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
+      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
+      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
       blockCssY.items[authorNameSelector] = (blockCssY.items[authorNameSelector] != undefined) ? blockCssY.items[authorNameSelector] : {};
 

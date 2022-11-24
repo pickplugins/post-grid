@@ -5456,7 +5456,17 @@ var myStore = wp.data.select('postgrid-shop');
       dangerouslySetInnerHTML: {
         __html: iconHtml
       }
-    })), !text.options.isLink && text.options.text, icon.options.position == 'beforePostfix' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    })), !text.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, icon.options.position == 'beforeText' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: icon.options.class,
+      dangerouslySetInnerHTML: {
+        __html: iconHtml
+      }
+    }), text.options.text, icon.options.position == 'afterText' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      className: icon.options.class,
+      dangerouslySetInnerHTML: {
+        __html: iconHtml
+      }
+    })), icon.options.position == 'beforePostfix' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: icon.options.class,
       dangerouslySetInnerHTML: {
         __html: iconHtml
@@ -5679,8 +5689,18 @@ var myStore = wp.data.select('postgrid-shop');
         styles: {
           textAlign: {},
           display: {},
-          width: {},
-          height: {},
+          width: {
+            "Desktop": {
+              "val": "100",
+              "unit": "%"
+            }
+          },
+          height: {
+            "Desktop": {
+              "val": "",
+              "unit": "auto"
+            }
+          },
           filter: {},
           objectFit: {},
           padding: {},
@@ -7586,7 +7606,8 @@ var myStore = wp.data.select('postgrid-shop');
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: image.styles.width[breakPointX] != undefined ? image.styles.width[breakPointX].val : 10,
+      disabled: image.styles.width[breakPointX] != undefined && image.styles.width[breakPointX].unit == 'auto' ? true : false,
+      value: image.styles.width[breakPointX] != undefined ? image.styles.width[breakPointX].val : 0,
       type: "number",
       onChange: newVal => {
         var newValuesObj = {};
@@ -7594,11 +7615,11 @@ var myStore = wp.data.select('postgrid-shop');
         if (Object.keys(image.styles.width).length == 0) {
           newValuesObj[breakPointX] = {
             val: newVal,
-            unit: 'em'
+            unit: 'auto'
           };
         } else {
           newValuesObj = image.styles.width;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'em';
+          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
           newValuesObj[breakPointX] = {
             val: newVal,
             unit: unit
@@ -7613,12 +7634,18 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var widthVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 10;
-        var widthUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'em';
-        var widthX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {};
-        widthX[breakPointX] = widthVal + widthUnit;
+        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
+        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
+        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
+
+        if (heightUnit == 'auto') {
+          heightX[breakPointX] = 'auto';
+        } else {
+          heightX[breakPointX] = heightVal + heightUnit;
+        }
+
         blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
-          'width': widthX
+          'width': heightX
         };
         setAttributes({
           blockCssY: {
@@ -7628,13 +7655,16 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       className: "mb-0",
-      value: image.styles.width[breakPointX] != undefined ? image.styles.width[breakPointX].unit : 'em',
+      value: image.styles.width[breakPointX] != undefined ? image.styles.width[breakPointX].unit : 'auto',
       options: [{
-        label: 'fr',
-        value: 'fr'
+        label: 'Auto',
+        value: 'auto'
       }, {
         label: 'px',
         value: 'px'
+      }, {
+        label: 'fr',
+        value: 'fr'
       }, {
         label: '%',
         value: '%'
@@ -7647,12 +7677,12 @@ var myStore = wp.data.select('postgrid-shop');
 
         if (Object.keys(image.styles.width).length == 0) {
           newValuesObj[breakPointX] = {
-            val: 10,
+            val: 0,
             unit: newVal
           };
         } else {
           newValuesObj = image.styles.width;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 10;
+          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
           newValuesObj[breakPointX] = {
             val: val,
             unit: newVal
@@ -7667,12 +7697,18 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var widthVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 10;
-        var widthUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'em';
-        var widthX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {};
-        widthX[breakPointX] = widthVal + widthUnit;
+        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
+        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
+        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
+
+        if (heightUnit == 'auto') {
+          heightX[breakPointX] = 'auto';
+        } else {
+          heightX[breakPointX] = heightVal + heightUnit;
+        }
+
         blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
-          'width': widthX
+          'width': heightX
         };
         setAttributes({
           blockCssY: {
@@ -7689,7 +7725,8 @@ var myStore = wp.data.select('postgrid-shop');
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: image.styles.height[breakPointX] != undefined ? image.styles.height[breakPointX].val : 10,
+      disabled: image.styles.height[breakPointX] != undefined && image.styles.height[breakPointX].unit == 'auto' ? true : false,
+      value: image.styles.height[breakPointX] != undefined ? image.styles.height[breakPointX].val : 0,
       type: "number",
       onChange: newVal => {
         var newValuesObj = {};
@@ -7697,11 +7734,11 @@ var myStore = wp.data.select('postgrid-shop');
         if (Object.keys(image.styles.height).length == 0) {
           newValuesObj[breakPointX] = {
             val: newVal,
-            unit: 'em'
+            unit: 'auto'
           };
         } else {
           newValuesObj = image.styles.height;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'em';
+          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
           newValuesObj[breakPointX] = {
             val: newVal,
             unit: unit
@@ -7716,10 +7753,16 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 10;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'em';
-        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {};
-        heightX[breakPointX] = heightVal + heightUnit;
+        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
+        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
+        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
+
+        if (heightUnit == 'auto') {
+          heightX[breakPointX] = 'auto';
+        } else {
+          heightX[breakPointX] = heightVal + heightUnit;
+        }
+
         blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
           'height': heightX
         };
@@ -7731,13 +7774,16 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       className: "mb-0",
-      value: image.styles.height[breakPointX] != undefined ? image.styles.height[breakPointX].unit : 'em',
+      value: image.styles.height[breakPointX] != undefined ? image.styles.height[breakPointX].unit : 'auto',
       options: [{
-        label: 'fr',
-        value: 'fr'
+        label: 'Auto',
+        value: 'auto'
       }, {
         label: 'px',
         value: 'px'
+      }, {
+        label: 'fr',
+        value: 'fr'
       }, {
         label: '%',
         value: '%'
@@ -7750,12 +7796,12 @@ var myStore = wp.data.select('postgrid-shop');
 
         if (Object.keys(image.styles.height).length == 0) {
           newValuesObj[breakPointX] = {
-            val: 10,
+            val: 0,
             unit: newVal
           };
         } else {
           newValuesObj = image.styles.height;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 10;
+          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
           newValuesObj[breakPointX] = {
             val: val,
             unit: newVal
@@ -7770,10 +7816,16 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 10;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'em';
-        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {};
-        heightX[breakPointX] = heightVal + heightUnit;
+        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
+        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
+        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
+
+        if (heightUnit == 'auto') {
+          heightX[breakPointX] = 'auto';
+        } else {
+          heightX[breakPointX] = heightVal + heightUnit;
+        }
+
         blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
           'height': heightX
         };
@@ -7841,7 +7893,9 @@ var myStore = wp.data.select('postgrid-shop');
       }
     })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, loading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Spinner, null), wrapper.options.useAsBackground == 'yes' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
       className: [blockId]
-    }), !loading && postImage == null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }), !loading && postImage == null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: [blockId]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
       src: _placeholder_jpg__WEBPACK_IMPORTED_MODULE_20__,
       alt: "Default Featured Image"
     })), wrapper.options.useAsBackground == 'no' && wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
@@ -14231,10 +14285,7 @@ const {
 
 
 
-var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select('postgrid-shop').getBreakPoint('food'))
-//////console.log(wp.data.select('postgrid-shop').setPrice('food', 98))
-//////console.log()
-
+var myStore = wp.data.select('postgrid-shop');
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)("post-grid/post-author", {
   title: "Post Author",
   icon: {
@@ -14436,6 +14487,7 @@ var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select(
     var [postAuthor, setPostAuthor] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({});
     var [html, setHtml] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({});
     var [loading, setLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
+    console.log(html);
     var [postAuthorId, setPostAuthorId] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'author', postId);
     var [currentPostUrl, setCurrentPostUrl] = (0,_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__.useEntityProp)('postType', postType, 'link', postId);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
@@ -14476,7 +14528,8 @@ var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select(
     }
 
     function generatehtml() {
-      console.log(postAuthor.name);
+      //console.log(postAuthor.name);
+      //console.log(name.options);
       var nameHtml = postAuthor.name != undefined ? `<span className='prefix'>${name.options.prefix}</span>${postAuthor.name}<span className='postfix'>${name.options.postfix}</span>` : 'Author Name 1';
 
       if (name.options.linkTo == 'postUrl') {
@@ -14497,7 +14550,8 @@ var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select(
 
       if (name.options.linkTo == 'customUrl') {
         nameHtml = `<span className='prefix'>${name.options.prefix}</span><a href="${name.options.customUrl}">${postAuthor.name != undefined ? postAuthor.name : 'Author Name'}</a><span className='postfix'>${name.options.postfix}</span>`;
-      }
+      } //console.log(nameHtml);
+
 
       html.name = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.createElement)(RawHTML, {
         class: name.options.class
@@ -14511,19 +14565,22 @@ var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select(
         html.avatar = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.createElement)(RawHTML, {
           class: avatar.options.class
         }, avatarHtml, " ");
-      } // console.log(nameHtml);
+      } //console.log(html);
 
 
-      setHtml(html);
+      setTimeout(x => {
+        setHtml(html);
+      }, 100);
     }
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
-      console.log('postAuthor', postAuthor);
+      //console.log('postAuthor', postAuthor);
       setTimeout(() => {
         generatehtml();
       }, 1000);
     }, [postAuthor]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
+      //console.log(name);
       generatehtml();
     }, [name]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
@@ -14549,7 +14606,7 @@ var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select(
 
     function paddingControl(nextValues) {
       var responsive = name.styles.padding;
-      responsive[breakPointX] = nextValues; ////console.log(nextValues);
+      responsive[breakPointX] = nextValues; //////console.log(nextValues);
 
       var styles = { ...name.styles,
         padding: responsive
@@ -14602,8 +14659,8 @@ var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select(
 
     function borderRadiusControlAvatar(nextValues) {
       var responsive = avatar.styles.borderRadius;
-      responsive[breakPointX] = nextValues;
-      console.log(responsive);
+      responsive[breakPointX] = nextValues; //console.log(responsive);
+
       var styles = { ...avatar.styles,
         borderRadius: responsive
       };
@@ -14631,7 +14688,7 @@ var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select(
 
     function paddingControlAvatar(nextValues) {
       var responsive = avatar.styles.padding;
-      responsive[breakPointX] = nextValues; ////console.log(nextValues);
+      responsive[breakPointX] = nextValues; //////console.log(nextValues);
 
       var styles = { ...avatar.styles,
         padding: responsive
@@ -14684,7 +14741,7 @@ var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select(
 
     function paddingControlDescription(nextValues) {
       var responsive = description.styles.padding;
-      responsive[breakPointX] = nextValues; ////console.log(nextValues);
+      responsive[breakPointX] = nextValues; //////console.log(nextValues);
 
       var styles = { ...description.styles,
         padding: responsive
@@ -14736,7 +14793,7 @@ var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select(
     }
 
     function marginControlAvatar(nextValues) {
-      var responsive = avatar.styles.margin;
+      var responsive = avatar.styles.padding;
       responsive[breakPointX] = nextValues;
       var styles = { ...avatar.styles,
         padding: responsive
@@ -14791,13 +14848,17 @@ var myStore = wp.data.select('postgrid-shop'); //////console.log(wp.data.select(
       var responsive = name.styles.margin;
       responsive[breakPointX] = nextValues;
       var styles = { ...name.styles,
-        padding: responsive
+        margin: responsive
       };
       setAttributes({
         name: { ...name,
           styles: styles
         }
       });
+      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
+      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
+      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
+      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
       blockCssY.items[authorNameSelector] = blockCssY.items[authorNameSelector] != undefined ? blockCssY.items[authorNameSelector] : {};
 
       if (nextValues.top != undefined) {
@@ -18493,7 +18554,7 @@ var myStore = wp.data.select('postgrid-shop');
       if (postDate.options.linkTo.length > 0) {
         postDateSelector = blockClass + ' a';
       } else {
-        postDateSelector = blockClass + ' .postDate';
+        postDateSelector = blockClass; //postDateSelector = blockClass + ' .postDate';
       }
     } else {
       postDateSelector = blockClass;
@@ -19336,24 +19397,16 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var newValuesObjX = {};
-
-        if (blockCssY.items[postDateSelector] == undefined) {
-          newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector],
-            color: newValuesObj
-          };
-        } else {
-          newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector],
-            color: newValuesObj
-          };
-        }
-
+        var itemsX = { ...blockCssY.items
+        };
+        itemsX[postDateSelector] = { ...blockCssY.items[postDateSelector],
+          'color': newValuesObj
+        };
         setAttributes({
           blockCssY: {
-            items: newValuesObjX
+            items: itemsX
           }
-        }); // blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'color': newValuesObj };
-        // setAttributes({ blockCssY: { items: blockCssY.items } });
+        });
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
       className: "my-3"
@@ -19387,24 +19440,16 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var newValuesObjX = {};
-
-        if (blockCssY.items[postDateSelector] == undefined) {
-          newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector],
-            'background-color': newValuesObj
-          };
-        } else {
-          newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector],
-            'background-color': newValuesObj
-          };
-        }
-
+        var itemsX = { ...blockCssY.items
+        };
+        itemsX[postDateSelector] = { ...blockCssY.items[postDateSelector],
+          'background-color': newValuesObj
+        };
         setAttributes({
           blockCssY: {
-            items: newValuesObjX
+            items: itemsX
           }
-        }); //blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'background-color': newValuesObj };
-        //setAttributes({ blockCssY: { items: blockCssY.items } });
+        });
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "font-bold"
@@ -19976,7 +20021,7 @@ var myStore = wp.data.select('postgrid-shop');
     }, linkAttrItems, {
       target: postDate.options.linkTarget,
       href: postUrl
-    }), icon.options.position == 'beforePostDate' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }), "A", icon.options.position == 'beforePostDate' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: icon.options.class,
       dangerouslySetInnerHTML: {
         __html: iconHtml
@@ -19986,29 +20031,19 @@ var myStore = wp.data.select('postgrid-shop');
       dangerouslySetInnerHTML: {
         __html: iconHtml
       }
-    })), postDate.options.linkTo.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, icon.options.position == 'beforePostDate' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    })), postDate.options.linkTo.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: [blockId]
+    }, "B", icon.options.position == 'beforePostDate' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: icon.options.class,
       dangerouslySetInnerHTML: {
         __html: iconHtml
       }
-    }), postDateEdited, " ############", icon.options.position == 'afterPostDate' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }), postDateEdited, icon.options.position == 'afterPostDate' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: icon.options.class,
       dangerouslySetInnerHTML: {
         __html: iconHtml
       }
-    })), icon.options.position == 'beforePostfix' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: icon.options.class,
-      dangerouslySetInnerHTML: {
-        __html: iconHtml
-      }
-    }), postDateEdited && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: postfix.options.class
-    }, postDateEdited), icon.options.position == 'afterPostfix' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: icon.options.class,
-      dangerouslySetInnerHTML: {
-        __html: iconHtml
-      }
-    })))];
+    }))))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
@@ -20761,6 +20796,10 @@ var myStore = wp.data.select('postgrid-shop');
       });
       var itemsX = { ...blockCssY.items
       };
+      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
+      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
+      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
+      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
       blockCssY.items[redmoreSelector] = blockCssY.items[redmoreSelector] != undefined ? blockCssY.items[redmoreSelector] : {};
 
       if (nextValues.top != undefined) {
@@ -22340,8 +22379,18 @@ var myStore = wp.data.select('postgrid-shop');
         styles: {
           textAlign: {},
           display: {},
-          width: {},
-          height: {},
+          width: {
+            "Desktop": {
+              "val": "100",
+              "unit": "%"
+            }
+          },
+          height: {
+            "Desktop": {
+              "val": "",
+              "unit": "auto"
+            }
+          },
           filter: {},
           objectFit: {},
           padding: {},
@@ -23847,7 +23896,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Width"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }), JSON.stringify(featuredImage.styles.width), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Width"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
@@ -23856,7 +23905,8 @@ var myStore = wp.data.select('postgrid-shop');
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: featuredImage.styles.width[breakPointX] != undefined ? featuredImage.styles.width[breakPointX].val : 10,
+      disabled: featuredImage.styles.width[breakPointX] != undefined && featuredImage.styles.width[breakPointX].unit == 'auto' ? true : false,
+      value: featuredImage.styles.width[breakPointX] != undefined ? featuredImage.styles.width[breakPointX].val : 0,
       type: "number",
       onChange: newVal => {
         var newValuesObj = {};
@@ -23864,11 +23914,11 @@ var myStore = wp.data.select('postgrid-shop');
         if (Object.keys(featuredImage.styles.width).length == 0) {
           newValuesObj[breakPointX] = {
             val: newVal,
-            unit: 'em'
+            unit: 'auto'
           };
         } else {
           newValuesObj = featuredImage.styles.width;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'em';
+          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
           newValuesObj[breakPointX] = {
             val: newVal,
             unit: unit
@@ -23883,12 +23933,18 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var widthVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 10;
-        var widthUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'em';
-        var widthX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {};
-        widthX[breakPointX] = widthVal + widthUnit;
+        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
+        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
+        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
+
+        if (heightUnit == 'auto') {
+          heightX[breakPointX] = 'auto';
+        } else {
+          heightX[breakPointX] = heightVal + heightUnit;
+        }
+
         blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
-          'width': widthX
+          'width': heightX
         };
         setAttributes({
           blockCssY: {
@@ -23898,13 +23954,16 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       className: "mb-0",
-      value: featuredImage.styles.width[breakPointX] != undefined ? featuredImage.styles.width[breakPointX].unit : 'em',
+      value: featuredImage.styles.width[breakPointX] != undefined ? featuredImage.styles.width[breakPointX].unit : 'auto',
       options: [{
-        label: 'fr',
-        value: 'fr'
+        label: 'Auto',
+        value: 'auto'
       }, {
         label: 'px',
         value: 'px'
+      }, {
+        label: 'fr',
+        value: 'fr'
       }, {
         label: '%',
         value: '%'
@@ -23917,12 +23976,12 @@ var myStore = wp.data.select('postgrid-shop');
 
         if (Object.keys(featuredImage.styles.width).length == 0) {
           newValuesObj[breakPointX] = {
-            val: 10,
+            val: 0,
             unit: newVal
           };
         } else {
           newValuesObj = featuredImage.styles.width;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 10;
+          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
           newValuesObj[breakPointX] = {
             val: val,
             unit: newVal
@@ -23937,12 +23996,18 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var widthVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 10;
-        var widthUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'em';
-        var widthX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {};
-        widthX[breakPointX] = widthVal + widthUnit;
+        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
+        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
+        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
+
+        if (heightUnit == 'auto') {
+          heightX[breakPointX] = 'auto';
+        } else {
+          heightX[breakPointX] = heightVal + heightUnit;
+        }
+
         blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
-          'width': widthX
+          'width': heightX
         };
         setAttributes({
           blockCssY: {
@@ -23959,7 +24024,8 @@ var myStore = wp.data.select('postgrid-shop');
       activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
-      value: featuredImage.styles.height[breakPointX] != undefined ? featuredImage.styles.height[breakPointX].val : 10,
+      disabled: featuredImage.styles.height[breakPointX] != undefined && featuredImage.styles.height[breakPointX].unit == 'auto' ? true : false,
+      value: featuredImage.styles.height[breakPointX] != undefined ? featuredImage.styles.height[breakPointX].val : 0,
       type: "number",
       onChange: newVal => {
         var newValuesObj = {};
@@ -23967,11 +24033,11 @@ var myStore = wp.data.select('postgrid-shop');
         if (Object.keys(featuredImage.styles.height).length == 0) {
           newValuesObj[breakPointX] = {
             val: newVal,
-            unit: 'em'
+            unit: 'auto'
           };
         } else {
           newValuesObj = featuredImage.styles.height;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'em';
+          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
           newValuesObj[breakPointX] = {
             val: newVal,
             unit: unit
@@ -23986,10 +24052,16 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 10;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'em';
-        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {};
-        heightX[breakPointX] = heightVal + heightUnit;
+        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
+        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
+        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
+
+        if (heightUnit == 'auto') {
+          heightX[breakPointX] = 'auto';
+        } else {
+          heightX[breakPointX] = heightVal + heightUnit;
+        }
+
         blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
           'height': heightX
         };
@@ -24001,13 +24073,16 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       className: "mb-0",
-      value: featuredImage.styles.height[breakPointX] != undefined ? featuredImage.styles.height[breakPointX].unit : 'em',
+      value: featuredImage.styles.height[breakPointX] != undefined ? featuredImage.styles.height[breakPointX].unit : 'auto',
       options: [{
-        label: 'fr',
-        value: 'fr'
+        label: 'Auto',
+        value: 'auto'
       }, {
         label: 'px',
         value: 'px'
+      }, {
+        label: 'fr',
+        value: 'fr'
       }, {
         label: '%',
         value: '%'
@@ -24020,12 +24095,12 @@ var myStore = wp.data.select('postgrid-shop');
 
         if (Object.keys(featuredImage.styles.height).length == 0) {
           newValuesObj[breakPointX] = {
-            val: 10,
+            val: 0,
             unit: newVal
           };
         } else {
           newValuesObj = featuredImage.styles.height;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 10;
+          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
           newValuesObj[breakPointX] = {
             val: val,
             unit: newVal
@@ -24040,10 +24115,16 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 10;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'em';
-        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {};
-        heightX[breakPointX] = heightVal + heightUnit;
+        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
+        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
+        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
+
+        if (heightUnit == 'auto') {
+          heightX[breakPointX] = 'auto';
+        } else {
+          heightX[breakPointX] = heightVal + heightUnit;
+        }
+
         blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
           'height': heightX
         };
@@ -25555,7 +25636,7 @@ var myStore = wp.data.select('postgrid-shop');
             "Desktop": "inline-block"
           },
           cursor: {
-            "Desktop": "inline-block"
+            "Desktop": "pointer"
           }
         }
       }
@@ -46210,6 +46291,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_breakpoint_toggle__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/breakpoint-toggle */ "./src/components/breakpoint-toggle/index.js");
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
 /* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/icon-picker */ "./src/components/icon-picker/index.js");
+/* harmony import */ var _components_css_cursor__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/css-cursor */ "./src/components/css-cursor/index.js");
+/* harmony import */ var _components_css_text_align__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/css-text-align */ "./src/components/css-text-align/index.js");
 
 
 
@@ -46226,6 +46309,8 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
+
 
 
 
@@ -46298,7 +46383,22 @@ var myStore = wp.data.select('postgrid-shop');
           bgColor: {},
           padding: {},
           margin: {},
-          display: {}
+          display: {},
+          cursor: {},
+          borderRadius: {},
+          fontSize: {},
+          //{ val: '18', unit: 'px' }
+          lineHeight: {},
+          // { val: '18', unit: 'px' }
+          letterSpacing: {},
+          // { val: '18', unit: 'px' }
+          fontFamily: {},
+          fontWeight: {
+            "Desktop": "700"
+          },
+          textDecoration: {},
+          //overline, line-through, underline
+          textTransform: {}
         }
       }
     },
@@ -46308,7 +46408,25 @@ var myStore = wp.data.select('postgrid-shop');
         options: {
           text: 'What is Lorem Ipsum?',
           tag: 'div',
-          class: 'tab-nav '
+          class: 'tab-nav ',
+          activeIndex: 0
+        },
+        styles: {
+          textAlign: {},
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {},
+          display: {}
+        }
+      }
+    },
+    headerWrap: {
+      type: 'object',
+      default: {
+        options: {
+          tag: 'div',
+          class: 'tabs-navs '
         },
         styles: {
           textAlign: {},
@@ -46430,6 +46548,7 @@ var myStore = wp.data.select('postgrid-shop');
     var blockClass = '.' + blockIdX;
     var items = attributes.items;
     var wrapper = attributes.wrapper;
+    var headerWrap = attributes.headerWrap;
     var header = attributes.header;
     var headerActive = attributes.headerActive;
     var content = attributes.content;
@@ -46442,10 +46561,10 @@ var myStore = wp.data.select('postgrid-shop');
     const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(myStore.getBreakPoint());
     const [isLoading, setisLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
     const [postGridData, setPostGridData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(window.PostGridPluginData);
-    const [isOpen, setisOpen] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-    const [activeIndex, setactiveIndex] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(0); // Wrapper CSS Class Selectors
+    const [isOpen, setisOpen] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false); // Wrapper CSS Class Selectors
 
     var wrapperSelector = blockClass;
+    var headerWrapSelector = blockClass + ' .tabs-navs';
     var headerSelector = blockClass + ' .tab-nav';
     var headerActiveSelector = blockClass + ' .tab-nav.active';
     var contentSelector = blockClass + ' .pg-accordion-content';
@@ -46520,6 +46639,89 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         iconToggle: { ...iconToggle,
           options: options
+        }
+      });
+    }
+
+    function onChangeHeaderTypo(typoX) {
+      setAttributes({
+        header: { ...header,
+          styles: typoX
+        }
+      });
+      var newValuesObjX = {};
+      var itemsX = blockCssY.items;
+
+      if (typoX.fontFamily[breakPointX] != undefined) {
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
+          'font-family': typoX.fontFamily
+        };
+      } else {
+        //typoX.fontFamily[breakPointX] = {};
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
+          'font-family': typoX.fontFamily
+        };
+      }
+
+      if (typoX.fontSize[breakPointX] != undefined) {
+        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
+        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
+        var fontSizeX = blockCssY.items[headerSelector]['font-size'] != undefined ? blockCssY.items[headerSelector]['font-size'] : {};
+        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit; //blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'font-size': fontSizeX };
+
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
+          'font-size': fontSizeX
+        };
+      }
+
+      if (typoX.lineHeight[breakPointX] != undefined) {
+        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 16;
+        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
+        var lineHeightX = blockCssY.items[headerSelector]['line-height'] != undefined ? blockCssY.items[headerSelector]['line-height'] : {};
+        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit; //blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'line-height': lineHeightX };
+
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
+          'line-height': lineHeightX
+        };
+      }
+
+      if (typoX.letterSpacing[breakPointX] != undefined) {
+        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
+        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
+        var letterSpacingX = blockCssY.items[headerSelector]['letter-spacing'] != undefined ? blockCssY.items[headerSelector]['letter-spacing'] : {};
+        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit; //blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'letter-spacing': letterSpacingX };
+
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
+          'letter-spacing': letterSpacingX
+        };
+      }
+
+      if (typoX.fontWeight[breakPointX] != undefined) {
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
+          'font-weight': typoX.fontWeight
+        };
+      }
+
+      if (typoX.textDecoration[breakPointX] != undefined) {
+        var str = {};
+        var textDecorationX = typoX.textDecoration[breakPointX];
+        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
+        str[breakPointX] = textDecorationXStr;
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
+          'text-decoration': str
+        };
+      }
+
+      if (typoX.textTransform[breakPointX] != undefined) {
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
+          'text-transform': typoX.textTransform
+        };
+      } //setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+      setAttributes({
+        blockCssY: {
+          items: itemsX
         }
       });
     }
@@ -46628,6 +46830,122 @@ var myStore = wp.data.select('postgrid-shop');
         blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
           'padding-left': paddingLeft
         }; //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-left': paddingLeft };
+      }
+
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      }); //setAttributes({ blockCssY: { items: itemsX } });
+    }
+
+    function paddingControlNavsWrap(nextValues) {
+      var responsive = headerWrap.styles.padding;
+      responsive[breakPointX] = nextValues;
+      var styles = { ...headerWrap.styles,
+        padding: responsive
+      };
+      setAttributes({
+        headerWrap: { ...headerWrap,
+          styles: styles
+        }
+      });
+      var itemsX = { ...blockCssY.items
+      };
+      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
+      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
+      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
+      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
+      blockCssY.items[headerWrapSelector] = blockCssY.items[headerWrapSelector] != undefined ? blockCssY.items[headerWrapSelector] : {};
+
+      if (nextValues.top != undefined) {
+        var paddingTop = blockCssY.items[headerWrapSelector]['padding-top'] != undefined ? blockCssY.items[headerWrapSelector]['padding-top'] : {};
+        paddingTop[breakPointX] = nextValues.top;
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector],
+          'padding-top': paddingTop
+        }; //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-top': paddingTop };
+      }
+
+      if (nextValues.right != undefined) {
+        var paddingRight = blockCssY.items[headerWrapSelector]['padding-right'] != undefined ? blockCssY.items[headerWrapSelector]['padding-right'] : {};
+        paddingRight[breakPointX] = nextValues.right;
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector],
+          'padding-right': paddingRight
+        }; //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-right': paddingRight };
+      }
+
+      if (nextValues.bottom != undefined) {
+        var paddingBottom = blockCssY.items[headerWrapSelector]['padding-bottom'] != undefined ? blockCssY.items[headerWrapSelector]['padding-bottom'] : {};
+        paddingBottom[breakPointX] = nextValues.bottom;
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector],
+          'padding-bottom': paddingBottom
+        }; //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-bottom': paddingBottom };
+      }
+
+      if (nextValues.left != undefined) {
+        var paddingLeft = blockCssY.items[headerWrapSelector]['padding-left'] != undefined ? blockCssY.items[headerWrapSelector]['padding-left'] : {};
+        paddingLeft[breakPointX] = nextValues.left;
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector],
+          'padding-left': paddingLeft
+        }; //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-left': paddingLeft };
+      }
+
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      }); //setAttributes({ blockCssY: { items: itemsX } });
+    }
+
+    function marginControlNavsWrap(nextValues) {
+      var responsive = headerWrap.styles.margin;
+      responsive[breakPointX] = nextValues;
+      var styles = { ...headerWrap.styles,
+        margin: responsive
+      };
+      setAttributes({
+        headerWrap: { ...headerWrap,
+          styles: styles
+        }
+      });
+      var itemsX = { ...blockCssY.items
+      };
+      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
+      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
+      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
+      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
+      blockCssY.items[headerWrapSelector] = blockCssY.items[headerWrapSelector] != undefined ? blockCssY.items[headerWrapSelector] : {};
+
+      if (nextValues.top != undefined) {
+        var marginTop = blockCssY.items[headerWrapSelector]['margin-top'] != undefined ? blockCssY.items[headerWrapSelector]['margin-top'] : {};
+        marginTop[breakPointX] = nextValues.top;
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector],
+          'margin-top': marginTop
+        }; //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-top': marginTop };
+      }
+
+      if (nextValues.right != undefined) {
+        var marginRight = blockCssY.items[headerWrapSelector]['margin-right'] !== undefined ? blockCssY.items[headerWrapSelector]['margin-right'] : {};
+        marginRight[breakPointX] = nextValues.right;
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector],
+          'margin-right': marginRight
+        }; //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-right': marginRight };
+      }
+
+      if (nextValues.bottom != undefined) {
+        var marginBottom = blockCssY.items[headerWrapSelector]['margin-bottom'] !== undefined ? blockCssY.items[headerWrapSelector]['margin-bottom'] : {};
+        marginBottom[breakPointX] = nextValues.bottom;
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector],
+          'margin-bottom': marginBottom
+        }; //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-bottom': marginBottom };
+      }
+
+      if (nextValues.left != undefined) {
+        var marginLeft = blockCssY.items[headerWrapSelector]['margin-left'] !== undefined ? blockCssY.items[headerWrapSelector]['margin-left'] : {};
+        marginLeft[breakPointX] = nextValues.left;
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector],
+          'margin-left': marginLeft
+        }; //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-left': marginLeft };
       }
 
       setAttributes({
@@ -47012,7 +47330,67 @@ var myStore = wp.data.select('postgrid-shop');
       title: "header",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
-      title: "Header",
+      title: "Navs Wrap",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Text Align"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_align__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      val: headerWrap.styles.textAlign[breakPointX],
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(headerWrap.styles.textAlign).length == 0) {
+          newValuesObj[breakPointX] = newVal;
+        } else {
+          newValuesObj = headerWrap.styles.textAlign;
+          newValuesObj[breakPointX] = newVal;
+        }
+
+        var styles = { ...headerWrap.styles,
+          textAlign: newValuesObj
+        };
+        setAttributes({
+          headerWrap: { ...headerWrap,
+            styles: styles
+          }
+        });
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector],
+          'text-align': newValuesObj
+        };
+        setAttributes({
+          blockCssY: {
+            items: blockCssY.items
+          }
+        });
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
+      label: "",
+      values: content.styles.padding[breakPointX],
+      onChange: nextValues => {
+        paddingControlNavsWrap(nextValues);
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
+      label: "",
+      values: content.styles.margin[breakPointX],
+      onChange: nextValues => {
+        marginControlNavsWrap(nextValues);
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: "Navs",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
@@ -47214,6 +47592,90 @@ var myStore = wp.data.select('postgrid-shop');
       onChange: nextValues => {
         marginControlHeader(nextValues);
       }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Cursor"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_cursor__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      val: header.styles.cursor[breakPointX],
+      onChange: newVal => {
+        var newValuesObj = {};
+
+        if (Object.keys(header.styles.cursor).length == 0) {
+          newValuesObj[breakPointX] = newVal;
+        } else {
+          newValuesObj = header.styles.cursor;
+          newValuesObj[breakPointX] = newVal;
+        }
+
+        var styles = { ...header.styles,
+          cursor: newValuesObj
+        };
+        setAttributes({
+          header: { ...header,
+            styles: styles
+          }
+        });
+        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
+          'cursor': newValuesObj
+        };
+        setAttributes({
+          blockCssY: {
+            items: blockCssY.items
+          }
+        });
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Border Radius"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
+      label: "",
+      values: header.styles.borderRadius[breakPointX],
+      onChange: nextValues => {
+        var newValuesObj = {};
+
+        if (Object.keys(header.styles.borderRadius).length == 0) {
+          newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
+        } else {
+          newValuesObj = header.styles.borderRadius;
+          newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
+          ;
+        }
+
+        var styles = { ...header.styles,
+          borderRadius: newValuesObj
+        };
+        setAttributes({
+          header: { ...header,
+            styles: styles
+          }
+        });
+        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
+          'border-radius': newValuesObj
+        };
+        setAttributes({
+          blockCssY: {
+            items: blockCssY.items
+          }
+        });
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "font-bold"
+    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      position: "bottom",
+      variant: "secondary",
+      iconList: breakPointList,
+      buttonTitle: "Break Point Switch",
+      onChange: onChangeBreakPoint,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
+      value: breakPointX
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      typo: header.styles,
+      breakPointX: breakPointX,
+      onChange: onChangeHeaderTypo,
+      setAttributes: setAttributes,
+      obj: header
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Content",
       initialOpen: false
@@ -47764,18 +48226,27 @@ var myStore = wp.data.select('postgrid-shop');
           items: itemx
         });
       }
-    }, "Add"), items.map((item, i) => {
+    }, "Add"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: headerWrap.options.class
+    }, items.map((item, i) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: `inline-block cursor-pointer ${activeIndex == i ? 'active' : ''} ${header.options.class}`,
+        className: `inline-block cursor-pointer ${headerActive.options.activeIndex == i ? 'active' : ''} ${header.options.class}`,
         onClick: ev => {
-          setactiveIndex(i);
+          var options = { ...headerActive.options,
+            activeIndex: i
+          };
+          setAttributes({
+            headerActive: { ...headerActive,
+              options: options
+            }
+          });
         }
-      }, icon.options.position == 'beforeHeader' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, icon.options.enableToggle == 'yes' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, activeIndex != i && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      }, icon.options.position == 'beforeHeader' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, icon.options.enableToggle == 'yes' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, headerActive.options.activeIndex != i && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
         className: "icon-wrap ",
         dangerouslySetInnerHTML: {
           __html: iconHtml
         }
-      }), activeIndex == i && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      }), headerActive.options.activeIndex == i && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
         className: "icon-wrap ",
         dangerouslySetInnerHTML: {
           __html: iconToggleHtml
@@ -47790,7 +48261,6 @@ var myStore = wp.data.select('postgrid-shop');
         value: item.headerText,
         allowedFormats: ['core/bold', 'core/italic', 'core/link'],
         onChange: content => {
-          console.log(content);
           items[i].headerText = content;
           var ssdsd = items.concat([]);
           setAttributes({
@@ -47798,12 +48268,12 @@ var myStore = wp.data.select('postgrid-shop');
           });
         },
         placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Start Writing...')
-      }), icon.options.position == 'afterHeader' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, icon.options.enableToggle == 'yes' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, activeIndex != i && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      }), icon.options.position == 'afterHeader' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, icon.options.enableToggle == 'yes' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, headerActive.options.activeIndex != i && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
         className: "icon-wrap float-right",
         dangerouslySetInnerHTML: {
           __html: iconHtml
         }
-      }), activeIndex == i && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      }), headerActive.options.activeIndex == i && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
         className: "icon-wrap float-right",
         dangerouslySetInnerHTML: {
           __html: iconToggleHtml
@@ -47824,14 +48294,13 @@ var myStore = wp.data.select('postgrid-shop');
           ev.preventDefault();
         }
       })));
-    }), items.map((item, i) => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, activeIndex == i && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.RichText, {
+    })), items.map((item, i) => {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, headerActive.options.activeIndex == i && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.RichText, {
         className: content.options.class,
         tagName: "div",
         value: item.content,
         allowedFormats: ['core/bold', 'core/italic', 'core/link'],
         onChange: content => {
-          console.log(content);
           items[i].content = content;
           var ssdsd = items.concat([]);
           setAttributes({

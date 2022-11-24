@@ -680,7 +680,7 @@ $admin_email = get_option('admin_email');
 
                     </div>
 
-                    <a target="_blank" href="https://pickplugins.com/post-grid/#purchase-license" class="bg-indigo-300 hover:bg-indigo-600 block border-indigo-700 border rounded-sm py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get Started</a>
+                    <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/" class="bg-indigo-300 hover:bg-indigo-600 block border-indigo-700 border rounded-sm py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get Started</a>
                     <div class="py-3 text-[18px] ">1 Domain License</div>
                     <div class="py-3 text-[18px] ">1 Year of Support</div>
                     <div class="py-3 text-[18px] ">1 Year of Updates</div>
@@ -705,7 +705,7 @@ $admin_email = get_option('admin_email');
 
                     </div>
 
-                    <a target="_blank" href="https://pickplugins.com/post-grid/#purchase-license" class="bg-indigo-600 rounded-sm block py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get Started</a>
+                    <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/" class="bg-indigo-600 rounded-sm block py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get Started</a>
                     <div class="py-3 text-[18px] ">Unlimited Domain License</div>
                     <div class="py-3 text-[18px] ">1 Year of Support</div>
                     <div class="py-3 text-[18px] ">1 Year of Updates</div>
@@ -728,7 +728,7 @@ $admin_email = get_option('admin_email');
                         <span class=" inline-block  text-lg  text-gray-600">/ Year</span>
                     </div>
 
-                    <a target="_blank" href="https://pickplugins.com/post-grid/#purchase-license" class="bg-indigo-300 hover:bg-indigo-600 rounded-sm block border-indigo-700 border py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get Started</a>
+                    <a target="_blank" href="https://pickplugins.com/post-grid/purchase-license/" class="bg-indigo-300 hover:bg-indigo-600 rounded-sm block border-indigo-700 border py-3 font-bold text-[16px] text-white mb-10 cursor-pointer">Get Started</a>
 
                     <div class="py-3 text-[18px] ">10 Domain License</div>
                     <div class="py-3 text-[18px] ">1 Year of Support</div>

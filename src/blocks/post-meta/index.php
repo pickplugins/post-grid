@@ -105,27 +105,17 @@ class BlockPostMeta
 
 
 
+        if ($metaKeyType != 'string') {
+            $acf_value = get_field($metaKey, $post_ID);
+        } else {
 
-        $acf_value = get_field($metaKey, $post_ID);
-
-
-        echo '<pre style="text-align: left">' . var_export($acf_value, true) . '</pre>';
-
-
-
+            $acf_value = get_post_meta($post_ID, $metaKey, true);
+        }
 
 
 
 
-
-
-
-
-
-
-
-
-
+        //echo '<pre style="text-align: left">' . var_export($acf_value, true) . '</pre>';
 
 
         ob_start();
@@ -139,9 +129,6 @@ class BlockPostMeta
 
 
             $singleArrayForCategory = $this->nestedToSingle($acf_value,);
-            //echo '<pre style="text-align: left">' . var_export($singleArrayForCategory, true) . '</pre>';
-
-            //echo strtr($templateFront, (array)$singleArrayForCategory);
         }
 
 

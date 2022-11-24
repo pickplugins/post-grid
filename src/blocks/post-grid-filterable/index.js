@@ -225,7 +225,7 @@ registerBlockType("post-grid/post-grid-filterable", {
           padding: {},
           margin: {},
           display: { "Desktop": "inline-block" },
-          cursor: { "Desktop": "inline-block" },
+          cursor: { "Desktop": "pointer" },
 
         },
 

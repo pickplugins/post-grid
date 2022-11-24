@@ -538,7 +538,8 @@ registerBlockType("post-grid/post-date", {
       if (postDate.options.linkTo.length > 0) {
         postDateSelector = blockClass + ' a';
       } else {
-        postDateSelector = blockClass + ' .postDate';
+        postDateSelector = blockClass;
+        //postDateSelector = blockClass + ' .postDate';
 
       }
 
@@ -1565,6 +1566,12 @@ registerBlockType("post-grid/post-date", {
                     enableAlpha
                     onChange={(newVal) => {
 
+
+
+
+
+
+
                       var newValuesObj = {};
 
 
@@ -1579,27 +1586,15 @@ registerBlockType("post-grid/post-date", {
                       setAttributes({ postDate: { ...postDate, styles: styles } });
 
 
+                      var itemsX = { ...blockCssY.items };
+                      itemsX[postDateSelector] = { ...blockCssY.items[postDateSelector], 'color': newValuesObj };
+
+                      setAttributes({ blockCssY: { items: itemsX } });
 
 
-                      var newValuesObjX = {};
-                      if (blockCssY.items[postDateSelector] == undefined) {
-
-                        newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector], color: newValuesObj };
-
-                      } else {
-
-                        newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector], color: newValuesObj };
-                      }
-
-
-                      setAttributes({ blockCssY: { items: newValuesObjX } });
-
-                      // blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'color': newValuesObj };
-                      // setAttributes({ blockCssY: { items: blockCssY.items } });
 
                     }}
                   />
-
 
                   <PanelRow className='my-3'>
                     <label>Background Color</label>
@@ -1617,6 +1612,8 @@ registerBlockType("post-grid/post-date", {
                     enableAlpha
                     onChange={(newVal) => {
 
+
+
                       var newValuesObj = {};
 
 
@@ -1631,27 +1628,17 @@ registerBlockType("post-grid/post-date", {
                       setAttributes({ postDate: { ...postDate, styles: styles } });
 
 
+                      var itemsX = { ...blockCssY.items };
+                      itemsX[postDateSelector] = { ...blockCssY.items[postDateSelector], 'background-color': newValuesObj };
+
+                      setAttributes({ blockCssY: { items: itemsX } });
 
 
 
 
 
-                      var newValuesObjX = {};
-                      if (blockCssY.items[postDateSelector] == undefined) {
-
-                        newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector], 'background-color': newValuesObj };
-
-                      } else {
-
-                        newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector], 'background-color': newValuesObj };
-                      }
 
 
-                      setAttributes({ blockCssY: { items: newValuesObjX } });
-
-
-                      //blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'background-color': newValuesObj };
-                      //setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
                     }}
@@ -2255,7 +2242,7 @@ registerBlockType("post-grid/post-date", {
               )}
 
               {postDate.options.linkTo.length > 0 && (
-                <a className='postDate' onClick={handleLinkClick}  {...linkAttrItems} target={postDate.options.linkTarget} href={postUrl}>
+                <a className='postDate' onClick={handleLinkClick}  {...linkAttrItems} target={postDate.options.linkTarget} href={postUrl}>A
 
                   {icon.options.position == 'beforePostDate' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
@@ -2270,31 +2257,21 @@ registerBlockType("post-grid/post-date", {
               )}
               {postDate.options.linkTo.length == 0 && (
 
-                <>
-
+                <div className={[blockId]}>
+                  B
                   {icon.options.position == 'beforePostDate' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
-                  {postDateEdited} ############
+                  {postDateEdited}
                   {icon.options.position == 'afterPostDate' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
-                </>
+                </div>
 
 
 
               )}
 
-
-
-              {icon.options.position == 'beforePostfix' && (
-                <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-              )}
-              {postDateEdited &&
-                (<span className={postfix.options.class}>{postDateEdited}</span>)}
-              {icon.options.position == 'afterPostfix' && (
-                <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-              )}
             </>
 
 

@@ -863,6 +863,15 @@ registerBlockType("post-grid/post-excerpt", {
 
       var itemsX = { ...blockCssY.items };
 
+
+      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
+      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
+      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
+      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
+
+
+
+
       blockCssY.items[redmoreSelector] = (blockCssY.items[redmoreSelector] != undefined) ? blockCssY.items[redmoreSelector] : {};
 
       if (nextValues.top != undefined) {

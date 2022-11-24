@@ -116,8 +116,8 @@ registerBlockType("post-grid/image", {
         styles: {
           textAlign: {},
           display: {},
-          width: {},
-          height: {},
+          width: { "Desktop": { "val": "100", "unit": "%" } },
+          height: { "Desktop": { "val": "", "unit": "auto" } },
           filter: {},
           objectFit: {},
           padding: {},
@@ -2263,6 +2263,10 @@ registerBlockType("post-grid/image", {
               />
 
 
+
+
+
+
               <PanelRow>
                 <label>Width</label>
                 <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
@@ -2270,16 +2274,17 @@ registerBlockType("post-grid/image", {
 
               <PanelRow>
                 <InputControl
-                  value={(image.styles.width[breakPointX] != undefined ? image.styles.width[breakPointX].val : 10)}
+                  disabled={(image.styles.width[breakPointX] != undefined && image.styles.width[breakPointX].unit == 'auto') ? true : false}
+                  value={(image.styles.width[breakPointX] != undefined ? image.styles.width[breakPointX].val : 0)}
                   type="number"
                   onChange={(newVal) => {
 
                     var newValuesObj = {};
                     if (Object.keys(image.styles.width).length == 0) {
-                      newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
+                      newValuesObj[breakPointX] = { val: newVal, unit: 'auto' };
                     } else {
                       newValuesObj = image.styles.width;
-                      var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'em';
+                      var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'auto';
 
                       newValuesObj[breakPointX] = { val: newVal, unit: unit };
                     }
@@ -2290,14 +2295,22 @@ registerBlockType("post-grid/image", {
 
 
 
-                    var widthVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
-                    var widthUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
+                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
+                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
 
 
-                    var widthX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
+                    var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
 
-                    widthX[breakPointX] = widthVal + widthUnit;
-                    blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': widthX };
+                    //heightX[breakPointX] = heightVal + heightUnit;
+
+                    if (heightUnit == 'auto') {
+                      heightX[breakPointX] = 'auto';
+                    } else {
+                      heightX[breakPointX] = heightVal + heightUnit;
+                    }
+
+
+                    blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': heightX };
 
                     setAttributes({ blockCssY: { items: blockCssY.items } });
 
@@ -2307,10 +2320,11 @@ registerBlockType("post-grid/image", {
                 />
 
                 <SelectControl className='mb-0'
-                  value={(image.styles.width[breakPointX] != undefined) ? image.styles.width[breakPointX].unit : 'em'}
+                  value={(image.styles.width[breakPointX] != undefined) ? image.styles.width[breakPointX].unit : 'auto'}
                   options={[
-                    { label: 'fr', value: 'fr' },
+                    { label: 'Auto', value: 'auto' },
                     { label: 'px', value: 'px' },
+                    { label: 'fr', value: 'fr' },
                     { label: '%', value: '%' },
                     { label: 'em', value: 'em' },
                   ]}
@@ -2319,10 +2333,10 @@ registerBlockType("post-grid/image", {
 
                     var newValuesObj = {};
                     if (Object.keys(image.styles.width).length == 0) {
-                      newValuesObj[breakPointX] = { val: 10, unit: newVal };
+                      newValuesObj[breakPointX] = { val: 0, unit: newVal };
                     } else {
                       newValuesObj = image.styles.width;
-                      var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 10;
+                      var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 0;
 
                       newValuesObj[breakPointX] = { val: val, unit: newVal };
                     }
@@ -2331,16 +2345,21 @@ registerBlockType("post-grid/image", {
                     var styles = { ...image.styles, width: newValuesObj };
                     setAttributes({ image: { ...image, styles: styles } });
 
+                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
+                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
+
+                    var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
+
+                    //heightX[breakPointX] = heightVal + heightUnit;
+
+                    if (heightUnit == 'auto') {
+                      heightX[breakPointX] = 'auto';
+                    } else {
+                      heightX[breakPointX] = heightVal + heightUnit;
+                    }
 
 
-                    var widthVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
-                    var widthUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
-
-
-                    var widthX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
-
-                    widthX[breakPointX] = widthVal + widthUnit;
-                    blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': widthX };
+                    blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': heightX };
 
                     setAttributes({ blockCssY: { items: blockCssY.items } });
 
@@ -2360,16 +2379,17 @@ registerBlockType("post-grid/image", {
 
               <PanelRow>
                 <InputControl
-                  value={(image.styles.height[breakPointX] != undefined ? image.styles.height[breakPointX].val : 10)}
+                  disabled={(image.styles.height[breakPointX] != undefined && image.styles.height[breakPointX].unit == 'auto') ? true : false}
+                  value={(image.styles.height[breakPointX] != undefined ? image.styles.height[breakPointX].val : 0)}
                   type="number"
                   onChange={(newVal) => {
 
                     var newValuesObj = {};
                     if (Object.keys(image.styles.height).length == 0) {
-                      newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
+                      newValuesObj[breakPointX] = { val: newVal, unit: 'auto' };
                     } else {
                       newValuesObj = image.styles.height;
-                      var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'em';
+                      var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'auto';
 
                       newValuesObj[breakPointX] = { val: newVal, unit: unit };
                     }
@@ -2380,13 +2400,21 @@ registerBlockType("post-grid/image", {
 
 
 
-                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
-                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
+                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
+                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
 
 
                     var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
 
-                    heightX[breakPointX] = heightVal + heightUnit;
+                    //heightX[breakPointX] = heightVal + heightUnit;
+
+                    if (heightUnit == 'auto') {
+                      heightX[breakPointX] = 'auto';
+                    } else {
+                      heightX[breakPointX] = heightVal + heightUnit;
+                    }
+
+
                     blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'height': heightX };
 
                     setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -2397,10 +2425,11 @@ registerBlockType("post-grid/image", {
                 />
 
                 <SelectControl className='mb-0'
-                  value={(image.styles.height[breakPointX] != undefined) ? image.styles.height[breakPointX].unit : 'em'}
+                  value={(image.styles.height[breakPointX] != undefined) ? image.styles.height[breakPointX].unit : 'auto'}
                   options={[
-                    { label: 'fr', value: 'fr' },
+                    { label: 'Auto', value: 'auto' },
                     { label: 'px', value: 'px' },
+                    { label: 'fr', value: 'fr' },
                     { label: '%', value: '%' },
                     { label: 'em', value: 'em' },
                   ]}
@@ -2409,10 +2438,10 @@ registerBlockType("post-grid/image", {
 
                     var newValuesObj = {};
                     if (Object.keys(image.styles.height).length == 0) {
-                      newValuesObj[breakPointX] = { val: 10, unit: newVal };
+                      newValuesObj[breakPointX] = { val: 0, unit: newVal };
                     } else {
                       newValuesObj = image.styles.height;
-                      var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 10;
+                      var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 0;
 
                       newValuesObj[breakPointX] = { val: val, unit: newVal };
                     }
@@ -2421,15 +2450,20 @@ registerBlockType("post-grid/image", {
                     var styles = { ...image.styles, height: newValuesObj };
                     setAttributes({ image: { ...image, styles: styles } });
 
-
-
-                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
-                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
-
+                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
+                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
 
                     var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
 
-                    heightX[breakPointX] = heightVal + heightUnit;
+                    //heightX[breakPointX] = heightVal + heightUnit;
+
+                    if (heightUnit == 'auto') {
+                      heightX[breakPointX] = 'auto';
+                    } else {
+                      heightX[breakPointX] = heightVal + heightUnit;
+                    }
+
+
                     blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'height': heightX };
 
                     setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -2439,6 +2473,12 @@ registerBlockType("post-grid/image", {
                 />
 
               </PanelRow>
+
+
+
+
+
+
 
 
 
@@ -2517,7 +2557,7 @@ registerBlockType("post-grid/image", {
           )}
 
           {!loading && postImage == null && (
-            <div>
+            <div className={[blockId]}>
               <img src={MyImage} alt="Default Featured Image" />
             </div>
 

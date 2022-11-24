@@ -2592,7 +2592,15 @@ registerBlockType("post-grid/icon", {
               )}
 
               {!text.options.isLink && (
-                text.options.text
+                <>
+                  {icon.options.position == 'beforeText' && (
+                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                  )}
+                  {text.options.text}
+                  {icon.options.position == 'afterText' && (
+                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                  )}
+                </>
               )}
 
 
@@ -2601,7 +2609,6 @@ registerBlockType("post-grid/icon", {
               {icon.options.position == 'beforePostfix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
               )}
-
               {postfix.options.text &&
                 (<span className={postfix.options.class}>{postfix.options.text}</span>)}
               {icon.options.position == 'afterPostfix' && (
@@ -2612,10 +2619,7 @@ registerBlockType("post-grid/icon", {
           )}
 
           {wrapper.options.tag.length == 0 && (
-
             <>
-
-
               {icon.options.position == 'beforePostfix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
               )}

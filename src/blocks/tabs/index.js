@@ -22,6 +22,8 @@ import PGContactSupport from '../../components/contact-support'
 import BreakpointToggle from '../../components/breakpoint-toggle'
 import colorsPresets from '../../colors-presets'
 import PGIconPicker from '../../components/icon-picker'
+import PGcssCursor from '../../components/css-cursor'
+import PGcssTextAlign from '../../components/css-text-align'
 
 
 
@@ -99,6 +101,16 @@ registerBlockType("post-grid/tabs", {
           padding: {},
           margin: {},
           display: {},
+          cursor: {},
+          borderRadius: {},
+
+          fontSize: {}, //{ val: '18', unit: 'px' }
+          lineHeight: {}, // { val: '18', unit: 'px' }
+          letterSpacing: {}, // { val: '18', unit: 'px' }
+          fontFamily: {},
+          fontWeight: { "Desktop": "700" },
+          textDecoration: {}, //overline, line-through, underline
+          textTransform: {},
 
         },
       },
@@ -110,6 +122,7 @@ registerBlockType("post-grid/tabs", {
           text: 'What is Lorem Ipsum?',
           tag: 'div',
           class: 'tab-nav ',
+          activeIndex: 0,
 
 
         },
@@ -126,6 +139,31 @@ registerBlockType("post-grid/tabs", {
         },
       },
     },
+
+
+    headerWrap: {
+      type: 'object',
+      default: {
+        options: {
+          tag: 'div',
+          class: 'tabs-navs ',
+
+        },
+
+        styles:
+        {
+          textAlign: {},
+
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {},
+          display: {},
+
+        },
+      },
+    },
+
     content: {
       type: 'object',
       default: {
@@ -232,6 +270,8 @@ registerBlockType("post-grid/tabs", {
 
     var items = attributes.items;
     var wrapper = attributes.wrapper;
+    var headerWrap = attributes.headerWrap;
+
     var header = attributes.header;
     var headerActive = attributes.headerActive;
 
@@ -251,10 +291,11 @@ registerBlockType("post-grid/tabs", {
     const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
 
     const [isOpen, setisOpen] = useState(false);
-    const [activeIndex, setactiveIndex] = useState(0);
 
     // Wrapper CSS Class Selectors
     var wrapperSelector = blockClass;
+    var headerWrapSelector = blockClass + ' .tabs-navs';
+
     var headerSelector = blockClass + ' .tab-nav';
     var headerActiveSelector = blockClass + ' .tab-nav.active';
 
@@ -345,6 +386,109 @@ registerBlockType("post-grid/tabs", {
 
       var options = { ...iconToggle.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
       setAttributes({ iconToggle: { ...iconToggle, options: options } });
+
+    }
+
+
+    function onChangeHeaderTypo(typoX) {
+
+
+      setAttributes({ header: { ...header, styles: typoX } });
+
+      var newValuesObjX = {};
+      var itemsX = blockCssY.items;
+
+
+      if (typoX.fontFamily[breakPointX] != undefined) {
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'font-family': typoX.fontFamily };
+
+
+      } else {
+
+        //typoX.fontFamily[breakPointX] = {};
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'font-family': typoX.fontFamily };
+
+      }
+
+
+      if (typoX.fontSize[breakPointX] != undefined) {
+
+        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
+        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
+
+
+        var fontSizeX = (blockCssY.items[headerSelector]['font-size'] != undefined) ? blockCssY.items[headerSelector]['font-size'] : {};
+
+        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
+        //blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'font-size': fontSizeX };
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'font-size': fontSizeX };
+
+      }
+
+
+      if (typoX.lineHeight[breakPointX] != undefined) {
+
+        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 16;
+        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
+
+
+        var lineHeightX = (blockCssY.items[headerSelector]['line-height'] != undefined) ? blockCssY.items[headerSelector]['line-height'] : {};
+
+        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
+
+        //blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'line-height': lineHeightX };
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'line-height': lineHeightX };
+
+      }
+      if (typoX.letterSpacing[breakPointX] != undefined) {
+
+        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
+        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
+
+
+
+        var letterSpacingX = (blockCssY.items[headerSelector]['letter-spacing'] != undefined) ? blockCssY.items[headerSelector]['letter-spacing'] : {};
+
+        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
+
+        //blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'letter-spacing': letterSpacingX };
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'letter-spacing': letterSpacingX };
+
+      }
+
+      if (typoX.fontWeight[breakPointX] != undefined) {
+
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'font-weight': typoX.fontWeight };
+
+      }
+
+
+      if (typoX.textDecoration[breakPointX] != undefined) {
+
+        var str = {};
+
+        var textDecorationX = typoX.textDecoration[breakPointX];
+        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
+
+        str[breakPointX] = textDecorationXStr;
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'text-decoration': str };
+
+
+
+      }
+      if (typoX.textTransform[breakPointX] != undefined) {
+
+        itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'text-transform': typoX.textTransform };
+
+
+      }
+
+
+
+      //setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ blockCssY: { items: itemsX } });
+
+
 
     }
 
@@ -507,6 +651,158 @@ registerBlockType("post-grid/tabs", {
 
     }
 
+
+    function paddingControlNavsWrap(nextValues) {
+
+
+      var responsive = headerWrap.styles.padding;
+      responsive[breakPointX] = nextValues;
+
+
+      var styles = { ...headerWrap.styles, padding: responsive };
+      setAttributes({ headerWrap: { ...headerWrap, styles: styles } });
+
+
+      var itemsX = { ...blockCssY.items };
+
+
+
+      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
+      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
+      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
+      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
+
+
+      blockCssY.items[headerWrapSelector] = (blockCssY.items[headerWrapSelector] != undefined) ? blockCssY.items[headerWrapSelector] : {};
+
+
+
+      if (nextValues.top != undefined) {
+
+        var paddingTop = (blockCssY.items[headerWrapSelector]['padding-top'] != undefined) ? blockCssY.items[headerWrapSelector]['padding-top'] : {};
+        paddingTop[breakPointX] = nextValues.top
+
+
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-top': paddingTop };
+        //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-top': paddingTop };
+
+      }
+
+
+      if (nextValues.right != undefined) {
+
+        var paddingRight = (blockCssY.items[headerWrapSelector]['padding-right'] != undefined) ? blockCssY.items[headerWrapSelector]['padding-right'] : {};
+        paddingRight[breakPointX] = nextValues.right
+
+
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-right': paddingRight };
+        //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-right': paddingRight };
+
+
+
+      }
+
+      if (nextValues.bottom != undefined) {
+
+        var paddingBottom = (blockCssY.items[headerWrapSelector]['padding-bottom'] != undefined) ? blockCssY.items[headerWrapSelector]['padding-bottom'] : {};
+        paddingBottom[breakPointX] = nextValues.bottom
+
+
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-bottom': paddingBottom };
+        //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-bottom': paddingBottom };
+
+
+
+      }
+
+      if (nextValues.left != undefined) {
+
+        var paddingLeft = (blockCssY.items[headerWrapSelector]['padding-left'] != undefined) ? blockCssY.items[headerWrapSelector]['padding-left'] : {};
+        paddingLeft[breakPointX] = nextValues.left
+
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-left': paddingLeft };
+        //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'padding-left': paddingLeft };
+
+
+      }
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      //setAttributes({ blockCssY: { items: itemsX } });
+
+
+
+    }
+
+
+
+    function marginControlNavsWrap(nextValues) {
+
+      var responsive = headerWrap.styles.margin;
+      responsive[breakPointX] = nextValues;
+
+
+
+      var styles = { ...headerWrap.styles, margin: responsive };
+      setAttributes({ headerWrap: { ...headerWrap, styles: styles } });
+
+
+
+
+      var itemsX = { ...blockCssY.items };
+
+      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
+      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
+      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
+      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
+
+
+      blockCssY.items[headerWrapSelector] = (blockCssY.items[headerWrapSelector] != undefined) ? blockCssY.items[headerWrapSelector] : {};
+
+      if (nextValues.top != undefined) {
+        var marginTop = (blockCssY.items[headerWrapSelector]['margin-top'] != undefined) ? blockCssY.items[headerWrapSelector]['margin-top'] : {};
+        marginTop[breakPointX] = nextValues.top
+
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-top': marginTop };
+        //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-top': marginTop };
+
+      }
+
+
+      if (nextValues.right != undefined) {
+
+        var marginRight = (blockCssY.items[headerWrapSelector]['margin-right'] !== undefined) ? blockCssY.items[headerWrapSelector]['margin-right'] : {};
+        marginRight[breakPointX] = nextValues.right
+
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-right': marginRight };
+        //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-right': marginRight };
+
+      }
+
+      if (nextValues.bottom != undefined) {
+
+        var marginBottom = (blockCssY.items[headerWrapSelector]['margin-bottom'] !== undefined) ? blockCssY.items[headerWrapSelector]['margin-bottom'] : {};
+        marginBottom[breakPointX] = nextValues.bottom
+
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-bottom': marginBottom };
+        //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-bottom': marginBottom };
+
+      }
+
+      if (nextValues.left != undefined) {
+
+        var marginLeft = (blockCssY.items[headerWrapSelector]['margin-left'] !== undefined) ? blockCssY.items[headerWrapSelector]['margin-left'] : {};
+        marginLeft[breakPointX] = nextValues.left
+
+        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-left': marginLeft };
+        //itemsX[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'margin-left': marginLeft };
+
+      }
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      //setAttributes({ blockCssY: { items: itemsX } });
+
+    }
 
 
     function paddingControlContent(nextValues) {
@@ -1018,8 +1314,65 @@ registerBlockType("post-grid/tabs", {
           <InspectorControls key="general">
             <div className='px-2' title="header" initialOpen={false}>
 
+              <PanelBody title="Navs Wrap" initialOpen={false}>
 
-              <PanelBody title="Header" initialOpen={false}>
+
+
+                <PanelRow>
+                  <label>Text Align</label>
+                  <PGcssTextAlign val={headerWrap.styles.textAlign[breakPointX]} onChange={(newVal => {
+
+
+                    var newValuesObj = {};
+
+                    if (Object.keys(headerWrap.styles.textAlign).length == 0) {
+                      newValuesObj[breakPointX] = newVal;
+                    } else {
+                      newValuesObj = headerWrap.styles.textAlign;
+                      newValuesObj[breakPointX] = newVal;
+                    }
+
+                    var styles = { ...headerWrap.styles, textAlign: newValuesObj };
+                    setAttributes({ headerWrap: { ...headerWrap, styles: styles } });
+
+                    blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector], 'text-align': newValuesObj };
+                    setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+                  })} />
+                </PanelRow>
+
+
+
+                <PanelRow>
+                  <label>Padding</label>
+                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                </PanelRow>
+                <BoxControl
+                  label=''
+                  values={content.styles.padding[breakPointX]}
+                  onChange={(nextValues) => { paddingControlNavsWrap(nextValues) }}
+                />
+
+
+
+
+
+                <PanelRow>
+                  <label>Margin</label>
+                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                </PanelRow>
+                <BoxControl
+                  label=""
+                  values={content.styles.margin[breakPointX]}
+                  onChange={(nextValues) => { marginControlNavsWrap(nextValues) }}
+                />
+
+
+              </PanelBody>
+              <PanelBody title="Navs" initialOpen={false}>
 
 
 
@@ -1187,6 +1540,67 @@ registerBlockType("post-grid/tabs", {
 
 
 
+                <PanelRow>
+                  <label>Cursor</label>
+                  <PGcssCursor val={header.styles.cursor[breakPointX]} onChange={(newVal => {
+                    var newValuesObj = {};
+
+                    if (Object.keys(header.styles.cursor).length == 0) {
+                      newValuesObj[breakPointX] = newVal;
+                    } else {
+                      newValuesObj = header.styles.cursor;
+                      newValuesObj[breakPointX] = newVal;
+                    }
+
+                    var styles = { ...header.styles, cursor: newValuesObj };
+                    setAttributes({ header: { ...header, styles: styles } });
+
+                    blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'cursor': newValuesObj };
+                    setAttributes({ blockCssY: { items: blockCssY.items } });
+
+                  })} />
+                </PanelRow>
+
+
+
+                <PanelRow>
+                  <label>Border Radius</label>
+                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                </PanelRow>
+                <BoxControl
+                  label=""
+                  values={header.styles.borderRadius[breakPointX]}
+                  onChange={(nextValues) => {
+
+
+                    var newValuesObj = {};
+
+                    if (Object.keys(header.styles.borderRadius).length == 0) {
+                      newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
+                    } else {
+                      newValuesObj = header.styles.borderRadius;
+                      newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;;
+                    }
+
+                    var styles = { ...header.styles, borderRadius: newValuesObj };
+                    setAttributes({ header: { ...header, styles: styles } });
+
+                    blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'border-radius': newValuesObj };
+                    setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+
+                  }}
+                />
+
+                <PanelRow>
+                  <div className='font-bold'>Typography</div>
+                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                </PanelRow>
+
+                <Typography typo={header.styles} breakPointX={breakPointX} onChange={onChangeHeaderTypo} setAttributes={setAttributes} obj={header} />
 
 
 
@@ -1754,6 +2168,112 @@ registerBlockType("post-grid/tabs", {
 
             }}>Add</div>
 
+            <div className={headerWrap.options.class}
+            >
+              {items.map((item, i) => {
+
+                return (
+
+                  <>
+
+                    <div className={`inline-block cursor-pointer ${(headerActive.options.activeIndex == i) ? 'active' : ''} ${header.options.class}`} onClick={ev => {
+
+
+                      var options = { ...headerActive.options, activeIndex: i };
+                      setAttributes({ headerActive: { ...headerActive, options: options } });
+
+                    }}>
+
+
+                      {icon.options.position == 'beforeHeader' && (
+                        <>
+
+                          {icon.options.enableToggle == 'yes' && (
+
+                            <>
+                              {headerActive.options.activeIndex != i && (
+                                <span className='icon-wrap ' dangerouslySetInnerHTML={{ __html: iconHtml }} />)}
+                              {headerActive.options.activeIndex == i && (
+                                <span className='icon-wrap ' dangerouslySetInnerHTML={{ __html: iconToggleHtml }} />
+                              )}
+                            </>
+                          )}
+
+
+                          {icon.options.enableToggle == 'no' && (
+                            <span className='icon-wrap ' dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                          )}
+
+                        </>
+                      )}
+
+
+                      <RichText
+
+
+                        tagName='span'
+                        value={item.headerText}
+                        allowedFormats={['core/bold', 'core/italic', 'core/link']}
+                        onChange={(content) => {
+
+
+                          items[i].headerText = content;
+                          var ssdsd = items.concat([]);
+
+                          setAttributes({ items: ssdsd });
+                        }}
+                        placeholder={__('Start Writing...')}
+                      />
+
+                      {icon.options.position == 'afterHeader' && (
+                        <>
+
+                          {icon.options.enableToggle == 'yes' && (
+
+                            <>
+                              {headerActive.options.activeIndex != i && (
+                                <span className='icon-wrap float-right' dangerouslySetInnerHTML={{ __html: iconHtml }} />)}
+                              {headerActive.options.activeIndex == i && (
+                                <span className='icon-wrap float-right' dangerouslySetInnerHTML={{ __html: iconToggleHtml }} />
+                              )}
+                            </>
+                          )}
+
+
+                          {icon.options.enableToggle == 'no' && (
+                            <span className='icon-wrap float-right' dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                          )}
+
+                        </>
+                      )}
+
+
+                      <span className='text-lg cursor-pointer px-2 text-red-500  py-1 float-right icon-close'
+                        onClick={(ev) => {
+
+                          items.splice(i, 1);
+                          var ssdsd = items.concat([]);
+
+                          setAttributes({ items: ssdsd })
+                          ev.preventDefault();
+                        }}
+
+                      ></span>
+                    </div>
+
+
+
+
+                  </>
+
+                )
+
+              })}
+            </div>
+
+
+
+
 
             {items.map((item, i) => {
 
@@ -1761,112 +2281,9 @@ registerBlockType("post-grid/tabs", {
 
                 <>
 
-                  <div className={`inline-block cursor-pointer ${(activeIndex == i) ? 'active' : ''} ${header.options.class}`} onClick={ev => {
-
-                    setactiveIndex(i);
-
-                  }}>
 
 
-                    {icon.options.position == 'beforeHeader' && (
-                      <>
-
-                        {icon.options.enableToggle == 'yes' && (
-
-                          <>
-                            {activeIndex != i && (
-                              <span className='icon-wrap ' dangerouslySetInnerHTML={{ __html: iconHtml }} />)}
-                            {activeIndex == i && (
-                              <span className='icon-wrap ' dangerouslySetInnerHTML={{ __html: iconToggleHtml }} />
-                            )}
-                          </>
-                        )}
-
-
-                        {icon.options.enableToggle == 'no' && (
-                          <span className='icon-wrap ' dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                        )}
-
-                      </>
-                    )}
-
-
-                    <RichText
-
-
-                      tagName='span'
-                      value={item.headerText}
-                      allowedFormats={['core/bold', 'core/italic', 'core/link']}
-                      onChange={(content) => {
-
-                        console.log(content);
-
-
-                        items[i].headerText = content;
-                        var ssdsd = items.concat([]);
-
-                        setAttributes({ items: ssdsd });
-                      }}
-                      placeholder={__('Start Writing...')}
-                    />
-
-                    {icon.options.position == 'afterHeader' && (
-                      <>
-
-                        {icon.options.enableToggle == 'yes' && (
-
-                          <>
-                            {activeIndex != i && (
-                              <span className='icon-wrap float-right' dangerouslySetInnerHTML={{ __html: iconHtml }} />)}
-                            {activeIndex == i && (
-                              <span className='icon-wrap float-right' dangerouslySetInnerHTML={{ __html: iconToggleHtml }} />
-                            )}
-                          </>
-                        )}
-
-
-                        {icon.options.enableToggle == 'no' && (
-                          <span className='icon-wrap float-right' dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                        )}
-
-                      </>
-                    )}
-
-
-                    <span className='text-lg cursor-pointer px-2 text-red-500  py-1 float-right icon-close'
-                      onClick={(ev) => {
-
-                        items.splice(i, 1);
-                        var ssdsd = items.concat([]);
-
-                        setAttributes({ items: ssdsd })
-                        ev.preventDefault();
-                      }}
-
-                    ></span>
-                  </div>
-
-
-
-
-                </>
-
-              )
-
-            })}
-
-
-
-
-            {items.map((item, i) => {
-
-              return (
-
-                <>
-
-
-
-                  {activeIndex == i && (
+                  {headerActive.options.activeIndex == i && (
                     <RichText
                       className={content.options.class}
 
@@ -1875,7 +2292,6 @@ registerBlockType("post-grid/tabs", {
                       allowedFormats={['core/bold', 'core/italic', 'core/link']}
                       onChange={(content) => {
 
-                        console.log(content);
 
 
                         items[i].content = content;

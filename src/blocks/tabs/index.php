@@ -79,6 +79,7 @@ class PGBlockTabs
         $headerActive = isset($attributes['headerActive']) ? $attributes['headerActive'] : [];
         $headerActiveOptions = isset($headerActive['options']) ? $headerActive['options'] : [];
         $headerActiveStyles = isset($headerActive['styles']) ? $headerActive['styles'] : [];
+        $headerActiveIndex = isset($headerActiveOptions['activeIndex']) ? $headerActiveOptions['activeIndex'] : [];
 
 
 
@@ -130,25 +131,17 @@ class PGBlockTabs
         ob_start();
 
 
-
-
         if (!empty($wrapperTag)) :
 ?>
 
             <div class="PGBlockTabs <?php echo $blockId; ?>">
-
                 <div class="tabs-navs">
-
                     <?php
                     foreach ($items as $index => $item) {
-
-                    ?>
-
-                        <<?php echo $headerTag; ?> class="<?php echo $headerOptions['class']; ?>" index=<?php echo esc_attr($index); ?> data-id=<?php echo esc_attr($blockId . $index); ?> panelId=<?php echo esc_attr($blockId . $index); ?>>
+                    ?><<?php echo $headerTag; ?> class="<?php echo $headerOptions['class']; ?> <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>" index=<?php echo esc_attr($index); ?> data-id=<?php echo esc_attr($blockId . $index); ?> panelId=<?php echo esc_attr($blockId . $index); ?>>
                             <?php if ($iconPosition == 'beforeHeader') : ?>
                                 <span class="icon-idle"><?php echo $iconHtml; ?></span>
                                 <span class="icon-toggled"><?php echo $iconToggleHtml; ?></span>
-
                             <?php endif; ?>
                             <?php echo $item['headerText']; ?>
                             <?php if ($iconPosition == 'afterHeader') : ?>
@@ -157,43 +150,21 @@ class PGBlockTabs
                                     <span class="icon-toggled"><?php echo $iconToggleHtml; ?></span>
                                 </span>
                             <?php endif; ?>
-                        </<?php echo $headerTag; ?>>
-
-
-
-
-
-                    <?php
-                    }
-                    ?>
-
+                        </<?php echo $headerTag; ?>><?php
+                                                }
+                                                    ?>
                 </div>
-
-
                 <div class="tabs-panels">
                     <?php
                     foreach ($items as $index => $item) {
-
                     ?>
-
-                        <div class="tabs-panel <?php echo $contentOptions['class']; ?>" id="<?php echo $blockId . $index; ?>">
-
-                            <?php  ?>
-                            <?php echo $item['content'];
-                            ?>
-                            <?php  ?>
+                        <div class="tabs-panel <?php echo $contentOptions['class']; ?> <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>" id="<?php echo $blockId . $index; ?>">
+                            <?php echo $item['content']; ?>
                         </div>
-
                     <?php
                     }
                     ?>
-
                 </div>
-
-
-
-
-
             </div>
         <?php
 

@@ -24,7 +24,140 @@ class PGBlockIcon
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "div",
+                            "class" => "",
+                            "attr" => []
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => [],
+                            "borderRadius" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "text" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "Custom Text",
+                            "isLink" => true,
+                            "linkTo" => "postUrl",
+                            "linkToAuthorMeta" => "",
+                            "linkToCustomMeta" => "",
+                            "linkTarget" => "_blank",
+                            "customUrl" => "",
+                            "linkAttr" => [],
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "textAlign" => [],
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "icon" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "library" => "fontAwesome",
+                            "srcType" => "class",
+                            "iconSrc" => "fas fa-check-circle",
+                            "position" => "beforeText",
+                            "class" => "text-icon"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "textAlign" => [],
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => []
+                        ]
+                    ]
+                ],
+                "prefix" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "class" => "prefix"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "postfix" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "class" => "postfix"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "linkAttr" => [
+                    "type" => "array",
+                    "default" => []
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
         ));
     }
 

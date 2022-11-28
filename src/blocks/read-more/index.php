@@ -24,7 +24,128 @@ class PGBlockReadmore
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "div",
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => []
+                        ]
+                    ]
+                ],
+                "readMore" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "Read More",
+                            "isLink" => true,
+                            "linkTarget" => "_blank",
+                            "customUrl" => "",
+                            "linkAttr" => [],
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "textAlign" => [],
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "icon" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "library" => "fontAwesome",
+                            "srcType" => "class",
+                            "iconSrc" => "",
+                            "position" => "",
+                            "class" => "readmore-icon"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "textAlign" => [],
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => []
+                        ]
+                    ]
+                ],
+                "prefix" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "class" => "prefix"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "postfix" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "class" => "postfix"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "linkAttr" => [
+                    "type" => "array",
+                    "default" => []
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
+
+
         ));
     }
 

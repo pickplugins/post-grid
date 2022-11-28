@@ -24,7 +24,150 @@ class PGBlockPostExcerpt
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' => [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "div",
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => [
+                                "Desktop" => "block"
+                            ]
+                        ]
+                    ]
+                ],
+                "postExcerpt" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "div",
+                            "text" => "",
+                            "limitBy" => "word",
+                            "limitCount" => 99,
+                            "excerptSource" => "auto",
+                            "excerptSourceMeta" => "",
+                            "removeBlocks" => true,
+                            "removeShortcodes" => true,
+                            "keepHtml" => false,
+                            "removeEmbeds" => true,
+                            "autoP" => false,
+                            "isLink" => false,
+                            "linkTarget" => "_blank",
+                            "customUrl" => "",
+                            "linkAttr" => [],
+                            "class" => "excerpt-text"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => [
+                                "Desktop" => "inline-block"
+                            ],
+                            "fontSize" => [],
+                            "lineHeight" => [
+                                "Desktop" => "25"
+                            ],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "readMore" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "Read More",
+                            "isLink" => true,
+                            "linkTarget" => "_blank",
+                            "customUrl" => "",
+                            "linkAttr" => [],
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "textAlign" => [],
+                            "display" => [
+                                "Desktop" => "inline-block"
+                            ],
+                            "fontSize" => [],
+                            "lineHeight" => [
+                                "Desktop" => "25"
+                            ],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "prefix" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "class" => "prefix"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "postfix" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "class" => "postfix"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "linkAttr" => [
+                    "type" => "array",
+                    "default" => []
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
+
+
         ));
     }
 

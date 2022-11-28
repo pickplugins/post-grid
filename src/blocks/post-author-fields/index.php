@@ -24,7 +24,127 @@ class PGBlockPostAuthorields
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => []
+                        ]
+                    ]
+                ],
+                "field" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "isLink" => false,
+                            "linkTo" => "postUrl",
+                            "linkToMeta" => "",
+                            "linkTarget" => "",
+                            "avatarSize" => "",
+                            "dateFormat" => "",
+                            "customUrl" => "",
+                            "prefix" => "",
+                            "postfix" => "",
+                            "linkAttr" => []
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ],
+                        "after" => [],
+                        "before" => []
+                    ]
+                ],
+                "icon" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "library" => "fontAwesome",
+                            "srcType" => "class",
+                            "iconSrc" => "",
+                            "position" => "beforePostDate",
+                            "class" => "icon"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "textAlign" => [],
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => []
+                        ]
+                    ]
+                ],
+                "metaKey" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "frontText" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "Author: ",
+                            "class" => "inline-block"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ]
+            ]
+
+
         ));
     }
 

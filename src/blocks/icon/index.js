@@ -33,7 +33,7 @@ var myStore = wp.data.select('postgrid-shop');
 
 
 registerBlockType("post-grid/icon", {
-  title: "Icon",
+  title: "Icon/Button/Link",
 
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
@@ -405,7 +405,7 @@ registerBlockType("post-grid/icon", {
         var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
 
 
-        var fontSizeX = (blockCssY.items[iconSelector]['font-size'] != undefined) ? blockCssY.items[iconSelector]['font-size'] : {};
+        var fontSizeX = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector]['font-size'] : {};
 
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
         //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
@@ -1298,6 +1298,7 @@ registerBlockType("post-grid/icon", {
                         { label: 'SPAN', value: 'span' },
                         { label: 'DIV', value: 'div' },
                         { label: 'P', value: 'p' },
+                        { label: 'BUTTON', value: 'button' },
 
 
                       ]}

@@ -24,7 +24,93 @@ class PGBlockFeaturedImage
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "div",
+                            "class" => "",
+                            "useAsBackground" => "no"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "height" => [],
+                            "overflow" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "bgImage" => [],
+                            "bgPosition" => [],
+                            "bgSize" => [],
+                            "display" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "featuredImage" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "div",
+                            "linkTo" => "",
+                            "customUrl" => "",
+                            "linkToMetaKey" => "",
+                            "altTextSrc" => "imgAltText",
+                            "altTextCustom" => "",
+                            "altTextMetaKey" => "",
+                            "linkTarget" => "_blank",
+                            "linkAttr" => [],
+                            "class" => "",
+                            "size" => [
+                                "Desktop" => "thumbnail",
+                                "Tablet" => "full",
+                                "Mobile" => "full"
+                            ]
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "display" => [],
+                            "width" => [
+                                "Desktop" => [
+                                    "val" => "100",
+                                    "unit" => "%"
+                                ]
+                            ],
+                            "height" => [
+                                "Desktop" => [
+                                    "val" => "",
+                                    "unit" => "auto"
+                                ]
+                            ],
+                            "filter" => [],
+                            "objectFit" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ],
+                        "hoverStyles" => [
+                            "filter" => []
+                        ]
+                    ]
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
+
+
         ));
     }
 

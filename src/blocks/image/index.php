@@ -24,7 +24,99 @@ class PGBlockImage
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "div",
+                            "class" => "",
+                            "useAsBackground" => "no"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "width" => [],
+                            "height" => [],
+                            "overflow" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "bgImage" => [],
+                            "bgPosition" => [],
+                            "bgSize" => [],
+                            "display" => [],
+                            "borderRadius" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "image" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "imgSrcType" => "media",
+                            "imgSrcMetaKey" => "",
+                            "imgSrcMetaKeyType" => "ID",
+                            "imgSrcImgId" => "",
+                            "srcUrl" => "",
+                            "srcId" => "",
+                            "tag" => "div",
+                            "linkTo" => "",
+                            "linkToMetaKey" => "",
+                            "linkTocustomUrl" => "",
+                            "altTextSrc" => "imgAltText",
+                            "altTextCustom" => "",
+                            "altTextMetaKey" => "",
+                            "linkTarget" => "_blank",
+                            "linkAttr" => [],
+                            "class" => "",
+                            "size" => [
+                                "Desktop" => "full",
+                                "Tablet" => "full",
+                                "Mobile" => "full"
+                            ]
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "display" => [],
+                            "width" => [
+                                "Desktop" => [
+                                    "val" => "100",
+                                    "unit" => "%"
+                                ]
+                            ],
+                            "height" => [
+                                "Desktop" => [
+                                    "val" => "",
+                                    "unit" => "auto"
+                                ]
+                            ],
+                            "filter" => [],
+                            "objectFit" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ],
+                        "hoverStyles" => [
+                            "filter" => []
+                        ]
+                    ]
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
         ));
     }
 

@@ -31,7 +31,163 @@ class PGBlockAccordion
             'style' => 'pgaccordion_front_style',
 
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "content" => "",
+                            "tag" => "div",
+                            "class" => "pg-accordion"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => []
+                        ]
+                    ]
+                ],
+                "items" => [
+                    "type" => "array",
+                    "default" => [
+                        [
+                            "isActive" => false,
+                            "headerText" => "What is Lorem Ipsum?",
+                            "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                            "icon" => "",
+                            "iconToggle" => "",
+                            "styles" => []
+                        ]
+                    ]
+                ],
+                "header" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "What is Lorem Ipsum?",
+                            "tag" => "div",
+                            "class" => "pg-accordion-header"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => []
+                        ]
+                    ]
+                ],
+                "headerActive" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "What is Lorem Ipsum?",
+                            "tag" => "div",
+                            "class" => "pg-accordion-header "
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => []
+                        ]
+                    ]
+                ],
+                "content" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                            "tag" => "div",
+                            "class" => "pg-accordion-content"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => []
+                        ]
+                    ]
+                ],
+                "icon" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "library" => "fontAwesome",
+                            "srcType" => "class",
+                            "iconSrc" => "fas fa-chevron-right",
+                            "class" => "icon",
+                            "positon" => "beforeHeader",
+                            "enableToggle" => "yes"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "textAlign" => [],
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => []
+                        ]
+                    ]
+                ],
+                "iconToggle" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "library" => "fontAwesome",
+                            "srcType" => "class",
+                            "iconSrc" => "fas fa-chevron-down",
+                            "class" => "iconToggle"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "textAlign" => [],
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => []
+                        ]
+                    ]
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
+
+
+
         ));
     }
 

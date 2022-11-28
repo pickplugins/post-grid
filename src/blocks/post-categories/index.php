@@ -24,7 +24,151 @@ class PGBlockPostCategories
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "inline-block"
+                        ],
+                        "styles" => [
+                            "display" => [],
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "items" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "prefix" => "",
+                            "postfix" => "",
+                            "maxCount" => 99,
+                            "postCount" => false,
+                            "class" => "item inline-block",
+                            "linkTarget" => "",
+                            "linkAttr" => []
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "display" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "icon" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "library" => "fontAwesome",
+                            "srcType" => "class",
+                            "iconSrc" => "",
+                            "position" => "beforeFronttext",
+                            "class" => "icon"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "textAlign" => [],
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => []
+                        ]
+                    ]
+                ],
+                "termTitle" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "inline-block",
+                            "text" => ", "
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "separator" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "inline-block",
+                            "text" => ", "
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "frontText" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "Categories: ",
+                            "class" => "inline-block"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ]
+            ]
+
+
         ));
     }
 

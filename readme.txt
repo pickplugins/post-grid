@@ -3,7 +3,7 @@
 	Donate link: https://www.pickplugins.com/post-grid
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
-	Tested up to: 6.0
+	Tested up to: 6.1
 	Stable tag: 2.2.0
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html

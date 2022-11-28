@@ -24,8 +24,52 @@ class BlockPostMeta
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'editor_style',
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "inline-block"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "shortcode" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "key" => "",
+                            "prefix" => "",
+                            "postfix" => "",
+                            "prams" => []
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
 
-            'render_callback' => array($this, 'theHTML')
+
         ));
     }
 

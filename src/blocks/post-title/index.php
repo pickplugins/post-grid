@@ -24,7 +24,102 @@ class PGBlockPostTitle
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "h2",
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "display" => [],
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "postTitle" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "div",
+                            "limitBy" => "",
+                            "limitCount" => 99,
+                            "isLink" => true,
+                            "linkTo" => "postUrl",
+                            "linkToAuthorMeta" => "",
+                            "linkToCustomMeta" => "",
+                            "linkTarget" => "_blank",
+                            "linkAttr" => [],
+                            "customUrl" => "",
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "display" => [],
+                            "width" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "prefix" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "class" => "prefix"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "postfix" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "class" => "prefix"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
+
+
         ));
     }
 

@@ -58,11 +58,11 @@ import './blocks/post-meta'
 import './blocks/read-more'
 
 
+import './blocks/terms-list'
 
 import './blocks/text'
 import './blocks/layers'
 import './blocks/layer'
-// import './blocks/accordions'
 import './blocks/accordion'
 import './blocks/tabs'
 import './blocks/list'
@@ -76,5 +76,5 @@ import './blocks/icon'
 // import './blocks/innerblocks'
 
 
- import './blocks/post-grid-filterable'
+import './blocks/post-grid-filterable'
 

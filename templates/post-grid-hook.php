@@ -1220,7 +1220,7 @@ function post_grid_main_scripts($args)
     <script>
         <?php
         if (!empty($custom_js)) : ?>
-            <?php echo esc_js($custom_js); ?>
+            <?php echo wp_kses_post($custom_js); ?>
         <?php
         endif;
 

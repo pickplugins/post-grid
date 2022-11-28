@@ -24,8 +24,85 @@ class BlockPostMeta
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'editor_style',
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "template" => [
+                    "type" => "string",
+                    "default" => "<div>Output HTML: {metaValue}</div>"
+                ],
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "inline-block"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "meta" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "key" => "",
+                            "type" => "string",
+                            "prefix" => "",
+                            "postfix" => ""
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "separator" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "inline-block"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "frontText" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "Meta Value: ",
+                            "class" => "inline-block"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
 
-            'render_callback' => array($this, 'theHTML')
+
         ));
     }
 

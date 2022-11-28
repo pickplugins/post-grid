@@ -1060,8 +1060,8 @@ registerBlockType("post-grid/image", {
                     { label: 'H4', value: 'h4' },
                     { label: 'H5', value: 'h5' },
                     { label: 'H6', value: 'h6' },
-                    { label: 'span', value: 'SPAN' },
-                    { label: 'div', value: 'DIV' },
+                    { label: 'SPAN', value: 'span' },
+                    { label: 'DIV', value: 'div' },
                     { label: 'P', value: 'p' },
                   ]}
                   onChange={(newVal) => {
@@ -2556,9 +2556,25 @@ registerBlockType("post-grid/image", {
             <CustomTag className={[blockId]}></CustomTag>
           )}
 
-          {!loading && postImage == null && (
+
+          {!loading && (
             <div className={[blockId]}>
-              <img src={MyImage} alt="Default Featured Image" />
+
+
+              {(image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && postImage == null && (
+                <img src={MyImage} alt="Default Featured Image" />
+              )}
+
+
+              {image.options.imgSrcType == 'customUrl' && image.options.srcUrl.length == 0 && (
+                <>
+                  <img src={MyImage} alt="Default Featured Image" />
+                </>
+              )}
+
+
+
+
             </div>
 
           )}
@@ -2583,9 +2599,7 @@ registerBlockType("post-grid/image", {
 
 
                   {image.options.imgSrcType == 'customUrl' && (
-                    <>
-                      {postImage != null && <img src={image.options.srcUrl} alt={image.options.altTextCustom} />}
-                    </>
+                    <img src={image.options.srcUrl} alt={image.options.altTextCustom} />
                   )}
 
 
@@ -2594,18 +2608,23 @@ registerBlockType("post-grid/image", {
             </CustomTag>
           )}
 
+
           {wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && (
 
-            (
-              image.options.linkTo.length > 0 && (
-                <a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
+            <>
+              {
+                image.options.linkTo.length > 0 && (
+                  <a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
 
 
-                  {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+                    {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
 
-                </a>)
-            )
+                  </a>)
+
+              }
+
+            </>
           )}
 
           {wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && image.options.linkTo.length == 0 && (

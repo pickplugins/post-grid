@@ -344,9 +344,10 @@ $admin_email = get_option('admin_email');
 
 
     <div class=" my-10 container mx-auto">
-        <div class="grid grid-cols-12 max-w-6xl mx-auto">
-            <div class="col-span-6 bg-white bg-[url('https://freepik.cdnpk.net/img/banner/microfunnel.webp')]">
+        <div class="grid grid-cols-12 max-w-6xl mx-auto items-center">
+            <div class="col-span-6 bg-white ">
 
+                <img src="https://getpostgrid.com/wp-content/uploads/2022/11/Post-Layout-Library.png" alt="">
 
             </div>
 
@@ -367,7 +368,7 @@ $admin_email = get_option('admin_email');
         </div>
     </div>
     <div class=" my-10 container mx-auto">
-        <div class="grid grid-cols-12 max-w-6xl mx-auto">
+        <div class="grid grid-cols-12 max-w-6xl mx-auto items-center">
 
 
             <div class="col-span-6 bg-white">
@@ -386,8 +387,9 @@ $admin_email = get_option('admin_email');
 
                 </div>
             </div>
-            <div class="col-span-6 bg-white bg-[url('https://freepik.cdnpk.net/img/banner/microfunnel.webp')]">
+            <div class="col-span-6 bg-white">
 
+                <img src="https://getpostgrid.com/wp-content/uploads/2022/11/Complex-Grid-Layout-Presets.png" alt="">
 
             </div>
 

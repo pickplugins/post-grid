@@ -54,6 +54,7 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/layers/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/accordion/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/tabs/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/terms-list/index.php');
 
             require_once(post_grid_plugin_dir . 'src/blocks/layer/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/image/index.php');

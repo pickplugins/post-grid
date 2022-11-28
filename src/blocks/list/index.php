@@ -28,7 +28,107 @@ class PGBlockList
             //'style' => 'pglist_front_style',
 
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "ul",
+                            "class" => "pg-accordion"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => []
+                        ]
+                    ]
+                ],
+                "items" => [
+                    "type" => "array",
+                    "default" => [
+                        [
+                            "text" => "",
+                            "icon" => [
+                                "library" => "fontAwesome",
+                                "srcType" => "class",
+                                "iconSrc" => "fas fa-chevron-right"
+                            ],
+                            "styles" => []
+                        ]
+                    ]
+                ],
+                "item" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "tag" => "li",
+                            "counter" => false,
+                            "reversed" => false,
+                            "start" => 1,
+                            "type" => "1",
+                            "class" => "item"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => [],
+                            "listStyle" => [],
+                            "listStylePosition" => [],
+                            "listStyleType" => []
+                        ]
+                    ]
+                ],
+                "icon" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "library" => "fontAwesome",
+                            "srcType" => "class",
+                            "iconSrc" => "fas fa-chevron-right",
+                            "class" => "icon",
+                            "positon" => "before"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "textAlign" => [],
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => []
+                        ]
+                    ]
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
+
+
         ));
     }
 

@@ -902,6 +902,9 @@ registerBlockType("post-grid/post-grid", {
     (
       postTypesData !== null && postTypesData.map(x => {
 
+        console.log(x);
+
+
         postTypes.push({ value: x.slug, label: x.name })
 
       })
@@ -2381,7 +2384,7 @@ registerBlockType("post-grid/post-grid", {
 
 
               <SelectControl
-                style={{ height: '75px' }}
+                style={{ minHeight: '75px' }}
                 label=""
                 multiple
                 value={item.val}

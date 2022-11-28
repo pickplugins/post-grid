@@ -1138,10 +1138,6 @@ video {
   --tw-bg-opacity: 0.9;
 }
 
-.bg-\[url\(\'https\:\/\/freepik\.cdnpk\.net\/img\/banner\/microfunnel\.webp\'\)\] {
-  background-image: url('https://freepik.cdnpk.net/img/banner/microfunnel.webp');
-}
-
 .p-2 {
   padding: 0.5rem;
 }

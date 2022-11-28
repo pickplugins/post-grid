@@ -30,7 +30,431 @@ class PGBlockPostGrid
             //'editor_style' => 'pgpostgrid_editor_style',
             'script' => 'pgpostgrid_front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+
+            'attributes' =>  [
+                "lazyLoad" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "lazyLoad",
+                            "enable" => "no",
+                            "srcUrl" => "",
+                            "srcId" => "",
+                            "icon" => [
+                                "library" => "",
+                                "srcType" => "class",
+                                "iconSrc" => ""
+                            ]
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "search" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "search",
+                            "enable" => "no",
+                            "type" => "",
+                            "placeholder" => "",
+                            "icon" => "",
+                            "busyIcon" => ""
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "container" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "backgroundImage" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "itemsWrap" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "items-loop"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "itemWrap" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "item"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "outline" => [],
+                            "border" => [],
+                            "boxShadow" => [],
+                            "borderRadius" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ],
+                        "hoverStyles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "noPostsWrap" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "no-posts text-center"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "spinnerWrap" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "spinner"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "grid" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "itemCss" => []
+                        ],
+                        "styles" => [
+                            "gridTemplateColumns" => [],
+                            "gridTemplateRows" => [],
+                            "colGap" => [],
+                            "rowGap" => [],
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "pagination" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "pagination",
+                            "type" => "normal",
+                            "maxPageNum" => "",
+                            "prevText" => "Previous",
+                            "nextText" => "Next",
+                            "loadMoreText" => "Load More",
+                            "noMorePosts" => "No More Posts",
+                            "loadingText" => "Loading...",
+                            "loadingIcon" => [
+                                "library" => "",
+                                "srcType" => "class",
+                                "iconSrc" => ""
+                            ]
+                        ],
+                        "styles" => [
+                            "textAlign" => [
+                                "Desktop" => "center"
+                            ],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ],
+                        "hoverStyles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "paginationItem" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "page-numbers inline-block"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "display" => [
+                                "Desktop" => "inline-block"
+                            ],
+                            "color" => [
+                                "Desktop" => "#18978F"
+                            ],
+                            "bgColor" => [
+                                "Desktop" => "#9DD6DF"
+                            ],
+                            "padding" => [
+                                "Desktop" => [
+                                    "top" => "10px",
+                                    "right" => "10px",
+                                    "bottom" => "10px",
+                                    "left" => "10px"
+                                ]
+                            ],
+                            "margin" => [
+                                "Desktop" => [
+                                    "top" => "5px",
+                                    "right" => "5px",
+                                    "bottom" => "5px",
+                                    "left" => "5px"
+                                ]
+                            ],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ],
+                        "hoverStyles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "paginationItemActive" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "page-numbers inline-block"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "display" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ],
+                        "hoverStyles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "layout" => [
+                    "type" => "object",
+                    "default" => [
+                        "id" => "",
+                        "srcServer" => "library",
+                        "data" => [
+                            [
+                                "blockName" => "core/post-title",
+                                "attrs" => [],
+                                "innerBlocks" => [],
+                                "innerHTML" => "",
+                                "innerContent" => []
+                            ],
+                            [
+                                "blockName" => null,
+                                "attrs" => [],
+                                "innerBlocks" => [],
+                                "innerHTML" => "
+
+",
+                                "innerContent" => [
+                                    "
+
+"
+                                ]
+                            ],
+                            [
+                                "blockName" => "core/post-date",
+                                "attrs" => [],
+                                "innerBlocks" => [],
+                                "innerHTML" => "",
+                                "innerContent" => []
+                            ],
+                            [
+                                "blockName" => null,
+                                "attrs" => [],
+                                "innerBlocks" => [],
+                                "innerHTML" => "
+
+",
+                                "innerContent" => [
+                                    "
+
+"
+                                ]
+                            ],
+                            [
+                                "blockName" => "core/post-excerpt",
+                                "attrs" => [
+                                    "moreText" => "",
+                                    "textColor" => "primary"
+                                ],
+                                "innerBlocks" => [],
+                                "innerHTML" => "",
+                                "innerContent" => []
+                            ]
+                        ],
+                        "rawData" => "<!-- wp:post-featured-image  /-->
+
+<!-- wp:post-title /-->
+
+<!-- wp:post-excerpt  /-->"
+                    ]
+                ],
+                "postTypes" => [
+                    "type" => "array",
+                    "default" => []
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "scripts" => [
+                    "type" => "object",
+                    "default" => [
+                        "js" => "",
+                        "css" => ""
+                    ]
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ],
+                "queryArgs" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => [
+                            [
+                                "val" => [
+                                    "post"
+                                ],
+                                "multiple" => false,
+                                "id" => "postType",
+                                "label" => "Post Types",
+                                "description" => "Select Post Types to Query"
+                            ],
+                            [
+                                "val" => [
+                                    "publish"
+                                ],
+                                "multiple" => false,
+                                "id" => "postStatus",
+                                "label" => "Post status",
+                                "description" => "Query post by post status"
+                            ],
+                            [
+                                "val" => "DESC",
+                                "multiple" => false,
+                                "id" => "order",
+                                "label" => "Order",
+                                "description" => "Post query order"
+                            ],
+                            [
+                                "val" => [
+                                    "date"
+                                ],
+                                "multiple" => false,
+                                "id" => "orderby",
+                                "label" => "Orderby",
+                                "description" => "Post query orderby"
+                            ],
+                            [
+                                "val" => 10,
+                                "multiple" => false,
+                                "id" => "postsPerPage",
+                                "label" => "Posts Per Page",
+                                "description" => "Number of post to show per page"
+                            ],
+                            [
+                                "val" => 1,
+                                "multiple" => false,
+                                "id" => "paged",
+                                "label" => "Paged",
+                                "description" => "Pagination start with"
+                            ]
+                        ]
+                    ]
+                ]
+            ]
         ));
     }
 
@@ -479,26 +903,20 @@ class PGBlockPostGrid
                 <?php
 
                 if (!empty($lazyLoadsrcUrl)) :
-                ?><img src="<?php echo esc_url_raw($lazyLoadsrcUrl); ?>" alt="Post Grid Lazy loading">
+                ?>
+                    <img src="<?php echo esc_url_raw($lazyLoadsrcUrl); ?>" alt="Post Grid Lazy loading">
                 <?php
                 else :
 
                 ?>
-                    <i class="<?php echo $lazyLoadIconSrc; ?> fa-spin"></i>
+                    <i class="<?php echo $lazyLoadIconSrc; ?> fa-spin" />
                 <?php
                 endif;
                 ?>
-
-
             </div>
         <?php endif; ?>
-
-
-
-        <div <?php echo ($lazyLoadEnable == 'yes') ?  'style="display: none;" ' : ''; ?> class="<?php echo $blockId; ?> PGBlockPostGrid PGBlockPostGrid-<?php echo $blockId; ?>" postgridargs="<?php echo esc_attr(json_encode($postGridArgs)); ?>">
-
-
-            <div class="loop-loading"></div>
+        <div<?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?> class="<?php echo $blockId; ?> PGBlockPostGrid PGBlockPostGrid-<?php echo $blockId; ?>" postgridargs="<?php echo esc_attr(json_encode($postGridArgs)); ?>">
+            <div class="loop-loading" />
             <div class="items-loop" id="items-loop-<?php echo $blockId; ?>">
                 <?php
                 if (!empty($responses['posts'])) {
@@ -582,32 +1000,24 @@ class PGBlockPostGrid
                     <?php endif; ?>
 
                     <?php if ($paginationType == 'loadmore') : ?>
-
                         <div class="page-numbers">
                             <?php echo $loadMoreText; ?>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($paginationType == 'infinite') : ?>
-
                         <div class="infinite-loader box">Loading...</div>
 
 
                     <?php endif; ?>
-
-
-
-
                 </div>
             <?php endif; ?>
-
-        </div>
-        <?php
-
+            </div>
+            <?php
 
 
-        ?>
 
+            ?>
 
 
 
@@ -616,7 +1026,8 @@ class PGBlockPostGrid
 
 
 
-<?php return ob_get_clean();
+
+    <?php return ob_get_clean();
     }
 }
 

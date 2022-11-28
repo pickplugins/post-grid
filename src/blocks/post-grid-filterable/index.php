@@ -33,7 +33,502 @@ class PGBlockPostGridFilterable
             //'editor_style' => 'pgpostgrid_editor_style',
             'script' => 'pgpostgridfilterable_front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'render_callback' => array($this, 'theHTML')
+            'render_callback' => array($this, 'theHTML'),
+            'attributes' =>  [
+                "lazyLoad" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "lazyLoad",
+                            "enable" => "no",
+                            "srcUrl" => "",
+                            "srcId" => "",
+                            "icon" => [
+                                "library" => "",
+                                "srcType" => "class",
+                                "iconSrc" => ""
+                            ]
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "search" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "search",
+                            "enable" => "no",
+                            "type" => "",
+                            "placeholder" => "",
+                            "icon" => "",
+                            "busyIcon" => ""
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "container" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "backgroundImage" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "itemsWrap" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "items-loop"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "itemWrap" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "item"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ],
+                        "hoverStyles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "filterable" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "filters" => [
+                                [
+                                    "groupTitle" => "",
+                                    "type" => "inline",
+                                    "logic" => "OR",
+                                    "showPostCount" => "yes",
+                                    "items" => [],
+                                    "styles" => []
+                                ],
+                                [
+                                    "groupTitle" => "",
+                                    "type" => "",
+                                    "logic" => "",
+                                    "showPostCount" => "",
+                                    "items" => [],
+                                    "styles" => []
+                                ]
+                            ],
+                            "allText" => "All",
+                            "showSort" => "",
+                            "showRandom" => "",
+                            "showAll" => "",
+                            "showClear" => "",
+                            "activeFilter" => ""
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => [
+                                "Desktop" => "inline-block"
+                            ],
+                            "cursor" => [
+                                "Desktop" => "pointer"
+                            ]
+                        ]
+                    ]
+                ],
+                "activeFilter" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "slug" => "all"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "filterGroup" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [
+                                "Desktop" => "#18978F"
+                            ],
+                            "bgColor" => [
+                                "Desktop" => "#9DD6DF"
+                            ],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => [
+                                "Desktop" => "inline-block"
+                            ]
+                        ]
+                    ]
+                ],
+                "noPostsWrap" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "no-posts text-center"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "spinnerWrap" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "spinner"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "wordBreak" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "grid" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "itemCss" => []
+                        ],
+                        "styles" => [
+                            "gridTemplateColumns" => [],
+                            "gridTemplateRows" => [],
+                            "colGap" => [],
+                            "rowGap" => [],
+                            "textAlign" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => []
+                        ]
+                    ]
+                ],
+                "pagination" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "pagination",
+                            "type" => "normal",
+                            "maxPageNum" => "",
+                            "prevText" => "Previous",
+                            "nextText" => "Next",
+                            "loadMoreText" => "Load More",
+                            "noMorePosts" => "No More Posts",
+                            "loadingText" => "Loading...",
+                            "loadingIcon" => [
+                                "library" => "",
+                                "srcType" => "class",
+                                "iconSrc" => ""
+                            ]
+                        ],
+                        "styles" => [
+                            "textAlign" => [
+                                "Desktop" => "center"
+                            ],
+                            "color" => [
+                                "Desktop" => "#18978F"
+                            ],
+                            "bgColor" => [
+                                "Desktop" => "#9DD6DF"
+                            ],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ],
+                        "hoverStyles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "paginationItem" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "page-numbers inline-block"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "display" => [
+                                "Desktop" => "inline-block"
+                            ],
+                            "color" => [
+                                "Desktop" => "#18978F"
+                            ],
+                            "bgColor" => [
+                                "Desktop" => "#9DD6DF"
+                            ],
+                            "padding" => [
+                                "Desktop" => [
+                                    "top" => "10px",
+                                    "right" => "10px",
+                                    "bottom" => "10px",
+                                    "left" => "10px"
+                                ]
+                            ],
+                            "margin" => [
+                                "Desktop" => [
+                                    "top" => "5px",
+                                    "right" => "5px",
+                                    "bottom" => "5px",
+                                    "left" => "5px"
+                                ]
+                            ],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ],
+                        "hoverStyles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "paginationItemActive" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "class" => "page-numbers inline-block"
+                        ],
+                        "styles" => [
+                            "textAlign" => [],
+                            "display" => [],
+                            "color" => [],
+                            "bgColor" => [],
+                            "padding" => [],
+                            "margin" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ],
+                        "hoverStyles" => [
+                            "color" => [],
+                            "bgColor" => []
+                        ]
+                    ]
+                ],
+                "layout" => [
+                    "type" => "object",
+                    "default" => [
+                        "id" => "",
+                        "srcServer" => "library",
+                        "data" => [
+                            [
+                                "blockName" => "core/post-title",
+                                "attrs" => [],
+                                "innerBlocks" => [],
+                                "innerHTML" => "",
+                                "innerContent" => []
+                            ],
+                            [
+                                "blockName" => null,
+                                "attrs" => [],
+                                "innerBlocks" => [],
+                                "innerHTML" => "",
+                                "innerContent" => [
+                                    ""
+                                ]
+                            ],
+                            [
+                                "blockName" => "core/post-date",
+                                "attrs" => [],
+                                "innerBlocks" => [],
+                                "innerHTML" => "",
+                                "innerContent" => []
+                            ],
+                            [
+                                "blockName" => null,
+                                "attrs" => [],
+                                "innerBlocks" => [],
+                                "innerHTML" => "",
+                                "innerContent" => [
+                                    ""
+                                ]
+                            ],
+                            [
+                                "blockName" => "core/post-excerpt",
+                                "attrs" => [
+                                    "moreText" => "",
+                                    "textColor" => "primary"
+                                ],
+                                "innerBlocks" => [],
+                                "innerHTML" => "",
+                                "innerContent" => []
+                            ]
+                        ],
+                        "rawData" => "<!-- wp:post-featured-image  /--><!-- wp:post-title /--><!-- wp:post-excerpt  /-->"
+                    ]
+                ],
+                "postTypes" => [
+                    "type" => "array",
+                    "default" => []
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "scripts" => [
+                    "type" => "object",
+                    "default" => [
+                        "js" => "",
+                        "css" => ""
+                    ]
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ],
+                "queryArgs" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => [
+                            [
+                                "val" => [
+                                    "post"
+                                ],
+                                "multiple" => false,
+                                "id" => "postType",
+                                "label" => "Post Types",
+                                "description" => "Select Post Types to Query"
+                            ],
+                            [
+                                "val" => [
+                                    "publish"
+                                ],
+                                "multiple" => false,
+                                "id" => "postStatus",
+                                "label" => "Post status",
+                                "description" => "Query post by post status"
+                            ],
+                            [
+                                "val" => "DESC",
+                                "multiple" => false,
+                                "id" => "order",
+                                "label" => "Order",
+                                "description" => "Post query order"
+                            ],
+                            [
+                                "val" => [
+                                    "date"
+                                ],
+                                "multiple" => false,
+                                "id" => "orderby",
+                                "label" => "Orderby",
+                                "description" => "Post query orderby"
+                            ],
+                            [
+                                "val" => -1,
+                                "multiple" => false,
+                                "id" => "postsPerPage",
+                                "label" => "Posts Per Page",
+                                "description" => "Number of post to show per page"
+                            ],
+                            [
+                                "val" => 1,
+                                "multiple" => false,
+                                "id" => "paged",
+                                "label" => "Paged",
+                                "description" => "Pagination start with"
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+
+
         ));
     }
 

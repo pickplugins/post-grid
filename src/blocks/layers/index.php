@@ -127,10 +127,10 @@ class PGBlockLayers
 
             //echo serialize($blockCssY);
 ?>
-            <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
-                <?php echo  $content;
+            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+                <?php echo  wp_kses_post($content);
                 ?>
-            </<?php echo $wrapperTag; ?>>
+            </<?php echo esc_attr($wrapperTag); ?>>
         <?php
 
         endif;

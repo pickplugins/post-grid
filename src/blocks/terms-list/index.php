@@ -173,6 +173,133 @@ class PGBlockTermsList
     {
     }
 
+
+
+    function get_term_postsx($termId = 0, $taxonomy = '')
+    {
+
+        $args = array(
+            'post_type' => ['docs'],
+            'tax_query' => array(
+                array(
+                    'taxonomy' => $taxonomy,
+                    'field' => 'term_id',
+                    'terms' => $termId
+                )
+            )
+        );
+
+
+        $query = new WP_Query($args);
+
+        $posts = [];
+
+
+
+        if ($query->have_posts()) :
+
+
+            while ($query->have_posts()) : $query->the_post();
+
+                $post_id = get_the_ID();
+                $posts[$post_id] = ['id' => $post_id, 'title' => get_the_title(), 'url' => get_the_permalink()];
+
+            endwhile;
+
+
+?>
+            </div>
+            <?php
+
+        //wp_reset_query();
+        //wp_reset_postdata();
+
+
+        endif;
+
+
+        return $posts;
+    }
+
+    function sort_terms_hierarchicaly(array $cats, $parentId = 0)
+    {
+        $into = [];
+
+        if ($cats)
+            foreach ($cats as $i => $cat) {
+                if ($cat->parent == $parentId) {
+                    //$cat->posts = $this->get_term_postsx($cat->term_id, $cat->taxonomy);
+                    //$cat->posts = $this->sort_terms_hierarchicaly($cats, $cat->term_id);
+
+                    $cat->children = $this->sort_terms_hierarchicaly($cats, $cat->term_id);
+                    $into[$cat->term_id] = $cat;
+                }
+            }
+        return $into;
+    }
+
+
+
+
+
+
+    function html_terms_hierarchicaly($sorted_terms)
+    {
+        $into = [];
+
+
+        ob_start();
+
+
+        foreach ($sorted_terms as $i => $cat) {
+
+            if (!empty($cat->children)) {
+            ?>
+                <li class="has-child">
+
+                    <div class="group-lable" wrapId="<?php echo $cat->slug; ?>">
+
+                        <?php echo $cat->name; ?>
+                        <span class="group-icon group-icon-active">
+                            <i class="fas fa-angle-up"></i>
+                        </span>
+
+                        <span class="group-icon group-icon-inactive">
+                            <i class="fas fa-angle-down"></i>
+                        </span>
+                    </div>
+
+                    <ul class="child-wrap <?php echo $cat->slug; ?>" id="child-wrap-<?php echo $cat->slug; ?>">
+                        <?php echo $this->html_terms_hierarchicaly($cat->children); ?>
+                    </ul>
+
+
+                </li>
+
+            <?php
+
+            } else {
+
+            ?>
+                <li>
+                    <div class="group-lable" wrapId="<?php echo isset($cat->slug) ? $cat->slug : ''; ?>"><?php echo isset($cat->name) ? $cat->name : ''; ?></div>
+
+
+                </li>
+        <?php
+
+            }
+        }
+
+
+
+
+        return ob_get_clean();
+    }
+
+
+
+
     // front-end output from the gutenberg editor 
     function theHTML($attributes, $content, $block)
     {
@@ -263,77 +390,18 @@ class PGBlockTermsList
 
         ob_start();
 
-        function sort_terms_hierarchicaly(array $cats, $parentId = 0)
-        {
-            $into = [];
-            foreach ($cats as $i => $cat) {
-                if ($cat->parent == $parentId) {
-                    $cat->children = sort_terms_hierarchicaly($cats, $cat->term_id);
-                    $into[$cat->term_id] = $cat;
-                }
-            }
-            return $into;
-        }
+
 
         $terms = get_terms('docs-category', array('hide_empty' => false));
 
-        $sorted_terms = sort_terms_hierarchicaly($terms);
+        //var_dump($terms);
 
-
-
-        function html_terms_hierarchicaly($sorted_terms)
-        {
-            $into = [];
-
-
-            ob_start();
-
-
-
-            foreach ($sorted_terms as $i => $cat) {
-
-                if (!empty($cat->children)) {
-?>
-                    <li class="has-child">
-
-                        <div class="group-lable" wrapId="<?php echo $cat->slug; ?>">
-
-                            <?php echo $cat->name; ?>
-                            <span class="group-icon group-icon-active">
-                                <i class="fas fa-angle-up"></i>
-                            </span>
-
-                            <span class="group-icon group-icon-inactive">
-                                <i class="fas fa-angle-down"></i>
-                            </span>
-                        </div>
-
-                        <ul class="child-wrap <?php echo $cat->slug; ?>" id="child-wrap-<?php echo $cat->slug; ?>">
-                            <?php echo html_terms_hierarchicaly($cat->children); ?>
-                        </ul>
-                    </li>
-
-                <?php
-
-                } else {
-
-                ?>
-                    <li>
-                        <div class="group-lable" wrapId="<?php echo $cat->slug; ?>"><?php echo $cat->name; ?></div>
-
-
-                    </li>
-        <?php
-
-                }
-            }
+        $sorted_terms = !empty($terms) ? $this->sort_terms_hierarchicaly($terms) : [];
 
 
 
 
-            return ob_get_clean();
-        }
-
+        //echo '<pre>' . var_export($sorted_terms, true) . '</pre>';
 
 
 
@@ -346,7 +414,7 @@ class PGBlockTermsList
 
             <ul class="main-wrap">
                 <?php
-                echo html_terms_hierarchicaly($sorted_terms);
+                echo $this->html_terms_hierarchicaly($sorted_terms);
                 ?>
             </ul>
 

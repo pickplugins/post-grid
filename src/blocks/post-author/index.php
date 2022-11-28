@@ -276,11 +276,11 @@ class PGBlockPostAuthor
             <?php if (!empty($nameLink)) : ?>
 
                 <?php if ($namePrefix) : ?>
-                    <span class="prefix"><?php echo $namePrefix; ?></span>
+                    <span class="prefix"><?php echo wp_kses_post($namePrefix); ?></span>
                 <?php endif; ?>
                 <a href="<?php echo esc_url_raw($nameLink); ?>"><?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?></a>
                 <?php if ($namePostfix) : ?>
-                    <span class="prefix"><?php echo $namePostfix; ?></span>
+                    <span class="prefix"><?php echo wp_kses_post($namePostfix); ?></span>
                 <?php endif; ?>
 
 
@@ -288,11 +288,11 @@ class PGBlockPostAuthor
 
 
                 <?php if ($namePrefix) : ?>
-                    <span class="prefix"><?php echo $namePrefix; ?></span>
+                    <span class="prefix"><?php echo wp_kses_post($namePrefix); ?></span>
                 <?php endif; ?>
                 <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
                 <?php if ($namePostfix) : ?>
-                    <span class="prefix"><?php echo $namePostfix; ?></span>
+                    <span class="prefix"><?php echo wp_kses_post($namePostfix); ?></span>
                 <?php endif; ?>
             <?php endif; ?>
 

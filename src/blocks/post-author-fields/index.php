@@ -291,7 +291,7 @@ class PGBlockPostAuthorields
         <div class="<?php echo $blockId; ?>">
 
             <?php if ($iconPosition == 'beforeFronttext') : ?>
-                <?php echo $fontIconHtml; ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
 
 
@@ -300,11 +300,11 @@ class PGBlockPostAuthorields
             <?php endif; ?>
 
             <?php if ($iconPosition == 'afterFronttext') : ?>
-                <?php echo $fontIconHtml; ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
 
             <?php if ($iconPosition == 'beforeField') : ?>
-                <?php echo $fontIconHtml; ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
 
             <?php if (!empty($fieldLink)) : ?>
@@ -330,7 +330,7 @@ class PGBlockPostAuthorields
                 </a>
             <?php endif; ?>
             <?php if ($iconPosition == 'afterField') : ?>
-                <?php echo $fontIconHtml; ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
         </div>
 

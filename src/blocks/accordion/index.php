@@ -291,7 +291,7 @@ class PGBlockAccordion
         if (!empty($wrapperTag)) :
 ?>
 
-            <div class="PGBlockAccordion <?php echo $blockId; ?>">
+            <div class="PGBlockAccordion <?php echo esc_attr($blockId); ?>">
 
 
 
@@ -300,25 +300,25 @@ class PGBlockAccordion
 
                 ?>
                     <div class="ac">
-                        <<?php echo $headerTag; ?> class="ac-header ac-trigger <?php echo $headerOptions['class']; ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
+                        <<?php echo esc_attr($headerTag); ?> class="ac-header ac-trigger <?php echo esc_attr($headerOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
                             <?php if ($iconPosition == 'beforeHeader') : ?>
-                                <span class="icon-idle"><?php echo $iconHtml; ?></span>
-                                <span class="icon-toggled"><?php echo $iconToggleHtml; ?></span>
+                                <span class="icon-idle"><?php echo wp_kses_post($iconHtml); ?></span>
+                                <span class="icon-toggled"><?php echo wp_kses_post($iconToggleHtml); ?></span>
 
                             <?php endif; ?>
                             <span><?php echo $item['headerText']; ?></span>
                             <?php if ($iconPosition == 'afterHeader') : ?>
                                 <span class="float-right">
-                                    <span class="icon-idle"><?php echo $iconHtml; ?></span>
-                                    <span class="icon-toggled"><?php echo $iconToggleHtml; ?></span>
+                                    <span class="icon-idle"><?php echo wp_kses_post($iconHtml); ?></span>
+                                    <span class="icon-toggled"><?php echo wp_kses_post($iconToggleHtml); ?></span>
                                 </span>
                             <?php endif; ?>
-                        </<?php echo $headerTag; ?>>
+                        </<?php echo esc_attr($headerTag); ?>>
 
-                        <div class="ac-panel <?php echo $contentOptions['class']; ?>" id="<?php echo $blockId . $index; ?>">
+                        <div class="ac-panel <?php echo esc_attr($contentOptions['class']); ?>" id="<?php echo esc_attr($blockId . $index); ?>">
 
                             <?php  ?>
-                            <div class="ac-text"><?php echo $item['content']; ?></div>
+                            <div class="ac-text"><?php echo wp_kses_post($item['content']); ?></div>
                             <?php  ?>
                         </div>
                     </div>

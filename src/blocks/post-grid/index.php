@@ -849,10 +849,6 @@ class PGBlockPostGrid
 
                 $posts[$post_id]            = $html;
 
-
-            ////error_log(serialize($thumb_url));
-
-
             endwhile;
 
 
@@ -888,42 +884,33 @@ class PGBlockPostGrid
         ];
 
 
-
-
-
-
-
-
-
 ?>
 
 
         <?php if ($lazyLoadEnable == 'yes') : ?>
-            <div class=" PGBlockPostGrid-lazyload" id="lazyload-<?php echo $blockId; ?>">
+            <div class=" PGBlockPostGrid-lazyload" id="lazyload-<?php echo esc_attr($blockId); ?>">
                 <?php
-
                 if (!empty($lazyLoadsrcUrl)) :
                 ?>
                     <img src="<?php echo esc_url_raw($lazyLoadsrcUrl); ?>" alt="Post Grid Lazy loading">
                 <?php
                 else :
-
                 ?>
-                    <i class="<?php echo $lazyLoadIconSrc; ?> fa-spin" />
+                    <i class="<?php echo esc_attr($lazyLoadIconSrc); ?> fa-spin"></i>
                 <?php
                 endif;
                 ?>
             </div>
         <?php endif; ?>
-        <div<?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?> class="<?php echo $blockId; ?> PGBlockPostGrid PGBlockPostGrid-<?php echo $blockId; ?>" postgridargs="<?php echo esc_attr(json_encode($postGridArgs)); ?>">
-            <div class="loop-loading" />
-            <div class="items-loop" id="items-loop-<?php echo $blockId; ?>">
+        <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>" postgridargs="<?php echo esc_attr(json_encode($postGridArgs)); ?>">
+            <div class="loop-loading"></div>
+            <div class="items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>">
                 <?php
                 if (!empty($responses['posts'])) {
                     foreach ($responses['posts'] as $post) {
                 ?>
                         <div class="item">
-                            <?php echo $post; ?>
+                            <?php echo wp_kses_post($post); ?>
                         </div>
                 <?php
                     }
@@ -932,7 +919,7 @@ class PGBlockPostGrid
             </div>
 
             <?php if ($paginationType != 'none') : ?>
-                <div id="pagination-<?php echo $blockId; ?>" class="pagination PGBlockPostGrid-pagination <?php echo esc_attr($paginationType); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
+                <div id="pagination-<?php echo esc_attr($blockId); ?>" class="pagination PGBlockPostGrid-pagination <?php echo esc_attr($paginationType); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
                     <?php if ($paginationType == 'normal') : ?>
                         <?php
                         $big = 999999999; // need an unlikely integer
@@ -953,7 +940,7 @@ class PGBlockPostGrid
 
                         if (!empty($pages)) :
                             foreach ($pages as $page) {
-                                echo $page;
+                                echo wp_kses_post($page);
                             }
                         endif;
                         ?>
@@ -983,7 +970,7 @@ class PGBlockPostGrid
                         if (!empty($pages)) :
                             foreach ($pages as $page) {
                                 //$links = str_replace('<a ', '<a blockArgs="' . esc_attr(json_encode($blockArgs)) . '" ', $page);
-                                echo $page;
+                                echo wp_kses_post($page);
                             }
                         endif;
                         ?>
@@ -992,42 +979,42 @@ class PGBlockPostGrid
 
                     <?php if ($paginationType == 'next_previous') : ?>
                         <a class="page-numbers" href="<?php echo esc_url_raw(get_previous_posts_page_link()); ?>">
-                            <?php echo $prevText; ?>
+                            <?php echo wp_kses_post($prevText); ?>
                         </a>
                         <a class="page-numbers" href="<?php echo esc_url_raw(get_next_posts_page_link()); ?>">
-                            <?php echo $nextText; ?>
+                            <?php echo wp_kses_post($nextText); ?>
                         </a>
                     <?php endif; ?>
 
                     <?php if ($paginationType == 'loadmore') : ?>
                         <div class="page-numbers">
-                            <?php echo $loadMoreText; ?>
+                            <?php echo wp_kses_post($loadMoreText); ?>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($paginationType == 'infinite') : ?>
-                        <div class="infinite-loader box">Loading...</div>
+                        <div class="infinite-loader box"><?php echo __('Loading...', 'post-grid'); ?></div>
 
 
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
-            </div>
-            <?php
+        </div>
+        <?php
 
 
 
-            ?>
-
-
-
-
+        ?>
 
 
 
 
 
-    <?php return ob_get_clean();
+
+
+
+
+<?php return ob_get_clean();
     }
 }
 

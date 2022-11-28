@@ -214,7 +214,7 @@ class PGBlockList
         if (!empty($wrapperTag)) :
 ?>
 
-            <<?php echo $wrapperTag; ?> class="PGBlockAccordion <?php echo $blockId; ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="PGBlockAccordion <?php echo esc_attr($blockId); ?>">
 
 
 
@@ -222,30 +222,30 @@ class PGBlockList
                 foreach ($items as $index => $item) {
 
                 ?>
-                    <<?php echo $itemTag; ?> class="ac-item ac-trigger <?php echo $itemOptions['class']; ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
+                    <<?php echo esc_attr($itemTag); ?> class="ac-item ac-trigger <?php echo esc_attr($itemOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
 
 
                         <?php if ($iconPosition == 'left') : ?>
-                            <?php echo $iconHtml; ?>
+                            <?php echo wp_kses_post($iconHtml); ?>
                         <?php endif; ?>
 
                         <span>
 
                             <?php if ($iconPosition == 'before') : ?>
-                                <?php echo $iconHtml; ?>
+                                <?php echo wp_kses_post($iconHtml); ?>
                             <?php endif; ?>
-                            <?php echo $item['text']; ?></span>
+                            <?php echo wp_kses_post($item['text']); ?></span>
                         <?php if ($iconPosition == 'after') : ?>
-                            <?php echo $iconHtml; ?>
+                            <?php echo wp_kses_post($iconHtml); ?>
                         <?php endif; ?>
 
 
                         <?php if ($iconPosition == 'right') : ?>
-                            <span class="float-right"><?php echo $iconHtml; ?></span>
+                            <span class="float-right"><?php echo wp_kses_post($iconHtml); ?></span>
                         <?php endif; ?>
 
 
-                    </<?php echo $itemTag; ?>>
+                    </<?php echo esc_attr($itemTag); ?>>
 
 
 
@@ -255,7 +255,7 @@ class PGBlockList
                 }
 
                 ?>
-            </<?php echo $wrapperTag; ?>>
+            </<?php echo esc_attr($wrapperTag); ?>>
         <?php
 
         endif;

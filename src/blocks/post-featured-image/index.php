@@ -275,7 +275,7 @@ class PGBlockFeaturedImage
 
 ?>
 
-            <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
                 <?php if (!empty($featuredImageLinkTo)) : ?>
                     <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
@@ -286,7 +286,7 @@ class PGBlockFeaturedImage
                     <img srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>" width="<?php echo esc_attr($image_src_w); ?>" height="<?php echo esc_attr($image_src_h); ?>" alt="<?php echo esc_attr($altText); ?>">
 
                 <?php endif; ?>
-            </<?php echo $wrapperTag; ?>>
+            </<?php echo esc_attr($wrapperTag); ?>>
         <?php
 
         endif;
@@ -294,18 +294,13 @@ class PGBlockFeaturedImage
         if (empty($wrapperTag) && $useAsBackground == 'no') :
 
         ?>
-
             <?php if (!empty($featuredImageLinkTo)) : ?>
-                <a class="<?php echo $blockId; ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
-
-
-                    <img src="<?php echo $attachment_url; ?>" alt="<?php echo esc_attr($altText); ?>">
-
+                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                    <img src="<?php echo esc_url_raw($attachment_url); ?>" alt="<?php echo esc_attr($altText); ?>">
                 </a>
             <?php else : ?>
-                <img src="<?php echo $attachment_url; ?>" alt="<?php echo esc_attr($altText); ?>">
+                <img src="<?php echo esc_url_raw($attachment_url); ?>" alt="<?php echo esc_attr($altText); ?>">
             <?php endif; ?>
-
         <?php
 
         endif;
@@ -317,15 +312,15 @@ class PGBlockFeaturedImage
 
             <?php if (!empty($featuredImageLinkTo)) : ?>
                 <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
-                    <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+                    <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
 
-                    </<?php echo $wrapperTag; ?>>
+                    </<?php echo esc_attr($wrapperTag); ?>>
                 </a>
             <?php else : ?>
 
-                <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+                <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
 
-                </<?php echo $wrapperTag; ?>>
+                </<?php echo esc_attr($wrapperTag); ?>>
             <?php endif; ?>
 
         <?php

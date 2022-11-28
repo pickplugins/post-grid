@@ -517,19 +517,19 @@ class PGBlockPostExcerpt
         if (!empty($wrapperTag)) :
 
 ?>
-            <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
                 <?php if ($postExcerptIsLink) : ?>
                     <a href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
 
                         <?php if ($postfixText) : ?>
-                            <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                            <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo esc_attr($prefixText); ?></span>
                         <?php endif; ?>
 
-                        <?php echo  $post_excerpt; ?>
+                        <?php echo  wp_kses_post($post_excerpt); ?>
 
                         <?php if ($postfixText) : ?>
-                            <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                            <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                         <?php endif; ?>
 
                     </a>
@@ -537,28 +537,28 @@ class PGBlockPostExcerpt
 
 
                     <?php if (!empty($postExcerptTag)) : ?>
-                        <<?php echo $postExcerptTag; ?> class="excerpt-text">
+                        <<?php echo esc_attr($postExcerptTag); ?> class="excerpt-text">
                             <?php if ($postfixText) : ?>
-                                <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                                <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
                             <?php endif; ?>
 
-                            <?php echo $post_excerpt; ?>
+                            <?php echo wp_kses_post($post_excerpt); ?>
 
                             <?php if ($postfixText) : ?>
-                                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                                <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                             <?php endif; ?>
 
-                        </<?php echo $postExcerptTag; ?>>
+                        </<?php echo esc_attr($postExcerptTag); ?>>
 
                     <?php else : ?>
                         <?php if ($postfixText) : ?>
-                            <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                            <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
                         <?php endif; ?>
 
-                        <?php echo $post_excerpt; ?>
+                        <?php echo wp_kses_post($post_excerpt); ?>
 
                         <?php if ($postfixText) : ?>
-                            <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                            <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                         <?php endif; ?>
 
 
@@ -568,8 +568,8 @@ class PGBlockPostExcerpt
 
                 <?php endif; ?>
 
-                <a class='readmore' <?php echo esc_attr($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo $readMoreText; ?></a>
-            </<?php echo $wrapperTag; ?>>
+                <a class='readmore' <?php echo esc_attr($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo wp_kses_post($readMoreText); ?></a>
+            </<?php echo esc_attr($wrapperTag); ?>>
         <?php
 
         endif;
@@ -579,49 +579,49 @@ class PGBlockPostExcerpt
         ?>
 
             <?php if ($postExcerptIsLink) : ?>
-                <a class="<?php echo $blockId; ?>" href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
                     <?php if ($postfixText) : ?>
-                        <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                        <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
                     <?php endif; ?>
 
-                    <?php echo $post_excerpt; ?>
+                    <?php echo wp_kses_post($post_excerpt); ?>
                     <?php if ($postfixText) : ?>
-                        <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                        <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                     <?php endif; ?>
                 </a>
             <?php else : ?>
-                <div class="<?php echo $blockId; ?>">
+                <div class="<?php echo esc_attr($blockId); ?>">
 
                     <?php if (!empty($postExcerptTag)) : ?>
-                        <<?php echo $postExcerptTag; ?> class="excerpt-text">
+                        <<?php echo esc_attr($postExcerptTag); ?> class="excerpt-text">
                             <?php if ($postfixText) : ?>
-                                <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                                <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
                             <?php endif; ?>
 
-                            <?php echo $post_excerpt; ?>
+                            <?php echo wp_kses_post($post_excerpt); ?>
 
                             <?php if ($postfixText) : ?>
-                                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                                <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                             <?php endif; ?>
 
-                        </<?php echo $postExcerptTag; ?>>
+                        </<?php echo esc_attr($postExcerptTag); ?>>
 
                     <?php else : ?>
                         <?php if ($postfixText) : ?>
-                            <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                            <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
                         <?php endif; ?>
 
-                        <?php echo $post_excerpt; ?>
+                        <?php echo wp_kses_post($post_excerpt); ?>
 
                         <?php if ($postfixText) : ?>
-                            <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                            <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                         <?php endif; ?>
 
 
                     <?php endif; ?>
 
-                    <a class='readmore' <?php echo esc_attr($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo $readMoreText; ?></a>
+                    <a class='readmore' <?php echo esc_attr($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo wp_kses_post($readMoreText); ?></a>
 
                 </div>
 

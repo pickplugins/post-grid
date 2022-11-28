@@ -209,7 +209,7 @@ class PGBlockIcon
         $textOptions = isset($text['options']) ? $text['options'] : [];
         $textStyles = isset($text['styles']) ? $text['styles'] : [];
 
-        $textText = isset($textOptions['text']) ? $textOptions['text'] : '';
+        $textText = isset($textOptions['text']) ? $textOptions['text'] : 'Custom Text';
 
         $textIsLink = isset($textOptions['isLink']) ? $textOptions['isLink'] : true;
         $textLinkTarget = isset($textOptions['linkTarget']) ? $textOptions['linkTarget'] : '_blank';
@@ -300,38 +300,38 @@ class PGBlockIcon
         if (!empty($wrapperTag)) :
 
 ?>
-            <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>" <?php echo esc_attr($wrapperAttrText); ?>>
+            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
 
 
                 <?php if ($iconPosition == 'beforePrefix') : ?>
-                    <?php echo $fontIconHtml; ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
                 <?php if ($prefixText) : ?>
-                    <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
                 <?php endif; ?>
 
                 <?php if ($iconPosition == 'afterPrefix') : ?>
-                    <?php echo $fontIconHtml; ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
                 <?php if ($textIsLink) : ?>
                     <a class='text' <?php echo esc_attr($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
                         <?php if ($iconPosition == 'beforeText') : ?>
-                            <?php echo $fontIconHtml; ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
-                        <?php echo $textText; ?>
+                        <?php echo wp_kses_post($textText); ?>
                         <?php if ($iconPosition == 'afterText') : ?>
-                            <?php echo $fontIconHtml; ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
                     </a>
 
                 <?php else : ?>
                     <?php if ($iconPosition == 'beforeText') : ?>
-                        <?php echo $fontIconHtml; ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
-                    <?php echo $textText; ?>
+                    <?php echo wp_kses_post($textText); ?>
                     <?php if ($iconPosition == 'afterText') : ?>
-                        <?php echo $fontIconHtml; ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
                 <?php endif; ?>
 
@@ -339,17 +339,17 @@ class PGBlockIcon
 
 
                 <?php if ($iconPosition == 'beforePostfix') : ?>
-                    <?php echo $fontIconHtml; ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
                 <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                 <?php endif; ?>
 
                 <?php if ($iconPosition == 'afterPostfix') : ?>
-                    <?php echo $fontIconHtml; ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-            </<?php echo $wrapperTag; ?>>
+            </<?php echo esc_attr($wrapperTag); ?>>
         <?php
 
         endif;
@@ -361,39 +361,39 @@ class PGBlockIcon
 
             <?php if (!$textIsLink) : ?>
                 <?php if ($prefixText) : ?>
-                    <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
                 <?php endif; ?>
 
 
                 <?php if ($iconPosition == 'beforeText') : ?>
-                    <?php echo $fontIconHtml; ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <?php echo $textText; ?>
+                <?php echo wp_kses_post($textText); ?>
                 <?php if ($iconPosition == 'afterText') : ?>
-                    <?php echo $fontIconHtml; ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
 
                 <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                 <?php endif; ?>
             <?php else : ?>
                 <?php if ($prefixText) : ?>
-                    <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
                 <?php endif; ?>
                 <a class='text' <?php echo esc_attr($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
 
                     <?php if ($iconPosition == 'beforeText') : ?>
-                        <?php echo $fontIconHtml; ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
-                    <?php echo $textText; ?>
+                    <?php echo wp_kses_post($textText); ?>
                     <?php if ($iconPosition == 'afterText') : ?>
-                        <?php echo $fontIconHtml; ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
 
                 </a>
                 <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                 <?php endif; ?>
             <?php endif; ?>
 

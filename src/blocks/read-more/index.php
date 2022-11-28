@@ -283,45 +283,45 @@ class PGBlockReadmore
         if (!empty($wrapperTag)) :
 
 ?>
-            <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
 
 
                 <?php if ($iconPosition == 'beforePrefix') : ?>
-                    <?php echo $fontIconHtml; ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
                 <?php if ($prefixText) : ?>
-                    <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
                 <?php endif; ?>
 
                 <?php if ($iconPosition == 'afterPrefix') : ?>
-                    <?php echo $fontIconHtml; ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
                 <a class='readmore' <?php echo esc_attr($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>">
                     <?php if ($iconPosition == 'beforeRedmore') : ?>
-                        <?php echo $fontIconHtml; ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
                     <?php echo $readMoreText; ?>
                     <?php if ($iconPosition == 'afterRedmore') : ?>
-                        <?php echo $fontIconHtml; ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
                 </a>
 
 
 
                 <?php if ($iconPosition == 'beforePostfix') : ?>
-                    <?php echo $fontIconHtml; ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
                 <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                 <?php endif; ?>
 
                 <?php if ($iconPosition == 'afterPostfix') : ?>
-                    <?php echo $fontIconHtml; ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-            </<?php echo $wrapperTag; ?>>
+            </<?php echo esc_attr($wrapperTag); ?>>
         <?php
 
         endif;
@@ -330,13 +330,13 @@ class PGBlockReadmore
 
         ?>
             <?php if ($prefixText) : ?>
-                <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
             <?php endif; ?>
-            <a class='readmore' <?php echo esc_attr($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo $readMoreText; ?></a>
+            <a class='readmore' <?php echo esc_attr($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo wp_kses_post($readMoreText); ?></a>
 
 
             <?php if ($postfixText) : ?>
-                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
             <?php endif; ?>
         <?php
 

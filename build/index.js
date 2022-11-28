@@ -7043,7 +7043,8 @@ var myStore = wp.data.select('postgrid-shop');
     }), image.options.srcUrl.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
       src: _placeholder_jpg__WEBPACK_IMPORTED_MODULE_20__,
       alt: ""
-    }), image.options.imgSrcType == 'media' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    }), image.options.imgSrcType == 'media' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: "mt-5",
       for: ""
     }, "Choose Image"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.MediaUpload, {
       class: "bg-blue-500",
@@ -7068,7 +7069,7 @@ var myStore = wp.data.select('postgrid-shop');
           open
         } = _ref2;
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
-          className: "my-3 border border-solid border-gray-300 text-center w-full",
+          className: "my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full",
           onClick: open
         }, "Open Media Library");
       }

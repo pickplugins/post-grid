@@ -1616,7 +1616,7 @@ registerBlockType("post-grid/image", {
 
                 <>
 
-                  <label for="">Choose Image</label>
+                  <div className='mt-5' for="">Choose Image</div>
 
                   <MediaUploadCheck>
                     <MediaUpload
@@ -1643,7 +1643,7 @@ registerBlockType("post-grid/image", {
                       value={image.options.srcId}
                       render={({ open }) => (
 
-                        <Button className='my-3 border border-solid border-gray-300 text-center w-full' onClick={open}>Open Media Library</Button>
+                        <Button className='my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full' onClick={open}>Open Media Library</Button>
 
 
                       )}

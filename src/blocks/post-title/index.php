@@ -234,22 +234,22 @@ class PGBlockPostTitle
         if (!empty($wrapperTag)) :
 
         ?>
-            <<?php echo $wrapperTag; ?> class="<?php echo $blockId; ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
                 <?php if ($postTitleIsLink) : ?>
                     <a href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
-                        <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                        <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
 
-                        <?php echo  $post_title; ?>
+                        <?php echo  wp_kses_post($post_title); ?>
 
-                        <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                        <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                     </a>
                 <?php else : ?>
-                    <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
-                    <?php echo $post_title; ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                    <?php echo wp_kses_post($post_title); ?>
+                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
 
                 <?php endif; ?>
-            </<?php echo $wrapperTag; ?>>
+            </<?php echo esc_attr($wrapperTag); ?>>
         <?php
 
         endif;
@@ -259,18 +259,18 @@ class PGBlockPostTitle
         ?>
 
             <?php if ($postTitleIsLink) : ?>
-                <a class="<?php echo $blockId; ?>" href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
-                    <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
+                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
 
-                    <?php echo $post_title; ?>
+                    <?php echo wp_kses_post($post_title); ?>
 
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
                 </a>
             <?php else : ?>
-                <span class="<?php echo $prefixClass; ?>"><?php echo $prefixText; ?></span>
-                <?php echo $post_title; ?>
-                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                <?php echo wp_kses_post($post_title); ?>
+                <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
             <?php endif; ?>
 
         <?php

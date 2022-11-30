@@ -24,7 +24,6 @@ import colorsPresets from '../../colors-presets'
 import { InnerBlocks, useBlockProps } from "@wordpress/block-editor"
 
 
-
 var myStore = wp.data.select('postgrid-shop');
 
 function SaveComponent() {

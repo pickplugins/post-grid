@@ -2586,6 +2586,12 @@ registerBlockType("post-grid/image", {
 
                   {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
+                  {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
+                    <>
+                      {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                    </>
+                  )}
+
                 </a>
               )}
               {image.options.linkTo.length == 0 && (
@@ -2594,6 +2600,16 @@ registerBlockType("post-grid/image", {
                   {(image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && (
                     <>
                       {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+
+
+                      {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
+                        <>
+                          {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                        </>
+                      )}
+
+
+
                     </>
                   )}
 
@@ -2620,6 +2636,15 @@ registerBlockType("post-grid/image", {
                     {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
 
+                    {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
+                      <>
+                        {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                      </>
+                    )}
+
+
+
+
                   </a>)
 
               }
@@ -2636,6 +2661,12 @@ registerBlockType("post-grid/image", {
 
                   {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
+                  {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
+                    <>
+                      {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                    </>
+                  )}
+
                 </CustomTagPostTitle>
 
               )}
@@ -2644,6 +2675,11 @@ registerBlockType("post-grid/image", {
 
                   {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
+                  {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
+                    <>
+                      {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                    </>
+                  )}
                 </div>
 
               )}

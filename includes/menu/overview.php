@@ -6,6 +6,11 @@ wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', 
 $admin_email = get_option('admin_email');
 
 
+$post_grid_license = get_option('post_grid_license');
+$license_status = isset($post_grid_license['license_status']) ? $post_grid_license['license_status'] : '';
+
+
+
 ?>
 <div class="wrap">
     <div class="p-5 bg-white ">
@@ -99,8 +104,13 @@ $admin_email = get_option('admin_email');
 
                     </ul>
 
+                    <?php if ($license_status != 'active') : ?>
+                        <a href="https://pickplugins.com/post-grid/#purchase-license" target="_blank" class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-amber-500 hover:bg-amber-600	cursor-pointer	 text-white text-lg hover:text-white "><span class="text-2xl mr-3 dashicons dashicons-cart"></span> Purchase License</a>
+                    <?php else : ?>
+                        <a href="https://pickplugins.com/post-grid/#purchase-license" target="_blank" class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-green-500 hover:bg-green-600	cursor-pointer	 text-white text-lg hover:text-white "><span class="text-2xl mr-3 dashicons dashicons-cart"></span> Thanks for using pro version</a>
+                    <?php endif; ?>
 
-                    <a href="https://pickplugins.com/post-grid/#purchase-license" target="_blank" class="inline-block mt-10 px-4 py-2 rounded-sm w-full text-center bg-amber-500 hover:bg-amber-600	cursor-pointer	 text-white text-lg hover:text-white "><span class="text-2xl mr-3 dashicons dashicons-cart"></span> Purchase License</a>
+
                 </div>
 
             </div>

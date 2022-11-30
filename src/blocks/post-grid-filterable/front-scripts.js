@@ -24,8 +24,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             var activeFilter = postgridargsObj.activeFilter
             var activeFilterSlug = activeFilter.slug
+            var perPage = postgridargsObj.perPage
 
-            activeFilterSlug = (activeFilterSlug.length == 0) ? 'all' : '.' + activeFilterSlug;
+
+            activeFilterSlug = (activeFilterSlug.length == 0) ? 'all' : activeFilterSlug;
+            activeFilterSlug = (activeFilterSlug == 'all') ? 'all' : '.' + activeFilterSlug;
+
 
             var lazyLoad = postgridargsObj.lazyLoad
             var lazyLoadEnable = lazyLoad.enable
@@ -40,11 +44,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-
-            console.log(activeFilterSlug);
-
-
-
             var containerEl = document.querySelector('.items-loop');
             var mixer = mixitup(containerEl, {
                 selectors: {
@@ -55,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 },
 
                 pagination: {
-                    limit: 6,
+                    limit: perPage,
 
                 },
                 templates: {

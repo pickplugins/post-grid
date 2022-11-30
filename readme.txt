@@ -4,24 +4,49 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 6.1
-	Stable tag: 2.2.0
+	Stable tag: 2.2.2
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-	Post Grid is extremely easy to create any post type grid and display anywhere post content, page content or widgets
-	via shortcodes or page builder elements and gutenberg blocks.
+	Post Grid Combo is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
+
 
 == Description ==
 
-Almost everything is ready to create post grid from any post types, with few click you can generate beautiful grid for your blog post, product showcase, team member showcase, portfolio, gallery, archive post display, category post display, tags post display and custom taxonomy and terms post can be displayed via post grid. if you have basic knowledge in CSS you can style your own via layout editor to create unique style of your grid.
+Post Grid Combo is the #1 Gutenberg Blocks plugin for creating a fully customizable "grid layout", "post layout" and "Custom Post Grid". Not only are we offering a "post grid" block, but you'll also get many small blocks like - Post Grid Filterable, Post Title, Post Excerpt, Post Author, Post Taxonomies, Accordions, Tabs, and a lot more with extensive flexibility.
 
 
 ### Post Grid by  [http://pickplugins.com](http://pickplugins.com)
 
-* [See the Live demo](https://www.pickplugins.com/demo/post-grid/?ref=wordpress.org)
+* [See the Live demo](https://getpostgrid.com/)
 * [Buy Premium](https://www.pickplugins.com/post-grid/)
-* [Documentation](http://pickplugins.com/documentation/post-grid/?ref=wordpress.org)
-* [Support](https://www.pickplugins.com/support/?ref=wordpress.org)
+* [Documentation](http://pickplugins.com/documentation/post-grid-combo/?ref=wordpress.org)
+* [Support](https://www.pickplugins.com/support/)
+
+
+#Grid Layouts
+We have a bunch of premade Grid layouts available that will help you to create a grid with just one simple click. Also, you'll get full flexibility to customize that grid. Our N'th item CSS option will allow you to create a much more advanced grid layout. 
+[Grid Layout Demo =>](https://getpostgrid.com/grid-layouts/)
+
+#Post Layouts
+We also have many premade post layouts that you can use. You can apply styles and add or remove any blocks(including our premade small blocks) to your layout to make it more impressive. 
+[Post Layout Demo =>](https://getpostgrid.com/post-layouts/)
+
+#Advance Query
+We're providing the maximum level of query features that you could ever imagine. You can query posts by various post types, custom taxonomies, meta queries, date queries, author queries, and a lot more. 
+ 
+#Pagination
+Along with the Normal Pagination, we have included some other pagination styles like Ajax Pagination, Next-Previous Pagination, Load More, and Infinite Load. 
+
+
+
+
+
+
+
+
+
+
 
 **Responsive Grid**
 Post Grid is responsive and almost work in any device. good things is you can set some option based on mobile or tablet
@@ -184,7 +209,7 @@ Event categories | Event tags | Event start date | Event end date | Event start 
 
 <strong>Video Tutorial(with premium version interface)</strong>
 
-* [All tutorials](https://www.youtube.com/watch?v=RKb-B_Q72Ak&list=PL2GPPfgLrfWxAZBQc10XCh5wzDSOfPrKB)
+* [All tutorials](https://www.youtube.com/playlist?list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6)
 
 
 
@@ -221,6 +246,20 @@ then paste this shortcode anywhere in your page to display grid<br />
 8. screenshot-8
 
 == Changelog ==
+
+
+
+	= 2.2.2 =
+    * 2022-11-30 - fix - Fatured image block - Fatured image default size issue fixed.
+    * 2022-11-30 - fix - Image block - Fatured image default size issue fixed.
+    * 2022-11-30 - fix - Post Grid Filterable - Post per page number issue fixed.
+    * 2022-11-30 - fix - Post Grid Filterable - All navs issue fixed.
+
+
+
+
+	= 2.2.1 =
+    * 2022-11-30 - fix - PHP fatal error fixed for block categories.
 
 
 	= 2.2.0 =

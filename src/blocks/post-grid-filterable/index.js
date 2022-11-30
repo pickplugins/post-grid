@@ -214,7 +214,7 @@ registerBlockType("post-grid/post-grid-filterable", {
       default: {
 
         options: {
-          filters: [{ "groupTitle": "", "type": "inline", "logic": "OR", "showPostCount": "yes", "items": [], "styles": {} }, { groupTitle: '', type: '', logic: '', showPostCount: '', items: [], styles: {} }], allText: 'All', showSort: '', showRandom: '', showAll: '', showClear: '', activeFilter: '',
+          filters: [], allText: 'All', showSort: '', showRandom: '', showAll: 'yes', showClear: '', activeFilter: '', parPage: 6,
         },
         styles:
         {
@@ -5393,6 +5393,27 @@ registerBlockType("post-grid/post-grid-filterable", {
                     }
                   />
                 </PanelRow>
+
+
+                <PanelRow>
+                  <label>Items Per Page</label>
+                  <InputControl
+                    type="number"
+                    value={(filterable.options.perPage != undefined) ? filterable.options.perPage : 6}
+
+                    onChange={(newVal) => {
+
+
+                      var options = { ...filterable.options, perPage: newVal }
+                      setAttributes({ filterable: { ...filterable, options: options } })
+
+
+
+
+                    }}
+                  />
+                </PanelRow>
+
 
 
 

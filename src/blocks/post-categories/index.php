@@ -226,6 +226,17 @@ class PGBlockPostCategories
         $frontTextClass = isset($frontTextOptions['class']) ? $frontTextOptions['class'] : '';
 
 
+        $icon = isset($attributes['icon']) ? $attributes['icon'] : [];
+        $iconOptions = isset($icon['options']) ? $icon['options'] : [];
+        $iconStyles = isset($icon['styles']) ? $icon['styles'] : [];
+
+        $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
+        $iconSrcType = isset($iconOptions['srcType']) ? $iconOptions['srcType'] : '';
+        $iconSrc = isset($iconOptions['iconSrc']) ? $iconOptions['iconSrc'] : '';
+        $iconPosition = isset($iconOptions['position']) ? $iconOptions['position'] : '';
+        $iconClass = isset($iconOptions['class']) ? $iconOptions['class'] : '';
+
+
         $separator = isset($attributes['separator']) ? $attributes['separator'] : [];
         $separatorOptions = isset($separator['options']) ? $separator['options'] : [];
         $separatorStyles = isset($separator['styles']) ? $separator['styles'] : [];
@@ -247,6 +258,7 @@ class PGBlockPostCategories
 
         //var_dump($customCss);
 
+        $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 
 
 
@@ -276,25 +288,54 @@ class PGBlockPostCategories
         ob_start();
 
 
+        if ($iconLibrary == 'fontAwesome') {
+            wp_enqueue_style('fontawesome-icons');
+        } else if ($iconLibrary == 'iconFont') {
+            wp_enqueue_style('icofont-icons');
+        } else if ($iconLibrary == 'bootstrap') {
+            wp_enqueue_style('bootstrap-icons');
+        }
+
+
 ?>
 
 
         <div class="<?php echo $blockId; ?>">
+
+            <?php if ($iconPosition == 'beforeFronttext') : ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+
             <span class='frontText '><?php echo $frontTexttext; ?></span>
+
+            <?php if ($iconPosition == 'afterFronttext') : ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+
+
+            <?php if ($iconPosition == 'beforeItems') : ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+
             <?php
 
             $i = 1;
-            foreach ($terms as $term) {
+            if (!empty($terms))
+                foreach ($terms as $term) {
 
-                $term_id = $term->term_id;
-                $term_post_count = $term->count;
+                    $term_id = $term->term_id;
+                    $term_post_count = $term->count;
 
-                $link = get_term_link($term_id);
+                    $link = get_term_link($term_id);
 
-                if ($i > $maxCount) break;
+                    if ($i > $maxCount) break;
 
             ?>
                 <a href="<?php echo esc_url_raw($link); ?>" <?php echo esc_attr($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
+
+                    <?php if ($iconPosition == 'beforeItem') : ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
 
                     <?php if (!empty($itemsPrefix)) : ?>
                         <span class='prefix'><?php echo wp_kses_post($itemsPrefix); ?></span>
@@ -314,12 +355,21 @@ class PGBlockPostCategories
                     <?php if ($maxCount > $i) : ?>
                         <span class='separator'><?php echo esc_html($separatorText); ?></span>
                     <?php endif; ?>
+
+                    <?php if ($iconPosition == 'afterItem') : ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
                 </a>
             <?php
-                $i++;
-            }
+                    $i++;
+                }
 
             ?>
+
+            <?php if ($iconPosition == 'afterItems') : ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+
 
         </div>
 

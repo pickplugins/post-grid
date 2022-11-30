@@ -8,6 +8,7 @@ class PGBlockPostGrid
     function __construct()
     {
         add_action('init', array($this, 'register_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
     }
 
 
@@ -15,10 +16,10 @@ class PGBlockPostGrid
     function register_scripts()
     {
         wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'src/blocks/post-grid/index.css');
-        wp_register_style('pgpostgrid_front_style', post_grid_plugin_url . 'src/blocks/post-grid/index.css');
+
 
         wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'src/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
-        wp_register_script('pgpostgrid_front_script', post_grid_plugin_url . 'src/blocks/post-grid/front-scripts.js', []);
+
 
         //wp_register_script('anime.min', post_grid_plugin_url . 'assets/global/js/anime.min.js', []);
 
@@ -28,7 +29,7 @@ class PGBlockPostGrid
             'editor_script' => 'pgpostgrid_editor_script',
             //'style' => 'pgpostgrid_front_style',
             //'editor_style' => 'pgpostgrid_editor_style',
-            'script' => 'pgpostgrid_front_script',
+            //'script' => 'pgpostgrid_front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'render_callback' => array($this, 'theHTML'),
 
@@ -458,8 +459,15 @@ class PGBlockPostGrid
         ));
     }
 
-    function front_script($attributes)
+    function front_scripts($attributes)
     {
+        wp_register_script('pgpostgrid_front_script', post_grid_plugin_url . 'src/blocks/post-grid/front-scripts.js', []);
+        wp_register_style('pgpostgrid_front_style', post_grid_plugin_url . 'src/blocks/post-grid/index.css');
+        if (has_block('post-grid/post-grid')) {
+
+            wp_enqueue_script('pgpostgrid_front_script');
+            wp_enqueue_style('pgpostgrid_front_style');
+        }
     }
     function front_style($attributes)
     {
@@ -902,7 +910,7 @@ class PGBlockPostGrid
                 ?>
             </div>
         <?php endif; ?>
-        <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>" postgridargs="<?php echo esc_attr(json_encode($postGridArgs)); ?>">
+        <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>" postgridargs=<?php echo (wp_json_encode($postGridArgs)); ?>>
             <div class="loop-loading"></div>
             <div class="items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>">
                 <?php

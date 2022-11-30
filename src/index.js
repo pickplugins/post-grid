@@ -39,8 +39,8 @@ apiFetch({
 import './store'
 
 
-
 import './blocks/post-grid'
+import './blocks/post-grid-filterable'
 
 import './blocks/post-title'
 import './blocks/post-excerpt'
@@ -54,19 +54,17 @@ import './blocks/post-categories'
 import './blocks/post-tags'
 import './blocks/post-taxonomies'
 import './blocks/post-date'
-import './blocks/post-meta'
+// import './blocks/post-meta'
 import './blocks/read-more'
 
-
-import './blocks/terms-list'
-
+// import './blocks/terms-list'
+import './blocks/icon'
 import './blocks/text'
 import './blocks/layers'
 import './blocks/layer'
 import './blocks/accordion'
 import './blocks/tabs'
 import './blocks/list'
-import './blocks/icon'
 
 //import './blocks/shortcode'
 
@@ -76,5 +74,4 @@ import './blocks/icon'
 // import './blocks/innerblocks'
 
 
-import './blocks/post-grid-filterable'
 

@@ -1,45 +1,25 @@
 
 document.addEventListener("DOMContentLoaded", function (event) {
-
-
-
     var PGBlockPostGrid = document.querySelectorAll('.PGBlockPostGrid');
-
-
-
     if (PGBlockPostGrid != null) {
         PGBlockPostGrid.forEach(item => {
+            var postgridargs = item.getAttribute("postgridargs");
+
+            console.log(postgridargs);
 
 
 
-
-            var postgridargs = item.getAttribute("postgridargs")
             var postgridargsObj = JSON.parse(postgridargs);
             var blockId = postgridargsObj.blockId
-
-
-
             var lazyLoad = postgridargsObj.lazyLoad
             var lazyLoadEnable = lazyLoad.enable
-
             if (lazyLoadEnable == 'yes') {
                 var lazyloadWrap = document.querySelector('#lazyload-' + blockId);
-
                 item.style.display = 'block';
                 lazyloadWrap.style.display = 'none';
-
             }
-
-
         })
     }
-
-
-
-
-
-
-
 
 
 

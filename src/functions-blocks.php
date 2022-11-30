@@ -299,17 +299,22 @@ add_filter('block_categories_all', 'post_grid_block_categories', 10, 2);
  * Register custom category for blocks
  */
 
-function post_grid_block_categories($categories, $post)
+function post_grid_block_categories($categories, $context)
 {
-    return array_merge(
-        array(
+
+    if (!empty($categories)) {
+        return array_merge(
             array(
-                'slug'  => 'post-grid',
-                'title' => __('Post Grid Combo', 'boilerplate'),
+                array(
+                    'slug'  => 'post-grid',
+                    'title' => __('Post Grid Combo', 'boilerplate'),
+                ),
             ),
-        ),
-        $categories,
-    );
+            $categories,
+        );
+    } else {
+        return $categories;
+    }
 }
 
 

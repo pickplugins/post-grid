@@ -1621,7 +1621,7 @@ registerBlockType("post-grid/post-categories", {
 
 
               <PanelRow>
-                <label for="">Icon postion</label>
+                <label for="">Icon position</label>
 
                 <SelectControl
                   label=""
@@ -1634,6 +1634,9 @@ registerBlockType("post-grid/post-categories", {
                     { label: 'After Front text', value: 'afterFronttext' },
                     { label: 'Before Items', value: 'beforeItems' },
                     { label: 'After Items', value: 'afterItems' },
+                    { label: 'Before Each Items', value: 'beforeItem' },
+                    { label: 'After Each Items', value: 'afterItem' },
+
 
                   ]}
                   onChange={(newVal) => {
@@ -2158,10 +2161,18 @@ registerBlockType("post-grid/post-categories", {
 
                 return (
                   <a onClick={ev => ev.preventDefault()} target={items.options.linkTarget} title={x.name} {...linkAttrItems} className={items.options.class} href={x.link}>
-                    <span className='termTitle'>{items.options.prefix}{x.name}{items.options.postfix}</span>
 
+
+                    {icon.options.position == 'beforeItem' && (
+                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                    )}
+                    <span className='termTitle'>{items.options.prefix}{x.name}{items.options.postfix}</span>
                     {items.options.postCount == true && (<span className='postCount'>({x.count})</span>)}
                     {categories.length > (index + 1) && (<span className='separator'>{separator.options.text} </span>)}
+                    {icon.options.position == 'afterItem' && (
+                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                    )}
+
                   </a>
 
                 )

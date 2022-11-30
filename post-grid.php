@@ -2,13 +2,15 @@
 /*
 Plugin Name: Post Grid Combo
 Plugin URI: https://www.pickplugins.com/post-grid
-Description: Post Grid Combo is most popular for creating custom post type grids and Gutenberg block bundles.
-Version: 2.2.0
+Description: Post Grid Combo is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
+Version: 2.2.2
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
+
+
 
 if (!defined('ABSPATH')) exit;  // if direct access 
 
@@ -26,7 +28,7 @@ if (!class_exists('PostGrid')) {
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid Combo');
-            define('post_grid_version', '2.2.0');
+            define('post_grid_version', '2.2.2');
             define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
 
 
@@ -54,14 +56,13 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/layers/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/accordion/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/tabs/index.php');
-            require_once(post_grid_plugin_dir . 'src/blocks/terms-list/index.php');
+            // require_once(post_grid_plugin_dir . 'src/blocks/terms-list/index.php');
 
             require_once(post_grid_plugin_dir . 'src/blocks/layer/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/image/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/list/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/icon/index.php');
-            require_once(post_grid_plugin_dir . 'src/blocks/post-meta/index.php');
-
+            // require_once(post_grid_plugin_dir . 'src/blocks/post-meta/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-grid-filterable/index.php');
 
 
@@ -354,7 +355,7 @@ if (!class_exists('PostGrid')) {
         {
 
             wp_enqueue_style(
-                'prefix-editor',
+                'post-grid-editor',
                 post_grid_plugin_url . '/dist/output.css',
                 [],
                 time(),
@@ -364,7 +365,7 @@ if (!class_exists('PostGrid')) {
 
 
             wp_enqueue_style(
-                'prefix-custom',
+                'post-grid-custom',
                 post_grid_plugin_url . '/dist/custom.css',
                 [],
                 time(),
@@ -381,7 +382,7 @@ if (!class_exists('PostGrid')) {
 
 
             wp_enqueue_script(
-                'prefix-block-para',
+                'post-grid-blocks',
                 post_grid_plugin_url . 'build/index.js',
                 [
                     'wp-blocks',

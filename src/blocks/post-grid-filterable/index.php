@@ -8,20 +8,36 @@ class PGBlockPostGridFilterable
     function __construct()
     {
         add_action('init', array($this, 'register_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
     }
+
+    function front_scripts($attributes)
+    {
+        wp_register_script('pgpostgridfilterable_front_script', post_grid_plugin_url . 'src/blocks/post-grid-filterable/front-scripts.js', []);
+        wp_register_script('pgpostgridfilterable_mixitup', post_grid_plugin_url . 'src/blocks/post-grid-filterable/mixitup.js', []);
+        wp_register_script('pgpostgridfilterable_mixitup_multifilter', post_grid_plugin_url . 'src/blocks/post-grid-filterable/mixitup-multifilter.js', []);
+        wp_register_script('pgpostgridfilterable_mixitup_pagination', post_grid_plugin_url . 'src/blocks/post-grid-filterable/mixitup-pagination.js', []);
+        wp_register_style('pgpostgrid_front_style', post_grid_plugin_url . 'src/blocks/post-grid-filterable/index.css');
+
+        if (has_block('post-grid/post-grid-filterable')) {
+
+            wp_enqueue_style('font-awesome-5');
+            wp_enqueue_script('pgpostgridfilterable_front_script');
+            wp_enqueue_script('pgpostgridfilterable_mixitup');
+            wp_enqueue_script('pgpostgridfilterable_mixitup_multifilter');
+            wp_enqueue_script('pgpostgridfilterable_mixitup_pagination');
+        }
+    }
+
 
 
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
         wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'src/blocks/post-grid-filterable/index.css');
-        wp_register_style('pgpostgrid_front_style', post_grid_plugin_url . 'src/blocks/post-grid-filterable/index.css');
-
         wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'src/blocks/post-grid-filterable/index.js', array('wp-blocks', 'wp-element'));
-        wp_register_script('pgpostgridfilterable_front_script', post_grid_plugin_url . 'src/blocks/post-grid-filterable/front-scripts.js', []);
-        wp_register_script('pgpostgridfilterable_mixitup', post_grid_plugin_url . 'src/blocks/post-grid-filterable/mixitup.js', []);
-        wp_register_script('pgpostgridfilterable_mixitup_multifilter', post_grid_plugin_url . 'src/blocks/post-grid-filterable/mixitup-multifilter.js', []);
-        wp_register_script('pgpostgridfilterable_mixitup_pagination', post_grid_plugin_url . 'src/blocks/post-grid-filterable/mixitup-pagination.js', []);
+
+
 
         //wp_register_script('anime.min', post_grid_plugin_url . 'assets/global/js/anime.min.js', []);
 
@@ -31,7 +47,7 @@ class PGBlockPostGridFilterable
             'editor_script' => 'pgpostgrid_editor_script',
             //'style' => 'pgpostgrid_front_style',
             //'editor_style' => 'pgpostgrid_editor_style',
-            'script' => 'pgpostgridfilterable_front_script',
+            //'script' => 'pgpostgridfilterable_front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'render_callback' => array($this, 'theHTML'),
             'attributes' =>  [
@@ -168,7 +184,9 @@ class PGBlockPostGridFilterable
                             "allText" => "All",
                             "showSort" => "",
                             "showRandom" => "",
-                            "showAll" => "",
+                            "showAll" => "yes",
+                            "perPage" => 6,
+
                             "showClear" => "",
                             "activeFilter" => ""
                         ],
@@ -532,9 +550,11 @@ class PGBlockPostGridFilterable
         ));
     }
 
-    function front_script($attributes)
-    {
-    }
+
+
+
+
+
     function front_style($attributes)
     {
     }
@@ -746,11 +766,7 @@ class PGBlockPostGridFilterable
     // front-end output from the gutenberg editor 
     function theHTML($attributes, $content, $block)
     {
-        wp_enqueue_style('font-awesome-5');
-        //wp_enqueue_script('anime.min');
-        wp_enqueue_script('pgpostgridfilterable_mixitup');
-        wp_enqueue_script('pgpostgridfilterable_mixitup_multifilter');
-        wp_enqueue_script('pgpostgridfilterable_mixitup_pagination');
+
 
 
 
@@ -791,13 +807,15 @@ class PGBlockPostGridFilterable
         $filterableShowRandom = isset($filterableOptions['showRandom']) ? $filterableOptions['showRandom'] : 'no';
         $filterableShowAll = isset($filterableOptions['showAll']) ? $filterableOptions['showAll'] : 'yes';
         $filterableShowClear = isset($filterableOptions['showClear']) ? $filterableOptions['showClear'] : 'no';
+        $filterablePerPage = isset($filterableOptions['perPage']) ? $filterableOptions['perPage'] : 6;
 
 
-        //echo '<pre>' . var_export($filterableOptions, true) . '</pre>';
 
         $activeFilter = isset($attributes['activeFilter']) ? $attributes['activeFilter'] : [];
         $activeFilterOptions = isset($activeFilter['options']) ? $activeFilter['options'] : [];
-        $activeFilterSlug = isset($activeFilterOptions['slug']) ? $activeFilterOptions['slug'] : 'all';
+        $activeFilterSlug = !empty($activeFilterOptions['slug']) ? $activeFilterOptions['slug'] : 'all';
+
+
 
         /*#########$noPostsWrap#########*/
         $noPostsWrap = isset($attributes['noPostsWrap']) ? $attributes['noPostsWrap'] : [];
@@ -979,9 +997,9 @@ class PGBlockPostGridFilterable
             'blockId' => $blockId,
             'lazyLoad' => ['enable' => $lazyLoadEnable],
             'activeFilter' => ['slug' => $activeFilterSlug],
+            'perPage' => $filterablePerPage,
 
         ];
-
 
 
 
@@ -1005,12 +1023,38 @@ class PGBlockPostGridFilterable
                 ?>
             </div>
         <?php endif; ?>
-        <div <?php echo ($lazyLoadEnable == 'yes') ?  'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>" postgridargs="<?php echo esc_attr(json_encode($postGridArgs)); ?>">
+        <div <?php echo ($lazyLoadEnable == 'yes') ?  'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>" postgridargs=<?php echo (wp_json_encode($postGridArgs)); ?>>
             <div class="loop-loading"></div>
             <div class="filters-wrap">
                 <form>
+
+
                     <?php
+
+                    if (empty($filterableFilters)) {
+
+                    ?>
+                        <div class="filterable-group" data-filter-group data-logic="OR">
+
+                            <?php if ($filterableShowAll == 'yes') : ?>
+                                <span class="pg-filter pg-filter-<?php echo esc_attr($blockId); ?>" data-filter="all"><?php echo 'All'; ?></span>
+                            <?php endif; ?>
+
+
+
+                        </div>
+
+                        <?php
+
+
+                    }
+
+
+
                     if (!empty($filterableFilters)) {
+
+                        $groupCount = 0;
+
                         foreach ($filterableFilters as $filterGroup) {
                             $groupTitle = isset($filterGroup['groupTitle']) ? $filterGroup['groupTitle'] : '';
                             $groupType = isset($filterGroup['type']) ? $filterGroup['type'] : '';
@@ -1018,14 +1062,19 @@ class PGBlockPostGridFilterable
                             $groupshowPostCount = isset($filterGroup['showPostCount']) ? $filterGroup['showPostCount'] : '';
                             $groupitems = isset($filterGroup['items']) ? $filterGroup['items'] : [];
                             if (!empty($groupitems)) {
-                    ?>
+                        ?>
                                 <div class="filterable-group" data-filter-group data-logic="<?php echo esc_attr($groupLogic); ?>">
                                     <span class="filterable-group-title">
                                         <?php echo esc_html($groupTitle); ?>
                                     </span>
-                                    <?php if (count($filterableFilters) == 1 && $filterableShowAll == 'yes') : ?>
-                                        <span class="pg-filter pg-filter-<?php echo esc_attr($blockId); ?>" data-filter="all"><?php echo 'All'; ?></span>
+
+                                    <?php if ($groupCount == 0 && count($filterableFilters) == 1) : ?>
+                                        <?php if ($filterableShowAll == 'yes') : ?>
+                                            <span class="pg-filter pg-filter-<?php echo esc_attr($blockId); ?>" data-filter="all"><?php echo 'All'; ?></span>
+                                        <?php endif; ?>
                                     <?php endif; ?>
+
+
                                     <?php
                                     if (!empty($groupitems))
                                         foreach ($groupitems as $item) {
@@ -1044,6 +1093,7 @@ class PGBlockPostGridFilterable
                                 </div>
                     <?php
                             }
+                            $groupCount++;
                         }
                     }
                     ?>

@@ -8,7 +8,26 @@ class PGBlockAccordion
     function __construct()
     {
         add_action('init', array($this, 'register_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
     }
+
+
+    function front_scripts($attributes)
+    {
+        wp_register_script('pgaccordion_front_script', post_grid_plugin_url . 'src/blocks/accordion/front-scripts.js', []);
+        wp_register_style('pgaccordion_accordion_css', post_grid_plugin_url . 'src/blocks/accordion/accordion.min.css', []);
+        wp_register_script('pgaccordion_accordion_js', post_grid_plugin_url . 'src/blocks/accordion/accordion.min.js', []);
+
+        if (has_block('post-grid/accordion')) {
+
+            wp_enqueue_script('pgaccordion_front_script');
+            wp_enqueue_style('pgaccordion_accordion_css');
+            wp_enqueue_script('pgaccordion_accordion_js');
+        }
+    }
+
+
+
 
 
     // loading src files in the gutenberg editor screen
@@ -16,19 +35,17 @@ class PGBlockAccordion
     {
         wp_register_style('pgaccordion_editor_style', post_grid_plugin_url . 'src/blocks/accordion/index.css');
         wp_register_script('pgaccordion_editor_script', post_grid_plugin_url . 'src/blocks/accordion/index.js', array('wp-blocks', 'wp-element'));
-        wp_register_style('pgaccordion_front_style', post_grid_plugin_url . 'src/blocks/accordion/index.css');
-        wp_register_script('pgaccordion_front_script', post_grid_plugin_url . 'src/blocks/accordion/front-scripts.js', []);
-        wp_register_script('pgaccordion_accordion_js', post_grid_plugin_url . 'src/blocks/accordion/accordion.min.js', []);
-        wp_register_style('pgaccordion_accordion_css', post_grid_plugin_url . 'src/blocks/accordion/accordion.min.css', []);
+
+
+
 
 
 
         register_block_type('post-grid/accordion', array(
             'editor_script' => 'pgaccordion_editor_script',
-            'script' => 'pgaccordion_front_script',
-
+            //'script' => array($this, 'front_script'),
             'editor_style' => 'pgaccordion_editor_style',
-            'style' => 'pgaccordion_front_style',
+            //'style' => 'pgaccordion_front_style',
 
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'render_callback' => array($this, 'theHTML'),
@@ -191,9 +208,9 @@ class PGBlockAccordion
         ));
     }
 
-    function front_script($attributes)
-    {
-    }
+
+
+
     function front_style($attributes)
     {
     }
@@ -202,8 +219,7 @@ class PGBlockAccordion
     function theHTML($attributes, $content, $block)
     {
 
-        wp_enqueue_style('pgaccordion_accordion_css');
-        wp_enqueue_script('pgaccordion_accordion_js');
+
 
         global $postGridCustomCss;
         global $postGridCssY;
@@ -332,54 +348,42 @@ class PGBlockAccordion
         <?php
 
         endif;
-
-
-
         ?>
-
-
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
                 new Accordion('.PGBlockAccordion', {
                     duration: 400,
                     onOpen: (currElement) => {
-
-
                         //console.log('onOpen');
-
                     },
                     onClose: (currElement) => {
                         //console.log('onClose');
                         //console.log();
-
                     },
                     beforeOpen: (currElement) => {
                         console.log('beforeOpen');
+
                         var iconIdle = currElement.querySelector('.icon-idle');
                         var iconToggled = currElement.querySelector('.icon-toggled');
+                        if (iconIdle != null) {
+                            iconIdle.style.display = 'none';
+                            iconToggled.style.display = 'inline-block';
+                        }
 
-                        iconIdle.style.display = 'none';
-                        iconToggled.style.display = 'inline-block';
                     },
                     beforeClose: (currElement) => {
                         console.log('beforeClose');
                         var iconIdle = currElement.querySelector('.icon-idle');
                         var iconToggled = currElement.querySelector('.icon-toggled');
+                        if (iconIdle != null) {
+                            iconIdle.style.display = 'inline-block';
+                            iconToggled.style.display = 'none';
+                        }
 
-                        iconIdle.style.display = 'inline-block';
-                        iconToggled.style.display = 'none';
                     }
-
                 });
-
             })
         </script>
-
-
-
-
-
-
 <?php return ob_get_clean();
     }
 }

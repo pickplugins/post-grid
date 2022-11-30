@@ -64,7 +64,7 @@ class PGBlockFeaturedImage
                             "linkAttr" => [],
                             "class" => "",
                             "size" => [
-                                "Desktop" => "thumbnail",
+                                "Desktop" => "full",
                                 "Tablet" => "full",
                                 "Mobile" => "full"
                             ]
@@ -274,7 +274,6 @@ class PGBlockFeaturedImage
         if (!empty($wrapperTag) && $useAsBackground == 'no') :
 
 ?>
-
             <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
                 <?php if (!empty($featuredImageLinkTo)) : ?>
                     <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
@@ -292,7 +291,6 @@ class PGBlockFeaturedImage
         endif;
 
         if (empty($wrapperTag) && $useAsBackground == 'no') :
-
         ?>
             <?php if (!empty($featuredImageLinkTo)) : ?>
                 <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
@@ -307,18 +305,15 @@ class PGBlockFeaturedImage
 
 
         if (!empty($wrapperTag) && $useAsBackground == 'yes') :
-
         ?>
-
             <?php if (!empty($featuredImageLinkTo)) : ?>
                 <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
-                    <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
-
+                    <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>" style="background-image: url(<?php echo esc_url_raw($attachment_url) ?>)">
                     </<?php echo esc_attr($wrapperTag); ?>>
                 </a>
             <?php else : ?>
 
-                <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+                <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>" style="background-image: url(<?php echo esc_url_raw($attachment_url) ?>)">
 
                 </<?php echo esc_attr($wrapperTag); ?>>
             <?php endif; ?>

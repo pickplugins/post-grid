@@ -101,7 +101,7 @@ registerBlockType("post-grid/post-featured-image", {
           linkTarget: '_blank',
           linkAttr: [],
           class: '',
-          size: { "Desktop": "thumbnail", "Tablet": "full", "Mobile": "full" },
+          size: { "Desktop": "full", "Tablet": "full", "Mobile": "full" },
 
         },
 
@@ -1056,7 +1056,7 @@ registerBlockType("post-grid/post-featured-image", {
                       var itemsX = { ...blockCssY.items };
                       itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-image': newValuesObj };
 
-                      setAttributes({ blockCssY: { items: itemsX } });
+                      //setAttributes({ blockCssY: { items: itemsX } });
 
                     }
 
@@ -1824,19 +1824,6 @@ registerBlockType("post-grid/post-featured-image", {
 
 
 
-
-
-
-
-
-
-
-
-
-
-              {JSON.stringify(featuredImage.styles.width)}
-
-
               <PanelRow>
                 <label>Width</label>
                 <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
@@ -2133,7 +2120,7 @@ registerBlockType("post-grid/post-featured-image", {
 
 
           {wrapper.options.useAsBackground == 'yes' && (
-            <CustomTag className={[blockId]}></CustomTag>
+            <CustomTag className={[blockId]} style={{ backgroundImage: 'url(' + ((postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '') + ')' }}></CustomTag>
 
           )}
 
@@ -2159,7 +2146,9 @@ registerBlockType("post-grid/post-featured-image", {
 
                   {postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] == undefined && (
                     <>
-                      No Image size found
+                      {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+
+
                     </>
                   )}
 
@@ -2177,7 +2166,8 @@ registerBlockType("post-grid/post-featured-image", {
 
                   {postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] == undefined && (
                     <>
-                      No Image size found
+
+                      {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
                     </>
                   )}
 

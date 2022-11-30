@@ -8,6 +8,7 @@ class PGBlockTabs
     function __construct()
     {
         add_action('init', array($this, 'register_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
     }
 
 
@@ -16,19 +17,16 @@ class PGBlockTabs
     {
         wp_register_style('pgtabs_editor_style', post_grid_plugin_url . 'src/blocks/tabs/index.css');
         wp_register_script('pgtabs_editor_script', post_grid_plugin_url . 'src/blocks/tabs/index.js', array('wp-blocks', 'wp-element'));
-        wp_register_style('pgtabs_front_style', post_grid_plugin_url . 'src/blocks/tabs/index.css');
-        wp_register_script('pgtabs_front_script', post_grid_plugin_url . 'src/blocks/tabs/front-scripts.js', []);
-        wp_register_script('pgtabs_tabs_js', post_grid_plugin_url . 'src/blocks/tabs/tabs.js', []);
-        wp_register_style('pgtabs_tabs_css', post_grid_plugin_url . 'src/blocks/tabs/tabs.css', []);
+
 
 
 
         register_block_type('post-grid/tabs', array(
             'editor_script' => 'pgtabs_editor_script',
-            'script' => 'pgtabs_front_script',
+            //'script' => 'pgtabs_front_script',
 
             'editor_style' => 'pgtabs_editor_style',
-            'style' => 'pgtabs_front_style',
+            //'style' => 'pgtabs_front_style',
 
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'render_callback' => array($this, 'theHTML'),
@@ -219,6 +217,25 @@ class PGBlockTabs
         ));
     }
 
+
+    function front_scripts($attributes)
+    {
+        wp_register_style('pgtabs_front_style', post_grid_plugin_url . 'src/blocks/tabs/index.css');
+        wp_register_script('pgtabs_front_script', post_grid_plugin_url . 'src/blocks/tabs/front-scripts.js', []);
+        wp_register_script('pgtabs_tabs_js', post_grid_plugin_url . 'src/blocks/tabs/tabs.js', []);
+        wp_register_style('pgtabs_tabs_css', post_grid_plugin_url . 'src/blocks/tabs/tabs.css', []);
+
+
+        if (has_block('post-grid/tabs')) {
+
+            wp_enqueue_script('pgtabs_front_script');
+            wp_enqueue_style('pgtabs_front_style');
+
+            wp_enqueue_style('pgtabs_tabs_css');
+            wp_enqueue_script('pgtabs_tabs_js');
+        }
+    }
+
     // function front_script($attributes)
     // {
     // }
@@ -230,8 +247,7 @@ class PGBlockTabs
     function theHTML($attributes, $content, $block)
     {
 
-        wp_enqueue_style('pgtabs_tabs_css');
-        wp_enqueue_script('pgtabs_tabs_js');
+
 
         global $postGridCustomCss;
         global $postGridCssY;

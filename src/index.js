@@ -57,7 +57,7 @@ import './blocks/post-date'
 // import './blocks/post-meta'
 import './blocks/read-more'
 
-// import './blocks/terms-list'
+import './blocks/terms-list'
 import './blocks/icon'
 import './blocks/text'
 import './blocks/layers'

@@ -83,7 +83,16 @@ registerBlockType("post-grid/terms-list", {
       type: 'object',
       default: {
 
-        options: { prefix: '', postfix: '', maxCount: 99, postCount: false, class: 'item inline-block', linkTarget: '', linkAttr: [], },
+        options: {
+          prefix: '', postfix: '',
+          viewType: 'accordion', // inline, grid, dropdown, accordion
+          hierarchicaly: true,
+          queryPosts: false,
+          accordionOpen: true,
+          linkToTerm: true,
+
+          maxCount: 99, postCount: false, class: 'item inline-block', linkTarget: '', linkAttr: [],
+        },
         styles:
         {
           textAlign: {},
@@ -1096,13 +1105,17 @@ registerBlockType("post-grid/terms-list", {
 
 
 
+    if (wp.data.dispatch('core/edit-post') == null) {
+      const {
+        __experimentalSetPreviewDeviceType: setPreviewDeviceType,
 
+      } = wp.data.dispatch('core/edit-widgets')
+    } else {
+      const {
+        __experimentalSetPreviewDeviceType: setPreviewDeviceType,
 
-    const {
-      __experimentalSetPreviewDeviceType: setPreviewDeviceType,
-
-    } = wp.data.dispatch('core/edit-post')
-
+      } = wp.data.dispatch('core/edit-post')
+    }
 
 
 

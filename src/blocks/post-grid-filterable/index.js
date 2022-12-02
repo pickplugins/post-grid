@@ -336,7 +336,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
         options: {
           class: 'pagination',
-          type: 'normal',
+          type: 'filterable',
           maxPageNum: '',
           prevText: 'Previous',
           nextText: 'Next',
@@ -6642,7 +6642,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
-              {pagination.options.type == 'normal' &&
+              {pagination.options.type == 'filterable' &&
                 (
                   <>
 

@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 pagination: {
                     limit: perPage,
-
+                    maxPagers: 5,
                 },
                 templates: {
                     pagerPrev: '<span class="page-numbers pg-filter-' + blockId + ' ${classNames}" data-page="prev">Prev</span>',

@@ -299,7 +299,7 @@ class PGBlockPostGridFilterable
                     "default" => [
                         "options" => [
                             "class" => "pagination",
-                            "type" => "normal",
+                            "type" => "filterable",
                             "maxPageNum" => "",
                             "prevText" => "Previous",
                             "nextText" => "Next",

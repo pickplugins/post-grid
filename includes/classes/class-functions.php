@@ -224,9 +224,60 @@ class class_post_grid_functions
         $layout_content_list = array(
 
             'flat' => array(
-                '0' => array('key' => 'title_link', 'char_limit' => '20', 'name' => 'Title with linked', 'css' => 'display: block;font-size: 21px;line-height: normal;padding: 5px 10px;text-align: left; text-decoration: none;', 'css_hover' => '',),
-                '1' => array('key' => 'excerpt', 'char_limit' => '20', 'name' => 'Excerpt', 'css' => 'display: block;font-size: 14px;padding: 5px 10px;text-align: left;', 'css_hover' => ''),
-                '2' => array('key' => 'read_more', 'name' => 'Read more', 'css' => 'display: block;font-size: 12px;font-weight: bold;padding: 0 10px;text-align: left;text-decoration: none;', 'css_hover' => ''),
+
+                '0' => array(
+                    'key' => 'media',
+                    'custom_class' => '',
+                    'media_source' =>
+                    array(
+                        'featured_image' =>
+                        array(
+                            'enable' => 'yes',
+                            'image_size' => 'large',
+                            'link_to' => 'post_link',
+                            'link_target' => '_self',
+                        ),
+                        'first_image' =>
+                        array(
+                            'enable' => 'no',
+                            'link_to' => 'post_link',
+                            'link_target' => '_self',
+                        ),
+                        'empty_thumb' =>
+                        array(
+                            'enable' => 'no',
+                            'link_to' => 'post_link',
+                            'link_target' => '_self',
+                            'default_thumb_src' => 'http://localhost/wp/wp-content/uploads/2020/02/single-1.jpg',
+                        ),
+                        'siteorigin_first_image' =>
+                        array(
+                            'enable' => 'no',
+                            'link_to' => 'none',
+                            'link_target' => '_self',
+                        ),
+                    ),
+                    'media_height' =>
+                    array(
+                        'large_type' => 'auto_height',
+                        'large' => '',
+                        'medium_type' => 'auto_height',
+                        'medium' => '',
+                        'small_type' => 'auto_height',
+                        'small' => '',
+                    ),
+                    'margin' => '',
+                    'padding' => '',
+                    'css' => '',
+                    'css_hover' => '',
+
+
+                    'name' => 'Title with linked', 'css' => 'display: block;font-size: 21px;line-height: normal;padding: 5px 10px;text-align: left; text-decoration: none;', 'css_hover' => '',
+                ),
+
+                '1' => array('key' => 'title_link', 'char_limit' => '20', 'name' => 'Title with linked', 'css' => 'display: block;font-size: 21px;line-height: normal;padding: 5px 10px;text-align: left; text-decoration: none;', 'css_hover' => '',),
+                '2' => array('key' => 'excerpt', 'char_limit' => '20', 'name' => 'Excerpt', 'css' => 'display: block;font-size: 14px;padding: 5px 10px;text-align: left;', 'css_hover' => ''),
+                '3' => array('key' => 'read_more', 'name' => 'Read more', 'css' => 'display: block;font-size: 12px;font-weight: bold;padding: 0 10px;text-align: left;text-decoration: none;', 'css_hover' => ''),
 
             ),
 

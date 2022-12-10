@@ -179,7 +179,6 @@ registerBlockType("post-grid/post-meta", {
         data: { postId: postId, meta_key: meta.options.key, type: meta.options.type, template: template },
       }).then((res) => {
 
-        console.log(res);
 
         if (meta.options.type == 'acfImage' || meta.options.type == 'acfFile') {
           setMetaHtml(res.html);
@@ -456,7 +455,6 @@ registerBlockType("post-grid/post-meta", {
 
 
     useEffect(() => {
-      ////console.log('Listening linkAttr: ', linkAttr);
       generateBlockCssY();
 
 
@@ -468,7 +466,6 @@ registerBlockType("post-grid/post-meta", {
 
 
 
-    ////console.log(breakPointList);
     const colors = [
       { name: '9DD6DF', color: '#9DD6DF' },
       { name: '18978F', color: '#18978F' },
@@ -535,7 +532,6 @@ registerBlockType("post-grid/post-meta", {
                 <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
 
-                  ////console.log(x.value);
 
                   setPreviewDeviceType(x.value)
                   var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
@@ -578,11 +574,6 @@ registerBlockType("post-grid/post-meta", {
 
 
     function onChangeBreakPoint(x, index) {
-
-      ////console.log(x);
-      ////console.log(index);
-      ////console.log('Post Title');
-
 
 
       setPreviewDeviceType(x.value)
@@ -668,7 +659,6 @@ registerBlockType("post-grid/post-meta", {
                 <label>Meta Key Type </label>
                 <PGDropdown position="bottom right" variant="secondary" options={filterArgs} buttonTitle="Choose" onChange={(option, index) => {
 
-                  console.log(option);
 
 
                   var options = { ...meta.options, type: option.value };

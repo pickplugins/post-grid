@@ -85,11 +85,19 @@ registerBlockType("post-grid/terms-list", {
 
         options: {
           prefix: '', postfix: '',
-          viewType: 'accordion', // inline, grid, dropdown, accordion
-          hierarchicaly: true,
+          viewType: 'list', // inline, grid, list, accordion
+          hierarchicaly: false,
           queryPosts: false,
-          accordionOpen: true,
-          linkToTerm: true,
+          accordionOpen: false,
+          linkToTerm: false,
+          postCountPosition: 'beforeTitle', //beforeTitle, afterTtile, afterPosts, beforePosts
+          postCountText: 'Total Posts %s',
+          gridColNumber: 4,
+          gridColGap: '15px',
+          gridRowGap: '15px',
+
+          hideEmpty: false,
+
 
           maxCount: 99, postCount: false, class: 'item inline-block', linkTarget: '', linkAttr: [],
         },
@@ -261,13 +269,25 @@ registerBlockType("post-grid/terms-list", {
       setPostCategoriesX,
     ] = useEntityProp('postType', postType, taxonomies.options.taxName, postId);
 
-    console.log(postCategoriesX);
 
 
 
     var dummyCats = [
       { "id": 1, "count": 1, "description": "", "link": "#", "name": "Category 1", "slug": "category-1", "taxonomy": "category_tax", },
-      { "id": 2, "count": 1, "description": "", "link": "#", "name": "Category 2", "slug": "category-2", "taxonomy": "category_tax", },
+      {
+        "id": 2, "count": 1, "description": "", "link": "#", "name": "Category 2", "slug": "category-2", "taxonomy": "category_tax",
+        children: [
+          { "id": 21, "count": 1, "description": "", "link": "#", "name": "Child Category 1", "slug": "category-3", "taxonomy": "category_tax", },
+          { "id": 22, "count": 1, "description": "", "link": "#", "name": "Child Category 2", "slug": "category-3", "taxonomy": "category_tax", },
+          { "id": 23, "count": 1, "description": "", "link": "#", "name": "Child Category 3", "slug": "category-3", "taxonomy": "category_tax", },
+        ],
+        posts: [
+          { "link": "#", "name": "Post Title 1", },
+          { "link": "#", "name": "Post Title 2", },
+          { "link": "#", "name": "Post Title 3", },
+        ],
+
+      },
       { "id": 3, "count": 1, "description": "", "link": "#", "name": "Category 3", "slug": "category-3", "taxonomy": "category_tax", },
       { "id": 4, "count": 1, "description": "", "link": "#", "name": "Category 4", "slug": "category-4", "taxonomy": "category_tax", },
       { "id": 5, "count": 1, "description": "", "link": "#", "name": "Category 5", "slug": "category-5", "taxonomy": "category_tax", },
@@ -277,7 +297,6 @@ registerBlockType("post-grid/terms-list", {
 
 
     useEffect(() => {
-      console.log('Listening postCategoriesX: ', postCategoriesX);
 
 
       setPostCategoriesData([]);
@@ -432,7 +451,6 @@ registerBlockType("post-grid/terms-list", {
 
     function onChangeIcon(arg) {
 
-      console.log(arg);
 
 
 
@@ -1244,6 +1262,188 @@ registerBlockType("post-grid/terms-list", {
 
 
             <PanelBody title="Items" initialOpen={false}>
+
+
+              <PanelRow>
+                <label for="">View Type</label>
+                <SelectControl
+                  label=""
+                  value={items.options.viewType}
+                  options={[
+                    { label: 'Accordion', value: 'accordion' },
+                    { label: 'Inline', value: 'inline' },
+                    { label: 'Grid', value: 'grid' },
+                    { label: 'List', value: 'list' },
+                  ]}
+                  onChange={(newVal) => {
+                    var options = { ...items.options, viewType: newVal };
+                    setAttributes({ items: { ...items, options: options } });
+                  }
+                  }
+                />
+              </PanelRow>
+
+
+
+
+
+
+              <PanelRow>
+                <label for="">Query Posts</label>
+                <SelectControl
+                  label=""
+                  value={items.options.queryPosts}
+                  options={[
+                    { label: 'True', value: 1 },
+                    { label: 'False', value: 0 },
+
+                  ]}
+                  onChange={(newVal) => {
+                    var options = { ...items.options, queryPosts: newVal };
+                    setAttributes({ items: { ...items, options: options } });
+                  }
+                  }
+                />
+              </PanelRow>
+
+              <PanelRow>
+                <label for="">Hide Empty Terms</label>
+                <SelectControl
+                  label=""
+                  value={items.options.hideEmpty}
+                  options={[
+                    { label: 'True', value: 1 },
+                    { label: 'False', value: 0 },
+
+                  ]}
+                  onChange={(newVal) => {
+                    var options = { ...items.options, hideEmpty: newVal };
+                    setAttributes({ items: { ...items, options: options } });
+                  }
+                  }
+                />
+              </PanelRow>
+
+
+
+
+              {items.options.viewType == 'accordion' && (
+
+                <PanelRow>
+                  <label for="">Accordion Open</label>
+                  <SelectControl
+                    label=""
+                    value={items.options.accordionOpen}
+                    options={[
+                      { label: 'True', value: 1 },
+                      { label: 'False', value: 0 },
+                    ]}
+                    onChange={(newVal) => {
+                      var options = { ...items.options, accordionOpen: newVal };
+                      setAttributes({ items: { ...items, options: options } });
+                    }
+                    }
+                  />
+                </PanelRow>
+              )}
+
+
+
+              {items.options.viewType == 'grid' && (
+
+                <>
+                  <PanelRow>
+                    <label for="">Post Count Position</label>
+                    <SelectControl
+                      label=""
+                      value={items.options.postCountPosition}
+                      options={[
+                        { label: 'Before Title', value: 'beforeTitle' },
+                        { label: 'After Ttile', value: 'afterTtile' },
+                        { label: 'Before Posts', value: 'beforePosts' },
+
+                        { label: 'After Posts', value: 'afterPosts' },
+                      ]}
+                      onChange={(newVal) => {
+                        var options = { ...items.options, postCountPosition: newVal };
+                        setAttributes({ items: { ...items, options: options } });
+                      }
+                      }
+                    />
+                  </PanelRow>
+
+                  <PanelRow>
+                    <label for="">Post Count Text</label>
+                    <InputControl
+                      value={items.options.postCountText}
+                      onChange={(newVal) => {
+
+
+                        var options = { ...items.options, postCountText: newVal };
+                        setAttributes({ items: { ...items, options: options } });
+
+                      }
+
+                      }
+                    />
+                  </PanelRow>
+
+
+
+
+
+
+
+                </>
+              )}
+
+
+
+
+
+              <PanelRow>
+                <label for="">Link To Term</label>
+                <SelectControl
+                  label=""
+                  value={items.options.linkToTerm}
+                  options={[
+                    { label: 'True', value: 1 },
+                    { label: 'False', value: 0 },
+                  ]}
+                  onChange={(newVal) => {
+                    var options = { ...items.options, linkToTerm: newVal };
+                    setAttributes({ items: { ...items, options: options } });
+                  }
+                  }
+                />
+              </PanelRow>
+
+
+              {items.options.viewType == 'accordion' || items.options.viewType == 'list' && (
+
+                <PanelRow>
+                  <label for="">Hierarchicaly</label>
+                  <SelectControl
+                    label=""
+                    value={items.options.hierarchicaly}
+                    options={[
+                      { label: 'True', value: 1 },
+                      { label: 'False', value: 0 },
+                    ]}
+                    onChange={(newVal) => {
+                      var options = { ...items.options, hierarchicaly: newVal };
+                      setAttributes({ items: { ...items, options: options } });
+                    }
+                    }
+                  />
+                </PanelRow>
+              )}
+
+
+
+
+
+
 
               <ToggleControl
                 label="Display Post Count"
@@ -2198,6 +2398,7 @@ registerBlockType("post-grid/terms-list", {
 
           )}
 
+          <p>Live Preview is not avilable at the moment, please visit page and see it.</p>
 
 
         </>

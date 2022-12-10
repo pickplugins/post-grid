@@ -2,6 +2,14 @@
 if (!defined('ABSPATH')) exit;  // if direct access
 
 
+
+
+
+
+
+
+
+
 //add_image_size( 'custom-size', 435, 435, true );
 //add_image_size( 'center-435', 220, 220, array( 'center', 'center' ) );
 

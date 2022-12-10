@@ -118,7 +118,6 @@ registerBlockType("post-grid/text", {
     var context = props.context;
     var clientId = props.clientId;
 
-    console.log(clientId);
 
 
 
@@ -798,7 +797,6 @@ registerBlockType("post-grid/text", {
                     <label></label>
                     <PGcssTextAlign val={text.styles.textAlign[breakPointX]} onChange={(newVal => {
 
-                      console.log(newVal);
 
                       var newValuesObj = {};
 

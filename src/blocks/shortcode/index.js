@@ -156,7 +156,7 @@ registerBlockType("post-grid/shortcode", {
       //   data: { postId: postId, meta_key: shortcode.options.key, prams: shortcode.options.prams, },
       // }).then((res) => {
 
-      //   console.log(res);
+      //   .log(res);
 
 
 
@@ -412,7 +412,6 @@ registerBlockType("post-grid/shortcode", {
 
 
     useEffect(() => {
-      ////console.log('Listening linkAttr: ', linkAttr);
       generateBlockCssY();
 
 
@@ -424,7 +423,6 @@ registerBlockType("post-grid/shortcode", {
 
 
 
-    ////console.log(breakPointList);
     const colors = [
       { name: '9DD6DF', color: '#9DD6DF' },
       { name: '18978F', color: '#18978F' },
@@ -491,7 +489,6 @@ registerBlockType("post-grid/shortcode", {
                 <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
 
-                  ////console.log(x.value);
 
                   setPreviewDeviceType(x.value)
                   var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
@@ -534,10 +531,6 @@ registerBlockType("post-grid/shortcode", {
 
 
     function onChangeBreakPoint(x, index) {
-
-      ////console.log(x);
-      ////console.log(index);
-      ////console.log('Post Title');
 
 
 
@@ -605,7 +598,6 @@ registerBlockType("post-grid/shortcode", {
                 <label>Choose Shortcode </label>
                 <PGDropdown position="bottom right" variant="secondary" options={shortcodes} buttonTitle="Choose" onChange={(option, index) => {
 
-                  console.log(option);
 
 
                   var options = { ...shortcode.options, key: option.value };
@@ -765,7 +757,6 @@ registerBlockType("post-grid/shortcode", {
 
           {shortcode.options.key.length == 0 && (<PGDropdown position="bottom right" variant="secondary" options={shortcodes} buttonTitle="Choose" onChange={(option, index) => {
 
-            console.log(option);
 
 
             var options = { ...shortcode.options, key: option.value };

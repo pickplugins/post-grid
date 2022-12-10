@@ -34,8 +34,8 @@ class PGBlockPostGridFilterable
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'src/blocks/post-grid-filterable/index.css');
-        wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'src/blocks/post-grid-filterable/index.js', array('wp-blocks', 'wp-element'));
+        //wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'src/blocks/post-grid-filterable/index.css');
+        //wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'src/blocks/post-grid-filterable/index.js', array('wp-blocks', 'wp-element'));
 
 
 
@@ -44,7 +44,7 @@ class PGBlockPostGridFilterable
 
 
         register_block_type('post-grid/post-grid-filterable', array(
-            'editor_script' => 'pgpostgrid_editor_script',
+            //'editor_script' => 'pgpostgrid_editor_script',
             //'style' => 'pgpostgrid_front_style',
             //'editor_style' => 'pgpostgrid_editor_style',
             //'script' => 'pgpostgridfilterable_front_script',
@@ -163,24 +163,7 @@ class PGBlockPostGridFilterable
                     "type" => "object",
                     "default" => [
                         "options" => [
-                            "filters" => [
-                                [
-                                    "groupTitle" => "",
-                                    "type" => "inline",
-                                    "logic" => "OR",
-                                    "showPostCount" => "yes",
-                                    "items" => [],
-                                    "styles" => []
-                                ],
-                                [
-                                    "groupTitle" => "",
-                                    "type" => "",
-                                    "logic" => "",
-                                    "showPostCount" => "",
-                                    "items" => [],
-                                    "styles" => []
-                                ]
-                            ],
+                            "filters" => [],
                             "allText" => "All",
                             "showSort" => "",
                             "showRandom" => "",
@@ -1023,11 +1006,17 @@ class PGBlockPostGridFilterable
                 ?>
             </div>
         <?php endif; ?>
-        <div <?php echo ($lazyLoadEnable == 'yes') ?  'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>" postgridargs=<?php echo (wp_json_encode($postGridArgs)); ?>>
+        <div <?php echo ($lazyLoadEnable == 'yes') ?  'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>" postgridargs=<?php echo wp_json_encode($postGridArgs); ?>>
             <div class="loop-loading"></div>
             <div class="filters-wrap">
                 <form>
 
+                    <?php
+
+                    //var_dump($filterableShowAll);
+                    //var_dump($filterableFilters);
+
+                    ?>
 
                     <?php
 

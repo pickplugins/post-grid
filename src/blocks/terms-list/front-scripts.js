@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
                 var childWrap = document.getElementById('child-wrap-' + wrapid);
-                console.log(childWrap);
 
                 if (childWrap != null) {
 

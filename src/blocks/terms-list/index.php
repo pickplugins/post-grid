@@ -14,14 +14,14 @@ class PGBlockTermsList
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/terms-list/index.css');
-        wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/terms-list/index.js', array('wp-blocks', 'wp-element'));
+        //wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/terms-list/index.css');
+        //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/terms-list/index.js', array('wp-blocks', 'wp-element'));
         wp_register_script('pgtermslist_front_script', post_grid_plugin_url . 'src/blocks/terms-list/front-scripts.js', []);
 
 
         register_block_type('post-grid/terms-list', array(
-            'editor_script' => 'editor_script',
-            'editor_style' => 'editor_style',
+            //'editor_script' => 'editor_script',
+            //'editor_style' => 'editor_style',
             'script' => 'pgtermslist_front_script',
 
             //'script' => 'front_script',
@@ -64,6 +64,10 @@ class PGBlockTermsList
                             "queryPosts" => true,
                             "accordionOpen" => true,
                             "linkToTerm" => false,
+                            "postCountPosition" => 'beforePosts',
+                            "postCountText" => 'Total Posts: %s',
+                            "hideEmpty" => false,
+
 
                             "maxCount" => 99,
                             "postCount" => false,
@@ -230,7 +234,7 @@ class PGBlockTermsList
         return $posts;
     }
 
-    function sort_terms_hierarchicaly(array $cats, $parentId = 0, $itemsQueryPosts)
+    function sort_terms_hierarchicaly(array $cats, $parentId = 0, $itemsQueryPosts = true)
     {
         $into = [];
 
@@ -241,7 +245,6 @@ class PGBlockTermsList
                     if ($itemsQueryPosts) {
                         $cat->posts = $this->get_term_postsx($cat->term_id, $cat->taxonomy, $cat->slug);
                     }
-                    //$cat->posts = $this->sort_terms_hierarchicaly($cats, $cat->term_id);
 
                     $cat->children = $this->sort_terms_hierarchicaly($cats, $cat->term_id, $itemsQueryPosts);
                     $into[$cat->term_id] = $cat;
@@ -263,7 +266,7 @@ class PGBlockTermsList
         $itemsStyles = isset($items['styles']) ? $items['styles'] : [];
         $itemsTypo = isset($items['typo']) ? $items['typo'] : [];
 
-        $itemsViewType = isset($itemsOptions['viewType']) ? $itemsOptions['viewType'] : 'accordion';
+        $itemsViewType = isset($itemsOptions['viewType']) ? $itemsOptions['viewType'] : 'list';
         $itemsHierarchicaly = isset($itemsOptions['hierarchicaly']) ? $itemsOptions['hierarchicaly'] : true;
         $itemsQueryPosts = isset($itemsOptions['queryPosts']) ? $itemsOptions['queryPosts'] : true;
         $itemsAccordionOpen = isset($itemsOptions['accordionOpen']) ? $itemsOptions['accordionOpen'] : true;
@@ -448,6 +451,7 @@ class PGBlockTermsList
         $itemsAccordionOpen = isset($itemsOptions['accordionOpen']) ? $itemsOptions['accordionOpen'] : true;
         $itemsLinkToTerm = isset($itemsOptions['linkToTerm']) ? $itemsOptions['linkToTerm'] : true;
 
+        //var_dump($itemsQueryPosts);
 
         $separator = isset($attributes['separator']) ? $attributes['separator'] : [];
         $separatorOptions = isset($separator['options']) ? $separator['options'] : [];
@@ -515,7 +519,7 @@ class PGBlockTermsList
                         <?php echo $cat->name; ?>
                     <?php endif; ?>
                 </li>
-        <?php
+            <?php
 
             }
         }
@@ -524,6 +528,136 @@ class PGBlockTermsList
     }
 
 
+
+
+    function html_terms_hierarchicaly_grid($sorted_terms, $attributes)
+    {
+
+        $items = isset($attributes['items']) ? $attributes['items'] : [];
+        $itemsOptions = isset($items['options']) ? $items['options'] : [];
+        $itemsStyles = isset($items['styles']) ? $items['styles'] : [];
+        $itemsTypo = isset($items['typo']) ? $items['typo'] : [];
+
+        $itemsViewType = isset($itemsOptions['viewType']) ? $itemsOptions['viewType'] : 'accordion';
+        $itemsHierarchicaly = isset($itemsOptions['hierarchicaly']) ? $itemsOptions['hierarchicaly'] : true;
+        $itemsQueryPosts = isset($itemsOptions['queryPosts']) ? $itemsOptions['queryPosts'] : true;
+        $itemsAccordionOpen = isset($itemsOptions['accordionOpen']) ? $itemsOptions['accordionOpen'] : true;
+        $itemsLinkToTerm = isset($itemsOptions['linkToTerm']) ? $itemsOptions['linkToTerm'] : true;
+        $postCountPosition = isset($itemsOptions['postCountPosition']) ? $itemsOptions['postCountPosition'] : 'beforePosts';
+        $postCountText = isset($itemsOptions['postCountText']) ? $itemsOptions['postCountText'] : 'Total Posts: %s';
+
+
+        $separator = isset($attributes['separator']) ? $attributes['separator'] : [];
+        $separatorOptions = isset($separator['options']) ? $separator['options'] : [];
+        $separatorStyles = isset($separator['styles']) ? $separator['styles'] : [];
+
+        $separatorClass = isset($separatorOptions['class']) ? $separatorOptions['class'] : '';
+        $separatorText = isset($separatorOptions['text']) ? $separatorOptions['text'] : '';
+
+        $current_post_id = get_the_ID();
+
+        $into = [];
+        ob_start();
+
+
+        foreach ($sorted_terms as $i => $cat) {
+
+            if (!empty($cat->children) || !empty($cat->posts)) {
+            ?>
+                <div class="grid-item">
+
+
+                    <div class="item-label">
+
+
+                        <?php echo ($postCountPosition == 'beforeTitle') ? sprintf($postCountText, $cat->count) : ''; ?>
+
+                        <?php if ($itemsLinkToTerm) :
+                            $term_link = get_term_link($cat->term_id);
+                        ?>
+                            <a href="<?php echo esc_url_raw($term_link); ?>"><?php echo $cat->name; ?> </a>
+                        <?php else : ?>
+                            <?php echo $cat->name; ?>
+                        <?php endif; ?>
+                        <?php echo ($postCountPosition == 'afterTtile') ? sprintf($postCountText, $cat->count) : ''; ?>
+
+
+                    </div>
+
+                    <?php echo ($postCountPosition == 'beforePosts') ? sprintf($postCountText, $cat->count) : ''; ?>
+
+
+
+
+                    <?php
+                    if (!empty($cat->posts) && $itemsQueryPosts) :
+
+                    ?>
+                        <ul>
+                            <?php
+
+                            foreach ($cat->posts as $post) :
+                            ?>
+                                <li>
+                                    <a class="<?php echo ($current_post_id == $post['id']) ? 'active' : ''; ?>" href="<?php echo isset($post['url']) ? esc_url_raw($post['url']) : ''; ?>">
+                                        <span class="fas fa-external-link-alt"></span>
+                                        <?php echo isset($post['title']) ? $post['title'] : ''; ?>
+
+                                    </a>
+
+
+
+                                </li>
+                            <?php
+
+                            endforeach;
+
+                            ?>
+                            <ul>
+                            <?php
+                        endif;
+
+                            ?>
+
+
+                            <?php echo ($postCountPosition == 'afterPosts') ? sprintf($postCountText, $cat->count)  : ''; ?>
+
+
+                </div>
+
+
+
+
+
+            <?php
+            } else {
+            ?>
+                <div class="grid-item">
+
+                    <div class="item-label">
+                        <?php echo ($postCountPosition == 'beforeTitle') ? sprintf($postCountText, $cat->count) : ''; ?>
+                        <?php if ($itemsLinkToTerm) :
+                            $term_link = get_term_link($cat->term_id);
+                        ?>
+                            <a href="<?php echo esc_url_raw($term_link); ?>"><?php echo $cat->name; ?> </a>
+                        <?php else : ?>
+                            <?php echo $cat->name; ?>
+                        <?php endif; ?>
+                        <?php echo ($postCountPosition == 'afterTtile') ? sprintf($postCountText, $cat->count) : ''; ?>
+                    </div>
+
+                    <?php echo ($postCountPosition == 'beforePosts') ? sprintf($postCountText, $cat->count) : ''; ?>
+                    <?php echo ($postCountPosition == 'afterPosts') ? sprintf($postCountText, $cat->count)  : ''; ?>
+
+
+                </div>
+        <?php
+
+            }
+        }
+
+        return ob_get_clean();
+    }
 
 
 
@@ -567,6 +701,8 @@ class PGBlockTermsList
         $itemsHierarchicaly = isset($itemsOptions['hierarchicaly']) ? $itemsOptions['hierarchicaly'] : true;
         $itemsQueryPosts = isset($itemsOptions['queryPosts']) ? $itemsOptions['queryPosts'] : true;
         $itemsAccordionOpen = isset($itemsOptions['accordionOpen']) ? $itemsOptions['accordionOpen'] : true;
+        $hideEmpty = isset($itemsOptions['hideEmpty']) ? $itemsOptions['hideEmpty'] : false;
+
 
         $itemsPrefix = isset($itemsOptions['prefix']) ? $itemsOptions['prefix'] : '';
         $itemsPostfix = isset($itemsOptions['postfix']) ? $itemsOptions['postfix'] : '';
@@ -625,9 +761,8 @@ class PGBlockTermsList
 
 
 
-        $terms = get_terms('docs-category', array('hide_empty' => false));
+        $terms = get_terms('docs-category', array('hide_empty' => $hideEmpty));
 
-        //var_dump($terms);
 
         $sorted_terms = !empty($terms) ? $this->sort_terms_hierarchicaly($terms, 0, $itemsQueryPosts) : [];
 
@@ -668,6 +803,15 @@ class PGBlockTermsList
                     ?>
                 </ul>
             <?php endif; ?>
+
+            <?php if ($itemsViewType == 'grid') : ?>
+                <div class="main-wrap term-list-grid">
+                    <?php
+                    echo $this->html_terms_hierarchicaly_grid($terms, $attributes);
+                    ?>
+                </div>
+            <?php endif; ?>
+
 
 
 
@@ -756,6 +900,33 @@ class PGBlockTermsList
 
             .term-list-list .active {
                 font-weight: bold;
+            }
+
+            .term-list-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                row-gap: 15px;
+                column-gap: 15px;
+            }
+
+            .term-list-grid .grid-item {
+                padding: 15px;
+                background: #9DD6DF;
+            }
+
+            .term-list-grid .grid-item ul {
+                padding: 0;
+
+            }
+
+            .term-list-grid .item-label {
+                font-size: 20px;
+                /* text-align: center; */
+                margin: 0 0px 10px 0;
+            }
+
+            .term-list-grid .grid-item a {
+                color: #444;
             }
         </style>
 

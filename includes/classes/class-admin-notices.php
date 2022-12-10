@@ -29,24 +29,25 @@ class class_post_grid_notices
 
         //var_dump($post_grid_notices);
 
+        ob_start();
 
         if ($screen->id == 'edit-post_grid_layout' || $screen->id == 'post_grid_layout' || $screen->id == 'dashboard'  || $screen->id == 'edit-post_grid' || $screen->id == 'post-grid_page_overview'  || $screen->id == 'post_grid' || $screen->id == 'edit-post_grid_template' || $screen->id == 'post_grid_template' || $screen->id == 'post-grid_page_post-grid-settings' || $screen->id == 'post-grid_page_import_layouts') :
 
-            ob_start();
+
 
             if ($license_status == 'expired' && $license_expired != 'hidden') :
 
-        $actionurl = $_SERVER['REQUEST_URI'];
-        $actionurl = wp_nonce_url( $actionurl,  'license_expired' );
+                $actionurl = $_SERVER['REQUEST_URI'];
+                $actionurl = wp_nonce_url($actionurl,  'license_expired');
 
-        $nonce = isset($_REQUEST['_wpnonce']) ? sanitize_text_field($_REQUEST['_wpnonce']) : '';
+                $nonce = isset($_REQUEST['_wpnonce']) ? sanitize_text_field($_REQUEST['_wpnonce']) : '';
 
-        if ( wp_verify_nonce( $nonce, 'license_expired' )  ){
-            $post_grid_notices['license_expired'] = 'hidden';
-            update_option('post_grid_notices', $post_grid_notices);
+                if (wp_verify_nonce($nonce, 'license_expired')) {
+                    $post_grid_notices['license_expired'] = 'hidden';
+                    update_option('post_grid_notices', $post_grid_notices);
 
-            return;
-        }
+                    return;
+                }
 
 
 
@@ -56,7 +57,7 @@ class class_post_grid_notices
                 <div class="p-3 bg-white my-10">
                     <p class="text-lg flex justify-between">
                         <span>
-                            <span class="dashicons dashicons-warning align-middle text-red-600"></span> Your license for Post Grid plugin has expried, please <a target="_blank" class="bg-blue-600 rounded-sm inline-block text-white hover:text-white hover:bg-blue-700 px-5 py-1" href="https://pickplugins.com/renew-license?licenseKey=<?php echo $license_key; ?>">Renew</a>
+                            <span class="dashicons dashicons-warning align-middle text-red-600"></span> Your license for Post Grid plugin has expried, please <a target="_blank" class="bg-blue-600 rounded-sm inline-block text-white hover:text-white hover:bg-blue-700 px-5 py-1" href="https://pickplugins.com/post-grid/purchase-license/?licenseKey=<?php echo $license_key; ?>">Renew</a>
 
                             <span class="text-amber-500 rounded-sm px-2 py-1 font-bold">Grab 25% Off!</span>
 
@@ -69,7 +70,7 @@ class class_post_grid_notices
             endif;
         endif;
 
-        echo (ob_get_clean());
+        echo ob_get_clean();
     }
 
     public function layout_depricated()

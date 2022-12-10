@@ -103,7 +103,7 @@ $post_grid_settings = get_option('post_grid_settings');
                 <a href="https://pickplugins.com/create-support-ticket/" target="_blank" class="inline-block px-4 py-2 rounded-sm bg-blue-600 text-white text-lg mx-2 hover:text-white ">Create Support</a>
 
 
-                <a href="https://pickplugins.com/documentation/post-grid-combo/" target="_blank" class="inline-block px-4 py-2 rounded-sm bg-blue-600 text-white text-lg mx-2 hover:text-white ">Documentation</a>
+                <a href="https://getpostgrid.com/documentations/" target="_blank" class="inline-block px-4 py-2 rounded-sm bg-blue-600 text-white text-lg mx-2 hover:text-white ">Documentation</a>
 
 
 

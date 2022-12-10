@@ -1350,7 +1350,6 @@ registerBlockType("post-grid/post-excerpt", {
                 <label>Display</label>
                 <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
 
-                  console.log(newVal);
 
                   var newValuesObj = {};
 

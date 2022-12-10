@@ -66,6 +66,9 @@ import './blocks/accordion'
 import './blocks/tabs'
 import './blocks/list'
 
+// import './blocks/row'
+// import './blocks/column'
+
 //import './blocks/shortcode'
 
 // import './blocks/link'

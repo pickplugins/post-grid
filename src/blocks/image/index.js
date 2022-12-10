@@ -247,7 +247,6 @@ registerBlockType("post-grid/image", {
           method: 'POST',
           data: { id: currentPostImageId },
         }).then((res) => {
-          console.log(res);
 
           setPostImage(res);
 
@@ -308,9 +307,7 @@ registerBlockType("post-grid/image", {
 
     useEffect(() => {
 
-      console.log(image.options.imgSrcMetaKey);
-      console.log(image.options.imgSrcMetaKeyType);
-      console.log(postId);
+
 
       if (image.options.imgSrcMetaKey.length != 0) {
 
@@ -323,14 +320,12 @@ registerBlockType("post-grid/image", {
           data: { postId: postId, meta_key: image.options.imgSrcMetaKey, type: 'string', template: '' },
         }).then((res) => {
 
-          console.log(res);
 
 
           var metaKeyType = (image.options.imgSrcMetaKeyType != undefined) ? image.options.imgSrcMetaKeyType : 'ID'
           if (metaKeyType == 'ID') {
             setCurrentPostImageId(res.meta_value)
 
-            console.log(res.meta_value);
 
 
           } else {

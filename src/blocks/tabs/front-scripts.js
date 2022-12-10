@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             tabs.onclick = e => {
                 const id = e.target.dataset.id;
 
-                console.log(id);
 
 
 

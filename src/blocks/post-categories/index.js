@@ -285,7 +285,6 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      //console.log('Listening postCategoriesX: ', postCategoriesX);
 
 
       setPostCategoriesData([]);
@@ -319,7 +318,6 @@ registerBlockType("post-grid/post-categories", {
       }
 
 
-      //console.log(postCategoriesData);
 
     }, [postCategoriesX]);
 
@@ -382,7 +380,6 @@ registerBlockType("post-grid/post-categories", {
 
     function paddingControlItems(nextValues) {
 
-      //console.log(nextValues);
 
 
       var responsive = items.styles.padding;
@@ -400,7 +397,6 @@ registerBlockType("post-grid/post-categories", {
       nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
-      //console.log(nextValues);
 
 
 
@@ -613,7 +609,6 @@ registerBlockType("post-grid/post-categories", {
 
     function onChangeIcon(arg) {
 
-      console.log(arg);
 
 
 
@@ -1007,7 +1002,6 @@ registerBlockType("post-grid/post-categories", {
 
 
     useEffect(() => {
-      ////console.log('Listening linkAttr: ', linkAttr);
       linkAttrObj();
       generateBlockCssY();
 
@@ -1036,7 +1030,6 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-    ////console.log(breakPointList);
     const colors = [
       { name: '9DD6DF', color: '#9DD6DF' },
       { name: '18978F', color: '#18978F' },
@@ -1101,7 +1094,6 @@ registerBlockType("post-grid/post-categories", {
                 <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
 
-                  ////console.log(x.value);
 
                   setPreviewDeviceType(x.value)
                   var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
@@ -1144,11 +1136,6 @@ registerBlockType("post-grid/post-categories", {
 
 
     function onChangeBreakPoint(x, index) {
-
-      ////console.log(x);
-      ////console.log(index);
-      ////console.log('Post Title');
-
 
 
       setPreviewDeviceType(x.value)
@@ -1215,7 +1202,6 @@ registerBlockType("post-grid/post-categories", {
                 <label>Display</label>
                 <PGcssDisplay val={items.styles.display[breakPointX]} onChange={(newVal => {
 
-                  console.log(newVal);
 
                   var newValuesObj = {};
 
@@ -1458,7 +1444,6 @@ registerBlockType("post-grid/post-categories", {
                 <label>Display</label>
                 <PGcssDisplay val={items.styles.display[breakPointX]} onChange={(newVal => {
 
-                  console.log(newVal);
 
                   var newValuesObj = {};
 

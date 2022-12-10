@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-            //console.log(item);
 
         })
     }
@@ -31,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
             //     var contentWrap = document.getElementById(blockId + index);
-            //     console.log(contentWrap);
 
 
             //     if (isActive) {

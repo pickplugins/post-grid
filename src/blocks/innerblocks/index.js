@@ -102,7 +102,6 @@ registerBlockType("post-grid/innerblocks", {
 
     function updateTemplate() {
 
-      console.log('asdfasd');
 
       setTemplate(baseTemplate1)
 

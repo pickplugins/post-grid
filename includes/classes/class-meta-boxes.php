@@ -261,7 +261,7 @@ class post_grid_meta_boxs
             'priority' => 35,
             'active' => ($current_tab == 'grid_settings') ? true : false,
             'data_visible' => 'grid filterable',
-            'hidden' => ($grid_type == 'grid') ? false : true,
+            'hidden' => (($grid_type == 'grid') ? false : true) || (($grid_type == 'filterable') ? false : true),
         );
 
         $settings_tabs[] = array(

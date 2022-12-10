@@ -341,8 +341,6 @@ registerBlockType("post-grid/post-title", {
 
     function setFieldLinkTo(option, index) {
 
-      console.log(option);
-
       var options = { ...postTitle.options, linkTo: option.value };
       setAttributes({ postTitle: { ...postTitle, options: options } });
 
@@ -376,7 +374,6 @@ registerBlockType("post-grid/post-title", {
 
       var count = (postTitle.options.limitCount > 0) ? postTitle.options.limitCount : 999;
 
-      //console.log(count);
 
 
       if (postTitle.options.limitBy == 'character') {
@@ -418,7 +415,6 @@ registerBlockType("post-grid/post-title", {
 
     function paddingControl(nextValues) {
 
-      //console.log(nextValues);
 
 
       var responsive = postTitle.styles.padding;
@@ -436,7 +432,6 @@ registerBlockType("post-grid/post-title", {
       nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
-      //console.log(nextValues);
 
 
 
@@ -556,7 +551,6 @@ registerBlockType("post-grid/post-title", {
 
     function paddingControlWrapper(nextValues) {
 
-      //console.log(nextValues);
 
 
       var responsive = wrapper.styles.padding;
@@ -574,7 +568,6 @@ registerBlockType("post-grid/post-title", {
       nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
-      //console.log(nextValues);
 
 
 
@@ -1809,7 +1802,6 @@ registerBlockType("post-grid/post-title", {
                     <label></label>
                     <PGcssTextAlign val={postTitle.styles.textAlign[breakPointX]} onChange={(newVal => {
 
-                      console.log(newVal);
 
                       var newValuesObj = {};
 

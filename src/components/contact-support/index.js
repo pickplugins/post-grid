@@ -36,7 +36,7 @@ class PGContactSupport extends Component {
 
       //console.log(utmPrams);
 
-      var docUrl = 'https://pickplugins.com/documentation/post-grid-combo/?' + utmPrams + '&utm_medium=Docsbutton';
+      var docUrl = 'https://getpostgrid.com/documentations/?' + utmPrams + '&utm_medium=Docsbutton';
       var tutsUrl = 'https://www.youtube.com/playlist?list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6';
       var supportCreate = 'https://pickplugins.com/create-support-ticket/?' + utmPrams + '&utm_medium=createSupportButton';
       var reviewUrl = 'https://wordpress.org/support/plugin/post-grid/reviews/#new-post';

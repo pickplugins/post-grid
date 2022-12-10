@@ -1,6 +1,5 @@
 //import mixitup from 'mixitup';
 
-//console.log(mixitup);
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -75,18 +74,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
             });
-
-            console.log(mixer);
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -255,7 +242,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     //this.saveAsStatus = 'error';
                     // handle the error
 
-                    //console.log(_error);
                 });
 
         }, 500)
@@ -394,7 +380,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         //this.saveAsStatus = 'error';
                         // handle the error
 
-                        //console.log(_error);
                     });
 
 
@@ -465,8 +450,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             })
 
-            console.log(blockargsObj);
-
 
             loadMorewrapparent.setAttribute('blockargs', JSON.stringify(blockargsObj))
 
@@ -520,7 +503,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     //this.saveAsStatus = 'error';
                     // handle the error
 
-                    //console.log(_error);
                 });
 
         }, 500)

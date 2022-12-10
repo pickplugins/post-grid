@@ -365,7 +365,6 @@ registerBlockType("post-grid/icon", {
 
     function setFieldLinkTo(option, index) {
 
-      console.log(option);
 
       var options = { ...text.options, linkTo: option.value };
       setAttributes({ text: { ...text, options: options } });
@@ -375,7 +374,6 @@ registerBlockType("post-grid/icon", {
 
     function onChangeIcon(arg) {
 
-      console.log(arg);
 
 
 

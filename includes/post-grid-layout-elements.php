@@ -865,7 +865,7 @@ function post_grid_layout_element_css_title($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1211,7 +1211,7 @@ function post_grid_layout_element_css_title_link($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1813,7 +1813,7 @@ function post_grid_layout_element_css_excerpt($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -2171,7 +2171,7 @@ function post_grid_layout_element_css_excerpt_read_more($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -2485,7 +2485,7 @@ function post_grid_layout_element_css_read_more($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?> !important;
             ;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?> !important;
@@ -2835,6 +2835,7 @@ function post_grid_layout_element_media($args)
         $html_media = '';
 
         $is_image = false;
+if(!empty($media_source))
         foreach ($media_source as $source_id => $source_info) {
 
             $args['source_id'] = $source_id;
@@ -4009,7 +4010,7 @@ function post_grid_layout_element_css_post_date($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4326,7 +4327,7 @@ function post_grid_layout_element_css_author($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4634,7 +4635,7 @@ function post_grid_layout_element_css_author_link($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4923,6 +4924,8 @@ function post_grid_layout_element_categories($args)
     $max_term_limit = ($term_total_count < $max_count) ? $term_total_count : $max_count;
 
     $i = 0;
+
+if(!empty($term_list))
     foreach ($term_list as $term) {
         if ($i >= $max_count) continue;
 
@@ -4977,7 +4980,7 @@ function post_grid_layout_element_css_categories($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($link_color)) : ?>color: <?php echo esc_attr($link_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -5234,6 +5237,8 @@ function post_grid_layout_element_tags($args)
     $max_term_limit = ($term_total_count < $max_count) ? $term_total_count : $max_count;
 
     $i = 0;
+
+if(!empty($term_list))
     foreach ($term_list as $term) {
         if ($i >= $max_count) continue;
 
@@ -5287,7 +5292,7 @@ function post_grid_layout_element_css_tags($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($link_color)) : ?>color: <?php echo esc_attr($link_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -5806,7 +5811,7 @@ function post_grid_layout_element_css_share_button($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>a {
+        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
             <?php if (!empty($icon_color)) : ?>color: <?php echo esc_attr($icon_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($icon_margin)) : ?>margin: <?php echo esc_attr($icon_margin);  ?>;

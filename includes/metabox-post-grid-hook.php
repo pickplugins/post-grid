@@ -272,7 +272,7 @@ function post_grid_metabox_tabs_content_general($tab, $post_id)
             ),
         );
 
-        //$settings_tabs_field->generate_field($args, $post_id);
+        $settings_tabs_field->generate_field($args, $post_id);
 
         ?>
 
@@ -668,17 +668,17 @@ function post_grid_metabox_tabs_content_layouts($tab, $post_id)
         ob_start();
 
         ?>
-        <p><a target="_blank" class="button" href="<?php echo esc_url(admin_url() . 'post-new.php?post_type=post_grid_layout'); ?>"><?php echo __('Create layout', 'post-grid'); ?></a> </p>
-        <p><a target="_blank" class="button" href="<?php echo esc_url(admin_url() . 'edit.php?post_type=post_grid_layout'); ?>"><?php echo __('Manage layouts', 'post-grid'); ?></a> </p>
-        <p><a target="_blank" class="button" href="<?php echo esc_url($layout_convert_url); ?>"><?php echo __('Covert old layout to new layout', 'post-grid'); ?></a> for this post grid.</p>
+        <span><a target="_blank" class="button" href="<?php echo esc_url(admin_url() . 'post-new.php?post_type=post_grid_layout'); ?>"><?php echo __('Create layout', 'post-grid'); ?></a> </span>
+        <span><a target="_blank" class="button" href="<?php echo esc_url(admin_url() . 'edit.php?post_type=post_grid_layout'); ?>"><?php echo __('Manage layouts', 'post-grid'); ?></a> </span>
+
         <?php
-        if ($import_layouts != 'done') :
+        //if ($import_layouts != 'done') :
 
 
         ?>
-            <p><a href="<?php echo esc_url(admin_url() . 'edit.php?post_type=post_grid&page=import_layouts'); ?>" class="button import-default-layouts"><?php echo __('Import default layouts', 'post-grid'); ?></a> </p>
+        <span><a target="_blank" href="<?php echo esc_url(admin_url() . 'admin.php?page=import_layouts'); ?>" class="button import-default-layouts"><?php echo __('Layouts library', 'post-grid'); ?></a> </span>
         <?php
-        endif;
+        // endif;
 
 
 

@@ -33,8 +33,8 @@ class PGBlockAccordion
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('pgaccordion_editor_style', post_grid_plugin_url . 'src/blocks/accordion/index.css');
-        wp_register_script('pgaccordion_editor_script', post_grid_plugin_url . 'src/blocks/accordion/index.js', array('wp-blocks', 'wp-element'));
+        //wp_register_style('pgaccordion_editor_style', post_grid_plugin_url . 'src/blocks/accordion/index.css');
+        // wp_register_script('pgaccordion_editor_script', post_grid_plugin_url . 'src/blocks/accordion/index.js', array('wp-blocks', 'wp-element'));
 
 
 
@@ -42,9 +42,9 @@ class PGBlockAccordion
 
 
         register_block_type('post-grid/accordion', array(
-            'editor_script' => 'pgaccordion_editor_script',
+            //'editor_script' => 'pgaccordion_editor_script',
             //'script' => array($this, 'front_script'),
-            'editor_style' => 'pgaccordion_editor_style',
+            //'editor_style' => 'pgaccordion_editor_style',
             //'style' => 'pgaccordion_front_style',
 
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
@@ -353,15 +353,9 @@ class PGBlockAccordion
             document.addEventListener("DOMContentLoaded", function(event) {
                 new Accordion('.PGBlockAccordion', {
                     duration: 400,
-                    onOpen: (currElement) => {
-                        //console.log('onOpen');
-                    },
-                    onClose: (currElement) => {
-                        //console.log('onClose');
-                        //console.log();
-                    },
+                    onOpen: (currElement) => {},
+                    onClose: (currElement) => {},
                     beforeOpen: (currElement) => {
-                        console.log('beforeOpen');
 
                         var iconIdle = currElement.querySelector('.icon-idle');
                         var iconToggled = currElement.querySelector('.icon-toggled');
@@ -372,7 +366,6 @@ class PGBlockAccordion
 
                     },
                     beforeClose: (currElement) => {
-                        console.log('beforeClose');
                         var iconIdle = currElement.querySelector('.icon-idle');
                         var iconToggled = currElement.querySelector('.icon-toggled');
                         if (iconIdle != null) {

@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 6.1
-	Stable tag: 2.2.4
+	Stable tag: 2.2.12
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,7 @@ Post Grid Combo is the #1 Gutenberg Blocks plugin for creating a fully customiza
 
 * [See the Live demo](https://getpostgrid.com/)
 * [Buy Premium](https://www.pickplugins.com/post-grid/)
-* [Documentation](http://pickplugins.com/documentation/post-grid-combo/?ref=wordpress.org)
+* [Documentation](https://getpostgrid.com/documentations/)
 * [Support](https://www.pickplugins.com/support/)
 
 
@@ -247,6 +247,29 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 == Changelog ==
 
+	= 2.2.12 =
+    * 2022-12-06 - Add - Terms List Block added
+
+	= 2.2.10 =
+    * 2022-12-06 - fix - post grid blok - Loop item typography issue fixed.
+
+	= 2.2.9 =
+    * 2022-12-06 - fix - purchase link issue fixed.
+
+	= 2.2.8 =
+    * 2022-12-05 - fix - Warning: Invalid argument supplied for foreach() fixed
+
+	= 2.2.7 =
+    * 2022-12-03 - fix - PHP fatal error fixed for block categories.
+
+	= 2.2.6 =
+    * 2022-12-01 - fix - Old - Post Title link color issue fixed
+    * 2022-12-01 - fix - Old - Container text align issue fixed.
+
+
+	= 2.2.5 =
+    * 2022-12-01 - fix - Post Grid Filterbale - Pagination issue fixed.
+    * 2022-12-01 - fix - Post Grid Shortcode - default style missing issue fixed.
 
 
 	= 2.2.4 =

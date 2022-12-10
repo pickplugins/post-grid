@@ -276,7 +276,6 @@ registerBlockType("post-grid/post-author-fields", {
 
 
     useEffect(() => {
-      //console.log('Listening postAuthorX: ', postAuthorX);
 
       if (metaKey.length == 0) return;
 
@@ -289,7 +288,6 @@ registerBlockType("post-grid/post-author-fields", {
         data: { id: postAuthorX, fields: [] },
       }).then((res) => {
 
-        //console.log(res);
         setpostAuthorData(res);
 
         setLoading(false);
@@ -330,14 +328,11 @@ registerBlockType("post-grid/post-author-fields", {
 
     function onRemoveStyleField(sudoScource, key) {
 
-      console.log(sudoScource);
-      console.log(key);
+
 
       var sudoScourceX = { ...field[sudoScource] }
-      console.log(sudoScourceX);
 
       delete sudoScourceX[key];
-      console.log(sudoScourceX);
 
       field[sudoScource] = sudoScourceX;
       //sudoScourceX[attr][breakPointX] = newVal;
@@ -350,10 +345,8 @@ registerBlockType("post-grid/post-author-fields", {
     function onAddStyleField(sudoScource, key) {
 
       var sudoScourceX = { ...field[sudoScource] }
-      console.log(sudoScourceX);
 
       sudoScourceX[key] = {};
-      console.log(sudoScourceX);
 
       field[sudoScource] = sudoScourceX;
       //sudoScourceX[attr][breakPointX] = newVal;
@@ -368,7 +361,6 @@ registerBlockType("post-grid/post-author-fields", {
 
     function setFieldLinkTo(option, index) {
 
-      console.log(option);
 
       var options = { ...field.options, linkTo: option.value };
       setAttributes({ field: { ...field, options: options } });
@@ -381,7 +373,6 @@ registerBlockType("post-grid/post-author-fields", {
 
     function setUserField(option, index) {
 
-      console.log(option);
 
       setAttributes({ metaKey: option.key });
 
@@ -401,7 +392,6 @@ registerBlockType("post-grid/post-author-fields", {
 
     function onChangeIcon(arg) {
 
-      console.log(arg);
 
 
 
@@ -491,7 +481,6 @@ registerBlockType("post-grid/post-author-fields", {
 
     function paddingControlItems(nextValues) {
 
-      //console.log(nextValues);
 
 
       var responsive = field.styles.padding;
@@ -509,7 +498,6 @@ registerBlockType("post-grid/post-author-fields", {
       nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
-      //console.log(nextValues);
 
 
 
@@ -1030,7 +1018,6 @@ registerBlockType("post-grid/post-author-fields", {
 
 
     useEffect(() => {
-      ////console.log('Listening linkAttr: ', linkAttr);
       linkAttrObj();
       generateBlockCssY();
 
@@ -1059,7 +1046,6 @@ registerBlockType("post-grid/post-author-fields", {
 
 
 
-    ////console.log(breakPointList);
     const colors = [
       { name: '9DD6DF', color: '#9DD6DF' },
       { name: '18978F', color: '#18978F' },
@@ -1187,7 +1173,6 @@ registerBlockType("post-grid/post-author-fields", {
                 <label>Display</label>
                 <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
 
-                  console.log(newVal);
 
                   var newValuesObj = {};
 

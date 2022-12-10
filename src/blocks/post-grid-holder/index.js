@@ -90,7 +90,6 @@ registerBlockType('post-grid/post-grid-holder', {
     }) {
 
 
-      console.log(blockContextId);
 
       const blockPreviewProps = useBlockPreview({
         blocks,

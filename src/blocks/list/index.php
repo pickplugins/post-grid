@@ -14,9 +14,9 @@ class PGBlockList
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('pglist_editor_style', post_grid_plugin_url . 'src/blocks/list/index.css');
-        wp_register_script('pglist_editor_script', post_grid_plugin_url . 'src/blocks/list/index.js', array('wp-blocks', 'wp-element'));
-        wp_register_style('pglist_front_style', post_grid_plugin_url . 'src/blocks/list/index.css');
+        //wp_register_style('pglist_editor_style', post_grid_plugin_url . 'src/blocks/list/index.css');
+        //wp_register_script('pglist_editor_script', post_grid_plugin_url . 'src/blocks/list/index.js', array('wp-blocks', 'wp-element'));
+        //wp_register_style('pglist_front_style', post_grid_plugin_url . 'src/blocks/list/index.css');
 
 
 

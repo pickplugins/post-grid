@@ -45,7 +45,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
             <div class="col-span-6 text-right">
 
                 <a target="_blank" href="https://pickplugins.com/create-support-ticket/" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Contact Support</a>
-                <a target="_blank" href="https://pickplugins.com/documentation/post-grid-combo/" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Documentations</a>
+                <a target="_blank" href="https://getpostgrid.com/documentations/" class="inline-block px-4 py-2 rounded-sm bg-blue-600 hover:bg-blue-400 text-white text-lg mx-2 hover:text-white ">Documentations</a>
 
 
 
@@ -873,7 +873,7 @@ $license_status = isset($post_grid_license['license_status']) ? $post_grid_licen
                     </h3>
                     <p class="text-[16px]">Read the documentations our techincal writer team already solve many issues for your needs. We update our documentation frequently.</p>
 
-                    <a target="_blank" href="https://pickplugins.com/documentation/post-grid-combo/" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See Documentations</a>
+                    <a target="_blank" href="https://getpostgrid.com/documentations/" class="inline-block mt-5 text-blue-700	 font-bold py-2 rounded-sm  text-center 		  text-lg  "> See Documentations</a>
 
                 </div>
 

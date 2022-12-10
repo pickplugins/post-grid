@@ -282,7 +282,6 @@ registerBlockType("post-grid/post-date", {
 
 
 
-      //console.log(dateFormat);
 
 
       const date = new Date(currentPostDate);
@@ -308,16 +307,12 @@ registerBlockType("post-grid/post-date", {
 
       setpostDateEdited(dateFormat.strtr(dateObj));
 
-      console.log(dateFormat.strtr(dateObj));
 
     }, [currentPostDate, postDate.options.dateFormat]);
 
 
 
     function onChangeIcon(arg) {
-
-      console.log(arg);
-
 
 
       var options = { ...icon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
@@ -590,7 +585,6 @@ registerBlockType("post-grid/post-date", {
 
     function paddingControl(nextValues) {
 
-      //console.log(nextValues);
 
 
       var responsive = postDate.styles.padding;
@@ -608,7 +602,6 @@ registerBlockType("post-grid/post-date", {
       nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
-      //console.log(nextValues);
 
 
 
@@ -1192,7 +1185,6 @@ registerBlockType("post-grid/post-date", {
                     <label>Display</label>
                     <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
 
-                      console.log(newVal);
 
                       var newValuesObj = {};
 

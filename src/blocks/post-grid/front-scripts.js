@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         PGBlockPostGrid.forEach(item => {
             var postgridargs = item.getAttribute("postgridargs");
 
-            console.log(postgridargs);
 
 
 

@@ -28,11 +28,19 @@ class class_post_grid_settings
 
         add_submenu_page('post-grid', __('Settings', 'post-grid'), __('Settings', 'post-grid'), 'manage_options', 'post-grid-settings', array($this, 'settings'));
 
-        add_submenu_page('post-grid', __('Layouts library (Old)', 'post-grid'), __('Layouts library (Old)', 'post-grid'), 'manage_options', 'import_layouts', array($this, 'import_layouts'));
 
         add_submenu_page('post-grid', __('Overview', 'post-grid'), __('Overview', 'post-grid'), 'manage_options', 'post-grid-overview', array($this, 'overview'));
+        add_submenu_page('post-grid', __('Layouts library (Old)', 'post-grid'), __('Layouts library (Old)', 'post-grid'), 'manage_options', 'import_layouts', array($this, 'import_layouts'));
+
+
+
         //add_submenu_page('post-grid', __('Post Grid', 'post-grid'), __('All Post Grid', 'post-grid'), 'manage_options', 'edit.php?post_type=post_grid',);
         //add_submenu_page('post-grid', __('Layouts', 'post-grid'), __('All Layouts', 'post-grid'), 'manage_options', 'edit.php?post_type=post_grid_layout',);
+    }
+
+    public function post_grid()
+    {
+        include(post_grid_plugin_dir . 'includes/menu/overview.php');
     }
 
     public function overview()

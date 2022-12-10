@@ -15,18 +15,14 @@ class PGBlockPostGrid
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'src/blocks/post-grid/index.css');
-
-
-        wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'src/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
-
-
+        //wp_register_style('pgpostgrid_editor_style', post_grid_plugin_url . 'src/blocks/post-grid/index.css');
+        //wp_register_script('pgpostgrid_editor_script', post_grid_plugin_url . 'src/blocks/post-grid/index.js', array('wp-blocks', 'wp-element'));
         //wp_register_script('anime.min', post_grid_plugin_url . 'assets/global/js/anime.min.js', []);
 
 
 
         register_block_type('post-grid/post-grid', array(
-            'editor_script' => 'pgpostgrid_editor_script',
+            //'editor_script' => 'pgpostgrid_editor_script',
             //'style' => 'pgpostgrid_front_style',
             //'editor_style' => 'pgpostgrid_editor_style',
             //'script' => 'pgpostgrid_front_script',
@@ -369,9 +365,7 @@ class PGBlockPostGrid
                             ]
                         ],
                         "rawData" => "<!-- wp:post-featured-image  /-->
-
 <!-- wp:post-title /-->
-
 <!-- wp:post-excerpt  /-->"
                     ]
                 ],

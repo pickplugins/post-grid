@@ -328,7 +328,6 @@ registerBlockType("post-grid/accordion", {
 
     function onChangeIcon(arg) {
 
-      console.log(arg);
 
 
 
@@ -340,7 +339,6 @@ registerBlockType("post-grid/accordion", {
 
     function onChangeIconToggle(arg) {
 
-      console.log(arg);
 
 
 
@@ -1823,7 +1821,6 @@ registerBlockType("post-grid/accordion", {
                       allowedFormats={['core/bold', 'core/italic', 'core/link']}
                       onChange={(content) => {
 
-                        console.log(content);
 
 
                         items[i].headerText = content;
@@ -1888,7 +1885,6 @@ registerBlockType("post-grid/accordion", {
                         allowedFormats={['core/bold', 'core/italic', 'core/link']}
                         onChange={(content) => {
 
-                          console.log(content);
 
 
                           items[i].content = content;

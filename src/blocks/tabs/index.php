@@ -15,17 +15,17 @@ class PGBlockTabs
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        wp_register_style('pgtabs_editor_style', post_grid_plugin_url . 'src/blocks/tabs/index.css');
-        wp_register_script('pgtabs_editor_script', post_grid_plugin_url . 'src/blocks/tabs/index.js', array('wp-blocks', 'wp-element'));
+        //wp_register_style('pgtabs_editor_style', post_grid_plugin_url . 'src/blocks/tabs/index.css');
+        //wp_register_script('pgtabs_editor_script', post_grid_plugin_url . 'src/blocks/tabs/index.js', array('wp-blocks', 'wp-element'));
 
 
 
 
         register_block_type('post-grid/tabs', array(
-            'editor_script' => 'pgtabs_editor_script',
+            //'editor_script' => 'pgtabs_editor_script',
             //'script' => 'pgtabs_front_script',
 
-            'editor_style' => 'pgtabs_editor_style',
+            //'editor_style' => 'pgtabs_editor_style',
             //'style' => 'pgtabs_front_style',
 
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],

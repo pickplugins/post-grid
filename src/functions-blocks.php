@@ -310,7 +310,7 @@ function post_grid_block_categories($categories, $context)
                     'title' => __('Post Grid Combo', 'boilerplate'),
                 ),
             ),
-            $categories,
+            $categories
         );
     } else {
         return $categories;

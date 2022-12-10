@@ -368,7 +368,6 @@ registerBlockType("post-grid/tabs", {
 
     function onChangeIcon(arg) {
 
-      console.log(arg);
 
 
 
@@ -379,9 +378,6 @@ registerBlockType("post-grid/tabs", {
 
 
     function onChangeIconToggle(arg) {
-
-      console.log(arg);
-
 
 
       var options = { ...iconToggle.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };

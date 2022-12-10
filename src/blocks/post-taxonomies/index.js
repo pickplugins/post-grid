@@ -252,7 +252,6 @@ registerBlockType("post-grid/post-taxonomies", {
       setPostCategoriesX,
     ] = useEntityProp('postType', postType, taxonomies.options.taxName, postId);
 
-    console.log(postCategoriesX);
 
 
 
@@ -268,8 +267,6 @@ registerBlockType("post-grid/post-taxonomies", {
 
 
     useEffect(() => {
-      console.log('Listening postCategoriesX: ', postCategoriesX);
-
 
       setPostCategoriesData([]);
       setCategories([]);
@@ -422,9 +419,6 @@ registerBlockType("post-grid/post-taxonomies", {
 
 
     function onChangeIcon(arg) {
-
-      console.log(arg);
-
 
 
       var options = { ...icon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };

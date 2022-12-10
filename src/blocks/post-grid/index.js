@@ -202,10 +202,11 @@ registerBlockType("post-grid/post-grid", {
           fontSize: {}, //{ val: '18', unit: 'px' }
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
           textDecoration: {}, //overline, line-through, underline
           textTransform: {},
+
+          fontFamily: {},
+          fontWeight: {},
         },
         hoverStyles:
         {
@@ -902,7 +903,6 @@ registerBlockType("post-grid/post-grid", {
     (
       postTypesData !== null && postTypesData.map(x => {
 
-        console.log(x);
 
 
         postTypes.push({ value: x.slug, label: x.name })
@@ -1317,7 +1317,6 @@ registerBlockType("post-grid/post-grid", {
 
     function onChangeItemBorder(nextValues) {
 
-      console.log(nextValues);
 
 
       var width = (nextValues.width == undefined) ? '0px' : nextValues.width;
@@ -2002,6 +2001,109 @@ registerBlockType("post-grid/post-grid", {
     }
 
 
+
+    function onChangeItemWrapTypo(typoX) {
+
+      setAttributes({ itemWrap: { ...itemWrap, styles: typoX } });
+
+      var newValuesObjX = {};
+
+
+      if (typoX.fontFamily[breakPointX] != undefined) {
+
+        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'font-family': typoX.fontFamily };
+
+      }
+
+
+      if (typoX.fontSize[breakPointX] != undefined) {
+
+        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
+        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
+
+
+        var fontSizeX = (blockCssY.items[loopItemSelector]['font-size'] != undefined) ? blockCssY.items[loopItemSelector]['font-size'] : {};
+
+        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
+        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'font-size': fontSizeX };
+
+      }
+
+
+
+      if (typoX.lineHeight[breakPointX] != undefined) {
+
+        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 0;
+        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
+
+
+        var lineHeightX = (blockCssY.items[loopItemSelector]['line-height'] != undefined) ? blockCssY.items[loopItemSelector]['line-height'] : {};
+
+        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
+
+        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'line-height': lineHeightX };
+      }
+      if (typoX.letterSpacing[breakPointX] != undefined) {
+
+        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
+        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
+
+
+
+        var letterSpacingX = (blockCssY.items[loopItemSelector]['letter-spacing'] != undefined) ? blockCssY.items[loopItemSelector]['letter-spacing'] : {};
+
+        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
+
+        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'letter-spacing': letterSpacingX };
+      }
+
+      if (typoX.fontWeight[breakPointX] != undefined) {
+
+        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'font-weight': typoX.fontWeight };
+
+      }
+
+
+      if (typoX.textDecoration[breakPointX] != undefined) {
+
+        var str = {};
+
+        var textDecorationX = typoX.textDecoration[breakPointX];
+        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
+
+        str[breakPointX] = textDecorationXStr;
+
+        //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
+
+        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'text-decoration': str };
+
+      }
+      if (typoX.textTransform[breakPointX] != undefined) {
+
+        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'text-transform': typoX.textTransform };
+
+
+      }
+
+
+      if (typoX.fontFamily[breakPointX] != undefined) {
+
+        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'font-family': typoX.fontFamily };
+
+      }
+
+      if (typoX.fontWeight[breakPointX] != undefined) {
+
+        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'font-weight': typoX.fontWeight };
+
+      }
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+    }
 
 
 
@@ -3150,9 +3252,6 @@ registerBlockType("post-grid/post-grid", {
                                     placeholder="Comma separated"
                                     onChange={(newVal) => {
                                       var itemData = queryArgs.items[index];
-                                      console.log(newVal);
-
-
 
                                       var term = itemData.val[j].terms[k]
                                       term.terms = newVal.split(',');
@@ -4421,7 +4520,6 @@ registerBlockType("post-grid/post-grid", {
                 <PanelRow>
                   <PGcssBoxShadow val={(itemWrap.styles.boxShadow != undefined) ? itemWrap.styles.boxShadow[breakPointX] : ''} onChange={(newVal => {
 
-                    //console.log(newVal);
 
                     var newValuesObj = {};
 
@@ -4483,7 +4581,7 @@ registerBlockType("post-grid/post-grid", {
                   <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                 </PanelRow>
 
-                <Typography typo={itemWrap.styles} breakPointX={breakPointX} onChange={onChangePaginationTypo} setAttributes={setAttributes} obj={itemWrap} />
+                <Typography typo={itemWrap.styles} breakPointX={breakPointX} onChange={onChangeItemWrapTypo} setAttributes={setAttributes} obj={itemWrap} />
 
 
 

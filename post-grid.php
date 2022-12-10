@@ -3,7 +3,7 @@
 Plugin Name: Post Grid Combo
 Plugin URI: https://www.pickplugins.com/post-grid
 Description: Post Grid Combo is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.4
+Version: 2.2.12
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid Combo');
-            define('post_grid_version', '2.2.4');
+            define('post_grid_version', '2.2.12');
             define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
 
 
@@ -56,7 +56,7 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/layers/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/accordion/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/tabs/index.php');
-             require_once(post_grid_plugin_dir . 'src/blocks/terms-list/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/terms-list/index.php');
 
             require_once(post_grid_plugin_dir . 'src/blocks/layer/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/image/index.php');
@@ -75,6 +75,8 @@ if (!class_exists('PostGrid')) {
             global $postGridCustomCss;
             global $postGridCssY;
             global $postGridScriptData;
+
+            global $postGridLoaded;
 
 
 
@@ -129,14 +131,15 @@ if (!class_exists('PostGrid')) {
             add_action('activated_plugin', array($this, 'redirect_welcome'));
 
 
-
-
             // $args = array(
             //     'post_types' => array('post_grid', 'post_grid_layout', 'post_grid_template'),
             // );
 
             // new PPduplicatePost($args);
         }
+
+
+
 
 
         public function init_plugin()
@@ -222,8 +225,8 @@ if (!class_exists('PostGrid')) {
             // Register Scripts & JS
             wp_register_script('post_grid_scripts', post_grid_plugin_url . 'assets/frontend/js/scripts.js', array('jquery'));
 
-            wp_register_script('masonry', post_grid_plugin_url . 'assets/frontend/js/masonry.pkgd.min.js', array('jquery'));
-            wp_register_script('imagesloaded', post_grid_plugin_url . 'assets/frontend/js/imagesloaded.pkgd.js', array('jquery'));
+            //wp_register_script('masonry', post_grid_plugin_url . 'assets/frontend/js/masonry.pkgd.min.js', array('jquery'));
+            //wp_register_script('imagesloaded', post_grid_plugin_url . 'assets/frontend/js/imagesloaded.pkgd.js', array('jquery'));
 
             // Register CSS & Styles
             wp_register_style('post-grid-style', post_grid_plugin_url . 'assets/frontend/css/style.css');
@@ -232,11 +235,12 @@ if (!class_exists('PostGrid')) {
             wp_register_style('font-awesome-4', post_grid_plugin_url . 'assets/global/css/font-awesome-4.css');
             wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/global/css/font-awesome-5.css');
 
-            wp_register_style('font-awesome-123123', post_grid_plugin_url . 'assets/global/css/font-awesome-5.css');
-
             wp_register_style('bootstrap-icons', post_grid_plugin_url . 'assets/css/bootstrap-icons/bootstrap-icons.css');
             wp_register_style('fontawesome-icons', post_grid_plugin_url . 'assets/css/fontawesome/css/all.min.css');
             wp_register_style('icofont-icons', post_grid_plugin_url . 'assets/css/icofont/icofont.min.css');
+
+
+
         }
 
         public function enqueue_scripts()

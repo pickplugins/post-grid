@@ -276,7 +276,6 @@ registerBlockType("post-grid/post-tags", {
     }, [icon]);
 
     useEffect(() => {
-      //console.log('Listening postCategoriesX: ', postCategoriesX);
 
 
       setPostCategoriesData([]);
@@ -309,7 +308,6 @@ registerBlockType("post-grid/post-tags", {
       }
 
 
-      //console.log(postCategoriesData);
 
     }, [postCategoriesX]);
 
@@ -334,7 +332,6 @@ registerBlockType("post-grid/post-tags", {
       if (postCategoriesX != undefined && postCategoriesX.length > 0) {
 
         var maxCount = (items.options.maxCount.length > 0) ? items.options.maxCount : 99;
-        console.log(maxCount);
 
         setcategoryCount(categories.length - 1);
         var asdasd = postCategoriesData.slice(0, maxCount);
@@ -359,7 +356,6 @@ registerBlockType("post-grid/post-tags", {
 
     function paddingControlItems(nextValues) {
 
-      //console.log(nextValues);
 
 
       var responsive = items.styles.padding;
@@ -377,7 +373,6 @@ registerBlockType("post-grid/post-tags", {
       nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
-      //console.log(nextValues);
 
 
 
@@ -437,9 +432,6 @@ registerBlockType("post-grid/post-tags", {
 
 
     function onChangeIcon(arg) {
-
-      console.log(arg);
-
 
 
       var options = { ...icon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
@@ -1021,7 +1013,6 @@ registerBlockType("post-grid/post-tags", {
 
 
 
-    ////console.log(breakPointList);
     const colors = [
       { name: '9DD6DF', color: '#9DD6DF' },
       { name: '18978F', color: '#18978F' },
@@ -1088,7 +1079,6 @@ registerBlockType("post-grid/post-tags", {
                 <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
 
-                  ////console.log(x.value);
 
                   setPreviewDeviceType(x.value)
                   var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
@@ -1131,10 +1121,6 @@ registerBlockType("post-grid/post-tags", {
 
 
     function onChangeBreakPoint(x, index) {
-
-      ////console.log(x);
-      ////console.log(index);
-      ////console.log('Post Title');
 
 
 
@@ -1201,7 +1187,6 @@ registerBlockType("post-grid/post-tags", {
                 <label>Display</label>
                 <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
 
-                  console.log(newVal);
 
                   var newValuesObj = {};
 
@@ -1271,7 +1256,6 @@ registerBlockType("post-grid/post-tags", {
                   onChange={(newVal) => {
 
 
-                    console.log(newVal);
                     var options = { ...items.options, maxCount: newVal };
                     setAttributes({ items: { ...items, options: options } });
 

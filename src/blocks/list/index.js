@@ -1632,7 +1632,6 @@ registerBlockType("post-grid/list", {
                         allowedFormats={['core/bold', 'core/italic', 'core/link']}
                         onChange={(content) => {
 
-                          console.log(content);
 
 
                           items[i].text = content;

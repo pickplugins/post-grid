@@ -223,7 +223,6 @@ registerBlockType("post-grid/read-more", {
     const [iconHtml, setIconHtml] = useState('');
 
 
-    console.log(postGridData);
 
     // Wrapper CSS Class Selectors
     const redmoreWrapperSelector = blockClass;
@@ -332,7 +331,6 @@ registerBlockType("post-grid/read-more", {
 
     function onChangeIcon(arg) {
 
-      console.log(arg);
 
 
 
@@ -1048,7 +1046,6 @@ registerBlockType("post-grid/read-more", {
                     <label>Display</label>
                     <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
 
-                      console.log(newVal);
 
                       var newValuesObj = {};
 

@@ -234,7 +234,6 @@ registerBlockType("post-grid/post-author", {
     var [html, setHtml] = useState({});
     var [loading, setLoading] = useState(false);
 
-    console.log(html);
 
 
 
@@ -308,9 +307,7 @@ registerBlockType("post-grid/post-author", {
 
     function generatehtml() {
 
-      //console.log(postAuthor.name);
 
-      //console.log(name.options);
 
 
       var nameHtml = (postAuthor.name != undefined) ? `<span className='prefix'>${name.options.prefix}</span>${postAuthor.name}<span className='postfix'>${name.options.postfix}</span>` : 'Author Name 1';
@@ -347,7 +344,6 @@ registerBlockType("post-grid/post-author", {
 
       }
 
-      //console.log(nameHtml);
 
 
 
@@ -368,7 +364,6 @@ registerBlockType("post-grid/post-author", {
 
       }
 
-      //console.log(html);
 
 
 
@@ -382,7 +377,6 @@ registerBlockType("post-grid/post-author", {
 
     useEffect(() => {
 
-      //console.log('postAuthor', postAuthor);
 
       setTimeout(() => {
         generatehtml();
@@ -394,7 +388,6 @@ registerBlockType("post-grid/post-author", {
 
     useEffect(() => {
 
-      //console.log(name);
 
 
       generatehtml();
@@ -443,7 +436,6 @@ registerBlockType("post-grid/post-author", {
       var responsive = name.styles.padding;
       responsive[breakPointX] = nextValues;
 
-      //////console.log(nextValues);
 
       var styles = { ...name.styles, padding: responsive };
       setAttributes({ name: { ...name, styles: styles } });
@@ -510,7 +502,6 @@ registerBlockType("post-grid/post-author", {
       var responsive = avatar.styles.borderRadius;
       responsive[breakPointX] = nextValues;
 
-      //console.log(responsive);
 
       var styles = { ...avatar.styles, borderRadius: responsive };
       setAttributes({ avatar: { ...avatar, styles: styles } });
@@ -556,7 +547,6 @@ registerBlockType("post-grid/post-author", {
       var responsive = avatar.styles.padding;
       responsive[breakPointX] = nextValues;
 
-      //////console.log(nextValues);
 
       var styles = { ...avatar.styles, padding: responsive };
       setAttributes({ avatar: { ...avatar, styles: styles } });
@@ -628,7 +618,6 @@ registerBlockType("post-grid/post-author", {
       var responsive = description.styles.padding;
       responsive[breakPointX] = nextValues;
 
-      //////console.log(nextValues);
 
       var styles = { ...description.styles, padding: responsive };
       setAttributes({ description: { ...description, styles: styles } });

@@ -219,7 +219,6 @@ function QueryPlaceholder({
 				getDefaultBlockVariation,
 			} = select(blocksStore);
 
-			console.log(getBlockVariations);
 
 			return {
 				blockType: getBlockType(name),
@@ -232,7 +231,6 @@ function QueryPlaceholder({
 
 	const { replaceInnerBlocks } = useDispatch(blockEditorStore);
 
-	console.log(replaceInnerBlocks);
 
 	const blockProps = useBlockProps();
 	return (
@@ -244,7 +242,6 @@ function QueryPlaceholder({
 				onSelect={(nextVariation = defaultVariation) => {
 
 
-					console.log(defaultVariation);
 
 
 					if (nextVariation.innerBlocks) {

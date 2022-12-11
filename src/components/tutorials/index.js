@@ -48,7 +48,7 @@ class PGTutorials extends Component {
               value={keyword}
               onChange={(newVal) => {
 
-                console.log(newVal);
+                //console.log(newVal);
                 setKeyword(newVal);
 
                 setfilteredLinks([]);
@@ -86,7 +86,7 @@ class PGTutorials extends Component {
                   //newLinks.push(x);
 
                 })
-                console.log(xLink);
+                //console.log(xLink);
                 setfilteredLinks(xLink);
 
 
@@ -100,7 +100,10 @@ class PGTutorials extends Component {
             {keyword.length == 0 && links.map(link => {
 
               return (
-                <a className='block my-1 text-[14px] hover:underline' href={link.url} target="_blank"><span class="dashicons dashicons-editor-help"></span> {link.label}</a>
+                <>
+                  {link.url.length > 0 && <a className='block my-1 text-[14px] hover:underline' href={link.url} target="_blank"><span class="dashicons dashicons-editor-help"></span> {link.label}</a>}
+                </>
+
               )
 
             })}
@@ -109,8 +112,9 @@ class PGTutorials extends Component {
 
               if (link.exclude === false) {
                 return (
-                  <a className='block my-1 text-[14px] hover:underline' href={link.url} target="_blank"> <RawHTML>{'<span class="dashicons dashicons-editor-help"></span>'} {link.label}</RawHTML></a>
-                )
+                  <>
+                    {link.url.length > 0 && <a className='block my-1 text-[14px] hover:underline' href={link.url} target="_blank"><span class="dashicons dashicons-editor-help"></span> {link.label}</a>}
+                  </>)
               }
 
 

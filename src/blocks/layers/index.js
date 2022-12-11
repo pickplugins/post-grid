@@ -1331,9 +1331,9 @@ registerBlockType("post-grid/layers", {
 
 
     return (
-      <div className={[blockId]} >
-        <InnerBlocks.Content />
-      </div>
+
+      <InnerBlocks.Content />
+
     );
 
 

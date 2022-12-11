@@ -49,9 +49,11 @@ import PGcssBorder from '../../components/css-border'
 import PGcssBoxShadow from '../../components/css-box-shadow'
 
 import breakPoints from '../../breakpoints'
-import queryPrams from '../../queryprams'
+//import queryPrams from '../../queryprams'
 import queryPresets from './query-presets'
 import gridLayouts from './grid-layouts'
+import queryPrams from './queryprams'
+
 
 import colorsPresets from '../../colors-presets'
 import anime from 'animejs/lib/anime.es.js';
@@ -486,33 +488,33 @@ registerBlockType("post-grid/post-grid", {
 
     var tutorialsLinks = [
       { label: 'How to add columns?', url: '', isVideo: false, },
-      { label: 'How to add rows?', url: '', isVideo: false, },
-      { label: 'How to display normal pagination?', url: '', isVideo: false, },
-      { label: 'How to display ajax pagination?', url: '', isVideo: false, },
-      { label: 'How to display next-previous pagination?', url: '', isVideo: false, },
-      { label: 'How to enable load more?', url: '', isVideo: false, },
-      { label: 'How to enable infinte loading?', url: '', isVideo: false, },
       { label: 'How to disable pagination?', url: '', isVideo: false, },
       { label: 'How to customize pagination style?', url: '', isVideo: false, },
+      { label: 'How to display normal pagination?', url: '', isVideo: false, },
+      { label: 'How to display next-previous pagination?', url: '', isVideo: false, },
+      { label: 'How to display ajax pagination?', url: '', isVideo: false, },
+      { label: 'How to enable infinte loading?', url: '', isVideo: false, },
+      { label: 'How to query post by post status?', url: '', isVideo: false, },
+
+
+      { label: 'How to add rows?', url: '', isVideo: false, },
+      { label: 'How to enable load more?', url: '', isVideo: false, },
       { label: 'How to enable lazy loading?', url: '', isVideo: true, },
       { label: 'How to custoize post grid container', url: '', isVideo: false, },
       { label: 'How to customize post grid loop wrapper?', url: '', isVideo: false, },
       { label: 'How to query post by post types?', url: '', isVideo: false, },
-      { label: 'How to query post by custom post types?', url: '', isVideo: false, },
-      { label: 'How to query post by post status?', url: '', isVideo: false, },
+      { label: 'How to query posts by custom post types?', url: '', isVideo: false, },
       { label: 'How to query post by categories?', url: '', isVideo: false, },
       { label: 'How to query post by tags?', url: '', isVideo: false, },
       { label: 'How to query post by custom taxonomies & terms?', url: '', isVideo: false, },
       { label: 'How to query post by custom meta fields?', url: '', isVideo: false, },
       { label: 'How to query post by search parameter?', url: '', isVideo: false, },
-      { label: 'How to query post by post status?', url: '', isVideo: false, },
       { label: 'How to query post by order & orderby?', url: '', isVideo: false, },
       { label: 'How to query post by date?', url: '', isVideo: false, },
       { label: 'How to query post by author?', url: '', isVideo: false, },
       { label: 'How to query post by post ids?', url: '', isVideo: false, },
       { label: 'How to query post by post parents?', url: '', isVideo: false, },
       { label: 'How to query post by post passwords?', url: '', isVideo: false, },
-      { label: 'How to customize layouts?', url: '', isVideo: false, },
       { label: 'How to customize layouts?', url: '', isVideo: false, },
       { label: 'How to customize grid layout?', url: '', isVideo: false, },
       { label: 'How to create complex grid layout?', url: '', isVideo: false, },
@@ -3380,9 +3382,9 @@ registerBlockType("post-grid/post-grid", {
             }
 
 
-            {(item.id == 'postParent' || item.id == 'postPassword') &&
+            {(item.id == 'postPassword') &&
 
-              <div >
+              <div>
 
                 <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryArgs"}>
                   <p> <span className='underline'>Post Parent, Post Password</span> Only avilable in Premium</p>

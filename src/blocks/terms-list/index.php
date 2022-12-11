@@ -761,7 +761,7 @@ class PGBlockTermsList
 
 
 
-        $terms = get_terms('docs-category', array('hide_empty' => $hideEmpty));
+        $terms = get_terms($taxName, array('hide_empty' => $hideEmpty));
 
 
         $sorted_terms = !empty($terms) ? $this->sort_terms_hierarchicaly($terms, 0, $itemsQueryPosts) : [];
@@ -769,7 +769,7 @@ class PGBlockTermsList
 
 
 
-        //echo '<pre>' . var_export($itemsViewType, true) . '</pre>';
+        //echo '<pre>' . var_export($terms, true) . '</pre>';
 
 
 

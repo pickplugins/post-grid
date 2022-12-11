@@ -1676,9 +1676,7 @@ registerBlockType("post-grid/layer", {
     const blockProps = useBlockProps.save({ style: redBackground });
 
     return (
-      <div className={[blockId]} >
-        <InnerBlocks.Content />
-      </div>
+      <InnerBlocks.Content />
     );
 
 

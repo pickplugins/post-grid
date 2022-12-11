@@ -47,9 +47,10 @@ import PGTutorials from '../../components/tutorials'
 import PGcssPadding from '../../components/css-padding'
 
 import breakPoints from '../../breakpoints'
-import queryPrams from '../../queryprams'
 import queryPresets from './query-presets'
 import gridLayouts from './grid-layouts'
+import queryPrams from './queryprams'
+
 
 import colorsPresets from '../../colors-presets'
 import anime from 'animejs/lib/anime.es.js';

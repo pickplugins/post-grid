@@ -9582,9 +9582,7 @@ var myStore = wp.data.select('postgrid-shop');
     const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.useBlockProps.save({
       style: redBackground
     });
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: [blockId]
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InnerBlocks.Content, null)); //return null;
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InnerBlocks.Content, null); //return null;
   }
 });
 
@@ -10804,9 +10802,7 @@ function EditComponent() {
     const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.useBlockProps.save({
       style: redBackground
     });
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: [blockId]
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InnerBlocks.Content, null)); //return null;
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InnerBlocks.Content, null); //return null;
   }
 });
 
@@ -25359,9 +25355,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_tutorials__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/tutorials */ "./src/components/tutorials/index.js");
 /* harmony import */ var _components_css_padding__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/css-padding */ "./src/components/css-padding/index.js");
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
-/* harmony import */ var _queryprams__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../queryprams */ "./src/queryprams.js");
-/* harmony import */ var _query_presets__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./query-presets */ "./src/blocks/post-grid-filterable/query-presets.js");
-/* harmony import */ var _grid_layouts__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./grid-layouts */ "./src/blocks/post-grid-filterable/grid-layouts.js");
+/* harmony import */ var _query_presets__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./query-presets */ "./src/blocks/post-grid-filterable/query-presets.js");
+/* harmony import */ var _grid_layouts__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./grid-layouts */ "./src/blocks/post-grid-filterable/grid-layouts.js");
+/* harmony import */ var _queryprams__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./queryprams */ "./src/blocks/post-grid-filterable/queryprams.js");
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
 /* harmony import */ var animejs_lib_anime_es_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! animejs/lib/anime.es.js */ "./node_modules/animejs/lib/anime.es.js");
 
@@ -25407,7 +25403,7 @@ var select = wp.data.select('core/block-editor');
 
 
 const ALLOWED_MEDIA_TYPES = ['image'];
-var queryPramsX = _queryprams__WEBPACK_IMPORTED_MODULE_23__["default"].map((x, i) => {
+var queryPramsX = _queryprams__WEBPACK_IMPORTED_MODULE_25__["default"].map((x, i) => {
   return {
     value: i,
     label: x.label,
@@ -29065,7 +29061,7 @@ var myStore = wp.data.select('postgrid-shop');
 
     function addQueryPramX(_option, index) {
       var attrExist = false;
-      var data = _queryprams__WEBPACK_IMPORTED_MODULE_23__["default"][index];
+      var data = _queryprams__WEBPACK_IMPORTED_MODULE_25__["default"][index];
       var multiple = data.multiple;
       var isExist = queryArgs.items.map(item => {
         if (item.id == index) {
@@ -29293,7 +29289,7 @@ var myStore = wp.data.select('postgrid-shop');
     }, "Query Presets"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom right",
       variant: "secondary",
-      options: _query_presets__WEBPACK_IMPORTED_MODULE_24__["default"],
+      options: _query_presets__WEBPACK_IMPORTED_MODULE_23__["default"],
       buttonTitle: "Choose",
       onChange: addQueryPreset,
       values: ''
@@ -29834,7 +29830,7 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       })));
-    }), _grid_layouts__WEBPACK_IMPORTED_MODULE_25__["default"].map((x, _i) => {
+    }), _grid_layouts__WEBPACK_IMPORTED_MODULE_24__["default"].map((x, _i) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "cursor-pointer relative hover:bg-blue-200 my-3",
         onClick: _ev => {
@@ -31870,6 +31866,427 @@ const queryPresets = [{
 
 /***/ }),
 
+/***/ "./src/blocks/post-grid-filterable/queryprams.js":
+/*!*******************************************************!*\
+  !*** ./src/blocks/post-grid-filterable/queryprams.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const queryPrams = [{
+  val: ['post'],
+  multiple: false,
+  id: 'postType',
+  label: 'Post Types',
+  description: "Select Post Types to Query"
+}, {
+  val: [],
+  multiple: false,
+  id: 'taxQuery',
+  label: 'Tax Query',
+  description: "Taxonomies query arguments",
+  isPro: true
+}, {
+  val: 'OR',
+  multiple: false,
+  id: 'taxQueryRelation',
+  label: 'Tax Query Relation',
+  description: "Taxonomies query relation"
+}, {
+  val: [],
+  multiple: false,
+  id: 'metaQuery',
+  label: 'Meta Query',
+  description: "Meta field query",
+  isPro: true
+}, {
+  val: '',
+  multiple: false,
+  id: 's',
+  label: 'Keyword',
+  description: "Search keyword, ex: hello"
+}, {
+  val: [],
+  multiple: false,
+  id: 'postStatus',
+  label: 'Post status',
+  description: "Query post by post status"
+}, {
+  val: '',
+  multiple: false,
+  id: 'order',
+  label: 'Order',
+  description: "Post query order"
+}, {
+  val: [],
+  multiple: false,
+  id: 'orderby',
+  label: 'Orderby',
+  description: "Post query orderby"
+}, {
+  val: '',
+  multiple: false,
+  id: 'metaKey',
+  label: 'Meta fields key',
+  description: "Post query by meta fields key"
+}, // Date Parameters
+{
+  val: [],
+  multiple: false,
+  id: 'dateQuery',
+  label: 'Date Query',
+  description: "Post query by date",
+  isPro: true
+}, {
+  val: '',
+  multiple: false,
+  id: 'year',
+  label: 'Year',
+  description: "Post query by year"
+}, {
+  val: '',
+  multiple: false,
+  id: 'monthnum',
+  label: 'Month',
+  description: "Post query by month"
+}, {
+  val: '',
+  multiple: false,
+  id: 'w',
+  label: 'Week',
+  description: "Post query by week"
+}, {
+  val: '',
+  multiple: false,
+  id: 'day',
+  label: 'Day',
+  description: "Post query by day"
+}, {
+  val: '',
+  multiple: false,
+  id: 'hour',
+  label: 'Hour',
+  description: "Post query by hour"
+}, {
+  val: '',
+  multiple: false,
+  id: 'minute',
+  label: 'Miniute',
+  description: "Post query by miniute"
+}, {
+  val: '',
+  multiple: false,
+  id: 'second',
+  label: 'Second',
+  description: "Post query by second"
+}, {
+  val: '',
+  multiple: false,
+  id: 'm',
+  label: 'Month',
+  description: "Post query by month"
+}, // Author Parameters
+{
+  val: '',
+  multiple: false,
+  id: 'author',
+  label: 'Author',
+  description: "Post query by Author ID"
+}, {
+  val: '',
+  multiple: false,
+  id: 'authorName',
+  label: 'Author Name',
+  description: "Post query by Author Name"
+}, {
+  val: [],
+  multiple: false,
+  id: 'authorIn',
+  label: 'Author In',
+  description: "Post query by Author IDs",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'authorNotIn',
+  label: 'Author Not In',
+  description: "Post query by exluded Author IDs",
+  isPro: true
+}, // Category Parameters
+{
+  val: '',
+  multiple: false,
+  id: 'cat',
+  label: 'Category ID',
+  description: "Post query by Category ID"
+}, {
+  val: '',
+  multiple: false,
+  id: 'categoryName',
+  label: 'Category Name',
+  description: "Post query by Category Name"
+}, {
+  val: [],
+  multiple: false,
+  id: 'categoryAnd',
+  label: 'CategoryAnd',
+  description: "Post query by Category IDs",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'categoryIn',
+  label: 'Category In',
+  description: "Post query by Category IDs",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'categoryNotIn',
+  label: 'Category Not In',
+  description: "Post query by excluded Category IDs",
+  isPro: true
+}, // Tag Parameters
+{
+  val: '',
+  multiple: false,
+  id: 'tag',
+  label: 'Tags',
+  description: "Post query by Tag slug"
+}, {
+  val: '',
+  multiple: false,
+  id: 'tagId',
+  label: 'Tag Id',
+  description: "Post query by Tag ID"
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagAnd',
+  label: 'Tag And',
+  description: "Post query by Tag Ids",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagIn',
+  label: 'Tag In',
+  description: "Post query by Tag ids",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagNotIn',
+  label: 'Tag Not In',
+  description: "Post query by excluded Tag ids"
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagSlugAnd',
+  label: 'Tag Slug And',
+  description: "Post query by Tags slug",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagSlugIn',
+  label: 'Tag Slug In',
+  description: "Post query by excluded Tags slug",
+  isPro: true
+}, {
+  val: '',
+  multiple: false,
+  id: 'p',
+  label: 'Post id',
+  description: "Post query by single post id"
+}, {
+  val: '',
+  multiple: false,
+  id: 'name',
+  label: 'Name',
+  description: "Post query by post slug"
+}, {
+  val: '',
+  multiple: false,
+  id: 'pageId',
+  label: 'Page Id',
+  description: "Post query by single page id"
+}, {
+  val: '',
+  multiple: false,
+  id: 'pagename',
+  label: 'Page name',
+  description: "Post query by page slug"
+}, {
+  val: '',
+  multiple: false,
+  id: 'postParent',
+  label: 'Post Parent',
+  description: "Post query by post parent id",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'postParentIn',
+  label: 'Post Parent In',
+  description: "Post query by post parent ids",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'postParentNotIn',
+  label: 'Post Parent Not In',
+  description: "Post query by excluded post parent ids"
+}, {
+  val: [],
+  multiple: false,
+  id: 'postIn',
+  label: 'Post In',
+  description: "Post query by single post id",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'postNotIn',
+  label: 'Post Not In',
+  description: "Post query by excluded post ids",
+  isPro: true
+}, {
+  val: [{
+    slug: ''
+  }],
+  multiple: false,
+  id: 'postNameIn',
+  label: 'Post Name In',
+  description: "Post query by post slugs",
+  isPro: true
+}, {
+  val: '',
+  multiple: false,
+  id: 'hasPassword',
+  label: 'Has Password',
+  description: "Post query for posts with passwords"
+}, {
+  val: '',
+  multiple: false,
+  id: 'postPassword',
+  label: 'Post Password',
+  description: "Post query for posts with particular passwords",
+  isPro: true
+}, {
+  val: {
+    compare: '='
+  },
+  multiple: false,
+  id: 'commentCount',
+  label: 'Comment Count',
+  description: "Post query by comment count"
+}, {
+  val: '',
+  multiple: false,
+  id: 'nopaging',
+  label: 'No Paging',
+  description: "Enable show all posts or use pagination"
+}, {
+  val: '',
+  multiple: false,
+  id: 'postsPerPage',
+  label: 'Posts Per Page',
+  description: "Number of post to show per page"
+}, {
+  val: '',
+  multiple: false,
+  id: 'paged',
+  label: 'Paged',
+  description: "Pagination start with"
+}, {
+  val: '',
+  multiple: false,
+  id: 'offset',
+  label: 'Offset',
+  description: "Number of post to displace or pass over"
+}, {
+  val: '',
+  multiple: false,
+  id: 'postsPerArchivePage',
+  label: 'Posts Per Archive Page',
+  description: ""
+}, {
+  val: '',
+  multiple: false,
+  id: 'ignoreStickyPosts',
+  label: 'Ignore Sticky Posts',
+  description: "Ignore post from post query",
+  isPro: true
+}, {
+  val: '',
+  multiple: false,
+  id: 'metaKey',
+  label: 'Meta Key',
+  description: "Post query by custom field key"
+}, {
+  val: '',
+  multiple: false,
+  id: 'metaValue',
+  label: 'Meta Value',
+  description: "Post query by custom field value"
+}, {
+  val: '',
+  multiple: false,
+  id: 'metaValueNum',
+  label: 'Meta Value Num',
+  description: "Post query by custom field value for number types"
+}, {
+  val: '',
+  multiple: false,
+  id: 'metaCompare',
+  label: 'Meta Compare',
+  description: "Meta query compare"
+}, {
+  val: [],
+  multiple: false,
+  id: 'metaQuery',
+  label: 'Meta Query',
+  description: "Advance meta fields query"
+}, {
+  val: 'readable',
+  multiple: false,
+  id: 'perm',
+  label: 'Perm',
+  description: "User permission parameter"
+}, {
+  val: [],
+  multiple: false,
+  id: 'postMimeType',
+  label: 'Post Mime Type',
+  description: "Post query by allwed post mime types"
+}, {
+  val: false,
+  multiple: false,
+  id: 'cacheResults',
+  label: 'Cache Results',
+  description: "Enable Post information cache"
+}, {
+  val: false,
+  multiple: false,
+  id: 'updatePostMetaCache',
+  label: 'Update Post Meta Cache',
+  description: "Enable Post meta information cache"
+}, {
+  val: false,
+  multiple: false,
+  id: 'updatePostTermCache',
+  label: 'Update Post Term Cache',
+  description: "Enable Post term information cache"
+}];
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (queryPrams);
+
+/***/ }),
+
 /***/ "./src/blocks/post-grid/grid-layouts.js":
 /*!**********************************************!*\
   !*** ./src/blocks/post-grid/grid-layouts.js ***!
@@ -33010,9 +33427,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_css_border__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../components/css-border */ "./src/components/css-border/index.js");
 /* harmony import */ var _components_css_box_shadow__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../components/css-box-shadow */ "./src/components/css-box-shadow/index.js");
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
-/* harmony import */ var _queryprams__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../queryprams */ "./src/queryprams.js");
-/* harmony import */ var _query_presets__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./query-presets */ "./src/blocks/post-grid/query-presets.js");
-/* harmony import */ var _grid_layouts__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./grid-layouts */ "./src/blocks/post-grid/grid-layouts.js");
+/* harmony import */ var _query_presets__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./query-presets */ "./src/blocks/post-grid/query-presets.js");
+/* harmony import */ var _grid_layouts__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./grid-layouts */ "./src/blocks/post-grid/grid-layouts.js");
+/* harmony import */ var _queryprams__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./queryprams */ "./src/blocks/post-grid/queryprams.js");
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
 /* harmony import */ var animejs_lib_anime_es_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! animejs/lib/anime.es.js */ "./node_modules/animejs/lib/anime.es.js");
 
@@ -33054,6 +33471,7 @@ var select = wp.data.select('core/block-editor');
 
 
 
+ //import queryPrams from '../../queryprams'
 
 
 
@@ -33061,7 +33479,7 @@ var select = wp.data.select('core/block-editor');
 
 
 const ALLOWED_MEDIA_TYPES = ['image'];
-var queryPramsX = _queryprams__WEBPACK_IMPORTED_MODULE_25__["default"].map((x, i) => {
+var queryPramsX = _queryprams__WEBPACK_IMPORTED_MODULE_27__["default"].map((x, i) => {
   return {
     value: i,
     label: x.label,
@@ -33576,7 +33994,11 @@ var myStore = wp.data.select('postgrid-shop');
       url: '',
       isVideo: false
     }, {
-      label: 'How to add rows?',
+      label: 'How to disable pagination?',
+      url: '',
+      isVideo: false
+    }, {
+      label: 'How to customize pagination style?',
       url: '',
       isVideo: false
     }, {
@@ -33584,15 +34006,11 @@ var myStore = wp.data.select('postgrid-shop');
       url: '',
       isVideo: false
     }, {
-      label: 'How to display ajax pagination?',
-      url: '',
-      isVideo: false
-    }, {
       label: 'How to display next-previous pagination?',
       url: '',
       isVideo: false
     }, {
-      label: 'How to enable load more?',
+      label: 'How to display ajax pagination?',
       url: '',
       isVideo: false
     }, {
@@ -33600,11 +34018,15 @@ var myStore = wp.data.select('postgrid-shop');
       url: '',
       isVideo: false
     }, {
-      label: 'How to disable pagination?',
+      label: 'How to query post by post status?',
       url: '',
       isVideo: false
     }, {
-      label: 'How to customize pagination style?',
+      label: 'How to add rows?',
+      url: '',
+      isVideo: false
+    }, {
+      label: 'How to enable load more?',
       url: '',
       isVideo: false
     }, {
@@ -33624,11 +34046,7 @@ var myStore = wp.data.select('postgrid-shop');
       url: '',
       isVideo: false
     }, {
-      label: 'How to query post by custom post types?',
-      url: '',
-      isVideo: false
-    }, {
-      label: 'How to query post by post status?',
+      label: 'How to query posts by custom post types?',
       url: '',
       isVideo: false
     }, {
@@ -33649,10 +34067,6 @@ var myStore = wp.data.select('postgrid-shop');
       isVideo: false
     }, {
       label: 'How to query post by search parameter?',
-      url: '',
-      isVideo: false
-    }, {
-      label: 'How to query post by post status?',
       url: '',
       isVideo: false
     }, {
@@ -33677,10 +34091,6 @@ var myStore = wp.data.select('postgrid-shop');
       isVideo: false
     }, {
       label: 'How to query post by post passwords?',
-      url: '',
-      isVideo: false
-    }, {
-      label: 'How to customize layouts?',
       url: '',
       isVideo: false
     }, {
@@ -36183,7 +36593,7 @@ var myStore = wp.data.select('postgrid-shop');
             updateQueryPram(newVal, index);
           }, 1000);
         }
-      })), (item.id == 'postParent' || item.id == 'postPassword') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      })), item.id == 'postPassword' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
         utmUrl: "?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryArgs"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
         className: "underline"
@@ -36307,7 +36717,7 @@ var myStore = wp.data.select('postgrid-shop');
 
     function addQueryPramX(_option, index) {
       var attrExist = false;
-      var data = _queryprams__WEBPACK_IMPORTED_MODULE_25__["default"][index];
+      var data = _queryprams__WEBPACK_IMPORTED_MODULE_27__["default"][index];
       var multiple = data.multiple;
       var isExist = queryArgs.items.map(item => {
         if (item.id == index) {
@@ -36535,7 +36945,7 @@ var myStore = wp.data.select('postgrid-shop');
     }, "Query Presets"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom right",
       variant: "secondary",
-      options: _query_presets__WEBPACK_IMPORTED_MODULE_26__["default"],
+      options: _query_presets__WEBPACK_IMPORTED_MODULE_25__["default"],
       buttonTitle: "Choose",
       onChange: addQueryPreset,
       values: ''
@@ -37076,7 +37486,7 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       })));
-    }), _grid_layouts__WEBPACK_IMPORTED_MODULE_27__["default"].map((x, _i) => {
+    }), _grid_layouts__WEBPACK_IMPORTED_MODULE_26__["default"].map((x, _i) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "cursor-pointer relative hover:bg-blue-200 my-3",
         onClick: _ev => {
@@ -38471,6 +38881,427 @@ const queryPresets = [{
   }
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (queryPresets);
+
+/***/ }),
+
+/***/ "./src/blocks/post-grid/queryprams.js":
+/*!********************************************!*\
+  !*** ./src/blocks/post-grid/queryprams.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const queryPrams = [{
+  val: ['post'],
+  multiple: false,
+  id: 'postType',
+  label: 'Post Types',
+  description: "Select Post Types to Query"
+}, {
+  val: [],
+  multiple: false,
+  id: 'taxQuery',
+  label: 'Tax Query',
+  description: "Taxonomies query arguments",
+  isPro: true
+}, {
+  val: 'OR',
+  multiple: false,
+  id: 'taxQueryRelation',
+  label: 'Tax Query Relation',
+  description: "Taxonomies query relation"
+}, {
+  val: [],
+  multiple: false,
+  id: 'metaQuery',
+  label: 'Meta Query',
+  description: "Meta field query",
+  isPro: true
+}, {
+  val: '',
+  multiple: false,
+  id: 's',
+  label: 'Keyword',
+  description: "Search keyword, ex: hello"
+}, {
+  val: [],
+  multiple: false,
+  id: 'postStatus',
+  label: 'Post status',
+  description: "Query post by post status"
+}, {
+  val: '',
+  multiple: false,
+  id: 'order',
+  label: 'Order',
+  description: "Post query order"
+}, {
+  val: [],
+  multiple: false,
+  id: 'orderby',
+  label: 'Orderby',
+  description: "Post query orderby"
+}, {
+  val: '',
+  multiple: false,
+  id: 'metaKey',
+  label: 'Meta fields key',
+  description: "Post query by meta fields key"
+}, // Date Parameters
+{
+  val: [],
+  multiple: false,
+  id: 'dateQuery',
+  label: 'Date Query',
+  description: "Post query by date",
+  isPro: true
+}, {
+  val: '',
+  multiple: false,
+  id: 'year',
+  label: 'Year',
+  description: "Post query by year"
+}, {
+  val: '',
+  multiple: false,
+  id: 'monthnum',
+  label: 'Month',
+  description: "Post query by month"
+}, {
+  val: '',
+  multiple: false,
+  id: 'w',
+  label: 'Week',
+  description: "Post query by week"
+}, {
+  val: '',
+  multiple: false,
+  id: 'day',
+  label: 'Day',
+  description: "Post query by day"
+}, {
+  val: '',
+  multiple: false,
+  id: 'hour',
+  label: 'Hour',
+  description: "Post query by hour"
+}, {
+  val: '',
+  multiple: false,
+  id: 'minute',
+  label: 'Miniute',
+  description: "Post query by miniute"
+}, {
+  val: '',
+  multiple: false,
+  id: 'second',
+  label: 'Second',
+  description: "Post query by second"
+}, {
+  val: '',
+  multiple: false,
+  id: 'm',
+  label: 'Month',
+  description: "Post query by month"
+}, // Author Parameters
+{
+  val: '',
+  multiple: false,
+  id: 'author',
+  label: 'Author',
+  description: "Post query by Author ID"
+}, {
+  val: '',
+  multiple: false,
+  id: 'authorName',
+  label: 'Author Name',
+  description: "Post query by Author Name"
+}, {
+  val: [],
+  multiple: false,
+  id: 'authorIn',
+  label: 'Author In',
+  description: "Post query by Author IDs",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'authorNotIn',
+  label: 'Author Not In',
+  description: "Post query by exluded Author IDs",
+  isPro: true
+}, // Category Parameters
+{
+  val: '',
+  multiple: false,
+  id: 'cat',
+  label: 'Category ID',
+  description: "Post query by Category ID"
+}, {
+  val: '',
+  multiple: false,
+  id: 'categoryName',
+  label: 'Category Name',
+  description: "Post query by Category Name"
+}, {
+  val: [],
+  multiple: false,
+  id: 'categoryAnd',
+  label: 'CategoryAnd',
+  description: "Post query by Category IDs",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'categoryIn',
+  label: 'Category In',
+  description: "Post query by Category IDs",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'categoryNotIn',
+  label: 'Category Not In',
+  description: "Post query by excluded Category IDs",
+  isPro: true
+}, // Tag Parameters
+{
+  val: '',
+  multiple: false,
+  id: 'tag',
+  label: 'Tags',
+  description: "Post query by Tag slug"
+}, {
+  val: '',
+  multiple: false,
+  id: 'tagId',
+  label: 'Tag Id',
+  description: "Post query by Tag ID"
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagAnd',
+  label: 'Tag And',
+  description: "Post query by Tag Ids",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagIn',
+  label: 'Tag In',
+  description: "Post query by Tag ids",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagNotIn',
+  label: 'Tag Not In',
+  description: "Post query by excluded Tag ids"
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagSlugAnd',
+  label: 'Tag Slug And',
+  description: "Post query by Tags slug",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagSlugIn',
+  label: 'Tag Slug In',
+  description: "Post query by excluded Tags slug",
+  isPro: true
+}, {
+  val: '',
+  multiple: false,
+  id: 'p',
+  label: 'Post id',
+  description: "Post query by single post id"
+}, {
+  val: '',
+  multiple: false,
+  id: 'name',
+  label: 'Name',
+  description: "Post query by post slug"
+}, {
+  val: '',
+  multiple: false,
+  id: 'pageId',
+  label: 'Page Id',
+  description: "Post query by single page id"
+}, {
+  val: '',
+  multiple: false,
+  id: 'pagename',
+  label: 'Page name',
+  description: "Post query by page slug"
+}, {
+  val: '',
+  multiple: false,
+  id: 'postParent',
+  label: 'Post Parent',
+  description: "Post query by post parent id",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'postParentIn',
+  label: 'Post Parent In',
+  description: "Post query by post parent ids",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'postParentNotIn',
+  label: 'Post Parent Not In',
+  description: "Post query by excluded post parent ids"
+}, {
+  val: [],
+  multiple: false,
+  id: 'postIn',
+  label: 'Post In',
+  description: "Post query by multiple post ids, comma separated.",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'postNotIn',
+  label: 'Post Not In',
+  description: "Post query by excluded post ids",
+  isPro: true
+}, {
+  val: [{
+    slug: ''
+  }],
+  multiple: false,
+  id: 'postNameIn',
+  label: 'Post Name In',
+  description: "Post query by post slugs",
+  isPro: true
+}, {
+  val: '',
+  multiple: false,
+  id: 'hasPassword',
+  label: 'Has Password',
+  description: "Post query for posts with passwords"
+}, {
+  val: '',
+  multiple: false,
+  id: 'postPassword',
+  label: 'Post Password',
+  description: "Post query for posts with particular passwords",
+  isPro: true
+}, {
+  val: {
+    compare: '='
+  },
+  multiple: false,
+  id: 'commentCount',
+  label: 'Comment Count',
+  description: "Post query by comment count"
+}, {
+  val: '',
+  multiple: false,
+  id: 'nopaging',
+  label: 'No Paging',
+  description: "Enable show all posts or use pagination"
+}, {
+  val: '',
+  multiple: false,
+  id: 'postsPerPage',
+  label: 'Posts Per Page',
+  description: "Number of post to show per page"
+}, {
+  val: '',
+  multiple: false,
+  id: 'paged',
+  label: 'Paged',
+  description: "Pagination start with"
+}, {
+  val: '',
+  multiple: false,
+  id: 'offset',
+  label: 'Offset',
+  description: "Number of post to displace or pass over"
+}, {
+  val: '',
+  multiple: false,
+  id: 'postsPerArchivePage',
+  label: 'Posts Per Archive Page',
+  description: ""
+}, {
+  val: '',
+  multiple: false,
+  id: 'ignoreStickyPosts',
+  label: 'Ignore Sticky Posts',
+  description: "Ignore post from post query",
+  isPro: true
+}, {
+  val: '',
+  multiple: false,
+  id: 'metaKey',
+  label: 'Meta Key',
+  description: "Post query by custom field key"
+}, {
+  val: '',
+  multiple: false,
+  id: 'metaValue',
+  label: 'Meta Value',
+  description: "Post query by custom field value"
+}, {
+  val: '',
+  multiple: false,
+  id: 'metaValueNum',
+  label: 'Meta Value Num',
+  description: "Post query by custom field value for number types"
+}, {
+  val: '',
+  multiple: false,
+  id: 'metaCompare',
+  label: 'Meta Compare',
+  description: "Meta query compare"
+}, {
+  val: [],
+  multiple: false,
+  id: 'metaQuery',
+  label: 'Meta Query',
+  description: "Advance meta fields query"
+}, {
+  val: 'readable',
+  multiple: false,
+  id: 'perm',
+  label: 'Perm',
+  description: "User permission parameter"
+}, {
+  val: [],
+  multiple: false,
+  id: 'postMimeType',
+  label: 'Post Mime Type',
+  description: "Post query by allwed post mime types"
+}, {
+  val: false,
+  multiple: false,
+  id: 'cacheResults',
+  label: 'Cache Results',
+  description: "Enable Post information cache"
+}, {
+  val: false,
+  multiple: false,
+  id: 'updatePostMetaCache',
+  label: 'Update Post Meta Cache',
+  description: "Enable Post meta information cache"
+}, {
+  val: false,
+  multiple: false,
+  id: 'updatePostTermCache',
+  label: 'Update Post Term Cache',
+  description: "Enable Post term information cache"
+}];
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (queryPrams);
 
 /***/ }),
 
@@ -42901,32 +43732,31 @@ var myStore = wp.data.select('postgrid-shop');
       } //return false;
 
 
-      var reponsiveCssMobile = '';
+      var reponsiveCssDesktop = '';
 
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCssMobile += selector + '{';
+      if (reponsiveCssGroups['Desktop'] != undefined) {
+        //reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
+        for (var selector in reponsiveCssGroups['Desktop']) {
+          var attrs = reponsiveCssGroups['Desktop'][selector];
+          reponsiveCssDesktop += selector + '{';
 
           for (var index in attrs) {
             var attr = attrs[index];
             var attrName = attr.attr;
             var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
+            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
           }
 
-          reponsiveCssMobile += '}';
-        }
+          reponsiveCssDesktop += '}';
+        } //reponsiveCssDesktop += '}';
 
-        reponsiveCssMobile += '}';
       }
 
       var reponsiveCssTablet = '';
 
       if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+        //reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+        reponsiveCssTablet += '@media(max-width: 780px){';
 
         for (var selector in reponsiveCssGroups['Tablet']) {
           var attrs = reponsiveCssGroups['Tablet'][selector];
@@ -42945,29 +43775,30 @@ var myStore = wp.data.select('postgrid-shop');
         reponsiveCssTablet += '}';
       }
 
-      var reponsiveCssDesktop = '';
+      var reponsiveCssMobile = '';
 
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
+      if (reponsiveCssGroups['Mobile'] != undefined) {
+        //reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+        reponsiveCssMobile += '@media(max-width:360px){';
 
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCssDesktop += selector + '{';
+        for (var selector in reponsiveCssGroups['Mobile']) {
+          var attrs = reponsiveCssGroups['Mobile'][selector];
+          reponsiveCssMobile += selector + '{';
 
           for (var index in attrs) {
             var attr = attrs[index];
             var attrName = attr.attr;
             var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
+            reponsiveCssMobile += attrName + ':' + attrValue + ';';
           }
 
-          reponsiveCssDesktop += '}';
+          reponsiveCssMobile += '}';
         }
 
-        reponsiveCssDesktop += '}';
+        reponsiveCssMobile += '}';
       }
 
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
+      var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
       var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
 
       if (iframe) {
@@ -45708,6 +46539,659 @@ var myStore = wp.data.select('postgrid-shop');
         __html: iconHtml
       }
     })))];
+  },
+  save: function (props) {
+    // to make a truly dynamic block, we're handling front end by render_callback under index.php file
+    return null;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/blocks/shortcode/index.js":
+/*!***************************************!*\
+  !*** ./src/blocks/shortcode/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../store */ "./src/store.js");
+/* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
+/* harmony import */ var _components_breakpoint_toggle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/breakpoint-toggle */ "./src/components/breakpoint-toggle/index.js");
+/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+const {
+  RawHTML
+} = wp.element;
+
+
+
+
+
+var myStore = wp.data.select('postgrid-shop');
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.registerBlockType)("post-grid/shortcode", {
+  title: "Shortcode",
+  icon: {
+    // Specifying a background color to appear with the icon e.g.: in the inserter.
+    background: '#2563eb',
+    // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
+    foreground: '#fff',
+    // Specifying an icon for the block
+    src: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+      width: "24",
+      height: "24",
+      viewBox: "0 0 24 24",
+      xmlns: "http://www.w3.org/2000/svg",
+      "aria-hidden": "true",
+      focusable: "false"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+      d: "M20 4H4v1.5h16V4zm-2 9h-3c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zm.5 5c0 .3-.2.5-.5.5h-3c-.3 0-.5-.2-.5-.5v-3c0-.3.2-.5.5-.5h3c.3 0 .5.2.5.5v3zM4 9.5h9V8H4v1.5zM9 13H6c-1.1 0-2 .9-2 2v3c0 1.1.9 2 2 2h3c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2zm.5 5c0 .3-.2.5-.5.5H6c-.3 0-.5-.2-.5-.5v-3c0-.3.2-.5.5-.5h3c.3 0 .5.2.5.5v3z",
+      "fill-rule": "evenodd",
+      "clip-rule": "evenodd"
+    }))
+  },
+  attributes: {
+    wrapper: {
+      type: 'object',
+      default: {
+        options: {
+          class: 'inline-block'
+        },
+        styles: {
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {}
+        }
+      }
+    },
+    shortcode: {
+      type: 'object',
+      default: {
+        options: {
+          key: '',
+          prefix: '',
+          postfix: '',
+          prams: {}
+        },
+        styles: {
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {}
+        }
+      }
+    },
+    customCss: {
+      "type": "string",
+      "default": ''
+    },
+    blockCssY: {
+      "type": "object",
+      "default": {
+        items: {}
+      }
+    }
+  },
+  usesContext: ["postId", "loopIndex", "postType", "queryId"],
+  supports: {
+    "align": ["wide", "full"]
+  },
+  category: "post-grid",
+  edit: function (props) {
+    var attributes = props.attributes;
+    var setAttributes = props.setAttributes;
+    var context = props.context;
+    var clientId = props.clientId;
+    var blockId = attributes.blockId;
+    var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
+    var blockClass = '.' + blockIdX;
+    var shortcode = attributes.shortcode;
+    var wrapper = attributes.wrapper;
+    var items = attributes.items;
+    var blockCssY = attributes.blockCssY;
+    var customCss = attributes.customCss;
+    var postId = context['postId'];
+    var postType = context['postType'];
+    const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(myStore.getBreakPoint());
+    const [metaValue, setMetaValue] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+    const [metaHtml, setMetaHtml] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+    const [metaArgs, setMetaArgs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null); // Wrapper CSS Class Selectors
+
+    const itemWrapSelector = blockClass;
+    const itemSelector = blockClass + ' .item';
+    const postCountSelector = blockClass + ' .postCount';
+    const [shortcodes, setshortcodes] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      yith_wcwl_add_to_wishlist: {
+        label: 'YITH - Add to Wishlist',
+        value: 'yith_wcwl_add_to_wishlist',
+        args: {
+          product_id: ''
+        }
+      },
+      yasr_overall_rating: {
+        label: 'YASR- overall rating',
+        value: 'yasr_overall_rating',
+        args: {
+          size: '',
+          postid: ''
+        }
+      },
+      yasr_visitor_votes: {
+        label: 'YASR - visitor votes',
+        value: 'yasr_visitor_votes',
+        args: {
+          size: '',
+          postid: ''
+        }
+      },
+      wp_postviews: {
+        label: 'WP-PostViews',
+        value: 'views',
+        args: {
+          id: ''
+        }
+      },
+      wp_postratings: {
+        label: 'WP-PostRatings',
+        value: 'wp_postratings',
+        args: {
+          id: ''
+        }
+      },
+      site_reviews_summary: {
+        label: 'Site Reviews - Summary',
+        value: 'site_reviews_summary',
+        args: {
+          hide: '',
+          assigned_to: '',
+          class: ''
+        }
+      },
+      ratingwidget: {
+        label: 'Rating-Widget',
+        value: 'ratingwidget',
+        args: {
+          post_id: ''
+        }
+      },
+      ratemypostresult: {
+        label: 'Rate my Post - Result',
+        value: 'ratemypost-result',
+        args: {
+          post_id: ''
+        }
+      },
+      ratemypost: {
+        label: 'Rate my Post',
+        value: 'ratemypost',
+        args: {
+          id: ''
+        }
+      },
+      postviews: {
+        label: 'Post Views Counter',
+        value: 'post-views',
+        args: {
+          id: ''
+        }
+      },
+      pvcp_1: {
+        label: 'Page Visit Counter',
+        value: 'pvcp_1',
+        args: {
+          postid: ''
+        }
+      },
+      pvc_stats: {
+        label: 'Page Views Count',
+        value: 'pvc_stats',
+        args: {
+          postid: ''
+        }
+      },
+      mr_rating_result: {
+        label: 'Multi Rating - Result',
+        value: 'mr_rating_result',
+        args: {
+          post_id: ''
+        }
+      },
+      mr_rating_form: {
+        label: 'Multi Rating',
+        value: 'mr_rating_form',
+        args: {
+          post_id: ''
+        }
+      },
+      likebtn: {
+        label: 'Like Button Rating',
+        value: 'likebtn',
+        args: {}
+      },
+      kkratings: {
+        label: 'KK Star Ratings',
+        value: 'kkratings',
+        args: {
+          size: '',
+          id: ''
+        }
+      }
+    });
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {// apiFetch({
+      //   path: '/post-grid/v2/get_post_meta',
+      //   method: 'POST',
+      //   data: { postId: postId, meta_key: shortcode.options.key, prams: shortcode.options.prams, },
+      // }).then((res) => {
+      //   .log(res);
+      //   setMetaHtml(res.html);
+      //   setMetaArgs(res.args);
+      // });
+    }, [shortcode]);
+    var breakPointList = [];
+
+    for (var x in _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"]) {
+      var item = _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][x];
+      breakPointList.push({
+        label: item.name,
+        icon: item.icon,
+        value: item.id
+      });
+    }
+
+    function generateBlockCssY() {
+      var reponsiveCssGroups = {};
+
+      for (var selector in blockCssY.items) {
+        var attrs = blockCssY.items[selector];
+
+        for (var attr in attrs) {
+          var breakpoints = attrs[attr];
+
+          for (var device in breakpoints) {
+            var attrValue = breakpoints[device];
+
+            if (reponsiveCssGroups[device] == undefined) {
+              reponsiveCssGroups[device] = [];
+            }
+
+            if (reponsiveCssGroups[device] == undefined) {
+              reponsiveCssGroups[device] = [];
+            }
+
+            if (reponsiveCssGroups[device][selector] == undefined) {
+              reponsiveCssGroups[device][selector] = [];
+            }
+
+            reponsiveCssGroups[device][selector].push({
+              'attr': attr,
+              'val': attrValue
+            });
+          }
+        }
+      } //return false;
+
+
+      var reponsiveCssMobile = '';
+
+      if (reponsiveCssGroups['Mobile'] != undefined) {
+        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+
+        for (var selector in reponsiveCssGroups['Mobile']) {
+          var attrs = reponsiveCssGroups['Mobile'][selector];
+          reponsiveCssMobile += selector + '{';
+
+          for (var index in attrs) {
+            var attr = attrs[index];
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCssMobile += attrName + ':' + attrValue + ';';
+          }
+
+          reponsiveCssMobile += '}';
+        }
+
+        reponsiveCssMobile += '}';
+      }
+
+      var reponsiveCssTablet = '';
+
+      if (reponsiveCssGroups['Tablet'] != undefined) {
+        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+
+        for (var selector in reponsiveCssGroups['Tablet']) {
+          var attrs = reponsiveCssGroups['Tablet'][selector];
+          reponsiveCssTablet += selector + '{';
+
+          for (var index in attrs) {
+            var attr = attrs[index];
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCssTablet += attrName + ':' + attrValue + ';';
+          }
+
+          reponsiveCssTablet += '}';
+        }
+
+        reponsiveCssTablet += '}';
+      }
+
+      var reponsiveCssDesktop = '';
+
+      if (reponsiveCssGroups['Desktop'] != undefined) {
+        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
+
+        for (var selector in reponsiveCssGroups['Desktop']) {
+          var attrs = reponsiveCssGroups['Desktop'][selector];
+          reponsiveCssDesktop += selector + '{';
+
+          for (var index in attrs) {
+            var attr = attrs[index];
+            var attrName = attr.attr;
+            var attrValue = attr.val;
+            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
+          }
+
+          reponsiveCssDesktop += '}';
+        }
+
+        reponsiveCssDesktop += '}';
+      }
+
+      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
+      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
+
+      if (iframe) {
+        setTimeout(() => {
+          var iframeDocument = iframe.contentDocument;
+          var body = iframeDocument.body;
+          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
+
+          if (divWrap != undefined) {
+            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
+          }
+
+          var divWrap = '<div id="css-block-' + blockId + '"></div>';
+          body.insertAdjacentHTML('beforeend', divWrap);
+          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
+          var str = '<style>' + reponsiveCss + customCss + '</style>';
+          csswrappg.insertAdjacentHTML('beforeend', str);
+        }, 200);
+      } else {
+        var wpfooter = document.getElementById('wpfooter');
+        var divWrap = document.getElementById("css-block-" + blockId);
+
+        if (divWrap != undefined) {
+          document.getElementById("css-block-" + blockId).outerHTML = "";
+        }
+
+        var divWrap = '<div id="css-block-' + blockId + '"></div>';
+        wpfooter.insertAdjacentHTML('beforeend', divWrap);
+        var csswrappg = document.getElementById('css-block-' + blockId);
+        var str = '<style>' + reponsiveCss + customCss + '</style>';
+        csswrappg.insertAdjacentHTML('beforeend', str);
+      }
+    }
+
+    var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}); // Using the hook.
+
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+      generateBlockCssY();
+    }, [blockCssY]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+      generateBlockCssY();
+    }, [items]);
+    const colors = [{
+      name: '9DD6DF',
+      color: '#9DD6DF'
+    }, {
+      name: '18978F',
+      color: '#18978F'
+    }, {
+      name: 'A084CF',
+      color: '#A084CF'
+    }, {
+      name: 'DFBB9D',
+      color: '#DFBB9D'
+    }, {
+      name: '774360',
+      color: '#774360'
+    }, {
+      name: '3AB0FF',
+      color: '#3AB0FF'
+    }, {
+      name: '51557E',
+      color: '#51557E'
+    }];
+    const {
+      __experimentalSetPreviewDeviceType: setPreviewDeviceType
+    } = wp.data.dispatch('core/edit-post');
+    const post = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.useSelect)(select => select('core').getEntityRecord('postType', context['postType'], context['postId']));
+    const termstaxonomy = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.useSelect)(select => select('core').getEntityRecords('taxonomy', 'category', [4, 5]));
+
+    const MyDropdown = () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Dropdown, {
+      position: "bottom",
+      renderToggle: _ref => {
+        let {
+          isOpen,
+          onToggle
+        } = _ref;
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+          title: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX] != undefined ? _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].name : '',
+          variant: "secondary",
+          onClick: onToggle,
+          "aria-expanded": isOpen
+        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RawHTML, {
+          className: "text-lg "
+        }, _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX] != undefined ? _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon : '<span class="icon-responsive font-bold"></span>'));
+      },
+      renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, breakPointList.map(x => {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: ' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer',
+          onClick: ev => {
+            setPreviewDeviceType(x.value);
+            var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value);
+            asdsdsd.then(res => {
+              setBreakPointX(res.breakpoint);
+              generateBlockCssY();
+            });
+          }
+        }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+          class: "icon-close"
+        })), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RawHTML, null, x.icon));
+      }))
+    }));
+
+    function onChangeBreakPoint(x, index) {
+      setPreviewDeviceType(x.value);
+      var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value);
+      asdsdsd.then(res => {
+        setBreakPointX(res.breakpoint);
+        generateBlockCssY();
+      });
+    }
+
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.AlignmentToolbar, {
+      value: wrapper.textAlign,
+      onChange: nextAlign => {
+        var newValuesObj = {};
+
+        if (Object.keys(wrapper.styles.textAlign).length == 0) {
+          newValuesObj[breakPointX] = nextAlign;
+        } else {
+          newValuesObj = wrapper.styles.textAlign;
+          newValuesObj[breakPointX] = nextAlign;
+        }
+
+        var styles = { ...wrapper.styles,
+          textAlign: newValuesObj
+        };
+        setAttributes({
+          wrapper: { ...wrapper,
+            styles: styles
+          }
+        });
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
+          'text-align': newValuesObj
+        };
+        setAttributes({
+          blockCssY: {
+            items: blockCssY.items
+          }
+        });
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
+      key: "general"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "p-3"
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+      title: "shortcode Key",
+      initialOpen: true
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Choose Shortcode "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      position: "bottom right",
+      variant: "secondary",
+      options: shortcodes,
+      buttonTitle: "Choose",
+      onChange: (option, index) => {
+        var options = { ...shortcode.options,
+          key: option.value
+        };
+        setAttributes({
+          shortcode: { ...shortcode,
+            options: options
+          }
+        });
+      },
+      values: "",
+      value: shortcode.options.key
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "shortcode Key"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      placeholder: "shortcode key",
+      value: shortcode.options.key,
+      onChange: newVal => {
+        var options = { ...shortcode.options,
+          key: newVal
+        };
+        setAttributes({
+          shortcode: { ...shortcode,
+            options: options
+          }
+        });
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Parameters"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: ""
+    }, metaArgs != undefined && Object.entries(metaArgs).map((arg, i) => {
+      var key = arg[0];
+      var val = arg[1];
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2 bg-gray-300"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        onClick: ev => {
+          var target = ev.target;
+        },
+        className: "bg-gray-500 px-3 py-2 text-white"
+      }, key), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "px-3 py-2"
+      }, val));
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+      title: "Wrapper",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Wrapper Class"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      value: wrapper.options.class,
+      onChange: newVal => {
+        var options = { ...wrapper.options,
+          class: newVal
+        };
+        setAttributes({
+          wrapper: { ...wrapper,
+            options: options
+          }
+        });
+      }
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: ""
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+      title: "Custom Style",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Please use following class selector to apply your custom CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+      className: "font-bold"
+    }, "Items Wrapper"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, itemWrapSelector, '{/* your CSS here*/}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+      className: "font-bold"
+    }, "Caetgory Items"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, itemSelector, '{}', " ")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, ".pg-postMeta a", '{/* your CSS here*/}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+      className: "font-bold"
+    }, "Post Count"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, postCountSelector, '{/* your CSS here*/}', " "))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.TextareaControl, {
+      label: "Custom CSS",
+      help: "Do not use 'style' tag",
+      value: customCss,
+      onChange: value => {
+        setAttributes({
+          customCss: value
+        });
+      }
+    })))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, shortcode.options.key.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      position: "bottom right",
+      variant: "secondary",
+      options: shortcodes,
+      buttonTitle: "Choose",
+      onChange: (option, index) => {
+        var options = { ...shortcode.options,
+          key: option.value
+        };
+        setAttributes({
+          shortcode: { ...shortcode,
+            options: options
+          }
+        });
+      },
+      values: "",
+      value: shortcode.options.key
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "pg-postMeta"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RawHTML, null, metaHtml)))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
@@ -58229,7 +59713,7 @@ class PGTutorials extends Component {
         placeholder: "Search Tutorials",
         value: keyword,
         onChange: newVal => {
-          console.log(newVal);
+          //console.log(newVal);
           setKeyword(newVal);
           setfilteredLinks([]);
           var newLinks = [];
@@ -58255,27 +59739,29 @@ class PGTutorials extends Component {
               label: linkObj.label
             };
             return linkObj; //newLinks.push(x);
-          });
-          console.log(xLink);
+          }); //console.log(xLink);
+
           setfilteredLinks(xLink);
         }
       })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "my-5"
       }, keyword.length == 0 && links.map(link => {
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, link.url.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
           className: "block my-1 text-[14px] hover:underline",
           href: link.url,
           target: "_blank"
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
           class: "dashicons dashicons-editor-help"
-        }), " ", link.label);
+        }), " ", link.label));
       }), keyword.length > 0 && filteredLinks.map(link => {
         if (link.exclude === false) {
-          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, link.url.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
             className: "block my-1 text-[14px] hover:underline",
             href: link.url,
             target: "_blank"
-          }, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RawHTML, null, '<span class="dashicons dashicons-editor-help"></span>', " ", link.label));
+          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+            class: "dashicons dashicons-editor-help"
+          }), " ", link.label));
         }
       })));
     }
@@ -58793,427 +60279,6 @@ class Typography extends Component {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Typography);
-
-/***/ }),
-
-/***/ "./src/queryprams.js":
-/*!***************************!*\
-  !*** ./src/queryprams.js ***!
-  \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-const queryPrams = [{
-  val: ['post'],
-  multiple: false,
-  id: 'postType',
-  label: 'Post Types',
-  description: "Select Post Types to Query"
-}, {
-  val: [],
-  multiple: false,
-  id: 'taxQuery',
-  label: 'Tax Query',
-  description: "Taxonomies query arguments",
-  isPro: true
-}, {
-  val: 'OR',
-  multiple: false,
-  id: 'taxQueryRelation',
-  label: 'Tax Query Relation',
-  description: "Taxonomies query relation"
-}, {
-  val: [],
-  multiple: false,
-  id: 'metaQuery',
-  label: 'Meta Query',
-  description: "Meta field query",
-  isPro: true
-}, {
-  val: '',
-  multiple: false,
-  id: 's',
-  label: 'Keyword',
-  description: "Search keyword, ex: hello"
-}, {
-  val: [],
-  multiple: false,
-  id: 'postStatus',
-  label: 'Post status',
-  description: "Query post by post status"
-}, {
-  val: '',
-  multiple: false,
-  id: 'order',
-  label: 'Order',
-  description: "Post query order"
-}, {
-  val: [],
-  multiple: false,
-  id: 'orderby',
-  label: 'Orderby',
-  description: "Post query orderby"
-}, {
-  val: '',
-  multiple: false,
-  id: 'metaKey',
-  label: 'Meta fields key',
-  description: "Post query by meta fields key"
-}, // Date Parameters
-{
-  val: [],
-  multiple: false,
-  id: 'dateQuery',
-  label: 'Date Query ',
-  description: "Post query by date",
-  isPro: true
-}, {
-  val: '',
-  multiple: false,
-  id: 'year',
-  label: 'Year',
-  description: "Post query by year"
-}, {
-  val: '',
-  multiple: false,
-  id: 'monthnum',
-  label: 'Month',
-  description: "Post query by month"
-}, {
-  val: '',
-  multiple: false,
-  id: 'w',
-  label: 'Week',
-  description: "Post query by week"
-}, {
-  val: '',
-  multiple: false,
-  id: 'day',
-  label: 'Day',
-  description: "Post query by day"
-}, {
-  val: '',
-  multiple: false,
-  id: 'hour',
-  label: 'Hour',
-  description: "Post query by hour"
-}, {
-  val: '',
-  multiple: false,
-  id: 'minute',
-  label: 'Miniute',
-  description: "Post query by miniute"
-}, {
-  val: '',
-  multiple: false,
-  id: 'second',
-  label: 'Second',
-  description: "Post query by second"
-}, {
-  val: '',
-  multiple: false,
-  id: 'm',
-  label: 'Month',
-  description: "Post query by month"
-}, // Author Parameters
-{
-  val: '',
-  multiple: false,
-  id: 'author',
-  label: 'Author',
-  description: "Post query by Author ID"
-}, {
-  val: '',
-  multiple: false,
-  id: 'authorName',
-  label: 'Author Name',
-  description: "Post query by Author Name"
-}, {
-  val: [],
-  multiple: false,
-  id: 'authorIn',
-  label: 'Author In',
-  description: "Post query by Author IDs",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'authorNotIn',
-  label: 'Author Not In',
-  description: "Post query by exluded Author IDs",
-  isPro: true
-}, // Category Parameters
-{
-  val: '',
-  multiple: false,
-  id: 'cat',
-  label: 'Category ID',
-  description: "Post query by Category ID"
-}, {
-  val: '',
-  multiple: false,
-  id: 'categoryName',
-  label: 'Category Name',
-  description: "Post query by Category Name"
-}, {
-  val: [],
-  multiple: false,
-  id: 'categoryAnd',
-  label: 'CategoryAnd',
-  description: "Post query by Category IDs",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'categoryIn',
-  label: 'Category In',
-  description: "Post query by Category IDs",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'categoryNotIn',
-  label: 'Category Not In',
-  description: "Post query by excluded Category IDs",
-  isPro: true
-}, // Tag Parameters
-{
-  val: '',
-  multiple: false,
-  id: 'tag',
-  label: 'Tags',
-  description: "Post query by Tag slug"
-}, {
-  val: '',
-  multiple: false,
-  id: 'tagId',
-  label: 'Tag Id',
-  description: "Post query by Tag ID"
-}, {
-  val: [],
-  multiple: false,
-  id: 'tagAnd',
-  label: 'Tag And',
-  description: "Post query by Tag Ids",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'tagIn',
-  label: 'Tag In',
-  description: "Post query by Tag ids",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'tagNotIn',
-  label: 'Tag Not In',
-  description: "Post query by excluded Tag ids"
-}, {
-  val: [],
-  multiple: false,
-  id: 'tagSlugAnd',
-  label: 'Tag Slug And',
-  description: "Post query by Tags slug",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'tagSlugIn',
-  label: 'Tag Slug In',
-  description: "Post query by excluded Tags slug",
-  isPro: true
-}, {
-  val: '',
-  multiple: false,
-  id: 'p',
-  label: 'Post id',
-  description: "Post query by single post id"
-}, {
-  val: '',
-  multiple: false,
-  id: 'name',
-  label: 'Name',
-  description: "Post query by post slug"
-}, {
-  val: '',
-  multiple: false,
-  id: 'pageId',
-  label: 'Page Id',
-  description: "Post query by single page id"
-}, {
-  val: '',
-  multiple: false,
-  id: 'pagename',
-  label: 'Page name',
-  description: "Post query by page slug"
-}, {
-  val: '',
-  multiple: false,
-  id: 'postParent',
-  label: 'Post Parent',
-  description: "Post query by post parent id",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'postParentIn',
-  label: 'Post Parent In',
-  description: "Post query by post parent ids",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'postParentNotIn',
-  label: 'Post Parent Not In',
-  description: "Post query by excluded post parent ids"
-}, {
-  val: [],
-  multiple: false,
-  id: 'postIn',
-  label: 'Post In',
-  description: "Post query by single post id",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'postNotIn',
-  label: 'Post Not In',
-  description: "Post query by excluded post ids",
-  isPro: true
-}, {
-  val: [{
-    slug: ''
-  }],
-  multiple: false,
-  id: 'postNameIn',
-  label: 'Post Name In',
-  description: "Post query by post slugs",
-  isPro: true
-}, {
-  val: '',
-  multiple: false,
-  id: 'hasPassword',
-  label: 'Has Password',
-  description: "Post query for posts with passwords"
-}, {
-  val: '',
-  multiple: false,
-  id: 'postPassword ',
-  label: 'Post Password',
-  description: "Post query for posts with particular passwords",
-  isPro: true
-}, {
-  val: {
-    compare: '='
-  },
-  multiple: false,
-  id: 'commentCount',
-  label: 'Comment Count',
-  description: "Post query by comment count"
-}, {
-  val: '',
-  multiple: false,
-  id: 'nopaging',
-  label: 'No Paging',
-  description: "Enable show all posts or use pagination"
-}, {
-  val: '',
-  multiple: false,
-  id: 'postsPerPage',
-  label: 'Posts Per Page',
-  description: "Number of post to show per page"
-}, {
-  val: '',
-  multiple: false,
-  id: 'paged',
-  label: 'Paged',
-  description: "Pagination start with"
-}, {
-  val: '',
-  multiple: false,
-  id: 'offset',
-  label: 'Offset',
-  description: "Number of post to displace or pass over"
-}, {
-  val: '',
-  multiple: false,
-  id: 'postsPerArchivePage',
-  label: 'Posts Per Archive Page',
-  description: ""
-}, {
-  val: '',
-  multiple: false,
-  id: 'ignoreStickyPosts',
-  label: 'Ignore Sticky Posts',
-  description: "Ignore post from post query",
-  isPro: true
-}, {
-  val: '',
-  multiple: false,
-  id: 'metaKey',
-  label: 'Meta Key',
-  description: "Post query by custom field key"
-}, {
-  val: '',
-  multiple: false,
-  id: 'metaValue',
-  label: 'Meta Value',
-  description: "Post query by custom field value"
-}, {
-  val: '',
-  multiple: false,
-  id: 'metaValueNum',
-  label: 'Meta Value Num',
-  description: "Post query by custom field value for number types"
-}, {
-  val: '',
-  multiple: false,
-  id: 'metaCompare',
-  label: 'Meta Compare',
-  description: "Meta query compare"
-}, {
-  val: [],
-  multiple: false,
-  id: 'metaQuery',
-  label: 'Meta Query',
-  description: "Advance meta fields query"
-}, {
-  val: 'readable',
-  multiple: false,
-  id: 'perm',
-  label: 'Perm',
-  description: "User permission parameter"
-}, {
-  val: [],
-  multiple: false,
-  id: 'postMimeType',
-  label: 'Post Mime Type',
-  description: "Post query by allwed post mime types"
-}, {
-  val: false,
-  multiple: false,
-  id: 'cacheResults',
-  label: 'Cache Results',
-  description: "Enable Post information cache"
-}, {
-  val: false,
-  multiple: false,
-  id: 'updatePostMetaCache',
-  label: 'Update Post Meta Cache',
-  description: "Enable Post meta information cache"
-}, {
-  val: false,
-  multiple: false,
-  id: 'updatePostTermCache',
-  label: 'Update Post Term Cache',
-  description: "Enable Post term information cache"
-}];
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (queryPrams);
 
 /***/ }),
 
@@ -64106,6 +65171,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_accordion__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./blocks/accordion */ "./src/blocks/accordion/index.js");
 /* harmony import */ var _blocks_tabs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./blocks/tabs */ "./src/blocks/tabs/index.js");
 /* harmony import */ var _blocks_list__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./blocks/list */ "./src/blocks/list/index.js");
+/* harmony import */ var _blocks_shortcode__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./blocks/shortcode */ "./src/blocks/shortcode/index.js");
 
 window.PostGridPluginData = {
   freeUrl: "https://wordpress.org/plugins/post-grid/",
@@ -64155,13 +65221,8 @@ _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
 
 
 
- // import './blocks/row'
-// import './blocks/column'
-//import './blocks/shortcode'
-// import './blocks/link'
-// import './blocks/query'
-// import './blocks/post-template'
-// import './blocks/innerblocks'
+
+
 })();
 
 /******/ })()

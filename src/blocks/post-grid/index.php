@@ -561,33 +561,33 @@ class PGBlockPostGrid
                 } elseif ($id == 'authorName') {
                     $query_args['author_name'] = $val;
                 } elseif ($id == 'authorIn') {
-                    $query_args['author_in'] = $val;
+                    $query_args['author_in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'authorNotIn') {
-                    $query_args['author__not_in'] = $val;
+                    $query_args['author__not_in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'cat') {
                     $query_args['cat'] = $val;
                 } elseif ($id == 'categoryName') {
                     $query_args['category_name'] = $val;
                 } elseif ($id == 'categoryAnd') {
-                    $query_args['category_and'] = $val;
+                    $query_args['category_and'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'categoryIn') {
-                    $query_args['category__in'] = $val;
+                    $query_args['category__in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'categoryNotIn') {
-                    $query_args['category__not_in'] = $val;
+                    $query_args['category__not_in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'tag') {
                     $query_args['tag'] = $val;
-                } elseif ($id == 'tag_id') {
-                    $query_args['meta_query'] = $val;
+                } elseif ($id == 'tagId') {
+                    $query_args['tag_id'] = $val;
                 } elseif ($id == 'tagAnd') {
-                    $query_args['tag__and'] = $val;
+                    $query_args['tag__and'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'tagIn') {
-                    $query_args['tag__in'] = $val;
+                    $query_args['tag__in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'tagNotIn') {
-                    $query_args['tag__not_in'] = $val;
+                    $query_args['tag__not_in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'tagSlugAnd') {
-                    $query_args['tag_slug__and'] = $val;
+                    $query_args['tag_slug__and'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'tagSlugIn') {
-                    $query_args['tag_slug__in'] = $val;
+                    $query_args['tag_slug__in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'taxQuery') {
                     $query_args['tax_query'] = isset($val[0]) ? $val[0] : $val;
                 } elseif ($id == 'p') {
@@ -601,16 +601,18 @@ class PGBlockPostGrid
                 } elseif ($id == 'postParent') {
                     $query_args['post_parent'] = $val;
                 } elseif ($id == 'postParentIn') {
-                    $query_args['post_parent__in'] = $val;
+                    $query_args['post_parent__in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'postParentNotIn') {
-                    $query_args['post_parent__not_in'] = $val;
+                    $query_args['post_parent__not_in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'postIn') {
-                    $query_args['post__in'] = $val;
+
+                    $query_args['post__in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'postNotIn') {
-                    $query_args['post__not_in'] = $val;
+                    $query_args['post__not_in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'postNameIn') {
-                    $query_args['post_name__in'] = $val;
+                    $query_args['post_name__in'] = !empty($val) ? explode(',', $val) : [];
                 } elseif ($id == 'hasPassword') {
+
                     $query_args['has_password'] = $val;
                 } elseif ($id == 'postPassword') {
                     $query_args['post_password'] = $val;

@@ -53,7 +53,7 @@ const queryPrams = [
   { val: '', multiple: false, id: 'postParent', label: 'Post Parent', description: "Post query by post parent id", isPro: true },
   { val: [], multiple: false, id: 'postParentIn', label: 'Post Parent In', description: "Post query by post parent ids", isPro: true },
   { val: [], multiple: false, id: 'postParentNotIn', label: 'Post Parent Not In', description: "Post query by excluded post parent ids" },
-  { val: [], multiple: false, id: 'postIn', label: 'Post In', description: "Post query by single post id", isPro: true },
+  { val: [], multiple: false, id: 'postIn', label: 'Post In', description: "Post query by multiple post ids, comma separated.", isPro: true },
   { val: [], multiple: false, id: 'postNotIn', label: 'Post Not In', description: "Post query by excluded post ids", isPro: true },
   { val: [{ slug: '' }], multiple: false, id: 'postNameIn', label: 'Post Name In', description: "Post query by post slugs", isPro: true },
 

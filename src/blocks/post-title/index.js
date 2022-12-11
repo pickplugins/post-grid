@@ -726,36 +726,37 @@ registerBlockType("post-grid/post-title", {
 
 
       //return false;
+      var reponsiveCssDesktop = '';
 
 
-      var reponsiveCssMobile = '';
+      if (reponsiveCssGroups['Desktop'] != undefined) {
+        //reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
 
-      if (reponsiveCssGroups['Mobile'] != undefined) {
+        for (var selector in reponsiveCssGroups['Desktop']) {
+          var attrs = reponsiveCssGroups['Desktop'][selector];
 
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-
-          reponsiveCssMobile += selector + '{';
+          reponsiveCssDesktop += selector + '{';
           for (var index in attrs) {
             var attr = attrs[index]
             var attrName = attr.attr;
             var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
+            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
           }
-          reponsiveCssMobile += '}';
-        }
-        reponsiveCssMobile += '}';
+          reponsiveCssDesktop += '}';
 
+
+        }
+        //reponsiveCssDesktop += '}';
       }
+
 
 
 
       var reponsiveCssTablet = '';
 
       if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+        //reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+        reponsiveCssTablet += '@media(max-width: 780px){';
 
         for (var selector in reponsiveCssGroups['Tablet']) {
           var attrs = reponsiveCssGroups['Tablet'][selector];
@@ -773,35 +774,32 @@ registerBlockType("post-grid/post-title", {
         reponsiveCssTablet += '}';
       }
 
-      var reponsiveCssDesktop = '';
 
 
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
+      var reponsiveCssMobile = '';
 
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
+      if (reponsiveCssGroups['Mobile'] != undefined) {
 
+        //reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+        reponsiveCssMobile += '@media(max-width:360px){';
 
-          reponsiveCssDesktop += selector + '{';
+        for (var selector in reponsiveCssGroups['Mobile']) {
+          var attrs = reponsiveCssGroups['Mobile'][selector];
+
+          reponsiveCssMobile += selector + '{';
           for (var index in attrs) {
             var attr = attrs[index]
             var attrName = attr.attr;
             var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
+            reponsiveCssMobile += attrName + ':' + attrValue + ';';
           }
-          reponsiveCssDesktop += '}';
-
-
+          reponsiveCssMobile += '}';
         }
-        reponsiveCssDesktop += '}';
-
-
+        reponsiveCssMobile += '}';
 
       }
 
-
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
+      var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
 
 
 

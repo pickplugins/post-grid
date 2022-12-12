@@ -533,7 +533,6 @@ class PGBlockPostGrid
                         }
                     }
 
-                    //error_log(serialize($date_query));
 
 
                     $query_args['date_query'] = $date_query;

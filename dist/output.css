@@ -633,6 +633,18 @@ video {
   bottom: 0px;
 }
 
+.left-0 {
+  left: 0px;
+}
+
+.top-5 {
+  top: 1.25rem;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
 }

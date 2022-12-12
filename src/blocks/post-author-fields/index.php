@@ -159,7 +159,6 @@ class PGBlockPostAuthorields
     function theHTML($attributes, $content, $block)
     {
 
-        //var_dump($block);
 
         global $postGridCss;
         global $postGridCustomCss;
@@ -283,7 +282,6 @@ class PGBlockPostAuthorields
 
         ob_start();
 
-        //var_dump($fieldLink);
 
 ?>
 

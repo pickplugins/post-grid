@@ -313,7 +313,6 @@ class PGBlockTabs
 
         $postGridCustomCss .= $customCss;
 
-        //var_dump($icon);
 
 
         if ($iconLibrary == 'fontAwesome') {

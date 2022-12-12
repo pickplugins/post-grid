@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) exit();
 
 
 
-class BlockPostMeta
+class BlockPostShortcode
 {
     function __construct()
     {
@@ -75,13 +75,9 @@ class BlockPostMeta
 
     function front_script($attributes)
     {
-
-
-        //var_dump('asdasdasd');
     }
     function front_style($attributes)
     {
-        //var_dump('asdasdasd');
     }
 
 
@@ -119,31 +115,12 @@ class BlockPostMeta
         $wrapperStyles = isset($wrapper['styles']) ? $wrapper['styles'] : [];
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
 
-        $meta = isset($attributes['meta']) ? $attributes['meta'] : [];
-        $metaOptions = isset($meta['options']) ? $meta['options'] : [];
-        $metaStyles = isset($meta['styles']) ? $meta['styles'] : [];
+        $shortcode = isset($attributes['shortcode']) ? $attributes['shortcode'] : [];
+        $shortcodeOptions = isset($shortcode['options']) ? $shortcode['options'] : [];
+        $shortcodeStyles = isset($shortcode['styles']) ? $shortcode['styles'] : [];
 
-        $metaKey = isset($metaOptions['key']) ? $metaOptions['key'] : '';
-        $metaKeyType = isset($metaOptions['type']) ? $metaOptions['type'] : '';
-
-        $templateFront = isset($attributes['templateFront']) ? $attributes['templateFront'] : '';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        $shortcodeKey = isset($shortcodeOptions['key']) ? $shortcodeOptions['key'] : '';
+        $shortcodePrams = isset($shortcodeOptions['prams']) ? $shortcodeOptions['prams'] : [];
 
 
 
@@ -153,14 +130,12 @@ class BlockPostMeta
 
 
 
-
-
+        //var_dump($shortcodePrams);
 
 
         if (!empty($wrapperTag)) :
-?>
 
-<?php
+            echo do_shortcode('[' . $shortcodeKey . ']');
 
         endif;
 
@@ -172,4 +147,4 @@ class BlockPostMeta
     }
 }
 
-$BlockPostGrid = new BlockPostMeta();
+$BlockPostShortcode = new BlockPostShortcode();

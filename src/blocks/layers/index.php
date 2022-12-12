@@ -73,8 +73,6 @@ class PGBlockLayers
     }
     function front_style($attributes)
     {
-
-        var_dump('Hello0');
     }
 
     // front-end output from the gutenberg editor 

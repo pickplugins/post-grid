@@ -250,6 +250,14 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 	= 2.2.12 =
     * 2022-12-11 - Fix - Post Grid Block - Post Query by author in, author not in, Tag in, tag and, tag not in, ta slug in, tag slug and, category and, category no in, category in, post parent in, post parent no in, post in, post not in, post name in
+    * 2022-12-11 - Fix - Post Grid Block - Tutorials link updated
+    * 2022-12-11 - Fix - Post Grid Filterable Block - Tutorials link updated
+    * 2022-12-11 - Fix - Icon Block - New icon position before link and after link added.
+    * 2022-12-11 - Fix - Post Grid Block - Typo issue fixed.
+
+
+
+
 
 	= 2.2.12 =
     * 2022-12-10 - Add - Terms List Block added

@@ -188,8 +188,6 @@ class PGBlockTermsList
     function get_term_postsx($termId = 0, $taxonomy = '', $slug = '')
     {
 
-        error_log($slug);
-        error_log($termId);
 
 
         $args = array(
@@ -223,7 +221,6 @@ class PGBlockTermsList
 
             endwhile;
 
-            error_log(serialize($posts));
             wp_reset_query();
             wp_reset_postdata();
 
@@ -451,7 +448,6 @@ class PGBlockTermsList
         $itemsAccordionOpen = isset($itemsOptions['accordionOpen']) ? $itemsOptions['accordionOpen'] : true;
         $itemsLinkToTerm = isset($itemsOptions['linkToTerm']) ? $itemsOptions['linkToTerm'] : true;
 
-        //var_dump($itemsQueryPosts);
 
         $separator = isset($attributes['separator']) ? $attributes['separator'] : [];
         $separatorOptions = isset($separator['options']) ? $separator['options'] : [];

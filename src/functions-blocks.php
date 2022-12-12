@@ -326,7 +326,6 @@ function post_grid_allowed_block_types($allowed_block_types, $editor_context)
 
     $disable_blocks = isset($post_grid_settings['disable_blocks']) ? $post_grid_settings['disable_blocks'] : [];
 
-    error_log(serialize($allowed_block_types));
 
     $blocks_list = [
         'post-grid/post-grid' => 'Post Grid',
@@ -360,4 +359,4 @@ function post_grid_allowed_block_types($allowed_block_types, $editor_context)
 
     return $allowed_block_types;
 }
-add_filter('allowed_block_types_all', 'post_grid_allowed_block_types', 99, 2);
+//add_filter('allowed_block_types_all', 'post_grid_allowed_block_types', 99, 2);

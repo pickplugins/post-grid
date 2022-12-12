@@ -141,7 +141,18 @@ class PGDropdown extends Component {
                     return (
 
                       <div className='border-b cursor-pointer hover:bg-slate-200 p-2 block' onClick={ev => {
-                        onChange(x, index)
+
+
+                        if (x.isPro == true) {
+                          if (postGridData != null && postGridData.license_status == 'active') {
+                            onChange(x, index)
+                          }
+
+                        } else {
+                          onChange(x, index)
+                        }
+
+
 
                       }} >
                         <div className='flex justify-between'>
@@ -149,7 +160,9 @@ class PGDropdown extends Component {
                             {x.icon != undefined && <span className=''><RawHTML>{x.icon}</RawHTML></span>}
                             <span className=''>{x.label} </span>
                           </div>
-                          {x.isPro && postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>Pro</span>)}
+                          {x.isPro && postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>
+                            <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
+                          </span>)}
                         </div>
                         {x.description != undefined && x.description.length > 0 && <div className='text-xs text-slate-400'>{x.description}</div>}
                       </div>

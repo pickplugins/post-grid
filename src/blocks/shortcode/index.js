@@ -150,20 +150,17 @@ registerBlockType("post-grid/shortcode", {
     useEffect(() => {
 
 
-      // apiFetch({
-      //   path: '/post-grid/v2/get_post_meta',
-      //   method: 'POST',
-      //   data: { postId: postId, meta_key: shortcode.options.key, prams: shortcode.options.prams, },
-      // }).then((res) => {
-
-      //   .log(res);
+      apiFetch({
+        path: '/post-grid/v2/get_shortcode',
+        method: 'POST',
+        data: { postId: postId, meta_key: shortcode.options.key, prams: shortcode.options.prams, },
+      }).then((res) => {
 
 
+        setMetaHtml(res.html);
+        //setMetaArgs(res.args);
 
-      //   setMetaHtml(res.html);
-      //   setMetaArgs(res.args);
-
-      // });
+      });
 
     }, [shortcode]);
 
@@ -692,55 +689,39 @@ registerBlockType("post-grid/shortcode", {
 
 
 
+            <PanelBody title="Custom Style" initialOpen={false}>
 
+              <p>Please use following class selector to apply your custom CSS</p>
+              <div className='my-3'>
+                <p className='font-bold'>Items Wrapper</p>
+                <p><code>{itemWrapSelector}{'{/* your CSS here*/}'}</code></p>
+              </div>
 
-
-            <div className=''>
-
-
-              <div>
-
-
-
-
-                <PanelBody title="Custom Style" initialOpen={false}>
-
-                  <p>Please use following class selector to apply your custom CSS</p>
-                  <div className='my-3'>
-                    <p className='font-bold'>Items Wrapper</p>
-                    <p><code>{itemWrapSelector}{'{/* your CSS here*/}'}</code></p>
-                  </div>
-
-                  <div className='my-3'>
-                    <p className='font-bold'>Caetgory Items</p>
-                    <p><code>{itemSelector}{'{}'} </code></p>
-                    <p><code>.pg-postMeta a{'{/* your CSS here*/}'}</code></p>
-                  </div>
-
-
-
-                  <div className='my-3'>
-                    <p className='font-bold'>Post Count</p>
-                    <p><code>{postCountSelector}{'{/* your CSS here*/}'} </code></p>
-                  </div>
-
-
-                  <TextareaControl
-                    label="Custom CSS"
-                    help="Do not use 'style' tag"
-                    value={customCss}
-                    onChange={(value) => {
-                      setAttributes({ customCss: value })
-
-                    }}
-                  />
-                </PanelBody>
-
+              <div className='my-3'>
+                <p className='font-bold'>Caetgory Items</p>
+                <p><code>{itemSelector}{'{}'} </code></p>
+                <p><code>.pg-postMeta a{'{/* your CSS here*/}'}</code></p>
               </div>
 
 
 
-            </div >
+              <div className='my-3'>
+                <p className='font-bold'>Post Count</p>
+                <p><code>{postCountSelector}{'{/* your CSS here*/}'} </code></p>
+              </div>
+
+
+              <TextareaControl
+                label="Custom CSS"
+                help="Do not use 'style' tag"
+                value={customCss}
+                onChange={(value) => {
+                  setAttributes({ customCss: value })
+
+                }}
+              />
+            </PanelBody>
+
 
 
 

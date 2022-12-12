@@ -118,7 +118,6 @@ class PGBlockLayer
 
         $postGridCustomCss .= $customCss;
 
-        //var_dump($wrapperStyles);
 
 
 

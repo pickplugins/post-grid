@@ -1043,14 +1043,13 @@ registerBlockType("post-grid/text", {
 
 
         <>
-
           <RichText
             className={[blockId]}
             tagName={text.options.tag}
             value={text.options.content}
             allowedFormats={['core/bold', 'core/italic', 'core/link']}
             onChange={(content) => {
-              var options = { ...text.styles, content: content };
+              var options = { ...text.options, content: content };
               setAttributes({ text: { ...text, options: options } });
             }}
             placeholder={__('Start Writing...')}

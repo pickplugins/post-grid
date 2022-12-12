@@ -131,7 +131,6 @@ class PGBlockImage
     function theHTML($attributes, $content, $block)
     {
 
-        //var_dump($block->context);
 
         global $postGridCss;
         global $postGridCustomCss;

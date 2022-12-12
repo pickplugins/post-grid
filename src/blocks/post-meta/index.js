@@ -50,6 +50,8 @@ registerBlockType("post-grid/post-meta", {
 
         options: {
           class: 'inline-block',
+          tag: 'div',
+
         },
         styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
 
@@ -66,37 +68,16 @@ registerBlockType("post-grid/post-meta", {
 
       },
     },
-    separator: {
-      type: 'object',
-      default: {
-
-        options: {
-          class: 'inline-block',
-        },
-        styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
-
-
-      },
-    },
-    frontText: {
-      type: 'object',
-      default: {
-
-        options: {
-          text: 'Meta Value: ', class: 'inline-block',
-        },
-        styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
-
-
-      },
-    },
 
 
     customCss: {
       "type": "string",
       "default": ''
     },
-
+    blockId: {
+      "type": "string",
+      "default": ''
+    },
     blockCssY: {
       "type": "object",
       "default": { items: {} }
@@ -131,8 +112,6 @@ registerBlockType("post-grid/post-meta", {
 
     var wrapper = attributes.wrapper;
     var items = attributes.items;
-    var separator = attributes.separator;
-    var frontText = attributes.frontText;
 
     var blockCssY = attributes.blockCssY;
 
@@ -152,19 +131,17 @@ registerBlockType("post-grid/post-meta", {
     // Wrapper CSS Class Selectors
     const itemWrapSelector = blockClass;
     const itemSelector = blockClass + ' .item';
-    const itemSeparatorSelector = blockClass + ' .separator';
-    const frontTextSelector = blockClass + ' .frontText';
     const postCountSelector = blockClass + ' .postCount';
 
     const [filterArgs, setfilterArgs] = useState({
       string: { label: 'String', value: 'string', },
-      acfImage: { label: 'ACF Image', value: 'acfImage', },
-      acfFile: { label: 'ACF File', value: 'acfFile', },
-      acfTaxonomy: { label: 'ACF Taxonomy', value: 'acfTaxonomy', },
-      acfPostObject: { label: 'ACF Post Object', value: 'acfPostObject', },
-      acfPageLink: { label: 'ACF Page Link', value: 'acfPageLink', },
-      acfLink: { label: 'ACF Link', value: 'acfLink', },
-      acfUser: { label: 'ACF User', value: 'acfUser', },
+      acfImage: { label: 'ACF Image', value: 'acfImage', isPro: true },
+      acfFile: { label: 'ACF File', value: 'acfFile', isPro: true },
+      acfTaxonomy: { label: 'ACF Taxonomy', value: 'acfTaxonomy', isPro: true },
+      acfPostObject: { label: 'ACF Post Object', value: 'acfPostObject', isPro: true },
+      acfPageLink: { label: 'ACF Page Link', value: 'acfPageLink', isPro: true },
+      acfLink: { label: 'ACF Link', value: 'acfLink', isPro: true },
+      acfUser: { label: 'ACF User', value: 'acfUser', isPro: true },
       acfButtonGroup: { label: 'ACF Button Group', value: 'acfButtonGroup', },
 
 
@@ -197,6 +174,7 @@ registerBlockType("post-grid/post-meta", {
     }, [meta, template]);
 
 
+
     useEffect(() => {
 
 
@@ -212,6 +190,21 @@ registerBlockType("post-grid/post-meta", {
 
 
     }, [template]);
+
+
+
+    useEffect(() => {
+
+      setAttributes({ blockId: blockIdX });
+
+      // setAttributes({ postTitle: postTitle });
+      // setAttributes({ wrapper: wrapper });
+
+      generateBlockCssY()
+
+
+
+    }, [clientId]);
 
 
     var breakPointList = [];
@@ -230,6 +223,7 @@ registerBlockType("post-grid/post-meta", {
 
 
 
+    const CustomTag = `${wrapper.options.tag}`;
 
 
 
@@ -635,6 +629,54 @@ registerBlockType("post-grid/post-meta", {
 
             </div>
 
+            <PanelBody title="Wrapper" initialOpen={false}>
+
+              <PanelRow>
+                <label for="">Wrapper Tag</label>
+                <SelectControl
+                  label=""
+                  value={wrapper.options.tag}
+                  options={[
+                    { label: 'No Wrapper', value: '' },
+                    { label: 'H1', value: 'h1' },
+                    { label: 'H2', value: 'h2' },
+                    { label: 'H3', value: 'h3' },
+                    { label: 'H4', value: 'h4' },
+                    { label: 'H5', value: 'h5' },
+                    { label: 'H6', value: 'h6' },
+                    { label: 'span', value: 'SPAN' },
+                    { label: 'div', value: 'DIV' },
+                    { label: 'P', value: 'p' },
+                  ]}
+                  onChange={(newVal) => {
+
+                    var options = { ...wrapper.options, tag: newVal };
+                    setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
+
+                  }
+
+                  }
+                />
+              </PanelRow>
+              <PanelRow>
+                <label for="">Wrapper Class</label>
+
+                <InputControl
+                  value={wrapper.options.class}
+                  onChange={(newVal) => {
+
+
+                    var options = { ...wrapper.options, class: newVal }
+                    setAttributes({ wrapper: { ...wrapper, options: options } });
+
+
+
+
+                  }}
+                />
+              </PanelRow>
+
+            </PanelBody>
             <PanelBody title="Meta Key" initialOpen={true}>
 
 
@@ -720,142 +762,34 @@ registerBlockType("post-grid/post-meta", {
 
 
 
-            <PanelBody title="Wrapper" initialOpen={false}>
-
-              <PanelRow>
-                <label for="">Wrapper Class</label>
-
-                <InputControl
-                  value={wrapper.options.class}
-                  onChange={(newVal) => {
 
 
-                    var options = { ...wrapper.options, class: newVal }
-                    setAttributes({ wrapper: { ...wrapper, options: options } });
+            <PanelBody title="Custom Style" initialOpen={false}>
 
-
-
-
-                  }}
-                />
-              </PanelRow>
-
-            </PanelBody>
-
-
-
-
-            <PanelBody title="Front Text" initialOpen={false}>
-
-
-
-              <PanelRow>
-                <label for="">Front Text</label>
-
-                <InputControl
-                  value={frontText.options.text}
-                  onChange={(newVal) => {
-
-                    var options = { ...frontText.options, text: newVal }
-                    setAttributes({ frontText: { ...frontText, options: options } });
-
-                  }
-
-                  }
-                />
-              </PanelRow>
-
-
-            </PanelBody>
-            <PanelBody title="Separator" initialOpen={false}>
-
-              <PanelRow>
-                <label for="">Separator</label>
-                <InputControl
-                  value={separator.options.text}
-                  onChange={(newVal) => {
-
-                    var options = { ...separator.options, text: newVal }
-                    setAttributes({ separator: { ...separator, options: options } });
-
-
-                  }
-
-                  }
-                />
-              </PanelRow>
-
-            </PanelBody>
-
-
-            <PanelBody title="Meta Value Return" initialOpen={true}>
-
-              <div className='p-3'>
-
-
-
-
-
-
-              </div>
-
-            </PanelBody>
-
-
-            <div className=''>
-
-
-              <div>
-
-
-
-
-                <PanelBody title="Custom Style" initialOpen={false}>
-
-                  <p>Please use following class selector to apply your custom CSS</p>
-                  <div className='my-3'>
-                    <p className='font-bold'>Items Wrapper</p>
-                    <p><code>{itemWrapSelector}{'{/* your CSS here*/}'}</code></p>
-                  </div>
-
-                  <div className='my-3'>
-                    <p className='font-bold'>Caetgory Items</p>
-                    <p><code>{itemSelector}{'{}'} </code></p>
-                    <p><code>.pg-postMeta a{'{/* your CSS here*/}'}</code></p>
-                  </div>
-
-                  <div className='my-3'>
-                    <p className='font-bold'>Separator</p>
-                    <p><code>{itemSeparatorSelector}{'{/* your CSS here*/}'} </code></p>
-                  </div>
-
-                  <div className='my-3'>
-                    <p className='font-bold'>Front Text</p>
-                    <p><code>{frontTextSelector}{'{/* your CSS here*/}'} </code></p>
-                  </div>
-
-                  <div className='my-3'>
-                    <p className='font-bold'>Post Count</p>
-                    <p><code>{postCountSelector}{'{/* your CSS here*/}'} </code></p>
-                  </div>
-
-
-                  <TextareaControl
-                    label="Custom CSS"
-                    help="Do not use 'style' tag"
-                    value={customCss}
-                    onChange={(value) => {
-                      setAttributes({ customCss: value })
-
-                    }}
-                  />
-                </PanelBody>
-
+              <p>Please use following class selector to apply your custom CSS</p>
+              <div className='my-3'>
+                <p className='font-bold'>Items Wrapper</p>
+                <p><code>{itemWrapSelector}{'{/* your CSS here*/}'}</code></p>
               </div>
 
 
 
-            </div >
+              <TextareaControl
+                label="Custom CSS"
+                help="Do not use 'style' tag"
+                value={customCss}
+                onChange={(value) => {
+                  setAttributes({ customCss: value })
+
+                }}
+              />
+            </PanelBody>
+
+
+
+
+
+
 
 
 
@@ -885,18 +819,20 @@ registerBlockType("post-grid/post-meta", {
 
 
 
-          <div className='pg-postMeta'>
-            <span className='frontText inline-block'>
-              <RawHTML>{frontText.text}</RawHTML>
+          {wrapper.options.tag && (
+            <CustomTag className={[blockId]}>
 
-            </span>
+              <RawHTML>{metaHtml}</RawHTML>
+            </CustomTag>
+          )}
 
-            <RawHTML>{metaHtml}</RawHTML>
+          {wrapper.options.tag.length == 0 && (
 
+            <div className={[blockId]}>
+              <RawHTML>{metaHtml}</RawHTML>
 
-          </div>
-
-
+            </div>
+          )}
 
 
 

@@ -53,6 +53,7 @@ import breakPoints from '../../breakpoints'
 import queryPresets from './query-presets'
 import gridLayouts from './grid-layouts'
 import queryPrams from './queryprams'
+import tutorialsLinks from './tutorials-links'
 
 
 import colorsPresets from '../../colors-presets'
@@ -486,43 +487,6 @@ registerBlockType("post-grid/post-grid", {
     const paginationItemActiveSelector = blockClass + ' .pagination .page-numbers.current';
 
 
-    var tutorialsLinks = [
-      { label: 'How to add columns?', url: '', isVideo: false, },
-      { label: 'How to disable pagination?', url: '', isVideo: false, },
-      { label: 'How to customize pagination style?', url: '', isVideo: false, },
-      { label: 'How to display normal pagination?', url: '', isVideo: false, },
-      { label: 'How to display next-previous pagination?', url: '', isVideo: false, },
-      { label: 'How to display ajax pagination?', url: '', isVideo: false, },
-      { label: 'How to enable infinte loading?', url: '', isVideo: false, },
-      { label: 'How to query post by post status?', url: '', isVideo: false, },
-
-
-      { label: 'How to add rows?', url: '', isVideo: false, },
-      { label: 'How to enable load more?', url: '', isVideo: false, },
-      { label: 'How to enable lazy loading?', url: '', isVideo: true, },
-      { label: 'How to custoize post grid container', url: '', isVideo: false, },
-      { label: 'How to customize post grid loop wrapper?', url: '', isVideo: false, },
-      { label: 'How to query post by post types?', url: '', isVideo: false, },
-      { label: 'How to query posts by custom post types?', url: '', isVideo: false, },
-      { label: 'How to query post by categories?', url: '', isVideo: false, },
-      { label: 'How to query post by tags?', url: '', isVideo: false, },
-      { label: 'How to query post by custom taxonomies & terms?', url: '', isVideo: false, },
-      { label: 'How to query post by custom meta fields?', url: '', isVideo: false, },
-      { label: 'How to query post by search parameter?', url: '', isVideo: false, },
-      { label: 'How to query post by order & orderby?', url: '', isVideo: false, },
-      { label: 'How to query post by date?', url: '', isVideo: false, },
-      { label: 'How to query post by author?', url: '', isVideo: false, },
-      { label: 'How to query post by post ids?', url: '', isVideo: false, },
-      { label: 'How to query post by post parents?', url: '', isVideo: false, },
-      { label: 'How to query post by post passwords?', url: '', isVideo: false, },
-      { label: 'How to customize layouts?', url: '', isVideo: false, },
-      { label: 'How to customize grid layout?', url: '', isVideo: false, },
-      { label: 'How to create complex grid layout?', url: '', isVideo: false, },
-
-
-
-
-    ];
 
     const BLOCKS_TEMPLATE = [
       ['post-grid/post-title', {}],
@@ -624,9 +588,11 @@ registerBlockType("post-grid/post-grid", {
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
+      if (pagination.options.type.length == 0) {
+        var paginationOptons = { ...pagination.options, type: 'normal' }
+        setAttributes({ pagination: { ...pagination, options: paginationOptons } });
+      }
 
-      var paginationOptons = { ...pagination.options, type: 'normal' }
-      setAttributes({ pagination: { ...pagination, options: paginationOptons } });
 
 
     }, [clientId]);
@@ -3886,9 +3852,6 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-queryPreset"}>
-                  <p> <span className='underline'>Query Presets</span> Only avilable in Premium</p>
-                </PGproWrapper>
 
                 <PanelRow className='mb-4'>
                   <label for="">Query Presets</label>
@@ -4210,34 +4173,42 @@ registerBlockType("post-grid/post-grid", {
                     <Button className='my-3' variant="secondary"
                       onClick={(_newVal) => {
 
-                        if (grid.options.itemCss[breakPointX] != undefined) {
 
-                          var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
-                        } else {
-                          grid.options.itemCss[breakPointX] = [];
-                          var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
+
+                        if (postGridData != null && postGridData.license_status == 'active') {
+
+                          if (grid.options.itemCss[breakPointX] != undefined) {
+
+                            var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
+                          } else {
+                            grid.options.itemCss[breakPointX] = [];
+                            var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
+
+                          }
+
+                          var newValuesObj = {};
+                          if (Object.keys(grid.options.itemCss).length == 0) {
+                            newValuesObj[breakPointX] = ssd;
+                          } else {
+                            newValuesObj = grid.options.itemCss;
+                            newValuesObj[breakPointX] = ssd;
+                          }
+
+                          var options = { ...grid.options, itemCss: newValuesObj };
+                          setAttributes({ grid: { ...grid, options: options } });
 
                         }
-
-
-
-
-                        var newValuesObj = {};
-                        if (Object.keys(grid.options.itemCss).length == 0) {
-                          newValuesObj[breakPointX] = ssd;
-                        } else {
-                          newValuesObj = grid.options.itemCss;
-                          newValuesObj[breakPointX] = ssd;
-                        }
-
-                        var options = { ...grid.options, itemCss: newValuesObj };
-                        setAttributes({ grid: { ...grid, options: options } });
 
 
 
                       }}
 
-                    >Add</Button>
+                    >
+                      Add
+                      {postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white'>
+                        <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS'}>Pro</a>
+                      </span>)}
+                    </Button>
                   </PanelRow>
 
 
@@ -4359,16 +4330,28 @@ registerBlockType("post-grid/post-grid", {
 
 
                           //setAttributes({ grid: { options: x.data } })
-                          setAttributes({ grid: x.data })
+                          if (x.isPro) {
+                            if (postGridData != null && postGridData.license_status == 'active') {
+                              setAttributes({ grid: x.data })
+                            }
+                          } else {
+                            setAttributes({ grid: x.data })
+                          }
+
 
 
                         }}>
 
-
+                          {x.isPro && postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white'>
+                            <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
+                          </span>)}
                           {x.icon != undefined && (
                             <div className='w-full grid-layout-prewview'>{x.icon}</div>
                           )}
-                          <div className='text-[16px] p-2 bg-blue-600 text-white bg-opacity-90 text-bold  w-full text-center'>{x.title}</div>
+                          <div className='text-[16px] p-2 bg-blue-600 text-white bg-opacity-90 text-bold  w-full text-center'>
+                            {x.title}
+
+                          </div>
                         </div>
 
                       )

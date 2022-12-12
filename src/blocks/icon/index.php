@@ -170,14 +170,6 @@ class PGBlockIcon
         $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
         $iconOptions = isset($icon['options']) ? $icon['options'] : [];
         $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
-
-
-
-
-
-
-
-        //var_dump($iconLibrary);
     }
 
     // front-end output from the gutenberg editor 

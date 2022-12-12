@@ -125,7 +125,6 @@ class PGBlockFeaturedImage
     function theHTML($attributes, $content, $block)
     {
 
-        //var_dump($block->context);
 
         global $postGridCss;
         global $postGridCustomCss;
@@ -180,7 +179,6 @@ class PGBlockFeaturedImage
 
 
 
-        //var_dump($size);
 
 
         $linkAttrStr = '';

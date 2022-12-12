@@ -108,13 +108,9 @@ class BlockPostMeta
 
     function front_script($attributes)
     {
-
-
-        //var_dump('asdasdasd');
     }
     function front_style($attributes)
     {
-        //var_dump('asdasdasd');
     }
 
 
@@ -145,7 +141,7 @@ class BlockPostMeta
 
         global $postGridCss;
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
@@ -163,6 +159,7 @@ class BlockPostMeta
         $post_ID = $block->context['postId'];
         $post_url = get_the_permalink($post_ID);
 
+        $template = isset($attributes['template']) ? $attributes['template'] : [];
 
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -180,19 +177,24 @@ class BlockPostMeta
         $templateFront = isset($attributes['templateFront']) ? $attributes['templateFront'] : '';
 
 
+        $metaValue = '';
 
 
         if ($metaKeyType != 'string') {
-            $acf_value = get_field($metaKey, $post_ID);
+
+            if (is_plugin_active('advanced-custom-fields/acf.php') ||  is_plugin_active('advanced-custom-fields-pro/acf.php')) {
+
+                $metaValue = get_field($metaKey, $post_ID);
+            }
         } else {
 
-            $acf_value = get_post_meta($post_ID, $metaKey, true);
+            $metaValue = get_post_meta($post_ID, $metaKey, true);
         }
 
 
 
 
-        //echo '<pre style="text-align: left">' . var_export($acf_value, true) . '</pre>';
+        //echo '<pre style="text-align: left">' . var_export($templateFront, true) . '</pre>';
 
 
         ob_start();
@@ -202,17 +204,33 @@ class BlockPostMeta
 
         //echo strtr($templateFront, $vars);
 
-        if (is_array($acf_value)) {
 
-
-            $singleArrayForCategory = $this->nestedToSingle($acf_value,);
-        }
 
 
 
 
         if (!empty($wrapperTag)) :
 ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+
+                <?php
+
+                if (is_array($metaValue)) {
+
+
+                    $singleArrayForCategory = $this->nestedToSingle($metaValue);
+                    echo strtr($template, (array)$singleArrayForCategory);
+                } else {
+
+                    $singleArray = ['{metaValue}' => $metaValue];
+
+                    echo strtr($template, (array)$singleArray);
+                }
+
+                ?>
+
+
+            </<?php echo esc_attr($wrapperTag); ?>>
 
 <?php
 

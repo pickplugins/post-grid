@@ -2155,6 +2155,9 @@ registerBlockType("post-grid/icon", {
                         { label: 'After Prefix', value: 'afterPrefix' },
                         { label: 'Before Postfix', value: 'beforePostfix' },
                         { label: 'After Postfix', value: 'afterPostfix' },
+                        { label: 'Before Link', value: 'beforeLink' },
+                        { label: 'After Link', value: 'afterLink' },
+
 
                       ]}
                       onChange={(newVal) => {
@@ -2561,6 +2564,8 @@ registerBlockType("post-grid/icon", {
 
         <>
 
+
+
           {wrapper.options.tag && (
             <CustomTag className={[blockId]} {...wrapAttrItems}>
 
@@ -2578,16 +2583,41 @@ registerBlockType("post-grid/icon", {
 
 
               {text.options.isLink && (
-                <a className='text' onClick={handleLinkClick}  {...linkAttrItemsText} target={text.options.linkTarget} href={postUrl}>
 
-                  {icon.options.position == 'beforeText' && (
+                <>
+                  {icon.options.position == 'beforeLink' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
-                  {text.options.text}
-                  {icon.options.position == 'afterText' && (
+                  <a className='text' onClick={handleLinkClick}  {...linkAttrItemsText} target={text.options.linkTarget} href={postUrl}>
+
+                    {icon.options.position == 'beforeText' && (
+                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                    )}
+                    <RichText
+
+                      tagName={'span'}
+                      value={text.options.text}
+                      allowedFormats={['core/bold', 'core/italic', 'core/link']}
+                      onChange={(content) => {
+                        var options = { ...text.options, text: content };
+                        setAttributes({ text: { ...text, options: options } });
+
+
+
+                      }}
+                      placeholder={__('Start Writing...')}
+                    />
+                    {icon.options.position == 'afterText' && (
+                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                    )}
+                  </a>
+                  {icon.options.position == 'afterLink' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
-                </a>
+                </>
+
+
+
               )}
 
               {!text.options.isLink && (
@@ -2595,7 +2625,17 @@ registerBlockType("post-grid/icon", {
                   {icon.options.position == 'beforeText' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
-                  {text.options.text}
+                  <RichText
+                    className='text'
+                    tagName={'span'}
+                    value={text.options.text}
+                    allowedFormats={['core/bold', 'core/italic', 'core/link']}
+                    onChange={(content) => {
+                      var options = { ...text.options, text: content };
+                      setAttributes({ text: { ...text, options: options } });
+                    }}
+                    placeholder={__('Start Writing...')}
+                  />
                   {icon.options.position == 'afterText' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
@@ -2631,18 +2671,36 @@ registerBlockType("post-grid/icon", {
               )}
 
               {text.options.isLink && (
-                <a className='text' onClick={handleLinkClick}  {...linkAttrItemsText} target={text.options.linkTarget} href={postUrl}>
-
-                  {icon.options.position == 'beforeText' && (
+                <>
+                  {icon.options.position == 'beforeLink' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
+                  <a className='text' onClick={handleLinkClick}  {...linkAttrItemsText} target={text.options.linkTarget} href={postUrl}>
 
-                  {text.options.text}
+                    {icon.options.position == 'beforeText' && (
+                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                    )}
 
-                  {icon.options.position == 'afterText' && (
+                    <RichText
+
+                      tagName={'span'}
+                      value={text.options.text}
+                      allowedFormats={['core/bold', 'core/italic', 'core/link']}
+                      onChange={(content) => {
+                        var options = { ...text.options, text: content };
+                        setAttributes({ text: { ...text, options: options } });
+                      }}
+                      placeholder={__('Start Writing...')}
+                    />
+
+                    {icon.options.position == 'afterText' && (
+                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                    )}
+                  </a>
+                  {icon.options.position == 'afterLink' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
-                </a>
+                </>
               )}
               {!text.options.isLink && (
 
@@ -2651,7 +2709,17 @@ registerBlockType("post-grid/icon", {
                   {icon.options.position == 'beforeText' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
-                  {text.options.text}
+                  <RichText
+                    className='text'
+                    tagName={'span'}
+                    value={text.options.text}
+                    allowedFormats={['core/bold', 'core/italic', 'core/link']}
+                    onChange={(content) => {
+                      var options = { ...text.options, text: content };
+                      setAttributes({ text: { ...text, options: options } });
+                    }}
+                    placeholder={__('Start Writing...')}
+                  />
                   {icon.options.position == 'afterText' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}

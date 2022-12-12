@@ -1422,9 +1422,9 @@ function post_grid_metabox_tabs_content_grid_settings($tab, $post_id)
 
     $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
 
-    $items_width_desktop = !empty($post_grid_meta_options['width']['desktop']) ? $post_grid_meta_options['width']['desktop'] : 3;
-    $items_width_tablet = !empty($post_grid_meta_options['width']['tablet']) ? $post_grid_meta_options['width']['tablet'] : 2;
-    $items_width_mobile = !empty($post_grid_meta_options['width']['mobile']) ? $post_grid_meta_options['width']['mobile'] : 1;
+    $items_width_desktop = !empty($post_grid_meta_options['width']['desktop']) ? $post_grid_meta_options['width']['desktop'] : '30%';
+    $items_width_tablet = !empty($post_grid_meta_options['width']['tablet']) ? $post_grid_meta_options['width']['tablet'] : '42%';
+    $items_width_mobile = !empty($post_grid_meta_options['width']['mobile']) ? $post_grid_meta_options['width']['mobile'] : '95%';
 
 
 

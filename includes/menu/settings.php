@@ -37,12 +37,12 @@ $post_grid_settings_tab[] = array(
 // );
 
 
-$post_grid_settings_tab[] = array(
-    'id' => 'disable_blocks',
-    'title' => sprintf(__('%s Disable Blocks', 'post-grid'), '<i class="fas fa-store"></i>'),
-    'priority' => 95,
-    'active' => ($current_tab == 'disable_blocks') ? true : false,
-);
+// $post_grid_settings_tab[] = array(
+//     'id' => 'disable_blocks',
+//     'title' => sprintf(__('%s Disable Blocks', 'post-grid'), '<i class="fas fa-store"></i>'),
+//     'priority' => 95,
+//     'active' => ($current_tab == 'disable_blocks') ? true : false,
+// );
 
 $post_grid_settings_tab[] = array(
     'id' => 'license_free',

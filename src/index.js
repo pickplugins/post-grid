@@ -54,7 +54,7 @@ import './blocks/post-categories'
 import './blocks/post-tags'
 import './blocks/post-taxonomies'
 import './blocks/post-date'
-// import './blocks/post-meta'
+import './blocks/post-meta'
 import './blocks/read-more'
 
 import './blocks/terms-list'

@@ -32,7 +32,7 @@ const queryPrams = [
   // Category Parameters
   { val: '', multiple: false, id: 'cat', label: 'Category ID', description: "Post query by Category ID" },
   { val: '', multiple: false, id: 'categoryName', label: 'Category Name', description: "Post query by Category Name" },
-  { val: [], multiple: false, id: 'categoryAnd', label: 'CategoryAnd', description: "Post query by Category IDs", isPro: true },
+  { val: [], multiple: false, id: 'categoryAnd', label: 'Category And', description: "Post query by Category IDs", isPro: true },
   { val: [], multiple: false, id: 'categoryIn', label: 'Category In', description: "Post query by Category IDs", isPro: true },
   { val: [], multiple: false, id: 'categoryNotIn', label: 'Category Not In', description: "Post query by excluded Category IDs", isPro: true },
 

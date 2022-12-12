@@ -166,7 +166,6 @@ class PGBlockPostTags
     function theHTML($attributes, $content, $block)
     {
 
-        //var_dump($block);
 
         global $postGridCss;
         global $postGridCustomCss;

@@ -183,7 +183,6 @@ class PGBlockPostCategories
     function theHTML($attributes, $content, $block)
     {
 
-        //var_dump($block);
 
         global $postGridCss;
         global $postGridCustomCss;
@@ -256,7 +255,6 @@ class PGBlockPostCategories
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
 
-        //var_dump($customCss);
 
         $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 

@@ -100,6 +100,16 @@ class BlockPostGridRest
 
         register_rest_route(
             'post-grid/v2',
+            '/get_shortcode',
+            array(
+                'methods'  => 'POST',
+                'callback' => array($this, 'get_shortcode'),
+                'permission_callback' => '__return_true',
+            )
+        );
+
+        register_rest_route(
+            'post-grid/v2',
             '/get_terms',
             array(
                 'methods'  => 'POST',
@@ -331,7 +341,6 @@ class BlockPostGridRest
         $post_content     = isset($postData['post_content']) ? $postData['post_content'] : '';
         $post_title     = isset($postData['post_title']) ? $postData['post_title'] : '';
 
-        error_log($post_title);
 
 
         $response = [];
@@ -571,7 +580,7 @@ class BlockPostGridRest
 
 
         if (empty($meta_key)) {
-            //die(wp_json_encode($response));
+            die(wp_json_encode($response));
         }
 
 
@@ -609,9 +618,7 @@ class BlockPostGridRest
         } else {
             $post_meta = get_post_meta($postId, $meta_key, true);
 
-            error_log($postId);
-            error_log($meta_key);
-            error_log($post_meta);
+
 
             $singleArray = ['{metaValue}' => $post_meta];
 
@@ -634,6 +641,37 @@ class BlockPostGridRest
 
 
 
+
+    /**
+     * Return get_shortcode
+     *
+     * @since 1.0.0
+     * @param WP_REST_Request $post_data Post data.
+     */
+    public function get_shortcode($post_data)
+    {
+
+        $postId      = isset($post_data['postId']) ? $post_data['postId'] : '';
+        $key    = isset($post_data['meta_key']) ? $post_data['meta_key'] : '';
+        $prams    = isset($post_data['prams']) ? $post_data['prams'] : '';
+
+        $response = new stdClass();
+        $response->key = $key;
+
+
+        if (empty($key)) {
+            die(wp_json_encode($response));
+        }
+
+
+        //$response->html = do_shortcode('[' . $key . ']');
+        $response->html = '[' . $key . ']';
+
+
+
+
+        die(wp_json_encode($response));
+    }
 
 
 
@@ -796,7 +834,6 @@ class BlockPostGridRest
                         $query_args['m'] = $val;
                     } elseif ($id == 'author') {
 
-                        error_log($val);
 
                         $query_args['author'] = $val;
                     } elseif ($id == 'authorName') {
@@ -896,7 +933,6 @@ class BlockPostGridRest
                     }
                 }
             }
-
 
 
         $posts = [];
@@ -1007,11 +1043,9 @@ class BlockPostGridRest
 
         global $_wp_additional_image_sizes;
 
-        error_log(serialize($_wp_additional_image_sizes));
 
         $default_image_sizes = get_intermediate_image_sizes();
 
-        error_log(serialize($default_image_sizes));
 
 
         foreach ($default_image_sizes as $size) {
@@ -1162,7 +1196,6 @@ class BlockPostGridRest
         if (is_wp_error($response)) {
             echo __("Unexpected Error! The query returned with an error.", 'post-grid');
         } else {
-            //var_dump($response);//uncomment it if you want to look at the full response
 
             // License data.
             $response_data = json_decode(wp_remote_retrieve_body($response));

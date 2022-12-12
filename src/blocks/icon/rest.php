@@ -57,7 +57,6 @@ class BlockPostGridRest
 
         $queryArgs      = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
 
-        //error_log(serialize($queryArgs));
 
 
         $post_types       = isset($post_data['post_types']) ? $post_data['post_types'] : ['post_grid_layout'];
@@ -91,7 +90,6 @@ class BlockPostGridRest
                 $posts[]            = $post;
 
 
-            ////error_log(serialize($thumb_url));
 
 
             endwhile;

@@ -607,7 +607,6 @@ class PGBlockPostGridFilterable
                         }
                     }
 
-                    //error_log(serialize($date_query));
 
 
                     $query_args['date_query'] = $date_query;
@@ -944,7 +943,6 @@ class PGBlockPostGridFilterable
                 $posts[$post_id]            = $html;
 
 
-            ////error_log(serialize($thumb_url));
 
 
             endwhile;
@@ -1013,8 +1011,7 @@ class PGBlockPostGridFilterable
 
                     <?php
 
-                    //var_dump($filterableShowAll);
-                    //var_dump($filterableFilters);
+
 
                     ?>
 

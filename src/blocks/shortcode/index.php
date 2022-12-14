@@ -128,6 +128,18 @@ class BlockPostShortcode
 
         ob_start();
 
+        $shortcodeAtts = '';
+
+        if (!empty($shortcodePrams))
+            foreach ($shortcodePrams as  $item) {
+
+                $val = isset($item['val']) ? $item['val'] : '';
+
+                $singleArray = ['{currentPostId}' => $post_ID];
+                $val = strtr($val, (array)$singleArray);
+
+                $shortcodeAtts .= $item['id'] . '="' . $val . '" ';
+            }
 
 
         //var_dump($shortcodePrams);
@@ -135,7 +147,7 @@ class BlockPostShortcode
 
         if (!empty($wrapperTag)) :
 
-            echo do_shortcode('[' . $shortcodeKey . ']');
+            echo do_shortcode('[' . $shortcodeKey . ' ' . $shortcodeAtts . ']');
 
         endif;
 

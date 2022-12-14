@@ -48,7 +48,6 @@ class PGTutorials extends Component {
               value={keyword}
               onChange={(newVal) => {
 
-                //console.log(newVal);
                 setKeyword(newVal);
 
                 setfilteredLinks([]);

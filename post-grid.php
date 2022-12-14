@@ -3,7 +3,7 @@
 Plugin Name: Post Grid Combo
 Plugin URI: https://www.pickplugins.com/post-grid
 Description: Post Grid Combo is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.13
+Version: 2.2.14
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid Combo');
-            define('post_grid_version', '2.2.13');
+            define('post_grid_version', '2.2.14');
             define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
 
 
@@ -38,9 +38,6 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/functions-rest.php');
 
             require_once(post_grid_plugin_dir . 'src/blocks/post-grid/index.php');
-            //require_once(post_grid_plugin_dir . 'src/blocks/post-grid/rest.php');
-
-
             require_once(post_grid_plugin_dir . 'src/blocks/post-title/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-excerpt/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/text/index.php');
@@ -174,11 +171,11 @@ if (!class_exists('PostGrid')) {
             $class_post_grid_functions = new class_post_grid_functions();
 
 
-            $post_grid_info = get_option('post_grid_info');
-            $post_grid_info['current_version'] = post_grid_version;
-            $post_grid_info['last_version'] = '2.0.44';
-            $post_grid_info['data_update_status'] = isset($post_grid_info['data_update_status']) ? $post_grid_info['data_update_status'] : 'pending';
-            update_option('post_grid_info', $post_grid_info);
+            // $post_grid_info = get_option('post_grid_info');
+            // $post_grid_info['current_version'] = post_grid_version;
+            // $post_grid_info['last_version'] = '2.2.13';
+            // $post_grid_info['data_update_status'] = isset($post_grid_info['data_update_status']) ? $post_grid_info['data_update_status'] : 'pending';
+            // update_option('post_grid_info', $post_grid_info);
 
 
             $class_post_grid_post_types = new class_post_grid_post_types();

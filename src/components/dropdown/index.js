@@ -49,7 +49,7 @@ class PGDropdown extends Component {
       return (
 
         <div className='relative'>
-          <div className='border border-gray-500' onClick={ev => {
+          <div className='' onClick={ev => {
 
             setPickerOpen(prev => !prev);
 

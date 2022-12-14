@@ -4622,34 +4622,45 @@ registerBlockType("post-grid/post-grid-filterable", {
                     <Button className='my-3' variant="secondary"
                       onClick={(_newVal) => {
 
-                        if (grid.options.itemCss[breakPointX] != undefined) {
+                        if (postGridData != null && postGridData.license_status == 'active') {
 
-                          var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
-                        } else {
-                          grid.options.itemCss[breakPointX] = [];
-                          var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
+                          if (grid.options.itemCss[breakPointX] != undefined) {
+
+                            var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
+                          } else {
+                            grid.options.itemCss[breakPointX] = [];
+                            var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
+
+                          }
+
+
+
+
+                          var newValuesObj = {};
+                          if (Object.keys(grid.options.itemCss).length == 0) {
+                            newValuesObj[breakPointX] = ssd;
+                          } else {
+                            newValuesObj = grid.options.itemCss;
+                            newValuesObj[breakPointX] = ssd;
+                          }
+
+                          var options = { ...grid.options, itemCss: newValuesObj };
+                          setAttributes({ grid: { ...grid, options: options } });
+
+
 
                         }
 
-
-
-
-                        var newValuesObj = {};
-                        if (Object.keys(grid.options.itemCss).length == 0) {
-                          newValuesObj[breakPointX] = ssd;
-                        } else {
-                          newValuesObj = grid.options.itemCss;
-                          newValuesObj[breakPointX] = ssd;
-                        }
-
-                        var options = { ...grid.options, itemCss: newValuesObj };
-                        setAttributes({ grid: { ...grid, options: options } });
 
 
 
                       }}
 
-                    >Add</Button>
+                    >Add
+                      {postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white'>
+                        <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS'}>Pro</a>
+                      </span>)}
+                    </Button>
                   </PanelRow>
 
 
@@ -4769,14 +4780,20 @@ registerBlockType("post-grid/post-grid-filterable", {
 
                         <div className='cursor-pointer relative hover:bg-blue-200 my-3' onClick={(_ev) => {
 
-
-                          //setAttributes({ grid: { options: x.data } })
-                          setAttributes({ grid: x.data })
+                          if (x.isPro) {
+                            if (postGridData != null && postGridData.license_status == 'active') {
+                              setAttributes({ grid: x.data })
+                            }
+                          } else {
+                            setAttributes({ grid: x.data })
+                          }
 
 
                         }}>
 
-
+                          {x.isPro && postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white'>
+                            <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
+                          </span>)}
                           {x.icon != undefined && (
                             <div className='w-full grid-layout-prewview'>{x.icon}</div>
                           )}

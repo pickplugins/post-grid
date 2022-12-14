@@ -6,8 +6,9 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, subscribe, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner } from '@wordpress/components'
+import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
+import { link, linkOff, plus } from "@wordpress/icons";
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -52,11 +53,16 @@ registerBlockType("post-grid/shortcode", {
 
       },
     },
+
+    shortcodeClassic: {
+      "type": "string",
+      "default": ''
+    },
     shortcode: {
       type: 'object',
       default: {
         options: {
-          key: '', prefix: '', postfix: '', prams: {},
+          key: '', id: '', prefix: '', postfix: '', prams: [],
         },
         styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
 
@@ -99,6 +105,7 @@ registerBlockType("post-grid/shortcode", {
     var blockClass = '.' + blockIdX;
 
     var shortcode = attributes.shortcode;
+    var shortcodeClassic = attributes.shortcodeClassic;
 
 
 
@@ -118,6 +125,8 @@ registerBlockType("post-grid/shortcode", {
     const [metaValue, setMetaValue] = useState(null);
     const [metaHtml, setMetaHtml] = useState('');
     const [metaArgs, setMetaArgs] = useState(null);
+    const [linkPickerText, setLinkPickerText] = useState(false);
+    const [shortcodePrams, setShortcodePrams] = useState({ id: '', label: '', val: '' });
 
 
     // Wrapper CSS Class Selectors
@@ -126,22 +135,22 @@ registerBlockType("post-grid/shortcode", {
     const postCountSelector = blockClass + ' .postCount';
 
     const [shortcodes, setshortcodes] = useState({
-      yith_wcwl_add_to_wishlist: { label: 'YITH - Add to Wishlist', value: 'yith_wcwl_add_to_wishlist', args: { product_id: '' } },
-      yasr_overall_rating: { label: 'YASR- overall rating', value: 'yasr_overall_rating', args: { size: '', postid: '' } },
-      yasr_visitor_votes: { label: 'YASR - visitor votes', value: 'yasr_visitor_votes', args: { size: '', postid: '' } },
-      wp_postviews: { label: 'WP-PostViews', value: 'views', args: { id: '' } },
-      wp_postratings: { label: 'WP-PostRatings', value: 'wp_postratings', args: { id: '' } },
-      site_reviews_summary: { label: 'Site Reviews - Summary', value: 'site_reviews_summary', args: { hide: '', assigned_to: '', class: '' } },
-      ratingwidget: { label: 'Rating-Widget', value: 'ratingwidget', args: { post_id: '' } },
-      ratemypostresult: { label: 'Rate my Post - Result', value: 'ratemypost-result', args: { post_id: '' } },
-      ratemypost: { label: 'Rate my Post', value: 'ratemypost', args: { id: '' } },
-      postviews: { label: 'Post Views Counter', value: 'post-views', args: { id: '' } },
-      pvcp_1: { label: 'Page Visit Counter', value: 'pvcp_1', args: { postid: '' } },
-      pvc_stats: { label: 'Page Views Count', value: 'pvc_stats', args: { postid: '' } },
-      mr_rating_result: { label: 'Multi Rating - Result', value: 'mr_rating_result', args: { post_id: '' } },
-      mr_rating_form: { label: 'Multi Rating', value: 'mr_rating_form', args: { post_id: '' } },
+      yith_wcwl_add_to_wishlist: { label: 'YITH - Add to Wishlist', value: 'yith_wcwl_add_to_wishlist', args: [{ id: 'product_id', label: 'Product Id', val: '{currentPostId}' }] },
+      yasr_overall_rating: { label: 'YASR- overall rating', value: 'yasr_overall_rating', args: [{ id: 'size', label: 'Size', val: '15' }, { label: 'Post Id', val: '{currentPostId}' }] },
+      yasr_visitor_votes: { label: 'YASR - visitor votes', value: 'yasr_visitor_votes', args: [{ id: 'size', label: 'Size', val: '15' }, { label: 'Post Id', val: '{currentPostId}' }] },
+      wp_postviews: { label: 'WP-PostViews', value: 'views', args: [{ id: 'id', label: 'Post Id', val: '{currentPostId}' }] },
+      wp_postratings: { label: 'WP-PostRatings', value: 'wp_postratings', args: [{ id: 'id', label: 'Post Id', val: '{currentPostId}' }] },
+      site_reviews_summary: { label: 'Site Reviews - Summary', value: 'site_reviews_summary', args: [{ id: 'hide', label: 'Hide', val: '' }, { id: 'assigned_to', label: 'Assigned To', val: '' }, { id: 'class', label: 'Class', val: '' }] },
+      ratingwidget: { label: 'Rating-Widget', value: 'ratingwidget', args: [{ id: 'post_id', label: 'Post Id', val: '{currentPostId}' }] },
+      ratemypostresult: { label: 'Rate my Post - Result', value: 'ratemypost-result', args: [{ id: 'post_id', label: 'Post Id', val: '{currentPostId}' }] },
+      ratemypost: { label: 'Rate my Post', value: 'ratemypost', args: [{ id: 'id', label: 'Post Id', val: '{currentPostId}' }] },
+      postviews: { label: 'Post Views Counter', value: 'post-views', args: [{ id: 'id', label: 'Post Id', val: '{currentPostId}' }] },
+      pvcp_1: { label: 'Page Visit Counter', value: 'pvcp_1', args: [{ id: 'postid', label: 'Post Id', val: '{currentPostId}' }] },
+      pvc_stats: { label: 'Page Views Count', value: 'pvc_stats', args: [{ id: 'postid', label: 'Post Id', val: '{currentPostId}' }] },
+      mr_rating_result: { label: 'Multi Rating - Result', value: 'mr_rating_result', args: [{ id: 'post_id', label: 'Post Id', val: '{currentPostId}' }] },
+      mr_rating_form: { label: 'Multi Rating', value: 'mr_rating_form', args: [{ id: 'post_id', label: 'Post Id', val: '{currentPostId}' }] },
       likebtn: { label: 'Like Button Rating', value: 'likebtn', args: {} },
-      kkratings: { label: 'KK Star Ratings', value: 'kkratings', args: { size: '', id: '' } },
+      kkratings: { label: 'KK Star Ratings', value: 'kkratings', args: [{ id: 'size', label: 'Size', val: '15' }, { id: 'id', label: 'Post Id', val: '{currentPostId}' }] },
 
 
 
@@ -590,26 +599,22 @@ registerBlockType("post-grid/shortcode", {
 
             </div>
 
-            <PanelBody title="shortcode Key" initialOpen={true}>
-              <PanelRow>
-                <label>Choose Shortcode </label>
-                <PGDropdown position="bottom right" variant="secondary" options={shortcodes} buttonTitle="Choose" onChange={(option, index) => {
+            <PanelBody title="Shortcode Key" initialOpen={true}>
+
+              <label className='mb-3'>Choose Shortcode </label>
+              <PGDropdown position="bottom right" variant="secondary" options={shortcodes} buttonTitle="Choose" onChange={(option, index) => {
+
+                var options = { ...shortcode.options, id: option.id, key: option.value, prams: option.args };
+                setAttributes({ shortcode: { ...shortcode, options: options } });
 
 
-
-                  var options = { ...shortcode.options, key: option.value };
-                  setAttributes({ shortcode: { ...shortcode, options: options } });
-
-
-                }} values="" value={shortcode.options.key}></PGDropdown>
-
-              </PanelRow>
+              }} values="" value={shortcode.options.key}></PGDropdown>
 
               <PanelRow>
-                <label for="">shortcode Key</label>
+                <label for="">Shortcode Key</label>
 
                 <InputControl
-                  placeholder="shortcode key"
+                  placeholder="Shortcode key"
                   value={shortcode.options.key}
                   onChange={(newVal) => {
 
@@ -623,39 +628,135 @@ registerBlockType("post-grid/shortcode", {
               </PanelRow>
 
 
-
-
-
-
-
-              <div className='my-3'>
-
+              <PanelRow>
                 <label for="">Parameters</label>
-                <div className=''>
+                <Button className={(linkPickerText) ? "!bg-gray-400" : ''} icon={plus} onClick={ev => {
 
-                  {metaArgs != undefined && Object.entries(metaArgs).map((arg, i) => {
+                  setLinkPickerText(prev => !prev)
+                }}>Add</Button>
 
-                    var key = arg[0]
-                    var val = arg[1]
+                {linkPickerText && (
+                  <Popover position="bottom right ">
 
-                    return (
-                      <div className='my-2 bg-gray-300'>
-                        <div onClick={ev => {
-                          var target = ev.target;
+                    <div className='p-3 w-60'>
+
+                      <PanelRow>
+                        <label for="">ID</label>
+
+                        <InputControl
+                          value={shortcodePrams.id}
+                          onChange={(newVal) => {
+                            setShortcodePrams({ ...shortcodePrams, id: newVal })
+                          }}
+                        />
+                      </PanelRow>
+
+                      <PanelRow>
+                        <label for="">Label</label>
+
+                        <InputControl
+                          value={shortcodePrams.label}
+                          onChange={(newVal) => {
+                            setShortcodePrams({ ...shortcodePrams, label: newVal })
+                          }}
+                        />
+                      </PanelRow>
+                      <PanelRow>
+                        <label for="">Value</label>
+
+                        <InputControl
+                          value={shortcodePrams.val}
+                          onChange={(newVal) => {
+                            setShortcodePrams({ ...shortcodePrams, val: newVal })
+                          }}
+                        />
+                      </PanelRow>
+
+                      <Button
+                        variant="secondary"
+                        onClick={ev => {
+
+                          console.log(shortcodePrams);
+                          var options = { ...shortcode.options }
+                          options.prams.push(shortcodePrams);
+
+                          setAttributes({ shortcode: { ...shortcode, options: options } });
 
 
-                        }} className='bg-gray-500 px-3 py-2 text-white'>{key}</div>
-                        <div className='px-3 py-2'>{val}</div>
+                          // shortcodePrams.id = '';
+                          // shortcodePrams.label = '';
+                          // shortcodePrams.val = '';
+                        }}
+                      >
+                        Add Parameter
+                      </Button>
+
+                    </div>
+
+                  </Popover>
+
+                )}
+
+
+              </PanelRow>
+
+
+
+
+              <div className=''>
+
+                {shortcode.options.prams != undefined && shortcode.options.prams.map((arg, index) => {
+
+
+
+                  return (
+                    <div className='my-2 bg-gray-300'>
+                      <div className='bg-gray-500 px-3 text-white'>
+
+                        <PanelRow>
+                          <label for="">{arg.label} ({arg.id})</label>
+
+                          <span class="cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1"
+                            onClick={ev => {
+                              var options = { ...shortcode.options }
+
+                              options.prams.splice(index, 1);
+
+
+                              setAttributes({ shortcode: { ...shortcode, options: options } });
+
+                            }}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M13 11.8l6.1-6.3-1-1-6.1 6.2-6.1-6.2-1 1 6.1 6.3-6.5 6.7 1 1 6.5-6.6 6.5 6.6 1-1z"></path></svg>
+                          </span>
+                        </PanelRow>
+
+
+
+
+
+
                       </div>
+                      <div className='px-3 py-2'>
+                        <InputControl
+                          value={arg.val}
+                          onChange={(newVal) => {
+                            var options = { ...shortcode.options }
+                            options.prams[index].val = newVal
+                            setAttributes({ shortcode: { ...shortcode, options: options } });
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )
 
-                    )
+                })
 
-                  })}
+                }
 
-
-                </div>
 
               </div>
+
 
 
             </PanelBody>
@@ -751,11 +852,7 @@ registerBlockType("post-grid/shortcode", {
 
 
           <div className='pg-postMeta'>
-
-
             <RawHTML>{metaHtml}</RawHTML>
-
-
           </div>
 
 

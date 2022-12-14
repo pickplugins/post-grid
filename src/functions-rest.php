@@ -572,7 +572,7 @@ class BlockPostGridRest
 
         $postId      = isset($post_data['postId']) ? $post_data['postId'] : '';
         $meta_key    = isset($post_data['meta_key']) ? $post_data['meta_key'] : '';
-        $meta_type    = isset($post_data['type']) ? $post_data['type'] : '';
+        $meta_type    = isset($post_data['type']) ? $post_data['type'] : 'string';
         $template    = isset($post_data['template']) ? $post_data['template'] : '';
 
         $response = new stdClass();
@@ -583,6 +583,10 @@ class BlockPostGridRest
             die(wp_json_encode($response));
         }
 
+
+        error_log('#########$meta_key##########');
+        error_log($meta_key);
+        error_log($meta_type);
 
 
 
@@ -619,16 +623,18 @@ class BlockPostGridRest
             $post_meta = get_post_meta($postId, $meta_key, true);
 
 
+            if (is_array($post_meta)) {
+                $singleArray = $this->nestedToSingle($post_meta);
+                $response->html = strtr($template, (array)$singleArray);
+                $response->args = $singleArray;
+            } else {
+                $singleArray = ['{metaValue}' => $post_meta];
+                $response->args = $singleArray;
+                $response->html = strtr($template, (array)$singleArray);
 
-            $singleArray = ['{metaValue}' => $post_meta];
-
-
-
-            $response->args = $singleArray;
-            $response->html = strtr($template, (array)$singleArray);
-
-            $response->meta_value = $post_meta;
-            $response->meta_key = $meta_key;
+                $response->meta_value = $post_meta;
+                $response->meta_key = $meta_key;
+            }
         }
 
 
@@ -664,10 +670,8 @@ class BlockPostGridRest
         }
 
 
-        //$response->html = do_shortcode('[' . $key . ']');
-        $response->html = '[' . $key . ']';
-
-
+        $response->html = do_shortcode('[' . $key . ' id="' . $postId . '"]');
+        //$response->html = '[' . $key . ']';
 
 
         die(wp_json_encode($response));
@@ -937,7 +941,6 @@ class BlockPostGridRest
 
         $posts = [];
         $responses = [];
-
 
 
         $post_grid_wp_query = new WP_Query($query_args);

@@ -3,8 +3,8 @@
 	Donate link: https://www.pickplugins.com/post-grid
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
-	Tested up to: 6.1
-	Stable tag: 2.2.13
+	Tested up to: 6.1.1
+	Stable tag: 2.2.14
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -247,8 +247,10 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 == Changelog ==
 
+	= 2.2.14 =
+    * 2022-12-11 - add - New block shortcode added.
 
-	= 2.2.12 =
+	= 2.2.13 =
     * 2022-12-11 - Fix - Post Grid Block - Post Query by author in, author not in, Tag in, tag and, tag not in, ta slug in, tag slug and, category and, category no in, category in, post parent in, post parent no in, post in, post not in, post name in
     * 2022-12-11 - Fix - Post Grid Block - Tutorials link updated
     * 2022-12-11 - Fix - Post Grid Filterable Block - Tutorials link updated

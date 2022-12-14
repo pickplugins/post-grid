@@ -21,6 +21,7 @@ import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
 import BreakpointToggle from '../../components/breakpoint-toggle'
 import PGproWrapper from '../../components/pro-wrapper'
+import PGDropdown from '../../components/dropdown'
 
 import colorsPresets from '../../colors-presets'
 import PGcssDisplay from '../../components/css-display'
@@ -1648,28 +1649,24 @@ registerBlockType("post-grid/post-excerpt", {
                 />
               </PanelRow>
 
-              <PanelRow className='my-4'>
-                <label for="">Excerpt Source</label>
 
-                <SelectControl
-                  label=""
-                  value={postExcerpt.options.excerptSource}
-                  options={[
-                    { label: 'Auto', value: 'auto' },
+              <PanelRow className='my-3'>
+                <label>Excerpt Source</label>
+                <PGDropdown position="bottom right" variant="secondary" buttonTitle={postExcerpt.options.excerptSource.length == 0 ? 'Choose' : postExcerpt.options.excerptSource} options={[
+                  { label: 'Auto', value: 'auto' },
 
-                    { label: 'Excerpt', value: 'excerpt' },
-                    { label: 'Content', value: 'content' },
-                    { label: 'Custom Fields', value: 'meta' },
+                  { label: 'Excerpt', value: 'excerpt' },
+                  { label: 'Content', value: 'content' },
+                  { label: 'Custom Fields', value: 'meta' },
 
-                  ]}
-                  onChange={(newVal) => {
-                    var options = { ...postExcerpt.options, excerptSource: newVal };
-                    setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                  }
+                ]} onChange={(option, index) => {
+                  var options = { ...postExcerpt.options, excerptSource: option.value };
+                  setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
 
-                  }
-                />
+                }} values=""></PGDropdown>
               </PanelRow>
+
+
 
               {postExcerpt.options.excerptSource == 'excerpt' && currentPostExcerpt.length == 0 && (
                 <div className='text-red-500'>Post Excerpt is empty.</div>

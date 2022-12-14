@@ -103,7 +103,7 @@ function post_grid_duplicate_post_link($actions, $post)
 {
 
 
-    if (current_user_can('edit_posts') && $post->post_type == 'post_grid') {
+    if (current_user_can('edit_posts') && ($post->post_type == 'post_grid' || $post->post_type == 'post_grid_template' || $post->post_type == 'post_grid_layout')) {
         $actions['duplicate'] = '<a href="' . wp_nonce_url('admin.php?action=post_grid_duplicate_post_as_draft&post=' . $post->ID, basename(__FILE__), 'duplicate_nonce') . '" title="Duplicate this item" rel="permalink">Duplicate</a>';
     }
     return $actions;

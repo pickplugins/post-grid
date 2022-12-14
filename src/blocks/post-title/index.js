@@ -960,7 +960,8 @@ registerBlockType("post-grid/post-title", {
 
       if (typoX.fontFamily[breakPointX] != undefined) {
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-family': typoX.fontFamily };
+        var fontFamilyX = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector]['font-family'] : {};
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-family': fontFamilyX };
 
       }
 
@@ -973,6 +974,7 @@ registerBlockType("post-grid/post-title", {
 
 
         var fontSizeX = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector]['font-size'] : {};
+
 
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
         //blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-size': fontSizeX };

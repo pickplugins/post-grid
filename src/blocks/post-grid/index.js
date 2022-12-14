@@ -2073,6 +2073,54 @@ registerBlockType("post-grid/post-grid", {
 
     }
 
+    function flatObject(block, flatObj, flatObjCss) {
+
+
+      flatObj.push(block);
+
+      var items = (block.attrs.blockCssY != undefined) ? block.attrs.blockCssY.items : [];
+
+      if (Object.entries(items).length > 0) {
+
+        Object.entries(items).map(data => {
+
+          var handle = data[0];
+          var css = data[1];
+
+
+
+          //flatObjCss[handle] = css;
+
+
+        })
+
+      }
+
+
+
+
+
+
+      if (block.innerBlocks != undefined) {
+
+        block.innerBlocks.map(block => {
+
+          flatObject(block, flatObj);
+
+        })
+
+
+      }
+
+
+
+
+
+      return flatObj;
+
+    }
+
+
 
 
     function selectLayout(id, postContent) {
@@ -2134,8 +2182,16 @@ registerBlockType("post-grid/post-grid", {
 
 
           var allStyle = {};
+          var flatObj = [];
+          var flatObjCss = [];
 
-          blocks.map((block, i) => {
+
+
+          var flatData = flatObject(blocks[0], flatObj, flatObjCss);
+
+
+
+          flatData.map((block, i) => {
 
             var items = (block.attrs.blockCssY != undefined) ? block.attrs.blockCssY.items : [];
 
@@ -2146,6 +2202,7 @@ registerBlockType("post-grid/post-grid", {
                 var handle = data[0];
                 var css = data[1];
 
+
                 allStyle[handle] = css;
 
 
@@ -2154,6 +2211,12 @@ registerBlockType("post-grid/post-grid", {
             }
 
           })
+
+
+
+
+
+
 
           var xxx = { ...blockCssY.items, ...allStyle }
 
@@ -3834,9 +3897,6 @@ registerBlockType("post-grid/post-grid", {
                 <PanelRow className='my-3'>
                   <label>Add Query Parameters</label>
                   <PGDropdown position="bottom right" variant="secondary" options={queryPramsX} buttonTitle="Choose" onChange={addQueryPramX} values=""></PGDropdown>
-
-
-
                 </PanelRow>
 
 

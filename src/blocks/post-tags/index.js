@@ -69,7 +69,7 @@ registerBlockType("post-grid/post-tags", {
       type: 'object',
       default: {
 
-        options: { prefix: '', postfix: '', maxCount: 99, postCount: false, class: 'item inline-block', linkTarget: '', linkAttr: [], },
+        options: { prefix: '', postfix: '', maxCount: 99, postCount: false, class: ' inline-block', linkTarget: '', linkAttr: [], },
         styles:
         {
           textAlign: {},
@@ -2122,24 +2122,29 @@ registerBlockType("post-grid/post-tags", {
               {categories.map((x, index) => {
 
                 return (
-                  <a onClick={ev => ev.preventDefault()} target={items.options.linkTarget} title={x.name} {...linkAttrItems} className={items.options.class} href={x.link}>
 
 
-                    {icon.options.position == 'beforeItem' && (
-                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                    )}
-
-                    <span className='termTitle'>{items.options.prefix}{x.name}{items.options.postfix}</span>
-                    {items.options.postCount == true && (<span className='postCount'>({x.count})</span>)}
-                    {categories.length > (index + 1) && (<span className='separator'>{separator.options.text} </span>)}
-
-                    {icon.options.position == 'afterItem' && (
-                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                    )}
+                  <>
+                    <a onClick={ev => ev.preventDefault()} target={items.options.linkTarget} title={x.name} {...linkAttrItems} className={items.options.class} href={x.link}>
 
 
+                      {icon.options.position == 'beforeItem' && (
+                        <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                      )}
 
-                  </a>
+                      <span className='termTitle'>{items.options.prefix}{x.name}{items.options.postfix}</span>
+                      {items.options.postCount == true && (<span className='postCount'>({x.count})</span>)}
+
+                      {icon.options.position == 'afterItem' && (
+                        <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                      )}
+
+
+
+                    </a>
+                    {categories.length > (index + 1) && (<span className='separator' dangerouslySetInnerHTML={{ __html: separator.options.text }}></span>)}
+
+                  </>
                 )
 
 

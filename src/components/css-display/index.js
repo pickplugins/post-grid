@@ -33,7 +33,7 @@ class PGcssDisplay extends Component {
       <div>
 
         <Dropdown
-          position="bottom"
+          position="bottom left"
           renderToggle={({ isOpen, onToggle }) => (
             <Button
               title=""

@@ -261,10 +261,10 @@ class PGBlockPostAuthor
 
             $nameLink = $nameCustomUrl;
         } else if ($nameLinkTo == 'authorMeta') {
-            $nameLink = get_user_meta($post_author_id, $nameLinkToMeta, true);
+            $nameLink = !empty($nameLinkToMeta) ? get_user_meta($post_author_id, $nameLinkToMeta, true) : '';
         }
 
-
+        error_log(serialize($nameLink));
 
 
         $htmlGroups = [];

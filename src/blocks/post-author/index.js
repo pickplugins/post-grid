@@ -1650,39 +1650,24 @@ registerBlockType("post-grid/post-author", {
 
 
 
-                    <PanelRow>
-                      <label for="">Link To</label>
-
-                      <SelectControl
-                        label=""
-                        value={name.options.linkTo}
-
-                        options={[
-                          { label: 'Select..', value: '' },
-
-                          { label: 'Post URL', value: 'postUrl' },
-                          { label: 'Home URL', value: 'homeUrl' },
-                          { label: 'Author URL', value: 'authorUrl' },
-                          { label: 'Author Link', value: 'authorLink' },
-                          { label: 'Author Meta', value: 'authorMeta' },
-                          { label: 'Custom URL', value: 'customUrl' },
-
-                        ]}
-                        onChange={(newVal) => {
-
-                          var options = { ...name.options, linkTo: newVal };
-                          setAttributes({ name: { ...name, options: options } });
-
-
-
-
-
-                        }
-
-                        }
-                      />
-
+                    <PanelRow className='my-3'>
+                      <label>Link To</label>
+                      <PGDropdown position="bottom right" variant="secondary" buttonTitle={name.options.linkTo.length == 0 ? 'Choose' : name.options.linkTo} options={[
+                        { label: 'Select..', value: '' },
+                        { label: 'Post URL', value: 'postUrl' },
+                        { label: 'Home URL', value: 'homeUrl' },
+                        { label: 'Author URL', value: 'authorUrl' },
+                        { label: 'Author Link', value: 'authorLink' },
+                        { label: 'Author Meta', value: 'authorMeta' },
+                        { label: 'Custom URL', value: 'customUrl' },
+                      ]} onChange={(option, index) => {
+                        var options = { ...name.options, linkTo: option.value };
+                        setAttributes({ name: { ...name, options: options } });
+                      }} values=""></PGDropdown>
                     </PanelRow>
+
+
+
 
 
 

@@ -1784,35 +1784,20 @@ registerBlockType("post-grid/image", {
 
 
 
-
-
-
-
-
-
-
-              <PanelRow>
-                <label for="">Link To</label>
-                <SelectControl
-                  label=""
-                  value={image.options.linkTo}
-                  options={[
-                    { label: 'No Link', value: '' },
-                    { label: 'Post URL', value: 'postUrl' },
-                    { label: 'Custom Field', value: 'customField' },
-                    { label: 'Author URL', value: 'authorUrl' },
-                    { label: 'Author Link', value: 'authorLink' },
-                    { label: 'Home URL', value: 'homeUrl' },
-                    { label: 'Custom', value: 'custom' },
-
-                  ]}
-                  onChange={(newVal) => {
-                    var options = { ...image.options, linkTo: newVal };
-                    setAttributes({ image: { ...image, options: options } });
-                  }
-
-                  }
-                />
+              <PanelRow className='my-3'>
+                <label>Link To</label>
+                <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.linkTo.length == 0 ? 'Choose' : image.options.linkTo} options={[
+                  { label: 'No Link', value: '' },
+                  { label: 'Post URL', value: 'postUrl' },
+                  { label: 'Custom Field', value: 'customField' },
+                  { label: 'Author URL', value: 'authorUrl' },
+                  { label: 'Author Link', value: 'authorLink' },
+                  { label: 'Home URL', value: 'homeUrl' },
+                  { label: 'Custom', value: 'custom' },
+                ]} onChange={(option, index) => {
+                  var options = { ...image.options, linkTo: option.value };
+                  setAttributes({ image: { ...image, options: options } });
+                }} values=""></PGDropdown>
               </PanelRow>
 
               {image.options.linkTo == 'customField' && (
@@ -1896,31 +1881,26 @@ registerBlockType("post-grid/image", {
               {image.options.linkTo.length == 0 && (
 
 
+                <PanelRow className='my-3'>
+                  <label>Custom Tag</label>
+                  <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.tag.length == 0 ? 'Choose' : image.options.tag} options={[
+                    { label: 'H1', value: 'h1' },
+                    { label: 'H2', value: 'h2' },
+                    { label: 'H3', value: 'h3' },
+                    { label: 'H4', value: 'h4' },
+                    { label: 'H5', value: 'h5' },
+                    { label: 'H6', value: 'h6' },
+                    { label: 'SPAN', value: 'span' },
+                    { label: 'DIV', value: 'div' },
+                    { label: 'P', value: 'p' },
+                  ]} onChange={(option, index) => {
 
-                <PanelRow>
-                  <label for="">Custom Tag</label>
-                  <SelectControl
-                    label=""
-                    value={image.options.tag}
-                    options={[
-                      { label: 'H1', value: 'h1' },
-                      { label: 'H2', value: 'h2' },
-                      { label: 'H3', value: 'h3' },
-                      { label: 'H4', value: 'h4' },
-                      { label: 'H5', value: 'h5' },
-                      { label: 'H6', value: 'h6' },
-                      { label: 'SPAN', value: 'span' },
-                      { label: 'DIV', value: 'div' },
-                      { label: 'P', value: 'p' },
-                    ]}
-                    onChange={(newVal) => {
-                      var options = { ...image.options, tag: newVal };
-                      setAttributes({ image: { ...image, options: options } });
-                    }
-
-                    }
-                  />
+                    var options = { ...image.options, tag: option.value };
+                    setAttributes({ image: { ...image, options: options } });
+                  }} values=""></PGDropdown>
                 </PanelRow>
+
+
               )}
 
 
@@ -2065,59 +2045,76 @@ registerBlockType("post-grid/image", {
               )}
 
 
+              <PanelRow className='my-3'>
+                <label>Alt Text Source</label>
+                <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.altTextSrc.length == 0 ? 'Choose' : image.options.altTextSrc} options={[
+                  { label: 'No Alt Text', value: '' },
+                  { label: 'Image Alt Text', value: 'imgAltText' },
+                  { label: 'Image Title', value: 'imgTitle' },
+                  { label: 'Image Caption', value: 'imgCaption' },
+                  { label: 'Image Description', value: 'imgDescription' },
+                  { label: 'Image Slug', value: 'imgSlug' },
+                  { label: 'Post Title', value: 'postTitle' },
+                  { label: 'Post Excerpt', value: 'excerpt' },
+                  { label: 'Post Slug', value: 'postSlug' },
+                  { label: 'Post Custom Field', value: 'customField' },
+                  { label: 'Custom', value: 'custom' },
+                ]} onChange={(option, index) => {
 
-              <PanelRow>
-                <label for="">Alt Text Source</label>
-                <SelectControl
-                  label=""
-                  value={image.options.altTextSrc}
-                  options={[
-                    { label: 'No Link', value: '' },
-                    { label: 'Image Alt Text', value: 'imgAltText' },
-                    { label: 'Image Title', value: 'imgTitle' },
-                    { label: 'Image Caption', value: 'imgCaption' },
-                    { label: 'Image Description', value: 'imgDescription' },
-                    { label: 'Image Slug', value: 'imgSlug' },
-                    { label: 'Post Title', value: 'postTitle' },
-                    { label: 'Post Excerpt', value: 'excerpt' },
-                    { label: 'Post Slug', value: 'postSlug' },
-                    { label: 'Post Custom Field', value: 'customField' },
-                    { label: 'Custom', value: 'custom' },
+                  var options = { ...image.options, altTextSrc: option.value };
+                  setAttributes({ image: { ...image, options: options } });
 
 
-                  ]}
-                  onChange={(newVal) => {
-                    var options = { ...image.options, altTextSrc: newVal };
-                    setAttributes({ image: { ...image, options: options } });
-                  }
-
-                  }
-                />
+                }} values=""></PGDropdown>
               </PanelRow>
+
 
 
 
               {image.options.altTextSrc == 'customField' && (
 
+                <div>
 
+                  <PanelRow className='my-3'>
+                    <label>Custom Field</label>
+                    <PGDropdown position="bottom right" variant="secondary" buttonTitle={'Choose'} options={[
+                      { label: 'Custom', value: '' },
+                      { label: 'Yoast meta', value: '_yoast_wpseo_metadesc' },
+                      { label: 'Rank Math meta', value: 'rank_math_description' },
+                      { label: 'AIO SEO meta', value: '_aioseo_og_description' },
+                      { label: 'SEOPress meta', value: '_seopress_titles_desc' },
+                      { label: 'WP Meta SEO meta', value: '_metaseo_metadesc' },
+                      { label: 'The SEO Framework meta', value: '_genesis_description' },
+                      { label: 'SEO SIMPLE PACK meta', value: 'ssp_meta_description' },
+                    ]} onChange={(option, index) => {
 
-                <PanelRow>
-                  <label for="">Custom Field Key</label>
-                  <InputControl
-                    className='mr-2'
-                    value={image.options.altTextMetaKey}
-                    onChange={(newVal) => {
-
-
-                      var options = { ...image.options, altTextMetaKey: newVal };
+                      var options = { ...image.options, altTextMetaKey: option.value };
                       setAttributes({ image: { ...image, options: options } });
 
-                    }}
-                  />
-                </PanelRow>
 
 
+
+                    }} values=""></PGDropdown>
+                  </PanelRow>
+                  <PanelRow>
+                    <label for="">Custom Field Key</label>
+                    <InputControl
+                      className='mr-2'
+                      value={image.options.altTextMetaKey}
+                      onChange={(newVal) => {
+
+
+                        var options = { ...image.options, altTextMetaKey: newVal };
+                        setAttributes({ image: { ...image, options: options } });
+
+                      }}
+                    />
+                  </PanelRow>
+                </div>
               )}
+
+
+
 
 
               {image.options.altTextSrc == 'custom' && (

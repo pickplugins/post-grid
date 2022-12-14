@@ -11,7 +11,6 @@ fetch("https://getpostgrid.com/wp-json/wp/v2/docs", {
         if (response.ok && response.status < 400) {
             response.json().then((data) => {
 
-                console.log(data);
 
                 data.map(x => {
 
@@ -19,7 +18,6 @@ fetch("https://getpostgrid.com/wp-json/wp/v2/docs", {
 
                 })
 
-                console.log(tutorialsLinks);
 
 
             });

@@ -188,14 +188,14 @@ registerBlockType("post-grid/post-featured-image", {
     const [postImage, setPostImage] = useState(null);
     const [imageSizes, setImageSizes] = useState([]);
     const [filterArgs, setfilterArgs] = useState([
-      { label: 'Blur', value: 'blur', val: '', unit: 'px' },
-      { label: 'Brightness', value: 'brightness', val: '10', unit: '%' },
-      { label: 'Contrast', value: 'contrast', val: '10', unit: '%' },
-      { label: 'Grayscale', value: 'grayscale', val: '10', unit: '%' },
-      { label: 'Hue-rotate', value: 'hue-rotate', val: '10', unit: 'deg' },
-      { label: 'Invert', value: 'invert', val: '10', unit: '%' },
-      { label: 'Opacity', value: 'opacity', val: '10', unit: '%' },
-      { label: 'Saturate', value: 'saturate', val: '10', unit: '%' },
+      { label: 'Blur', isPro: false, value: 'blur', val: '', unit: 'px' },
+      { label: 'Brightness', isPro: false, value: 'brightness', val: '10', unit: '%' },
+      { label: 'Contrast', isPro: true, value: 'contrast', val: '10', unit: '%' },
+      { label: 'Grayscale', isPro: true, value: 'grayscale', val: '10', unit: '%' },
+      { label: 'Hue-rotate', isPro: true, value: 'hue-rotate', val: '10', unit: 'deg' },
+      { label: 'Invert', isPro: true, value: 'invert', val: '10', unit: '%' },
+      { label: 'Opacity', isPro: true, value: 'opacity', val: '10', unit: '%' },
+      { label: 'Saturate', isPro: true, value: 'saturate', val: '10', unit: '%' },
       { label: 'Sepia', value: 'sepia', val: '10', unit: '%' },
     ]);
 
@@ -1353,31 +1353,22 @@ registerBlockType("post-grid/post-featured-image", {
 
 
 
-
-
-              <PanelRow>
-                <label for="">Link To</label>
-                <SelectControl
-                  label=""
-                  value={featuredImage.options.linkTo}
-                  options={[
-                    { label: 'No Link', value: '' },
-                    { label: 'Post URL', value: 'postUrl' },
-                    { label: 'Custom Field', value: 'customField' },
-                    { label: 'Author URL', value: 'authorUrl' },
-                    { label: 'Author Link', value: 'authorLink' },
-                    { label: 'Home URL', value: 'homeUrl' },
-                    { label: 'Custom', value: 'custom' },
-
-                  ]}
-                  onChange={(newVal) => {
-                    var options = { ...featuredImage.options, linkTo: newVal };
-                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
-                  }
-
-                  }
-                />
+              <PanelRow className='my-3'>
+                <label>Link To</label>
+                <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.linkTo.length == 0 ? 'Choose' : featuredImage.options.linkTo} options={[
+                  { label: 'No Link', value: '' },
+                  { label: 'Post URL', value: 'postUrl' },
+                  { label: 'Custom Field', value: 'customField' },
+                  { label: 'Author URL', value: 'authorUrl' },
+                  { label: 'Author Link', value: 'authorLink' },
+                  { label: 'Home URL', value: 'homeUrl' },
+                  { label: 'Custom', value: 'custom' },
+                ]} onChange={(option, index) => {
+                  var options = { ...featuredImage.options, linkTo: option.value };
+                  setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                }} values=""></PGDropdown>
               </PanelRow>
+
 
               {featuredImage.options.linkTo == 'customField' && (
 
@@ -1461,30 +1452,28 @@ registerBlockType("post-grid/post-featured-image", {
 
 
 
-                <PanelRow>
-                  <label for="">Custom Tag</label>
-                  <SelectControl
-                    label=""
-                    value={featuredImage.options.tag}
-                    options={[
-                      { label: 'H1', value: 'h1' },
-                      { label: 'H2', value: 'h2' },
-                      { label: 'H3', value: 'h3' },
-                      { label: 'H4', value: 'h4' },
-                      { label: 'H5', value: 'h5' },
-                      { label: 'H6', value: 'h6' },
-                      { label: 'SPAN', value: 'span' },
-                      { label: 'DIV', value: 'div' },
-                      { label: 'P', value: 'p' },
-                    ]}
-                    onChange={(newVal) => {
-                      var options = { ...featuredImage.options, tag: newVal };
-                      setAttributes({ featuredImage: { ...featuredImage, options: options } });
-                    }
+                <PanelRow className='my-3'>
+                  <label>Custom Tag</label>
+                  <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.tag.length == 0 ? 'Choose' : featuredImage.options.tag} options={[
+                    { label: 'H1', value: 'h1' },
+                    { label: 'H2', value: 'h2' },
+                    { label: 'H3', value: 'h3' },
+                    { label: 'H4', value: 'h4' },
+                    { label: 'H5', value: 'h5' },
+                    { label: 'H6', value: 'h6' },
+                    { label: 'SPAN', value: 'span' },
+                    { label: 'DIV', value: 'div' },
+                    { label: 'P', value: 'p' },
+                  ]} onChange={(option, index) => {
 
-                    }
-                  />
+                    var options = { ...featuredImage.options, tag: option.value };
+                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                  }} values=""></PGDropdown>
                 </PanelRow>
+
+
+
+
               )}
 
 
@@ -1630,58 +1619,75 @@ registerBlockType("post-grid/post-featured-image", {
 
 
 
-              <PanelRow>
-                <label for="">Alt Text Source</label>
-                <SelectControl
-                  label=""
-                  value={featuredImage.options.altTextSrc}
-                  options={[
-                    { label: 'No Link', value: '' },
-                    { label: 'Image Alt Text', value: 'imgAltText' },
-                    { label: 'Image Title', value: 'imgTitle' },
-                    { label: 'Image Caption', value: 'imgCaption' },
-                    { label: 'Image Description', value: 'imgDescription' },
-                    { label: 'Image Slug', value: 'imgSlug' },
-                    { label: 'Post Title', value: 'postTitle' },
-                    { label: 'Post Excerpt', value: 'excerpt' },
-                    { label: 'Post Slug', value: 'postSlug' },
-                    { label: 'Post Custom Field', value: 'customField' },
-                    { label: 'Custom', value: 'custom' },
+              <PanelRow className='my-3'>
+                <label>Alt Text Source</label>
+                <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.altTextSrc.length == 0 ? 'Choose' : featuredImage.options.altTextSrc} options={[
+                  { label: 'No Alt Text', value: '' },
+                  { label: 'Image Alt Text', value: 'imgAltText' },
+                  { label: 'Image Title', value: 'imgTitle' },
+                  { label: 'Image Caption', value: 'imgCaption' },
+                  { label: 'Image Description', value: 'imgDescription' },
+                  { label: 'Image Slug', value: 'imgSlug' },
+                  { label: 'Post Title', value: 'postTitle' },
+                  { label: 'Post Excerpt', value: 'excerpt' },
+                  { label: 'Post Slug', value: 'postSlug' },
+                  { label: 'Post Custom Field', value: 'customField' },
+                  { label: 'Custom', value: 'custom' },
+                ]} onChange={(option, index) => {
+
+                  var options = { ...featuredImage.options, altTextSrc: option.value };
+                  setAttributes({ featuredImage: { ...featuredImage, options: options } });
 
 
-                  ]}
-                  onChange={(newVal) => {
-                    var options = { ...featuredImage.options, altTextSrc: newVal };
-                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
-                  }
-
-                  }
-                />
+                }} values=""></PGDropdown>
               </PanelRow>
 
 
 
               {featuredImage.options.altTextSrc == 'customField' && (
 
+                <div>
 
+                  <PanelRow className='my-3'>
+                    <label>Custom Field</label>
+                    <PGDropdown position="bottom right" variant="secondary" buttonTitle={'Choose'} options={[
+                      { label: 'Custom', value: '' },
+                      { label: 'Yoast meta', value: '_yoast_wpseo_metadesc' },
+                      { label: 'Rank Math meta', value: 'rank_math_description' },
+                      { label: 'AIO SEO meta', value: '_aioseo_og_description' },
+                      { label: 'SEOPress meta', value: '_seopress_titles_desc' },
+                      { label: 'WP Meta SEO meta', value: '_metaseo_metadesc' },
+                      { label: 'The SEO Framework meta', value: '_genesis_description' },
+                      { label: 'SEO SIMPLE PACK meta', value: 'ssp_meta_description' },
+                    ]} onChange={(option, index) => {
 
-                <PanelRow>
-                  <label for="">Custom Field Key</label>
-                  <InputControl
-                    className='mr-2'
-                    value={featuredImage.options.altTextMetaKey}
-                    onChange={(newVal) => {
-
-
-                      var options = { ...featuredImage.options, altTextMetaKey: newVal };
+                      var options = { ...featuredImage.options, altTextMetaKey: option.value };
                       setAttributes({ featuredImage: { ...featuredImage, options: options } });
 
-                    }}
-                  />
-                </PanelRow>
 
 
+
+                    }} values=""></PGDropdown>
+                  </PanelRow>
+                  <PanelRow>
+                    <label for="">Custom Field Key</label>
+                    <InputControl
+                      className='mr-2'
+                      value={featuredImage.options.altTextMetaKey}
+                      onChange={(newVal) => {
+
+
+                        var options = { ...featuredImage.options, altTextMetaKey: newVal };
+                        setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                      }}
+                    />
+                  </PanelRow>
+                </div>
               )}
+
+
+
 
 
               {featuredImage.options.altTextSrc == 'custom' && (
@@ -1704,19 +1710,6 @@ registerBlockType("post-grid/post-featured-image", {
                 </PanelRow>
 
 
-              )}
-
-
-
-
-
-
-
-              {featuredImage.styles.filter[breakPointX] != undefined && postGridData.license_status != 'active' && (
-
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postFeaturedImage&utm_campaign=pluginPostGrid&utm_medium=postFeaturedImage-filters"}>
-                  <p>Filters feature only avilable in pro version</p>
-                </PGproWrapper>
               )}
 
 

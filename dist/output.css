@@ -629,20 +629,16 @@ video {
   right: 0px;
 }
 
-.bottom-0 {
-  bottom: 0px;
+.top-2 {
+  top: 0.5rem;
 }
 
 .left-0 {
   left: 0px;
 }
 
-.top-5 {
-  top: 1.25rem;
-}
-
-.top-2 {
-  top: 0.5rem;
+.bottom-0 {
+  bottom: 0px;
 }
 
 .col-span-2 {
@@ -750,6 +746,10 @@ video {
   margin-top: 0.5rem;
 }
 
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
 .mt-4 {
   margin-top: 1rem;
 }
@@ -834,16 +834,16 @@ video {
   width: 12rem;
 }
 
+.w-60 {
+  width: 15rem;
+}
+
 .w-32 {
   width: 8rem;
 }
 
 .w-2 {
   width: 0.5rem;
-}
-
-.w-60 {
-  width: 15rem;
 }
 
 .w-8 {

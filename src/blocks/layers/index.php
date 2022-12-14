@@ -21,9 +21,9 @@ class PGBlockLayers
         register_block_type('post-grid/layers', array(
             //'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
-            'script' => 'front_script',
+            //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'style' => [$this, 'front_style'],
+            //'style' => [$this, 'front_style'],
             'render_callback' => array($this, 'theHTML'),
             'attributes' =>  [
                 "wrapper" => [

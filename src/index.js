@@ -67,6 +67,7 @@ import './blocks/tabs'
 import './blocks/list'
 
 import './blocks/shortcode'
+import './blocks/social-share-x'
 
 
 

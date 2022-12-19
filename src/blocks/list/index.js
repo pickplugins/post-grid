@@ -1218,42 +1218,25 @@ registerBlockType("post-grid/list", {
 
                 <PanelRow>
                   <label for="">Choose Icon</label>
-
                   <PGIconPicker library={icon.options.library} srcType={icon.options.srcType} iconSrc={icon.options.iconSrc} onChange={onChangeIcon} />
                 </PanelRow>
 
-
-
-
-
-
                 <PanelRow>
                   <label for="">Icon postion</label>
-
                   <SelectControl
                     label=""
                     value={icon.options.position}
                     options={[
-
                       { label: 'Choose...', value: '' },
                       { label: 'Left', value: 'left' },
                       { label: 'Before Text', value: 'before' },
                       { label: 'After Text', value: 'after' },
                       { label: 'Right', value: 'right' },
-
-
                     ]}
                     onChange={(newVal) => {
-
-
                       var options = { ...icon.options, position: newVal };
                       setAttributes({ icon: { ...icon, options: options } });
-
-
                     }
-
-
-
                     }
                   />
                 </PanelRow>

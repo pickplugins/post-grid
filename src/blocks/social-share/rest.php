@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) exit();
 
 
 
-class BlockPostCategoriesRest
+class BlockPostGridRest
 {
     function __construct()
     {
@@ -191,4 +191,4 @@ class BlockPostCategoriesRest
     }
 }
 
-$BlockPostGrid = new BlockPostCategoriesRest();
+$BlockPostGrid = new BlockPostGridRest();

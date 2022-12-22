@@ -319,15 +319,18 @@ class PGBlockPostTags
 
                     <?php endif; ?>
 
-                    <?php if ($maxCount > $i) : ?>
-                        <span class='separator'><?php echo esc_html($separatorText); ?></span>
-                    <?php endif; ?>
 
                     <?php if ($iconPosition == 'afterItem') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
 
                 </a>
+
+
+                <?php if ($maxCount > $i) : ?>
+                    <span class='separator'><?php echo esc_html($separatorText); ?></span>
+                <?php endif; ?>
+
             <?php
                     $i++;
                 }

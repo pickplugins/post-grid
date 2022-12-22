@@ -216,7 +216,7 @@ registerBlockType("post-grid/post-grid-filterable", {
       default: {
 
         options: {
-          filters: [], allText: 'All', showSort: '', showRandom: '', showAll: 'yes', showClear: '', activeFilter: '', parPage: 6,
+          filters: [], allText: 'All', logicWithinGroup: '', logicBetweenGroups: '', multifilter: false, showSort: '', showRandom: '', showAll: 'yes', showClear: '', activeFilter: '', parPage: 6,
         },
         styles:
         {
@@ -5382,6 +5382,79 @@ registerBlockType("post-grid/post-grid-filterable", {
                   })
                   }
                 </div>
+
+                {filterable.options.multifilter && (
+                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridFilterableBlock&utm_campaign=pluginPostGrid&utm_medium=postGridFilterableBlock-multifilter"}>
+                    <p><span className='underline'>Multifilter</span> Only avilable in Premium</p>
+                  </PGproWrapper>
+                )}
+
+
+
+                <PanelRow >
+                  <label for="">Enable Multifilter </label>
+
+                  <SelectControl
+                    label=""
+                    value={filterable.options.multifilter}
+                    options={[
+                      { label: 'True', value: true },
+                      { label: 'False', value: false },
+
+                    ]}
+                    onChange={(newVal) => {
+
+                      var options = { ...filterable.options, multifilter: newVal }
+                      setAttributes({ filterable: { ...filterable, options: options } })
+                    }
+                    }
+                  />
+                </PanelRow>
+
+                <PanelRow >
+                  <label for="">Logic Within Group </label>
+
+                  <SelectControl
+                    label=""
+                    value={filterable.options.logicWithinGroup}
+                    options={[
+                      { label: 'OR', value: 'or' },
+                      { label: 'AND', value: 'and' },
+
+                    ]}
+                    onChange={(newVal) => {
+
+                      var options = { ...filterable.options, logicWithinGroup: newVal }
+                      setAttributes({ filterable: { ...filterable, options: options } })
+                    }
+                    }
+                  />
+                </PanelRow>
+                {filterable.options.multifilter && (
+                  <>
+                    <PanelRow >
+                      <label for="">Logic Between Groups </label>
+
+                      <SelectControl
+                        label=""
+                        value={filterable.options.logicBetweenGroups}
+                        options={[
+                          { label: 'OR', value: 'or' },
+                          { label: 'AND', value: 'and' },
+
+                        ]}
+                        onChange={(newVal) => {
+
+                          var options = { ...filterable.options, logicBetweenGroups: newVal }
+                          setAttributes({ filterable: { ...filterable, options: options } })
+                        }
+                        }
+                      />
+                    </PanelRow>
+                  </>
+
+                )}
+
 
 
                 <PanelRow >

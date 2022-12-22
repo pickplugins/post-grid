@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) exit();
 
 
 
-class BlockPostShortcode
+class PGBlockSocialShare
 {
     function __construct()
     {
@@ -14,60 +14,237 @@ class BlockPostShortcode
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        //wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/shortcode/index.css');
-        //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/shortcode/index.js', array('wp-blocks', 'wp-element'));
+        //wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/social-share-x/index.css');
+        // wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/social-share-x/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/shortcode', array(
+        register_block_type('post-grid/social-share', array(
             //'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'editor_style',
+            //'style' => 'front_style',
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "inline-block"
-                        ],
-                        "styles" => [
-                            "color" => [],
-                            "bgColor" => [],
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "shortcode" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "key" => "",
-                            "prefix" => "",
-                            "postfix" => "",
-                            "prams" => []
-                        ],
-                        "styles" => [
-                            "color" => [],
-                            "bgColor" => [],
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
+            'attributes' =>  array(
+                'wrapper' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' => array(
+                            'tag' => 'div',
+                            'class' => '',
+                        ),
+                        'styles' =>
+                        array(
+                            'textAlign' => [],
+                            'color' => [],
+                            'bgColor' => [],
+                            'padding' => [],
+                            'margin' => [],
+                            'display' => [],
+                        ),
+                    ),
+                ),
+                'icon' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => 'icon',
+                            'position' => 'beforeLabel',
+                        ),
+                        'styles' =>
+                        array(
+                            'textAlign' => [],
+                            'color' => [],
+                            'bgColor' => [],
+                            'padding' => [],
+                            'margin' => [],
+                            'display' => [],
+                        ),
+                    ),
+                ),
+                'label' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => '',
+                        ),
+                        'styles' =>
+                        array(
+                            'textAlign' => [],
+                            'color' => [],
+                            'bgColor' => [],
+                            'padding' => [],
+                            'margin' => [],
+                            'display' => [],
+                        ),
+                    ),
+                ),
+                'count' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => '',
+                        ),
+                        'styles' =>
+                        array(
+                            'textAlign' => [],
+                            'color' => [],
+                            'bgColor' => [],
+                            'padding' => [],
+                            'margin' => [],
+                            'display' => [],
+                        ),
+                    ),
+                ),
+                'elements' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'linkTarget' => '_blank',
+                            'showLabel' => false,
+                            'showCount' => false,
+                            'showIcon' => true,
+                            'iconPositon' => 'beforeLabel',
+                        ),
+                        'styles' =>
+                        array(
+                            'textAlign' => [],
+                            'color' =>
+                            array(
+                                'Desktop' => '#18978F',
+                            ),
+                            'bgColor' => [],
+                            'padding' => [],
+                            'margin' =>
+                            array(
+                                'Desktop' =>
+                                array(
+                                    'top' => '5px',
+                                    'right' => '5px',
+                                    'bottom' => '5px',
+                                    'left' => '5px',
+                                ),
+                            ),
+                            'display' => [],
+                            'borderRadius' => [],
+                            'fontSize' =>
+                            array(
+                                'Desktop' =>
+                                array(
+                                    'val' => '35',
+                                ),
+                            ),
+                            'lineHeight' => [],
+                            'letterSpacing' => [],
+                            'fontWeight' => [],
+                            'textDecoration' => [],
+                            'textTransform' => [],
+                        ),
+                        'items' =>
+                        array(
+                            0 =>
+                            array(
+                                'id' => 'facebook',
+                                'label' => 'Facebook',
+                                'count' => 125,
+                                'url' => 'https://www.facebook.com/sharer.php?u={URL}',
+                                'siteIcon' =>
+                                array(
+                                    'library' => 'fontAwesome',
+                                    'srcType' => 'class',
+                                    'iconSrc' => 'fab fa-facebook-square',
+                                ),
+                                'styles' =>
+                                array(
+                                    'textAlign' => [],
+                                    'color' => [],
+                                    'bgColor' => [],
+                                    'padding' => [],
+                                    'margin' => [],
+                                    'display' => [],
+                                ),
+                            ),
+                            1 =>
+                            array(
+                                'id' => 'twitter',
+                                'label' => 'Twitter',
+                                'count' => 125,
+                                'url' => 'https://twitter.com/intent/tweet?url={URL}',
+                                'siteIcon' =>
+                                array(
+                                    'library' => 'fontAwesome',
+                                    'srcType' => 'class',
+                                    'iconSrc' => 'fab fa-twitter-square',
+                                ),
+                                'styles' =>
+                                array(
+                                    'textAlign' => [],
+                                    'color' => [],
+                                    'bgColor' => [],
+                                    'padding' => [],
+                                    'margin' => [],
+                                    'display' => [],
+                                ),
+                            ),
+                            2 =>
+                            array(
+                                'id' => 'linkedin',
+                                'label' => 'Linkedin',
+                                'count' => 125,
+                                'url' => 'https://www.linkedin.com/shareArticle?mini=true&url={URL}&title={TITLE}',
+                                'siteIcon' =>
+                                array(
+                                    'library' => 'fontAwesome',
+                                    'srcType' => 'class',
+                                    'iconSrc' => 'fab fa-linkedin',
+                                ),
+                                'styles' =>
+                                array(
+                                    'textAlign' => [],
+                                    'color' => [],
+                                    'bgColor' => [],
+                                    'padding' => [],
+                                    'margin' => [],
+                                    'display' => [],
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                'customCss' =>
+                array(
+                    'type' => 'string',
+                    'default' => '',
+                ),
+                'blockCssY' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'items' =>
+                        [],
+                    ),
+                ),
+                'blockId' =>
+                array(
+                    'type' => 'string',
+                    'default' => '',
+                ),
+            )
 
 
         ));
@@ -80,47 +257,90 @@ class BlockPostShortcode
     {
     }
 
-
-
-
     // front-end output from the gutenberg editor 
     function theHTML($attributes, $content, $block)
     {
 
 
         global $postGridCss;
-
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
-        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
-
-
-
-        if (!is_admin()) {
-
-
-            //wp_enqueue_script('blk_post_grid', post_grid_plugin_dir . 'src/blocks/post-categories/index.js', array('wp-element'));
-
-            // wp_enqueue_style('blk_post_grid', post_grid_plugin_url . 'src/blocks/post-categories/index.css');
-        }
-
-
+        global $postGridCustomCss;
+        global $postGridCssY;
 
         $post_ID = $block->context['postId'];
-        $post_url = get_the_permalink($post_ID);
+        $post_data = get_post($post_ID);
 
+        $post_url = get_the_permalink($post_ID);
+        $post_title = get_the_title($post_ID);
+        $post_thumb_url = get_the_post_thumbnail_url($post_ID, 'full');
+
+
+        $post_author_id = $post_data->post_author;
+        //$author_data = get_user_by('ID', $post_author_id);
+
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
 
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
         $wrapperStyles = isset($wrapper['styles']) ? $wrapper['styles'] : [];
-        $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
 
-        $shortcode = isset($attributes['shortcode']) ? $attributes['shortcode'] : [];
-        $shortcodeOptions = isset($shortcode['options']) ? $shortcode['options'] : [];
-        $shortcodeStyles = isset($shortcode['styles']) ? $shortcode['styles'] : [];
+        $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'h2';
+        $wrapperClass = isset($wrapperStyles['class']) ? $wrapperStyles['class'] : '';
 
-        $shortcodeKey = isset($shortcodeOptions['key']) ? $shortcodeOptions['key'] : '';
-        $shortcodePrams = isset($shortcodeOptions['prams']) ? $shortcodeOptions['prams'] : [];
+        $elements = isset($attributes['elements']) ? $attributes['elements'] : [];
+        $elementsOptions = isset($elements['options']) ? $elements['options'] : [];
+        $elementsStyles = isset($elements['styles']) ? $elements['styles'] : [];
+        $elementsItems = isset($elements['items']) ? $elements['items'] : [];
+        $showLabel = isset($elementsOptions['showLabel']) ? $elementsOptions['showLabel'] : false;
+        $showIcon = isset($elementsOptions['showIcon']) ? $elementsOptions['showIcon'] : true;
+        $showCount = isset($elementsOptions['showCount']) ? $elementsOptions['showCount'] : false;
+
+
+
+        $icon = isset($attributes['icon']) ? $attributes['icon'] : [];
+        $iconOptions = isset($icon['options']) ? $icon['options'] : [];
+        $iconStyles = isset($icon['styles']) ? $icon['styles'] : [];
+        $iconClass = isset($iconOptions['class']) ? $iconOptions['class'] : 'icon';
+
+        $label = isset($attributes['label']) ? $attributes['label'] : [];
+        $labelOptions = isset($label['options']) ? $label['options'] : [];
+        $labelStyles = isset($label['styles']) ? $label['styles'] : [];
+
+
+
+
+        $count = isset($attributes['count']) ? $attributes['count'] : [];
+        $countOptions = isset($count['options']) ? $count['options'] : [];
+        $countStyles = isset($count['styles']) ? $count['styles'] : [];
+
+
+        $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
+        $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : [];
+
+
+        //$postGridCustomCss .= $customCss;
+        $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
+
+
+
+
+        //error_log(serialize($elements));
+
+
+?>
+
+
+        <?php //echo var_export($post_thumb_url, true);
+        ?>
+
+
+
+        <?php
+
+
+
+
+
 
 
 
@@ -128,35 +348,89 @@ class BlockPostShortcode
 
         ob_start();
 
-        $shortcodeAtts = '';
-
-        if (!empty($shortcodePrams))
-            foreach ($shortcodePrams as  $item) {
-
-                $val = isset($item['val']) ? $item['val'] : '';
-
-                $singleArray = ['{currentPostId}' => $post_ID];
-                $val = strtr($val, (array)$singleArray);
-
-                $shortcodeAtts .= $item['id'] . '="' . $val . '" ';
-            }
-
-
-        //var_dump($shortcodePrams);
-
-
         if (!empty($wrapperTag)) :
 
-            echo do_shortcode('[' . $shortcodeKey . ' ' . $shortcodeAtts . ']');
+        ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+                <?php
+                if (!empty($elementsItems))
+                    foreach ($elementsItems as $index => $item) {
+                        $label = isset($item['label']) ? $item['label'] : '';
+                        $count = isset($item['count']) ? $item['count'] : '';
+                        $url = isset($item['url']) ? $item['url'] : '';
+
+                        $siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
+
+                        $iconLibrary = isset($siteIcon['library']) ? $siteIcon['library'] : '';
+                        $iconSrcType = isset($siteIcon['srcType']) ? $siteIcon['srcType'] : '';
+                        $iconSrc = isset($siteIcon['iconSrc']) ? $siteIcon['iconSrc'] : '';
+
+                        //echo var_export($url, true);
+
+
+                        if ($iconLibrary == 'fontAwesome') {
+                            wp_enqueue_style('fontawesome-icons');
+                        } else if ($iconLibrary == 'iconFont') {
+                            wp_enqueue_style('icofont-icons');
+                        } else if ($iconLibrary == 'bootstrap') {
+                            wp_enqueue_style('bootstrap-icons');
+                        }
+
+                        $fontIconHtml = '<span class="icon ' . $iconClass . ' ' . $iconSrc . '"></span>';
+
+                        $pramsArr = ['{URL}' => $post_url, '{TITLE}' => $post_title, '{IMAGE}' => $post_thumb_url,];
+                        $url = strtr($url, (array)$pramsArr);
+
+
+
+                ?>
+                    <a href="<?php echo esc_url_raw($url); ?>" class="<?php echo esc_attr('media-item item-' . $index); ?>">
+
+                        <?php if ($showLabel) : ?>
+                            <span class='media-label'>
+                                <?php echo esc_html($label); ?>
+
+                            </span>
+                        <?php endif; ?>
+
+                        <?php if ($showIcon) : ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+
+                        <?php if ($showCount) : ?>
+                            <span class="media-count">(<?php echo esc_html($count); ?>)</span>
+                        <?php endif; ?>
+
+                    </a>
+                <?php
+
+                    }
+
+
+                ?>
+            </<?php echo esc_attr($wrapperTag); ?>>
+
+        <?php
 
         endif;
 
+        ?>
 
 
 
 
-        return ob_get_clean();
+
+
+
+
+
+
+
+
+
+
+<?php return ob_get_clean();
     }
 }
 
-$BlockPostShortcode = new BlockPostShortcode();
+$PGBlockSocialShare = new PGBlockSocialShare();

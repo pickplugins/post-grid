@@ -97,9 +97,7 @@ class Typography extends Component {
                   }
                   var typoX = { ...obj.styles, fontSize: newValuesObj };
 
-                  console.log(obj.styles);
 
-                  console.log(newValuesObj);
                   onChange(typoX)
 
 

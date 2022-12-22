@@ -23,14 +23,13 @@ class PGcssBoxShadow extends Component {
 
     function Html() {
 
-      var valParts = (val != undefined) ? val.split(" ") : ['0px', '1px', '0px', '0px', '#000000'];
+      var valParts = (val != undefined) ? val.split(" ") : ['0px', '0px', '0px', '0px', '#000000'];
 
-      var hOffsetVal = valParts[0];
-      var vOffsetVal = valParts[1];
-      var blurVal = valParts[2];
-
-      var spreadVal = valParts[3];
-      var colorVal = valParts[4];
+      var hOffsetVal = (valParts[0] != undefined) ? valParts[0] : '0px';
+      var vOffsetVal = (valParts[1] != undefined) ? valParts[1] : '0px';
+      var blurVal = (valParts[2] != undefined) ? valParts[2] : '0px';
+      var spreadVal = (valParts[3] != undefined) ? valParts[3] : '0px';
+      var colorVal = (valParts[4] != undefined) ? valParts[4] : '#000000';
 
       var insetVal = (valParts[5] != undefined && valParts[5].length > 0) ? 'inset' : '';
 
@@ -42,28 +41,28 @@ class PGcssBoxShadow extends Component {
 
       }
 
-      var hOffsetValX = hOffsetVal != undefined ? hOffsetVal.match(/\d+/g)[0] : 1;
-      var hOffsetUnitX = hOffsetVal != undefined ? hOffsetVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      var hOffsetValX = (hOffsetVal.match(/\d+/g) != null) ? hOffsetVal.match(/\d+/g)[0] : 0;
+      var hOffsetUnitX = (hOffsetVal.match(/[a-zA-Z]+/g) != null) ? hOffsetVal.match(/[a-zA-Z]+/g)[0] : 'px';
 
       const [hOffsetValY, sethOffsetVal] = useState(hOffsetValX);
       const [hOffsetUnitY, sethOffsetUnit] = useState(hOffsetUnitX);
 
-      var vOffsetValX = vOffsetVal != undefined ? vOffsetVal.match(/\d+/g)[0] : 1;
-      var vOffsetUnitX = vOffsetVal != undefined ? vOffsetVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      var vOffsetValX = (vOffsetVal.match(/\d+/g) != null) ? vOffsetVal.match(/\d+/g)[0] : 0;
+      var vOffsetUnitX = (vOffsetVal.match(/[a-zA-Z]+/g) != null) ? vOffsetVal.match(/[a-zA-Z]+/g)[0] : 'px';
 
       const [vOffsetValY, setvOffsetVal] = useState(vOffsetValX);
       const [vOffsetUnitY, setvOffsetUnit] = useState(vOffsetUnitX);
 
 
-      var blurValX = blurVal != undefined ? blurVal.match(/\d+/g)[0] : 1;
-      var blurUnitX = blurVal != undefined ? blurVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      var blurValX = (blurVal.match(/\d+/g) != null) ? blurVal.match(/\d+/g)[0] : 0;
+      var blurUnitX = (blurVal.match(/[a-zA-Z]+/g) != null) ? blurVal.match(/[a-zA-Z]+/g)[0] : 'px';
 
 
       const [blurValY, setblurVal] = useState(blurValX);
       const [blurUnitY, setblurUnit] = useState(blurUnitX);
 
-      var spreadValX = spreadVal != undefined ? spreadVal.match(/\d+/g)[0] : 1;
-      var spreadUnitX = spreadVal != undefined ? spreadVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      var spreadValX = (spreadVal.match(/\d+/g) != null) ? spreadVal.match(/\d+/g)[0] : 0;
+      var spreadUnitX = (spreadVal.match(/[a-zA-Z]+/g) != null) ? spreadVal.match(/[a-zA-Z]+/g)[0] : 'px';
 
       const [spreadValY, setspreadVal] = useState(spreadValX);
       const [spreadUnitY, setspreadUnit] = useState(spreadUnitX);

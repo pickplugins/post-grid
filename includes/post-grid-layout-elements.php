@@ -110,7 +110,7 @@ function post_grid_layout_element_option_wrapper_start($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -177,7 +177,7 @@ function post_grid_layout_element_css_wrapper_start($args)
 
     ?>
         <style type="text/css">
-            .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+            <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
                 <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
                 <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -186,7 +186,7 @@ function post_grid_layout_element_css_wrapper_start($args)
                 <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
             }
 
-            <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+            <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
                 <?php echo wp_strip_all_tags($css_hover); ?>
             }
 
@@ -436,7 +436,7 @@ function post_grid_layout_element_option_custom_text($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -506,7 +506,7 @@ function post_grid_layout_element_css_custom_text($args)
 
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -515,7 +515,7 @@ function post_grid_layout_element_css_custom_text($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
@@ -544,7 +544,7 @@ function post_grid_layout_element_option_title($parameters)
     $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
-    $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : 0;
+    $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : '';
 
     $text_align = isset($element_data['text_align']) ? $element_data['text_align'] : '';
 
@@ -631,8 +631,8 @@ function post_grid_layout_element_option_title($parameters)
                 'details'    => __('Set character limit.', 'post-grid'),
                 'type'        => 'text',
                 'value'        => $char_limit,
-                'default'        => '20',
-                'placeholder'        => '5',
+                'default'        => '',
+                'placeholder'        => '25',
             );
 
             $settings_tabs_field->generate_field($args);
@@ -745,8 +745,8 @@ function post_grid_layout_element_option_title($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -811,7 +811,7 @@ function post_grid_layout_element_title($args)
 ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title ">
         <?php if ($link_to == 'post_link') : ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($title); ?></a>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($title); ?></a>
 
         <?php elseif ($link_to == 'custom_link') :
 
@@ -821,10 +821,10 @@ function post_grid_layout_element_title($args)
             //var_dump($thumb_custom_url);
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($title); ?></a>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
 
         <?php else : ?>
-            <?php echo esc_html($title); ?>
+            <?php echo wp_kses_post($title); ?>
         <?php endif; ?>
 
 
@@ -852,7 +852,7 @@ function post_grid_layout_element_css_title($args)
 
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -861,11 +861,11 @@ function post_grid_layout_element_css_title($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -901,7 +901,7 @@ function post_grid_layout_element_option_title_link($parameters)
 
     $link_to = isset($element_data['link_to']) ? $element_data['link_to'] : '';
     $link_target = isset($element_data['link_target']) ? $element_data['link_target'] : '';
-    $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : 0;
+    $char_limit = isset($element_data['char_limit']) ? $element_data['char_limit'] : '';
 
     $css = isset($element_data['css']) ? $element_data['css'] : '';
     $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
@@ -985,7 +985,7 @@ function post_grid_layout_element_option_title_link($parameters)
                 'type'        => 'text',
                 'value'        => $char_limit,
                 'default'        => '',
-                'placeholder'        => '5',
+                'placeholder'        => '25',
             );
 
             $settings_tabs_field->generate_field($args);
@@ -1098,8 +1098,8 @@ function post_grid_layout_element_option_title_link($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+<?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -1159,18 +1159,16 @@ function post_grid_layout_element_title_link($args)
 ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> title_link ">
         <?php if ($link_to == 'post_link') : ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($title); ?></a>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($title); ?></a>
         <?php elseif ($link_to == 'custom_link') :
 
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
-            //var_dump($thumb_custom_url);
-
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($title); ?></a>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
         <?php else : ?>
-            <?php echo esc_html($title); ?>
+            <?php echo wp_kses_post($title); ?>
         <?php endif; ?>
     </div>
 <?php
@@ -1198,7 +1196,7 @@ function post_grid_layout_element_css_title_link($args)
 
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1207,11 +1205,11 @@ function post_grid_layout_element_css_title_link($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1345,8 +1343,8 @@ function post_grid_layout_element_option_content($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -1665,8 +1663,8 @@ function post_grid_layout_element_option_excerpt($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -1768,11 +1766,11 @@ function post_grid_layout_element_excerpt($args)
 
 ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> excerpt ">
-        <?php echo esc_html($post_excerpt); ?>
+        <?php echo wp_kses_post($post_excerpt); ?>
         <?php
         if (!empty($read_more_text)) :
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo esc_html($read_more_text); ?></a>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><?php echo wp_kses_post($read_more_text); ?></a>
         <?php
         endif;
         ?>
@@ -1800,7 +1798,7 @@ function post_grid_layout_element_css_excerpt($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1809,11 +1807,11 @@ function post_grid_layout_element_css_excerpt($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -2038,8 +2036,8 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -2158,7 +2156,7 @@ function post_grid_layout_element_css_excerpt_read_more($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        -<?php echo esc_attr('.layout'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -2167,11 +2165,11 @@ function post_grid_layout_element_css_excerpt_read_more($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -2382,8 +2380,8 @@ function post_grid_layout_element_option_read_more($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -2471,7 +2469,7 @@ function post_grid_layout_element_css_read_more($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?> !important;
             ;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
@@ -2481,11 +2479,11 @@ function post_grid_layout_element_css_read_more($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?> !important;
             ;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?> !important;
@@ -2597,9 +2595,9 @@ function post_grid_layout_element_option_media($parameters)
                                 <?php
                                 if ($source_enable == 'yes') :
                                 ?><i class="fas fa-check"></i><?php
-                                                                    else :
-                                                                        ?><i class="fas fa-times"></i><?php
-                                                                    endif; ?>
+                                                            else :
+                                                                ?><i class="fas fa-times"></i><?php
+                                                                                            endif; ?>
                                 <span class="expand"><?php echo esc_html($source_name); ?></span>
                             </div>
                             <div class="element-options options">
@@ -2779,8 +2777,8 @@ function post_grid_layout_element_option_media($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -2835,33 +2833,33 @@ function post_grid_layout_element_media($args)
         $html_media = '';
 
         $is_image = false;
-if(!empty($media_source))
-        foreach ($media_source as $source_id => $source_info) {
+        if (!empty($media_source))
+            foreach ($media_source as $source_id => $source_info) {
 
-            $args['source_id'] = $source_id;
-            $args['source_args'] = $source_info;
-            $args['post_settings'] = $post_grid_post_settings;
+                $args['source_id'] = $source_id;
+                $args['source_args'] = $source_info;
+                $args['post_settings'] = $post_grid_post_settings;
 
 
-            //var_dump($source_id);
-            // var_dump($source_info);
+                //var_dump($source_id);
+                // var_dump($source_info);
 
-            $is_enable = isset($source_info['enable']) ? $source_info['enable'] : '';
+                $is_enable = isset($source_info['enable']) ? $source_info['enable'] : '';
 
-            $media = post_grid_media($post_id, $args);
+                $media = post_grid_media($post_id, $args);
 
-            if ($is_image) continue;
+                if ($is_image) continue;
 
-            if ($is_enable == 'yes') {
-                if (!empty($media)) {
+                if ($is_enable == 'yes') {
+                    if (!empty($media)) {
 
-                    $html_media = post_grid_media($post_id, $args);
-                    $is_image = true;
-                } else {
-                    $html_media = '';
+                        $html_media = post_grid_media($post_id, $args);
+                        $is_image = true;
+                    } else {
+                        $html_media = '';
+                    }
                 }
             }
-        }
 
         echo ($html_media);
 
@@ -2898,19 +2896,19 @@ function post_grid_layout_element_css_media($args)
 
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?><?php if (!empty($padding)) : ?>padding: <?php echo esc_attr($padding);  ?>;
             <?php endif; ?>overflow: hidden;
             <?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
         <?php endif; ?>@media only screen and (min-width: 1024px) {
-            .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+            <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if ($height_large_type == 'auto_height') :  ?>height: auto;
                 <?php elseif ($height_large_type == 'fixed_height') : ?><?php if (!empty($thumb_height_large)) : ?>height: <?php echo esc_attr($thumb_height_large); ?>;
                 <?php endif; ?><?php elseif ($height_large_type == 'max_height') : ?><?php if (!empty($thumb_height_large)) : ?>max-height: <?php echo esc_attr($thumb_height_large); ?>;
@@ -2919,7 +2917,7 @@ function post_grid_layout_element_css_media($args)
         }
 
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+            <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if ($height_medium_type == 'auto_height') :  ?>height: auto;
                 <?php elseif ($height_medium_type == 'fixed_height') : ?><?php if (!empty($thumb_height_medium)) : ?>height: <?php echo esc_attr($thumb_height_medium); ?>;
                 <?php endif; ?><?php elseif ($height_medium_type == 'max_height') : ?><?php if (!empty($thumb_height_medium)) : ?>max-height: <?php echo esc_attr($thumb_height_medium); ?>;
@@ -2928,7 +2926,7 @@ function post_grid_layout_element_css_media($args)
         }
 
         @media only screen and (min-width: 0px) and (max-width: 767px) {
-            .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+            <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if ($height_small_type == 'auto_height') :  ?>height: auto;
                 <?php elseif ($height_small_type == 'fixed_height') : ?><?php if (!empty($thumb_height_small)) : ?>height: <?php echo esc_attr($thumb_height_small); ?>;
                 <?php endif; ?><?php elseif ($height_small_type == 'max_height') : ?><?php if (!empty($thumb_height_small)) : ?>max-height: <?php echo esc_attr($thumb_height_small); ?>;
@@ -3170,8 +3168,8 @@ function post_grid_layout_element_option_thumb($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -3283,28 +3281,27 @@ function post_grid_layout_element_css_thumb($args)
 
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
-            overflow: hidden;
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {overflow: hidden;
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?>
         }
 
         @media only screen and (min-width: 1024px) {
-            .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+            <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if (!empty($thumb_height_large)) : ?>max-height: <?php echo esc_attr($thumb_height_large); ?>;
                 <?php endif; ?>
             }
         }
 
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+            <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if (!empty($thumb_height_medium)) : ?>max-height: <?php echo esc_attr($thumb_height_medium); ?>;
                 <?php endif; ?>
             }
         }
 
         @media only screen and (min-width: 0px) and (max-width: 767px) {
-            .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+            <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if (!empty($thumb_height_small)) : ?>max-height: <?php echo esc_attr($thumb_height_small); ?>;
                 <?php endif; ?>
             }
@@ -3540,8 +3537,8 @@ function post_grid_layout_element_option_thumb_link($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -3650,28 +3647,25 @@ function post_grid_layout_element_css_thumb_link($args)
 
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
-            overflow: hidden;
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {overflow:hidden;
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?>
         }
 
         @media only screen and (min-width: 1024px) {
-            .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+            <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if (!empty($thumb_height_large)) : ?>max-height: <?php echo esc_attr($thumb_height_large); ?>;
                 <?php endif; ?>
             }
         }
-
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
-            .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+            <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if (!empty($thumb_height_medium)) : ?>max-height: <?php echo esc_attr($thumb_height_medium); ?>;
                 <?php endif; ?>
             }
         }
-
         @media only screen and (min-width: 0px) and (max-width: 767px) {
-            .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+            <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if (!empty($thumb_height_small)) : ?>max-height: <?php echo esc_attr($thumb_height_small); ?>;
                 <?php endif; ?>
             }
@@ -3896,8 +3890,8 @@ function post_grid_layout_element_option_post_date($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -3997,7 +3991,7 @@ function post_grid_layout_element_css_post_date($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4006,11 +4000,11 @@ function post_grid_layout_element_css_post_date($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4201,8 +4195,8 @@ function post_grid_layout_element_option_author($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -4314,7 +4308,7 @@ function post_grid_layout_element_css_author($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4323,11 +4317,11 @@ function post_grid_layout_element_css_author($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4514,8 +4508,8 @@ function post_grid_layout_element_option_author_link($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -4622,7 +4616,7 @@ function post_grid_layout_element_css_author_link($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4631,11 +4625,11 @@ function post_grid_layout_element_css_author_link($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4872,8 +4866,8 @@ function post_grid_layout_element_option_categories($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -4925,21 +4919,21 @@ function post_grid_layout_element_categories($args)
 
     $i = 0;
 
-if(!empty($term_list))
-    foreach ($term_list as $term) {
-        if ($i >= $max_count) continue;
+    if (!empty($term_list))
+        foreach ($term_list as $term) {
+            if ($i >= $max_count) continue;
 
-        $term_id = isset($term->term_id) ? $term->term_id : '';
-        $term_name = isset($term->name) ? $term->name : '';
-        $term_link = get_term_link($term_id);
+            $term_id = isset($term->term_id) ? $term->term_id : '';
+            $term_name = isset($term->name) ? $term->name : '';
+            $term_link = get_term_link($term_id);
 
-        $categories_html .= '<a target="' . esc_attr($link_target) . '" href="' . esc_url($term_link) . '">' . esc_html($term_name) . '</a>';
-        if ($i + 1 < $max_term_limit) {
-            $categories_html .= $separator;
+            $categories_html .= '<a target="' . esc_attr($link_target) . '" href="' . esc_url($term_link) . '">' . esc_html($term_name) . '</a>';
+            if ($i + 1 < $max_term_limit) {
+                $categories_html .= $separator;
+            }
+
+            $i++;
         }
-
-        $i++;
-    }
 
     //var_dump($categories_html);
 
@@ -4971,7 +4965,7 @@ function post_grid_layout_element_css_categories($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($text_color)) : ?>color: <?php echo esc_attr($text_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4980,14 +4974,14 @@ function post_grid_layout_element_css_categories($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($link_color)) : ?>color: <?php echo esc_attr($link_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
             <?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
@@ -5186,8 +5180,8 @@ function post_grid_layout_element_option_tags($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -5238,21 +5232,21 @@ function post_grid_layout_element_tags($args)
 
     $i = 0;
 
-if(!empty($term_list))
-    foreach ($term_list as $term) {
-        if ($i >= $max_count) continue;
+    if (!empty($term_list))
+        foreach ($term_list as $term) {
+            if ($i >= $max_count) continue;
 
-        $term_id = isset($term->term_id) ? $term->term_id : '';
-        $term_name = isset($term->name) ? $term->name : '';
-        $term_link = get_term_link($term_id);
+            $term_id = isset($term->term_id) ? $term->term_id : '';
+            $term_name = isset($term->name) ? $term->name : '';
+            $term_link = get_term_link($term_id);
 
-        $categories_html .= '<a target="' . esc_attr($link_target) . '" href="' . esc_url($term_link) . '">' . esc_html($term_name) . '</a>';
-        if ($i + 1 < $max_term_limit) {
-            $categories_html .= $separator;
+            $categories_html .= '<a target="' . esc_attr($link_target) . '" href="' . esc_url($term_link) . '">' . esc_html($term_name) . '</a>';
+            if ($i + 1 < $max_term_limit) {
+                $categories_html .= $separator;
+            }
+
+            $i++;
         }
-
-        $i++;
-    }
 
 ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> tags ">
@@ -5283,7 +5277,7 @@ function post_grid_layout_element_css_tags($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($text_color)) : ?>color: <?php echo esc_attr($text_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -5292,14 +5286,14 @@ function post_grid_layout_element_css_tags($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($link_color)) : ?>color: <?php echo esc_attr($link_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
             <?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
@@ -5478,7 +5472,7 @@ function post_grid_layout_element_option_comments_count($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -5565,7 +5559,7 @@ function post_grid_layout_element_css_comments_count($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
     ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -5574,7 +5568,7 @@ function post_grid_layout_element_css_comments_count($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
@@ -5711,8 +5705,8 @@ function post_grid_layout_element_option_share_button($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}
-.element_<?php echo esc_attr($element_index); ?> a{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}
+ <?php echo esc_attr('.element_'.$element_index); ?> a{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -5803,7 +5797,7 @@ function post_grid_layout_element_css_share_button($args)
 
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($icon_color)) : ?>color: <?php echo esc_attr($icon_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($wrapper_margin)) : ?>margin: <?php echo esc_attr($wrapper_margin);  ?>;
@@ -5811,14 +5805,14 @@ function post_grid_layout_element_css_share_button($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> a {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
             <?php if (!empty($icon_color)) : ?>color: <?php echo esc_attr($icon_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($icon_margin)) : ?>margin: <?php echo esc_attr($icon_margin);  ?>;
             <?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
@@ -5946,7 +5940,7 @@ function post_grid_layout_element_option_hr($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -6014,14 +6008,14 @@ function post_grid_layout_element_css_hr($args)
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?><?php if (!empty($background_color)) : ?>background-color: <?php echo esc_attr($background_color);  ?>;
             <?php endif; ?><?php if (!empty($height)) : ?>padding: <?php echo esc_attr($height);  ?>;
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
@@ -6165,7 +6159,7 @@ function post_grid_layout_element_option_five_star($parameters)
 
             ob_start();
             ?>
-            <textarea readonly type="text" onclick="this.select();">.element_<?php echo esc_attr($element_index); ?>{}</textarea>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}</textarea>
             <?php
 
             $html = ob_get_clean();
@@ -6263,7 +6257,7 @@ function post_grid_layout_element_css_five_star($args)
 
 ?>
     <style type="text/css">
-        .layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?> {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
@@ -6271,7 +6265,7 @@ function post_grid_layout_element_css_five_star($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php if (!empty($css_hover)) : ?>.layout-<?php echo esc_attr($layout_id); ?> .element_<?php echo esc_attr($index); ?>:hover {
+        <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 

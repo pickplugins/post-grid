@@ -46,11 +46,11 @@ class PGcssBorder extends Component {
 
     function Html() {
 
-      var valParts = (val != undefined) ? val.split(" ") : ['1px', 'solid', '#000000'];
+      var valParts = (val != undefined) ? val.split(" ") : ['0px', 'solid', '#000000'];
 
-      var widthVal = valParts[0];
-      var styleVal = valParts[1];
-      var colorVal = valParts[2];
+      var widthVal = (valParts[0] != undefined) ? valParts[0] : '0px';
+      var styleVal = (valParts[1] != undefined) ? valParts[1] : 'solid';
+      var colorVal = (valParts[2] != undefined) ? valParts[2] : '#000000';
 
 
 
@@ -63,8 +63,12 @@ class PGcssBorder extends Component {
 
       }
 
-      var widthValX = widthVal != undefined ? widthVal.match(/\d+/g)[0] : 1;
-      var widthUnitX = widthVal != undefined ? widthVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      console.log(widthVal);
+      console.log(widthVal.match(/\d+/g));
+
+
+      var widthValX = (widthVal.match(/\d+/g) != null) ? widthVal.match(/\d+/g)[0] : 1;
+      var widthUnitX = (widthVal.match(/[a-zA-Z]+/g) != null) ? widthVal.match(/[a-zA-Z]+/g)[0] : 'px';
 
 
       const [widthValY, setwidthVal] = useState(widthValX);

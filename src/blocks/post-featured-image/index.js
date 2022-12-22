@@ -180,7 +180,6 @@ registerBlockType("post-grid/post-featured-image", {
 
     const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 
-    const [customTags, setCustomTags] = useState({});
 
     const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
     const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
@@ -323,6 +322,7 @@ registerBlockType("post-grid/post-featured-image", {
       }))
 
 
+
       blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'filter': filterStr };
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -364,69 +364,12 @@ registerBlockType("post-grid/post-featured-image", {
       generateBlockCssY()
 
 
-      customTags['currentYear'] = '2022';
-      customTags['currentMonth'] = '07';
-      customTags['currentDay'] = '27';
-      customTags['currentDate'] = '27';
-      customTags['currentTime'] = '27';
 
-      customTags['postPublishDate'] = '123';
-      customTags['postModifiedDate'] = '123';
-
-      customTags['termId'] = '';
-      customTags['termTitle'] = '';
-      customTags['termDescription'] = '';
-      customTags['termPostCount'] = '';
-
-      customTags['postTagTitle'] = 'First Tag Title';
-      customTags['postTagsTitle'] = 'First Tag Title';
-
-      customTags['postCategoryTitle'] = 'First Category Title';
-      customTags['postCategoriesTitle'] = 'First Categories Title';
+      blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': { "Desktop": "100%" } };
+      blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'height': { "Desktop": "auto" } };
 
 
-      customTags['postTermTitle'] = 'First Term Title';
-      customTags['postTermsTitle'] = 'List of all terms title';
-
-
-
-      customTags['postId'] = '123';
-      customTags['postStatus'] = '123';
-
-
-      customTags['authorId'] = '123';
-      customTags['authorName'] = 'Nur Hasan';
-      customTags['authorFirstName'] = 'Nur';
-      customTags['authorLastName'] = 'Hasan';
-      customTags['authorDescription'] = 'Hasan';
-
-      customTags['excerpt'] = 'Here is the post excerpt';
-
-      customTags['rankmathTitle'] = 'Hasan';
-      customTags['rankmathPermalink'] = 'Hasan';
-      customTags['rankmathExcerpt'] = 'Hasan';
-      customTags['rankmathFocusKeyword'] = 'Hasan';
-      customTags['rankmathFocusKeywords'] = 'Hasan';
-
-      customTags['rankmathOrgname'] = 'Hasan';
-      customTags['rankmathOrgurl'] = 'Hasan';
-      customTags['rankmathOrglogo'] = 'Hasan';
-
-
-
-      customTags['siteTitle'] = '';
-      customTags['siteDescription'] = '';
-      customTags['siteTagline'] = '';
-
-      customTags['postMeta'] = '';
-
-      customTags['separator'] = '';
-      customTags['searchTerms'] = '';
-
-
-
-      customTags['counter'] = '1';
-
+      setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
     }, [clientId]);

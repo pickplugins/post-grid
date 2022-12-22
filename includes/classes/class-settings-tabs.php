@@ -615,7 +615,7 @@ if (!class_exists('settings_tabs_field')) {
         ?>
             <div class="item-wrap collapsible">
                 <div class="header">
-                    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><?php echo esc_html($remove_text); ?></span>
+                    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><?php echo wp_kses_post($remove_text); ?></span>
                     <?php
                     if ($sortable) :
                     ?>
@@ -684,7 +684,7 @@ if (!class_exists('settings_tabs_field')) {
                                 <?php if ($collapsible) : ?>
                                     <div class="header">
                                     <?php endif; ?>
-                                    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><?php echo esc_html($remove_text); ?></span>
+                                    <span class="remove" onclick="jQuery(this).parent().parent().remove()"><?php echo wp_kses_post($remove_text); ?></span>
                                     <?php if ($sortable) : ?>
                                         <span class="sort"><i class="fas fa-arrows-alt"></i></span>
                                     <?php endif; ?>
@@ -954,7 +954,7 @@ if (!class_exists('settings_tabs_field')) {
                                     <span class="button sort"><i class="fas fa-arrows-alt"></i></span>
                                 <?php endif; ?>
 
-                                <span class="button remove" onclick="jQuery(this).parent().remove()"><?php echo esc_html($remove_text); ?></span>
+                                <span class="button remove" onclick="jQuery(this).parent().remove()"><?php echo wp_kses_post($remove_text); ?></span>
                             </div>
                         <?php
                         endforeach;
@@ -975,7 +975,7 @@ if (!class_exists('settings_tabs_field')) {
                                 <span class="button sort"><i class="fas fa-arrows-alt"></i></span>
                             <?php endif; ?>
 
-                            <span class="button remove" onclick="jQuery(this).parent().remove()"><?php echo esc_html($remove_text); ?></span>
+                            <span class="button remove" onclick="jQuery(this).parent().remove()"><?php echo wp_kses_post($remove_text); ?></span>
                         </div>
                     <?php
 

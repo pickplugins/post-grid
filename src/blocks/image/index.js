@@ -188,7 +188,6 @@ registerBlockType("post-grid/image", {
 
     const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
 
-    const [customTags, setCustomTags] = useState({});
     const [loading, setLoading] = useState(false);
 
     const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
@@ -428,69 +427,12 @@ registerBlockType("post-grid/image", {
       generateBlockCssY()
 
 
-      customTags['currentYear'] = '2022';
-      customTags['currentMonth'] = '07';
-      customTags['currentDay'] = '27';
-      customTags['currentDate'] = '27';
-      customTags['currentTime'] = '27';
 
-      customTags['postPublishDate'] = '';
-      customTags['postModifiedDate'] = '';
-
-      customTags['termId'] = '';
-      customTags['termTitle'] = '';
-      customTags['termDescription'] = '';
-      customTags['termPostCount'] = '';
-
-      customTags['postTagTitle'] = 'First Tag Title';
-      customTags['postTagsTitle'] = 'First Tag Title';
-
-      customTags['postCategoryTitle'] = 'First Category Title';
-      customTags['postCategoriesTitle'] = 'First Categories Title';
+      blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': { "Desktop": "100%" } };
+      blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'height': { "Desktop": "auto" } };
 
 
-      customTags['postTermTitle'] = 'First Term Title';
-      customTags['postTermsTitle'] = 'List of all terms title';
-
-
-
-      customTags['postId'] = '';
-      customTags['postStatus'] = '';
-
-
-      customTags['authorId'] = '';
-      customTags['authorName'] = 'Nur Hasan';
-      customTags['authorFirstName'] = 'Nur';
-      customTags['authorLastName'] = 'Hasan';
-      customTags['authorDescription'] = 'Hasan';
-
-      customTags['excerpt'] = 'Here is the post excerpt';
-
-      customTags['rankmathTitle'] = 'Hasan';
-      customTags['rankmathPermalink'] = 'Hasan';
-      customTags['rankmathExcerpt'] = 'Hasan';
-      customTags['rankmathFocusKeyword'] = 'Hasan';
-      customTags['rankmathFocusKeywords'] = 'Hasan';
-
-      customTags['rankmathOrgname'] = 'Hasan';
-      customTags['rankmathOrgurl'] = 'Hasan';
-      customTags['rankmathOrglogo'] = 'Hasan';
-
-
-
-      customTags['siteTitle'] = '';
-      customTags['siteDescription'] = '';
-      customTags['siteTagline'] = '';
-
-      customTags['postMeta'] = '';
-
-      customTags['separator'] = '';
-      customTags['searchTerms'] = '';
-
-
-
-      customTags['counter'] = '1';
-
+      setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
     }, [clientId]);
@@ -1781,9 +1723,6 @@ registerBlockType("post-grid/image", {
               )}
 
 
-
-
-
               <PanelRow className='my-3'>
                 <label>Link To</label>
                 <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.linkTo.length == 0 ? 'Choose' : image.options.linkTo} options={[
@@ -2554,13 +2493,182 @@ registerBlockType("post-grid/image", {
 
 
               {(image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && postImage == null && (
-                <img src={MyImage} alt="Default Featured Image" />
+
+                <>
+
+                  <PanelRow>
+                    <label for="">Image Sources</label>
+                    <SelectControl
+                      label=""
+                      value={image.options.imgSrcType}
+                      options={[
+                        { label: 'Media', value: 'media' },
+                        { label: 'Custom Field', value: 'customField' },
+                        { label: 'Image Source URL', value: 'customUrl' },
+                        // { label: 'Image ID', value: 'imgId' },
+                      ]}
+                      onChange={(newVal) => {
+                        var options = { ...image.options, imgSrcType: newVal };
+                        setAttributes({ image: { ...image, options: options } });
+                      }
+
+                      }
+                    />
+                  </PanelRow>
+
+
+                  {image.options.imgSrcType == 'media' && (
+
+                    <>
+
+                      <div className='mt-5' for="">Choose Image</div>
+
+                      <MediaUploadCheck>
+                        <MediaUpload
+                          class="bg-blue-500"
+                          onSelect={(media) => {
+                            // media.id
+                            setCurrentPostImageId(media.id)
+
+                            var options = { ...image.options, srcUrl: media.url, srcId: media.id };
+                            setAttributes({ image: { ...image, options: options } });
+
+
+                          }
+
+
+                          }
+                          onClose={() => {
+                          }
+
+
+                          }
+
+                          allowedTypes={ALLOWED_MEDIA_TYPES}
+                          value={image.options.srcId}
+                          render={({ open }) => (
+
+                            <Button className='my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full' onClick={open}>Open Media Library</Button>
+
+
+                          )}
+                        />
+                      </MediaUploadCheck>
+
+                    </>
+
+                  )}
+
+
+
+                  {image.options.imgSrcType == 'customField' && (
+
+
+
+                    <>
+
+                      <PanelRow>
+                        <label for="">Custom Field Key</label>
+                        <InputControl
+                          className='mr-2'
+                          value={image.options.imgSrcMetaKey}
+                          onChange={(newVal) => {
+                            var options = { ...image.options, imgSrcMetaKey: newVal };
+                            setAttributes({ image: { ...image, options: options } });
+                          }}
+                        />
+                      </PanelRow>
+
+                      <PanelRow>
+                        <label for="">Metakey Type</label>
+                        <SelectControl
+                          label=""
+                          value={image.options.imgSrcMetaKeyType}
+                          options={[
+                            { label: 'ID', value: 'ID' },
+                            { label: 'URL', value: 'URL' },
+
+
+                          ]}
+                          onChange={(newVal) => {
+                            var options = { ...image.options, imgSrcMetaKeyType: newVal };
+                            setAttributes({ image: { ...image, options: options } });
+                          }
+
+                          }
+                        />
+                      </PanelRow>
+
+                    </>
+
+
+                  )}
+
+
+
+                </>
+
+
+
+
               )}
 
 
               {image.options.imgSrcType == 'customUrl' && image.options.srcUrl.length == 0 && (
                 <>
-                  <img src={MyImage} alt="Default Featured Image" />
+
+                  {image.options.imgSrcType == 'customUrl' && (
+
+                    <>
+                      <PanelRow>
+                        <label for="">Image URL</label>
+
+                        <div className='relative'>
+                          <Button className={(linkPickerSrcUrl) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                            setlinkPickerSrcUrl(prev => !prev);
+
+                          }}></Button>
+                          {image.options.srcUrl.length > 0 && (
+                            <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                              var options = { ...image.options, srcUrl: '' };
+                              setAttributes({ image: { ...image, options: options } });
+                              setlinkPickerSrcUrl(false);
+
+
+
+
+
+                            }}></Button>
+
+                          )}
+                          {linkPickerSrcUrl && (
+                            <Popover position="bottom right">
+                              <LinkControl settings={[]} value={image.options.srcUrl} onChange={newVal => {
+
+                                var options = { ...image.options, srcUrl: newVal.url };
+                                setAttributes({ image: { ...image, options: options } });
+
+
+                                setImageObj({ ...imageObj, src: newVal.url });
+
+
+                              }} />
+
+                              <div className='p-2'><span className='font-bold'>Image Source URL:</span> {(image.options.srcUrl.length != 0) ? image.options.srcUrl : 'No link'} </div>
+                            </Popover>
+
+                          )}
+
+
+                        </div>
+                      </PanelRow>
+
+                    </>
+
+
+                  )}
                 </>
               )}
 

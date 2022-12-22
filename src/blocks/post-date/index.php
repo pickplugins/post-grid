@@ -81,7 +81,7 @@ class PGBlocPostDate
                         "options" => [
                             "library" => "fontAwesome",
                             "srcType" => "class",
-                            "iconSrc" => "",
+                            "iconSrc" => "far fa-calendar-alt",
                             "position" => "beforePostDate",
                             "class" => "postdate-icon"
                         ],
@@ -299,8 +299,6 @@ class PGBlocPostDate
         ob_start();
 
 
-
-
         if (!empty($wrapperTag)) :
 
 ?>
@@ -331,9 +329,7 @@ class PGBlocPostDate
                     </a>
 
                 <?php else : ?>
-                    <?php if ($iconPosition == 'beforePostDate') : ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
+
                     <span class='postDate' <?php echo esc_attr($linkAttrStrpostDate); ?>>
                         <?php if ($iconPosition == 'beforePostDate') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
@@ -343,9 +339,7 @@ class PGBlocPostDate
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
                     </span>
-                    <?php if ($iconPosition == 'beforePostDate') : ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
+
 
                 <?php endif; ?>
 
@@ -390,7 +384,7 @@ class PGBlocPostDate
                     <?php if ($iconPosition == 'beforePostDate') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
-                    <?php echo wp_kses_post($formatedPostDate); ?>
+                    <?php echo wp_kses_post($formatedPostDate); ?>C
                     <?php if ($iconPosition == 'afterPostDate') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>

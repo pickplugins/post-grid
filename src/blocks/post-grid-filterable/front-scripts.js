@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             var activeFilter = postgridargsObj.activeFilter
             var activeFilterSlug = activeFilter.slug
             var perPage = postgridargsObj.perPage
+            var logicBetweenGroups = postgridargsObj.logicBetweenGroups
+            var logicWithinGroup = postgridargsObj.logicWithinGroup
+            var multifilter = postgridargsObj.multifilter
 
 
             activeFilterSlug = (activeFilterSlug.length == 0) ? 'all' : activeFilterSlug;
@@ -63,9 +66,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 },
 
                 multifilter: {
-                    enable: true,
-                    logicWithinGroup: 'and',
-                    //logicBetweenGroups: 'and',
+                    enable: multifilter,
+                    logicWithinGroup: logicWithinGroup,
+                    logicBetweenGroups: logicBetweenGroups,
                 },
 
                 load: {

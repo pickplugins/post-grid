@@ -3,7 +3,7 @@
 Plugin Name: Post Grid Combo
 Plugin URI: https://www.pickplugins.com/post-grid
 Description: Post Grid Combo is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.14
+Version: 2.2.17
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid Combo');
-            define('post_grid_version', '2.2.14');
+            define('post_grid_version', '2.2.17');
             define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
 
 
@@ -49,7 +49,6 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/post-taxonomies/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-author-fields/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-date/index.php');
-
             require_once(post_grid_plugin_dir . 'src/blocks/accordion/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/tabs/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/terms-list/index.php');
@@ -61,7 +60,8 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/post-meta/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-grid-filterable/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/shortcode/index.php');
-
+            require_once(post_grid_plugin_dir . 'src/blocks/social-share/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/breadcrumb/index.php');
 
 
             $postGridCss = [];

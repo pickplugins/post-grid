@@ -791,7 +791,11 @@ class PGBlockPostGridFilterable
         $filterableShowClear = isset($filterableOptions['showClear']) ? $filterableOptions['showClear'] : 'no';
         $filterablePerPage = isset($filterableOptions['perPage']) ? $filterableOptions['perPage'] : 6;
 
+        $logicWithinGroup = isset($filterableOptions['logicWithinGroup']) ? $filterableOptions['logicWithinGroup'] : 'or';
+        $logicBetweenGroups = isset($filterableOptions['logicBetweenGroups']) ? $filterableOptions['logicBetweenGroups'] : 'and';
+        $multifilter = isset($filterableOptions['multifilter']) ? (bool) $filterableOptions['multifilter'] : true;
 
+        //var_dump($multifilter);
 
         $activeFilter = isset($attributes['activeFilter']) ? $attributes['activeFilter'] : [];
         $activeFilterOptions = isset($activeFilter['options']) ? $activeFilter['options'] : [];
@@ -979,6 +983,10 @@ class PGBlockPostGridFilterable
             'lazyLoad' => ['enable' => $lazyLoadEnable],
             'activeFilter' => ['slug' => $activeFilterSlug],
             'perPage' => $filterablePerPage,
+            'logicWithinGroup' => $logicWithinGroup,
+            'logicBetweenGroups' => $logicBetweenGroups,
+            'multifilter' => $multifilter,
+
 
         ];
 
@@ -1021,15 +1029,10 @@ class PGBlockPostGridFilterable
 
                     ?>
                         <div class="filterable-group" data-filter-group data-logic="OR">
-
                             <?php if ($filterableShowAll == 'yes') : ?>
                                 <span class="pg-filter pg-filter-<?php echo esc_attr($blockId); ?>" data-filter="all"><?php echo 'All'; ?></span>
                             <?php endif; ?>
-
-
-
                         </div>
-
                         <?php
 
 
@@ -1069,7 +1072,7 @@ class PGBlockPostGridFilterable
                                             $itemTitle = isset($item['title']) ? $item['title'] : '';
                                             $itemCount = isset($item['count']) ? $item['count'] : '';
                                     ?>
-                                        <span class="pg-filter pg-filter-<?php echo  esc_attr($blockId); ?>" data-filter="<?php echo  '.' . esc_attr($itemSlug); ?>">
+                                        <span class="pg-filter pg-filter-<?php echo  esc_attr($blockId); ?>" <?php if ($multifilter) : ?> data-toggle="<?php echo  '.' . esc_attr($itemSlug); ?>" <?php else : ?> data-filter="<?php echo  '.' . esc_attr($itemSlug); ?>" <?php endif; ?>>
                                             <?php echo esc_html($itemTitle) ?>
                                             <?php echo ($groupshowPostCount == 'yes') ?  '(' . esc_html($itemCount) . ')' : '' ?>
                                         </span>

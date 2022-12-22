@@ -65,9 +65,10 @@ import './blocks/layer'
 import './blocks/accordion'
 import './blocks/tabs'
 import './blocks/list'
+import './blocks/breadcrumb'
 
 import './blocks/shortcode'
-import './blocks/social-share-x'
+import './blocks/social-share'
 
 
 

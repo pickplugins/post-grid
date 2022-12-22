@@ -112,7 +112,7 @@ registerBlockType("post-grid/post-date", {
     icon: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: 'beforePostDate', /*before, after, prefix, postfix */ class: 'postdate-icon', },
+        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'far fa-calendar-alt', position: 'beforePostDate', /*before, after, prefix, postfix */ class: 'postdate-icon', },
 
         styles:
         {
@@ -2167,6 +2167,7 @@ registerBlockType("post-grid/post-date", {
         <>
 
 
+
           {wrapper.options.tag && (
             <CustomTag className={[blockId]}>
 
@@ -2181,7 +2182,6 @@ registerBlockType("post-grid/post-date", {
               {icon.options.position == 'afterPrefix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
               )}
-
 
               {postDate.options.linkTo.length > 0 && (
                 <a className='postDate' onClick={handleLinkClick}  {...linkAttrItems} target={postDate.options.linkTarget} href={postUrl}>
@@ -2198,11 +2198,18 @@ registerBlockType("post-grid/post-date", {
 
 
               {postDate.options.linkTo.length == 0 && (
-                postDateEdited
+                <>
+                  {icon.options.position == 'beforePostDate' && (
+                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                  )}
+
+                  {postDateEdited}
+
+                  {icon.options.position == 'afterPostDate' && (
+                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                  )}
+                </>
               )}
-
-
-
 
               {icon.options.position == 'beforePostfix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
@@ -2247,10 +2254,12 @@ registerBlockType("post-grid/post-date", {
                   )}
                 </a>
               )}
+
+
               {postDate.options.linkTo.length == 0 && (
 
                 <div className={[blockId]}>
-                  B
+
                   {icon.options.position == 'beforePostDate' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
@@ -2265,19 +2274,7 @@ registerBlockType("post-grid/post-date", {
               )}
 
             </>
-
-
-
-
           )}
-
-
-
-
-
-
-
-
         </>
       ]
 

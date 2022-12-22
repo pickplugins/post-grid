@@ -783,8 +783,13 @@ function post_grid_loop_bottom_pagination($args, $post_grid_wp_query)
     $post_grid_options = $args['options'];
 
     $pagination_type = isset($post_grid_options['nav_bottom']['pagination_type']) ? $post_grid_options['nav_bottom']['pagination_type'] : 'normal';
+    $grid_type = !empty($post_grid_options['grid_type']) ? $post_grid_options['grid_type'] : 'grid';
+
+
 
     if ($pagination_type == 'none') return;
+
+$pagination_type = ($grid_type == 'filterable') ? 'jquery' : $pagination_type;
 
 ?>
     <div class="pagination">

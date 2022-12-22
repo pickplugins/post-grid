@@ -52,7 +52,7 @@ registerBlockType("post-grid/post-tags", {
       type: 'object',
       default: {
 
-        options: { class: 'inline-block' },
+        options: { class: '' },
         styles:
         {
           textAlign: {},
@@ -69,7 +69,7 @@ registerBlockType("post-grid/post-tags", {
       type: 'object',
       default: {
 
-        options: { prefix: '', postfix: '', maxCount: 99, postCount: false, class: ' inline-block', linkTarget: '', linkAttr: [], },
+        options: { prefix: '', postfix: '', maxCount: 99, postCount: false, class: ' item', linkTarget: '', linkAttr: [], },
         styles:
         {
           textAlign: {},

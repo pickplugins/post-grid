@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 6.1.1
-	Stable tag: 2.2.14
+	Stable tag: 2.2.17
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -246,6 +246,24 @@ then paste this shortcode anywhere in your page to display grid<br />
 8. screenshot-8
 
 == Changelog ==
+
+	= 2.2.17 =
+    * 2022-12-20 - fix - Old layout style issue fixed.
+
+	= 2.2.16 =
+    * 2022-12-20 - fix - Post date icon issue fixed.
+    * 2022-12-20 - fix - Old layout post title html supprot added.
+
+	= 2.2.15 =
+    * 2022-12-20 - add - New block social share added.
+    * 2022-12-20 - fix - Post Grid Filterable - Multiilter issue fixed.
+    * 2022-12-20 - fix -On 'Post Categories, Post Tags, Post taxonomies' block, the item color isn't generating both the front and back end.
+    * 2022-12-20 - fix - On the feature image block & Image, default width:100% and height:auto isn't working on the first block initiate.
+    * 2022-12-20 - fix - 'Post Date' block, icon issue fixed.
+    * 2022-12-20 - fix - 'Post Title' block, font size breaking issue fixed.
+    * 2022-12-20 - fix - 'post grid' block  loop item border or box-shadow empty breaking issue fixed.
+
+
 
 	= 2.2.14 =
     * 2022-12-11 - add - New block shortcode added.

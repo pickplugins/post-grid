@@ -103,13 +103,13 @@ registerBlockType("post-grid/post-title", {
           padding: {},
           margin: {},
 
+          fontFamily: {},
           fontSize: {}, //{ val: '18', unit: 'px' }
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontFamily: {},
           fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
           textTransform: {},
+          textDecoration: {}, //overline, line-through, underline
         },
       },
     },
@@ -955,29 +955,20 @@ registerBlockType("post-grid/post-title", {
 
       setAttributes({ postTitle: { ...postTitle, styles: typoX } });
 
-      var newValuesObjX = {};
-
 
       if (typoX.fontFamily[breakPointX] != undefined) {
-
         var fontFamilyX = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector]['font-family'] : {};
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-family': fontFamilyX };
-
       }
 
 
 
       if (typoX.fontSize[breakPointX] != undefined) {
-
         var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
         var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector]['font-size'] : {};
-
-
+        var styles = (blockCssY.items[titleLinkSelector] == undefined) ? {} : blockCssY.items[titleLinkSelector];
+        var fontSizeX = (styles['font-size'] == undefined) ? {} : styles['font-size'];
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        //blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-size': fontSizeX };
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-size': fontSizeX };
 
       }
@@ -985,63 +976,42 @@ registerBlockType("post-grid/post-title", {
 
 
       if (typoX.lineHeight[breakPointX] != undefined) {
-
         var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 0;
         var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[titleLinkSelector]['line-height'] != undefined) ? blockCssY.items[titleLinkSelector]['line-height'] : {};
+        var styles = (blockCssY.items[titleLinkSelector] == undefined) ? {} : blockCssY.items[titleLinkSelector];
+        var lineHeightX = (styles['line-height'] == undefined) ? {} : styles['line-height'];
 
         lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'line-height': lineHeightX };
       }
       if (typoX.letterSpacing[breakPointX] != undefined) {
-
         var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
         var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
-
-
-
-        var letterSpacingX = (blockCssY.items[titleLinkSelector]['letter-spacing'] != undefined) ? blockCssY.items[titleLinkSelector]['letter-spacing'] : {};
+        var styles = (blockCssY.items[titleLinkSelector] == undefined) ? {} : blockCssY.items[titleLinkSelector];
+        var letterSpacingX = (styles['letter-spacing'] == undefined) ? {} : styles['letter-spacing'];
 
         letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'letter-spacing': letterSpacingX };
       }
 
       if (typoX.fontWeight[breakPointX] != undefined) {
-
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-weight': typoX.fontWeight };
-
       }
 
 
       if (typoX.textDecoration[breakPointX] != undefined) {
-
         var str = {};
-
         var textDecorationX = typoX.textDecoration[breakPointX];
         var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
         str[breakPointX] = textDecorationXStr;
-
-        //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'text-decoration': str };
 
       }
       if (typoX.textTransform[breakPointX] != undefined) {
-
         blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'text-transform': typoX.textTransform };
-
-
       }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
     }
 
     function onChangeBreakPoint(x, index) {
@@ -1728,7 +1698,7 @@ registerBlockType("post-grid/post-title", {
                     <div className='font-bold'>Typography</div>
                     <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </PanelRow>
-
+                  Hello
                   <Typography typo={postTitle.styles} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} obj={postTitle} />
 
 

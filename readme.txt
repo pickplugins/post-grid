@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 6.1.1
-	Stable tag: 2.2.17
+	Stable tag: 2.2.18
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -247,11 +247,16 @@ then paste this shortcode anywhere in your page to display grid<br />
 
 == Changelog ==
 
+
+	= 2.2.18 =
+    * 2022-12-23 - fix - added more elements for breadcrumb block.
+
 	= 2.2.17 =
-    * 2022-12-20 - fix - Old layout style issue fixed.
+    * 2022-12-22 - fix - Old layout style issue fixed.
+    * 2022-12-22 - add - New block breadcrumb added.
 
 	= 2.2.16 =
-    * 2022-12-20 - fix - Post date icon issue fixed.
+    * 2022-12-21 - fix - Post date icon issue fixed.
     * 2022-12-20 - fix - Old layout post title html supprot added.
 
 	= 2.2.15 =

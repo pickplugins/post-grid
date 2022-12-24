@@ -482,7 +482,7 @@ registerBlockType("post-grid/breadcrumb", {
         id: 'postDate', label: 'Post Date', customText: '%s', url: '',
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
-          format: '',
+          format: 'Y-m-d',
           showSeparator: true,
         },
         styles: {
@@ -548,10 +548,11 @@ registerBlockType("post-grid/breadcrumb", {
 
       },
       {
-        id: 'postAncestors', label: 'Post Ancestors', customText: '%s', url: '',
+        id: 'postAncestors', isPro: true, label: 'Post Ancestors', customText: '%s', url: '',
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
           showSeparator: true,
+          count: '',
         },
         styles: {
           textAlign: {},
@@ -611,7 +612,7 @@ registerBlockType("post-grid/breadcrumb", {
         },
       },
       {
-        id: 'postCategories', label: 'Post Categories', customText: '%s', url: '',
+        id: 'postCategories', isPro: true, label: 'Post Categories', customText: '%s', url: '',
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
           showSeparator: true,
@@ -629,7 +630,7 @@ registerBlockType("post-grid/breadcrumb", {
 
       },
       {
-        id: 'postTags', label: 'Post Tags', customText: '%s', url: '',
+        id: 'postTags', isPro: true, label: 'Post Tags', customText: '%s', url: '',
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
           showSeparator: true,
@@ -648,7 +649,7 @@ registerBlockType("post-grid/breadcrumb", {
 
 
       {
-        id: 'postTerm', label: 'Post Term', customText: '%s', url: '',
+        id: 'postTerm', isPro: true, label: 'Post Term', customText: '%s', url: '',
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
           taxonomy: '',
@@ -666,7 +667,7 @@ registerBlockType("post-grid/breadcrumb", {
       },
 
       {
-        id: 'termParent', label: 'Term Parent', customText: '%s', url: '',
+        id: 'postTerms', isPro: true, label: 'Post Terms', customText: '%s', url: '',
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
           taxonomy: '',
@@ -682,12 +683,14 @@ registerBlockType("post-grid/breadcrumb", {
         },
 
       },
+
+
+
 
       {
         id: 'termTitle', label: 'Term Title', customText: '%s', url: '',
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
-          taxonomy: '',
           showSeparator: true,
         },
         styles: {
@@ -700,9 +703,26 @@ registerBlockType("post-grid/breadcrumb", {
         },
 
       },
-
       {
-        id: 'termAncestors', label: 'Term Ancestors', customText: '%s', url: '',
+        id: 'termParents', isPro: true, label: 'Term Parents', customText: '%s', url: '',
+        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
+        options: {
+          showSeparator: true,
+          count: 0,
+
+        },
+        styles: {
+          textAlign: {},
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {},
+          display: {},
+        },
+
+      },
+      {
+        id: 'termAncestors', isPro: true, label: 'Term Ancestors', customText: '%s', url: '',
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
           taxonomy: '',
@@ -750,6 +770,38 @@ registerBlockType("post-grid/breadcrumb", {
           display: {},
         },
       },
+      {
+        id: 'wcCart', label: 'WooCommerce Cart', isPro: true, customText: '%s', url: '',
+        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
+        options: {
+          showSeparator: true,
+        },
+        styles: {
+          textAlign: {},
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {},
+          display: {},
+        },
+      },
+      {
+        id: 'wcCheckout', label: 'WooCommerce Checkout', isPro: true, customText: '%s', url: '',
+        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
+        options: {
+          showSeparator: true,
+        },
+        styles: {
+          textAlign: {},
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {},
+          display: {},
+        },
+      },
+
+
       {
         id: 'searchText', label: 'Search Text', customText: '%s', url: '',
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
@@ -804,6 +856,7 @@ registerBlockType("post-grid/breadcrumb", {
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
           showSeparator: true,
+          format: 'Y-m-d',
         },
         styles: {
           textAlign: {},
@@ -819,6 +872,7 @@ registerBlockType("post-grid/breadcrumb", {
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
           showSeparator: true,
+          format: 'Y-m',
         },
         styles: {
           textAlign: {},
@@ -835,6 +889,7 @@ registerBlockType("post-grid/breadcrumb", {
         siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
         options: {
           showSeparator: true,
+          format: 'Y',
         },
         styles: {
           textAlign: {},
@@ -1495,6 +1550,61 @@ registerBlockType("post-grid/breadcrumb", {
                               }}
                             />
                           </div>
+
+                          {(item.id == 'postTerms' || item.id == 'postTerm') && (
+                            <div className='my-3'>
+                              <label for="">Taxonomy</label>
+                              <InputControl
+                                value={item.options.taxonomy}
+                                onChange={(newVal) => {
+                                  elements.items[index].options.taxonomy = newVal
+                                  setAttributes({ elements: { ...elements, items: elements.items } });
+                                }}
+                              />
+                            </div>
+                          )}
+
+                          {(item.id == 'termParents' || item.id == 'postAncestors') && (
+                            <>
+                              <div className='my-3'>
+                                <label for="">Max Count</label>
+                                <InputControl
+                                  value={item.options.count}
+                                  onChange={(newVal) => {
+                                    elements.items[index].options.count = newVal
+                                    setAttributes({ elements: { ...elements, items: elements.items } });
+                                  }}
+                                />
+                                <p>Use <code>-</code> (negetive sign) to count from end.</p>
+                              </div>
+
+
+                            </>
+
+
+
+
+
+
+
+                          )}
+
+
+                          {(item.id == 'dateText' || item.id == 'monthText' || item.id == 'yearText' || item.id == 'postDate' || item.id == 'postDay' || item.id == 'postMonth' || item.id == 'postYear') && (
+                            <div className='my-3'>
+                              <label for="">Date Format</label>
+                              <InputControl
+                                value={item.options.format}
+                                onChange={(newVal) => {
+                                  elements.items[index].options.format = newVal
+                                  setAttributes({ elements: { ...elements, items: elements.items } });
+                                }}
+                              />
+                            </div>
+                          )}
+
+
+
 
                           <PanelRow>
                             <label for="">Choose Icon</label>

@@ -69,6 +69,8 @@ import './blocks/breadcrumb'
 
 import './blocks/shortcode'
 import './blocks/social-share'
+import './blocks/archive-title'
+import './blocks/archive-description'
 
 
 

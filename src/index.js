@@ -66,12 +66,11 @@ import './blocks/accordion'
 import './blocks/tabs'
 import './blocks/list'
 import './blocks/breadcrumb'
-
 import './blocks/shortcode'
 import './blocks/social-share'
 import './blocks/archive-title'
 import './blocks/archive-description'
-
+import './blocks/post-comment-count'
 
 
 

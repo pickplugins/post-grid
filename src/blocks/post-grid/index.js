@@ -2666,13 +2666,11 @@ registerBlockType("post-grid/post-grid", {
                             <div
                               className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm'
                               onClick={(_ev) => {
-
                                 var itemData = queryArgs.items[index];
                                 var xx = itemData.val.splice(j, 1);
                                 queryArgs.items[index].val = itemData.val;
                                 setAttributes({ queryArgs: { items: queryArgs.items } });
                               }}
-
                             >Remove</div>
 
 
@@ -2705,6 +2703,23 @@ registerBlockType("post-grid/post-grid", {
                               return (
 
                                 <div className='border-b border-solid border-gray-300 py-3'>
+
+                                  <div
+                                    className='cursor-pointer block text-right mb-2 px-3 py-1 text-white bg-red-600 text-sm'
+                                    onClick={(_ev) => {
+                                      var itemData = queryArgs.items[index];
+                                      var fields = itemData.val[j].fields
+                                      var xx = itemData.val[j].fields.splice(k, 1);
+
+                                      console.log(fields);
+
+
+                                      queryArgs.items[index].val = itemData.val;
+                                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                                    }}
+                                  >Remove</div>
+
+
 
                                   <InputControl
                                     label="Custom field key"
@@ -2775,8 +2790,18 @@ registerBlockType("post-grid/post-grid", {
                                       options={[
 
 
+                                        { label: '=', value: '=' },
+                                        { label: '!=', value: '!=' },
+                                        { label: '>', value: '>' },
+                                        { label: '>=', value: '>=' },
+                                        { label: '<', value: '<' },
+                                        { label: '<=', value: '<=' },
+                                        { label: 'LIKE', value: 'LIKE' },
+                                        { label: 'NOT LIKE', value: 'NOT LIKE' },
                                         { label: 'IN', value: 'IN' },
                                         { label: 'NOT IN', value: 'NOT IN' },
+                                        { label: 'BETWEEN', value: 'BETWEEN' },
+                                        { label: 'NOT BETWEEN', value: 'NOT BETWEEN' },
                                         { label: 'EXISTS', value: 'EXISTS' },
                                         { label: 'NOT EXISTS', value: 'NOT EXISTS' },
                                       ]}
@@ -3387,7 +3412,7 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-            {(item.id == 'metaKey' || item.id == 's' || item.id == 'metaValue' || item.id == 'metaValueNum' || item.id == 'metaCompare' || item.id == 'year' || item.id == 'monthnum' || item.id == 'w' || item.id == 'day' || item.id == 'hour' || item.id == 'minute' || item.id == 'second' || item.id == 'm' || item.id == 'author' || item.id == 'authorName' || item.id == 'tag' || item.id == 'tagId' || item.id == 'cat' || item.id == 'categoryName' || item.id == 'p' || item.id == 'name' || item.id == 'pageId' || item.id == 'pagename' || item.id == 'postParent' || item.id == 'postsPerPage' || item.id == 'paged' || item.id == 'offset' || item.id == 'postsPerArchivePage' || item.id == 'perm') &&
+            {(item.id == 'metaKey' || item.id == 's' || item.id == 'metaValue' || item.id == 'metaValueNum' || item.id == 'year' || item.id == 'monthnum' || item.id == 'w' || item.id == 'day' || item.id == 'hour' || item.id == 'minute' || item.id == 'second' || item.id == 'm' || item.id == 'author' || item.id == 'authorName' || item.id == 'tag' || item.id == 'tagId' || item.id == 'cat' || item.id == 'categoryName' || item.id == 'p' || item.id == 'name' || item.id == 'pageId' || item.id == 'pagename' || item.id == 'postParent' || item.id == 'postsPerPage' || item.id == 'paged' || item.id == 'offset' || item.id == 'postsPerArchivePage' || item.id == 'perm') &&
 
               <div >
                 <InputControl
@@ -3409,57 +3434,76 @@ registerBlockType("post-grid/post-grid", {
               </div>
 
             }
+            {item.id == 'metaCompare' &&
+              <div >
 
+                <SelectControl
+                  style={{ margin: 0 }}
+                  label=""
+
+                  value={item.val}
+                  options={[
+                    { label: '=', value: '=' },
+                    { label: '!=', value: '!=' },
+                    { label: '>', value: '>' },
+                    { label: '>=', value: '>=' },
+                    { label: '<', value: '<' },
+                    { label: '<=', value: '<=' },
+                    { label: 'LIKE', value: 'LIKE' },
+                    { label: 'NOT LIKE', value: 'NOT LIKE' },
+                    { label: 'IN', value: 'IN' },
+                    { label: 'NOT IN', value: 'NOT IN' },
+                    { label: 'BETWEEN', value: 'BETWEEN' },
+                    { label: 'NOT BETWEEN', value: 'NOT BETWEEN' },
+                    { label: 'NOT EXISTS', value: 'NOT EXISTS' },
+                    { label: 'REGEXP', value: 'REGEXP' },
+                    { label: 'NOT REGEXP', value: 'NOT REGEXP' },
+                    { label: 'RLIKE', value: 'RLIKE' },
+
+
+
+                  ]}
+                  onChange={(newVal) => {
+                    updateQueryPram(newVal, index)
+
+                  }}
+                />
+
+              </div>
+            }
 
             {(item.id == 'postPassword') &&
 
               <div>
-
                 <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryArgs"}>
                   <p> <span className='underline'>Post Parent, Post Password</span> Only avilable in Premium</p>
                 </PGproWrapper>
-
-
-
                 <InputControl
                   value={item.val}
                   onChange={(newVal) => updateQueryPram(newVal, index)}
                 />
-
-
               </div>
 
             }
 
 
             {(item.id == 'postNameIn' || item.id == 'authorIn' || item.id == 'authorNotIn' || item.id == 'postNotIn' || item.id == 'postIn' || item.id == 'postParentNotIn' || item.id == 'tagNotIn' || item.id == 'tagAnd' || item.id == 'tagIn' || item.id == 'postParentIn' || item.id == 'tagSlugIn' || item.id == 'tagSlugAnd' || item.id == 'categoryNotIn' || item.id == 'categoryIn' || item.id == 'categoryAnd') &&
-
               <div>
-
                 <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryArgs"}>
                   <p>Only avilable in Premium</p>
                 </PGproWrapper>
-
-
-
-
-
                 <InputControl
                   value={item.val}
                   placeholder="Comma separated"
                   onChange={(newVal) => updateQueryPram(newVal, index)}
                 />
-
-
               </div>
 
             }
-
             <div className={item.id == 'postNameIndd' ? '' : 'hidden'}>
               <div
                 className='cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm'
                 onClick={(_ev) => {
-
                   var itemData = queryArgs.items[index];
 
                   var val = itemData.val.concat({ slug: '' });
@@ -3468,19 +3512,15 @@ registerBlockType("post-grid/post-grid", {
                   setAttributes({ queryArgs: { items: queryArgs.items } });
                 }}
               >Add</div>
-
-
             </div>
 
             {item.id == 'commentCount' &&
               <div >
-
                 <InputControl
                   value={item.val.value}
                   placeholder="Comment Count, Ex: 25"
                   onChange={(newVal) => updateQueryPram({ value: newVal, compare: item.val.compare }, index)}
                 />
-
                 <SelectControl
                   style={{ margin: 0 }}
                   label=""
@@ -3499,6 +3539,9 @@ registerBlockType("post-grid/post-grid", {
 
               </div>
             }
+
+
+
 
 
             {item.id == 'postMimeType' &&

@@ -34,7 +34,15 @@ class BlockPostGridRest
                 'permission_callback' => '__return_true',
             )
         );
-
+        register_rest_route(
+            'post-grid/v2',
+            '/get_comment_count',
+            array(
+                'methods'  => 'POST',
+                'callback' => array($this, 'get_comment_count'),
+                'permission_callback' => '__return_true',
+            )
+        );
 
         register_rest_route(
             'post-grid/v2',
@@ -466,6 +474,40 @@ class BlockPostGridRest
         die(wp_json_encode($response));
     }
 
+
+
+    /**
+     * Return get_comment_count
+     *
+     * @since 1.0.0
+     * @param WP_REST_Request $post_data Post data.
+     */
+    public function get_comment_count($post_data)
+    {
+
+        $post_id      = isset($post_data['id']) ? $post_data['id'] : '';
+        //$status    = isset($post_data['status']) ? $post_data['status'] : '';
+
+        error_log($post_id);
+
+        $response = [];
+
+        if (empty($post_id)) die(wp_json_encode($response));
+
+        $counts = wp_count_comments($post_id);
+
+        $response = $counts;
+
+
+
+
+
+
+
+
+
+        die(wp_json_encode($response));
+    }
 
 
     /**
@@ -919,7 +961,7 @@ class BlockPostGridRest
                     } elseif ($id == 'metaValue') {
                         $query_args['meta_value'] = $val;
                     } elseif ($id == 'metaValueNum') {
-                        $query_args['meta_value_num'] = $val;
+                        $query_args['meta_value_num'] = (int) $val;
                     } elseif ($id == 'metaCompare') {
                         $query_args['meta_compare'] = $val;
                     } elseif ($id == 'metaQuery') {
@@ -942,6 +984,7 @@ class BlockPostGridRest
         $posts = [];
         $responses = [];
 
+        error_log(serialize($query_args));
 
         $post_grid_wp_query = new WP_Query($query_args);
 

@@ -633,8 +633,19 @@ class PGBlockPostGrid
                 } elseif ($id == 'metaKey') {
                     $query_args['meta_key'] = $val;
                 } elseif ($id == 'metaValue') {
+
+
+                    error_log('metaValue');
+
+                    error_log($val);
+
                     $query_args['meta_value'] = $val;
                 } elseif ($id == 'metaValueNum') {
+
+                    error_log('metaValueNum');
+
+                    error_log($val);
+
                     $query_args['meta_value_num'] = $val;
                 } elseif ($id == 'metaCompare') {
                     $query_args['meta_compare'] = $val;

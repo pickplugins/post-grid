@@ -394,7 +394,7 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id)
                                     </span>
                                     <label><input type="checkbox" <?php if (!empty($checked)) echo 'checked'; ?> name="post_grid_meta_options[taxonomies][<?php echo esc_attr($taxonomy); ?>][checked]" value="<?php echo esc_attr($taxonomy); ?>" /> <?php echo esc_html($the_taxonomy->labels->name); ?>(<?php echo esc_html($taxonomy); ?>)</label>
                                 </div>
-                                <div class="options">
+                                <div class="options <?php echo ($taxonomy=='category') ? 'active':''; ?>">
                                     <?php
 
                                     $args = array(

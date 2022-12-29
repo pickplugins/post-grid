@@ -34563,8 +34563,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
 /* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
 /* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
 /* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
@@ -34576,15 +34576,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_css_text_align__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/css-text-align */ "./src/components/css-text-align/index.js");
 /* harmony import */ var _components_css_display__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/css-display */ "./src/components/css-display/index.js");
 /* harmony import */ var _components_css_cursor__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../components/css-cursor */ "./src/components/css-cursor/index.js");
-/* harmony import */ var _components_tutorials__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/tutorials */ "./src/components/tutorials/index.js");
-/* harmony import */ var _components_css_padding__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/css-padding */ "./src/components/css-padding/index.js");
-/* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
-/* harmony import */ var _query_presets__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./query-presets */ "./src/blocks/post-grid-filterable/query-presets.js");
-/* harmony import */ var _grid_layouts__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./grid-layouts */ "./src/blocks/post-grid-filterable/grid-layouts.js");
-/* harmony import */ var _queryprams__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./queryprams */ "./src/blocks/post-grid-filterable/queryprams.js");
-/* harmony import */ var _tutorials_links__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./tutorials-links */ "./src/blocks/post-grid-filterable/tutorials-links.js");
-/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
-/* harmony import */ var animejs_lib_anime_es_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! animejs/lib/anime.es.js */ "./node_modules/animejs/lib/anime.es.js");
+/* harmony import */ var _components_input_select__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/input-select */ "./src/components/input-select/index.js");
+/* harmony import */ var _components_tutorials__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/tutorials */ "./src/components/tutorials/index.js");
+/* harmony import */ var _components_css_padding__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../components/css-padding */ "./src/components/css-padding/index.js");
+/* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
+/* harmony import */ var _query_presets__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./query-presets */ "./src/blocks/post-grid-filterable/query-presets.js");
+/* harmony import */ var _grid_layouts__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./grid-layouts */ "./src/blocks/post-grid-filterable/grid-layouts.js");
+/* harmony import */ var _queryprams__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./queryprams */ "./src/blocks/post-grid-filterable/queryprams.js");
+/* harmony import */ var _tutorials_links__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./tutorials-links */ "./src/blocks/post-grid-filterable/tutorials-links.js");
+/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+/* harmony import */ var animejs_lib_anime_es_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! animejs/lib/anime.es.js */ "./node_modules/animejs/lib/anime.es.js");
 
 
 
@@ -34628,8 +34629,9 @@ var select = wp.data.select('core/block-editor');
 
 
 
+
 const ALLOWED_MEDIA_TYPES = ['image'];
-var queryPramsX = _queryprams__WEBPACK_IMPORTED_MODULE_25__["default"].map((x, i) => {
+var queryPramsX = _queryprams__WEBPACK_IMPORTED_MODULE_26__["default"].map((x, i) => {
   return {
     value: i,
     label: x.label,
@@ -34815,6 +34817,7 @@ var myStore = wp.data.select('postgrid-shop');
           logicBetweenGroups: '',
           multifilter: false,
           showSort: '',
+          filterToggle: 'no',
           showRandom: '',
           showAll: 'yes',
           showClear: '',
@@ -35646,8 +35649,8 @@ var myStore = wp.data.select('postgrid-shop');
       value: ''
     }];
 
-    for (var x in _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"]) {
-      var item = _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][x];
+    for (var x in _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"]) {
+      var item = _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][x];
       breakPointList.push({
         label: item.name,
         icon: item.icon,
@@ -37113,24 +37116,17 @@ var myStore = wp.data.select('postgrid-shop');
         initialOpen: false
       }, item.id == 'postType' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: item.id == 'postType' ? '' : 'hidden'
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-        style: {
-          height: '75px'
-        },
-        label: "",
-        multiple: true,
-        value: item.val,
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_input_select__WEBPACK_IMPORTED_MODULE_20__["default"], {
+        val: item.val,
         options: postTypes,
-        onChange: newVal => updateQueryPram(newVal, index)
+        multiple: true,
+        onChange: newVal => {
+          updateQueryPram(newVal, index);
+        }
       })), item.id == 'postStatus' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: item.id == 'postStatus' ? '' : 'hidden'
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-        style: {
-          height: '75px'
-        },
-        label: "",
-        multiple: true,
-        value: item.val,
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_input_select__WEBPACK_IMPORTED_MODULE_20__["default"], {
+        val: item.val,
         options: [{
           label: 'Publish',
           value: 'publish'
@@ -37159,7 +37155,10 @@ var myStore = wp.data.select('postgrid-shop');
           label: 'Any',
           value: 'any'
         }],
-        onChange: newVal => updateQueryPram(newVal, index)
+        multiple: true,
+        onChange: newVal => {
+          updateQueryPram(newVal, index);
+        }
       })), item.id == 'order' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: item.id == 'order' ? '' : 'hidden'
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
@@ -37178,13 +37177,8 @@ var myStore = wp.data.select('postgrid-shop');
         onChange: newVal => updateQueryPram(newVal, index)
       })), item.id == 'orderby' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: item.id == 'orderby' ? '' : 'hidden'
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-        style: {
-          height: '75px'
-        },
-        label: "",
-        multiple: true,
-        value: item.val,
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_input_select__WEBPACK_IMPORTED_MODULE_20__["default"], {
+        val: item.val,
         options: [{
           label: 'None',
           value: 'none'
@@ -37192,43 +37186,43 @@ var myStore = wp.data.select('postgrid-shop');
           label: 'ID',
           value: 'ID'
         }, {
-          label: 'author',
+          label: 'Author',
           value: 'author'
         }, {
-          label: 'title',
+          label: 'Title',
           value: 'title'
         }, {
-          label: 'name',
+          label: 'Name',
           value: 'name'
         }, {
-          label: 'type',
+          label: 'Type',
           value: 'type'
         }, {
-          label: 'date',
+          label: 'Date',
           value: 'date'
         }, {
-          label: 'modified',
+          label: 'Modified',
           value: 'modified'
         }, {
-          label: 'parent',
+          label: 'Parent',
           value: 'parent'
         }, {
-          label: 'rand',
+          label: 'Random',
           value: 'rand'
         }, {
-          label: 'comment_count',
+          label: 'Comment Count',
           value: 'comment_count'
         }, {
-          label: 'relevance',
+          label: 'Relevance',
           value: 'relevance'
         }, {
-          label: 'menu_order',
+          label: 'Menu Order',
           value: 'menu_order'
         }, {
-          label: 'meta_value',
+          label: 'Meta Value(String)',
           value: 'meta_value'
         }, {
-          label: 'meta_value_num',
+          label: 'Meta Value(Number)',
           value: 'meta_value_num'
         }, {
           label: 'post__in',
@@ -37240,7 +37234,10 @@ var myStore = wp.data.select('postgrid-shop');
           label: 'post_parent__in',
           value: 'post_parent__in'
         }],
-        onChange: newVal => updateQueryPram(newVal, index)
+        multiple: true,
+        onChange: newVal => {
+          updateQueryPram(newVal, index);
+        }
       })), item.id == 'taxQueryRelation' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: item.id == 'taxQueryRelation' ? '' : 'hidden'
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
@@ -38107,13 +38104,8 @@ var myStore = wp.data.select('postgrid-shop');
           value: item.val.value,
           compare: newVal
         }, index)
-      })), item.id == 'postMimeType' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-        style: {
-          margin: 0
-        },
-        label: "",
-        multiple: true,
-        value: item.val,
+      })), item.id == 'postMimeType' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_input_select__WEBPACK_IMPORTED_MODULE_20__["default"], {
+        val: item.val,
         options: [{
           label: 'image/jpeg',
           value: 'jpg|jpeg|jpe'
@@ -38127,7 +38119,10 @@ var myStore = wp.data.select('postgrid-shop');
           label: 'image/bmp',
           value: 'bmp'
         }],
-        onChange: newVal => updateQueryPram(newVal, index)
+        multiple: true,
+        onChange: newVal => {
+          updateQueryPram(newVal, index);
+        }
       })), (item.id == 'cacheResults' || item.id == 'nopaging' || item.id == 'hasPassword' || item.id == 'updatePostMetaCache' || item.id == 'updatePostTermCache') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
         style: {
           margin: 0
@@ -38165,7 +38160,7 @@ var myStore = wp.data.select('postgrid-shop');
 
     function addQueryPramX(_option, index) {
       var attrExist = false;
-      var data = _queryprams__WEBPACK_IMPORTED_MODULE_25__["default"][index];
+      var data = _queryprams__WEBPACK_IMPORTED_MODULE_26__["default"][index];
       var multiple = data.multiple;
       var isExist = queryArgs.items.map(item => {
         if (item.id == index) {
@@ -38195,8 +38190,8 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_29__["default"], {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_30__["default"]
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_30__["default"], {
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_31__["default"]
       })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
         className: "mx-2"
       }, title));
@@ -38393,7 +38388,7 @@ var myStore = wp.data.select('postgrid-shop');
     }, "Query Presets"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom right",
       variant: "secondary",
-      options: _query_presets__WEBPACK_IMPORTED_MODULE_23__["default"],
+      options: _query_presets__WEBPACK_IMPORTED_MODULE_24__["default"],
       buttonTitle: "Choose",
       onChange: addQueryPreset,
       values: ''
@@ -38438,7 +38433,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), grid.styles.gridTemplateColumns[breakPointX] != undefined && grid.styles.gridTemplateColumns[breakPointX].map((item, index) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
@@ -38560,7 +38555,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), grid.styles.gridTemplateRows[breakPointX] != undefined && grid.styles.gridTemplateRows[breakPointX].map((item, index) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
@@ -38652,7 +38647,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
       value: grid.styles.colGap[breakPointX] != undefined ? grid.styles.colGap[breakPointX].val : 1,
@@ -38733,7 +38728,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
       value: grid.styles.rowGap[breakPointX] != undefined ? grid.styles.rowGap[breakPointX].val : 1,
@@ -38941,7 +38936,7 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       })));
-    }), _grid_layouts__WEBPACK_IMPORTED_MODULE_24__["default"].map((x, _i) => {
+    }), _grid_layouts__WEBPACK_IMPORTED_MODULE_25__["default"].map((x, _i) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "cursor-pointer relative hover:bg-blue-200 my-3",
         onClick: _ev => {
@@ -38974,7 +38969,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: itemWrap.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -39009,7 +39004,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: itemWrap.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -39046,7 +39041,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -39062,7 +39057,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
       typo: itemWrap.styles,
@@ -39079,7 +39074,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -39093,7 +39088,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -39109,11 +39104,11 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       value: container.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -39152,11 +39147,11 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       value: container.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -39492,6 +39487,28 @@ var myStore = wp.data.select('postgrid-shop');
       }
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
+    }, "Enable Filter Toggle "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      label: "",
+      value: filterable.options.filterToggle,
+      options: [{
+        label: 'Yes',
+        value: 'yes'
+      }, {
+        label: 'no',
+        value: 'no'
+      }],
+      onChange: newVal => {
+        var options = { ...filterable.options,
+          filterToggle: newVal
+        };
+        setAttributes({
+          filterable: { ...filterable,
+            options: options
+          }
+        });
+      }
+    })), filterable.options.multifilter && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
     }, "Logic Within Group "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       label: "",
       value: filterable.options.logicWithinGroup,
@@ -39512,7 +39529,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), filterable.options.multifilter && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Logic Between Groups "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
       label: "",
@@ -39642,7 +39659,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: filterable.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -39677,7 +39694,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: filterable.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -39772,7 +39789,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -39786,7 +39803,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -39801,7 +39818,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: activeFilter.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -39836,7 +39853,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: activeFilter.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -39873,7 +39890,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -39887,7 +39904,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -39902,7 +39919,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: filterGroup.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -39937,7 +39954,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: filterGroup.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -40003,7 +40020,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -40017,7 +40034,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -40165,7 +40182,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: pagination.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -40200,7 +40217,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: pagination.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -40266,7 +40283,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -40280,7 +40297,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -40295,7 +40312,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: paginationItem.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -40330,7 +40347,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: paginationItem.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -40365,7 +40382,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Active Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
       color: paginationItemActive.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_28__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -40431,7 +40448,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -40445,7 +40462,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
       label: "",
@@ -40461,7 +40478,7 @@ var myStore = wp.data.select('postgrid-shop');
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_22__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_23__["default"][breakPointX].icon,
       value: breakPointX
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
       typo: paginationItem.styles,
@@ -40635,8 +40652,8 @@ var myStore = wp.data.select('postgrid-shop');
       className: "",
       title: "Tutorials",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tutorials__WEBPACK_IMPORTED_MODULE_20__["default"], {
-      links: _tutorials_links__WEBPACK_IMPORTED_MODULE_26__["default"]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tutorials__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      links: _tutorials_links__WEBPACK_IMPORTED_MODULE_27__["default"]
     }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: [blockId]
     }, grid.styles.gridTemplateColumns[breakPointX] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -41560,8 +41577,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__);
 
-const gridLayouts = [{
+
+const gridLayoutsBasic = [{
   thumb: '',
   title: '3 Col, 0 Gap',
   data: {
@@ -42642,6 +42662,7 @@ const gridLayouts = [{
     fill: "black"
   }))
 }];
+let gridLayouts = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__.applyFilters)('gridLayouts', gridLayoutsBasic);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gridLayouts);
 
 /***/ }),
@@ -42661,40 +42682,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
-/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
-/* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
-/* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
-/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
-/* harmony import */ var _components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/pro-wrapper */ "./src/components/pro-wrapper/index.js");
-/* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/icon-picker */ "./src/components/icon-picker/index.js");
-/* harmony import */ var _components_mail_subscribe__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/mail-subscribe */ "./src/components/mail-subscribe/index.js");
-/* harmony import */ var _components_contact_support__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/contact-support */ "./src/components/contact-support/index.js");
-/* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
-/* harmony import */ var _components_css_text_align__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/css-text-align */ "./src/components/css-text-align/index.js");
-/* harmony import */ var _components_css_display__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/css-display */ "./src/components/css-display/index.js");
-/* harmony import */ var _components_tutorials__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../components/tutorials */ "./src/components/tutorials/index.js");
-/* harmony import */ var _components_css_padding__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/css-padding */ "./src/components/css-padding/index.js");
-/* harmony import */ var _components_css_outline__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/css-outline */ "./src/components/css-outline/index.js");
-/* harmony import */ var _components_css_border__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../components/css-border */ "./src/components/css-border/index.js");
-/* harmony import */ var _components_css_box_shadow__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../components/css-box-shadow */ "./src/components/css-box-shadow/index.js");
-/* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
-/* harmony import */ var _query_presets__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./query-presets */ "./src/blocks/post-grid/query-presets.js");
-/* harmony import */ var _grid_layouts__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./grid-layouts */ "./src/blocks/post-grid/grid-layouts.js");
-/* harmony import */ var _queryprams__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./queryprams */ "./src/blocks/post-grid/queryprams.js");
-/* harmony import */ var _tutorials_links__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./tutorials-links */ "./src/blocks/post-grid/tutorials-links.js");
-/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
-/* harmony import */ var animejs_lib_anime_es_js__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! animejs/lib/anime.es.js */ "./node_modules/animejs/lib/anime.es.js");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
+/* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
+/* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
+/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
+/* harmony import */ var _components_pro_wrapper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/pro-wrapper */ "./src/components/pro-wrapper/index.js");
+/* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/icon-picker */ "./src/components/icon-picker/index.js");
+/* harmony import */ var _components_mail_subscribe__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/mail-subscribe */ "./src/components/mail-subscribe/index.js");
+/* harmony import */ var _components_contact_support__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/contact-support */ "./src/components/contact-support/index.js");
+/* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
+/* harmony import */ var _components_css_text_align__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/css-text-align */ "./src/components/css-text-align/index.js");
+/* harmony import */ var _components_css_display__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../components/css-display */ "./src/components/css-display/index.js");
+/* harmony import */ var _components_tutorials__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/tutorials */ "./src/components/tutorials/index.js");
+/* harmony import */ var _components_css_padding__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/css-padding */ "./src/components/css-padding/index.js");
+/* harmony import */ var _components_css_outline__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../components/css-outline */ "./src/components/css-outline/index.js");
+/* harmony import */ var _components_css_border__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../components/css-border */ "./src/components/css-border/index.js");
+/* harmony import */ var _components_css_box_shadow__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../components/css-box-shadow */ "./src/components/css-box-shadow/index.js");
+/* harmony import */ var _components_input_select__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../components/input-select */ "./src/components/input-select/index.js");
+/* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
+/* harmony import */ var _query_presets__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./query-presets */ "./src/blocks/post-grid/query-presets.js");
+/* harmony import */ var _grid_layouts__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./grid-layouts */ "./src/blocks/post-grid/grid-layouts.js");
+/* harmony import */ var _queryprams__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./queryprams */ "./src/blocks/post-grid/queryprams.js");
+/* harmony import */ var _pagination_types__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./pagination-types */ "./src/blocks/post-grid/pagination-types.js");
+/* harmony import */ var _tutorials_links__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./tutorials-links */ "./src/blocks/post-grid/tutorials-links.js");
+/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+/* harmony import */ var animejs_lib_anime_es_js__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! animejs/lib/anime.es.js */ "./node_modules/animejs/lib/anime.es.js");
+
 
 
 
@@ -42734,7 +42760,8 @@ var select = wp.data.select('core/block-editor');
 
 
 
- //import queryPrams from '../../queryprams'
+
+
 
 
 
@@ -42743,7 +42770,7 @@ var select = wp.data.select('core/block-editor');
 
 
 const ALLOWED_MEDIA_TYPES = ['image'];
-var queryPramsX = _queryprams__WEBPACK_IMPORTED_MODULE_27__["default"].map((x, i) => {
+var queryPramsX = _queryprams__WEBPACK_IMPORTED_MODULE_29__["default"].map((x, i) => {
   return {
     value: i,
     label: x.label,
@@ -43214,7 +43241,7 @@ var myStore = wp.data.select('postgrid-shop');
   },
   category: "post-grid",
   edit: function (props) {
-    const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)();
+    const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.useBlockProps)();
     var attributes = props.attributes;
     var clientId = props.clientId;
     var setAttributes = props.setAttributes;
@@ -43253,6 +43280,24 @@ var myStore = wp.data.select('postgrid-shop');
     const paginationWrapSelector = blockClass + ' .pagination';
     const paginationItemSelector = blockClass + ' .pagination .page-numbers';
     const paginationItemActiveSelector = blockClass + ' .pagination .page-numbers.current';
+    var [debounce, setDebounce] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(null); // Using the hook.
+
+    const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore != null ? myStore.getBreakPoint() : 'Desktop');
+    const [postGridData, setPostGridData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(window.PostGridPluginData);
+    const [proInfo, setproInfo] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore != null ? myStore.getproinfo() : {});
+    const [clientData, setClientData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({});
+    var clientDataX = myStore != null ? myStore.getclientdata() : '';
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+      setPostGridData(window.PostGridPluginData);
+    }, [window.PostGridPluginData]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+      setClientData(myStore != null ? myStore.getclientdata() : '');
+    }, [clientDataX]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+      var proinfo = myStore != null ? myStore.getproinfo() : {};
+      console.log(proinfo);
+      setproInfo(proinfo);
+    }, [proInfo]);
     const BLOCKS_TEMPLATE = [['post-grid/post-title', {}], ['post-grid/read-more', {}]];
     const columnPresets = [{
       label: '1 Column',
@@ -43590,7 +43635,7 @@ var myStore = wp.data.select('postgrid-shop');
 
     function importLayout(postData) {
       setTimeout(() => {
-        _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+        _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
           path: '/post-grid/v2/import_post_grid_template',
           method: 'POST',
           data: {
@@ -43600,45 +43645,15 @@ var myStore = wp.data.select('postgrid-shop');
           setlayoutImporting(false);
         });
       }, 2000);
-    }
-
-    var [debounce, setDebounce] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(null); // Using the hook.
-
-    const [breakPointX, setBreakPointX] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(myStore != null ? myStore.getBreakPoint() : 'Desktop');
-    const [postGridData, setPostGridData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(window.PostGridPluginData);
-    const [clientData, setClientData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({});
-    const paginationTypes = {
-      none: {
-        label: 'None',
-        value: 'none',
-        isPro: false
-      },
-      normal: {
-        label: 'Normal Pagination',
-        value: 'normal',
-        isPro: false
-      },
-      ajax: {
-        label: 'Ajax Pagination',
-        value: 'ajax',
-        isPro: true
-      },
-      next_previous: {
-        label: 'Next-Previous',
-        value: 'next_previous',
-        isPro: true
-      },
-      loadmore: {
-        label: 'Load More',
-        value: 'loadmore',
-        isPro: true
-      },
-      infinite: {
-        label: 'Infinite Load',
-        value: 'infinite',
-        isPro: true
-      }
-    }; // [
+    } // const paginationTypes = {
+    //   none: { label: 'None', value: 'none', isPro: false },
+    //   normal: { label: 'Normal Pagination', value: 'normal', isPro: false },
+    //   ajax: { label: 'Ajax Pagination', value: 'ajax', isPro: true },
+    //   next_previous: { label: 'Next-Previous', value: 'next_previous', isPro: true },
+    //   loadmore: { label: 'Load More', value: 'loadmore', isPro: true },
+    //   infinite: { label: 'Infinite Load', value: 'infinite', isPro: true },
+    // };
+    // [
     //       { label: 'None', value: 'none', isPro: false },
     //       { label: 'Normal Pagination', value: 'normal', isPro: false },
     //       { label: 'Ajax Pagination', value: 'ajax', isPro: true },
@@ -43646,18 +43661,12 @@ var myStore = wp.data.select('postgrid-shop');
     //       { label: 'Load More', value: 'loadmore', isPro: true },
     //       { label: 'Infinite Load', value: 'infinite', isPro: true },
     //     ]
-
-    var clientDataX = myStore != null ? myStore.getclientdata() : '';
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      setPostGridData(window.PostGridPluginData);
-    }, [window.PostGridPluginData]);
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      setClientData(myStore != null ? myStore.getclientdata() : '');
-    }, [clientDataX]); // var ItemNthCssadasd2 = grid.options.itemCss.map((x, i) => {
+    // var ItemNthCssadasd2 = grid.options.itemCss.map((x, i) => {
     //   return (
     //     `<style>.item:nth-child(${i + 1}){grid-column-start: ${x['grid-column-start']};grid-column-end: ${x['grid-column-end']};grid-row-start: ${x['grid-row-start']};grid-row-end: ${x['grid-row-end']};}</style>`
     //   )
     // });
+
 
     const {
       __experimentalSetPreviewDeviceType: setPreviewDeviceType
@@ -43668,8 +43677,8 @@ var myStore = wp.data.select('postgrid-shop');
       value: ''
     }];
 
-    for (var x in _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"]) {
-      var item = _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][x];
+    for (var x in _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"]) {
+      var item = _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][x];
       breakPointList.push({
         label: item.name,
         icon: item.icon,
@@ -43688,7 +43697,7 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     var postTypes = [];
-    const postTypesData = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_7__.useSelect)(select => select(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_8__.store).getPostTypes({
+    const postTypesData = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.useSelect)(select => select(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_9__.store).getPostTypes({
       per_page: -1
     }), []);
     postTypesData !== null && postTypesData.map(x => {
@@ -43709,7 +43718,7 @@ var myStore = wp.data.select('postgrid-shop');
       let {
         attsx
       } = _ref;
-      const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useInnerBlocksProps)({
+      const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.useInnerBlocksProps)({
         className: 'item'
       }, {
         template: attsx
@@ -43724,7 +43733,7 @@ var myStore = wp.data.select('postgrid-shop');
         isHidden,
         setActiveBlockContextId
       } = _ref2;
-      const blockPreviewProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.__experimentalUseBlockPreview)({
+      const blockPreviewProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.__experimentalUseBlockPreview)({
         blocks,
         props: {
           className: 'item'
@@ -44375,7 +44384,7 @@ var myStore = wp.data.select('postgrid-shop');
           val: item.val
         };
       });
-      _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+      _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
         path: '/post-grid/v2/get_posts',
         method: 'POST',
         data: {
@@ -44639,7 +44648,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       } else {
-        _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+        _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
           path: '/post-grid/v2/get_post_data',
           method: 'POST',
           data: {
@@ -44733,7 +44742,7 @@ var myStore = wp.data.select('postgrid-shop');
       setLayoutLoading(true);
 
       if (layoutData.source == 'saved') {
-        _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+        _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
           path: '/post-grid/v2/get_posts_layout',
           method: 'POST',
           data: {
@@ -44776,7 +44785,7 @@ var myStore = wp.data.select('postgrid-shop');
         page: queryLayouts.page,
         category: queryLayouts.category
       });
-      _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+      _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default()({
         path: '/post-grid/v2/get_posts_layout',
         method: 'POST',
         data: {
@@ -44830,7 +44839,7 @@ var myStore = wp.data.select('postgrid-shop');
     function generateQueryArgOptions(item, index) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: " "
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
         title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RemoveQueryPram, {
           title: item.label,
           index: index
@@ -44838,24 +44847,17 @@ var myStore = wp.data.select('postgrid-shop');
         initialOpen: false
       }, item.id == 'postType' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: item.id == 'postType' ? '' : 'hidden'
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-        style: {
-          minHeight: '75px'
-        },
-        label: "",
-        multiple: true,
-        value: item.val,
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_input_select__WEBPACK_IMPORTED_MODULE_25__["default"], {
+        val: item.val,
         options: postTypes,
-        onChange: newVal => updateQueryPram(newVal, index)
+        multiple: true,
+        onChange: newVal => {
+          updateQueryPram(newVal, index);
+        }
       })), item.id == 'postStatus' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: item.id == 'postStatus' ? '' : 'hidden'
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-        style: {
-          height: '75px'
-        },
-        label: "",
-        multiple: true,
-        value: item.val,
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_input_select__WEBPACK_IMPORTED_MODULE_25__["default"], {
+        val: item.val,
         options: [{
           label: 'Publish',
           value: 'publish'
@@ -44884,10 +44886,13 @@ var myStore = wp.data.select('postgrid-shop');
           label: 'Any',
           value: 'any'
         }],
-        onChange: newVal => updateQueryPram(newVal, index)
+        multiple: true,
+        onChange: newVal => {
+          updateQueryPram(newVal, index);
+        }
       })), item.id == 'order' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: item.id == 'order' ? '' : 'hidden'
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
         style: {
           margin: 0
         },
@@ -44903,13 +44908,8 @@ var myStore = wp.data.select('postgrid-shop');
         onChange: newVal => updateQueryPram(newVal, index)
       })), item.id == 'orderby' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: item.id == 'orderby' ? '' : 'hidden'
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-        style: {
-          height: '75px'
-        },
-        label: "",
-        multiple: true,
-        value: item.val,
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_input_select__WEBPACK_IMPORTED_MODULE_25__["default"], {
+        val: item.val,
         options: [{
           label: 'None',
           value: 'none'
@@ -44917,43 +44917,43 @@ var myStore = wp.data.select('postgrid-shop');
           label: 'ID',
           value: 'ID'
         }, {
-          label: 'author',
+          label: 'Author',
           value: 'author'
         }, {
-          label: 'title',
+          label: 'Title',
           value: 'title'
         }, {
-          label: 'name',
+          label: 'Name',
           value: 'name'
         }, {
-          label: 'type',
+          label: 'Type',
           value: 'type'
         }, {
-          label: 'date',
+          label: 'Date',
           value: 'date'
         }, {
-          label: 'modified',
+          label: 'Modified',
           value: 'modified'
         }, {
-          label: 'parent',
+          label: 'Parent',
           value: 'parent'
         }, {
-          label: 'rand',
+          label: 'Random',
           value: 'rand'
         }, {
-          label: 'comment_count',
+          label: 'Comment Count',
           value: 'comment_count'
         }, {
-          label: 'relevance',
+          label: 'Relevance',
           value: 'relevance'
         }, {
-          label: 'menu_order',
+          label: 'Menu Order',
           value: 'menu_order'
         }, {
-          label: 'meta_value',
+          label: 'Meta Value(String)',
           value: 'meta_value'
         }, {
-          label: 'meta_value_num',
+          label: 'Meta Value(Number)',
           value: 'meta_value_num'
         }, {
           label: 'post__in',
@@ -44965,10 +44965,13 @@ var myStore = wp.data.select('postgrid-shop');
           label: 'post_parent__in',
           value: 'post_parent__in'
         }],
-        onChange: newVal => updateQueryPram(newVal, index)
+        multiple: true,
+        onChange: newVal => {
+          updateQueryPram(newVal, index);
+        }
       })), item.id == 'taxQueryRelation' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: item.id == 'taxQueryRelation' ? '' : 'hidden'
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
         style: {
           margin: 0
         },
@@ -44982,12 +44985,8 @@ var myStore = wp.data.select('postgrid-shop');
           value: 'AND'
         }],
         onChange: newVal => updateQueryPram(newVal, index)
-      })), item.id == 'metaQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        utmUrl: "?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-metaQuery"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "underline"
-      }, "Meta Query"), " Only avilable in Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-        className: postGridData.license_status != 'active' ? '' : ''
+      })), item.id == 'metaQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+        className: proInfo.status != 'active' ? '' : ''
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm",
         onClick: _ev => {
@@ -45009,7 +45008,7 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       }, "Add"), item.val.map((x, j) => {
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
           title: "Meta Field",
           initialOpen: false
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -45024,7 +45023,7 @@ var myStore = wp.data.select('postgrid-shop');
               }
             });
           }
-        }, "Remove"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, "Relation"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+        }, "Remove"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, "Relation"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
           style: {
             margin: 0
           },
@@ -45059,7 +45058,6 @@ var myStore = wp.data.select('postgrid-shop');
               var itemData = queryArgs.items[index];
               var fields = itemData.val[j].fields;
               var xx = itemData.val[j].fields.splice(k, 1);
-              console.log(fields);
               queryArgs.items[index].val = itemData.val;
               setAttributes({
                 queryArgs: {
@@ -45067,7 +45065,7 @@ var myStore = wp.data.select('postgrid-shop');
                 }
               });
             }
-          }, "Remove"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+          }, "Remove"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
             label: "Custom field key",
             value: y.key,
             placeholder: "meta_key",
@@ -45082,7 +45080,7 @@ var myStore = wp.data.select('postgrid-shop');
                 }
               });
             }
-          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
             label: "Meta Value ",
             value: y.value,
             placeholder: "25",
@@ -45097,7 +45095,7 @@ var myStore = wp.data.select('postgrid-shop');
                 }
               });
             }
-          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
             style: {
               margin: 0
             },
@@ -45142,7 +45140,7 @@ var myStore = wp.data.select('postgrid-shop');
                 }
               });
             }
-          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
             style: {
               margin: 0
             },
@@ -45221,13 +45219,9 @@ var myStore = wp.data.select('postgrid-shop');
             });
           }
         }, "Add")));
-      }))), item.id == 'dateQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        utmUrl: "?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-dateQuery"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "underline"
-      }, "Date Query"), " Only avilable in Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+      }))), item.id == 'dateQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
         className: "my-3"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Add Arguments"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Add Arguments"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
         options: [{
           "value": "",
           "label": "Select..."
@@ -45386,7 +45380,7 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       })), item.val.map((x, j) => {
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
           title: x.id,
           initialOpen: false
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
@@ -45399,7 +45393,7 @@ var myStore = wp.data.select('postgrid-shop');
               }
             });
           }
-        }, "Delete"), (x.id == 'after' || x.id == 'before') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Year"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+        }, "Delete"), (x.id == 'after' || x.id == 'before') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Year"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
           placeholder: "",
           onChange: newVal => {
             //clearTimeout(debounce);
@@ -45411,7 +45405,7 @@ var myStore = wp.data.select('postgrid-shop');
               }
             }); //}, 1000);
           }
-        })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Month"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+        })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Month"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
           placeholder: "",
           onChange: newVal => {
             // clearTimeout(debounce);
@@ -45423,7 +45417,7 @@ var myStore = wp.data.select('postgrid-shop');
               }
             }); //}, 1000);
           }
-        })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Day"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+        })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Day"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
           placeholder: "",
           onChange: newVal => {
             clearTimeout(debounce);
@@ -45436,7 +45430,7 @@ var myStore = wp.data.select('postgrid-shop');
               });
             }, 1000);
           }
-        }))), x.id == 'inclusive' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+        }))), x.id == 'inclusive' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
           style: {
             margin: 0
           },
@@ -45455,7 +45449,7 @@ var myStore = wp.data.select('postgrid-shop');
               }
             });
           }
-        })), x.id == 'compare' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+        })), x.id == 'compare' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
           style: {
             margin: 0
           },
@@ -45504,7 +45498,7 @@ var myStore = wp.data.select('postgrid-shop');
               }
             });
           }
-        })), x.id == 'column' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+        })), x.id == 'column' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
           placeholder: "",
           onChange: newVal => {
             clearTimeout(debounce);
@@ -45517,7 +45511,7 @@ var myStore = wp.data.select('postgrid-shop');
               });
             }, 1000);
           }
-        })), x.id == 'relation' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+        })), x.id == 'relation' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
           style: {
             margin: 0
           },
@@ -45536,7 +45530,7 @@ var myStore = wp.data.select('postgrid-shop');
               }
             });
           }
-        })), (x.id == 'year' || x.id == 'month' || x.id == 'week' || x.id == 'day' || x.id == 'hour' || x.id == 'minute' || x.id == 'second') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+        })), (x.id == 'year' || x.id == 'month' || x.id == 'week' || x.id == 'day' || x.id == 'hour' || x.id == 'minute' || x.id == 'second') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
           label: "Value",
           placeholder: "",
           onChange: newVal => {
@@ -45549,7 +45543,7 @@ var myStore = wp.data.select('postgrid-shop');
               }
             }); //}, 1000);
           }
-        }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+        }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
           style: {
             margin: 0
           },
@@ -45600,12 +45594,8 @@ var myStore = wp.data.select('postgrid-shop');
             });
           }
         }))));
-      })), item.id == 'taxQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        utmUrl: "?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryargsTaxonomy"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "underline"
-      }, "Taxonomy Query"), " Only avilable in Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-        className: postGridData.license_status != 'active' ? '' : ''
+      })), item.id == 'taxQuery' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+        className: proInfo.status != 'active' ? '' : ''
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm",
         onClick: _ev => {
@@ -45627,7 +45617,7 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       }, "Add"), item.val.map((x, j) => {
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
           title: "Term",
           initialOpen: false
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -45642,7 +45632,7 @@ var myStore = wp.data.select('postgrid-shop');
               }
             });
           }
-        }, "Remove"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, "Terms Relation"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+        }, "Remove"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, "Terms Relation"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
           style: {
             margin: 0
           },
@@ -45671,7 +45661,7 @@ var myStore = wp.data.select('postgrid-shop');
         })), x.terms.map((y, k) => {
           return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
             className: "border-b border-solid border-gray-300 py-3"
-          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
             label: "Taxonomy",
             value: y.taxonomy,
             placeholder: "Taxonomy",
@@ -45686,7 +45676,7 @@ var myStore = wp.data.select('postgrid-shop');
                 }
               });
             }
-          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
             label: "Terms",
             value: y.terms.join(','),
             placeholder: "Comma separated",
@@ -45701,7 +45691,7 @@ var myStore = wp.data.select('postgrid-shop');
                 }
               });
             }
-          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
             style: {
               margin: 0
             },
@@ -45734,7 +45724,7 @@ var myStore = wp.data.select('postgrid-shop');
                 }
               });
             }
-          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+          }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
             style: {
               margin: 0
             },
@@ -45802,7 +45792,7 @@ var myStore = wp.data.select('postgrid-shop');
             });
           }
         }, "Add")));
-      }))), (item.id == 'metaKey' || item.id == 's' || item.id == 'metaValue' || item.id == 'metaValueNum' || item.id == 'year' || item.id == 'monthnum' || item.id == 'w' || item.id == 'day' || item.id == 'hour' || item.id == 'minute' || item.id == 'second' || item.id == 'm' || item.id == 'author' || item.id == 'authorName' || item.id == 'tag' || item.id == 'tagId' || item.id == 'cat' || item.id == 'categoryName' || item.id == 'p' || item.id == 'name' || item.id == 'pageId' || item.id == 'pagename' || item.id == 'postParent' || item.id == 'postsPerPage' || item.id == 'paged' || item.id == 'offset' || item.id == 'postsPerArchivePage' || item.id == 'perm') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      }))), (item.id == 'metaKey' || item.id == 's' || item.id == 'metaValue' || item.id == 'metaValueNum' || item.id == 'year' || item.id == 'monthnum' || item.id == 'w' || item.id == 'day' || item.id == 'hour' || item.id == 'minute' || item.id == 'second' || item.id == 'm' || item.id == 'author' || item.id == 'authorName' || item.id == 'tag' || item.id == 'tagId' || item.id == 'cat' || item.id == 'categoryName' || item.id == 'p' || item.id == 'name' || item.id == 'pageId' || item.id == 'pagename' || item.id == 'postParent' || item.id == 'postsPerPage' || item.id == 'paged' || item.id == 'offset' || item.id == 'postsPerArchivePage' || item.id == 'perm') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
         value: item.val,
         onChange: newVal => {
           clearTimeout(debounce);
@@ -45810,7 +45800,7 @@ var myStore = wp.data.select('postgrid-shop');
             updateQueryPram(newVal, index);
           }, 1000);
         }
-      })), item.id == 'metaCompare' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      })), item.id == 'metaCompare' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
         style: {
           margin: 0
         },
@@ -45868,16 +45858,10 @@ var myStore = wp.data.select('postgrid-shop');
         onChange: newVal => {
           updateQueryPram(newVal, index);
         }
-      })), item.id == 'postPassword' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        utmUrl: "?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryArgs"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "underline"
-      }, "Post Parent, Post Password"), " Only avilable in Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      })), item.id == 'postPassword' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
         value: item.val,
         onChange: newVal => updateQueryPram(newVal, index)
-      })), (item.id == 'postNameIn' || item.id == 'authorIn' || item.id == 'authorNotIn' || item.id == 'postNotIn' || item.id == 'postIn' || item.id == 'postParentNotIn' || item.id == 'tagNotIn' || item.id == 'tagAnd' || item.id == 'tagIn' || item.id == 'postParentIn' || item.id == 'tagSlugIn' || item.id == 'tagSlugAnd' || item.id == 'categoryNotIn' || item.id == 'categoryIn' || item.id == 'categoryAnd') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        utmUrl: "?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryArgs"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, "Only avilable in Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      })), (item.id == 'postNameIn' || item.id == 'authorIn' || item.id == 'authorNotIn' || item.id == 'postNotIn' || item.id == 'postIn' || item.id == 'postParentNotIn' || item.id == 'tagNotIn' || item.id == 'tagAnd' || item.id == 'tagIn' || item.id == 'postParentIn' || item.id == 'tagSlugIn' || item.id == 'tagSlugAnd' || item.id == 'categoryNotIn' || item.id == 'categoryIn' || item.id == 'categoryAnd') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
         value: item.val,
         placeholder: "Comma separated",
         onChange: newVal => updateQueryPram(newVal, index)
@@ -45898,14 +45882,14 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      }, "Add")), item.id == 'commentCount' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      }, "Add")), item.id == 'commentCount' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
         value: item.val.value,
         placeholder: "Comment Count, Ex: 25",
         onChange: newVal => updateQueryPram({
           value: newVal,
           compare: item.val.compare
         }, index)
-      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
         style: {
           margin: 0
         },
@@ -45934,13 +45918,8 @@ var myStore = wp.data.select('postgrid-shop');
           value: item.val.value,
           compare: newVal
         }, index)
-      })), item.id == 'postMimeType' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-        style: {
-          margin: 0
-        },
-        label: "",
-        multiple: true,
-        value: item.val,
+      })), item.id == 'postMimeType' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_input_select__WEBPACK_IMPORTED_MODULE_25__["default"], {
+        val: item.val,
         options: [{
           label: 'image/jpeg',
           value: 'jpg|jpeg|jpe'
@@ -45954,8 +45933,11 @@ var myStore = wp.data.select('postgrid-shop');
           label: 'image/bmp',
           value: 'bmp'
         }],
-        onChange: newVal => updateQueryPram(newVal, index)
-      })), (item.id == 'cacheResults' || item.id == 'nopaging' || item.id == 'hasPassword' || item.id == 'updatePostMetaCache' || item.id == 'updatePostTermCache') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+        multiple: true,
+        onChange: newVal => {
+          updateQueryPram(newVal, index);
+        }
+      })), (item.id == 'cacheResults' || item.id == 'nopaging' || item.id == 'hasPassword' || item.id == 'updatePostMetaCache' || item.id == 'updatePostTermCache') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
         style: {
           margin: 0
         },
@@ -45969,11 +45951,7 @@ var myStore = wp.data.select('postgrid-shop');
           value: false
         }],
         onChange: newVal => updateQueryPram(newVal, index)
-      })), item.id == 'ignoreStickyPosts' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        utmUrl: "?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-stickyPost"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "underline"
-      }, "Ignore Sticky Posts"), " Only avilable in Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      })), item.id == 'ignoreStickyPosts' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
         style: {
           margin: 0
         },
@@ -45992,7 +45970,7 @@ var myStore = wp.data.select('postgrid-shop');
 
     function addQueryPramX(_option, index) {
       var attrExist = false;
-      var data = _queryprams__WEBPACK_IMPORTED_MODULE_27__["default"][index];
+      var data = _queryprams__WEBPACK_IMPORTED_MODULE_29__["default"][index];
       var multiple = data.multiple;
       var isExist = queryArgs.items.map(item => {
         if (item.id == index) {
@@ -46022,8 +46000,8 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_31__["default"], {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_32__["default"]
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_34__["default"], {
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_35__["default"]
       })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
         className: "mx-2"
       }, title));
@@ -46053,11 +46031,11 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "post-grid "
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Layouts",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -46076,7 +46054,7 @@ var myStore = wp.data.select('postgrid-shop');
           source: 'saved'
         });
       }
-    }, "Saved")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    }, "Saved")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: queryLayouts.keyword,
       type: "text",
       placeholder: "Search Layouts...",
@@ -46090,7 +46068,7 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }, 1000); //fetchLayouts();
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
       className: "w-full",
       style: {
         margin: 0
@@ -46121,7 +46099,7 @@ var myStore = wp.data.select('postgrid-shop');
       href: clientData.siteAdminurl + 'post-new.php?post_type=post_grid_template'
     }, "Create Layout"))), layoutLoading == true && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "text-center"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Spinner, null)), layoutLoading == false && layoutList.items.length > 0 && layoutList.items.map(x => {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null)), layoutLoading == false && layoutList.items.length > 0 && layoutList.items.map(x => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "my-4 border bg-gray-200 "
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -46150,7 +46128,7 @@ var myStore = wp.data.select('postgrid-shop');
       }, "#", x.post_id), layoutData.source == 'library' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "mx-1 relative inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer",
         onClick: ev => {
-          if (postGridData.license_status == 'active') {
+          if (proInfo.status == 'active') {
             if (!importLayoutOpen.isOpen) {
               setlayoutImporting(true);
               importLayout(x);
@@ -46164,9 +46142,9 @@ var myStore = wp.data.select('postgrid-shop');
         }
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
         class: "dashicons dashicons-download"
-      }), " Import"), importLayoutOpen.id == x.post_id && importLayoutOpen.isOpen && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Popover, {
+      }), " Import"), importLayoutOpen.id == x.post_id && importLayoutOpen.isOpen && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Popover, {
         position: "bottom left p-2 "
-      }, postGridData.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      }, proInfo.status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "w-48 bg-amber-100 px-3 py-2"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
         className: ""
@@ -46174,9 +46152,9 @@ var myStore = wp.data.select('postgrid-shop');
         className: "underline"
       }, "Importing Layouts"), " Only avilable in Premium"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
         className: ""
-      }, "After import the layout you customize and make your own.")), postGridData.license_status == 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      }, "After import the layout you customize and make your own.")), proInfo.status == 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "w-48 bg-sky-300 px-3 py-2"
-      }, layoutImporting && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Spinner, null), " Importing"), !layoutImporting && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
+      }, layoutImporting && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null), " Importing"), !layoutImporting && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
         className: ""
       }, "Layout imported and saved under ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
         target: "_blank",
@@ -46195,12 +46173,12 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }, layoutLoading.loading == true && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: "text-center"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Spinner, null)), "Load More"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null)), "Load More")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Query Post",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Add Query Parameters"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Add Query Parameters"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_12__["default"], {
       position: "bottom right",
       variant: "secondary",
       options: queryPramsX,
@@ -46209,23 +46187,23 @@ var myStore = wp.data.select('postgrid-shop');
       values: ""
     })), queryArgs.items.map((item, index) => {
       return generateQueryArgOptions(item, index);
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "mb-4"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Query Presets"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }, "Query Presets"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_12__["default"], {
       position: "bottom right",
       variant: "secondary",
-      options: _query_presets__WEBPACK_IMPORTED_MODULE_25__["default"],
+      options: _query_presets__WEBPACK_IMPORTED_MODULE_27__["default"],
       buttonTitle: "Choose",
       onChange: addQueryPreset,
       values: ''
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Grid Settings",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       onClick: _ev => {
         var gridTemplateColumns = grid.styles.gridTemplateColumns;
 
@@ -46255,16 +46233,16 @@ var myStore = wp.data.select('postgrid-shop');
         });
       },
       className: "my-3 !bg-blue-600 !text-white"
-    }, "Add Column"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }, "Add Column"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
     })), grid.styles.gridTemplateColumns[breakPointX] != undefined && grid.styles.gridTemplateColumns[breakPointX].map((item, index) => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
         value: item.val,
         type: "number",
         onChange: newVal => {
@@ -46295,7 +46273,7 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
         className: "mb-0",
         value: item.unit,
         options: [{
@@ -46339,15 +46317,15 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
         icon: "no-alt",
         onClick: _ev => {
           deleteGridColumn(index);
         }
       }));
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       onClick: _ev => {
         var gridTemplateRows = grid.styles.gridTemplateRows;
 
@@ -46377,16 +46355,16 @@ var myStore = wp.data.select('postgrid-shop');
         });
       },
       className: "my-3 !bg-blue-600 !text-white"
-    }, "Add Row"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }, "Add Row"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
     })), grid.styles.gridTemplateRows[breakPointX] != undefined && grid.styles.gridTemplateRows[breakPointX].map((item, index) => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
         value: item.val,
         type: "number",
         onChange: newVal => {
@@ -46417,7 +46395,7 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
         className: "mb-0",
         value: item.unit,
         options: [{
@@ -46461,23 +46439,23 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
         icon: "no-alt",
         onClick: _ev => {
           deleteGridRow(index);
         }
       }));
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Column Gap"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Column Gap"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: grid.styles.colGap[breakPointX] != undefined ? grid.styles.colGap[breakPointX].val : 1,
       type: "number",
       onChange: newVal => {
@@ -46506,7 +46484,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
       className: "mb-0",
       value: grid.styles.colGap[breakPointX] != undefined ? grid.styles.colGap[breakPointX].unit : 'em',
       options: [{
@@ -46548,17 +46526,17 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Row Gap"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Row Gap"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: grid.styles.rowGap[breakPointX] != undefined ? grid.styles.rowGap[breakPointX].val : 1,
       type: "number",
       onChange: newVal => {
@@ -46587,7 +46565,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
       className: "mb-0",
       value: grid.styles.rowGap[breakPointX] != undefined ? grid.styles.rowGap[breakPointX].unit : 'em',
       options: [{
@@ -46629,17 +46607,13 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), postGridData.license_status != 'active' && grid.options.itemCss[breakPointX] != undefined && Object.entries(grid.options.itemCss[breakPointX]).length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      utmUrl: "?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-nthcss"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: "underline"
-    }, "N'th Item CSS"), " Only avilable in Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "N'th Item CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+    }, "N'th Item CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       className: "my-3",
       variant: "secondary",
       onClick: _newVal => {
-        if (postGridData != null && postGridData.license_status == 'active') {
+        if (proInfo.status == 'active') {
           if (grid.options.itemCss[breakPointX] != undefined) {
             var ssd = grid.options.itemCss[breakPointX].concat({
               'grid-column-start': '',
@@ -46676,16 +46650,16 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       }
-    }, "Add", postGridData != null && postGridData.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+    }, "Add", !proInfo.proInstalled && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: "bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
       target: "_blank",
       href: 'https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS'
-    }, "Pro")))), grid.options.itemCss[breakPointX] != undefined && grid.options.itemCss[breakPointX].map((x, i) => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }, "Pro")))), JSON.stringify(proInfo), grid.options.itemCss[breakPointX] != undefined && grid.options.itemCss[breakPointX].map((x, i) => {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
         title: i + 1 + '\'th Item',
         initialOpen: false
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
         icon: "no-alt",
         variant: "secondary",
         onClick: _ev => {
@@ -46699,9 +46673,9 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      }, "Delete"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      }, "Delete"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
         for: ""
-      }, "grid-column-start"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      }, "grid-column-start"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
         value: x['grid-column-start'],
         type: "number",
         onChange: newVal => {
@@ -46715,9 +46689,9 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
         for: ""
-      }, "grid-column-end"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      }, "grid-column-end"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
         value: x['grid-column-end'],
         type: "number",
         onChange: newVal => {
@@ -46731,9 +46705,9 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
         for: ""
-      }, "grid-row-start"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      }, "grid-row-start"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
         value: x['grid-row-start'],
         type: "number",
         onChange: newVal => {
@@ -46747,9 +46721,9 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
         for: ""
-      }, "grid-row-end"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+      }, "grid-row-end"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
         value: x['grid-row-end'],
         type: "number",
         onChange: newVal => {
@@ -46764,24 +46738,18 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       })));
-    }), _grid_layouts__WEBPACK_IMPORTED_MODULE_26__["default"].map((x, _i) => {
+    }), _grid_layouts__WEBPACK_IMPORTED_MODULE_28__["default"].map((x, _i) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "cursor-pointer relative hover:bg-blue-200 my-3",
         onClick: _ev => {
-          //setAttributes({ grid: { options: x.data } })
-          if (x.isPro) {
-            if (postGridData != null && postGridData.license_status == 'active') {
-              setAttributes({
-                grid: x.data
-              });
-            }
+          if (x.isPro) {//setAttributes({ grid: x.data })
           } else {
             setAttributes({
               grid: x.data
             });
           }
         }
-      }, x.isPro && postGridData != null && postGridData.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+      }, x.isPro && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
         className: "bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
         target: "_blank",
@@ -46791,14 +46759,14 @@ var myStore = wp.data.select('postgrid-shop');
       }, x.icon), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "text-[16px] p-2 bg-blue-600 text-white bg-opacity-90 text-bold  w-full text-center"
       }, x.title));
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Loop Item",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+    }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
       color: itemWrap.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_29__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_32__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -46831,9 +46799,9 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+    }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
       color: itemWrap.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_29__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_32__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -46864,29 +46832,29 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
       label: "",
       values: itemWrap.styles.padding[breakPointX],
       onChange: nextValues => {
         itemwrapPaddingControl(nextValues);
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Border"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Border"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_border__WEBPACK_IMPORTED_MODULE_22__["default"], {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_border__WEBPACK_IMPORTED_MODULE_23__["default"], {
       val: itemWrap.styles.border != undefined ? itemWrap.styles.border[breakPointX] : '',
       onChange: newVal => {
         var newValuesObj = {};
@@ -46915,15 +46883,15 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Box Shadow"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Box Shadow"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_box_shadow__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_box_shadow__WEBPACK_IMPORTED_MODULE_24__["default"], {
       val: itemWrap.styles.boxShadow != undefined ? itemWrap.styles.boxShadow[breakPointX] : '',
       onChange: newVal => {
         var newValuesObj = {};
@@ -46952,15 +46920,15 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Border Radius"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Border Radius"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
       label: "",
       values: itemWrap.styles.borderRadius != undefined ? itemWrap.styles.borderRadius[breakPointX] : '',
       onChange: nextValues => {
@@ -46991,66 +46959,66 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_10__["default"], {
       typo: itemWrap.styles,
       breakPointX: breakPointX,
       onChange: onChangeItemWrapTypo,
       setAttributes: setAttributes,
       obj: itemWrap
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Container",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
       label: "",
       values: container.styles.padding[breakPointX],
       onChange: nextValues => {
         containerPaddingControl(nextValues);
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
       label: "",
       values: container.styles.margin[breakPointX],
       onChange: nextValues => {
         containerMarginControl(nextValues);
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
       value: container.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_29__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_32__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -47081,19 +47049,19 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
       value: container.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_29__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_32__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -47129,7 +47097,7 @@ var myStore = wp.data.select('postgrid-shop');
     }, "Background Image"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
       src: container.styles.backgroundImage[breakPointX] != undefined ? container.styles.backgroundImage[breakPointX].url : '',
       alt: ""
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.MediaUpload, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.MediaUpload, {
       onSelect: media => {
         var newValuesObj = {};
 
@@ -47172,21 +47140,21 @@ var myStore = wp.data.select('postgrid-shop');
         let {
           open
         } = _ref4;
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
           onClick: open
         }, "Open Media Library");
       }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Pagination",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "mb-4"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Pagination Type"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }, "Pagination Type"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_12__["default"], {
       position: "bottom right",
       variant: "secondary",
-      options: paginationTypes,
+      options: _pagination_types__WEBPACK_IMPORTED_MODULE_30__["default"],
       buttonTitle: "Choose",
       onChange: (arg, index) => {
         var options = { ...pagination.options,
@@ -47201,13 +47169,9 @@ var myStore = wp.data.select('postgrid-shop');
       values: ''
     })), pagination.options.type.length != 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "bg-gray-500 text-white px-3 py-2 my-5"
-    }, paginationTypes[pagination.options.type] != undefined ? paginationTypes[pagination.options.type].label : ''), (pagination.options.type == 'ajax' || pagination.options.type == 'next_previous' || pagination.options.type == 'loadmore' || pagination.options.type == 'infinite') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      utmUrl: "?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-pagination_type"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: "underline"
-    }, "Ajax, Next Previous, Load More, Infinite"), " Only avilable in Premium")), (pagination.options.type == 'normal' || pagination.options.type == 'ajax') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    }, _pagination_types__WEBPACK_IMPORTED_MODULE_30__["default"][pagination.options.type] != undefined ? _pagination_types__WEBPACK_IMPORTED_MODULE_30__["default"][pagination.options.type].label : ''), (pagination.options.type == 'normal' || pagination.options.type == 'ajax') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Max Number of Pagination"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    }, "Max Number of Pagination"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.maxPageNum,
       onChange: newVal => {
         var options = { ...pagination.options,
@@ -47221,7 +47185,7 @@ var myStore = wp.data.select('postgrid-shop');
       }
     })), (pagination.options.type == 'normal' || pagination.options.type == 'ajax' || pagination.options.type == 'next_previous') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Previous Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    }, "Previous Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.prevText,
       onChange: newVal => {
         var options = { ...pagination.options,
@@ -47235,7 +47199,7 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Next Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    }, "Next Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.nextText,
       onChange: newVal => {
         var options = { ...pagination.options,
@@ -47249,7 +47213,7 @@ var myStore = wp.data.select('postgrid-shop');
       }
     })), (pagination.options.type == 'loadmore' || pagination.options.type == 'infinite') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Load More Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    }, "Load More Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.loadMoreText,
       onChange: newVal => {
         var options = { ...pagination.options,
@@ -47263,7 +47227,7 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "No Posts Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    }, "No Posts Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.noMorePosts,
       onChange: newVal => {
         var options = { ...pagination.options,
@@ -47277,7 +47241,7 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Loading Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    }, "Loading Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.loadingText,
       onChange: newVal => {
         var options = { ...pagination.options,
@@ -47289,9 +47253,9 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Loading Icon"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    }, "Loading Icon"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_14__["default"], {
       library: pagination.options.loadingIcon.library,
       srcType: pagination.options.loadingIcon.srcType,
       iconSrc: pagination.options.loadingIcon.iconSrc,
@@ -47309,14 +47273,14 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Pagination Wrapper",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+    }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
       color: pagination.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_29__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_32__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -47349,9 +47313,9 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+    }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
       color: pagination.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_29__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_32__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -47382,7 +47346,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Text Align"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_text_align__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Text Align"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_text_align__WEBPACK_IMPORTED_MODULE_18__["default"], {
       val: pagination.styles.textAlign[breakPointX],
       onChange: newVal => {
         var newValuesObj = {};
@@ -47411,42 +47375,42 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
       label: "",
       values: pagination.styles.padding[breakPointX],
       onChange: nextValues => {
         paginationPaddingControl(nextValues);
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
       label: "",
       values: pagination.styles.margin[breakPointX],
       onChange: nextValues => {
         paginationMarginControl(nextValues);
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Pagination Items",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+    }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
       color: paginationItem.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_29__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_32__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -47479,9 +47443,9 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+    }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
       color: paginationItem.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_29__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_32__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -47514,9 +47478,9 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Active Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+    }, "Active Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
       color: paginationItemActive.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_29__["default"],
+      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_32__["default"],
       enableAlpha: true,
       onChange: newVal => {
         var newValuesObj = {};
@@ -47547,7 +47511,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_19__["default"], {
       val: paginationItem.styles.display[breakPointX],
       onChange: newVal => {
         var newValuesObj = {};
@@ -47576,54 +47540,54 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
       label: "",
       values: paginationItem.styles.padding[breakPointX],
       onChange: nextValues => {
         paginationItemPaddingControl(nextValues);
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
       label: "",
       values: paginationItem.styles.margin[breakPointX],
       onChange: nextValues => {
         paginationItemMarginControl(nextValues);
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
       position: "bottom",
       variant: "secondary",
       iconList: breakPointList,
       buttonTitle: "Break Point Switch",
       onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_24__["default"][breakPointX].icon,
+      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_26__["default"][breakPointX].icon,
       value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_10__["default"], {
       typo: paginationItem.styles,
       breakPointX: breakPointX,
       onChange: onChangePaginationTypo,
       setAttributes: setAttributes,
       obj: paginationItem
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Lazy load",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
       label: "Enable",
       value: lazyLoad.options.enable,
       options: [{
@@ -47643,9 +47607,9 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
-    }, "Lazyload Icon"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    }, "Lazyload Icon"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_14__["default"], {
       library: lazyLoad.options.icon != undefined ? lazyLoad.options.icon.library : 'fontAwesome',
       srcType: lazyLoad.options.icon != undefined ? lazyLoad.options.icon.srcType : 'class',
       iconSrc: lazyLoad.options.icon != undefined ? lazyLoad.options.icon.iconSrc : '',
@@ -47663,16 +47627,12 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), lazyLoad.options.srcUrl.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_pro_wrapper__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      utmUrl: "?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-lazyload"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-      className: "underline"
-    }, "Lazy Load Image"), " Only avilable in Premium")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Lazy Load Image"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
       src: lazyLoad.options.srcUrl,
       alt: ""
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.MediaUpload, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.MediaUpload, {
       onSelect: media => {
         // media.id
         var options = { ...lazyLoad.options,
@@ -47692,15 +47652,15 @@ var myStore = wp.data.select('postgrid-shop');
         let {
           open
         } = _ref5;
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
           onClick: open
         }, "Open Media Library");
       }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       className: "hidden",
       title: "Search",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
       label: "Enable",
       value: search.enable,
       options: [{
@@ -47719,7 +47679,7 @@ var myStore = wp.data.select('postgrid-shop');
           busyIcon: search.busyIcon
         }
       })
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
       label: "Search action",
       value: search.type,
       options: [{
@@ -47738,7 +47698,7 @@ var myStore = wp.data.select('postgrid-shop');
           busyIcon: search.busyIcon
         }
       })
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       label: "Placeholder text",
       value: search.placeholder,
       onChange: newVal => setAttributes({
@@ -47750,7 +47710,7 @@ var myStore = wp.data.select('postgrid-shop');
           busyIcon: search.busyIcon
         }
       })
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       label: "Search icon",
       value: search.icon,
       onChange: newVal => setAttributes({
@@ -47762,7 +47722,7 @@ var myStore = wp.data.select('postgrid-shop');
           busyIcon: search.busyIcon
         }
       })
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       label: "Loading icon",
       value: search.busyIcon,
       onChange: newVal => setAttributes({
@@ -47776,18 +47736,18 @@ var myStore = wp.data.select('postgrid-shop');
       })
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "px-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_mail_subscribe__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_contact_support__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_mail_subscribe__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_contact_support__WEBPACK_IMPORTED_MODULE_16__["default"], {
       utm: {
         utm_source: 'BlockPostGrid',
         utm_campaign: 'PostGridCombo',
         utm_content: 'BlockOptions'
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       className: "",
       title: "Tutorials",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tutorials__WEBPACK_IMPORTED_MODULE_19__["default"], {
-      links: _tutorials_links__WEBPACK_IMPORTED_MODULE_28__["default"]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tutorials__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      links: _tutorials_links__WEBPACK_IMPORTED_MODULE_31__["default"]
     }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: [blockId]
     }, grid.styles.gridTemplateColumns[breakPointX] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -47834,9 +47794,9 @@ var myStore = wp.data.select('postgrid-shop');
       className: noPostsWrap.options.class
     }, "No Post found"), postsQuery && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: spinnerWrap.options.class
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Spinner, null)), isBusy && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null)), isBusy && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "text-center"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Spinner, null)), postsQuery == false && posts != null && posts.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null)), postsQuery == false && posts != null && posts.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: itemsWrap.options.class
     }, posts.map((x, _i) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -47871,6 +47831,57 @@ var myStore = wp.data.select('postgrid-shop');
 
 /***/ }),
 
+/***/ "./src/blocks/post-grid/pagination-types.js":
+/*!**************************************************!*\
+  !*** ./src/blocks/post-grid/pagination-types.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+
+const paginationTypesBasic = {
+  none: {
+    label: 'None',
+    value: 'none',
+    isPro: false
+  },
+  normal: {
+    label: 'Normal Pagination',
+    value: 'normal',
+    isPro: false
+  },
+  ajax: {
+    label: 'Ajax Pagination',
+    value: 'ajax',
+    isPro: true
+  },
+  next_previous: {
+    label: 'Next-Previous',
+    value: 'next_previous',
+    isPro: true
+  },
+  loadmore: {
+    label: 'Load More',
+    value: 'loadmore',
+    isPro: true
+  },
+  infinite: {
+    label: 'Infinite Load',
+    value: 'infinite',
+    isPro: true
+  }
+};
+let paginationTypes = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('paginationTypes', paginationTypesBasic);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (paginationTypes);
+
+/***/ }),
+
 /***/ "./src/blocks/post-grid/query-presets.js":
 /*!***********************************************!*\
   !*** ./src/blocks/post-grid/query-presets.js ***!
@@ -47882,7 +47893,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-const queryPresets = [{
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+
+const queryPresetsBasic = [{
   label: 'Latest Posts by Publish Date',
   key: 'preset1',
   isPro: false,
@@ -48179,6 +48193,7 @@ const queryPresets = [{
     }]
   }
 }];
+let queryPresets = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('queryPresets', queryPresetsBasic);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (queryPresets);
 
 /***/ }),
@@ -48194,32 +48209,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-const queryPrams = [{
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+
+const queryPramsBasic = [{
   val: ['post'],
   multiple: false,
   id: 'postType',
   label: 'Post Types',
   description: "Select Post Types to Query"
-}, {
-  val: [],
-  multiple: false,
-  id: 'taxQuery',
-  label: 'Tax Query',
-  description: "Taxonomies query arguments",
-  isPro: true
-}, {
-  val: 'OR',
-  multiple: false,
-  id: 'taxQueryRelation',
-  label: 'Tax Query Relation',
-  description: "Taxonomies query relation"
-}, {
-  val: [],
-  multiple: false,
-  id: 'metaQuery',
-  label: 'Meta Query',
-  description: "Meta field query",
-  isPro: true
 }, {
   val: '',
   multiple: false,
@@ -48250,6 +48248,100 @@ const queryPrams = [{
   id: 'metaKey',
   label: 'Meta fields key',
   description: "Post query by meta fields key"
+}, // Category Parameters
+{
+  val: '',
+  multiple: false,
+  id: 'cat',
+  label: 'Category ID',
+  description: "Post query by Category ID"
+}, {
+  val: '',
+  multiple: false,
+  id: 'categoryName',
+  label: 'Category Name',
+  description: "Post query by Category Name"
+}, {
+  val: [],
+  multiple: false,
+  id: 'categoryAnd',
+  label: 'Category And',
+  description: "Post query by Category IDs",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'categoryIn',
+  label: 'Category In',
+  description: "Post query by Category IDs",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'categoryNotIn',
+  label: 'Category Not In',
+  description: "Post query by excluded Category IDs",
+  isPro: true
+}, // Tag Parameters
+{
+  val: '',
+  multiple: false,
+  id: 'tag',
+  label: 'Tags',
+  description: "Post query by Tag slug"
+}, {
+  val: '',
+  multiple: false,
+  id: 'tagId',
+  label: 'Tag Id',
+  description: "Post query by Tag ID"
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagAnd',
+  label: 'Tag And',
+  description: "Post query by Tag Ids",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagIn',
+  label: 'Tag In',
+  description: "Post query by Tag ids",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagNotIn',
+  label: 'Tag Not In',
+  description: "Post query by excluded Tag ids"
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagSlugAnd',
+  label: 'Tag Slug And',
+  description: "Post query by Tags slug",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'tagSlugIn',
+  label: 'Tag Slug In',
+  description: "Post query by excluded Tags slug",
+  isPro: true
+}, {
+  val: [],
+  multiple: false,
+  id: 'taxQuery',
+  label: 'Tax Query',
+  description: "Taxonomies query arguments",
+  isPro: true
+}, {
+  val: 'OR',
+  multiple: false,
+  id: 'taxQueryRelation',
+  label: 'Tax Query Relation',
+  description: "Taxonomies query relation"
 }, // Date Parameters
 {
   val: [],
@@ -48332,87 +48424,6 @@ const queryPrams = [{
   id: 'authorNotIn',
   label: 'Author Not In',
   description: "Post query by exluded Author IDs",
-  isPro: true
-}, // Category Parameters
-{
-  val: '',
-  multiple: false,
-  id: 'cat',
-  label: 'Category ID',
-  description: "Post query by Category ID"
-}, {
-  val: '',
-  multiple: false,
-  id: 'categoryName',
-  label: 'Category Name',
-  description: "Post query by Category Name"
-}, {
-  val: [],
-  multiple: false,
-  id: 'categoryAnd',
-  label: 'Category And',
-  description: "Post query by Category IDs",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'categoryIn',
-  label: 'Category In',
-  description: "Post query by Category IDs",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'categoryNotIn',
-  label: 'Category Not In',
-  description: "Post query by excluded Category IDs",
-  isPro: true
-}, // Tag Parameters
-{
-  val: '',
-  multiple: false,
-  id: 'tag',
-  label: 'Tags',
-  description: "Post query by Tag slug"
-}, {
-  val: '',
-  multiple: false,
-  id: 'tagId',
-  label: 'Tag Id',
-  description: "Post query by Tag ID"
-}, {
-  val: [],
-  multiple: false,
-  id: 'tagAnd',
-  label: 'Tag And',
-  description: "Post query by Tag Ids",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'tagIn',
-  label: 'Tag In',
-  description: "Post query by Tag ids",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'tagNotIn',
-  label: 'Tag Not In',
-  description: "Post query by excluded Tag ids"
-}, {
-  val: [],
-  multiple: false,
-  id: 'tagSlugAnd',
-  label: 'Tag Slug And',
-  description: "Post query by Tags slug",
-  isPro: true
-}, {
-  val: [],
-  multiple: false,
-  id: 'tagSlugIn',
-  label: 'Tag Slug In',
-  description: "Post query by excluded Tags slug",
   isPro: true
 }, {
   val: '',
@@ -48568,7 +48579,8 @@ const queryPrams = [{
   multiple: false,
   id: 'metaQuery',
   label: 'Meta Query',
-  description: "Advance meta fields query"
+  description: "Advance meta fields query",
+  isPro: true
 }, {
   val: 'readable',
   multiple: false,
@@ -48600,6 +48612,7 @@ const queryPrams = [{
   label: 'Update Post Term Cache',
   description: "Enable Post term information cache"
 }];
+let queryPrams = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('queryPrams', queryPramsBasic);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (queryPrams);
 
 /***/ }),
@@ -70399,13 +70412,6 @@ class PGDropdown extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Compone
       const [pickerOpen, setPickerOpen] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
       const [keyword, setKeyword] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('');
       const [filteredOptions, setfilteredOptions] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
-      const [postGridData, setPostGridData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(window.PostGridPluginData);
-      (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-        setPostGridData(window.PostGridPluginData);
-      }, [window.PostGridPluginData]); // useEffect(() => {
-      // }, [keyword]);
-      //console.log(typeof options);
-
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
         className: "relative"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -70472,9 +70478,7 @@ class PGDropdown extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Compone
           className: "border-b cursor-pointer hover:bg-slate-200 p-2 block",
           onClick: ev => {
             if (x.isPro == true) {
-              if (postGridData != null && postGridData.license_status == 'active') {
-                onChange(x, index);
-              }
+              alert('Sorry this feature only avilbale in pro');
             } else {
               onChange(x, index);
             }
@@ -70485,7 +70489,7 @@ class PGDropdown extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Compone
           className: ""
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.RawHTML, null, x.icon)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
           className: ""
-        }, x.label, " ")), x.isPro && postGridData != null && postGridData.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+        }, x.label, " ")), x.isPro && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
           className: "bg-amber-400 rounded-sm px-3  text-white hover:text-white"
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
           target: "_blank",
@@ -70497,7 +70501,12 @@ class PGDropdown extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Compone
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
           className: " border-b cursor-pointer hover:bg-slate-200 p-2 block",
           onClick: ev => {
-            onChange(x, index);
+            //onChange(x, index)
+            if (x.isPro == true) {
+              alert('Sorry this feature only avilbale in pro');
+            } else {
+              onChange(x, index);
+            }
           }
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
           className: "flex justify-between"
@@ -70505,7 +70514,7 @@ class PGDropdown extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Compone
           className: ""
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.RawHTML, null, x.icon)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
           className: ""
-        }, x.label, " ")), x.isPro && postGridData != null && postGridData.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+        }, x.label, " ")), x.isPro && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
           className: "bg-amber-400 rounded-sm px-3  text-white hover:text-white"
         }, "Pro")), x.description != undefined && x.description.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
           className: "text-xs text-slate-400"
@@ -70518,7 +70527,12 @@ class PGDropdown extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Compone
           return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
             className: "  cursor-pointer hover:bg-slate-400 p-2 block",
             onClick: ev => {
-              onChange(x, index);
+              //onChange(x, index)
+              if (x.isPro == true) {
+                alert('Sorry this feature only avilbale in pro');
+              } else {
+                onChange(x, index);
+              }
             }
           }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
             className: "flex justify-between"
@@ -70526,7 +70540,7 @@ class PGDropdown extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Compone
             className: ""
           }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.RawHTML, null, x.icon)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
             className: ""
-          }, x.label, " ")), x.isPro && postGridData != null && postGridData.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+          }, x.label, " ")), x.isPro && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
             className: "bg-amber-400 rounded-sm px-3  text-white hover:text-white"
           }, "Pro")), x.description != undefined && x.description.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
             className: "text-xs text-slate-400"
@@ -70537,7 +70551,12 @@ class PGDropdown extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Compone
           return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
             className: "  cursor-pointer hover:bg-slate-400 p-2 block",
             onClick: ev => {
-              onChange(x, index);
+              //onChange(x, index)
+              if (x.isPro == true) {
+                alert('Sorry this feature only avilbale in pro');
+              } else {
+                onChange(x, index);
+              }
             }
           }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
             className: "flex justify-between"
@@ -70545,7 +70564,7 @@ class PGDropdown extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Compone
             className: ""
           }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.RawHTML, null, x.icon)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
             className: ""
-          }, x.label, " ")), x.isPro && postGridData != null && postGridData.license_status != 'active' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+          }, x.label, " ")), x.isPro && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
             className: "bg-amber-400 rounded-sm px-3  text-white hover:text-white"
           }, "Pro")), x.description != undefined && x.description.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
             className: "text-xs text-slate-400"
@@ -70848,6 +70867,85 @@ class IconToggle extends Component {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (IconToggle);
+
+/***/ }),
+
+/***/ "./src/components/input-select/index.js":
+/*!**********************************************!*\
+  !*** ./src/components/input-select/index.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+
+const {
+  Component
+} = wp.element;
+
+
+
+
+class PGinputSelect extends Component {
+  render() {
+    var {
+      val,
+      options,
+      multiple,
+      onChange
+    } = this.props;
+
+    function Html() {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "w-full"
+      }, multiple == true && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+        className: "w-full",
+        multiple: true,
+        onChange: event => {
+          var options = event.target.options;
+          var selected = [];
+
+          for (var i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+              selected.push(options[i].value);
+            }
+          }
+
+          onChange(selected);
+        }
+      }, options.map(x => {
+        var isSelected = val.includes(x.value);
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+          value: x.value,
+          selected: isSelected
+        }, x.label);
+      }))), multiple == false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+        onChange: event => {
+          var currentVal = options[event.target.options.selectedIndex].value;
+          onChange(currentVal);
+        }
+      }, options.map(x => {
+        var selected = val.includes(x.value);
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+          value: x.value,
+          selected: selected
+        }, x.label);
+      }))));
+    }
+
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, null);
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGinputSelect);
 
 /***/ }),
 
@@ -72544,6 +72642,10 @@ const DEFAULT_STATE = {
   proUrl: 'http://getpostgrid.com/',
   breakPoint: 'Desktop',
   clientdata: {},
+  proinfo: {
+    proInstalled: false,
+    status: 'inactive'
+  },
   license: {
     license_status: '',
     license_key: ''
@@ -72561,6 +72663,14 @@ const actions = {
     return {
       type: 'SET_CLIENTDATA',
       clientdata
+    };
+  },
+
+  setproinfo(proinfo) {
+    console.log(proinfo);
+    return {
+      type: 'SET_PROINFO',
+      proinfo
     };
   },
 
@@ -72606,6 +72716,13 @@ const actions = {
       type: 'FETCH_CLIENTDATA_FROM_API',
       path
     };
+  },
+
+  fetchproinfo(path) {
+    return {
+      type: 'FETCH_PRO_INFO_FROM_API',
+      path
+    };
   }
 
 };
@@ -72625,6 +72742,11 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.createReduxStore)(
       case 'SET_CLIENTDATA':
         return { ...state,
           clientdata: action.clientdata
+        };
+
+      case 'SET_PROINFO':
+        return { ...state,
+          proinfo: action.proinfo
         };
 
       case 'SET_LICENSE':
@@ -72651,16 +72773,14 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.createReduxStore)(
     getProurl(state) {
       const {
         proUrl
-      } = state; //return price * (1 - 0.01 * discountPercent);
-
+      } = state;
       return proUrl;
     },
 
     getBreakPoint(state) {
       const {
         breakPoint
-      } = state; //return price * (1 - 0.01 * discountPercent);
-
+      } = state;
       return breakPoint;
     },
 
@@ -72669,6 +72789,13 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.createReduxStore)(
         clientdata
       } = state;
       return clientdata;
+    },
+
+    getproinfo(state) {
+      const {
+        proinfo
+      } = state;
+      return proinfo;
     },
 
     getLicense(state) {
@@ -72700,6 +72827,12 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.createReduxStore)(
 
   },
   controls: {
+    SET_PROINFO(action) {
+      return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
+        path: action.path
+      });
+    },
+
     FETCH_FROM_API(action) {
       return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
         path: action.path
@@ -72715,6 +72848,14 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.createReduxStore)(
     },
 
     FETCH_CLIENTDATA_FROM_API(action) {
+      return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
+        path: action.path,
+        method: 'POST',
+        data: {}
+      });
+    },
+
+    FETCH_PRO_INFO_FROM_API(action) {
       return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()({
         path: action.path,
         method: 'POST',
@@ -72742,6 +72883,13 @@ const store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.createReduxStore)(
       const res = yield actions.fetchclientdata(path); ////console.log(res);
 
       return actions.setclientdata(res);
+    },
+
+    *getproinfo() {
+      const path = '/post-grid/v2/get_pro_info';
+      const res = yield actions.fetchproinfo(path);
+      console.log(res);
+      return actions.setproinfo(res);
     }
 
   }
@@ -77193,6 +77341,17 @@ module.exports = window["wp"]["data"];
 
 "use strict";
 module.exports = window["wp"]["element"];
+
+/***/ }),
+
+/***/ "@wordpress/hooks":
+/*!*******************************!*\
+  !*** external ["wp","hooks"] ***!
+  \*******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["hooks"];
 
 /***/ }),
 

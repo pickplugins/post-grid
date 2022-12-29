@@ -14,6 +14,7 @@ const DEFAULT_STATE = {
 
   breakPoint: 'Desktop',
   clientdata: {},
+  proinfo: { proInstalled: false, status: 'inactive' },
 
   license: { license_status: '', license_key: '' },
 
@@ -34,12 +35,29 @@ const actions = {
     };
   },
 
+
+
+
+
+
   setclientdata(clientdata) {
 
 
     return {
       type: 'SET_CLIENTDATA',
       clientdata,
+    };
+  },
+
+
+  setproinfo(proinfo) {
+
+    console.log(proinfo);
+
+
+    return {
+      type: 'SET_PROINFO',
+      proinfo,
     };
   },
 
@@ -93,6 +111,14 @@ const actions = {
   },
 
 
+  fetchproinfo(path) {
+    return {
+      type: 'FETCH_PRO_INFO_FROM_API',
+      path,
+    };
+  },
+
+
 
 
 };
@@ -111,12 +137,18 @@ const store = createReduxStore('postgrid-shop', {
           ...state,
           breakPoint: action.breakpoint,
         };
+
       case 'SET_CLIENTDATA':
         return {
           ...state,
           clientdata: action.clientdata,
         };
 
+      case 'SET_PROINFO':
+        return {
+          ...state,
+          proinfo: action.proinfo,
+        };
 
       case 'SET_LICENSE':
 
@@ -150,7 +182,6 @@ const store = createReduxStore('postgrid-shop', {
     getProurl(state) {
       const { proUrl } = state;
 
-      //return price * (1 - 0.01 * discountPercent);
       return proUrl;
 
     },
@@ -159,20 +190,28 @@ const store = createReduxStore('postgrid-shop', {
     getBreakPoint(state) {
       const { breakPoint } = state;
 
-      //return price * (1 - 0.01 * discountPercent);
       return breakPoint;
 
     },
 
+
+
+
+
     getclientdata(state) {
       const { clientdata } = state;
-
-
 
       return clientdata;
 
     },
 
+
+    getproinfo(state) {
+      const { proinfo } = state;
+
+      return proinfo;
+
+    },
 
     getLicense(state) {
       const { license } = state;
@@ -215,6 +254,11 @@ const store = createReduxStore('postgrid-shop', {
   },
 
   controls: {
+
+    SET_PROINFO(action) {
+      return apiFetch({ path: action.path });
+    },
+
     FETCH_FROM_API(action) {
       return apiFetch({ path: action.path });
     },
@@ -226,10 +270,17 @@ const store = createReduxStore('postgrid-shop', {
       return apiFetch({ path: action.path, method: 'POST', data: {}, });
     },
 
+    FETCH_PRO_INFO_FROM_API(action) {
+      return apiFetch({ path: action.path, method: 'POST', data: {}, });
+    },
+
+
 
   },
 
   resolvers: {
+
+
     * getPrice(item) {
       const path = '/wp/v2/prices/' + item;
       const price = yield actions.fetchFromAPI(path);
@@ -253,6 +304,17 @@ const store = createReduxStore('postgrid-shop', {
 
 
       return actions.setclientdata(res);
+    },
+
+
+    * getproinfo() {
+      const path = '/post-grid/v2/get_pro_info';
+      const res = yield actions.fetchproinfo(path);
+
+      console.log(res);
+
+
+      return actions.setproinfo(res);
     },
 
 

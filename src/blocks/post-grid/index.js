@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n'
 
 
 
+import { applyFilters } from '@wordpress/hooks';
 
 import apiFetch from '@wordpress/api-fetch';
 import {
@@ -47,12 +48,16 @@ import PGcssPadding from '../../components/css-padding'
 import PGcssOutline from '../../components/css-outline'
 import PGcssBorder from '../../components/css-border'
 import PGcssBoxShadow from '../../components/css-box-shadow'
+import PGinputSelect from '../../components/input-select'
+
 
 import breakPoints from '../../breakpoints'
-//import queryPrams from '../../queryprams'
 import queryPresets from './query-presets'
 import gridLayouts from './grid-layouts'
 import queryPrams from './queryprams'
+import paginationTypes from './pagination-types'
+
+
 import tutorialsLinks from './tutorials-links'
 
 
@@ -487,11 +492,59 @@ registerBlockType("post-grid/post-grid", {
     const paginationItemActiveSelector = blockClass + ' .pagination .page-numbers.current';
 
 
+    var [debounce, setDebounce] = useState(null); // Using the hook.
+    const [breakPointX, setBreakPointX] = useState((myStore != null) ? myStore.getBreakPoint() : 'Desktop');
+    const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
+    const [proInfo, setproInfo] = useState((myStore != null) ? myStore.getproinfo() : {});
+
+
+
+
+    const [clientData, setClientData] = useState({});
+
+
+    var clientDataX = (myStore != null) ? myStore.getclientdata() : '';
+
+
+
+    useEffect(() => {
+
+      setPostGridData(window.PostGridPluginData);
+
+    }, [window.PostGridPluginData]);
+
+
+
+
+    useEffect(() => {
+
+      setClientData((myStore != null) ? myStore.getclientdata() : '');
+
+    }, [clientDataX]);
+
+
+    useEffect(() => {
+
+      var proinfo = (myStore != null) ? myStore.getproinfo() : {};
+
+      console.log(proinfo);
+
+
+      setproInfo(proinfo);
+
+    }, [proInfo]);
+
+
+
+
 
     const BLOCKS_TEMPLATE = [
       ['post-grid/post-title', {}],
       ['post-grid/read-more', {}],
     ];
+
+
+
 
 
     const columnPresets = [
@@ -773,21 +826,17 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-    var [debounce, setDebounce] = useState(null); // Using the hook.
-    const [breakPointX, setBreakPointX] = useState((myStore != null) ? myStore.getBreakPoint() : 'Desktop');
-    const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
+    // const paginationTypes = {
+    //   none: { label: 'None', value: 'none', isPro: false },
+    //   normal: { label: 'Normal Pagination', value: 'normal', isPro: false },
+    //   ajax: { label: 'Ajax Pagination', value: 'ajax', isPro: true },
+    //   next_previous: { label: 'Next-Previous', value: 'next_previous', isPro: true },
+    //   loadmore: { label: 'Load More', value: 'loadmore', isPro: true },
+    //   infinite: { label: 'Infinite Load', value: 'infinite', isPro: true },
+    // };
 
 
 
-    const [clientData, setClientData] = useState({});
-    const paginationTypes = {
-      none: { label: 'None', value: 'none', isPro: false },
-      normal: { label: 'Normal Pagination', value: 'normal', isPro: false },
-      ajax: { label: 'Ajax Pagination', value: 'ajax', isPro: true },
-      next_previous: { label: 'Next-Previous', value: 'next_previous', isPro: true },
-      loadmore: { label: 'Load More', value: 'loadmore', isPro: true },
-      infinite: { label: 'Infinite Load', value: 'infinite', isPro: true },
-    };
 
     // [
     //       { label: 'None', value: 'none', isPro: false },
@@ -798,25 +847,8 @@ registerBlockType("post-grid/post-grid", {
     //       { label: 'Infinite Load', value: 'infinite', isPro: true },
     //     ]
 
-    var clientDataX = (myStore != null) ? myStore.getclientdata() : '';
 
 
-    useEffect(() => {
-
-      setPostGridData(window.PostGridPluginData);
-
-    }, [window.PostGridPluginData]);
-
-
-
-
-    useEffect(() => {
-
-      setClientData((myStore != null) ? myStore.getclientdata() : '');
-
-
-
-    }, [clientDataX]);
 
 
 
@@ -2516,15 +2548,14 @@ registerBlockType("post-grid/post-grid", {
             {item.id == 'postType' && <div className={item.id == 'postType' ? '' : 'hidden'}>
 
 
-              <SelectControl
-                style={{ minHeight: '75px' }}
-                label=""
-                multiple
-                value={item.val}
+              <PGinputSelect
+                val={item.val}
                 options={postTypes}
-                onChange={(newVal) => updateQueryPram(newVal, index)}
+                multiple={true}
+                onChange={(newVal) => {
+                  updateQueryPram(newVal, index)
+                }}
               />
-
 
             </div>}
 
@@ -2532,11 +2563,10 @@ registerBlockType("post-grid/post-grid", {
             {item.id == 'postStatus' &&
               <div className={item.id == 'postStatus' ? '' : 'hidden'}>
 
-                <SelectControl
-                  style={{ height: '75px' }}
-                  label=""
-                  multiple
-                  value={item.val}
+
+
+                <PGinputSelect
+                  val={item.val}
                   options={[
                     { label: 'Publish', value: 'publish' },
                     { label: 'Pending', value: 'pending' },
@@ -2547,13 +2577,13 @@ registerBlockType("post-grid/post-grid", {
                     { label: 'Inherit', value: 'inherit' },
                     { label: 'Trash', value: 'trash' },
                     { label: 'Any', value: 'any' },
-
-
-
-
                   ]}
-                  onChange={(newVal) => updateQueryPram(newVal, index)}
+                  multiple={true}
+                  onChange={(newVal) => {
+                    updateQueryPram(newVal, index)
+                  }}
                 />
+
 
 
               </div>}
@@ -2581,36 +2611,41 @@ registerBlockType("post-grid/post-grid", {
 
               <div className={item.id == 'orderby' ? '' : 'hidden'}>
 
-                <SelectControl
-                  style={{ height: '75px' }}
-                  label=""
-                  multiple
-                  value={item.val}
+
+                <PGinputSelect
+                  val={item.val}
+
                   options={[
                     { label: 'None', value: 'none' },
                     { label: 'ID', value: 'ID' },
-                    { label: 'author', value: 'author' },
-                    { label: 'title', value: 'title' },
-                    { label: 'name', value: 'name' },
+                    { label: 'Author', value: 'author' },
+                    { label: 'Title', value: 'title' },
+                    { label: 'Name', value: 'name' },
 
-                    { label: 'type', value: 'type' },
-                    { label: 'date', value: 'date' },
-                    { label: 'modified', value: 'modified' },
-                    { label: 'parent', value: 'parent' },
-                    { label: 'rand', value: 'rand' },
-                    { label: 'comment_count', value: 'comment_count' },
-                    { label: 'relevance', value: 'relevance' },
-                    { label: 'menu_order', value: 'menu_order' },
-                    { label: 'meta_value', value: 'meta_value' },
-                    { label: 'meta_value_num', value: 'meta_value_num' },
+                    { label: 'Type', value: 'type' },
+                    { label: 'Date', value: 'date' },
+                    { label: 'Modified', value: 'modified' },
+                    { label: 'Parent', value: 'parent' },
+                    { label: 'Random', value: 'rand' },
+                    { label: 'Comment Count', value: 'comment_count' },
+                    { label: 'Relevance', value: 'relevance' },
+                    { label: 'Menu Order', value: 'menu_order' },
+                    { label: 'Meta Value(String)', value: 'meta_value' },
+                    { label: 'Meta Value(Number)', value: 'meta_value_num' },
                     { label: 'post__in', value: 'post__in' },
                     { label: 'post_name__in', value: 'post_name__in' },
                     { label: 'post_parent__in', value: 'post_parent__in' },
 
 
                   ]}
-                  onChange={(newVal) => updateQueryPram(newVal, index)}
+                  multiple={true}
+                  onChange={(newVal) => {
+                    updateQueryPram(newVal, index)
+                  }}
                 />
+
+
+
 
               </div>}
             {item.id == 'taxQueryRelation' &&
@@ -2637,16 +2672,7 @@ registerBlockType("post-grid/post-grid", {
             {item.id == 'metaQuery' &&
               <div>
 
-
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-metaQuery"}>
-                  <p> <span className='underline'>Meta Query</span> Only avilable in Premium</p>
-                </PGproWrapper>
-
-
-
-
-
-                <div className={(postGridData.license_status != 'active') ? '' : ''}>
+                <div className={(proInfo.status != 'active') ? '' : ''}>
                   <div
                     className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
                     onClick={(_ev) => {
@@ -2711,7 +2737,6 @@ registerBlockType("post-grid/post-grid", {
                                       var fields = itemData.val[j].fields
                                       var xx = itemData.val[j].fields.splice(k, 1);
 
-                                      console.log(fields);
 
 
                                       queryArgs.items[index].val = itemData.val;
@@ -2845,13 +2870,6 @@ registerBlockType("post-grid/post-grid", {
 
             {item.id == 'dateQuery' &&
               <div>
-
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-dateQuery"}>
-                  <p> <span className='underline'>Date Query</span> Only avilable in Premium</p>
-                </PGproWrapper>
-
-
-
                 <PanelRow className='my-3'>
                   <label>Add Arguments</label>
                   <SelectControl
@@ -3217,14 +3235,7 @@ registerBlockType("post-grid/post-grid", {
 
             {item.id == 'taxQuery' &&
               <div >
-
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryargsTaxonomy"}>
-                  <p> <span className='underline'>Taxonomy Query</span> Only avilable in Premium</p>
-                </PGproWrapper>
-
-
-
-                <div className={(postGridData.license_status != 'active') ? '' : ''}>
+                <div className={(proInfo.status != 'active') ? '' : ''}>
 
 
                   <div
@@ -3475,9 +3486,7 @@ registerBlockType("post-grid/post-grid", {
             {(item.id == 'postPassword') &&
 
               <div>
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryArgs"}>
-                  <p> <span className='underline'>Post Parent, Post Password</span> Only avilable in Premium</p>
-                </PGproWrapper>
+
                 <InputControl
                   value={item.val}
                   onChange={(newVal) => updateQueryPram(newVal, index)}
@@ -3489,9 +3498,7 @@ registerBlockType("post-grid/post-grid", {
 
             {(item.id == 'postNameIn' || item.id == 'authorIn' || item.id == 'authorNotIn' || item.id == 'postNotIn' || item.id == 'postIn' || item.id == 'postParentNotIn' || item.id == 'tagNotIn' || item.id == 'tagAnd' || item.id == 'tagIn' || item.id == 'postParentIn' || item.id == 'tagSlugIn' || item.id == 'tagSlugAnd' || item.id == 'categoryNotIn' || item.id == 'categoryIn' || item.id == 'categoryAnd') &&
               <div>
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryArgs"}>
-                  <p>Only avilable in Premium</p>
-                </PGproWrapper>
+
                 <InputControl
                   value={item.val}
                   placeholder="Comma separated"
@@ -3548,21 +3555,21 @@ registerBlockType("post-grid/post-grid", {
               <div >
 
 
-                <SelectControl
-                  style={{ margin: 0 }}
-                  label=""
-                  multiple
-                  value={item.val}
+
+                <PGinputSelect
+                  val={item.val}
                   options={[
                     { label: 'image/jpeg', value: 'jpg|jpeg|jpe' },
                     { label: 'image/gif', value: 'gif' },
                     { label: 'image/png', value: 'png' },
                     { label: 'image/bmp', value: 'bmp' },
-
-
-                  ]}
-                  onChange={(newVal) => updateQueryPram(newVal, index)}
+                  ]} multiple={true}
+                  onChange={(newVal) => {
+                    updateQueryPram(newVal, index)
+                  }}
                 />
+
+
 
               </div>}
             {(item.id == 'cacheResults' || item.id == 'nopaging' || item.id == 'hasPassword' || item.id == 'updatePostMetaCache' || item.id == 'updatePostTermCache') &&
@@ -3587,13 +3594,6 @@ registerBlockType("post-grid/post-grid", {
 
             {(item.id == 'ignoreStickyPosts') &&
               <div >
-
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-stickyPost"}>
-                  <p> <span className='underline'>Ignore Sticky Posts</span> Only avilable in Premium</p>
-                </PGproWrapper>
-
-
-
 
                 <SelectControl
                   style={{ margin: 0 }}
@@ -3825,16 +3825,12 @@ registerBlockType("post-grid/post-grid", {
 
                         <span className='mx-1 inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer' >#{x.post_id}</span>
 
-                        {/* {(postGridData.license_status != 'active') && (
-                          
-                        )} */}
-
 
                         {layoutData.source == 'library' && (
 
                           <>
                             <div className='mx-1 relative inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer' onClick={ev => {
-                              if (postGridData.license_status == 'active') {
+                              if (proInfo.status == 'active') {
 
                                 if (!importLayoutOpen.isOpen) {
                                   setlayoutImporting(true);
@@ -3850,7 +3846,7 @@ registerBlockType("post-grid/post-grid", {
                             }} ><span class="dashicons dashicons-download"></span> Import</div>
                             {importLayoutOpen.id == x.post_id && importLayoutOpen.isOpen && (
                               <Popover position="bottom left p-2 ">
-                                {postGridData.license_status != 'active' && (
+                                {proInfo.status != 'active' && (
                                   <div className='w-48 bg-amber-100 px-3 py-2'>
                                     <p className=''> <span className='underline'>Importing Layouts</span> Only avilable in Premium</p>
                                     <p className=''>After import the layout you customize and make your own.</p>
@@ -3859,7 +3855,7 @@ registerBlockType("post-grid/post-grid", {
                                   </div>
                                 )}
 
-                                {postGridData.license_status == 'active' && (
+                                {proInfo.status == 'active' && (
                                   <div className='w-48 bg-sky-300 px-3 py-2'>
 
 
@@ -3924,15 +3920,6 @@ registerBlockType("post-grid/post-grid", {
 
                   Load More
                 </div>
-
-                <PanelRow>
-
-
-
-
-                </PanelRow>
-
-
               </PanelBody>
 
               <PanelBody title="Query Post" initialOpen={false}>
@@ -4260,13 +4247,7 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-                {(postGridData.license_status != 'active') && grid.options.itemCss[breakPointX] != undefined && Object.entries(grid.options.itemCss[breakPointX]).length > 0 && (
 
-                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-nthcss"}>
-                    <p> <span className='underline'>N'th Item CSS</span> Only avilable in Premium</p>
-                  </PGproWrapper>
-
-                )}
 
                 <div >
 
@@ -4278,7 +4259,7 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-                        if (postGridData != null && postGridData.license_status == 'active') {
+                        if (proInfo.status == 'active') {
 
                           if (grid.options.itemCss[breakPointX] != undefined) {
 
@@ -4308,12 +4289,13 @@ registerBlockType("post-grid/post-grid", {
 
                     >
                       Add
-                      {postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white'>
+                      {!proInfo.proInstalled && (<span className='bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white'>
                         <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS'}>Pro</a>
                       </span>)}
                     </Button>
                   </PanelRow>
 
+                  {JSON.stringify(proInfo)}
 
 
 
@@ -4432,11 +4414,8 @@ registerBlockType("post-grid/post-grid", {
                         <div className='cursor-pointer relative hover:bg-blue-200 my-3' onClick={(_ev) => {
 
 
-                          //setAttributes({ grid: { options: x.data } })
                           if (x.isPro) {
-                            if (postGridData != null && postGridData.license_status == 'active') {
-                              setAttributes({ grid: x.data })
-                            }
+                            //setAttributes({ grid: x.data })
                           } else {
                             setAttributes({ grid: x.data })
                           }
@@ -4445,7 +4424,7 @@ registerBlockType("post-grid/post-grid", {
 
                         }}>
 
-                          {x.isPro && postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white'>
+                          {x.isPro && (<span className='bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white'>
                             <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
                           </span>)}
                           {x.icon != undefined && (
@@ -4844,22 +4823,6 @@ registerBlockType("post-grid/post-grid", {
 
 
                 {(pagination.options.type.length != 0) && (<div className='bg-gray-500 text-white px-3 py-2 my-5'>{(paginationTypes[pagination.options.type] != undefined) ? paginationTypes[pagination.options.type].label : ''}</div>)}
-
-
-
-                {((pagination.options.type == 'ajax' || pagination.options.type == 'next_previous' || pagination.options.type == 'loadmore' || pagination.options.type == 'infinite')) && (
-
-
-                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-pagination_type"}>
-                    <p> <span className='underline'>Ajax, Next Previous, Load More, Infinite</span> Only avilable in Premium</p>
-                  </PGproWrapper>
-
-
-
-                )}
-
-
-
 
 
 
@@ -5301,12 +5264,6 @@ registerBlockType("post-grid/post-grid", {
 
                   }} />
                 </PanelRow>
-
-                {lazyLoad.options.srcUrl.length > 0 && (
-                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-lazyload"}>
-                    <p> <span className='underline'>Lazy Load Image</span> Only avilable in Premium</p>
-                  </PGproWrapper>
-                )}
 
 
                 <label for="">Lazy Load Image</label>

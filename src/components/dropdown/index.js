@@ -30,19 +30,7 @@ class PGDropdown extends Component {
       const [filteredOptions, setfilteredOptions] = useState([]);
 
 
-      const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
 
-      useEffect(() => {
-
-        setPostGridData(window.PostGridPluginData);
-
-      }, [window.PostGridPluginData]);
-      // useEffect(() => {
-
-      // }, [keyword]);
-
-
-      //console.log(typeof options);
 
 
 
@@ -144,9 +132,9 @@ class PGDropdown extends Component {
 
 
                         if (x.isPro == true) {
-                          if (postGridData != null && postGridData.license_status == 'active') {
-                            onChange(x, index)
-                          }
+
+                          alert('Sorry this feature only avilbale in pro');
+
 
                         } else {
                           onChange(x, index)
@@ -160,7 +148,7 @@ class PGDropdown extends Component {
                             {x.icon != undefined && <span className=''><RawHTML>{x.icon}</RawHTML></span>}
                             <span className=''>{x.label} </span>
                           </div>
-                          {x.isPro && postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>
+                          {x.isPro && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>
                             <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
                           </span>)}
                         </div>
@@ -174,14 +162,26 @@ class PGDropdown extends Component {
                     return (
 
                       <div className=' border-b cursor-pointer hover:bg-slate-200 p-2 block' onClick={ev => {
-                        onChange(x, index)
+                        //onChange(x, index)
+
+                        if (x.isPro == true) {
+
+                          alert('Sorry this feature only avilbale in pro');
+
+
+                        } else {
+                          onChange(x, index)
+                        }
+
+
+
                       }} >
                         <div className='flex justify-between'>
                           <div >
                             {x.icon != undefined && <span className=''><RawHTML>{x.icon}</RawHTML></span>}
                             <span className=''>{x.label} </span>
                           </div>
-                          {x.isPro && postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>Pro</span>)}
+                          {x.isPro && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>Pro</span>)}
 
                         </div>
 
@@ -206,14 +206,26 @@ class PGDropdown extends Component {
                     if (x.exclude == false) {
                       return (
                         <div className='  cursor-pointer hover:bg-slate-400 p-2 block' onClick={ev => {
-                          onChange(x, index)
+                          //onChange(x, index)
+
+
+                          if (x.isPro == true) {
+
+                            alert('Sorry this feature only avilbale in pro');
+
+
+                          } else {
+                            onChange(x, index)
+                          }
+
+
                         }} >
                           <div className='flex justify-between'>
                             <div >
                               {x.icon != undefined && <span className=''><RawHTML>{x.icon}</RawHTML></span>}
                               <span className=''>{x.label} </span>
                             </div>
-                            {x.isPro && postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>Pro</span>)}
+                            {x.isPro && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>Pro</span>)}
                           </div>
                           {x.description != undefined && x.description.length > 0 && <div className='text-xs text-slate-400'>{x.description}</div>}
                         </div>
@@ -226,14 +238,25 @@ class PGDropdown extends Component {
                     if (x.exclude == false) {
                       return (
                         <div className='  cursor-pointer hover:bg-slate-400 p-2 block' onClick={ev => {
-                          onChange(x, index)
+                          //onChange(x, index)
+
+                          if (x.isPro == true) {
+
+                            alert('Sorry this feature only avilbale in pro');
+
+
+                          } else {
+                            onChange(x, index)
+                          }
+
+
                         }} >
                           <div className='flex justify-between'>
                             <div >
                               {x.icon != undefined && <span className=''><RawHTML>{x.icon}</RawHTML></span>}
                               <span className=''>{x.label} </span>
                             </div>
-                            {x.isPro && postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>Pro</span>)}
+                            {x.isPro && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>Pro</span>)}
                           </div>
                           {x.description != undefined && x.description.length > 0 && <div className='text-xs text-slate-400'>{x.description}</div>}
                         </div>

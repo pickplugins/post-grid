@@ -34,6 +34,7 @@
 .settings-tabs .collapsible .header {
     background: #eee;
     padding: 8px 10px;
+    display: flex;
 }
 
 .settings-tabs .collapsible .header span {
@@ -51,6 +52,7 @@
 .settings-tabs .collapsible.active .content {
     display: block;
 }
+
 
 
 
@@ -357,6 +359,7 @@
 
 .field-repeatable-wrapper .title-text {
     cursor: pointer;
+    width: 90%;
 }
 
 .field-repeatable-wrapper .add-repeat-field {

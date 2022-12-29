@@ -96,6 +96,18 @@ class BlockPostGridRest
             )
         );
 
+
+
+        register_rest_route(
+            'post-grid/v2',
+            '/get_pro_info',
+            array(
+                'methods'  => 'POST',
+                'callback' => array($this, 'get_pro_info'),
+                'permission_callback' => '__return_true',
+            )
+        );
+
         register_rest_route(
             'post-grid/v2',
             '/get_post_meta',
@@ -1293,6 +1305,34 @@ class BlockPostGridRest
 
         die(wp_json_encode($response));
     }
+
+
+    /**
+     * Return get_pro_info.
+     *
+     * @since 1.0.0
+     *
+     * @param WP_REST_Request $tax_data The tax data.
+     */
+    public function get_pro_info($request)
+    {
+
+
+        $response = [];
+        $post_grid_license = get_option('post_grid_license');
+                
+        $response['proInstalled'] = false;
+        $response['status'] = (isset($post_grid_license['license_status']) && !empty($post_grid_license['license_status'])) ? $post_grid_license['license_status'] : 'inactive';
+
+        if ( is_plugin_active( 'post-grid-pro/post-grid-pro.php' ) ) {
+            $response['proInstalled'] = true;
+        }
+
+
+
+        die(wp_json_encode($response));
+    }
+
 
 
     /**

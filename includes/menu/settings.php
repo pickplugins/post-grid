@@ -13,47 +13,11 @@ $post_grid_settings_tab[] = array(
     'active' => ($current_tab == 'general') ? true : false,
 );
 
-//$post_grid_settings_tab[] = array(
-//    'id' => 'templates',
-//    'title' => sprintf(__('%s Templates','post-grid'),'<i class="far fa-newspaper"></i>'),
-//    'priority' => 3,
-//    'active' => ($current_tab == 'templates') ? true : false,
-//);
-
-// $post_grid_settings_tab[] = array(
-//     'id' => 'help_support',
-//     'title' => sprintf(__('%s Help & support', 'post-grid'), '<i class="fas fa-hands-helping"></i>'),
-//     'priority' => 90,
-//     'active' => ($current_tab == 'help_support') ? true : false,
-// );
-
-
-
-// $post_grid_settings_tab[] = array(
-//     'id' => 'buy_pro',
-//     'title' => sprintf(__('%s Buy Pro', 'post-grid'), '<i class="fas fa-store"></i>'),
-//     'priority' => 95,
-//     'active' => ($current_tab == 'buy_pro') ? true : false,
-// );
-
-
-// $post_grid_settings_tab[] = array(
-//     'id' => 'disable_blocks',
-//     'title' => sprintf(__('%s Disable Blocks', 'post-grid'), '<i class="fas fa-store"></i>'),
-//     'priority' => 95,
-//     'active' => ($current_tab == 'disable_blocks') ? true : false,
-// );
-
-$post_grid_settings_tab[] = array(
-    'id' => 'license_free',
-    'title' => __('<i class="fas fa-laptop-code"></i> License', 'post-grid'),
-    'priority' => 90,
-    'active' => ($current_tab == 'license_free') ? true : false,
-);
-
-
 
 $post_grid_settings_tab = apply_filters('post_grid_settings_tabs', $post_grid_settings_tab);
+
+
+
 
 $tabs_sorted = array();
 

@@ -117,6 +117,9 @@ if(!function_exists('post_grid_layout_metabox_content_layout_builder')){
                     'items'=>array(
                         'wrapper_start'=>array('name' =>__('Wrapper start','post-grid')),
                         'wrapper_end'=>array('name' =>__('Wrapper end','post-grid')),
+                        'wrapper_link_start'=>array('name' =>__('Wrapper Link start','post-grid')),
+                        'wrapper_link_end'=>array('name' =>__('Wrapper Link end','post-grid')),
+
                         'media'=>array('name' =>__('Media','post-grid')),
 
                         'custom_text'=>array('name' =>__('Custom text','post-grid')),

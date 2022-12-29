@@ -1,6 +1,229 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
 
+add_action('post_grid_layout_element_option_wrapper_link_start', 'post_grid_layout_element_option_wrapper_link_start');
+
+
+function post_grid_layout_element_option_wrapper_link_start($parameters)
+{
+
+    $settings_tabs_field = new settings_tabs_field();
+
+    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
+    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
+    $element_index = isset($parameters['index']) ? $parameters['index'] : '';
+
+    $wrapper_id = isset($element_data['wrapper_id']) ? $element_data['wrapper_id'] : '';
+    $wrapper_class = isset($element_data['wrapper_class']) ? $element_data['wrapper_class'] : '';
+    $margin = isset($element_data['margin']) ? $element_data['margin'] : '';
+
+
+    $css = isset($element_data['css']) ? $element_data['css'] : '';
+    $css_hover = isset($element_data['css_hover']) ? $element_data['css_hover'] : '';
+
+
+?>
+    <div class="item wrapper_link_start">
+        <div class="element-title header ">
+            <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+            <span class="sort"><i class="fas fa-sort"></i></span>
+
+            <span class="expand"><?php echo __('Wrapper Link start', 'post-grid'); ?></span>
+
+            <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
+
+        </div>
+        <div class="element-options options">
+
+            <?php
+
+            $args = array(
+                'id'        => 'wrapper_id',
+                'parent' => $input_name . '[wrapper_link_start]',
+                'title'        => __('Wrapper id', 'post-grid'),
+                'details'    => __('Write wrapper id, ex: my-unique-id.', 'post-grid'),
+                'type'        => 'text',
+                'value'        => $wrapper_id,
+                'default'        => '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+            $args = array(
+                'id'        => 'wrapper_class',
+                'parent' => $input_name . '[wrapper_link_start]',
+                'title'        => __('Wrapper class', 'post-grid'),
+                'details'    => __('Write wrapper class, ex: layer-thumbnail', 'post-grid'),
+                'type'        => 'text',
+                'value'        => $wrapper_class,
+                'default'        => '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+
+            $args = array(
+                'id'        => 'margin',
+                'css_id'        => $element_index . '_margin',
+                'parent' => $input_name . '[wrapper_link_start]',
+                'title'        => __('Margin', 'post-grid'),
+                'details'    => __('Set margin.', 'post-grid'),
+                'type'        => 'text',
+                'value'        => $margin,
+                'default'        => '',
+                'placeholder'        => '5px 0',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'        => 'css',
+                'css_id'        => $element_index . '_css',
+                'parent' => $input_name . '[wrapper_link_start]',
+                'title'        => __('Custom CSS', 'post-grid'),
+                'details'    => __('Set csutom CSS.', 'post-grid'),
+                'type'        => 'textarea',
+                'value'        => $css,
+                'default'        => '',
+                'placeholder'        => '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            $args = array(
+                'id'        => 'css_hover',
+                'css_id'        => $element_index . '_css_hover',
+                'parent' => $input_name . '[wrapper_link_start]',
+                'title'        => __('Hover CSS', 'post-grid'),
+                'details'    => __('Set hover custom CSS.', 'post-grid'),
+                'type'        => 'textarea',
+                'value'        => $css_hover,
+                'default'        => '',
+                'placeholder'        => '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            ob_start();
+            ?>
+            <textarea readonly type="text" onclick="this.select();"> <?php echo esc_attr('.element_'.$element_index); ?>{}</textarea>
+            <?php
+
+            $html = ob_get_clean();
+
+            $args = array(
+                'id'        => 'use_css',
+                'title'        => __('Use of CSS', 'post-grid'),
+                'details'    => __('Use following class selector to add custom CSS for this element.', 'post-grid'),
+                'type'        => 'custom_html',
+                'html'        => $html,
+
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+            ?>
+
+        </div>
+    </div>
+<?php
+
+}
+
+
+
+
+add_action('post_grid_layout_element_wrapper_link_start', 'post_grid_layout_element_wrapper_link_start', 10);
+function post_grid_layout_element_wrapper_link_start($args)
+{
+
+    $index = isset($args['index']) ? $args['index'] : '';
+    $element_class = !empty($index) ? 'element_' . $index : '';
+    $post_id = isset($args['post_id']) ? $args['post_id'] : '';
+
+    $element = isset($args['element']) ? $args['element'] : array();
+    $wrapper_class = isset($element['wrapper_class']) ? $element['wrapper_class'] : '';
+    $wrapper_id = isset($element['wrapper_id']) ? $element['wrapper_id'] : '';
+
+
+
+?>
+    <a class="<?php echo esc_attr($wrapper_class); ?> <?php echo esc_attr($element_class); ?>" id="<?php echo esc_attr($wrapper_id); ?>" href="<?php echo esc_url_raw(get_permalink( $post_id )); ?>">
+
+
+    <?php
+
+}
+
+
+add_action('post_grid_layout_element_option_wrapper_link_end', 'post_grid_layout_element_option_wrapper_link_end');
+
+
+function post_grid_layout_element_option_wrapper_link_end($parameters)
+{
+
+    $settings_tabs_field = new settings_tabs_field();
+
+    $input_name = isset($parameters['input_name']) ? $parameters['input_name'] : '{input_name}';
+    $element_data = isset($parameters['element_data']) ? $parameters['element_data'] : array();
+
+    $wrapper_id = isset($element_data['wrapper_id']) ? $element_data['wrapper_id'] : '';
+
+    ?>
+        <div class="item wrapper_link_end">
+            <div class="element-title header ">
+                <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
+                <span class="sort"><i class="fas fa-sort"></i></span>
+
+                <span class="expand"><?php echo __('Wrapper Link end', 'post-grid'); ?></span>
+                <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
+            </div>
+            <div class="element-options options">
+
+                <?php
+
+                $args = array(
+                    'id'        => 'wrapper_id',
+                    'wraper_class'        => 'hidden',
+
+                    'parent' => $input_name . '[wrapper_link_end]',
+                    'title'        => __('Wrapper id', 'post-grid'),
+                    'details'    => __('Write wrapper id, ex: div, p, span.', 'post-grid'),
+                    'type'        => 'hidden',
+                    'value'        => $wrapper_id,
+                    'default'        => '',
+                );
+
+                $settings_tabs_field->generate_field($args);
+
+
+
+
+
+                ?>
+
+            </div>
+        </div>
+    <?php
+
+}
+
+
+
+add_action('post_grid_layout_element_wrapper_link_end', 'post_grid_layout_element_wrapper_link_end', 10);
+function post_grid_layout_element_wrapper_link_end($args)
+{
+
+
+    ?>
+    </a>
+<?php
+
+}
+
+
 
 
 add_action('post_grid_layout_element_option_wrapper_start', 'post_grid_layout_element_option_wrapper_start');
@@ -865,11 +1088,13 @@ function post_grid_layout_element_css_title($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?>  {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?>
+            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
+            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
+            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
     </style>
 <?php
@@ -1209,7 +1434,7 @@ function post_grid_layout_element_css_title_link($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -1811,7 +2036,7 @@ function post_grid_layout_element_css_excerpt($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -2169,7 +2394,7 @@ function post_grid_layout_element_css_excerpt_read_more($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -2483,7 +2708,7 @@ function post_grid_layout_element_css_read_more($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?> !important;
             ;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?> !important;
@@ -4004,7 +4229,7 @@ function post_grid_layout_element_css_post_date($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4321,7 +4546,7 @@ function post_grid_layout_element_css_author($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4629,7 +4854,7 @@ function post_grid_layout_element_css_author_link($args)
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
 
-        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php endif; ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?> {
             <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -4974,7 +5199,7 @@ function post_grid_layout_element_css_categories($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?> {
             <?php if (!empty($link_color)) : ?>color: <?php echo esc_attr($link_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -5286,7 +5511,7 @@ function post_grid_layout_element_css_tags($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?> {
             <?php if (!empty($link_color)) : ?>color: <?php echo esc_attr($link_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
@@ -5805,7 +6030,7 @@ function post_grid_layout_element_css_share_button($args)
             <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
-        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>a {
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index.' a'); ?> {
             <?php if (!empty($icon_color)) : ?>color: <?php echo esc_attr($icon_color);  ?>;
             <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
             <?php endif; ?><?php if (!empty($icon_margin)) : ?>margin: <?php echo esc_attr($icon_margin);  ?>;

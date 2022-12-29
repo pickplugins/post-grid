@@ -1,4 +1,7 @@
-const gridLayouts = [
+import { applyFilters } from '@wordpress/hooks';
+
+
+const gridLayoutsBasic = [
     {
         thumb: '', title: '3 Col, 0 Gap', data: { "options": { "gridTemplateColumns": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "gridTemplateRows": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "colGap": { "val": 1, "unit": "em" }, "rowGap": { "val": 1, "unit": "em" }, "itemCss": [] }, "styles": { "gridTemplateColumns": { "Desktop": [{ "val": "1", "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "Tablet": [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], "Mobile": [{ "val": 1, "unit": "fr" }] }, "gridTemplateRows": {}, "colGap": { "Desktop": { "val": "0", "unit": "em" }, "Mobile": { "val": "0", "unit": "em" }, "Tablet": { "val": "0", "unit": "em" } }, "rowGap": { "Desktop": { "val": "0", "unit": "em" }, "Mobile": { "val": "0", "unit": "em" }, "Tablet": { "val": "0", "unit": "em" } }, "textAlign": {}, "color": {}, "bgColor": {}, "padding": {}, "margin": {} } }
         , icon:
@@ -192,5 +195,10 @@ const gridLayouts = [
 
 
 ]
+
+
+let gridLayouts = applyFilters('gridLayouts', gridLayoutsBasic);
+
+
 
 export default gridLayouts;

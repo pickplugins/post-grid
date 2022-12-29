@@ -1,33 +1,13 @@
-const queryPrams = [
+import { applyFilters } from '@wordpress/hooks';
+
+
+const queryPramsBasic = [
   { val: ['post'], multiple: false, id: 'postType', label: 'Post Types', description: "Select Post Types to Query" },
-  { val: [], multiple: false, id: 'taxQuery', label: 'Tax Query', description: "Taxonomies query arguments", isPro: true },
-  { val: 'OR', multiple: false, id: 'taxQueryRelation', label: 'Tax Query Relation', description: "Taxonomies query relation" },
-
-  { val: [], multiple: false, id: 'metaQuery', label: 'Meta Query', description: "Meta field query", isPro: true },
   { val: '', multiple: false, id: 's', label: 'Keyword', description: "Search keyword, ex: hello" },
-
   { val: [], multiple: false, id: 'postStatus', label: 'Post status', description: "Query post by post status" },
   { val: '', multiple: false, id: 'order', label: 'Order', description: "Post query order" },
   { val: [], multiple: false, id: 'orderby', label: 'Orderby', description: "Post query orderby" },
   { val: '', multiple: false, id: 'metaKey', label: 'Meta fields key', description: "Post query by meta fields key" },
-
-
-  // Date Parameters
-  { val: [], multiple: false, id: 'dateQuery', label: 'Date Query', description: "Post query by date", isPro: true },
-  { val: '', multiple: false, id: 'year', label: 'Year', description: "Post query by year" },
-  { val: '', multiple: false, id: 'monthnum', label: 'Month', description: "Post query by month" },
-  { val: '', multiple: false, id: 'w', label: 'Week', description: "Post query by week" },
-  { val: '', multiple: false, id: 'day', label: 'Day', description: "Post query by day" },
-  { val: '', multiple: false, id: 'hour', label: 'Hour', description: "Post query by hour" },
-  { val: '', multiple: false, id: 'minute', label: 'Miniute', description: "Post query by miniute" },
-  { val: '', multiple: false, id: 'second', label: 'Second', description: "Post query by second" },
-  { val: '', multiple: false, id: 'm', label: 'Month', description: "Post query by month" },
-
-  // Author Parameters
-  { val: '', multiple: false, id: 'author', label: 'Author', description: "Post query by Author ID" },
-  { val: '', multiple: false, id: 'authorName', label: 'Author Name', description: "Post query by Author Name" },
-  { val: [], multiple: false, id: 'authorIn', label: 'Author In', description: "Post query by Author IDs", isPro: true },
-  { val: [], multiple: false, id: 'authorNotIn', label: 'Author Not In', description: "Post query by exluded Author IDs", isPro: true },
 
   // Category Parameters
   { val: '', multiple: false, id: 'cat', label: 'Category ID', description: "Post query by Category ID" },
@@ -45,6 +25,26 @@ const queryPrams = [
   { val: [], multiple: false, id: 'tagNotIn', label: 'Tag Not In', description: "Post query by excluded Tag ids" },
   { val: [], multiple: false, id: 'tagSlugAnd', label: 'Tag Slug And', description: "Post query by Tags slug", isPro: true },
   { val: [], multiple: false, id: 'tagSlugIn', label: 'Tag Slug In', description: "Post query by excluded Tags slug", isPro: true },
+
+  { val: [], multiple: false, id: 'taxQuery', label: 'Tax Query', description: "Taxonomies query arguments", isPro: true },
+  { val: 'OR', multiple: false, id: 'taxQueryRelation', label: 'Tax Query Relation', description: "Taxonomies query relation" },
+
+  // Date Parameters
+  { val: [], multiple: false, id: 'dateQuery', label: 'Date Query', description: "Post query by date", isPro: true },
+  { val: '', multiple: false, id: 'year', label: 'Year', description: "Post query by year" },
+  { val: '', multiple: false, id: 'monthnum', label: 'Month', description: "Post query by month" },
+  { val: '', multiple: false, id: 'w', label: 'Week', description: "Post query by week" },
+  { val: '', multiple: false, id: 'day', label: 'Day', description: "Post query by day" },
+  { val: '', multiple: false, id: 'hour', label: 'Hour', description: "Post query by hour" },
+  { val: '', multiple: false, id: 'minute', label: 'Miniute', description: "Post query by miniute" },
+  { val: '', multiple: false, id: 'second', label: 'Second', description: "Post query by second" },
+  { val: '', multiple: false, id: 'm', label: 'Month', description: "Post query by month" },
+
+  // Author Parameters
+  { val: '', multiple: false, id: 'author', label: 'Author', description: "Post query by Author ID" },
+  { val: '', multiple: false, id: 'authorName', label: 'Author Name', description: "Post query by Author Name" },
+  { val: [], multiple: false, id: 'authorIn', label: 'Author In', description: "Post query by Author IDs", isPro: true },
+  { val: [], multiple: false, id: 'authorNotIn', label: 'Author Not In', description: "Post query by exluded Author IDs", isPro: true },
 
   { val: '', multiple: false, id: 'p', label: 'Post id', description: "Post query by single post id" },
   { val: '', multiple: false, id: 'name', label: 'Name', description: "Post query by post slug" },
@@ -73,7 +73,7 @@ const queryPrams = [
   { val: '', multiple: false, id: 'metaValue', label: 'Meta Value', description: "Post query by custom field value" },
   { val: '', multiple: false, id: 'metaValueNum', label: 'Meta Value Num', description: "Post query by custom field value for number types" },
   { val: '', multiple: false, id: 'metaCompare', label: 'Meta Compare', description: "Meta query compare" },
-  { val: [], multiple: false, id: 'metaQuery', label: 'Meta Query', description: "Advance meta fields query" },
+  { val: [], multiple: false, id: 'metaQuery', label: 'Meta Query', description: "Advance meta fields query", isPro: true },
 
   { val: 'readable', multiple: false, id: 'perm', label: 'Perm', description: "User permission parameter" },
   { val: [], multiple: false, id: 'postMimeType', label: 'Post Mime Type', description: "Post query by allwed post mime types" },
@@ -82,6 +82,8 @@ const queryPrams = [
   { val: false, multiple: false, id: 'updatePostTermCache', label: 'Update Post Term Cache', description: "Enable Post term information cache" },
 
 ];
+
+let queryPrams = applyFilters('queryPrams', queryPramsBasic);
 
 
 export default queryPrams;

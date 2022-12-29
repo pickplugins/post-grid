@@ -168,6 +168,8 @@ class PGBlockPostGridFilterable
                             "showSort" => "",
                             "showRandom" => "",
                             "showAll" => "yes",
+                            "filterToggle" => "no",
+
                             "perPage" => 6,
 
                             "showClear" => "",
@@ -785,6 +787,8 @@ class PGBlockPostGridFilterable
         $filterableOptions = isset($filterable['options']) ? $filterable['options'] : [];
         $filterableFilters = isset($filterableOptions['filters']) ? $filterableOptions['filters'] : [];
         $filterableShowSort = isset($filterableOptions['showSort']) ? $filterableOptions['showSort'] : 'no';
+        $filterToggle = isset($filterableOptions['filterToggle']) ? $filterableOptions['filterToggle'] : 'no';
+
 
         $filterableShowRandom = isset($filterableOptions['showRandom']) ? $filterableOptions['showRandom'] : 'no';
         $filterableShowAll = isset($filterableOptions['showAll']) ? $filterableOptions['showAll'] : 'yes';
@@ -1072,7 +1076,7 @@ class PGBlockPostGridFilterable
                                             $itemTitle = isset($item['title']) ? $item['title'] : '';
                                             $itemCount = isset($item['count']) ? $item['count'] : '';
                                     ?>
-                                        <span class="pg-filter pg-filter-<?php echo  esc_attr($blockId); ?>" <?php if ($multifilter) : ?> data-toggle="<?php echo  '.' . esc_attr($itemSlug); ?>" <?php else : ?> data-filter="<?php echo  '.' . esc_attr($itemSlug); ?>" <?php endif; ?>>
+                                        <span class="pg-filter pg-filter-<?php echo  esc_attr($blockId); ?>" <?php if ($filterToggle=='yes') : ?> data-toggle="<?php echo  '.' . esc_attr($itemSlug); ?>" <?php else : ?> data-filter="<?php echo  '.' . esc_attr($itemSlug); ?>" <?php endif; ?>>
                                             <?php echo esc_html($itemTitle) ?>
                                             <?php echo ($groupshowPostCount == 'yes') ?  '(' . esc_html($itemCount) . ')' : '' ?>
                                         </span>

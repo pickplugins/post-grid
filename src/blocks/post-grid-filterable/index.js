@@ -40,6 +40,7 @@ import PGStyles from '../../components/styles'
 import PGcssTextAlign from '../../components/css-text-align'
 import PGcssDisplay from '../../components/css-display'
 import PGcssCursor from '../../components/css-cursor'
+import PGinputSelect from '../../components/input-select'
 
 
 import PGTutorials from '../../components/tutorials'
@@ -216,7 +217,7 @@ registerBlockType("post-grid/post-grid-filterable", {
       default: {
 
         options: {
-          filters: [], allText: 'All', logicWithinGroup: '', logicBetweenGroups: '', multifilter: false, showSort: '', showRandom: '', showAll: 'yes', showClear: '', activeFilter: '', parPage: 6,
+          filters: [], allText: 'All', logicWithinGroup: '', logicBetweenGroups: '', multifilter: false, showSort: '', filterToggle: 'no', showRandom: '', showAll: 'yes', showClear: '', activeFilter: '', parPage: 6,
         },
         styles:
         {
@@ -2899,13 +2900,13 @@ registerBlockType("post-grid/post-grid-filterable", {
             {item.id == 'postType' && <div className={item.id == 'postType' ? '' : 'hidden'}>
 
 
-              <SelectControl
-                style={{ height: '75px' }}
-                label=""
-                multiple
-                value={item.val}
+              <PGinputSelect
+                val={item.val}
                 options={postTypes}
-                onChange={(newVal) => updateQueryPram(newVal, index)}
+                multiple={true}
+                onChange={(newVal) => {
+                  updateQueryPram(newVal, index)
+                }}
               />
 
 
@@ -2915,11 +2916,8 @@ registerBlockType("post-grid/post-grid-filterable", {
             {item.id == 'postStatus' &&
               <div className={item.id == 'postStatus' ? '' : 'hidden'}>
 
-                <SelectControl
-                  style={{ height: '75px' }}
-                  label=""
-                  multiple
-                  value={item.val}
+                <PGinputSelect
+                  val={item.val}
                   options={[
                     { label: 'Publish', value: 'publish' },
                     { label: 'Pending', value: 'pending' },
@@ -2930,12 +2928,11 @@ registerBlockType("post-grid/post-grid-filterable", {
                     { label: 'Inherit', value: 'inherit' },
                     { label: 'Trash', value: 'trash' },
                     { label: 'Any', value: 'any' },
-
-
-
-
                   ]}
-                  onChange={(newVal) => updateQueryPram(newVal, index)}
+                  multiple={true}
+                  onChange={(newVal) => {
+                    updateQueryPram(newVal, index)
+                  }}
                 />
 
 
@@ -2964,35 +2961,33 @@ registerBlockType("post-grid/post-grid-filterable", {
 
               <div className={item.id == 'orderby' ? '' : 'hidden'}>
 
-                <SelectControl
-                  style={{ height: '75px' }}
-                  label=""
-                  multiple
-                  value={item.val}
+
+                <PGinputSelect
+                  val={item.val}
                   options={[
                     { label: 'None', value: 'none' },
                     { label: 'ID', value: 'ID' },
-                    { label: 'author', value: 'author' },
-                    { label: 'title', value: 'title' },
-                    { label: 'name', value: 'name' },
-
-                    { label: 'type', value: 'type' },
-                    { label: 'date', value: 'date' },
-                    { label: 'modified', value: 'modified' },
-                    { label: 'parent', value: 'parent' },
-                    { label: 'rand', value: 'rand' },
-                    { label: 'comment_count', value: 'comment_count' },
-                    { label: 'relevance', value: 'relevance' },
-                    { label: 'menu_order', value: 'menu_order' },
-                    { label: 'meta_value', value: 'meta_value' },
-                    { label: 'meta_value_num', value: 'meta_value_num' },
+                    { label: 'Author', value: 'author' },
+                    { label: 'Title', value: 'title' },
+                    { label: 'Name', value: 'name' },
+                    { label: 'Type', value: 'type' },
+                    { label: 'Date', value: 'date' },
+                    { label: 'Modified', value: 'modified' },
+                    { label: 'Parent', value: 'parent' },
+                    { label: 'Random', value: 'rand' },
+                    { label: 'Comment Count', value: 'comment_count' },
+                    { label: 'Relevance', value: 'relevance' },
+                    { label: 'Menu Order', value: 'menu_order' },
+                    { label: 'Meta Value(String)', value: 'meta_value' },
+                    { label: 'Meta Value(Number)', value: 'meta_value_num' },
                     { label: 'post__in', value: 'post__in' },
                     { label: 'post_name__in', value: 'post_name__in' },
                     { label: 'post_parent__in', value: 'post_parent__in' },
-
-
                   ]}
-                  onChange={(newVal) => updateQueryPram(newVal, index)}
+                  multiple={true}
+                  onChange={(newVal) => {
+                    updateQueryPram(newVal, index)
+                  }}
                 />
 
               </div>}
@@ -3888,21 +3883,20 @@ registerBlockType("post-grid/post-grid-filterable", {
               <div >
 
 
-                <SelectControl
-                  style={{ margin: 0 }}
-                  label=""
-                  multiple
-                  value={item.val}
+
+                <PGinputSelect
+                  val={item.val}
                   options={[
                     { label: 'image/jpeg', value: 'jpg|jpeg|jpe' },
                     { label: 'image/gif', value: 'gif' },
                     { label: 'image/png', value: 'png' },
                     { label: 'image/bmp', value: 'bmp' },
-
-
-                  ]}
-                  onChange={(newVal) => updateQueryPram(newVal, index)}
+                  ]} multiple={true}
+                  onChange={(newVal) => {
+                    updateQueryPram(newVal, index)
+                  }}
                 />
+
 
               </div>}
             {(item.id == 'cacheResults' || item.id == 'nopaging' || item.id == 'hasPassword' || item.id == 'updatePostMetaCache' || item.id == 'updatePostTermCache') &&
@@ -5412,26 +5406,48 @@ registerBlockType("post-grid/post-grid-filterable", {
                 </PanelRow>
 
                 <PanelRow >
-                  <label for="">Logic Within Group </label>
+                  <label for="">Enable Filter Toggle </label>
 
                   <SelectControl
                     label=""
-                    value={filterable.options.logicWithinGroup}
+                    value={filterable.options.filterToggle}
                     options={[
-                      { label: 'OR', value: 'or' },
-                      { label: 'AND', value: 'and' },
+                      { label: 'Yes', value: 'yes' },
+                      { label: 'no', value: 'no' },
 
                     ]}
                     onChange={(newVal) => {
 
-                      var options = { ...filterable.options, logicWithinGroup: newVal }
+                      var options = { ...filterable.options, filterToggle: newVal }
                       setAttributes({ filterable: { ...filterable, options: options } })
                     }
                     }
                   />
                 </PanelRow>
+
+
                 {filterable.options.multifilter && (
                   <>
+                    <PanelRow >
+                      <label for="">Logic Within Group </label>
+
+                      <SelectControl
+                        label=""
+                        value={filterable.options.logicWithinGroup}
+                        options={[
+                          { label: 'OR', value: 'or' },
+                          { label: 'AND', value: 'and' },
+
+                        ]}
+                        onChange={(newVal) => {
+
+                          var options = { ...filterable.options, logicWithinGroup: newVal }
+                          setAttributes({ filterable: { ...filterable, options: options } })
+                        }
+                        }
+                      />
+                    </PanelRow>
+
                     <PanelRow >
                       <label for="">Logic Between Groups </label>
 

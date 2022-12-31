@@ -1268,7 +1268,7 @@ registerBlockType("post-grid/post-title", {
 
 
                               var options = { ...postTitle.options, linkToAuthorMeta: newVal };
-                              setAttributes({ text: { ...text, options: options } });
+                              setAttributes({ postTitle: { ...postTitle, options: options } });
 
                             }}
                           />
@@ -1287,9 +1287,8 @@ registerBlockType("post-grid/post-title", {
                             value={postTitle.options.linkToAuthorMeta}
                             onChange={(newVal) => {
 
-
                               var options = { ...postTitle.options, linkToAuthorMeta: newVal };
-                              setAttributes({ text: { ...text, options: options } });
+                              setAttributes({ postTitle: { ...postTitle, options: options } });
 
                             }}
                           />

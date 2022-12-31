@@ -54403,7 +54403,7 @@ var myStore = wp.data.select('postgrid-shop');
           linkToAuthorMeta: newVal
         };
         setAttributes({
-          text: { ...text,
+          postTitle: { ...postTitle,
             options: options
           }
         });
@@ -54417,7 +54417,7 @@ var myStore = wp.data.select('postgrid-shop');
           linkToAuthorMeta: newVal
         };
         setAttributes({
-          text: { ...text,
+          postTitle: { ...postTitle,
             options: options
           }
         });

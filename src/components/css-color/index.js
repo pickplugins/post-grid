@@ -45,7 +45,7 @@ class PGcssColor extends Component {
             enableAlpha
             onChange={(newVal) => {
 
-              console.log(newVal);
+              //console.log(newVal);
               onChange(newVal, 'color');
 
 

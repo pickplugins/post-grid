@@ -6,6 +6,7 @@ import { createElement, useCallback, memo, useMemo, useState, useEffect } from '
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
+import { applyFilters } from '@wordpress/hooks';
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -204,9 +205,8 @@ registerBlockType("post-grid/post-title", {
     const [customTags, setCustomTags] = useState({});
 
     const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
-    const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
 
-    var linkToArgs = {
+    var linkToArgsBasic = {
       postUrl: { label: 'Post URL', value: 'postUrl' },
       homeUrl: { label: 'Home URL', value: 'homeUrl' },
       authorUrl: { label: 'Author URL', value: 'authorUrl' },
@@ -214,16 +214,20 @@ registerBlockType("post-grid/post-title", {
       authorMail: { label: 'Author Mail', value: 'authorMail', isPro: true },
       authorMeta: { label: 'Author Meta', value: 'authorMeta', isPro: true },
       customField: { label: 'Custom Field', value: 'customField', isPro: true },
-
       customUrl: { label: 'Custom URL', value: 'customUrl', isPro: true },
-
     };
 
-    useEffect(() => {
+    let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
 
-      setPostGridData(window.PostGridPluginData);
 
-    }, [window.PostGridPluginData]);
+    var limitByArgsBasic = {
+      none: { label: 'Choose..', value: '' },
+      word: { label: 'Word', value: 'word' },
+      character: { label: 'Character', value: 'character', isPro: true },
+    };
+
+    let limitByArgs = applyFilters('limitByArgs', limitByArgsBasic);
+
 
 
     const [
@@ -342,6 +346,13 @@ registerBlockType("post-grid/post-title", {
     function setFieldLinkTo(option, index) {
 
       var options = { ...postTitle.options, linkTo: option.value };
+      setAttributes({ postTitle: { ...postTitle, options: options } });
+
+    }
+
+    function setLimitBy(option, index) {
+
+      var options = { ...postTitle.options, limitBy: option.value };
       setAttributes({ postTitle: { ...postTitle, options: options } });
 
     }
@@ -956,9 +967,11 @@ registerBlockType("post-grid/post-title", {
       setAttributes({ postTitle: { ...postTitle, styles: typoX } });
 
 
+
       if (typoX.fontFamily[breakPointX] != undefined) {
-        var fontFamilyX = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector]['font-family'] : {};
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-family': fontFamilyX };
+
+        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-family': typoX.fontFamily }
+
       }
 
 
@@ -1088,6 +1101,9 @@ registerBlockType("post-grid/post-title", {
 
 
               <div>
+
+
+
                 <PanelBody title="Wrapper" initialOpen={false}>
                   <PanelRow>
                     <label for="">Wrapper Tag</label>
@@ -1174,8 +1190,8 @@ registerBlockType("post-grid/post-title", {
 
 
                   <ToggleControl
-                    label="Linked with post?"
-                    help={postTitle.options.isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
+                    label="Linked?"
+                    help={postTitle.options.isLink ? 'Linked to URL' : 'Not linked to URL.'}
                     checked={postTitle.options.isLink ? true : false}
                     onChange={(e) => {
 
@@ -1314,65 +1330,6 @@ registerBlockType("post-grid/post-title", {
                     </>
 
                   )}
-
-
-
-
-                  {postTitle.options.linkTo == 'customUrl' && (
-
-
-                    <PanelRow>
-                      <label for="">Custom Url</label>
-
-                      <div className='relative'>
-                        <Button className={(linkPickerText) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                          setLinkPickerText(prev => !prev)
-                        }}></Button>
-                        {postTitle.options.customUrl.length > 0 && (
-                          <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                            var options = { ...postTitle.options, customUrl: '' };
-                            setAttributes({ text: { ...text, options: options } });
-
-
-
-                          }}></Button>
-
-                        )}
-                        {linkPickerText && (
-                          <Popover position="bottom right">
-                            <LinkControl settings={[]} value={postTitle.options.customUrl} onChange={newVal => {
-
-                              var options = { ...postTitle.options, customUrl: newVal.url };
-                              setAttributes({ text: { ...text, options: options } });
-                              //setLinkPickerText(false)
-
-                            }} />
-
-                            <div className='p-2'><span className='font-bold'>Linked to:</span> {(postTitle.options.customUrl.length != 0) ? postTitle.options.customUrl : 'No link'} </div>
-                          </Popover>
-
-                        )}
-
-
-                      </div>
-                    </PanelRow>
-
-
-                  )}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1535,52 +1492,35 @@ registerBlockType("post-grid/post-title", {
                   )}
 
 
-                  {(postTitle.options.limitBy.length > 0) && (
-
-                    <PGproWrapper utmUrl={"?utm_source=dashboard&utm_term=postTitleBlock&utm_campaign=pluginPostGrid&utm_medium=postTitleBlock-limitBy"}>
-                      <p> <span className='underline'>Limit By, Limit Count</span> Only avilable in Premium</p>
-                    </PGproWrapper>
-
-                  )}
-
-
-
 
                   <PanelRow>
                     <label for="">Limit By</label>
 
-                    <SelectControl
-                      label=""
-                      value={postTitle.options.limitBy}
-                      options={[
-                        { label: 'Choose..', value: '' },
-
-                        { label: 'Word', value: 'word' },
-                        { label: 'Character', value: 'character' },
-                      ]}
-                      onChange={(newVal) => {
-                        var options = { ...postTitle.options, limitBy: newVal };
-                        setAttributes({ postTitle: { ...postTitle, options: options } });
-                      }
-
-                      }
-                    />
+                    <PGDropdown position="bottom right" variant="secondary" options={limitByArgs} buttonTitle="Choose" onChange={setLimitBy} values={[]}></PGDropdown>
                   </PanelRow>
 
+                  {postTitle.options.limitBy.length > 0 && (
+                    <div className='bg-gray-500 my-3 text-white p-2'>{limitByArgs[postTitle.options.limitBy].label}</div>
+                  )}
 
-                  <PanelRow>
-                    <label for="">Limit Count</label>
+                  {(postTitle.options.limitBy == 'word' || postTitle.options.limitBy == 'character') && (
 
-                    <InputControl
-                      value={postTitle.options.limitCount}
-                      onChange={(newVal) => {
-                        var options = { ...postTitle.options, limitCount: newVal };
-                        setAttributes({ postTitle: { ...postTitle, options: options } });
+                    <PanelRow>
+                      <label for="">Limit Count</label>
 
-                      }
-                      }
-                    />
-                  </PanelRow>
+                      <InputControl
+                        value={postTitle.options.limitCount}
+                        onChange={(newVal) => {
+                          var options = { ...postTitle.options, limitCount: newVal };
+                          setAttributes({ postTitle: { ...postTitle, options: options } });
+
+                        }
+                        }
+                      />
+                    </PanelRow>
+                  )}
+
+
 
 
 
@@ -1698,7 +1638,7 @@ registerBlockType("post-grid/post-title", {
                     <div className='font-bold'>Typography</div>
                     <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </PanelRow>
-                  Hello
+
                   <Typography typo={postTitle.styles} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} obj={postTitle} />
 
 

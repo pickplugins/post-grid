@@ -85,7 +85,7 @@ class PGTutorials extends Component {
                   //newLinks.push(x);
 
                 })
-                //console.log(xLink);
+                ////console.log(xLink);
                 setfilteredLinks(xLink);
 
 

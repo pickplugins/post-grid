@@ -63,8 +63,8 @@ class PGcssBorder extends Component {
 
       }
 
-      console.log(widthVal);
-      console.log(widthVal.match(/\d+/g));
+      //console.log(widthVal);
+      //console.log(widthVal.match(/\d+/g));
 
 
       var widthValX = (widthVal.match(/\d+/g) != null) ? widthVal.match(/\d+/g)[0] : 1;

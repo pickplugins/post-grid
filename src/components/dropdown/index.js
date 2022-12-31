@@ -62,7 +62,7 @@ class PGDropdown extends Component {
                       setKeyword(newVal);
                     }
 
-                    console.log(typeof options);
+                    //console.log(typeof options);
 
 
                     if (typeof options == 'object') {
@@ -85,7 +85,7 @@ class PGDropdown extends Component {
 
                       })
 
-                      console.log(newOptions);
+                      //console.log(newOptions);
 
 
                       setfilteredOptions(newOptions);
@@ -201,7 +201,7 @@ class PGDropdown extends Component {
                     var index = args[0]
                     var x = args[1]
 
-                    //console.log(x.exclude);
+                    ////console.log(x.exclude);
 
                     if (x.exclude == false) {
                       return (

@@ -71,14 +71,14 @@ class PGcssFilter extends Component {
 
       useEffect(() => {
 
-        console.log(valParts);
+        //console.log(valParts);
         var filtered = valParts.filter(Boolean)
 
 
 
         var res = filtered.map(x => {
 
-          console.log(x.length);
+          //console.log(x.length);
 
 
 
@@ -94,14 +94,14 @@ class PGcssFilter extends Component {
         })
 
         setvalArgs(res);
-        console.log(res);
+        //console.log(res);
 
       }, [val]);
 
 
       useEffect(() => {
 
-        console.log(valArgs);
+        //console.log(valArgs);
 
 
         //onChange('contrast(200%) brightness(150%) blur(10%)', 'filter');

@@ -47,7 +47,7 @@ class PGIconPicker extends Component {
 
       useEffect(() => {
 
-        console.log('value updated: ' + iconData.library);
+        //console.log('value updated: ' + iconData.library);
 
         if (iconData.library == 'fontAwesome') {
           setIconsArr(fontawesomeClasses);

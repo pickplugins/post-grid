@@ -46,7 +46,7 @@ class PGcssTextDecoration extends Component {
 
       var valParts = (val != undefined) ? val.split(" ") : ['underline', '#000000', 'wavy', '1px'];
 
-      console.log(valParts);
+      //console.log(valParts);
 
       if (valParts.length == 4) {
         var lineVal = [valParts[0]];
@@ -88,8 +88,8 @@ class PGcssTextDecoration extends Component {
       const [thicknessValY, setthicknessVal] = useState(thicknessValX);
       const [thicknessUnitY, setthicknessUnit] = useState(thicknessUnitX);
 
-      console.log(thicknessValY);
-      console.log(thicknessUnitY);
+      //console.log(thicknessValY);
+      //console.log(thicknessUnitY);
 
 
 
@@ -111,7 +111,7 @@ class PGcssTextDecoration extends Component {
 
       useEffect(() => {
 
-        //console.log(textDecoration);
+        ////console.log(textDecoration);
 
 
         //onChange(textDecoration.line.join(' ') + ' ' + textDecoration.style + ' ' + textDecoration.style + ' ' + textDecoration.thicknessVal + textDecoration.thicknessUnit, 'textDecoration');
@@ -122,7 +122,7 @@ class PGcssTextDecoration extends Component {
 
       useEffect(() => {
 
-        //console.log(val);
+        ////console.log(val);
 
         var valParts = (val != undefined) ? val.split(" ") : ['underline', '#000000', 'wavy', '1px'];
 
@@ -178,7 +178,7 @@ class PGcssTextDecoration extends Component {
                         setTextDecoration({ ...textDecoration, line: arr });
                         setoutlinelineVal(arr)
                         onChange(arr.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal, 'textDecoration');
-                        console.log(arr);
+                        //console.log(arr);
 
                       }
 

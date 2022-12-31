@@ -254,13 +254,13 @@ class PGStyles extends Component {
 
       function setCssAttr(option, index) {
 
-        console.log(option);
-        console.log(cssAtts);
+        //console.log(option);
+        //console.log(cssAtts);
 
         if (cssAtts[option.id] == undefined) {
           cssAtts[option.id] = {};
         }
-        console.log(cssAtts);
+        //console.log(cssAtts);
 
         onAdd(sudoScource, option.id)
 
@@ -269,7 +269,7 @@ class PGStyles extends Component {
 
       function onChangeCssVal(newVal, attr) {
 
-        console.log(newVal);
+        //console.log(newVal);
         onChange(sudoScource, newVal, attr);
 
 

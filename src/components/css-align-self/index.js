@@ -27,7 +27,7 @@ class PGcssAlignSelf extends Component {
       'space-evenly': { "label": "space-evenly", "value": "space-evenly" },
     };
 
-    console.log(val);
+    //console.log(val);
 
     return (
       <div>

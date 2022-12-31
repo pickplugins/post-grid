@@ -46,9 +46,9 @@ class PGcssTextShadow extends Component {
       var colorVal = valParts[2];
 
 
-      console.log(horizontalVal);
-      console.log(vericalVal);
-      console.log(colorVal);
+      //console.log(horizontalVal);
+      //console.log(vericalVal);
+      //console.log(colorVal);
 
 
 
@@ -74,11 +74,11 @@ class PGcssTextShadow extends Component {
       const [vericalValY, setvericalVal] = useState(vericalValX);
       const [vericalUnitY, setvericalUnit] = useState(vericalUnitX);
 
-      console.log(horizontalValY);
-      console.log(horizontalUnitY);
+      //console.log(horizontalValY);
+      //console.log(horizontalUnitY);
 
-      console.log(vericalValY);
-      console.log(vericalUnitY);
+      //console.log(vericalValY);
+      //console.log(vericalUnitY);
 
 
 

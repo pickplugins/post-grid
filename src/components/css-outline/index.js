@@ -53,9 +53,9 @@ class PGcssOutline extends Component {
       var colorVal = valParts[2];
 
 
-      console.log(widthVal);
-      console.log(styleVal);
-      console.log(colorVal);
+      //console.log(widthVal);
+      //console.log(styleVal);
+      //console.log(colorVal);
 
 
 
@@ -73,8 +73,8 @@ class PGcssOutline extends Component {
       const [widthValY, setwidthVal] = useState(widthValX);
       const [widthUnitY, setwidthUnit] = useState(widthUnitX);
 
-      console.log(widthValY);
-      console.log(widthUnitY);
+      //console.log(widthValY);
+      //console.log(widthUnitY);
 
 
 

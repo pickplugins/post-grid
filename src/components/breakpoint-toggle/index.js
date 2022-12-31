@@ -22,7 +22,7 @@ class BreakpointToggle extends Component {
 
   setBreakPoint = (x) => {
 
-    console.log(x)
+    //console.log(x)
     //setPreviewDeviceType(x.value)
     var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
 
@@ -54,7 +54,7 @@ class BreakpointToggle extends Component {
 
     function onChangeX(x) {
 
-      console.log(x);
+      //console.log(x);
 
     }
 

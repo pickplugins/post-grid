@@ -30,7 +30,7 @@ class PGcssBackgroundPosition extends Component {
 
     ];
 
-    console.log(val);
+    //console.log(val);
 
     return (
       <div>

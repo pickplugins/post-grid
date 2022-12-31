@@ -53,7 +53,7 @@ class PGcssWordSpacing extends Component {
             type="number"
             onChange={(newVal) => {
 
-              console.log(newVal);
+              //console.log(newVal);
               setwidthVal(newVal);
               onChange(newVal + widthUnit, 'wordSpacing');
 

@@ -6,12 +6,15 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl } from '@wordpress/components'
+import { link, linkOff } from "@wordpress/icons";
+
+import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 import { Icon, close } from '@wordpress/icons';
+import { applyFilters } from '@wordpress/hooks';
 
-import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
+import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
@@ -233,6 +236,7 @@ registerBlockType("post-grid/post-author", {
 
     var [html, setHtml] = useState({});
     var [loading, setLoading] = useState(false);
+    const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
 
 
 
@@ -274,6 +278,20 @@ registerBlockType("post-grid/post-author", {
 
     }, [postAuthorId]);
 
+
+
+    var linkToArgsBasic = {
+      postUrl: { label: 'Post URL', value: 'postUrl' },
+      homeUrl: { label: 'Home URL', value: 'homeUrl' },
+      authorUrl: { label: 'Author URL', value: 'authorUrl' },
+      authorLink: { label: 'Author Link', value: 'authorLink' },
+      authorMail: { label: 'Author Mail', value: 'authorMail', isPro: true },
+      authorMeta: { label: 'Author Meta', value: 'authorMeta', isPro: true },
+      customField: { label: 'Custom Field', value: 'customField', isPro: true },
+      customUrl: { label: 'Custom URL', value: 'customUrl', isPro: true },
+    };
+
+    let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
 
 
 
@@ -1652,15 +1670,7 @@ registerBlockType("post-grid/post-author", {
 
                     <PanelRow className='my-3'>
                       <label>Link To</label>
-                      <PGDropdown position="bottom right" variant="secondary" buttonTitle={name.options.linkTo.length == 0 ? 'Choose' : name.options.linkTo} options={[
-                        { label: 'Select..', value: '' },
-                        { label: 'Post URL', value: 'postUrl' },
-                        { label: 'Home URL', value: 'homeUrl' },
-                        { label: 'Author URL', value: 'authorUrl' },
-                        { label: 'Author Link', value: 'authorLink' },
-                        { label: 'Author Meta', value: 'authorMeta' },
-                        { label: 'Custom URL', value: 'customUrl' },
-                      ]} onChange={(option, index) => {
+                      <PGDropdown position="bottom right" variant="secondary" buttonTitle={name.options.linkTo.length == 0 ? 'Choose' : linkToArgs[name.options.linkTo].label} options={linkToArgs} onChange={(option, index) => {
                         var options = { ...name.options, linkTo: option.value };
                         setAttributes({ name: { ...name, options: options } });
                       }} values=""></PGDropdown>
@@ -1671,22 +1681,25 @@ registerBlockType("post-grid/post-author", {
 
 
 
-                    {name.options.linkTo == 'authorMeta' && (
+                    {(name.options.linkTo == 'authorMeta' || name.options.linkTo == 'customField') && (
 
                       <PanelRow>
-                        <label for="">Link Meta Key</label>
+                        <label for="">
+                          {name.options.linkTo == 'authorMeta' && (
+                            <>Author Meta Key</>
+                          )}
+                          {name.options.linkTo == 'customField' && (
+                            <>Post Meta Key</>
+                          )}
+
+                        </label>
 
                         <InputControl
                           value={name.options.linkToMeta}
                           onChange={(newVal) => {
 
-
                             var options = { ...name.options, linkToMeta: newVal };
                             setAttributes({ name: { ...name, options: options } });
-
-
-
-
 
                           }}
                         />
@@ -1697,25 +1710,59 @@ registerBlockType("post-grid/post-author", {
 
 
 
+
+
                     {name.options.linkTo == 'customUrl' && (
 
-                      <PanelRow>
-                        <label for="">Custom Url</label>
-
-                        <InputControl
-                          value={name.options.customUrl}
-                          onChange={(newVal) => {
-
-
-                            var options = { ...name.options, customUrl: newVal };
-                            setAttributes({ name: { ...name, options: options } });
+                      <>
 
 
 
-                          }}
-                        />
+                        <PanelRow>
+                          <label for="">Custom Url</label>
 
-                      </PanelRow>
+                          <div className='relative'>
+                            <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                              setLinkPickerPosttitle(prev => !prev);
+
+                            }}></Button>
+                            {name.options.customUrl.length > 0 && (
+                              <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                                var options = { ...name.options, customUrl: '' };
+                                setAttributes({ name: { ...name, options: options } });
+                                setLinkPickerPosttitle(false);
+
+
+
+                              }}></Button>
+
+                            )}
+                            {linkPickerPosttitle && (
+                              <Popover position="bottom right">
+                                <LinkControl settings={[]} value={name.options.customUrl} onChange={newVal => {
+
+                                  var options = { ...name.options, customUrl: newVal.url };
+
+                                  setAttributes({ name: { ...name, options: options } });
+
+                                }} />
+
+                                <div className='p-2'><span className='font-bold'>Linked to:</span> {(name.options.customUrl.length != 0) ? name.options.customUrl : 'No link'} </div>
+                              </Popover>
+
+                            )}
+
+
+                          </div>
+                        </PanelRow>
+
+                      </>
+
+
+
+
 
                     )}
 

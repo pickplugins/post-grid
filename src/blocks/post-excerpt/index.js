@@ -3,6 +3,8 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
+import { applyFilters } from '@wordpress/hooks';
+
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover, Spinner } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
@@ -244,6 +246,55 @@ registerBlockType("post-grid/post-excerpt", {
 
     const [currentPostUrl, setCurrentPostUrl] = useEntityProp('postType', postType, 'link', postId);
 
+
+
+    var linkToArgsBasic = {
+      postUrl: { label: 'Post URL', value: 'postUrl' },
+      homeUrl: { label: 'Home URL', value: 'homeUrl' },
+      authorUrl: { label: 'Author URL', value: 'authorUrl' },
+      authorLink: { label: 'Author Link', value: 'authorLink' },
+      authorMail: { label: 'Author Mail', value: 'authorMail', isPro: true },
+      authorMeta: { label: 'Author Meta', value: 'authorMeta', isPro: true },
+      customField: { label: 'Custom Field', value: 'customField', isPro: true },
+      customUrl: { label: 'Custom URL', value: 'customUrl', isPro: true },
+    };
+
+    let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
+
+
+    var limitByArgsBasic = {
+      none: { label: 'Choose..', value: '' },
+      word: { label: 'Word', value: 'word' },
+      character: { label: 'Character', value: 'character', isPro: true },
+    };
+
+    let limitByArgs = applyFilters('limitByArgs', limitByArgsBasic);
+
+
+    var excerptSourceArgsBasic = {
+      auto: { label: 'Auto', value: 'auto' },
+      excerpt: { label: 'Excerpt', value: 'excerpt' },
+      content: { label: 'Content', value: 'content' },
+      meta: { label: 'Custom Fields', value: 'meta', isPro: true },
+    };
+
+    let excerptSourceArgs = applyFilters('excerptSourceArgs', excerptSourceArgsBasic);
+
+
+
+    function setFieldLinkTo(option, index) {
+
+      var options = { ...postExcerpt.options, linkTo: option.value };
+      setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+
+    }
+
+    function setLimitBy(option, index) {
+
+      var options = { ...postExcerpt.options, limitBy: option.value };
+      setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+
+    }
 
 
     useEffect(() => {
@@ -1612,54 +1663,36 @@ registerBlockType("post-grid/post-excerpt", {
 
 
 
-
-
-
               <PanelRow>
                 <label for="">Limit By</label>
 
-                <SelectControl
-                  label=""
-                  value={postExcerpt.options.limitBy}
-                  options={[
-                    { label: 'Word', value: 'word' },
-                    { label: 'Character', value: 'character' },
-                  ]}
-                  onChange={(newVal) => {
-                    var options = { ...postExcerpt.options, limitBy: newVal };
-                    setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                  }
-
-                  }
-                />
+                <PGDropdown position="bottom right" variant="secondary" options={limitByArgs} buttonTitle="Choose" onChange={setLimitBy} values={[]}></PGDropdown>
               </PanelRow>
 
+              {postExcerpt.options.limitBy.length > 0 && (
+                <div className='bg-gray-500 my-3 text-white p-2'>{limitByArgs[postExcerpt.options.limitBy].label}</div>
+              )}
 
-              <PanelRow>
-                <label for="">Limit Count</label>
+              {(postExcerpt.options.limitBy == 'word' || postExcerpt.options.limitBy == 'character') && (
 
-                <InputControl
-                  value={postExcerpt.options.limitCount}
-                  onChange={(newVal) => {
-                    var options = { ...postExcerpt.options, limitCount: newVal };
-                    setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                <PanelRow>
+                  <label for="">Limit Count</label>
 
-                  }
-                  }
-                />
-              </PanelRow>
+                  <InputControl
+                    value={postExcerpt.options.limitCount}
+                    onChange={(newVal) => {
+                      var options = { ...postExcerpt.options, limitCount: newVal };
+                      setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
 
+                    }
+                    }
+                  />
+                </PanelRow>
+              )}
 
               <PanelRow className='my-3'>
                 <label>Excerpt Source</label>
-                <PGDropdown position="bottom right" variant="secondary" buttonTitle={postExcerpt.options.excerptSource.length == 0 ? 'Choose' : postExcerpt.options.excerptSource} options={[
-                  { label: 'Auto', value: 'auto' },
-
-                  { label: 'Excerpt', value: 'excerpt' },
-                  { label: 'Content', value: 'content' },
-                  { label: 'Custom Fields', value: 'meta' },
-
-                ]} onChange={(option, index) => {
+                <PGDropdown position="bottom right" variant="secondary" buttonTitle={postExcerpt.options.excerptSource.length == 0 ? 'Choose' : postExcerpt.options.excerptSource} options={excerptSourceArgs} onChange={(option, index) => {
                   var options = { ...postExcerpt.options, excerptSource: option.value };
                   setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
 
@@ -1675,18 +1708,6 @@ registerBlockType("post-grid/post-excerpt", {
               {/* {postExcerpt.options.excerptSource == 'content' && currentPostContent.length == 0 && (
                     <div className='text-red-500'>Post Content is empty.</div>
                   )} */}
-
-
-              {(postExcerpt.options.excerptSource === 'meta' || postExcerpt.options.excerptSource === 'yoast_meta' || postExcerpt.options.excerptSource === 'rankmath_meta' || postExcerpt.options.excerptSource === 'aioseo_meta') && (
-
-
-
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postFeaturedImage&utm_campaign=pluginPostGrid&utm_medium=postFeaturedImage-customUrl"}>
-                  <p> <span className='underline'>Excerpt Source - Custom Fields</span> Only avilable in Premium</p>
-                </PGproWrapper>
-
-
-              )}
 
 
               {postExcerpt.options.excerptSource == 'meta' && (

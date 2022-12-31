@@ -4,133 +4,170 @@ import { createReduxStore, register, subscribe, select } from '@wordpress/data';
 
 
 
+
+
 const DEFAULT_STATE = {
-  prices: {},
-  discountPercent: 5656,
-  choko: 'Milk Candy',
-  price: 123,
-
-  proUrl: 'http://getpostgrid.com/',
-
   breakPoint: 'Desktop',
   clientdata: {},
-  proinfo: { proInstalled: false, status: 'inactive' },
-
+  proinfo: { proInstalled: false, status: 'inactive-initial' },
   license: { license_status: '', license_key: '' },
+};
 
+var selectors = {
+
+  getBreakPoint(state) {
+    const { breakPoint } = state;
+    return breakPoint;
+  },
+  getclientdata(state) {
+    const { clientdata } = state;
+    return clientdata;
+  },
+  getproinfo(state) {
+    console.log('step: 1');
+
+    const { proinfo } = state;
+
+    console.log(proinfo);
+
+    return proinfo;
+  },
+  getLicense(state) {
+    const { license } = state;
+    return license;
+  },
 
 };
 
+
+var resolvers = {
+
+
+
+  * getLicense() {
+    const path = '/post-grid/v2/get_license';
+    const res = yield actions.fetchLicense(path);
+    ////console.log(res);
+
+    return actions.setLicense(res);
+  },
+
+
+
+  * getclientdata() {
+    const path = '/post-grid/v2/get_site_details';
+    const res = yield actions.fetchclientdata(path);
+
+    ////console.log(res);
+
+
+    return actions.setclientdata(res);
+  },
+
+
+  * getproinfo() {
+
+    console.log('step: 2');
+
+
+
+    const path = '/post-grid/v2/get_pro_info';
+    const res = yield actions.fetchproinfo(path);
+
+    console.log(res);
+
+
+    return actions.setproinfo(res);
+  },
+
+
+
+}
+
+
+
 const actions = {
-
-
-
-
   setBreakPoint(breakpoint) {
-
-
     return {
       type: 'SET_BREAKPOINT',
       breakpoint,
     };
   },
-
-
-
-
-
-
   setclientdata(clientdata) {
-
-
     return {
       type: 'SET_CLIENTDATA',
       clientdata,
     };
   },
-
-
   setproinfo(proinfo) {
 
+    console.log('step: 3');
     console.log(proinfo);
-
 
     return {
       type: 'SET_PROINFO',
       proinfo,
     };
   },
-
-
   setLicense(license) {
-    ////console.log(license);
-
     return {
       type: 'SET_LICENSE',
       license,
     };
-
   },
-
-
-
-  setPrice(item, price) {
-    return {
-      type: 'SET_PRICE',
-      item,
-      price,
-    };
-  },
-
-  startSale(discountPercent) {
-    return {
-      type: 'START_SALE',
-      discountPercent,
-    };
-  },
-
-  fetchFromAPI(path) {
-    return {
-      type: 'FETCH_FROM_API',
-      path,
-    };
-  },
-
   fetchLicense(path) {
     return {
       type: 'FETCH_LICENSE_FROM_API',
       path,
     };
   },
-
   fetchclientdata(path) {
     return {
       type: 'FETCH_CLIENTDATA_FROM_API',
       path,
     };
   },
-
-
   fetchproinfo(path) {
+    console.log('step: 4');
+
     return {
       type: 'FETCH_PRO_INFO_FROM_API',
       path,
     };
   },
 
-
-
-
 };
+
+
+
+var controls = {
+  FETCH_LICENSE_FROM_API(action) {
+    return apiFetch({ path: action.path, method: 'POST', data: {}, });
+  },
+
+  FETCH_CLIENTDATA_FROM_API(action) {
+    return apiFetch({ path: action.path, method: 'POST', data: {}, });
+  },
+
+  FETCH_PRO_INFO_FROM_API(action) {
+    console.log('step: 5');
+
+    return apiFetch({ path: action.path, method: 'POST', data: {}, });
+  },
+
+
+
+}
+
+
 
 const store = createReduxStore('postgrid-shop', {
   reducer(state = DEFAULT_STATE, action) {
-    ////console.log(action.type);
-    ////console.log(action.license);
+
+
+
 
     switch (action.type) {
-
-
 
       case 'SET_BREAKPOINT':
         return {
@@ -145,190 +182,38 @@ const store = createReduxStore('postgrid-shop', {
         };
 
       case 'SET_PROINFO':
+
+        console.log('step: 3');
+        console.log(action.proinfo);
+
+
         return {
           ...state,
           proinfo: action.proinfo,
         };
 
       case 'SET_LICENSE':
-
         return {
           ...state,
           license: action.license,
         };
 
 
-      case 'SET_PRICE':
-        return {
-          ...state,
-          price: action.price,
-        };
-
-      case 'START_SALE':
-        return {
-          ...state,
-          discountPercent: action.discountPercent,
-        };
     }
 
     return state;
   },
 
   actions,
-
-  selectors: {
-
-
-    getProurl(state) {
-      const { proUrl } = state;
-
-      return proUrl;
-
-    },
-
-
-    getBreakPoint(state) {
-      const { breakPoint } = state;
-
-      return breakPoint;
-
-    },
-
-
-
-
-
-    getclientdata(state) {
-      const { clientdata } = state;
-
-      return clientdata;
-
-    },
-
-
-    getproinfo(state) {
-      const { proinfo } = state;
-
-      return proinfo;
-
-    },
-
-    getLicense(state) {
-      const { license } = state;
-      return license;
-
-    },
-
-
-
-
-
-
-
-
-
-    getPrice(state, item) {
-      const { price, discountPercent } = state;
-      //const price = prices[item];
-
-      //return price * (1 - 0.01 * discountPercent);
-      return price;
-
-    },
-    getData(state, item) {
-
-
-      const { prices, discountPercent } = state;
-      const price = prices[item];
-
-      //return price * (1 - 0.01 * discountPercent);
-      return 234234;
-
-    },
-
-
-
-
-
-
-  },
-
-  controls: {
-
-    SET_PROINFO(action) {
-      return apiFetch({ path: action.path });
-    },
-
-    FETCH_FROM_API(action) {
-      return apiFetch({ path: action.path });
-    },
-    FETCH_LICENSE_FROM_API(action) {
-      return apiFetch({ path: action.path, method: 'POST', data: {}, });
-    },
-
-    FETCH_CLIENTDATA_FROM_API(action) {
-      return apiFetch({ path: action.path, method: 'POST', data: {}, });
-    },
-
-    FETCH_PRO_INFO_FROM_API(action) {
-      return apiFetch({ path: action.path, method: 'POST', data: {}, });
-    },
-
-
-
-  },
-
-  resolvers: {
-
-
-    * getPrice(item) {
-      const path = '/wp/v2/prices/' + item;
-      const price = yield actions.fetchFromAPI(path);
-      return actions.setPrice(item, price);
-    },
-    * getLicense() {
-      const path = '/post-grid/v2/get_license';
-      const res = yield actions.fetchLicense(path);
-      ////console.log(res);
-
-      return actions.setLicense(res);
-    },
-
-
-
-    * getclientdata() {
-      const path = '/post-grid/v2/get_site_details';
-      const res = yield actions.fetchclientdata(path);
-
-      ////console.log(res);
-
-
-      return actions.setclientdata(res);
-    },
-
-
-    * getproinfo() {
-      const path = '/post-grid/v2/get_pro_info';
-      const res = yield actions.fetchproinfo(path);
-
-      console.log(res);
-
-
-      return actions.setproinfo(res);
-    },
-
-
-
-  },
+  selectors,
+  controls,
+  resolvers,
 });
 
 register(store);
 
 
 subscribe(() => {
-
-
-
 
 })
 

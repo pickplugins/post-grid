@@ -53,7 +53,7 @@ class PGcssWidth extends Component {
             type="number"
             onChange={(newVal) => {
 
-              console.log(newVal);
+              //console.log(newVal);
               setwidthVal(newVal);
               onChange(newVal + widthUnit, 'width');
 

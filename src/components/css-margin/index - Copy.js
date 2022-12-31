@@ -43,7 +43,7 @@ class PGcssPadding extends Component {
 
       useEffect(() => {
 
-        console.log(valZ);
+        //console.log(valZ);
 
       }, [valZ]);
 
@@ -64,7 +64,7 @@ class PGcssPadding extends Component {
                 options={unitArgs}
                 onChange={(newVal) => {
 
-                  console.log(newVal);
+                  //console.log(newVal);
 
 
                 }}
@@ -131,7 +131,7 @@ class PGcssPadding extends Component {
 
                     valY[keyName].val = newVal;
 
-                    console.log(valY);
+                    //console.log(valY);
                     setvalZ(valY);
                   }}
                 />

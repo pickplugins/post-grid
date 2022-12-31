@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 6.1.1
-	Stable tag: 2.2.21
+	Stable tag: 2.2.22
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -246,6 +246,9 @@ then paste this shortcode anywhere in your page to display grid<br />
 8. screenshot-8
 
 == Changelog ==
+
+	= 2.2.22 =
+    * 2022-12-28 - fix - Post Title Block - Post title link to custom URL error fixed.
 
 	= 2.2.21 =
     * 2022-12-28 - fix - Post Grid Block - Post types multi select issue fixed.

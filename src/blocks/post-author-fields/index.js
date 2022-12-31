@@ -1,15 +1,17 @@
 import apiFetch from '@wordpress/api-fetch';
 import { useEntityProp } from '@wordpress/core-data';
+import { applyFilters } from '@wordpress/hooks';
 
 import { registerBlockType } from '@wordpress/blocks'
 import { __ } from '@wordpress/i18n'
 import { useSelect, select, subscribe, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner } from '@wordpress/components'
-import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
+import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner, Popover } from '@wordpress/components'
+import { __experimentalBoxControl as BoxControl, } from '@wordpress/components';
+import { link, linkOff } from "@wordpress/icons";
 
-import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
+import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
@@ -214,6 +216,7 @@ registerBlockType("post-grid/post-author-fields", {
     var postType = context['postType'];
 
     const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
+    const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
 
     var userFields = [
       { label: "ID", key: 'id' },
@@ -233,17 +236,20 @@ registerBlockType("post-grid/post-author-fields", {
 
     ];
 
-    var linkToArgs = {
+
+
+    var linkToArgsBasic = {
       postUrl: { label: 'Post URL', value: 'postUrl' },
       homeUrl: { label: 'Home URL', value: 'homeUrl' },
       authorUrl: { label: 'Author URL', value: 'authorUrl' },
       authorLink: { label: 'Author Link', value: 'authorLink' },
-      authorMail: { label: 'Author Mail', value: 'authorMail' },
-      authorMeta: { label: 'Author Meta', value: 'authorMeta' },
-      customUrl: { label: 'Custom URL', value: 'customUrl' },
-
+      authorMail: { label: 'Author Mail', value: 'authorMail', isPro: true },
+      authorMeta: { label: 'Author Meta', value: 'authorMeta', isPro: true },
+      customField: { label: 'Custom Field', value: 'customField', isPro: true },
+      customUrl: { label: 'Custom URL', value: 'customUrl', isPro: true },
     };
 
+    let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
 
 
     // Wrapper CSS Class Selectors
@@ -1235,7 +1241,7 @@ registerBlockType("post-grid/post-author-fields", {
                   {field.options.linkTo == 'authorMeta' && (
 
                     <PanelRow>
-                      <label for="">Link Meta Key</label>
+                      <label for="">Author Meta Key</label>
 
                       <InputControl
                         value={field.options.linkToMeta}
@@ -1253,21 +1259,17 @@ registerBlockType("post-grid/post-author-fields", {
                   )}
 
 
-
-                  {field.options.linkTo == 'customUrl' && (
+                  {field.options.linkTo == 'customField' && (
 
                     <PanelRow>
-                      <label for="">Custom Url</label>
+                      <label for="">Custom Meta Key</label>
 
                       <InputControl
-                        value={field.options.customUrl}
+                        value={field.options.linkToAuthorMeta}
                         onChange={(newVal) => {
 
-
-                          var options = { ...field.options, customUrl: newVal };
+                          var options = { ...field.options, linkToAuthorMeta: newVal };
                           setAttributes({ field: { ...field, options: options } });
-
-
 
                         }}
                       />
@@ -1277,6 +1279,60 @@ registerBlockType("post-grid/post-author-fields", {
                   )}
 
 
+
+                  {field.options.linkTo == 'customUrl' && (
+
+                    <>
+
+
+
+                      <PanelRow>
+                        <label for="">Custom Url</label>
+
+                        <div className='relative'>
+                          <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                            setLinkPickerPosttitle(prev => !prev);
+
+                          }}></Button>
+                          {field.options.customUrl.length > 0 && (
+                            <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                              var options = { ...field.options, customUrl: '' };
+                              setAttributes({ field: { ...field, options: options } });
+                              setLinkPickerPosttitle(false);
+
+
+
+                            }}></Button>
+
+                          )}
+                          {linkPickerPosttitle && (
+                            <Popover position="bottom right">
+                              <LinkControl settings={[]} value={field.options.customUrl} onChange={newVal => {
+
+                                var options = { ...field.options, customUrl: newVal.url };
+
+                                setAttributes({ field: { ...field, options: options } });
+
+                              }} />
+
+                              <div className='p-2'><span className='font-bold'>Linked to:</span> {(field.options.customUrl.length != 0) ? field.options.customUrl : 'No link'} </div>
+                            </Popover>
+
+                          )}
+
+
+                        </div>
+                      </PanelRow>
+
+                    </>
+
+
+
+
+
+                  )}
 
 
 

@@ -3,6 +3,8 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
+import { applyFilters } from '@wordpress/hooks';
+
 import { PanelBody, RangeControl, Button, ButtonGroup, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover, Spinner } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
@@ -24,7 +26,6 @@ import PGContactSupport from '../../components/contact-support'
 import BreakpointToggle from '../../components/breakpoint-toggle'
 import PGDropdown from '../../components/dropdown'
 import PGtoggle from '../../components/toggle'
-import PGproWrapper from '../../components/pro-wrapper'
 import colorsPresets from '../../colors-presets'
 import PGcssDisplay from '../../components/css-display'
 
@@ -193,30 +194,78 @@ registerBlockType("post-grid/image", {
     const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
     const [linkPickerSrcUrl, setlinkPickerSrcUrl] = useState(false);
 
-    const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
 
     const [postImage, setPostImage] = useState(null);
     const [imageObj, setImageObj] = useState({}); //{src:'', altText:'', sizes:{}}
 
     const [imageSizes, setImageSizes] = useState([]);
-    const [filterArgs, setfilterArgs] = useState([
-      { label: 'Blur', value: 'blur', val: '', unit: 'px' },
-      { label: 'Brightness', value: 'brightness', val: '10', unit: '%' },
-      { label: 'Contrast', value: 'contrast', val: '10', unit: '%' },
-      { label: 'Grayscale', value: 'grayscale', val: '10', unit: '%' },
-      { label: 'Hue-rotate', value: 'hue-rotate', val: '10', unit: 'deg' },
-      { label: 'Invert', value: 'invert', val: '10', unit: '%' },
-      { label: 'Opacity', value: 'opacity', val: '10', unit: '%' },
-      { label: 'Saturate', value: 'saturate', val: '10', unit: '%' },
+    let filterArgsBasic = [
+
+      { label: 'Blur', isPro: false, value: 'blur', val: '', unit: 'px' },
+      { label: 'Brightness', isPro: false, value: 'brightness', val: '10', unit: '%' },
+      { label: 'Contrast', isPro: true, value: 'contrast', val: '10', unit: '%' },
+      { label: 'Grayscale', isPro: true, value: 'grayscale', val: '10', unit: '%' },
+      { label: 'Hue-rotate', isPro: true, value: 'hue-rotate', val: '10', unit: 'deg' },
+      { label: 'Invert', isPro: true, value: 'invert', val: '10', unit: '%' },
+      { label: 'Opacity', isPro: true, value: 'opacity', val: '10', unit: '%' },
+      { label: 'Saturate', isPro: true, value: 'saturate', val: '10', unit: '%' },
       { label: 'Sepia', value: 'sepia', val: '10', unit: '%' },
-    ]);
+
+    ];
+
+    let filterArgs = applyFilters('imageFilterArgs', filterArgsBasic);
 
 
-    useEffect(() => {
 
-      setPostGridData(window.PostGridPluginData);
 
-    }, [window.PostGridPluginData]);
+    var linkToArgsBasic = {
+      postUrl: { label: 'Post URL', value: 'postUrl' },
+      homeUrl: { label: 'Home URL', value: 'homeUrl' },
+      authorUrl: { label: 'Author URL', value: 'authorUrl' },
+      authorLink: { label: 'Author Link', value: 'authorLink' },
+      authorMail: { label: 'Author Mail', value: 'authorMail', isPro: true },
+      authorMeta: { label: 'Author Meta', value: 'authorMeta', isPro: true },
+      customField: { label: 'Custom Field', value: 'customField', isPro: true },
+      customUrl: { label: 'Custom URL', value: 'customUrl', isPro: true },
+    };
+
+    let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
+
+
+    var customTagArgsBasic = {
+      h1: { label: 'H1', value: 'h1' },
+      h2: { label: 'H2', value: 'h2' },
+      h3: { label: 'H3', value: 'h3' },
+      h4: { label: 'H4', value: 'h4' },
+      h5: { label: 'H5', value: 'h5' },
+      h6: { label: 'H6', value: 'h6' },
+      span: { label: 'SPAN', value: 'span' },
+      div: { label: 'DIV', value: 'div' },
+      p: { label: 'P', value: 'p' }
+    };
+
+    let customTagArgs = applyFilters('customTagArgs', customTagArgsBasic);
+
+
+    var altTextSrcArgsBasic = {
+      'none': { label: 'No Alt Text', value: '' },
+      'imgAltText': { label: 'Image Alt Text', value: 'imgAltText' },
+      'imgTitle': { label: 'Image Title', value: 'imgTitle' },
+      'imgCaption': { label: 'Image Caption', value: 'imgCaption' },
+      'imgDescription': { label: 'Image Description', value: 'imgDescription' },
+      'imgSlug': { label: 'Image Slug', value: 'imgSlug' },
+      'postTitle': { label: 'Post Title', value: 'postTitle' },
+      'postSlug': { label: 'Post Slug', value: 'postSlug' },
+      'excerpt': { label: 'Post Excerpt', value: 'excerpt', isPro: true },
+      'customField': { label: 'Post Custom Field', value: 'customField', isPro: true },
+      'custom': { label: 'Custom', value: 'custom', isPro: true },
+    };
+
+    let altTextSrcArgs = applyFilters('altTextSrcArgs', altTextSrcArgsBasic);
+
+
+
+
 
 
     const ALLOWED_MEDIA_TYPES = ['image'];
@@ -1725,19 +1774,13 @@ registerBlockType("post-grid/image", {
 
               <PanelRow className='my-3'>
                 <label>Link To</label>
-                <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.linkTo.length == 0 ? 'Choose' : image.options.linkTo} options={[
-                  { label: 'No Link', value: '' },
-                  { label: 'Post URL', value: 'postUrl' },
-                  { label: 'Custom Field', value: 'customField' },
-                  { label: 'Author URL', value: 'authorUrl' },
-                  { label: 'Author Link', value: 'authorLink' },
-                  { label: 'Home URL', value: 'homeUrl' },
-                  { label: 'Custom', value: 'custom' },
-                ]} onChange={(option, index) => {
+                <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.linkTo.length == 0 ? 'Choose' : linkToArgs[image.options.linkTo].label} options={linkToArgs} onChange={(option, index) => {
                   var options = { ...image.options, linkTo: option.value };
                   setAttributes({ image: { ...image, options: options } });
                 }} values=""></PGDropdown>
               </PanelRow>
+
+
 
               {image.options.linkTo == 'customField' && (
 
@@ -1763,18 +1806,9 @@ registerBlockType("post-grid/image", {
 
 
 
-              {(image.options.linkTocustomUrl.length > 0) && (
-
-                (postGridData.license_status != 'active') && (
-                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postFeaturedImage&utm_campaign=pluginPostGrid&utm_medium=postFeaturedImage-linkTocustomUrl"}>
-                    <p><span className='underline'>Custom URL</span> feature only avilable in pro version</p>
-                  </PGproWrapper>
-                )
-
-              )}
 
 
-              {image.options.linkTo == 'custom' && (
+              {image.options.linkTo == 'customUrl' && (
 
                 <PanelRow>
                   <label for="">Custom URL</label>
@@ -1822,17 +1856,7 @@ registerBlockType("post-grid/image", {
 
                 <PanelRow className='my-3'>
                   <label>Custom Tag</label>
-                  <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.tag.length == 0 ? 'Choose' : image.options.tag} options={[
-                    { label: 'H1', value: 'h1' },
-                    { label: 'H2', value: 'h2' },
-                    { label: 'H3', value: 'h3' },
-                    { label: 'H4', value: 'h4' },
-                    { label: 'H5', value: 'h5' },
-                    { label: 'H6', value: 'h6' },
-                    { label: 'SPAN', value: 'span' },
-                    { label: 'DIV', value: 'div' },
-                    { label: 'P', value: 'p' },
-                  ]} onChange={(option, index) => {
+                  <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.tag.length == 0 ? 'Choose' : customTagArgs[image.options.tag].label} options={customTagArgs} onChange={(option, index) => {
 
                     var options = { ...image.options, tag: option.value };
                     setAttributes({ image: { ...image, options: options } });
@@ -1986,19 +2010,7 @@ registerBlockType("post-grid/image", {
 
               <PanelRow className='my-3'>
                 <label>Alt Text Source</label>
-                <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.altTextSrc.length == 0 ? 'Choose' : image.options.altTextSrc} options={[
-                  { label: 'No Alt Text', value: '' },
-                  { label: 'Image Alt Text', value: 'imgAltText' },
-                  { label: 'Image Title', value: 'imgTitle' },
-                  { label: 'Image Caption', value: 'imgCaption' },
-                  { label: 'Image Description', value: 'imgDescription' },
-                  { label: 'Image Slug', value: 'imgSlug' },
-                  { label: 'Post Title', value: 'postTitle' },
-                  { label: 'Post Excerpt', value: 'excerpt' },
-                  { label: 'Post Slug', value: 'postSlug' },
-                  { label: 'Post Custom Field', value: 'customField' },
-                  { label: 'Custom', value: 'custom' },
-                ]} onChange={(option, index) => {
+                <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.altTextSrc.length == 0 ? 'Choose' : altTextSrcArgs[image.options.altTextSrc].label} options={altTextSrcArgs} onChange={(option, index) => {
 
                   var options = { ...image.options, altTextSrc: option.value };
                   setAttributes({ image: { ...image, options: options } });
@@ -2084,12 +2096,7 @@ registerBlockType("post-grid/image", {
 
 
 
-              {image.styles.filter[breakPointX] != undefined && postGridData.license_status != 'active' && (
 
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postFeaturedImage&utm_campaign=pluginPostGrid&utm_medium=postFeaturedImage-filters"}>
-                  <p>Filters feature only avilable in pro version</p>
-                </PGproWrapper>
-              )}
 
 
 

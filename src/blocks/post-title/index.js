@@ -16,7 +16,6 @@ import { store } from '../../store'
 
 import { link, linkOff } from "@wordpress/icons";
 
-import PGproWrapper from '../../components/pro-wrapper'
 import PGcssTextAlign from '../../components/css-text-align'
 
 import IconToggle from '../../components/icon-toggle'
@@ -1247,10 +1246,7 @@ registerBlockType("post-grid/post-title", {
                       <PanelRow>
                         <label for="">Link To</label>
 
-
-
-                        <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle="Choose" onChange={setFieldLinkTo} values={[]}></PGDropdown>
-
+                        <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={postTitle.options.linkTo.length == 0 ? 'Choose' : linkToArgs[postTitle.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
 
                       </PanelRow>
 
@@ -1299,6 +1295,51 @@ registerBlockType("post-grid/post-title", {
 
 
 
+                      {postTitle.options.linkTo == 'customUrl' && (
+
+
+                        <PanelRow>
+                          <label for="">Custom Url</label>
+
+                          <div className='relative'>
+                            <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                              setLinkPickerPosttitle(prev => !prev);
+
+                            }}></Button>
+                            {postTitle.options.customUrl.length > 0 && (
+                              <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                                var options = { ...postTitle.options, customUrl: '' };
+                                setAttributes({ postTitle: { ...postTitle, options: options } });
+                                setLinkPickerPosttitle(false);
+
+
+
+                              }}></Button>
+
+                            )}
+                            {linkPickerPosttitle && (
+                              <Popover position="bottom right">
+                                <LinkControl settings={[]} value={postTitle.options.customUrl} onChange={newVal => {
+
+                                  var options = { ...postTitle.options, customUrl: newVal.url };
+
+                                  setAttributes({ postTitle: { ...postTitle, options: options } });
+
+                                }} />
+
+                                <div className='p-2'><span className='font-bold'>Linked to:</span> {(postTitle.options.customUrl.length != 0) ? postTitle.options.customUrl : 'No link'} </div>
+                              </Popover>
+
+                            )}
+
+
+                          </div>
+                        </PanelRow>
+                      )}
+
+
 
 
 
@@ -1337,62 +1378,6 @@ registerBlockType("post-grid/post-title", {
                   {postTitle.options.isLink && (
 
                     <div>
-
-
-                      {(postTitle.options.customUrl.length > 0) && (
-
-                        <PGproWrapper utmUrl={"?utm_source=dashboard&utm_term=postTitleBlock&utm_campaign=pluginPostGrid&utm_medium=postTitleBlock-customUrl"}>
-                          <p> <span className='underline'>Custom Url</span> Only avilable in Premium</p>
-                        </PGproWrapper>
-
-
-                      )}
-
-
-                      <PanelRow>
-                        <label for="">Custom Url</label>
-
-                        <div className='relative'>
-                          <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                            setLinkPickerPosttitle(prev => !prev);
-
-                          }}></Button>
-                          {postTitle.options.customUrl.length > 0 && (
-                            <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                              var options = { ...postTitle.options, customUrl: '' };
-                              setAttributes({ postTitle: { ...postTitle, options: options } });
-                              setLinkPickerPosttitle(false);
-
-
-
-                            }}></Button>
-
-                          )}
-                          {linkPickerPosttitle && (
-                            <Popover position="bottom right">
-                              <LinkControl settings={[]} value={postTitle.options.customUrl} onChange={newVal => {
-
-                                var options = { ...postTitle.options, customUrl: newVal.url };
-
-                                setAttributes({ postTitle: { ...postTitle, options: options } });
-
-                              }} />
-
-                              <div className='p-2'><span className='font-bold'>Linked to:</span> {(postTitle.options.customUrl.length != 0) ? postTitle.options.customUrl : 'No link'} </div>
-                            </Popover>
-
-                          )}
-
-
-                        </div>
-                      </PanelRow>
-
-
-
-
-
 
 
                       <PanelRow>

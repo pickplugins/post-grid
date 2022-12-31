@@ -3,6 +3,8 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
+import { applyFilters } from '@wordpress/hooks';
+
 import { PanelBody, RangeControl, Button, ButtonGroup, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
@@ -24,7 +26,6 @@ import PGContactSupport from '../../components/contact-support'
 import BreakpointToggle from '../../components/breakpoint-toggle'
 import PGDropdown from '../../components/dropdown'
 import PGtoggle from '../../components/toggle'
-import PGproWrapper from '../../components/pro-wrapper'
 import colorsPresets from '../../colors-presets'
 import PGcssDisplay from '../../components/css-display'
 
@@ -197,6 +198,53 @@ registerBlockType("post-grid/post-featured-image", {
       { label: 'Saturate', isPro: true, value: 'saturate', val: '10', unit: '%' },
       { label: 'Sepia', value: 'sepia', val: '10', unit: '%' },
     ]);
+
+
+    var linkToArgsBasic = {
+      postUrl: { label: 'Post URL', value: 'postUrl' },
+      homeUrl: { label: 'Home URL', value: 'homeUrl' },
+      authorUrl: { label: 'Author URL', value: 'authorUrl' },
+      authorLink: { label: 'Author Link', value: 'authorLink' },
+      authorMail: { label: 'Author Mail', value: 'authorMail', isPro: true },
+      authorMeta: { label: 'Author Meta', value: 'authorMeta', isPro: true },
+      customField: { label: 'Custom Field', value: 'customField', isPro: true },
+      customUrl: { label: 'Custom URL', value: 'customUrl', isPro: true },
+    };
+
+    let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
+
+    var altTextSrcArgsBasic = {
+      'none': { label: 'No Alt Text', value: '' },
+      'imgAltText': { label: 'Image Alt Text', value: 'imgAltText' },
+      'imgTitle': { label: 'Image Title', value: 'imgTitle' },
+      'imgCaption': { label: 'Image Caption', value: 'imgCaption' },
+      'imgDescription': { label: 'Image Description', value: 'imgDescription' },
+      'imgSlug': { label: 'Image Slug', value: 'imgSlug' },
+      'postTitle': { label: 'Post Title', value: 'postTitle' },
+      'postSlug': { label: 'Post Slug', value: 'postSlug' },
+      'excerpt': { label: 'Post Excerpt', value: 'excerpt', isPro: true },
+      'customField': { label: 'Post Custom Field', value: 'customField', isPro: true },
+      'custom': { label: 'Custom', value: 'custom', isPro: true },
+    };
+
+    let altTextSrcArgs = applyFilters('altTextSrcArgs', altTextSrcArgsBasic);
+
+
+    var customTagArgsBasic = {
+      h1: { label: 'H1', value: 'h1' },
+      h2: { label: 'H2', value: 'h2' },
+      h3: { label: 'H3', value: 'h3' },
+      h4: { label: 'H4', value: 'h4' },
+      h5: { label: 'H5', value: 'h5' },
+      h6: { label: 'H6', value: 'h6' },
+      span: { label: 'SPAN', value: 'span' },
+      div: { label: 'DIV', value: 'div' },
+      p: { label: 'P', value: 'p' }
+    };
+
+    let customTagArgs = applyFilters('customTagArgs', customTagArgsBasic);
+
+
 
 
     useEffect(() => {
@@ -1298,15 +1346,7 @@ registerBlockType("post-grid/post-featured-image", {
 
               <PanelRow className='my-3'>
                 <label>Link To</label>
-                <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.linkTo.length == 0 ? 'Choose' : featuredImage.options.linkTo} options={[
-                  { label: 'No Link', value: '' },
-                  { label: 'Post URL', value: 'postUrl' },
-                  { label: 'Custom Field', value: 'customField' },
-                  { label: 'Author URL', value: 'authorUrl' },
-                  { label: 'Author Link', value: 'authorLink' },
-                  { label: 'Home URL', value: 'homeUrl' },
-                  { label: 'Custom', value: 'custom' },
-                ]} onChange={(option, index) => {
+                <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.linkTo.length == 0 ? 'Choose' : linkToArgs[featuredImage.options.linkTo].label} options={linkToArgs} onChange={(option, index) => {
                   var options = { ...featuredImage.options, linkTo: option.value };
                   setAttributes({ featuredImage: { ...featuredImage, options: options } });
                 }} values=""></PGDropdown>
@@ -1336,19 +1376,7 @@ registerBlockType("post-grid/post-featured-image", {
               )}
 
 
-
-              {(featuredImage.options.customUrl.length > 0) && (
-
-                (postGridData.license_status != 'active') && (
-                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postFeaturedImage&utm_campaign=pluginPostGrid&utm_medium=postFeaturedImage-customUrl"}>
-                    <p><span className='underline'>Custom URL</span> feature only avilable in pro version</p>
-                  </PGproWrapper>
-                )
-
-              )}
-
-
-              {featuredImage.options.linkTo == 'custom' && (
+              {featuredImage.options.linkTo == 'customUrl' && (
 
                 <PanelRow>
                   <label for="">Custom URL</label>
@@ -1397,17 +1425,7 @@ registerBlockType("post-grid/post-featured-image", {
 
                 <PanelRow className='my-3'>
                   <label>Custom Tag</label>
-                  <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.tag.length == 0 ? 'Choose' : featuredImage.options.tag} options={[
-                    { label: 'H1', value: 'h1' },
-                    { label: 'H2', value: 'h2' },
-                    { label: 'H3', value: 'h3' },
-                    { label: 'H4', value: 'h4' },
-                    { label: 'H5', value: 'h5' },
-                    { label: 'H6', value: 'h6' },
-                    { label: 'SPAN', value: 'span' },
-                    { label: 'DIV', value: 'div' },
-                    { label: 'P', value: 'p' },
-                  ]} onChange={(option, index) => {
+                  <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.tag.length == 0 ? 'Choose' : customTagArgs[featuredImage.options.tag].label} options={customTagArgs} onChange={(option, index) => {
 
                     var options = { ...featuredImage.options, tag: option.value };
                     setAttributes({ featuredImage: { ...featuredImage, options: options } });
@@ -1564,19 +1582,7 @@ registerBlockType("post-grid/post-featured-image", {
 
               <PanelRow className='my-3'>
                 <label>Alt Text Source</label>
-                <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.altTextSrc.length == 0 ? 'Choose' : featuredImage.options.altTextSrc} options={[
-                  { label: 'No Alt Text', value: '' },
-                  { label: 'Image Alt Text', value: 'imgAltText' },
-                  { label: 'Image Title', value: 'imgTitle' },
-                  { label: 'Image Caption', value: 'imgCaption' },
-                  { label: 'Image Description', value: 'imgDescription' },
-                  { label: 'Image Slug', value: 'imgSlug' },
-                  { label: 'Post Title', value: 'postTitle' },
-                  { label: 'Post Excerpt', value: 'excerpt' },
-                  { label: 'Post Slug', value: 'postSlug' },
-                  { label: 'Post Custom Field', value: 'customField' },
-                  { label: 'Custom', value: 'custom' },
-                ]} onChange={(option, index) => {
+                <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.altTextSrc.length == 0 ? 'Choose' : altTextSrcArgs[featuredImage.options.altTextSrc].label} options={altTextSrcArgs} onChange={(option, index) => {
 
                   var options = { ...featuredImage.options, altTextSrc: option.value };
                   setAttributes({ featuredImage: { ...featuredImage, options: options } });

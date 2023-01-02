@@ -50389,7 +50389,7 @@ var myStore = wp.data.select('postgrid-shop');
       var newValuesObjX = {};
 
       if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'font-family': typoX.fontFamily
         };
       }
@@ -50397,9 +50397,9 @@ var myStore = wp.data.select('postgrid-shop');
       if (typoX.fontSize[breakPointX] != undefined) {
         var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
         var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[itemSelector]['font-size'] != undefined ? blockCssY.items[itemSelector]['font-size'] : {};
+        var fontSizeX = blockCssY.items[frontTextSelector]['font-size'] != undefined ? blockCssY.items[frontTextSelector]['font-size'] : {};
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'font-size': fontSizeX
         };
       }
@@ -50407,9 +50407,9 @@ var myStore = wp.data.select('postgrid-shop');
       if (typoX.lineHeight[breakPointX] != undefined) {
         var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 0;
         var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[itemSelector]['line-height'] != undefined ? blockCssY.items[itemSelector]['line-height'] : {};
+        var lineHeightX = blockCssY.items[frontTextSelector]['line-height'] != undefined ? blockCssY.items[frontTextSelector]['line-height'] : {};
         lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'line-height': lineHeightX
         };
       }
@@ -50417,15 +50417,15 @@ var myStore = wp.data.select('postgrid-shop');
       if (typoX.letterSpacing[breakPointX] != undefined) {
         var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
         var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[itemSelector]['letter-spacing'] != undefined ? blockCssY.items[itemSelector]['letter-spacing'] : {};
+        var letterSpacingX = blockCssY.items[frontTextSelector]['letter-spacing'] != undefined ? blockCssY.items[frontTextSelector]['letter-spacing'] : {};
         letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'letter-spacing': letterSpacingX
         };
       }
 
       if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'font-weight': typoX.fontWeight
         };
       }
@@ -50436,13 +50436,13 @@ var myStore = wp.data.select('postgrid-shop');
         var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
         str[breakPointX] = textDecorationXStr; //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
 
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'text-decoration': str
         };
       }
 
       if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'text-transform': typoX.textTransform
         };
       }
@@ -51394,21 +51394,12 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var newValuesObjX = {};
-
-        if (blockCssY.items[frontTextSelector] == undefined) {
-          newValuesObjX[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-            color: newValuesObj
-          };
-        } else {
-          newValuesObjX[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-            color: newValuesObj
-          };
-        }
-
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
+          'color': newValuesObj
+        };
         setAttributes({
           blockCssY: {
-            frontText: newValuesObjX
+            items: blockCssY.items
           }
         });
       }
@@ -51444,21 +51435,12 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        var newValuesObjX = {};
-
-        if (blockCssY.items[frontTextSelector] == undefined) {
-          newValuesObjX[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-            'background-color': newValuesObj
-          };
-        } else {
-          newValuesObjX[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-            'background-color': newValuesObj
-          };
-        }
-
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
+          'background-color': newValuesObj
+        };
         setAttributes({
           blockCssY: {
-            frontText: newValuesObjX
+            items: blockCssY.items
           }
         });
       }
@@ -52325,7 +52307,7 @@ var myStore = wp.data.select('postgrid-shop');
       var newValuesObjX = {};
 
       if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'font-family': typoX.fontFamily
         };
       }
@@ -52333,9 +52315,9 @@ var myStore = wp.data.select('postgrid-shop');
       if (typoX.fontSize[breakPointX] != undefined) {
         var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
         var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[itemSelector]['font-size'] != undefined ? blockCssY.items[itemSelector]['font-size'] : {};
+        var fontSizeX = blockCssY.items[frontTextSelector]['font-size'] != undefined ? blockCssY.items[frontTextSelector]['font-size'] : {};
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'font-size': fontSizeX
         };
       }
@@ -52343,9 +52325,9 @@ var myStore = wp.data.select('postgrid-shop');
       if (typoX.lineHeight[breakPointX] != undefined) {
         var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 0;
         var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[itemSelector]['line-height'] != undefined ? blockCssY.items[itemSelector]['line-height'] : {};
+        var lineHeightX = blockCssY.items[frontTextSelector]['line-height'] != undefined ? blockCssY.items[frontTextSelector]['line-height'] : {};
         lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'line-height': lineHeightX
         };
       }
@@ -52353,15 +52335,15 @@ var myStore = wp.data.select('postgrid-shop');
       if (typoX.letterSpacing[breakPointX] != undefined) {
         var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
         var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[itemSelector]['letter-spacing'] != undefined ? blockCssY.items[itemSelector]['letter-spacing'] : {};
+        var letterSpacingX = blockCssY.items[frontTextSelector]['letter-spacing'] != undefined ? blockCssY.items[frontTextSelector]['letter-spacing'] : {};
         letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'letter-spacing': letterSpacingX
         };
       }
 
       if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'font-weight': typoX.fontWeight
         };
       }
@@ -52372,13 +52354,13 @@ var myStore = wp.data.select('postgrid-shop');
         var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
         str[breakPointX] = textDecorationXStr; //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
 
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'text-decoration': str
         };
       }
 
       if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
           'text-transform': typoX.textTransform
         };
       }

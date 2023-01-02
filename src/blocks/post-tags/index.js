@@ -711,7 +711,7 @@ registerBlockType("post-grid/post-tags", {
 
       if (typoX.fontFamily[breakPointX] != undefined) {
 
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-family': typoX.fontFamily };
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'font-family': typoX.fontFamily };
 
       }
 
@@ -722,10 +722,10 @@ registerBlockType("post-grid/post-tags", {
         var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
 
 
-        var fontSizeX = (blockCssY.items[itemSelector]['font-size'] != undefined) ? blockCssY.items[itemSelector]['font-size'] : {};
+        var fontSizeX = (blockCssY.items[frontTextSelector]['font-size'] != undefined) ? blockCssY.items[frontTextSelector]['font-size'] : {};
 
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-size': fontSizeX };
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'font-size': fontSizeX };
 
       }
 
@@ -737,11 +737,11 @@ registerBlockType("post-grid/post-tags", {
         var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
 
 
-        var lineHeightX = (blockCssY.items[itemSelector]['line-height'] != undefined) ? blockCssY.items[itemSelector]['line-height'] : {};
+        var lineHeightX = (blockCssY.items[frontTextSelector]['line-height'] != undefined) ? blockCssY.items[frontTextSelector]['line-height'] : {};
 
         lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
 
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'line-height': lineHeightX };
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'line-height': lineHeightX };
       }
       if (typoX.letterSpacing[breakPointX] != undefined) {
 
@@ -750,16 +750,16 @@ registerBlockType("post-grid/post-tags", {
 
 
 
-        var letterSpacingX = (blockCssY.items[itemSelector]['letter-spacing'] != undefined) ? blockCssY.items[itemSelector]['letter-spacing'] : {};
+        var letterSpacingX = (blockCssY.items[frontTextSelector]['letter-spacing'] != undefined) ? blockCssY.items[frontTextSelector]['letter-spacing'] : {};
 
         letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
 
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'letter-spacing': letterSpacingX };
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'letter-spacing': letterSpacingX };
       }
 
       if (typoX.fontWeight[breakPointX] != undefined) {
 
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-weight': typoX.fontWeight };
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'font-weight': typoX.fontWeight };
 
       }
 
@@ -775,12 +775,12 @@ registerBlockType("post-grid/post-tags", {
 
         //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
 
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'text-decoration': str };
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'text-decoration': str };
 
       }
       if (typoX.textTransform[breakPointX] != undefined) {
 
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'text-transform': typoX.textTransform };
+        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'text-transform': typoX.textTransform };
 
 
       }
@@ -1932,19 +1932,10 @@ registerBlockType("post-grid/post-tags", {
 
 
 
-
-                  var newValuesObjX = {};
-                  if (blockCssY.items[frontTextSelector] == undefined) {
-
-                    newValuesObjX[frontTextSelector] = { ...blockCssY.items[frontTextSelector], color: newValuesObj };
-
-                  } else {
-
-                    newValuesObjX[frontTextSelector] = { ...blockCssY.items[frontTextSelector], color: newValuesObj };
-                  }
+                  blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'color': newValuesObj };
+                  setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
-                  setAttributes({ blockCssY: { frontText: newValuesObjX } });
 
 
                 }}
@@ -1981,18 +1972,9 @@ registerBlockType("post-grid/post-tags", {
                   setAttributes({ frontText: { ...frontText, styles: styles } });
 
 
-                  var newValuesObjX = {};
-                  if (blockCssY.items[frontTextSelector] == undefined) {
 
-                    newValuesObjX[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'background-color': newValuesObj };
-
-                  } else {
-
-                    newValuesObjX[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'background-color': newValuesObj };
-                  }
-
-
-                  setAttributes({ blockCssY: { frontText: newValuesObjX } });
+                  blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'background-color': newValuesObj };
+                  setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
 

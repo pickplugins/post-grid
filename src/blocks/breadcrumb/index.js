@@ -71,7 +71,7 @@ registerBlockType("post-grid/breadcrumb", {
     icon: {
       type: 'object',
       default: {
-        options: { class: 'icon', position: 'beforeLabel'/*beforeLabel, afterLabel, beforeseparator, afterseparator*/ },
+        options: { class: 'icon', position: 'beforeLabel'/*beforeLabel, afterLabel, beforeSeparator, afterSeparator*/ },
         styles:
         {
           textAlign: {},
@@ -119,7 +119,7 @@ registerBlockType("post-grid/breadcrumb", {
       "type": "object",
       "default": {
         options: {
-          linkTarget: '_blank', showLabel: true, showSeparator: true, showIcon: false, iconPositon: 'beforeLabel' // beforeLabel, afterLabel, beforeseparator, afterseparator
+          linkTarget: '_blank', showLabel: true, showSeparator: true, showIcon: false, iconPositon: 'beforeLabel' // beforeLabel, afterLabel, beforeSeparator, afterSeparator
         },
         styles: {
           textAlign: {},
@@ -330,15 +330,21 @@ registerBlockType("post-grid/breadcrumb", {
             }
 
 
+            if (blockCssY.items[itemSelector + '.item-' + index + ' a'] == undefined) {
+              blockCssY.items[itemSelector + '.item-' + index + ' a'] = {}
+              blockCssY.items[itemSelector + '.item-' + index + ' a'][attrIdX] = attrVal;
+            } else {
+              blockCssY.items[itemSelector + '.item-' + index + ' a'][attrIdX] = attrVal;
+            }
+
+
             if (blockCssY.items[itemSelector + '.item-' + index] == undefined) {
               blockCssY.items[itemSelector + '.item-' + index] = {}
               blockCssY.items[itemSelector + '.item-' + index][attrIdX] = attrVal;
-
-
             } else {
               blockCssY.items[itemSelector + '.item-' + index][attrIdX] = attrVal;
-
             }
+
 
 
             setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -1969,8 +1975,8 @@ registerBlockType("post-grid/breadcrumb", {
 
                         { label: 'Before Label', value: 'beforeLabel' },
                         { label: 'After Label', value: 'afterLabel' },
-                        // { label: 'Before separator', value: 'beforeseparator' },
-                        // { label: 'After separator', value: 'afterseparator' },
+                        { label: 'Before Separator', value: 'beforeSeparator' },
+                        { label: 'After Separator', value: 'afterSeparator' },
 
 
                       ]}
@@ -2844,17 +2850,51 @@ registerBlockType("post-grid/breadcrumb", {
 
               return (
                 <li className={'item item-' + index}>
-                  <a href={x.url}>
-                    {elements.options.showIcon && (
-                      <span className={`icon ${x.siteIcon.iconSrc}`}></span>
-                    )}
-                    {elements.options.showLabel && (
-                      <span className='label'>{(x.customText.length > 0) ? x.customText : x.label}</span>
-                    )}
 
-                  </a>
-                  {elements.items.length > index && (
-                    <span class="separator">{separator.options.text}</span>
+                  {x.url.length > 0 && (
+
+                    <a href={x.url}>
+                      {elements.options.showIcon && icon.options.position == 'beforeLabel' && (
+                        <span className={`icon ${x.siteIcon.iconSrc}`}></span>
+                      )}
+                      {elements.options.showLabel && (
+                        <span className='label'>{(x.customText.length > 0) ? x.customText : x.label}</span>
+                      )}
+                      {elements.options.showIcon && icon.options.position == 'afterLabel' && (
+                        <span className={`icon ${x.siteIcon.iconSrc}`}></span>
+                      )}
+                    </a>
+                  )}
+
+
+                  {x.url.length == 0 && (
+
+                    <span>
+                      {elements.options.showIcon && icon.options.position == 'beforeLabel' && (
+                        <span className={`icon ${x.siteIcon.iconSrc}`}></span>
+                      )}
+                      {elements.options.showLabel && (
+                        <span className='label'>{(x.customText.length > 0) ? x.customText : x.label}</span>
+                      )}
+                      {elements.options.showIcon && icon.options.position == 'afterLabel' && (
+                        <span className={`icon ${x.siteIcon.iconSrc}`}></span>
+                      )}
+                    </span>
+                  )}
+
+                  {elements.options.showSeparator && (
+                    <>
+                      {elements.options.showIcon && icon.options.position == 'beforeSeparator' && (
+                        <span className={`icon ${x.siteIcon.iconSrc}`}></span>
+                      )}
+                      {elements.items.length > index && (
+                        <span class="separator">{separator.options.text}</span>
+                      )}
+                      {elements.options.showIcon && icon.options.position == 'afterSeparator' && (
+                        <span className={`icon ${x.siteIcon.iconSrc}`}></span>
+                      )}
+                    </>
+
                   )}
 
                 </li>

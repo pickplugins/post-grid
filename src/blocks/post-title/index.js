@@ -1412,6 +1412,7 @@ registerBlockType("post-grid/post-title", {
                             <div className='my-2'>
                               <PanelRow>
                                 <InputControl
+                                  placeholder="Name"
                                   className='mr-2'
                                   value={postTitle.options.linkAttr[i].id}
                                   onChange={(newVal) => {
@@ -1430,6 +1431,7 @@ registerBlockType("post-grid/post-title", {
                                 />
 
                                 <InputControl
+                                  placeholder="Value"
                                   className='mr-2'
                                   value={x.val}
                                   onChange={(newVal) => {

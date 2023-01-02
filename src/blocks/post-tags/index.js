@@ -6,6 +6,8 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, subscribe, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
+import { applyFilters } from '@wordpress/hooks';
+
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 
@@ -23,6 +25,7 @@ import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
 import PGcssDisplay from '../../components/css-display'
 import PGIconPicker from '../../components/icon-picker'
+import PGDropdown from '../../components/dropdown'
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -216,6 +219,28 @@ registerBlockType("post-grid/post-tags", {
     const postCountSelector = blockClass + ' .postCount';
     const iconSelector = blockClass + ' .icon';
 
+
+    var iconPositonArgsBasic = {
+
+      none: { label: 'Choose Position', value: '' },
+      beforeFronttext: { label: 'Before Front text', value: 'beforeFronttext' },
+      afterFronttext: { label: 'After Front text', value: 'afterFronttext' },
+      beforeItems: { label: 'Before Items', value: 'beforeItems' },
+      afterItems: { label: 'After Items', value: 'afterItems' },
+      beforeItem: { label: 'Before Each Items', value: 'beforeItem', isPro: true },
+      afterItem: { label: 'After Each Items', value: 'afterItem', isPro: true },
+    };
+
+    let iconPositonArgs = applyFilters('iconPositonArgs', iconPositonArgsBasic);
+
+    function setIconPosition(option, index) {
+
+      var options = { ...icon.options, position: option.value };
+      setAttributes({ icon: { ...icon, options: options } });
+
+    }
+
+
     var breakPointList = [];
 
     for (var x in breakPoints) {
@@ -224,6 +249,8 @@ registerBlockType("post-grid/post-tags", {
       breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
     }
+
+
 
 
     var dummyCats = [
@@ -1375,6 +1402,7 @@ registerBlockType("post-grid/post-tags", {
                     <div className='my-2'>
                       <PanelRow>
                         <InputControl
+                          placeholder="Name"
                           className='mr-2'
                           value={items.options.linkAttr[i].id}
                           onChange={(newVal) => {
@@ -1387,6 +1415,7 @@ registerBlockType("post-grid/post-tags", {
                         />
 
                         <InputControl
+                          placeholder="Value"
                           className='mr-2'
                           value={x.val}
                           onChange={(newVal) => {
@@ -1568,34 +1597,11 @@ registerBlockType("post-grid/post-tags", {
               <PanelRow>
                 <label for="">Icon position</label>
 
-                <SelectControl
-                  label=""
-                  value={icon.options.position}
-                  options={[
-
-                    { label: 'Choose Position', value: '' },
-
-                    { label: 'Before Front text', value: 'beforeFronttext' },
-                    { label: 'After Front text', value: 'afterFronttext' },
-                    { label: 'Before Items', value: 'beforeItems' },
-                    { label: 'After Items', value: 'afterItems' },
-                    { label: 'Before Each Items', value: 'beforeItem' },
-                    { label: 'After Each Items', value: 'afterItem' },
-
-                  ]}
-                  onChange={(newVal) => {
 
 
-                    var options = { ...icon.options, position: newVal };
-                    setAttributes({ icon: { ...icon, options: options } });
+                <PGDropdown position="bottom right" variant="secondary" options={iconPositonArgs} buttonTitle={icon.options.position.length == 0 ? 'Choose' : iconPositonArgs[icon.options.position].label}
+                  onChange={setIconPosition} values={[]}></PGDropdown>
 
-
-                  }
-
-
-
-                  }
-                />
               </PanelRow>
 
 

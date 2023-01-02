@@ -8,6 +8,7 @@ import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -20,6 +21,7 @@ import BreakpointToggle from '../../components/breakpoint-toggle'
 import colorsPresets from '../../colors-presets'
 import Typography from '../../components/typography'
 import PGcssDisplay from '../../components/css-display'
+import PGDropdown from '../../components/dropdown'
 
 import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
@@ -282,6 +284,29 @@ registerBlockType("post-grid/post-categories", {
       setPostCategoriesX,
     ] = useEntityProp('postType', postType, 'categories', postId);
 
+
+
+    var iconPositonArgsBasic = {
+
+      none: { label: 'Choose Position', value: '' },
+      beforeFronttext: { label: 'Before Front text', value: 'beforeFronttext' },
+      afterFronttext: { label: 'After Front text', value: 'afterFronttext' },
+      beforeItems: { label: 'Before Items', value: 'beforeItems' },
+      afterItems: { label: 'After Items', value: 'afterItems' },
+      beforeItem: { label: 'Before Each Items', value: 'beforeItem', isPro: true },
+      afterItem: { label: 'After Each Items', value: 'afterItem', isPro: true },
+    };
+
+    let iconPositonArgs = applyFilters('iconPositonArgs', iconPositonArgsBasic);
+
+
+
+    function setIconPosition(option, index) {
+
+      var options = { ...icon.options, position: option.value };
+      setAttributes({ icon: { ...icon, options: options } });
+
+    }
 
 
     useEffect(() => {
@@ -1393,6 +1418,7 @@ registerBlockType("post-grid/post-categories", {
                     <div className='my-2'>
                       <PanelRow>
                         <InputControl
+                          placeholder="Name"
                           className='mr-2'
                           value={items.options.linkAttr[i].id}
                           onChange={(newVal) => {
@@ -1406,6 +1432,7 @@ registerBlockType("post-grid/post-categories", {
 
                         <InputControl
                           className='mr-2'
+                          placeholder="Value"
                           value={x.val}
                           onChange={(newVal) => {
                             items.options.linkAttr[i].val = newVal
@@ -1608,35 +1635,11 @@ registerBlockType("post-grid/post-categories", {
               <PanelRow>
                 <label for="">Icon position</label>
 
-                <SelectControl
-                  label=""
-                  value={icon.options.position}
-                  options={[
 
-                    { label: 'Choose Position', value: '' },
-
-                    { label: 'Before Front text', value: 'beforeFronttext' },
-                    { label: 'After Front text', value: 'afterFronttext' },
-                    { label: 'Before Items', value: 'beforeItems' },
-                    { label: 'After Items', value: 'afterItems' },
-                    { label: 'Before Each Items', value: 'beforeItem' },
-                    { label: 'After Each Items', value: 'afterItem' },
+                <PGDropdown position="bottom right" variant="secondary" options={iconPositonArgs} buttonTitle={icon.options.position.length == 0 ? 'Choose' : iconPositonArgs[icon.options.position].label}
+                  onChange={setIconPosition} values={[]}></PGDropdown>
 
 
-                  ]}
-                  onChange={(newVal) => {
-
-
-                    var options = { ...icon.options, position: newVal };
-                    setAttributes({ icon: { ...icon, options: options } });
-
-
-                  }
-
-
-
-                  }
-                />
               </PanelRow>
 
 

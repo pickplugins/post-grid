@@ -1944,6 +1944,7 @@ registerBlockType("post-grid/image", {
                         <div className='my-2'>
                           <PanelRow>
                             <InputControl
+                              placeholder="Name"
                               className='mr-2'
                               value={image.options.linkAttr[i].id}
                               onChange={(newVal) => {
@@ -1963,6 +1964,7 @@ registerBlockType("post-grid/image", {
 
                             <InputControl
                               className='mr-2'
+                              placeholder="Value"
                               value={x.val}
                               onChange={(newVal) => {
                                 image.options.linkAttr[i].val = newVal

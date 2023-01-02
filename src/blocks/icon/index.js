@@ -1362,6 +1362,7 @@ registerBlockType("post-grid/icon", {
                           <div className='my-2'>
                             <PanelRow>
                               <InputControl
+                                placeholder="Name"
                                 className='mr-2'
                                 value={wrapper.options.attr[i].id}
                                 onChange={(newVal) => {
@@ -1383,6 +1384,7 @@ registerBlockType("post-grid/icon", {
 
                               <InputControl
                                 className='mr-2'
+                                placeholder="Value"
                                 value={x.val}
                                 onChange={(newVal) => {
                                   wrapper.options.attr[i].val = newVal
@@ -1876,6 +1878,7 @@ registerBlockType("post-grid/icon", {
                             <div className='my-2'>
                               <PanelRow>
                                 <InputControl
+                                  placeholder="Name"
                                   className='mr-2'
                                   value={text.options.linkAttr[i].id}
                                   onChange={(newVal) => {
@@ -1897,6 +1900,7 @@ registerBlockType("post-grid/icon", {
 
                                 <InputControl
                                   className='mr-2'
+                                  placeholder="Value"
                                   value={x.val}
                                   onChange={(newVal) => {
                                     text.options.linkAttr[i].val = newVal

@@ -340,14 +340,12 @@ class PGBlockBreadcrumb
 
 
 
-        //error_log(serialize($elements));
 
 
 ?>
 
 
-        <?php //echo var_export($post_thumb_url, true);
-        ?>
+ 
 
 
 
@@ -358,9 +356,6 @@ class PGBlockBreadcrumb
 
 
         $links = [];
-        //var_dump($total);
-
-
 
         $i = 1;
 
@@ -372,7 +367,7 @@ class PGBlockBreadcrumb
                 $customText = isset($item['customText']) ? $item['customText'] : '%s';
 
                 $separator = isset($item['separator']) ? $item['separator'] : '»';
-                $url = isset($item['url']) ? $item['url'] : '';
+                $custom_url = isset($item['url']) ? $item['url'] : '';
 
                 $siteIcon = isset($item['siteIcon']) ? $item['siteIcon'] : '';
 
@@ -380,7 +375,6 @@ class PGBlockBreadcrumb
                 $iconSrcType = isset($siteIcon['srcType']) ? $siteIcon['srcType'] : '';
                 $iconSrc = isset($siteIcon['iconSrc']) ? $siteIcon['iconSrc'] : '';
 
-                //echo var_export($id, true);
                 $linkData = [];
 
 
@@ -388,7 +382,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => (!empty($customText)) ? $customText : __('You are here: ', 'post-grid'),
-                        'link' => $url
+                        'link' => $custom_url
                     ];
 
                 elseif ($id == 'homePage') :
@@ -396,12 +390,13 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => !empty($customText) ? $customText : __('Home', 'post-grid'),
-                        'link' => $home_url
+                        'link' => !empty($custom_url ) ? $custom_url : $home_url
                     ];
+
+
 
                 elseif ($id == 'frontPage') :
                     $post_id = get_option('page_on_front');
-                    //echo var_export($post_id);
 
                     $post_url = get_permalink($post_id);
                     $post_title = get_the_title($post_id);
@@ -410,13 +405,14 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $post_title),
-                        'link' => $post_url
+                        'link' => !empty($custom_url ) ? $custom_url : $post_url
                     ];
+
+
 
 
                 elseif ($id == 'postsPage') :
                     $post_id = get_option('page_for_posts');
-                    //echo var_export($post_id);
 
                     $post_url = get_permalink($post_id);
                     $post_title = get_the_title($post_id);
@@ -425,7 +421,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $post_title),
-                        'link' => $post_url
+                        'link' => !empty($custom_url ) ? $custom_url :$post_url
                     ];
 
 
@@ -437,7 +433,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $post_title),
-                        'link' => $post_url
+                        'link' => !empty($custom_url ) ? $custom_url :$post_url
                     ];
 
 
@@ -451,7 +447,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => !empty($customText) ? $customText : $author_name,
-                        'link' => $author_posts_url
+                        'link' => !empty($custom_url ) ? $custom_url :$author_posts_url
                     ];
 
 
@@ -460,7 +456,6 @@ class PGBlockBreadcrumb
                     $format = !empty($item['options']['format']) ? $item['options']['format'] : 'Y-m-d';
                     $post_date = get_the_time($format);
 
-                    //echo var_export($format, true);
 
                     $post_date_year = get_the_time('Y');
                     $post_date_month = get_the_time('m');
@@ -473,7 +468,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $post_date),
-                        'link' => $get_day_link
+                        'link' => !empty($custom_url ) ? $custom_url :$get_day_link
                     ];
 
 
@@ -490,7 +485,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' =>  sprintf($customText, $post_date_day),
-                        'link' => $get_day_link
+                        'link' => !empty($custom_url ) ? $custom_url :$get_day_link
                     ];
 
 
@@ -507,7 +502,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' =>  sprintf($customText, $post_date_month),
-                        'link' => $get_month_link
+                        'link' => !empty($custom_url ) ? $custom_url :$get_month_link
                     ];
 
                 elseif ($id == 'postYear') :
@@ -523,7 +518,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' =>  sprintf($customText, $post_date_year),
-                        'link' => $get_year_link
+                        'link' => !empty($custom_url ) ? $custom_url :$get_year_link
                     ];
 
 
@@ -546,13 +541,12 @@ class PGBlockBreadcrumb
                     }
 
 
-                    //echo '<pre>' . var_export($ancestors, true) . '</pre>';
 
                     foreach ($ancestors as $ancestor) {
 
                         $links[] = [
                             'label' =>  sprintf($customText, get_the_title($ancestor)),
-                            'link' => get_permalink($ancestor)
+                            'link' => !empty($custom_url ) ? $custom_url : get_permalink($ancestor)
                         ];
                     }
 
@@ -566,7 +560,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' =>  sprintf($customText, $post_id),
-                        'link' => $post_url
+                        'link' => !empty($custom_url ) ? $custom_url : $post_url
                     ];
 
                 elseif ($id == 'postCategory') :
@@ -590,7 +584,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' =>  sprintf($customText, $term_title),
-                        'link' => $term_link
+                        'link' => !empty($custom_url ) ? $custom_url : $term_link
                     ];
 
                 elseif ($id == 'postTag') :
@@ -612,7 +606,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' =>  sprintf($customText, $term_title),
-                        'link' => $term_link
+                        'link' => !empty($custom_url ) ? $custom_url : $term_link
                     ];
 
 
@@ -640,7 +634,7 @@ class PGBlockBreadcrumb
 
                             $links[] = [
                                 'label' =>  sprintf($customText, $term_title),
-                                'link' => $term_link
+                                'link' => !empty($custom_url ) ? $custom_url : $term_link
                             ];
                         }
                     endif;
@@ -673,11 +667,11 @@ class PGBlockBreadcrumb
                             $customText = !empty($customText) ? $customText : '%s';
 
                             $linkData['label'] = sprintf($customText, $term_title);
-                            $linkData['link'] = $term_link;
+                            $linkData['link'] = !empty($custom_url ) ? $custom_url : $term_link;
 
                             $links[] = [
                                 'label' =>  sprintf($customText, $term_title),
-                                'link' => $term_link
+                                'link' => !empty($custom_url ) ? $custom_url : $term_link
                             ];
                         }
                     endif;
@@ -706,11 +700,11 @@ class PGBlockBreadcrumb
                             $customText = !empty($customText) ? $customText : '%s';
 
                             $linkData['label'] = sprintf($customText, $term_title);
-                            $linkData['link'] = $term_link;
+                            $linkData['link'] = !empty($custom_url ) ? $custom_url : $term_link;
 
                             $links[] = [
                                 'label' =>  sprintf($customText, $term_title),
-                                'link' => $term_link
+                                'link' => !empty($custom_url ) ? $custom_url : $term_link
                             ];
                         }
                     endif;
@@ -744,7 +738,7 @@ class PGBlockBreadcrumb
 
                             $links[] = [
                                 'label' =>  sprintf($customText, $term_title),
-                                'link' => $term_link
+                                'link' => !empty($custom_url ) ? $custom_url : $term_link
                             ];
                         }
                     endif;
@@ -780,7 +774,7 @@ class PGBlockBreadcrumb
 
                         $links[] = [
                             'label' => sprintf($customText, $paren_term_name->name),
-                            'link' => $parent_term_link
+                            'link' => !empty($custom_url ) ? $custom_url : $parent_term_link
                         ];
                     }
 
@@ -800,7 +794,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $archive_title),
-                        'link' => $term_link
+                        'link' => !empty($custom_url ) ? $custom_url : $term_link
                     ];
 
 
@@ -820,7 +814,7 @@ class PGBlockBreadcrumb
 
                         $links[] = [
                             'label' => sprintf($customText, $post_title),
-                            'link' => $post_url
+                            'link' => !empty($custom_url ) ? $custom_url : $post_url
                         ];
 
 
@@ -843,7 +837,7 @@ class PGBlockBreadcrumb
 
                         $links[] = [
                             'label' => sprintf($customText, $post_title),
-                            'link' => $post_url
+                            'link' => !empty($custom_url ) ? $custom_url : $post_url
                         ];
 
                     endif;
@@ -862,7 +856,7 @@ class PGBlockBreadcrumb
 
                         $links[] = [
                             'label' => sprintf($customText, $post_title),
-                            'link' => $post_url
+                            'link' => !empty($custom_url ) ? $custom_url : $post_url
                         ];
 
                     endif;
@@ -880,7 +874,7 @@ class PGBlockBreadcrumb
 
                         $links[] = [
                             'label' => sprintf($customText, $post_title),
-                            'link' => $post_url
+                            'link' => !empty($custom_url ) ? $custom_url : $post_url
                         ];
 
                     endif;
@@ -894,7 +888,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $current_query),
-                        'link' => '#'
+                        'link' => !empty($custom_url ) ? $custom_url : '#'
                     ];
 
 
@@ -905,7 +899,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $archive_title),
-                        'link' => '#'
+                        'link' => !empty($custom_url ) ? $custom_url : '#'
                     ];
 
                 elseif ($id == '404Text') :
@@ -915,7 +909,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $archive_title),
-                        'link' => '#'
+                        'link' => !empty($custom_url ) ? $custom_url : '#'
                     ];
 
                 elseif ($id == 'dateText') :
@@ -931,7 +925,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $archive_title),
-                        'link' => '#'
+                        'link' => !empty($custom_url ) ? $custom_url : '#'
                     ];
 
                 elseif ($id == 'monthText') :
@@ -945,7 +939,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $archive_title),
-                        'link' => '#'
+                        'link' => !empty($custom_url ) ? $custom_url : '#'
                     ];
 
 
@@ -959,7 +953,7 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $archive_title),
-                        'link' => '#'
+                        'link' => !empty($custom_url ) ? $custom_url : '#'
                     ];
 
                 elseif ($id == 'authorName') :
@@ -969,13 +963,12 @@ class PGBlockBreadcrumb
 
                     $links[] = [
                         'label' => sprintf($customText, $archive_title),
-                        'link' => get_author_posts_url(get_the_author_meta("ID")),
+                        'link' => !empty($custom_url ) ? $custom_url : get_author_posts_url(get_the_author_meta("ID")),
                     ];
 
 
 
                 endif;
-
 
 
 
@@ -991,7 +984,7 @@ class PGBlockBreadcrumb
                 $fontIconHtml = '<span class="icon ' . $iconClass . ' ' . $iconSrc . '"></span>';
 
                 $pramsArr = ['{URL}' => $post_url, '{TITLE}' => $post_title, '{IMAGE}' => $post_thumb_url,];
-                $url = strtr($url, (array)$pramsArr);
+                $url = strtr($custom_url, (array)$pramsArr);
 
 
 
@@ -1005,7 +998,6 @@ class PGBlockBreadcrumb
         $total = count($links);
 
 
-        //echo '<pre>' . var_export($links, true) . '</pre>';
 
 
 
@@ -1020,29 +1012,43 @@ class PGBlockBreadcrumb
                     $i = 1;
                     if (!empty($links))
                         foreach ($links as $index => $item) {
+$item_link = isset($item['link']) ? $item['link'] : '';
 
                     ?><li class="<?php echo esc_attr('item item-' . $index); ?>">
-                            <a href="<?php echo esc_url_raw($item['link']); ?>">
-
-
+                            <?php if(!empty($item_link)): ?>
+<a href="<?php echo esc_url_raw($item_link); ?>">
                                 <?php if ($showIcon) : ?>
                                     <?php //echo wp_kses_post($item['icon']); 
                                     ?>
                                 <?php endif; ?>
                                 <?php if ($showLabel) : ?>
                                     <span class='label'>
-                                        <?php echo wp_kses_post($item['label']);
-                                        ?>
-
+                                        <?php echo wp_kses_post($item['label']); ?>
                                     </span>
                                 <?php endif; ?>
-
-
                                 <?php if ($showSeparator && $total > $i) : ?>
                                     <span class="separator"><?php echo esc_html($separatorText); ?></span>
                                 <?php endif; ?>
-
                             </a>
+
+<?php else: ?>
+
+<span >
+                                <?php if ($showIcon) : ?>
+                                    <?php //echo wp_kses_post($item['icon']); 
+                                    ?>
+                                <?php endif; ?>
+                                <?php if ($showLabel) : ?>
+                                    <span class='label'>
+                                        <?php echo wp_kses_post($item['label']); ?>
+                                    </span>
+                                <?php endif; ?>
+                                <?php if ($showSeparator && $total > $i) : ?>
+                                    <span class="separator"><?php echo esc_html($separatorText); ?></span>
+                                <?php endif; ?>
+                            </span>
+<?php endif; ?>
+
                         </li>
                     <?php
                             $i++;

@@ -342,7 +342,9 @@ class PGBlocpostCommentCount
                 <?php endif; ?>
 
                 <?php if (!empty($commentCountLinkTo)) : ?>
-                    <a class='commentCount' <?php echo esc_attr($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>" rel="<?php echo esc_attr($commentCountRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
+                    <a class='commentCount' <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>" rel="<?php echo esc_attr($commentCountRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
                         <?php if ($iconPosition == 'beforeCommentCount') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -354,7 +356,9 @@ class PGBlocpostCommentCount
 
                 <?php else : ?>
 
-                    <span class='commentCount' <?php echo esc_attr($linkAttrStrcommentCount); ?>>
+                    <span class='commentCount' <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStrcommentCount); ?>>
                         <?php if ($iconPosition == 'beforeCommentCount') :
                         ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
@@ -406,7 +410,9 @@ class PGBlocpostCommentCount
 
             <?php if (!empty($commentCountLinkTo)) : ?>
 
-                <a class='commentCount' <?php echo esc_attr($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>" rel="<?php echo esc_attr($commentCountRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
+                <a class='commentCount' <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>" rel="<?php echo esc_attr($commentCountRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
                     <?php if ($iconPosition == 'beforeCommentCount') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>

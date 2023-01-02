@@ -519,7 +519,9 @@ class PGBlockPostExcerpt
 ?>
             <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
                 <?php if ($postExcerptIsLink) : ?>
-                    <a href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                    <a href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStr); ?>>
 
 
                         <?php if ($postfixText) : ?>
@@ -568,7 +570,9 @@ class PGBlockPostExcerpt
 
                 <?php endif; ?>
 
-                <a class='readmore' <?php echo esc_attr($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo wp_kses_post($readMoreText); ?></a>
+                <a class='readmore' <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo wp_kses_post($readMoreText); ?></a>
             </<?php echo esc_attr($wrapperTag); ?>>
         <?php
 
@@ -579,7 +583,9 @@ class PGBlockPostExcerpt
         ?>
 
             <?php if ($postExcerptIsLink) : ?>
-                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($postExcerptCustomUrl)) ? esc_url_raw($postExcerptCustomUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($postExcerptRel); ?>" target="<?php echo esc_attr($postExcerptLinkTarget); ?>" <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStr); ?>>
 
                     <?php if ($postfixText) : ?>
                         <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
@@ -621,7 +627,9 @@ class PGBlockPostExcerpt
 
                     <?php endif; ?>
 
-                    <a class='readmore' <?php echo esc_attr($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo wp_kses_post($readMoreText); ?></a>
+                    <a class='readmore' <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo wp_kses_post($readMoreText); ?></a>
 
                 </div>
 

@@ -1356,6 +1356,7 @@ registerBlockType("post-grid/post-comment-count", {
                             <div className='my-2'>
                               <PanelRow>
                                 <InputControl
+                                  placeholder="Name"
                                   className='mr-2'
                                   value={commentCount.options.linkAttr[i].id}
                                   onChange={(newVal) => {
@@ -1375,6 +1376,7 @@ registerBlockType("post-grid/post-comment-count", {
 
                                 <InputControl
                                   className='mr-2'
+                                  placeholder="Value"
                                   value={x.val}
                                   onChange={(newVal) => {
                                     commentCount.options.linkAttr[i].val = newVal

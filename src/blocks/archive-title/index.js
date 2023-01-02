@@ -1466,6 +1466,7 @@ registerBlockType("post-grid/archive-title", {
                               <PanelRow>
                                 <InputControl
                                   className='mr-2'
+                                  placeholder="Name"
                                   value={archiveTitle.options.linkAttr[i].id}
                                   onChange={(newVal) => {
 
@@ -1484,6 +1485,7 @@ registerBlockType("post-grid/archive-title", {
 
                                 <InputControl
                                   className='mr-2'
+                                  placeholder="Value"
                                   value={x.val}
                                   onChange={(newVal) => {
                                     archiveTitle.options.linkAttr[i].val = newVal

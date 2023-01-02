@@ -739,6 +739,7 @@ class PGBlockPostGridFilterable
             $paged = 1;
         }
 
+
         if (!empty($paged))
             $query_args['paged'] = $paged;
 

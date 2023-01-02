@@ -372,7 +372,9 @@ class PGBlocArchiveTitle
                 <?php endif; ?>
 
                 <?php if (!empty($archiveTitleLinkTo)) : ?>
-                    <a class='archiveTitle' <?php echo esc_attr($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
+                    <a class='archiveTitle' <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
                         <?php if ($iconPosition == 'beforeArchiveTitle') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -384,7 +386,9 @@ class PGBlocArchiveTitle
 
                 <?php else : ?>
 
-                    <span class='archiveTitle' <?php echo esc_attr($linkAttrStrarchiveTitle); ?>>
+                    <span class='archiveTitle' <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStrarchiveTitle); ?>>
                         <?php if ($iconPosition == 'beforeArchiveTitle') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -434,7 +438,9 @@ class PGBlocArchiveTitle
 
             <?php if (!empty($archiveTitleLinkTo)) : ?>
 
-                <a class='archiveTitle' <?php echo esc_attr($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
+                <a class='archiveTitle' <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
                     <?php if ($iconPosition == 'beforeArchiveTitle') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>

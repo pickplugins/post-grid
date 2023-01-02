@@ -82,7 +82,7 @@ registerBlockType("post-grid/post-excerpt", {
       type: 'object',
       default: {
         options: {
-          tag: 'div',
+          tag: 'p',
           text: '',
           limitBy: 'word', /*word, character*/
           limitCount: 99,
@@ -109,7 +109,7 @@ registerBlockType("post-grid/post-excerpt", {
           display: { "Desktop": "inline-block" },
 
           fontSize: {}, //{ val: '18', unit: 'px' }
-          lineHeight: { "Desktop": "25" }, // { val: '18', unit: 'px' }
+          lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},
           fontWeight: {},
@@ -137,7 +137,7 @@ registerBlockType("post-grid/post-excerpt", {
           display: { "Desktop": "inline-block" },
 
           fontSize: {}, //{ val: '18', unit: 'px' }
-          lineHeight: { "Desktop": "25" }, // { val: '18', unit: 'px' }
+          lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},
           fontWeight: { "Desktop": "700" },
@@ -504,6 +504,9 @@ registerBlockType("post-grid/post-excerpt", {
 
       var newValuesObjX = {};
       var itemsX = blockCssY.items;
+
+      console.log(typoX);
+
 
 
       if (typoX.fontFamily[breakPointX] != undefined) {
@@ -1589,6 +1592,7 @@ registerBlockType("post-grid/post-excerpt", {
                         <div className='my-2'>
                           <PanelRow>
                             <InputControl
+                              placeholder="Name"
                               className='mr-2'
                               value={postExcerpt.options.linkAttr[i].id}
                               onChange={(newVal) => {
@@ -1610,6 +1614,7 @@ registerBlockType("post-grid/post-excerpt", {
 
                             <InputControl
                               className='mr-2'
+                              placeholder="Value"
                               value={x.val}
                               onChange={(newVal) => {
                                 postExcerpt.options.linkAttr[i].val = newVal
@@ -2130,6 +2135,7 @@ registerBlockType("post-grid/post-excerpt", {
                         <div className='my-2'>
                           <PanelRow>
                             <InputControl
+                              placeholder="Name"
                               className='mr-2'
                               value={readMore.options.linkAttr[i].id}
                               onChange={(newVal) => {
@@ -2151,6 +2157,7 @@ registerBlockType("post-grid/post-excerpt", {
 
                             <InputControl
                               className='mr-2'
+                              placeholder="Value"
                               value={x.val}
                               onChange={(newVal) => {
                                 readMore.options.linkAttr[i].val = newVal

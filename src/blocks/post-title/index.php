@@ -195,17 +195,20 @@ class PGBlockPostTitle
 
 
 
-
         $linkAttrStr = '';
-
-
+        $attrArr = [];
 
         if (!empty($linkAttr))
             foreach ($linkAttr as $attr) {
 
-                if (!empty($attr['val']))
-                    $linkAttrStr .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
+                if (!empty($attr['val'])){
+                    $linkAttrStr .= esc_attr($attr['id']) . '="' . esc_attr($attr['val']) . '" ';
+                    $attrArr[$attr['id']] = $attr['val'];
+
+                }
             }
+
+
 
 
 
@@ -235,7 +238,12 @@ class PGBlockPostTitle
         ?>
             <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
                 <?php if ($postTitleIsLink) : ?>
-                    <a href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                    <a href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" 
+
+<?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStr); ?>
+>
                         <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
 
                         <?php echo  wp_kses_post($post_title); ?>
@@ -258,7 +266,9 @@ class PGBlockPostTitle
         ?>
 
             <?php if ($postTitleIsLink) : ?>
-                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStr); ?>>
 
                     <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
 

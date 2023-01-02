@@ -1609,6 +1609,7 @@ registerBlockType("post-grid/terms-list", {
                       <PanelRow>
                         <InputControl
                           className='mr-2'
+                          placeholder="Name"
                           value={items.options.linkAttr[i].id}
                           onChange={(newVal) => {
                             items.options.linkAttr[i].id = newVal;
@@ -1621,6 +1622,7 @@ registerBlockType("post-grid/terms-list", {
 
                         <InputControl
                           className='mr-2'
+                          placeholder="Value"
                           value={x.val}
                           onChange={(newVal) => {
                             items.options.linkAttr[i].val = newVal

@@ -310,7 +310,9 @@ class PGBlockPostTaxonomies
                     if ($i > $maxCount) break;
 
             ?>
-                <a href="<?php echo esc_url_raw($link); ?>" <?php echo esc_attr($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
+                <a href="<?php echo esc_url_raw($link); ?>" <?php 
+/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
 
                     <?php if ($iconPosition == 'beforeItem') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>

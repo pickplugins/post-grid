@@ -271,8 +271,8 @@ registerBlockType("post-grid/post-tags", {
       // setAttributes({ postTitle: postTitle });
       // setAttributes({ wrapper: wrapper });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -809,8 +809,8 @@ registerBlockType("post-grid/post-tags", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [blockCssY]);
 
@@ -1016,8 +1016,8 @@ registerBlockType("post-grid/post-tags", {
 
     useEffect(() => {
       linkAttrObj();
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [items]);
 
@@ -1113,8 +1113,8 @@ registerBlockType("post-grid/post-tags", {
                   asdsdsd.then((res) => {
 
                     setBreakPointX(res.breakpoint);
-                    generateBlockCssY()
-
+                    //generateBlockCssY()
+                    myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
                   });
 
@@ -1157,8 +1157,8 @@ registerBlockType("post-grid/post-tags", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY()
-
+        //generateBlockCssY()
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

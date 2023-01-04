@@ -759,13 +759,15 @@ class PGBlockTermsList
 
         $terms = get_terms($taxName, array('hide_empty' => $hideEmpty));
 
+        $terms = is_wp_error($terms) ? [] : $terms;
+        //var_dump($terms);
+
 
         $sorted_terms = !empty($terms) ? $this->sort_terms_hierarchicaly($terms, 0, $itemsQueryPosts) : [];
 
 
 
 
-        //echo '<pre>' . var_export($terms, true) . '</pre>';
 
 
 

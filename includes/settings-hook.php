@@ -2,9 +2,9 @@
 if (!defined('ABSPATH')) exit;  // if direct access
 
 
-remove_filter('post_grid_settings_tabs', 'post_grid_pro_settings_tabs', 90);
-remove_action('post_grid_settings_content_license', 'post_grid_settings_content_license', 10);
-remove_action('post_grid_settings_save', 'post_grid_pro_settings_save');
+//remove_filter('post_grid_settings_tabs', 'post_grid_pro_settings_tabs', 90);
+//remove_action('post_grid_settings_content_license', 'post_grid_settings_content_license', 10);
+//remove_action('post_grid_settings_save', 'post_grid_pro_settings_save');
 
 
 add_action('post_grid_settings_content_general', 'post_grid_settings_content_general');

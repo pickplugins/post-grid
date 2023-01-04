@@ -303,8 +303,8 @@ registerBlockType("post-grid/icon", {
       setAttributes({ customCss: customCss });
 
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -323,8 +323,8 @@ registerBlockType("post-grid/icon", {
 
       setAttributes({ blockId: blockIdX });
 
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [clientId]);
 
@@ -1063,8 +1063,8 @@ registerBlockType("post-grid/icon", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -1169,8 +1169,8 @@ registerBlockType("post-grid/icon", {
                   asdsdsd.then((res) => {
 
                     setBreakPointX(res.breakpoint);
-                    generateBlockCssY();
-
+                    //generateBlockCssY();
+                    myStore.generateBlockCss(blockCssY.items, blockId, customCss);
                   });
 
 
@@ -1211,8 +1211,8 @@ registerBlockType("post-grid/icon", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

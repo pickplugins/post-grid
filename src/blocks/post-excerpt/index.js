@@ -384,8 +384,8 @@ registerBlockType("post-grid/post-excerpt", {
       setAttributes({ customCss: customCss });
 
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -468,8 +468,8 @@ registerBlockType("post-grid/post-excerpt", {
       // setAttributes({ blockCssY: { items: itemsX } });
 
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
 
@@ -1143,8 +1143,8 @@ registerBlockType("post-grid/post-excerpt", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -1261,8 +1261,8 @@ registerBlockType("post-grid/post-excerpt", {
                   asdsdsd.then((res) => {
 
                     setBreakPointX(res.breakpoint);
-                    generateBlockCssY();
-
+                    //generateBlockCssY();
+                    myStore.generateBlockCss(blockCssY.items, blockId, customCss);
                   });
 
 
@@ -1303,8 +1303,8 @@ registerBlockType("post-grid/post-excerpt", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

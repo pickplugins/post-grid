@@ -306,8 +306,8 @@ registerBlockType("post-grid/tabs", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -316,8 +316,8 @@ registerBlockType("post-grid/tabs", {
 
       setAttributes({ customCss: customCss });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -1194,8 +1194,8 @@ registerBlockType("post-grid/tabs", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -1247,8 +1247,8 @@ registerBlockType("post-grid/tabs", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

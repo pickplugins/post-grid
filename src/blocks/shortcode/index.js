@@ -158,6 +158,8 @@ registerBlockType("post-grid/shortcode", {
 
     useEffect(() => {
 
+      console.log(shortcode);
+
 
       apiFetch({
         path: '/post-grid/v2/get_shortcode',
@@ -165,6 +167,8 @@ registerBlockType("post-grid/shortcode", {
         data: { postId: postId, meta_key: shortcode.options.key, prams: shortcode.options.prams, },
       }).then((res) => {
 
+
+        console.log(res.html);
 
         setMetaHtml(res.html);
         //setMetaArgs(res.args);
@@ -404,8 +408,8 @@ registerBlockType("post-grid/shortcode", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [blockCssY]);
 
@@ -418,8 +422,8 @@ registerBlockType("post-grid/shortcode", {
 
 
     useEffect(() => {
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [items]);
 
@@ -502,8 +506,8 @@ registerBlockType("post-grid/shortcode", {
                   asdsdsd.then((res) => {
 
                     setBreakPointX(res.breakpoint);
-                    generateBlockCssY()
-
+                    //generateBlockCssY()
+                    myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
                   });
 
@@ -546,8 +550,8 @@ registerBlockType("post-grid/shortcode", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY()
-
+        //generateBlockCssY()
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 
@@ -618,6 +622,52 @@ registerBlockType("post-grid/shortcode", {
                   value={shortcode.options.key}
                   onChange={(newVal) => {
 
+                    let result = newVal.includes("[");
+
+                    if (result) {
+
+                      var shortcodeStr = newVal.replace('[', '');
+                      shortcodeStr = shortcodeStr.replace(']', '');
+
+                      var shortcodeArr = shortcodeStr.split(' ');
+                      var shortcodeKey = shortcodeArr[0];
+
+                      newVal = shortcodeKey;
+
+                      shortcodeArr.shift();
+
+
+                      var attsGroups = [];
+                      var options = { ...shortcode.options }
+
+                      console.log(options);
+
+
+                      shortcodeArr.map(x => {
+
+                        var shortcodePrams = {};
+                        var attrArr = x.split('=');
+
+                        shortcodePrams.id = attrArr[0];
+                        shortcodePrams.label = attrArr[0];
+                        shortcodePrams.val = attrArr[1].replaceAll('"', '');
+
+                        options.prams.push(shortcodePrams);
+
+                      })
+
+                      setAttributes({ shortcode: { ...shortcode, options: options } });
+
+
+
+
+
+
+                    }
+
+
+
+
 
                     var options = { ...shortcode.options, key: newVal }
                     setAttributes({ shortcode: { ...shortcode, options: options } });
@@ -627,6 +677,9 @@ registerBlockType("post-grid/shortcode", {
                 />
               </PanelRow>
 
+              <p>You can paste the shortcode, please use following format when pasting</p>
+
+              <code>[shortcode attr1="value1" attr2="value2"]</code>
 
               <PanelRow>
                 <label for="">Parameters</label>
@@ -676,7 +729,6 @@ registerBlockType("post-grid/shortcode", {
                         variant="secondary"
                         onClick={ev => {
 
-                          console.log(shortcodePrams);
                           var options = { ...shortcode.options }
                           options.prams.push(shortcodePrams);
 

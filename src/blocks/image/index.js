@@ -473,8 +473,8 @@ registerBlockType("post-grid/image", {
       // setAttributes({ image: image });
       // setAttributes({ wrapper: wrapper });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
       blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': { "Desktop": "100%" } };
@@ -876,8 +876,8 @@ registerBlockType("post-grid/image", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -887,8 +887,8 @@ registerBlockType("post-grid/image", {
       setAttributes({ customCss: customCss });
 
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -966,8 +966,8 @@ registerBlockType("post-grid/image", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

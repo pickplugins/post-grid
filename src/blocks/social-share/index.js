@@ -259,8 +259,8 @@ registerBlockType("post-grid/social-share", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
       blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-size': { "Desktop": "30px" } };
@@ -920,8 +920,8 @@ registerBlockType("post-grid/social-share", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -961,8 +961,8 @@ registerBlockType("post-grid/social-share", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

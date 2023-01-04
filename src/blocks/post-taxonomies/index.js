@@ -438,8 +438,8 @@ registerBlockType("post-grid/post-taxonomies", {
 
 
 
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -1060,8 +1060,8 @@ registerBlockType("post-grid/post-taxonomies", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [blockCssY]);
 
@@ -1075,8 +1075,8 @@ registerBlockType("post-grid/post-taxonomies", {
 
     useEffect(() => {
       linkAttrObj();
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
 
@@ -1150,8 +1150,8 @@ registerBlockType("post-grid/post-taxonomies", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY()
-
+        //generateBlockCssY()
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

@@ -15,6 +15,8 @@ const { RawHTML } = wp.element;
 import { store } from '../../store'
 import { link, linkOff } from "@wordpress/icons";
 
+
+
 import IconToggle from '../../components/icon-toggle'
 import Typography from '../../components/typography'
 import PGMailSubsctibe from '../../components/mail-subscribe'
@@ -189,6 +191,7 @@ registerBlockType("post-grid/list", {
 
     const [isOpen, setisOpen] = useState(false);
 
+
     // Wrapper CSS Class Selectors
     var wrapperSelector = blockClass;
     var itemSelector = blockClass + ' .item';
@@ -202,8 +205,8 @@ registerBlockType("post-grid/list", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -212,8 +215,8 @@ registerBlockType("post-grid/list", {
 
       setAttributes({ customCss: customCss });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -670,8 +673,8 @@ registerBlockType("post-grid/list", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -723,8 +726,8 @@ registerBlockType("post-grid/list", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 
@@ -1609,12 +1612,13 @@ registerBlockType("post-grid/list", {
 
                       <RichText
 
-
                         tagName='span'
                         value={itemX.text}
                         allowedFormats={['core/bold', 'core/italic', 'core/link']}
+
                         onChange={(content) => {
 
+                          console.log('#onChange');
 
 
                           items[i].text = content;

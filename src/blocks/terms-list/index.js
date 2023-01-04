@@ -92,7 +92,7 @@ registerBlockType("post-grid/terms-list", {
           linkToTerm: false,
           postCountPosition: 'beforeTitle', //beforeTitle, afterTtile, afterPosts, beforePosts
           postCountText: 'Total Posts %s',
-          gridColNumber: 4,
+          gridColNumber: {},
           gridColGap: '15px',
           gridRowGap: '15px',
 
@@ -443,8 +443,8 @@ registerBlockType("post-grid/terms-list", {
 
 
 
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -1067,8 +1067,8 @@ registerBlockType("post-grid/terms-list", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [blockCssY]);
 
@@ -1082,8 +1082,8 @@ registerBlockType("post-grid/terms-list", {
 
     useEffect(() => {
       linkAttrObj();
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
 
@@ -1121,7 +1121,10 @@ registerBlockType("post-grid/terms-list", {
 
     ];
 
+    const {
+      __experimentalSetPreviewDeviceType: setPreviewDeviceType,
 
+    } = wp.data.dispatch('core/edit-post')
 
     if (wp.data.dispatch('core/edit-post') == null) {
       const {
@@ -1161,8 +1164,8 @@ registerBlockType("post-grid/terms-list", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY()
-
+        //generateBlockCssY()
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 
@@ -1328,7 +1331,6 @@ registerBlockType("post-grid/terms-list", {
 
 
               {items.options.viewType == 'accordion' && (
-
                 <PanelRow>
                   <label for="">Accordion Open</label>
                   <SelectControl
@@ -1350,7 +1352,6 @@ registerBlockType("post-grid/terms-list", {
 
 
               {items.options.viewType == 'grid' && (
-
                 <>
                   <PanelRow>
                     <label for="">Post Count Position</label>
@@ -1388,6 +1389,65 @@ registerBlockType("post-grid/terms-list", {
                     />
                   </PanelRow>
 
+
+                  <PanelRow className='my-3'>
+                    <label>Column Count</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+                  <PanelRow>
+                    <InputControl
+                      value={(items.options.gridColNumber[breakPointX] != undefined ? items.options.gridColNumber[breakPointX].val : 1)}
+                      type="number"
+                      onChange={(newVal) => {
+
+                        var newValuesObj = {};
+                        if (Object.keys(items.options.gridColNumber).length == 0) {
+                          newValuesObj[breakPointX] = { val: newVal, unit: 'fr' };
+                        } else {
+                          var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'fr';
+
+                          newValuesObj = items.options.gridColNumber;
+                          newValuesObj[breakPointX] = { val: newVal, unit: unit };
+                        }
+
+
+                        var options = { ...items.options, gridColNumber: newValuesObj };
+                        setAttributes({ items: { ...items, options: options } });
+
+
+                      }}
+
+                    />
+                    <SelectControl className='mb-0'
+                      value={(items.options.gridColNumber[breakPointX] != undefined) ? items.options.gridColNumber[breakPointX].unit : 'fr'}
+                      options={[
+                        { label: 'fr', value: 'fr' },
+                        { label: 'px', value: 'px' },
+                        { label: '%', value: '%' },
+                        { label: 'em', value: 'em' },
+                      ]}
+                      onChange={(newVal) => {
+
+                        var newValuesObj = {};
+                        if (Object.keys(items.options.gridColNumber).length == 0) {
+                          newValuesObj[breakPointX] = { val: 1, unit: newVal };
+                        } else {
+                          var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 'fr';
+
+                          newValuesObj = items.options.gridColNumber;
+                          newValuesObj[breakPointX] = { val: val, unit: newVal };
+                        }
+
+
+                        var options = { ...items.options, gridColNumber: newValuesObj };
+                        setAttributes({ items: { ...items, options: options } });
+
+
+                      }}
+                    />
+
+
+                  </PanelRow>
 
 
 

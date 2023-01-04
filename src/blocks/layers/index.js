@@ -142,8 +142,8 @@ registerBlockType("post-grid/layers", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -152,8 +152,8 @@ registerBlockType("post-grid/layers", {
 
       setAttributes({ customCss: customCss });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -607,8 +607,8 @@ registerBlockType("post-grid/layers", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -660,8 +660,8 @@ registerBlockType("post-grid/layers", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

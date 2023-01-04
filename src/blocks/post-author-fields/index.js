@@ -390,8 +390,8 @@ registerBlockType("post-grid/post-author-fields", {
 
 
 
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -1010,8 +1010,8 @@ registerBlockType("post-grid/post-author-fields", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [blockCssY]);
 
@@ -1025,8 +1025,8 @@ registerBlockType("post-grid/post-author-fields", {
 
     useEffect(() => {
       linkAttrObj();
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
 
@@ -1102,8 +1102,8 @@ registerBlockType("post-grid/post-author-fields", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY()
-
+        //generateBlockCssY()
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

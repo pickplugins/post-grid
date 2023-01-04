@@ -200,10 +200,13 @@ registerBlockType("post-grid/post-title", {
     var postType = context['postType'];
 
     const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
-
     const [customTags, setCustomTags] = useState({});
-
     const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
+
+
+    //console.log(myStore.generateBlockCss(blockCssY.items, blockId, customCss));
+
+
 
     var linkToArgsBasic = {
       postUrl: { label: 'Post URL', value: 'postUrl' },
@@ -248,8 +251,8 @@ registerBlockType("post-grid/post-title", {
       // setAttributes({ postTitle: postTitle });
       // setAttributes({ wrapper: wrapper });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss)
 
       customTags['currentYear'] = '2022';
       customTags['currentMonth'] = '07';
@@ -698,6 +701,8 @@ registerBlockType("post-grid/post-title", {
     function generateBlockCssY() {
 
 
+      return;
+
       var reponsiveCssGroups = {};
 
 
@@ -881,19 +886,17 @@ registerBlockType("post-grid/post-title", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss)
     }, [blockCssY]);
 
 
     useEffect(() => {
 
-
       setAttributes({ customCss: customCss });
 
-
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -931,8 +934,6 @@ registerBlockType("post-grid/post-title", {
       { name: '774360', color: '#774360' },
       { name: '3AB0FF', color: '#3AB0FF' },
       { name: '51557E', color: '#51557E' },
-
-
     ];
 
 
@@ -1035,7 +1036,8 @@ registerBlockType("post-grid/post-title", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss)
 
       });
 

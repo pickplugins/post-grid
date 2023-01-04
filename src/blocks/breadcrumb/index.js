@@ -10,6 +10,7 @@ import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMen
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 import { Icon, close, menu } from '@wordpress/icons';
+import { applyFilters } from '@wordpress/hooks';
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -276,8 +277,8 @@ registerBlockType("post-grid/breadcrumb", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
       blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-size': { "Desktop": "16px" } };
@@ -374,7 +375,7 @@ registerBlockType("post-grid/breadcrumb", {
 
 
 
-    var linkElements = [
+    var linkElementsArgsBasic = [
 
 
       {
@@ -928,6 +929,8 @@ registerBlockType("post-grid/breadcrumb", {
 
 
     ]
+    let linkElementsArgs = applyFilters('linkElementsArgs', linkElementsArgsBasic);
+    let isProFeature = applyFilters('isProFeature', true);
 
 
     function addMedia(option, index) {
@@ -1353,8 +1356,8 @@ registerBlockType("post-grid/breadcrumb", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -1394,8 +1397,8 @@ registerBlockType("post-grid/breadcrumb", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 
@@ -1494,8 +1497,8 @@ registerBlockType("post-grid/breadcrumb", {
 
                   <div className='my-4'>
                     <PanelRow>
-                      <label for="">Add Media</label>
-                      <PGDropdown position="bottom right" variant="secondary" options={linkElements} buttonTitle="Choose" onChange={addMedia} values=""></PGDropdown>
+                      <label for="">Add Element</label>
+                      <PGDropdown position="bottom right" variant="secondary" options={linkElementsArgs} buttonTitle="Choose" onChange={addMedia} values=""></PGDropdown>
                     </PanelRow>
                   </div>
 
@@ -1750,18 +1753,35 @@ registerBlockType("post-grid/breadcrumb", {
                     }}
                   />
 
-                  <ToggleControl
-                    className='my-3'
-                    label="Display Icon?"
-                    help={elements.options.showIcon ? 'Icon is displaying' : 'Icon is hidden'}
-                    checked={elements.options.showIcon ? true : false}
-                    onChange={(e) => {
 
-                      var options = { ...elements.options, showIcon: elements.options.showIcon ? false : true };
-                      setAttributes({ elements: { ...elements, options: options } });
 
-                    }}
-                  />
+                  <PanelRow className='my-3'>
+                    <div>
+                      <ToggleControl
+                        className='my-3'
+                        disabled={isProFeature}
+                        label="Display Icon?"
+                        help={elements.options.showIcon ? 'Icon is displaying' : 'Icon is hidden'}
+                        checked={elements.options.showIcon ? true : false}
+                        onChange={(e) => {
+
+                          var options = { ...elements.options, showIcon: elements.options.showIcon ? false : true };
+                          setAttributes({ elements: { ...elements, options: options } });
+
+                        }}
+                      />
+
+                    </div>
+
+                    <div>
+                      {isProFeature && (<span className='bg-amber-400 rounded-sm py-1 px-3  text-white hover:text-white'>
+                        <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
+                      </span>)}
+                    </div>
+
+                  </PanelRow>
+
+
 
                   <ToggleControl
                     className='my-3'

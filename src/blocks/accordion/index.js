@@ -266,8 +266,8 @@ registerBlockType("post-grid/accordion", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -276,8 +276,8 @@ registerBlockType("post-grid/accordion", {
 
       setAttributes({ customCss: customCss });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -901,8 +901,8 @@ registerBlockType("post-grid/accordion", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -954,8 +954,8 @@ registerBlockType("post-grid/accordion", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

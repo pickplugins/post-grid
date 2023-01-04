@@ -3,6 +3,8 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
+import { applyFilters } from '@wordpress/hooks';
+
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
@@ -15,7 +17,6 @@ import { store } from '../../store'
 
 import { link, linkOff } from "@wordpress/icons";
 
-import PGproWrapper from '../../components/pro-wrapper'
 
 import IconToggle from '../../components/icon-toggle'
 import Typography from '../../components/typography'
@@ -224,6 +225,16 @@ registerBlockType("post-grid/archive-description", {
     const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
 
 
+    var archiveLinkToArgsBasic = {
+      none: { label: 'No Link', value: '' },
+      archiveUrl: { label: 'Archive URL', value: 'archiveUrl' },
+      homeUrl: { label: 'Home URL', value: 'homeUrl' },
+      customUrl: { label: 'Custom', value: 'customUrl' },
+    };
+
+    let archiveLinkToArgs = applyFilters('archiveLinkToArgs', archiveLinkToArgsBasic);
+
+
     var archiveTypes = {
       'auto': { label: 'Auto Detect', value: 'auto' },
       // 'author': { label: 'Author', value: 'author' },
@@ -267,6 +278,15 @@ registerBlockType("post-grid/archive-description", {
       setAttributes({ icon: { ...icon, options: options } });
 
     }
+
+
+    function setFieldLinkTo(option, index) {
+
+      var options = { ...archiveTitle.options, linkTo: option.value };
+      setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
+
+    }
+
 
     useEffect(() => {
 
@@ -415,8 +435,8 @@ registerBlockType("post-grid/archive-description", {
       // setAttributes({ archiveTitle: archiveTitle });
       // setAttributes({ wrapper: wrapper });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
       customTags['currentYear'] = '2022';
       customTags['currentMonth'] = '07';
@@ -872,8 +892,8 @@ registerBlockType("post-grid/archive-description", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -883,8 +903,8 @@ registerBlockType("post-grid/archive-description", {
       setAttributes({ customCss: customCss });
 
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -1050,8 +1070,8 @@ registerBlockType("post-grid/archive-description", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 
@@ -1178,7 +1198,7 @@ registerBlockType("post-grid/archive-description", {
 
                 </PanelBody>
 
-                <PanelBody title="Archive Title" initialOpen={false}>
+                <PanelBody title="Archive Description" initialOpen={false}>
 
 
 
@@ -1256,26 +1276,7 @@ registerBlockType("post-grid/archive-description", {
 
                   <PanelRow>
                     <label for="">Link To</label>
-                    <SelectControl
-                      label=""
-                      value={archiveTitle.options.linkTo}
-                      options={[
-                        { label: 'No Link', value: '' },
-                        { label: 'Post URL', value: 'postUrl' },
-                        { label: 'Custom Field', value: 'customField' },
-                        { label: 'Author URL', value: 'authorUrl' },
-                        { label: 'Author Link', value: 'authorLink' },
-                        { label: 'Home URL', value: 'homeUrl' },
-                        { label: 'Custom', value: 'custom' },
-
-                      ]}
-                      onChange={(newVal) => {
-                        var options = { ...archiveTitle.options, linkTo: newVal };
-                        setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
-                      }
-
-                      }
-                    />
+                    <PGDropdown position="bottom right" variant="secondary" options={archiveLinkToArgs} buttonTitle={archiveTitle.options.linkTo.length == 0 ? 'Choose' : archiveLinkToArgs[archiveTitle.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
                   </PanelRow>
 
                   {archiveTitle.options.linkTo == 'customField' && (
@@ -1302,18 +1303,10 @@ registerBlockType("post-grid/archive-description", {
 
 
 
-                  {(archiveTitle.options.customUrl.length > 0) && (
-
-                    (postGridData.license_status != 'active') && (
-                      <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postpostDate&utm_campaign=pluginPostGrid&utm_medium=postpostDate-customUrl"}>
-                        <p><span className='underline'>Custom URL</span> feature only avilable in pro version</p>
-                      </PGproWrapper>
-                    )
-
-                  )}
 
 
-                  {archiveTitle.options.linkTo == 'custom' && (
+
+                  {archiveTitle.options.linkTo == 'customUrl' && (
 
                     <PanelRow>
                       <label for="">Custom URL</label>

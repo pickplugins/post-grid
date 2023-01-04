@@ -6,6 +6,8 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, subscribe, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
+import { applyFilters } from '@wordpress/hooks';
+
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 
@@ -49,11 +51,20 @@ registerBlockType("post-grid/post-meta", {
       default: {
 
         options: {
-          class: 'inline-block',
+          class: '',
           tag: 'div',
 
         },
-        styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
+        styles:
+        {
+          textAlign: {},
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {},
+          display: {},
+
+        },
 
 
       },
@@ -64,7 +75,24 @@ registerBlockType("post-grid/post-meta", {
         options: {
           key: '', type: 'string', /*string, acfImage, acfFile, , , , acfUser*/ prefix: '', postfix: '',
         },
-        styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
+
+        styles: {
+          textAlign: {},
+          display: {},
+          width: {},
+          color: {},
+          bgColor: {},
+          padding: {},
+          margin: {},
+
+          fontSize: {}, //{ val: '18', unit: 'px' }
+          lineHeight: {}, // { val: '18', unit: 'px' }
+          letterSpacing: {}, // { val: '18', unit: 'px' }
+          fontFamily: {},
+          fontWeight: {},
+          textDecoration: {}, //overline, line-through, underline
+          textTransform: {},
+        },
 
       },
     },
@@ -133,8 +161,12 @@ registerBlockType("post-grid/post-meta", {
     const itemSelector = blockClass + ' .item';
     const postCountSelector = blockClass + ' .postCount';
 
-    const [filterArgs, setfilterArgs] = useState({
+
+    var metaKeyTypeArgsBasic = {
       string: { label: 'String', value: 'string', },
+      object: { label: 'Object', value: 'object', isPro: true },
+      array: { label: 'Array', value: 'array', isPro: true },
+
       acfImage: { label: 'ACF Image', value: 'acfImage', isPro: true },
       acfFile: { label: 'ACF File', value: 'acfFile', isPro: true },
       acfTaxonomy: { label: 'ACF Taxonomy', value: 'acfTaxonomy', isPro: true },
@@ -142,10 +174,12 @@ registerBlockType("post-grid/post-meta", {
       acfPageLink: { label: 'ACF Page Link', value: 'acfPageLink', isPro: true },
       acfLink: { label: 'ACF Link', value: 'acfLink', isPro: true },
       acfUser: { label: 'ACF User', value: 'acfUser', isPro: true },
-      acfButtonGroup: { label: 'ACF Button Group', value: 'acfButtonGroup', },
+      acfButtonGroup: { label: 'ACF Button Group', value: 'acfButtonGroup', isPro: true },
+    };
+
+    let metaKeyTypeArgs = applyFilters('metaKeyTypeArgs', metaKeyTypeArgsBasic);
 
 
-    });
 
     useEffect(() => {
 
@@ -200,8 +234,8 @@ registerBlockType("post-grid/post-meta", {
       // setAttributes({ postTitle: postTitle });
       // setAttributes({ wrapper: wrapper });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
     }, [clientId]);
@@ -416,73 +450,21 @@ registerBlockType("post-grid/post-meta", {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
-
-
-
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [blockCssY]);
 
 
 
 
-
-
-
-
-
     useEffect(() => {
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [items]);
-
-
-
-
-
-
-
-    const colors = [
-      { name: '9DD6DF', color: '#9DD6DF' },
-      { name: '18978F', color: '#18978F' },
-      { name: 'A084CF', color: '#A084CF' },
-      { name: 'DFBB9D', color: '#DFBB9D' },
-      { name: '774360', color: '#774360' },
-      { name: '3AB0FF', color: '#3AB0FF' },
-      { name: '51557E', color: '#51557E' },
-
-
-    ];
-
-
-
-
-
-    const {
-      __experimentalSetPreviewDeviceType: setPreviewDeviceType,
-
-    } = wp.data.dispatch('core/edit-post')
-
-
-
 
 
     const post = useSelect((select) =>
@@ -498,91 +480,10 @@ registerBlockType("post-grid/post-meta", {
 
 
 
-    const MyDropdown = () => (
-
-      <div>
-
-        <Dropdown
-          position="bottom"
-          renderToggle={({ isOpen, onToggle }) => (
-            <Button
-              title={(breakPoints[breakPointX] != undefined) ? breakPoints[breakPointX].name : ''}
-              variant="secondary"
-              onClick={onToggle}
-              aria-expanded={isOpen}
-            >
-              <RawHTML className="text-lg ">{(breakPoints[breakPointX] != undefined) ? breakPoints[breakPointX].icon : '<span class="icon-responsive font-bold"></span>'}</RawHTML>
-
-
-            </Button>
-          )}
-          renderContent={() => <div>
-
-            {breakPointList.map(x => {
-
-
-              return (
-
-                <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
-
-
-
-                  setPreviewDeviceType(x.value)
-                  var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
-
-                  asdsdsd.then((res) => {
-
-                    setBreakPointX(res.breakpoint);
-                    generateBlockCssY()
-
-
-                  });
-
-
-
-                }}>
-
-                  {!x.value && (
-
-                    <div><span class="icon-close"></span></div>
-
-                  )}
-
-                  {x.value && (
-
-                    <RawHTML>{x.icon}</RawHTML>
-
-                  )}
-
-                </div>
-
-              )
-
-            })}
-          </div>}
-        />
-      </div>
-    );
 
 
 
 
-    function onChangeBreakPoint(x, index) {
-
-
-      setPreviewDeviceType(x.value)
-      var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
-
-      asdsdsd.then((res) => {
-
-        setBreakPointX(res.breakpoint);
-        generateBlockCssY()
-
-      });
-
-
-
-    }
 
 
     return (
@@ -699,7 +600,7 @@ registerBlockType("post-grid/post-meta", {
 
               <PanelRow>
                 <label>Meta Key Type </label>
-                <PGDropdown position="bottom right" variant="secondary" options={filterArgs} buttonTitle="Choose" onChange={(option, index) => {
+                <PGDropdown position="bottom right" variant="secondary" options={metaKeyTypeArgs} buttonTitle="Choose" onChange={(option, index) => {
 
 
 

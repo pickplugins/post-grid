@@ -3,6 +3,8 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
+import { applyFilters } from '@wordpress/hooks';
+
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
@@ -15,7 +17,6 @@ import { store } from '../../store'
 
 import { link, linkOff } from "@wordpress/icons";
 
-import PGproWrapper from '../../components/pro-wrapper'
 
 import IconToggle from '../../components/icon-toggle'
 import Typography from '../../components/typography'
@@ -222,6 +223,21 @@ registerBlockType("post-grid/post-date", {
     const [formatedPostDate, setformatedPostDate] = useState("");
 
 
+    var linkToArgsBasic = {
+      postUrl: { label: 'Post URL', value: 'postUrl' },
+      homeUrl: { label: 'Home URL', value: 'homeUrl' },
+      authorUrl: { label: 'Author URL', value: 'authorUrl' },
+      authorLink: { label: 'Author Link', value: 'authorLink' },
+      authorMail: { label: 'Author Mail', value: 'authorMail', isPro: true },
+      authorMeta: { label: 'Author Meta', value: 'authorMeta', isPro: true },
+      customField: { label: 'Custom Field', value: 'customField', isPro: true },
+      customUrl: { label: 'Custom URL', value: 'customUrl', isPro: true },
+    };
+
+    let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
+
+
+
     var dateFormats = {
       'Y-M-d': { label: '2022-May-25', value: 'Y-M-d' },
       'Y-m-d': { label: '2022-05-25', value: 'Y-m-d' },
@@ -321,6 +337,12 @@ registerBlockType("post-grid/post-date", {
     }
 
 
+    function setFieldLinkTo(option, index) {
+
+      var options = { ...postDate.options, linkTo: option.value };
+      setAttributes({ postDate: { ...postDate, options: options } });
+
+    }
 
 
     function onChangeIconTypo(typoX) {
@@ -451,8 +473,8 @@ registerBlockType("post-grid/post-date", {
       // setAttributes({ postDate: postDate });
       // setAttributes({ wrapper: wrapper });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
       customTags['currentYear'] = '2022';
       customTags['currentMonth'] = '07';
@@ -908,8 +930,8 @@ registerBlockType("post-grid/post-date", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -919,8 +941,8 @@ registerBlockType("post-grid/post-date", {
       setAttributes({ customCss: customCss });
 
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -1086,8 +1108,8 @@ registerBlockType("post-grid/post-date", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 
@@ -1260,34 +1282,27 @@ registerBlockType("post-grid/post-date", {
 
                   <PanelRow>
                     <label for="">Link To</label>
-                    <SelectControl
-                      label=""
-                      value={postDate.options.linkTo}
-                      options={[
-                        { label: 'No Link', value: '' },
-                        { label: 'Post URL', value: 'postUrl' },
-                        { label: 'Custom Field', value: 'customField' },
-                        { label: 'Author URL', value: 'authorUrl' },
-                        { label: 'Author Link', value: 'authorLink' },
-                        { label: 'Home URL', value: 'homeUrl' },
-                        { label: 'Custom', value: 'custom' },
 
-                      ]}
-                      onChange={(newVal) => {
-                        var options = { ...postDate.options, linkTo: newVal };
-                        setAttributes({ postDate: { ...postDate, options: options } });
-                      }
+                    <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={postDate.options.linkTo.length == 0 ? 'Choose' : linkToArgs[postDate.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
 
-                      }
-                    />
+
                   </PanelRow>
 
-                  {postDate.options.linkTo == 'customField' && (
+                  {(postDate.options.linkTo == 'authorMeta' || postDate.options.linkTo == 'customField') && (
 
 
 
                     <PanelRow>
-                      <label for="">Custom Field Key</label>
+                      <label for="">
+                        {postDate.options.linkTo == 'authorMeta' && (
+                          <>Author Meta Key</>
+                        )}
+
+                        {postDate.options.linkTo == 'customField' && (
+                          <>Custom Field Key</>
+                        )}
+
+                      </label>
                       <InputControl
                         className='mr-2'
                         value={postDate.options.linkToMetaKey}
@@ -1306,18 +1321,10 @@ registerBlockType("post-grid/post-date", {
 
 
 
-                  {(postDate.options.customUrl.length > 0) && (
-
-                    (postGridData.license_status != 'active') && (
-                      <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postpostDate&utm_campaign=pluginPostGrid&utm_medium=postpostDate-customUrl"}>
-                        <p><span className='underline'>Custom URL</span> feature only avilable in pro version</p>
-                      </PGproWrapper>
-                    )
-
-                  )}
 
 
-                  {postDate.options.linkTo == 'custom' && (
+
+                  {postDate.options.linkTo == 'customUrl' && (
 
                     <PanelRow>
                       <label for="">Custom URL</label>

@@ -147,8 +147,8 @@ registerBlockType("post-grid/text", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -157,16 +157,16 @@ registerBlockType("post-grid/text", {
 
       setAttributes({ customCss: customCss });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
 
     useEffect(() => {
 
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockId]);
 
 
@@ -620,8 +620,8 @@ registerBlockType("post-grid/text", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -673,8 +673,8 @@ registerBlockType("post-grid/text", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

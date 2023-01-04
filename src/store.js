@@ -11,6 +11,8 @@ const DEFAULT_STATE = {
   clientdata: {},
   proinfo: { proInstalled: false, status: 'inactive-initial' },
   license: { license_status: '', license_key: '' },
+  blockCss: '',
+
 };
 
 var selectors = {
@@ -36,6 +38,185 @@ var selectors = {
     const { license } = state;
     return license;
   },
+
+  generateBlockCss(state, items, blockId, customCss) {
+    const { blockCss } = state;
+
+
+    console.log(items);
+
+
+    var reponsiveCssGroups = {};
+
+
+    for (var selector in items) {
+
+
+
+      var attrs = items[selector];
+
+
+      for (var attr in attrs) {
+        var breakpoints = attrs[attr];
+
+        for (var device in breakpoints) {
+
+          var attrValue = breakpoints[device];
+
+          if (reponsiveCssGroups[device] == undefined) {
+            reponsiveCssGroups[device] = []
+          }
+
+          if (reponsiveCssGroups[device] == undefined) {
+            reponsiveCssGroups[device] = []
+          }
+
+          if (reponsiveCssGroups[device][selector] == undefined) {
+            reponsiveCssGroups[device][selector] = []
+          }
+
+          reponsiveCssGroups[device][selector].push({ 'attr': attr, 'val': attrValue });
+
+        }
+      }
+    }
+
+
+
+    //return false;
+    var reponsiveCssDesktop = '';
+
+
+    if (reponsiveCssGroups['Desktop'] != undefined) {
+      //reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
+
+      for (var selector in reponsiveCssGroups['Desktop']) {
+        var attrs = reponsiveCssGroups['Desktop'][selector];
+
+        reponsiveCssDesktop += selector + '{';
+        for (var index in attrs) {
+          var attr = attrs[index]
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssDesktop += attrName + ':' + attrValue + ';';
+        }
+        reponsiveCssDesktop += '}';
+
+
+      }
+      //reponsiveCssDesktop += '}';
+    }
+
+
+
+
+    var reponsiveCssTablet = '';
+
+    if (reponsiveCssGroups['Tablet'] != undefined) {
+      //reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
+      reponsiveCssTablet += '@media(max-width: 780px){';
+
+      for (var selector in reponsiveCssGroups['Tablet']) {
+        var attrs = reponsiveCssGroups['Tablet'][selector];
+
+        reponsiveCssTablet += selector + '{';
+        for (var index in attrs) {
+          var attr = attrs[index]
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssTablet += attrName + ':' + attrValue + ';';
+        }
+        reponsiveCssTablet += '}';
+      }
+
+      reponsiveCssTablet += '}';
+    }
+
+
+
+    var reponsiveCssMobile = '';
+
+    if (reponsiveCssGroups['Mobile'] != undefined) {
+
+      //reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
+      reponsiveCssMobile += '@media(max-width:360px){';
+
+      for (var selector in reponsiveCssGroups['Mobile']) {
+        var attrs = reponsiveCssGroups['Mobile'][selector];
+
+        reponsiveCssMobile += selector + '{';
+        for (var index in attrs) {
+          var attr = attrs[index]
+          var attrName = attr.attr;
+          var attrValue = attr.val;
+          reponsiveCssMobile += attrName + ':' + attrValue + ';';
+        }
+        reponsiveCssMobile += '}';
+      }
+      reponsiveCssMobile += '}';
+
+    }
+
+    var reponsiveCss = reponsiveCssDesktop + reponsiveCssTablet + reponsiveCssMobile;
+
+
+
+    var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
+
+    if (iframe) {
+
+      setTimeout(() => {
+        var iframeDocument = iframe.contentDocument;
+        var body = iframeDocument.body;
+        var divWrap = iframeDocument.getElementById("css-block-" + blockId);
+
+        if (divWrap != undefined) {
+          iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
+
+        }
+
+        var divWrap = '<div id="css-block-' + blockId + '"></div>';
+        body.insertAdjacentHTML('beforeend', divWrap);
+
+        var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
+        var str = '<style>' + reponsiveCss + customCss + '</style>';
+
+        csswrappg.insertAdjacentHTML('beforeend', str);
+      }, 200)
+
+
+    } else {
+
+
+
+      var wpfooter = document.getElementById('wpfooter');
+      var divWrap = document.getElementById("css-block-" + blockId);
+
+      if (divWrap != undefined) {
+        document.getElementById("css-block-" + blockId).outerHTML = "";
+      }
+
+      var divWrap = '<div id="css-block-' + blockId + '"></div>';
+      wpfooter.insertAdjacentHTML('beforeend', divWrap);
+
+      var csswrappg = document.getElementById('css-block-' + blockId);
+      var str = '<style>' + reponsiveCss + customCss + '</style>';
+
+      csswrappg.insertAdjacentHTML('beforeend', str);
+
+
+
+    }
+
+
+
+
+
+
+    return blockCss;
+  },
+
+
 
 };
 

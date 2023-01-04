@@ -106,7 +106,7 @@ function post_grid_global_css()
         $reponsiveCss .= '}';
     }
     if (!empty($reponsiveCssGroups['Desktop'])) {
-        $reponsiveCss .= '@media only screen and (min-width: 781px){';
+        $reponsiveCss .= '@media only screen and (min-width: 783px){';
 
 
         foreach ($reponsiveCssGroups['Desktop'] as $selector => $atts) {
@@ -193,47 +193,8 @@ function post_grid_global_cssY()
 
 
 
-
-
-
-    if (!empty($reponsiveCssGroups['Mobile'])) {
-        $reponsiveCss .= '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        foreach ($reponsiveCssGroups['Mobile'] as $selector => $atts) {
-
-            $reponsiveCss .= $selector . '{';
-
-            foreach ($atts as  $attr => $val) {
-                if (!empty($val))
-                    $reponsiveCss .=  $attr . ':' . $val . ';';
-            }
-            $reponsiveCss .= '}';
-        }
-
-
-
-        $reponsiveCss .= '}';
-    }
-    if (!empty($reponsiveCssGroups['Tablet'])) {
-        $reponsiveCss .= '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-
-        foreach ($reponsiveCssGroups['Tablet'] as $selector => $atts) {
-
-            $reponsiveCss .= $selector . '{';
-
-            foreach ($atts as  $attr => $val) {
-                if (!empty($val))
-                    $reponsiveCss .=  $attr . ':' . $val . ';';
-            }
-            $reponsiveCss .= '}';
-        }
-
-
-        $reponsiveCss .= '}';
-    }
-    if (!empty($reponsiveCssGroups['Desktop'])) {
-        $reponsiveCss .= '@media only screen and (min-width: 781px){';
+if (!empty($reponsiveCssGroups['Desktop'])) {
+        //$reponsiveCss .= '@media only screen and (min-width: 782px){';
 
 
         foreach ($reponsiveCssGroups['Desktop'] as $selector => $atts) {
@@ -250,10 +211,51 @@ function post_grid_global_cssY()
 
 
 
-        $reponsiveCss .= '}';
+        //$reponsiveCss .= '}';
     }
 
 
+
+    if (!empty($reponsiveCssGroups['Tablet'])) {
+        //$reponsiveCss .= '@media only screen and (min-width: 361px) and (max-width: 780px){';
+        $reponsiveCss .= '@media(max-width: 780px){';
+
+
+        foreach ($reponsiveCssGroups['Tablet'] as $selector => $atts) {
+
+            $reponsiveCss .= $selector . '{';
+
+            foreach ($atts as  $attr => $val) {
+                if (!empty($val))
+                    $reponsiveCss .=  $attr . ':' . $val . ';';
+            }
+            $reponsiveCss .= '}';
+        }
+
+
+        $reponsiveCss .= '}';
+    }
+    
+
+    if (!empty($reponsiveCssGroups['Mobile'])) {
+        //$reponsiveCss .= '@media only screen and (min-width: 0px) and (max-width: 360px){';
+        $reponsiveCss .= '@media(max-width:360px){';
+
+        foreach ($reponsiveCssGroups['Mobile'] as $selector => $atts) {
+
+            $reponsiveCss .= $selector . '{';
+
+            foreach ($atts as  $attr => $val) {
+                if (!empty($val))
+                    $reponsiveCss .=  $attr . ':' . $val . ';';
+            }
+            $reponsiveCss .= '}';
+        }
+
+
+
+        $reponsiveCss .= '}';
+    }
 
 
 
@@ -360,3 +362,20 @@ function post_grid_allowed_block_types($allowed_block_types, $editor_context)
     return $allowed_block_types;
 }
 //add_filter('allowed_block_types_all', 'post_grid_allowed_block_types', 99, 2);
+
+// enable gutenberg for woocommerce
+function activate_gutenberg_product( $can_edit, $post_type ) {
+ if ( $post_type == 'product' ) {
+        $can_edit = true;
+    }
+    return $can_edit;
+}
+add_filter( 'use_block_editor_for_post_type', 'activate_gutenberg_product', 10, 2 );
+
+// enable taxonomy fields for woocommerce with gutenberg on
+function enable_taxonomy_rest( $args ) {
+    $args['show_in_rest'] = true;
+    return $args;
+}
+add_filter( 'woocommerce_taxonomy_args_product_cat', 'enable_taxonomy_rest' );
+add_filter( 'woocommerce_taxonomy_args_product_tag', 'enable_taxonomy_rest' );

@@ -3065,10 +3065,6 @@ function post_grid_layout_element_media($args)
                 $args['source_args'] = $source_info;
                 $args['post_settings'] = $post_grid_post_settings;
 
-
-                //var_dump($source_id);
-                // var_dump($source_info);
-
                 $is_enable = isset($source_info['enable']) ? $source_info['enable'] : '';
 
                 $media = post_grid_media($post_id, $args);
@@ -3128,6 +3124,7 @@ function post_grid_layout_element_css_media($args)
             <?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
+<?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index).' img'; ?> {max-width:100%;height:auto;}
         <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {
             <?php echo wp_strip_all_tags($css_hover); ?>
         }
@@ -3511,6 +3508,7 @@ function post_grid_layout_element_css_thumb($args)
             <?php endif; ?>
         }
 
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index).' img'; ?> {max-width: 100%; height: auto;}
         @media only screen and (min-width: 1024px) {
             <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
                 <?php if (!empty($thumb_height_large)) : ?>max-height: <?php echo esc_attr($thumb_height_large); ?>;
@@ -3876,6 +3874,7 @@ function post_grid_layout_element_css_thumb_link($args)
             <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
             <?php endif; ?>
         }
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index).' img'; ?> {max-width: 100%; height: auto;}
 
         @media only screen and (min-width: 1024px) {
             <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {

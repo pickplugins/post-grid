@@ -608,8 +608,8 @@ registerBlockType("post-grid/post-grid-filterable", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
       blockCssY.items[loopItemSelector] = (blockCssY.items[loopItemSelector] != undefined) ? blockCssY.items[loopItemSelector] : {};
@@ -1108,8 +1108,8 @@ registerBlockType("post-grid/post-grid-filterable", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 
@@ -2034,8 +2034,8 @@ registerBlockType("post-grid/post-grid-filterable", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
     function generateBlockCssY() {

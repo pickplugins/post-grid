@@ -497,6 +497,7 @@ registerBlockType("post-grid/post-grid", {
     const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
     const [proInfo, setproInfo] = useState((myStore != null) ? myStore.getproinfo() : {});
 
+    let isProFeature = applyFilters('isProFeature', true);
 
 
 
@@ -604,8 +605,8 @@ registerBlockType("post-grid/post-grid", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
       blockCssY.items[loopItemSelector] = (blockCssY.items[loopItemSelector] != undefined) ? blockCssY.items[loopItemSelector] : {};
@@ -1029,8 +1030,8 @@ registerBlockType("post-grid/post-grid", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 
@@ -1617,8 +1618,8 @@ registerBlockType("post-grid/post-grid", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
     function generateBlockCssY() {
@@ -4252,36 +4253,33 @@ registerBlockType("post-grid/post-grid", {
                 <div >
 
                   <PanelRow>
-
                     <label for="">N'th Item CSS</label>
                     <Button className='my-3' variant="secondary"
+                      disabled={isProFeature}
                       onClick={(_newVal) => {
 
 
+                        if (grid.options.itemCss[breakPointX] != undefined) {
 
-                        if (proInfo.status == 'active') {
-
-                          if (grid.options.itemCss[breakPointX] != undefined) {
-
-                            var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
-                          } else {
-                            grid.options.itemCss[breakPointX] = [];
-                            var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
-
-                          }
-
-                          var newValuesObj = {};
-                          if (Object.keys(grid.options.itemCss).length == 0) {
-                            newValuesObj[breakPointX] = ssd;
-                          } else {
-                            newValuesObj = grid.options.itemCss;
-                            newValuesObj[breakPointX] = ssd;
-                          }
-
-                          var options = { ...grid.options, itemCss: newValuesObj };
-                          setAttributes({ grid: { ...grid, options: options } });
+                          var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
+                        } else {
+                          grid.options.itemCss[breakPointX] = [];
+                          var ssd = grid.options.itemCss[breakPointX].concat({ 'grid-column-start': '', 'grid-column-end': '', 'grid-row-start': '', 'grid-row-end': '' })
 
                         }
+
+                        var newValuesObj = {};
+                        if (Object.keys(grid.options.itemCss).length == 0) {
+                          newValuesObj[breakPointX] = ssd;
+                        } else {
+                          newValuesObj = grid.options.itemCss;
+                          newValuesObj[breakPointX] = ssd;
+                        }
+
+                        var options = { ...grid.options, itemCss: newValuesObj };
+                        setAttributes({ grid: { ...grid, options: options } });
+
+
 
 
 
@@ -4289,15 +4287,15 @@ registerBlockType("post-grid/post-grid", {
 
                     >
                       Add
-                      {!proInfo.proInstalled && (<span className='bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white'>
-                        <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS'}>Pro</a>
-                      </span>)}
+
                     </Button>
+
+                    {isProFeature && (<span className='bg-amber-400 mx-2 rounded-sm py-1 px-3  text-white hover:text-white'>
+                      <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS'}>Pro</a>
+                    </span>)}
+
+
                   </PanelRow>
-
-                  {JSON.stringify(proInfo)}
-
-
 
 
                   {grid.options.itemCss[breakPointX] != undefined &&

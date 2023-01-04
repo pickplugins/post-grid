@@ -259,8 +259,8 @@ registerBlockType("post-grid/post-author", {
 
 
 
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
     useEffect(() => {
@@ -1224,8 +1224,8 @@ registerBlockType("post-grid/post-author", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -1311,8 +1311,8 @@ registerBlockType("post-grid/post-author", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

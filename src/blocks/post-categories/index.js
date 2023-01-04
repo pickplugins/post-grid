@@ -266,8 +266,8 @@ registerBlockType("post-grid/post-categories", {
       // setAttributes({ postTitle: postTitle });
       // setAttributes({ wrapper: wrapper });
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -829,8 +829,8 @@ registerBlockType("post-grid/post-categories", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -1028,8 +1028,8 @@ registerBlockType("post-grid/post-categories", {
 
     useEffect(() => {
       linkAttrObj();
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
 
@@ -1126,8 +1126,8 @@ registerBlockType("post-grid/post-categories", {
                   asdsdsd.then((res) => {
 
                     setBreakPointX(res.breakpoint);
-                    generateBlockCssY()
-
+                    //generateBlockCssY()
+                    myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
                   });
 
@@ -1169,8 +1169,8 @@ registerBlockType("post-grid/post-categories", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY()
-
+        //generateBlockCssY()
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 

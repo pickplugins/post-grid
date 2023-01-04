@@ -7,6 +7,7 @@ import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMen
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 import apiFetch from '@wordpress/api-fetch';
+import { applyFilters } from '@wordpress/hooks';
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -24,6 +25,7 @@ import PGContactSupport from '../../components/contact-support'
 import BreakpointToggle from '../../components/breakpoint-toggle'
 import colorsPresets from '../../colors-presets'
 import PGcssDisplay from '../../components/css-display'
+import PGDropdown from '../../components/dropdown'
 
 
 
@@ -76,7 +78,10 @@ registerBlockType("post-grid/read-more", {
     readMore: {
       type: 'object',
       default: {
-        options: { text: 'Read More', isLink: true, linkTarget: '_blank', customUrl: '', linkAttr: [], class: '', },
+        options: {
+          text: 'Read More', linkTo: 'postUrl', isLink: true, linkTarget: '_blank', customUrl: '', linkToAuthorMeta: '',
+          linkToCustomMeta: '', linkAttr: [], class: '',
+        },
 
         styles:
         {
@@ -214,13 +219,13 @@ registerBlockType("post-grid/read-more", {
 
     const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
     const [isLoading, setisLoading] = useState(false);
-    const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
     const [currentPostContent, setCurrentpostContent] = useEntityProp('postType', postType, 'content', postId);
     const [customFields, setCustomFields] = useState({});
 
     const [currentPostUrl, setCurrentPostUrl] = useEntityProp('postType', postType, 'link', postId);
 
     const [iconHtml, setIconHtml] = useState('');
+    const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
 
 
 
@@ -232,6 +237,28 @@ registerBlockType("post-grid/read-more", {
     const prefixSelector = blockClass + ' .prefix';
     const postfixSelector = blockClass + ' .postfix';
 
+
+    var linkToArgsBasic = {
+      postUrl: { label: 'Post URL', value: 'postUrl' },
+      homeUrl: { label: 'Home URL', value: 'homeUrl' },
+      authorUrl: { label: 'Author URL', value: 'authorUrl' },
+      authorLink: { label: 'Author Link', value: 'authorLink' },
+      authorMail: { label: 'Author Mail', value: 'authorMail', isPro: true },
+      authorMeta: { label: 'Author Meta', value: 'authorMeta', isPro: true },
+      customField: { label: 'Custom Field', value: 'customField', isPro: true },
+      customUrl: { label: 'Custom URL', value: 'customUrl', isPro: true },
+    };
+
+    let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
+
+
+
+    function setFieldLinkTo(option, index) {
+
+      var options = { ...readMore.options, linkTo: option.value };
+      setAttributes({ readMore: { ...readMore, options: options } });
+
+    }
 
     function getMetaField(metaKey) {
 
@@ -270,8 +297,8 @@ registerBlockType("post-grid/read-more", {
       setAttributes({ customCss: customCss });
 
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
@@ -290,8 +317,8 @@ registerBlockType("post-grid/read-more", {
 
       setAttributes({ blockId: blockIdX });
 
-      generateBlockCssY();
-
+      //generateBlockCssY();
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
     }, [clientId]);
 
@@ -809,8 +836,8 @@ registerBlockType("post-grid/read-more", {
 
     useEffect(() => {
 
-      generateBlockCssY()
-
+      //generateBlockCssY()
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -911,8 +938,8 @@ registerBlockType("post-grid/read-more", {
                   asdsdsd.then((res) => {
 
                     setBreakPointX(res.breakpoint);
-                    generateBlockCssY();
-
+                    //generateBlockCssY();
+                    myStore.generateBlockCss(blockCssY.items, blockId, customCss);
                   });
 
 
@@ -953,8 +980,8 @@ registerBlockType("post-grid/read-more", {
       asdsdsd.then((res) => {
 
         setBreakPointX(res.breakpoint);
-        generateBlockCssY();
-
+        //generateBlockCssY();
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       });
 
 
@@ -1100,8 +1127,8 @@ registerBlockType("post-grid/read-more", {
 
 
                   <ToggleControl
-                    label="Linked with post?"
-                    help={readMore.options.isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
+                    label="Is Linked?"
+                    help={readMore.options.isLink ? 'Linked with URL' : 'Not linked to URL.'}
                     checked={readMore.options.isLink ? true : false}
                     onChange={(e) => {
 
@@ -1117,6 +1144,108 @@ registerBlockType("post-grid/read-more", {
                   {readMore.options.isLink && (
 
                     <div>
+
+
+                      <PanelRow>
+                        <label for="">Link To</label>
+
+                        <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={readMore.options.linkTo.length == 0 ? 'Choose' : linkToArgs[readMore.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
+
+                      </PanelRow>
+
+
+                      <div className='bg-gray-500 p-2 my-3 text-white'>{(linkToArgs[readMore.options.linkTo] != undefined) ? linkToArgs[readMore.options.linkTo].label : ''}</div>
+
+                      {readMore.options.linkTo == 'authorMeta' && (
+
+                        <PanelRow>
+                          <label for="">Author Meta Key</label>
+
+                          <InputControl
+                            value={readMore.options.linkToAuthorMeta}
+                            onChange={(newVal) => {
+
+
+                              var options = { ...readMore.options, linkToAuthorMeta: newVal };
+                              setAttributes({ readMore: { ...readMore, options: options } });
+
+                            }}
+                          />
+
+                        </PanelRow>
+
+                      )}
+
+
+                      {readMore.options.linkTo == 'customField' && (
+
+                        <PanelRow>
+                          <label for="">Custom Meta Key</label>
+
+                          <InputControl
+                            value={readMore.options.linkToAuthorMeta}
+                            onChange={(newVal) => {
+
+                              var options = { ...readMore.options, linkToAuthorMeta: newVal };
+                              setAttributes({ readMore: { ...readMore, options: options } });
+
+                            }}
+                          />
+
+                        </PanelRow>
+
+                      )}
+
+
+
+                      {readMore.options.linkTo == 'customUrl' && (
+
+
+                        <PanelRow>
+                          <label for="">Custom Url</label>
+
+                          <div className='relative'>
+                            <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                              setLinkPickerPosttitle(prev => !prev);
+
+                            }}></Button>
+                            {readMore.options.customUrl.length > 0 && (
+                              <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                                var options = { ...readMore.options, customUrl: '' };
+                                setAttributes({ readMore: { ...readMore, options: options } });
+                                setLinkPickerPosttitle(false);
+
+
+
+                              }}></Button>
+
+                            )}
+                            {linkPickerPosttitle && (
+                              <Popover position="bottom right">
+                                <LinkControl settings={[]} value={readMore.options.customUrl} onChange={newVal => {
+
+                                  var options = { ...readMore.options, customUrl: newVal.url };
+
+                                  setAttributes({ readMore: { ...readMore, options: options } });
+
+                                }} />
+
+                                <div className='p-2'><span className='font-bold'>Linked to:</span> {(readMore.options.customUrl.length != 0) ? readMore.options.customUrl : 'No link'} </div>
+                              </Popover>
+
+                            )}
+
+
+                          </div>
+                        </PanelRow>
+                      )}
+
+
+
+
+
                       <PanelRow>
                         <label for="">Link Target</label>
 
@@ -1148,43 +1277,6 @@ registerBlockType("post-grid/read-more", {
 
 
 
-                      <PanelRow>
-                        <label for="">Custom Url</label>
-
-                        <div className='relative'>
-                          <Button className={(linkPickerReadmore) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                            setLinkPickerReadmore(prev => !prev)
-                          }}></Button>
-                          {readMore.options.customUrl.length > 0 && (
-                            <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                              var options = { ...readMore.options, customUrl: '' };
-                              setAttributes({ readMore: { ...readMore, options: options } });
-
-
-
-                            }}></Button>
-
-                          )}
-                          {linkPickerReadmore && (
-                            <Popover position="bottom right">
-                              <LinkControl settings={[]} value={readMore.options.customUrl} onChange={newVal => {
-
-                                var options = { ...readMore.options, customUrl: newVal.url };
-                                setAttributes({ readMore: { ...readMore, options: options } });
-                                //setLinkPickerReadmore(false)
-
-                              }} />
-
-                              <div className='p-2'><span className='font-bold'>Linked to:</span> {(readMore.options.customUrl.length != 0) ? readMore.options.customUrl : 'No link'} </div>
-                            </Popover>
-
-                          )}
-
-
-                        </div>
-                      </PanelRow>
 
 
                       <PanelRow>
@@ -1933,7 +2025,21 @@ registerBlockType("post-grid/read-more", {
                   {icon.options.position == 'beforeRedmore' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
-                  {readMore.options.text}
+
+                  <RichText
+                    className='text'
+                    tagName={'span'}
+                    value={readMore.options.text}
+                    allowedFormats={['core/bold', 'core/italic', 'core/link']}
+                    onChange={(content) => {
+                      var options = { ...readMore.options, text: content };
+                      setAttributes({ readMore: { ...readMore, options: options } });
+                    }}
+                    placeholder={__('Start Writing...')}
+                  />
+
+
+
                   {icon.options.position == 'afterRedmore' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
@@ -1941,7 +2047,17 @@ registerBlockType("post-grid/read-more", {
               )}
 
               {!readMore.options.isLink && (
-                readMore.options.text
+                <RichText
+                  className='text'
+                  tagName={'span'}
+                  value={readMore.options.text}
+                  allowedFormats={['core/bold', 'core/italic', 'core/link']}
+                  onChange={(content) => {
+                    var options = { ...readMore.options, text: content };
+                    setAttributes({ readMore: { ...readMore, options: options } });
+                  }}
+                  placeholder={__('Start Writing...')}
+                />
               )}
 
 
@@ -1983,7 +2099,19 @@ registerBlockType("post-grid/read-more", {
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
 
-                  {readMore.options.text}
+
+                  <RichText
+                    className='text'
+                    tagName={'span'}
+                    value={readMore.options.text}
+                    allowedFormats={['core/bold', 'core/italic', 'core/link']}
+                    onChange={(content) => {
+                      var options = { ...readMore.options, text: content };
+                      setAttributes({ readMore: { ...readMore, options: options } });
+                    }}
+                    placeholder={__('Start Writing...')}
+                  />
+
 
                   {icon.options.position == 'afterRedmore' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
@@ -1993,11 +2121,23 @@ registerBlockType("post-grid/read-more", {
               {!readMore.options.isLink && (
 
                 <>
-
                   {icon.options.position == 'beforeRedmore' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
-                  {readMore.options.text}
+
+                  <RichText
+                    className='text'
+                    tagName={'span'}
+                    value={readMore.options.text}
+                    allowedFormats={['core/bold', 'core/italic', 'core/link']}
+                    onChange={(content) => {
+                      var options = { ...readMore.options, text: content };
+                      setAttributes({ readMore: { ...readMore, options: options } });
+                    }}
+                    placeholder={__('Start Writing...')}
+                  />
+
+
                   {icon.options.position == 'afterRedmore' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}

@@ -144,7 +144,7 @@ class PGDropdown extends Component {
 
                       }} >
                         <div className='flex justify-between'>
-                          <div >
+                          <div className={[x.isPro ? 'text-gray-400' : '']}>
                             {x.icon != undefined && <span className=''><RawHTML>{x.icon}</RawHTML></span>}
                             <span className=''>{x.label} </span>
                           </div>

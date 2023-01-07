@@ -44,7 +44,7 @@ class PGColorPicker extends Component {
 
 
 
-      // const [enablePicker, setenablePicker] = useState(false);
+      const [enablePicker, setenablePicker] = useState(false);
 
       //console.log('enablePicker: ' + enablePicker);
 
@@ -76,16 +76,16 @@ class PGColorPicker extends Component {
 
           <div className='p-2 px-3' style={(val == undefined) ? defaultbtnStyle : btnStyle} onClick={ev => {
 
-            //setenablePicker(prev => !prev);
+            setenablePicker(prev => !prev);
             //this.setState({ enablePickerX: (this.state.enablePickerX) ? false : true });
-            console.log(enablePickerX);
+            //console.log(enablePickerX);
 
-            enablePickerX = true;
+            //enablePickerX = true;
 
           }}>{(val == undefined) ? 'Set Color' : val}</div>
 
           {
-            enablePickerX && (
+            enablePicker && (
               <Popover position="bottom right">
 
 

@@ -71782,8 +71782,8 @@ class PGColorPicker extends Component {
     console.log(this.props);
 
     function Html() {
-      // const [enablePicker, setenablePicker] = useState(false);
-      //console.log('enablePicker: ' + enablePicker);
+      const [enablePicker, setenablePicker] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false); //console.log('enablePicker: ' + enablePicker);
+
       var defaultbtnStyle = {
         backgroundImage: 'repeating-linear-gradient(45deg,#e0e0e0 25%,transparent 0,transparent 75%,#e0e0e0 0,#e0e0e0),repeating-linear-gradient(45deg,#e0e0e0 25%,transparent 0,transparent 75%,#e0e0e0 0,#e0e0e0)',
         backgroundPosition: '0 0,25px 25px',
@@ -71802,12 +71802,11 @@ class PGColorPicker extends Component {
         className: "p-2 px-3",
         style: val == undefined ? defaultbtnStyle : btnStyle,
         onClick: ev => {
-          //setenablePicker(prev => !prev);
-          //this.setState({ enablePickerX: (this.state.enablePickerX) ? false : true });
-          console.log(enablePickerX);
-          enablePickerX = true;
+          setenablePicker(prev => !prev); //this.setState({ enablePickerX: (this.state.enablePickerX) ? false : true });
+          //console.log(enablePickerX);
+          //enablePickerX = true;
         }
-      }, val == undefined ? 'Set Color' : val), enablePickerX && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
+      }, val == undefined ? 'Set Color' : val), enablePicker && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
         position: "bottom right"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "p-2"

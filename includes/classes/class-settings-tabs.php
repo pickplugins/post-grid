@@ -31,6 +31,9 @@ if (!class_exists('settings_tabs_field')) {
             wp_enqueue_style('wp-color-picker');
 
 
+            wp_enqueue_style('select2');
+            wp_enqueue_script('select2');
+
             wp_enqueue_style('font-awesome-5');
 
             wp_enqueue_style('settings-tabs');

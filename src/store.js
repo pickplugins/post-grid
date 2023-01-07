@@ -26,11 +26,11 @@ var selectors = {
     return clientdata;
   },
   getproinfo(state) {
-    console.log('step: 1');
+    //console.log('step: 1');
 
     const { proinfo } = state;
 
-    console.log(proinfo);
+    //console.log(proinfo);
 
     return proinfo;
   },
@@ -43,7 +43,7 @@ var selectors = {
     const { blockCss } = state;
 
 
-    console.log(items);
+    //console.log(items);
 
 
     var reponsiveCssGroups = {};
@@ -228,7 +228,7 @@ var resolvers = {
   * getLicense() {
     const path = '/post-grid/v2/get_license';
     const res = yield actions.fetchLicense(path);
-    ////console.log(res);
+    //////console.log(res);
 
     return actions.setLicense(res);
   },
@@ -239,7 +239,7 @@ var resolvers = {
     const path = '/post-grid/v2/get_site_details';
     const res = yield actions.fetchclientdata(path);
 
-    ////console.log(res);
+    //////console.log(res);
 
 
     return actions.setclientdata(res);
@@ -248,14 +248,14 @@ var resolvers = {
 
   * getproinfo() {
 
-    console.log('step: 2');
+    //console.log('step: 2');
 
 
 
     const path = '/post-grid/v2/get_pro_info';
     const res = yield actions.fetchproinfo(path);
 
-    console.log(res);
+    //console.log(res);
 
 
     return actions.setproinfo(res);
@@ -282,8 +282,8 @@ const actions = {
   },
   setproinfo(proinfo) {
 
-    console.log('step: 3');
-    console.log(proinfo);
+    //console.log('step: 3');
+    //console.log(proinfo);
 
     return {
       type: 'SET_PROINFO',
@@ -309,7 +309,7 @@ const actions = {
     };
   },
   fetchproinfo(path) {
-    console.log('step: 4');
+    //console.log('step: 4');
 
     return {
       type: 'FETCH_PRO_INFO_FROM_API',
@@ -331,7 +331,7 @@ var controls = {
   },
 
   FETCH_PRO_INFO_FROM_API(action) {
-    console.log('step: 5');
+    //console.log('step: 5');
 
     return apiFetch({ path: action.path, method: 'POST', data: {}, });
   },
@@ -364,8 +364,8 @@ const store = createReduxStore('postgrid-shop', {
 
       case 'SET_PROINFO':
 
-        console.log('step: 3');
-        console.log(action.proinfo);
+        //console.log('step: 3');
+        //console.log(action.proinfo);
 
 
         return {

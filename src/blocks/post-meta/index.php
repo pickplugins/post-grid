@@ -159,7 +159,8 @@ class BlockPostMeta
         $post_ID = $block->context['postId'];
         $post_url = get_the_permalink($post_ID);
 
-        $template = isset($attributes['template']) ? $attributes['template'] : [];
+        $template = isset($attributes['template']) ? $attributes['template'] :'';
+        $templateLoop= isset($attributes['templateLoop']) ? $attributes['templateLoop'] :'<div>{title}</div><div>{details}</div>';
 
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -194,7 +195,6 @@ class BlockPostMeta
 
 
 
-        //echo '<pre style="text-align: left">' . var_export($templateFront, true) . '</pre>';
 
 
         ob_start();
@@ -203,6 +203,7 @@ class BlockPostMeta
 
 
         //echo strtr($templateFront, $vars);
+
 
 
 
@@ -218,8 +219,30 @@ class BlockPostMeta
                 if (is_array($metaValue)) {
 
 
-                    $singleArrayForCategory = $this->nestedToSingle($metaValue);
+if(!empty($templateLoop)){
+
+        foreach($metaValue as $items){
+
+            $tempArgs = []; 
+
+            foreach($items as $itemIndex=>$item){
+                $tempArgs['{' . $itemIndex . '}'] = $item;
+
+            }
+
+            echo strtr($templateLoop, (array)$tempArgs);
+
+
+        }
+
+}else{
+  $singleArrayForCategory = $this->nestedToSingle($metaValue);
                     echo strtr($template, (array)$singleArrayForCategory);
+}
+                  
+
+
+
                 } else {
 
                     $singleArray = ['{metaValue}' => $metaValue];

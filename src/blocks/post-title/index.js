@@ -19,6 +19,8 @@ import { link, linkOff } from "@wordpress/icons";
 import PGcssTextAlign from '../../components/css-text-align'
 
 import IconToggle from '../../components/icon-toggle'
+import BreakpointSwitch from '../../components/breakpoint-switch'
+
 import Typography from '../../components/typography'
 import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
@@ -26,6 +28,7 @@ import BreakpointToggle from '../../components/breakpoint-toggle'
 import colorsPresets from '../../colors-presets'
 import PGcssDisplay from '../../components/css-display'
 import PGDropdown from '../../components/dropdown'
+import PGColorPicker from '../../components/input-color-picker'
 
 
 
@@ -343,6 +346,24 @@ registerBlockType("post-grid/post-title", {
 
     }
 
+
+
+    var RemoveQueryPram = function ({ title }) {
+
+      return (
+
+        <>
+
+          <span className='mx-2'>{title}</span>
+          <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+        </>
+
+
+
+
+      )
+
+    }
 
 
     function setFieldLinkTo(option, index) {
@@ -1162,7 +1183,7 @@ registerBlockType("post-grid/post-title", {
 
                   <PanelRow>
                     <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </PanelRow>
                   <BoxControl
                     label=""
@@ -1173,7 +1194,7 @@ registerBlockType("post-grid/post-title", {
 
                   <PanelRow>
                     <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </PanelRow>
                   <BoxControl
                     label=""
@@ -1515,7 +1536,7 @@ registerBlockType("post-grid/post-title", {
 
                   <PanelRow className='my-3'>
                     <label>Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
 
 
 
@@ -1542,8 +1563,40 @@ registerBlockType("post-grid/post-title", {
                       var styles = { ...postTitle.styles, color: newValuesObj };
                       setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
+                      var newValuesObjX = {};
+                      if (blockCssY.items[titleLinkSelector] == undefined) {
+
+                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], color: newValuesObj };
+
+                      } else {
+
+                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], color: newValuesObj };
+                      }
+
+                      setAttributes({ blockCssY: { items: newValuesObjX } });
+                    }}
+                  />
 
 
+
+                  <PGColorPicker
+                    val={postTitle.styles.color[breakPointX]}
+                    colors={colorsPresets}
+                    enableAlpha
+                    onChange={(newVal) => {
+
+                      var newValuesObj = {};
+
+
+                      if (Object.keys(postTitle.styles.color).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
+                      } else {
+                        newValuesObj = postTitle.styles.color;
+                        newValuesObj[breakPointX] = newVal;
+                      }
+
+                      var styles = { ...postTitle.styles, color: newValuesObj };
+                      setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
                       var newValuesObjX = {};
                       if (blockCssY.items[titleLinkSelector] == undefined) {
@@ -1555,19 +1608,20 @@ registerBlockType("post-grid/post-title", {
                         newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], color: newValuesObj };
                       }
 
-
                       setAttributes({ blockCssY: { items: newValuesObjX } });
-
-                      // blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'color': newValuesObj };
-                      // setAttributes({ blockCssY: { items: blockCssY.items } });
-
                     }}
+
+                    label={<RemoveQueryPram title='Color' />}
+                    enablePickerX={false}
+
+
                   />
+
 
 
                   <PanelRow className='my-3'>
                     <label>Background Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
 
 
 
@@ -1595,11 +1649,6 @@ registerBlockType("post-grid/post-title", {
                       setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
 
-
-
-
-
-
                       var newValuesObjX = {};
                       if (blockCssY.items[titleLinkSelector] == undefined) {
 
@@ -1614,8 +1663,6 @@ registerBlockType("post-grid/post-title", {
                       setAttributes({ blockCssY: { items: newValuesObjX } });
 
 
-                      //blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': newValuesObj };
-                      //setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
                     }}
@@ -1624,18 +1671,17 @@ registerBlockType("post-grid/post-title", {
 
                   <PanelRow>
                     <div className='font-bold'>Typography</div>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </PanelRow>
 
                   <Typography typo={postTitle.styles} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} obj={postTitle} />
 
 
                   <PanelRow className='my-3'>
-                    <label>Display</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
+                    <div className='flex items-center'>
+                      <label>Display</label>
+                      <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                    </div>
 
                     <SelectControl
                       label=""
@@ -1691,15 +1737,15 @@ registerBlockType("post-grid/post-title", {
                     />
                   </PanelRow>
 
+
+
                   <PanelRow className='my-3'>
-                    <label>Text Align</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
+                    <div className='flex items-center'>
+                      <label>Text Align</label>
+                      <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                    </div>
 
-                  <PanelRow>
-                    <label></label>
                     <PGcssTextAlign val={postTitle.styles.textAlign[breakPointX]} onChange={(newVal => {
-
 
                       var newValuesObj = {};
 
@@ -1723,8 +1769,12 @@ registerBlockType("post-grid/post-title", {
                   </PanelRow>
 
                   <PanelRow>
+
+                  </PanelRow>
+
+                  <PanelRow>
                     <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </PanelRow>
                   <BoxControl
                     label=""
@@ -1735,7 +1785,7 @@ registerBlockType("post-grid/post-title", {
 
                   <PanelRow>
                     <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </PanelRow>
                   <BoxControl
                     label=""

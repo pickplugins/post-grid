@@ -46,6 +46,11 @@ registerBlockType("post-grid/post-meta", {
       "type": "string",
       "default": '<div>Output HTML: {metaValue}</div>'
     },
+    templateLoop: {
+      "type": "string",
+      "default": ''
+    },
+
     wrapper: {
       type: 'object',
       default: {
@@ -135,6 +140,7 @@ registerBlockType("post-grid/post-meta", {
 
     var meta = attributes.meta;
     var template = attributes.template;
+    var templateLoop = attributes.templateLoop;
 
 
 
@@ -628,6 +634,23 @@ registerBlockType("post-grid/post-meta", {
                 }}
               />
 
+
+              <label className='my-3' for="">Loop Template </label>
+
+
+              <TextareaControl
+                placeholder='<div>{title}</div><div>{details}</div>'
+
+                value={templateLoop}
+                onChange={(newVal) => {
+
+                  setAttributes({ templateLoop: newVal });
+
+
+                }}
+              />
+
+              <p>You can use following for loop template to iterate array elements <code>&#60;div&#62; &#123;itemIndex1&#125;&#60;/div&#62;&#60;div&#62;&#123;itemIndex2&#125;&#60;/div&#62;</code></p>
 
               <div className='my-3'>
 

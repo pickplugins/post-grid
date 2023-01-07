@@ -29,44 +29,36 @@ class Typography extends Component {
 
             <PanelRow>
               <label for="">Font Family</label>
+              <InputControl
+                value={(typo.fontFamily[breakPointX] != undefined) ? typo.fontFamily[breakPointX] : ''}
+                onChange={(newVal) => {
 
-            </PanelRow>
-            <PanelRow>
+                  var newValuesObj = {};
+                  if (Object.keys(obj.styles.fontFamily).length == 0) {
+                    newValuesObj[breakPointX] = newVal;
 
-              <div>
+                  } else {
 
-                <InputControl
-                  value={(typo.fontFamily[breakPointX] != undefined) ? typo.fontFamily[breakPointX] : ''}
-                  onChange={(newVal) => {
-
-                    var newValuesObj = {};
-                    if (Object.keys(obj.styles.fontFamily).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-
-                    } else {
-
-                      newValuesObj = obj.styles.fontFamily;
-                      newValuesObj[breakPointX] = newVal;
-
-                    }
-                    var typoX = { ...obj.styles, fontFamily: newValuesObj };
-
-
-
-                    onChange(typoX)
-
-
-
-
-
+                    newValuesObj = obj.styles.fontFamily;
+                    newValuesObj[breakPointX] = newVal;
 
                   }
-                  }
-                />
+                  var typoX = { ...obj.styles, fontFamily: newValuesObj };
 
 
-              </div>
+
+                  onChange(typoX)
+
+
+
+
+
+
+                }
+                }
+              />
             </PanelRow>
+
 
           </>
 
@@ -81,66 +73,67 @@ class Typography extends Component {
 
             <PanelRow>
               <label for="">Font Size</label>
+              <div className='flex'>
+                <InputControl type="number"
+                  value={(typo.fontSize[breakPointX] != undefined) ? typo.fontSize[breakPointX].val : ''}
+                  onChange={(newVal) => {
+
+                    var newValuesObj = {};
+                    if (Object.keys(obj.styles.fontSize).length == 0) {
+                      newValuesObj[breakPointX] = { ...obj.styles.fontSize[breakPointX], val: newVal };
+                    } else {
+                      newValuesObj = obj.styles.fontSize;
+                      newValuesObj[breakPointX] = { ...obj.styles.fontSize[breakPointX], val: newVal };
+                    }
+                    var typoX = { ...obj.styles, fontSize: newValuesObj };
+
+
+                    onChange(typoX)
+
+
+                  }
+                  }
+                />
+                <SelectControl
+                  label=""
+                  value={(typo.fontSize[breakPointX] != undefined) ? typo.fontSize[breakPointX].unit : ''}
+
+                  options={[
+                    { label: 'Select Unit', value: '' },
+
+                    { label: 'px', value: 'px' },
+                    { label: '%', value: '%' },
+                    { label: 'em', value: 'em' },
+                    { label: 'ex', value: 'ex' },
+                    { label: 'rem', value: 'rem' },
+                    { label: 'vh', value: 'vh' },
+                    { label: 'vw', value: 'vw' },
+                    { label: 'pt', value: 'pt' },
+                    { label: 'pc', value: 'pc' },
+                    { label: 'ch', value: 'ch' },
+
+                  ]}
+                  onChange={(newVal) => {
+
+                    var newValuesObj = {};
+                    if (Object.keys(obj.styles.fontSize).length == 0) {
+                      newValuesObj[breakPointX] = { ...obj.styles.fontSize[breakPointX], unit: newVal };
+                    } else {
+                      newValuesObj = obj.styles.fontSize;
+                      newValuesObj[breakPointX] = { ...obj.styles.fontSize[breakPointX], unit: newVal };
+                    }
+                    var typoX = { ...obj.styles, fontSize: newValuesObj };
+                    onChange(typoX)
+
+
+
+                  }
+                  }
+                />
+              </div>
 
             </PanelRow>
-            <PanelRow>
-              <InputControl type="number"
-                value={(typo.fontSize[breakPointX] != undefined) ? typo.fontSize[breakPointX].val : ''}
-                onChange={(newVal) => {
 
-                  var newValuesObj = {};
-                  if (Object.keys(obj.styles.fontSize).length == 0) {
-                    newValuesObj[breakPointX] = { ...obj.styles.fontSize[breakPointX], val: newVal };
-                  } else {
-                    newValuesObj = obj.styles.fontSize;
-                    newValuesObj[breakPointX] = { ...obj.styles.fontSize[breakPointX], val: newVal };
-                  }
-                  var typoX = { ...obj.styles, fontSize: newValuesObj };
-
-
-                  onChange(typoX)
-
-
-                }
-                }
-              />
-              <SelectControl
-                label=""
-                value={(typo.fontSize[breakPointX] != undefined) ? typo.fontSize[breakPointX].unit : ''}
-
-                options={[
-                  { label: 'Select Unit', value: '' },
-
-                  { label: 'px', value: 'px' },
-                  { label: '%', value: '%' },
-                  { label: 'em', value: 'em' },
-                  { label: 'ex', value: 'ex' },
-                  { label: 'rem', value: 'rem' },
-                  { label: 'vh', value: 'vh' },
-                  { label: 'vw', value: 'vw' },
-                  { label: 'pt', value: 'pt' },
-                  { label: 'pc', value: 'pc' },
-                  { label: 'ch', value: 'ch' },
-
-                ]}
-                onChange={(newVal) => {
-
-                  var newValuesObj = {};
-                  if (Object.keys(obj.styles.fontSize).length == 0) {
-                    newValuesObj[breakPointX] = { ...obj.styles.fontSize[breakPointX], unit: newVal };
-                  } else {
-                    newValuesObj = obj.styles.fontSize;
-                    newValuesObj[breakPointX] = { ...obj.styles.fontSize[breakPointX], unit: newVal };
-                  }
-                  var typoX = { ...obj.styles, fontSize: newValuesObj };
-                  onChange(typoX)
-
-
-
-                }
-                }
-              />
-            </PanelRow>
 
           </>
 
@@ -156,65 +149,70 @@ class Typography extends Component {
             <PanelRow>
               <label for="">Line Height</label>
 
-            </PanelRow>
-            <PanelRow>
-              <InputControl
-                type="number"
-                value={(typo.lineHeight[breakPointX] != undefined) ? typo.lineHeight[breakPointX].val : ''}
+              <div className='flex'>
 
-                onChange={(newVal) => {
-                  var newValuesObj = {};
-                  if (Object.keys(obj.styles.lineHeight).length == 0) {
-                    newValuesObj[breakPointX] = { ...obj.styles.lineHeight[breakPointX], val: newVal };
-                  } else {
-                    newValuesObj = obj.styles.lineHeight;
-                    newValuesObj[breakPointX] = { ...obj.styles.lineHeight[breakPointX], val: newVal };
+
+                <InputControl
+                  type="number"
+                  value={(typo.lineHeight[breakPointX] != undefined) ? typo.lineHeight[breakPointX].val : ''}
+
+                  onChange={(newVal) => {
+                    var newValuesObj = {};
+                    if (Object.keys(obj.styles.lineHeight).length == 0) {
+                      newValuesObj[breakPointX] = { ...obj.styles.lineHeight[breakPointX], val: newVal };
+                    } else {
+                      newValuesObj = obj.styles.lineHeight;
+                      newValuesObj[breakPointX] = { ...obj.styles.lineHeight[breakPointX], val: newVal };
+                    }
+                    var typoX = { ...obj.styles, lineHeight: newValuesObj };
+
+                    onChange(typoX)
+
+
                   }
-                  var typoX = { ...obj.styles, lineHeight: newValuesObj };
-
-                  onChange(typoX)
-
-
-                }
-                }
-              />
-              <SelectControl
-                label=""
-                value={(typo.lineHeight[breakPointX] != undefined) ? typo.lineHeight[breakPointX].unit : ''}
-
-                options={[
-                  { label: 'Select Unit', value: '' },
-
-                  { label: 'px', value: 'px' },
-                  { label: '%', value: '%' },
-                  { label: 'em', value: 'em' },
-                  { label: 'ex', value: 'ex' },
-                  { label: 'rem', value: 'rem' },
-                  { label: 'vh', value: 'vh' },
-                  { label: 'vw', value: 'vw' },
-                  { label: 'pt', value: 'pt' },
-                  { label: 'pc', value: 'pc' },
-                  { label: 'ch', value: 'ch' },
-
-                ]}
-                onChange={(newVal) => {
-
-                  var newValuesObj = {};
-                  if (Object.keys(obj.styles.lineHeight).length == 0) {
-                    newValuesObj[breakPointX] = { ...obj.styles.lineHeight[breakPointX], unit: newVal };
-                  } else {
-                    newValuesObj = obj.styles.lineHeight;
-                    newValuesObj[breakPointX] = { ...obj.styles.lineHeight[breakPointX], unit: newVal };
                   }
-                  var typoX = { ...obj.styles, lineHeight: newValuesObj };
+                />
+                <SelectControl
+                  label=""
+                  value={(typo.lineHeight[breakPointX] != undefined) ? typo.lineHeight[breakPointX].unit : ''}
 
-                  onChange(typoX)
+                  options={[
+                    { label: 'Select Unit', value: '' },
+
+                    { label: 'px', value: 'px' },
+                    { label: '%', value: '%' },
+                    { label: 'em', value: 'em' },
+                    { label: 'ex', value: 'ex' },
+                    { label: 'rem', value: 'rem' },
+                    { label: 'vh', value: 'vh' },
+                    { label: 'vw', value: 'vw' },
+                    { label: 'pt', value: 'pt' },
+                    { label: 'pc', value: 'pc' },
+                    { label: 'ch', value: 'ch' },
+
+                  ]}
+                  onChange={(newVal) => {
+
+                    var newValuesObj = {};
+                    if (Object.keys(obj.styles.lineHeight).length == 0) {
+                      newValuesObj[breakPointX] = { ...obj.styles.lineHeight[breakPointX], unit: newVal };
+                    } else {
+                      newValuesObj = obj.styles.lineHeight;
+                      newValuesObj[breakPointX] = { ...obj.styles.lineHeight[breakPointX], unit: newVal };
+                    }
+                    var typoX = { ...obj.styles, lineHeight: newValuesObj };
+
+                    onChange(typoX)
 
 
-                }
-                }
-              />
+                  }
+                  }
+                />
+
+              </div>
+
             </PanelRow>
+
 
 
           </>
@@ -230,70 +228,71 @@ class Typography extends Component {
 
             <PanelRow>
               <label for="">Letter Spacing</label>
+              <div className='flex'>
+
+                <InputControl
+                  type="number"
+                  value={(typo.letterSpacing[breakPointX] != undefined) ? typo.letterSpacing[breakPointX].val : ''}
+
+                  onChange={(newVal) => {
+
+
+                    var newValuesObj = {};
+                    if (Object.keys(obj.styles.letterSpacing).length == 0) {
+                      newValuesObj[breakPointX] = { ...obj.styles.letterSpacing[breakPointX], val: newVal };
+                    } else {
+                      newValuesObj = obj.styles.letterSpacing;
+                      newValuesObj[breakPointX] = { ...obj.styles.letterSpacing[breakPointX], val: newVal };
+                    }
+                    var typoX = { ...obj.styles, letterSpacing: newValuesObj };
+
+                    onChange(typoX)
+
+
+
+                  }
+                  }
+                />
+                <SelectControl
+                  label=""
+                  value={(typo.letterSpacing[breakPointX] != undefined) ? typo.letterSpacing[breakPointX].unit : ''}
+
+                  options={[
+                    { label: 'Select Unit', value: '' },
+
+                    { label: 'px', value: 'px' },
+                    { label: '%', value: '%' },
+                    { label: 'em', value: 'em' },
+                    { label: 'ex', value: 'ex' },
+                    { label: 'rem', value: 'rem' },
+                    { label: 'vh', value: 'vh' },
+                    { label: 'vw', value: 'vw' },
+                    { label: 'pt', value: 'pt' },
+                    { label: 'pc', value: 'pc' },
+                    { label: 'ch', value: 'ch' },
+
+                  ]}
+                  onChange={(newVal) => {
+
+                    var newValuesObj = {};
+                    if (Object.keys(obj.styles.letterSpacing).length == 0) {
+                      newValuesObj[breakPointX] = { ...obj.styles.letterSpacing[breakPointX], unit: newVal };
+                    } else {
+                      newValuesObj = obj.styles.letterSpacing;
+                      newValuesObj[breakPointX] = { ...obj.styles.letterSpacing[breakPointX], unit: newVal };
+                    }
+                    var typoX = { ...obj.styles, letterSpacing: newValuesObj };
+
+                    onChange(typoX)
+
+                  }
+                  }
+                />
+              </div>
 
             </PanelRow>
 
 
-            <PanelRow>
-              <InputControl
-                type="number"
-                value={(typo.letterSpacing[breakPointX] != undefined) ? typo.letterSpacing[breakPointX].val : ''}
-
-                onChange={(newVal) => {
-
-
-                  var newValuesObj = {};
-                  if (Object.keys(obj.styles.letterSpacing).length == 0) {
-                    newValuesObj[breakPointX] = { ...obj.styles.letterSpacing[breakPointX], val: newVal };
-                  } else {
-                    newValuesObj = obj.styles.letterSpacing;
-                    newValuesObj[breakPointX] = { ...obj.styles.letterSpacing[breakPointX], val: newVal };
-                  }
-                  var typoX = { ...obj.styles, letterSpacing: newValuesObj };
-
-                  onChange(typoX)
-
-
-
-                }
-                }
-              />
-              <SelectControl
-                label=""
-                value={(typo.letterSpacing[breakPointX] != undefined) ? typo.letterSpacing[breakPointX].unit : ''}
-
-                options={[
-                  { label: 'Select Unit', value: '' },
-
-                  { label: 'px', value: 'px' },
-                  { label: '%', value: '%' },
-                  { label: 'em', value: 'em' },
-                  { label: 'ex', value: 'ex' },
-                  { label: 'rem', value: 'rem' },
-                  { label: 'vh', value: 'vh' },
-                  { label: 'vw', value: 'vw' },
-                  { label: 'pt', value: 'pt' },
-                  { label: 'pc', value: 'pc' },
-                  { label: 'ch', value: 'ch' },
-
-                ]}
-                onChange={(newVal) => {
-
-                  var newValuesObj = {};
-                  if (Object.keys(obj.styles.letterSpacing).length == 0) {
-                    newValuesObj[breakPointX] = { ...obj.styles.letterSpacing[breakPointX], unit: newVal };
-                  } else {
-                    newValuesObj = obj.styles.letterSpacing;
-                    newValuesObj[breakPointX] = { ...obj.styles.letterSpacing[breakPointX], unit: newVal };
-                  }
-                  var typoX = { ...obj.styles, letterSpacing: newValuesObj };
-
-                  onChange(typoX)
-
-                }
-                }
-              />
-            </PanelRow>
 
           </>
 
@@ -410,121 +409,123 @@ class Typography extends Component {
 
             <PanelRow>
               <label for="">Text Decoration</label>
+              <div className='flex justify-between'>
+
+                <Button className={(obj.styles.textDecoration[breakPointX] != undefined && obj.styles.textDecoration[breakPointX].indexOf('underline') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
+
+
+                  var newVal = 'underline';
+
+                  var newValuesObj = {};
+                  if (Object.keys(obj.styles.textDecoration).length == 0) {
+
+                    newValuesObj[breakPointX] = [newVal];
+                  } else {
+                    newValuesObj = obj.styles.textDecoration;
+
+                    if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
+                      var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
+
+                      newValuesObj[breakPointX] = arr;
+
+                    } else {
+                      newValuesObj[breakPointX].push(newVal)
+                    }
+
+                  }
+                  var typoX = { ...obj.styles, textDecoration: newValuesObj };
+
+                  onChange(typoX)
+
+
+
+                }}><span class="icon-underline"></span></Button>
+
+                <Button className={(obj.styles.textDecoration[breakPointX] != undefined && obj.styles.textDecoration[breakPointX].indexOf('line-through') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
+
+
+                  var newVal = 'line-through';
+
+                  var newValuesObj = {};
+                  if (Object.keys(obj.styles.textDecoration).length == 0) {
+
+                    newValuesObj[breakPointX] = [newVal];
+                  } else {
+                    newValuesObj = obj.styles.textDecoration;
+
+                    if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
+                      var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
+
+                      newValuesObj[breakPointX] = arr;
+
+                    } else {
+                      newValuesObj[breakPointX].push(newVal)
+                    }
+
+                  }
+                  var typoX = { ...obj.styles, textDecoration: newValuesObj };
+
+                  onChange(typoX)
+
+
+
+                }}><span class="icon-strikethrough"></span></Button>
+
+                <Button className={(obj.styles.textDecoration[breakPointX] != undefined && obj.styles.textDecoration[breakPointX].indexOf('overline') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
+
+
+                  var newVal = 'overline';
+
+                  var newValuesObj = {};
+                  if (Object.keys(obj.styles.textDecoration).length == 0) {
+
+                    newValuesObj[breakPointX] = [newVal];
+                  } else {
+                    newValuesObj = obj.styles.textDecoration;
+
+                    if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
+                      var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
+
+                      newValuesObj[breakPointX] = arr;
+
+                    } else {
+                      newValuesObj[breakPointX].push(newVal)
+                    }
+
+                  }
+                  var typoX = { ...obj.styles, textDecoration: newValuesObj };
+
+                  onChange(typoX)
+
+
+                }}><span class="icon-overline"></span></Button>
+
+
+
+
+                <Button className={(obj.styles.textDecoration[breakPointX] != undefined && obj.styles.textDecoration[breakPointX].indexOf('none') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
+                  var newVal = 'none';
+                  var newValuesObj = {};
+                  if (Object.keys(obj.styles.textDecoration).length == 0) {
+                    newValuesObj[breakPointX] = [newVal];
+                  } else {
+                    newValuesObj = obj.styles.textDecoration;
+
+                    if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
+                      var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
+                      newValuesObj[breakPointX] = arr;
+                    } else {
+                      newValuesObj[breakPointX] = [newVal];
+                    }
+                  }
+                  var typoX = { ...obj.styles, textDecoration: newValuesObj };
+                  onChange(typoX)
+                }}><span class="icon-close"></span></Button>
+              </div>
+
             </PanelRow>
 
-            <div className='flex justify-between'>
 
-              <Button className={(obj.styles.textDecoration[breakPointX] != undefined && obj.styles.textDecoration[breakPointX].indexOf('underline') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
-
-
-                var newVal = 'underline';
-
-                var newValuesObj = {};
-                if (Object.keys(obj.styles.textDecoration).length == 0) {
-
-                  newValuesObj[breakPointX] = [newVal];
-                } else {
-                  newValuesObj = obj.styles.textDecoration;
-
-                  if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
-                    var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
-
-                    newValuesObj[breakPointX] = arr;
-
-                  } else {
-                    newValuesObj[breakPointX].push(newVal)
-                  }
-
-                }
-                var typoX = { ...obj.styles, textDecoration: newValuesObj };
-
-                onChange(typoX)
-
-
-
-              }}><span class="icon-underline"></span></Button>
-
-              <Button className={(obj.styles.textDecoration[breakPointX] != undefined && obj.styles.textDecoration[breakPointX].indexOf('line-through') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
-
-
-                var newVal = 'line-through';
-
-                var newValuesObj = {};
-                if (Object.keys(obj.styles.textDecoration).length == 0) {
-
-                  newValuesObj[breakPointX] = [newVal];
-                } else {
-                  newValuesObj = obj.styles.textDecoration;
-
-                  if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
-                    var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
-
-                    newValuesObj[breakPointX] = arr;
-
-                  } else {
-                    newValuesObj[breakPointX].push(newVal)
-                  }
-
-                }
-                var typoX = { ...obj.styles, textDecoration: newValuesObj };
-
-                onChange(typoX)
-
-
-
-              }}><span class="icon-strikethrough"></span></Button>
-
-              <Button className={(obj.styles.textDecoration[breakPointX] != undefined && obj.styles.textDecoration[breakPointX].indexOf('overline') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
-
-
-                var newVal = 'overline';
-
-                var newValuesObj = {};
-                if (Object.keys(obj.styles.textDecoration).length == 0) {
-
-                  newValuesObj[breakPointX] = [newVal];
-                } else {
-                  newValuesObj = obj.styles.textDecoration;
-
-                  if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
-                    var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
-
-                    newValuesObj[breakPointX] = arr;
-
-                  } else {
-                    newValuesObj[breakPointX].push(newVal)
-                  }
-
-                }
-                var typoX = { ...obj.styles, textDecoration: newValuesObj };
-
-                onChange(typoX)
-
-
-              }}><span class="icon-overline"></span></Button>
-
-
-
-
-              <Button className={(obj.styles.textDecoration[breakPointX] != undefined && obj.styles.textDecoration[breakPointX].indexOf('none') !== -1) ? '!bg-blue-300 ' : ''} variant="secondary" onClick={(ev) => {
-                var newVal = 'none';
-                var newValuesObj = {};
-                if (Object.keys(obj.styles.textDecoration).length == 0) {
-                  newValuesObj[breakPointX] = [newVal];
-                } else {
-                  newValuesObj = obj.styles.textDecoration;
-
-                  if (newValuesObj[breakPointX].indexOf(newVal) !== -1) {
-                    var arr = newValuesObj[breakPointX].filter(item => item !== newVal)
-                    newValuesObj[breakPointX] = arr;
-                  } else {
-                    newValuesObj[breakPointX] = [newVal];
-                  }
-                }
-                var typoX = { ...obj.styles, textDecoration: newValuesObj };
-                onChange(typoX)
-              }}><span class="icon-close"></span></Button>
-            </div>
 
 
 

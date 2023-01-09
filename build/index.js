@@ -18259,7 +18259,7 @@ const {
 
 var myStore = wp.data.select('postgrid-shop');
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)("post-grid/list", {
-  title: "list",
+  title: "List",
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: '#2563eb',
@@ -53959,8 +53959,8 @@ var myStore = wp.data.select('postgrid-shop');
       let {
         title
       } = _ref;
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "mx-2"
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+        className: "text-sm "
       }, title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_breakpoint_switch__WEBPACK_IMPORTED_MODULE_13__["default"], {
         position: "bottom",
         variant: "secondary",
@@ -54995,9 +54995,11 @@ var myStore = wp.data.select('postgrid-shop');
         });
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_21__["default"], {
-      val: postTitle.styles.color[breakPointX],
+      className: "my-3",
+      value: postTitle.styles.color[breakPointX],
       colors: _colors_presets__WEBPACK_IMPORTED_MODULE_18__["default"],
       enableAlpha: true,
+      initialOpen: false,
       onChange: newVal => {
         var newValuesObj = {};
 
@@ -55036,22 +55038,16 @@ var myStore = wp.data.select('postgrid-shop');
       },
       label: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RemoveQueryPram, {
         title: "Color"
-      }),
-      enablePickerX: false
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_breakpoint_switch__WEBPACK_IMPORTED_MODULE_13__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
+      })
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      className: "my-3",
       value: postTitle.styles.bgColor[breakPointX],
       colors: _colors_presets__WEBPACK_IMPORTED_MODULE_18__["default"],
       enableAlpha: true,
+      initialOpen: false,
+      label: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(RemoveQueryPram, {
+        title: "Background Color"
+      }),
       onChange: newVal => {
         var newValuesObj = {};
 
@@ -55089,7 +55085,7 @@ var myStore = wp.data.select('postgrid-shop');
         });
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "font-bold"
+      className: ""
     }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_breakpoint_switch__WEBPACK_IMPORTED_MODULE_13__["default"], {
       position: "bottom",
       variant: "secondary",
@@ -71756,6 +71752,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_breakpoint_switch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/breakpoint-switch */ "./src/components/breakpoint-switch/index.js");
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
+/* harmony import */ var _use_controlled_state__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./use-controlled-state */ "./src/components/input-color-picker/use-controlled-state.js");
 
 const {
   Component
@@ -71765,24 +71762,70 @@ const {
 
 
 
-class PGColorPicker extends Component {
-  constructor(props) {
-    super(props);
-  }
 
+class PGColorPicker extends Component {
   render() {
     var {
-      val,
+      value,
       colors,
       enableAlpha,
       onChange,
       label,
-      enablePickerX
+      initialOpen
     } = this.props;
-    console.log(this.props);
 
-    function Html() {
-      const [enablePicker, setenablePicker] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false); //console.log('enablePicker: ' + enablePicker);
+    const Child2 = _ref => {
+      let {
+        id,
+        setValue,
+        value,
+        onChangeX,
+        enablePicker
+      } = _ref;
+      (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => console.log(`${id} rendered`));
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, id, ": ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+        type: "text",
+        onChange: e => {
+          setValue(e.target.value); //onChangeX('#bc4242');
+        }
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "enablePicker:", JSON.stringify(enablePicker)), enablePicker && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
+        position: "bottom right"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "p-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+        value: value,
+        colors: colors,
+        enableAlpha: true,
+        onChange: newVal => {
+          //onChange(newVal);
+          setValue(newVal);
+        }
+      }))));
+    };
+
+    const Child2wMemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.memo)(Child2);
+
+    const Parent = () => {
+      const [value, setValue] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+      const [enablePicker, setenablePicker] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+      (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+        console.log(value); //onChange(value)
+      }, [value]);
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, JSON.stringify(value), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Child2wMemo, {
+        id: "Child 2 with Memo",
+        setValue: setValue,
+        onChangeX: onChange,
+        value: value,
+        enablePicker: enablePicker
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        onClick: ev => {
+          setenablePicker(prev => !prev);
+        }
+      }, " Picker Open"));
+    };
+
+    const Html = () => {
+      const [enablePicker, setenablePicker] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(initialOpen); //console.log(enablePickerX);
 
       var defaultbtnStyle = {
         backgroundImage: 'repeating-linear-gradient(45deg,#e0e0e0 25%,transparent 0,transparent 75%,#e0e0e0 0,#e0e0e0),repeating-linear-gradient(45deg,#e0e0e0 25%,transparent 0,transparent 75%,#e0e0e0 0,#e0e0e0)',
@@ -71792,40 +71835,308 @@ class PGColorPicker extends Component {
         padding: '10px 35px'
       };
       var btnStyle = {
-        backgroundColor: val,
+        backgroundColor: value,
         boxShadow: 'inset 0 0 0 1px rgb(0 0 0 / 20%)',
         padding: '10px 35px'
       };
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: "flex justify-between items-center"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-4"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Parent, {
+        enablePicker: enablePicker,
+        onChange: onChange
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex justify-between items-center mb-3"
+      }, label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "p-2 px-3",
-        style: val == undefined ? defaultbtnStyle : btnStyle,
+        style: value == undefined ? defaultbtnStyle : btnStyle,
         onClick: ev => {
-          setenablePicker(prev => !prev); //this.setState({ enablePickerX: (this.state.enablePickerX) ? false : true });
-          //console.log(enablePickerX);
-          //enablePickerX = true;
+          //ev.preventDefault();
+          setenablePicker(prev => !prev);
         }
-      }, val == undefined ? 'Set Color' : val), enablePicker && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
+      }, value == undefined ? 'Set Color' : value), enablePicker && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
         position: "bottom right"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "p-2"
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
-        value: val,
+        value: value,
         colors: colors,
         enableAlpha: true,
         onChange: newVal => {
           onChange(newVal);
         }
       }))));
-    }
+    };
 
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, null);
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Parent, null);
   }
 
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGColorPicker);
+
+/***/ }),
+
+/***/ "./src/components/input-color-picker/use-controlled-state.js":
+/*!*******************************************************************!*\
+  !*** ./src/components/input-color-picker/use-controlled-state.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _values__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./values */ "./src/components/input-color-picker/values.js");
+/**
+ * WordPress dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * @template T
+ * @typedef Options
+ * @property {T | undefined} initial  Initial value
+ * @property {T | ""}        fallback Fallback value
+ */
+
+/** @type {Readonly<{ initial: undefined, fallback: '' }>} */
+
+const defaultOptions = {
+  initial: undefined,
+
+  /**
+   * Defaults to empty string, as that is preferred for usage with
+   * <input />, <textarea />, and <select /> form elements.
+   */
+  fallback: ''
+};
+/**
+ * Custom hooks for "controlled" components to track and consolidate internal
+ * state and incoming values. This is useful for components that render
+ * `input`, `textarea`, or `select` HTML elements.
+ *
+ * https://reactjs.org/docs/forms.html#controlled-components
+ *
+ * At first, a component using useControlledState receives an initial prop
+ * value, which is used as initial internal state.
+ *
+ * This internal state can be maintained and updated without
+ * relying on new incoming prop values.
+ *
+ * Unlike the basic useState hook, useControlledState's state can
+ * be updated if a new incoming prop value is changed.
+ *
+ * @template T
+ *
+ * @param {T | undefined} currentState             The current value.
+ * @param {Options<T>}    [options=defaultOptions] Additional options for the hook.
+ *
+ * @return {[T | "", (nextState: T) => void]} The controlled value and the value setter.
+ */
+
+function useControlledState(currentState) {
+  let options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultOptions;
+  const {
+    initial,
+    fallback
+  } = { ...defaultOptions,
+    ...options
+  };
+  console.log(options);
+  console.log(currentState);
+  const [internalState, setInternalState] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(currentState);
+  const hasCurrentState = (0,_values__WEBPACK_IMPORTED_MODULE_1__.isValueDefined)(currentState);
+  /*
+   * Resets internal state if value every changes from uncontrolled <-> controlled.
+   */
+
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (hasCurrentState || internalState) {
+      setInternalState(true);
+    }
+  }, [hasCurrentState, internalState]);
+  const state = (0,_values__WEBPACK_IMPORTED_MODULE_1__.getDefinedValue)([currentState, internalState, initial], fallback);
+  /* eslint-disable jsdoc/no-undefined-types */
+
+  /** @type {(nextState: T) => void} */
+
+  const setState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(nextState => {
+    console.log(nextState);
+    console.log('hasCurrentState', hasCurrentState); //if (!hasCurrentState) {
+
+    setInternalState(nextState); //}
+  }, [hasCurrentState]);
+  /* eslint-enable jsdoc/no-undefined-types */
+
+  return [state, setState];
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useControlledState);
+
+/***/ }),
+
+/***/ "./src/components/input-color-picker/values.js":
+/*!*****************************************************!*\
+  !*** ./src/components/input-color-picker/values.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ensureNumber": () => (/* binding */ ensureNumber),
+/* harmony export */   "ensureString": () => (/* binding */ ensureString),
+/* harmony export */   "getDefinedValue": () => (/* binding */ getDefinedValue),
+/* harmony export */   "isValueDefined": () => (/* binding */ isValueDefined),
+/* harmony export */   "isValueEmpty": () => (/* binding */ isValueEmpty),
+/* harmony export */   "isValueNumeric": () => (/* binding */ isValueNumeric),
+/* harmony export */   "numberToString": () => (/* binding */ numberToString),
+/* harmony export */   "stringToNumber": () => (/* binding */ stringToNumber)
+/* harmony export */ });
+/* eslint-disable jsdoc/valid-types */
+
+/**
+ * Determines if a value is null or undefined.
+ *
+ * @template T
+ *
+ * @param {T} value The value to check.
+ * @return {value is Exclude<T, null | undefined>} Whether value is not null or undefined.
+ */
+function isValueDefined(value) {
+  return value !== undefined && value !== null;
+}
+/* eslint-enable jsdoc/valid-types */
+
+/* eslint-disable jsdoc/valid-types */
+
+/**
+ * Determines if a value is empty, null, or undefined.
+ *
+ * @param {string | number | null | undefined} value The value to check.
+ * @return {value is ("" | null | undefined)} Whether value is empty.
+ */
+
+function isValueEmpty(value) {
+  const isEmptyString = value === '';
+  return !isValueDefined(value) || isEmptyString;
+}
+/* eslint-enable jsdoc/valid-types */
+
+/**
+ * Get the first defined/non-null value from an array.
+ *
+ * @template T
+ *
+ * @param {Array<T | null | undefined>} values        Values to derive from.
+ * @param {T}                           fallbackValue Fallback value if there are no defined values.
+ * @return {T} A defined value or the fallback value.
+ */
+
+function getDefinedValue() {
+  var _values$find;
+
+  let values = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  let fallbackValue = arguments.length > 1 ? arguments[1] : undefined;
+  return (_values$find = values.find(isValueDefined)) !== null && _values$find !== void 0 ? _values$find : fallbackValue;
+}
+/**
+ * @param {string} [locale]
+ * @return {[RegExp, RegExp]} The delimiter and decimal regexp
+ */
+
+const getDelimiterAndDecimalRegex = locale => {
+  const formatted = Intl.NumberFormat(locale).format(1000.1);
+  const delimiter = formatted[1];
+  const decimal = formatted[formatted.length - 2];
+  return [new RegExp(`\\${delimiter}`, 'g'), new RegExp(`\\${decimal}`, 'g')];
+}; // https://en.wikipedia.org/wiki/Decimal_separator#Current_standards
+
+
+const INTERNATIONAL_THOUSANDS_DELIMITER = / /g;
+const ARABIC_NUMERAL_LOCALES = ['ar', 'fa', 'ur', 'ckb', 'ps'];
+const EASTERN_ARABIC_NUMBERS = /([۰-۹]|[٠-٩])/g;
+/**
+ * Checks to see if a value is a numeric value (`number` or `string`).
+ *
+ * Intentionally ignores whether the thousands delimiters are only
+ * in the thousands marks.
+ *
+ * @param {any}    value
+ * @param {string} [locale]
+ * @return {boolean} Whether value is numeric.
+ */
+
+function isValueNumeric(value) {
+  let locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window.navigator.language;
+
+  if (ARABIC_NUMERAL_LOCALES.some(l => locale.startsWith(l))) {
+    locale = 'en-GB';
+
+    if (EASTERN_ARABIC_NUMBERS.test(value)) {
+      value = value.replace(/[٠-٩]/g, (
+      /** @type {string} */
+      d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g, (
+      /** @type {string} */
+      d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/٬/g, ',').replace(/٫/g, '.');
+    }
+  }
+
+  const [delimiterRegexp, decimalRegexp] = getDelimiterAndDecimalRegex(locale);
+  const valueToCheck = typeof value === 'string' ? value.replace(delimiterRegexp, '').replace(decimalRegexp, '.').replace(INTERNATIONAL_THOUSANDS_DELIMITER, '') : value;
+  return !isNaN(parseFloat(valueToCheck)) && isFinite(valueToCheck);
+}
+/**
+ * Converts a string to a number.
+ *
+ * @param {string} value
+ * @return {number} String as a number.
+ */
+
+const stringToNumber = value => {
+  return parseFloat(value);
+};
+/**
+ * Converts a number to a string.
+ *
+ * @param {number} value
+ * @return {string} Number as a string.
+ */
+
+const numberToString = value => {
+  return `${value}`;
+};
+/**
+ * Regardless of the input being a string or a number, returns a number.
+ *
+ * Returns `undefined` in case the string is `undefined` or not a valid numeric value.
+ *
+ * @param {string | number} value
+ * @return {number} The parsed number.
+ */
+
+const ensureNumber = value => {
+  return typeof value === 'string' ? stringToNumber(value) : value;
+};
+/**
+ * Regardless of the input being a string or a number, returns a number.
+ *
+ * Returns `undefined` in case the string is `undefined` or not a valid numeric value.
+ *
+ * @param {string | number} value
+ * @return {string} The converted string, or `undefined` in case the input is `undefined` or `NaN`.
+ */
+
+const ensureString = value => {
+  return typeof value === 'string' ? value : numberToString(value);
+};
 
 /***/ }),
 

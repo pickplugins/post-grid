@@ -3,9 +3,12 @@
 const { Component } = wp.element;
 import { Button, Dropdown, ColorPalette, PanelRow, __experimentalInputControl as InputControl, Popover } from '@wordpress/components'
 
-import { memo, useMemo, useState } from '@wordpress/element'
+
+
+import { memo, useMemo, useState, useRef, useEffect , useCallback } from '@wordpress/element'
 import BreakpointSwitch from '../../components/breakpoint-switch'
 import breakPoints from '../../breakpoints'
+import useControlledState from './use-controlled-state';
 
 
 
@@ -13,40 +16,114 @@ import breakPoints from '../../breakpoints'
 
 class PGColorPicker extends Component {
 
-  constructor(props) {
 
-
-
-    super(props);
-
-
-  }
 
   render() {
 
     var {
-      val,
+      value,
       colors,
       enableAlpha,
       onChange,
       label,
-      enablePickerX
-
+      initialOpen,
 
 
     } = this.props;
 
-    console.log(this.props);
 
 
 
-    function Html() {
+
+const Child2 = ({ id, setValue,value, onChangeX, enablePicker }) => {
+  useEffect(() => console.log(`${id} rendered`));
+  return (
+    <div>
+
+      {id}: <input type="text" onChange={(e) => {
+setValue(e.target.value);
+//onChangeX('#bc4242');
+}} />
+
+
+<div>enablePicker: 
+{JSON.stringify(enablePicker)}
+
+</div>
+
+{
+            enablePicker && (
+              <Popover position="bottom right">
+                <div className='p-2'>
+                  <ColorPalette
+                    value={value}
+                    colors={colors}
+                    enableAlpha
+                    onChange={(newVal) => {
+                      //onChange(newVal);
+setValue(newVal);
+                    }}
+                  />
+                </div>
+              </Popover>
+            )
+          }
+
+
+    </div>
+  );
+};
+
+const Child2wMemo = memo(Child2);
+
+const Parent = () => {
+  const [value, setValue] = useState("");
+  const [enablePicker, setenablePicker] = useState(false);
+
+    useEffect(() => {
+
+      console.log(value);
+//onChange(value)
+      
+    }, [value]);
 
 
 
-      const [enablePicker, setenablePicker] = useState(false);
+  return (
+    <>
 
-      //console.log('enablePicker: ' + enablePicker);
+{JSON.stringify(value)}
+
+      <Child2wMemo id="Child 2 with Memo" setValue={setValue} onChangeX={onChange} value={value} enablePicker={enablePicker}  />
+
+<div onClick={ev=>{
+
+setenablePicker(prev => !prev)
+
+}}> Picker Open</div>
+
+    </>
+  );
+};
+
+
+
+
+
+    const Html = ()=> {
+
+
+
+
+
+      const [enablePicker, setenablePicker] = useState(initialOpen);
+
+
+
+
+
+//console.log(enablePickerX);
+
 
 
       var defaultbtnStyle = {
@@ -58,7 +135,7 @@ class PGColorPicker extends Component {
       };
 
       var btnStyle = {
-        backgroundColor: val,
+        backgroundColor: value,
         boxShadow: 'inset 0 0 0 1px rgb(0 0 0 / 20%)',
         padding: '10px 35px',
 
@@ -69,20 +146,26 @@ class PGColorPicker extends Component {
 
       return (
 
-        <div className='flex justify-between items-center'>
-
-          <div>{label}</div>
+        <div className='my-4'>
 
 
-          <div className='p-2 px-3' style={(val == undefined) ? defaultbtnStyle : btnStyle} onClick={ev => {
+<Parent enablePicker={enablePicker} onChange={ onChange}/>
+
+          <div className='flex justify-between items-center mb-3'>
+            {label}
+          </div>
+
+
+          <div className='p-2 px-3' style={(value == undefined) ? defaultbtnStyle : btnStyle} onClick={ev => {
+
+            //ev.preventDefault();
 
             setenablePicker(prev => !prev);
-            //this.setState({ enablePickerX: (this.state.enablePickerX) ? false : true });
-            //console.log(enablePickerX);
 
-            //enablePickerX = true;
 
-          }}>{(val == undefined) ? 'Set Color' : val}</div>
+
+
+          }}>{(value == undefined) ? 'Set Color' : value}</div>
 
           {
             enablePicker && (
@@ -92,7 +175,7 @@ class PGColorPicker extends Component {
                 <div className='p-2'>
 
                   <ColorPalette
-                    value={val}
+                    value={value}
                     colors={colors}
                     enableAlpha
                     onChange={(newVal) => {
@@ -121,10 +204,13 @@ class PGColorPicker extends Component {
     }
 
 
+
+
     return (
 
 
-      <Html />
+
+      <Parent />
 
 
     )

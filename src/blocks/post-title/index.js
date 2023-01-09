@@ -354,7 +354,7 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
-          <span className='mx-2'>{title}</span>
+          <div className='text-sm '>{title}</div>
           <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
         </>
 
@@ -1579,10 +1579,12 @@ registerBlockType("post-grid/post-title", {
 
 
 
-                  <PGColorPicker
-                    val={postTitle.styles.color[breakPointX]}
+                  <PGColorPicker className="my-3"
+                    value={postTitle.styles.color[breakPointX]}
                     colors={colorsPresets}
                     enableAlpha
+                    initialOpen={false}
+
                     onChange={(newVal) => {
 
                       var newValuesObj = {};
@@ -1612,27 +1614,18 @@ registerBlockType("post-grid/post-title", {
                     }}
 
                     label={<RemoveQueryPram title='Color' />}
-                    enablePickerX={false}
 
 
                   />
 
 
-
-                  <PanelRow className='my-3'>
-                    <label>Background Color</label>
-                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-
-                  <ColorPalette
+                  <PGColorPicker className="my-3"
                     value={postTitle.styles.bgColor[breakPointX]}
                     colors={colorsPresets}
                     enableAlpha
+                    initialOpen={false}
+                    label={<RemoveQueryPram title='Background Color' />}
+
                     onChange={(newVal) => {
 
                       var newValuesObj = {};
@@ -1670,7 +1663,7 @@ registerBlockType("post-grid/post-title", {
 
 
                   <PanelRow>
-                    <div className='font-bold'>Typography</div>
+                    <div className=''>Typography</div>
                     <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </PanelRow>
 

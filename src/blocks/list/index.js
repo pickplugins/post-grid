@@ -32,7 +32,7 @@ var myStore = wp.data.select('postgrid-shop');
 
 
 registerBlockType("post-grid/list", {
-  title: "list",
+  title: "List",
 
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.

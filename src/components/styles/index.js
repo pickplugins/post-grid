@@ -94,7 +94,496 @@ import IconToggle from '../../components/icon-toggle'
 
 
 
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
+
+
+  var sudoScourceArgs = [
+    { label: 'Select..', value: '' },
+
+    { label: 'Idle', value: 'styles' },
+    { label: 'Hover', value: 'hover' },
+    { label: 'Typo', value: 'typo' },
+    { label: 'After', value: 'after' },
+    { label: 'Before', value: 'before' },
+    { label: 'First-child', value: 'first-child' },
+    { label: 'Last-child', value: 'last-child' },
+    { label: 'Visited', value: 'visited' },
+    { label: 'Selection', value: 'selection' },
+    { label: 'First-letter', value: 'first-letter' },
+    { label: 'First-line', value: 'first-line' },
+
+
+  ];
+  const [sudoScources, setSudoScources] = useState([]);
+
+  const [sudoScource, setSudoScource] = useState('styles');
+  const [styles, setStyles] = useState({});
+
+  const [cssAtts, setcssAtts] = useState({});
+  const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
+
+  var cssProps = {
+    alignContent: { id: 'alignContent', label: 'Align Content' },
+    alignItems: { id: 'alignItems', label: 'Align Items' },
+    alignSelf: { id: 'alignSelf', label: 'Align Self' },
+    backfaceVisibility: { id: 'backfaceVisibility', label: 'Backface Visibility' },
+    background: { id: 'background', label: 'Background' },
+    backgroundAttachment: { id: 'backgroundAttachment', label: 'Background Attachment' },
+    backgroundBlendMode: { id: 'backgroundBlendMode', label: 'Background Blend Mode' },
+    backgroundClip: { id: 'backgroundClip', label: 'Background Clip' },
+    backgroundColor: { id: 'backgroundColor', label: 'BackgroundColor' },
+    backgroundImage: { id: 'backgroundImage', label: 'Background Image' },
+    backgroundOrigin: { id: 'backgroundOrigin', label: 'Background Origin' },
+    backgroundRepeat: { id: 'backgroundRepeat', label: 'Background Repeat' },
+    backgroundPosition: { id: 'backgroundPosition', label: 'Background Position' },
+    backgroundSize: { id: 'backgroundSize', label: 'Background Size' },
+
+
+    border: { id: 'border', label: 'Border' },
+    borderCollapse: { id: 'borderCollapse', label: 'Border Collapse' },
+    borderImage: { id: 'borderImage', label: 'Border Image' },
+    borderRadius: { id: 'borderRadius', label: 'Border Radius' },
+    borderSpacing: { id: 'borderSpacing', label: 'Border Spacing' },
+    bottom: { id: 'bottom', label: 'Bottom' },
+    boxShadow: { id: 'boxShadow', label: 'Box Shadow' },
+    boxSizing: { id: 'boxSizing', label: 'Box Sizing' },
+    clear: { id: 'clear', label: 'Clear' },
+    clip: { id: 'clip', label: 'Clip' },
+    clipPath: { id: 'clipPath', label: 'Clip Path' },
+
+    color: { id: 'color', label: 'Color' },
+    columnCount: { id: 'columnCount', label: 'Column Count' },
+
+    content: { id: 'content', label: 'Content' },
+    cursor: { id: 'cursor', label: 'Cursor' },
+    display: { id: 'display', label: 'Display' },
+    direction: { id: 'direction', label: 'Direction' },
+    float: { id: 'float', label: 'Float' },
+    filter: { id: 'filter', label: 'Filter' },
+    fontSize: { id: 'fontSize', label: 'Font Size' },
+    fontFamily: { id: 'fontFamily', label: 'Font Family' },
+    fontStretch: { id: 'fontStretch', label: 'Font Stretch' },
+    fontStyle: { id: 'fontStyle', label: 'Font Style' },
+    fontVariantCaps: { id: 'fontVariantCaps', label: 'Font VariantCaps' },
+    fontWeight: { id: 'fontWeight', label: 'Font Weight' },
+    height: { id: 'height', label: 'Height' },
+    left: { id: 'left', label: 'Left' },
+    letterSpacing: { id: 'letterSpacing', label: 'Letter Spacing' },
+    lineHeight: { id: 'lineHeight', label: 'Line Height' },
+    listStyle: { id: 'listStyle', label: 'ListStyle' },
+    margin: { id: 'margin', label: 'Margin' },
+    maxHeight: { id: 'maxHeight', label: 'Max Height' },
+    maxWidth: { id: 'maxWidth', label: 'Max Width' },
+    minHeight: { id: 'minHeight', label: 'Min Height' },
+    minWidth: { id: 'minWidth', label: 'Min Width' },
+    opacity: { id: 'opacity', label: 'Opacity' },
+    outline: { id: 'outline', label: 'Outline' },
+    overflow: { id: 'overflow', label: 'Overflow' },
+    overflowX: { id: 'overflowX', label: 'OverflowX' },
+    overflowY: { id: 'overflowY', label: 'OverflowY' },
+    padding: { id: 'padding', label: 'Padding' },
+    perspective: { id: 'perspective', label: 'Perspective' },
+    position: { id: 'position', label: 'Position' },
+    right: { id: 'right', label: 'Right' },
+    textAlign: { id: 'textAlign', label: 'Text Align' },
+
+    top: { id: 'top', label: 'Top' },
+    transform: { id: 'transform', label: 'Transform' },
+    transition: { id: 'transition', label: 'Transition' },
+    verticalAlign: { id: 'verticalAlign', label: 'Vertical Align' },
+    visibility: { id: 'visibility', label: 'Visibility' },
+    width: { id: 'width', label: 'Width' },
+    zIndex: { id: 'zIndex', label: 'Z-Index' },
+
+
+    textDecoration: { id: 'textDecoration', label: 'Text Decoration' },
+    textIndent: { id: 'textIndent', label: 'Text Indent' },
+    textJustify: { id: 'textJustify', label: 'Text Indent' },
+    textOverflow: { id: 'textOverflow', label: 'Text Overflow' },
+    textShadow: { id: 'textShadow', label: 'Text Shadow' },
+    textTransform: { id: 'textTransform', label: 'Text Transform' },
+    wordBreak: { id: 'wordBreak', label: 'Word Break' },
+    wordSpacing: { id: 'wordSpacing', label: 'Word Spacing' },
+    wordWrap: { id: 'wordWrap', label: 'Word Wrap' },
+    writingMode: { id: 'writingMode', label: 'Writing Mode' },
+
+
+  };
+
+
+  useEffect(() => {
+
+    sudoScourceArgs.map(sudo => {
+
+      if (props.obj[sudo.value] != undefined) {
+        sudoScources.push(sudo);
+      }
+
+    })
+
+
+  }, [props.obj]);
+
+
+
+  useEffect(() => {
+    setcssAtts(props.obj[sudoScource]);
+
+  }, [sudoScource]);
+
+
+  function setCssAttr(option, index) {
+
+    if (cssAtts[option.id] == undefined) {
+      cssAtts[option.id] = {};
+    }
+
+    props.onAdd(sudoScource, option.id)
+
+
+  }
+
+  function onChangeCssVal(newVal, attr) {
+
+    props.onChange(sudoScource, newVal, attr);
+
+
+  }
+
+  const {
+    __experimentalSetPreviewDeviceType: setPreviewDeviceType,
+
+  } = wp.data.dispatch('core/edit-post')
+
+  var breakPointList = [];
+
+  for (var x in breakPoints) {
+
+    var item = breakPoints[x];
+    breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
+
+  }
+
+
+
+
+  return (
+    <div >
+
+      <PanelBody className="my-5" title="Style" initialOpen={true}>
+        <PanelRow>
+          <div>Sudo Selector</div>
+          <SelectControl
+            label=""
+
+            value={sudoScource}
+            options={sudoScources}
+            onChange={(newVal) => {
+              setSudoScource(newVal)
+
+            }}
+          />
+        </PanelRow>
+
+
+        <PanelRow>
+          <div>Add Style</div>
+          <PGDropdown position="bottom right" variant="secondary" options={cssProps} buttonTitle="Choose" onChange={setCssAttr} values=""></PGDropdown>
+        </PanelRow>
+
+
+
+        <div className='my-5'>
+          {
+
+            //Object.entries(cssAtts).map(([key, value]) => (
+            Object.entries(props.obj[sudoScource]).map(([key, value]) => (
+              <div className='border-b-2 border-solid py-4 hover:border-gray-600 border-t-2 hover:border-t-2 hover:border-b-2 border-t-transparent' key={key}>
+
+
+                <PanelRow className=''>
+                  <label>{(cssProps[key] != undefined) ? cssProps[key].label : key}</label>
+                  <div>
+                    <div className='inline-block bg-blue-500 text-white'>
+                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={(x, index) => {
+                        setPreviewDeviceType(x.value)
+                        var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
+
+                        asdsdsd.then((res) => {
+
+                          setBreakPointX(res.breakpoint);
+
+                        });
+
+                      }} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                    </div>
+
+                    <div className='hover:bg-red-500 bg-red-400 text-white m-1 inline-block p-1 cursor-pointer' onClick={ev => {
+
+
+                      props.onRemove(sudoScource, key)
+                    }}><span class="dashicons dashicons-no-alt"></span></div>
+                  </div>
+
+
+
+                </PanelRow>
+
+
+
+
+                {(key == 'alignContent') && (
+                  <PGcssAlignContent val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'alignItems') && (
+                  <PGcssAlignItems val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'alignSelf') && (
+                  <PGcssAlignSelf val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'backfaceVisibility') && (
+                  <PGcssBackfaceVisibility val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+                {(key == 'backgroundAttachment') && (
+                  <PGcssBackgroundAttachment val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+                {(key == 'backgroundBlendMode') && (
+                  <PGcssBackgroundBlendMode val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'backgroundClip') && (
+                  <PGcssBackgroundClip val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+                {(key == 'bgColor') && (
+                  <PGcssBackgroundColor val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+                {(key == 'backgroundOrigin') && (
+                  <PGcssBackgroundOrigin val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+                {(key == 'backgroundRepeat') && (
+                  <PGcssBackgroundRepeat val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'backgroundSize') && (
+                  <PGcssBackgroundSize val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+                {(key == 'backgroundPosition') && (
+                  <PGcssBackgroundPosition val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+                {(key == 'borderRadius') && (
+                  <PGcssBorderRadius val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'bottom') && (
+                  <PGcssBottom val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'top') && (
+                  <PGcssTop val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'left') && (
+                  <PGcssLeft val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+                {(key == 'right') && (
+                  <PGcssRight val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'boxSizing') && (
+                  <PGcssBoxSizing val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+                {(key == 'clear') && (
+                  <PGcssClear val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'color') && (
+                  <PGcssColor val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'filter') && (
+                  <PGcssFilter val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+                {(key == 'float') && (
+                  <PGcssFloat val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'fontSize') && (
+                  <PGcssFontSize val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'fontStyle') && (
+                  <PGcssFontStyle val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'fontStretch') && (
+                  <PGcssFontStretch val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'fontWeight') && (
+                  <PGcssFontWeight val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+                {(key == 'letterSpacing') && (
+                  <PGcssLetterSpacing val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+                {(key == 'lineHeight') && (
+                  <PGcssLineHeight val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'objectFit') && (
+                  <PGcssObjectFit val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+                {(key == 'opacity') && (
+                  <PGcssOpacity val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'outline') && (
+                  <PGcssOutline val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+                {(key == 'outlineOffset') && (
+                  <PGcssOutlineOffset val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'position') && (
+                  <PGcssPosition val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'textIndent') && (
+                  <PGcssTextIndent val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'textJustify') && (
+                  <PGcssTextJustify val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+                {(key == 'textTransform') && (
+                  <PGcssTextTransform val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'textDecoration') && (
+                  <PGcssTextDecoration val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'textShadow') && (
+                  <PGcssTextShadow val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+
+
+
+
+
+
+
+                {(key == 'textAlign') && (
+                  <PGcssTextAlign val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'visibility') && (
+                  <PGcssVisibility val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'wordBreak') && (
+                  <PGcssWordBreak val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'wordSpacing') && (
+                  <PGcssWordSpacing val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'zIndex') && (
+                  <PGcssZIndex val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+                {(key == 'padding') && (
+                  <PGcssPadding val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'margin') && (
+                  <PGcssMargin val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'display') && (
+                  <PGcssDisplay val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'width') && (
+                  <PGcssWidth val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'height') && (
+                  <PGcssHeight val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'verticalAlign') && (
+                  <PGcssVerticalAlign val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+
+                {(key == 'overflow') && (
+                  <PGcssOverflow val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+
+                {(key == 'overflowX') && (
+                  <PGcssOverflowX val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+                {(key == 'overflowY') && (
+                  <PGcssOverflowY val={value[breakPointX]} onChange={onChangeCssVal} />
+                )}
+
+
+              </div>
+            ))
+
+          }
+        </div>
+
+      </PanelBody>
+
+
+    </div>
+  );
+}
+
+
 class PGStyles extends Component {
+
+
+  constructor(props) {
+    super(props);
+    this.state = { showWarning: true };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
 
 
   render() {
@@ -109,497 +598,17 @@ class PGStyles extends Component {
     } = this.props;
 
 
-    function Html() {
-
-
-      var sudoScourceArgs = [
-        { label: 'Select..', value: '' },
-
-        { label: 'Idle', value: 'styles' },
-        { label: 'Hover', value: 'hover' },
-        { label: 'Typo', value: 'typo' },
-        { label: 'After', value: 'after' },
-        { label: 'Before', value: 'before' },
-        { label: 'First-child', value: 'first-child' },
-        { label: 'Last-child', value: 'last-child' },
-        { label: 'Visited', value: 'visited' },
-        { label: 'Selection', value: 'selection' },
-        { label: 'First-letter', value: 'first-letter' },
-        { label: 'First-line', value: 'first-line' },
-
-
-      ];
-      const [sudoScources, setSudoScources] = useState([]);
-
-      const [sudoScource, setSudoScource] = useState('styles');
-      const [styles, setStyles] = useState({});
-
-      const [cssAtts, setcssAtts] = useState({});
-      const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
-
-      var cssProps = {
-        alignContent: { id: 'alignContent', label: 'Align Content' },
-        alignItems: { id: 'alignItems', label: 'Align Items' },
-        alignSelf: { id: 'alignSelf', label: 'Align Self' },
-        backfaceVisibility: { id: 'backfaceVisibility', label: 'Backface Visibility' },
-        background: { id: 'background', label: 'Background' },
-        backgroundAttachment: { id: 'backgroundAttachment', label: 'Background Attachment' },
-        backgroundBlendMode: { id: 'backgroundBlendMode', label: 'Background Blend Mode' },
-        backgroundClip: { id: 'backgroundClip', label: 'Background Clip' },
-        backgroundColor: { id: 'backgroundColor', label: 'BackgroundColor' },
-        backgroundImage: { id: 'backgroundImage', label: 'Background Image' },
-        backgroundOrigin: { id: 'backgroundOrigin', label: 'Background Origin' },
-        backgroundRepeat: { id: 'backgroundRepeat', label: 'Background Repeat' },
-        backgroundPosition: { id: 'backgroundPosition', label: 'Background Position' },
-        backgroundSize: { id: 'backgroundSize', label: 'Background Size' },
-
-
-        border: { id: 'border', label: 'Border' },
-        borderCollapse: { id: 'borderCollapse', label: 'Border Collapse' },
-        borderImage: { id: 'borderImage', label: 'Border Image' },
-        borderRadius: { id: 'borderRadius', label: 'Border Radius' },
-        borderSpacing: { id: 'borderSpacing', label: 'Border Spacing' },
-        bottom: { id: 'bottom', label: 'Bottom' },
-        boxShadow: { id: 'boxShadow', label: 'Box Shadow' },
-        boxSizing: { id: 'boxSizing', label: 'Box Sizing' },
-        clear: { id: 'clear', label: 'Clear' },
-        clip: { id: 'clip', label: 'Clip' },
-        clipPath: { id: 'clipPath', label: 'Clip Path' },
-
-        color: { id: 'color', label: 'Color' },
-        columnCount: { id: 'columnCount', label: 'Column Count' },
-
-        content: { id: 'content', label: 'Content' },
-        cursor: { id: 'cursor', label: 'Cursor' },
-        display: { id: 'display', label: 'Display' },
-        direction: { id: 'direction', label: 'Direction' },
-        float: { id: 'float', label: 'Float' },
-        filter: { id: 'filter', label: 'Filter' },
-        fontSize: { id: 'fontSize', label: 'Font Size' },
-        fontFamily: { id: 'fontFamily', label: 'Font Family' },
-        fontStretch: { id: 'fontStretch', label: 'Font Stretch' },
-        fontStyle: { id: 'fontStyle', label: 'Font Style' },
-        fontVariantCaps: { id: 'fontVariantCaps', label: 'Font VariantCaps' },
-        fontWeight: { id: 'fontWeight', label: 'Font Weight' },
-        height: { id: 'height', label: 'Height' },
-        left: { id: 'left', label: 'Left' },
-        letterSpacing: { id: 'letterSpacing', label: 'Letter Spacing' },
-        lineHeight: { id: 'lineHeight', label: 'Line Height' },
-        listStyle: { id: 'listStyle', label: 'ListStyle' },
-        margin: { id: 'margin', label: 'Margin' },
-        maxHeight: { id: 'maxHeight', label: 'Max Height' },
-        maxWidth: { id: 'maxWidth', label: 'Max Width' },
-        minHeight: { id: 'minHeight', label: 'Min Height' },
-        minWidth: { id: 'minWidth', label: 'Min Width' },
-        opacity: { id: 'opacity', label: 'Opacity' },
-        outline: { id: 'outline', label: 'Outline' },
-        overflow: { id: 'overflow', label: 'Overflow' },
-        overflowX: { id: 'overflowX', label: 'OverflowX' },
-        overflowY: { id: 'overflowY', label: 'OverflowY' },
-        padding: { id: 'padding', label: 'Padding' },
-        perspective: { id: 'perspective', label: 'Perspective' },
-        position: { id: 'position', label: 'Position' },
-        right: { id: 'right', label: 'Right' },
-        textAlign: { id: 'textAlign', label: 'Text Align' },
-
-        top: { id: 'top', label: 'Top' },
-        transform: { id: 'transform', label: 'Transform' },
-        transition: { id: 'transition', label: 'Transition' },
-        verticalAlign: { id: 'verticalAlign', label: 'Vertical Align' },
-        visibility: { id: 'visibility', label: 'Visibility' },
-        width: { id: 'width', label: 'Width' },
-        zIndex: { id: 'zIndex', label: 'Z-Index' },
-
-
-        textDecoration: { id: 'textDecoration', label: 'Text Decoration' },
-        textIndent: { id: 'textIndent', label: 'Text Indent' },
-        textJustify: { id: 'textJustify', label: 'Text Indent' },
-        textOverflow: { id: 'textOverflow', label: 'Text Overflow' },
-        textShadow: { id: 'textShadow', label: 'Text Shadow' },
-        textTransform: { id: 'textTransform', label: 'Text Transform' },
-        wordBreak: { id: 'wordBreak', label: 'Word Break' },
-        wordSpacing: { id: 'wordSpacing', label: 'Word Spacing' },
-        wordWrap: { id: 'wordWrap', label: 'Word Wrap' },
-        writingMode: { id: 'writingMode', label: 'Writing Mode' },
-
-
-      };
-
-
-      useEffect(() => {
-
-        sudoScourceArgs.map(sudo => {
-
-          if (obj[sudo.value] != undefined) {
-            sudoScources.push(sudo);
-          }
-
-        })
-
-
-      }, [obj]);
-
-
-
-      useEffect(() => {
-
-
-        setcssAtts(obj[sudoScource]);
-
-
-
-
-      }, [sudoScource]);
-
-
-      function setCssAttr(option, index) {
-
-        //console.log(option);
-        //console.log(cssAtts);
-
-        if (cssAtts[option.id] == undefined) {
-          cssAtts[option.id] = {};
-        }
-        //console.log(cssAtts);
-
-        onAdd(sudoScource, option.id)
-
-
-      }
-
-      function onChangeCssVal(newVal, attr) {
-
-        //console.log(newVal);
-        onChange(sudoScource, newVal, attr);
-
-
-      }
-
-      const {
-        __experimentalSetPreviewDeviceType: setPreviewDeviceType,
-
-      } = wp.data.dispatch('core/edit-post')
-
-      var breakPointList = [];
-
-      for (var x in breakPoints) {
-
-        var item = breakPoints[x];
-        breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-      }
-
-
-      return (
-
-        <>
-          <PanelBody className="my-5" title="Style" initialOpen={true}>
-            <PanelRow>
-              <div>Style Source</div>
-              <SelectControl
-                label=""
-
-                value={sudoScource}
-                options={sudoScources}
-                onChange={(newVal) => {
-                  setSudoScource(newVal)
-
-                }}
-              />
-            </PanelRow>
-
-
-            <PanelRow>
-              <div>Add Style</div>
-              <PGDropdown position="bottom right" variant="secondary" options={cssProps} buttonTitle="Choose" onChange={setCssAttr} values=""></PGDropdown>
-            </PanelRow>
-
-            {JSON.stringify(cssAtts)}
-
-            <div>
-              {
-                Object.entries(cssAtts).map(([key, value]) => (
-                  <div className='border-b-2 border-solid py-4 hover:border-gray-600 border-t-2 hover:border-t-2 hover:border-b-2 border-t-transparent' key={key}>
-
-                    {JSON.stringify(value)}
-
-                    <PanelRow className=''>
-                      <label>{(cssProps[key] != undefined) ? cssProps[key].label : key}</label>
-                      <div>
-                        <div className='inline-block bg-blue-500 text-white'>
-                          <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={(x, index) => {
-                            setPreviewDeviceType(x.value)
-                            var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
-
-                            asdsdsd.then((res) => {
-
-                              setBreakPointX(res.breakpoint);
-
-                            });
-
-                          }} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                        </div>
-
-                        <div className='hover:bg-red-500 bg-red-400 text-white m-1 inline-block p-1 cursor-pointer' onClick={ev => {
-
-
-                          onRemove(sudoScource, key)
-                        }}><span class="dashicons dashicons-no-alt"></span></div>
-                      </div>
-
-
-
-                    </PanelRow>
-
-
-
-
-                    {(key == 'alignContent') && (
-                      <PGcssAlignContent val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'alignItems') && (
-                      <PGcssAlignItems val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'alignSelf') && (
-                      <PGcssAlignSelf val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'backfaceVisibility') && (
-                      <PGcssBackfaceVisibility val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-                    {(key == 'backgroundAttachment') && (
-                      <PGcssBackgroundAttachment val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-                    {(key == 'backgroundBlendMode') && (
-                      <PGcssBackgroundBlendMode val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'backgroundClip') && (
-                      <PGcssBackgroundClip val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-                    {(key == 'bgColor') && (
-                      <PGcssBackgroundColor val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-                    {(key == 'backgroundOrigin') && (
-                      <PGcssBackgroundOrigin val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-                    {(key == 'backgroundRepeat') && (
-                      <PGcssBackgroundRepeat val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'backgroundSize') && (
-                      <PGcssBackgroundSize val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-                    {(key == 'backgroundPosition') && (
-                      <PGcssBackgroundPosition val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-                    {(key == 'borderRadius') && (
-                      <PGcssBorderRadius val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'bottom') && (
-                      <PGcssBottom val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'top') && (
-                      <PGcssTop val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'left') && (
-                      <PGcssLeft val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-                    {(key == 'right') && (
-                      <PGcssRight val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'boxSizing') && (
-                      <PGcssBoxSizing val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-                    {(key == 'clear') && (
-                      <PGcssClear val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'color') && (
-                      <PGcssColor val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'filter') && (
-                      <PGcssFilter val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-                    {(key == 'float') && (
-                      <PGcssFloat val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'fontSize') && (
-                      <PGcssFontSize val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'fontStyle') && (
-                      <PGcssFontStyle val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'fontStretch') && (
-                      <PGcssFontStretch val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'fontWeight') && (
-                      <PGcssFontWeight val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-                    {(key == 'letterSpacing') && (
-                      <PGcssLetterSpacing val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-                    {(key == 'lineHeight') && (
-                      <PGcssLineHeight val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'objectFit') && (
-                      <PGcssObjectFit val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-                    {(key == 'opacity') && (
-                      <PGcssOpacity val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'outline') && (
-                      <PGcssOutline val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-                    {(key == 'outlineOffset') && (
-                      <PGcssOutlineOffset val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'position') && (
-                      <PGcssPosition val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'textIndent') && (
-                      <PGcssTextIndent val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'textJustify') && (
-                      <PGcssTextJustify val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-                    {(key == 'textTransform') && (
-                      <PGcssTextTransform val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'textDecoration') && (
-                      <PGcssTextDecoration val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'textShadow') && (
-                      <PGcssTextShadow val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-
-
-
-
-
-
-
-                    {(key == 'textAlign') && (
-                      <PGcssTextAlign val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'visibility') && (
-                      <PGcssVisibility val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'wordBreak') && (
-                      <PGcssWordBreak val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'wordSpacing') && (
-                      <PGcssWordSpacing val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'zIndex') && (
-                      <PGcssZIndex val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-                    {(key == 'padding') && (
-                      <PGcssPadding val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'margin') && (
-                      <PGcssMargin val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'display') && (
-                      <PGcssDisplay val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'width') && (
-                      <PGcssWidth val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'height') && (
-                      <PGcssHeight val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'verticalAlign') && (
-                      <PGcssVerticalAlign val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-
-                    {(key == 'overflow') && (
-                      <PGcssOverflow val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-
-                    {(key == 'overflowX') && (
-                      <PGcssOverflowX val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-                    {(key == 'overflowY') && (
-                      <PGcssOverflowY val={value[breakPointX]} onChange={onChangeCssVal} />
-                    )}
-
-
-                  </div>
-                ))
-
-              }
-            </div>
-
-          </PanelBody>
-
-
-
-
-        </>
-
-
-
-
-      )
-
-    }
 
 
     return (
 
+      <>
 
-      <Html />
+
+        <WarningBanner obj={obj} onAdd={onAdd} onRemove={onRemove} onChange={onChange} warn={this.state.showWarning} />
+
+      </>
+
 
 
     )

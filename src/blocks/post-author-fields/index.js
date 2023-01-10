@@ -327,6 +327,30 @@ registerBlockType("post-grid/post-author-fields", {
       var sudoScourceX = { ...field[sudoScource] }
       sudoScourceX[attr][breakPointX] = newVal;
 
+
+      if (blockCssY.items[fieldSelector] == undefined) {
+        blockCssY.items[fieldSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+
+        console.log(argAttr);
+
+        var argAttrVal = args[1];
+
+
+
+        blockCssY.items[fieldSelector][argAttr] = argAttrVal;
+
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
       setAttributes({ field: { ...field } });
 
     }
@@ -338,12 +362,45 @@ registerBlockType("post-grid/post-author-fields", {
 
       var sudoScourceX = { ...field[sudoScource] }
 
-      delete sudoScourceX[key];
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+
 
       field[sudoScource] = sudoScourceX;
       //sudoScourceX[attr][breakPointX] = newVal;
 
+
+
       setAttributes({ field: { ...field } });
+
+
+
+
+
+      if (blockCssY.items[fieldSelector] == undefined) {
+        blockCssY.items[fieldSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+
+        console.log(argAttr);
+
+        var argAttrVal = args[1];
+
+
+
+        blockCssY.items[fieldSelector][argAttr] = argAttrVal;
+
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
 
     }
 
@@ -1477,23 +1534,8 @@ registerBlockType("post-grid/post-author-fields", {
               )}
 
 
-
-
-
-
-
-
-              <div>
-
-
-
-
-
-
-              </div>
-
-              {/* <PGStyles obj={field} onChange={onChangeStyleField} onAdd={onAddStyleField} onRemove={onRemoveStyleField} /> */}
-
+              <PGStyles obj={field} onChange={onChangeStyleField} onAdd={onAddStyleField} onRemove={onRemoveStyleField} />
+              {/* 
               <PanelRow className='my-3'>
                 <label>Color</label>
                 <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
@@ -1591,7 +1633,7 @@ registerBlockType("post-grid/post-author-fields", {
               />
 
 
-              <Typography typo={field.styles} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} obj={field} />
+              <Typography typo={field.styles} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} obj={field} /> */}
 
 
 
@@ -2125,6 +2167,7 @@ registerBlockType("post-grid/post-author-fields", {
           )}
 
           {loading && (<Spinner />)}
+
 
           {metaKey.length > 0 && (
 

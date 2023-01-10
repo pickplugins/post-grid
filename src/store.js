@@ -38,7 +38,206 @@ var selectors = {
     const { license } = state;
     return license;
   },
+  cssAttrParse(state, key) {
 
+    var cssProp = '';
+
+    if (key == 'alignContent') {
+      cssProp = 'align-content';
+    }
+
+    else if (key == 'alignItems') {
+      cssProp = 'align-items';
+    }
+
+    else if (key == 'alignSelf') {
+      cssProp = 'align-self';
+    }
+
+    else if (key == 'backfaceVisibility') {
+      cssProp = 'backface-visibility';
+    }
+    else if (key == 'backgroundAttachment') {
+      cssProp = 'background-attachment';
+    }
+    else if (key == 'backgroundBlendMode') {
+      cssProp = 'background-blend-mode';
+    }
+
+    else if (key == 'backgroundClip') {
+      cssProp = 'background-clip';
+    }
+    else if (key == 'bgColor') {
+      cssProp = 'background-color';
+    }
+    else if (key == 'backgroundOrigin') {
+      cssProp = '-background-origin';
+    }
+
+
+    else if (key == 'backgroundRepeat') {
+      cssProp = 'background-repeat';
+    }
+
+    else if (key == 'backgroundSize') {
+      cssProp = 'background-size';
+    }
+    else if (key == 'backgroundPosition') {
+      cssProp = 'background-position';
+    }
+
+
+    else if (key == 'borderRadius') {
+      cssProp = 'border-radius';
+    }
+
+    else if (key == 'bottom' || key == 'top' || key == 'left' || key == 'right' || key == 'clear' || key == 'color' || key == 'filter' || key == 'float') {
+      cssProp = key;
+    }
+
+
+
+    else if (key == 'boxSizing') {
+      cssProp = 'box-sizing';
+    }
+
+
+
+    else if (key == 'fontSize') {
+      cssProp = 'font-size';
+    }
+
+    else if (key == 'fontStyle') {
+      cssProp = 'font-style';
+    }
+
+    else if (key == 'fontStretch') {
+      cssProp = 'font-stretch';
+    }
+
+    else if (key == 'fontWeight') {
+      cssProp = 'font-weight';
+    }
+
+
+    else if (key == 'letterSpacing') {
+      cssProp = 'letter-spacing';
+    }
+
+
+    else if (key == 'lineHeight') {
+      cssProp = 'line-height';
+    }
+
+    else if (key == 'objectFit') {
+      cssProp = 'object-fit';
+    }
+
+
+    else if (key == 'opacity') {
+      cssProp = 'opacity';
+    }
+
+    else if (key == 'outline') {
+      cssProp = 'outline';
+    }
+    else if (key == 'outlineOffset') {
+      cssProp = 'outline-offset';
+    }
+
+    else if (key == 'position') {
+      cssProp = 'position';
+    }
+
+    else if (key == 'textIndent') {
+      cssProp = 'text-indent';
+    }
+
+    else if (key == 'textJustify') {
+      cssProp = 'text-justify';
+    }
+
+
+    else if (key == 'textTransform') {
+      cssProp = 'text-transform';
+    }
+
+    else if (key == 'textDecoration') {
+      cssProp = 'text-decoration';
+    }
+
+    else if (key == 'textShadow') {
+      cssProp = 'text-shadow';
+    }
+
+
+    else if (key == 'textAlign') {
+      cssProp = 'text-align';
+    }
+
+    else if (key == 'visibility') {
+      cssProp = 'visibility';
+    }
+
+    else if (key == 'wordBreak') {
+      cssProp = 'word-break';
+    }
+
+    else if (key == 'wordSpacing') {
+      cssProp = 'word-spacing';
+    }
+
+    else if (key == 'zIndex') {
+      cssProp = 'z-index';
+    }
+
+
+    else if (key == 'padding') {
+      cssProp = 'padding';
+    }
+
+    else if (key == 'margin') {
+      cssProp = 'margin';
+    }
+
+    else if (key == 'display') {
+      cssProp = 'display';
+    }
+
+    else if (key == 'width') {
+      cssProp = 'width';
+    }
+
+    else if (key == 'height') {
+      cssProp = 'height';
+    }
+
+    else if (key == 'verticalAlign') {
+      cssProp = 'vertical-align';
+    }
+
+
+
+    else if (key == 'overflow') {
+      cssProp = 'overflow';
+    }
+
+
+
+    else if (key == 'overflowX') {
+      cssProp = 'overflow-x';
+    }
+
+    else if (key == 'overflowY') {
+      cssProp = 'overflow-y';
+    }
+
+    console.log(key);
+
+
+    return cssProp;
+
+  },
   generateBlockCss(state, items, blockId, customCss) {
     const { blockCss } = state;
 

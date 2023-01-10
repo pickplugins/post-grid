@@ -140,7 +140,6 @@ class PGcssTextDecoration extends Component {
 
         <div>
 
-          {JSON.stringify(outlinelineVal)}
 
           <div className='my-2'>
             <label for="">Line</label>

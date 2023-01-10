@@ -348,7 +348,7 @@ registerBlockType("post-grid/post-title", {
 
 
 
-    var RemoveQueryPram = function ({ title }) {
+    var PGColorPickerLabel = function ({ title }) {
 
       return (
 
@@ -1613,18 +1613,18 @@ registerBlockType("post-grid/post-title", {
                       setAttributes({ blockCssY: { items: newValuesObjX } });
                     }}
 
-                    label={<RemoveQueryPram title='Color' />}
+                    label={<PGColorPickerLabel title='Color' />}
 
 
                   />
 
 
-                  <PGColorPicker className="my-3"
+                  { <PGColorPicker className="my-3"
                     value={postTitle.styles.bgColor[breakPointX]}
                     colors={colorsPresets}
                     enableAlpha
                     initialOpen={false}
-                    label={<RemoveQueryPram title='Background Color' />}
+                    label={<PGColorPickerLabel title='Background Color' />}
 
                     onChange={(newVal) => {
 
@@ -1659,7 +1659,7 @@ registerBlockType("post-grid/post-title", {
 
 
                     }}
-                  />
+                  /> }
 
 
                   <PanelRow>

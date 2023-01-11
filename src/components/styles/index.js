@@ -21,6 +21,8 @@ import PGcssBackgroundAttachment from '../../components/css-background-attachmen
 import PGcssBackgroundBlendMode from '../../components/css-background-blend-mode'
 import PGcssBackgroundClip from '../../components/css-background-clip'
 import PGcssBackgroundColor from '../../components/css-background-color'
+import PGcssBgColor from '../../components/css-bg-color'
+
 // import PGcssBackgroundImage from '../../components/css-background-image'
 import PGcssBackgroundOrigin from '../../components/css-background-origin'
 import PGcssBackgroundPosition from '../../components/css-background-position'
@@ -100,23 +102,22 @@ function WarningBanner(props) {
   }
 
 
-  var sudoScourceArgs = [
-    { label: 'Select..', value: '' },
+  var sudoScourceArgs = {
 
-    { label: 'Idle', value: 'styles' },
-    { label: 'Hover', value: 'hover' },
-    { label: 'Typo', value: 'typo' },
-    { label: 'After', value: 'after' },
-    { label: 'Before', value: 'before' },
-    { label: 'First-child', value: 'first-child' },
-    { label: 'Last-child', value: 'last-child' },
-    { label: 'Visited', value: 'visited' },
-    { label: 'Selection', value: 'selection' },
-    { label: 'First-letter', value: 'first-letter' },
-    { label: 'First-line', value: 'first-line' },
+    none: { label: 'Select..', value: '' },
 
+    styles: { label: 'Idle', value: 'styles' },
+    hover: { label: 'Hover', value: 'hover' },
+    after: { label: 'After', value: 'after', isPro: true },
+    before: { label: 'Before', value: 'before', isPro: true },
+    'first-child': { label: 'First-child', value: 'first-child', isPro: true },
+    'last-child': { label: 'Last-child', value: 'last-child', isPro: true },
+    visited: { label: 'Visited', value: 'visited', isPro: true },
+    selection: { label: 'Selection', value: 'selection', isPro: true },
+    'first-letter': { label: 'First-letter', value: 'first-letter', isPro: true },
+    'first-line': { label: 'First-line', value: 'first-line', isPro: true },
 
-  ];
+  };
   const [sudoScources, setSudoScources] = useState([]);
 
   const [sudoScource, setSudoScource] = useState('styles');
@@ -145,31 +146,31 @@ function WarningBanner(props) {
 
 
     border: { id: 'border', label: 'Border' },
-    borderCollapse: { id: 'borderCollapse', label: 'Border Collapse' },
+    borderCollapse: { id: 'borderCollapse', label: 'Border Collapse', isPro: true },
     borderImage: { id: 'borderImage', label: 'Border Image' },
     borderRadius: { id: 'borderRadius', label: 'Border Radius' },
-    borderSpacing: { id: 'borderSpacing', label: 'Border Spacing' },
+    borderSpacing: { id: 'borderSpacing', label: 'Border Spacing', isPro: true },
     bottom: { id: 'bottom', label: 'Bottom' },
     boxShadow: { id: 'boxShadow', label: 'Box Shadow' },
-    boxSizing: { id: 'boxSizing', label: 'Box Sizing' },
+    boxSizing: { id: 'boxSizing', label: 'Box Sizing', isPro: true },
     clear: { id: 'clear', label: 'Clear' },
-    clip: { id: 'clip', label: 'Clip' },
-    clipPath: { id: 'clipPath', label: 'Clip Path' },
+    clip: { id: 'clip', label: 'Clip', isPro: true },
+    clipPath: { id: 'clipPath', label: 'Clip Path', isPro: true },
 
     color: { id: 'color', label: 'Color' },
-    columnCount: { id: 'columnCount', label: 'Column Count' },
+    columnCount: { id: 'columnCount', label: 'Column Count', isPro: true },
 
-    content: { id: 'content', label: 'Content' },
-    cursor: { id: 'cursor', label: 'Cursor' },
+    content: { id: 'content', label: 'Content', isPro: true },
+    cursor: { id: 'cursor', label: 'Cursor', isPro: true },
     display: { id: 'display', label: 'Display' },
     direction: { id: 'direction', label: 'Direction' },
     float: { id: 'float', label: 'Float' },
-    filter: { id: 'filter', label: 'Filter' },
+    filter: { id: 'filter', label: 'Filter', isPro: true },
     fontSize: { id: 'fontSize', label: 'Font Size' },
     fontFamily: { id: 'fontFamily', label: 'Font Family' },
-    fontStretch: { id: 'fontStretch', label: 'Font Stretch' },
+    fontStretch: { id: 'fontStretch', label: 'Font Stretch', isPro: true },
     fontStyle: { id: 'fontStyle', label: 'Font Style' },
-    fontVariantCaps: { id: 'fontVariantCaps', label: 'Font VariantCaps' },
+    fontVariantCaps: { id: 'fontVariantCaps', label: 'Font VariantCaps', isPro: true },
     fontWeight: { id: 'fontWeight', label: 'Font Weight' },
     height: { id: 'height', label: 'Height' },
     left: { id: 'left', label: 'Left' },
@@ -182,35 +183,35 @@ function WarningBanner(props) {
     minHeight: { id: 'minHeight', label: 'Min Height' },
     minWidth: { id: 'minWidth', label: 'Min Width' },
     opacity: { id: 'opacity', label: 'Opacity' },
-    outline: { id: 'outline', label: 'Outline' },
+    outline: { id: 'outline', label: 'Outline', isPro: true },
     overflow: { id: 'overflow', label: 'Overflow' },
-    overflowX: { id: 'overflowX', label: 'OverflowX' },
-    overflowY: { id: 'overflowY', label: 'OverflowY' },
+    overflowX: { id: 'overflowX', label: 'OverflowX', isPro: true },
+    overflowY: { id: 'overflowY', label: 'OverflowY', isPro: true },
     padding: { id: 'padding', label: 'Padding' },
-    perspective: { id: 'perspective', label: 'Perspective' },
+    perspective: { id: 'perspective', label: 'Perspective', isPro: true },
     position: { id: 'position', label: 'Position' },
     right: { id: 'right', label: 'Right' },
     textAlign: { id: 'textAlign', label: 'Text Align' },
 
     top: { id: 'top', label: 'Top' },
-    transform: { id: 'transform', label: 'Transform' },
-    transition: { id: 'transition', label: 'Transition' },
+    transform: { id: 'transform', label: 'Transform', isPro: true },
+    transition: { id: 'transition', label: 'Transition', isPro: true },
     verticalAlign: { id: 'verticalAlign', label: 'Vertical Align' },
     visibility: { id: 'visibility', label: 'Visibility' },
     width: { id: 'width', label: 'Width' },
     zIndex: { id: 'zIndex', label: 'Z-Index' },
 
 
-    textDecoration: { id: 'textDecoration', label: 'Text Decoration' },
-    textIndent: { id: 'textIndent', label: 'Text Indent' },
-    textJustify: { id: 'textJustify', label: 'Text Indent' },
+    textDecoration: { id: 'textDecoration', label: 'Text Decoration', isPro: true },
+    textIndent: { id: 'textIndent', label: 'Text Indent', isPro: true },
+    textJustify: { id: 'textJustify', label: 'Text Justify', isPro: true },
     textOverflow: { id: 'textOverflow', label: 'Text Overflow' },
-    textShadow: { id: 'textShadow', label: 'Text Shadow' },
-    textTransform: { id: 'textTransform', label: 'Text Transform' },
-    wordBreak: { id: 'wordBreak', label: 'Word Break' },
-    wordSpacing: { id: 'wordSpacing', label: 'Word Spacing' },
-    wordWrap: { id: 'wordWrap', label: 'Word Wrap' },
-    writingMode: { id: 'writingMode', label: 'Writing Mode' },
+    textShadow: { id: 'textShadow', label: 'Text Shadow', isPro: true },
+    textTransform: { id: 'textTransform', label: 'Text Transform', isPro: true },
+    wordBreak: { id: 'wordBreak', label: 'Word Break', isPro: true },
+    wordSpacing: { id: 'wordSpacing', label: 'Word Spacing', isPro: true },
+    wordWrap: { id: 'wordWrap', label: 'Word Wrap', isPro: true },
+    writingMode: { id: 'writingMode', label: 'Writing Mode', isPro: true },
 
 
   };
@@ -218,13 +219,13 @@ function WarningBanner(props) {
 
   useEffect(() => {
 
-    sudoScourceArgs.map(sudo => {
+    // sudoScourceArgs.map(sudo => {
 
-      if (props.obj[sudo.value] != undefined) {
-        sudoScources.push(sudo);
-      }
+    //   if (props.obj[sudo.value] != undefined) {
+    //     sudoScources.push(sudo);
+    //   }
 
-    })
+    // })
 
 
   }, [props.obj]);
@@ -232,15 +233,22 @@ function WarningBanner(props) {
 
 
   useEffect(() => {
-    setcssAtts(props.obj[sudoScource]);
+    //setcssAtts(props.obj[sudoScource]);
+    if (props.obj[sudoScource] == undefined) {
+      props.obj[sudoScource] = {};
+    }
+
+    console.log(props.obj[sudoScource]);
+
+
 
   }, [sudoScource]);
 
 
   function setCssAttr(option, index) {
 
-    if (cssAtts[option.id] == undefined) {
-      cssAtts[option.id] = {};
+    if (props.obj[sudoScource][option.id] == undefined) {
+      props.obj[sudoScource][option.id] = {};
     }
 
     props.onAdd(sudoScource, option.id)
@@ -278,16 +286,14 @@ function WarningBanner(props) {
 
       <PanelRow>
         <div>Sudo Selector</div>
-        <SelectControl
-          label=""
 
-          value={sudoScource}
-          options={sudoScources}
-          onChange={(newVal) => {
-            setSudoScource(newVal)
 
-          }}
-        />
+        <PGDropdown position="bottom right" variant="secondary" options={sudoScourceArgs} buttonTitle="Choose" onChange={(option, index) => {
+
+          setSudoScource(option.value)
+
+        }} values=""></PGDropdown>
+
       </PanelRow>
 
 
@@ -302,8 +308,8 @@ function WarningBanner(props) {
         {
 
           //Object.entries(cssAtts).map(([key, value]) => (
-          Object.entries(props.obj[sudoScource]).map(([key, value]) => (
-            <div className='border-b-2 border-solid py-4 hover:border-gray-600 border-t-2 hover:border-t-2 hover:border-b-2 border-t-transparent' key={key}>
+          props.obj[sudoScource] != undefined && Object.entries(props.obj[sudoScource]).map(([key, value]) => (
+            <PanelBody title={(cssProps[key] != undefined) ? cssProps[key].label : key} initialOpen={false} key={key}>
 
 
               <PanelRow className=''>
@@ -363,8 +369,12 @@ function WarningBanner(props) {
                 <PGcssBackgroundClip val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
               {(key == 'bgColor') && (
+                <PGcssBgColor val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+              {(key == 'backgroundColor') && (
                 <PGcssBackgroundColor val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
+
               {(key == 'backgroundOrigin') && (
                 <PGcssBackgroundOrigin val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
@@ -558,7 +568,7 @@ function WarningBanner(props) {
               )}
 
 
-            </div>
+            </PanelBody>
           ))
 
         }

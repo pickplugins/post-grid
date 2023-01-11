@@ -325,6 +325,11 @@ registerBlockType("post-grid/post-author-fields", {
 
 
       var sudoScourceX = { ...field[sudoScource] }
+
+      console.log(attr);
+
+
+
       sudoScourceX[attr][breakPointX] = newVal;
 
 

@@ -70,6 +70,10 @@ var selectors = {
     else if (key == 'bgColor') {
       cssProp = 'background-color';
     }
+    else if (key == 'backgroundColor') {
+      cssProp = 'background-color';
+    }
+
     else if (key == 'backgroundOrigin') {
       cssProp = '-background-origin';
     }
@@ -232,7 +236,6 @@ var selectors = {
       cssProp = 'overflow-y';
     }
 
-    console.log(key);
 
 
     return cssProp;
@@ -242,7 +245,7 @@ var selectors = {
     const { blockCss } = state;
 
 
-    //console.log(items);
+    console.log(items);
 
 
     var reponsiveCssGroups = {};

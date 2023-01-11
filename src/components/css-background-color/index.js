@@ -28,7 +28,7 @@ function WarningBanner(props) {
 
             enableAlpha
             onChange={(newVal) => {
-              props.onChange(newVal, 'bgColor');
+              props.onChange(newVal, 'backgroundColor');
             }}
           />
         </div>
@@ -58,7 +58,7 @@ class PGcssBackgroundColor extends Component {
   render() {
 
     var {
-      value,
+      val,
       enableAlpha,
       onChange,
       label,
@@ -87,7 +87,7 @@ class PGcssBackgroundColor extends Component {
     };
 
     var btnStyle = {
-      backgroundColor: value,
+      backgroundColor: val,
       boxShadow: 'inset 0 0 0 1px rgb(0 0 0 / 20%)',
 
       cursor: 'pointer',
@@ -97,21 +97,18 @@ class PGcssBackgroundColor extends Component {
     return (
       <div>
         <div className='my-4'>
-          <div className='flex justify-between items-center mb-3'>
-            {label}
-          </div>
 
           <div className='relative h-10' style={placeholderStyle}>
             <div className='absolute w-full  h-full top-0 left-0 text-center' style={btnStyle} onClick={this.handleToggleClick}>
 
-              <span className='w-full text-center left-0 top-1/2 -translate-y-1/2	 absolute'>{(value == undefined) ? 'Set Color' : value}</span>
+              <span className='w-full text-center left-0 top-1/2 -translate-y-1/2	 absolute'>{(val == undefined) ? 'Set Color' : val}</span>
 
             </div>
           </div>
 
 
         </div>
-        <WarningBanner enableAlpha={enableAlpha} value={value} onChange={onChange} warn={this.state.showWarning} />
+        <WarningBanner enableAlpha={enableAlpha} value={val} onChange={onChange} warn={this.state.showWarning} />
 
 
 

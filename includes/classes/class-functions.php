@@ -268,7 +268,7 @@ class class_post_grid_functions
                     ),
                     'margin' => '',
                     'padding' => '',
-                    'css' => '',
+                    'css' => 'max-width:100%;height:auto;',
                     'css_hover' => '',
 
 

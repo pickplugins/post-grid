@@ -104,8 +104,6 @@ function WarningBanner(props) {
 
   var sudoScourceArgs = {
 
-    none: { label: 'Select..', value: '' },
-
     styles: { label: 'Idle', value: 'styles' },
     hover: { label: 'Hover', value: 'hover' },
     after: { label: 'After', value: 'after', isPro: true },
@@ -137,14 +135,11 @@ function WarningBanner(props) {
     backgroundClip: { id: 'backgroundClip', label: 'Background Clip' },
     backgroundColor: { id: 'backgroundColor', label: 'Background Color' },
     bgColor: { id: 'bgColor', label: 'Background Color' },
-
     backgroundImage: { id: 'backgroundImage', label: 'Background Image' },
     backgroundOrigin: { id: 'backgroundOrigin', label: 'Background Origin' },
     backgroundRepeat: { id: 'backgroundRepeat', label: 'Background Repeat' },
     backgroundPosition: { id: 'backgroundPosition', label: 'Background Position' },
     backgroundSize: { id: 'backgroundSize', label: 'Background Size' },
-
-
     border: { id: 'border', label: 'Border' },
     borderCollapse: { id: 'borderCollapse', label: 'Border Collapse', isPro: true },
     borderImage: { id: 'borderImage', label: 'Border Image' },
@@ -156,10 +151,8 @@ function WarningBanner(props) {
     clear: { id: 'clear', label: 'Clear' },
     clip: { id: 'clip', label: 'Clip', isPro: true },
     clipPath: { id: 'clipPath', label: 'Clip Path', isPro: true },
-
     color: { id: 'color', label: 'Color' },
     columnCount: { id: 'columnCount', label: 'Column Count', isPro: true },
-
     content: { id: 'content', label: 'Content', isPro: true },
     cursor: { id: 'cursor', label: 'Cursor', isPro: true },
     display: { id: 'display', label: 'Display' },
@@ -174,7 +167,7 @@ function WarningBanner(props) {
     fontWeight: { id: 'fontWeight', label: 'Font Weight' },
     height: { id: 'height', label: 'Height' },
     left: { id: 'left', label: 'Left' },
-    letterSpacing: { id: 'letterSpacing', label: 'Letter Spacing' },
+    letterSpacing: { id: 'letterSpacing', label: 'Letter Spacing', isPro: true },
     lineHeight: { id: 'lineHeight', label: 'Line Height' },
     listStyle: { id: 'listStyle', label: 'ListStyle' },
     margin: { id: 'margin', label: 'Margin' },
@@ -192,7 +185,6 @@ function WarningBanner(props) {
     position: { id: 'position', label: 'Position' },
     right: { id: 'right', label: 'Right' },
     textAlign: { id: 'textAlign', label: 'Text Align' },
-
     top: { id: 'top', label: 'Top' },
     transform: { id: 'transform', label: 'Transform', isPro: true },
     transition: { id: 'transition', label: 'Transition', isPro: true },
@@ -200,8 +192,6 @@ function WarningBanner(props) {
     visibility: { id: 'visibility', label: 'Visibility' },
     width: { id: 'width', label: 'Width' },
     zIndex: { id: 'zIndex', label: 'Z-Index' },
-
-
     textDecoration: { id: 'textDecoration', label: 'Text Decoration', isPro: true },
     textIndent: { id: 'textIndent', label: 'Text Indent', isPro: true },
     textJustify: { id: 'textJustify', label: 'Text Justify', isPro: true },
@@ -212,8 +202,6 @@ function WarningBanner(props) {
     wordSpacing: { id: 'wordSpacing', label: 'Word Spacing', isPro: true },
     wordWrap: { id: 'wordWrap', label: 'Word Wrap', isPro: true },
     writingMode: { id: 'writingMode', label: 'Writing Mode', isPro: true },
-
-
   };
 
 
@@ -285,21 +273,13 @@ function WarningBanner(props) {
 
 
       <PanelRow>
-        <div>Sudo Selector</div>
 
-
-        <PGDropdown position="bottom right" variant="secondary" options={sudoScourceArgs} buttonTitle="Choose" onChange={(option, index) => {
+        <PGDropdown position="bottom right" variant="secondary" options={sudoScourceArgs} buttonTitle={(sudoScourceArgs[sudoScource] != undefined) ? sudoScourceArgs[sudoScource].label : 'Choose'} onChange={(option, index) => {
 
           setSudoScource(option.value)
 
         }} values=""></PGDropdown>
-
-      </PanelRow>
-
-
-      <PanelRow>
-        <div>Add Style</div>
-        <PGDropdown position="bottom right" variant="secondary" options={cssProps} buttonTitle="Choose" onChange={setCssAttr} values=""></PGDropdown>
+        <PGDropdown position="bottom right" variant="secondary" options={cssProps} buttonTitle="Add Style" onChange={setCssAttr} values=""></PGDropdown>
       </PanelRow>
 
 

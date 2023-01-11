@@ -67611,44 +67611,96 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+
 const {
-  Component,
-  RawHTML
+  Component
 } = wp.element;
 
 
 
 
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
 
-
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Popover, {
+    position: "bottom right"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-2"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+    value: props.value,
+    colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
+    enableAlpha: true,
+    onChange: newVal => {
+      props.onChange(newVal, 'color');
+    }
+  }))));
+}
 
 class PGcssColor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showWarning: false
+    };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+
   render() {
     var {
       val,
-      onChange
+      enableAlpha,
+      onChange,
+      label
     } = this.props;
-
-    function Html() {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ColorPalette, {
-        value: val,
-        colors: _colors_presets__WEBPACK_IMPORTED_MODULE_3__["default"],
-        enableAlpha: true,
-        onChange: newVal => {
-          //console.log(newVal);
-          onChange(newVal, 'color');
-        }
-      }));
-    }
-
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Html, null);
+    var placeholderStyle = {
+      backgroundImage: 'repeating-linear-gradient(45deg,#e0e0e0 25%,transparent 0,transparent 75%,#e0e0e0 0,#e0e0e0),repeating-linear-gradient(45deg,#e0e0e0 25%,transparent 0,transparent 75%,#e0e0e0 0,#e0e0e0)',
+      backgroundPosition: '0 0,25px 25px',
+      backgroundSize: '50px 50px',
+      boxShadow: 'inset 0 0 0 1px rgb(0 0 0 / 20%)',
+      cursor: 'pointer'
+    };
+    var defaultbtnStyle = {
+      backgroundImage: 'repeating-linear-gradient(45deg,#e0e0e0 25%,transparent 0,transparent 75%,#e0e0e0 0,#e0e0e0),repeating-linear-gradient(45deg,#e0e0e0 25%,transparent 0,transparent 75%,#e0e0e0 0,#e0e0e0)',
+      backgroundPosition: '0 0,25px 25px',
+      backgroundSize: '50px 50px',
+      boxShadow: 'inset 0 0 0 1px rgb(0 0 0 / 20%)',
+      cursor: 'pointer'
+    };
+    var btnStyle = {
+      backgroundColor: val,
+      boxShadow: 'inset 0 0 0 1px rgb(0 0 0 / 20%)',
+      cursor: 'pointer'
+    };
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "my-4"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "relative h-10",
+      style: placeholderStyle
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "absolute w-full  h-full top-0 left-0 text-center",
+      style: btnStyle,
+      onClick: this.handleToggleClick
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "w-full text-center left-0 top-1/2 -translate-y-1/2\t absolute"
+    }, val == undefined ? 'Set Color' : val)))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(WarningBanner, {
+      enableAlpha: enableAlpha,
+      value: val,
+      onChange: onChange,
+      warn: this.state.showWarning
+    }));
   }
 
 }
@@ -72648,10 +72700,6 @@ function WarningBanner(props) {
   }
 
   var sudoScourceArgs = {
-    none: {
-      label: 'Select..',
-      value: ''
-    },
     styles: {
       label: 'Idle',
       value: 'styles'
@@ -72888,7 +72936,8 @@ function WarningBanner(props) {
     },
     letterSpacing: {
       id: 'letterSpacing',
-      label: 'Letter Spacing'
+      label: 'Letter Spacing',
+      isPro: true
     },
     lineHeight: {
       id: 'lineHeight',
@@ -73083,20 +73132,20 @@ function WarningBanner(props) {
     });
   }
 
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Sudo Selector"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["default"], {
     position: "bottom right",
     variant: "secondary",
     options: sudoScourceArgs,
-    buttonTitle: "Choose",
+    buttonTitle: sudoScourceArgs[sudoScource] != undefined ? sudoScourceArgs[sudoScource].label : 'Choose',
     onChange: (option, index) => {
       setSudoScource(option.value);
     },
     values: ""
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Add Style"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["default"], {
     position: "bottom right",
     variant: "secondary",
     options: cssProps,
-    buttonTitle: "Choose",
+    buttonTitle: "Add Style",
     onChange: setCssAttr,
     values: ""
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

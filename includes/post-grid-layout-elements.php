@@ -2379,15 +2379,18 @@ function post_grid_layout_element_css_excerpt_read_more($args)
 
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
+
+var_dump($text_align);
+
 ?>
     <style type="text/css">
-        <?php echo esc_attr('.layout'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
-            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;
-            <?php endif; ?><?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;
-            <?php endif; ?><?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;
-            <?php endif; ?><?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;
-            <?php endif; ?><?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;
-            <?php endif; ?><?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
+        <?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?> {
+            <?php if (!empty($color)) : ?>color: <?php echo esc_attr($color); ?>;<?php endif; ?>
+            <?php if (!empty($font_size)) : ?>font-size: <?php echo esc_attr($font_size); ?>;<?php endif; ?>
+            <?php if (!empty($font_family)) : ?>font-family: <?php echo esc_attr($font_family); ?>;<?php endif; ?>
+            <?php if (!empty($margin)) : ?>margin: <?php echo esc_attr($margin); ?>;<?php endif; ?>
+            <?php if (!empty($text_align)) : ?>text-align: <?php echo esc_attr($text_align); ?>;<?php endif; ?>
+            <?php if (!empty($css)) : ?><?php echo wp_strip_all_tags($css); ?><?php endif; ?>
         }
 
         <?php if (!empty($css_hover)) : ?><?php echo esc_attr('.layout-'.$layout_id); ?> <?php echo esc_attr('.element_'.$index); ?>:hover {

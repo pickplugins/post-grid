@@ -134,7 +134,9 @@ function WarningBanner(props) {
     backgroundAttachment: { id: 'backgroundAttachment', label: 'Background Attachment' },
     backgroundBlendMode: { id: 'backgroundBlendMode', label: 'Background Blend Mode' },
     backgroundClip: { id: 'backgroundClip', label: 'Background Clip' },
-    backgroundColor: { id: 'backgroundColor', label: 'BackgroundColor' },
+    backgroundColor: { id: 'backgroundColor', label: 'Background Color' },
+    bgColor: { id: 'bgColor', label: 'Background Color' },
+
     backgroundImage: { id: 'backgroundImage', label: 'Background Image' },
     backgroundOrigin: { id: 'backgroundOrigin', label: 'Background Origin' },
     backgroundRepeat: { id: 'backgroundRepeat', label: 'Background Repeat' },
@@ -273,296 +275,296 @@ function WarningBanner(props) {
   return (
     <div >
 
-      <PanelBody className="my-5" title="Style" initialOpen={true}>
-        <PanelRow>
-          <div>Sudo Selector</div>
-          <SelectControl
-            label=""
 
-            value={sudoScource}
-            options={sudoScources}
-            onChange={(newVal) => {
-              setSudoScource(newVal)
+      <PanelRow>
+        <div>Sudo Selector</div>
+        <SelectControl
+          label=""
 
-            }}
-          />
-        </PanelRow>
+          value={sudoScource}
+          options={sudoScources}
+          onChange={(newVal) => {
+            setSudoScource(newVal)
 
-
-        <PanelRow>
-          <div>Add Style</div>
-          <PGDropdown position="bottom right" variant="secondary" options={cssProps} buttonTitle="Choose" onChange={setCssAttr} values=""></PGDropdown>
-        </PanelRow>
+          }}
+        />
+      </PanelRow>
 
 
-
-        <div className='my-5'>
-          {
-
-            //Object.entries(cssAtts).map(([key, value]) => (
-            Object.entries(props.obj[sudoScource]).map(([key, value]) => (
-              <div className='border-b-2 border-solid py-4 hover:border-gray-600 border-t-2 hover:border-t-2 hover:border-b-2 border-t-transparent' key={key}>
+      <PanelRow>
+        <div>Add Style</div>
+        <PGDropdown position="bottom right" variant="secondary" options={cssProps} buttonTitle="Choose" onChange={setCssAttr} values=""></PGDropdown>
+      </PanelRow>
 
 
-                <PanelRow className=''>
-                  <label>{(cssProps[key] != undefined) ? cssProps[key].label : key}</label>
-                  <div>
-                    <div className='inline-block bg-blue-500 text-white'>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={(x, index) => {
-                        setPreviewDeviceType(x.value)
-                        var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
 
-                        asdsdsd.then((res) => {
+      <div className='my-5'>
+        {
 
-                          setBreakPointX(res.breakpoint);
-
-                        });
-
-                      }} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </div>
-
-                    <div className='hover:bg-red-500 bg-red-400 text-white m-1 inline-block p-1 cursor-pointer' onClick={ev => {
+          //Object.entries(cssAtts).map(([key, value]) => (
+          Object.entries(props.obj[sudoScource]).map(([key, value]) => (
+            <div className='border-b-2 border-solid py-4 hover:border-gray-600 border-t-2 hover:border-t-2 hover:border-b-2 border-t-transparent' key={key}>
 
 
-                      props.onRemove(sudoScource, key)
-                    }}><span class="dashicons dashicons-no-alt"></span></div>
+              <PanelRow className=''>
+                <label>{(cssProps[key] != undefined) ? cssProps[key].label : key}</label>
+                <div>
+                  <div className='inline-block bg-blue-500 text-white'>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={(x, index) => {
+                      setPreviewDeviceType(x.value)
+                      var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
+
+                      asdsdsd.then((res) => {
+
+                        setBreakPointX(res.breakpoint);
+
+                      });
+
+                    }} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
                   </div>
 
+                  <div className='hover:bg-red-500 bg-red-400 text-white m-1 inline-block p-1 cursor-pointer' onClick={ev => {
 
 
-                </PanelRow>
+                    props.onRemove(sudoScource, key)
+                  }}><span class="dashicons dashicons-no-alt"></span></div>
+                </div>
 
 
 
+              </PanelRow>
 
-                {(key == 'alignContent') && (
-                  <PGcssAlignContent val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'alignItems') && (
-                  <PGcssAlignItems val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'alignSelf') && (
-                  <PGcssAlignSelf val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'backfaceVisibility') && (
-                  <PGcssBackfaceVisibility val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
-                {(key == 'backgroundAttachment') && (
-                  <PGcssBackgroundAttachment val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
-                {(key == 'backgroundBlendMode') && (
-                  <PGcssBackgroundBlendMode val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'alignContent') && (
+                <PGcssAlignContent val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'backgroundClip') && (
-                  <PGcssBackgroundClip val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
-                {(key == 'bgColor') && (
-                  <PGcssBackgroundColor val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
-                {(key == 'backgroundOrigin') && (
-                  <PGcssBackgroundOrigin val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'alignItems') && (
+                <PGcssAlignItems val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
+              {(key == 'alignSelf') && (
+                <PGcssAlignSelf val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'backgroundRepeat') && (
-                  <PGcssBackgroundRepeat val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'backfaceVisibility') && (
+                <PGcssBackfaceVisibility val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+              {(key == 'backgroundAttachment') && (
+                <PGcssBackgroundAttachment val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+              {(key == 'backgroundBlendMode') && (
+                <PGcssBackgroundBlendMode val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'backgroundSize') && (
-                  <PGcssBackgroundSize val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
-                {(key == 'backgroundPosition') && (
-                  <PGcssBackgroundPosition val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'backgroundClip') && (
+                <PGcssBackgroundClip val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+              {(key == 'bgColor') && (
+                <PGcssBackgroundColor val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+              {(key == 'backgroundOrigin') && (
+                <PGcssBackgroundOrigin val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
 
-                {(key == 'borderRadius') && (
-                  <PGcssBorderRadius val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'backgroundRepeat') && (
+                <PGcssBackgroundRepeat val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'bottom') && (
-                  <PGcssBottom val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'backgroundSize') && (
+                <PGcssBackgroundSize val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+              {(key == 'backgroundPosition') && (
+                <PGcssBackgroundPosition val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'top') && (
-                  <PGcssTop val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'left') && (
-                  <PGcssLeft val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
-                {(key == 'right') && (
-                  <PGcssRight val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'borderRadius') && (
+                <PGcssBorderRadius val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'boxSizing') && (
-                  <PGcssBoxSizing val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'bottom') && (
+                <PGcssBottom val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
+              {(key == 'top') && (
+                <PGcssTop val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'clear') && (
-                  <PGcssClear val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'left') && (
+                <PGcssLeft val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+              {(key == 'right') && (
+                <PGcssRight val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'color') && (
-                  <PGcssColor val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'boxSizing') && (
+                <PGcssBoxSizing val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'filter') && (
-                  <PGcssFilter val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
-                {(key == 'float') && (
-                  <PGcssFloat val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'fontSize') && (
-                  <PGcssFontSize val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'clear') && (
+                <PGcssClear val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'fontStyle') && (
-                  <PGcssFontStyle val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'color') && (
+                <PGcssColor val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'fontStretch') && (
-                  <PGcssFontStretch val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'filter') && (
+                <PGcssFilter val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+              {(key == 'float') && (
+                <PGcssFloat val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'fontWeight') && (
-                  <PGcssFontWeight val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'fontSize') && (
+                <PGcssFontSize val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
+              {(key == 'fontStyle') && (
+                <PGcssFontStyle val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'letterSpacing') && (
-                  <PGcssLetterSpacing val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'fontStretch') && (
+                <PGcssFontStretch val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
+              {(key == 'fontWeight') && (
+                <PGcssFontWeight val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'lineHeight') && (
-                  <PGcssLineHeight val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'objectFit') && (
-                  <PGcssObjectFit val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'letterSpacing') && (
+                <PGcssLetterSpacing val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
 
-                {(key == 'opacity') && (
-                  <PGcssOpacity val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'lineHeight') && (
+                <PGcssLineHeight val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'outline') && (
-                  <PGcssOutline val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
-                {(key == 'outlineOffset') && (
-                  <PGcssOutlineOffset val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'objectFit') && (
+                <PGcssObjectFit val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'position') && (
-                  <PGcssPosition val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'textIndent') && (
-                  <PGcssTextIndent val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'opacity') && (
+                <PGcssOpacity val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'textJustify') && (
-                  <PGcssTextJustify val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'outline') && (
+                <PGcssOutline val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+              {(key == 'outlineOffset') && (
+                <PGcssOutlineOffset val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
+              {(key == 'position') && (
+                <PGcssPosition val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'textTransform') && (
-                  <PGcssTextTransform val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'textIndent') && (
+                <PGcssTextIndent val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'textDecoration') && (
-                  <PGcssTextDecoration val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'textJustify') && (
+                <PGcssTextJustify val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'textShadow') && (
-                  <PGcssTextShadow val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
+              {(key == 'textTransform') && (
+                <PGcssTextTransform val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
+              {(key == 'textDecoration') && (
+                <PGcssTextDecoration val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
+              {(key == 'textShadow') && (
+                <PGcssTextShadow val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
 
 
 
 
 
-                {(key == 'textAlign') && (
-                  <PGcssTextAlign val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'visibility') && (
-                  <PGcssVisibility val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'wordBreak') && (
-                  <PGcssWordBreak val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'wordSpacing') && (
-                  <PGcssWordSpacing val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'textAlign') && (
+                <PGcssTextAlign val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'zIndex') && (
-                  <PGcssZIndex val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'visibility') && (
+                <PGcssVisibility val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
+              {(key == 'wordBreak') && (
+                <PGcssWordBreak val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'padding') && (
-                  <PGcssPadding val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'wordSpacing') && (
+                <PGcssWordSpacing val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'margin') && (
-                  <PGcssMargin val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'zIndex') && (
+                <PGcssZIndex val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'display') && (
-                  <PGcssDisplay val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
-                {(key == 'width') && (
-                  <PGcssWidth val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'padding') && (
+                <PGcssPadding val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'height') && (
-                  <PGcssHeight val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'margin') && (
+                <PGcssMargin val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'verticalAlign') && (
-                  <PGcssVerticalAlign val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'display') && (
+                <PGcssDisplay val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
+              {(key == 'width') && (
+                <PGcssWidth val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
+              {(key == 'height') && (
+                <PGcssHeight val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'overflow') && (
-                  <PGcssOverflow val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'verticalAlign') && (
+                <PGcssVerticalAlign val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
 
 
-                {(key == 'overflowX') && (
-                  <PGcssOverflowX val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
+              {(key == 'overflow') && (
+                <PGcssOverflow val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-                {(key == 'overflowY') && (
-                  <PGcssOverflowY val={value[breakPointX]} onChange={onChangeCssVal} />
-                )}
 
 
-              </div>
-            ))
+              {(key == 'overflowX') && (
+                <PGcssOverflowX val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-          }
-        </div>
+              {(key == 'overflowY') && (
+                <PGcssOverflowY val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
-      </PanelBody>
+
+            </div>
+          ))
+
+        }
+      </div>
+
+
 
 
     </div>

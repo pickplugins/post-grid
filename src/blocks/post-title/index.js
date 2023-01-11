@@ -353,7 +353,6 @@ registerBlockType("post-grid/post-title", {
       return (
 
         <>
-
           <div className='text-sm '>{title}</div>
           <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
         </>
@@ -1619,7 +1618,7 @@ registerBlockType("post-grid/post-title", {
                   />
 
 
-                  { <PGColorPicker className="my-3"
+                  {<PGColorPicker className="my-3"
                     value={postTitle.styles.bgColor[breakPointX]}
                     colors={colorsPresets}
                     enableAlpha
@@ -1659,7 +1658,7 @@ registerBlockType("post-grid/post-title", {
 
 
                     }}
-                  /> }
+                  />}
 
 
                   <PanelRow>

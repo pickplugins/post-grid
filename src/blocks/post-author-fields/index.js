@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, subscribe, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner, Popover } from '@wordpress/components'
+import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner, Popover, TabPanel } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl, } from '@wordpress/components';
 import { link, linkOff } from "@wordpress/icons";
 
@@ -1264,277 +1264,324 @@ registerBlockType("post-grid/post-author-fields", {
 
             <PanelBody title="Field Settings" initialOpen={false}>
 
-              <ToggleControl
-                label="Is linked?"
-                help={(field.options != undefined && field.options.isLink) ? 'User field is linked' : 'User field is not linked'}
-                checked={(field.options != undefined && field.options.isLink) ? true : false}
-                onChange={(e) => {
 
-
-                  var options = { ...field.options, isLink: field.options.isLink ? false : true };
-                  setAttributes({ field: { ...field, options: options } });
-
-
-
-                }}
-              />
-
-              {field.options.isLink && (
-                <>
-
-                  <PanelRow>
-                    <label for="">Link To</label>
-
-
-
-                    <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle="Choose" onChange={setFieldLinkTo} values={metaKey}></PGDropdown>
-
-
-                  </PanelRow>
-
-
-                  <div className='bg-gray-500 p-2 my-3 text-white'>{(linkToArgs[field.options.linkTo] != undefined) ? linkToArgs[field.options.linkTo].label : ''}</div>
-
-                  {field.options.linkTo == 'authorMeta' && (
-
-                    <PanelRow>
-                      <label for="">Author Meta Key</label>
-
-                      <InputControl
-                        value={field.options.linkToMeta}
-                        onChange={(newVal) => {
-
-
-                          var options = { ...field.options, linkToMeta: newVal };
-                          setAttributes({ field: { ...field, options: options } });
-
-                        }}
-                      />
-
-                    </PanelRow>
-
-                  )}
-
-
-                  {field.options.linkTo == 'customField' && (
-
-                    <PanelRow>
-                      <label for="">Custom Meta Key</label>
-
-                      <InputControl
-                        value={field.options.linkToAuthorMeta}
-                        onChange={(newVal) => {
-
-                          var options = { ...field.options, linkToAuthorMeta: newVal };
-                          setAttributes({ field: { ...field, options: options } });
-
-                        }}
-                      />
-
-                    </PanelRow>
-
-                  )}
-
-
-
-                  {field.options.linkTo == 'customUrl' && (
-
-                    <>
-
-
-
-                      <PanelRow>
-                        <label for="">Custom Url</label>
-
-                        <div className='relative'>
-                          <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                            setLinkPickerPosttitle(prev => !prev);
-
-                          }}></Button>
-                          {field.options.customUrl.length > 0 && (
-                            <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                              var options = { ...field.options, customUrl: '' };
-                              setAttributes({ field: { ...field, options: options } });
-                              setLinkPickerPosttitle(false);
-
-
-
-                            }}></Button>
-
-                          )}
-                          {linkPickerPosttitle && (
-                            <Popover position="bottom right">
-                              <LinkControl settings={[]} value={field.options.customUrl} onChange={newVal => {
-
-                                var options = { ...field.options, customUrl: newVal.url };
-
-                                setAttributes({ field: { ...field, options: options } });
-
-                              }} />
-
-                              <div className='p-2'><span className='font-bold'>Linked to:</span> {(field.options.customUrl.length != 0) ? field.options.customUrl : 'No link'} </div>
-                            </Popover>
-
-                          )}
-
-
-                        </div>
-                      </PanelRow>
-
-                    </>
-
-
-
-
-
-                  )}
-
-
-
-                  <PanelRow>
-                    <label for="">Link Target</label>
-
-                    <SelectControl
-                      label=""
-                      value={field.options.linkTarget}
-                      options={[
-                        { label: '_self', value: '_self' },
-                        { label: '_blank', value: '_blank' },
-                        { label: '_parent', value: '_parent' },
-                        { label: '_top', value: '_top' },
-                      ]}
-                      onChange={
-                        (newVal) => {
-                          var options = { ...field.options, linkTarget: newVal };
-                          setAttributes({ field: { ...field, options: options } });
-                        }
-                      }
-                    />
-                  </PanelRow>
-                </>
-
-              )}
-
-
-
-
-              {field.options.linkTo == 'custom' && (
-
-                <PanelRow>
-                  <label for="">Custom URL</label>
-                  <InputControl
-                    value={field.options.customUrl}
-                    onChange={
-                      (newVal) => {
-                        var options = { ...field.options, customUrl: newVal };
-                        setAttributes({ field: { ...field, options: options } });
-                      }
-                    }
-                  />
-                </PanelRow>
-
-              )}
-
-
-
-              <PanelRow>
-                <label for="">Prefix</label>
-                <InputControl
-                  value={field.options.prefix}
-                  onChange={(newVal) => {
-                    var options = { ...field.options, prefix: newVal };
-                    setAttributes({ field: { ...field, options: options } });
-                  }
-                  }
-                />
-              </PanelRow>
-
-              <PanelRow>
-                <label for="">Postfix</label>
-                <InputControl
-                  value={field.options.postfix}
-                  onChange={(newVal) => {
-
-
-                    var options = { ...field.options, postfix: newVal };
-                    setAttributes({ field: { ...field, options: options } });
-
-
-                  }}
-                />
-              </PanelRow>
-
-
-
-
-              {field.options.isLink && (
-
-                <>
-                  <PanelRow>
-                    <label for="">Link Attributes</label>
-                    <div
-                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-                      onClick={(ev) => {
-                        var sdsd = field.options.linkAttr.concat({ id: '', val: '' })
-                        var options = { ...field.options, linkAttr: sdsd };
-                        setAttributes({ field: { ...field, options: options } });
-                        linkAttrObj()
-                      }}
-                    >Add</div>
-                  </PanelRow>
+              <TabPanel
+                className=""
+                activeClass="active-tab bg-gray-200"
+                orientation="horizontal"
+                initialTabName="settings"
+                onSelect={(tabName) => console.log('Selecting tab', tabName)}
+                tabs={[
                   {
-                    field.options.linkAttr.length > 0 && field.options.linkAttr.map((x, i) => {
+                    name: 'settings',
+                    title: 'Options',
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'style',
+                    title: 'Style',
+                    className: 'tab-style',
+                  },
+                ]}>
+                {
+                  (tab) => (
+                    <div className='my-4'>
+                      {tab.name == 'settings' && (
 
-                      return (
+                        <>
 
-                        <div className='my-2'>
+                          <ToggleControl
+                            label="Is linked?"
+                            help={(field.options != undefined && field.options.isLink) ? 'User field is linked' : 'User field is not linked'}
+                            checked={(field.options != undefined && field.options.isLink) ? true : false}
+                            onChange={(e) => {
+
+
+                              var options = { ...field.options, isLink: field.options.isLink ? false : true };
+                              setAttributes({ field: { ...field, options: options } });
+
+
+
+                            }}
+                          />
+
+                          {field.options.isLink && (
+                            <>
+
+                              <PanelRow>
+                                <label for="">Link To</label>
+
+
+
+                                <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle="Choose" onChange={setFieldLinkTo} values={metaKey}></PGDropdown>
+
+
+                              </PanelRow>
+
+
+                              <div className='bg-gray-500 p-2 my-3 text-white'>{(linkToArgs[field.options.linkTo] != undefined) ? linkToArgs[field.options.linkTo].label : ''}</div>
+
+                              {field.options.linkTo == 'authorMeta' && (
+
+                                <PanelRow>
+                                  <label for="">Author Meta Key</label>
+
+                                  <InputControl
+                                    value={field.options.linkToMeta}
+                                    onChange={(newVal) => {
+
+
+                                      var options = { ...field.options, linkToMeta: newVal };
+                                      setAttributes({ field: { ...field, options: options } });
+
+                                    }}
+                                  />
+
+                                </PanelRow>
+
+                              )}
+
+
+                              {field.options.linkTo == 'customField' && (
+
+                                <PanelRow>
+                                  <label for="">Custom Meta Key</label>
+
+                                  <InputControl
+                                    value={field.options.linkToAuthorMeta}
+                                    onChange={(newVal) => {
+
+                                      var options = { ...field.options, linkToAuthorMeta: newVal };
+                                      setAttributes({ field: { ...field, options: options } });
+
+                                    }}
+                                  />
+
+                                </PanelRow>
+
+                              )}
+
+
+
+                              {field.options.linkTo == 'customUrl' && (
+
+                                <>
+
+
+
+                                  <PanelRow>
+                                    <label for="">Custom Url</label>
+
+                                    <div className='relative'>
+                                      <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                                        setLinkPickerPosttitle(prev => !prev);
+
+                                      }}></Button>
+                                      {field.options.customUrl.length > 0 && (
+                                        <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                                          var options = { ...field.options, customUrl: '' };
+                                          setAttributes({ field: { ...field, options: options } });
+                                          setLinkPickerPosttitle(false);
+
+
+
+                                        }}></Button>
+
+                                      )}
+                                      {linkPickerPosttitle && (
+                                        <Popover position="bottom right">
+                                          <LinkControl settings={[]} value={field.options.customUrl} onChange={newVal => {
+
+                                            var options = { ...field.options, customUrl: newVal.url };
+
+                                            setAttributes({ field: { ...field, options: options } });
+
+                                          }} />
+
+                                          <div className='p-2'><span className='font-bold'>Linked to:</span> {(field.options.customUrl.length != 0) ? field.options.customUrl : 'No link'} </div>
+                                        </Popover>
+
+                                      )}
+
+
+                                    </div>
+                                  </PanelRow>
+
+                                </>
+
+
+
+
+
+                              )}
+
+
+
+                              <PanelRow>
+                                <label for="">Link Target</label>
+
+                                <SelectControl
+                                  label=""
+                                  value={field.options.linkTarget}
+                                  options={[
+                                    { label: '_self', value: '_self' },
+                                    { label: '_blank', value: '_blank' },
+                                    { label: '_parent', value: '_parent' },
+                                    { label: '_top', value: '_top' },
+                                  ]}
+                                  onChange={
+                                    (newVal) => {
+                                      var options = { ...field.options, linkTarget: newVal };
+                                      setAttributes({ field: { ...field, options: options } });
+                                    }
+                                  }
+                                />
+                              </PanelRow>
+                            </>
+
+                          )}
+
+
+
+
+                          {field.options.linkTo == 'custom' && (
+
+                            <PanelRow>
+                              <label for="">Custom URL</label>
+                              <InputControl
+                                value={field.options.customUrl}
+                                onChange={
+                                  (newVal) => {
+                                    var options = { ...field.options, customUrl: newVal };
+                                    setAttributes({ field: { ...field, options: options } });
+                                  }
+                                }
+                              />
+                            </PanelRow>
+
+                          )}
+
+
+
                           <PanelRow>
+                            <label for="">Prefix</label>
                             <InputControl
-                              className='mr-2'
-                              value={field.options.linkAttr[i].id}
+                              value={field.options.prefix}
                               onChange={(newVal) => {
-                                field.options.linkAttr[i].id = newVal;
-                                var ssdsd = field.options.linkAttr.concat([]);
-                                var options = { ...field.options, linkAttr: ssdsd };
+                                var options = { ...field.options, prefix: newVal };
                                 setAttributes({ field: { ...field, options: options } });
-
-                              }}
+                              }
+                              }
                             />
-
-                            <InputControl
-                              className='mr-2'
-                              value={x.val}
-                              onChange={(newVal) => {
-                                field.options.linkAttr[i].val = newVal
-                                var ssdsd = field.options.linkAttr.concat([]);
-                                var options = { ...field.options, linkAttr: ssdsd };
-                                setAttributes({ field: { ...field, options: options } });
-
-                              }}
-                            />
-                            <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                              onClick={(ev) => {
-
-                                field.options.linkAttr.splice(i, 1);
-                                var ssdsd = field.options.linkAttr.concat([]);
-                                var options = { ...field.options, linkAttr: ssdsd };
-                                setAttributes({ field: { ...field, options: options } });
-                              }}
-
-                            ></span>
                           </PanelRow>
-                        </div>
-                      )
-                    })
-                  }
-                </>
 
-              )}
+                          <PanelRow>
+                            <label for="">Postfix</label>
+                            <InputControl
+                              value={field.options.postfix}
+                              onChange={(newVal) => {
 
 
-              <PGStyles obj={field} onChange={onChangeStyleField} onAdd={onAddStyleField} onRemove={onRemoveStyleField} />
+                                var options = { ...field.options, postfix: newVal };
+                                setAttributes({ field: { ...field, options: options } });
+
+
+                              }}
+                            />
+                          </PanelRow>
+
+
+
+
+                          {field.options.isLink && (
+
+                            <>
+                              <PanelRow>
+                                <label for="">Link Attributes</label>
+                                <div
+                                  className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+                                  onClick={(ev) => {
+                                    var sdsd = field.options.linkAttr.concat({ id: '', val: '' })
+                                    var options = { ...field.options, linkAttr: sdsd };
+                                    setAttributes({ field: { ...field, options: options } });
+                                    linkAttrObj()
+                                  }}
+                                >Add</div>
+                              </PanelRow>
+                              {
+                                field.options.linkAttr.length > 0 && field.options.linkAttr.map((x, i) => {
+
+                                  return (
+
+                                    <div className='my-2'>
+                                      <PanelRow>
+                                        <InputControl
+                                          className='mr-2'
+                                          value={field.options.linkAttr[i].id}
+                                          onChange={(newVal) => {
+                                            field.options.linkAttr[i].id = newVal;
+                                            var ssdsd = field.options.linkAttr.concat([]);
+                                            var options = { ...field.options, linkAttr: ssdsd };
+                                            setAttributes({ field: { ...field, options: options } });
+
+                                          }}
+                                        />
+
+                                        <InputControl
+                                          className='mr-2'
+                                          value={x.val}
+                                          onChange={(newVal) => {
+                                            field.options.linkAttr[i].val = newVal
+                                            var ssdsd = field.options.linkAttr.concat([]);
+                                            var options = { ...field.options, linkAttr: ssdsd };
+                                            setAttributes({ field: { ...field, options: options } });
+
+                                          }}
+                                        />
+                                        <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                                          onClick={(ev) => {
+
+                                            field.options.linkAttr.splice(i, 1);
+                                            var ssdsd = field.options.linkAttr.concat([]);
+                                            var options = { ...field.options, linkAttr: ssdsd };
+                                            setAttributes({ field: { ...field, options: options } });
+                                          }}
+
+                                        ></span>
+                                      </PanelRow>
+                                    </div>
+                                  )
+                                })
+                              }
+                            </>
+
+                          )}
+
+
+                        </>
+
+                      )}
+
+                      {tab.name == 'style' && (
+                        <PGStyles obj={field} onChange={onChangeStyleField} onAdd={onAddStyleField} onRemove={onRemoveStyleField} />
+
+                      )}
+
+
+
+                    </div>
+                  )
+                }
+              </TabPanel>
+
+
+
+
+
+
+
               {/* 
               <PanelRow className='my-3'>
                 <label>Color</label>

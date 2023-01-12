@@ -42,7 +42,7 @@ class class_post_grid_settings
 
         if($data_update_status == 'pending'):
 
-        add_submenu_page('post-grid', __('Data Update', 'post-grid'), __('Data Update', 'post-grid'), 'manage_options', 'data_update', array($this, 'import_layouts'));
+        //add_submenu_page('post-grid', __('Data Update', 'post-grid'), __('Data Update', 'post-grid'), 'manage_options', 'data_update', array($this, 'import_layouts'));
 
         endif;
 

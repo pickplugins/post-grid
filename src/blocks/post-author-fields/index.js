@@ -326,15 +326,51 @@ registerBlockType("post-grid/post-author-fields", {
 
       var sudoScourceX = { ...field[sudoScource] }
 
-      console.log(attr);
+      console.log(sudoScource);
+
+      var elementSelector = fieldSelector;
+
+
+      if (sudoScource == 'hover') {
+        elementSelector = fieldSelector + ':hover';
+
+      } else if (sudoScource == 'after') {
+        elementSelector = fieldSelector + ':after';
+
+      } else if (sudoScource == 'before') {
+        elementSelector = fieldSelector + ':before';
+
+      } else if (sudoScource == 'first-child') {
+        elementSelector = fieldSelector + ':first-child';
+
+      } else if (sudoScource == 'last-child') {
+        elementSelector = fieldSelector + ':last-child';
+
+      } else if (sudoScource == 'visited') {
+        elementSelector = fieldSelector + ':visited';
+
+      } else if (sudoScource == 'selection') {
+        elementSelector = fieldSelector + ':selection';
+
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = fieldSelector + '::first-letter';
+
+      } else if (sudoScource == 'first-line') {
+        elementSelector = fieldSelector + '::first-line';
+
+      }
+      else {
+        elementSelector = fieldSelector;
+
+      }
 
 
 
       sudoScourceX[attr][breakPointX] = newVal;
 
 
-      if (blockCssY.items[fieldSelector] == undefined) {
-        blockCssY.items[fieldSelector] = {};
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
       }
 
       Object.entries(sudoScourceX).map(args => {
@@ -347,7 +383,7 @@ registerBlockType("post-grid/post-author-fields", {
 
 
 
-        blockCssY.items[fieldSelector][argAttr] = argAttrVal;
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
 
       })
 

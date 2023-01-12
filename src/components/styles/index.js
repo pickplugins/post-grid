@@ -11,6 +11,7 @@ import { Icon, close } from '@wordpress/icons';
 
 import PGDropdown from '../../components/dropdown'
 import BreakpointToggle from '../../components/breakpoint-toggle'
+import PGDropdownSudoSelector from '../../components/dropdown-sudo-selector'
 
 
 import PGcssAlignContent from '../../components/css-align-content'
@@ -96,7 +97,7 @@ import IconToggle from '../../components/icon-toggle'
 
 
 
-function WarningBanner(props) {
+function Html(props) {
   if (!props.warn) {
     return null;
   }
@@ -114,6 +115,13 @@ function WarningBanner(props) {
     selection: { label: 'Selection', value: 'selection', isPro: true },
     'first-letter': { label: 'First-letter', value: 'first-letter', isPro: true },
     'first-line': { label: 'First-line', value: 'first-line', isPro: true },
+    'nth-child(N)': { label: 'First-line', value: 'first-line', arg: 1, isPro: true },
+    'nth-last-child(N)': { label: 'First-line', value: 'first-line', arg: 1, isPro: true },
+    'nth-last-of-type(N)': { label: 'First-line', value: 'first-line', arg: 1, isPro: true },
+
+    'lang(L)': { label: 'First-line', value: 'first-line', arg: '', isPro: true },
+    'not(S)': { label: 'First-line', value: 'first-line', arg: '', isPro: true },
+
 
   };
   const [sudoScources, setSudoScources] = useState([]);
@@ -274,11 +282,11 @@ function WarningBanner(props) {
 
       <PanelRow className='bg-gray-200 p-2'>
 
-        <PGDropdown position="bottom right" variant="secondary" options={sudoScourceArgs} buttonTitle={(sudoScourceArgs[sudoScource] != undefined) ? sudoScourceArgs[sudoScource].label : 'Choose'} onChange={(option, index) => {
+        <PGDropdownSudoSelector position="bottom right" variant="secondary" options={sudoScourceArgs} buttonTitle={(sudoScourceArgs[sudoScource] != undefined) ? sudoScourceArgs[sudoScource].label : 'Choose'} onChange={(option, index) => {
 
           setSudoScource(option.value)
 
-        }} values=""></PGDropdown>
+        }} values=""></PGDropdownSudoSelector>
         <PGDropdown position="bottom right" variant="secondary" options={cssProps} buttonTitle="Add Style" onChange={setCssAttr} values=""></PGDropdown>
       </PanelRow>
 
@@ -597,7 +605,7 @@ class PGStyles extends Component {
       <>
 
 
-        <WarningBanner obj={obj} onAdd={onAdd} onRemove={onRemove} onChange={onChange} warn={this.state.showWarning} />
+        <Html obj={obj} onAdd={onAdd} onRemove={onRemove} onChange={onChange} warn={this.state.showWarning} />
 
       </>
 

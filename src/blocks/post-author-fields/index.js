@@ -2221,6 +2221,7 @@ registerBlockType("post-grid/post-author-fields", {
           {loading && (<Spinner />)}
 
 
+
           {metaKey.length > 0 && (
 
             <div className={[blockId]}>

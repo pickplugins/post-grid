@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
 	Requires at least: 3.8
 	Tested up to: 6.1.1
-	Stable tag: 2.2.22
+	Stable tag: 2.2.23
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -246,6 +246,22 @@ then paste this shortcode anywhere in your page to display grid<br />
 8. screenshot-8
 
 == Changelog ==
+
+	= 2.2.23 =
+    * 2022-01-12 - add - Style component added to post author field block.
+    * 2022-01-12 - fix - Old layout element post excerpt css issue fixed.
+    * 2022-01-12 - update - Color component update.
+    * 2022-01-12 - update - Background Color component update.
+    * 2022-01-12 - fix - Post Tags Block - CSS conflict between items and front-text.
+    * 2022-01-12 - fix - Post-Taxonomies block An extra ‘seperator’ HTML markup was generated.
+    * 2022-01-12 - fix - Post-Taxonomies block Style conflict between items and front-text.
+    * 2022-01-12 - fix - Post Title Block – Typography section font family not changing and extra hello word found.
+    * 2022-01-12 - fix - Breadcrumb Block Under Icon, color and background color isn’t working.
+    * 2022-01-12 - fix - Breadcrumb Block Separator HTML markup issue.
+
+
+
+
 
 	= 2.2.22 =
     * 2022-12-28 - fix - Post Title Block - Post title link to custom URL error fixed.

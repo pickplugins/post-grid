@@ -130,9 +130,9 @@ function WarningBanner(props) {
     alignSelf: { id: 'alignSelf', label: 'Align Self' },
     backfaceVisibility: { id: 'backfaceVisibility', label: 'Backface Visibility' },
     background: { id: 'background', label: 'Background' },
-    backgroundAttachment: { id: 'backgroundAttachment', label: 'Background Attachment' },
-    backgroundBlendMode: { id: 'backgroundBlendMode', label: 'Background Blend Mode' },
-    backgroundClip: { id: 'backgroundClip', label: 'Background Clip' },
+    backgroundAttachment: { id: 'backgroundAttachment', label: 'Background Attachment', isPro: true },
+    backgroundBlendMode: { id: 'backgroundBlendMode', label: 'Background Blend Mode', isPro: true },
+    backgroundClip: { id: 'backgroundClip', label: 'Background Clip', isPro: true },
     backgroundColor: { id: 'backgroundColor', label: 'Background Color' },
     bgColor: { id: 'bgColor', label: 'Background Color' },
     backgroundImage: { id: 'backgroundImage', label: 'Background Image' },
@@ -142,7 +142,7 @@ function WarningBanner(props) {
     backgroundSize: { id: 'backgroundSize', label: 'Background Size' },
     border: { id: 'border', label: 'Border' },
     borderCollapse: { id: 'borderCollapse', label: 'Border Collapse', isPro: true },
-    borderImage: { id: 'borderImage', label: 'Border Image' },
+    borderImage: { id: 'borderImage', label: 'Border Image', isPro: true },
     borderRadius: { id: 'borderRadius', label: 'Border Radius' },
     borderSpacing: { id: 'borderSpacing', label: 'Border Spacing', isPro: true },
     bottom: { id: 'bottom', label: 'Bottom' },
@@ -272,7 +272,7 @@ function WarningBanner(props) {
     <div >
 
 
-      <PanelRow>
+      <PanelRow className='bg-gray-200 p-2'>
 
         <PGDropdown position="bottom right" variant="secondary" options={sudoScourceArgs} buttonTitle={(sudoScourceArgs[sudoScource] != undefined) ? sudoScourceArgs[sudoScource].label : 'Choose'} onChange={(option, index) => {
 

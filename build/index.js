@@ -72777,15 +72777,18 @@ function WarningBanner(props) {
     },
     backgroundAttachment: {
       id: 'backgroundAttachment',
-      label: 'Background Attachment'
+      label: 'Background Attachment',
+      isPro: true
     },
     backgroundBlendMode: {
       id: 'backgroundBlendMode',
-      label: 'Background Blend Mode'
+      label: 'Background Blend Mode',
+      isPro: true
     },
     backgroundClip: {
       id: 'backgroundClip',
-      label: 'Background Clip'
+      label: 'Background Clip',
+      isPro: true
     },
     backgroundColor: {
       id: 'backgroundColor',
@@ -72826,7 +72829,8 @@ function WarningBanner(props) {
     },
     borderImage: {
       id: 'borderImage',
-      label: 'Border Image'
+      label: 'Border Image',
+      isPro: true
     },
     borderRadius: {
       id: 'borderRadius',
@@ -73132,7 +73136,9 @@ function WarningBanner(props) {
     });
   }
 
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, {
+    className: "bg-gray-200 p-2"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["default"], {
     position: "bottom right",
     variant: "secondary",
     options: sudoScourceArgs,

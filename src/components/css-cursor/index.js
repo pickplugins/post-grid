@@ -18,9 +18,40 @@ class PGcssCursor extends Component {
 
 
     var args = {
-      none: { "label": "auto", "value": "auto" },
+      auto: { "label": "auto", "value": "auto" },
       pointer: { "label": "pointer", "value": "pointer" },
       progress: { "label": "progress", "value": "progress" },
+      alias: { "label": "alias", "value": "alias" },
+      cell: { "label": "cell", "value": "cell" },
+      copy: { "label": "copy", "value": "copy" },
+      crosshair: { "label": "crosshair", "value": "crosshair" },
+      default: { "label": "default", "value": "default" },
+      grab: { "label": "grab", "value": "grab" },
+      grabbing: { "label": "grabbing", "value": "grabbing" },
+      help: { "label": "help", "value": "help" },
+      move: { "label": "move", "value": "move" },
+      'col-resize': { "label": "col-resize", "value": "col-resize" },
+      'context-menu': { "label": "context-menu", "value": "context-menu" },
+      'e-resize': { "label": "e-resize", "value": "e-resize" },
+      'ew-resize': { "label": "ew-resize", "value": "ew-resize" },
+      'n-resize': { "label": "n-resize", "value": "n-resize" },
+      'ne-resize': { "label": "ne-resize", "value": "ne-resize" },
+      'nesw-resize': { "label": "nesw-resize", "value": "nesw-resize" },
+      'ns-resize': { "label": "ns-resize", "value": "ns-resize" },
+      'nw-resize': { "label": "nw-resize", "value": "nw-resize" },
+      'nwse-resize': { "label": "nwse-resize", "value": "nwse-resize" },
+      'no-drop': { "label": "no-drop", "value": "no-drop" },
+      'none': { "label": "none", "value": "none" },
+      'not-allowed': { "label": "not-allowed", "value": "not-allowed" },
+      'row-resize': { "label": "row-resize", "value": "row-resize" },
+      's-resize;': { "label": "s-resize;", "value": "s-resize;" },
+      'se-resize': { "label": "se-resize", "value": "se-resize" },
+      'sw-resize': { "label": "sw-resize", "value": "sw-resize" },
+      'text': { "label": "text", "value": "text" },
+      'w-resize': { "label": "w-resize", "value": "w-resize" },
+      'wait': { "label": "wait", "value": "wait" },
+      'zoom-in': { "label": "zoom-in", "value": "zoom-in" },
+      'zoom-out': { "label": "zoom-out", "value": "zoom-out" },
 
     };
 
@@ -55,7 +86,7 @@ class PGcssCursor extends Component {
 
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
-                  onChange(x.value, 'display');
+                  onChange(x.value, 'cursor');
 
 
                 }}>

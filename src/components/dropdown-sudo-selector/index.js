@@ -1,6 +1,7 @@
 import { Button, PanelRow, Dropdown, Popover } from '@wordpress/components'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 import { createElement, useCallback, memo, useMemo, useState, useEffect, Component, RawHTML } from '@wordpress/element'
+import { applyFilters } from '@wordpress/hooks';
 
 
 class PGDropdownSudoSelector extends Component {
@@ -10,25 +11,32 @@ class PGDropdownSudoSelector extends Component {
     const {
       position,
       variant,
-      options, //[{"label":"Select..","icon":"","value":""}]
+      options,
       buttonTitle,
       onChange,
       values,
       value,
-
-
+      sudoScourceUpdate,
     } = this.props;
 
 
 
     function Html() {
-
+      //var sudoScourceArgsLocal = localStorage.getItem('sudoScourceArgs');
+      //sudoScourceArgsLocal = (sudoScourceArgsLocal != null) ? JSON.parse(sudoScourceArgsLocal) : {};
 
       const [pickerOpen, setPickerOpen] = useState(false);
       const [keyword, setKeyword] = useState('');
 
       const [filteredOptions, setfilteredOptions] = useState([]);
+      const [optionsX, setoptionsX] = useState(options);
 
+
+      useEffect(() => {
+
+        sudoScourceUpdate(optionsX)
+
+      }, [optionsX]);
 
 
 
@@ -42,7 +50,7 @@ class PGDropdownSudoSelector extends Component {
             setPickerOpen(prev => !prev);
 
           }}>
-            <Button variant={variant} >{options[value] != undefined ? options[value].label : buttonTitle}</Button>
+            <Button variant={variant} >{optionsX[value] != undefined ? optionsX[value].label : buttonTitle}</Button>
           </div>
 
 
@@ -65,12 +73,12 @@ class PGDropdownSudoSelector extends Component {
                     //console.log(typeof options);
 
 
-                    if (typeof options == 'object') {
+                    if (typeof optionsX == 'object') {
 
                       setfilteredOptions({});
                       var newOptions = {}
 
-                      Object.entries(options).map((args) => {
+                      Object.entries(optionsX).map((args) => {
                         var index = args[0]
                         var x = args[1]
 
@@ -95,7 +103,7 @@ class PGDropdownSudoSelector extends Component {
                       setfilteredOptions([]);
                       var newOptions = []
 
-                      options.map((x, index) => {
+                      optionsX.map((x, index) => {
 
                         let position = x.label.toLowerCase().search(newVal.toLowerCase());
                         if (position < 0) {
@@ -121,33 +129,79 @@ class PGDropdownSudoSelector extends Component {
 
                 <div>
 
-                  {keyword.length == 0 && typeof options == 'object' && Object.entries(options).map((args) => {
+                  {keyword.length == 0 && typeof optionsX == 'object' && Object.entries(optionsX).map((args) => {
 
                     var index = args[0]
                     var x = args[1]
 
                     return (
 
-                      <div className='border-b cursor-pointer hover:bg-slate-200 p-2 block' onClick={ev => {
-
-
-                        if (x.isPro == true) {
-
-                          alert('Sorry this feature only avilbale in pro');
-
-
-                        } else {
-                          onChange(x, index)
-                        }
-
-
-
-                      }} >
+                      <div className='border-b cursor-pointer hover:bg-slate-200 p-2 block'  >
                         <div className='flex justify-between'>
                           <div className={[x.isPro ? 'text-gray-400' : '']}>
                             {x.icon != undefined && <span className=''><RawHTML>{x.icon}</RawHTML></span>}
-                            <span className=''>{x.label} </span>
+                            <span className='' onClick={ev => {
+
+
+                              if (x.isPro == true) {
+
+                                alert('Sorry this feature only avilbale in pro');
+
+
+                              } else {
+
+
+
+                                // var sudoScourceArgsLocal = localStorage.getItem('sudoScourceArgs');
+                                //sudoScourceArgsLocal = (sudoScourceArgsLocal != null) ? JSON.parse(sudoScourceArgsLocal) : {};
+
+
+                                var sudoId = x.value.replace('(n)', '(' + x.arg + ')');
+
+                                //sudoScourceArgsLocal[sudoId] = { label: sudoId, value: sudoId, }
+
+                                //localStorage.setItem('sudoScourceArgs', JSON.stringify(sudoScourceArgsLocal));
+
+                                // var sudoScourceArgsLocalX = localStorage.getItem('sudoScourceArgs');
+
+                                //console.log(JSON.parse(sudoScourceArgsLocalX));
+                                //localStorage.clear();
+
+                                //options = JSON.parse(sudoScourceArgsLocalX);
+                                //setoptionsX(JSON.parse(sudoScourceArgsLocalX));
+
+                                onChange(x, index)
+                                optionsX[sudoId] = { label: sudoId, value: sudoId, };
+
+
+                                setoptionsX(optionsX)
+
+
+                                //sudoScourceUpdate();
+
+                              }
+
+
+
+                            }}>{x.label} </span>
                           </div>
+
+                          {x.arg != undefined && (
+                            <div className='w-16'>
+                              <InputControl
+                                className='mr-2'
+                                value={x.arg}
+                                onChange={(newVal) => {
+
+                                  x.arg = newVal;
+
+                                }}
+                              />
+                            </div>
+
+                          )}
+
+
                           {x.isPro && (<span className='bg-amber-400 rounded-sm px-3  text-white hover:text-white'>
                             <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
                           </span>)}
@@ -158,7 +212,7 @@ class PGDropdownSudoSelector extends Component {
 
                   })}
 
-                  {keyword.length == 0 && typeof options == 'array' && options.map((x, index) => {
+                  {keyword.length == 0 && typeof optionsX == 'array' && optionsX.map((x, index) => {
                     return (
 
                       <div className=' border-b cursor-pointer hover:bg-slate-200 p-2 block' onClick={ev => {

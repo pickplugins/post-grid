@@ -528,7 +528,6 @@ registerBlockType("post-grid/post-grid", {
 
       var proinfo = (myStore != null) ? myStore.getproinfo() : {};
 
-      console.log(proinfo);
 
 
       setproInfo(proinfo);

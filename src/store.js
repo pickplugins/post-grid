@@ -26,11 +26,9 @@ var selectors = {
     return clientdata;
   },
   getproinfo(state) {
-    //console.log('step: 1');
 
     const { proinfo } = state;
 
-    //console.log(proinfo);
 
     return proinfo;
   },
@@ -90,9 +88,25 @@ var selectors = {
       cssProp = 'background-position';
     }
 
+    else if (key == 'border') {
+      cssProp = 'border';
+    }
 
     else if (key == 'borderRadius') {
       cssProp = 'border-radius';
+    }
+
+    else if (key == 'borderCollapse') {
+      cssProp = 'border-collapse';
+    }
+
+    else if (key == 'borderSpacing') {
+      cssProp = 'border-spacing';
+    }
+
+
+    else if (key == 'backdropFilter') {
+      cssProp = 'backdrop-filter';
     }
 
     else if (key == 'bottom' || key == 'top' || key == 'left' || key == 'right' || key == 'clear' || key == 'color' || key == 'filter' || key == 'float') {
@@ -103,6 +117,21 @@ var selectors = {
 
     else if (key == 'boxSizing') {
       cssProp = 'box-sizing';
+    }
+    else if (key == 'cursor') {
+      cssProp = 'cursor';
+    }
+
+    else if (key == 'content') {
+      cssProp = 'content';
+    }
+
+    else if (key == 'columnCount') {
+      cssProp = 'column-count';
+    }
+
+    else if (key == 'direction') {
+      cssProp = 'direction';
     }
 
 
@@ -235,6 +264,29 @@ var selectors = {
     else if (key == 'overflowY') {
       cssProp = 'overflow-y';
     }
+    else if (key == 'writingMode') {
+      cssProp = 'writing-mode';
+    }
+
+    else if (key == 'wordWrap') {
+      cssProp = 'word-wrap';
+    }
+    else if (key == 'perspective') {
+      cssProp = 'perspective';
+    }
+
+    else if (key == 'minWidth') {
+      cssProp = 'min-width';
+    }
+    else if (key == 'minHeight') {
+      cssProp = 'min-height';
+    }
+    else if (key == 'maxHeight') {
+      cssProp = 'max-height';
+    }
+    else if (key == 'maxWidth') {
+      cssProp = 'max-width';
+    }
 
 
 
@@ -245,7 +297,6 @@ var selectors = {
     const { blockCss } = state;
 
 
-    console.log(items);
 
 
     var reponsiveCssGroups = {};
@@ -430,7 +481,6 @@ var resolvers = {
   * getLicense() {
     const path = '/post-grid/v2/get_license';
     const res = yield actions.fetchLicense(path);
-    //////console.log(res);
 
     return actions.setLicense(res);
   },
@@ -441,7 +491,6 @@ var resolvers = {
     const path = '/post-grid/v2/get_site_details';
     const res = yield actions.fetchclientdata(path);
 
-    //////console.log(res);
 
 
     return actions.setclientdata(res);
@@ -450,14 +499,12 @@ var resolvers = {
 
   * getproinfo() {
 
-    //console.log('step: 2');
 
 
 
     const path = '/post-grid/v2/get_pro_info';
     const res = yield actions.fetchproinfo(path);
 
-    //console.log(res);
 
 
     return actions.setproinfo(res);
@@ -484,8 +531,6 @@ const actions = {
   },
   setproinfo(proinfo) {
 
-    //console.log('step: 3');
-    //console.log(proinfo);
 
     return {
       type: 'SET_PROINFO',
@@ -511,7 +556,6 @@ const actions = {
     };
   },
   fetchproinfo(path) {
-    //console.log('step: 4');
 
     return {
       type: 'FETCH_PRO_INFO_FROM_API',
@@ -533,7 +577,6 @@ var controls = {
   },
 
   FETCH_PRO_INFO_FROM_API(action) {
-    //console.log('step: 5');
 
     return apiFetch({ path: action.path, method: 'POST', data: {}, });
   },
@@ -566,8 +609,6 @@ const store = createReduxStore('postgrid-shop', {
 
       case 'SET_PROINFO':
 
-        //console.log('step: 3');
-        //console.log(action.proinfo);
 
 
         return {

@@ -18,16 +18,16 @@ class PGcssBackgroundBlendMode extends Component {
 
 
     var args = {
-      normal: { "label": "normal", "value": "normal" },
-      multiply: { "label": "multiply", "value": "multiply" },
-      screen: { "label": "screen", "value": "screen" },
-      overlay: { "label": "overlay", "value": "overlay" },
-      darken: { "label": "darken", "value": "darken" },
-      lighten: { "label": "lighten", "value": "lighten" },
-      'color-dodge': { "label": "color-dodge", "value": "color-dodge" },
-      saturation: { "label": "saturation", "value": "saturation" },
-      color: { "label": "color", "value": "color" },
-      luminosity: { "label": "luminosity", "value": "luminosity" },
+      normal: { "label": "Normal", "value": "normal" },
+      multiply: { "label": "Multiply", "value": "multiply" },
+      screen: { "label": "Screen", "value": "screen" },
+      overlay: { "label": "Overlay", "value": "overlay" },
+      darken: { "label": "Darken", "value": "darken" },
+      lighten: { "label": "Lighten", "value": "lighten" },
+      'color-dodge': { "label": "Color dodge", "value": "color-dodge" },
+      saturation: { "label": "Saturation", "value": "saturation" },
+      color: { "label": "Color", "value": "color" },
+      luminosity: { "label": "Luminosity", "value": "luminosity" },
 
 
 

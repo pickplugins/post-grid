@@ -18,10 +18,10 @@ class PGcssTextTransform extends Component {
 
 
     var args = {
-      none: { "label": "none", "value": "none" },
-      capitalize: { "label": "capitalize", "value": "capitalize" },
-      uppercase: { "label": "uppercase", "value": "uppercase" },
-      lowercase: { "label": "lowercase", "value": "lowercase" },
+      none: { "label": "None", "value": "none" },
+      capitalize: { "label": "Capitalize", "value": "capitalize" },
+      uppercase: { "label": "Uppercase", "value": "uppercase" },
+      lowercase: { "label": "Lowercase", "value": "lowercase" },
 
 
 

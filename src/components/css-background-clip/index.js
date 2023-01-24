@@ -18,9 +18,9 @@ class PGcssBackgroundClip extends Component {
 
 
     var args = {
-      'border-box': { "label": "border-box", "value": "border-box" },
-      'padding-box': { "label": "padding-box", "value": "padding-box" },
-      'content-box': { "label": "content-box", "value": "content-box" },
+      'border-box': { "label": "Border box", "value": "border-box" },
+      'padding-box': { "label": "Padding box", "value": "padding-box" },
+      'content-box': { "label": "Content box", "value": "content-box" },
 
 
     };

@@ -18,8 +18,8 @@ class PGcssBackfaceVisibility extends Component {
 
 
     var args = {
-      visible: { "label": "visible", "value": "visible" },
-      hidden: { "label": "hidden", "value": "hidden" },
+      visible: { "label": "Visible", "value": "visible" },
+      hidden: { "label": "Hidden", "value": "hidden" },
 
     }
 

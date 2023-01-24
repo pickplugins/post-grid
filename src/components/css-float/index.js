@@ -18,9 +18,9 @@ class PGcssFloat extends Component {
 
 
     var args = {
-      none: { "label": "none", "value": "none" },
-      left: { "label": "left", "value": "left" },
-      right: { "label": "right", "value": "right" },
+      none: { "label": "None", "value": "none" },
+      left: { "label": "Left", "value": "left" },
+      right: { "label": "Right", "value": "right" },
 
     };
 

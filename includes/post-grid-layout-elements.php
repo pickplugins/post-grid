@@ -1041,7 +1041,6 @@ function post_grid_layout_element_title($args)
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
-            //var_dump($thumb_custom_url);
 
         ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo wp_kses_post($title); ?></a>
@@ -1946,7 +1945,6 @@ function post_grid_layout_element_excerpt($args)
     $char_limit = !empty($element['char_limit']) ? (int) $element['char_limit'] : 50;
     $read_more_text = isset($element['read_more_text']) ? $element['read_more_text'] : '';
 
-    //var_dump($excerpt_source);
 
     if ($excerpt_source == 'excerpt_field') {
 
@@ -1986,7 +1984,6 @@ function post_grid_layout_element_excerpt($args)
         $post_excerpt = wp_trim_words($post_excerpt, $char_limit, '');
     }
 
-    //var_dump($post_excerpt);
 
 
 ?>
@@ -2380,7 +2377,6 @@ function post_grid_layout_element_css_excerpt_read_more($args)
     $css = isset($element['css']) ? $element['css'] : '';
     $css_hover = isset($element['css_hover']) ? $element['css_hover'] : '';
 
-var_dump($text_align);
 
 ?>
     <style type="text/css">
@@ -3463,7 +3459,6 @@ function post_grid_layout_element_thumb($args)
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
-            //var_dump($thumb_custom_url);
 
         ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img src="<?php echo esc_url($thumb_url); ?>"></a>
@@ -3833,7 +3828,6 @@ function post_grid_layout_element_thumb_link($args)
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
-            //var_dump($thumb_custom_url);
 
         ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img src="<?php echo esc_url($thumb_url); ?>"></a>
@@ -4181,7 +4175,6 @@ function post_grid_layout_element_post_date($args)
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
-            //var_dump($thumb_custom_url);
 
         ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_date); ?></a>
@@ -4799,7 +4792,6 @@ function post_grid_layout_element_author_link($args)
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
             $thumb_custom_url = !empty($post_grid_post_settings['thumb_custom_url']) ? $post_grid_post_settings['thumb_custom_url'] : $post_link;
 
-            //var_dump($thumb_custom_url);
 
         ?>
             <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><?php echo esc_html($post_author); ?></a>
@@ -5162,7 +5154,6 @@ function post_grid_layout_element_categories($args)
             $i++;
         }
 
-    //var_dump($categories_html);
 
 ?>
     <div class="element element_<?php echo esc_attr($elementIndex); ?> <?php echo esc_attr($custom_class); ?> categories ">

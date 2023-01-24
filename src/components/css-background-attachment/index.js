@@ -18,9 +18,9 @@ class PGcssBackgroundAttachment extends Component {
 
 
     var args = {
-      scroll: { "label": "scroll", "value": "scroll" },
-      fixed: { "label": "fixed", "value": "fixed" },
-      local: { "label": "local", "value": "local" },
+      scroll: { "label": "Scroll", "value": "scroll" },
+      fixed: { "label": "Fixed", "value": "fixed" },
+      local: { "label": "Local", "value": "local" },
 
 
 

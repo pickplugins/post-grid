@@ -18,13 +18,13 @@ class PGcssAlignSelf extends Component {
 
 
     var args = {
-      'stretch': { "label": "stretch", "value": "stretch" },
-      'center': { "label": "center", "value": "center" },
-      'flex-start': { "label": "flex-start	", "value": "flex-start" },
-      'flex-end': { "label": "flex-end	", "value": "flex-end" },
-      'space-between': { "label": "space-between", "value": "space-between" },
-      'space-around': { "label": "space-around", "value": "space-around" },
-      'space-evenly': { "label": "space-evenly", "value": "space-evenly" },
+      'stretch': { "label": "Stretch", "value": "stretch" },
+      'center': { "label": "Center", "value": "center" },
+      'flex-start': { "label": "Flex start	", "value": "flex-start" },
+      'flex-end': { "label": "Flex end	", "value": "flex-end" },
+      'space-between': { "label": "Space between", "value": "space-between" },
+      'space-around': { "label": "Space around", "value": "space-around" },
+      'space-evenly': { "label": "Space evenly", "value": "space-evenly" },
     };
 
     //console.log(val);

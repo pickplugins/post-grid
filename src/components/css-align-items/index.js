@@ -18,11 +18,11 @@ class PGcssAlignItems extends Component {
 
 
     var args = [
-      { "label": "stretch", "value": "stretch" },
-      { "label": "center", "value": "center" },
-      { "label": "flex-start	", "value": "flex-start" },
-      { "label": "flex-end	", "value": "flex-end" },
-      { "label": "baseline", "value": "baseline" },
+      { "label": "Stretch", "value": "stretch" },
+      { "label": "Center", "value": "center" },
+      { "label": "Flex start	", "value": "flex-start" },
+      { "label": "Flex end	", "value": "flex-end" },
+      { "label": "Baseline", "value": "baseline" },
     ];
 
 

@@ -18,13 +18,13 @@ class PGcssBackgroundRepeat extends Component {
 
 
     var args = {
-      repeat: { "label": "repeat", "value": "repeat" },
-      'repeat-x': { "label": "repeat-x", "value": "repeat-x" },
-      'repeat-y': { "label": "repeat-y", "value": "repeat-y" },
-      'no-repeat': { "label": "no-repeat", "value": "no-repeat" },
+      repeat: { "label": "Repeat", "value": "repeat" },
+      'repeat-x': { "label": "Repeat X", "value": "repeat-x" },
+      'repeat-y': { "label": "Repeat Y", "value": "repeat-y" },
+      'no-repeat': { "label": "No repeat", "value": "no-repeat" },
 
-      space: { "label": "space", "value": "space" },
-      round: { "label": "round", "value": "round" },
+      space: { "label": "Space", "value": "space" },
+      round: { "label": "Round", "value": "round" },
 
 
 

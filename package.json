@@ -28,6 +28,7 @@
     "gutenberg-sortable": "^1.0.5",
     "masonry-layout": "^4.2.2",
     "npmignore": "^0.3.0",
+    "re-resizable": "^6.9.9",
     "react-sortablejs": "^6.1.4",
     "sortablejs": "^1.15.0",
     "styled-components": "^5.3.5"

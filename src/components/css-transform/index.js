@@ -24,28 +24,21 @@ class PGcssVerticalAlign extends Component {
       sub: { "label": "Sub", "value": "sub" },
       super: { "label": "Super", "value": "super" },
 
-    }
-
-
-      ;
+    };
 
     //console.log(val);
 
     return (
       <div>
-
         <Dropdown
           position="bottom"
           renderToggle={({ isOpen, onToggle }) => (
             <Button
               title=""
-
               onClick={onToggle}
               aria-expanded={isOpen}
             >
               <div className=" ">{val ? args[val].label : 'Select...'}</div>
-
-
             </Button>
           )}
           renderContent={() => <div className='w-32'>

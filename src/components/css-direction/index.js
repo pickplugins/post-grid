@@ -1,131 +1,87 @@
 
 
-const { Component } = wp.element;
-import { Button, Dropdown, } from '@wordpress/components'
-import { useState, } from '@wordpress/element'
-
-import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
+const { Component, RawHTML } = wp.element;
+import { Button, Dropdown } from '@wordpress/components'
 
 
-
-
-class PGcssBottom extends Component {
-
-
+class PGcssDirection extends Component {
   render() {
 
-    var {
+
+    const {
       val,
       onChange,
+
 
 
     } = this.props;
 
 
+    var args = {
+      ltr: { "label": "ltr", "value": "ltr" },
+      rtl: { "label": "rtl", "value": "rtl" },
+      initial: { "label": "initial", "value": "initial" },
+      inherit: { "label": "inherit", "value": "inherit" },
+    };
 
-
-
-
-    function Html() {
-
-
-      var unitArgs = {
-        px: { "label": "PX", "value": "px" },
-        em: { "label": "EM", "value": "em" },
-        rem: { "label": "REM", "value": "rem" },
-
-      }
-
-      var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
-      var widthUnitX = val != undefined ? val.match(/[a-zA-Z]+/g)[0] : 'px';
-
-
-      const [widthVal, setwidthVal] = useState(widthValX);
-      const [widthUnit, setwidthUnit] = useState(widthUnitX);
-
-      return (
-
-        <div className='flex mt-4'>
-
-
-          <InputControl
-            value={widthVal}
-            type="number"
-            onChange={(newVal) => {
-
-              setwidthVal(newVal);
-              onChange(newVal + widthUnit, 'bottom');
-
-
-            }}
-          />
-          <div>
-
-            <Dropdown
-              position="bottom"
-              renderToggle={({ isOpen, onToggle }) => (
-                <Button
-                  title=""
-
-                  onClick={onToggle}
-                  aria-expanded={isOpen}
-                >
-                  <div className=" ">{val ? unitArgs[widthUnit].label : 'Select...'}</div>
-
-
-                </Button>
-              )}
-              renderContent={() => <div className='w-32'>
-
-                {Object.entries(unitArgs).map((y) => {
-
-                  var index = y[0]
-                  var x = y[1]
-                  return (
-
-                    <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
-
-                      setwidthUnit(x.value);
-                      onChange(widthVal + x.value, 'bottom');
-
-
-                    }}>
-
-                      {x.value && (
-
-                        <>{x.label}</>
-
-                      )}
-
-                    </div>
-
-                  )
-
-                })}
-              </div>}
-            />
-          </div>
-
-
-        </div>
-
-
-
-
-      )
-
-    }
-
+    //console.log(val);
 
     return (
+      <div>
+
+        <Dropdown
+          position="bottom"
+          renderToggle={({ isOpen, onToggle }) => (
+            <Button
+              title="Align Content"
+
+              onClick={onToggle}
+              aria-expanded={isOpen}
+            >
+              <div className=" ">{val ? args[val].label : 'Select...'}</div>
 
 
-      <Html />
+            </Button>
+          )}
+          renderContent={() => <div className='w-32'>
 
+            {Object.entries(args).map((args) => {
+
+              var index = args[0]
+              var x = args[1]
+              return (
+
+                <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
+
+                  onChange(x.value, 'direction');
+
+
+                }}>
+
+                  {!x.value && (
+
+                    <div>Reset</div>
+
+                  )}
+
+                  {x.value && (
+
+                    <>{x.label}</>
+
+                  )}
+
+                </div>
+
+              )
+
+            })}
+          </div>}
+        />
+      </div>
 
     )
   }
 }
 
 
-export default PGcssBottom;
+export default PGcssDirection;

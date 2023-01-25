@@ -100,7 +100,7 @@ import PGcssTextTransform from '../../components/css-text-transform'
 import PGcssTop from '../../components/css-top'
 
 // import PGcssTransform from '../../components/css-transform'
-// import PGcssTransition from '../../components/css-transition'
+import PGcssTransition from '../../components/css-transition'
 import PGcssVerticalAlign from '../../components/css-vertical-align'
 import PGcssVisibility from '../../components/css-visibility'
 import PGcssWidth from '../../components/css-width'
@@ -178,7 +178,7 @@ function Html(props) {
     borderImage: { id: 'borderImage', label: 'Border Image', isPro: true },
     borderRadius: { id: 'borderRadius', label: 'Border Radius' },
     borderSpacing: { id: 'borderSpacing', label: 'Border Spacing', isPro: true },
-    backdropFilter: { id: 'backdropFilter', label: 'Backdrop Filter', isPro: true },
+    backdropFilter: { id: 'backdropFilter', label: 'Backdrop Filter', },
 
     bottom: { id: 'bottom', label: 'Bottom' },
     boxShadow: { id: 'boxShadow', label: 'Box Shadow' },
@@ -265,9 +265,7 @@ function Html(props) {
 
 
   function sudoScourceUpdate(args) {
-    //console.log(args);
     setSudoScources(args)
-    // console.log('#####sudoScourceArgs######', sudoScourceArgs);
 
 
   }
@@ -283,7 +281,6 @@ function Html(props) {
 
           props.onRemove(sudoScource, keyX)
 
-          console.log(sudoScource, keyX);
 
 
         }}><Icon icon={close} /></span>
@@ -312,7 +309,6 @@ function Html(props) {
 
   function onChangeCssVal(newVal, attr) {
 
-    console.log(sudoScource);
 
 
     props.onChange(sudoScource, newVal, attr);
@@ -551,6 +547,10 @@ function Html(props) {
 
               {(key == 'position') && (
                 <PGcssPosition val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+
+              {(key == 'transition') && (
+                <PGcssTransition val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
 
               {(key == 'textIndent') && (

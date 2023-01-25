@@ -95,24 +95,8 @@ registerBlockType("post-grid/post-author-fields", {
 
 
         },
-        styles:
-        {
-          textAlign: {},
-          color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {}, //{ val: '18', unit: 'px' }
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
-        },
+        styles: {},
 
-        after: {},
-        before: {},
       },
     },
     icon: {
@@ -330,7 +314,6 @@ registerBlockType("post-grid/post-author-fields", {
 
       var sudoScourceX = { ...field[sudoScource] }
 
-      //console.log(sudoScource);
 
       var elementSelector = fieldSelector;
 
@@ -386,7 +369,6 @@ registerBlockType("post-grid/post-author-fields", {
 
         var argAttr = myStore.cssAttrParse(args[0]);
 
-        //console.log(argAttr);
 
         var argAttrVal = args[1];
 
@@ -438,7 +420,6 @@ registerBlockType("post-grid/post-author-fields", {
 
         var argAttr = myStore.cssAttrParse(args[0]);
 
-        //console.log(argAttr);
 
         var argAttrVal = args[1];
 
@@ -1319,7 +1300,7 @@ registerBlockType("post-grid/post-author-fields", {
                 orientation="horizontal"
                 activeClass="active-tab"
 
-                onSelect={(tabName) => console.log('Selecting tab', tabName)}
+                onSelect={(tabName) => { }}
                 tabs={[
                   {
                     name: 'options',
@@ -1630,7 +1611,7 @@ registerBlockType("post-grid/post-author-fields", {
                 activeClass="active-tab bg-gray-200"
                 orientation="horizontal"
                 initialTabName="settings"
-                onSelect={(tabName) => console.log('Selecting tab', tabName)}
+                onSelect={(tabName) => {}}
                 tabs={[
                   {
                     name: 'settings',

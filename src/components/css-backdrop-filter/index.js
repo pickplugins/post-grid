@@ -11,7 +11,7 @@ import { Icon, close } from '@wordpress/icons';
 
 
 
-class PGcssFilter extends Component {
+class PGcssBackdropFilter extends Component {
 
 
   render() {
@@ -55,7 +55,7 @@ class PGcssFilter extends Component {
 
           })
 
-          onChange(str, 'filter');
+          onChange(str, 'backdropFilter');
 
         }
 
@@ -174,7 +174,7 @@ class PGcssFilter extends Component {
 
 
 
-                          onChange(str, 'filter');
+                          onChange(str, 'backdropFilter');
 
 
 
@@ -219,4 +219,4 @@ class PGcssFilter extends Component {
 }
 
 
-export default PGcssFilter;
+export default PGcssBackdropFilter;

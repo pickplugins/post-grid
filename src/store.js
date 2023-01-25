@@ -288,7 +288,9 @@ var selectors = {
       cssProp = 'max-width';
     }
 
-
+    else if (key == 'transition') {
+      cssProp = 'transition';
+    }
 
     return cssProp;
 

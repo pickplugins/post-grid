@@ -13,7 +13,6 @@ function MyFunction(props) {
 
   const [selected, setSelected] = useState(props.activeTab);
   var content;
-  console.log(selected);
 
   // useEffect(() => {
   // }, [keyword]);

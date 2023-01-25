@@ -32,7 +32,18 @@ class PGcssPadding extends Component {
 
     function Html() {
 
+      console.log(val);
 
+
+      var valParts = (val != undefined) ? val.split(" ") : ['5px', '5px', '5px', '5px'];
+
+      var topX = valParts[0];
+      var rightX = valParts[1];
+      var bottomX = valParts[2];
+      var leftX = valParts[3];
+
+
+      const [valX, setvalX] = useState({ top: topX, right: rightX, bottom: bottomX, left: leftX });
 
 
       return (
@@ -41,9 +52,16 @@ class PGcssPadding extends Component {
 
           <BoxControl
             label=""
-            values={val}
+            values={valX}
             onChange={(nextValues) => {
-              onChange(nextValues, 'padding');
+
+              console.log(val);
+              console.log(nextValues);
+
+              setvalX({ top: nextValues.top, right: nextValues.right, bottom: nextValues.bottom, left: nextValues.left })
+              //nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left
+
+              onChange(nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left, 'padding');
             }}
           />
 

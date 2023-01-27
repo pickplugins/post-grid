@@ -292,6 +292,10 @@ var selectors = {
       cssProp = 'transition';
     }
 
+    else if (key == 'transform') {
+      cssProp = 'transform';
+    }
+
     return cssProp;
 
   },

@@ -71,14 +71,14 @@ class PGcssFilter extends Component {
 
       useEffect(() => {
 
-        //console.log(valParts);
         var filtered = valParts.filter(Boolean)
 
+        //console.log(filtered);
 
 
         var res = filtered.map(x => {
 
-          //console.log(x.length);
+          console.log(x);
 
 
 
@@ -86,12 +86,18 @@ class PGcssFilter extends Component {
             var argVal = x != undefined ? x.match(/\d+/g)[0] : 1;
             var argId = x != undefined ? x.match(/[a-zA-Z]+/g)[0] : '';
 
+            console.log(argVal);
+
+
             return { id: argId, val: argVal };
           }
 
 
 
         })
+
+        console.log(res);
+
 
         setvalArgs(res);
         //console.log(res);

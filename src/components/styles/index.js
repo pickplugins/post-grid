@@ -99,7 +99,7 @@ import PGcssTextShadow from '../../components/css-text-shadow'
 import PGcssTextTransform from '../../components/css-text-transform'
 import PGcssTop from '../../components/css-top'
 
-// import PGcssTransform from '../../components/css-transform'
+import PGcssTransform from '../../components/css-transform'
 import PGcssTransition from '../../components/css-transition'
 import PGcssVerticalAlign from '../../components/css-vertical-align'
 import PGcssVisibility from '../../components/css-visibility'
@@ -551,6 +551,10 @@ function Html(props) {
 
               {(key == 'transition') && (
                 <PGcssTransition val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+
+              {(key == 'transform') && (
+                <PGcssTransform val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
 
               {(key == 'textIndent') && (

@@ -32,76 +32,99 @@ function Html(props) {
     { label: 'ease-in-out', value: 'ease-in-out' },
     { label: 'step-start', value: 'step-start' },
     { label: 'step-end', value: 'step-end' },
-    { label: 'ease', value: 'ease' },
-    { label: 'ease', value: 'ease' },
   ]
 
 
-  var propertyArgs = [
-    { label: 'all', value: 'all' },
-    { label: 'background-color', value: 'background-color' },
-    { label: 'color', value: 'color' },
-    { label: 'opacity', value: 'opacity' },
-    { label: 'border', value: 'border' },
-    { label: 'bottom', value: 'bottom' },
-    { label: 'box-shadow', value: 'box-shadow' },
-    { label: 'height', value: 'height' },
-    { label: 'left', value: 'left' },
-    { label: 'margin', value: 'margin' },
-    { label: 'padding', value: 'padding' },
-    { label: 'right', value: 'right' },
-    { label: 'rotate', value: 'rotate' },
-    { label: 'top', value: 'top' },
-    { label: 'translate', value: 'translate' },
-    { label: 'width', value: 'width' },
-    { label: 'transform', value: 'transform' },
-    { label: 'zoom', value: 'zoom' },
-    { label: 'font-size', value: 'font-size' },
-    { label: 'font-weight', value: 'font-weight' },
-    { label: 'font-stretch', value: 'font-stretch' },
-    { label: 'filter', value: 'filter' },
-    { label: 'background', value: 'background' },
-
-
-
-
-  ]
-
-
-
-
-
-  function addFilter() {
-
-    valArgs.push({ property: 'width', duration: '1s', timingFunction: 'ease', delay: '0s' });
-
-    var str = '';
-    valArgs.map(x => {
-      str += x.property + ' ' + x.duration + ' ' + x.timingFunction + ' ' + x.delay + ',';
-    })
-
-    props.onChange(str, 'transition');
-  }
-
-
-
+  var propertyArgs = {
+    'background-color': { value: 'background-color', label: 'Background Color' },
+    color: { value: 'color', label: 'Color' },
+    'box-shadow': { value: 'box-shadow', label: 'Box Shadow' },
+    'font-size': { value: 'font-size', label: 'Font Size' },
+    right: { value: 'right', label: 'Right' },
+    top: { value: 'top', label: 'Top' },
+    width: { value: 'width', label: 'Width' },
+    height: { value: 'height', label: 'Height' },
+    'font-weight': { value: 'font-weight', label: 'Font Weight' },
+    left: { value: 'left', label: 'Left' },
+    'z-index': { value: 'z-index', label: 'Z-Index' },
+    margin: { value: 'margin', label: 'Margin' },
+    padding: { value: 'padding', label: 'Padding' },
+    'max-height': { value: 'max-height', label: 'Max Height' },
+    'max-width': { value: 'max-width', label: 'Max Width' },
+    'min-height': { value: 'min-height', label: 'Min Height' },
+    'min-width': { value: 'min-width', label: 'Min Width' },
+    opacity: { value: 'opacity', label: 'Opacity' },
+    'align-content': { value: 'align-content', label: 'Align Content' },
+    'align-items': { value: 'align-items', label: 'Align Items' },
+    'align-self': { value: 'align-self', label: 'Align Self' },
+    'backface-visibility': { value: 'backface-visibility', label: 'Backface Visibility' },
+    //background: { value: 'background', label: 'Background' },
+    'background-attachment': { value: 'background-attachment', label: 'Background Attachment', isPro: true },
+    'background-blendMode': { value: 'background-blendMode', label: 'Background Blend Mode', isPro: true },
+    'background-clip': { value: 'background-clip', label: 'Background Clip', isPro: true },
+    'background-image': { value: 'background-image', label: 'Background Image' },
+    'background-origin': { value: 'background-origin', label: 'Background Origin' },
+    'background-repeat': { value: 'background-repeat', label: 'Background Repeat' },
+    'background-position': { value: 'background-position', label: 'Background Position' },
+    'background-size': { value: 'background-size', label: 'Background Size' },
+    border: { value: 'border', label: 'Border' },
+    'border-collapse': { value: 'border-collapse', label: 'Border Collapse', isPro: true },
+    'border-image': { value: 'border-image', label: 'Border Image', isPro: true },
+    'border-radius': { value: 'border-radius', label: 'Border Radius' },
+    'border-spacing': { value: 'border-spacing', label: 'Border Spacing', isPro: true },
+    'backdrop-filter': { value: 'backdrop-filter', label: 'Backdrop Filter', },
+    bottom: { value: 'bottom', label: 'Bottom' },
+    'box-sizing': { value: 'box-sizing', label: 'Box Sizing', isPro: true },
+    clear: { value: 'clear', label: 'Clear' },
+    clip: { value: 'clip', label: 'Clip', isPro: true },
+    'clip-path': { value: 'clip-path', label: 'Clip Path', isPro: true },
+    'column-count': { value: 'column-count', label: 'Column Count', isPro: true },
+    content: { value: 'content', label: 'Content', isPro: true },
+    cursor: { value: 'cursor', label: 'Cursor', isPro: true },
+    display: { value: 'display', label: 'Display' },
+    direction: { value: 'direction', label: 'Direction' },
+    float: { value: 'float', label: 'Float' },
+    filter: { value: 'filter', label: 'Filter', isPro: true },
+    'font-family': { value: 'font-family', label: 'Font Family' },
+    'font-stretch': { value: 'font-stretch', label: 'Font Stretch', isPro: true },
+    'font-style': { value: 'font-style', label: 'Font Style' },
+    'font-variant-caps': { value: 'font-variant-caps', label: 'Font VariantCaps', isPro: true },
+    'letter-spacing': { value: 'letter-spacing', label: 'Letter Spacing', isPro: true },
+    'line-height': { value: 'line-height', label: 'Line Height' },
+    'list-style': { value: 'list-style', label: 'ListStyle' },
+    outline: { value: 'outline', label: 'Outline', isPro: true },
+    overflow: { value: 'overflow', label: 'Overflow' },
+    'overflow-x': { value: 'overflow-x', label: 'OverflowX', isPro: true },
+    'overflow-y': { value: 'overflow-y', label: 'OverflowY', isPro: true },
+    perspective: { value: 'perspective', label: 'Perspective', isPro: true },
+    position: { value: 'position', label: 'Position' },
+    'text-align': { value: 'text-align', label: 'Text Align' },
+    transform: { value: 'transform', label: 'Transform', isPro: true },
+    transition: { value: 'transition', label: 'Transition', isPro: true },
+    'vertical-align': { value: 'vertical-align', label: 'Vertical Align' },
+    visibility: { value: 'visibility', label: 'Visibility' },
+    'text-decoration': { value: 'text-decoration', label: 'Text Decoration', isPro: true },
+    'text-indent': { value: 'text-indent', label: 'Text Indent', isPro: true },
+    'text-justify': { value: 'text-justify', label: 'Text Justify', isPro: true },
+    'text-overflow': { value: 'text-overflow', label: 'Text Overflow' },
+    'text-shadow': { value: 'text-shadow', label: 'Text Shadow', isPro: true },
+    'text-transform': { value: 'text-transform', label: 'Text Transform', isPro: true },
+    'word-break': { value: 'word-break', label: 'Word Break', isPro: true },
+    'word-spacing': { value: 'word-spacing', label: 'Word Spacing', isPro: true },
+    'word-wrap': { value: 'word-wrap', label: 'Word Wrap', isPro: true },
+    'writing-mode': { value: 'writing-mode', label: 'Writing Mode', isPro: true },
+  };
 
 
 
   useEffect(() => {
 
-
-
     var filtered = valParts.filter(Boolean)
-
 
     var res = filtered.map(x => {
 
-
       if (x.length != 0) {
-
         var items = x.split(" ");
-
         var property = items[0];
         var duration = items[1];
         var timingFunction = items[2];
@@ -123,7 +146,31 @@ function Html(props) {
 
     <div className='mt-4'>
       <div className='flex mb-3'>
-        <Button variant="secondary" onClick={addFilter} values="">Add</Button>
+
+        <PGDropdown position="bottom right" variant="secondary" options={propertyArgs} buttonTitle="Choose"
+          onChange={(option, index) => {
+
+            valArgs.push({ property: option.value, duration: '1s', timingFunction: 'ease', delay: '0s' });
+
+            var str = '';
+            valArgs.map((x, i) => {
+              str += x.property + ' ' + x.duration + ' ' + x.timingFunction + ' ' + x.delay;
+              str += ',';
+            })
+
+
+
+            var strX = str.slice(0, -1);
+
+
+
+            props.onChange(strX, 'transition');
+
+          }} ></PGDropdown>
+
+
+
+
       </div>
 
       {
@@ -136,32 +183,7 @@ function Html(props) {
 
             return (
 
-              <PanelBody title={(arg.property != null) ? arg.property : 'property'} initialOpen={false}>
-
-                <PanelRow>
-                  <label for="">Property Name</label>
-
-                  <PGDropdown position="bottom right" variant="secondary" options={propertyArgs} buttonTitle={(arg.property != null) ? arg.property : 'Choose'} onChange={(option, index) => {
-
-
-                    valArgs[i].property = option.value;
-
-                    var str = '';
-                    valArgs.map(x => {
-
-                      str += option.value + ' ' + x.duration + ' ' + x.timingFunction + ' ' + x.delay;
-
-                    })
-
-                    props.onChange(str, 'transition');
-
-
-
-                  }} ></PGDropdown>
-
-
-
-                </PanelRow>
+              <PanelBody title={(arg.property != null && propertyArgs[arg.property] != undefined) ? propertyArgs[arg.property].label : 'property'} initialOpen={false}>
 
                 <PanelRow>
                   <label for="">Duration</label>
@@ -176,9 +198,10 @@ function Html(props) {
                       valArgs.map(x => {
 
                         str += x.property + ' ' + newVal + ' ' + x.timingFunction + ' ' + x.delay;
+                        str += ',';
                       })
-
-                      props.onChange(str, 'transition');
+                      var strX = str.slice(0, -1);
+                      props.onChange(strX, 'transition');
 
                     }}
                   />
@@ -198,9 +221,10 @@ function Html(props) {
                     valArgs.map(x => {
 
                       str += x.property + ' ' + x.duration + ' ' + option.value + ' ' + x.delay;
+                      str += ',';
                     })
-
-                    props.onChange(str, 'transition');
+                    var strX = str.slice(0, -1);
+                    props.onChange(strX, 'transition');
 
 
 
@@ -224,9 +248,10 @@ function Html(props) {
                       valArgs.map(x => {
 
                         str += x.property + ' ' + x.duration + ' ' + x.timingFunction + ' ' + newVal;
+                        str += ',';
                       })
-
-                      props.onChange(str, 'transition');
+                      var strX = str.slice(0, -1);
+                      props.onChange(strX, 'transition');
 
                     }}
                   />
@@ -242,9 +267,24 @@ function Html(props) {
                   <span class="hover:bg-red-500 bg-red-400 text-white ml-1 inline-block p-1 cursor-pointer" onClick={ev => {
 
 
-                    valArgs.splice(i, 1);
+                    var hellox = valArgs.splice(i, 1);
+                    console.log(valArgs);
+                    console.log(hellox);
+
 
                     setvalArgs(valArgs);
+
+                    var str = '';
+                    valArgs.map(x => {
+
+                      str += x.property + ' ' + x.duration + ' ' + x.timingFunction + ' ' + x.delay;
+                      str += ',';
+                    })
+                    var strX = str.slice(0, -1);
+                    props.onChange(strX, 'transition');
+
+
+
 
                   }}><span class="dashicons dashicons-no-alt"></span></span>
                 </div>

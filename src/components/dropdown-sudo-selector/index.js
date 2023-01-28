@@ -137,10 +137,10 @@ class PGDropdownSudoSelector extends Component {
                     return (
 
                       <div className='border-b cursor-pointer hover:bg-slate-200 p-2 block'  >
-                        <div className='flex justify-between'>
+                        <div className=''>
                           <div className={[x.isPro ? 'text-gray-400' : '']}>
                             {x.icon != undefined && <span className=''><RawHTML>{x.icon}</RawHTML></span>}
-                            <span className='' onClick={ev => {
+                            <div className='' onClick={ev => {
 
 
                               if (x.isPro == true) {
@@ -183,7 +183,7 @@ class PGDropdownSudoSelector extends Component {
 
 
 
-                            }}>{x.label} </span>
+                            }}>{x.label} </div>
                           </div>
 
                           {x.arg != undefined && (

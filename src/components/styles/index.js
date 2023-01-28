@@ -370,6 +370,28 @@ function Html(props) {
 
 
       <div className='my-5'>
+
+        {props.obj[sudoScource] == undefined && (
+
+          <PanelRow>
+            <label for="">Copy Style</label>
+            <PGDropdown position="bottom right" variant="secondary" options={sudoScources} buttonTitle="Copy Style"
+              onChange={(option, index) => {
+                console.log(props.obj[option.value]);
+
+                if (props.obj[option.value] != undefined) {
+
+                } else {
+                  alert('No style found on ' + option.label)
+                }
+
+
+              }} values=""></PGDropdown>
+          </PanelRow>
+
+        )}
+
+
         {
 
           //Object.entries(cssAtts).map(([key, value]) => (

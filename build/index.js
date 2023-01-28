@@ -73297,6 +73297,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
 
 const {
   Component
@@ -73312,171 +73314,159 @@ function Html(props) {
     return null;
   }
 
-  var valParts = props.val != undefined ? props.val.split(" ") : [];
+  console.log(props.val);
+  var valParts = props.val != undefined ? props.val.split(") ") : [];
   const [valArgs, setvalArgs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   var propertyArgs = {
-    translate: {
-      label: 'translate',
-      id: 'translate',
-      x: '',
-      y: ''
-    },
-    translate3d: {
-      label: 'translate3d',
-      id: 'translate3d',
-      x: '',
-      y: '',
-      z: ''
-    },
     translateX: {
-      label: 'translateX',
+      label: 'TranslateX',
       id: 'translateX',
-      val: '0px',
-      unit: 'px'
+      val: '0px'
     },
     translateY: {
-      label: 'translateY',
+      label: 'TranslateY',
       id: 'translateY',
-      val: '0px',
-      unit: 'px'
+      val: '0px'
     },
     translateZ: {
-      label: 'translateZ',
+      label: 'TranslateZ',
       id: 'translateZ',
-      val: '0px',
-      unit: 'px'
+      val: '0px'
+    },
+    translate: {
+      label: 'Translate',
+      id: 'translate',
+      val: '5px,6px'
+    },
+    translate3d: {
+      label: 'Translate3d',
+      id: 'translate3d',
+      val: '0px,0px,0px'
     },
     scale: {
-      label: 'scale',
+      label: 'Scale',
       id: 'scale',
-      x: '',
-      y: ''
+      val: '2,3'
     },
     scale3d: {
-      label: 'scale3d',
+      label: 'Scale3d',
       id: 'scale3d',
-      x: '',
-      y: '',
-      z: ''
+      val: '1,1,1'
     },
     scaleX: {
-      label: 'scaleX',
+      label: 'ScaleX',
       id: 'scaleX',
-      val: '0px',
-      unit: 'px'
+      val: '1'
     },
     scaleY: {
-      label: 'scaleY',
+      label: 'ScaleY',
       id: 'scaleY',
-      val: '0px',
-      unit: 'px'
+      val: '1'
     },
     scaleZ: {
-      label: 'scaleZ',
+      label: 'ScaleZ',
       id: 'scaleZ',
-      val: '0px',
-      unit: 'px'
+      val: '1'
     },
     rotate: {
-      label: 'rotate',
+      label: 'Rotate',
       id: 'rotate',
-      angle: '0',
-      unit: 'deg'
+      val: '0deg'
     },
     rotate3d: {
-      label: 'rotate3d',
+      label: 'Rotate3d',
       id: 'rotate3d',
-      x: '',
-      y: '',
-      z: '',
-      angle: ''
+      val: '1,1,1,0deg'
     },
     rotateX: {
-      label: 'rotateX',
+      label: 'RotateX',
       id: 'rotateX',
-      val: '0',
-      unit: 'deg'
+      val: '0deg'
     },
     rotateY: {
-      label: 'rotateY',
+      label: 'RotateY',
       id: 'rotateY',
-      val: '0deg',
-      unit: 'deg'
+      val: '0deg'
     },
     rotateZ: {
-      label: 'rotateZ',
+      label: 'RotateZ',
       id: 'rotateZ',
-      val: '0deg',
-      unit: 'deg'
+      val: '0deg'
     },
     skew: {
-      label: 'skew',
+      label: 'Skew',
       id: 'skew',
-      x: '',
-      y: ''
+      val: '2deg,3deg'
     },
     skewX: {
-      label: 'skewX',
+      label: 'SkewX',
       id: 'skewX',
-      val: '0deg',
-      unit: 'deg'
+      val: '0deg'
     },
     skewY: {
-      label: 'skewY',
+      label: 'SkewY',
       id: 'skewY',
-      val: '0deg',
-      unit: 'deg'
+      val: '0deg'
     },
     perspective: {
-      label: 'perspective',
+      label: 'Perspective',
       id: 'perspective',
-      val: ''
+      val: '0px'
     },
     matrix: {
-      label: 'matrix',
+      label: 'Matrix',
       id: 'matrix',
-      args: []
+      val: '1,1,1,1,1,1'
     },
     matrix3d: {
-      label: 'matrix3d',
+      label: 'Matrix3d',
       id: 'matrix3d',
-      args: []
+      val: '1,1'
     }
   };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     var filtered = valParts.filter(Boolean);
     var res = filtered.map(x => {
-      console.log(x);
-
       if (x.length != 0) {
         var proptyParts = x != undefined ? x.split("(") : [];
-        console.log(proptyParts);
         var proptyId = proptyParts[0];
-        var proptyVal = proptyParts[1].slice(0, -1);
+        var proptyVal = proptyParts[1];
         var obj = {
           id: proptyId,
-          val: ''
+          val: proptyVal
         };
-
-        if (proptyId == 'translateX' || proptyId == 'translateY' || proptyId == 'translateZ' || proptyId == 'scaleX' || proptyId == 'scaleY' || proptyId == 'scaleZ' || proptyId == 'rotateX' || proptyId == 'rotateY' || proptyId == 'rotateZ' || proptyId == 'skewX' || proptyId == 'skewY') {
-          var argVal = proptyVal != undefined ? proptyVal.match(/\d+/g)[0] : 1;
-          var argUnit = proptyVal != undefined ? proptyVal.match(/[a-zA-Z%]+/g)[0] : '';
-          obj = {
-            id: proptyId,
-            val: argVal,
-            unit: argUnit
-          };
-        }
-
         return obj;
       }
     });
-    console.log(res);
     setvalArgs(res);
   }, [props.val]);
+
+  function RemoveProty(_ref) {
+    let {
+      title,
+      index
+    } = _ref;
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "flex  items-center "
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      class: "hover:bg-red-500 hover:text-white mr-1 inline-block p-1 cursor-pointer",
+      onClick: ev => {
+        var hellox = valArgs.splice(index, 1);
+        setvalArgs(valArgs);
+        var str = '';
+        valArgs.map(x => {
+          str += x.id + '(' + x.val + ') ';
+        });
+        props.onChange(str, 'transform');
+      }
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"]
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, title));
+  }
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mt-4"
-  }, JSON.stringify(props.val), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-3"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_2__["default"], {
     position: "bottom right",
@@ -73487,34 +73477,232 @@ function Html(props) {
       valArgs.push(option);
       var str = '';
       valArgs.map((x, i) => {
-        if (x.id == 'translateX' || x.id == 'translateY' || x.id == 'translateZ' || x.id == 'scaleX' || x.id == 'scaleY' || x.id == 'scaleZ' || x.id == 'rotateX' || x.id == 'rotateY' || x.id == 'rotateZ' || x.id == 'skewX' || x.id == 'skewY') {
-          str += x.id + '(' + x.val + ') ';
-        } else {
-          str += x.id + '(2%) ';
-        }
+        str += x.id + '(' + x.val + ') ';
       });
       props.onChange(str, 'transform');
     }
   })), valArgs != undefined && valArgs.map((arg, i) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
-      title: arg.id != null && propertyArgs[arg.id] != undefined ? propertyArgs[arg.id].label : 'property',
+      title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveProty, {
+        title: arg.id != null && propertyArgs[arg.id] != undefined ? propertyArgs[arg.id].label : 'property',
+        index: i
+      }),
       initialOpen: false
-    }, JSON.stringify(arg), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "flex"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      class: "hover:bg-red-500 bg-red-400 text-white ml-1 inline-block p-1 cursor-pointer",
-      onClick: ev => {
-        var hellox = valArgs.splice(i, 1);
-        setvalArgs(valArgs);
+    }, (arg.id == 'translateX' || arg.id == 'translateY' || arg.id == 'translateZ' || arg.id == 'scaleX' || arg.id == 'scaleY' || arg.id == 'scaleZ' || arg.id == 'rotateX' || arg.id == 'rotateY' || arg.id == 'rotateZ' || arg.id == 'skewX' || arg.id == 'skewY' || arg.id == 'perspective') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Value"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      value: arg.val.match(/\d+/g)[0],
+      type: "number",
+      onChange: newVal => {
+        //var argVal = arg.val != undefined ? arg.val.match(/\d+/g)[0] : 1;
+        //var argUnit = arg.val != undefined ? arg.val.match(/[a-zA-Z]+/g)[0] : '';
+        console.log(newVal); //console.log(argUnit);
+
         var str = '';
-        valArgs.map(x => {
-          str += x.id + '(2%) ';
+        valArgs.map((x, j) => {
+          if (arg.id == x.id) {
+            if (arg.id == 'scaleX' || arg.id == 'scaleY' || arg.id == 'scaleZ') {
+              str += x.id + '(' + newVal + ') ';
+            }
+
+            if (arg.id == 'translateX' || arg.id == 'translateY' || arg.id == 'translateZ' || arg.id == 'perspective') {
+              str += x.id + '(' + newVal + 'px) ';
+            }
+
+            if (arg.id == 'rotateX' || arg.id == 'rotateY' || arg.id == 'rotateZ' || arg.id == 'skewX' || arg.id == 'skewY') {
+              str += x.id + '(' + newVal + 'deg) ';
+            }
+          } else {
+            str += x.id + '(' + x.val + ') ';
+          }
+        });
+        console.log(str);
+        props.onChange(str, 'transform');
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (arg.id == 'translateX' || arg.id == 'translateY' || arg.id == 'translateZ' || arg.id == 'perspective') && "PX", (arg.id == 'rotateX' || arg.id == 'rotateY' || arg.id == 'rotateZ' || arg.id == 'skewX' || arg.id == 'skewY') && "deg"))), (arg.id == 'translate' || arg.id == 'scale' || arg.id == 'skew') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "X Value"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      value: arg.val.split(",")[0].match(/\d+/g)[0],
+      type: "number",
+      onChange: newVal => {
+        //var argVal = arg.val != undefined ? arg.val.match(/\d+/g)[0] : 1;
+        //var argUnit = arg.val != undefined ? arg.val.match(/[a-zA-Z]+/g)[0] : '';
+        console.log(newVal); //console.log(argUnit);
+
+        var valPartsX = arg.val.split(",")[0].match(/\d+/g)[0];
+        var valPartsY = arg.val.split(",")[1].match(/\d+/g)[0];
+        var str = '';
+        valArgs.map((x, j) => {
+          if (arg.id == x.id) {
+            if (arg.id == 'scale') {
+              str += x.id + '(' + newVal + ',' + valPartsY + ') ';
+            }
+
+            if (arg.id == 'translate') {
+              str += x.id + '(' + newVal + 'px,' + valPartsY + 'px) ';
+            }
+
+            if (arg.id == 'skew') {
+              str += x.id + '(' + newVal + 'deg,' + valPartsY + 'deg) ';
+            }
+          } else {
+            str += x.id + '(' + x.val + ') ';
+          }
         });
         props.onChange(str, 'transform');
       }
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      class: "dashicons dashicons-no-alt"
-    }))));
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, arg.id == 'translate' && "PX", arg.id == 'skew' && "deg")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Y Value"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      value: arg.val.split(",")[1].match(/\d+/g)[0],
+      type: "number",
+      onChange: newVal => {
+        var valPartsX = arg.val.split(",")[0].match(/\d+/g)[0];
+        var valPartsY = arg.val.split(",")[1].match(/\d+/g)[0];
+        var str = '';
+        valArgs.map((x, j) => {
+          if (arg.id == x.id) {
+            if (arg.id == 'scale') {
+              str += x.id + '(' + valPartsX + ',' + newVal + ') ';
+            }
+
+            if (arg.id == 'translate') {
+              str += x.id + '(' + valPartsX + 'px,' + newVal + 'px) ';
+            }
+
+            if (arg.id == 'skew') {
+              str += x.id + '(' + valPartsX + 'deg,' + newVal + 'deg) ';
+            }
+          } else {
+            str += x.id + '(' + x.val + ') ';
+          }
+        });
+        props.onChange(str, 'transform');
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, arg.id == 'translate' && "PX", arg.id == 'skew' && "deg"))), (arg.id == 'translate3d' || arg.id == 'scale3d' || arg.id == 'rotate3d') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "X Value"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      value: arg.val.split(",")[0].match(/\d+/g)[0],
+      type: "number",
+      onChange: newVal => {
+        //var argVal = arg.val != undefined ? arg.val.match(/\d+/g)[0] : 1;
+        //var argUnit = arg.val != undefined ? arg.val.match(/[a-zA-Z]+/g)[0] : '';
+        console.log(newVal); //console.log(argUnit);
+
+        var valPartsX = arg.val.split(",")[0].match(/\d+/g)[0];
+        var valPartsY = arg.val.split(",")[1].match(/\d+/g)[0];
+        var valPartsZ = arg.val.split(",")[2].match(/\d+/g)[0];
+        var str = '';
+        valArgs.map((x, j) => {
+          if (arg.id == x.id) {
+            if (arg.id == 'scale3d') {
+              str += x.id + '(' + newVal + ',' + valPartsY + ',' + valPartsZ + ') ';
+            }
+
+            if (arg.id == 'translate3d') {
+              str += x.id + '(' + newVal + 'px,' + valPartsY + 'px,' + valPartsZ + 'px) ';
+            }
+
+            if (arg.id == 'rotate3d') {
+              var valPartsA = arg.val.split(",")[2].match(/\d+/g)[0];
+              str += x.id + '(' + newVal + ',' + valPartsY + ',' + valPartsZ + ',' + valPartsA + 'deg) ';
+            }
+          } else {
+            str += x.id + '(' + x.val + ') ';
+          }
+        });
+        props.onChange(str, 'transform');
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, arg.id == 'translate3d' && "PX")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Y Value"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      value: arg.val.split(",")[1].match(/\d+/g)[0],
+      type: "number",
+      onChange: newVal => {
+        var valPartsX = arg.val.split(",")[0].match(/\d+/g)[0];
+        var valPartsY = arg.val.split(",")[1].match(/\d+/g)[0];
+        var valPartsZ = arg.val.split(",")[2].match(/\d+/g)[0];
+        var str = '';
+        valArgs.map((x, j) => {
+          if (arg.id == x.id) {
+            if (arg.id == 'scale3d') {
+              str += x.id + '(' + valPartsX + ',' + newVal + ',' + valPartsZ + ') ';
+            }
+
+            if (arg.id == 'translate3d') {
+              str += x.id + '(' + valPartsX + 'px,' + newVal + 'px,' + valPartsZ + 'px) ';
+            }
+
+            if (arg.id == 'rotate3d') {
+              var valPartsA = arg.val.split(",")[3].match(/\d+/g)[0];
+              str += x.id + '(' + valPartsX + ',' + newVal + ',' + valPartsZ + ',' + valPartsA + 'deg) ';
+            }
+          } else {
+            str += x.id + '(' + x.val + ') ';
+          }
+        });
+        props.onChange(str, 'transform');
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, arg.id == 'translate3d' && "PX", arg.id == 'skew' && "deg")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Z Value"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      value: arg.val.split(",")[2].match(/\d+/g)[0],
+      type: "number",
+      onChange: newVal => {
+        var valPartsX = arg.val.split(",")[0].match(/\d+/g)[0];
+        var valPartsY = arg.val.split(",")[1].match(/\d+/g)[0];
+        var valPartsZ = arg.val.split(",")[2].match(/\d+/g)[0];
+        var str = '';
+        valArgs.map((x, j) => {
+          if (arg.id == x.id) {
+            if (arg.id == 'scale3d') {
+              str += x.id + '(' + valPartsX + ',' + valPartsY + ',' + newVal + ') ';
+            }
+
+            if (arg.id == 'translate3d') {
+              str += x.id + '(' + valPartsX + 'px,' + valPartsY + 'px,' + newVal + 'px) ';
+            }
+
+            if (arg.id == 'rotate3d') {
+              var valPartsA = arg.val.split(",")[3].match(/\d+/g)[0];
+              str += x.id + '(' + valPartsX + ',' + valPartsY + ',' + newVal + ',' + valPartsA + 'deg) ';
+            }
+          } else {
+            str += x.id + '(' + x.val + ') ';
+          }
+        });
+        props.onChange(str, 'transform');
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, arg.id == 'translate3d' && "PX", arg.id == 'skew' && "deg")), arg.id == 'rotate3d' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Angle"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+      value: arg.val.split(",")[3].match(/\d+/g)[0],
+      type: "number",
+      onChange: newVal => {
+        var valPartsX = arg.val.split(",")[0].match(/\d+/g)[0];
+        var valPartsY = arg.val.split(",")[1].match(/\d+/g)[0];
+        var valPartsZ = arg.val.split(",")[2].match(/\d+/g)[0];
+        var str = '';
+        valArgs.map((x, j) => {
+          if (arg.id == x.id) {
+            if (arg.id == 'scale3d') {
+              str += x.id + '(' + valPartsX + ',' + valPartsY + ',' + valPartsZ + ') ';
+            }
+
+            if (arg.id == 'translate3d') {
+              str += x.id + '(' + valPartsX + 'px,' + valPartsY + 'px,' + valPartsZ + 'px) ';
+            }
+
+            if (arg.id == 'rotate3d') {
+              str += x.id + '(' + valPartsX + ',' + valPartsY + ',' + valPartsZ + ',' + newVal + 'deg) ';
+            }
+          } else {
+            str += x.id + '(' + x.val + ') ';
+          }
+        });
+        props.onChange(str, 'transform');
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, arg.id == 'rotate3d' && "deg"))));
   }));
 }
 
@@ -76851,7 +77039,22 @@ function Html(props) {
     value: breakPointX
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-5"
-  }, //Object.entries(cssAtts).map(([key, value]) => (
+  }, props.obj[sudoScource] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: ""
+  }, "Copy Style"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    position: "bottom right",
+    variant: "secondary",
+    options: sudoScources,
+    buttonTitle: "Copy Style",
+    onChange: (option, index) => {
+      console.log(props.obj[option.value]);
+
+      if (props.obj[option.value] != undefined) {} else {
+        alert('No style found on ' + option.label);
+      }
+    },
+    values: ""
+  })), //Object.entries(cssAtts).map(([key, value]) => (
   props.obj[sudoScource] != undefined && Object.entries(props.obj[sudoScource]).reverse().map(_ref2 => {
     let [key, value] = _ref2;
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {

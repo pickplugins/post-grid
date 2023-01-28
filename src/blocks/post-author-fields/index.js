@@ -1559,7 +1559,6 @@ registerBlockType("post-grid/post-author-fields", {
                                       var ssdsd = field.options.linkAttr.concat([]);
                                       var options = { ...field.options, linkAttr: ssdsd };
                                       setAttributes({ field: { ...field, options: options } });
-
                                     }}
                                   />
 

@@ -1,38 +1,33 @@
 
 
 const { Component, RawHTML } = wp.element;
-import { Button, Dropdown } from '@wordpress/components'
+import { Button, Dropdown, PanelRow, __experimentalInputControl as InputControl } from '@wordpress/components'
 
 
-class PGcssVerticalAlign extends Component {
+class PGcssTextOverflow extends Component {
   render() {
 
 
     const {
       val,
       onChange,
-
-
-
     } = this.props;
 
 
     var args = {
-      baseline: { "label": "Baseline", "value": "baseline" },
-      'text-top': { "label": "Text Top", "value": "text-top" },
-      'text-bottom': { "label": "Text Bottom", "value": "text-bottom" },
-      sub: { "label": "Sub", "value": "sub" },
-      super: { "label": "Super", "value": "super" },
+      clip: { "label": "Clip", "value": "clip" },
+      ellipsis: { "label": "Ellipsis", "value": "ellipsis" },
+      string: { "label": "String", "value": "string" },
+      initial: { "label": "initial", "value": "initial" },
+      inherit: { "label": "inherit", "value": "inherit" },
+    };
 
-    }
+    console.log(typeof val);
 
-
-      ;
-
-    //console.log(val);
 
     return (
       <div>
+
 
         <Dropdown
           position="bottom"
@@ -43,7 +38,7 @@ class PGcssVerticalAlign extends Component {
               onClick={onToggle}
               aria-expanded={isOpen}
             >
-              <div className=" ">{val ? args[val].label : 'Select...'}</div>
+              <div className=" ">{(args[val] != undefined) ? args[val].label : 'Select...'}</div>
 
 
             </Button>
@@ -58,7 +53,7 @@ class PGcssVerticalAlign extends Component {
 
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
-                  onChange(x.value, 'verticalAlign');
+                  onChange(x.value, 'textOverflow');
 
 
                 }}>
@@ -82,6 +77,33 @@ class PGcssVerticalAlign extends Component {
             })}
           </div>}
         />
+
+
+
+        {(val != 'clip' || val != 'ellipsis' || val != 'initial' || val != 'inherit') && (
+
+          <PanelRow>
+            <label for="">
+              Custom String
+            </label>
+            <InputControl
+              className='mr-2'
+              value={val}
+              onChange={(newVal) => {
+
+                var string = '"' + newVal + '"'
+                onChange(string, 'textOverflow');
+              }}
+            />
+          </PanelRow>
+
+
+
+        )}
+
+
+
+
       </div>
 
     )
@@ -89,4 +111,4 @@ class PGcssVerticalAlign extends Component {
 }
 
 
-export default PGcssVerticalAlign;
+export default PGcssTextOverflow;

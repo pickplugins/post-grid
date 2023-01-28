@@ -103,7 +103,9 @@ var selectors = {
     else if (key == 'borderSpacing') {
       cssProp = 'border-spacing';
     }
-
+    else if (key == 'boxShadow') {
+      cssProp = 'box-shadow';
+    }
 
     else if (key == 'backdropFilter') {
       cssProp = 'backdrop-filter';
@@ -151,12 +153,17 @@ var selectors = {
     else if (key == 'fontWeight') {
       cssProp = 'font-weight';
     }
-
+    else if (key == 'fontVariantCaps') {
+      cssProp = 'font-variant-caps';
+    }
 
     else if (key == 'letterSpacing') {
       cssProp = 'letter-spacing';
     }
 
+    else if (key == 'listStyle') {
+      cssProp = 'list-style';
+    }
 
     else if (key == 'lineHeight') {
       cssProp = 'line-height';
@@ -198,6 +205,10 @@ var selectors = {
     else if (key == 'textDecoration') {
       cssProp = 'text-decoration';
     }
+    else if (key == 'textOverflow') {
+      cssProp = 'text-overflow';
+    }
+
 
     else if (key == 'textShadow') {
       cssProp = 'text-shadow';

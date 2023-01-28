@@ -38,7 +38,7 @@ import PGcssBorderSpacing from '../../components/css-border-spacing'
 
 import PGcssBackdropFilter from '../../components/css-backdrop-filter'
 
-// import PGcssBoxShadow from '../../components/css-box-shadow'
+import PGcssBoxShadow from '../../components/css-box-shadow'
 import PGcssBoxSizing from '../../components/css-box-sizing'
 import PGcssClear from '../../components/css-clear'
 // import PGcssClip from '../../components/css-clip'
@@ -59,11 +59,13 @@ import PGcssFontSize from '../../components/css-font-size'
 import PGcssFontStretch from '../../components/css-font-stretch'
 import PGcssFontStyle from '../../components/css-font-style'
 import PGcssFontWeight from '../../components/css-font-weight'
+import PGcssFontVariantCaps from '../../components/css-font-variant-caps'
+
 import PGcssHeight from '../../components/css-height'
 import PGcssLeft from '../../components/css-left'
 import PGcssLetterSpacing from '../../components/css-letter-spacing'
 import PGcssLineHeight from '../../components/css-line-height'
-// import PGcssListStyle from '../../components/css-list-style'
+import PGcssListStyle from '../../components/css-list-style'
 import PGcssMargin from '../../components/css-margin'
 import PGcssMaxHeight from '../../components/css-max-height'
 import PGcssMaxWidth from '../../components/css-max-width'
@@ -94,7 +96,7 @@ import PGcssTextAlign from '../../components/css-text-align'
 import PGcssTextDecoration from '../../components/css-text-decoration'
 import PGcssTextIndent from '../../components/css-text-indent'
 import PGcssTextJustify from '../../components/css-text-justify'
-// import PGcssTextOverflow from '../../components/css-text-overflow'
+import PGcssTextOverflow from '../../components/css-text-overflow'
 import PGcssTextShadow from '../../components/css-text-shadow'
 import PGcssTextTransform from '../../components/css-text-transform'
 import PGcssTop from '../../components/css-top'
@@ -184,8 +186,8 @@ function Html(props) {
     boxShadow: { id: 'boxShadow', label: 'Box Shadow' },
     boxSizing: { id: 'boxSizing', label: 'Box Sizing', isPro: true },
     clear: { id: 'clear', label: 'Clear' },
-    clip: { id: 'clip', label: 'Clip', isPro: true },
-    clipPath: { id: 'clipPath', label: 'Clip Path', isPro: true },
+    // clip: { id: 'clip', label: 'Clip', isPro: true },
+    // clipPath: { id: 'clipPath', label: 'Clip Path', isPro: true },
     color: { id: 'color', label: 'Color' },
     columnCount: { id: 'columnCount', label: 'Column Count', isPro: true },
     content: { id: 'content', label: 'Content', isPro: true },
@@ -204,7 +206,7 @@ function Html(props) {
     left: { id: 'left', label: 'Left' },
     letterSpacing: { id: 'letterSpacing', label: 'Letter Spacing', isPro: true },
     lineHeight: { id: 'lineHeight', label: 'Line Height' },
-    listStyle: { id: 'listStyle', label: 'ListStyle' },
+    listStyle: { id: 'listStyle', label: 'List Style' },
     margin: { id: 'margin', label: 'Margin' },
     maxHeight: { id: 'maxHeight', label: 'Max Height' },
     maxWidth: { id: 'maxWidth', label: 'Max Width' },
@@ -425,6 +427,8 @@ function Html(props) {
                 <PGcssBackgroundBlendMode val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
 
+
+
               {(key == 'backgroundClip') && (
                 <PGcssBackgroundClip val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
@@ -451,6 +455,9 @@ function Html(props) {
                 <PGcssBackgroundPosition val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
 
+              {(key == 'boxShadow') && (
+                <PGcssBoxShadow val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
               {(key == 'border') && (
                 <PGcssBorder val={value[breakPointX]} onChange={onChangeCssVal} />
@@ -541,6 +548,10 @@ function Html(props) {
                 <PGcssFontWeight val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
 
+              {(key == 'fontVariantCaps') && (
+                <PGcssFontVariantCaps val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+
 
               {(key == 'letterSpacing') && (
                 <PGcssLetterSpacing val={value[breakPointX]} onChange={onChangeCssVal} />
@@ -549,6 +560,10 @@ function Html(props) {
 
               {(key == 'lineHeight') && (
                 <PGcssLineHeight val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+
+              {(key == 'listStyle') && (
+                <PGcssListStyle val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
 
               {(key == 'objectFit') && (
@@ -586,6 +601,11 @@ function Html(props) {
               {(key == 'textJustify') && (
                 <PGcssTextJustify val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
+
+              {(key == 'textOverflow') && (
+                <PGcssTextOverflow val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+
 
 
               {(key == 'textTransform') && (

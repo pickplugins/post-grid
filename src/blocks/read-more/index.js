@@ -903,70 +903,7 @@ registerBlockType("post-grid/read-more", {
 
     const CustomTag = `${wrapper.options.tag}`;
 
-    const MyDropdown = () => (
 
-      <div>
-
-        <Dropdown
-          position="bottom"
-          renderToggle={({ isOpen, onToggle }) => (
-            <Button
-              title={(breakPoints[breakPointX] != undefined) ? breakPoints[breakPointX].name : ''}
-              variant="secondary"
-              onClick={onToggle}
-              aria-expanded={isOpen}
-            >
-              <RawHTML className="text-lg ">{(breakPoints[breakPointX] != undefined) ? breakPoints[breakPointX].icon : '<span class="icon-responsive font-bold"></span>'}</RawHTML>
-
-
-            </Button>
-          )}
-          renderContent={() => <div>
-
-            {breakPointList.map(x => {
-
-
-              return (
-
-                <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
-
-
-
-                  setPreviewDeviceType(x.value)
-                  var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
-
-                  asdsdsd.then((res) => {
-
-                    setBreakPointX(res.breakpoint);
-                    //generateBlockCssY();
-                    myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-                  });
-
-
-
-                }}>
-
-                  {!x.value && (
-
-                    <div><span class="icon-close"></span></div>
-
-                  )}
-
-                  {x.value && (
-
-                    <RawHTML>{x.icon}</RawHTML>
-
-                  )}
-
-                </div>
-
-              )
-
-            })}
-          </div>}
-        />
-      </div>
-    );
 
 
 

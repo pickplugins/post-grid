@@ -15,7 +15,7 @@ import { __experimentalInputControl as InputControl } from '@wordpress/component
 import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
 import { store } from '../../store'
-import { link, linkOff } from "@wordpress/icons";
+import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 
 import IconToggle from '../../components/icon-toggle'
 import Typography from '../../components/typography'
@@ -27,6 +27,12 @@ import PGDropdown from '../../components/dropdown'
 
 import colorsPresets from '../../colors-presets'
 import PGcssDisplay from '../../components/css-display'
+
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
+
+
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -305,7 +311,7 @@ registerBlockType("post-grid/post-excerpt", {
 
 
     // Wrapper CSS Class Selectors
-    const excerptWrapperSelector = blockClass;
+    const wrapperSelector = blockClass;
     var excerptSelector = '';
     const redmoreSelector = blockClass + ' .readmore';
     const prefixSelector = blockClass + ' .prefix';
@@ -494,6 +500,465 @@ registerBlockType("post-grid/post-excerpt", {
       ev.preventDefault();
       return false;
     }
+
+
+
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+    function onChangeStylePostExcerpt(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...postExcerpt[sudoScource] }
+      var elementSelector = excerptSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = excerptSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = excerptSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = excerptSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = excerptSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = excerptSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = excerptSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = excerptSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = excerptSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = excerptSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = excerptSelector + '::first-line';
+      }
+      else {
+        elementSelector = excerptSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ postExcerpt: { ...postExcerpt } });
+    }
+
+
+
+
+
+
+    function onRemoveStylePostExcerpt(sudoScource, key) {
+      var sudoScourceX = { ...postExcerpt[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      postExcerpt[sudoScource] = sudoScourceX;
+      setAttributes({ postExcerpt: { ...postExcerpt } });
+
+      if (blockCssY.items[excerptSelector] == undefined) {
+        blockCssY.items[excerptSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[excerptSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStylePostExcerpt(sudoScource, key) {
+      var sudoScourceX = { ...postExcerpt[sudoScource] }
+      sudoScourceX[key] = {};
+      postExcerpt[sudoScource] = sudoScourceX;
+      setAttributes({ postExcerpt: { ...postExcerpt } });
+    }
+
+
+
+
+    function onChangeStyleRedmore(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...postExcerpt[sudoScource] }
+      var elementSelector = redmoreSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = redmoreSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = redmoreSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = redmoreSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = redmoreSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = redmoreSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = redmoreSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = redmoreSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = redmoreSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = redmoreSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = redmoreSelector + '::first-line';
+      }
+      else {
+        elementSelector = redmoreSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ postExcerpt: { ...postExcerpt } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleRedmore(sudoScource, key) {
+      var sudoScourceX = { ...postExcerpt[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      postExcerpt[sudoScource] = sudoScourceX;
+      setAttributes({ postExcerpt: { ...postExcerpt } });
+
+      if (blockCssY.items[redmoreSelector] == undefined) {
+        blockCssY.items[redmoreSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[redmoreSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleRedmore(sudoScource, key) {
+      var sudoScourceX = { ...postExcerpt[sudoScource] }
+      sudoScourceX[key] = {};
+      postExcerpt[sudoScource] = sudoScourceX;
+      setAttributes({ postExcerpt: { ...postExcerpt } });
+    }
+
+
+
+    function onChangeStylePrefix(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      var elementSelector = prefixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = prefixSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = prefixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = prefixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = prefixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = prefixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = prefixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = prefixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = prefixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = prefixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = prefixSelector + '::first-line';
+      }
+      else {
+        elementSelector = prefixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onRemoveStylePrefix(sudoScource, key) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      prefix[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ prefix: { ...prefix } });
+
+      if (blockCssY.items[prefixSelector] == undefined) {
+        blockCssY.items[prefixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePrefix(sudoScource, key) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      sudoScourceX[key] = {};
+      prefix[sudoScource] = sudoScourceX;
+      setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onChangeStylePostfix(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      var elementSelector = postfixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = postfixSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = postfixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = postfixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = postfixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = postfixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = postfixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = postfixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = postfixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = postfixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = postfixSelector + '::first-line';
+      }
+      else {
+        elementSelector = postfixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+    function onRemoveStylePostfix(sudoScource, key) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      postfix[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ postfix: { ...postfix } });
+
+      if (blockCssY.items[postfixSelector] == undefined) {
+        blockCssY.items[postfixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePostfix(sudoScource, key) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      sudoScourceX[key] = {};
+      postfix[sudoScource] = sudoScourceX;
+      setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1226,70 +1691,6 @@ registerBlockType("post-grid/post-excerpt", {
     const CustomTagExcerpt = `${postExcerpt.options.tag}`;
 
 
-    const MyDropdown = () => (
-
-      <div>
-
-        <Dropdown
-          position="bottom"
-          renderToggle={({ isOpen, onToggle }) => (
-            <Button
-              title={(breakPoints[breakPointX] != undefined) ? breakPoints[breakPointX].name : ''}
-              variant="secondary"
-              onClick={onToggle}
-              aria-expanded={isOpen}
-            >
-              <RawHTML className="text-lg ">{(breakPoints[breakPointX] != undefined) ? breakPoints[breakPointX].icon : '<span class="icon-responsive font-bold"></span>'}</RawHTML>
-
-
-            </Button>
-          )}
-          renderContent={() => <div>
-
-            {breakPointList.map(x => {
-
-
-              return (
-
-                <div className={' text-lg font-bold border-b inline-block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
-
-
-
-                  setPreviewDeviceType(x.value)
-                  var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
-
-                  asdsdsd.then((res) => {
-
-                    setBreakPointX(res.breakpoint);
-                    //generateBlockCssY();
-                    myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-                  });
-
-
-
-                }}>
-
-                  {!x.value && (
-
-                    <div><span class="icon-close"></span></div>
-
-                  )}
-
-                  {x.value && (
-
-                    <RawHTML>{x.icon}</RawHTML>
-
-                  )}
-
-                </div>
-
-              )
-
-            })}
-          </div>}
-        />
-      </div>
-    );
 
 
 
@@ -1337,15 +1738,8 @@ registerBlockType("post-grid/post-excerpt", {
                 var styles = { ...wrapper.styles, textAlign: newValuesObj };
                 setAttributes({ wrapper: { options: wrapper.options, styles: styles } });
 
-                blockCssY.items[excerptWrapperSelector] = { ...blockCssY.items[excerptWrapperSelector], 'text-align': newValuesObj };
+                blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-align': newValuesObj };
                 setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-
-
-
 
               }}
             />
@@ -1361,70 +1755,58 @@ registerBlockType("post-grid/post-excerpt", {
 
           <InspectorControls key="general">
 
-
-
             <PanelBody title="Wrapper" initialOpen={false}>
 
-              <PanelRow>
-                <label for="">Wrapper Tag</label>
-
-                <SelectControl
-                  label=""
-                  value={wrapper.options.tag}
-                  options={[
-                    { label: 'No Wrapper', value: '' },
-
-                    { label: 'H1', value: 'h1' },
-                    { label: 'H2', value: 'h2' },
-                    { label: 'H3', value: 'h3' },
-                    { label: 'H4', value: 'h4' },
-                    { label: 'H5', value: 'h5' },
-                    { label: 'H6', value: 'h6' },
-                    { label: 'SPAN', value: 'span' },
-                    { label: 'DIV', value: 'div' },
-                    { label: 'P', value: 'p' },
-
-
-                  ]}
-                  onChange={(newVal) => {
-
-
-
-                    var options = { ...wrapper.options, tag: newVal };
-                    setAttributes({ wrapper: { ...wrapper, options: options } });
-
-
-
-                  }
-
-                  }
-                />
-              </PanelRow>
-
-              <PanelRow>
-                <label>Display</label>
-                <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
-
-
-                  var newValuesObj = {};
-
-                  if (Object.keys(wrapper.styles.display).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = wrapper.styles.display;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...wrapper.styles, display: newValuesObj };
-                  setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-                  blockCssY.items[excerptWrapperSelector] = { ...blockCssY.items[excerptWrapperSelector], 'display': newValuesObj };
-                  setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                })} />
-              </PanelRow>
-
-
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
+                  <PanelRow>
+                    <label for="">Wrapper Tag</label>
+                    <SelectControl
+                      label=""
+                      value={wrapper.options.tag}
+                      options={[
+                        { label: 'No Wrapper', value: '' },
+                        { label: 'H1', value: 'h1' },
+                        { label: 'H2', value: 'h2' },
+                        { label: 'H3', value: 'h3' },
+                        { label: 'H4', value: 'h4' },
+                        { label: 'H5', value: 'h5' },
+                        { label: 'H6', value: 'h6' },
+                        { label: 'SPAN', value: 'span' },
+                        { label: 'DIV', value: 'div' },
+                        { label: 'P', value: 'p' },
+                      ]}
+                      onChange={(newVal) => {
+                        var options = { ...wrapper.options, tag: newVal };
+                        setAttributes({ wrapper: { ...wrapper, options: options } });
+                      }
+                      }
+                    />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                </PGtab>
+              </PGtabs>
             </PanelBody>
 
 
@@ -1435,380 +1817,403 @@ registerBlockType("post-grid/post-excerpt", {
 
 
 
-              <ToggleControl
-                label="Linked with post?"
-                help={postExcerpt.options.isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
-                checked={postExcerpt.options.isLink ? true : false}
-                onChange={(e) => {
-                  var options = { ...postExcerpt.options, isLink: postExcerpt.options.isLink ? false : true, };
-                  setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                }}
-              />
-
-
-              {!postExcerpt.options.isLink && (
-
-                <PanelRow>
-                  <label for="">Custom Tag</label>
-                  <SelectControl
-                    label=""
-                    value={postExcerpt.options.tag}
-                    options={[
-                      { label: 'H1', value: 'h1' },
-                      { label: 'H2', value: 'h2' },
-                      { label: 'H3', value: 'h3' },
-                      { label: 'H4', value: 'h4' },
-                      { label: 'H5', value: 'h5' },
-                      { label: 'H6', value: 'h6' },
-                      { label: 'SPAN', value: 'span' },
-                      { label: 'DIV', value: 'div' },
-                      { label: 'P', value: 'p' },
-                    ]}
-                    onChange={(newVal) => {
-                      var options = { ...postExcerpt.options, tag: newVal };
-                      setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                    }
-
-                    }
-                  />
-                </PanelRow>
-
-
-              )}
-
-
-              {postExcerpt.options.isLink && (
-
-                <div>
-                  <PanelRow>
-                    <label for="">Link Target</label>
-
-                    <SelectControl
-                      label=""
-                      value={postExcerpt.options.linkTarget}
-                      options={[
-                        { label: '_self', value: '_self' },
-                        { label: '_blank', value: '_blank' },
-                        { label: '_parent', value: '_parent' },
-                        { label: '_top', value: '_top' },
-
-
-                      ]}
-                      onChange={(newVal) => {
-
-
-
-                        var options = { ...postExcerpt.options, linkTarget: newVal, };
-                        setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-
-
-
-
-                      }
-
-
-
-                      }
-                    />
-                  </PanelRow>
-
-
-
-
-                  <PanelRow>
-                    <label for="">Custom Url</label>
-
-                    <div className='relative'>
-                      <Button className={(linkPickerExcerpt) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                        setLinkPickerExcerpt(prev => !prev)
-                      }}></Button>
-                      {postExcerpt.options.customUrl.length > 0 && (
-                        <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                          var options = { ...postExcerpt.options, customUrl: '' };
-                          setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                        }}></Button>
-
-                      )}
-                      {linkPickerExcerpt && (
-                        <Popover position="bottom right">
-                          <LinkControl settings={[]} value={postExcerpt.options.customUrl} onChange={newVal => {
-
-                            var options = { ...postExcerpt.options, customUrl: newVal.url };
-
-                            setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                            //setLinkPickerpostExcerpt(false)
-
-                          }} />
-
-                          <div className='p-2'><span className='font-bold'>Linked to:</span> {(postExcerpt.options.customUrl.length != 0) ? postExcerpt.options.customUrl : 'No link'} </div>
-                        </Popover>
-
-                      )}
-
-
-                    </div>
-                  </PanelRow>
-
-
-
-
-
-
-                  <PanelRow>
-                    <label for="">Custom Attributes</label>
-                    <div
-                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                      onClick={(ev) => {
-
-                        var sdsd = postExcerpt.options.linkAttr != undefined ? postExcerpt.options.linkAttr.concat({ id: '', val: '' }) : [];
-
-
-                        var options = { ...postExcerpt.options, linkAttr: sdsd, };
-                        setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-
-
-
-
-
-
-                      }}
-
-                    >Add</div>
-
-
-
-                  </PanelRow>
-
-
-
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
                   {
-                    postExcerpt.options.linkAttr != undefined && postExcerpt.options.linkAttr.map((x, i) => {
-
-                      return (
-
-                        <div className='my-2'>
-                          <PanelRow>
-                            <InputControl
-                              placeholder="Name"
-                              className='mr-2'
-                              value={postExcerpt.options.linkAttr[i].id}
-                              onChange={(newVal) => {
-
-                                postExcerpt.options.linkAttr[i].id = newVal;
-
-
-                                var ssdsd = postExcerpt.options.linkAttr.concat([]);
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
 
 
-                                var options = { ...postExcerpt.options, linkAttr: ssdsd, };
+                  <ToggleControl
+                    label="Linked with post?"
+                    help={postExcerpt.options.isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
+                    checked={postExcerpt.options.isLink ? true : false}
+                    onChange={(e) => {
+                      var options = { ...postExcerpt.options, isLink: postExcerpt.options.isLink ? false : true, };
+                      setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                    }}
+                  />
+
+
+                  {!postExcerpt.options.isLink && (
+
+                    <PanelRow>
+                      <label for="">Custom Tag</label>
+                      <SelectControl
+                        label=""
+                        value={postExcerpt.options.tag}
+                        options={[
+                          { label: 'H1', value: 'h1' },
+                          { label: 'H2', value: 'h2' },
+                          { label: 'H3', value: 'h3' },
+                          { label: 'H4', value: 'h4' },
+                          { label: 'H5', value: 'h5' },
+                          { label: 'H6', value: 'h6' },
+                          { label: 'SPAN', value: 'span' },
+                          { label: 'DIV', value: 'div' },
+                          { label: 'P', value: 'p' },
+                        ]}
+                        onChange={(newVal) => {
+                          var options = { ...postExcerpt.options, tag: newVal };
+                          setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                        }
+
+                        }
+                      />
+                    </PanelRow>
+
+
+                  )}
+
+
+                  {postExcerpt.options.isLink && (
+
+                    <div>
+                      <PanelRow>
+                        <label for="">Link Target</label>
+
+                        <SelectControl
+                          label=""
+                          value={postExcerpt.options.linkTarget}
+                          options={[
+                            { label: '_self', value: '_self' },
+                            { label: '_blank', value: '_blank' },
+                            { label: '_parent', value: '_parent' },
+                            { label: '_top', value: '_top' },
+
+
+                          ]}
+                          onChange={(newVal) => {
+
+
+
+                            var options = { ...postExcerpt.options, linkTarget: newVal, };
+                            setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+
+
+
+
+                          }
+
+
+
+                          }
+                        />
+                      </PanelRow>
+
+
+
+
+                      <PanelRow>
+                        <label for="">Custom Url</label>
+
+                        <div className='relative'>
+                          <Button className={(linkPickerExcerpt) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                            setLinkPickerExcerpt(prev => !prev)
+                          }}></Button>
+                          {postExcerpt.options.customUrl.length > 0 && (
+                            <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                              var options = { ...postExcerpt.options, customUrl: '' };
+                              setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                            }}></Button>
+
+                          )}
+                          {linkPickerExcerpt && (
+                            <Popover position="bottom right">
+                              <LinkControl settings={[]} value={postExcerpt.options.customUrl} onChange={newVal => {
+
+                                var options = { ...postExcerpt.options, customUrl: newVal.url };
+
                                 setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                                //setLinkPickerpostExcerpt(false)
 
+                              }} />
 
+                              <div className='p-2'><span className='font-bold'>Linked to:</span> {(postExcerpt.options.customUrl.length != 0) ? postExcerpt.options.customUrl : 'No link'} </div>
+                            </Popover>
 
-
-                              }}
-                            />
-
-                            <InputControl
-                              className='mr-2'
-                              placeholder="Value"
-                              value={x.val}
-                              onChange={(newVal) => {
-                                postExcerpt.options.linkAttr[i].val = newVal
-                                var ssdsd = postExcerpt.options.linkAttr.concat([]);
-
-
-
-                                var options = { ...postExcerpt.options, linkAttr: ssdsd, };
-                                setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-
-
-
-                              }}
-                            />
-                            <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                              onClick={(ev) => {
-
-                                postExcerpt.options.linkAttr.splice(i, 1);
-
-                                var ssdsd = postExcerpt.options.linkAttr.concat([]);
-
-
-
-                                var options = { ...postExcerpt.options, linkAttr: ssdsd, };
-                                setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-
-
-
-
-                              }}
-
-                            ></span>
-                          </PanelRow>
-
-
+                          )}
 
 
                         </div>
-
-                      )
-
-                    })
-                  }
-
-
-                </div>
+                      </PanelRow>
 
 
 
-              )}
 
 
 
-              <PanelRow>
-                <label for="">Limit By</label>
+                      <PanelRow>
+                        <label for="">Custom Attributes</label>
+                        <div
+                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
 
-                <PGDropdown position="bottom right" variant="secondary" options={limitByArgs} buttonTitle="Choose" onChange={setLimitBy} values={[]}></PGDropdown>
-              </PanelRow>
+                          onClick={(ev) => {
 
-              {postExcerpt.options.limitBy.length > 0 && (
-                <div className='bg-gray-500 my-3 text-white p-2'>{limitByArgs[postExcerpt.options.limitBy].label}</div>
-              )}
+                            var sdsd = postExcerpt.options.linkAttr != undefined ? postExcerpt.options.linkAttr.concat({ id: '', val: '' }) : [];
 
-              {(postExcerpt.options.limitBy == 'word' || postExcerpt.options.limitBy == 'character') && (
 
-                <PanelRow>
-                  <label for="">Limit Count</label>
+                            var options = { ...postExcerpt.options, linkAttr: sdsd, };
+                            setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
 
-                  <InputControl
-                    value={postExcerpt.options.limitCount}
-                    onChange={(newVal) => {
-                      var options = { ...postExcerpt.options, limitCount: newVal };
+
+
+
+
+
+                          }}
+
+                        >Add</div>
+
+
+
+                      </PanelRow>
+
+
+
+                      {
+                        postExcerpt.options.linkAttr != undefined && postExcerpt.options.linkAttr.map((x, i) => {
+
+                          return (
+
+                            <div className='my-2'>
+                              <PanelRow>
+                                <InputControl
+                                  placeholder="Name"
+                                  className='mr-2'
+                                  value={postExcerpt.options.linkAttr[i].id}
+                                  onChange={(newVal) => {
+
+                                    postExcerpt.options.linkAttr[i].id = newVal;
+
+
+                                    var ssdsd = postExcerpt.options.linkAttr.concat([]);
+
+
+                                    var options = { ...postExcerpt.options, linkAttr: ssdsd, };
+                                    setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+
+
+
+
+                                  }}
+                                />
+
+                                <InputControl
+                                  className='mr-2'
+                                  placeholder="Value"
+                                  value={x.val}
+                                  onChange={(newVal) => {
+                                    postExcerpt.options.linkAttr[i].val = newVal
+                                    var ssdsd = postExcerpt.options.linkAttr.concat([]);
+
+
+
+                                    var options = { ...postExcerpt.options, linkAttr: ssdsd, };
+                                    setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+
+
+
+                                  }}
+                                />
+                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                                  onClick={(ev) => {
+
+                                    postExcerpt.options.linkAttr.splice(i, 1);
+
+                                    var ssdsd = postExcerpt.options.linkAttr.concat([]);
+
+
+
+                                    var options = { ...postExcerpt.options, linkAttr: ssdsd, };
+                                    setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+
+
+
+
+                                  }}
+
+                                ></span>
+                              </PanelRow>
+
+
+
+
+                            </div>
+
+                          )
+
+                        })
+                      }
+
+
+                    </div>
+
+
+
+                  )}
+
+
+
+                  <PanelRow>
+                    <label for="">Limit By</label>
+
+                    <PGDropdown position="bottom right" variant="secondary" options={limitByArgs} buttonTitle="Choose" onChange={setLimitBy} values={[]}></PGDropdown>
+                  </PanelRow>
+
+                  {postExcerpt.options.limitBy.length > 0 && (
+                    <div className='bg-gray-500 my-3 text-white p-2'>{limitByArgs[postExcerpt.options.limitBy].label}</div>
+                  )}
+
+                  {(postExcerpt.options.limitBy == 'word' || postExcerpt.options.limitBy == 'character') && (
+
+                    <PanelRow>
+                      <label for="">Limit Count</label>
+
+                      <InputControl
+                        value={postExcerpt.options.limitCount}
+                        onChange={(newVal) => {
+                          var options = { ...postExcerpt.options, limitCount: newVal };
+                          setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+
+                        }
+                        }
+                      />
+                    </PanelRow>
+                  )}
+
+                  <PanelRow className='my-3'>
+                    <label>Excerpt Source</label>
+                    <PGDropdown position="bottom right" variant="secondary" buttonTitle={postExcerpt.options.excerptSource.length == 0 ? 'Choose' : postExcerpt.options.excerptSource} options={excerptSourceArgs} onChange={(option, index) => {
+                      var options = { ...postExcerpt.options, excerptSource: option.value };
                       setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
 
-                    }
-                    }
-                  />
-                </PanelRow>
-              )}
-
-              <PanelRow className='my-3'>
-                <label>Excerpt Source</label>
-                <PGDropdown position="bottom right" variant="secondary" buttonTitle={postExcerpt.options.excerptSource.length == 0 ? 'Choose' : postExcerpt.options.excerptSource} options={excerptSourceArgs} onChange={(option, index) => {
-                  var options = { ...postExcerpt.options, excerptSource: option.value };
-                  setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-
-                }} values=""></PGDropdown>
-              </PanelRow>
+                    }} values=""></PGDropdown>
+                  </PanelRow>
 
 
 
-              {postExcerpt.options.excerptSource == 'excerpt' && currentPostExcerpt.length == 0 && (
-                <div className='text-red-500'>Post Excerpt is empty.</div>
-              )}
+                  {postExcerpt.options.excerptSource == 'excerpt' && currentPostExcerpt.length == 0 && (
+                    <div className='text-red-500'>Post Excerpt is empty.</div>
+                  )}
 
-              {/* {postExcerpt.options.excerptSource == 'content' && currentPostContent.length == 0 && (
+                  {/* {postExcerpt.options.excerptSource == 'content' && currentPostContent.length == 0 && (
                     <div className='text-red-500'>Post Content is empty.</div>
                   )} */}
 
 
-              {postExcerpt.options.excerptSource == 'meta' && (
+                  {postExcerpt.options.excerptSource == 'meta' && (
 
-                <div>
-                  <PanelRow className='my-4'>
-                    <label for="">Meta Field</label>
-                    <SelectControl
-                      label=""
-                      value={postExcerpt.options.excerptSourceMeta}
-                      options={[
-                        { label: 'Custom', value: '' },
-                        { label: 'Yoast meta', value: '_yoast_wpseo_metadesc' },
-                        { label: 'Rank Math meta', value: 'rank_math_description' },
-                        { label: 'AIO SEO meta', value: '_aioseo_og_description' },
-                        { label: 'SEOPress meta', value: '_seopress_titles_desc' },
-                        { label: 'WP Meta SEO meta', value: '_metaseo_metadesc' },
-                        { label: 'The SEO Framework meta', value: '_genesis_description' },
-                        { label: 'SEO SIMPLE PACK meta', value: 'ssp_meta_description' },
-                      ]}
-                      onChange={(newVal) => {
-                        var options = { ...postExcerpt.options, excerptSourceMeta: newVal };
-                        setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                      }
+                    <div>
+                      <PanelRow className='my-4'>
+                        <label for="">Meta Field</label>
+                        <SelectControl
+                          label=""
+                          value={postExcerpt.options.excerptSourceMeta}
+                          options={[
+                            { label: 'Custom', value: '' },
+                            { label: 'Yoast meta', value: '_yoast_wpseo_metadesc' },
+                            { label: 'Rank Math meta', value: 'rank_math_description' },
+                            { label: 'AIO SEO meta', value: '_aioseo_og_description' },
+                            { label: 'SEOPress meta', value: '_seopress_titles_desc' },
+                            { label: 'WP Meta SEO meta', value: '_metaseo_metadesc' },
+                            { label: 'The SEO Framework meta', value: '_genesis_description' },
+                            { label: 'SEO SIMPLE PACK meta', value: 'ssp_meta_description' },
+                          ]}
+                          onChange={(newVal) => {
+                            var options = { ...postExcerpt.options, excerptSourceMeta: newVal };
+                            setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                          }
 
-                      }
-                    />
-                  </PanelRow>
-                  <PanelRow>
-                    <label for="">Custom Meta Key</label>
-                    <InputControl
-                      value={postExcerpt.options.excerptSourceMeta}
-                      onChange={(newVal) => {
-                        var options = { ...postExcerpt.options, excerptSourceMeta: newVal };
-                        setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                      }
-                      }
-                    />
-                  </PanelRow>
-                </div>
-              )}
+                          }
+                        />
+                      </PanelRow>
+                      <PanelRow>
+                        <label for="">Custom Meta Key</label>
+                        <InputControl
+                          value={postExcerpt.options.excerptSourceMeta}
+                          onChange={(newVal) => {
+                            var options = { ...postExcerpt.options, excerptSourceMeta: newVal };
+                            setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                          }
+                          }
+                        />
+                      </PanelRow>
+                    </div>
+                  )}
 
-              <ToggleControl className='my-4'
-                label="Remove Blocks?"
-                help={postExcerpt.options.removeBlocks ? 'Blocks will be removed' : 'Blocks may output with excerpt.'}
-                checked={postExcerpt.options.removeBlocks ? true : false}
-                onChange={(e) => {
-                  var options = { ...postExcerpt.options, removeBlocks: postExcerpt.options.removeBlocks ? false : true, };
-                  setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                }}
-              />
+                  <ToggleControl className='my-4'
+                    label="Remove Blocks?"
+                    help={postExcerpt.options.removeBlocks ? 'Blocks will be removed' : 'Blocks may output with excerpt.'}
+                    checked={postExcerpt.options.removeBlocks ? true : false}
+                    onChange={(e) => {
+                      var options = { ...postExcerpt.options, removeBlocks: postExcerpt.options.removeBlocks ? false : true, };
+                      setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                    }}
+                  />
 
-              <ToggleControl className='my-4'
-                label="Remove Shortcodes?"
-                help={postExcerpt.options.removeShortcodes ? 'Shortcodes will be removed' : 'Shortcodes may output with excerpt.'}
-                checked={postExcerpt.options.removeShortcodes ? true : false}
-                onChange={(e) => {
-                  var options = { ...postExcerpt.options, removeShortcodes: postExcerpt.options.removeShortcodes ? false : true, };
-                  setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                }}
-              />
+                  <ToggleControl className='my-4'
+                    label="Remove Shortcodes?"
+                    help={postExcerpt.options.removeShortcodes ? 'Shortcodes will be removed' : 'Shortcodes may output with excerpt.'}
+                    checked={postExcerpt.options.removeShortcodes ? true : false}
+                    onChange={(e) => {
+                      var options = { ...postExcerpt.options, removeShortcodes: postExcerpt.options.removeShortcodes ? false : true, };
+                      setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                    }}
+                  />
 
-              <ToggleControl className='my-4'
-                label="Keep HTML?"
-                help={postExcerpt.options.keepHtml ? 'HTML may output with excerpt.' : 'HTML will be removed'}
-                checked={postExcerpt.options.keepHtml ? true : false}
-                onChange={(e) => {
-                  var options = { ...postExcerpt.options, keepHtml: postExcerpt.options.keepHtml ? false : true, };
-                  setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                }}
-              />
+                  <ToggleControl className='my-4'
+                    label="Keep HTML?"
+                    help={postExcerpt.options.keepHtml ? 'HTML may output with excerpt.' : 'HTML will be removed'}
+                    checked={postExcerpt.options.keepHtml ? true : false}
+                    onChange={(e) => {
+                      var options = { ...postExcerpt.options, keepHtml: postExcerpt.options.keepHtml ? false : true, };
+                      setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                    }}
+                  />
 
-              {postExcerpt.options.keepHtml && (
-
-
-                <PGproWrapper utmUrl={"?utm_source=dashboard&utm_term=postExcerptBlock&utm_campaign=pluginPostGrid&utm_medium=postTitleBlock-keepHtml"}>
-                  <p> <span className='underline'>Keep HTML</span> Only avilable in Premium</p>
-                </PGproWrapper>
+                  {postExcerpt.options.keepHtml && (
 
 
+                    <PGproWrapper utmUrl={"?utm_source=dashboard&utm_term=postExcerptBlock&utm_campaign=pluginPostGrid&utm_medium=postTitleBlock-keepHtml"}>
+                      <p> <span className='underline'>Keep HTML</span> Only avilable in Premium</p>
+                    </PGproWrapper>
 
 
-              )}
-
-              <ToggleControl className='my-4'
-                label="Enable wpautop()?"
-                help={postExcerpt.options.autoP ? 'wpautop function will be applied' : 'wpautop function will not be applied.'}
-                checked={postExcerpt.options.autoP ? true : false}
-                onChange={(e) => {
-                  var options = { ...postExcerpt.options, autoP: postExcerpt.options.autoP ? false : true, };
-                  setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
-                }}
-              />
 
 
-              {/* <ToggleControl className='my-4'
+                  )}
+
+                  <ToggleControl className='my-4'
+                    label="Enable wpautop()?"
+                    help={postExcerpt.options.autoP ? 'wpautop function will be applied' : 'wpautop function will not be applied.'}
+                    checked={postExcerpt.options.autoP ? true : false}
+                    onChange={(e) => {
+                      var options = { ...postExcerpt.options, autoP: postExcerpt.options.autoP ? false : true, };
+                      setAttributes({ postExcerpt: { ...postExcerpt, options: options } });
+                    }}
+                  />
+
+
+                  {/* <ToggleControl className='my-4'
                     label="Remove Embeds?"
                     help={postExcerpt.options.removeEmbeds ? 'Embeded will be removed' : 'Embeded may output with excerpt.'}
                     checked={postExcerpt.options.removeEmbeds ? true : false}
@@ -1820,167 +2225,13 @@ registerBlockType("post-grid/post-excerpt", {
 
 
 
-              <PanelRow className='my-3'>
-                <label>Color</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
 
 
-
-
-              </PanelRow>
-
-              <ColorPalette
-                value={postExcerpt.styles.color[breakPointX]}
-                colors={colorsPresets}
-                enableAlpha
-                onChange={(newVal) => {
-
-
-
-                  var newValuesObj = {};
-
-
-                  if (Object.keys(postExcerpt.styles.color).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = postExcerpt.styles.color;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...postExcerpt.styles, color: newValuesObj };
-                  setAttributes({ postExcerpt: { ...postExcerpt, styles: styles } });
-
-
-
-                  var itemsX = { ...blockCssY.items };
-                  itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'color': newValuesObj };
-
-                  setAttributes({ blockCssY: { items: itemsX } });
-
-                }}
-              />
-
-
-
-              <PanelRow className='my-3'>
-                <label>Background Color</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-              </PanelRow>
-
-              <ColorPalette
-                value={postExcerpt.styles.bgColor[breakPointX]}
-                colors={colorsPresets}
-                enableAlpha
-                onChange={(newVal) => {
-
-                  var newValuesObj = {};
-
-                  if (Object.keys(postExcerpt.styles.bgColor).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = postExcerpt.styles.bgColor;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...postExcerpt.styles, bgColor: newValuesObj };
-                  setAttributes({ postExcerpt: { ...postExcerpt, styles: styles } });
-
-                  var itemsX = { ...blockCssY.items };
-                  itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'background-color': newValuesObj };
-
-                  setAttributes({ blockCssY: { items: itemsX } });
-
-                }}
-              />
-
-              <PanelRow className='my-3'>
-                <label>Display</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <PanelRow>
-
-                <SelectControl
-                  label=""
-                  value={postExcerpt.styles.display[breakPointX]}
-
-                  options={[
-                    { label: 'Select..', value: '' },
-                    { label: 'inline', value: 'inline' },
-                    { label: 'inline-block', value: 'inline-block' },
-                    { label: 'block', value: 'block' },
-
-                  ]}
-                  onChange={(newVal) => {
-
-                    var newValuesObj = {};
-
-                    if (Object.keys(postExcerpt.styles.display).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = postExcerpt.styles.display;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...postExcerpt.styles, display: newValuesObj };
-                    setAttributes({ postExcerpt: { ...postExcerpt, styles: styles } });
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'display': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-                  }
-
-                  }
-                />
-              </PanelRow>
-
-              <PanelRow>
-                <div className='font-bold'>Typography</div>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <Typography typo={postExcerpt.styles} breakPointX={breakPointX} onChange={onChangeExcerptTypo} setAttributes={setAttributes} obj={postExcerpt} />
-
-
-
-
-
-
-
-              <PanelRow>
-                <label>Padding</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-              <BoxControl
-                label=''
-                values={postExcerpt.styles.padding[breakPointX]}
-                onChange={(nextValues) => { paddingControl(nextValues) }}
-              />
-
-
-
-
-
-              <PanelRow>
-                <label>Margin</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-              <BoxControl
-                label=""
-                values={postExcerpt.styles.margin[breakPointX]}
-                onChange={(nextValues) => { marginControl(nextValues) }}
-              />
-
-
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={postExcerpt} onChange={onChangeStylePostExcerpt} onAdd={onAddStylePostExcerpt} onRemove={onRemoveStylePostExcerpt} />
+                </PGtab>
+              </PGtabs>
 
 
 
@@ -1988,423 +2239,304 @@ registerBlockType("post-grid/post-excerpt", {
             </PanelBody>
 
             <PanelBody title="Read More" initialOpen={false}>
-              <PanelRow>
-                <label for="">Read More Text</label>
-
-                <InputControl
-                  value={readMore.options.text}
-                  onChange={(newVal) => {
-
-
-                    var options = { ...readMore.options, text: newVal };
-                    setAttributes({ readMore: { ...readMore, options: options } });
 
 
 
-                  }
-                  }
-                />
-              </PanelRow>
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
 
 
-              <ToggleControl
-                label="Linked with post?"
-                help={readMore.options.isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
-                checked={readMore.options.isLink ? true : false}
-                onChange={(e) => {
-
-
-                  var options = { ...readMore.options, isLink: readMore.options.isLink ? false : true, };
-                  setAttributes({ readMore: { ...readMore, options: options } });
-
-
-
-                }}
-              />
-
-              {readMore.options.isLink && (
-
-                <div>
                   <PanelRow>
-                    <label for="">Link Target</label>
+                    <label for="">Read More Text</label>
 
-                    <SelectControl
-                      label=""
-                      value={readMore.options.linkTarget}
-                      options={[
-                        { label: '_self', value: '_self' },
-                        { label: '_blank', value: '_blank' },
-                        { label: '_parent', value: '_parent' },
-                        { label: '_top', value: '_top' },
-
-
-                      ]}
+                    <InputControl
+                      value={readMore.options.text}
                       onChange={(newVal) => {
 
 
-                        var options = { ...readMore.options, linkTarget: newVal };
+                        var options = { ...readMore.options, text: newVal };
                         setAttributes({ readMore: { ...readMore, options: options } });
 
 
+
                       }
-
-
-
                       }
                     />
                   </PanelRow>
 
 
+                  <ToggleControl
+                    label="Linked with post?"
+                    help={readMore.options.isLink ? 'Linked with post URL' : 'Not linked to post URL.'}
+                    checked={readMore.options.isLink ? true : false}
+                    onChange={(e) => {
+
+
+                      var options = { ...readMore.options, isLink: readMore.options.isLink ? false : true, };
+                      setAttributes({ readMore: { ...readMore, options: options } });
 
 
 
-                  <PanelRow>
-                    <label for="">Custom Url</label>
+                    }}
+                  />
 
-                    <div className='relative'>
-                      <Button className={(linkPickerReadmore) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+                  {readMore.options.isLink && (
 
-                        setLinkPickerReadmore(prev => !prev)
-                      }}></Button>
-                      {readMore.options.customUrl.length > 0 && (
-                        <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+                    <div>
+                      <PanelRow>
+                        <label for="">Link Target</label>
 
-                          var options = { ...readMore.options, customUrl: '' };
-                          setAttributes({ readMore: { ...readMore, options: options } });
+                        <SelectControl
+                          label=""
+                          value={readMore.options.linkTarget}
+                          options={[
+                            { label: '_self', value: '_self' },
+                            { label: '_blank', value: '_blank' },
+                            { label: '_parent', value: '_parent' },
+                            { label: '_top', value: '_top' },
 
 
+                          ]}
+                          onChange={(newVal) => {
 
-                        }}></Button>
 
-                      )}
-                      {linkPickerReadmore && (
-                        <Popover position="bottom right">
-                          <LinkControl settings={[]} value={readMore.options.customUrl} onChange={newVal => {
-
-                            var options = { ...readMore.options, customUrl: newVal.url };
-
+                            var options = { ...readMore.options, linkTarget: newVal };
                             setAttributes({ readMore: { ...readMore, options: options } });
-                            //setLinkPickerReadmore(false)
-
-                          }} />
-
-                          <div className='p-2'><span className='font-bold'>Linked to:</span> {(readMore.options.customUrl.length != 0) ? readMore.options.customUrl : 'No link'} </div>
-                        </Popover>
-
-                      )}
 
 
-                    </div>
-                  </PanelRow>
-
-
-                  <PanelRow>
-                    <label for="">Custom Attributes</label>
-                    <div
-                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                      onClick={(ev) => {
-
-                        var sdsd = readMore.options.linkAttr.concat({ id: '', val: '' })
+                          }
 
 
 
-                        var options = { ...readMore.options, linkAttr: sdsd };
-                        setAttributes({ readMore: { ...readMore, options: options } });
+                          }
+                        />
+                      </PanelRow>
 
 
 
 
 
+                      <PanelRow>
+                        <label for="">Custom Url</label>
 
-                      }}
+                        <div className='relative'>
+                          <Button className={(linkPickerReadmore) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
 
-                    >Add</div>
+                            setLinkPickerReadmore(prev => !prev)
+                          }}></Button>
+                          {readMore.options.customUrl.length > 0 && (
+                            <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
 
-
-
-                  </PanelRow>
-
-
-
-                  {
-                    readMore.options.linkAttr != undefined && readMore.options.linkAttr.map((x, i) => {
-
-                      return (
-
-                        <div className='my-2'>
-                          <PanelRow>
-                            <InputControl
-                              placeholder="Name"
-                              className='mr-2'
-                              value={readMore.options.linkAttr[i].id}
-                              onChange={(newVal) => {
-
-                                readMore.options.linkAttr[i].id = newVal;
-
-
-                                var ssdsd = readMore.options.linkAttr.concat([]);
+                              var options = { ...readMore.options, customUrl: '' };
+                              setAttributes({ readMore: { ...readMore, options: options } });
 
 
 
-                                var options = { ...readMore.options, linkAttr: ssdsd };
+                            }}></Button>
+
+                          )}
+                          {linkPickerReadmore && (
+                            <Popover position="bottom right">
+                              <LinkControl settings={[]} value={readMore.options.customUrl} onChange={newVal => {
+
+                                var options = { ...readMore.options, customUrl: newVal.url };
+
                                 setAttributes({ readMore: { ...readMore, options: options } });
+                                //setLinkPickerReadmore(false)
 
+                              }} />
 
+                              <div className='p-2'><span className='font-bold'>Linked to:</span> {(readMore.options.customUrl.length != 0) ? readMore.options.customUrl : 'No link'} </div>
+                            </Popover>
 
-                              }}
-                            />
-
-                            <InputControl
-                              className='mr-2'
-                              placeholder="Value"
-                              value={x.val}
-                              onChange={(newVal) => {
-                                readMore.options.linkAttr[i].val = newVal
-                                var ssdsd = readMore.options.linkAttr.concat([]);
-
-
-
-                                var options = { ...readMore.options, linkAttr: ssdsd };
-                                setAttributes({ readMore: { ...readMore, options: options } });
-
-
-                              }}
-                            />
-                            <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                              onClick={(ev) => {
-
-                                readMore.options.linkAttr.splice(i, 1);
-
-                                var ssdsd = readMore.options.linkAttr.concat([]);
-
-
-
-
-                                var options = { ...readMore.options, linkAttr: ssdsd };
-                                setAttributes({ readMore: { ...readMore, options: options } });
-
-
-                              }}
-
-                            ></span>
-                          </PanelRow>
-
-
+                          )}
 
 
                         </div>
+                      </PanelRow>
 
-                      )
 
-                    })
-                  }
+                      <PanelRow>
+                        <label for="">Custom Attributes</label>
+                        <div
+                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
 
+                          onClick={(ev) => {
 
-                </div>
+                            var sdsd = readMore.options.linkAttr.concat({ id: '', val: '' })
 
 
 
-              )}
+                            var options = { ...readMore.options, linkAttr: sdsd };
+                            setAttributes({ readMore: { ...readMore, options: options } });
 
 
-              <PanelRow className='my-3'>
-                <label>Color</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
 
 
 
 
-              </PanelRow>
+                          }}
 
-              <ColorPalette
-                value={readMore.styles.color[breakPointX]}
-                colors={colorsPresets}
-                enableAlpha
-                onChange={(newVal) => {
+                        >Add</div>
 
-                  // var responsive = readMore.styles.color;
-                  // responsive[breakPointX] = newVal;
 
 
+                      </PanelRow>
 
-                  // var styles = { ...readMore.styles, color: responsive };
-                  // setAttributes({ readMore: { ...readMore, styles: styles } });
 
 
+                      {
+                        readMore.options.linkAttr != undefined && readMore.options.linkAttr.map((x, i) => {
 
+                          return (
 
+                            <div className='my-2'>
+                              <PanelRow>
+                                <InputControl
+                                  placeholder="Name"
+                                  className='mr-2'
+                                  value={readMore.options.linkAttr[i].id}
+                                  onChange={(newVal) => {
 
-                  var newValuesObj = {};
+                                    readMore.options.linkAttr[i].id = newVal;
 
 
-                  if (Object.keys(readMore.styles.color).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = readMore.styles.color;
-                    newValuesObj[breakPointX] = newVal;
-                  }
+                                    var ssdsd = readMore.options.linkAttr.concat([]);
 
-                  var styles = { ...readMore.styles, color: newValuesObj };
-                  setAttributes({ readMore: { ...readMore, styles: styles } });
 
 
+                                    var options = { ...readMore.options, linkAttr: ssdsd };
+                                    setAttributes({ readMore: { ...readMore, options: options } });
 
-                  var itemsX = { ...blockCssY.items };
-                  itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector], 'color': newValuesObj };
 
-                  setAttributes({ blockCssY: { items: itemsX } });
 
+                                  }}
+                                />
 
-                }}
-              />
+                                <InputControl
+                                  className='mr-2'
+                                  placeholder="Value"
+                                  value={x.val}
+                                  onChange={(newVal) => {
+                                    readMore.options.linkAttr[i].val = newVal
+                                    var ssdsd = readMore.options.linkAttr.concat([]);
 
 
 
-              <PanelRow className='my-3'>
-                <label>Background Color</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                                    var options = { ...readMore.options, linkAttr: ssdsd };
+                                    setAttributes({ readMore: { ...readMore, options: options } });
 
 
+                                  }}
+                                />
+                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                                  onClick={(ev) => {
 
+                                    readMore.options.linkAttr.splice(i, 1);
 
-              </PanelRow>
+                                    var ssdsd = readMore.options.linkAttr.concat([]);
 
-              <ColorPalette
-                value={readMore.styles.bgColor[breakPointX]}
-                colors={colorsPresets}
-                enableAlpha
-                onChange={(newVal) => {
 
 
 
+                                    var options = { ...readMore.options, linkAttr: ssdsd };
+                                    setAttributes({ readMore: { ...readMore, options: options } });
 
 
+                                  }}
 
-                  var newValuesObj = {};
+                                ></span>
+                              </PanelRow>
 
 
-                  if (Object.keys(readMore.styles.bgColor).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = readMore.styles.bgColor;
-                    newValuesObj[breakPointX] = newVal;
-                  }
 
-                  var styles = { ...readMore.styles, bgColor: newValuesObj };
-                  setAttributes({ readMore: { ...readMore, styles: styles } });
 
+                            </div>
 
+                          )
 
+                        })
+                      }
 
 
-                  var itemsX = { ...blockCssY.items };
-                  itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector], 'background-color': newValuesObj };
+                    </div>
 
-                  setAttributes({ blockCssY: { items: itemsX } });
 
 
+                  )}
 
-                }}
-              />
 
-
-
-
-              <PanelRow className='my-3'>
-                <label>Display</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <PanelRow>
-
-                <SelectControl
-                  label=""
-                  value={readMore.styles.display[breakPointX]}
-
-                  options={[
-                    { label: 'Select..', value: '' },
-                    { label: 'inline', value: 'inline' },
-                    { label: 'inline-block', value: 'inline-block' },
-                    { label: 'block', value: 'block' },
-
-                  ]}
-                  onChange={(newVal) => {
-
-                    var newValuesObj = {};
-
-                    if (Object.keys(readMore.styles.display).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = readMore.styles.display;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...readMore.styles, display: newValuesObj };
-                    setAttributes({ readMore: { ...readMore, styles: styles } });
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector], 'display': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-                  }
-
-                  }
-                />
-              </PanelRow>
-
-              <PanelRow>
-                <label>Padding</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-              <BoxControl
-                label=''
-                values={readMore.styles.padding[breakPointX]}
-                onChange={(nextValues) => { paddingControlReadmore(nextValues) }}
-              />
-
-              <PanelRow>
-                <label>Margin</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-              <BoxControl
-                label=""
-                values={readMore.styles.margin[breakPointX]}
-                onChange={(nextValues) => { marginControlReadmore(nextValues) }}
-              />
-
-
-              <PanelRow>
-                <div className='font-bold'>Typography</div>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <Typography typo={readMore.styles} breakPointX={breakPointX} onChange={onChangeReadmoreTypo} setAttributes={setAttributes} obj={readMore} />
-
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={wrapper} onChange={onChangeStyleRedmore} onAdd={onAddStyleRedmore} onRemove={onRemoveStyleRedmore} />
+                </PGtab>
+              </PGtabs>
 
             </PanelBody>
 
             <PanelBody title="Prefix" initialOpen={false}>
-              <PanelRow>
-                <label for="">Prefix</label>
-
-                <InputControl
-                  value={prefix.options.text}
-                  onChange={(newVal) => {
 
 
-                    var options = { ...prefix.options, text: newVal };
-                    setAttributes({ prefix: { ...prefix, options: options } });
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
+                  <PanelRow>
+                    <label for="">Prefix</label>
 
+                    <InputControl
+                      value={prefix.options.text}
+                      onChange={(newVal) => {
 
-                  }
-                  }
-                />
-              </PanelRow>
+                        var options = { ...prefix.options, text: newVal };
+                        setAttributes({ prefix: { styles: prefix.styles, options: options } });
+
+                      }
+                      }
+                    />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={prefix} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
+                </PGtab>
+              </PGtabs>
+
 
             </PanelBody>
 
@@ -2416,23 +2548,46 @@ registerBlockType("post-grid/post-excerpt", {
 
 
 
-              <PanelRow>
-                <label for="">Postfix</label>
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
+                  <PanelRow>
+                    <label for="">Postfix</label>
+                    <InputControl
+                      value={postfix.options.text}
+                      onChange={(newVal) => {
 
-                <InputControl
-                  value={postfix.options.text}
-                  onChange={(newVal) => {
+                        var options = { ...postfix.options, text: newVal };
+                        setAttributes({ postfix: { ...postfix, options: options } });
 
-                    var options = { ...postfix.options, text: newVal };
-                    setAttributes({ postfix: { ...postfix, options: options } });
+                      }
 
-
-
-                  }
-
-                  }
-                />
-              </PanelRow>
+                      }
+                    />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={postfix} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
+                </PGtab>
+              </PGtabs>
 
             </PanelBody>
 
@@ -2442,7 +2597,7 @@ registerBlockType("post-grid/post-excerpt", {
               <p>Please use following class selector to apply your custom CSS</p>
               <div className='my-3'>
                 <p className='font-bold'>Excerpt Wrapper</p>
-                <p><code>{excerptWrapperSelector}{'{/* your CSS here*/}'}</code></p>
+                <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
               </div>
 
               <div className='my-3'>

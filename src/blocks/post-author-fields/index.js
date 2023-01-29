@@ -310,56 +310,37 @@ registerBlockType("post-grid/post-author-fields", {
 
     function onChangeStyleField(sudoScource, newVal, attr) {
 
-
-
       var sudoScourceX = { ...field[sudoScource] }
-
-
       var elementSelector = fieldSelector;
-
 
       if (sudoScource == 'styles') {
         elementSelector = fieldSelector;
-
       }
 
       else if (sudoScource == 'hover') {
         elementSelector = fieldSelector + ':hover';
-
       } else if (sudoScource == 'after') {
         elementSelector = fieldSelector + ':after';
-
       } else if (sudoScource == 'before') {
         elementSelector = fieldSelector + ':before';
-
       } else if (sudoScource == 'first-child') {
         elementSelector = fieldSelector + ':first-child';
-
       } else if (sudoScource == 'last-child') {
         elementSelector = fieldSelector + ':last-child';
-
       } else if (sudoScource == 'visited') {
         elementSelector = fieldSelector + ':visited';
-
       } else if (sudoScource == 'selection') {
         elementSelector = fieldSelector + ':selection';
-
       } else if (sudoScource == 'first-letter') {
         elementSelector = fieldSelector + '::first-letter';
-
       } else if (sudoScource == 'first-line') {
         elementSelector = fieldSelector + '::first-line';
-
       }
       else {
         elementSelector = fieldSelector + ':' + sudoScource;
-
       }
 
-
-
       sudoScourceX[attr][breakPointX] = newVal;
-
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
@@ -368,21 +349,12 @@ registerBlockType("post-grid/post-author-fields", {
       Object.entries(sudoScourceX).map(args => {
 
         var argAttr = myStore.cssAttrParse(args[0]);
-
-
         var argAttrVal = args[1];
-
-
-
         blockCssY.items[elementSelector][argAttr] = argAttrVal;
-
       })
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
       setAttributes({ field: { ...field } });
 
     }
@@ -390,26 +362,13 @@ registerBlockType("post-grid/post-author-fields", {
 
     function onRemoveStyleField(sudoScource, key) {
 
-
-
       var sudoScourceX = { ...field[sudoScource] }
-
-
       if (sudoScourceX[key] != undefined) {
         delete sudoScourceX[key];
       }
 
-
-
       field[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
-
-
-
       setAttributes({ field: { ...field } });
-
-
-
 
 
       if (blockCssY.items[fieldSelector] == undefined) {
@@ -419,32 +378,21 @@ registerBlockType("post-grid/post-author-fields", {
       Object.entries(sudoScourceX).map(args => {
 
         var argAttr = myStore.cssAttrParse(args[0]);
-
-
         var argAttrVal = args[1];
-
-
 
         blockCssY.items[fieldSelector][argAttr] = argAttrVal;
 
       })
 
-
       setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
     }
 
 
     function onAddStyleField(sudoScource, key) {
 
       var sudoScourceX = { ...field[sudoScource] }
-
       sudoScourceX[key] = {};
-
       field[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
-
       setAttributes({ field: { ...field } });
 
     }

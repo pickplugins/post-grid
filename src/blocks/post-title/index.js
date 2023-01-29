@@ -7,6 +7,7 @@ import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMen
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 import { applyFilters } from '@wordpress/hooks';
+import { Icon, styles, settings } from '@wordpress/icons';
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -29,7 +30,9 @@ import colorsPresets from '../../colors-presets'
 import PGcssDisplay from '../../components/css-display'
 import PGDropdown from '../../components/dropdown'
 import PGColorPicker from '../../components/input-color-picker'
-
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -137,7 +140,7 @@ registerBlockType("post-grid/post-title", {
       type: 'object',
       default: {
         options:
-          { text: '', class: 'prefix', },
+          { text: '', class: 'postfix', },
         styles:
         {
           color: {},
@@ -325,25 +328,21 @@ registerBlockType("post-grid/post-title", {
     }, [clientId]);
 
     // Wrapper CSS Class Selectors
-    const titleWrapperSelector = blockClass;
-    //const titleLinkSelector = postTitle.options.isLink ? blockClass + ' a' : blockClass;
+    const wrapperSelector = blockClass;
 
 
-    var titleLinkSelector = '';
+    var postTitleSelector = '';
 
 
     if (wrapper.options.tag.length != 0) {
 
       if (postTitle.options.isLink) {
-        titleLinkSelector = blockClass + ' a';
+        postTitleSelector = blockClass + ' a';
       } else {
-        titleLinkSelector = blockClass;
-
+        postTitleSelector = blockClass;
       }
-
     } else {
-      titleLinkSelector = blockClass;
-
+      postTitleSelector = blockClass;
     }
 
 
@@ -381,8 +380,8 @@ registerBlockType("post-grid/post-title", {
 
 
 
-    const titlePrefixSelector = blockClass + ' .prefix';
-    const titlePostfixSelector = blockClass + ' .postfix';
+    const prefixSelector = blockClass + ' .prefix';
+    const postfixSelector = blockClass + ' .postfix';
 
 
 
@@ -446,6 +445,379 @@ registerBlockType("post-grid/post-title", {
       return false;
     }
 
+
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+
+    }
+
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+      setAttributes({ wrapper: { ...wrapper } });
+
+    }
+
+
+
+    function onChangeStylePostTitle(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...postTitle[sudoScource] }
+      var elementSelector = postTitleSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = postTitleSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = postTitleSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = postTitleSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = postTitleSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = postTitleSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = postTitleSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = postTitleSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = postTitleSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = postTitleSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = postTitleSelector + '::first-line';
+      }
+      else {
+        elementSelector = postTitleSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ postTitle: { ...postTitle } });
+
+    }
+
+
+    function onRemoveStylePostTitle(sudoScource, key) {
+
+      var sudoScourceX = { ...postTitle[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      postTitle[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ postTitle: { ...postTitle } });
+
+      if (blockCssY.items[postTitleSelector] == undefined) {
+        blockCssY.items[postTitleSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[postTitleSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePostTitle(sudoScource, key) {
+
+      var sudoScourceX = { ...postTitle[sudoScource] }
+      sudoScourceX[key] = {};
+      postTitle[sudoScource] = sudoScourceX;
+      setAttributes({ postTitle: { ...postTitle } });
+
+    }
+
+
+
+
+    function onChangeStylePrefix(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      var elementSelector = prefixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = prefixSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = prefixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = prefixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = prefixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = prefixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = prefixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = prefixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = prefixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = prefixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = prefixSelector + '::first-line';
+      }
+      else {
+        elementSelector = prefixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onRemoveStylePrefix(sudoScource, key) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      prefix[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ prefix: { ...prefix } });
+
+      if (blockCssY.items[prefixSelector] == undefined) {
+        blockCssY.items[prefixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePrefix(sudoScource, key) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      sudoScourceX[key] = {};
+      prefix[sudoScource] = sudoScourceX;
+      setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onChangeStylePostfix(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      var elementSelector = postfixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = postfixSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = postfixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = postfixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = postfixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = postfixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = postfixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = postfixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = postfixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = postfixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = postfixSelector + '::first-line';
+      }
+      else {
+        elementSelector = postfixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+    function onRemoveStylePostfix(sudoScource, key) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      postfix[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ postfix: { ...postfix } });
+
+      if (blockCssY.items[postfixSelector] == undefined) {
+        blockCssY.items[postfixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePostfix(sudoScource, key) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      sudoScourceX[key] = {};
+      postfix[sudoScource] = sudoScourceX;
+      setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+
+
+
+
+
+
+
     function paddingControl(nextValues) {
 
 
@@ -457,7 +829,7 @@ registerBlockType("post-grid/post-title", {
       setAttributes({ postTitle: { ...postTitle, styles: styles } });
 
 
-      blockCssY.items[titleLinkSelector] = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector] : {};
+      blockCssY.items[postTitleSelector] = (blockCssY.items[postTitleSelector] != undefined) ? blockCssY.items[postTitleSelector] : {};
 
 
       nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
@@ -471,22 +843,22 @@ registerBlockType("post-grid/post-title", {
 
       if (nextValues.top != undefined) {
 
-        var paddingTop = (blockCssY.items[titleLinkSelector]['padding-top'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-top'] : {};
+        var paddingTop = (blockCssY.items[postTitleSelector]['padding-top'] != undefined) ? blockCssY.items[postTitleSelector]['padding-top'] : {};
         paddingTop[breakPointX] = nextValues.top
 
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-top': paddingTop };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'padding-top': paddingTop };
 
       }
 
 
       if (nextValues.right != undefined) {
 
-        var paddingRight = (blockCssY.items[titleLinkSelector]['padding-right'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-right'] : {};
+        var paddingRight = (blockCssY.items[postTitleSelector]['padding-right'] != undefined) ? blockCssY.items[postTitleSelector]['padding-right'] : {};
         paddingRight[breakPointX] = nextValues.right
 
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-right': paddingRight };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'padding-right': paddingRight };
 
 
 
@@ -494,11 +866,11 @@ registerBlockType("post-grid/post-title", {
 
       if (nextValues.bottom != undefined) {
 
-        var paddingBottom = (blockCssY.items[titleLinkSelector]['padding-bottom'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-bottom'] : {};
+        var paddingBottom = (blockCssY.items[postTitleSelector]['padding-bottom'] != undefined) ? blockCssY.items[postTitleSelector]['padding-bottom'] : {};
         paddingBottom[breakPointX] = nextValues.bottom
 
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-bottom': paddingBottom };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'padding-bottom': paddingBottom };
 
 
 
@@ -506,10 +878,10 @@ registerBlockType("post-grid/post-title", {
 
       if (nextValues.left != undefined) {
 
-        var paddingLeft = (blockCssY.items[titleLinkSelector]['padding-left'] != undefined) ? blockCssY.items[titleLinkSelector]['padding-left'] : {};
+        var paddingLeft = (blockCssY.items[postTitleSelector]['padding-left'] != undefined) ? blockCssY.items[postTitleSelector]['padding-left'] : {};
         paddingLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'padding-left': paddingLeft };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'padding-left': paddingLeft };
 
 
       }
@@ -541,40 +913,40 @@ registerBlockType("post-grid/post-title", {
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
 
-      blockCssY.items[titleLinkSelector] = (blockCssY.items[titleLinkSelector] != undefined) ? blockCssY.items[titleLinkSelector] : {};
+      blockCssY.items[postTitleSelector] = (blockCssY.items[postTitleSelector] != undefined) ? blockCssY.items[postTitleSelector] : {};
 
       if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[titleLinkSelector]['margin-top'] != undefined) ? blockCssY.items[titleLinkSelector]['margin-top'] : {};
+        var marginTop = (blockCssY.items[postTitleSelector]['margin-top'] != undefined) ? blockCssY.items[postTitleSelector]['margin-top'] : {};
         marginTop[breakPointX] = nextValues.top
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-top': marginTop };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'margin-top': marginTop };
       }
 
 
       if (nextValues.right != undefined) {
 
-        var marginRight = (blockCssY.items[titleLinkSelector]['margin-right'] !== undefined) ? blockCssY.items[titleLinkSelector]['margin-right'] : {};
+        var marginRight = (blockCssY.items[postTitleSelector]['margin-right'] !== undefined) ? blockCssY.items[postTitleSelector]['margin-right'] : {};
         marginRight[breakPointX] = nextValues.right
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-right': marginRight };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'margin-right': marginRight };
 
       }
 
       if (nextValues.bottom != undefined) {
 
-        var marginBottom = (blockCssY.items[titleLinkSelector]['margin-bottom'] !== undefined) ? blockCssY.items[titleLinkSelector]['margin-bottom'] : {};
+        var marginBottom = (blockCssY.items[postTitleSelector]['margin-bottom'] !== undefined) ? blockCssY.items[postTitleSelector]['margin-bottom'] : {};
         marginBottom[breakPointX] = nextValues.bottom
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-bottom': marginBottom };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'margin-bottom': marginBottom };
 
       }
 
       if (nextValues.left != undefined) {
 
-        var marginLeft = (blockCssY.items[titleLinkSelector]['margin-left'] !== undefined) ? blockCssY.items[titleLinkSelector]['margin-left'] : {};
+        var marginLeft = (blockCssY.items[postTitleSelector]['margin-left'] !== undefined) ? blockCssY.items[postTitleSelector]['margin-left'] : {};
         marginLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'margin-left': marginLeft };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'margin-left': marginLeft };
 
       }
 
@@ -593,7 +965,7 @@ registerBlockType("post-grid/post-title", {
       setAttributes({ wrapper: { ...wrapper, styles: styles } });
 
 
-      blockCssY.items[titleWrapperSelector] = (blockCssY.items[titleWrapperSelector] != undefined) ? blockCssY.items[titleWrapperSelector] : {};
+      blockCssY.items[wrapperSelector] = (blockCssY.items[wrapperSelector] != undefined) ? blockCssY.items[wrapperSelector] : {};
 
 
       nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
@@ -607,22 +979,22 @@ registerBlockType("post-grid/post-title", {
 
       if (nextValues.top != undefined) {
 
-        var paddingTop = (blockCssY.items[titleWrapperSelector]['padding-top'] != undefined) ? blockCssY.items[titleWrapperSelector]['padding-top'] : {};
+        var paddingTop = (blockCssY.items[wrapperSelector]['padding-top'] != undefined) ? blockCssY.items[wrapperSelector]['padding-top'] : {};
         paddingTop[breakPointX] = nextValues.top
 
 
-        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'padding-top': paddingTop };
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-top': paddingTop };
 
       }
 
 
       if (nextValues.right != undefined) {
 
-        var paddingRight = (blockCssY.items[titleWrapperSelector]['padding-right'] != undefined) ? blockCssY.items[titleWrapperSelector]['padding-right'] : {};
+        var paddingRight = (blockCssY.items[wrapperSelector]['padding-right'] != undefined) ? blockCssY.items[wrapperSelector]['padding-right'] : {};
         paddingRight[breakPointX] = nextValues.right
 
 
-        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'padding-right': paddingRight };
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-right': paddingRight };
 
 
 
@@ -630,11 +1002,11 @@ registerBlockType("post-grid/post-title", {
 
       if (nextValues.bottom != undefined) {
 
-        var paddingBottom = (blockCssY.items[titleWrapperSelector]['padding-bottom'] != undefined) ? blockCssY.items[titleWrapperSelector]['padding-bottom'] : {};
+        var paddingBottom = (blockCssY.items[wrapperSelector]['padding-bottom'] != undefined) ? blockCssY.items[wrapperSelector]['padding-bottom'] : {};
         paddingBottom[breakPointX] = nextValues.bottom
 
 
-        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'padding-bottom': paddingBottom };
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-bottom': paddingBottom };
 
 
 
@@ -642,10 +1014,10 @@ registerBlockType("post-grid/post-title", {
 
       if (nextValues.left != undefined) {
 
-        var paddingLeft = (blockCssY.items[titleWrapperSelector]['padding-left'] != undefined) ? blockCssY.items[titleWrapperSelector]['padding-left'] : {};
+        var paddingLeft = (blockCssY.items[wrapperSelector]['padding-left'] != undefined) ? blockCssY.items[wrapperSelector]['padding-left'] : {};
         paddingLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'padding-left': paddingLeft };
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-left': paddingLeft };
 
 
       }
@@ -677,40 +1049,40 @@ registerBlockType("post-grid/post-title", {
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
 
-      blockCssY.items[titleWrapperSelector] = (blockCssY.items[titleWrapperSelector] != undefined) ? blockCssY.items[titleWrapperSelector] : {};
+      blockCssY.items[wrapperSelector] = (blockCssY.items[wrapperSelector] != undefined) ? blockCssY.items[wrapperSelector] : {};
 
       if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[titleWrapperSelector]['margin-top'] != undefined) ? blockCssY.items[titleWrapperSelector]['margin-top'] : {};
+        var marginTop = (blockCssY.items[wrapperSelector]['margin-top'] != undefined) ? blockCssY.items[wrapperSelector]['margin-top'] : {};
         marginTop[breakPointX] = nextValues.top
 
-        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'margin-top': marginTop };
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-top': marginTop };
       }
 
 
       if (nextValues.right != undefined) {
 
-        var marginRight = (blockCssY.items[titleWrapperSelector]['margin-right'] !== undefined) ? blockCssY.items[titleWrapperSelector]['margin-right'] : {};
+        var marginRight = (blockCssY.items[wrapperSelector]['margin-right'] !== undefined) ? blockCssY.items[wrapperSelector]['margin-right'] : {};
         marginRight[breakPointX] = nextValues.right
 
-        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'margin-right': marginRight };
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-right': marginRight };
 
       }
 
       if (nextValues.bottom != undefined) {
 
-        var marginBottom = (blockCssY.items[titleWrapperSelector]['margin-bottom'] !== undefined) ? blockCssY.items[titleWrapperSelector]['margin-bottom'] : {};
+        var marginBottom = (blockCssY.items[wrapperSelector]['margin-bottom'] !== undefined) ? blockCssY.items[wrapperSelector]['margin-bottom'] : {};
         marginBottom[breakPointX] = nextValues.bottom
 
-        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'margin-bottom': marginBottom };
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-bottom': marginBottom };
 
       }
 
       if (nextValues.left != undefined) {
 
-        var marginLeft = (blockCssY.items[titleWrapperSelector]['margin-left'] !== undefined) ? blockCssY.items[titleWrapperSelector]['margin-left'] : {};
+        var marginLeft = (blockCssY.items[wrapperSelector]['margin-left'] !== undefined) ? blockCssY.items[wrapperSelector]['margin-left'] : {};
         marginLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'margin-left': marginLeft };
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-left': marginLeft };
 
       }
 
@@ -990,7 +1362,7 @@ registerBlockType("post-grid/post-title", {
 
       if (typoX.fontFamily[breakPointX] != undefined) {
 
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-family': typoX.fontFamily }
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'font-family': typoX.fontFamily }
 
       }
 
@@ -999,10 +1371,10 @@ registerBlockType("post-grid/post-title", {
       if (typoX.fontSize[breakPointX] != undefined) {
         var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
         var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-        var styles = (blockCssY.items[titleLinkSelector] == undefined) ? {} : blockCssY.items[titleLinkSelector];
+        var styles = (blockCssY.items[postTitleSelector] == undefined) ? {} : blockCssY.items[postTitleSelector];
         var fontSizeX = (styles['font-size'] == undefined) ? {} : styles['font-size'];
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-size': fontSizeX };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'font-size': fontSizeX };
 
       }
 
@@ -1011,24 +1383,24 @@ registerBlockType("post-grid/post-title", {
       if (typoX.lineHeight[breakPointX] != undefined) {
         var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 0;
         var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-        var styles = (blockCssY.items[titleLinkSelector] == undefined) ? {} : blockCssY.items[titleLinkSelector];
+        var styles = (blockCssY.items[postTitleSelector] == undefined) ? {} : blockCssY.items[postTitleSelector];
         var lineHeightX = (styles['line-height'] == undefined) ? {} : styles['line-height'];
 
         lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'line-height': lineHeightX };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'line-height': lineHeightX };
       }
       if (typoX.letterSpacing[breakPointX] != undefined) {
         var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
         var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var styles = (blockCssY.items[titleLinkSelector] == undefined) ? {} : blockCssY.items[titleLinkSelector];
+        var styles = (blockCssY.items[postTitleSelector] == undefined) ? {} : blockCssY.items[postTitleSelector];
         var letterSpacingX = (styles['letter-spacing'] == undefined) ? {} : styles['letter-spacing'];
 
         letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'letter-spacing': letterSpacingX };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'letter-spacing': letterSpacingX };
       }
 
       if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'font-weight': typoX.fontWeight };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'font-weight': typoX.fontWeight };
       }
 
 
@@ -1037,11 +1409,11 @@ registerBlockType("post-grid/post-title", {
         var textDecorationX = typoX.textDecoration[breakPointX];
         var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
         str[breakPointX] = textDecorationXStr;
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'text-decoration': str };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'text-decoration': str };
 
       }
       if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'text-transform': typoX.textTransform };
+        blockCssY.items[postTitleSelector] = { ...blockCssY.items[postTitleSelector], 'text-transform': typoX.textTransform };
       }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -1103,7 +1475,7 @@ registerBlockType("post-grid/post-title", {
                 var styles = { ...wrapper.styles, textAlign: newValuesObj };
                 setAttributes({ wrapper: { options: wrapper.options, styles: styles } });
 
-                blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'text-align': newValuesObj };
+                blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-align': newValuesObj };
                 setAttributes({ blockCssY: { items: blockCssY.items } });
 
               }}
@@ -1126,81 +1498,66 @@ registerBlockType("post-grid/post-title", {
 
 
                 <PanelBody title="Wrapper" initialOpen={false}>
-                  <PanelRow>
-                    <label for="">Wrapper Tag</label>
-                    <SelectControl
-                      label=""
-                      value={wrapper.options.tag}
-                      options={[
-                        { label: 'No Wrapper', value: '' },
-                        { label: 'H1', value: 'h1' },
-                        { label: 'H2', value: 'h2' },
-                        { label: 'H3', value: 'h3' },
-                        { label: 'H4', value: 'h4' },
-                        { label: 'H5', value: 'h5' },
-                        { label: 'H6', value: 'h6' },
-                        { label: 'span', value: 'SPAN' },
-                        { label: 'div', value: 'DIV' },
-                        { label: 'P', value: 'p' },
-                      ]}
-                      onChange={(newVal) => {
 
-                        var options = { ...wrapper.options, tag: newVal };
-                        setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
 
-                      }
-
-                      }
-                    />
-                  </PanelRow>
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
 
 
 
-                  <PanelRow>
-                    <label>Display</label>
-                    <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
+                    ]}
+                  >
+                    <PGtab name="options">
+
+                      <PanelRow>
+                        <label for="">Wrapper Tag</label>
+                        <SelectControl
+                          label=""
+                          value={wrapper.options.tag}
+                          options={[
+                            { label: 'No Wrapper', value: '' },
+                            { label: 'H1', value: 'h1' },
+                            { label: 'H2', value: 'h2' },
+                            { label: 'H3', value: 'h3' },
+                            { label: 'H4', value: 'h4' },
+                            { label: 'H5', value: 'h5' },
+                            { label: 'H6', value: 'h6' },
+                            { label: 'span', value: 'SPAN' },
+                            { label: 'div', value: 'DIV' },
+                            { label: 'P', value: 'p' },
+                          ]}
+                          onChange={(newVal) => {
+                            var options = { ...wrapper.options, tag: newVal };
+                            setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
+                          }
+                          }
+                        />
+                      </PanelRow>
 
 
-                      var newValuesObj = {};
-
-                      if (Object.keys(wrapper.styles.display).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = wrapper.styles.display;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...wrapper.styles, display: newValuesObj };
-                      setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-                      blockCssY.items[titleWrapperSelector] = { ...blockCssY.items[titleWrapperSelector], 'display': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                    })} />
-                  </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                    </PGtab>
 
 
-                  <PanelRow>
-                    <label>Padding</label>
-                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={wrapper.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paddingControlWrapper(nextValues) }}
-                  />
-
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={wrapper.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { marginControlWrapper(nextValues) }}
-                  />
-
+                  </PGtabs>
 
 
                 </PanelBody>
@@ -1208,607 +1565,402 @@ registerBlockType("post-grid/post-title", {
                 <PanelBody title="Post Title" initialOpen={false}>
 
 
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+
+                      <ToggleControl
+                        label="Linked?"
+                        help={postTitle.options.isLink ? 'Linked to URL' : 'Not linked to URL.'}
+                        checked={postTitle.options.isLink ? true : false}
+                        onChange={(e) => {
 
 
-                  <ToggleControl
-                    label="Linked?"
-                    help={postTitle.options.isLink ? 'Linked to URL' : 'Not linked to URL.'}
-                    checked={postTitle.options.isLink ? true : false}
-                    onChange={(e) => {
 
-
-
-                      var options = { ...postTitle.options, isLink: postTitle.options.isLink ? false : true };
-                      setAttributes({ postTitle: { ...postTitle, options: options } });
-
-
-
-                    }}
-                  />
-
-
-
-                  {!postTitle.options.isLink && (
-
-                    <PanelRow>
-                      <label for="">Custom Tag</label>
-                      <SelectControl
-                        label=""
-                        value={postTitle.options.tag}
-                        options={[
-                          { label: 'H1', value: 'h1' },
-                          { label: 'H2', value: 'h2' },
-                          { label: 'H3', value: 'h3' },
-                          { label: 'H4', value: 'h4' },
-                          { label: 'H5', value: 'h5' },
-                          { label: 'H6', value: 'h6' },
-                          { label: 'SPAN', value: 'span' },
-                          { label: 'DIV', value: 'div' },
-                          { label: 'P', value: 'p' },
-                        ]}
-                        onChange={(newVal) => {
-                          var options = { ...postTitle.options, tag: newVal };
+                          var options = { ...postTitle.options, isLink: postTitle.options.isLink ? false : true };
                           setAttributes({ postTitle: { ...postTitle, options: options } });
-                        }
 
-                        }
+
+
+                        }}
                       />
-                    </PanelRow>
-                  )}
 
 
 
-
-
-
-
-                  {postTitle.options.isLink && (
-                    <>
-
-                      <PanelRow>
-                        <label for="">Link To</label>
-
-                        <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={postTitle.options.linkTo.length == 0 ? 'Choose' : linkToArgs[postTitle.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
-
-                      </PanelRow>
-
-
-                      <div className='bg-gray-500 p-2 my-3 text-white'>{(linkToArgs[postTitle.options.linkTo] != undefined) ? linkToArgs[postTitle.options.linkTo].label : ''}</div>
-
-                      {postTitle.options.linkTo == 'authorMeta' && (
+                      {!postTitle.options.isLink && (
 
                         <PanelRow>
-                          <label for="">Author Meta Key</label>
-
-                          <InputControl
-                            value={postTitle.options.linkToAuthorMeta}
+                          <label for="">Custom Tag</label>
+                          <SelectControl
+                            label=""
+                            value={postTitle.options.tag}
+                            options={[
+                              { label: 'H1', value: 'h1' },
+                              { label: 'H2', value: 'h2' },
+                              { label: 'H3', value: 'h3' },
+                              { label: 'H4', value: 'h4' },
+                              { label: 'H5', value: 'h5' },
+                              { label: 'H6', value: 'h6' },
+                              { label: 'SPAN', value: 'span' },
+                              { label: 'DIV', value: 'div' },
+                              { label: 'P', value: 'p' },
+                            ]}
                             onChange={(newVal) => {
-
-
-                              var options = { ...postTitle.options, linkToAuthorMeta: newVal };
+                              var options = { ...postTitle.options, tag: newVal };
                               setAttributes({ postTitle: { ...postTitle, options: options } });
+                            }
 
-                            }}
+                            }
                           />
-
                         </PanelRow>
-
-                      )}
-
-
-                      {postTitle.options.linkTo == 'customField' && (
-
-                        <PanelRow>
-                          <label for="">Custom Meta Key</label>
-
-                          <InputControl
-                            value={postTitle.options.linkToAuthorMeta}
-                            onChange={(newVal) => {
-
-                              var options = { ...postTitle.options, linkToAuthorMeta: newVal };
-                              setAttributes({ postTitle: { ...postTitle, options: options } });
-
-                            }}
-                          />
-
-                        </PanelRow>
-
                       )}
 
 
 
-                      {postTitle.options.linkTo == 'customUrl' && (
-
-
-                        <PanelRow>
-                          <label for="">Custom Url</label>
-
-                          <div className='relative'>
-                            <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                              setLinkPickerPosttitle(prev => !prev);
-
-                            }}></Button>
-                            {postTitle.options.customUrl.length > 0 && (
-                              <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                                var options = { ...postTitle.options, customUrl: '' };
-                                setAttributes({ postTitle: { ...postTitle, options: options } });
-                                setLinkPickerPosttitle(false);
 
 
 
-                              }}></Button>
 
-                            )}
-                            {linkPickerPosttitle && (
-                              <Popover position="bottom right">
-                                <LinkControl settings={[]} value={postTitle.options.customUrl} onChange={newVal => {
+                      {postTitle.options.isLink && (
+                        <>
 
-                                  var options = { ...postTitle.options, customUrl: newVal.url };
+                          <PanelRow>
+                            <label for="">Link To</label>
 
+                            <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={postTitle.options.linkTo.length == 0 ? 'Choose' : linkToArgs[postTitle.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
+
+                          </PanelRow>
+
+
+                          <div className='bg-gray-500 p-2 my-3 text-white'>{(linkToArgs[postTitle.options.linkTo] != undefined) ? linkToArgs[postTitle.options.linkTo].label : ''}</div>
+
+                          {postTitle.options.linkTo == 'authorMeta' && (
+
+                            <PanelRow>
+                              <label for="">Author Meta Key</label>
+
+                              <InputControl
+                                value={postTitle.options.linkToAuthorMeta}
+                                onChange={(newVal) => {
+
+
+                                  var options = { ...postTitle.options, linkToAuthorMeta: newVal };
                                   setAttributes({ postTitle: { ...postTitle, options: options } });
 
-                                }} />
+                                }}
+                              />
 
-                                <div className='p-2'><span className='font-bold'>Linked to:</span> {(postTitle.options.customUrl.length != 0) ? postTitle.options.customUrl : 'No link'} </div>
-                              </Popover>
+                            </PanelRow>
 
-                            )}
+                          )}
 
 
-                          </div>
-                        </PanelRow>
+                          {postTitle.options.linkTo == 'customField' && (
+
+                            <PanelRow>
+                              <label for="">Custom Meta Key</label>
+
+                              <InputControl
+                                value={postTitle.options.linkToAuthorMeta}
+                                onChange={(newVal) => {
+
+                                  var options = { ...postTitle.options, linkToAuthorMeta: newVal };
+                                  setAttributes({ postTitle: { ...postTitle, options: options } });
+
+                                }}
+                              />
+
+                            </PanelRow>
+
+                          )}
+
+
+
+                          {postTitle.options.linkTo == 'customUrl' && (
+
+
+                            <PanelRow>
+                              <label for="">Custom Url</label>
+
+                              <div className='relative'>
+                                <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                                  setLinkPickerPosttitle(prev => !prev);
+
+                                }}></Button>
+                                {postTitle.options.customUrl.length > 0 && (
+                                  <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                                    var options = { ...postTitle.options, customUrl: '' };
+                                    setAttributes({ postTitle: { ...postTitle, options: options } });
+                                    setLinkPickerPosttitle(false);
+
+
+
+                                  }}></Button>
+
+                                )}
+                                {linkPickerPosttitle && (
+                                  <Popover position="bottom right">
+                                    <LinkControl settings={[]} value={postTitle.options.customUrl} onChange={newVal => {
+
+                                      var options = { ...postTitle.options, customUrl: newVal.url };
+
+                                      setAttributes({ postTitle: { ...postTitle, options: options } });
+
+                                    }} />
+
+                                    <div className='p-2'><span className='font-bold'>Linked to:</span> {(postTitle.options.customUrl.length != 0) ? postTitle.options.customUrl : 'No link'} </div>
+                                  </Popover>
+
+                                )}
+
+
+                              </div>
+                            </PanelRow>
+                          )}
+
+
+
+
+
+
+
+
+
+                          <PanelRow>
+                            <label for="">Link Target</label>
+
+                            <SelectControl
+                              label=""
+                              value={postTitle.options.linkTarget}
+                              options={[
+                                { label: '_self', value: '_self' },
+                                { label: '_blank', value: '_blank' },
+                                { label: '_parent', value: '_parent' },
+                                { label: '_top', value: '_top' },
+                              ]}
+                              onChange={
+                                (newVal) => {
+                                  var options = { ...postTitle.options, linkTarget: newVal };
+                                  setAttributes({ text: { ...text, options: options } });
+                                }
+                              }
+                            />
+                          </PanelRow>
+                        </>
+
                       )}
 
 
 
 
 
+                      {postTitle.options.isLink && (
+
+                        <div>
+
+
+                          <PanelRow>
+                            <label for="">Custom Attributes</label>
+                            <div
+                              className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                              onClick={(ev) => {
+
+                                var sdsd = postTitle.options.linkAttr.concat({ id: '', val: '' })
+
+
+                                var options = { ...postTitle.options, linkAttr: sdsd };
+                                setAttributes({ postTitle: { ...postTitle, options: options } });
+
+                                linkAttrObj()
+                              }}
+
+                            >Add</div>
+
+
+
+                          </PanelRow>
+
+
+
+                          {
+                            postTitle.options.linkAttr.map((x, i) => {
+
+                              return (
+
+                                <div className='my-2'>
+                                  <PanelRow>
+                                    <InputControl
+                                      placeholder="Name"
+                                      className='mr-2'
+                                      value={postTitle.options.linkAttr[i].id}
+                                      onChange={(newVal) => {
+
+                                        postTitle.options.linkAttr[i].id = newVal;
+
+
+                                        var ssdsd = postTitle.options.linkAttr.concat([]);
+
+
+
+                                        var options = { ...postTitle.options, linkAttr: ssdsd };
+                                        setAttributes({ postTitle: { ...postTitle, options: options } });
+
+                                      }}
+                                    />
+
+                                    <InputControl
+                                      placeholder="Value"
+                                      className='mr-2'
+                                      value={x.val}
+                                      onChange={(newVal) => {
+                                        postTitle.options.linkAttr[i].val = newVal
+                                        var ssdsd = postTitle.options.linkAttr.concat([]);
+
+
+
+                                        var options = { ...postTitle.options, linkAttr: ssdsd };
+                                        setAttributes({ postTitle: { ...postTitle, options: options } });
+
+                                      }}
+                                    />
+                                    <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                                      onClick={(ev) => {
+
+                                        postTitle.options.linkAttr.splice(i, 1);
+
+                                        var ssdsd = postTitle.options.linkAttr.concat([]);
+
+
+                                        var options = { ...postTitle.options, linkAttr: ssdsd };
+                                        setAttributes({ postTitle: { ...postTitle, options: options } });
+                                      }}
+
+                                    ></span>
+                                  </PanelRow>
 
 
 
 
-                      <PanelRow>
-                        <label for="">Link Target</label>
+                                </div>
 
-                        <SelectControl
-                          label=""
-                          value={postTitle.options.linkTarget}
-                          options={[
-                            { label: '_self', value: '_self' },
-                            { label: '_blank', value: '_blank' },
-                            { label: '_parent', value: '_parent' },
-                            { label: '_top', value: '_top' },
-                          ]}
-                          onChange={
-                            (newVal) => {
-                              var options = { ...postTitle.options, linkTarget: newVal };
-                              setAttributes({ text: { ...text, options: options } });
-                            }
+                              )
+
+                            })
                           }
-                        />
-                      </PanelRow>
-                    </>
 
-                  )}
+
+                        </div>
 
 
 
+                      )}
 
-
-                  {postTitle.options.isLink && (
-
-                    <div>
 
 
                       <PanelRow>
-                        <label for="">Custom Attributes</label>
-                        <div
-                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+                        <label for="">Limit By</label>
 
-                          onClick={(ev) => {
-
-                            var sdsd = postTitle.options.linkAttr.concat({ id: '', val: '' })
-
-
-                            var options = { ...postTitle.options, linkAttr: sdsd };
-                            setAttributes({ postTitle: { ...postTitle, options: options } });
-
-                            linkAttrObj()
-                          }}
-
-                        >Add</div>
-
-
-
+                        <PGDropdown position="bottom right" variant="secondary" options={limitByArgs} buttonTitle="Choose" onChange={setLimitBy} values={[]}></PGDropdown>
                       </PanelRow>
 
-
-
-                      {
-                        postTitle.options.linkAttr.map((x, i) => {
-
-                          return (
-
-                            <div className='my-2'>
-                              <PanelRow>
-                                <InputControl
-                                  placeholder="Name"
-                                  className='mr-2'
-                                  value={postTitle.options.linkAttr[i].id}
-                                  onChange={(newVal) => {
-
-                                    postTitle.options.linkAttr[i].id = newVal;
-
-
-                                    var ssdsd = postTitle.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...postTitle.options, linkAttr: ssdsd };
-                                    setAttributes({ postTitle: { ...postTitle, options: options } });
-
-                                  }}
-                                />
-
-                                <InputControl
-                                  placeholder="Value"
-                                  className='mr-2'
-                                  value={x.val}
-                                  onChange={(newVal) => {
-                                    postTitle.options.linkAttr[i].val = newVal
-                                    var ssdsd = postTitle.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...postTitle.options, linkAttr: ssdsd };
-                                    setAttributes({ postTitle: { ...postTitle, options: options } });
-
-                                  }}
-                                />
-                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                                  onClick={(ev) => {
-
-                                    postTitle.options.linkAttr.splice(i, 1);
-
-                                    var ssdsd = postTitle.options.linkAttr.concat([]);
-
-
-                                    var options = { ...postTitle.options, linkAttr: ssdsd };
-                                    setAttributes({ postTitle: { ...postTitle, options: options } });
-                                  }}
-
-                                ></span>
-                              </PanelRow>
-
-
-
-
-                            </div>
-
-                          )
-
-                        })
-                      }
-
-
-                    </div>
-
-
-
-                  )}
-
-
-
-                  <PanelRow>
-                    <label for="">Limit By</label>
-
-                    <PGDropdown position="bottom right" variant="secondary" options={limitByArgs} buttonTitle="Choose" onChange={setLimitBy} values={[]}></PGDropdown>
-                  </PanelRow>
-
-                  {postTitle.options.limitBy.length > 0 && (
-                    <div className='bg-gray-500 my-3 text-white p-2'>{limitByArgs[postTitle.options.limitBy].label}</div>
-                  )}
-
-                  {(postTitle.options.limitBy == 'word' || postTitle.options.limitBy == 'character') && (
-
-                    <PanelRow>
-                      <label for="">Limit Count</label>
-
-                      <InputControl
-                        value={postTitle.options.limitCount}
-                        onChange={(newVal) => {
-                          var options = { ...postTitle.options, limitCount: newVal };
-                          setAttributes({ postTitle: { ...postTitle, options: options } });
-
-                        }
-                        }
-                      />
-                    </PanelRow>
-                  )}
-
-
-
-
-
-
-                  <PanelRow className='my-3'>
-                    <label>Color</label>
-                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-
-                  <ColorPalette
-                    value={postTitle.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(postTitle.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = postTitle.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...postTitle.styles, color: newValuesObj };
-                      setAttributes({ postTitle: { ...postTitle, styles: styles } });
-
-                      var newValuesObjX = {};
-                      if (blockCssY.items[titleLinkSelector] == undefined) {
-
-                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], color: newValuesObj };
-
-                      } else {
-
-                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], color: newValuesObj };
-                      }
-
-                      setAttributes({ blockCssY: { items: newValuesObjX } });
-                    }}
-                  />
-
-
-
-                  <PGColorPicker className="my-3"
-                    value={postTitle.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    initialOpen={false}
-
-                    onChange={(newVal) => {
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(postTitle.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = postTitle.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...postTitle.styles, color: newValuesObj };
-                      setAttributes({ postTitle: { ...postTitle, styles: styles } });
-
-                      var newValuesObjX = {};
-                      if (blockCssY.items[titleLinkSelector] == undefined) {
-
-                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], color: newValuesObj };
-
-                      } else {
-
-                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], color: newValuesObj };
-                      }
-
-                      setAttributes({ blockCssY: { items: newValuesObjX } });
-                    }}
-
-                    label={<PGColorPickerLabel title='Color' />}
-
-
-                  />
-
-
-                  {<PGColorPicker className="my-3"
-                    value={postTitle.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    initialOpen={false}
-                    label={<PGColorPickerLabel title='Background Color' />}
-
-                    onChange={(newVal) => {
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(postTitle.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = postTitle.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...postTitle.styles, bgColor: newValuesObj };
-                      setAttributes({ postTitle: { ...postTitle, styles: styles } });
-
-
-                      var newValuesObjX = {};
-                      if (blockCssY.items[titleLinkSelector] == undefined) {
-
-                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': newValuesObj };
-
-                      } else {
-
-                        newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'background-color': newValuesObj };
-                      }
-
-
-                      setAttributes({ blockCssY: { items: newValuesObjX } });
-
-
-
-
-                    }}
-                  />}
-
-
-                  <PanelRow>
-                    <div className=''>Typography</div>
-                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <Typography typo={postTitle.styles} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} obj={postTitle} />
-
-
-                  <PanelRow className='my-3'>
-                    <div className='flex items-center'>
-                      <label>Display</label>
-                      <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </div>
-
-                    <SelectControl
-                      label=""
-                      value={postTitle.styles.display[breakPointX]}
-
-                      options={[
-                        { label: 'Select..', value: '' },
-
-                        { label: 'inline', value: 'inline' },
-                        { label: 'inline-block', value: 'inline-block' },
-                        { label: 'block', value: 'block' },
-                        { label: 'none', value: 'none' },
-
-
-
-                      ]}
-                      onChange={(newVal) => {
-
-
-
-                        var newValuesObj = {};
-
-
-                        if (Object.keys(postTitle.styles.display).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = postTitle.styles.display;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-
-                        var styles = { ...postTitle.styles, display: newValuesObj };
-                        setAttributes({ postTitle: { ...postTitle, styles: styles } });
-
-
-                        var newValuesObjX = {};
-                        if (blockCssY.items[titleLinkSelector] == undefined) {
-
-                          newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], display: newValuesObj };
-
-                        } else {
-
-                          newValuesObjX[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], display: newValuesObj };
-                        }
-
-
-                        setAttributes({ blockCssY: { items: newValuesObjX } });
-
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
-
-
-
-                  <PanelRow className='my-3'>
-                    <div className='flex items-center'>
-                      <label>Text Align</label>
-                      <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </div>
-
-                    <PGcssTextAlign val={postTitle.styles.textAlign[breakPointX]} onChange={(newVal => {
-
-                      var newValuesObj = {};
-
-                      if (Object.keys(postTitle.styles.textAlign).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = postTitle.styles.textAlign;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...postTitle.styles, textAlign: newValuesObj };
-                      setAttributes({ postTitle: { ...postTitle, styles: styles } });
-
-                      blockCssY.items[titleLinkSelector] = { ...blockCssY.items[titleLinkSelector], 'text-align': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-                    })} />
-                  </PanelRow>
-
-                  <PanelRow>
-
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label>Padding</label>
-                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={postTitle.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paddingControl(nextValues) }}
-                  />
-
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={postTitle.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { marginControl(nextValues) }}
-                  />
+                      {postTitle.options.limitBy.length > 0 && (
+                        <div className='bg-gray-500 my-3 text-white p-2'>{limitByArgs[postTitle.options.limitBy].label}</div>
+                      )}
+
+                      {(postTitle.options.limitBy == 'word' || postTitle.options.limitBy == 'character') && (
+
+                        <PanelRow>
+                          <label for="">Limit Count</label>
+
+                          <InputControl
+                            value={postTitle.options.limitCount}
+                            onChange={(newVal) => {
+                              var options = { ...postTitle.options, limitCount: newVal };
+                              setAttributes({ postTitle: { ...postTitle, options: options } });
+
+                            }
+                            }
+                          />
+                        </PanelRow>
+                      )}
+
+
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={postTitle} onChange={onChangeStylePostTitle} onAdd={onAddStylePostTitle} onRemove={onRemoveStylePostTitle} />
+                    </PGtab>
+                  </PGtabs>
 
 
                 </PanelBody>
 
 
                 <PanelBody title="Prefix" initialOpen={false}>
-                  <PanelRow>
-                    <label for="">Prefix</label>
-
-                    <InputControl
-                      value={prefix.options.text}
-                      onChange={(newVal) => {
 
 
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+                      <PanelRow>
+                        <label for="">Prefix</label>
 
-                        var options = { ...prefix.options, text: newVal };
-                        setAttributes({ prefix: { styles: prefix.styles, options: options } });
+                        <InputControl
+                          value={prefix.options.text}
+                          onChange={(newVal) => {
+
+                            var options = { ...prefix.options, text: newVal };
+                            setAttributes({ prefix: { styles: prefix.styles, options: options } });
+
+                          }
+                          }
+                        />
+                      </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={prefix} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
+                    </PGtab>
+                  </PGtabs>
 
 
-
-                        // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, bgColor: prefix.bgColor } })
-                      }
-                      }
-                    />
-                  </PanelRow>
 
                 </PanelBody>
 
@@ -1819,25 +1971,46 @@ registerBlockType("post-grid/post-title", {
 
 
 
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+                      <PanelRow>
+                        <label for="">Postfix</label>
+                        <InputControl
+                          value={postfix.options.text}
+                          onChange={(newVal) => {
 
-                  <PanelRow>
-                    <label for="">Postfix</label>
+                            var options = { ...postfix.options, text: newVal };
+                            setAttributes({ postfix: { ...postfix, options: options } });
 
-                    <InputControl
-                      value={postfix.options.text}
-                      onChange={(newVal) => {
+                          }
 
-
-                        var options = { ...postfix.options, text: newVal };
-                        setAttributes({ postfix: { ...postfix, options: options } });
-
-
-                        // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, bgColor: postfix.bgColor } })
-                      }
-
-                      }
-                    />
-                  </PanelRow>
+                          }
+                        />
+                      </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={postfix} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
+                    </PGtab>
+                  </PGtabs>
 
                 </PanelBody>
 
@@ -1847,22 +2020,22 @@ registerBlockType("post-grid/post-title", {
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
                     <p className='font-bold'>Title Wrapper</p>
-                    <p><code>{titleWrapperSelector}{'{/* your CSS here*/}'}</code></p>
+                    <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>Title link</p>
-                    <p><code>{titleLinkSelector}{'{/* your CSS here*/}'} </code></p>
+                    <p><code>{postTitleSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>Prefix</p>
-                    <p><code>{titlePrefixSelector}{'{/* your CSS here*/}'} </code></p>
+                    <p><code>{prefixSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>Postfix</p>
-                    <p><code>{titlePostfixSelector}{'{/* your CSS here*/}'} </code></p>
+                    <p><code>{postfixSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
 

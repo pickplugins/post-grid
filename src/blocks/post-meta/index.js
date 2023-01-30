@@ -265,7 +265,7 @@ registerBlockType("post-grid/post-meta", {
 
 
 
-    const CustomTag = `${wrapper.options.tag}`;
+    const CustomTag = (wrapper.options.tag != undefined && wrapper.options.tag.length != 0) ? `${wrapper.options.tag}` : 'div';
 
 
 
@@ -962,26 +962,7 @@ registerBlockType("post-grid/post-meta", {
           />)}
 
 
-
-
-
-          {wrapper.options.tag && (
-            <CustomTag className={[blockId]}>
-
-              <RawHTML>{metaHtml}</RawHTML>
-            </CustomTag>
-          )}
-
-          {wrapper.options.tag.length == 0 && (
-
-            <div className={[blockId]}>
-              <RawHTML className="metaValue">{metaHtml}</RawHTML>
-
-            </div>
-          )}
-
-
-
+          <CustomTag className={[blockId]} dangerouslySetInnerHTML={{ __html: metaHtml }} />
 
         </>
       ]

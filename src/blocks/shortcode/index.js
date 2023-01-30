@@ -8,7 +8,7 @@ import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
-import { link, linkOff, plus } from "@wordpress/icons";
+import { Icon, styles, settings, link, linkOff, plus } from "@wordpress/icons";
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -21,7 +21,9 @@ import BreakpointToggle from '../../components/breakpoint-toggle'
 import colorsPresets from '../../colors-presets'
 import PGDropdown from '../../components/dropdown'
 
-
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -130,7 +132,7 @@ registerBlockType("post-grid/shortcode", {
 
 
     // Wrapper CSS Class Selectors
-    const itemWrapSelector = blockClass;
+    const wrapperSelector = blockClass;
     const itemSelector = blockClass + ' .item';
     const postCountSelector = blockClass + ' .postCount';
 
@@ -201,6 +203,84 @@ registerBlockType("post-grid/shortcode", {
 
 
 
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
 
 
 
@@ -752,23 +832,56 @@ registerBlockType("post-grid/shortcode", {
 
             <PanelBody title="Wrapper" initialOpen={false}>
 
-              <PanelRow>
-                <label for="">Wrapper Class</label>
-
-                <InputControl
-                  value={wrapper.options.class}
-                  onChange={(newVal) => {
 
 
-                    var options = { ...wrapper.options, class: newVal }
-                    setAttributes({ wrapper: { ...wrapper, options: options } });
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
+                  <PanelRow>
+                    <label for="">Wrapper Class</label>
+
+                    <InputControl
+                      value={wrapper.options.class}
+                      onChange={(newVal) => {
+
+
+                        var options = { ...wrapper.options, class: newVal }
+                        setAttributes({ wrapper: { ...wrapper, options: options } });
 
 
 
 
-                  }}
-                />
-              </PanelRow>
+                      }}
+                    />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                </PGtab>
+              </PGtabs>
+
+
+
+
+
 
             </PanelBody>
 
@@ -782,7 +895,7 @@ registerBlockType("post-grid/shortcode", {
               <p>Please use following class selector to apply your custom CSS</p>
               <div className='my-3'>
                 <p className='font-bold'>Items Wrapper</p>
-                <p><code>{itemWrapSelector}{'{/* your CSS here*/}'}</code></p>
+                <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
               </div>
 
               <div className='my-3'>

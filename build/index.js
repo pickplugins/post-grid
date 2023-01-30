@@ -10407,6 +10407,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../store */ "./src/store.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
 /* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
 /* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
 /* harmony import */ var _components_mail_subscribe__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/mail-subscribe */ "./src/components/mail-subscribe/index.js");
@@ -10416,6 +10418,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
 /* harmony import */ var _components_css_display__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/css-display */ "./src/components/css-display/index.js");
 /* harmony import */ var re_resizable__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! re-resizable */ "./node_modules/re-resizable/lib/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
 
 
 
@@ -10431,6 +10436,9 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
+
+
 
 
 
@@ -10597,7 +10605,7 @@ var myStore = wp.data.select('postgrid-shop');
       };
     }, [clientId]); // Wrapper CSS Class Selectors
 
-    const postDateWrapperSelector = blockClass;
+    const wrapperSelector = blockClass;
     var dividerSelector = '';
 
     if (wrapper.options.tag.length != 0) {
@@ -10618,6 +10626,98 @@ var myStore = wp.data.select('postgrid-shop');
         label: item.name,
         icon: item.icon,
         value: item.id
+      });
+    }
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      } else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+    }
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
       });
     }
 
@@ -11014,7 +11114,7 @@ var myStore = wp.data.select('postgrid-shop');
             styles: styles
           }
         });
-        blockCssY.items[postDateWrapperSelector] = { ...blockCssY.items[postDateWrapperSelector],
+        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
           'text-align': newValuesObj
         };
         setAttributes({
@@ -11031,6 +11131,24 @@ var myStore = wp.data.select('postgrid-shop');
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Wrapper",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
@@ -11078,36 +11196,14 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_17__["default"], {
-      val: wrapper.styles.display[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        blockCssY.items[postDateWrapperSelector] = { ...blockCssY.items[postDateWrapperSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      obj: wrapper,
+      onChange: onChangeStyleWrapper,
+      onAdd: onAddStyleWrapper,
+      onRemove: onRemoveStyleWrapper
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Divider",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
@@ -11296,7 +11392,7 @@ var myStore = wp.data.select('postgrid-shop');
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("p", {
       className: "font-bold"
-    }, "Title Wrapper"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("code", null, postDateWrapperSelector, '{/* your CSS here*/}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("div", {
+    }, "Title Wrapper"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("code", null, wrapperSelector, '{/* your CSS here*/}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("div", {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("p", {
       className: "font-bold"
@@ -16497,12 +16593,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../store */ "./src/store.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
 /* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
 /* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
 /* harmony import */ var _components_mail_subscribe__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/mail-subscribe */ "./src/components/mail-subscribe/index.js");
 /* harmony import */ var _components_contact_support__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/contact-support */ "./src/components/contact-support/index.js");
 /* harmony import */ var _components_breakpoint_toggle__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/breakpoint-toggle */ "./src/components/breakpoint-toggle/index.js");
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
 
 
 
@@ -16519,6 +16620,9 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
+
+
 
 
 
@@ -16558,16 +16662,10 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-layers'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
-          padding: {},
-          margin: {},
-          display: {},
           position: {},
           zIndex: {},
-          width: {},
-          height: {},
           top: {},
           right: {},
           bottom: {},
@@ -16646,6 +16744,98 @@ var myStore = wp.data.select('postgrid-shop');
       ev.stopPropagation();
       ev.preventDefault();
       return false;
+    }
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      } else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+    }
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
     }
 
     function paddingControl(nextValues) {
@@ -16969,6 +17159,24 @@ var myStore = wp.data.select('postgrid-shop');
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Wrapper",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
@@ -17012,1058 +17220,14 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Postion"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      label: "",
-      value: wrapper.styles.position[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'static',
-        value: 'static'
-      }, {
-        label: 'relative',
-        value: 'relative'
-      }, {
-        label: 'fixed',
-        value: 'fixed'
-      }, {
-        label: 'absolute',
-        value: 'absolute'
-      }, {
-        label: 'sticky',
-        value: 'sticky'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.position).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.position;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          position: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'position': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "z-Index"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalInputControl, {
-      value: wrapper.styles.zIndex[breakPointX] != undefined ? wrapper.styles.zIndex[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.zIndex).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: ''
-          };
-        } else {
-          newValuesObj = wrapper.styles.zIndex;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : '';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          zIndex: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : '';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {};
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'z-index': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      className: "mb-0",
-      value: wrapper.styles.zIndex[breakPointX] != undefined ? wrapper.styles.zIndex[breakPointX].unit : '',
-      options: [{
-        label: 'Choose',
-        value: ''
-      }, {
-        label: 'Auto',
-        value: 'auto'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.zIndex).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = wrapper.styles.zIndex;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          zIndex: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : '';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'z-index': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Width"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalInputControl, {
-      value: wrapper.styles.width[breakPointX] != undefined ? wrapper.styles.width[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.width).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: 'auto'
-          };
-        } else {
-          newValuesObj = wrapper.styles.width;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          width: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {};
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'width': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      className: "mb-0",
-      value: wrapper.styles.width[breakPointX] != undefined ? wrapper.styles.width[breakPointX].unit : 'auto',
-      options: [{
-        label: 'Auto',
-        value: 'auto'
-      }, {
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'fr',
-        value: 'fr'
-      }, {
-        label: '%',
-        value: '%'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.width).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = wrapper.styles.width;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          width: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'width': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Height"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalInputControl, {
-      value: wrapper.styles.height[breakPointX] != undefined ? wrapper.styles.height[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.height).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: 'auto'
-          };
-        } else {
-          newValuesObj = wrapper.styles.height;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          height: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'height': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      className: "mb-0",
-      value: wrapper.styles.height[breakPointX] != undefined ? wrapper.styles.height[breakPointX].unit : 'auto',
-      options: [{
-        label: 'Auto',
-        value: 'auto'
-      }, {
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'fr',
-        value: 'fr'
-      }, {
-        label: '%',
-        value: '%'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.height).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = wrapper.styles.height;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          height: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'height': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Top"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalInputControl, {
-      disabled: wrapper.styles.top[breakPointX] != undefined && wrapper.styles.top[breakPointX].unit == 'auto' ? true : false,
-      value: wrapper.styles.top[breakPointX] != undefined ? wrapper.styles.top[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.top).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: 'auto'
-          };
-        } else {
-          newValuesObj = wrapper.styles.top;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          top: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'top': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      className: "mb-0",
-      value: wrapper.styles.top[breakPointX] != undefined ? wrapper.styles.top[breakPointX].unit : 'auto',
-      options: [{
-        label: 'Auto',
-        value: 'auto'
-      }, {
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'fr',
-        value: 'fr'
-      }, {
-        label: '%',
-        value: '%'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.top).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = wrapper.styles.top;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          top: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'top': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Right"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalInputControl, {
-      disabled: wrapper.styles.right[breakPointX] != undefined && wrapper.styles.right[breakPointX].unit == 'auto' ? true : false,
-      value: wrapper.styles.right[breakPointX] != undefined ? wrapper.styles.right[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.right).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: 'auto'
-          };
-        } else {
-          newValuesObj = wrapper.styles.right;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          right: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'right': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      className: "mb-0",
-      value: wrapper.styles.right[breakPointX] != undefined ? wrapper.styles.right[breakPointX].unit : 'auto',
-      options: [{
-        label: 'Auto',
-        value: 'auto'
-      }, {
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'fr',
-        value: 'fr'
-      }, {
-        label: '%',
-        value: '%'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.right).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = wrapper.styles.right;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          right: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'right': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Bottom"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalInputControl, {
-      disabled: wrapper.styles.bottom[breakPointX] != undefined && wrapper.styles.bottom[breakPointX].unit == 'auto' ? true : false,
-      value: wrapper.styles.bottom[breakPointX] != undefined ? wrapper.styles.bottom[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.bottom).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: 'auto'
-          };
-        } else {
-          newValuesObj = wrapper.styles.bottom;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          bottom: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'bottom': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      className: "mb-0",
-      value: wrapper.styles.bottom[breakPointX] != undefined ? wrapper.styles.bottom[breakPointX].unit : 'auto',
-      options: [{
-        label: 'Auto',
-        value: 'auto'
-      }, {
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'fr',
-        value: 'fr'
-      }, {
-        label: '%',
-        value: '%'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.bottom).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = wrapper.styles.bottom;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          bottom: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'bottom': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Left"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalInputControl, {
-      disabled: wrapper.styles.left[breakPointX] != undefined && wrapper.styles.left[breakPointX].unit == 'auto' ? true : false,
-      value: wrapper.styles.left[breakPointX] != undefined ? wrapper.styles.left[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.left).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: 'auto'
-          };
-        } else {
-          newValuesObj = wrapper.styles.left;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          left: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {};
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'left': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      className: "mb-0",
-      value: wrapper.styles.left[breakPointX] != undefined ? wrapper.styles.left[breakPointX].unit : 'auto',
-      options: [{
-        label: 'Auto',
-        value: 'auto'
-      }, {
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'fr',
-        value: 'fr'
-      }, {
-        label: '%',
-        value: '%'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.left).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = wrapper.styles.left;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          left: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {};
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'left': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: wrapper.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: wrapper.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      label: "",
-      value: wrapper.styles.display[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'inline',
-        value: 'inline'
-      }, {
-        label: 'inline-block',
-        value: 'inline-block'
-      }, {
-        label: 'block',
-        value: 'block'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: wrapper.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControl(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: wrapper.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControl(nextValues);
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      obj: wrapper,
+      onChange: onChangeStyleWrapper,
+      onAdd: onAddStyleWrapper,
+      onRemove: onRemoveStyleWrapper
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Please use following class selector to apply your custom CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -18133,6 +17297,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
@@ -18143,6 +17309,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_contact_support__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/contact-support */ "./src/components/contact-support/index.js");
 /* harmony import */ var _components_breakpoint_toggle__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/breakpoint-toggle */ "./src/components/breakpoint-toggle/index.js");
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
+
+
 
 
 
@@ -18159,6 +17330,7 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
 
 
 
@@ -18211,16 +17383,11 @@ function EditComponent() {
           class: 'pg-layers'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
-          padding: {},
-          margin: {},
           display: {},
           position: {},
-          overflow: {},
-          width: {},
-          height: {}
+          overflow: {}
         }
       }
     },
@@ -18295,6 +17462,98 @@ function EditComponent() {
       ev.stopPropagation();
       ev.preventDefault();
       return false;
+    }
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      } else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+    }
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
     }
 
     function onChangeTextTypo(typoX) {
@@ -18701,6 +17960,24 @@ function EditComponent() {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Wrapper",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
@@ -18744,550 +18021,14 @@ function EditComponent() {
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Postion"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      label: "",
-      value: wrapper.styles.position[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'static',
-        value: 'static'
-      }, {
-        label: 'relative',
-        value: 'relative'
-      }, {
-        label: 'fixed',
-        value: 'fixed'
-      }, {
-        label: 'absolute',
-        value: 'absolute'
-      }, {
-        label: 'sticky',
-        value: 'sticky'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.position).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.position;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          position: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'position': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Overflow"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      label: "",
-      value: wrapper.styles.overflow[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'visible',
-        value: 'visible'
-      }, {
-        label: 'hidden',
-        value: 'hidden'
-      }, {
-        label: 'scroll',
-        value: 'scroll'
-      }, {
-        label: 'auto',
-        value: 'auto'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.overflow).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.overflow;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          overflow: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'overflow': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Width"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalInputControl, {
-      value: wrapper.styles.width[breakPointX] != undefined ? wrapper.styles.width[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.width).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: 'auto'
-          };
-        } else {
-          newValuesObj = wrapper.styles.width;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          width: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {};
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'width': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      className: "mb-0",
-      value: wrapper.styles.width[breakPointX] != undefined ? wrapper.styles.width[breakPointX].unit : 'auto',
-      options: [{
-        label: 'Auto',
-        value: 'auto'
-      }, {
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'fr',
-        value: 'fr'
-      }, {
-        label: '%',
-        value: '%'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.width).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = wrapper.styles.width;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          width: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'width': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Height"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalInputControl, {
-      value: wrapper.styles.height[breakPointX] != undefined ? wrapper.styles.height[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.height).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: 'auto'
-          };
-        } else {
-          newValuesObj = wrapper.styles.height;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          height: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 10;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'height': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      className: "mb-0",
-      value: wrapper.styles.height[breakPointX] != undefined ? wrapper.styles.height[breakPointX].unit : 'auto',
-      options: [{
-        label: 'Auto',
-        value: 'auto'
-      }, {
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'fr',
-        value: 'fr'
-      }, {
-        label: '%',
-        value: '%'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.height).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = wrapper.styles.height;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...wrapper.styles,
-          height: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {};
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'height': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: wrapper.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: wrapper.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      label: "",
-      value: wrapper.styles.display[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'inline',
-        value: 'inline'
-      }, {
-        label: 'inline-block',
-        value: 'inline-block'
-      }, {
-        label: 'block',
-        value: 'block'
-      }, {
-        label: 'flex',
-        value: 'flex'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      typo: wrapper.styles,
-      breakPointX: breakPointX,
-      onChange: onChangeTextTypo,
-      setAttributes: setAttributes,
-      obj: wrapper
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: wrapper.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControl(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: wrapper.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControl(nextValues);
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      obj: wrapper,
+      onChange: onChangeStyleWrapper,
+      onAdd: onAddStyleWrapper,
+      onRemove: onRemoveStyleWrapper
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Please use following class selector to apply your custom CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -50468,7 +49209,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    const CustomTag = `${wrapper.options.tag}`;
+    const CustomTag = wrapper.options.tag != undefined && wrapper.options.tag.length != 0 ? `${wrapper.options.tag}` : 'div';
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
@@ -51049,13 +49790,12 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CustomTag, {
-      className: [blockId]
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RawHTML, null, metaHtml)), wrapper.options.tag.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: [blockId]
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RawHTML, {
-      className: "metaValue"
-    }, metaHtml)))];
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CustomTag, {
+      className: [blockId],
+      dangerouslySetInnerHTML: {
+        __html: metaHtml
+      }
+    }))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
@@ -58734,7 +57474,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/plus.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/plus.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
@@ -58743,6 +57485,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_breakpoint_toggle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/breakpoint-toggle */ "./src/components/breakpoint-toggle/index.js");
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
 
 
 
@@ -58760,6 +57505,9 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
+
+
 
 
 
@@ -58867,7 +57615,7 @@ var myStore = wp.data.select('postgrid-shop');
       val: ''
     }); // Wrapper CSS Class Selectors
 
-    const itemWrapSelector = blockClass;
+    const wrapperSelector = blockClass;
     const itemSelector = blockClass + ' .item';
     const postCountSelector = blockClass + ' .postCount';
     const [shortcodes, setshortcodes] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
@@ -59053,6 +57801,98 @@ var myStore = wp.data.select('postgrid-shop');
         label: item.name,
         icon: item.icon,
         value: item.id
+      });
+    }
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      } else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+    }
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
       });
     }
 
@@ -59342,7 +58182,7 @@ var myStore = wp.data.select('postgrid-shop');
       for: ""
     }, "Parameters"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
       className: linkPickerText ? "!bg-gray-400" : '',
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_14__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_17__["default"],
       onClick: ev => {
         setLinkPickerText(prev => !prev);
       }
@@ -59439,6 +58279,24 @@ var myStore = wp.data.select('postgrid-shop');
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Wrapper",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Wrapper Class"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
@@ -59453,14 +58311,21 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      obj: wrapper,
+      onChange: onChangeStyleWrapper,
+      onAdd: onAddStyleWrapper,
+      onRemove: onRemoveStyleWrapper
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Please use following class selector to apply your custom CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
       className: "font-bold"
-    }, "Items Wrapper"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, itemWrapSelector, '{/* your CSS here*/}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    }, "Items Wrapper"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, wrapperSelector, '{/* your CSS here*/}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
       className: "font-bold"

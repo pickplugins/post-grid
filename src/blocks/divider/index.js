@@ -14,8 +14,8 @@ import { __experimentalInputControl as InputControl } from '@wordpress/component
 import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
 import { store } from '../../store'
+import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 
-import { link, linkOff } from "@wordpress/icons";
 import { InnerBlocks, useBlockProps } from "@wordpress/block-editor"
 
 import IconToggle from '../../components/icon-toggle'
@@ -28,7 +28,9 @@ import PGDropdown from '../../components/dropdown'
 import PGcssDisplay from '../../components/css-display'
 import { Resizable } from 're-resizable';
 
-
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
 
 var myStore = wp.data.select('postgrid-shop');
 
@@ -218,7 +220,7 @@ registerBlockType("post-grid/divider", {
     }, [clientId]);
 
     // Wrapper CSS Class Selectors
-    const postDateWrapperSelector = blockClass;
+    const wrapperSelector = blockClass;
 
 
     var dividerSelector = '';
@@ -255,6 +257,88 @@ registerBlockType("post-grid/divider", {
 
 
 
+
+
+
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
 
 
 
@@ -797,7 +881,7 @@ registerBlockType("post-grid/divider", {
                 var styles = { ...wrapper.styles, textAlign: newValuesObj };
                 setAttributes({ wrapper: { options: wrapper.options, styles: styles } });
 
-                blockCssY.items[postDateWrapperSelector] = { ...blockCssY.items[postDateWrapperSelector], 'text-align': newValuesObj };
+                blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-align': newValuesObj };
                 setAttributes({ blockCssY: { items: blockCssY.items } });
 
               }}
@@ -817,57 +901,64 @@ registerBlockType("post-grid/divider", {
 
               <div>
                 <PanelBody title="Wrapper" initialOpen={false}>
-                  <PanelRow>
-                    <label for="">Wrapper Tag</label>
-                    <SelectControl
-                      label=""
-                      value={wrapper.options.tag}
-                      options={[
-                        { label: 'No Wrapper', value: '' },
-                        { label: 'H1', value: 'h1' },
-                        { label: 'H2', value: 'h2' },
-                        { label: 'H3', value: 'h3' },
-                        { label: 'H4', value: 'h4' },
-                        { label: 'H5', value: 'h5' },
-                        { label: 'H6', value: 'h6' },
-                        { label: 'span', value: 'SPAN' },
-                        { label: 'div', value: 'DIV' },
-                        { label: 'P', value: 'p' },
-                      ]}
-                      onChange={(newVal) => {
-
-                        var options = { ...wrapper.options, tag: newVal };
-                        setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
 
 
-                  <PanelRow>
-                    <label>Display</label>
-                    <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+
+                      <PanelRow>
+                        <label for="">Wrapper Tag</label>
+                        <SelectControl
+                          label=""
+                          value={wrapper.options.tag}
+                          options={[
+                            { label: 'No Wrapper', value: '' },
+                            { label: 'H1', value: 'h1' },
+                            { label: 'H2', value: 'h2' },
+                            { label: 'H3', value: 'h3' },
+                            { label: 'H4', value: 'h4' },
+                            { label: 'H5', value: 'h5' },
+                            { label: 'H6', value: 'h6' },
+                            { label: 'span', value: 'SPAN' },
+                            { label: 'div', value: 'DIV' },
+                            { label: 'P', value: 'p' },
+                          ]}
+                          onChange={(newVal) => {
+
+                            var options = { ...wrapper.options, tag: newVal };
+                            setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
+
+                          }
+
+                          }
+                        />
+                      </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                    </PGtab>
+                  </PGtabs>
 
 
-                      var newValuesObj = {};
-
-                      if (Object.keys(wrapper.styles.display).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = wrapper.styles.display;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...wrapper.styles, display: newValuesObj };
-                      setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-                      blockCssY.items[postDateWrapperSelector] = { ...blockCssY.items[postDateWrapperSelector], 'display': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                    })} />
-                  </PanelRow>
 
 
 
@@ -1088,7 +1179,7 @@ registerBlockType("post-grid/divider", {
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
                     <p className='font-bold'>Title Wrapper</p>
-                    <p><code>{postDateWrapperSelector}{'{/* your CSS here*/}'}</code></p>
+                    <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>

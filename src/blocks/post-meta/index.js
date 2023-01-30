@@ -7,6 +7,7 @@ import { useSelect, select, subscribe, useDispatch, dispatch } from '@wordpress/
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { applyFilters } from '@wordpress/hooks';
+import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Spinner } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
@@ -22,7 +23,9 @@ import BreakpointToggle from '../../components/breakpoint-toggle'
 import colorsPresets from '../../colors-presets'
 import PGDropdown from '../../components/dropdown'
 
-
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -163,9 +166,8 @@ registerBlockType("post-grid/post-meta", {
 
 
     // Wrapper CSS Class Selectors
-    const itemWrapSelector = blockClass;
-    const itemSelector = blockClass + ' .item';
-    const postCountSelector = blockClass + ' .postCount';
+    const wrapperSelector = blockClass;
+    const metaValueSelector = blockClass + ' .metaValue';
 
 
     var metaKeyTypeArgsBasic = {
@@ -273,10 +275,170 @@ registerBlockType("post-grid/post-meta", {
 
 
 
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
 
 
 
 
+
+
+
+
+    function onChangeStyleMeta(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = metaValueSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = metaValueSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = metaValueSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = metaValueSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = metaValueSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = metaValueSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = metaValueSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = metaValueSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = metaValueSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = metaValueSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = metaValueSelector + '::first-line';
+      }
+      else {
+        elementSelector = metaValueSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+    function onRemoveStyleMeta(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[metaValueSelector] == undefined) {
+        blockCssY.items[metaValueSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[metaValueSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleMeta(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
 
 
 
@@ -538,148 +700,208 @@ registerBlockType("post-grid/post-meta", {
 
             <PanelBody title="Wrapper" initialOpen={false}>
 
-              <PanelRow>
-                <label for="">Wrapper Tag</label>
-                <SelectControl
-                  label=""
-                  value={wrapper.options.tag}
-                  options={[
-                    { label: 'No Wrapper', value: '' },
-                    { label: 'H1', value: 'h1' },
-                    { label: 'H2', value: 'h2' },
-                    { label: 'H3', value: 'h3' },
-                    { label: 'H4', value: 'h4' },
-                    { label: 'H5', value: 'h5' },
-                    { label: 'H6', value: 'h6' },
-                    { label: 'span', value: 'SPAN' },
-                    { label: 'div', value: 'DIV' },
-                    { label: 'P', value: 'p' },
-                  ]}
-                  onChange={(newVal) => {
 
-                    var options = { ...wrapper.options, tag: newVal };
-                    setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
 
-                  }
+                  <PanelRow>
+                    <label for="">Wrapper Tag</label>
+                    <SelectControl
+                      label=""
+                      value={wrapper.options.tag}
+                      options={[
+                        { label: 'No Wrapper', value: '' },
+                        { label: 'H1', value: 'h1' },
+                        { label: 'H2', value: 'h2' },
+                        { label: 'H3', value: 'h3' },
+                        { label: 'H4', value: 'h4' },
+                        { label: 'H5', value: 'h5' },
+                        { label: 'H6', value: 'h6' },
+                        { label: 'span', value: 'SPAN' },
+                        { label: 'div', value: 'DIV' },
+                        { label: 'P', value: 'p' },
+                      ]}
+                      onChange={(newVal) => {
 
-                  }
-                />
-              </PanelRow>
-              <PanelRow>
-                <label for="">Wrapper Class</label>
+                        var options = { ...wrapper.options, tag: newVal };
+                        setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
 
-                <InputControl
-                  value={wrapper.options.class}
-                  onChange={(newVal) => {
+                      }
+
+                      }
+                    />
+                  </PanelRow>
+                  <PanelRow>
+                    <label for="">Wrapper Class</label>
+
+                    <InputControl
+                      value={wrapper.options.class}
+                      onChange={(newVal) => {
 
 
-                    var options = { ...wrapper.options, class: newVal }
-                    setAttributes({ wrapper: { ...wrapper, options: options } });
+                        var options = { ...wrapper.options, class: newVal }
+                        setAttributes({ wrapper: { ...wrapper, options: options } });
 
 
 
 
-                  }}
-                />
-              </PanelRow>
+                      }}
+                    />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                </PGtab>
+              </PGtabs>
+
+
+
 
             </PanelBody>
             <PanelBody title="Meta Key" initialOpen={true}>
 
 
-              <PanelRow>
-                <label for="">Meta Key</label>
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
 
-                <InputControl
-                  placeholder="Meta key"
-                  value={meta.options.key}
-                  onChange={(newVal) => {
+                  <PanelRow>
+                    <label for="">Meta Key</label>
 
-
-                    var options = { ...meta.options, key: newVal }
-                    setAttributes({ meta: { ...meta, options: options } });
-
-
-                  }}
-                />
-              </PanelRow>
-
-              <PanelRow>
-                <label>Meta Key Type </label>
-                <PGDropdown position="bottom right" variant="secondary" options={metaKeyTypeArgs} buttonTitle="Choose" onChange={(option, index) => {
-
-
-
-                  var options = { ...meta.options, type: option.value };
-                  setAttributes({ meta: { ...meta, options: options } });
-
-
-                }} values="" value={meta.options.type}></PGDropdown>
-
-              </PanelRow>
-
+                    <InputControl
+                      placeholder="Meta key"
+                      value={meta.options.key}
+                      onChange={(newVal) => {
 
 
-              <label className='my-3' for="">Template</label>
+                        var options = { ...meta.options, key: newVal }
+                        setAttributes({ meta: { ...meta, options: options } });
 
 
-              <TextareaControl
+                      }}
+                    />
+                  </PanelRow>
 
-                value={template}
-                onChange={(newVal) => {
-
-                  setAttributes({ template: newVal });
-
-
-                }}
-              />
+                  <PanelRow>
+                    <label>Meta Key Type </label>
+                    <PGDropdown position="bottom right" variant="secondary" options={metaKeyTypeArgs} buttonTitle="Choose" onChange={(option, index) => {
 
 
-              <label className='my-3' for="">Loop Template </label>
+
+                      var options = { ...meta.options, type: option.value };
+                      setAttributes({ meta: { ...meta, options: options } });
 
 
-              <TextareaControl
-                placeholder='<div>{title}</div><div>{details}</div>'
+                    }} values="" value={meta.options.type}></PGDropdown>
 
-                value={templateLoop}
-                onChange={(newVal) => {
-
-                  setAttributes({ templateLoop: newVal });
+                  </PanelRow>
 
 
-                }}
-              />
 
-              <p>You can use following for loop template to iterate array elements <code>&#60;div&#62; &#123;itemIndex1&#125;&#60;/div&#62;&#60;div&#62;&#123;itemIndex2&#125;&#60;/div&#62;</code></p>
-
-              <div className='my-3'>
-
-                <label for="">Parameters</label>
-                <div className=''>
-
-                  {metaArgs != undefined && Object.entries(metaArgs).map((arg, i) => {
-
-                    var key = arg[0]
-                    var val = arg[1]
-
-                    return (
-                      <div className='my-2 bg-gray-300'>
-                        <div onClick={ev => {
-                          var target = ev.target;
+                  <label className='my-3' for="">Template</label>
 
 
-                        }} className='bg-gray-500 px-3 py-2 text-white'>{key}</div>
-                        <div className='px-3 py-2'>{val}</div>
-                      </div>
+                  <TextareaControl
 
-                    )
+                    value={template}
+                    onChange={(newVal) => {
 
-                  })}
+                      setAttributes({ template: newVal });
 
 
-                </div>
+                    }}
+                  />
 
-              </div>
+
+                  <label className='my-3' for="">Loop Template </label>
+
+
+                  <TextareaControl
+                    placeholder='<div>{title}</div><div>{details}</div>'
+
+                    value={templateLoop}
+                    onChange={(newVal) => {
+
+                      setAttributes({ templateLoop: newVal });
+
+
+                    }}
+                  />
+
+                  <p>You can use following for loop template to iterate array elements <code>&#60;div&#62; &#123;itemIndex1&#125;&#60;/div&#62;&#60;div&#62;&#123;itemIndex2&#125;&#60;/div&#62;</code></p>
+
+                  <div className='my-3'>
+
+                    <label for="">Parameters</label>
+                    <div className=''>
+
+                      {metaArgs != undefined && Object.entries(metaArgs).map((arg, i) => {
+
+                        var key = arg[0]
+                        var val = arg[1]
+
+                        return (
+                          <div className='my-2 bg-gray-300'>
+                            <div onClick={ev => {
+                              var target = ev.target;
+
+
+                            }} className='bg-gray-500 px-3 py-2 text-white'>{key}</div>
+                            <div className='px-3 py-2'>{val}</div>
+                          </div>
+
+                        )
+
+                      })}
+
+
+                    </div>
+
+                  </div>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={meta} onChange={onChangeStyleMeta} onAdd={onAddStyleMeta} onRemove={onRemoveStyleMeta} />
+                </PGtab>
+              </PGtabs>
+
+
 
 
             </PanelBody>
@@ -693,7 +915,7 @@ registerBlockType("post-grid/post-meta", {
               <p>Please use following class selector to apply your custom CSS</p>
               <div className='my-3'>
                 <p className='font-bold'>Items Wrapper</p>
-                <p><code>{itemWrapSelector}{'{/* your CSS here*/}'}</code></p>
+                <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
               </div>
 
 
@@ -753,7 +975,7 @@ registerBlockType("post-grid/post-meta", {
           {wrapper.options.tag.length == 0 && (
 
             <div className={[blockId]}>
-              <RawHTML>{metaHtml}</RawHTML>
+              <RawHTML className="metaValue">{metaHtml}</RawHTML>
 
             </div>
           )}

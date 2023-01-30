@@ -7,13 +7,13 @@ import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMen
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 import apiFetch from '@wordpress/api-fetch';
+import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
 import { store } from '../../store'
-import { link, linkOff } from "@wordpress/icons";
 
 import IconToggle from '../../components/icon-toggle'
 import Typography from '../../components/typography'
@@ -23,7 +23,9 @@ import BreakpointToggle from '../../components/breakpoint-toggle'
 import colorsPresets from '../../colors-presets'
 import PGcssTextAlign from '../../components/css-text-align'
 
-
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
 
 var myStore = wp.data.select('postgrid-shop');
 
@@ -187,6 +189,90 @@ registerBlockType("post-grid/text", {
       ev.preventDefault();
       return false;
     }
+
+
+
+    function onChangeStyleText(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...text[sudoScource] }
+      var elementSelector = textSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = textSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = textSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = textSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = textSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = textSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = textSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = textSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = textSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = textSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = textSelector + '::first-line';
+      }
+      else {
+        elementSelector = textSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ text: { ...text } });
+    }
+
+
+    function onRemoveStyleText(sudoScource, key) {
+      var sudoScourceX = { ...text[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      text[sudoScource] = sudoScourceX;
+      setAttributes({ text: { ...text } });
+
+      if (blockCssY.items[textSelector] == undefined) {
+        blockCssY.items[textSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[textSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleText(sudoScource, key) {
+      var sudoScourceX = { ...text[sudoScource] }
+      sudoScourceX[key] = {};
+      text[sudoScource] = sudoScourceX;
+      setAttributes({ text: { ...text } });
+    }
+
+
+
 
 
 
@@ -744,251 +830,85 @@ registerBlockType("post-grid/text", {
 
                 <PanelBody title="Text" initialOpen={false}>
 
-                  <PanelRow>
-                    <label for="">Block ID</label>
 
-                    <InputControl
-                      value={blockId}
-                      onChange={(newVal) => {
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
 
-                        setAttributes({ blockId: newVal });
+                      <PanelRow>
+                        <label for="">Block ID</label>
 
-                      }}
-                    />
+                        <InputControl
+                          value={blockId}
+                          onChange={(newVal) => {
 
-                  </PanelRow>
+                            setAttributes({ blockId: newVal });
 
+                          }}
+                        />
 
-                  <PanelRow>
-                    <label for="">Wrapper Tag</label>
+                      </PanelRow>
 
-                    <SelectControl
-                      label=""
-                      value={text.options.tag}
-                      options={[
-                        { label: 'H1', value: 'h1' },
-                        { label: 'H2', value: 'h2' },
-                        { label: 'H3', value: 'h3' },
-                        { label: 'H4', value: 'h4' },
-                        { label: 'H5', value: 'h5' },
-                        { label: 'H6', value: 'h6' },
-                        { label: 'SPAN', value: 'span' },
-                        { label: 'DIV', value: 'div' },
-                        { label: 'P', value: 'p' },
 
+                      <PanelRow>
+                        <label for="">Wrapper Tag</label>
 
-                      ]}
-                      onChange={(newVal) => {
+                        <SelectControl
+                          label=""
+                          value={text.options.tag}
+                          options={[
+                            { label: 'H1', value: 'h1' },
+                            { label: 'H2', value: 'h2' },
+                            { label: 'H3', value: 'h3' },
+                            { label: 'H4', value: 'h4' },
+                            { label: 'H5', value: 'h5' },
+                            { label: 'H6', value: 'h6' },
+                            { label: 'SPAN', value: 'span' },
+                            { label: 'DIV', value: 'div' },
+                            { label: 'P', value: 'p' },
 
 
+                          ]}
+                          onChange={(newVal) => {
 
-                        var options = { ...text.options, tag: newVal };
-                        setAttributes({ text: { ...text, options: options } });
 
 
+                            var options = { ...text.options, tag: newVal };
+                            setAttributes({ text: { ...text, options: options } });
 
-                      }
 
-                      }
-                    />
-                  </PanelRow>
 
-                  <PanelRow>
-                    <label></label>
-                    <PGcssTextAlign val={text.styles.textAlign[breakPointX]} onChange={(newVal => {
+                          }
 
+                          }
+                        />
+                      </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={text} onChange={onChangeStyleText} onAdd={onAddStyleText} onRemove={onRemoveStyleText} />
+                    </PGtab>
+                  </PGtabs>
 
-                      var newValuesObj = {};
 
-                      if (Object.keys(text.styles.textAlign).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = text.styles.textAlign;
-                        newValuesObj[breakPointX] = newVal;
-                      }
 
-                      var styles = { ...text.styles, textAlign: newValuesObj };
-                      setAttributes({ text: { ...text, styles: styles } });
-
-                      blockCssY.items[textSelector] = { ...blockCssY.items[textSelector], 'text-align': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-                    })} />
-                  </PanelRow>
-
-                  <PanelRow className='my-3'>
-                    <label>Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-                  <ColorPalette
-                    value={text.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(text.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = text.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...text.styles, color: newValuesObj };
-                      setAttributes({ text: { ...text, styles: styles } });
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[textSelector] = { ...blockCssY.items[textSelector], 'color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-                    }}
-                  />
-
-
-
-                  <PanelRow className='my-3'>
-                    <label>Background Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-                  <ColorPalette
-                    value={text.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(text.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = text.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...text.styles, bgColor: newValuesObj };
-                      setAttributes({ text: { ...text, styles: styles } });
-
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[textSelector] = { ...blockCssY.items[textSelector], 'background-color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-
-
-                    }}
-                  />
-
-                  <PanelRow className='my-3'>
-                    <label>Display</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
-
-                    <SelectControl
-                      label=""
-                      value={text.styles.display[breakPointX]}
-
-                      options={[
-                        { label: 'Select..', value: '' },
-                        { label: 'inline', value: 'inline' },
-                        { label: 'inline-block', value: 'inline-block' },
-                        { label: 'block', value: 'block' },
-
-                      ]}
-                      onChange={(newVal) => {
-
-                        var newValuesObj = {};
-
-                        if (Object.keys(text.styles.display).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = text.styles.display;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-                        var styles = { ...text.styles, display: newValuesObj };
-                        setAttributes({ text: { ...text, styles: styles } });
-
-
-
-                        var itemsX = { ...blockCssY.items };
-                        itemsX[textSelector] = { ...blockCssY.items[textSelector], 'display': newValuesObj };
-
-                        setAttributes({ blockCssY: { items: itemsX } });
-
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <div className='font-bold'>Typography</div>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <Typography typo={text.styles} breakPointX={breakPointX} onChange={onChangeTextTypo} setAttributes={setAttributes} obj={text} />
-
-
-
-
-
-
-
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=''
-                    values={text.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paddingControl(nextValues) }}
-                  />
-
-
-
-
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={text.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { marginControl(nextValues) }}
-                  />
 
 
 

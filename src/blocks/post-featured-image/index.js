@@ -9,6 +9,7 @@ import { PanelBody, RangeControl, Button, ButtonGroup, Panel, PanelRow, Dropdown
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
+import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -17,8 +18,6 @@ const { RawHTML } = wp.element;
 import { store } from '../../store'
 import apiFetch from '@wordpress/api-fetch';
 
-import { link, linkOff } from "@wordpress/icons";
-import { Icon, close } from '@wordpress/icons';
 
 import IconToggle from '../../components/icon-toggle'
 import PGMailSubsctibe from '../../components/mail-subscribe'
@@ -30,7 +29,9 @@ import colorsPresets from '../../colors-presets'
 import PGcssDisplay from '../../components/css-display'
 
 import MyImage from './placeholder.jpg';
-
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
 
 var myStore = wp.data.select('postgrid-shop');
 
@@ -359,21 +360,6 @@ registerBlockType("post-grid/post-featured-image", {
 
 
     useEffect(() => {
-      var filterStr = {};
-
-      filterStr[breakPointX] = '';
-      (featuredImage.styles.filter[breakPointX] != undefined && featuredImage.styles.filter[breakPointX].map(x => {
-
-
-        filterStr[breakPointX] += x.value + '(' + x.val + x.unit + ') ';
-
-      }))
-
-
-
-      blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'filter': filterStr };
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
 
@@ -490,6 +476,180 @@ registerBlockType("post-grid/post-featured-image", {
       ev.preventDefault();
       return false;
     }
+
+
+
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+    function onChangeStyleImage(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...featuredImage[sudoScource] }
+      var elementSelector = imgSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = imgSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = imgSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = imgSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = imgSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = imgSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = imgSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = imgSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = imgSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = imgSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = imgSelector + '::first-line';
+      }
+      else {
+        elementSelector = imgSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ featuredImage: { ...featuredImage } });
+    }
+
+
+    function onRemoveStyleImage(sudoScource, key) {
+      var sudoScourceX = { ...featuredImage[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      featuredImage[sudoScource] = sudoScourceX;
+      setAttributes({ featuredImage: { ...featuredImage } });
+
+      if (blockCssY.items[imgSelector] == undefined) {
+        blockCssY.items[imgSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[imgSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleImage(sudoScource, key) {
+      var sudoScourceX = { ...featuredImage[sudoScource] }
+      sudoScourceX[key] = {};
+      featuredImage[sudoScource] = sudoScourceX;
+      setAttributes({ featuredImage: { ...featuredImage } });
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     function paddingControl(nextValues) {
 
@@ -973,1047 +1133,757 @@ registerBlockType("post-grid/post-featured-image", {
 
 
             <PanelBody title="Wrapper" initialOpen={false}>
-              <PanelRow>
-                <label for="">Wrapper Tag</label>
-                <SelectControl
-                  label=""
-                  value={wrapper.options.tag}
-                  options={[
-                    { label: 'No Wrapper', value: '' },
-                    { label: 'H1', value: 'h1' },
-                    { label: 'H2', value: 'h2' },
-                    { label: 'H3', value: 'h3' },
-                    { label: 'H4', value: 'h4' },
-                    { label: 'H5', value: 'h5' },
-                    { label: 'H6', value: 'h6' },
-                    { label: 'span', value: 'SPAN' },
-                    { label: 'div', value: 'DIV' },
-                    { label: 'P', value: 'p' },
-                  ]}
-                  onChange={(newVal) => {
-
-                    var options = { ...wrapper.options, tag: newVal };
-                    setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
-
-                  }
-
-                  }
-                />
-              </PanelRow>
 
 
-              <PanelRow>
-                <label for="">Image as Background</label>
-                <SelectControl
-                  label=""
-                  value={wrapper.options.useAsBackground}
-                  options={[
-                    { label: 'No', value: 'no' },
-                    { label: 'Yes', value: 'yes' },
-                  ]}
-                  onChange={(newVal) => {
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
 
-                    var options = { ...wrapper.options, useAsBackground: newVal };
-                    var styles = { ...wrapper.styles, bgImage: {} };
+                  <PanelRow>
+                    <label for="">Wrapper Tag</label>
+                    <SelectControl
+                      label=""
+                      value={wrapper.options.tag}
+                      options={[
+                        { label: 'No Wrapper', value: '' },
+                        { label: 'H1', value: 'h1' },
+                        { label: 'H2', value: 'h2' },
+                        { label: 'H3', value: 'h3' },
+                        { label: 'H4', value: 'h4' },
+                        { label: 'H5', value: 'h5' },
+                        { label: 'H6', value: 'h6' },
+                        { label: 'span', value: 'SPAN' },
+                        { label: 'div', value: 'DIV' },
+                        { label: 'P', value: 'p' },
+                      ]}
+                      onChange={(newVal) => {
 
-                    if (newVal == 'no') {
-                      setAttributes({ wrapper: { ...wrapper, options: options, styles: styles, } });
+                        var options = { ...wrapper.options, tag: newVal };
+                        setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
+
+                      }
+
+                      }
+                    />
+                  </PanelRow>
 
 
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-image': {} };
+                  <PanelRow>
+                    <label for="">Image as Background</label>
+                    <SelectControl
+                      label=""
+                      value={wrapper.options.useAsBackground}
+                      options={[
+                        { label: 'No', value: 'no' },
+                        { label: 'Yes', value: 'yes' },
+                      ]}
+                      onChange={(newVal) => {
 
-                      setAttributes({ blockCssY: { items: itemsX } });
+                        var options = { ...wrapper.options, useAsBackground: newVal };
+                        var styles = { ...wrapper.styles, bgImage: {} };
 
-                    }
+                        if (newVal == 'no') {
+                          setAttributes({ wrapper: { ...wrapper, options: options, styles: styles, } });
 
-                    if (newVal == 'yes') {
+
+                          var itemsX = { ...blockCssY.items };
+                          itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-image': {} };
+
+                          setAttributes({ blockCssY: { items: itemsX } });
+
+                        }
+
+                        if (newVal == 'yes') {
+
+
+                          var newValuesObj = {};
+
+
+                          if (Object.keys(wrapper.styles.bgImage).length == 0) {
+                            newValuesObj[breakPointX] = 'url("' + postImage.guid.rendered + '")';
+                          } else {
+                            newValuesObj = wrapper.styles.bgImage;
+                            newValuesObj[breakPointX] = 'url("' + postImage.guid.rendered + '")';
+                          }
+
+                          var styles = { ...wrapper.styles, bgImage: newValuesObj };
+                          setAttributes({ wrapper: { ...wrapper, styles: styles, options: options } });
+
+
+                          var itemsX = { ...blockCssY.items };
+                          itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-image': newValuesObj };
+
+                          //setAttributes({ blockCssY: { items: itemsX } });
+
+                        }
+
+                      }
+
+                      }
+                    />
+                  </PanelRow>
+
+
+
+
+                  <PanelRow>
+                    <label>Height</label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+
+                  <PanelRow>
+                    <InputControl
+                      value={(wrapper.styles.height[breakPointX] != undefined ? wrapper.styles.height[breakPointX].val : 10)}
+                      type="number"
+                      onChange={(newVal) => {
+
+                        var newValuesObj = {};
+                        if (Object.keys(wrapper.styles.height).length == 0) {
+                          newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
+                        } else {
+                          newValuesObj = wrapper.styles.height;
+                          var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'em';
+
+                          newValuesObj[breakPointX] = { val: newVal, unit: unit };
+                        }
+
+
+                        var styles = { ...wrapper.styles, height: newValuesObj };
+                        setAttributes({ wrapper: { ...wrapper, styles: styles } });
+
+
+
+                        var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
+                        var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
+
+
+                        var heightX = (blockCssY.items[wrapperSelector] != undefined) ? blockCssY.items[wrapperSelector] : {};
+
+                        heightX[breakPointX] = heightVal + heightUnit;
+                        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'height': heightX };
+
+                        setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+                      }}
+
+                    />
+
+                    <SelectControl className='mb-0'
+                      value={(wrapper.styles.height[breakPointX] != undefined) ? wrapper.styles.height[breakPointX].unit : 'em'}
+                      options={[
+                        { label: 'fr', value: 'fr' },
+                        { label: 'px', value: 'px' },
+                        { label: '%', value: '%' },
+                        { label: 'em', value: 'em' },
+                      ]}
+                      onChange={(newVal) => {
+
+
+                        var newValuesObj = {};
+                        if (Object.keys(wrapper.styles.height).length == 0) {
+                          newValuesObj[breakPointX] = { val: 10, unit: newVal };
+                        } else {
+                          newValuesObj = wrapper.styles.height;
+                          var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 10;
+
+                          newValuesObj[breakPointX] = { val: val, unit: newVal };
+                        }
+
+
+                        var styles = { ...wrapper.styles, height: newValuesObj };
+                        setAttributes({ wrapper: { ...wrapper, styles: styles } });
+
+                        var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
+                        var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
+
+                        var heightX = (blockCssY.items[wrapperSelector] != undefined) ? blockCssY.items[wrapperSelector] : {};
+
+                        heightX[breakPointX] = heightVal + heightUnit;
+                        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'height': heightX };
+
+                        setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+                      }}
+                    />
+
+                  </PanelRow>
+
+
+
+                  <PanelRow>
+                    <label>Overflow </label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+
+                  <PanelRow>
+
+
+                    <SelectControl className='mb-0'
+                      value={(wrapper.styles.overflow[breakPointX] != undefined) ? wrapper.styles.overflow[breakPointX] : 'hidden'}
+                      options={[
+                        { label: 'scroll', value: 'scroll' },
+                        { label: 'hidden', value: 'hidden' },
+                        { label: 'auto', value: 'auto' },
+                        { label: 'clip', value: 'clip' },
+                        { label: 'visible', value: 'visible' },
+
+                      ]}
+                      onChange={(newVal) => {
+
+
+                        var newValuesObj = {};
+
+
+                        if (Object.keys(wrapper.styles.overflow).length == 0) {
+                          newValuesObj[breakPointX] = newVal;
+                        } else {
+                          newValuesObj = wrapper.styles.overflow;
+                          newValuesObj[breakPointX] = newVal;
+                        }
+
+                        var styles = { ...wrapper.styles, overflow: newValuesObj };
+                        setAttributes({ wrapper: { ...wrapper, styles: styles } });
+
+
+
+
+                        var itemsX = { ...blockCssY.items };
+                        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'overflow': newValuesObj };
+
+                        setAttributes({ blockCssY: { items: itemsX } });
+
+
+
+                      }}
+                    />
+
+                  </PanelRow>
+
+
+
+
+
+
+                  <PanelRow>
+                    <label>Background Position </label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+
+                  <PanelRow>
+
+
+                    <SelectControl className='mb-0'
+                      value={(wrapper.styles.bgPosition[breakPointX] != undefined) ? wrapper.styles.bgPosition[breakPointX] : 'hidden'}
+                      options={[
+                        { label: 'left top', value: 'left top' },
+                        { label: 'left center', value: 'left center' },
+                        { label: 'left bottom', value: 'left bottom' },
+                        { label: 'right top', value: 'right top' },
+                        { label: 'right center', value: 'right center' },
+                        { label: 'right bottom', value: 'right bottom' },
+                        { label: 'center top', value: 'center top' },
+                        { label: 'center center', value: 'center center' },
+                        { label: 'center bottom', value: 'center bottom' },
+
+                      ]}
+                      onChange={(newVal) => {
+
+
+                        var newValuesObj = {};
+
+
+                        if (Object.keys(wrapper.styles.bgPosition).length == 0) {
+                          newValuesObj[breakPointX] = newVal;
+                        } else {
+                          newValuesObj = wrapper.styles.bgPosition;
+                          newValuesObj[breakPointX] = newVal;
+                        }
+
+                        var styles = { ...wrapper.styles, bgPosition: newValuesObj };
+                        setAttributes({ wrapper: { ...wrapper, styles: styles } });
+
+
+
+
+                        var itemsX = { ...blockCssY.items };
+                        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-position': newValuesObj };
+
+                        setAttributes({ blockCssY: { items: itemsX } });
+
+
+
+                      }}
+                    />
+
+                  </PanelRow>
+
+
+                  <PanelRow>
+                    <label>Background Size </label>
+                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PanelRow>
+
+                  <PanelRow>
+
+
+                    <SelectControl className='mb-0'
+                      value={(wrapper.styles.bgSize[breakPointX] != undefined) ? wrapper.styles.bgSize[breakPointX] : 'hidden'}
+                      options={[
+                        { label: 'auto', value: 'auto' },
+                        { label: 'cover', value: 'cover' },
+                        { label: 'contain', value: 'contain' },
+
+                      ]}
+                      onChange={(newVal) => {
+
+
+                        var newValuesObj = {};
+
+
+                        if (Object.keys(wrapper.styles.bgSize).length == 0) {
+                          newValuesObj[breakPointX] = newVal;
+                        } else {
+                          newValuesObj = wrapper.styles.bgSize;
+                          newValuesObj[breakPointX] = newVal;
+                        }
+
+                        var styles = { ...wrapper.styles, bgSize: newValuesObj };
+                        setAttributes({ wrapper: { ...wrapper, styles: styles } });
+
+
+
+
+                        var itemsX = { ...blockCssY.items };
+                        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-size': newValuesObj };
+
+                        setAttributes({ blockCssY: { items: itemsX } });
+
+
+
+                      }}
+                    />
+
+                  </PanelRow>
+
+                  <PanelRow>
+                    <label>Display</label>
+                    <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
 
 
                       var newValuesObj = {};
 
-
-                      if (Object.keys(wrapper.styles.bgImage).length == 0) {
-                        newValuesObj[breakPointX] = 'url("' + postImage.guid.rendered + '")';
+                      if (Object.keys(wrapper.styles.display).length == 0) {
+                        newValuesObj[breakPointX] = newVal;
                       } else {
-                        newValuesObj = wrapper.styles.bgImage;
-                        newValuesObj[breakPointX] = 'url("' + postImage.guid.rendered + '")';
+                        newValuesObj = wrapper.styles.display;
+                        newValuesObj[breakPointX] = newVal;
                       }
 
-                      var styles = { ...wrapper.styles, bgImage: newValuesObj };
-                      setAttributes({ wrapper: { ...wrapper, styles: styles, options: options } });
+                      var styles = { ...wrapper.styles, display: newValuesObj };
+                      setAttributes({ wrapper: { ...wrapper, styles: styles } });
 
+                      blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'display': newValuesObj };
+                      setAttributes({ blockCssY: { items: blockCssY.items } });
 
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-image': newValuesObj };
+                    })} />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                </PGtab>
+              </PGtabs>
 
-                      //setAttributes({ blockCssY: { items: itemsX } });
 
-                    }
 
-                  }
-
-                  }
-                />
-              </PanelRow>
-
-
-
-
-              <PanelRow>
-                <label>Height</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <PanelRow>
-                <InputControl
-                  value={(wrapper.styles.height[breakPointX] != undefined ? wrapper.styles.height[breakPointX].val : 10)}
-                  type="number"
-                  onChange={(newVal) => {
-
-                    var newValuesObj = {};
-                    if (Object.keys(wrapper.styles.height).length == 0) {
-                      newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
-                    } else {
-                      newValuesObj = wrapper.styles.height;
-                      var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'em';
-
-                      newValuesObj[breakPointX] = { val: newVal, unit: unit };
-                    }
-
-
-                    var styles = { ...wrapper.styles, height: newValuesObj };
-                    setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-
-
-                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
-                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
-
-
-                    var heightX = (blockCssY.items[wrapperSelector] != undefined) ? blockCssY.items[wrapperSelector] : {};
-
-                    heightX[breakPointX] = heightVal + heightUnit;
-                    blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'height': heightX };
-
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                  }}
-
-                />
-
-                <SelectControl className='mb-0'
-                  value={(wrapper.styles.height[breakPointX] != undefined) ? wrapper.styles.height[breakPointX].unit : 'em'}
-                  options={[
-                    { label: 'fr', value: 'fr' },
-                    { label: 'px', value: 'px' },
-                    { label: '%', value: '%' },
-                    { label: 'em', value: 'em' },
-                  ]}
-                  onChange={(newVal) => {
-
-
-                    var newValuesObj = {};
-                    if (Object.keys(wrapper.styles.height).length == 0) {
-                      newValuesObj[breakPointX] = { val: 10, unit: newVal };
-                    } else {
-                      newValuesObj = wrapper.styles.height;
-                      var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 10;
-
-                      newValuesObj[breakPointX] = { val: val, unit: newVal };
-                    }
-
-
-                    var styles = { ...wrapper.styles, height: newValuesObj };
-                    setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
-                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
-
-                    var heightX = (blockCssY.items[wrapperSelector] != undefined) ? blockCssY.items[wrapperSelector] : {};
-
-                    heightX[breakPointX] = heightVal + heightUnit;
-                    blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'height': heightX };
-
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                  }}
-                />
-
-              </PanelRow>
-
-
-
-              <PanelRow>
-                <label>Overflow </label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <PanelRow>
-
-
-                <SelectControl className='mb-0'
-                  value={(wrapper.styles.overflow[breakPointX] != undefined) ? wrapper.styles.overflow[breakPointX] : 'hidden'}
-                  options={[
-                    { label: 'scroll', value: 'scroll' },
-                    { label: 'hidden', value: 'hidden' },
-                    { label: 'auto', value: 'auto' },
-                    { label: 'clip', value: 'clip' },
-                    { label: 'visible', value: 'visible' },
-
-                  ]}
-                  onChange={(newVal) => {
-
-
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(wrapper.styles.overflow).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = wrapper.styles.overflow;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...wrapper.styles, overflow: newValuesObj };
-                    setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'overflow': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                  }}
-                />
-
-              </PanelRow>
-
-
-
-
-
-
-              <PanelRow>
-                <label>Background Position </label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <PanelRow>
-
-
-                <SelectControl className='mb-0'
-                  value={(wrapper.styles.bgPosition[breakPointX] != undefined) ? wrapper.styles.bgPosition[breakPointX] : 'hidden'}
-                  options={[
-                    { label: 'left top', value: 'left top' },
-                    { label: 'left center', value: 'left center' },
-                    { label: 'left bottom', value: 'left bottom' },
-                    { label: 'right top', value: 'right top' },
-                    { label: 'right center', value: 'right center' },
-                    { label: 'right bottom', value: 'right bottom' },
-                    { label: 'center top', value: 'center top' },
-                    { label: 'center center', value: 'center center' },
-                    { label: 'center bottom', value: 'center bottom' },
-
-                  ]}
-                  onChange={(newVal) => {
-
-
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(wrapper.styles.bgPosition).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = wrapper.styles.bgPosition;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...wrapper.styles, bgPosition: newValuesObj };
-                    setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-position': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                  }}
-                />
-
-              </PanelRow>
-
-
-              <PanelRow>
-                <label>Background Size </label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <PanelRow>
-
-
-                <SelectControl className='mb-0'
-                  value={(wrapper.styles.bgSize[breakPointX] != undefined) ? wrapper.styles.bgSize[breakPointX] : 'hidden'}
-                  options={[
-                    { label: 'auto', value: 'auto' },
-                    { label: 'cover', value: 'cover' },
-                    { label: 'contain', value: 'contain' },
-
-                  ]}
-                  onChange={(newVal) => {
-
-
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(wrapper.styles.bgSize).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = wrapper.styles.bgSize;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...wrapper.styles, bgSize: newValuesObj };
-                    setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-size': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                  }}
-                />
-
-              </PanelRow>
-
-              <PanelRow>
-                <label>Display</label>
-                <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
-
-
-                  var newValuesObj = {};
-
-                  if (Object.keys(wrapper.styles.display).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = wrapper.styles.display;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...wrapper.styles, display: newValuesObj };
-                  setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-                  blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'display': newValuesObj };
-                  setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                })} />
-              </PanelRow>
 
             </PanelBody>
 
             <PanelBody title="Featured Image" initialOpen={false}>
 
 
-
-              <PanelRow className='mb-4'>
-                <label for="">Thumbnail Size</label>
-                <PGDropdown position="bottom right" variant="secondary" options={imageSizes} buttonTitle="Choose" onChange={setFeaturedImageSize} values={featuredImage.options.size[breakPointX]}></PGDropdown>
-              </PanelRow>
-
-
-              {featuredImage.options.size[breakPointX] != undefined && (
-
-                <div className='bg-gray-400 text-white px-3 py-2 my-3' > {featuredImage.options.size[breakPointX]}</div>
-
-              )}
-
-
-
-              <PanelRow className='my-3'>
-                <label>Link To</label>
-                <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.linkTo.length == 0 ? 'Choose' : linkToArgs[featuredImage.options.linkTo].label} options={linkToArgs} onChange={(option, index) => {
-                  var options = { ...featuredImage.options, linkTo: option.value };
-                  setAttributes({ featuredImage: { ...featuredImage, options: options } });
-                }} values=""></PGDropdown>
-              </PanelRow>
-
-
-              {featuredImage.options.linkTo == 'customField' && (
-
-
-
-                <PanelRow>
-                  <label for="">Custom Field Key</label>
-                  <InputControl
-                    className='mr-2'
-                    value={featuredImage.options.linkToMetaKey}
-                    onChange={(newVal) => {
-
-
-                      var options = { ...featuredImage.options, linkToMetaKey: newVal };
-                      setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-                    }}
-                  />
-                </PanelRow>
-
-
-              )}
-
-
-              {featuredImage.options.linkTo == 'customUrl' && (
-
-                <PanelRow>
-                  <label for="">Custom URL</label>
-
-                  <div className='relative'>
-                    <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                      setLinkPickerPosttitle(prev => !prev);
-
-                    }}></Button>
-                    {featuredImage.options.customUrl.length > 0 && (
-                      <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                        var options = { ...featuredImage.options, customUrl: '' };
-                        setAttributes({ featuredImage: { ...featuredImage, options: options } });
-                        setLinkPickerPosttitle(false);
-
-                      }}></Button>
-
-                    )}
-                    {linkPickerPosttitle && (
-                      <Popover position="bottom right">
-                        <LinkControl settings={[]} value={featuredImage.options.customUrl} onChange={newVal => {
-
-                          var options = { ...featuredImage.options, customUrl: newVal.url };
-
-                          setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-                        }} />
-
-                        <div className='p-2'><span className='font-bold'>Linked to:</span> {(featuredImage.options.customUrl.length != 0) ? featuredImage.options.customUrl : 'No link'} </div>
-                      </Popover>
-
-                    )}
-
-
-                  </div>
-                </PanelRow>
-
-              )}
-
-
-              {featuredImage.options.linkTo.length == 0 && (
-
-
-
-                <PanelRow className='my-3'>
-                  <label>Custom Tag</label>
-                  <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.tag.length == 0 ? 'Choose' : customTagArgs[featuredImage.options.tag].label} options={customTagArgs} onChange={(option, index) => {
-
-                    var options = { ...featuredImage.options, tag: option.value };
-                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
-                  }} values=""></PGDropdown>
-                </PanelRow>
-
-
-
-
-              )}
-
-
-
-
-              {featuredImage.options.linkTo.length > 0 && (
-
-                <div>
-                  <PanelRow>
-                    <label for="">Link Target</label>
-
-                    <SelectControl
-                      label=""
-                      value={featuredImage.options.linkTarget}
-                      options={[
-                        { label: 'Choose...', value: '' },
-
-                        { label: '_self', value: '_self' },
-                        { label: '_blank', value: '_blank' },
-                        { label: '_parent', value: '_parent' },
-                        { label: '_top', value: '_top' },
-
-
-                      ]}
-                      onChange={(newVal) => {
-
-
-
-                        var options = { ...featuredImage.options, linkTarget: newVal };
-                        setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-
-
-                      }
-
-
-
-                      }
-                    />
-                  </PanelRow>
-
-
-
-
-
-
-
-
-                  <PanelRow>
-                    <label for="">Custom Attributes</label>
-                    <div
-                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                      onClick={(ev) => {
-
-                        var sdsd = featuredImage.options.linkAttr.concat({ id: '', val: '' })
-
-
-                        var options = { ...featuredImage.options, linkAttr: sdsd };
-                        setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-                        linkAttrObj()
-                      }}
-
-                    >Add</div>
-
-
-
-                  </PanelRow>
-
-
-
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
                   {
-                    featuredImage.options.linkAttr.map((x, i) => {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
 
-                      return (
-
-                        <div className='my-2'>
-                          <PanelRow>
-                            <InputControl
-                              placeholder="Name"
-                              className='mr-2'
-                              value={featuredImage.options.linkAttr[i].id}
-                              onChange={(newVal) => {
-
-                                featuredImage.options.linkAttr[i].id = newVal;
-
-
-                                var ssdsd = featuredImage.options.linkAttr.concat([]);
-
-
-
-                                var options = { ...featuredImage.options, linkAttr: ssdsd };
-                                setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-                              }}
-                            />
-
-                            <InputControl
-                              className='mr-2'
-                              placeholder="Value"
-                              value={x.val}
-                              onChange={(newVal) => {
-                                featuredImage.options.linkAttr[i].val = newVal
-                                var ssdsd = featuredImage.options.linkAttr.concat([]);
+                  <PanelRow className='mb-4'>
+                    <label for="">Thumbnail Size</label>
+                    <PGDropdown position="bottom right" variant="secondary" options={imageSizes} buttonTitle="Choose" onChange={setFeaturedImageSize} values={featuredImage.options.size[breakPointX]}></PGDropdown>
+                  </PanelRow>
 
 
+                  {featuredImage.options.size[breakPointX] != undefined && (
 
-                                var options = { ...featuredImage.options, linkAttr: ssdsd };
-                                setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                    <div className='bg-gray-400 text-white px-3 py-2 my-3' > {featuredImage.options.size[breakPointX]}</div>
 
-                              }}
-                            />
-                            <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                              onClick={(ev) => {
-
-                                featuredImage.options.linkAttr.splice(i, 1);
-
-                                var ssdsd = featuredImage.options.linkAttr.concat([]);
+                  )}
 
 
-                                var options = { ...featuredImage.options, linkAttr: ssdsd };
-                                setAttributes({ featuredImage: { ...featuredImage, options: options } });
-                              }}
-
-                            ></span>
-                          </PanelRow>
-
-
-
-
-                        </div>
-
-                      )
-
-                    })
-                  }
-
-
-                </div>
-
-
-
-              )}
-
-
-
-              <PanelRow className='my-3'>
-                <label>Alt Text Source</label>
-                <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.altTextSrc.length == 0 ? 'Choose' : altTextSrcArgs[featuredImage.options.altTextSrc].label} options={altTextSrcArgs} onChange={(option, index) => {
-
-                  var options = { ...featuredImage.options, altTextSrc: option.value };
-                  setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-
-                }} values=""></PGDropdown>
-              </PanelRow>
-
-
-
-              {featuredImage.options.altTextSrc == 'customField' && (
-
-                <div>
 
                   <PanelRow className='my-3'>
-                    <label>Custom Field</label>
-                    <PGDropdown position="bottom right" variant="secondary" buttonTitle={'Choose'} options={[
-                      { label: 'Custom', value: '' },
-                      { label: 'Yoast meta', value: '_yoast_wpseo_metadesc' },
-                      { label: 'Rank Math meta', value: 'rank_math_description' },
-                      { label: 'AIO SEO meta', value: '_aioseo_og_description' },
-                      { label: 'SEOPress meta', value: '_seopress_titles_desc' },
-                      { label: 'WP Meta SEO meta', value: '_metaseo_metadesc' },
-                      { label: 'The SEO Framework meta', value: '_genesis_description' },
-                      { label: 'SEO SIMPLE PACK meta', value: 'ssp_meta_description' },
-                    ]} onChange={(option, index) => {
-
-                      var options = { ...featuredImage.options, altTextMetaKey: option.value };
+                    <label>Link To</label>
+                    <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.linkTo.length == 0 ? 'Choose' : linkToArgs[featuredImage.options.linkTo].label} options={linkToArgs} onChange={(option, index) => {
+                      var options = { ...featuredImage.options, linkTo: option.value };
                       setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-
-
-
                     }} values=""></PGDropdown>
                   </PanelRow>
-                  <PanelRow>
-                    <label for="">Custom Field Key</label>
-                    <InputControl
-                      className='mr-2'
-                      value={featuredImage.options.altTextMetaKey}
-                      onChange={(newVal) => {
 
 
-                        var options = { ...featuredImage.options, altTextMetaKey: newVal };
+                  {featuredImage.options.linkTo == 'customField' && (
+
+
+
+                    <PanelRow>
+                      <label for="">Custom Field Key</label>
+                      <InputControl
+                        className='mr-2'
+                        value={featuredImage.options.linkToMetaKey}
+                        onChange={(newVal) => {
+
+
+                          var options = { ...featuredImage.options, linkToMetaKey: newVal };
+                          setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                        }}
+                      />
+                    </PanelRow>
+
+
+                  )}
+
+
+                  {featuredImage.options.linkTo == 'customUrl' && (
+
+                    <PanelRow>
+                      <label for="">Custom URL</label>
+
+                      <div className='relative'>
+                        <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                          setLinkPickerPosttitle(prev => !prev);
+
+                        }}></Button>
+                        {featuredImage.options.customUrl.length > 0 && (
+                          <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                            var options = { ...featuredImage.options, customUrl: '' };
+                            setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                            setLinkPickerPosttitle(false);
+
+                          }}></Button>
+
+                        )}
+                        {linkPickerPosttitle && (
+                          <Popover position="bottom right">
+                            <LinkControl settings={[]} value={featuredImage.options.customUrl} onChange={newVal => {
+
+                              var options = { ...featuredImage.options, customUrl: newVal.url };
+
+                              setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                            }} />
+
+                            <div className='p-2'><span className='font-bold'>Linked to:</span> {(featuredImage.options.customUrl.length != 0) ? featuredImage.options.customUrl : 'No link'} </div>
+                          </Popover>
+
+                        )}
+
+
+                      </div>
+                    </PanelRow>
+
+                  )}
+
+
+                  {featuredImage.options.linkTo.length == 0 && (
+
+
+
+                    <PanelRow className='my-3'>
+                      <label>Custom Tag</label>
+                      <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.tag.length == 0 ? 'Choose' : customTagArgs[featuredImage.options.tag].label} options={customTagArgs} onChange={(option, index) => {
+
+                        var options = { ...featuredImage.options, tag: option.value };
                         setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-                      }}
-                    />
-                  </PanelRow>
-                </div>
-              )}
+                      }} values=""></PGDropdown>
+                    </PanelRow>
 
 
 
 
-
-              {featuredImage.options.altTextSrc == 'custom' && (
-
-
-
-                <PanelRow>
-                  <label for="">Custom Alt Text</label>
-                  <InputControl
-                    className='mr-2'
-                    value={featuredImage.options.altTextCustom}
-                    onChange={(newVal) => {
-
-
-                      var options = { ...featuredImage.options, altTextCustom: newVal };
-                      setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-                    }}
-                  />
-                </PanelRow>
-
-
-              )}
+                  )}
 
 
 
-              <PanelRow>
-                <label>Filters </label>
-                <PGDropdown position="bottom right" variant="secondary" options={filterArgs} buttonTitle="Add" onChange={addfilterArgs} values=""></PGDropdown>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
+
+                  {featuredImage.options.linkTo.length > 0 && (
+
+                    <div>
+                      <PanelRow>
+                        <label for="">Link Target</label>
+
+                        <SelectControl
+                          label=""
+                          value={featuredImage.options.linkTarget}
+                          options={[
+                            { label: 'Choose...', value: '' },
+
+                            { label: '_self', value: '_self' },
+                            { label: '_blank', value: '_blank' },
+                            { label: '_parent', value: '_parent' },
+                            { label: '_top', value: '_top' },
 
 
-              <div className='my-5'>
-
-                {
-                  featuredImage.styles.filter[breakPointX] != undefined && (
+                          ]}
+                          onChange={(newVal) => {
 
 
 
-                    featuredImage.styles.filter[breakPointX].map((arg, index) => {
-
-                      return (
-                        <div>
-
-                          <PanelBody title={<BefroeTitle title={arg.label} args={{ index: index, arg: arg }} />} initialOpen={false}>
-
-                            <div>
+                            var options = { ...featuredImage.options, linkTarget: newVal };
+                            setAttributes({ featuredImage: { ...featuredImage, options: options } });
 
 
-                              <RangeControl
-                                value={arg.val}
-                                onChange={(newVal) => {
-                                  arg.val = newVal;
 
-                                  featuredImage.styles.filter[breakPointX][index] = arg;
-                                  var styles = featuredImage.styles;
+                          }
 
-                                  setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
-                                }}
-                                min={0}
-                                max={100}
-                              />
+
+
+                          }
+                        />
+                      </PanelRow>
+
+
+
+
+
+
+
+
+                      <PanelRow>
+                        <label for="">Custom Attributes</label>
+                        <div
+                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                          onClick={(ev) => {
+
+                            var sdsd = featuredImage.options.linkAttr.concat({ id: '', val: '' })
+
+
+                            var options = { ...featuredImage.options, linkAttr: sdsd };
+                            setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                            linkAttrObj()
+                          }}
+
+                        >Add</div>
+
+
+
+                      </PanelRow>
+
+
+
+                      {
+                        featuredImage.options.linkAttr.map((x, i) => {
+
+                          return (
+
+                            <div className='my-2'>
+                              <PanelRow>
+                                <InputControl
+                                  placeholder="Name"
+                                  className='mr-2'
+                                  value={featuredImage.options.linkAttr[i].id}
+                                  onChange={(newVal) => {
+
+                                    featuredImage.options.linkAttr[i].id = newVal;
+
+
+                                    var ssdsd = featuredImage.options.linkAttr.concat([]);
+
+
+
+                                    var options = { ...featuredImage.options, linkAttr: ssdsd };
+                                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                                  }}
+                                />
+
+                                <InputControl
+                                  className='mr-2'
+                                  placeholder="Value"
+                                  value={x.val}
+                                  onChange={(newVal) => {
+                                    featuredImage.options.linkAttr[i].val = newVal
+                                    var ssdsd = featuredImage.options.linkAttr.concat([]);
+
+
+
+                                    var options = { ...featuredImage.options, linkAttr: ssdsd };
+                                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                                  }}
+                                />
+                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                                  onClick={(ev) => {
+
+                                    featuredImage.options.linkAttr.splice(i, 1);
+
+                                    var ssdsd = featuredImage.options.linkAttr.concat([]);
+
+
+                                    var options = { ...featuredImage.options, linkAttr: ssdsd };
+                                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                                  }}
+
+                                ></span>
+                              </PanelRow>
+
+
 
 
                             </div>
 
-                          </PanelBody>
+                          )
 
+                        })
+                      }
 
 
+                    </div>
 
 
 
+                  )}
 
-                        </div>
-                      )
 
 
-                    }))
-                }
+                  <PanelRow className='my-3'>
+                    <label>Alt Text Source</label>
+                    <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.altTextSrc.length == 0 ? 'Choose' : altTextSrcArgs[featuredImage.options.altTextSrc].label} options={altTextSrcArgs} onChange={(option, index) => {
 
-              </div>
+                      var options = { ...featuredImage.options, altTextSrc: option.value };
+                      setAttributes({ featuredImage: { ...featuredImage, options: options } });
 
-              <PanelRow>
-                <label>Image Scale</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
 
+                    }} values=""></PGDropdown>
+                  </PanelRow>
 
-              <SelectControl
-                className='my-3'
-                value={featuredImage.styles.objectFit[breakPointX]}
-                options={[
-                  { label: 'Fill', value: 'fill' },
-                  { label: 'Contain', value: 'contain' },
-                  { label: 'Cover', value: 'cover' },
 
-                  { label: 'None', value: 'none' },
-                  { label: 'Scale-down', value: 'scale-down' },
 
+                  {featuredImage.options.altTextSrc == 'customField' && (
 
-                ]}
-                onChange={(newVal) => {
+                    <div>
 
+                      <PanelRow className='my-3'>
+                        <label>Custom Field</label>
+                        <PGDropdown position="bottom right" variant="secondary" buttonTitle={'Choose'} options={[
+                          { label: 'Custom', value: '' },
+                          { label: 'Yoast meta', value: '_yoast_wpseo_metadesc' },
+                          { label: 'Rank Math meta', value: 'rank_math_description' },
+                          { label: 'AIO SEO meta', value: '_aioseo_og_description' },
+                          { label: 'SEOPress meta', value: '_seopress_titles_desc' },
+                          { label: 'WP Meta SEO meta', value: '_metaseo_metadesc' },
+                          { label: 'The SEO Framework meta', value: '_genesis_description' },
+                          { label: 'SEO SIMPLE PACK meta', value: 'ssp_meta_description' },
+                        ]} onChange={(option, index) => {
 
-                  var newValuesObj = {};
+                          var options = { ...featuredImage.options, altTextMetaKey: option.value };
+                          setAttributes({ featuredImage: { ...featuredImage, options: options } });
 
-                  if (Object.keys(featuredImage.styles.objectFit).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = featuredImage.styles.objectFit;
-                    newValuesObj[breakPointX] = newVal;
-                  }
 
-                  var styles = { ...featuredImage.styles, objectFit: newValuesObj };
-                  setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
 
-                  blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'object-fit': newValuesObj };
 
-                  setAttributes({ blockCssY: { items: blockCssY.items } });
+                        }} values=""></PGDropdown>
+                      </PanelRow>
+                      <PanelRow>
+                        <label for="">Custom Field Key</label>
+                        <InputControl
+                          className='mr-2'
+                          value={featuredImage.options.altTextMetaKey}
+                          onChange={(newVal) => {
 
 
-                }}
-              />
+                            var options = { ...featuredImage.options, altTextMetaKey: newVal };
+                            setAttributes({ featuredImage: { ...featuredImage, options: options } });
 
+                          }}
+                        />
+                      </PanelRow>
+                    </div>
+                  )}
 
 
 
-              <PanelRow>
-                <label>Width</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
 
-              <PanelRow>
-                <InputControl
-                  disabled={(featuredImage.styles.width[breakPointX] != undefined && featuredImage.styles.width[breakPointX].unit == 'auto') ? true : false}
-                  value={(featuredImage.styles.width[breakPointX] != undefined ? featuredImage.styles.width[breakPointX].val : 0)}
-                  type="number"
-                  onChange={(newVal) => {
 
-                    var newValuesObj = {};
-                    if (Object.keys(featuredImage.styles.width).length == 0) {
-                      newValuesObj[breakPointX] = { val: newVal, unit: 'auto' };
-                    } else {
-                      newValuesObj = featuredImage.styles.width;
-                      var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'auto';
+                  {featuredImage.options.altTextSrc == 'custom' && (
 
-                      newValuesObj[breakPointX] = { val: newVal, unit: unit };
-                    }
 
 
-                    var styles = { ...featuredImage.styles, width: newValuesObj };
-                    setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
+                    <PanelRow>
+                      <label for="">Custom Alt Text</label>
+                      <InputControl
+                        className='mr-2'
+                        value={featuredImage.options.altTextCustom}
+                        onChange={(newVal) => {
 
 
+                          var options = { ...featuredImage.options, altTextCustom: newVal };
+                          setAttributes({ featuredImage: { ...featuredImage, options: options } });
 
-                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
-                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
+                        }}
+                      />
+                    </PanelRow>
 
 
-                    var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
+                  )}
 
-                    //heightX[breakPointX] = heightVal + heightUnit;
 
-                    if (heightUnit == 'auto') {
-                      heightX[breakPointX] = 'auto';
-                    } else {
-                      heightX[breakPointX] = heightVal + heightUnit;
-                    }
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={featuredImage} onChange={onChangeStyleImage} onAdd={onAddStyleImage} onRemove={onRemoveStyleImage} />
+                </PGtab>
+              </PGtabs>
 
 
-                    blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': heightX };
-
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                  }}
-
-                />
-
-                <SelectControl className='mb-0'
-                  value={(featuredImage.styles.width[breakPointX] != undefined) ? featuredImage.styles.width[breakPointX].unit : 'auto'}
-                  options={[
-                    { label: 'Auto', value: 'auto' },
-                    { label: 'px', value: 'px' },
-                    { label: 'fr', value: 'fr' },
-                    { label: '%', value: '%' },
-                    { label: 'em', value: 'em' },
-                  ]}
-                  onChange={(newVal) => {
-
-
-                    var newValuesObj = {};
-                    if (Object.keys(featuredImage.styles.width).length == 0) {
-                      newValuesObj[breakPointX] = { val: 0, unit: newVal };
-                    } else {
-                      newValuesObj = featuredImage.styles.width;
-                      var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 0;
-
-                      newValuesObj[breakPointX] = { val: val, unit: newVal };
-                    }
-
-
-                    var styles = { ...featuredImage.styles, width: newValuesObj };
-                    setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
-
-                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
-                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
-
-                    var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
-
-                    //heightX[breakPointX] = heightVal + heightUnit;
-
-                    if (heightUnit == 'auto') {
-                      heightX[breakPointX] = 'auto';
-                    } else {
-                      heightX[breakPointX] = heightVal + heightUnit;
-                    }
-
-
-                    blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': heightX };
-
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                  }}
-                />
-
-              </PanelRow>
-
-
-
-
-              <PanelRow>
-                <label>Height</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <PanelRow>
-                <InputControl
-                  disabled={(featuredImage.styles.height[breakPointX] != undefined && featuredImage.styles.height[breakPointX].unit == 'auto') ? true : false}
-                  value={(featuredImage.styles.height[breakPointX] != undefined ? featuredImage.styles.height[breakPointX].val : 0)}
-                  type="number"
-                  onChange={(newVal) => {
-
-                    var newValuesObj = {};
-                    if (Object.keys(featuredImage.styles.height).length == 0) {
-                      newValuesObj[breakPointX] = { val: newVal, unit: 'auto' };
-                    } else {
-                      newValuesObj = featuredImage.styles.height;
-                      var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'auto';
-
-                      newValuesObj[breakPointX] = { val: newVal, unit: unit };
-                    }
-
-
-                    var styles = { ...featuredImage.styles, height: newValuesObj };
-                    setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
-
-
-
-                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
-                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
-
-
-                    var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
-
-                    //heightX[breakPointX] = heightVal + heightUnit;
-
-                    if (heightUnit == 'auto') {
-                      heightX[breakPointX] = 'auto';
-                    } else {
-                      heightX[breakPointX] = heightVal + heightUnit;
-                    }
-
-
-                    blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'height': heightX };
-
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                  }}
-
-                />
-
-                <SelectControl className='mb-0'
-                  value={(featuredImage.styles.height[breakPointX] != undefined) ? featuredImage.styles.height[breakPointX].unit : 'auto'}
-                  options={[
-                    { label: 'Auto', value: 'auto' },
-                    { label: 'px', value: 'px' },
-                    { label: 'fr', value: 'fr' },
-                    { label: '%', value: '%' },
-                    { label: 'em', value: 'em' },
-                  ]}
-                  onChange={(newVal) => {
-
-
-                    var newValuesObj = {};
-                    if (Object.keys(featuredImage.styles.height).length == 0) {
-                      newValuesObj[breakPointX] = { val: 0, unit: newVal };
-                    } else {
-                      newValuesObj = featuredImage.styles.height;
-                      var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 0;
-
-                      newValuesObj[breakPointX] = { val: val, unit: newVal };
-                    }
-
-
-                    var styles = { ...featuredImage.styles, height: newValuesObj };
-                    setAttributes({ featuredImage: { ...featuredImage, styles: styles } });
-
-                    var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
-                    var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
-
-                    var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
-
-                    //heightX[breakPointX] = heightVal + heightUnit;
-
-                    if (heightUnit == 'auto') {
-                      heightX[breakPointX] = 'auto';
-                    } else {
-                      heightX[breakPointX] = heightVal + heightUnit;
-                    }
-
-
-                    blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'height': heightX };
-
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                  }}
-                />
-
-              </PanelRow>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              <PanelRow>
-                <label>Padding</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-              <BoxControl
-                label=""
-                values={featuredImage.styles.padding[breakPointX]}
-                onChange={(nextValues) => { paddingControl(nextValues) }}
-              />
-
-
-              <PanelRow>
-                <label>Margin</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-              <BoxControl
-                label=""
-                values={featuredImage.styles.margin[breakPointX]}
-                onChange={(nextValues) => { marginControl(nextValues) }}
-              />
 
 
             </PanelBody>

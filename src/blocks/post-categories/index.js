@@ -236,11 +236,11 @@ registerBlockType("post-grid/post-categories", {
 
 
     // Wrapper CSS Class Selectors
-    const wrapSelector = blockClass;
+    const wrapperSelector = blockClass;
     const itemSelector = blockClass + ' .item';
     const itemTitleSelector = blockClass + ' .termTitle';
 
-    const itemSeparatorSelector = blockClass + ' .separator';
+    const separatorSelector = blockClass + ' .separator';
     const frontTextSelector = blockClass + ' .frontText';
     const postCountSelector = blockClass + ' .postCount';
     const iconSelector = blockClass + ' .icon';
@@ -414,33 +414,33 @@ registerBlockType("post-grid/post-categories", {
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = wrapSelector;
+      var elementSelector = wrapperSelector;
 
       if (sudoScource == 'styles') {
-        elementSelector = wrapSelector;
+        elementSelector = wrapperSelector;
       }
 
       else if (sudoScource == 'hover') {
-        elementSelector = wrapSelector + ':hover';
+        elementSelector = wrapperSelector + ':hover';
       } else if (sudoScource == 'after') {
-        elementSelector = wrapSelector + ':after';
+        elementSelector = wrapperSelector + ':after';
       } else if (sudoScource == 'before') {
-        elementSelector = wrapSelector + ':before';
+        elementSelector = wrapperSelector + ':before';
       } else if (sudoScource == 'first-child') {
-        elementSelector = wrapSelector + ':first-child';
+        elementSelector = wrapperSelector + ':first-child';
       } else if (sudoScource == 'last-child') {
-        elementSelector = wrapSelector + ':last-child';
+        elementSelector = wrapperSelector + ':last-child';
       } else if (sudoScource == 'visited') {
-        elementSelector = wrapSelector + ':visited';
+        elementSelector = wrapperSelector + ':visited';
       } else if (sudoScource == 'selection') {
-        elementSelector = wrapSelector + ':selection';
+        elementSelector = wrapperSelector + ':selection';
       } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapSelector + '::first-letter';
+        elementSelector = wrapperSelector + '::first-letter';
       } else if (sudoScource == 'first-line') {
-        elementSelector = wrapSelector + '::first-line';
+        elementSelector = wrapperSelector + '::first-line';
       }
       else {
-        elementSelector = wrapSelector + ':' + sudoScource;
+        elementSelector = wrapperSelector + ':' + sudoScource;
       }
 
       sudoScourceX[attr][breakPointX] = newVal;
@@ -469,14 +469,14 @@ registerBlockType("post-grid/post-categories", {
       wrapper[sudoScource] = sudoScourceX;
       setAttributes({ wrapper: { ...wrapper } });
 
-      if (blockCssY.items[wrapSelector] == undefined) {
-        blockCssY.items[wrapSelector] = {};
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
       }
 
       Object.entries(sudoScourceX).map(args => {
         var argAttr = myStore.cssAttrParse(args[0]);
         var argAttrVal = args[1];
-        blockCssY.items[wrapSelector][argAttr] = argAttrVal;
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -750,33 +750,33 @@ registerBlockType("post-grid/post-categories", {
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...separator[sudoScource] }
-      var elementSelector = fieldSelector;
+      var elementSelector = separatorSelector;
 
       if (sudoScource == 'styles') {
-        elementSelector = fieldSelector;
+        elementSelector = separatorSelector;
       }
 
       else if (sudoScource == 'hover') {
-        elementSelector = fieldSelector + ':hover';
+        elementSelector = separatorSelector + ':hover';
       } else if (sudoScource == 'after') {
-        elementSelector = fieldSelector + ':after';
+        elementSelector = separatorSelector + ':after';
       } else if (sudoScource == 'before') {
-        elementSelector = fieldSelector + ':before';
+        elementSelector = separatorSelector + ':before';
       } else if (sudoScource == 'first-child') {
-        elementSelector = fieldSelector + ':first-child';
+        elementSelector = separatorSelector + ':first-child';
       } else if (sudoScource == 'last-child') {
-        elementSelector = fieldSelector + ':last-child';
+        elementSelector = separatorSelector + ':last-child';
       } else if (sudoScource == 'visited') {
-        elementSelector = fieldSelector + ':visited';
+        elementSelector = separatorSelector + ':visited';
       } else if (sudoScource == 'selection') {
-        elementSelector = fieldSelector + ':selection';
+        elementSelector = separatorSelector + ':selection';
       } else if (sudoScource == 'first-letter') {
-        elementSelector = fieldSelector + '::first-letter';
+        elementSelector = separatorSelector + '::first-letter';
       } else if (sudoScource == 'first-line') {
-        elementSelector = fieldSelector + '::first-line';
+        elementSelector = separatorSelector + '::first-line';
       }
       else {
-        elementSelector = fieldSelector + ':' + sudoScource;
+        elementSelector = separatorSelector + ':' + sudoScource;
       }
 
       sudoScourceX[attr][breakPointX] = newVal;
@@ -805,8 +805,8 @@ registerBlockType("post-grid/post-categories", {
       separator[sudoScource] = sudoScourceX;
       setAttributes({ separator: { ...separator } });
 
-      if (blockCssY.items[fieldSelector] == undefined) {
-        blockCssY.items[fieldSelector] = {};
+      if (blockCssY.items[separatorSelector] == undefined) {
+        blockCssY.items[separatorSelector] = {};
       }
 
       Object.entries(sudoScourceX).map(args => {
@@ -2046,7 +2046,7 @@ registerBlockType("post-grid/post-categories", {
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
                     <p className='font-bold'>Items Wrapper</p>
-                    <p><code>{wrapSelector}{'{/* your CSS here*/}'}</code></p>
+                    <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>
@@ -2057,7 +2057,7 @@ registerBlockType("post-grid/post-categories", {
 
                   <div className='my-3'>
                     <p className='font-bold'>Separator</p>
-                    <p><code>{itemSeparatorSelector}{'{/* your CSS here*/}'} </code></p>
+                    <p><code>{separatorSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
                   <div className='my-3'>

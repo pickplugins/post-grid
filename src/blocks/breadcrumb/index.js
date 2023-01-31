@@ -65,12 +65,10 @@ registerBlockType("post-grid/breadcrumb", {
         options: { tag: 'div', class: '', },
         styles:
         {
-          textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
-          display: {},
         },
       },
     },
@@ -80,12 +78,10 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: 'icon', position: 'beforeLabel'/*beforeLabel, afterLabel, beforeSeparator, afterSeparator*/ },
         styles:
         {
-          textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
-          display: {},
         },
       },
     },
@@ -95,12 +91,10 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: '', },
         styles:
         {
-          textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
-          display: {},
         },
       },
     },
@@ -113,7 +107,7 @@ registerBlockType("post-grid/breadcrumb", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -130,7 +124,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: { Desktop: '#18978F' },
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {
             Desktop: { top: '5px', right: '5px', bottom: '5px', left: '5px' }
@@ -139,11 +133,7 @@ registerBlockType("post-grid/breadcrumb", {
           borderRadius: {},
 
           fontSize: { Desktop: { val: '35' } }, //{ val: '18', unit: 'px' }
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+
 
         },
         items: [
@@ -156,12 +146,10 @@ registerBlockType("post-grid/breadcrumb", {
 
             },
             styles: {
-              textAlign: {},
               color: {},
-              bgColor: {},
+              backgroundColor: {},
               padding: {},
               margin: {},
-              display: {},
             },
 
           },
@@ -172,12 +160,10 @@ registerBlockType("post-grid/breadcrumb", {
               showSeparator: true,
             },
             styles: {
-              textAlign: {},
               color: {},
-              bgColor: {},
+              backgroundColor: {},
               padding: {},
               margin: {},
-              display: {},
             },
 
           },
@@ -188,12 +174,10 @@ registerBlockType("post-grid/breadcrumb", {
               showSeparator: true,
             },
             styles: {
-              textAlign: {},
               color: {},
-              bgColor: {},
+              backgroundColor: {},
               padding: {},
               margin: {},
-              display: {},
             },
 
           },
@@ -394,7 +378,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -413,7 +397,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -430,7 +414,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -447,7 +431,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -465,7 +449,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -481,7 +465,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -500,7 +484,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -517,7 +501,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -534,7 +518,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -552,7 +536,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -569,7 +553,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -585,7 +569,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -601,7 +585,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -617,7 +601,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -634,7 +618,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -652,7 +636,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -670,7 +654,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -688,7 +672,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -708,7 +692,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -726,7 +710,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -743,7 +727,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -761,7 +745,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -776,7 +760,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -791,7 +775,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -806,7 +790,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -823,7 +807,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -839,7 +823,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -855,7 +839,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -873,7 +857,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -889,7 +873,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -906,7 +890,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -922,7 +906,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -1070,33 +1054,33 @@ registerBlockType("post-grid/breadcrumb", {
     function onChangeStyleElements(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...elements[sudoScource] }
-      var elementSelector = excerptSelector;
+      var elementSelector = itemSelector;
 
       if (sudoScource == 'styles') {
-        elementSelector = excerptSelector;
+        elementSelector = itemSelector;
       }
 
       else if (sudoScource == 'hover') {
-        elementSelector = excerptSelector + ':hover';
+        elementSelector = itemSelector + ':hover';
       } else if (sudoScource == 'after') {
-        elementSelector = excerptSelector + ':after';
+        elementSelector = itemSelector + ':after';
       } else if (sudoScource == 'before') {
-        elementSelector = excerptSelector + ':before';
+        elementSelector = itemSelector + ':before';
       } else if (sudoScource == 'first-child') {
-        elementSelector = excerptSelector + ':first-child';
+        elementSelector = itemSelector + ':first-child';
       } else if (sudoScource == 'last-child') {
-        elementSelector = excerptSelector + ':last-child';
+        elementSelector = itemSelector + ':last-child';
       } else if (sudoScource == 'visited') {
-        elementSelector = excerptSelector + ':visited';
+        elementSelector = itemSelector + ':visited';
       } else if (sudoScource == 'selection') {
-        elementSelector = excerptSelector + ':selection';
+        elementSelector = itemSelector + ':selection';
       } else if (sudoScource == 'first-letter') {
-        elementSelector = excerptSelector + '::first-letter';
+        elementSelector = itemSelector + '::first-letter';
       } else if (sudoScource == 'first-line') {
-        elementSelector = excerptSelector + '::first-line';
+        elementSelector = itemSelector + '::first-line';
       }
       else {
-        elementSelector = excerptSelector + ':' + sudoScource;
+        elementSelector = itemSelector + ':' + sudoScource;
       }
 
       sudoScourceX[attr][breakPointX] = newVal;
@@ -1129,14 +1113,14 @@ registerBlockType("post-grid/breadcrumb", {
       elements[sudoScource] = sudoScourceX;
       setAttributes({ elements: { ...elements } });
 
-      if (blockCssY.items[excerptSelector] == undefined) {
-        blockCssY.items[excerptSelector] = {};
+      if (blockCssY.items[itemSelector] == undefined) {
+        blockCssY.items[itemSelector] = {};
       }
 
       Object.entries(sudoScourceX).map(args => {
         var argAttr = myStore.cssAttrParse(args[0]);
         var argAttrVal = args[1];
-        blockCssY.items[excerptSelector][argAttr] = argAttrVal;
+        blockCssY.items[itemSelector][argAttr] = argAttrVal;
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -2180,21 +2164,21 @@ registerBlockType("post-grid/breadcrumb", {
 
 
                               <ColorPalette
-                                value={elements.items[index].styles.bgColor[breakPointX]}
+                                value={elements.items[index].styles.backgroundColor[breakPointX]}
                                 colors={colorsPresets}
                                 enableAlpha
                                 onChange={(newVal) => {
 
                                   var newValuesObj = {};
 
-                                  if (Object.keys(elements.items[index].styles.bgColor).length == 0) {
+                                  if (Object.keys(elements.items[index].styles.backgroundColor).length == 0) {
                                     newValuesObj[breakPointX] = newVal;
                                   } else {
-                                    newValuesObj = elements.items[index].styles.bgColor;
+                                    newValuesObj = elements.items[index].styles.backgroundColor;
                                     newValuesObj[breakPointX] = newVal;
                                   }
 
-                                  var styles = { ...elements.items[index].styles, bgColor: newValuesObj };
+                                  var styles = { ...elements.items[index].styles, backgroundColor: newValuesObj };
                                   elements.items[index].styles = styles
 
                                   setAttributes({ elements: { ...elements, items: elements.items } });
@@ -2302,178 +2286,6 @@ registerBlockType("post-grid/breadcrumb", {
 
 
 
-
-
-                  <PanelRow className='my-3'>
-                    <label>Display</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
-
-                    <SelectControl
-                      label=""
-                      value={elements.styles.display[breakPointX]}
-
-                      options={[
-                        { label: 'Select..', value: '' },
-                        { label: 'inline', value: 'inline' },
-                        { label: 'inline-block', value: 'inline-block' },
-                        { label: 'block', value: 'block' },
-
-                      ]}
-                      onChange={(newVal) => {
-
-                        var newValuesObj = {};
-
-                        if (Object.keys(elements.styles.display).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = elements.styles.display;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-                        var styles = { ...elements.styles, display: newValuesObj };
-                        setAttributes({ elements: { ...elements, styles: styles } });
-
-
-
-                        var itemsX = { ...blockCssY.items };
-                        itemsX[itemSelector] = { ...blockCssY.items[itemSelector], 'display': newValuesObj };
-
-                        setAttributes({ blockCssY: { items: itemsX } });
-
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
-
-
-                  <PanelRow className='my-3'>
-                    <label>Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-
-                  <ColorPalette
-                    value={elements.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-                      //sdsd
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(elements.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = elements.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...elements.styles, color: newValuesObj };
-                      setAttributes({ elements: { ...elements, styles: styles } });
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[itemSelector] = { ...blockCssY.items[itemSelector], 'color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }}
-                  />
-
-
-                  <PanelRow className='my-3'>
-                    <label>Background Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-
-                  <ColorPalette
-                    value={elements.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-                      //
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(elements.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = elements.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...elements.styles, bgColor: newValuesObj };
-                      setAttributes({ elements: { ...elements, styles: styles } });
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[itemSelector] = { ...blockCssY.items[itemSelector], 'background-color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                    }}
-                  />
-
-
-
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={elements.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paddingControlItems(nextValues) }}
-                  />
-
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={elements.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { marginControlItems(nextValues) }}
-                  />
-
-
-                  <Typography typo={elements.styles} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} obj={elements} />
 
 
 

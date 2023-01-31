@@ -15,7 +15,7 @@ import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
 import { store } from '../../store'
 
-import { link, linkOff } from "@wordpress/icons";
+import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 
 
 import IconToggle from '../../components/icon-toggle'
@@ -28,7 +28,9 @@ import PGDropdown from '../../components/dropdown'
 import PGIconPicker from '../../components/icon-picker'
 import PGcssDisplay from '../../components/css-display'
 
-
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
 
 var myStore = wp.data.select('postgrid-shop');
 
@@ -305,6 +307,474 @@ registerBlockType("post-grid/archive-title", {
     }
 
 
+
+
+
+
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+
+
+
+    function onChangeStyleArchiveTitle(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...archiveTitle[sudoScource] }
+      var elementSelector = archiveTitleSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = archiveTitleSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = archiveTitleSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = archiveTitleSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = archiveTitleSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = archiveTitleSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = archiveTitleSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = archiveTitleSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = archiveTitleSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = archiveTitleSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = archiveTitleSelector + '::first-line';
+      }
+      else {
+        elementSelector = archiveTitleSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ archiveTitle: { ...archiveTitle } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleArchiveTitle(sudoScource, key) {
+      var sudoScourceX = { ...archiveTitle[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      archiveTitle[sudoScource] = sudoScourceX;
+      setAttributes({ archiveTitle: { ...archiveTitle } });
+
+      if (blockCssY.items[archiveTitleSelector] == undefined) {
+        blockCssY.items[archiveTitleSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[archiveTitleSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleArchiveTitle(sudoScource, key) {
+      var sudoScourceX = { ...archiveTitle[sudoScource] }
+      sudoScourceX[key] = {};
+      archiveTitle[sudoScource] = sudoScourceX;
+      setAttributes({ archiveTitle: { ...archiveTitle } });
+    }
+
+
+
+
+    function onChangeStyleIcon(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...icon[sudoScource] }
+      var elementSelector = iconSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = iconSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = iconSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = iconSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = iconSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = iconSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = iconSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = iconSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = iconSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = iconSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = iconSelector + '::first-line';
+      }
+      else {
+        elementSelector = iconSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ icon: { ...icon } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({ icon: { ...icon } });
+
+      if (blockCssY.items[iconSelector] == undefined) {
+        blockCssY.items[iconSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[iconSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource] }
+      sudoScourceX[key] = {};
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({ icon: { ...icon } });
+    }
+
+
+
+
+
+
+
+
+
+
+
+    function onChangeStylePrefix(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      var elementSelector = prefixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = prefixSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = prefixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = prefixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = prefixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = prefixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = prefixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = prefixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = prefixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = prefixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = prefixSelector + '::first-line';
+      }
+      else {
+        elementSelector = prefixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onRemoveStylePrefix(sudoScource, key) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      prefix[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ prefix: { ...prefix } });
+
+      if (blockCssY.items[prefixSelector] == undefined) {
+        blockCssY.items[prefixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePrefix(sudoScource, key) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      sudoScourceX[key] = {};
+      prefix[sudoScource] = sudoScourceX;
+      setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onChangeStylePostfix(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      var elementSelector = postfixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = postfixSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = postfixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = postfixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = postfixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = postfixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = postfixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = postfixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = postfixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = postfixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = postfixSelector + '::first-line';
+      }
+      else {
+        elementSelector = postfixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+    function onRemoveStylePostfix(sudoScource, key) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      postfix[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ postfix: { ...postfix } });
+
+      if (blockCssY.items[postfixSelector] == undefined) {
+        blockCssY.items[postfixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePostfix(sudoScource, key) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      sudoScourceX[key] = {};
+      postfix[sudoScource] = sudoScourceX;
+      setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     function onChangeIconTypo(typoX) {
 
 
@@ -507,24 +977,24 @@ registerBlockType("post-grid/archive-title", {
     }, [clientId]);
 
     // Wrapper CSS Class Selectors
-    const postDateWrapperSelector = blockClass;
+    const wrapperSelector = blockClass;
 
 
-    var postDateSelector = '';
+    var archiveTitleSelector = '';
 
 
     if (wrapper.options.tag.length != 0) {
 
       if (archiveTitle.options.linkTo.length > 0) {
-        postDateSelector = blockClass + ' a';
+        archiveTitleSelector = blockClass + ' a';
       } else {
-        postDateSelector = blockClass;
-        //postDateSelector = blockClass + ' .archiveTitle';
+        archiveTitleSelector = blockClass;
+        //archiveTitleSelector = blockClass + ' .archiveTitle';
 
       }
 
     } else {
-      postDateSelector = blockClass;
+      archiveTitleSelector = blockClass;
 
     }
 
@@ -534,8 +1004,8 @@ registerBlockType("post-grid/archive-title", {
 
 
 
-    const postDatePrefixSelector = blockClass + ' .prefix';
-    const postDatePostfixSelector = blockClass + ' .postfix';
+    const prefixSelector = blockClass + ' .prefix';
+    const postfixSelector = blockClass + ' .postfix';
     const iconSelector = blockClass + ' .postdate-icon';
 
 
@@ -579,7 +1049,7 @@ registerBlockType("post-grid/archive-title", {
       setAttributes({ archiveTitle: { ...archiveTitle, styles: styles } });
 
 
-      blockCssY.items[postDateSelector] = (blockCssY.items[postDateSelector] != undefined) ? blockCssY.items[postDateSelector] : {};
+      blockCssY.items[archiveTitleSelector] = (blockCssY.items[archiveTitleSelector] != undefined) ? blockCssY.items[archiveTitleSelector] : {};
 
 
       nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
@@ -593,22 +1063,22 @@ registerBlockType("post-grid/archive-title", {
 
       if (nextValues.top != undefined) {
 
-        var paddingTop = (blockCssY.items[postDateSelector]['padding-top'] != undefined) ? blockCssY.items[postDateSelector]['padding-top'] : {};
+        var paddingTop = (blockCssY.items[archiveTitleSelector]['padding-top'] != undefined) ? blockCssY.items[archiveTitleSelector]['padding-top'] : {};
         paddingTop[breakPointX] = nextValues.top
 
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'padding-top': paddingTop };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'padding-top': paddingTop };
 
       }
 
 
       if (nextValues.right != undefined) {
 
-        var paddingRight = (blockCssY.items[postDateSelector]['padding-right'] != undefined) ? blockCssY.items[postDateSelector]['padding-right'] : {};
+        var paddingRight = (blockCssY.items[archiveTitleSelector]['padding-right'] != undefined) ? blockCssY.items[archiveTitleSelector]['padding-right'] : {};
         paddingRight[breakPointX] = nextValues.right
 
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'padding-right': paddingRight };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'padding-right': paddingRight };
 
 
 
@@ -616,11 +1086,11 @@ registerBlockType("post-grid/archive-title", {
 
       if (nextValues.bottom != undefined) {
 
-        var paddingBottom = (blockCssY.items[postDateSelector]['padding-bottom'] != undefined) ? blockCssY.items[postDateSelector]['padding-bottom'] : {};
+        var paddingBottom = (blockCssY.items[archiveTitleSelector]['padding-bottom'] != undefined) ? blockCssY.items[archiveTitleSelector]['padding-bottom'] : {};
         paddingBottom[breakPointX] = nextValues.bottom
 
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'padding-bottom': paddingBottom };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'padding-bottom': paddingBottom };
 
 
 
@@ -628,10 +1098,10 @@ registerBlockType("post-grid/archive-title", {
 
       if (nextValues.left != undefined) {
 
-        var paddingLeft = (blockCssY.items[postDateSelector]['padding-left'] != undefined) ? blockCssY.items[postDateSelector]['padding-left'] : {};
+        var paddingLeft = (blockCssY.items[archiveTitleSelector]['padding-left'] != undefined) ? blockCssY.items[archiveTitleSelector]['padding-left'] : {};
         paddingLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'padding-left': paddingLeft };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'padding-left': paddingLeft };
 
 
       }
@@ -663,40 +1133,40 @@ registerBlockType("post-grid/archive-title", {
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
 
-      blockCssY.items[postDateSelector] = (blockCssY.items[postDateSelector] != undefined) ? blockCssY.items[postDateSelector] : {};
+      blockCssY.items[archiveTitleSelector] = (blockCssY.items[archiveTitleSelector] != undefined) ? blockCssY.items[archiveTitleSelector] : {};
 
       if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[postDateSelector]['margin-top'] != undefined) ? blockCssY.items[postDateSelector]['margin-top'] : {};
+        var marginTop = (blockCssY.items[archiveTitleSelector]['margin-top'] != undefined) ? blockCssY.items[archiveTitleSelector]['margin-top'] : {};
         marginTop[breakPointX] = nextValues.top
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'margin-top': marginTop };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'margin-top': marginTop };
       }
 
 
       if (nextValues.right != undefined) {
 
-        var marginRight = (blockCssY.items[postDateSelector]['margin-right'] !== undefined) ? blockCssY.items[postDateSelector]['margin-right'] : {};
+        var marginRight = (blockCssY.items[archiveTitleSelector]['margin-right'] !== undefined) ? blockCssY.items[archiveTitleSelector]['margin-right'] : {};
         marginRight[breakPointX] = nextValues.right
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'margin-right': marginRight };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'margin-right': marginRight };
 
       }
 
       if (nextValues.bottom != undefined) {
 
-        var marginBottom = (blockCssY.items[postDateSelector]['margin-bottom'] !== undefined) ? blockCssY.items[postDateSelector]['margin-bottom'] : {};
+        var marginBottom = (blockCssY.items[archiveTitleSelector]['margin-bottom'] !== undefined) ? blockCssY.items[archiveTitleSelector]['margin-bottom'] : {};
         marginBottom[breakPointX] = nextValues.bottom
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'margin-bottom': marginBottom };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'margin-bottom': marginBottom };
 
       }
 
       if (nextValues.left != undefined) {
 
-        var marginLeft = (blockCssY.items[postDateSelector]['margin-left'] !== undefined) ? blockCssY.items[postDateSelector]['margin-left'] : {};
+        var marginLeft = (blockCssY.items[archiveTitleSelector]['margin-left'] !== undefined) ? blockCssY.items[archiveTitleSelector]['margin-left'] : {};
         marginLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'margin-left': marginLeft };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'margin-left': marginLeft };
 
       }
 
@@ -982,7 +1452,7 @@ registerBlockType("post-grid/archive-title", {
 
       if (typoX.fontFamily[breakPointX] != undefined) {
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'font-family': typoX.fontFamily };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'font-family': typoX.fontFamily };
 
       }
 
@@ -993,10 +1463,10 @@ registerBlockType("post-grid/archive-title", {
         var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
 
 
-        var fontSizeX = (blockCssY.items[postDateSelector] != undefined) ? blockCssY.items[postDateSelector]['font-size'] : {};
+        var fontSizeX = (blockCssY.items[archiveTitleSelector] != undefined) ? blockCssY.items[archiveTitleSelector]['font-size'] : {};
 
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'font-size': fontSizeX };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'font-size': fontSizeX };
 
       }
 
@@ -1008,11 +1478,11 @@ registerBlockType("post-grid/archive-title", {
         var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
 
 
-        var lineHeightX = (blockCssY.items[postDateSelector]['line-height'] != undefined) ? blockCssY.items[postDateSelector]['line-height'] : {};
+        var lineHeightX = (blockCssY.items[archiveTitleSelector]['line-height'] != undefined) ? blockCssY.items[archiveTitleSelector]['line-height'] : {};
 
         lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'line-height': lineHeightX };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'line-height': lineHeightX };
       }
       if (typoX.letterSpacing[breakPointX] != undefined) {
 
@@ -1021,16 +1491,16 @@ registerBlockType("post-grid/archive-title", {
 
 
 
-        var letterSpacingX = (blockCssY.items[postDateSelector]['letter-spacing'] != undefined) ? blockCssY.items[postDateSelector]['letter-spacing'] : {};
+        var letterSpacingX = (blockCssY.items[archiveTitleSelector]['letter-spacing'] != undefined) ? blockCssY.items[archiveTitleSelector]['letter-spacing'] : {};
 
         letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'letter-spacing': letterSpacingX };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'letter-spacing': letterSpacingX };
       }
 
       if (typoX.fontWeight[breakPointX] != undefined) {
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'font-weight': typoX.fontWeight };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'font-weight': typoX.fontWeight };
 
       }
 
@@ -1046,12 +1516,12 @@ registerBlockType("post-grid/archive-title", {
 
         //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'text-decoration': str };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'text-decoration': str };
 
       }
       if (typoX.textTransform[breakPointX] != undefined) {
 
-        blockCssY.items[postDateSelector] = { ...blockCssY.items[postDateSelector], 'text-transform': typoX.textTransform };
+        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'text-transform': typoX.textTransform };
 
 
       }
@@ -1117,7 +1587,7 @@ registerBlockType("post-grid/archive-title", {
                 var styles = { ...wrapper.styles, textAlign: newValuesObj };
                 setAttributes({ wrapper: { options: wrapper.options, styles: styles } });
 
-                blockCssY.items[postDateWrapperSelector] = { ...blockCssY.items[postDateWrapperSelector], 'text-align': newValuesObj };
+                blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-align': newValuesObj };
                 setAttributes({ blockCssY: { items: blockCssY.items } });
 
               }}
@@ -1137,57 +1607,67 @@ registerBlockType("post-grid/archive-title", {
 
               <div>
                 <PanelBody title="Wrapper" initialOpen={false}>
-                  <PanelRow>
-                    <label for="">Wrapper Tag</label>
-                    <SelectControl
-                      label=""
-                      value={wrapper.options.tag}
-                      options={[
-                        { label: 'No Wrapper', value: '' },
-                        { label: 'H1', value: 'h1' },
-                        { label: 'H2', value: 'h2' },
-                        { label: 'H3', value: 'h3' },
-                        { label: 'H4', value: 'h4' },
-                        { label: 'H5', value: 'h5' },
-                        { label: 'H6', value: 'h6' },
-                        { label: 'span', value: 'SPAN' },
-                        { label: 'div', value: 'DIV' },
-                        { label: 'P', value: 'p' },
-                      ]}
-                      onChange={(newVal) => {
-
-                        var options = { ...wrapper.options, tag: newVal };
-                        setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
 
 
-                  <PanelRow>
-                    <label>Display</label>
-                    <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+
+                      <PanelRow>
+                        <label for="">Wrapper Tag</label>
+                        <SelectControl
+                          label=""
+                          value={wrapper.options.tag}
+                          options={[
+                            { label: 'No Wrapper', value: '' },
+                            { label: 'H1', value: 'h1' },
+                            { label: 'H2', value: 'h2' },
+                            { label: 'H3', value: 'h3' },
+                            { label: 'H4', value: 'h4' },
+                            { label: 'H5', value: 'h5' },
+                            { label: 'H6', value: 'h6' },
+                            { label: 'span', value: 'SPAN' },
+                            { label: 'div', value: 'DIV' },
+                            { label: 'P', value: 'p' },
+                          ]}
+                          onChange={(newVal) => {
+
+                            var options = { ...wrapper.options, tag: newVal };
+                            setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
+
+                          }
+
+                          }
+                        />
+                      </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                    </PGtab>
+                  </PGtabs>
 
 
-                      var newValuesObj = {};
 
-                      if (Object.keys(wrapper.styles.display).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = wrapper.styles.display;
-                        newValuesObj[breakPointX] = newVal;
-                      }
 
-                      var styles = { ...wrapper.styles, display: newValuesObj };
-                      setAttributes({ wrapper: { ...wrapper, styles: styles } });
 
-                      blockCssY.items[postDateWrapperSelector] = { ...blockCssY.items[postDateWrapperSelector], 'display': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                    })} />
-                  </PanelRow>
 
 
 
@@ -1203,58 +1683,51 @@ registerBlockType("post-grid/archive-title", {
 
 
 
-                  <PanelRow className='mb-4'>
-                    <label for="">Archive Type</label>
-                    <PGDropdown position="bottom right" variant="secondary" options={archiveTypes} buttonTitle="Choose" onChange={(option, index) => {
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
 
-                      var options = { ...archiveTitle.options, archiveType: option.value };
-                      setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
-
-                    }} values={''}></PGDropdown>
-                  </PanelRow>
-
-                  <div className='bg-gray-500 text-white p-3 py-2'>{archiveTypes[archiveTitle.options.archiveType].label}</div>
-
-
-
-                  <PanelRow className='mb-4'>
-                    <label for="">Custom Label</label>
-                    <InputControl
-                      className='mr-2'
-                      value={archiveTitle.options.customLabel}
-                      onChange={(newVal) => {
-
-
-                        var options = { ...archiveTitle.options, customLabel: newVal };
-                        setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
-
-                      }}
-                    />
-                  </PanelRow>
-
-
-                  {(archiveTitle.options.archiveType == 'year' || archiveTitle.options.archiveType == 'month' || archiveTitle.options.archiveType == 'day') && (
-
-                    <>
                       <PanelRow className='mb-4'>
-                        <label for="">Date Format</label>
-                        <PGDropdown position="bottom right" variant="secondary" options={dateFormats} buttonTitle="Choose" onChange={(option, index) => {
+                        <label for="">Archive Type</label>
+                        <PGDropdown position="bottom right" variant="secondary" options={archiveTypes} buttonTitle="Choose" onChange={(option, index) => {
 
-                          var options = { ...archiveTitle.options, dateFormat: option.value };
+                          var options = { ...archiveTitle.options, archiveType: option.value };
                           setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
 
                         }} values={''}></PGDropdown>
                       </PanelRow>
+
+                      <div className='bg-gray-500 text-white p-3 py-2'>{archiveTypes[archiveTitle.options.archiveType].label}</div>
+
+
+
                       <PanelRow className='mb-4'>
-                        <label for="">Custom Format</label>
+                        <label for="">Custom Label</label>
                         <InputControl
                           className='mr-2'
-                          value={archiveTitle.options.dateFormat}
+                          value={archiveTitle.options.customLabel}
                           onChange={(newVal) => {
 
 
-
-                            var options = { ...archiveTitle.options, dateFormat: newVal };
+                            var options = { ...archiveTitle.options, customLabel: newVal };
                             setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
 
                           }}
@@ -1262,169 +1735,52 @@ registerBlockType("post-grid/archive-title", {
                       </PanelRow>
 
 
-                      {dateFormats[archiveTitle.options.dateFormat] != undefined && (
-                        <div className='p-2 my-3 bg-gray-500 text-white'>{dateFormats[archiveTitle.options.dateFormat].label}</div>
+                      {(archiveTitle.options.archiveType == 'year' || archiveTitle.options.archiveType == 'month' || archiveTitle.options.archiveType == 'day') && (
 
-                      )}
-                    </>
+                        <>
+                          <PanelRow className='mb-4'>
+                            <label for="">Date Format</label>
+                            <PGDropdown position="bottom right" variant="secondary" options={dateFormats} buttonTitle="Choose" onChange={(option, index) => {
 
-
-
-                  )}
-
-
-
-
-                  <PanelRow>
-                    <label for="">Link To</label>
-
-                    <PGDropdown position="bottom right" variant="secondary" options={archiveLinkToArgs} buttonTitle={archiveTitle.options.linkTo.length == 0 ? 'Choose' : archiveLinkToArgs[archiveTitle.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
-
-
-
-                  </PanelRow>
-
-
-
-
-
-                  {archiveTitle.options.linkTo == 'customUrl' && (
-
-                    <PanelRow>
-                      <label for="">Custom URL</label>
-
-                      <div className='relative'>
-                        <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                          setLinkPickerPosttitle(prev => !prev);
-
-                        }}></Button>
-                        {archiveTitle.options.customUrl.length > 0 && (
-                          <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                            var options = { ...archiveTitle.options, customUrl: '' };
-                            setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
-                            setLinkPickerPosttitle(false);
-
-                          }}></Button>
-
-                        )}
-                        {linkPickerPosttitle && (
-                          <Popover position="bottom right">
-                            <LinkControl settings={[]} value={archiveTitle.options.customUrl} onChange={newVal => {
-
-                              var options = { ...archiveTitle.options, customUrl: newVal.url };
-
+                              var options = { ...archiveTitle.options, dateFormat: option.value };
                               setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
 
-                            }} />
-
-                            <div className='p-2'><span className='font-bold'>Linked to:</span> {(archiveTitle.options.customUrl.length != 0) ? archiveTitle.options.customUrl : 'No link'} </div>
-                          </Popover>
-
-                        )}
-
-
-                      </div>
-                    </PanelRow>
-
-                  )}
+                            }} values={''}></PGDropdown>
+                          </PanelRow>
+                          <PanelRow className='mb-4'>
+                            <label for="">Custom Format</label>
+                            <InputControl
+                              className='mr-2'
+                              value={archiveTitle.options.dateFormat}
+                              onChange={(newVal) => {
 
 
 
-                  {archiveTitle.options.linkTo.length == 0 && (
+                                var options = { ...archiveTitle.options, dateFormat: newVal };
+                                setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
 
-                    <PanelRow>
-                      <label for="">Custom Tag</label>
-                      <SelectControl
-                        label=""
-                        value={archiveTitle.options.tag}
-                        options={[
-                          { label: 'H1', value: 'h1' },
-                          { label: 'H2', value: 'h2' },
-                          { label: 'H3', value: 'h3' },
-                          { label: 'H4', value: 'h4' },
-                          { label: 'H5', value: 'h5' },
-                          { label: 'H6', value: 'h6' },
-                          { label: 'SPAN', value: 'span' },
-                          { label: 'DIV', value: 'div' },
-                          { label: 'P', value: 'p' },
-                        ]}
-                        onChange={(newVal) => {
-                          var options = { ...archiveTitle.options, tag: newVal };
-                          setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
-                        }
+                              }}
+                            />
+                          </PanelRow>
 
-                        }
-                      />
-                    </PanelRow>
-                  )}
+
+                          {dateFormats[archiveTitle.options.dateFormat] != undefined && (
+                            <div className='p-2 my-3 bg-gray-500 text-white'>{dateFormats[archiveTitle.options.dateFormat].label}</div>
+
+                          )}
+                        </>
 
 
 
-
-                  {archiveTitle.options.linkTo.length > 0 && (
-
-                    <div>
-                      <PanelRow>
-                        <label for="">Link Target</label>
-
-                        <SelectControl
-                          label=""
-                          value={archiveTitle.options.linkTarget}
-                          options={[
-                            { label: 'Choose...', value: '' },
-
-                            { label: '_self', value: '_self' },
-                            { label: '_blank', value: '_blank' },
-                            { label: '_parent', value: '_parent' },
-                            { label: '_top', value: '_top' },
-
-
-                          ]}
-                          onChange={(newVal) => {
-
-
-
-                            var options = { ...archiveTitle.options, linkTarget: newVal };
-                            setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
-
-
-
-                          }
-
-
-
-                          }
-                        />
-                      </PanelRow>
-
-
-
-
-
-
+                      )}
 
 
 
 
                       <PanelRow>
-                        <label for="">Custom Attributes</label>
-                        <div
-                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+                        <label for="">Link To</label>
 
-                          onClick={(ev) => {
-
-                            var sdsd = archiveTitle.options.linkAttr.concat({ id: '', val: '' })
-
-
-                            var options = { ...archiveTitle.options, linkAttr: sdsd };
-                            setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
-
-                            linkAttrObj()
-                          }}
-
-                        >Add</div>
+                        <PGDropdown position="bottom right" variant="secondary" options={archiveLinkToArgs} buttonTitle={archiveTitle.options.linkTo.length == 0 ? 'Choose' : archiveLinkToArgs[archiveTitle.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
 
 
 
@@ -1432,283 +1788,235 @@ registerBlockType("post-grid/archive-title", {
 
 
 
-                      {
-                        archiveTitle.options.linkAttr.map((x, i) => {
 
-                          return (
 
-                            <div className='my-2'>
-                              <PanelRow>
-                                <InputControl
-                                  className='mr-2'
-                                  placeholder="Name"
-                                  value={archiveTitle.options.linkAttr[i].id}
-                                  onChange={(newVal) => {
+                      {archiveTitle.options.linkTo == 'customUrl' && (
 
-                                    archiveTitle.options.linkAttr[i].id = newVal;
+                        <PanelRow>
+                          <label for="">Custom URL</label>
 
+                          <div className='relative'>
+                            <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
 
-                                    var ssdsd = archiveTitle.options.linkAttr.concat([]);
+                              setLinkPickerPosttitle(prev => !prev);
 
+                            }}></Button>
+                            {archiveTitle.options.customUrl.length > 0 && (
+                              <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
 
+                                var options = { ...archiveTitle.options, customUrl: '' };
+                                setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
+                                setLinkPickerPosttitle(false);
 
-                                    var options = { ...archiveTitle.options, linkAttr: ssdsd };
-                                    setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
+                              }}></Button>
 
-                                  }}
-                                />
+                            )}
+                            {linkPickerPosttitle && (
+                              <Popover position="bottom right">
+                                <LinkControl settings={[]} value={archiveTitle.options.customUrl} onChange={newVal => {
 
-                                <InputControl
-                                  className='mr-2'
-                                  placeholder="Value"
-                                  value={x.val}
-                                  onChange={(newVal) => {
-                                    archiveTitle.options.linkAttr[i].val = newVal
-                                    var ssdsd = archiveTitle.options.linkAttr.concat([]);
+                                  var options = { ...archiveTitle.options, customUrl: newVal.url };
 
+                                  setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
 
+                                }} />
 
-                                    var options = { ...archiveTitle.options, linkAttr: ssdsd };
-                                    setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
+                                <div className='p-2'><span className='font-bold'>Linked to:</span> {(archiveTitle.options.customUrl.length != 0) ? archiveTitle.options.customUrl : 'No link'} </div>
+                              </Popover>
 
-                                  }}
-                                />
-                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                                  onClick={(ev) => {
+                            )}
 
-                                    archiveTitle.options.linkAttr.splice(i, 1);
 
-                                    var ssdsd = archiveTitle.options.linkAttr.concat([]);
+                          </div>
+                        </PanelRow>
 
+                      )}
 
-                                    var options = { ...archiveTitle.options, linkAttr: ssdsd };
-                                    setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
-                                  }}
 
-                                ></span>
-                              </PanelRow>
 
+                      {archiveTitle.options.linkTo.length == 0 && (
 
+                        <PanelRow>
+                          <label for="">Custom Tag</label>
+                          <SelectControl
+                            label=""
+                            value={archiveTitle.options.tag}
+                            options={[
+                              { label: 'H1', value: 'h1' },
+                              { label: 'H2', value: 'h2' },
+                              { label: 'H3', value: 'h3' },
+                              { label: 'H4', value: 'h4' },
+                              { label: 'H5', value: 'h5' },
+                              { label: 'H6', value: 'h6' },
+                              { label: 'SPAN', value: 'span' },
+                              { label: 'DIV', value: 'div' },
+                              { label: 'P', value: 'p' },
+                            ]}
+                            onChange={(newVal) => {
+                              var options = { ...archiveTitle.options, tag: newVal };
+                              setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
+                            }
 
+                            }
+                          />
+                        </PanelRow>
+                      )}
 
-                            </div>
 
-                          )
 
-                        })
-                      }
 
+                      {archiveTitle.options.linkTo.length > 0 && (
 
-                    </div>
+                        <div>
+                          <PanelRow>
+                            <label for="">Link Target</label>
 
+                            <SelectControl
+                              label=""
+                              value={archiveTitle.options.linkTarget}
+                              options={[
+                                { label: 'Choose...', value: '' },
 
+                                { label: '_self', value: '_self' },
+                                { label: '_blank', value: '_blank' },
+                                { label: '_parent', value: '_parent' },
+                                { label: '_top', value: '_top' },
 
-                  )}
 
+                              ]}
+                              onChange={(newVal) => {
 
 
 
+                                var options = { ...archiveTitle.options, linkTarget: newVal };
+                                setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
 
 
 
+                              }
 
 
 
+                              }
+                            />
+                          </PanelRow>
 
-                  <PanelRow className='my-3'>
-                    <label>Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
 
 
 
 
-                  </PanelRow>
 
 
-                  <ColorPalette
-                    value={archiveTitle.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
 
 
 
+                          <PanelRow>
+                            <label for="">Custom Attributes</label>
+                            <div
+                              className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
 
+                              onClick={(ev) => {
 
+                                var sdsd = archiveTitle.options.linkAttr.concat({ id: '', val: '' })
 
 
-                      var newValuesObj = {};
+                                var options = { ...archiveTitle.options, linkAttr: sdsd };
+                                setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
 
+                                linkAttrObj()
+                              }}
 
-                      if (Object.keys(archiveTitle.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = archiveTitle.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
+                            >Add</div>
 
-                      var styles = { ...archiveTitle.styles, color: newValuesObj };
-                      setAttributes({ archiveTitle: { ...archiveTitle, styles: styles } });
 
 
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[postDateSelector] = { ...blockCssY.items[postDateSelector], 'color': newValuesObj };
+                          </PanelRow>
 
-                      setAttributes({ blockCssY: { items: itemsX } });
 
 
+                          {
+                            archiveTitle.options.linkAttr.map((x, i) => {
 
-                    }}
-                  />
+                              return (
 
-                  <PanelRow className='my-3'>
-                    <label>Background Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                                <div className='my-2'>
+                                  <PanelRow>
+                                    <InputControl
+                                      className='mr-2'
+                                      placeholder="Name"
+                                      value={archiveTitle.options.linkAttr[i].id}
+                                      onChange={(newVal) => {
 
+                                        archiveTitle.options.linkAttr[i].id = newVal;
 
 
+                                        var ssdsd = archiveTitle.options.linkAttr.concat([]);
 
-                  </PanelRow>
 
 
-                  <ColorPalette
-                    value={archiveTitle.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
+                                        var options = { ...archiveTitle.options, linkAttr: ssdsd };
+                                        setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
 
+                                      }}
+                                    />
 
+                                    <InputControl
+                                      className='mr-2'
+                                      placeholder="Value"
+                                      value={x.val}
+                                      onChange={(newVal) => {
+                                        archiveTitle.options.linkAttr[i].val = newVal
+                                        var ssdsd = archiveTitle.options.linkAttr.concat([]);
 
-                      var newValuesObj = {};
 
 
-                      if (Object.keys(archiveTitle.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = archiveTitle.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
+                                        var options = { ...archiveTitle.options, linkAttr: ssdsd };
+                                        setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
 
-                      var styles = { ...archiveTitle.styles, bgColor: newValuesObj };
-                      setAttributes({ archiveTitle: { ...archiveTitle, styles: styles } });
+                                      }}
+                                    />
+                                    <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                                      onClick={(ev) => {
 
+                                        archiveTitle.options.linkAttr.splice(i, 1);
 
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[postDateSelector] = { ...blockCssY.items[postDateSelector], 'background-color': newValuesObj };
+                                        var ssdsd = archiveTitle.options.linkAttr.concat([]);
 
-                      setAttributes({ blockCssY: { items: itemsX } });
 
+                                        var options = { ...archiveTitle.options, linkAttr: ssdsd };
+                                        setAttributes({ archiveTitle: { ...archiveTitle, options: options } });
+                                      }}
 
+                                    ></span>
+                                  </PanelRow>
 
 
 
 
+                                </div>
 
+                              )
 
+                            })
+                          }
 
-                    }}
-                  />
 
+                        </div>
 
-                  <PanelRow>
-                    <div className='font-bold'>Typography</div>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
 
-                  <Typography typo={archiveTitle.styles} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} obj={archiveTitle} />
 
+                      )}
 
-                  <PanelRow className='my-3'>
-                    <label>Display</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
 
-                  <PanelRow>
 
-                    <SelectControl
-                      label=""
-                      value={archiveTitle.styles.display[breakPointX]}
 
-                      options={[
-                        { label: 'Select..', value: '' },
 
-                        { label: 'inline', value: 'inline' },
-                        { label: 'inline-block', value: 'inline-block' },
-                        { label: 'block', value: 'block' },
-                        { label: 'none', value: 'none' },
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStyleArchiveTitle} onAdd={onAddStyleArchiveTitle} onRemove={onRemoveStyleArchiveTitle} />
+                    </PGtab>
+                  </PGtabs>
 
-
-
-                      ]}
-                      onChange={(newVal) => {
-
-
-
-                        var newValuesObj = {};
-
-
-                        if (Object.keys(archiveTitle.styles.display).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = archiveTitle.styles.display;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-
-                        var styles = { ...archiveTitle.styles, display: newValuesObj };
-                        setAttributes({ archiveTitle: { ...archiveTitle, styles: styles } });
-
-
-
-
-
-
-
-
-
-                        var newValuesObjX = {};
-                        if (blockCssY.items[postDateSelector] == undefined) {
-
-                          newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector], display: newValuesObj };
-
-                        } else {
-
-                          newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector], display: newValuesObj };
-                        }
-
-
-                        setAttributes({ blockCssY: { items: newValuesObjX } });
-
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
-
-
-
-
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={archiveTitle.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paddingControl(nextValues) }}
-                  />
-
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={archiveTitle.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { marginControl(nextValues) }}
-                  />
 
 
                 </PanelBody>
@@ -1716,316 +2024,77 @@ registerBlockType("post-grid/archive-title", {
                 <PanelBody title="Icon" initialOpen={false}>
 
 
-                  <PanelRow>
-                    <label for="">Choose Icon</label>
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
 
-                    <PGIconPicker library={icon.options.library} srcType={icon.options.srcType} iconSrc={icon.options.iconSrc} onChange={onChangeIcon} />
-                  </PanelRow>
+                      <PanelRow>
+                        <label for="">Choose Icon</label>
 
+                        <PGIconPicker library={icon.options.library} srcType={icon.options.srcType} iconSrc={icon.options.iconSrc} onChange={onChangeIcon} />
+                      </PanelRow>
 
 
-                  <PanelRow>
-                    <label for="">Icon postion</label>
 
-                    <SelectControl
-                      label=""
-                      value={icon.options.position}
-                      options={[
+                      <PanelRow>
+                        <label for="">Icon postion</label>
 
-                        { label: 'Choose Position', value: '' },
+                        <SelectControl
+                          label=""
+                          value={icon.options.position}
+                          options={[
 
-                        { label: 'Before Archive Title', value: 'beforeArchiveTitle' },
-                        { label: 'After Archive Title', value: 'afterArchiveTitle' },
-                        { label: 'Before Prefix', value: 'beforePrefix' },
-                        { label: 'After Prefix', value: 'afterPrefix' },
-                        { label: 'Before Postfix', value: 'beforePostfix' },
-                        { label: 'After Postfix', value: 'afterPostfix' },
+                            { label: 'Choose Position', value: '' },
 
-                      ]}
-                      onChange={(newVal) => {
+                            { label: 'Before Archive Title', value: 'beforeArchiveTitle' },
+                            { label: 'After Archive Title', value: 'afterArchiveTitle' },
+                            { label: 'Before Prefix', value: 'beforePrefix' },
+                            { label: 'After Prefix', value: 'afterPrefix' },
+                            { label: 'Before Postfix', value: 'beforePostfix' },
+                            { label: 'After Postfix', value: 'afterPostfix' },
 
+                          ]}
+                          onChange={(newVal) => {
 
-                        var options = { ...icon.options, position: newVal };
-                        setAttributes({ icon: { ...icon, options: options } });
 
+                            var options = { ...icon.options, position: newVal };
+                            setAttributes({ icon: { ...icon, options: options } });
 
-                      }
 
+                          }
 
 
-                      }
-                    />
-                  </PanelRow>
 
+                          }
+                        />
+                      </PanelRow>
 
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                    </PGtab>
+                  </PGtabs>
 
-                  <PanelRow className='my-3'>
-                    <label>Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
 
 
-
-
-                  </PanelRow>
-
-                  <ColorPalette
-                    value={icon.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(icon.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = icon.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...icon.styles, color: newValuesObj };
-                      setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-                    }}
-                  />
-
-
-
-                  <PanelRow className='my-3'>
-                    <label>Background Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-                  <ColorPalette
-                    value={icon.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-
-
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(icon.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = icon.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...icon.styles, bgColor: newValuesObj };
-                      setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'background-color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                    }}
-                  />
-
-
-
-
-                  <PanelRow className='my-3'>
-                    <label>Display</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
-
-                    <SelectControl
-                      label=""
-                      value={icon.styles.display[breakPointX]}
-
-                      options={[
-                        { label: 'Select..', value: '' },
-                        { label: 'inline', value: 'inline' },
-                        { label: 'inline-block', value: 'inline-block' },
-                        { label: 'block', value: 'block' },
-
-                      ]}
-                      onChange={(newVal) => {
-
-                        var newValuesObj = {};
-
-                        if (Object.keys(icon.styles.display).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = icon.styles.display;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-                        var styles = { ...icon.styles, display: newValuesObj };
-                        setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-                        var itemsX = { ...blockCssY.items };
-                        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'display': newValuesObj };
-
-                        setAttributes({ blockCssY: { items: itemsX } });
-
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=''
-                    values={icon.styles.padding[breakPointX]}
-                    onChange={(nextValues) => {
-
-
-                      var responsive = icon.styles.padding;
-                      responsive[breakPointX] = nextValues;
-
-
-                      var styles = { ...icon.styles, padding: responsive };
-                      setAttributes({ icon: { ...icon, styles: styles } });
-
-                      var itemsX = { ...blockCssY.items };
-
-                      blockCssY.items[iconSelector] = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector] : {};
-
-                      if (nextValues.top != undefined) {
-
-                        var paddingTop = (blockCssY.items[iconSelector]['padding-top'] != undefined) ? blockCssY.items[iconSelector]['padding-top'] : {};
-                        paddingTop[breakPointX] = nextValues.top
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-top': paddingTop };
-                      }
-
-
-                      if (nextValues.right != undefined) {
-
-                        var paddingRight = (blockCssY.items[iconSelector]['padding-right'] != undefined) ? blockCssY.items[iconSelector]['padding-right'] : {};
-                        paddingRight[breakPointX] = nextValues.right
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-right': paddingRight };
-                      }
-
-                      if (nextValues.bottom != undefined) {
-
-                        var paddingBottom = (blockCssY.items[iconSelector]['padding-bottom'] != undefined) ? blockCssY.items[iconSelector]['padding-bottom'] : {};
-                        paddingBottom[breakPointX] = nextValues.bottom
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-bottom': paddingBottom };
-                      }
-
-                      if (nextValues.left != undefined) {
-
-                        var paddingLeft = (blockCssY.items[iconSelector]['padding-left'] != undefined) ? blockCssY.items[iconSelector]['padding-left'] : {};
-                        paddingLeft[breakPointX] = nextValues.left
-
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-left': paddingLeft };
-                      }
-
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                    }}
-                  />
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={icon.styles.margin[breakPointX]}
-                    onChange={(nextValues) => {
-
-
-                      var responsive = icon.styles.margin;
-                      responsive[breakPointX] = nextValues;
-
-                      var styles = { ...icon.styles, margin: responsive };
-                      setAttributes({ icon: { ...icon, styles: styles } });
-
-                      var itemsX = { ...blockCssY.items };
-
-                      blockCssY.items[iconSelector] = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector] : {};
-
-                      if (nextValues.top != undefined) {
-                        var marginTop = (blockCssY.items[iconSelector]['margin-top'] != undefined) ? blockCssY.items[iconSelector]['margin-top'] : {};
-                        marginTop[breakPointX] = nextValues.top
-
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-top': marginTop };
-
-                      }
-
-
-                      if (nextValues.right != undefined) {
-
-                        var marginRight = (blockCssY.items[iconSelector]['margin-right'] !== undefined) ? blockCssY.items[iconSelector]['margin-right'] : {};
-                        marginRight[breakPointX] = nextValues.right
-
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-right': marginRight };
-
-                      }
-
-                      if (nextValues.bottom != undefined) {
-
-                        var marginBottom = (blockCssY.items[iconSelector]['margin-bottom'] !== undefined) ? blockCssY.items[iconSelector]['margin-bottom'] : {};
-                        marginBottom[breakPointX] = nextValues.bottom
-
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-bottom': marginBottom };
-
-                      }
-
-                      if (nextValues.left != undefined) {
-
-                        var marginLeft = (blockCssY.items[iconSelector]['margin-left'] !== undefined) ? blockCssY.items[iconSelector]['margin-left'] : {};
-                        marginLeft[breakPointX] = nextValues.left
-
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-left': marginLeft };
-
-                      }
-
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                    }}
-                  />
-
-
-                  <PanelRow>
-                    <div className='font-bold'>Typography</div>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <Typography typo={icon.styles} breakPointX={breakPointX} onChange={onChangeIconTypo} setAttributes={setAttributes} obj={icon} />
 
 
 
@@ -2034,25 +2103,58 @@ registerBlockType("post-grid/archive-title", {
 
 
                 <PanelBody title="Prefix" initialOpen={false}>
-                  <PanelRow>
-                    <label for="">Prefix</label>
-
-                    <InputControl
-                      value={prefix.options.text}
-                      onChange={(newVal) => {
 
 
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
 
-                        var options = { ...prefix.options, text: newVal };
-                        setAttributes({ prefix: { styles: prefix.styles, options: options } });
+                      <PanelRow>
+                        <label for="">Prefix</label>
+
+                        <InputControl
+                          value={prefix.options.text}
+                          onChange={(newVal) => {
 
 
 
-                        // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, bgColor: prefix.bgColor } })
-                      }
-                      }
-                    />
-                  </PanelRow>
+                            var options = { ...prefix.options, text: newVal };
+                            setAttributes({ prefix: { styles: prefix.styles, options: options } });
+
+
+
+                            // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, bgColor: prefix.bgColor } })
+                          }
+                          }
+                        />
+                      </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
+                    </PGtab>
+                  </PGtabs>
+
+
+
+
 
                 </PanelBody>
 
@@ -2062,26 +2164,53 @@ registerBlockType("post-grid/archive-title", {
                 <PanelBody title="Postfix" initialOpen={false}>
 
 
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+
+                      <PanelRow>
+                        <label for="">Postfix</label>
+
+                        <InputControl
+                          value={postfix.options.text}
+                          onChange={(newVal) => {
 
 
-                  <PanelRow>
-                    <label for="">Postfix</label>
-
-                    <InputControl
-                      value={postfix.options.text}
-                      onChange={(newVal) => {
+                            var options = { ...postfix.options, text: newVal };
+                            setAttributes({ postfix: { ...postfix, options: options } });
 
 
-                        var options = { ...postfix.options, text: newVal };
-                        setAttributes({ postfix: { ...postfix, options: options } });
+                            // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, bgColor: postfix.bgColor } })
+                          }
+
+                          }
+                        />
+                      </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
+                    </PGtab>
+                  </PGtabs>
 
 
-                        // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, bgColor: postfix.bgColor } })
-                      }
-
-                      }
-                    />
-                  </PanelRow>
 
                 </PanelBody>
 
@@ -2091,22 +2220,22 @@ registerBlockType("post-grid/archive-title", {
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
                     <p className='font-bold'>Title Wrapper</p>
-                    <p><code>{postDateWrapperSelector}{'{/* your CSS here*/}'}</code></p>
+                    <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>Title link</p>
-                    <p><code>{postDateSelector}{'{/* your CSS here*/}'} </code></p>
+                    <p><code>{archiveTitleSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>Prefix</p>
-                    <p><code>{postDatePrefixSelector}{'{/* your CSS here*/}'} </code></p>
+                    <p><code>{prefixSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>Postfix</p>
-                    <p><code>{postDatePostfixSelector}{'{/* your CSS here*/}'} </code></p>
+                    <p><code>{postfixSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
 

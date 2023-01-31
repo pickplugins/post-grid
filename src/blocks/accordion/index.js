@@ -13,7 +13,7 @@ import { __experimentalInputControl as InputControl } from '@wordpress/component
 import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
 import { store } from '../../store'
-import { link, linkOff } from "@wordpress/icons";
+import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 
 import IconToggle from '../../components/icon-toggle'
 import Typography from '../../components/typography'
@@ -23,6 +23,9 @@ import BreakpointToggle from '../../components/breakpoint-toggle'
 import colorsPresets from '../../colors-presets'
 import PGIconPicker from '../../components/icon-picker'
 
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -68,7 +71,7 @@ registerBlockType("post-grid/accordion", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -95,12 +98,12 @@ registerBlockType("post-grid/accordion", {
 
         styles:
         {
-          textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
+          textAlign: {},
+
           padding: {},
           margin: {},
-          display: {},
 
         },
       },
@@ -120,7 +123,7 @@ registerBlockType("post-grid/accordion", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -141,7 +144,7 @@ registerBlockType("post-grid/accordion", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -158,16 +161,11 @@ registerBlockType("post-grid/accordion", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
-          margin: {},
-          textAlign: {},
-          display: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
+
         },
       },
     },
@@ -179,16 +177,12 @@ registerBlockType("post-grid/accordion", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
-          display: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
+
         },
       },
     },
@@ -348,542 +342,467 @@ registerBlockType("post-grid/accordion", {
     }
 
 
-    function onChangeIconTypo(typoX) {
 
 
 
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
 
-      setAttributes({ icon: { ...icon, styles: typoX } });
-
-      var newValuesObjX = {};
-      var itemsX = blockCssY.items;
-
-
-
-
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-
-        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector]['font-size'] : {};
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
-
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
       }
 
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-
-        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 16;
-        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[iconSelector]['line-height'] != undefined) ? blockCssY.items[iconSelector]['line-height'] : {};
-
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
-        //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'line-height': lineHeightX };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'line-height': lineHeightX };
-
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
       }
 
+      sudoScourceX[attr][breakPointX] = newVal;
 
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'font-weight': typoX.fontWeight };
-
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
       }
 
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
 
-      if (typoX.textDecoration[breakPointX] != undefined) {
-
-        var str = {};
-
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
-        str[breakPointX] = textDecorationXStr;
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'text-decoration': str };
-
-
-
-      }
-
-
-
-
-      //setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ blockCssY: { items: itemsX } });
-
-
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
     }
 
-    function paddingControlHeader(nextValues) {
-
-
-      var responsive = header.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...header.styles, padding: responsive };
-      setAttributes({ header: { ...header, styles: styles } });
-
-
-      var itemsX = { ...blockCssY.items };
 
 
 
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
 
-      blockCssY.items[headerSelector] = (blockCssY.items[headerSelector] != undefined) ? blockCssY.items[headerSelector] : {};
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[headerSelector]['padding-top'] != undefined) ? blockCssY.items[headerSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-top': paddingTop };
-        //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-top': paddingTop };
-
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
       }
 
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
 
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[headerSelector]['padding-right'] != undefined) ? blockCssY.items[headerSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-right': paddingRight };
-        //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-right': paddingRight };
-
-
-
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
       }
 
-      if (nextValues.bottom != undefined) {
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      })
 
-        var paddingBottom = (blockCssY.items[headerSelector]['padding-bottom'] != undefined) ? blockCssY.items[headerSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-bottom': paddingBottom };
-        //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-bottom': paddingBottom };
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
 
 
 
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+    function onChangeStyleHeader(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...header[sudoScource] }
+      var elementSelector = headerSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = headerSelector;
       }
 
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[headerSelector]['padding-left'] != undefined) ? blockCssY.items[headerSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-left': paddingLeft };
-        //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-left': paddingLeft };
-
-
+      else if (sudoScource == 'hover') {
+        elementSelector = headerSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = headerSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = headerSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = headerSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = headerSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = headerSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = headerSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = headerSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = headerSelector + '::first-line';
       }
+      else {
+        elementSelector = headerSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ header: { ...header } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleHeader(sudoScource, key) {
+      var sudoScourceX = { ...header[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      header[sudoScource] = sudoScourceX;
+      setAttributes({ header: { ...header } });
+
+      if (blockCssY.items[headerSelector] == undefined) {
+        blockCssY.items[headerSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[headerSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleHeader(sudoScource, key) {
+      var sudoScourceX = { ...header[sudoScource] }
+      sudoScourceX[key] = {};
+      header[sudoScource] = sudoScourceX;
+      setAttributes({ header: { ...header } });
+    }
+
+
+
+
+    function onChangeStyleContent(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...content[sudoScource] }
+      var elementSelector = contentSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = contentSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = contentSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = contentSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = contentSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = contentSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = contentSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = contentSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = contentSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = contentSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = contentSelector + '::first-line';
+      }
+      else {
+        elementSelector = contentSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ content: { ...content } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleContent(sudoScource, key) {
+      var sudoScourceX = { ...content[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      content[sudoScource] = sudoScourceX;
+      setAttributes({ content: { ...content } });
+
+      if (blockCssY.items[contentSelector] == undefined) {
+        blockCssY.items[contentSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[contentSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleContent(sudoScource, key) {
+      var sudoScourceX = { ...content[sudoScource] }
+      sudoScourceX[key] = {};
+      content[sudoScource] = sudoScourceX;
+      setAttributes({ content: { ...content } });
+    }
+
+
+
+    function onChangeStyleIcon(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...icon[sudoScource] }
+      var elementSelector = iconSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = iconSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = iconSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = iconSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = iconSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = iconSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = iconSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = iconSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = iconSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = iconSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = iconSelector + '::first-line';
+      }
+      else {
+        elementSelector = iconSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
-
-
+      setAttributes({ icon: { ...icon } });
 
     }
 
 
+    function onRemoveStyleIcon(sudoScource, key) {
 
-    function paddingControlContent(nextValues) {
-
-
-      var responsive = content.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...content.styles, padding: responsive };
-      setAttributes({ content: { ...content, styles: styles } });
-
-
-      var itemsX = { ...blockCssY.items };
-
-
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-      blockCssY.items[contentSelector] = (blockCssY.items[contentSelector] != undefined) ? blockCssY.items[contentSelector] : {};
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[contentSelector]['padding-top'] != undefined) ? blockCssY.items[contentSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-top': paddingTop };
-        //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-top': paddingTop };
-
+      var sudoScourceX = { ...icon[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
       }
 
+      icon[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
 
-      if (nextValues.right != undefined) {
+      setAttributes({ icon: { ...icon } });
 
-        var paddingRight = (blockCssY.items[contentSelector]['padding-right'] != undefined) ? blockCssY.items[contentSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-right': paddingRight };
-        //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-right': paddingRight };
-
-
-
+      if (blockCssY.items[iconSelector] == undefined) {
+        blockCssY.items[iconSelector] = {};
       }
 
-      if (nextValues.bottom != undefined) {
+      Object.entries(sudoScourceX).map(args => {
 
-        var paddingBottom = (blockCssY.items[contentSelector]['padding-bottom'] != undefined) ? blockCssY.items[contentSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[iconSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
 
 
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-bottom': paddingBottom };
-        //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-bottom': paddingBottom };
+    function onAddStyleIcon(sudoScource, key) {
+
+      var sudoScourceX = { ...icon[sudoScource] }
+      sudoScourceX[key] = {};
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({ icon: { ...icon } });
+
+    }
 
 
+    function onChangeStyleHeaderActive(sudoScource, newVal, attr) {
 
+      var sudoScourceX = { ...headerActive[sudoScource] }
+      var elementSelector = headerActiveSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = headerActiveSelector;
       }
 
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[contentSelector]['padding-left'] != undefined) ? blockCssY.items[contentSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-left': paddingLeft };
-        //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-left': paddingLeft };
-
-
+      else if (sudoScource == 'hover') {
+        elementSelector = headerActiveSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = headerActiveSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = headerActiveSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = headerActiveSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = headerActiveSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = headerActiveSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = headerActiveSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = headerActiveSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = headerActiveSelector + '::first-line';
       }
+      else {
+        elementSelector = headerActiveSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
-
-
+      setAttributes({ headerActive: { ...headerActive } });
 
     }
 
 
+    function onRemoveStyleHeaderActive(sudoScource, key) {
 
-    function marginControlHeader(nextValues) {
-
-      var responsive = header.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-
-      var styles = { ...header.styles, margin: responsive };
-      setAttributes({ header: { ...header, styles: styles } });
-
-
-
-
-      var itemsX = { ...blockCssY.items };
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-      blockCssY.items[headerSelector] = (blockCssY.items[headerSelector] != undefined) ? blockCssY.items[headerSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[headerSelector]['margin-top'] != undefined) ? blockCssY.items[headerSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-top': marginTop };
-        //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-top': marginTop };
-
+      var sudoScourceX = { ...headerActive[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
       }
 
+      headerActive[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
 
-      if (nextValues.right != undefined) {
+      setAttributes({ headerActive: { ...headerActive } });
 
-        var marginRight = (blockCssY.items[headerSelector]['margin-right'] !== undefined) ? blockCssY.items[headerSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-right': marginRight };
-        //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-right': marginRight };
-
+      if (blockCssY.items[headerActiveSelector] == undefined) {
+        blockCssY.items[headerActiveSelector] = {};
       }
 
-      if (nextValues.bottom != undefined) {
+      Object.entries(sudoScourceX).map(args => {
 
-        var marginBottom = (blockCssY.items[headerSelector]['margin-bottom'] !== undefined) ? blockCssY.items[headerSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[headerActiveSelector][argAttr] = argAttrVal;
 
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-bottom': marginBottom };
-        //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[headerSelector]['margin-left'] !== undefined) ? blockCssY.items[headerSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-left': marginLeft };
-        //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-left': marginLeft };
-
-      }
+      })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
+
+    }
+
+
+    function onAddStyleHeaderActive(sudoScource, key) {
+
+      var sudoScourceX = { ...headerActive[sudoScource] }
+      sudoScourceX[key] = {};
+      headerActive[sudoScource] = sudoScourceX;
+      setAttributes({ headerActive: { ...headerActive } });
 
     }
 
 
 
-    function marginControlContent(nextValues) {
 
-      var responsive = content.styles.margin;
-      responsive[breakPointX] = nextValues;
 
 
 
-      var styles = { ...content.styles, margin: responsive };
-      setAttributes({ content: { ...content, styles: styles } });
 
 
 
 
-      var itemsX = { ...blockCssY.items };
 
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
 
-      blockCssY.items[contentSelector] = (blockCssY.items[contentSelector] != undefined) ? blockCssY.items[contentSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[contentSelector]['margin-top'] != undefined) ? blockCssY.items[contentSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-top': marginTop };
-        //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-top': marginTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[contentSelector]['margin-right'] !== undefined) ? blockCssY.items[contentSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-right': marginRight };
-        //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-right': marginRight };
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[contentSelector]['margin-bottom'] !== undefined) ? blockCssY.items[contentSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-bottom': marginBottom };
-        //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[contentSelector]['margin-left'] !== undefined) ? blockCssY.items[contentSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-left': marginLeft };
-        //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-left': marginLeft };
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
-
-    }
-
-    function generateBlockCssY() {
-
-
-      var reponsiveCssGroups = {};
-      var reponsiveCss = '';
-
-      for (var selector in blockCssY.items) {
-
-        var attrs = blockCssY.items[selector];
-
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = []
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = []
-            }
-
-            reponsiveCssGroups[device][selector].push({ 'attr': attr, 'val': attrValue });
-
-          }
-
-
-        }
-      }
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-
-          reponsiveCss += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCss += '}';
-        }
-        reponsiveCss += '}';
-
-      }
-
-
-
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-
-          reponsiveCss += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-
-
-          reponsiveCss += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCss += '}';
-
-
-        }
-        reponsiveCss += '}';
-      }
-
-
-
-
-
-
-
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200)
-
-
-      } else {
-
-
-
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-
-        csswrappg.insertAdjacentHTML('beforeend', str);
-
-
-
-      }
-
-
-
-    }
 
 
 
@@ -1021,346 +940,170 @@ registerBlockType("post-grid/accordion", {
               <PanelBody title="Header" initialOpen={false}>
 
 
-
-                <PanelRow>
-                  <label for="">Wrapper Tag</label>
-
-                  <SelectControl
-                    label=""
-                    value={header.options.tag}
-                    options={[
-                      { label: 'H1', value: 'h1' },
-                      { label: 'H2', value: 'h2' },
-                      { label: 'H3', value: 'h3' },
-                      { label: 'H4', value: 'h4' },
-                      { label: 'H5', value: 'h5' },
-                      { label: 'H6', value: 'h6' },
-                      { label: 'SPAN', value: 'span' },
-                      { label: 'DIV', value: 'div' },
-                      { label: 'P', value: 'p' },
-
-
-                    ]}
-                    onChange={(newVal) => {
-
-                      var options = { ...header.options, tag: newVal };
-                      setAttributes({ header: { ...header, options: options } });
-
-                    }
-
-                    }
-                  />
-                </PanelRow>
-
-
-
-
-
-
-                <PanelRow className='my-3'>
-                  <label>Color</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                </PanelRow>
-
-                <ColorPalette
-                  value={header.styles.color[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
-
-
-
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(header.styles.color).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = header.styles.color;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...header.styles, color: newValuesObj };
-                    setAttributes({ header: { ...header, styles: styles } });
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-                  }}
-                />
-
-
-
-                <PanelRow className='my-3'>
-                  <label>Background Color</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                </PanelRow>
-
-                <ColorPalette
-                  value={header.styles.bgColor[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
-
-
-
-
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(header.styles.bgColor).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = header.styles.bgColor;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...header.styles, bgColor: newValuesObj };
-                    setAttributes({ header: { ...header, styles: styles } });
-
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'background-color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-
-
-                  }}
-                />
-
-
-                <PanelRow className='my-3'>
-                  <label>Active Background Color</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-
-                <ColorPalette
-                  value={headerActive.styles.bgColor[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
-                    var newValuesObj = {};
-                    if (Object.keys(headerActive.styles.bgColor).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = headerActive.styles.bgColor;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...headerActive.styles, bgColor: newValuesObj };
-                    setAttributes({ headerActive: { ...headerActive, styles: styles } });
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[headerActiveSelector] = { ...blockCssY.items[headerActiveSelector], 'background-color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-                  }}
-                />
-
-
-                <PanelRow>
-                  <label>Padding</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=''
-                  values={header.styles.padding[breakPointX]}
-                  onChange={(nextValues) => { paddingControlHeader(nextValues) }}
-                />
-
-
-
-
-
-                <PanelRow>
-                  <label>Margin</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=""
-                  values={header.styles.margin[breakPointX]}
-                  onChange={(nextValues) => { marginControlHeader(nextValues) }}
-                />
-
-
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+                  ]}
+                >
+                  <PGtab name="options">
+
+                    <PanelRow>
+                      <label for="">Wrapper Tag</label>
+
+                      <SelectControl
+                        label=""
+                        value={header.options.tag}
+                        options={[
+                          { label: 'H1', value: 'h1' },
+                          { label: 'H2', value: 'h2' },
+                          { label: 'H3', value: 'h3' },
+                          { label: 'H4', value: 'h4' },
+                          { label: 'H5', value: 'h5' },
+                          { label: 'H6', value: 'h6' },
+                          { label: 'SPAN', value: 'span' },
+                          { label: 'DIV', value: 'div' },
+                          { label: 'P', value: 'p' },
+
+
+                        ]}
+                        onChange={(newVal) => {
+
+                          var options = { ...header.options, tag: newVal };
+                          setAttributes({ header: { ...header, options: options } });
+
+                        }
+
+                        }
+                      />
+                    </PanelRow>
+
+
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={header} onChange={onChangeStyleHeader} onAdd={onAddStyleHeader} onRemove={onRemoveStyleHeader} />
+                  </PGtab>
+                </PGtabs>
 
 
 
 
               </PanelBody>
 
+              <PanelBody title="Header - Active" initialOpen={false}>
 
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+                  ]}
+                >
+                  <PGtab name="options">
+
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={headerActive} onChange={onChangeStyleHeaderActive} onAdd={onAddStyleHeaderActive} onRemove={onRemoveStyleHeaderActive} />
+                  </PGtab>
+                </PGtabs>
+
+
+
+              </PanelBody>
 
               <PanelBody title="Content" initialOpen={false}>
 
 
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+                  ]}
+                >
+                  <PGtab name="options">
 
-                <PanelRow>
-                  <label for="">Wrapper Tag</label>
+                    <PanelRow>
+                      <label for="">Wrapper Tag</label>
 
-                  <SelectControl
-                    label=""
-                    value={content.options.tag}
-                    options={[
-                      { label: 'H1', value: 'h1' },
-                      { label: 'H2', value: 'h2' },
-                      { label: 'H3', value: 'h3' },
-                      { label: 'H4', value: 'h4' },
-                      { label: 'H5', value: 'h5' },
-                      { label: 'H6', value: 'h6' },
-                      { label: 'SPAN', value: 'span' },
-                      { label: 'DIV', value: 'div' },
-                      { label: 'P', value: 'p' },
-
-
-                    ]}
-                    onChange={(newVal) => {
-
-                      var options = { ...content.options, tag: newVal };
-                      setAttributes({ content: { ...content, options: options } });
-
-                    }
-
-                    }
-                  />
-                </PanelRow>
-
-
-
-
-
-
-                <PanelRow className='my-3'>
-                  <label>Color</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
+                      <SelectControl
+                        label=""
+                        value={content.options.tag}
+                        options={[
+                          { label: 'H1', value: 'h1' },
+                          { label: 'H2', value: 'h2' },
+                          { label: 'H3', value: 'h3' },
+                          { label: 'H4', value: 'h4' },
+                          { label: 'H5', value: 'h5' },
+                          { label: 'H6', value: 'h6' },
+                          { label: 'SPAN', value: 'span' },
+                          { label: 'DIV', value: 'div' },
+                          { label: 'P', value: 'p' },
 
 
+                        ]}
+                        onChange={(newVal) => {
 
-                </PanelRow>
+                          var options = { ...content.options, tag: newVal };
+                          setAttributes({ content: { ...content, options: options } });
 
-                <ColorPalette
-                  value={content.styles.color[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
+                        }
 
+                        }
+                      />
+                    </PanelRow>
 
-
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(content.styles.color).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = content.styles.color;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...content.styles, color: newValuesObj };
-                    setAttributes({ content: { ...content, styles: styles } });
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-                  }}
-                />
-
-
-
-                <PanelRow className='my-3'>
-                  <label>Background Color</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                </PanelRow>
-
-                <ColorPalette
-                  value={content.styles.bgColor[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
-
-
-
-
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(content.styles.bgColor).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = content.styles.bgColor;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...content.styles, bgColor: newValuesObj };
-                    setAttributes({ content: { ...content, styles: styles } });
-
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'background-color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={content} onChange={onChangeStyleContent} onAdd={onAddStyleContent} onRemove={onRemoveStyleContent} />
+                  </PGtab>
+                </PGtabs>
 
 
 
 
 
-                  }}
-                />
 
-
-
-                <PanelRow>
-                  <label>Padding</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=''
-                  values={content.styles.padding[breakPointX]}
-                  onChange={(nextValues) => { paddingControlContent(nextValues) }}
-                />
-
-
-
-
-
-                <PanelRow>
-                  <label>Margin</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=""
-                  values={content.styles.margin[breakPointX]}
-                  onChange={(nextValues) => { marginControlContent(nextValues) }}
-                />
 
 
 
@@ -1372,343 +1115,105 @@ registerBlockType("post-grid/accordion", {
               <PanelBody title="Icon" initialOpen={false}>
 
 
-                <PanelRow>
-                  <label for="">Choose Icon</label>
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+                  ]}
+                >
+                  <PGtab name="options">
 
-                  <PGIconPicker library={icon.options.library} srcType={icon.options.srcType} iconSrc={icon.options.iconSrc} onChange={onChangeIcon} />
-                </PanelRow>
+                    <PanelRow>
+                      <label for="">Choose Icon</label>
 
+                      <PGIconPicker library={icon.options.library} srcType={icon.options.srcType} iconSrc={icon.options.iconSrc} onChange={onChangeIcon} />
+                    </PanelRow>
 
 
 
-                <PanelRow>
-                  <label for="">Choose Toggled Icon</label>
 
-                  <PGIconPicker library={iconToggle.options.library} srcType={iconToggle.options.srcType} iconSrc={iconToggle.options.iconSrc} onChange={onChangeIconToggle} />
-                </PanelRow>
+                    <PanelRow>
+                      <label for="">Choose Toggled Icon</label>
 
+                      <PGIconPicker library={iconToggle.options.library} srcType={iconToggle.options.srcType} iconSrc={iconToggle.options.iconSrc} onChange={onChangeIconToggle} />
+                    </PanelRow>
 
-                <PanelRow>
-                  <label for="">Icon postion</label>
 
-                  <SelectControl
-                    label=""
-                    value={icon.options.position}
-                    options={[
+                    <PanelRow>
+                      <label for="">Icon postion</label>
 
-                      { label: 'Choose...', value: '' },
+                      <SelectControl
+                        label=""
+                        value={icon.options.position}
+                        options={[
 
-                      { label: 'Before Header Text', value: 'beforeHeader' },
-                      { label: 'After Header Text', value: 'afterHeader' },
+                          { label: 'Choose...', value: '' },
 
+                          { label: 'Before Header Text', value: 'beforeHeader' },
+                          { label: 'After Header Text', value: 'afterHeader' },
 
-                    ]}
-                    onChange={(newVal) => {
 
+                        ]}
+                        onChange={(newVal) => {
 
-                      var options = { ...icon.options, position: newVal };
-                      setAttributes({ icon: { ...icon, options: options } });
 
+                          var options = { ...icon.options, position: newVal };
+                          setAttributes({ icon: { ...icon, options: options } });
 
-                    }
 
+                        }
 
 
-                    }
-                  />
-                </PanelRow>
 
+                        }
+                      />
+                    </PanelRow>
 
-                <PanelRow>
-                  <label for="">Enable Icon Toggle</label>
 
-                  <SelectControl
-                    label=""
-                    value={icon.options.enableToggle}
-                    options={[
+                    <PanelRow>
+                      <label for="">Enable Icon Toggle</label>
 
-                      { label: 'Yes', value: 'yes' },
-                      { label: 'No', value: 'no' },
+                      <SelectControl
+                        label=""
+                        value={icon.options.enableToggle}
+                        options={[
 
+                          { label: 'Yes', value: 'yes' },
+                          { label: 'No', value: 'no' },
 
-                    ]}
-                    onChange={(newVal) => {
-                      var options = { ...icon.options, enableToggle: newVal };
-                      setAttributes({ icon: { ...icon, options: options } });
 
-                    }
-                    }
-                  />
-                </PanelRow>
+                        ]}
+                        onChange={(newVal) => {
+                          var options = { ...icon.options, enableToggle: newVal };
+                          setAttributes({ icon: { ...icon, options: options } });
 
+                        }
+                        }
+                      />
+                    </PanelRow>
 
-                <PanelRow className='my-3'>
-                  <label>Color</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                  </PGtab>
+                </PGtabs>
 
 
 
-
-                </PanelRow>
-
-                <ColorPalette
-                  value={icon.styles.color[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
-
-
-
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(icon.styles.color).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = icon.styles.color;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...icon.styles, color: newValuesObj };
-                    setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-                  }}
-                />
-
-
-
-                <PanelRow className='my-3'>
-                  <label>Background Color</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                </PanelRow>
-
-                <ColorPalette
-                  value={icon.styles.bgColor[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
-
-
-
-
-
-
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(icon.styles.bgColor).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = icon.styles.bgColor;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...icon.styles, bgColor: newValuesObj };
-                    setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'background-color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                  }}
-                />
-
-
-
-
-                <PanelRow className='my-3'>
-                  <label>Display</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-
-                <PanelRow>
-
-                  <SelectControl
-                    label=""
-                    value={icon.styles.display[breakPointX]}
-
-                    options={[
-                      { label: 'Select..', value: '' },
-                      { label: 'inline', value: 'inline' },
-                      { label: 'inline-block', value: 'inline-block' },
-                      { label: 'block', value: 'block' },
-
-                    ]}
-                    onChange={(newVal) => {
-
-                      var newValuesObj = {};
-
-                      if (Object.keys(icon.styles.display).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = icon.styles.display;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...icon.styles, display: newValuesObj };
-                      setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'display': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-                    }
-
-                    }
-                  />
-                </PanelRow>
-
-                <PanelRow>
-                  <label>Padding</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=''
-                  values={icon.styles.padding[breakPointX]}
-                  onChange={(nextValues) => {
-
-
-                    var responsive = icon.styles.padding;
-                    responsive[breakPointX] = nextValues;
-
-
-                    var styles = { ...icon.styles, padding: responsive };
-                    setAttributes({ icon: { ...icon, styles: styles } });
-
-                    var itemsX = { ...blockCssY.items };
-
-                    blockCssY.items[iconSelector] = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector] : {};
-
-                    if (nextValues.top != undefined) {
-
-                      var paddingTop = (blockCssY.items[iconSelector]['padding-top'] != undefined) ? blockCssY.items[iconSelector]['padding-top'] : {};
-                      paddingTop[breakPointX] = nextValues.top
-                      blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-top': paddingTop };
-                    }
-
-
-                    if (nextValues.right != undefined) {
-
-                      var paddingRight = (blockCssY.items[iconSelector]['padding-right'] != undefined) ? blockCssY.items[iconSelector]['padding-right'] : {};
-                      paddingRight[breakPointX] = nextValues.right
-                      blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-right': paddingRight };
-                    }
-
-                    if (nextValues.bottom != undefined) {
-
-                      var paddingBottom = (blockCssY.items[iconSelector]['padding-bottom'] != undefined) ? blockCssY.items[iconSelector]['padding-bottom'] : {};
-                      paddingBottom[breakPointX] = nextValues.bottom
-                      blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-bottom': paddingBottom };
-                    }
-
-                    if (nextValues.left != undefined) {
-
-                      var paddingLeft = (blockCssY.items[iconSelector]['padding-left'] != undefined) ? blockCssY.items[iconSelector]['padding-left'] : {};
-                      paddingLeft[breakPointX] = nextValues.left
-
-                      blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-left': paddingLeft };
-                    }
-
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                  }}
-                />
-
-                <PanelRow>
-                  <label>Margin</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=""
-                  values={icon.styles.margin[breakPointX]}
-                  onChange={(nextValues) => {
-
-
-                    var responsive = icon.styles.margin;
-                    responsive[breakPointX] = nextValues;
-
-                    var styles = { ...icon.styles, margin: responsive };
-                    setAttributes({ icon: { ...icon, styles: styles } });
-
-                    var itemsX = { ...blockCssY.items };
-
-                    blockCssY.items[iconSelector] = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector] : {};
-
-                    if (nextValues.top != undefined) {
-                      var marginTop = (blockCssY.items[iconSelector]['margin-top'] != undefined) ? blockCssY.items[iconSelector]['margin-top'] : {};
-                      marginTop[breakPointX] = nextValues.top
-
-                      blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-top': marginTop };
-
-                    }
-
-
-                    if (nextValues.right != undefined) {
-
-                      var marginRight = (blockCssY.items[iconSelector]['margin-right'] !== undefined) ? blockCssY.items[iconSelector]['margin-right'] : {};
-                      marginRight[breakPointX] = nextValues.right
-
-                      blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-right': marginRight };
-
-                    }
-
-                    if (nextValues.bottom != undefined) {
-
-                      var marginBottom = (blockCssY.items[iconSelector]['margin-bottom'] !== undefined) ? blockCssY.items[iconSelector]['margin-bottom'] : {};
-                      marginBottom[breakPointX] = nextValues.bottom
-
-                      blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-bottom': marginBottom };
-
-                    }
-
-                    if (nextValues.left != undefined) {
-
-                      var marginLeft = (blockCssY.items[iconSelector]['margin-left'] !== undefined) ? blockCssY.items[iconSelector]['margin-left'] : {};
-                      marginLeft[breakPointX] = nextValues.left
-
-                      blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-left': marginLeft };
-
-                    }
-
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                  }}
-                />
-
-
-                <PanelRow>
-                  <div className='font-bold'>Typography</div>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-
-                <Typography typo={icon.styles} breakPointX={breakPointX} onChange={onChangeIconTypo} setAttributes={setAttributes} obj={icon} />
 
 
 

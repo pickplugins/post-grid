@@ -350,19 +350,17 @@ class PGBlockAccordion
         ?>
         <script>
             document.addEventListener("DOMContentLoaded", function(event) {
-                new Accordion('.PGBlockAccordion', {
+                new Accordion('.<?php echo esc_attr($blockId); ?>', {
                     duration: 400,
                     onOpen: (currElement) => {},
                     onClose: (currElement) => {},
                     beforeOpen: (currElement) => {
-
                         var iconIdle = currElement.querySelector('.icon-idle');
                         var iconToggled = currElement.querySelector('.icon-toggled');
                         if (iconIdle != null) {
                             iconIdle.style.display = 'none';
                             iconToggled.style.display = 'inline-block';
                         }
-
                     },
                     beforeClose: (currElement) => {
                         var iconIdle = currElement.querySelector('.icon-idle');
@@ -371,7 +369,6 @@ class PGBlockAccordion
                             iconIdle.style.display = 'inline-block';
                             iconToggled.style.display = 'none';
                         }
-
                     }
                 });
             })

@@ -1720,6 +1720,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../store */ "./src/store.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
 /* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
 /* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
 /* harmony import */ var _components_mail_subscribe__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/mail-subscribe */ "./src/components/mail-subscribe/index.js");
@@ -1727,6 +1729,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_breakpoint_toggle__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/breakpoint-toggle */ "./src/components/breakpoint-toggle/index.js");
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
 /* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/icon-picker */ "./src/components/icon-picker/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
 
 
 
@@ -1743,6 +1748,9 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
+
+
 
 
 
@@ -1787,7 +1795,7 @@ var myStore = wp.data.select('postgrid-shop');
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {}
@@ -1814,12 +1822,11 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion-header'
         },
         styles: {
-          textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
+          textAlign: {},
           padding: {},
-          margin: {},
-          display: {}
+          margin: {}
         }
       }
     },
@@ -1834,7 +1841,7 @@ var myStore = wp.data.select('postgrid-shop');
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {}
@@ -1852,7 +1859,7 @@ var myStore = wp.data.select('postgrid-shop');
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {}
@@ -1874,19 +1881,9 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
-          margin: {},
-          textAlign: {},
-          display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          fontWeight: {
-            "Desktop": "700"
-          },
-          textDecoration: {} //overline, line-through, underline
+          fontSize: {} //{ val: '18', unit: 'px' }
 
         }
       }
@@ -1904,19 +1901,10 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
-          display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          fontWeight: {
-            "Desktop": "700"
-          },
-          textDecoration: {} //overline, line-through, underline
+          fontSize: {} //{ val: '18', unit: 'px' }
 
         }
       }
@@ -2044,414 +2032,466 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    function onChangeIconTypo(typoX) {
-      setAttributes({
-        icon: { ...icon,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-      var itemsX = blockCssY.items;
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit; //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 16;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[iconSelector]['line-height'] != undefined ? blockCssY.items[iconSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit; //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'line-height': lineHeightX };
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr;
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'text-decoration': str
-        };
-      } //setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-      setAttributes({
-        blockCssY: {
-          items: itemsX
-        }
-      });
-    }
-
-    function paddingControlHeader(nextValues) {
-      var responsive = header.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...header.styles,
-        padding: responsive
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...wrapper[sudoScource]
       };
-      setAttributes({
-        header: { ...header,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[headerSelector] = blockCssY.items[headerSelector] != undefined ? blockCssY.items[headerSelector] : {};
+      var elementSelector = wrapperSelector;
 
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[headerSelector]['padding-top'] != undefined ? blockCssY.items[headerSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
-          'padding-top': paddingTop
-        }; //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-top': paddingTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[headerSelector]['padding-right'] != undefined ? blockCssY.items[headerSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
-          'padding-right': paddingRight
-        }; //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-right': paddingRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[headerSelector]['padding-bottom'] != undefined ? blockCssY.items[headerSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
-          'padding-bottom': paddingBottom
-        }; //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-bottom': paddingBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[headerSelector]['padding-left'] != undefined ? blockCssY.items[headerSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
-          'padding-left': paddingLeft
-        }; //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'padding-left': paddingLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function paddingControlContent(nextValues) {
-      var responsive = content.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...content.styles,
-        padding: responsive
-      };
-      setAttributes({
-        content: { ...content,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[contentSelector] = blockCssY.items[contentSelector] != undefined ? blockCssY.items[contentSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[contentSelector]['padding-top'] != undefined ? blockCssY.items[contentSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector],
-          'padding-top': paddingTop
-        }; //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-top': paddingTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[contentSelector]['padding-right'] != undefined ? blockCssY.items[contentSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector],
-          'padding-right': paddingRight
-        }; //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-right': paddingRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[contentSelector]['padding-bottom'] != undefined ? blockCssY.items[contentSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector],
-          'padding-bottom': paddingBottom
-        }; //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-bottom': paddingBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[contentSelector]['padding-left'] != undefined ? blockCssY.items[contentSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector],
-          'padding-left': paddingLeft
-        }; //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'padding-left': paddingLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function marginControlHeader(nextValues) {
-      var responsive = header.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...header.styles,
-        margin: responsive
-      };
-      setAttributes({
-        header: { ...header,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[headerSelector] = blockCssY.items[headerSelector] != undefined ? blockCssY.items[headerSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[headerSelector]['margin-top'] != undefined ? blockCssY.items[headerSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
-          'margin-top': marginTop
-        }; //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-top': marginTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[headerSelector]['margin-right'] !== undefined ? blockCssY.items[headerSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
-          'margin-right': marginRight
-        }; //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-right': marginRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[headerSelector]['margin-bottom'] !== undefined ? blockCssY.items[headerSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
-          'margin-bottom': marginBottom
-        }; //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-bottom': marginBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[headerSelector]['margin-left'] !== undefined ? blockCssY.items[headerSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
-          'margin-left': marginLeft
-        }; //itemsX[headerSelector] = { ...blockCssY.items[headerSelector], 'margin-left': marginLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function marginControlContent(nextValues) {
-      var responsive = content.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...content.styles,
-        margin: responsive
-      };
-      setAttributes({
-        content: { ...content,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[contentSelector] = blockCssY.items[contentSelector] != undefined ? blockCssY.items[contentSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[contentSelector]['margin-top'] != undefined ? blockCssY.items[contentSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector],
-          'margin-top': marginTop
-        }; //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-top': marginTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[contentSelector]['margin-right'] !== undefined ? blockCssY.items[contentSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector],
-          'margin-right': marginRight
-        }; //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-right': marginRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[contentSelector]['margin-bottom'] !== undefined ? blockCssY.items[contentSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector],
-          'margin-bottom': marginBottom
-        }; //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-bottom': marginBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[contentSelector]['margin-left'] !== undefined ? blockCssY.items[contentSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[contentSelector] = { ...blockCssY.items[contentSelector],
-          'margin-left': marginLeft
-        }; //itemsX[contentSelector] = { ...blockCssY.items[contentSelector], 'margin-left': marginLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function generateBlockCssY() {
-      var reponsiveCssGroups = {};
-      var reponsiveCss = '';
-
-      for (var selector in blockCssY.items) {
-        var attrs = blockCssY.items[selector];
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = [];
-            }
-
-            reponsiveCssGroups[device][selector].push({
-              'attr': attr,
-              'val': attrValue
-            });
-          }
-        }
-      }
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200);
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
       } else {
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-        csswrappg.insertAdjacentHTML('beforeend', str);
+        elementSelector = wrapperSelector + ':' + sudoScource;
       }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+    }
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+    }
+
+    function onChangeStyleHeader(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...header[sudoScource]
+      };
+      var elementSelector = headerSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = headerSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = headerSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = headerSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = headerSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = headerSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = headerSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = headerSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = headerSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = headerSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = headerSelector + '::first-line';
+      } else {
+        elementSelector = headerSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        header: { ...header
+        }
+      });
+    }
+
+    function onRemoveStyleHeader(sudoScource, key) {
+      var sudoScourceX = { ...header[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      header[sudoScource] = sudoScourceX;
+      setAttributes({
+        header: { ...header
+        }
+      });
+
+      if (blockCssY.items[headerSelector] == undefined) {
+        blockCssY.items[headerSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[headerSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleHeader(sudoScource, key) {
+      var sudoScourceX = { ...header[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      header[sudoScource] = sudoScourceX;
+      setAttributes({
+        header: { ...header
+        }
+      });
+    }
+
+    function onChangeStyleContent(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...content[sudoScource]
+      };
+      var elementSelector = contentSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = contentSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = contentSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = contentSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = contentSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = contentSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = contentSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = contentSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = contentSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = contentSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = contentSelector + '::first-line';
+      } else {
+        elementSelector = contentSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        content: { ...content
+        }
+      });
+    }
+
+    function onRemoveStyleContent(sudoScource, key) {
+      var sudoScourceX = { ...content[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      content[sudoScource] = sudoScourceX;
+      setAttributes({
+        content: { ...content
+        }
+      });
+
+      if (blockCssY.items[contentSelector] == undefined) {
+        blockCssY.items[contentSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[contentSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleContent(sudoScource, key) {
+      var sudoScourceX = { ...content[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      content[sudoScource] = sudoScourceX;
+      setAttributes({
+        content: { ...content
+        }
+      });
+    }
+
+    function onChangeStyleIcon(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+      var elementSelector = iconSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = iconSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = iconSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = iconSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = iconSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = iconSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = iconSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = iconSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = iconSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = iconSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = iconSelector + '::first-line';
+      } else {
+        elementSelector = iconSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+    }
+
+    function onRemoveStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      icon[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+
+      if (blockCssY.items[iconSelector] == undefined) {
+        blockCssY.items[iconSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[iconSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+    }
+
+    function onChangeStyleHeaderActive(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...headerActive[sudoScource]
+      };
+      var elementSelector = headerActiveSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = headerActiveSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = headerActiveSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = headerActiveSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = headerActiveSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = headerActiveSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = headerActiveSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = headerActiveSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = headerActiveSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = headerActiveSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = headerActiveSelector + '::first-line';
+      } else {
+        elementSelector = headerActiveSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        headerActive: { ...headerActive
+        }
+      });
+    }
+
+    function onRemoveStyleHeaderActive(sudoScource, key) {
+      var sudoScourceX = { ...headerActive[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      headerActive[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({
+        headerActive: { ...headerActive
+        }
+      });
+
+      if (blockCssY.items[headerActiveSelector] == undefined) {
+        blockCssY.items[headerActiveSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[headerActiveSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleHeaderActive(sudoScource, key) {
+      var sudoScourceX = { ...headerActive[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      headerActive[sudoScource] = sudoScourceX;
+      setAttributes({
+        headerActive: { ...headerActive
+        }
+      });
     }
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -2536,6 +2576,24 @@ var myStore = wp.data.select('postgrid-shop');
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Header",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
@@ -2579,166 +2637,62 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: header.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(header.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = header.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...header.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          header: { ...header,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: header.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(header.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = header.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...header.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          header: { ...header,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Active Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: headerActive.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(headerActive.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = headerActive.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...headerActive.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          headerActive: { ...headerActive,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[headerActiveSelector] = { ...blockCssY.items[headerActiveSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: header.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControlHeader(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: header.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControlHeader(nextValues);
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      obj: header,
+      onChange: onChangeStyleHeader,
+      onAdd: onAddStyleHeader,
+      onRemove: onRemoveStyleHeader
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: "Header - Active",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      name: "options"
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      obj: headerActive,
+      onChange: onChangeStyleHeaderActive,
+      onAdd: onAddStyleHeaderActive,
+      onRemove: onRemoveStyleHeaderActive
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Content",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
@@ -2782,123 +2736,34 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: content.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(content.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = content.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...content.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          content: { ...content,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[contentSelector] = { ...blockCssY.items[contentSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: content.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(content.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = content.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...content.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          content: { ...content,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[contentSelector] = { ...blockCssY.items[contentSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: content.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControlContent(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: content.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControlContent(nextValues);
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      obj: content,
+      onChange: onChangeStyleContent,
+      onAdd: onAddStyleContent,
+      onRemove: onRemoveStyleContent
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Icon",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Choose Icon"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -2960,292 +2825,14 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: icon.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: icon.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      label: "",
-      value: icon.styles.display[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'inline',
-        value: 'inline'
-      }, {
-        label: 'inline-block',
-        value: 'inline-block'
-      }, {
-        label: 'block',
-        value: 'block'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: icon.styles.padding[breakPointX],
-      onChange: nextValues => {
-        var responsive = icon.styles.padding;
-        responsive[breakPointX] = nextValues;
-        var styles = { ...icon.styles,
-          padding: responsive
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        blockCssY.items[iconSelector] = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector] : {};
-
-        if (nextValues.top != undefined) {
-          var paddingTop = blockCssY.items[iconSelector]['padding-top'] != undefined ? blockCssY.items[iconSelector]['padding-top'] : {};
-          paddingTop[breakPointX] = nextValues.top;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-top': paddingTop
-          };
-        }
-
-        if (nextValues.right != undefined) {
-          var paddingRight = blockCssY.items[iconSelector]['padding-right'] != undefined ? blockCssY.items[iconSelector]['padding-right'] : {};
-          paddingRight[breakPointX] = nextValues.right;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-right': paddingRight
-          };
-        }
-
-        if (nextValues.bottom != undefined) {
-          var paddingBottom = blockCssY.items[iconSelector]['padding-bottom'] != undefined ? blockCssY.items[iconSelector]['padding-bottom'] : {};
-          paddingBottom[breakPointX] = nextValues.bottom;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-bottom': paddingBottom
-          };
-        }
-
-        if (nextValues.left != undefined) {
-          var paddingLeft = blockCssY.items[iconSelector]['padding-left'] != undefined ? blockCssY.items[iconSelector]['padding-left'] : {};
-          paddingLeft[breakPointX] = nextValues.left;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-left': paddingLeft
-          };
-        }
-
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: icon.styles.margin[breakPointX],
-      onChange: nextValues => {
-        var responsive = icon.styles.margin;
-        responsive[breakPointX] = nextValues;
-        var styles = { ...icon.styles,
-          margin: responsive
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        blockCssY.items[iconSelector] = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector] : {};
-
-        if (nextValues.top != undefined) {
-          var marginTop = blockCssY.items[iconSelector]['margin-top'] != undefined ? blockCssY.items[iconSelector]['margin-top'] : {};
-          marginTop[breakPointX] = nextValues.top;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-top': marginTop
-          };
-        }
-
-        if (nextValues.right != undefined) {
-          var marginRight = blockCssY.items[iconSelector]['margin-right'] !== undefined ? blockCssY.items[iconSelector]['margin-right'] : {};
-          marginRight[breakPointX] = nextValues.right;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-right': marginRight
-          };
-        }
-
-        if (nextValues.bottom != undefined) {
-          var marginBottom = blockCssY.items[iconSelector]['margin-bottom'] !== undefined ? blockCssY.items[iconSelector]['margin-bottom'] : {};
-          marginBottom[breakPointX] = nextValues.bottom;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-bottom': marginBottom
-          };
-        }
-
-        if (nextValues.left != undefined) {
-          var marginLeft = blockCssY.items[iconSelector]['margin-left'] !== undefined ? blockCssY.items[iconSelector]['margin-left'] : {};
-          marginLeft[breakPointX] = nextValues.left;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-left': marginLeft
-          };
-        }
-
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      typo: icon.styles,
-      breakPointX: breakPointX,
-      onChange: onChangeIconTypo,
-      setAttributes: setAttributes,
-      obj: icon
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      obj: icon,
+      onChange: onChangeStyleIcon,
+      onAdd: onAddStyleIcon,
+      onRemove: onRemoveStyleIcon
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Please use following class selector to apply your custom CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -11477,8 +11064,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../store */ "./src/store.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link-off.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link-off.js");
 /* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
 /* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
 /* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/icon-picker */ "./src/components/icon-picker/index.js");
@@ -11488,6 +11077,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
 /* harmony import */ var _components_css_display__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/css-display */ "./src/components/css-display/index.js");
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
 
 
 
@@ -11505,6 +11097,9 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
+
+
 
 
 
@@ -11545,26 +11140,8 @@ var myStore = wp.data.select('postgrid-shop');
           attr: []
         },
         styles: {
-          textAlign: {},
           color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          display: {},
-          borderRadius: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {
-            "Desktop": "700"
-          },
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {}
+          borderRadius: {}
         }
       }
     },
@@ -11586,24 +11163,8 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          textAlign: {},
-          display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {
-            "Desktop": "700"
-          },
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {}
+          fontSize: {} //{ val: '18', unit: 'px' }
+
         }
       }
     },
@@ -11622,21 +11183,7 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'text-icon'
         },
         styles: {
-          color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          textAlign: {},
-          display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          fontWeight: {
-            "Desktop": "700"
-          },
-          textDecoration: {} //overline, line-through, underline
-
+          color: {}
         }
       }
     },
@@ -11648,8 +11195,7 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {},
-          bgColor: {}
+          color: {}
         }
       }
     },
@@ -11661,8 +11207,7 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'postfix'
         },
         styles: {
-          color: {},
-          bgColor: {}
+          color: {}
         }
       }
     },
@@ -11838,6 +11383,468 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         icon: { ...icon,
           options: options
+        }
+      });
+    }
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      } else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+    }
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+    }
+
+    function onChangeStyleText(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...text[sudoScource]
+      };
+      var elementSelector = textSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = textSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = textSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = textSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = textSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = textSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = textSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = textSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = textSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = textSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = textSelector + '::first-line';
+      } else {
+        elementSelector = textSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        text: { ...text
+        }
+      });
+    }
+
+    function onRemoveStyleText(sudoScource, key) {
+      var sudoScourceX = { ...text[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      text[sudoScource] = sudoScourceX;
+      setAttributes({
+        text: { ...text
+        }
+      });
+
+      if (blockCssY.items[textSelector] == undefined) {
+        blockCssY.items[textSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[textSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleText(sudoScource, key) {
+      var sudoScourceX = { ...text[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      text[sudoScource] = sudoScourceX;
+      setAttributes({
+        text: { ...text
+        }
+      });
+    }
+
+    function onChangeStyleIcon(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+      var elementSelector = iconSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = iconSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = iconSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = iconSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = iconSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = iconSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = iconSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = iconSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = iconSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = iconSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = iconSelector + '::first-line';
+      } else {
+        elementSelector = iconSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+    }
+
+    function onRemoveStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+
+      if (blockCssY.items[iconSelector] == undefined) {
+        blockCssY.items[iconSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[iconSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+    }
+
+    function onChangeStylePrefix(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...prefix[sudoScource]
+      };
+      var elementSelector = prefixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = prefixSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = prefixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = prefixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = prefixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = prefixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = prefixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = prefixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = prefixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = prefixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = prefixSelector + '::first-line';
+      } else {
+        elementSelector = prefixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        prefix: { ...prefix
+        }
+      });
+    }
+
+    function onRemoveStylePrefix(sudoScource, key) {
+      var sudoScourceX = { ...prefix[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      prefix[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({
+        prefix: { ...prefix
+        }
+      });
+
+      if (blockCssY.items[prefixSelector] == undefined) {
+        blockCssY.items[prefixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStylePrefix(sudoScource, key) {
+      var sudoScourceX = { ...prefix[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      prefix[sudoScource] = sudoScourceX;
+      setAttributes({
+        prefix: { ...prefix
+        }
+      });
+    }
+
+    function onChangeStylePostfix(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...postfix[sudoScource]
+      };
+      var elementSelector = postfixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = postfixSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = postfixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = postfixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = postfixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = postfixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = postfixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = postfixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = postfixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = postfixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = postfixSelector + '::first-line';
+      } else {
+        elementSelector = postfixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        postfix: { ...postfix
+        }
+      });
+    }
+
+    function onRemoveStylePostfix(sudoScource, key) {
+      var sudoScourceX = { ...postfix[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      postfix[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({
+        postfix: { ...postfix
+        }
+      });
+
+      if (blockCssY.items[postfixSelector] == undefined) {
+        blockCssY.items[postfixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStylePostfix(sudoScource, key) {
+      var sudoScourceX = { ...postfix[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      postfix[sudoScource] = sudoScourceX;
+      setAttributes({
+        postfix: { ...postfix
         }
       });
     }
@@ -12522,6 +12529,24 @@ var myStore = wp.data.select('postgrid-shop');
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Wrapper",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
@@ -12571,7 +12596,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Custom Attributes"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: " cursor-pointer px-3 text-white py-1 bg-blue-600",
@@ -12643,207 +12668,34 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       })));
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_18__["default"], {
-      val: wrapper.styles.display[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: wrapper.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_17__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: wrapper.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_17__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: wrapper.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControlWrapper(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: wrapper.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControlWrapper(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Border Radius"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: wrapper.styles.borderRadius[breakPointX],
-      onChange: nextValues => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.borderRadius).length == 0) {
-          newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
-        } else {
-          newValuesObj = wrapper.styles.borderRadius;
-          newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
-          ;
-        }
-
-        var styles = { ...wrapper.styles,
-          borderRadius: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'border-radius': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      typo: wrapper.styles,
-      breakPointX: breakPointX,
-      onChange: onChangeWrapTypo,
-      setAttributes: setAttributes,
-      obj: wrapper
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      obj: wrapper,
+      onChange: onChangeStyleWrapper,
+      onAdd: onAddStyleWrapper,
+      onRemove: onRemoveStyleWrapper
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Text",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Custom Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
@@ -12945,13 +12797,13 @@ var myStore = wp.data.select('postgrid-shop');
       className: "relative"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
       className: linkPickerText ? "!bg-gray-400" : '',
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
       onClick: ev => {
         setLinkPickerText(prev => !prev);
       }
     }), text.options.customUrl.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
       className: "!text-red-500 ml-2",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"],
       onClick: ev => {
         var options = { ...text.options,
           customUrl: ''
@@ -13049,198 +12901,34 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       })));
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: text.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_17__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        // var responsive = text.styles.color;
-        // responsive[breakPointX] = newVal;
-        // var styles = { ...text.styles, color: responsive };
-        // setAttributes({ text: { ...text, styles: styles } });
-        var newValuesObj = {};
-
-        if (Object.keys(text.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = text.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...text.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          text: { ...text,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[textSelector] = { ...blockCssY.items[textSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: text.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_17__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(text.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = text.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...text.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          text: { ...text,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[textSelector] = { ...blockCssY.items[textSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-      label: "",
-      value: text.styles.display[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'inline',
-        value: 'inline'
-      }, {
-        label: 'inline-block',
-        value: 'inline-block'
-      }, {
-        label: 'block',
-        value: 'block'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(text.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = text.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...text.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          text: { ...text,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[textSelector] = { ...blockCssY.items[textSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: text.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControlText(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: text.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControlText(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      typo: text.styles,
-      breakPointX: breakPointX,
-      onChange: onChangeTextTypo,
-      setAttributes: setAttributes,
-      obj: text
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      obj: text,
+      onChange: onChangeStyleText,
+      onAdd: onAddStyleText,
+      onRemove: onRemoveStyleText
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Icon",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Choose Icon"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -13291,294 +12979,34 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: icon.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_17__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: icon.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_17__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-      label: "",
-      value: icon.styles.display[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'inline',
-        value: 'inline'
-      }, {
-        label: 'inline-block',
-        value: 'inline-block'
-      }, {
-        label: 'block',
-        value: 'block'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: icon.styles.padding[breakPointX],
-      onChange: nextValues => {
-        var responsive = icon.styles.padding;
-        responsive[breakPointX] = nextValues;
-        var styles = { ...icon.styles,
-          padding: responsive
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        blockCssY.items[iconSelector] = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector] : {};
-
-        if (nextValues.top != undefined) {
-          var paddingTop = blockCssY.items[iconSelector]['padding-top'] != undefined ? blockCssY.items[iconSelector]['padding-top'] : {};
-          paddingTop[breakPointX] = nextValues.top;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-top': paddingTop
-          };
-        }
-
-        if (nextValues.right != undefined) {
-          var paddingRight = blockCssY.items[iconSelector]['padding-right'] != undefined ? blockCssY.items[iconSelector]['padding-right'] : {};
-          paddingRight[breakPointX] = nextValues.right;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-right': paddingRight
-          };
-        }
-
-        if (nextValues.bottom != undefined) {
-          var paddingBottom = blockCssY.items[iconSelector]['padding-bottom'] != undefined ? blockCssY.items[iconSelector]['padding-bottom'] : {};
-          paddingBottom[breakPointX] = nextValues.bottom;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-bottom': paddingBottom
-          };
-        }
-
-        if (nextValues.left != undefined) {
-          var paddingLeft = blockCssY.items[iconSelector]['padding-left'] != undefined ? blockCssY.items[iconSelector]['padding-left'] : {};
-          paddingLeft[breakPointX] = nextValues.left;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-left': paddingLeft
-          };
-        }
-
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: icon.styles.margin[breakPointX],
-      onChange: nextValues => {
-        var responsive = icon.styles.margin;
-        responsive[breakPointX] = nextValues;
-        var styles = { ...icon.styles,
-          margin: responsive
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        blockCssY.items[iconSelector] = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector] : {};
-
-        if (nextValues.top != undefined) {
-          var marginTop = blockCssY.items[iconSelector]['margin-top'] != undefined ? blockCssY.items[iconSelector]['margin-top'] : {};
-          marginTop[breakPointX] = nextValues.top;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-top': marginTop
-          };
-        }
-
-        if (nextValues.right != undefined) {
-          var marginRight = blockCssY.items[iconSelector]['margin-right'] !== undefined ? blockCssY.items[iconSelector]['margin-right'] : {};
-          marginRight[breakPointX] = nextValues.right;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-right': marginRight
-          };
-        }
-
-        if (nextValues.bottom != undefined) {
-          var marginBottom = blockCssY.items[iconSelector]['margin-bottom'] !== undefined ? blockCssY.items[iconSelector]['margin-bottom'] : {};
-          marginBottom[breakPointX] = nextValues.bottom;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-bottom': marginBottom
-          };
-        }
-
-        if (nextValues.left != undefined) {
-          var marginLeft = blockCssY.items[iconSelector]['margin-left'] !== undefined ? blockCssY.items[iconSelector]['margin-left'] : {};
-          marginLeft[breakPointX] = nextValues.left;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-left': marginLeft
-          };
-        }
-
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      typo: icon.styles,
-      breakPointX: breakPointX,
-      onChange: onChangeIconTypo,
-      setAttributes: setAttributes,
-      obj: icon
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      obj: icon,
+      onChange: onChangeStyleIcon,
+      onAdd: onAddStyleIcon,
+      onRemove: onRemoveStyleIcon
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Prefix",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Prefix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
@@ -13593,9 +13021,34 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      obj: prefix,
+      onChange: onChangeStylePrefix,
+      onAdd: onAddStylePrefix,
+      onRemove: onRemoveStylePrefix
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Postfix",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Postfix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
@@ -13610,7 +13063,14 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      obj: postfix,
+      onChange: onChangeStylePostfix,
+      onAdd: onAddStylePostfix,
+      onRemove: onRemoveStylePostfix
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, "Please use following class selector to apply your custom CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
@@ -29403,14 +28863,7 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
-          color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          display: {
-            "Desktop": "block"
-          }
+          color: {}
         }
       }
     },
@@ -29440,25 +28893,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'excerpt-text'
         },
         styles: {
-          textAlign: {},
           color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          display: {
-            "Desktop": "inline-block"
-          },
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {}
+          fontSize: {} //{ val: '18', unit: 'px' }
+
         }
       }
     },
@@ -29475,26 +28912,8 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          textAlign: {},
-          display: {
-            "Desktop": "inline-block"
-          },
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {
-            "Desktop": "700"
-          },
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {}
+          fontSize: {} //{ val: '18', unit: 'px' }
+
         }
       }
     },
@@ -29506,8 +28925,7 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {},
-          bgColor: {}
+          color: {}
         }
       }
     },
@@ -29519,8 +28937,7 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'postfix'
         },
         styles: {
-          color: {},
-          bgColor: {}
+          color: {}
         }
       }
     },
@@ -30257,524 +29674,6 @@ var myStore = wp.data.select('postgrid-shop');
         postfix: { ...postfix
         }
       });
-    }
-
-    function onChangeExcerptTypo(typoX) {
-      setAttributes({
-        postExcerpt: { ...postExcerpt,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-      var itemsX = blockCssY.items;
-      console.log(typoX);
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'font-family': typoX.fontFamily
-        };
-      } else {
-        //typoX.fontFamily[breakPointX] = {};
-        itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[excerptSelector]['font-size'] != undefined ? blockCssY.items[excerptSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit; //blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'font-size': fontSizeX };
-
-        itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 16;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[excerptSelector]['line-height'] != undefined ? blockCssY.items[excerptSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit; //blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'line-height': lineHeightX };
-
-        itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[excerptSelector]['letter-spacing'] != undefined ? blockCssY.items[excerptSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit; //blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector], 'letter-spacing': letterSpacingX };
-
-        itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr;
-        itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'text-transform': typoX.textTransform
-        };
-      } //setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-      setAttributes({
-        blockCssY: {
-          items: itemsX
-        }
-      });
-    }
-
-    function onChangeReadmoreTypo(typoX) {
-      setAttributes({
-        readMore: { ...readMore,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-      var itemsX = blockCssY.items;
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'font-family': typoX.fontFamily
-        };
-      } else {
-        //typoX.fontFamily[breakPointX] = {};
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[redmoreSelector]['font-size'] != undefined ? blockCssY.items[redmoreSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit; //blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector], 'font-size': fontSizeX };
-
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 16;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[redmoreSelector]['line-height'] != undefined ? blockCssY.items[redmoreSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit; //blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector], 'line-height': lineHeightX };
-
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[redmoreSelector]['letter-spacing'] != undefined ? blockCssY.items[redmoreSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit; //blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector], 'letter-spacing': letterSpacingX };
-
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr;
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'text-transform': typoX.textTransform
-        };
-      } //setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-      setAttributes({
-        blockCssY: {
-          items: itemsX
-        }
-      });
-    }
-
-    function paddingControl(nextValues) {
-      var responsive = postExcerpt.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...postExcerpt.styles,
-        padding: responsive
-      };
-      setAttributes({
-        postExcerpt: { ...postExcerpt,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[excerptSelector] = blockCssY.items[excerptSelector] != undefined ? blockCssY.items[excerptSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[excerptSelector]['padding-top'] != undefined ? blockCssY.items[excerptSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'padding-top': paddingTop
-        }; //itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'padding-top': paddingTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[excerptSelector]['padding-right'] != undefined ? blockCssY.items[excerptSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'padding-right': paddingRight
-        }; //itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'padding-right': paddingRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[excerptSelector]['padding-bottom'] != undefined ? blockCssY.items[excerptSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'padding-bottom': paddingBottom
-        }; //itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'padding-bottom': paddingBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[excerptSelector]['padding-left'] != undefined ? blockCssY.items[excerptSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'padding-left': paddingLeft
-        }; //itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'padding-left': paddingLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function paddingControlReadmore(nextValues) {
-      var responsive = readMore.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...readMore.styles,
-        padding: responsive
-      };
-      setAttributes({
-        readMore: { ...readMore,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[redmoreSelector] = blockCssY.items[redmoreSelector] != undefined ? blockCssY.items[redmoreSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[redmoreSelector]['padding-top'] != undefined ? blockCssY.items[redmoreSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'padding-top': paddingTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[redmoreSelector]['padding-right'] != undefined ? blockCssY.items[redmoreSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'padding-right': paddingRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[redmoreSelector]['padding-bottom'] != undefined ? blockCssY.items[redmoreSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'padding-bottom': paddingBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[redmoreSelector]['padding-left'] != undefined ? blockCssY.items[redmoreSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'padding-left': paddingLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function marginControl(nextValues) {
-      var responsive = postExcerpt.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...postExcerpt.styles,
-        margin: responsive
-      };
-      setAttributes({
-        postExcerpt: { ...postExcerpt,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      blockCssY.items[excerptSelector] = blockCssY.items[excerptSelector] != undefined ? blockCssY.items[excerptSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[excerptSelector]['margin-top'] != undefined ? blockCssY.items[excerptSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'margin-top': marginTop
-        }; //itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'margin-top': marginTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[excerptSelector]['margin-right'] !== undefined ? blockCssY.items[excerptSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'margin-right': marginRight
-        }; //itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'margin-right': marginRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[excerptSelector]['margin-bottom'] !== undefined ? blockCssY.items[excerptSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'margin-bottom': marginBottom
-        }; //itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'margin-bottom': marginBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[excerptSelector]['margin-left'] !== undefined ? blockCssY.items[excerptSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[excerptSelector] = { ...blockCssY.items[excerptSelector],
-          'margin-left': marginLeft
-        }; //itemsX[excerptSelector] = { ...blockCssY.items[excerptSelector], 'margin-left': marginLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function marginControlReadmore(nextValues) {
-      var responsive = readMore.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...readMore.styles,
-        margin: responsive
-      };
-      setAttributes({
-        readMore: { ...readMore,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[redmoreSelector] = blockCssY.items[redmoreSelector] != undefined ? blockCssY.items[redmoreSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[redmoreSelector]['margin-top'] != undefined ? blockCssY.items[redmoreSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[redmoreSelector]['margin-right'] !== undefined ? blockCssY.items[redmoreSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[redmoreSelector]['margin-bottom'] !== undefined ? blockCssY.items[redmoreSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[redmoreSelector]['margin-left'] !== undefined ? blockCssY.items[redmoreSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function generateBlockCssY() {
-      var reponsiveCssGroups = {};
-      var reponsiveCss = '';
-
-      for (var selector in blockCssY.items) {
-        var attrs = blockCssY.items[selector];
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = [];
-            }
-
-            reponsiveCssGroups[device][selector].push({
-              'attr': attr,
-              'val': attrValue
-            });
-          }
-        }
-      }
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200);
-      } else {
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-        csswrappg.insertAdjacentHTML('beforeend', str);
-      }
     }
 
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
@@ -55603,8 +54502,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../store */ "./src/store.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link-off.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link-off.js");
 /* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
 /* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
 /* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/icon-picker */ "./src/components/icon-picker/index.js");
@@ -55614,6 +54515,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
 /* harmony import */ var _components_css_display__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../components/css-display */ "./src/components/css-display/index.js");
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
 
 
 
@@ -55632,6 +54536,9 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
+
+
 
 
 
@@ -55830,7 +54737,7 @@ var myStore = wp.data.select('postgrid-shop');
     const [iconHtml, setIconHtml] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('');
     const [linkPickerPosttitle, setLinkPickerPosttitle] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false); // Wrapper CSS Class Selectors
 
-    const redmoreWrapperSelector = blockClass;
+    const wrapperSelector = blockClass;
     const redmoreSelector = blockClass + ' .readmore';
     const iconSelector = blockClass + ' .readmore-icon';
     const prefixSelector = blockClass + ' .prefix';
@@ -55954,6 +54861,468 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         icon: { ...icon,
           options: options
+        }
+      });
+    }
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      } else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+    }
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({
+        wrapper: { ...wrapper
+        }
+      });
+    }
+
+    function onChangeStyleRedmore(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...readMore[sudoScource]
+      };
+      var elementSelector = redmoreSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = redmoreSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = redmoreSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = redmoreSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = redmoreSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = redmoreSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = redmoreSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = redmoreSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = redmoreSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = redmoreSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = redmoreSelector + '::first-line';
+      } else {
+        elementSelector = redmoreSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        readMore: { ...readMore
+        }
+      });
+    }
+
+    function onRemoveStyleRedmore(sudoScource, key) {
+      var sudoScourceX = { ...readMore[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      readMore[sudoScource] = sudoScourceX;
+      setAttributes({
+        readMore: { ...readMore
+        }
+      });
+
+      if (blockCssY.items[redmoreSelector] == undefined) {
+        blockCssY.items[redmoreSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[redmoreSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleRedmore(sudoScource, key) {
+      var sudoScourceX = { ...readMore[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      readMore[sudoScource] = sudoScourceX;
+      setAttributes({
+        readMore: { ...readMore
+        }
+      });
+    }
+
+    function onChangeStyleIcon(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+      var elementSelector = iconSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = iconSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = iconSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = iconSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = iconSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = iconSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = iconSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = iconSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = iconSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = iconSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = iconSelector + '::first-line';
+      } else {
+        elementSelector = iconSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+    }
+
+    function onRemoveStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+
+      if (blockCssY.items[iconSelector] == undefined) {
+        blockCssY.items[iconSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[iconSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+    }
+
+    function onChangeStylePrefix(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...prefix[sudoScource]
+      };
+      var elementSelector = prefixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = prefixSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = prefixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = prefixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = prefixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = prefixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = prefixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = prefixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = prefixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = prefixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = prefixSelector + '::first-line';
+      } else {
+        elementSelector = prefixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        prefix: { ...prefix
+        }
+      });
+    }
+
+    function onRemoveStylePrefix(sudoScource, key) {
+      var sudoScourceX = { ...prefix[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      prefix[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({
+        prefix: { ...prefix
+        }
+      });
+
+      if (blockCssY.items[prefixSelector] == undefined) {
+        blockCssY.items[prefixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStylePrefix(sudoScource, key) {
+      var sudoScourceX = { ...prefix[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      prefix[sudoScource] = sudoScourceX;
+      setAttributes({
+        prefix: { ...prefix
+        }
+      });
+    }
+
+    function onChangeStylePostfix(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...postfix[sudoScource]
+      };
+      var elementSelector = postfixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = postfixSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = postfixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = postfixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = postfixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = postfixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = postfixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = postfixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = postfixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = postfixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = postfixSelector + '::first-line';
+      } else {
+        elementSelector = postfixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        postfix: { ...postfix
+        }
+      });
+    }
+
+    function onRemoveStylePostfix(sudoScource, key) {
+      var sudoScourceX = { ...postfix[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      postfix[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({
+        postfix: { ...postfix
+        }
+      });
+
+      if (blockCssY.items[postfixSelector] == undefined) {
+        blockCssY.items[postfixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStylePostfix(sudoScource, key) {
+      var sudoScourceX = { ...postfix[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      postfix[sudoScource] = sudoScourceX;
+      setAttributes({
+        postfix: { ...postfix
         }
       });
     }
@@ -56411,6 +55780,24 @@ var myStore = wp.data.select('postgrid-shop');
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Wrapper",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
@@ -56457,38 +55844,34 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_19__["default"], {
-      val: wrapper.styles.display[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        blockCssY.items[redmoreWrapperSelector] = { ...blockCssY.items[redmoreWrapperSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      obj: wrapper,
+      onChange: onChangeStyleWrapper,
+      onAdd: onAddStyleWrapper,
+      onRemove: onRemoveStyleWrapper
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Read More",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Read More Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
@@ -56562,13 +55945,13 @@ var myStore = wp.data.select('postgrid-shop');
       className: "relative"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
       className: linkPickerPosttitle ? "!bg-gray-400" : '',
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"],
       onClick: ev => {
         setLinkPickerPosttitle(prev => !prev);
       }
     }), readMore.options.customUrl.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
       className: "!text-red-500 ml-2",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__["default"],
       onClick: ev => {
         var options = { ...readMore.options,
           customUrl: ''
@@ -56695,198 +56078,34 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       })));
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: readMore.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_18__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        // var responsive = readMore.styles.color;
-        // responsive[breakPointX] = newVal;
-        // var styles = { ...readMore.styles, color: responsive };
-        // setAttributes({ readMore: { ...readMore, styles: styles } });
-        var newValuesObj = {};
-
-        if (Object.keys(readMore.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = readMore.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...readMore.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          readMore: { ...readMore,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: readMore.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_18__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(readMore.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = readMore.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...readMore.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          readMore: { ...readMore,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-      label: "",
-      value: readMore.styles.display[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'inline',
-        value: 'inline'
-      }, {
-        label: 'inline-block',
-        value: 'inline-block'
-      }, {
-        label: 'block',
-        value: 'block'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(readMore.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = readMore.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...readMore.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          readMore: { ...readMore,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[redmoreSelector] = { ...blockCssY.items[redmoreSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: readMore.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControlReadmore(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: readMore.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControlReadmore(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
-      typo: readMore.styles,
-      breakPointX: breakPointX,
-      onChange: onChangeReadmoreTypo,
-      setAttributes: setAttributes,
-      obj: readMore
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      obj: wrapper,
+      onChange: onChangeStyleRedmore,
+      onAdd: onAddStyleRedmore,
+      onRemove: onRemoveStyleRedmore
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Icon",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Choose Icon"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -56931,294 +56150,34 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: icon.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_18__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: icon.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_18__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-      label: "",
-      value: icon.styles.display[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'inline',
-        value: 'inline'
-      }, {
-        label: 'inline-block',
-        value: 'inline-block'
-      }, {
-        label: 'block',
-        value: 'block'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: icon.styles.padding[breakPointX],
-      onChange: nextValues => {
-        var responsive = icon.styles.padding;
-        responsive[breakPointX] = nextValues;
-        var styles = { ...icon.styles,
-          padding: responsive
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        blockCssY.items[iconSelector] = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector] : {};
-
-        if (nextValues.top != undefined) {
-          var paddingTop = blockCssY.items[iconSelector]['padding-top'] != undefined ? blockCssY.items[iconSelector]['padding-top'] : {};
-          paddingTop[breakPointX] = nextValues.top;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-top': paddingTop
-          };
-        }
-
-        if (nextValues.right != undefined) {
-          var paddingRight = blockCssY.items[iconSelector]['padding-right'] != undefined ? blockCssY.items[iconSelector]['padding-right'] : {};
-          paddingRight[breakPointX] = nextValues.right;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-right': paddingRight
-          };
-        }
-
-        if (nextValues.bottom != undefined) {
-          var paddingBottom = blockCssY.items[iconSelector]['padding-bottom'] != undefined ? blockCssY.items[iconSelector]['padding-bottom'] : {};
-          paddingBottom[breakPointX] = nextValues.bottom;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-bottom': paddingBottom
-          };
-        }
-
-        if (nextValues.left != undefined) {
-          var paddingLeft = blockCssY.items[iconSelector]['padding-left'] != undefined ? blockCssY.items[iconSelector]['padding-left'] : {};
-          paddingLeft[breakPointX] = nextValues.left;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-left': paddingLeft
-          };
-        }
-
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: icon.styles.margin[breakPointX],
-      onChange: nextValues => {
-        var responsive = icon.styles.margin;
-        responsive[breakPointX] = nextValues;
-        var styles = { ...icon.styles,
-          margin: responsive
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        blockCssY.items[iconSelector] = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector] : {};
-
-        if (nextValues.top != undefined) {
-          var marginTop = blockCssY.items[iconSelector]['margin-top'] != undefined ? blockCssY.items[iconSelector]['margin-top'] : {};
-          marginTop[breakPointX] = nextValues.top;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-top': marginTop
-          };
-        }
-
-        if (nextValues.right != undefined) {
-          var marginRight = blockCssY.items[iconSelector]['margin-right'] !== undefined ? blockCssY.items[iconSelector]['margin-right'] : {};
-          marginRight[breakPointX] = nextValues.right;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-right': marginRight
-          };
-        }
-
-        if (nextValues.bottom != undefined) {
-          var marginBottom = blockCssY.items[iconSelector]['margin-bottom'] !== undefined ? blockCssY.items[iconSelector]['margin-bottom'] : {};
-          marginBottom[breakPointX] = nextValues.bottom;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-bottom': marginBottom
-          };
-        }
-
-        if (nextValues.left != undefined) {
-          var marginLeft = blockCssY.items[iconSelector]['margin-left'] !== undefined ? blockCssY.items[iconSelector]['margin-left'] : {};
-          marginLeft[breakPointX] = nextValues.left;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-left': marginLeft
-          };
-        }
-
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_10__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_13__["default"], {
-      typo: icon.styles,
-      breakPointX: breakPointX,
-      onChange: onChangeIconTypo,
-      setAttributes: setAttributes,
-      obj: icon
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      obj: wrapper,
+      onChange: onChangeStyleIcon,
+      onAdd: onAddStyleIcon,
+      onRemove: onRemoveStyleIcon
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Prefix",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Prefix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
@@ -57233,9 +56192,34 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      obj: wrapper,
+      onChange: onChangeStylePrefix,
+      onAdd: onAddStylePrefix,
+      onRemove: onRemoveStylePrefix
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Postfix",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Postfix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalInputControl, {
@@ -57250,14 +56234,21 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      obj: wrapper,
+      onChange: onChangeStylePostfix,
+      onAdd: onAddStylePostfix,
+      onRemove: onRemoveStylePostfix
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, "Please use following class selector to apply your custom CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
       className: "font-bold"
-    }, "Excerpt Wrapper"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, redmoreWrapperSelector, '{/* your CSS here*/}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, "Excerpt Wrapper"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, wrapperSelector, '{/* your CSS here*/}'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("p", {
       className: "font-bold"
@@ -60441,6 +59432,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
@@ -60454,6 +59447,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/icon-picker */ "./src/components/icon-picker/index.js");
 /* harmony import */ var _components_css_cursor__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/css-cursor */ "./src/components/css-cursor/index.js");
 /* harmony import */ var _components_css_text_align__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/css-text-align */ "./src/components/css-text-align/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
+
 
 
 
@@ -60470,6 +59467,8 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
+
 
 
 
@@ -60512,7 +59511,7 @@ var myStore = wp.data.select('postgrid-shop');
         styles: {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {}
@@ -60539,27 +59538,14 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'tab-nav '
         },
         styles: {
-          textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
-          display: {},
           cursor: {},
           borderRadius: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {
-            "Desktop": "700"
-          },
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {}
+          fontSize: {} //{ val: '18', unit: 'px' }
+
         }
       }
     },
@@ -60573,12 +59559,10 @@ var myStore = wp.data.select('postgrid-shop');
           activeIndex: 0
         },
         styles: {
-          textAlign: {},
           color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          backgroundColor: {},
+          fontSize: {} //{ val: '18', unit: 'px' }
+
         }
       }
     },
@@ -60590,12 +59574,10 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'tabs-navs '
         },
         styles: {
-          textAlign: {},
           color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          backgroundColor: {},
+          fontSize: {} //{ val: '18', unit: 'px' }
+
         }
       }
     },
@@ -60608,12 +59590,10 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion-content'
         },
         styles: {
-          textAlign: {},
           color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          backgroundColor: {},
+          fontSize: {} //{ val: '18', unit: 'px' }
+
         }
       }
     },
@@ -60632,19 +59612,8 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           color: {},
-          bgColor: {},
-          padding: {},
-          margin: {},
-          textAlign: {},
-          display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          fontWeight: {
-            "Desktop": "700"
-          },
-          textDecoration: {} //overline, line-through, underline
+          backgroundColor: {},
+          fontSize: {} //{ val: '18', unit: 'px' }
 
         }
       }
@@ -60662,11 +59631,10 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           textAlign: {},
-          display: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
           lineHeight: {},
@@ -60800,6 +59768,468 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         iconToggle: { ...iconToggle,
           options: options
+        }
+      });
+    }
+
+    function onChangeStyleHeaderWrap(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...headerWrap[sudoScource]
+      };
+      var elementSelector = headerWrapSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = headerWrapSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = headerWrapSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = headerWrapSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = headerWrapSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = headerWrapSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = headerWrapSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = headerWrapSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = headerWrapSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = headerWrapSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = headerWrapSelector + '::first-line';
+      } else {
+        elementSelector = headerWrapSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        headerWrap: { ...headerWrap
+        }
+      });
+    }
+
+    function onRemoveStyleHeaderWrap(sudoScource, key) {
+      var sudoScourceX = { ...headerWrap[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      headerWrap[sudoScource] = sudoScourceX;
+      setAttributes({
+        headerWrap: { ...headerWrap
+        }
+      });
+
+      if (blockCssY.items[headerWrapSelector] == undefined) {
+        blockCssY.items[headerWrapSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[headerWrapSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleHeaderWrap(sudoScource, key) {
+      var sudoScourceX = { ...headerWrap[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      headerWrap[sudoScource] = sudoScourceX;
+      setAttributes({
+        headerWrap: { ...headerWrap
+        }
+      });
+    }
+
+    function onChangeStyleHeader(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...header[sudoScource]
+      };
+      var elementSelector = headerSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = headerSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = headerSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = headerSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = headerSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = headerSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = headerSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = headerSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = headerSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = headerSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = headerSelector + '::first-line';
+      } else {
+        elementSelector = headerSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        header: { ...header
+        }
+      });
+    }
+
+    function onRemoveStyleHeader(sudoScource, key) {
+      var sudoScourceX = { ...header[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      header[sudoScource] = sudoScourceX;
+      setAttributes({
+        header: { ...header
+        }
+      });
+
+      if (blockCssY.items[headerSelector] == undefined) {
+        blockCssY.items[headerSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[headerSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleHeader(sudoScource, key) {
+      var sudoScourceX = { ...header[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      header[sudoScource] = sudoScourceX;
+      setAttributes({
+        header: { ...header
+        }
+      });
+    }
+
+    function onChangeStyleContent(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...content[sudoScource]
+      };
+      var elementSelector = contentSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = contentSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = contentSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = contentSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = contentSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = contentSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = contentSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = contentSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = contentSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = contentSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = contentSelector + '::first-line';
+      } else {
+        elementSelector = contentSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        content: { ...content
+        }
+      });
+    }
+
+    function onRemoveStyleContent(sudoScource, key) {
+      var sudoScourceX = { ...content[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      content[sudoScource] = sudoScourceX;
+      setAttributes({
+        content: { ...content
+        }
+      });
+
+      if (blockCssY.items[contentSelector] == undefined) {
+        blockCssY.items[contentSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[contentSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleContent(sudoScource, key) {
+      var sudoScourceX = { ...content[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      content[sudoScource] = sudoScourceX;
+      setAttributes({
+        content: { ...content
+        }
+      });
+    }
+
+    function onChangeStyleIcon(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+      var elementSelector = iconSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = iconSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = iconSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = iconSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = iconSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = iconSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = iconSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = iconSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = iconSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = iconSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = iconSelector + '::first-line';
+      } else {
+        elementSelector = iconSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+    }
+
+    function onRemoveStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      icon[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+
+      if (blockCssY.items[iconSelector] == undefined) {
+        blockCssY.items[iconSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[iconSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({
+        icon: { ...icon
+        }
+      });
+    }
+
+    function onChangeStyleHeaderActive(sudoScource, newVal, attr) {
+      var sudoScourceX = { ...headerActive[sudoScource]
+      };
+      var elementSelector = headerActiveSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = headerActiveSelector;
+      } else if (sudoScource == 'hover') {
+        elementSelector = headerActiveSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = headerActiveSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = headerActiveSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = headerActiveSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = headerActiveSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = headerActiveSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = headerActiveSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = headerActiveSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = headerActiveSelector + '::first-line';
+      } else {
+        elementSelector = headerActiveSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+      setAttributes({
+        headerActive: { ...headerActive
+        }
+      });
+    }
+
+    function onRemoveStyleHeaderActive(sudoScource, key) {
+      var sudoScourceX = { ...headerActive[sudoScource]
+      };
+
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      headerActive[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({
+        headerActive: { ...headerActive
+        }
+      });
+
+      if (blockCssY.items[headerActiveSelector] == undefined) {
+        blockCssY.items[headerActiveSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[headerActiveSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
+    }
+
+    function onAddStyleHeaderActive(sudoScource, key) {
+      var sudoScourceX = { ...headerActive[sudoScource]
+      };
+      sudoScourceX[key] = {};
+      headerActive[sudoScource] = sudoScourceX;
+      setAttributes({
+        headerActive: { ...headerActive
         }
       });
     }
@@ -61495,66 +60925,52 @@ var myStore = wp.data.select('postgrid-shop');
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Navs Wrap",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Text Align"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_align__WEBPACK_IMPORTED_MODULE_18__["default"], {
-      val: headerWrap.styles.textAlign[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(headerWrap.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = headerWrap.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...headerWrap.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          headerWrap: { ...headerWrap,
-            styles: styles
-          }
-        });
-        blockCssY.items[headerWrapSelector] = { ...blockCssY.items[headerWrapSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: content.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControlNavsWrap(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: content.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControlNavsWrap(nextValues);
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "options"
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      obj: headerWrap,
+      onChange: onChangeStyleHeaderWrap,
+      onAdd: onAddStyleHeaderWrap,
+      onRemove: onRemoveStyleHeaderWrap
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Navs",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
@@ -61598,250 +61014,62 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: header.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(header.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = header.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...header.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          header: { ...header,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: header.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(header.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = header.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...header.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          header: { ...header,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[headerSelector] = { ...blockCssY.items[headerSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Active Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: headerActive.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(headerActive.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = headerActive.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...headerActive.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          headerActive: { ...headerActive,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[headerActiveSelector] = { ...blockCssY.items[headerActiveSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: header.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControlHeader(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: header.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControlHeader(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Cursor"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_cursor__WEBPACK_IMPORTED_MODULE_17__["default"], {
-      val: header.styles.cursor[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(header.styles.cursor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = header.styles.cursor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...header.styles,
-          cursor: newValuesObj
-        };
-        setAttributes({
-          header: { ...header,
-            styles: styles
-          }
-        });
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
-          'cursor': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Border Radius"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: header.styles.borderRadius[breakPointX],
-      onChange: nextValues => {
-        var newValuesObj = {};
-
-        if (Object.keys(header.styles.borderRadius).length == 0) {
-          newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
-        } else {
-          newValuesObj = header.styles.borderRadius;
-          newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
-          ;
-        }
-
-        var styles = { ...header.styles,
-          borderRadius: newValuesObj
-        };
-        setAttributes({
-          header: { ...header,
-            styles: styles
-          }
-        });
-        blockCssY.items[headerSelector] = { ...blockCssY.items[headerSelector],
-          'border-radius': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      typo: header.styles,
-      breakPointX: breakPointX,
-      onChange: onChangeHeaderTypo,
-      setAttributes: setAttributes,
-      obj: header
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      obj: header,
+      onChange: onChangeStyleHeader,
+      onAdd: onAddStyleHeader,
+      onRemove: onRemoveStyleHeader
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+      title: "Navs - Active",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "options"
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      obj: headerActive,
+      onChange: onChangeStyleHeaderActive,
+      onAdd: onAddStyleHeaderActive,
+      onRemove: onRemoveStyleHeaderActive
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Content",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Wrapper Tag"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
@@ -61885,123 +61113,34 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: content.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(content.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = content.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...content.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          content: { ...content,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[contentSelector] = { ...blockCssY.items[contentSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: content.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(content.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = content.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...content.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          content: { ...content,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[contentSelector] = { ...blockCssY.items[contentSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: content.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControlContent(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: content.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControlContent(nextValues);
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      obj: content,
+      onChange: onChangeStyleContent,
+      onAdd: onAddStyleContent,
+      onRemove: onRemoveStyleContent
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Icon",
       initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        className: 'tab-style'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Choose Icon"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -62063,292 +61202,14 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: icon.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.ColorPalette, {
-      value: icon.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
-      label: "",
-      value: icon.styles.display[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'inline',
-        value: 'inline'
-      }, {
-        label: 'inline-block',
-        value: 'inline-block'
-      }, {
-        label: 'block',
-        value: 'block'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(icon.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = icon.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...icon.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: icon.styles.padding[breakPointX],
-      onChange: nextValues => {
-        var responsive = icon.styles.padding;
-        responsive[breakPointX] = nextValues;
-        var styles = { ...icon.styles,
-          padding: responsive
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        blockCssY.items[iconSelector] = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector] : {};
-
-        if (nextValues.top != undefined) {
-          var paddingTop = blockCssY.items[iconSelector]['padding-top'] != undefined ? blockCssY.items[iconSelector]['padding-top'] : {};
-          paddingTop[breakPointX] = nextValues.top;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-top': paddingTop
-          };
-        }
-
-        if (nextValues.right != undefined) {
-          var paddingRight = blockCssY.items[iconSelector]['padding-right'] != undefined ? blockCssY.items[iconSelector]['padding-right'] : {};
-          paddingRight[breakPointX] = nextValues.right;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-right': paddingRight
-          };
-        }
-
-        if (nextValues.bottom != undefined) {
-          var paddingBottom = blockCssY.items[iconSelector]['padding-bottom'] != undefined ? blockCssY.items[iconSelector]['padding-bottom'] : {};
-          paddingBottom[breakPointX] = nextValues.bottom;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-bottom': paddingBottom
-          };
-        }
-
-        if (nextValues.left != undefined) {
-          var paddingLeft = blockCssY.items[iconSelector]['padding-left'] != undefined ? blockCssY.items[iconSelector]['padding-left'] : {};
-          paddingLeft[breakPointX] = nextValues.left;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'padding-left': paddingLeft
-          };
-        }
-
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalBoxControl, {
-      label: "",
-      values: icon.styles.margin[breakPointX],
-      onChange: nextValues => {
-        var responsive = icon.styles.margin;
-        responsive[breakPointX] = nextValues;
-        var styles = { ...icon.styles,
-          margin: responsive
-        };
-        setAttributes({
-          icon: { ...icon,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        blockCssY.items[iconSelector] = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector] : {};
-
-        if (nextValues.top != undefined) {
-          var marginTop = blockCssY.items[iconSelector]['margin-top'] != undefined ? blockCssY.items[iconSelector]['margin-top'] : {};
-          marginTop[breakPointX] = nextValues.top;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-top': marginTop
-          };
-        }
-
-        if (nextValues.right != undefined) {
-          var marginRight = blockCssY.items[iconSelector]['margin-right'] !== undefined ? blockCssY.items[iconSelector]['margin-right'] : {};
-          marginRight[breakPointX] = nextValues.right;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-right': marginRight
-          };
-        }
-
-        if (nextValues.bottom != undefined) {
-          var marginBottom = blockCssY.items[iconSelector]['margin-bottom'] !== undefined ? blockCssY.items[iconSelector]['margin-bottom'] : {};
-          marginBottom[breakPointX] = nextValues.bottom;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-bottom': marginBottom
-          };
-        }
-
-        if (nextValues.left != undefined) {
-          var marginLeft = blockCssY.items[iconSelector]['margin-left'] !== undefined ? blockCssY.items[iconSelector]['margin-left'] : {};
-          marginLeft[breakPointX] = nextValues.left;
-          blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector],
-            'margin-left': marginLeft
-          };
-        }
-
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      typo: icon.styles,
-      breakPointX: breakPointX,
-      onChange: onChangeIconTypo,
-      setAttributes: setAttributes,
-      obj: icon
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      obj: wrapper,
+      onChange: onChangeStyleIcon,
+      onAdd: onAddStyleIcon,
+      onRemove: onRemoveStyleIcon
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Please use following class selector to apply your custom CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

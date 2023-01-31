@@ -1892,8 +1892,6 @@ registerBlockType("post-grid/tabs", {
               </PanelBody>
 
               <PanelBody title="Content" initialOpen={false}>
-
-
                 <PGtabs
                   activeTab="options"
                   orientation="horizontal"

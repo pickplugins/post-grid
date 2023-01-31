@@ -71,7 +71,7 @@ registerBlockType("post-grid/read-more", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -91,7 +91,7 @@ registerBlockType("post-grid/read-more", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           textAlign: {},
@@ -118,7 +118,7 @@ registerBlockType("post-grid/read-more", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           textAlign: {},
@@ -142,7 +142,7 @@ registerBlockType("post-grid/read-more", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
 
         },
       },
@@ -156,7 +156,7 @@ registerBlockType("post-grid/read-more", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
 
         },
       },

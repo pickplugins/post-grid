@@ -17,16 +17,10 @@ const { RawHTML } = wp.element;
 import { store } from '../../store'
 import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 
-import IconToggle from '../../components/icon-toggle'
-import Typography from '../../components/typography'
 import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
-import BreakpointToggle from '../../components/breakpoint-toggle'
 import PGproWrapper from '../../components/pro-wrapper'
 import PGDropdown from '../../components/dropdown'
-
-import colorsPresets from '../../colors-presets'
-import PGcssDisplay from '../../components/css-display'
 
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
@@ -1009,15 +1003,6 @@ registerBlockType("post-grid/post-excerpt", {
 
 
 
-    const [setSome, setSomeState] = useState({});
-    const [stateX, setStateX] = useState('Old Value');
-
-
-
-
-
-
-
     const {
       __experimentalSetPreviewDeviceType: setPreviewDeviceType,
 
@@ -1060,35 +1045,6 @@ registerBlockType("post-grid/post-excerpt", {
         <div>
 
           <BlockControls >
-            <AlignmentToolbar
-              value={wrapper.styles.textAlign[breakPointX]}
-              onChange={(newVal) => {
-
-                var newValuesObj = {};
-
-
-                if (Object.keys(wrapper.styles.textAlign).length == 0) {
-                  newValuesObj[breakPointX] = newVal;
-                } else {
-                  newValuesObj = wrapper.styles.textAlign;
-                  newValuesObj[breakPointX] = newVal;
-                }
-
-
-                var styles = { ...wrapper.styles, textAlign: newValuesObj };
-                setAttributes({ wrapper: { options: wrapper.options, styles: styles } });
-
-                blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-align': newValuesObj };
-                setAttributes({ blockCssY: { items: blockCssY.items } });
-
-              }}
-            />
-
-
-
-
-
-
 
           </BlockControls>
 

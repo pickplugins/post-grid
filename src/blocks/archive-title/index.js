@@ -66,12 +66,10 @@ registerBlockType("post-grid/archive-title", {
 
         styles:
         {
-          textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
-          display: {},
 
         },
       },
@@ -98,21 +96,13 @@ registerBlockType("post-grid/archive-title", {
         },
 
         styles: {
-          textAlign: {},
-          display: {},
-          width: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
-          margin: {},
+
 
           fontSize: {}, //{ val: '18', unit: 'px' }
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+
         },
       },
     },
@@ -124,16 +114,11 @@ registerBlockType("post-grid/archive-title", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
-          display: {},
-
           fontSize: {}, //{ val: '18', unit: 'px' }
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
+
         },
       },
     },
@@ -147,7 +132,7 @@ registerBlockType("post-grid/archive-title", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
 
         },
       },
@@ -161,7 +146,7 @@ registerBlockType("post-grid/archive-title", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
 
         },
       },
@@ -2141,7 +2126,7 @@ registerBlockType("post-grid/archive-title", {
 
 
 
-                            // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, bgColor: prefix.bgColor } })
+                            // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
                           }
                           }
                         />
@@ -2198,7 +2183,7 @@ registerBlockType("post-grid/archive-title", {
                             setAttributes({ postfix: { ...postfix, options: options } });
 
 
-                            // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, bgColor: postfix.bgColor } })
+                            // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, backgroundColor: postfix.backgroundColor } })
                           }
 
                           }

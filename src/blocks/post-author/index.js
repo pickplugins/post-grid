@@ -6,13 +6,12 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { link, linkOff } from "@wordpress/icons";
 
 import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
-import { Icon, close } from '@wordpress/icons';
 import { applyFilters } from '@wordpress/hooks';
+import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
@@ -28,6 +27,14 @@ import Typography from '../../components/typography'
 import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
 import PGcssDisplay from '../../components/css-display'
+
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
+
+
+
+
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -63,7 +70,7 @@ registerBlockType("post-grid/post-author", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -91,7 +98,7 @@ registerBlockType("post-grid/post-author", {
           display: {},
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -113,19 +120,14 @@ registerBlockType("post-grid/post-author", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
           verticalAlign: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+
         },
 
 
@@ -140,7 +142,7 @@ registerBlockType("post-grid/post-author", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -219,12 +221,12 @@ registerBlockType("post-grid/post-author", {
 
 
 
-    var authorWrapperSelector = blockClass;
+    var wrapperSelector = blockClass;
     // Wrapper CSS Class Selectors
-    var authorNameSelector = blockClass + ' .name';
-    var authorDescriptionSelector = blockClass + ' .description';
-    var authorAvatarSelector = blockClass + ' .avatar';
-    var authorAvatarImgSelector = blockClass + ' .avatar img';
+    var nameSelector = blockClass + ' .name';
+    var descriptionSelector = blockClass + ' .description';
+    var avatarSelector = blockClass + ' .avatar';
+    var avatarImgSelector = blockClass + ' .avatar img';
 
 
 
@@ -448,6 +450,646 @@ registerBlockType("post-grid/post-author", {
     }
 
 
+
+
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+
+
+
+    function onChangeStyleElements(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...elements[sudoScource] }
+      var elementSelector = redmoreSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = redmoreSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = redmoreSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = redmoreSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = redmoreSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = redmoreSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = redmoreSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = redmoreSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = redmoreSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = redmoreSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = redmoreSelector + '::first-line';
+      }
+      else {
+        elementSelector = redmoreSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ elements: { ...elements } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleElements(sudoScource, key) {
+      var sudoScourceX = { ...elements[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      elements[sudoScource] = sudoScourceX;
+      setAttributes({ elements: { ...elements } });
+
+      if (blockCssY.items[redmoreSelector] == undefined) {
+        blockCssY.items[redmoreSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[redmoreSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleElements(sudoScource, key) {
+      var sudoScourceX = { ...elements[sudoScource] }
+      sudoScourceX[key] = {};
+      elements[sudoScource] = sudoScourceX;
+      setAttributes({ elements: { ...elements } });
+    }
+
+
+
+
+
+
+    function onChangeStyleAvatar(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...avatar[sudoScource] }
+      var elementSelector = avatarSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = avatarSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = avatarSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = avatarSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = avatarSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = avatarSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = avatarSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = avatarSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = avatarSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = avatarSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = avatarSelector + '::first-line';
+      }
+      else {
+        elementSelector = avatarSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ avatar: { ...avatar } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleAvatar(sudoScource, key) {
+      var sudoScourceX = { ...avatar[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      avatar[sudoScource] = sudoScourceX;
+      setAttributes({ avatar: { ...avatar } });
+
+      if (blockCssY.items[avatarSelector] == undefined) {
+        blockCssY.items[avatarSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[avatarSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleAvatar(sudoScource, key) {
+      var sudoScourceX = { ...avatar[sudoScource] }
+      sudoScourceX[key] = {};
+      avatar[sudoScource] = sudoScourceX;
+      setAttributes({ avatar: { ...avatar } });
+    }
+
+
+
+
+    function onChangeStyleName(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...name[sudoScource] }
+      var elementSelector = nameSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = nameSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = nameSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = nameSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = nameSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = nameSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = nameSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = nameSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = nameSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = nameSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = nameSelector + '::first-line';
+      }
+      else {
+        elementSelector = nameSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ name: { ...name } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleName(sudoScource, key) {
+      var sudoScourceX = { ...name[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      name[sudoScource] = sudoScourceX;
+      setAttributes({ name: { ...name } });
+
+      if (blockCssY.items[nameSelector] == undefined) {
+        blockCssY.items[nameSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[nameSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleName(sudoScource, key) {
+      var sudoScourceX = { ...name[sudoScource] }
+      sudoScourceX[key] = {};
+      name[sudoScource] = sudoScourceX;
+      setAttributes({ name: { ...name } });
+    }
+
+
+
+
+
+    function onChangeStyleDescription(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...description[sudoScource] }
+      var elementSelector = descriptionSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = descriptionSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = descriptionSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = descriptionSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = descriptionSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = descriptionSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = descriptionSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = descriptionSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = descriptionSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = descriptionSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = descriptionSelector + '::first-line';
+      }
+      else {
+        elementSelector = descriptionSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ description: { ...description } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleDescription(sudoScource, key) {
+      var sudoScourceX = { ...description[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      description[sudoScource] = sudoScourceX;
+      setAttributes({ description: { ...description } });
+
+      if (blockCssY.items[descriptionSelector] == undefined) {
+        blockCssY.items[descriptionSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[descriptionSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleDescription(sudoScource, key) {
+      var sudoScourceX = { ...description[sudoScource] }
+      sudoScourceX[key] = {};
+      description[sudoScource] = sudoScourceX;
+      setAttributes({ description: { ...description } });
+    }
+
+
+
+
+
+    function onChangeStylePrefix(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      var elementSelector = prefixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = prefixSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = prefixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = prefixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = prefixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = prefixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = prefixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = prefixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = prefixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = prefixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = prefixSelector + '::first-line';
+      }
+      else {
+        elementSelector = prefixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onRemoveStylePrefix(sudoScource, key) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      prefix[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ prefix: { ...prefix } });
+
+      if (blockCssY.items[prefixSelector] == undefined) {
+        blockCssY.items[prefixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePrefix(sudoScource, key) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      sudoScourceX[key] = {};
+      prefix[sudoScource] = sudoScourceX;
+      setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onChangeStylePostfix(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      var elementSelector = postfixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = postfixSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = postfixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = postfixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = postfixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = postfixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = postfixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = postfixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = postfixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = postfixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = postfixSelector + '::first-line';
+      }
+      else {
+        elementSelector = postfixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+    function onRemoveStylePostfix(sudoScource, key) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      postfix[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ postfix: { ...postfix } });
+
+      if (blockCssY.items[postfixSelector] == undefined) {
+        blockCssY.items[postfixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePostfix(sudoScource, key) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      sudoScourceX[key] = {};
+      postfix[sudoScource] = sudoScourceX;
+      setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     function paddingControl(nextValues) {
 
 
@@ -459,28 +1101,28 @@ registerBlockType("post-grid/post-author", {
       setAttributes({ name: { ...name, styles: styles } });
 
 
-      blockCssY.items[authorNameSelector] = (blockCssY.items[authorNameSelector] != undefined) ? blockCssY.items[authorNameSelector] : {};
+      blockCssY.items[nameSelector] = (blockCssY.items[nameSelector] != undefined) ? blockCssY.items[nameSelector] : {};
 
 
 
       if (nextValues.top != undefined) {
 
-        var paddingTop = (blockCssY.items[authorNameSelector]['padding-top'] != undefined) ? blockCssY.items[authorNameSelector]['padding-top'] : {};
+        var paddingTop = (blockCssY.items[nameSelector]['padding-top'] != undefined) ? blockCssY.items[nameSelector]['padding-top'] : {};
         paddingTop[breakPointX] = nextValues.top
 
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'padding-top': paddingTop };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'padding-top': paddingTop };
 
       }
 
 
       if (nextValues.right != undefined) {
 
-        var paddingRight = (blockCssY.items[authorNameSelector]['padding-right'] != undefined) ? blockCssY.items[authorNameSelector]['padding-right'] : {};
+        var paddingRight = (blockCssY.items[nameSelector]['padding-right'] != undefined) ? blockCssY.items[nameSelector]['padding-right'] : {};
         paddingRight[breakPointX] = nextValues.right
 
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'padding-right': paddingRight };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'padding-right': paddingRight };
 
 
 
@@ -488,11 +1130,11 @@ registerBlockType("post-grid/post-author", {
 
       if (nextValues.bottom != undefined) {
 
-        var paddingBottom = (blockCssY.items[authorNameSelector]['padding-bottom'] != undefined) ? blockCssY.items[authorNameSelector]['padding-bottom'] : {};
+        var paddingBottom = (blockCssY.items[nameSelector]['padding-bottom'] != undefined) ? blockCssY.items[nameSelector]['padding-bottom'] : {};
         paddingBottom[breakPointX] = nextValues.bottom
 
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'padding-bottom': paddingBottom };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'padding-bottom': paddingBottom };
 
 
 
@@ -500,10 +1142,10 @@ registerBlockType("post-grid/post-author", {
 
       if (nextValues.left != undefined) {
 
-        var paddingLeft = (blockCssY.items[authorNameSelector]['padding-left'] != undefined) ? blockCssY.items[authorNameSelector]['padding-left'] : {};
+        var paddingLeft = (blockCssY.items[nameSelector]['padding-left'] != undefined) ? blockCssY.items[nameSelector]['padding-left'] : {};
         paddingLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'padding-left': paddingLeft };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'padding-left': paddingLeft };
 
 
       }
@@ -527,17 +1169,17 @@ registerBlockType("post-grid/post-author", {
 
 
 
-      blockCssY.items[authorAvatarImgSelector] = (blockCssY.items[authorAvatarImgSelector] != undefined) ? blockCssY.items[authorAvatarImgSelector] : {};
+      blockCssY.items[avatarImgSelector] = (blockCssY.items[avatarImgSelector] != undefined) ? blockCssY.items[avatarImgSelector] : {};
 
 
 
       if (nextValues.top != undefined) {
 
-        var borderRadiusX = (blockCssY.items[authorAvatarImgSelector]['border-radius'] != undefined) ? blockCssY.items[authorAvatarImgSelector]['border-radius'] : {};
+        var borderRadiusX = (blockCssY.items[avatarImgSelector]['border-radius'] != undefined) ? blockCssY.items[avatarImgSelector]['border-radius'] : {};
         borderRadiusX[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left
 
 
-        blockCssY.items[authorAvatarImgSelector] = { ...blockCssY.items[authorAvatarImgSelector], 'border-radius': borderRadiusX };
+        blockCssY.items[avatarImgSelector] = { ...blockCssY.items[avatarImgSelector], 'border-radius': borderRadiusX };
 
       }
 
@@ -570,28 +1212,28 @@ registerBlockType("post-grid/post-author", {
       setAttributes({ avatar: { ...avatar, styles: styles } });
 
 
-      blockCssY.items[authorAvatarSelector] = (blockCssY.items[authorAvatarSelector] != undefined) ? blockCssY.items[authorAvatarSelector] : {};
+      blockCssY.items[avatarSelector] = (blockCssY.items[avatarSelector] != undefined) ? blockCssY.items[avatarSelector] : {};
 
 
 
       if (nextValues.top != undefined) {
 
-        var paddingTop = (blockCssY.items[authorAvatarSelector]['padding-top'] != undefined) ? blockCssY.items[authorAvatarSelector]['padding-top'] : {};
+        var paddingTop = (blockCssY.items[avatarSelector]['padding-top'] != undefined) ? blockCssY.items[avatarSelector]['padding-top'] : {};
         paddingTop[breakPointX] = nextValues.top
 
 
-        blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'padding-top': paddingTop };
+        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'padding-top': paddingTop };
 
       }
 
 
       if (nextValues.right != undefined) {
 
-        var paddingRight = (blockCssY.items[authorAvatarSelector]['padding-right'] != undefined) ? blockCssY.items[authorAvatarSelector]['padding-right'] : {};
+        var paddingRight = (blockCssY.items[avatarSelector]['padding-right'] != undefined) ? blockCssY.items[avatarSelector]['padding-right'] : {};
         paddingRight[breakPointX] = nextValues.right
 
 
-        blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'padding-right': paddingRight };
+        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'padding-right': paddingRight };
 
 
 
@@ -599,11 +1241,11 @@ registerBlockType("post-grid/post-author", {
 
       if (nextValues.bottom != undefined) {
 
-        var paddingBottom = (blockCssY.items[authorAvatarSelector]['padding-bottom'] != undefined) ? blockCssY.items[authorAvatarSelector]['padding-bottom'] : {};
+        var paddingBottom = (blockCssY.items[avatarSelector]['padding-bottom'] != undefined) ? blockCssY.items[avatarSelector]['padding-bottom'] : {};
         paddingBottom[breakPointX] = nextValues.bottom
 
 
-        blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'padding-bottom': paddingBottom };
+        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'padding-bottom': paddingBottom };
 
 
 
@@ -611,10 +1253,10 @@ registerBlockType("post-grid/post-author", {
 
       if (nextValues.left != undefined) {
 
-        var paddingLeft = (blockCssY.items[authorAvatarSelector]['padding-left'] != undefined) ? blockCssY.items[authorAvatarSelector]['padding-left'] : {};
+        var paddingLeft = (blockCssY.items[avatarSelector]['padding-left'] != undefined) ? blockCssY.items[avatarSelector]['padding-left'] : {};
         paddingLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'padding-left': paddingLeft };
+        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'padding-left': paddingLeft };
 
 
       }
@@ -641,28 +1283,28 @@ registerBlockType("post-grid/post-author", {
       setAttributes({ description: { ...description, styles: styles } });
 
 
-      blockCssY.items[authorDescriptionSelector] = (blockCssY.items[authorDescriptionSelector] != undefined) ? blockCssY.items[authorDescriptionSelector] : {};
+      blockCssY.items[descriptionSelector] = (blockCssY.items[descriptionSelector] != undefined) ? blockCssY.items[descriptionSelector] : {};
 
 
 
       if (nextValues.top != undefined) {
 
-        var paddingTop = (blockCssY.items[authorDescriptionSelector]['padding-top'] != undefined) ? blockCssY.items[authorDescriptionSelector]['padding-top'] : {};
+        var paddingTop = (blockCssY.items[descriptionSelector]['padding-top'] != undefined) ? blockCssY.items[descriptionSelector]['padding-top'] : {};
         paddingTop[breakPointX] = nextValues.top
 
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'padding-top': paddingTop };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'padding-top': paddingTop };
 
       }
 
 
       if (nextValues.right != undefined) {
 
-        var paddingRight = (blockCssY.items[authorDescriptionSelector]['padding-right'] != undefined) ? blockCssY.items[authorDescriptionSelector]['padding-right'] : {};
+        var paddingRight = (blockCssY.items[descriptionSelector]['padding-right'] != undefined) ? blockCssY.items[descriptionSelector]['padding-right'] : {};
         paddingRight[breakPointX] = nextValues.right
 
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'padding-right': paddingRight };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'padding-right': paddingRight };
 
 
 
@@ -670,11 +1312,11 @@ registerBlockType("post-grid/post-author", {
 
       if (nextValues.bottom != undefined) {
 
-        var paddingBottom = (blockCssY.items[authorDescriptionSelector]['padding-bottom'] != undefined) ? blockCssY.items[authorDescriptionSelector]['padding-bottom'] : {};
+        var paddingBottom = (blockCssY.items[descriptionSelector]['padding-bottom'] != undefined) ? blockCssY.items[descriptionSelector]['padding-bottom'] : {};
         paddingBottom[breakPointX] = nextValues.bottom
 
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'padding-bottom': paddingBottom };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'padding-bottom': paddingBottom };
 
 
 
@@ -682,10 +1324,10 @@ registerBlockType("post-grid/post-author", {
 
       if (nextValues.left != undefined) {
 
-        var paddingLeft = (blockCssY.items[authorDescriptionSelector]['padding-left'] != undefined) ? blockCssY.items[authorDescriptionSelector]['padding-left'] : {};
+        var paddingLeft = (blockCssY.items[descriptionSelector]['padding-left'] != undefined) ? blockCssY.items[descriptionSelector]['padding-left'] : {};
         paddingLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'padding-left': paddingLeft };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'padding-left': paddingLeft };
 
 
       }
@@ -710,40 +1352,40 @@ registerBlockType("post-grid/post-author", {
 
 
 
-      blockCssY.items[authorAvatarSelector] = (blockCssY.items[authorAvatarSelector] != undefined) ? blockCssY.items[authorAvatarSelector] : {};
+      blockCssY.items[avatarSelector] = (blockCssY.items[avatarSelector] != undefined) ? blockCssY.items[avatarSelector] : {};
 
       if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[authorAvatarSelector]['margin-top'] != undefined) ? blockCssY.items[authorAvatarSelector]['margin-top'] : {};
+        var marginTop = (blockCssY.items[avatarSelector]['margin-top'] != undefined) ? blockCssY.items[avatarSelector]['margin-top'] : {};
         marginTop[breakPointX] = nextValues.top
 
-        blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'margin-top': marginTop };
+        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'margin-top': marginTop };
       }
 
 
       if (nextValues.right != undefined) {
 
-        var marginRight = (blockCssY.items[authorAvatarSelector]['margin-right'] !== undefined) ? blockCssY.items[authorAvatarSelector]['margin-right'] : {};
+        var marginRight = (blockCssY.items[avatarSelector]['margin-right'] !== undefined) ? blockCssY.items[avatarSelector]['margin-right'] : {};
         marginRight[breakPointX] = nextValues.right
 
-        blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'margin-right': marginRight };
+        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'margin-right': marginRight };
 
       }
 
       if (nextValues.bottom != undefined) {
 
-        var marginBottom = (blockCssY.items[authorAvatarSelector]['margin-bottom'] !== undefined) ? blockCssY.items[authorAvatarSelector]['margin-bottom'] : {};
+        var marginBottom = (blockCssY.items[avatarSelector]['margin-bottom'] !== undefined) ? blockCssY.items[avatarSelector]['margin-bottom'] : {};
         marginBottom[breakPointX] = nextValues.bottom
 
-        blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'margin-bottom': marginBottom };
+        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'margin-bottom': marginBottom };
 
       }
 
       if (nextValues.left != undefined) {
 
-        var marginLeft = (blockCssY.items[authorAvatarSelector]['margin-left'] !== undefined) ? blockCssY.items[authorAvatarSelector]['margin-left'] : {};
+        var marginLeft = (blockCssY.items[avatarSelector]['margin-left'] !== undefined) ? blockCssY.items[avatarSelector]['margin-left'] : {};
         marginLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'margin-left': marginLeft };
+        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'margin-left': marginLeft };
 
       }
 
@@ -766,40 +1408,40 @@ registerBlockType("post-grid/post-author", {
       nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
       nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
-      blockCssY.items[authorNameSelector] = (blockCssY.items[authorNameSelector] != undefined) ? blockCssY.items[authorNameSelector] : {};
+      blockCssY.items[nameSelector] = (blockCssY.items[nameSelector] != undefined) ? blockCssY.items[nameSelector] : {};
 
       if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[authorNameSelector]['margin-top'] != undefined) ? blockCssY.items[authorNameSelector]['margin-top'] : {};
+        var marginTop = (blockCssY.items[nameSelector]['margin-top'] != undefined) ? blockCssY.items[nameSelector]['margin-top'] : {};
         marginTop[breakPointX] = nextValues.top
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'margin-top': marginTop };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'margin-top': marginTop };
       }
 
 
       if (nextValues.right != undefined) {
 
-        var marginRight = (blockCssY.items[authorNameSelector]['margin-right'] !== undefined) ? blockCssY.items[authorNameSelector]['margin-right'] : {};
+        var marginRight = (blockCssY.items[nameSelector]['margin-right'] !== undefined) ? blockCssY.items[nameSelector]['margin-right'] : {};
         marginRight[breakPointX] = nextValues.right
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'margin-right': marginRight };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'margin-right': marginRight };
 
       }
 
       if (nextValues.bottom != undefined) {
 
-        var marginBottom = (blockCssY.items[authorNameSelector]['margin-bottom'] !== undefined) ? blockCssY.items[authorNameSelector]['margin-bottom'] : {};
+        var marginBottom = (blockCssY.items[nameSelector]['margin-bottom'] !== undefined) ? blockCssY.items[nameSelector]['margin-bottom'] : {};
         marginBottom[breakPointX] = nextValues.bottom
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'margin-bottom': marginBottom };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'margin-bottom': marginBottom };
 
       }
 
       if (nextValues.left != undefined) {
 
-        var marginLeft = (blockCssY.items[authorNameSelector]['margin-left'] !== undefined) ? blockCssY.items[authorNameSelector]['margin-left'] : {};
+        var marginLeft = (blockCssY.items[nameSelector]['margin-left'] !== undefined) ? blockCssY.items[nameSelector]['margin-left'] : {};
         marginLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'margin-left': marginLeft };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'margin-left': marginLeft };
 
       }
 
@@ -819,40 +1461,40 @@ registerBlockType("post-grid/post-author", {
 
 
 
-      blockCssY.items[authorDescriptionSelector] = (blockCssY.items[authorDescriptionSelector] != undefined) ? blockCssY.items[authorDescriptionSelector] : {};
+      blockCssY.items[descriptionSelector] = (blockCssY.items[descriptionSelector] != undefined) ? blockCssY.items[descriptionSelector] : {};
 
       if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[authorDescriptionSelector]['margin-top'] != undefined) ? blockCssY.items[authorDescriptionSelector]['margin-top'] : {};
+        var marginTop = (blockCssY.items[descriptionSelector]['margin-top'] != undefined) ? blockCssY.items[descriptionSelector]['margin-top'] : {};
         marginTop[breakPointX] = nextValues.top
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'margin-top': marginTop };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'margin-top': marginTop };
       }
 
 
       if (nextValues.right != undefined) {
 
-        var marginRight = (blockCssY.items[authorDescriptionSelector]['margin-right'] !== undefined) ? blockCssY.items[authorDescriptionSelector]['margin-right'] : {};
+        var marginRight = (blockCssY.items[descriptionSelector]['margin-right'] !== undefined) ? blockCssY.items[descriptionSelector]['margin-right'] : {};
         marginRight[breakPointX] = nextValues.right
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'margin-right': marginRight };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'margin-right': marginRight };
 
       }
 
       if (nextValues.bottom != undefined) {
 
-        var marginBottom = (blockCssY.items[authorDescriptionSelector]['margin-bottom'] !== undefined) ? blockCssY.items[authorDescriptionSelector]['margin-bottom'] : {};
+        var marginBottom = (blockCssY.items[descriptionSelector]['margin-bottom'] !== undefined) ? blockCssY.items[descriptionSelector]['margin-bottom'] : {};
         marginBottom[breakPointX] = nextValues.bottom
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'margin-bottom': marginBottom };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'margin-bottom': marginBottom };
 
       }
 
       if (nextValues.left != undefined) {
 
-        var marginLeft = (blockCssY.items[authorDescriptionSelector]['margin-left'] !== undefined) ? blockCssY.items[authorDescriptionSelector]['margin-left'] : {};
+        var marginLeft = (blockCssY.items[descriptionSelector]['margin-left'] !== undefined) ? blockCssY.items[descriptionSelector]['margin-left'] : {};
         marginLeft[breakPointX] = nextValues.left
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'margin-left': marginLeft };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'margin-left': marginLeft };
 
       }
 
@@ -870,7 +1512,7 @@ registerBlockType("post-grid/post-author", {
 
       if (typoX.fontFamily[breakPointX] != undefined) {
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'font-family': typoX.fontFamily };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'font-family': typoX.fontFamily };
 
       }
 
@@ -881,10 +1523,10 @@ registerBlockType("post-grid/post-author", {
         var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
 
 
-        var fontSizeX = (blockCssY.items[authorNameSelector] != undefined) ? blockCssY.items[authorNameSelector]['font-size'] : {};
+        var fontSizeX = (blockCssY.items[nameSelector] != undefined) ? blockCssY.items[nameSelector]['font-size'] : {};
 
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'font-size': fontSizeX };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'font-size': fontSizeX };
 
       }
 
@@ -896,11 +1538,11 @@ registerBlockType("post-grid/post-author", {
         var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
 
 
-        var lineHeightX = (blockCssY.items[authorNameSelector]['line-height'] != undefined) ? blockCssY.items[authorNameSelector]['line-height'] : {};
+        var lineHeightX = (blockCssY.items[nameSelector]['line-height'] != undefined) ? blockCssY.items[nameSelector]['line-height'] : {};
 
         lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'line-height': lineHeightX };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'line-height': lineHeightX };
       }
       if (typoX.letterSpacing[breakPointX] != undefined) {
 
@@ -909,16 +1551,16 @@ registerBlockType("post-grid/post-author", {
 
 
 
-        var letterSpacingX = (blockCssY.items[authorNameSelector]['letter-spacing'] != undefined) ? blockCssY.items[authorNameSelector]['letter-spacing'] : {};
+        var letterSpacingX = (blockCssY.items[nameSelector]['letter-spacing'] != undefined) ? blockCssY.items[nameSelector]['letter-spacing'] : {};
 
         letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'letter-spacing': letterSpacingX };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'letter-spacing': letterSpacingX };
       }
 
       if (typoX.fontWeight[breakPointX] != undefined) {
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'font-weight': typoX.fontWeight };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'font-weight': typoX.fontWeight };
 
       }
 
@@ -933,12 +1575,12 @@ registerBlockType("post-grid/post-author", {
         str[breakPointX] = textDecorationXStr;
 
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'text-decoration': str };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'text-decoration': str };
 
       }
       if (typoX.textTransform[breakPointX] != undefined) {
 
-        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'text-transform': typoX.textTransform };
+        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'text-transform': typoX.textTransform };
 
 
       }
@@ -956,7 +1598,7 @@ registerBlockType("post-grid/post-author", {
 
       if (typoX.fontFamily[breakPointX] != undefined) {
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'font-family': typoX.fontFamily };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'font-family': typoX.fontFamily };
 
       }
 
@@ -967,10 +1609,10 @@ registerBlockType("post-grid/post-author", {
         var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
 
 
-        var fontSizeX = (blockCssY.items[authorDescriptionSelector] != undefined) ? blockCssY.items[authorDescriptionSelector]['font-size'] : {};
+        var fontSizeX = (blockCssY.items[descriptionSelector] != undefined) ? blockCssY.items[descriptionSelector]['font-size'] : {};
 
         fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'font-size': fontSizeX };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'font-size': fontSizeX };
 
       }
 
@@ -982,11 +1624,11 @@ registerBlockType("post-grid/post-author", {
         var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
 
 
-        var lineHeightX = (blockCssY.items[authorDescriptionSelector]['line-height'] != undefined) ? blockCssY.items[authorDescriptionSelector]['line-height'] : {};
+        var lineHeightX = (blockCssY.items[descriptionSelector]['line-height'] != undefined) ? blockCssY.items[descriptionSelector]['line-height'] : {};
 
         lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'line-height': lineHeightX };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'line-height': lineHeightX };
       }
       if (typoX.letterSpacing[breakPointX] != undefined) {
 
@@ -995,16 +1637,16 @@ registerBlockType("post-grid/post-author", {
 
 
 
-        var letterSpacingX = (blockCssY.items[authorDescriptionSelector]['letter-spacing'] != undefined) ? blockCssY.items[authorDescriptionSelector]['letter-spacing'] : {};
+        var letterSpacingX = (blockCssY.items[descriptionSelector]['letter-spacing'] != undefined) ? blockCssY.items[descriptionSelector]['letter-spacing'] : {};
 
         letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'letter-spacing': letterSpacingX };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'letter-spacing': letterSpacingX };
       }
 
       if (typoX.fontWeight[breakPointX] != undefined) {
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'font-weight': typoX.fontWeight };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'font-weight': typoX.fontWeight };
 
       }
 
@@ -1019,12 +1661,12 @@ registerBlockType("post-grid/post-author", {
         str[breakPointX] = textDecorationXStr;
 
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'text-decoration': str };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'text-decoration': str };
 
       }
       if (typoX.textTransform[breakPointX] != undefined) {
 
-        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'text-transform': typoX.textTransform };
+        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'text-transform': typoX.textTransform };
 
 
       }
@@ -1343,62 +1985,71 @@ registerBlockType("post-grid/post-author", {
 
                 <PanelBody title="Wrapper" initialOpen={false}>
 
-                  <PanelRow>
-                    <label for="">Wrapper Tag</label>
 
-                    <SelectControl
-                      label=""
-                      value={wrapper.options.tag}
-                      options={[
-                        { label: 'No Wrapper', value: '' },
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
 
-                        { label: 'H1', value: 'h1' },
-                        { label: 'H2', value: 'h2' },
-                        { label: 'H3', value: 'h3' },
-                        { label: 'H4', value: 'h4' },
-                        { label: 'H5', value: 'h5' },
-                        { label: 'H6', value: 'h6' },
-                        { label: 'span', value: 'SPAN' },
-                        { label: 'div', value: 'DIV' },
-                        { label: 'P', value: 'p' },
+                      <PanelRow>
+                        <label for="">Wrapper Tag</label>
+
+                        <SelectControl
+                          label=""
+                          value={wrapper.options.tag}
+                          options={[
+                            { label: 'No Wrapper', value: '' },
+
+                            { label: 'H1', value: 'h1' },
+                            { label: 'H2', value: 'h2' },
+                            { label: 'H3', value: 'h3' },
+                            { label: 'H4', value: 'h4' },
+                            { label: 'H5', value: 'h5' },
+                            { label: 'H6', value: 'h6' },
+                            { label: 'span', value: 'SPAN' },
+                            { label: 'div', value: 'DIV' },
+                            { label: 'P', value: 'p' },
 
 
-                      ]}
-                      onChange={(newVal) => {
+                          ]}
+                          onChange={(newVal) => {
 
-                        var options = { ...wrapper.options, tag: newVal };
-                        setAttributes({ wrapper: { ...wrapper, options: options } });
-
-
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label>Display</label>
-                    <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
+                            var options = { ...wrapper.options, tag: newVal };
+                            setAttributes({ wrapper: { ...wrapper, options: options } });
 
 
-                      var newValuesObj = {};
 
-                      if (Object.keys(wrapper.styles.display).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = wrapper.styles.display;
-                        newValuesObj[breakPointX] = newVal;
-                      }
+                          }
 
-                      var styles = { ...wrapper.styles, display: newValuesObj };
-                      setAttributes({ wrapper: { ...wrapper, styles: styles } });
+                          }
+                        />
+                      </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                    </PGtab>
+                  </PGtabs>
 
-                      blockCssY.items[authorWrapperSelector] = { ...blockCssY.items[authorWrapperSelector], 'display': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
 
-                    })} />
-                  </PanelRow>
+
+
 
 
                 </PanelBody>
@@ -1407,6 +2058,37 @@ registerBlockType("post-grid/post-author", {
 
 
                 <PanelBody title="Elements" initialOpen={true}>
+
+
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={elements} onChange={onChangeStyleElements} onAdd={onAddStyleElements} onRemove={onRemoveStyleElements} />
+                    </PGtab>
+                  </PGtabs>
+
+
 
 
                   <PanelRow>
@@ -1457,188 +2139,88 @@ registerBlockType("post-grid/post-author", {
                 </PanelBody>
                 {elements.items.find(x => x.label === 'Avatar') && (
                   <PanelBody title="Avatar" initialOpen={false}>
-                    <PanelRow>
-                      <label for="">Avatar Size</label>
 
-                      <SelectControl
-                        label=""
-                        value={avatar.options.size}
-                        options={[
-                          { label: 'Select..', value: '' },
 
-                          { label: '24', value: '24' },
-                          { label: '48', value: '48' },
-                          { label: '96', value: '96' },
+                    <PGtabs
+                      activeTab="options"
+                      orientation="horizontal"
+                      activeClass="active-tab"
+                      onSelect={(tabName) => { }}
+                      tabs={[
+                        {
+                          name: 'options',
+                          title: 'Options',
+                          icon: settings,
+                          className: 'tab-settings',
+                        },
+                        {
+                          name: 'styles',
+                          title: 'Styles',
+                          icon: styles,
+                          className: 'tab-style',
+                        },
+                      ]}
+                    >
+                      <PGtab name="options">
 
 
+                        <PanelRow>
+                          <label for="">Avatar Size</label>
 
-                        ]}
-                        onChange={(newVal) => {
+                          <SelectControl
+                            label=""
+                            value={avatar.options.size}
+                            options={[
+                              { label: 'Select..', value: '' },
 
+                              { label: '24', value: '24' },
+                              { label: '48', value: '48' },
+                              { label: '96', value: '96' },
 
 
-                          var options = { ...avatar.options, size: newVal };
-                          setAttributes({ avatar: { ...avatar, options: options } });
 
+                            ]}
+                            onChange={(newVal) => {
 
 
-                        }
 
-                        }
-                      />
-                    </PanelRow>
+                              var options = { ...avatar.options, size: newVal };
+                              setAttributes({ avatar: { ...avatar, options: options } });
 
 
-                    <PanelRow>
-                      <label for="">Avatar Class</label>
 
-                      <InputControl
-                        value={avatar.options.class}
-                        onChange={(newVal) => {
+                            }
 
+                            }
+                          />
+                        </PanelRow>
 
-                          var options = { ...avatar.options, class: newVal };
-                          setAttributes({ avatar: { ...avatar, options: options } });
 
+                        <PanelRow>
+                          <label for="">Avatar Class</label>
 
+                          <InputControl
+                            value={avatar.options.class}
+                            onChange={(newVal) => {
 
-                        }}
-                      />
-                    </PanelRow>
 
+                              var options = { ...avatar.options, class: newVal };
+                              setAttributes({ avatar: { ...avatar, options: options } });
 
-                    <PanelRow className='my-3'>
-                      <label>Display</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
 
 
-                    <PanelRow>
+                            }}
+                          />
+                        </PanelRow>
 
-                      <SelectControl
-                        label=""
-                        value={avatar.styles.display[breakPointX]}
+                      </PGtab>
+                      <PGtab name="styles">
+                        <PGStyles obj={wrapper} onChange={onChangeStyleAvatar} onAdd={onAddStyleAvatar} onRemove={onRemoveStyleAvatar} />
+                      </PGtab>
+                    </PGtabs>
 
-                        options={[
-                          { label: 'Select..', value: '' },
 
-                          { label: 'inline', value: 'inline' },
-                          { label: 'inline-block', value: 'inline-block' },
-                          { label: 'block', value: 'block' },
 
-
-
-                        ]}
-                        onChange={(newVal) => {
-
-
-
-                          var newValuesObj = {};
-
-                          if (Object.keys(avatar.styles.display).length == 0) {
-                            newValuesObj[breakPointX] = newVal;
-                          } else {
-                            newValuesObj = avatar.styles.display;
-                            newValuesObj[breakPointX] = newVal;
-                          }
-
-                          var styles = { ...avatar.styles, display: newValuesObj };
-                          setAttributes({ avatar: { ...avatar, styles: styles } });
-
-                          blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'display': newValuesObj };
-                          setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                        }
-
-                        }
-                      />
-                    </PanelRow>
-
-
-
-                    <PanelRow className='my-3'>
-                      <label>Vertical Align</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
-
-
-                    <PanelRow>
-
-                      <SelectControl
-                        label=""
-                        value={avatar.styles.verticalAlign[breakPointX]}
-
-                        options={[
-                          { label: 'Select..', value: '' },
-
-                          { label: 'Baseline', value: 'baseline' },
-                          { label: 'Text-top', value: 'text-top' },
-                          { label: 'Text-bottom', value: 'text-bottom' },
-                          { label: 'Middle', value: 'middle' },
-                          { label: 'Bottom', value: 'bottom' },
-
-
-
-                        ]}
-                        onChange={(newVal) => {
-
-                          var newValuesObj = {};
-
-                          if (Object.keys(avatar.styles.verticalAlign).length == 0) {
-                            newValuesObj[breakPointX] = newVal;
-                          } else {
-                            newValuesObj = avatar.styles.verticalAlign;
-                            newValuesObj[breakPointX] = newVal;
-                          }
-
-                          var styles = { ...avatar.styles, verticalAlign: newValuesObj };
-                          setAttributes({ avatar: { ...avatar, styles: styles } });
-
-                          blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'vertical-align': newValuesObj };
-                          setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                        }
-
-                        }
-                      />
-                    </PanelRow>
-
-
-
-
-                    <PanelRow>
-                      <label>Border Radius</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
-                    <BoxControl
-                      label=""
-                      values={avatar.styles.borderRadius[breakPointX]}
-                      onChange={(nextValues) => { borderRadiusControlAvatar(nextValues) }}
-                    />
-
-
-                    <PanelRow>
-                      <label>Padding</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
-                    <BoxControl
-                      label=""
-                      values={avatar.styles.padding[breakPointX]}
-                      onChange={(nextValues) => { paddingControlAvatar(nextValues) }}
-                    />
-
-
-                    <PanelRow>
-                      <label>Margin</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
-                    <BoxControl
-                      label=""
-                      values={avatar.styles.margin[breakPointX]}
-                      onChange={(nextValues) => { marginControlAvatar(nextValues) }}
-                    />
 
                   </PanelBody>
                 )}
@@ -1648,355 +2230,186 @@ registerBlockType("post-grid/post-author", {
                   <PanelBody title="Name" initialOpen={false}>
 
 
-                    <PanelRow>
-                      <label for="">Name Class</label>
 
-                      <InputControl
-                        value={name.options.class}
-                        onChange={(newVal) => {
-
-
-                          var options = { ...name.options, class: newVal };
-                          setAttributes({ name: { ...name, options: options } });
-
-
-
-
-                        }}
-                      />
-                    </PanelRow>
-
-
-
-                    <PanelRow className='my-3'>
-                      <label>Link To</label>
-                      <PGDropdown position="bottom right" variant="secondary" buttonTitle={name.options.linkTo.length == 0 ? 'Choose' : linkToArgs[name.options.linkTo].label} options={linkToArgs} onChange={(option, index) => {
-                        var options = { ...name.options, linkTo: option.value };
-                        setAttributes({ name: { ...name, options: options } });
-                      }} values=""></PGDropdown>
-                    </PanelRow>
-
-
-
-
-
-
-                    {(name.options.linkTo == 'authorMeta' || name.options.linkTo == 'customField') && (
-
-                      <PanelRow>
-                        <label for="">
-                          {name.options.linkTo == 'authorMeta' && (
-                            <>Author Meta Key</>
-                          )}
-                          {name.options.linkTo == 'customField' && (
-                            <>Post Meta Key</>
-                          )}
-
-                        </label>
-
-                        <InputControl
-                          value={name.options.linkToMeta}
-                          onChange={(newVal) => {
-
-                            var options = { ...name.options, linkToMeta: newVal };
-                            setAttributes({ name: { ...name, options: options } });
-
-                          }}
-                        />
-
-                      </PanelRow>
-
-                    )}
-
-
-
-
-
-                    {name.options.linkTo == 'customUrl' && (
-
-                      <>
-
+                    <PGtabs
+                      activeTab="options"
+                      orientation="horizontal"
+                      activeClass="active-tab"
+                      onSelect={(tabName) => { }}
+                      tabs={[
+                        {
+                          name: 'options',
+                          title: 'Options',
+                          icon: settings,
+                          className: 'tab-settings',
+                        },
+                        {
+                          name: 'styles',
+                          title: 'Styles',
+                          icon: styles,
+                          className: 'tab-style',
+                        },
+                      ]}
+                    >
+                      <PGtab name="options">
 
 
                         <PanelRow>
-                          <label for="">Custom Url</label>
+                          <label for="">Name Class</label>
 
-                          <div className='relative'>
-                            <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+                          <InputControl
+                            value={name.options.class}
+                            onChange={(newVal) => {
 
-                              setLinkPickerPosttitle(prev => !prev);
 
-                            }}></Button>
-                            {name.options.customUrl.length > 0 && (
-                              <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                                var options = { ...name.options, customUrl: '' };
-                                setAttributes({ name: { ...name, options: options } });
-                                setLinkPickerPosttitle(false);
+                              var options = { ...name.options, class: newVal };
+                              setAttributes({ name: { ...name, options: options } });
 
 
 
-                              }}></Button>
 
-                            )}
-                            {linkPickerPosttitle && (
-                              <Popover position="bottom right">
-                                <LinkControl settings={[]} value={name.options.customUrl} onChange={newVal => {
-
-                                  var options = { ...name.options, customUrl: newVal.url };
-
-                                  setAttributes({ name: { ...name, options: options } });
-
-                                }} />
-
-                                <div className='p-2'><span className='font-bold'>Linked to:</span> {(name.options.customUrl.length != 0) ? name.options.customUrl : 'No link'} </div>
-                              </Popover>
-
-                            )}
-
-
-                          </div>
+                            }}
+                          />
                         </PanelRow>
 
-                      </>
 
 
+                        <PanelRow className='my-3'>
+                          <label>Link To</label>
+                          <PGDropdown position="bottom right" variant="secondary" buttonTitle={name.options.linkTo.length == 0 ? 'Choose' : linkToArgs[name.options.linkTo].label} options={linkToArgs} onChange={(option, index) => {
+                            var options = { ...name.options, linkTo: option.value };
+                            setAttributes({ name: { ...name, options: options } });
+                          }} values=""></PGDropdown>
+                        </PanelRow>
 
 
 
-                    )}
 
-                    <PanelRow>
-                      <label for="">Prefix</label>
-                      <InputControl
-                        value={name.options.prefix}
-                        onChange={(newVal) => {
-                          var options = { ...name.options, prefix: newVal };
-                          setAttributes({ name: { ...name, options: options } });
-                        }
-                        }
-                      />
-                    </PanelRow>
 
-                    <PanelRow>
-                      <label for="">Postfix</label>
-                      <InputControl
-                        value={name.options.postfix}
-                        onChange={(newVal) => {
 
+                        {(name.options.linkTo == 'authorMeta' || name.options.linkTo == 'customField') && (
 
-                          var options = { ...name.options, postfix: newVal };
-                          setAttributes({ name: { ...name, options: options } });
+                          <PanelRow>
+                            <label for="">
+                              {name.options.linkTo == 'authorMeta' && (
+                                <>Author Meta Key</>
+                              )}
+                              {name.options.linkTo == 'customField' && (
+                                <>Post Meta Key</>
+                              )}
 
+                            </label>
 
-                        }}
-                      />
-                    </PanelRow>
+                            <InputControl
+                              value={name.options.linkToMeta}
+                              onChange={(newVal) => {
 
+                                var options = { ...name.options, linkToMeta: newVal };
+                                setAttributes({ name: { ...name, options: options } });
 
-                    <PanelRow className='my-3'>
-                      <label>Display</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
+                              }}
+                            />
 
+                          </PanelRow>
 
+                        )}
 
 
-                    </PanelRow>
 
 
-                    <div className='px-3'>
 
-                      <SelectControl
-                        label=""
-                        value={name.styles.display[breakPointX]}
+                        {name.options.linkTo == 'customUrl' && (
 
-                        options={[
-                          { label: 'Select..', value: '' },
+                          <>
 
-                          { label: 'inline', value: 'inline' },
-                          { label: 'inline-block', value: 'inline-block' },
-                          { label: 'block', value: 'block' },
 
 
+                            <PanelRow>
+                              <label for="">Custom Url</label>
 
-                        ]}
-                        onChange={(newVal) => {
+                              <div className='relative'>
+                                <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
 
+                                  setLinkPickerPosttitle(prev => !prev);
 
-                          var newValuesObj = {};
+                                }}></Button>
+                                {name.options.customUrl.length > 0 && (
+                                  <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
 
-                          if (Object.keys(name.styles.display).length == 0) {
-                            newValuesObj[breakPointX] = newVal;
-                          } else {
-                            newValuesObj = name.styles.display;
-                            newValuesObj[breakPointX] = newVal;
-                          }
+                                    var options = { ...name.options, customUrl: '' };
+                                    setAttributes({ name: { ...name, options: options } });
+                                    setLinkPickerPosttitle(false);
 
-                          var styles = { ...name.styles, display: newValuesObj };
-                          setAttributes({ name: { ...name, styles: styles } });
 
-                          blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'display': newValuesObj };
-                          setAttributes({ blockCssY: { items: blockCssY.items } });
 
+                                  }}></Button>
 
+                                )}
+                                {linkPickerPosttitle && (
+                                  <Popover position="bottom right">
+                                    <LinkControl settings={[]} value={name.options.customUrl} onChange={newVal => {
 
+                                      var options = { ...name.options, customUrl: newVal.url };
 
-                        }
+                                      setAttributes({ name: { ...name, options: options } });
 
-                        }
-                      />
-                    </div>
+                                    }} />
 
+                                    <div className='p-2'><span className='font-bold'>Linked to:</span> {(name.options.customUrl.length != 0) ? name.options.customUrl : 'No link'} </div>
+                                  </Popover>
 
-                    <PanelRow className='my-3'>
-                      <label>Vertical Align</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
+                                )}
 
 
-                    <PanelRow>
+                              </div>
+                            </PanelRow>
 
-                      <SelectControl
-                        label=""
-                        value={name.styles.verticalAlign[breakPointX]}
+                          </>
 
-                        options={[
-                          { label: 'Select..', value: '' },
 
-                          { label: 'Baseline', value: 'baseline' },
-                          { label: 'Text-top', value: 'text-top' },
-                          { label: 'Text-bottom', value: 'text-bottom' },
-                          { label: 'Middle', value: 'middle' },
-                          { label: 'Bottom', value: 'bottom' },
 
 
 
-                        ]}
-                        onChange={(newVal) => {
+                        )}
 
-                          var newValuesObj = {};
+                        <PanelRow>
+                          <label for="">Prefix</label>
+                          <InputControl
+                            value={name.options.prefix}
+                            onChange={(newVal) => {
+                              var options = { ...name.options, prefix: newVal };
+                              setAttributes({ name: { ...name, options: options } });
+                            }
+                            }
+                          />
+                        </PanelRow>
 
-                          if (Object.keys(name.styles.verticalAlign).length == 0) {
-                            newValuesObj[breakPointX] = newVal;
-                          } else {
-                            newValuesObj = name.styles.verticalAlign;
-                            newValuesObj[breakPointX] = newVal;
-                          }
+                        <PanelRow>
+                          <label for="">Postfix</label>
+                          <InputControl
+                            value={name.options.postfix}
+                            onChange={(newVal) => {
 
-                          var styles = { ...name.styles, verticalAlign: newValuesObj };
-                          setAttributes({ name: { ...name, styles: styles } });
 
-                          blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'vertical-align': newValuesObj };
-                          setAttributes({ blockCssY: { items: blockCssY.items } });
+                              var options = { ...name.options, postfix: newVal };
+                              setAttributes({ name: { ...name, options: options } });
 
-                        }
 
-                        }
-                      />
-                    </PanelRow>
+                            }}
+                          />
+                        </PanelRow>
 
+                      </PGtab>
+                      <PGtab name="styles">
+                        <PGStyles obj={wrapper} onChange={onChangeStyleName} onAdd={onAddStyleName} onRemove={onRemoveStyleName} />
+                      </PGtab>
+                    </PGtabs>
 
-                    <PanelRow className='my-3'>
-                      <label>Color</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
 
 
 
 
-                    </PanelRow>
 
-                    <ColorPalette
-                      value={name.styles.color[breakPointX]}
-                      colors={colorsPresets}
-                      enableAlpha
-                      onChange={(newVal) => {
-
-
-
-                        var newValuesObj = {};
-
-                        if (Object.keys(name.styles.color).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = name.styles.color;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-                        var styles = { ...name.styles, color: newValuesObj };
-                        setAttributes({ name: { ...name, styles: styles } });
-
-                        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'color': newValuesObj };
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                      }}
-                    />
-
-
-
-                    <PanelRow className='my-3'>
-                      <label>Background Color</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
-
-                    <ColorPalette
-                      value={name.styles.bgColor[breakPointX]}
-                      colors={colorsPresets}
-                      enableAlpha
-                      onChange={(newVal) => {
-
-
-                        var newValuesObj = {};
-
-                        if (Object.keys(name.styles.bgColor).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = name.styles.bgColor;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-                        var styles = { ...name.styles, bgColor: newValuesObj };
-                        setAttributes({ name: { ...name, styles: styles } });
-
-                        blockCssY.items[authorNameSelector] = { ...blockCssY.items[authorNameSelector], 'background-color': newValuesObj };
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-                      }}
-                    />
-
-
-
-
-
-
-
-
-
-                    <PanelRow>
-                      <label>Padding</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
-                    <BoxControl
-                      label=""
-                      values={name.styles.padding[breakPointX]}
-                      onChange={(nextValues) => { paddingControl(nextValues) }}
-                    />
-
-
-                    <PanelRow>
-                      <label>Margin</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
-                    <BoxControl
-                      label=""
-                      values={name.styles.margin[breakPointX]}
-                      onChange={(nextValues) => { marginControl(nextValues) }}
-                    />
-
-                    <Typography typo={name.styles} breakPointX={breakPointX} onChange={onChangeTypoName} setAttributes={setAttributes} obj={name} />
 
                   </PanelBody>
                 )}
@@ -2009,179 +2422,58 @@ registerBlockType("post-grid/post-author", {
                 {elements.items.find(x => x.label === 'Description') && (
                   <PanelBody title="Description" initialOpen={false}>
 
-                    <PanelRow>
-                      <label for="">Description Class</label>
 
-                      <InputControl
-                        value={description.options.class}
-                        onChange={(newVal) => {
+                    <PGtabs
+                      activeTab="options"
+                      orientation="horizontal"
+                      activeClass="active-tab"
+                      onSelect={(tabName) => { }}
+                      tabs={[
+                        {
+                          name: 'options',
+                          title: 'Options',
+                          icon: settings,
+                          className: 'tab-settings',
+                        },
+                        {
+                          name: 'styles',
+                          title: 'Styles',
+                          icon: styles,
+                          className: 'tab-style',
+                        },
+                      ]}
+                    >
+                      <PGtab name="options">
 
-                          var options = { ...description.options, class: newVal };
-                          setAttributes({ description: { ...description, options: options } });
+                        <PanelRow>
+                          <label for="">Description Class</label>
 
-                        }}
-                      />
+                          <InputControl
+                            value={description.options.class}
+                            onChange={(newVal) => {
 
+                              var options = { ...description.options, class: newVal };
+                              setAttributes({ description: { ...description, options: options } });
 
+                            }}
+                          />
 
-                    </PanelRow>
 
 
+                        </PanelRow>
+                      </PGtab>
+                      <PGtab name="styles">
+                        <PGStyles obj={wrapper} onChange={onChangeStyleDescription} onAdd={onAddStyleDescription} onRemove={onRemoveStyleDescription} />
+                      </PGtab>
+                    </PGtabs>
 
-                    <PanelRow className='my-3'>
-                      <label>VerticalA lign</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
 
 
-                    <PanelRow>
 
-                      <SelectControl
-                        label=""
-                        value={description.styles.verticalAlign[breakPointX]}
 
-                        options={[
-                          { label: 'Select..', value: '' },
 
-                          { label: 'Baseline', value: 'baseline' },
-                          { label: 'Text-top', value: 'text-top' },
-                          { label: 'Text-bottom', value: 'text-bottom' },
-                          { label: 'Middle', value: 'middle' },
-                          { label: 'Bottom', value: 'bottom' },
 
 
-
-                        ]}
-                        onChange={(newVal) => {
-
-                          var newValuesObj = {};
-
-                          if (Object.keys(description.styles.verticalAlign).length == 0) {
-                            newValuesObj[breakPointX] = newVal;
-                          } else {
-                            newValuesObj = description.styles.verticalAlign;
-                            newValuesObj[breakPointX] = newVal;
-                          }
-
-                          var styles = { ...description.styles, verticalAlign: newValuesObj };
-                          setAttributes({ description: { ...description, styles: styles } });
-
-                          blockCssY.items[authorAvatarSelector] = { ...blockCssY.items[authorAvatarSelector], 'vertical-align': newValuesObj };
-                          setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                        }
-
-                        }
-                      />
-                    </PanelRow>
-
-
-                    <PanelRow className='my-3'>
-                      <label>Color</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                    </PanelRow>
-
-                    <ColorPalette
-                      value={description.styles.color[breakPointX]}
-                      colors={colorsPresets}
-                      enableAlpha
-                      onChange={(newVal) => {
-
-
-
-                        var newValuesObj = {};
-
-                        if (Object.keys(description.styles.color).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = description.styles.color;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-                        var styles = { ...description.styles, color: newValuesObj };
-                        setAttributes({ description: { ...description, styles: styles } });
-
-                        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'color': newValuesObj };
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                      }}
-                    />
-
-
-
-                    <PanelRow className='my-3'>
-                      <label>Background Color</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                    </PanelRow>
-
-                    <ColorPalette
-                      value={description.styles.bgColor[breakPointX]}
-                      colors={colorsPresets}
-                      enableAlpha
-                      onChange={(newVal) => {
-
-
-                        var newValuesObj = {};
-
-                        if (Object.keys(description.styles.bgColor).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = description.styles.bgColor;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-                        var styles = { ...description.styles, bgColor: newValuesObj };
-                        setAttributes({ description: { ...description, styles: styles } });
-
-                        blockCssY.items[authorDescriptionSelector] = { ...blockCssY.items[authorDescriptionSelector], 'background-color': newValuesObj };
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-                      }}
-                    />
-
-
-
-
-
-
-
-
-
-                    <PanelRow>
-                      <label>Padding</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
-                    <BoxControl
-                      label=""
-                      values={description.styles.padding[breakPointX]}
-                      onChange={(nextValues) => { paddingControlDescription(nextValues) }}
-                    />
-
-
-                    <PanelRow>
-                      <label>Margin</label>
-                      <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                    </PanelRow>
-                    <BoxControl
-                      label=""
-                      values={description.styles.margin[breakPointX]}
-                      onChange={(nextValues) => { marginControlDescription(nextValues) }}
-                    />
-
-                    <Typography typo={description.styles} breakPointX={breakPointX} onChange={onChangeTypoDescription} setAttributes={setAttributes} obj={description} />
                   </PanelBody>
                 )}
 
@@ -2197,24 +2489,24 @@ registerBlockType("post-grid/post-author", {
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
                     <p className='font-bold'>Wrapper Selector</p>
-                    <p><code>{authorWrapperSelector}{'{/* your CSS here*/}'}</code></p>
+                    <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>Name Selector</p>
-                    <p><code>{authorNameSelector}{'{}'} </code></p>
+                    <p><code>{nameSelector}{'{}'} </code></p>
                   </div>
 
 
 
                   <div className='my-3'>
                     <p className='font-bold'>Description Selector</p>
-                    <p><code>{authorDescriptionSelector}{'{}'} </code></p>
+                    <p><code>{descriptionSelector}{'{}'} </code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>Avatar Selector </p>
-                    <p><code>{authorAvatarSelector}{'{}'} </code></p>
+                    <p><code>{avatarSelector}{'{}'} </code></p>
                   </div>
 
 

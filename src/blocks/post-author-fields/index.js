@@ -66,7 +66,7 @@ registerBlockType("post-grid/post-author-fields", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -107,7 +107,7 @@ registerBlockType("post-grid/post-author-fields", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           textAlign: {},
@@ -138,7 +138,7 @@ registerBlockType("post-grid/post-author-fields", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           fontSize: {}, //{ val: '18', unit: 'px' }
@@ -240,7 +240,7 @@ registerBlockType("post-grid/post-author-fields", {
 
 
     // Wrapper CSS Class Selectors
-    const wrapSelector = blockClass;
+    const wrapperSelector = blockClass;
     const fieldSelector = blockClass + ' .fieldVal';
     const frontTextSelector = blockClass + ' .frontText';
     const iconSelector = blockClass + ' .icon';
@@ -307,6 +307,99 @@ registerBlockType("post-grid/post-author-fields", {
 
 
     }, [icon]);
+
+
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+
 
     function onChangeStyleField(sudoScource, newVal, attr) {
 
@@ -396,6 +489,203 @@ registerBlockType("post-grid/post-author-fields", {
       setAttributes({ field: { ...field } });
 
     }
+
+
+
+
+
+    function onChangeStyleIcon(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...icon[sudoScource] }
+      var elementSelector = iconSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = iconSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = iconSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = iconSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = iconSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = iconSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = iconSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = iconSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = iconSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = iconSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = iconSelector + '::first-line';
+      }
+      else {
+        elementSelector = iconSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ icon: { ...icon } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({ icon: { ...icon } });
+
+      if (blockCssY.items[iconSelector] == undefined) {
+        blockCssY.items[iconSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[iconSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource] }
+      sudoScourceX[key] = {};
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({ icon: { ...icon } });
+    }
+
+
+
+
+
+
+
+
+    function onChangeStyleFrontText(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...frontText[sudoScource] }
+      var elementSelector = frontTextSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = frontTextSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = frontTextSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = frontTextSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = frontTextSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = frontTextSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = frontTextSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = frontTextSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = frontTextSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = frontTextSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = frontTextSelector + '::first-line';
+      }
+      else {
+        elementSelector = frontTextSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ frontText: { ...frontText } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleFrontText(sudoScource, key) {
+      var sudoScourceX = { ...frontText[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      frontText[sudoScource] = sudoScourceX;
+      setAttributes({ frontText: { ...frontText } });
+
+      if (blockCssY.items[frontTextSelector] == undefined) {
+        blockCssY.items[frontTextSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[frontTextSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleFrontText(sudoScource, key) {
+      var sudoScourceX = { ...frontText[sudoScource] }
+      sudoScourceX[key] = {};
+      frontText[sudoScource] = sudoScourceX;
+      setAttributes({ frontText: { ...frontText } });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1193,49 +1483,54 @@ registerBlockType("post-grid/post-author-fields", {
 
             </div>
 
-            <PanelBody title="Field Wrapper" initialOpen={false}>
-
-              <PanelRow>
-                <label for="">Wrapper Class</label>
-
-                <InputControl
-                  value={wrapper.options.class}
-                  onChange={(newVal) => {
-
-                    var options = { ...wrapper.options, class: newVal };
-                    setAttributes({ wrapper: { ...wrapper, options: options } });
-
-                  }}
-                />
-              </PanelRow>
+            <PanelBody title="Wrapper" initialOpen={false}>
 
 
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
 
-              <PanelRow>
-                <label>Display</label>
-                <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
+                  <PanelRow>
+                    <label for="">Wrapper Class</label>
+
+                    <InputControl
+                      value={wrapper.options.class}
+                      onChange={(newVal) => {
+
+                        var options = { ...wrapper.options, class: newVal };
+                        setAttributes({ wrapper: { ...wrapper, options: options } });
+
+                      }}
+                    />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                </PGtab>
+              </PGtabs>
 
 
-                  var newValuesObj = {};
-
-                  if (Object.keys(wrapper.styles.display).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = wrapper.styles.display;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...wrapper.styles, display: newValuesObj };
-                  setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-                  blockCssY.items[wrapSelector] = { ...blockCssY.items[wrapSelector], 'display': newValuesObj };
-                  setAttributes({ blockCssY: { items: blockCssY.items } });
 
 
 
-
-                })} />
-              </PanelRow>
 
             </PanelBody>
 
@@ -1916,7 +2211,7 @@ registerBlockType("post-grid/post-author-fields", {
 
 
               <ColorPalette
-                value={field.styles.bgColor[breakPointX]}
+                value={field.styles.backgroundColor[breakPointX]}
                 colors={colorsPresets}
                 enableAlpha
                 onChange={(newVal) => {
@@ -1924,14 +2219,14 @@ registerBlockType("post-grid/post-author-fields", {
                   var newValuesObj = {};
 
 
-                  if (Object.keys(field.styles.bgColor).length == 0) {
+                  if (Object.keys(field.styles.backgroundColor).length == 0) {
                     newValuesObj[breakPointX] = newVal;
                   } else {
-                    newValuesObj = field.styles.bgColor;
+                    newValuesObj = field.styles.backgroundColor;
                     newValuesObj[breakPointX] = newVal;
                   }
 
-                  var styles = { ...field.styles, bgColor: newValuesObj };
+                  var styles = { ...field.styles, backgroundColor: newValuesObj };
                   setAttributes({ field: { ...field, styles: styles } });
 
 
@@ -1978,314 +2273,82 @@ registerBlockType("post-grid/post-author-fields", {
             <PanelBody title="Icon" initialOpen={false}>
 
 
-              <PanelRow>
-                <label for="">Choose Icon</label>
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
 
-                <PGIconPicker library={icon.options.library} srcType={icon.options.srcType} iconSrc={icon.options.iconSrc} onChange={onChangeIcon} />
-              </PanelRow>
 
+                  <PanelRow>
+                    <label for="">Choose Icon</label>
 
+                    <PGIconPicker library={icon.options.library} srcType={icon.options.srcType} iconSrc={icon.options.iconSrc} onChange={onChangeIcon} />
+                  </PanelRow>
 
-              <PanelRow>
-                <label for="">Icon postion</label>
 
-                <SelectControl
-                  label=""
-                  value={icon.options.position}
-                  options={[
 
-                    { label: 'Choose Position', value: '' },
+                  <PanelRow>
+                    <label for="">Icon postion</label>
 
-                    { label: 'Before Front text', value: 'beforeFronttext' },
-                    { label: 'After Front text', value: 'afterFronttext' },
-                    { label: 'Before Field', value: 'beforeField' },
-                    { label: 'After Field', value: 'afterField' },
+                    <SelectControl
+                      label=""
+                      value={icon.options.position}
+                      options={[
 
-                  ]}
-                  onChange={(newVal) => {
+                        { label: 'Choose Position', value: '' },
 
+                        { label: 'Before Front text', value: 'beforeFronttext' },
+                        { label: 'After Front text', value: 'afterFronttext' },
+                        { label: 'Before Field', value: 'beforeField' },
+                        { label: 'After Field', value: 'afterField' },
 
-                    var options = { ...icon.options, position: newVal };
-                    setAttributes({ icon: { ...icon, options: options } });
+                      ]}
+                      onChange={(newVal) => {
 
 
-                  }
+                        var options = { ...icon.options, position: newVal };
+                        setAttributes({ icon: { ...icon, options: options } });
 
 
+                      }
 
-                  }
-                />
-              </PanelRow>
 
 
+                      }
+                    />
+                  </PanelRow>
 
-              <PanelRow className='my-3'>
-                <label>Color</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
 
 
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={wrapper} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                </PGtab>
+              </PGtabs>
 
 
-              </PanelRow>
 
-              <ColorPalette
-                value={icon.styles.color[breakPointX]}
-                colors={colorsPresets}
-                enableAlpha
-                onChange={(newVal) => {
 
 
 
-                  var newValuesObj = {};
 
-
-                  if (Object.keys(icon.styles.color).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = icon.styles.color;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...icon.styles, color: newValuesObj };
-                  setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-                  var itemsX = { ...blockCssY.items };
-                  itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'color': newValuesObj };
-
-                  setAttributes({ blockCssY: { items: itemsX } });
-
-
-                }}
-              />
-
-
-
-              <PanelRow className='my-3'>
-                <label>Background Color</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-              </PanelRow>
-
-              <ColorPalette
-                value={icon.styles.bgColor[breakPointX]}
-                colors={colorsPresets}
-                enableAlpha
-                onChange={(newVal) => {
-
-
-
-
-
-
-                  var newValuesObj = {};
-
-
-                  if (Object.keys(icon.styles.bgColor).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = icon.styles.bgColor;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...icon.styles, bgColor: newValuesObj };
-                  setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-
-
-                  var itemsX = { ...blockCssY.items };
-                  itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'background-color': newValuesObj };
-
-                  setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                }}
-              />
-
-
-
-
-              <PanelRow className='my-3'>
-                <label>Display</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <PanelRow>
-
-                <SelectControl
-                  label=""
-                  value={icon.styles.display[breakPointX]}
-
-                  options={[
-                    { label: 'Select..', value: '' },
-                    { label: 'inline', value: 'inline' },
-                    { label: 'inline-block', value: 'inline-block' },
-                    { label: 'block', value: 'block' },
-
-                  ]}
-                  onChange={(newVal) => {
-
-                    var newValuesObj = {};
-
-                    if (Object.keys(icon.styles.display).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = icon.styles.display;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...icon.styles, display: newValuesObj };
-                    setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'display': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-                  }
-
-                  }
-                />
-              </PanelRow>
-
-              <PanelRow>
-                <label>Padding</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-              <BoxControl
-                label=''
-                values={icon.styles.padding[breakPointX]}
-                onChange={(nextValues) => {
-
-
-                  var responsive = icon.styles.padding;
-                  responsive[breakPointX] = nextValues;
-
-
-                  var styles = { ...icon.styles, padding: responsive };
-                  setAttributes({ icon: { ...icon, styles: styles } });
-
-                  var itemsX = { ...blockCssY.items };
-
-                  blockCssY.items[iconSelector] = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector] : {};
-
-                  if (nextValues.top != undefined) {
-
-                    var paddingTop = (blockCssY.items[iconSelector]['padding-top'] != undefined) ? blockCssY.items[iconSelector]['padding-top'] : {};
-                    paddingTop[breakPointX] = nextValues.top
-                    blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-top': paddingTop };
-                  }
-
-
-                  if (nextValues.right != undefined) {
-
-                    var paddingRight = (blockCssY.items[iconSelector]['padding-right'] != undefined) ? blockCssY.items[iconSelector]['padding-right'] : {};
-                    paddingRight[breakPointX] = nextValues.right
-                    blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-right': paddingRight };
-                  }
-
-                  if (nextValues.bottom != undefined) {
-
-                    var paddingBottom = (blockCssY.items[iconSelector]['padding-bottom'] != undefined) ? blockCssY.items[iconSelector]['padding-bottom'] : {};
-                    paddingBottom[breakPointX] = nextValues.bottom
-                    blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-bottom': paddingBottom };
-                  }
-
-                  if (nextValues.left != undefined) {
-
-                    var paddingLeft = (blockCssY.items[iconSelector]['padding-left'] != undefined) ? blockCssY.items[iconSelector]['padding-left'] : {};
-                    paddingLeft[breakPointX] = nextValues.left
-
-                    blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-left': paddingLeft };
-                  }
-
-                  setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                }}
-              />
-
-              <PanelRow>
-                <label>Margin</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-              <BoxControl
-                label=""
-                values={icon.styles.margin[breakPointX]}
-                onChange={(nextValues) => {
-
-
-                  var responsive = icon.styles.margin;
-                  responsive[breakPointX] = nextValues;
-
-                  var styles = { ...icon.styles, margin: responsive };
-                  setAttributes({ icon: { ...icon, styles: styles } });
-
-                  var itemsX = { ...blockCssY.items };
-
-                  blockCssY.items[iconSelector] = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector] : {};
-
-                  if (nextValues.top != undefined) {
-                    var marginTop = (blockCssY.items[iconSelector]['margin-top'] != undefined) ? blockCssY.items[iconSelector]['margin-top'] : {};
-                    marginTop[breakPointX] = nextValues.top
-
-                    blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-top': marginTop };
-
-                  }
-
-
-                  if (nextValues.right != undefined) {
-
-                    var marginRight = (blockCssY.items[iconSelector]['margin-right'] !== undefined) ? blockCssY.items[iconSelector]['margin-right'] : {};
-                    marginRight[breakPointX] = nextValues.right
-
-                    blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-right': marginRight };
-
-                  }
-
-                  if (nextValues.bottom != undefined) {
-
-                    var marginBottom = (blockCssY.items[iconSelector]['margin-bottom'] !== undefined) ? blockCssY.items[iconSelector]['margin-bottom'] : {};
-                    marginBottom[breakPointX] = nextValues.bottom
-
-                    blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-bottom': marginBottom };
-
-                  }
-
-                  if (nextValues.left != undefined) {
-
-                    var marginLeft = (blockCssY.items[iconSelector]['margin-left'] !== undefined) ? blockCssY.items[iconSelector]['margin-left'] : {};
-                    marginLeft[breakPointX] = nextValues.left
-
-                    blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-left': marginLeft };
-
-                  }
-
-                  setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                }}
-              />
-
-
-              <PanelRow>
-                <div className='font-bold'>Typography</div>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-              <Typography typo={icon.styles} breakPointX={breakPointX} onChange={onChangeIconTypo} setAttributes={setAttributes} obj={icon} />
 
 
 
@@ -2295,175 +2358,98 @@ registerBlockType("post-grid/post-author-fields", {
             <PanelBody title="Front Text" initialOpen={false}>
 
 
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                ]}
+              >
+                <PGtab name="options">
 
-              <PanelRow>
-                <label for="">Front Text</label>
+                  <PanelRow>
+                    <label for="">Front Text</label>
 
-                <InputControl
-                  value={frontText.options.text}
-                  onChange={(newVal) => {
+                    <InputControl
+                      value={frontText.options.text}
+                      onChange={(newVal) => {
 
-                    var options = { ...frontText.options, text: newVal };
-                    setAttributes({ frontText: { ...frontText, options: options } });
-
-
-                  }}
-                />
-              </PanelRow>
-
-
-
-              <PanelRow className='my-3'>
-                <label>Color</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-              </PanelRow>
-
-
-              <ColorPalette
-                value={frontText.styles.color[breakPointX]}
-                colors={colorsPresets}
-                enableAlpha
-                onChange={(newVal) => {
-
-                  var newValuesObj = {};
+                        var options = { ...frontText.options, text: newVal };
+                        setAttributes({ frontText: { ...frontText, options: options } });
 
 
-                  if (Object.keys(frontText.styles.color).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = frontText.styles.color;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...frontText.styles, color: newValuesObj };
-                  setAttributes({ frontText: { ...frontText, styles: styles } });
+                      }}
+                    />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={wrapper} onChange={onChangeStyleFrontText} onAdd={onAddStyleFrontText} onRemove={onRemoveStyleFrontText} />
+                </PGtab>
+              </PGtabs>
 
 
 
 
-                  blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], color: newValuesObj };
-
-
-                  setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                }}
-              />
-
-
-              <PanelRow className='my-3'>
-                <label>Background Color</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-              </PanelRow>
-
-
-              <ColorPalette
-                value={frontText.styles.bgColor[breakPointX]}
-                colors={colorsPresets}
-                enableAlpha
-                onChange={(newVal) => {
-
-                  var newValuesObj = {};
-
-
-                  if (Object.keys(frontText.styles.bgColor).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = frontText.styles.bgColor;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...frontText.styles, bgColor: newValuesObj };
-                  setAttributes({ frontText: { ...frontText, styles: styles } });
-
-
-                  blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'background-color': newValuesObj };
-
-
-                  setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                }}
-              />
-
-
-
-              <Typography typo={frontText.styles} breakPointX={breakPointX} onChange={onChangeTypoFrontText} setAttributes={setAttributes} obj={frontText} />
 
             </PanelBody>
 
 
-            <div className=''>
 
+            <PanelBody title="Custom Style" initialOpen={false}>
 
-              {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
+              <p>Please use following class selector to apply your custom CSS</p>
+              <div className='my-3'>
+                <p className='font-bold'>Wrapper</p>
+                <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
+              </div>
 
-
-
-
-
-
-
-
-
-              <div>
-
-
-
-
-                <PanelBody title="Custom Style" initialOpen={false}>
-
-                  <p>Please use following class selector to apply your custom CSS</p>
-                  <div className='my-3'>
-                    <p className='font-bold'>Wrapper</p>
-                    <p><code>{wrapSelector}{'{/* your CSS here*/}'}</code></p>
-                  </div>
-
-                  <div className='my-3'>
-                    <p className='font-bold'>Field Selector</p>
-                    <p><code>{fieldSelector}{'{}'} </code></p>
-                    <p><code>.pg-postAuthor a{'{/* your CSS here*/}'}</code></p>
-                  </div>
-
-
-
-                  <div className='my-3'>
-                    <p className='font-bold'>Front Text</p>
-                    <p><code>{frontTextSelector}{'{/* your CSS here*/}'} </code></p>
-                  </div>
-
-                  <TextareaControl
-                    label="Custom CSS"
-                    help="Do not use 'style' tag"
-                    value={customCss}
-                    onChange={(value) => {
-                      setAttributes({ customCss: value })
-
-                    }}
-                  />
-                </PanelBody>
-
-                <div className='px-2'>
-                  <PGMailSubsctibe />
-                  <PGContactSupport utm={{ utm_source: 'BlockPostTitle', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
-
-
-                </div>
-
+              <div className='my-3'>
+                <p className='font-bold'>Field Selector</p>
+                <p><code>{fieldSelector}{'{}'} </code></p>
+                <p><code>.pg-postAuthor a{'{/* your CSS here*/}'}</code></p>
               </div>
 
 
 
-            </div >
+              <div className='my-3'>
+                <p className='font-bold'>Front Text</p>
+                <p><code>{frontTextSelector}{'{/* your CSS here*/}'} </code></p>
+              </div>
+
+              <TextareaControl
+                label="Custom CSS"
+                help="Do not use 'style' tag"
+                value={customCss}
+                onChange={(value) => {
+                  setAttributes({ customCss: value })
+
+                }}
+              />
+            </PanelBody>
+
+            <div className='px-2'>
+              <PGMailSubsctibe />
+              <PGContactSupport utm={{ utm_source: 'BlockPostTitle', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
+
+
+            </div>
+
+
+
+
 
           </InspectorControls >
         </div >

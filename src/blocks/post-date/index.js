@@ -15,7 +15,7 @@ import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
 import { store } from '../../store'
 
-import { link, linkOff } from "@wordpress/icons";
+import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 
 
 import IconToggle from '../../components/icon-toggle'
@@ -27,6 +27,11 @@ import colorsPresets from '../../colors-presets'
 import PGDropdown from '../../components/dropdown'
 import PGIconPicker from '../../components/icon-picker'
 import PGcssDisplay from '../../components/css-display'
+
+
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGStyles from '../../components/styles'
 
 
 
@@ -66,7 +71,7 @@ registerBlockType("post-grid/post-date", {
         {
           textAlign: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -96,7 +101,7 @@ registerBlockType("post-grid/post-date", {
           display: {},
           width: {},
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
 
@@ -118,7 +123,7 @@ registerBlockType("post-grid/post-date", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
           padding: {},
           margin: {},
           textAlign: {},
@@ -141,7 +146,7 @@ registerBlockType("post-grid/post-date", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
 
         },
       },
@@ -155,7 +160,7 @@ registerBlockType("post-grid/post-date", {
         styles:
         {
           color: {},
-          bgColor: {},
+          backgroundColor: {},
 
         },
       },
@@ -343,6 +348,476 @@ registerBlockType("post-grid/post-date", {
       setAttributes({ postDate: { ...postDate, options: options } });
 
     }
+
+
+
+
+
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      var elementSelector = wrapperSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = wrapperSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = wrapperSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = wrapperSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = wrapperSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = wrapperSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = wrapperSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = wrapperSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = wrapperSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = wrapperSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = wrapperSelector + '::first-line';
+      }
+      else {
+        elementSelector = wrapperSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+
+      if (blockCssY.items[wrapperSelector] == undefined) {
+        blockCssY.items[wrapperSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStyleWrapper(sudoScource, key) {
+      var sudoScourceX = { ...wrapper[sudoScource] }
+      sudoScourceX[key] = {};
+      wrapper[sudoScource] = sudoScourceX;
+      setAttributes({ wrapper: { ...wrapper } });
+    }
+
+
+
+
+
+
+
+    function onChangeStylePostDate(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...readMore[sudoScource] }
+      var elementSelector = postDateSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = postDateSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = postDateSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = postDateSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = postDateSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = postDateSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = postDateSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = postDateSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = postDateSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = postDateSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = postDateSelector + '::first-line';
+      }
+      else {
+        elementSelector = postDateSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ readMore: { ...readMore } });
+    }
+
+
+
+
+
+
+    function onRemoveStylePostDate(sudoScource, key) {
+      var sudoScourceX = { ...readMore[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      readMore[sudoScource] = sudoScourceX;
+      setAttributes({ readMore: { ...readMore } });
+
+      if (blockCssY.items[postDateSelector] == undefined) {
+        blockCssY.items[postDateSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[postDateSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+
+
+
+    function onAddStylePostDate(sudoScource, key) {
+      var sudoScourceX = { ...readMore[sudoScource] }
+      sudoScourceX[key] = {};
+      readMore[sudoScource] = sudoScourceX;
+      setAttributes({ readMore: { ...readMore } });
+    }
+
+
+
+
+    function onChangeStyleIcon(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...icon[sudoScource] }
+      var elementSelector = iconSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = iconSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = iconSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = iconSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = iconSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = iconSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = iconSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = iconSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = iconSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = iconSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = iconSelector + '::first-line';
+      }
+      else {
+        elementSelector = iconSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ icon: { ...icon } });
+    }
+
+
+
+
+
+
+    function onRemoveStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({ icon: { ...icon } });
+
+      if (blockCssY.items[iconSelector] == undefined) {
+        blockCssY.items[iconSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[iconSelector][argAttr] = argAttrVal;
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+
+    function onAddStyleIcon(sudoScource, key) {
+      var sudoScourceX = { ...icon[sudoScource] }
+      sudoScourceX[key] = {};
+      icon[sudoScource] = sudoScourceX;
+      setAttributes({ icon: { ...icon } });
+    }
+
+
+
+
+
+
+
+
+
+
+
+    function onChangeStylePrefix(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      var elementSelector = prefixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = prefixSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = prefixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = prefixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = prefixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = prefixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = prefixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = prefixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = prefixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = prefixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = prefixSelector + '::first-line';
+      }
+      else {
+        elementSelector = prefixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onRemoveStylePrefix(sudoScource, key) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      prefix[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ prefix: { ...prefix } });
+
+      if (blockCssY.items[prefixSelector] == undefined) {
+        blockCssY.items[prefixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePrefix(sudoScource, key) {
+
+      var sudoScourceX = { ...prefix[sudoScource] }
+      sudoScourceX[key] = {};
+      prefix[sudoScource] = sudoScourceX;
+      setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onChangeStylePostfix(sudoScource, newVal, attr) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      var elementSelector = postfixSelector;
+
+      if (sudoScource == 'styles') {
+        elementSelector = postfixSelector;
+      }
+
+      else if (sudoScource == 'hover') {
+        elementSelector = postfixSelector + ':hover';
+      } else if (sudoScource == 'after') {
+        elementSelector = postfixSelector + ':after';
+      } else if (sudoScource == 'before') {
+        elementSelector = postfixSelector + ':before';
+      } else if (sudoScource == 'first-child') {
+        elementSelector = postfixSelector + ':first-child';
+      } else if (sudoScource == 'last-child') {
+        elementSelector = postfixSelector + ':last-child';
+      } else if (sudoScource == 'visited') {
+        elementSelector = postfixSelector + ':visited';
+      } else if (sudoScource == 'selection') {
+        elementSelector = postfixSelector + ':selection';
+      } else if (sudoScource == 'first-letter') {
+        elementSelector = postfixSelector + '::first-letter';
+      } else if (sudoScource == 'first-line') {
+        elementSelector = postfixSelector + '::first-line';
+      }
+      else {
+        elementSelector = postfixSelector + ':' + sudoScource;
+      }
+
+      sudoScourceX[attr][breakPointX] = newVal;
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
+
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+    function onRemoveStylePostfix(sudoScource, key) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      if (sudoScourceX[key] != undefined) {
+        delete sudoScourceX[key];
+      }
+
+      postfix[sudoScource] = sudoScourceX;
+      //sudoScourceX[attr][breakPointX] = newVal;
+
+      setAttributes({ postfix: { ...postfix } });
+
+      if (blockCssY.items[postfixSelector] == undefined) {
+        blockCssY.items[postfixSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+
+      })
+
+      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePostfix(sudoScource, key) {
+
+      var sudoScourceX = { ...postfix[sudoScource] }
+      sudoScourceX[key] = {};
+      postfix[sudoScource] = sudoScourceX;
+      setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     function onChangeIconTypo(typoX) {
@@ -544,7 +1019,7 @@ registerBlockType("post-grid/post-date", {
     }, [clientId]);
 
     // Wrapper CSS Class Selectors
-    const postDateWrapperSelector = blockClass;
+    const wrapperSelector = blockClass;
 
 
     var postDateSelector = '';
@@ -567,12 +1042,8 @@ registerBlockType("post-grid/post-date", {
 
 
 
-
-
-
-
-    const postDatePrefixSelector = blockClass + ' .prefix';
-    const postDatePostfixSelector = blockClass + ' .postfix';
+    const prefixSelector = blockClass + ' .prefix';
+    const postfixSelector = blockClass + ' .postfix';
     const iconSelector = blockClass + ' .postdate-icon';
 
 
@@ -1135,33 +1606,6 @@ registerBlockType("post-grid/post-date", {
         <div>
 
           <BlockControls>
-            <AlignmentToolbar
-              value={wrapper.styles.textAlign[breakPointX]}
-
-              onChange={(newVal) => {
-
-                var newValuesObj = {};
-
-
-                if (Object.keys(wrapper.styles.textAlign).length == 0) {
-                  newValuesObj[breakPointX] = newVal;
-                } else {
-                  newValuesObj = wrapper.styles.textAlign;
-                  newValuesObj[breakPointX] = newVal;
-                }
-
-
-                var styles = { ...wrapper.styles, textAlign: newValuesObj };
-                setAttributes({ wrapper: { options: wrapper.options, styles: styles } });
-
-                blockCssY.items[postDateWrapperSelector] = { ...blockCssY.items[postDateWrapperSelector], 'text-align': newValuesObj };
-                setAttributes({ blockCssY: { items: blockCssY.items } });
-
-              }}
-            />
-
-
-
 
 
 
@@ -1174,57 +1618,67 @@ registerBlockType("post-grid/post-date", {
 
               <div>
                 <PanelBody title="Wrapper" initialOpen={false}>
-                  <PanelRow>
-                    <label for="">Wrapper Tag</label>
-                    <SelectControl
-                      label=""
-                      value={wrapper.options.tag}
-                      options={[
-                        { label: 'No Wrapper', value: '' },
-                        { label: 'H1', value: 'h1' },
-                        { label: 'H2', value: 'h2' },
-                        { label: 'H3', value: 'h3' },
-                        { label: 'H4', value: 'h4' },
-                        { label: 'H5', value: 'h5' },
-                        { label: 'H6', value: 'h6' },
-                        { label: 'span', value: 'SPAN' },
-                        { label: 'div', value: 'DIV' },
-                        { label: 'P', value: 'p' },
-                      ]}
-                      onChange={(newVal) => {
-
-                        var options = { ...wrapper.options, tag: newVal };
-                        setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
 
 
-                  <PanelRow>
-                    <label>Display</label>
-                    <PGcssDisplay val={wrapper.styles.display[breakPointX]} onChange={(newVal => {
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+
+                      <PanelRow>
+                        <label for="">Wrapper Tag</label>
+                        <SelectControl
+                          label=""
+                          value={wrapper.options.tag}
+                          options={[
+                            { label: 'No Wrapper', value: '' },
+                            { label: 'H1', value: 'h1' },
+                            { label: 'H2', value: 'h2' },
+                            { label: 'H3', value: 'h3' },
+                            { label: 'H4', value: 'h4' },
+                            { label: 'H5', value: 'h5' },
+                            { label: 'H6', value: 'h6' },
+                            { label: 'span', value: 'SPAN' },
+                            { label: 'div', value: 'DIV' },
+                            { label: 'P', value: 'p' },
+                          ]}
+                          onChange={(newVal) => {
+
+                            var options = { ...wrapper.options, tag: newVal };
+                            setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
+
+                          }
+
+                          }
+                        />
+                      </PanelRow>
+
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                    </PGtab>
+                  </PGtabs>
 
 
-                      var newValuesObj = {};
 
-                      if (Object.keys(wrapper.styles.display).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = wrapper.styles.display;
-                        newValuesObj[breakPointX] = newVal;
-                      }
 
-                      var styles = { ...wrapper.styles, display: newValuesObj };
-                      setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-                      blockCssY.items[postDateWrapperSelector] = { ...blockCssY.items[postDateWrapperSelector], 'display': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                    })} />
-                  </PanelRow>
 
 
 
@@ -1240,191 +1694,406 @@ registerBlockType("post-grid/post-date", {
 
 
 
-                  <PanelRow className='mb-4'>
-                    <label for="">Date Format</label>
-                    <PGDropdown position="bottom right" variant="secondary" options={dateFormats} buttonTitle="Choose" onChange={(option, index) => {
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
 
-                      var options = { ...postDate.options, dateFormat: option.value };
-                      setAttributes({ postDate: { ...postDate, options: options } });
+                      <PanelRow className='mb-4'>
+                        <label for="">Date Format</label>
+                        <PGDropdown position="bottom right" variant="secondary" options={dateFormats} buttonTitle="Choose" onChange={(option, index) => {
 
-                    }} values={''}></PGDropdown>
-                  </PanelRow>
-
-
-                  <PanelRow className='mb-4'>
-                    <label for="">Custom Format</label>
-                    <InputControl
-                      className='mr-2'
-                      value={postDate.options.dateFormat}
-                      onChange={(newVal) => {
-
-
-
-                        var options = { ...postDate.options, dateFormat: newVal };
-                        setAttributes({ postDate: { ...postDate, options: options } });
-
-                      }}
-                    />
-                  </PanelRow>
-
-
-                  {dateFormats[postDate.options.dateFormat] != undefined && (
-                    <div className='p-2 my-3 bg-gray-500 text-white'>{dateFormats[postDate.options.dateFormat].label}</div>
-
-                  )}
-
-
-
-
-
-
-
-
-                  <PanelRow>
-                    <label for="">Link To</label>
-
-                    <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={postDate.options.linkTo.length == 0 ? 'Choose' : linkToArgs[postDate.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
-
-
-                  </PanelRow>
-
-                  {(postDate.options.linkTo == 'authorMeta' || postDate.options.linkTo == 'customField') && (
-
-
-
-                    <PanelRow>
-                      <label for="">
-                        {postDate.options.linkTo == 'authorMeta' && (
-                          <>Author Meta Key</>
-                        )}
-
-                        {postDate.options.linkTo == 'customField' && (
-                          <>Custom Field Key</>
-                        )}
-
-                      </label>
-                      <InputControl
-                        className='mr-2'
-                        value={postDate.options.linkToMetaKey}
-                        onChange={(newVal) => {
-
-
-                          var options = { ...postDate.options, linkToMetaKey: newVal };
+                          var options = { ...postDate.options, dateFormat: option.value };
                           setAttributes({ postDate: { ...postDate, options: options } });
 
-                        }}
-                      />
-                    </PanelRow>
+                        }} values={''}></PGDropdown>
+                      </PanelRow>
 
 
-                  )}
+                      <PanelRow className='mb-4'>
+                        <label for="">Custom Format</label>
+                        <InputControl
+                          className='mr-2'
+                          value={postDate.options.dateFormat}
+                          onChange={(newVal) => {
 
 
 
-
-
-
-                  {postDate.options.linkTo == 'customUrl' && (
-
-                    <PanelRow>
-                      <label for="">Custom URL</label>
-
-                      <div className='relative'>
-                        <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                          setLinkPickerPosttitle(prev => !prev);
-
-                        }}></Button>
-                        {postDate.options.customUrl.length > 0 && (
-                          <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                            var options = { ...postDate.options, customUrl: '' };
+                            var options = { ...postDate.options, dateFormat: newVal };
                             setAttributes({ postDate: { ...postDate, options: options } });
-                            setLinkPickerPosttitle(false);
 
-                          }}></Button>
+                          }}
+                        />
+                      </PanelRow>
 
-                        )}
-                        {linkPickerPosttitle && (
-                          <Popover position="bottom right">
-                            <LinkControl settings={[]} value={postDate.options.customUrl} onChange={newVal => {
 
-                              var options = { ...postDate.options, customUrl: newVal.url };
+                      {dateFormats[postDate.options.dateFormat] != undefined && (
+                        <div className='p-2 my-3 bg-gray-500 text-white'>{dateFormats[postDate.options.dateFormat].label}</div>
 
+                      )}
+
+
+
+
+
+
+
+
+                      <PanelRow>
+                        <label for="">Link To</label>
+
+                        <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={postDate.options.linkTo.length == 0 ? 'Choose' : linkToArgs[postDate.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
+
+
+                      </PanelRow>
+
+                      {(postDate.options.linkTo == 'authorMeta' || postDate.options.linkTo == 'customField') && (
+
+
+
+                        <PanelRow>
+                          <label for="">
+                            {postDate.options.linkTo == 'authorMeta' && (
+                              <>Author Meta Key</>
+                            )}
+
+                            {postDate.options.linkTo == 'customField' && (
+                              <>Custom Field Key</>
+                            )}
+
+                          </label>
+                          <InputControl
+                            className='mr-2'
+                            value={postDate.options.linkToMetaKey}
+                            onChange={(newVal) => {
+
+
+                              var options = { ...postDate.options, linkToMetaKey: newVal };
                               setAttributes({ postDate: { ...postDate, options: options } });
 
-                            }} />
-
-                            <div className='p-2'><span className='font-bold'>Linked to:</span> {(postDate.options.customUrl.length != 0) ? postDate.options.customUrl : 'No link'} </div>
-                          </Popover>
-
-                        )}
+                            }}
+                          />
+                        </PanelRow>
 
 
-                      </div>
-                    </PanelRow>
-
-                  )}
-
-
-
-                  {postDate.options.linkTo.length == 0 && (
-
-                    <PanelRow>
-                      <label for="">Custom Tag</label>
-                      <SelectControl
-                        label=""
-                        value={postDate.options.tag}
-                        options={[
-                          { label: 'H1', value: 'h1' },
-                          { label: 'H2', value: 'h2' },
-                          { label: 'H3', value: 'h3' },
-                          { label: 'H4', value: 'h4' },
-                          { label: 'H5', value: 'h5' },
-                          { label: 'H6', value: 'h6' },
-                          { label: 'SPAN', value: 'span' },
-                          { label: 'DIV', value: 'div' },
-                          { label: 'P', value: 'p' },
-                        ]}
-                        onChange={(newVal) => {
-                          var options = { ...postDate.options, tag: newVal };
-                          setAttributes({ postDate: { ...postDate, options: options } });
-                        }
-
-                        }
-                      />
-                    </PanelRow>
-                  )}
+                      )}
 
 
 
 
-                  {postDate.options.linkTo.length > 0 && (
 
-                    <div>
+
+                      {postDate.options.linkTo == 'customUrl' && (
+
+                        <PanelRow>
+                          <label for="">Custom URL</label>
+
+                          <div className='relative'>
+                            <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
+
+                              setLinkPickerPosttitle(prev => !prev);
+
+                            }}></Button>
+                            {postDate.options.customUrl.length > 0 && (
+                              <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
+
+                                var options = { ...postDate.options, customUrl: '' };
+                                setAttributes({ postDate: { ...postDate, options: options } });
+                                setLinkPickerPosttitle(false);
+
+                              }}></Button>
+
+                            )}
+                            {linkPickerPosttitle && (
+                              <Popover position="bottom right">
+                                <LinkControl settings={[]} value={postDate.options.customUrl} onChange={newVal => {
+
+                                  var options = { ...postDate.options, customUrl: newVal.url };
+
+                                  setAttributes({ postDate: { ...postDate, options: options } });
+
+                                }} />
+
+                                <div className='p-2'><span className='font-bold'>Linked to:</span> {(postDate.options.customUrl.length != 0) ? postDate.options.customUrl : 'No link'} </div>
+                              </Popover>
+
+                            )}
+
+
+                          </div>
+                        </PanelRow>
+
+                      )}
+
+
+
+                      {postDate.options.linkTo.length == 0 && (
+
+                        <PanelRow>
+                          <label for="">Custom Tag</label>
+                          <SelectControl
+                            label=""
+                            value={postDate.options.tag}
+                            options={[
+                              { label: 'H1', value: 'h1' },
+                              { label: 'H2', value: 'h2' },
+                              { label: 'H3', value: 'h3' },
+                              { label: 'H4', value: 'h4' },
+                              { label: 'H5', value: 'h5' },
+                              { label: 'H6', value: 'h6' },
+                              { label: 'SPAN', value: 'span' },
+                              { label: 'DIV', value: 'div' },
+                              { label: 'P', value: 'p' },
+                            ]}
+                            onChange={(newVal) => {
+                              var options = { ...postDate.options, tag: newVal };
+                              setAttributes({ postDate: { ...postDate, options: options } });
+                            }
+
+                            }
+                          />
+                        </PanelRow>
+                      )}
+
+
+
+
+                      {postDate.options.linkTo.length > 0 && (
+
+                        <div>
+                          <PanelRow>
+                            <label for="">Link Target</label>
+
+                            <SelectControl
+                              label=""
+                              value={postDate.options.linkTarget}
+                              options={[
+                                { label: 'Choose...', value: '' },
+
+                                { label: '_self', value: '_self' },
+                                { label: '_blank', value: '_blank' },
+                                { label: '_parent', value: '_parent' },
+                                { label: '_top', value: '_top' },
+
+
+                              ]}
+                              onChange={(newVal) => {
+
+
+
+                                var options = { ...postDate.options, linkTarget: newVal };
+                                setAttributes({ postDate: { ...postDate, options: options } });
+
+
+
+                              }
+
+
+
+                              }
+                            />
+                          </PanelRow>
+
+
+
+
+
+
+
+
+
+
+                          <PanelRow>
+                            <label for="">Custom Attributes</label>
+                            <div
+                              className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                              onClick={(ev) => {
+
+                                var sdsd = postDate.options.linkAttr.concat({ id: '', val: '' })
+
+
+                                var options = { ...postDate.options, linkAttr: sdsd };
+                                setAttributes({ postDate: { ...postDate, options: options } });
+
+                                linkAttrObj()
+                              }}
+
+                            >Add</div>
+
+
+
+                          </PanelRow>
+
+
+
+                          {
+                            postDate.options.linkAttr.map((x, i) => {
+
+                              return (
+
+                                <div className='my-2'>
+                                  <PanelRow>
+                                    <InputControl
+                                      placeholder="Name"
+                                      className='mr-2'
+                                      value={postDate.options.linkAttr[i].id}
+                                      onChange={(newVal) => {
+
+                                        postDate.options.linkAttr[i].id = newVal;
+
+
+                                        var ssdsd = postDate.options.linkAttr.concat([]);
+
+
+
+                                        var options = { ...postDate.options, linkAttr: ssdsd };
+                                        setAttributes({ postDate: { ...postDate, options: options } });
+
+                                      }}
+                                    />
+
+                                    <InputControl
+                                      className='mr-2'
+                                      placeholder="Value"
+                                      value={x.val}
+                                      onChange={(newVal) => {
+                                        postDate.options.linkAttr[i].val = newVal
+                                        var ssdsd = postDate.options.linkAttr.concat([]);
+
+
+
+                                        var options = { ...postDate.options, linkAttr: ssdsd };
+                                        setAttributes({ postDate: { ...postDate, options: options } });
+
+                                      }}
+                                    />
+                                    <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                                      onClick={(ev) => {
+
+                                        postDate.options.linkAttr.splice(i, 1);
+
+                                        var ssdsd = postDate.options.linkAttr.concat([]);
+
+
+                                        var options = { ...postDate.options, linkAttr: ssdsd };
+                                        setAttributes({ postDate: { ...postDate, options: options } });
+                                      }}
+
+                                    ></span>
+                                  </PanelRow>
+
+
+
+
+                                </div>
+
+                              )
+
+                            })
+                          }
+
+
+                        </div>
+
+
+
+                      )}
+
+
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={postDate} onChange={onChangeStylePostDate} onAdd={onAddStylePostDate} onRemove={onRemoveStylePostDate} />
+                    </PGtab>
+                  </PGtabs>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </PanelBody>
+
+                <PanelBody title="Icon" initialOpen={false}>
+
+
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+
                       <PanelRow>
-                        <label for="">Link Target</label>
+                        <label for="">Choose Icon</label>
+
+                        <PGIconPicker library={icon.options.library} srcType={icon.options.srcType} iconSrc={icon.options.iconSrc} onChange={onChangeIcon} />
+                      </PanelRow>
+
+
+
+                      <PanelRow>
+                        <label for="">Icon postion</label>
 
                         <SelectControl
                           label=""
-                          value={postDate.options.linkTarget}
+                          value={icon.options.position}
                           options={[
-                            { label: 'Choose...', value: '' },
 
-                            { label: '_self', value: '_self' },
-                            { label: '_blank', value: '_blank' },
-                            { label: '_parent', value: '_parent' },
-                            { label: '_top', value: '_top' },
+                            { label: 'Choose Position', value: '' },
 
+                            { label: 'Before Post Date', value: 'beforePostDate' },
+                            { label: 'After Post Date', value: 'afterPostDate' },
+                            { label: 'Before Prefix', value: 'beforePrefix' },
+                            { label: 'After Prefix', value: 'afterPrefix' },
+                            { label: 'Before Postfix', value: 'beforePostfix' },
+                            { label: 'After Postfix', value: 'afterPostfix' },
 
                           ]}
                           onChange={(newVal) => {
 
 
-
-                            var options = { ...postDate.options, linkTarget: newVal };
-                            setAttributes({ postDate: { ...postDate, options: options } });
-
+                            var options = { ...icon.options, position: newVal };
+                            setAttributes({ icon: { ...icon, options: options } });
 
 
                           }
@@ -1435,633 +2104,15 @@ registerBlockType("post-grid/post-date", {
                         />
                       </PanelRow>
 
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                    </PGtab>
+                  </PGtabs>
 
 
 
 
-
-
-
-
-
-                      <PanelRow>
-                        <label for="">Custom Attributes</label>
-                        <div
-                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                          onClick={(ev) => {
-
-                            var sdsd = postDate.options.linkAttr.concat({ id: '', val: '' })
-
-
-                            var options = { ...postDate.options, linkAttr: sdsd };
-                            setAttributes({ postDate: { ...postDate, options: options } });
-
-                            linkAttrObj()
-                          }}
-
-                        >Add</div>
-
-
-
-                      </PanelRow>
-
-
-
-                      {
-                        postDate.options.linkAttr.map((x, i) => {
-
-                          return (
-
-                            <div className='my-2'>
-                              <PanelRow>
-                                <InputControl
-                                  placeholder="Name"
-                                  className='mr-2'
-                                  value={postDate.options.linkAttr[i].id}
-                                  onChange={(newVal) => {
-
-                                    postDate.options.linkAttr[i].id = newVal;
-
-
-                                    var ssdsd = postDate.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...postDate.options, linkAttr: ssdsd };
-                                    setAttributes({ postDate: { ...postDate, options: options } });
-
-                                  }}
-                                />
-
-                                <InputControl
-                                  className='mr-2'
-                                  placeholder="Value"
-                                  value={x.val}
-                                  onChange={(newVal) => {
-                                    postDate.options.linkAttr[i].val = newVal
-                                    var ssdsd = postDate.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...postDate.options, linkAttr: ssdsd };
-                                    setAttributes({ postDate: { ...postDate, options: options } });
-
-                                  }}
-                                />
-                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                                  onClick={(ev) => {
-
-                                    postDate.options.linkAttr.splice(i, 1);
-
-                                    var ssdsd = postDate.options.linkAttr.concat([]);
-
-
-                                    var options = { ...postDate.options, linkAttr: ssdsd };
-                                    setAttributes({ postDate: { ...postDate, options: options } });
-                                  }}
-
-                                ></span>
-                              </PanelRow>
-
-
-
-
-                            </div>
-
-                          )
-
-                        })
-                      }
-
-
-                    </div>
-
-
-
-                  )}
-
-
-
-
-
-
-
-
-
-
-
-                  <PanelRow className='my-3'>
-                    <label>Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-
-                  <ColorPalette
-                    value={postDate.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-
-
-
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(postDate.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = postDate.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...postDate.styles, color: newValuesObj };
-                      setAttributes({ postDate: { ...postDate, styles: styles } });
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[postDateSelector] = { ...blockCssY.items[postDateSelector], 'color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                    }}
-                  />
-
-                  <PanelRow className='my-3'>
-                    <label>Background Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-
-                  <ColorPalette
-                    value={postDate.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(postDate.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = postDate.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...postDate.styles, bgColor: newValuesObj };
-                      setAttributes({ postDate: { ...postDate, styles: styles } });
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[postDateSelector] = { ...blockCssY.items[postDateSelector], 'background-color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-
-
-
-
-
-
-                    }}
-                  />
-
-
-                  <PanelRow>
-                    <div className='font-bold'>Typography</div>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <Typography typo={postDate.styles} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} obj={postDate} />
-
-
-                  <PanelRow className='my-3'>
-                    <label>Display</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
-
-                    <SelectControl
-                      label=""
-                      value={postDate.styles.display[breakPointX]}
-
-                      options={[
-                        { label: 'Select..', value: '' },
-
-                        { label: 'inline', value: 'inline' },
-                        { label: 'inline-block', value: 'inline-block' },
-                        { label: 'block', value: 'block' },
-                        { label: 'none', value: 'none' },
-
-
-
-                      ]}
-                      onChange={(newVal) => {
-
-
-
-                        var newValuesObj = {};
-
-
-                        if (Object.keys(postDate.styles.display).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = postDate.styles.display;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-
-                        var styles = { ...postDate.styles, display: newValuesObj };
-                        setAttributes({ postDate: { ...postDate, styles: styles } });
-
-
-
-
-
-
-
-
-
-                        var newValuesObjX = {};
-                        if (blockCssY.items[postDateSelector] == undefined) {
-
-                          newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector], display: newValuesObj };
-
-                        } else {
-
-                          newValuesObjX[postDateSelector] = { ...blockCssY.items[postDateSelector], display: newValuesObj };
-                        }
-
-
-                        setAttributes({ blockCssY: { items: newValuesObjX } });
-
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
-
-
-
-
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={postDate.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paddingControl(nextValues) }}
-                  />
-
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={postDate.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { marginControl(nextValues) }}
-                  />
-
-
-                </PanelBody>
-
-                <PanelBody title="Icon" initialOpen={false}>
-
-
-                  <PanelRow>
-                    <label for="">Choose Icon</label>
-
-                    <PGIconPicker library={icon.options.library} srcType={icon.options.srcType} iconSrc={icon.options.iconSrc} onChange={onChangeIcon} />
-                  </PanelRow>
-
-
-
-                  <PanelRow>
-                    <label for="">Icon postion</label>
-
-                    <SelectControl
-                      label=""
-                      value={icon.options.position}
-                      options={[
-
-                        { label: 'Choose Position', value: '' },
-
-                        { label: 'Before Post Date', value: 'beforePostDate' },
-                        { label: 'After Post Date', value: 'afterPostDate' },
-                        { label: 'Before Prefix', value: 'beforePrefix' },
-                        { label: 'After Prefix', value: 'afterPrefix' },
-                        { label: 'Before Postfix', value: 'beforePostfix' },
-                        { label: 'After Postfix', value: 'afterPostfix' },
-
-                      ]}
-                      onChange={(newVal) => {
-
-
-                        var options = { ...icon.options, position: newVal };
-                        setAttributes({ icon: { ...icon, options: options } });
-
-
-                      }
-
-
-
-                      }
-                    />
-                  </PanelRow>
-
-
-
-                  <PanelRow className='my-3'>
-                    <label>Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-                  <ColorPalette
-                    value={icon.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(icon.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = icon.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...icon.styles, color: newValuesObj };
-                      setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-                    }}
-                  />
-
-
-
-                  <PanelRow className='my-3'>
-                    <label>Background Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-                  <ColorPalette
-                    value={icon.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-
-
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(icon.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = icon.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...icon.styles, bgColor: newValuesObj };
-                      setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'background-color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                    }}
-                  />
-
-
-
-
-                  <PanelRow className='my-3'>
-                    <label>Display</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
-
-                    <SelectControl
-                      label=""
-                      value={icon.styles.display[breakPointX]}
-
-                      options={[
-                        { label: 'Select..', value: '' },
-                        { label: 'inline', value: 'inline' },
-                        { label: 'inline-block', value: 'inline-block' },
-                        { label: 'block', value: 'block' },
-
-                      ]}
-                      onChange={(newVal) => {
-
-                        var newValuesObj = {};
-
-                        if (Object.keys(icon.styles.display).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = icon.styles.display;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-                        var styles = { ...icon.styles, display: newValuesObj };
-                        setAttributes({ icon: { ...icon, styles: styles } });
-
-
-
-                        var itemsX = { ...blockCssY.items };
-                        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'display': newValuesObj };
-
-                        setAttributes({ blockCssY: { items: itemsX } });
-
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=''
-                    values={icon.styles.padding[breakPointX]}
-                    onChange={(nextValues) => {
-
-
-                      var responsive = icon.styles.padding;
-                      responsive[breakPointX] = nextValues;
-
-
-                      var styles = { ...icon.styles, padding: responsive };
-                      setAttributes({ icon: { ...icon, styles: styles } });
-
-                      var itemsX = { ...blockCssY.items };
-
-                      blockCssY.items[iconSelector] = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector] : {};
-
-                      if (nextValues.top != undefined) {
-
-                        var paddingTop = (blockCssY.items[iconSelector]['padding-top'] != undefined) ? blockCssY.items[iconSelector]['padding-top'] : {};
-                        paddingTop[breakPointX] = nextValues.top
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-top': paddingTop };
-                      }
-
-
-                      if (nextValues.right != undefined) {
-
-                        var paddingRight = (blockCssY.items[iconSelector]['padding-right'] != undefined) ? blockCssY.items[iconSelector]['padding-right'] : {};
-                        paddingRight[breakPointX] = nextValues.right
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-right': paddingRight };
-                      }
-
-                      if (nextValues.bottom != undefined) {
-
-                        var paddingBottom = (blockCssY.items[iconSelector]['padding-bottom'] != undefined) ? blockCssY.items[iconSelector]['padding-bottom'] : {};
-                        paddingBottom[breakPointX] = nextValues.bottom
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-bottom': paddingBottom };
-                      }
-
-                      if (nextValues.left != undefined) {
-
-                        var paddingLeft = (blockCssY.items[iconSelector]['padding-left'] != undefined) ? blockCssY.items[iconSelector]['padding-left'] : {};
-                        paddingLeft[breakPointX] = nextValues.left
-
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'padding-left': paddingLeft };
-                      }
-
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                    }}
-                  />
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={icon.styles.margin[breakPointX]}
-                    onChange={(nextValues) => {
-
-
-                      var responsive = icon.styles.margin;
-                      responsive[breakPointX] = nextValues;
-
-                      var styles = { ...icon.styles, margin: responsive };
-                      setAttributes({ icon: { ...icon, styles: styles } });
-
-                      var itemsX = { ...blockCssY.items };
-
-                      blockCssY.items[iconSelector] = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector] : {};
-
-                      if (nextValues.top != undefined) {
-                        var marginTop = (blockCssY.items[iconSelector]['margin-top'] != undefined) ? blockCssY.items[iconSelector]['margin-top'] : {};
-                        marginTop[breakPointX] = nextValues.top
-
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-top': marginTop };
-
-                      }
-
-
-                      if (nextValues.right != undefined) {
-
-                        var marginRight = (blockCssY.items[iconSelector]['margin-right'] !== undefined) ? blockCssY.items[iconSelector]['margin-right'] : {};
-                        marginRight[breakPointX] = nextValues.right
-
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-right': marginRight };
-
-                      }
-
-                      if (nextValues.bottom != undefined) {
-
-                        var marginBottom = (blockCssY.items[iconSelector]['margin-bottom'] !== undefined) ? blockCssY.items[iconSelector]['margin-bottom'] : {};
-                        marginBottom[breakPointX] = nextValues.bottom
-
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-bottom': marginBottom };
-
-                      }
-
-                      if (nextValues.left != undefined) {
-
-                        var marginLeft = (blockCssY.items[iconSelector]['margin-left'] !== undefined) ? blockCssY.items[iconSelector]['margin-left'] : {};
-                        marginLeft[breakPointX] = nextValues.left
-
-                        blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'margin-left': marginLeft };
-
-                      }
-
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                    }}
-                  />
-
-
-                  <PanelRow>
-                    <div className='font-bold'>Typography</div>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <Typography typo={icon.styles} breakPointX={breakPointX} onChange={onChangeIconTypo} setAttributes={setAttributes} obj={icon} />
 
 
 
@@ -2070,25 +2121,58 @@ registerBlockType("post-grid/post-date", {
 
 
                 <PanelBody title="Prefix" initialOpen={false}>
-                  <PanelRow>
-                    <label for="">Prefix</label>
-
-                    <InputControl
-                      value={prefix.options.text}
-                      onChange={(newVal) => {
 
 
 
-                        var options = { ...prefix.options, text: newVal };
-                        setAttributes({ prefix: { styles: prefix.styles, options: options } });
 
 
 
-                        // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, bgColor: prefix.bgColor } })
-                      }
-                      }
-                    />
-                  </PanelRow>
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+                      <PanelRow>
+                        <label for="">Prefix</label>
+
+                        <InputControl
+                          value={prefix.options.text}
+                          onChange={(newVal) => {
+
+
+
+                            var options = { ...prefix.options, text: newVal };
+                            setAttributes({ prefix: { styles: prefix.styles, options: options } });
+
+
+
+                            // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
+                          }
+                          }
+                        />
+                      </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
+                    </PGtab>
+                  </PGtabs>
+
 
                 </PanelBody>
 
@@ -2099,25 +2183,52 @@ registerBlockType("post-grid/post-date", {
 
 
 
+                  <PGtabs
+                    activeTab="options"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
+                      {
+                        name: 'options',
+                        title: 'Options',
+                        icon: settings,
+                        className: 'tab-settings',
+                      },
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: styles,
+                        className: 'tab-style',
+                      },
+                    ]}
+                  >
+                    <PGtab name="options">
+                      <PanelRow>
+                        <label for="">Postfix</label>
 
-                  <PanelRow>
-                    <label for="">Postfix</label>
-
-                    <InputControl
-                      value={postfix.options.text}
-                      onChange={(newVal) => {
+                        <InputControl
+                          value={postfix.options.text}
+                          onChange={(newVal) => {
 
 
-                        var options = { ...postfix.options, text: newVal };
-                        setAttributes({ postfix: { ...postfix, options: options } });
+                            var options = { ...postfix.options, text: newVal };
+                            setAttributes({ postfix: { ...postfix, options: options } });
 
 
-                        // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, bgColor: postfix.bgColor } })
-                      }
+                            // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, backgroundColor: postfix.backgroundColor } })
+                          }
 
-                      }
-                    />
-                  </PanelRow>
+                          }
+                        />
+                      </PanelRow>
+                    </PGtab>
+                    <PGtab name="styles">
+                      <PGStyles obj={wrapper} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
+                    </PGtab>
+                  </PGtabs>
+
+
 
                 </PanelBody>
 
@@ -2127,7 +2238,7 @@ registerBlockType("post-grid/post-date", {
                   <p>Please use following class selector to apply your custom CSS</p>
                   <div className='my-3'>
                     <p className='font-bold'>Title Wrapper</p>
-                    <p><code>{postDateWrapperSelector}{'{/* your CSS here*/}'}</code></p>
+                    <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
                   </div>
 
                   <div className='my-3'>
@@ -2137,12 +2248,12 @@ registerBlockType("post-grid/post-date", {
 
                   <div className='my-3'>
                     <p className='font-bold'>Prefix</p>
-                    <p><code>{postDatePrefixSelector}{'{/* your CSS here*/}'} </code></p>
+                    <p><code>{prefixSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
                   <div className='my-3'>
                     <p className='font-bold'>Postfix</p>
-                    <p><code>{postDatePostfixSelector}{'{/* your CSS here*/}'} </code></p>
+                    <p><code>{postfixSelector}{'{/* your CSS here*/}'} </code></p>
                   </div>
 
 

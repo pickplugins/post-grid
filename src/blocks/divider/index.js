@@ -61,9 +61,8 @@ registerBlockType("post-grid/divider", {
         options: { tag: 'div', class: '' },
         styles:
         {
-          textAlign: {},
+
           color: {},
-          bgColor: {},
           padding: {},
           margin: {},
           display: {},
@@ -83,24 +82,16 @@ registerBlockType("post-grid/divider", {
         },
 
         styles: {
-          textAlign: {},
+
           display: {},
           width: {},
-          height: { "Desktop": { val: 50, unit: 'px' } },
+          height: {},
 
           color: {},
-          bgColor: { "Desktop": '#dddddd' },
           padding: { "Desktop": { top: '0px', right: '0px', bottom: '0px', left: '0px' } },
 
           margin: {},
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
         },
       },
     },
@@ -862,31 +853,6 @@ registerBlockType("post-grid/divider", {
         <div>
 
           <BlockControls>
-            <AlignmentToolbar
-              value={wrapper.styles.textAlign[breakPointX]}
-
-              onChange={(newVal) => {
-
-                var newValuesObj = {};
-
-
-                if (Object.keys(wrapper.styles.textAlign).length == 0) {
-                  newValuesObj[breakPointX] = newVal;
-                } else {
-                  newValuesObj = wrapper.styles.textAlign;
-                  newValuesObj[breakPointX] = newVal;
-                }
-
-
-                var styles = { ...wrapper.styles, textAlign: newValuesObj };
-                setAttributes({ wrapper: { options: wrapper.options, styles: styles } });
-
-                blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-align': newValuesObj };
-                setAttributes({ blockCssY: { items: blockCssY.items } });
-
-              }}
-            />
-
 
 
 
@@ -972,195 +938,6 @@ registerBlockType("post-grid/divider", {
 
                 <PanelBody title="Divider" initialOpen={false}>
 
-
-                  <PanelRow className='my-3'>
-                    <label>Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-
-                  <ColorPalette
-                    value={divider.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-
-
-
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(divider.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = divider.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...divider.styles, color: newValuesObj };
-                      setAttributes({ divider: { ...divider, styles: styles } });
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[dividerSelector] = { ...blockCssY.items[dividerSelector], 'color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                    }}
-                  />
-
-                  <PanelRow className='my-3'>
-                    <label>Background Color</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-                  </PanelRow>
-
-
-                  <ColorPalette
-                    value={divider.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(divider.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = divider.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...divider.styles, bgColor: newValuesObj };
-                      setAttributes({ divider: { ...divider, styles: styles } });
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[dividerSelector] = { ...blockCssY.items[dividerSelector], 'background-color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-
-
-
-
-
-
-                    }}
-                  />
-
-
-
-
-                  <PanelRow className='my-3'>
-                    <label>Display</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
-
-                    <SelectControl
-                      label=""
-                      value={divider.styles.display[breakPointX]}
-
-                      options={[
-                        { label: 'Select..', value: '' },
-
-                        { label: 'inline', value: 'inline' },
-                        { label: 'inline-block', value: 'inline-block' },
-                        { label: 'block', value: 'block' },
-                        { label: 'none', value: 'none' },
-
-
-
-                      ]}
-                      onChange={(newVal) => {
-
-
-
-                        var newValuesObj = {};
-
-
-                        if (Object.keys(divider.styles.display).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = divider.styles.display;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-
-                        var styles = { ...divider.styles, display: newValuesObj };
-                        setAttributes({ divider: { ...divider, styles: styles } });
-
-
-
-
-
-
-
-
-
-                        var newValuesObjX = {};
-                        if (blockCssY.items[dividerSelector] == undefined) {
-
-                          newValuesObjX[dividerSelector] = { ...blockCssY.items[dividerSelector], display: newValuesObj };
-
-                        } else {
-
-                          newValuesObjX[dividerSelector] = { ...blockCssY.items[dividerSelector], display: newValuesObj };
-                        }
-
-
-                        setAttributes({ blockCssY: { items: newValuesObjX } });
-
-
-                      }
-
-                      }
-                    />
-                  </PanelRow>
-
-
-
-
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={divider.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paddingControl(nextValues) }}
-                  />
-
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={divider.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { marginControl(nextValues) }}
-                  />
 
 
                 </PanelBody>

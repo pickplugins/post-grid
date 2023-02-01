@@ -35,7 +35,7 @@ class PGBlockIcon
                             "attr" => []
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -73,7 +73,7 @@ class PGBlockIcon
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -102,7 +102,7 @@ class PGBlockIcon
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -307,9 +307,9 @@ class PGBlockIcon
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
                 <?php if ($textIsLink) : ?>
-                    <a class='text' <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
+                    <a class='text' <?php
+                                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                    echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
                         <?php if ($iconPosition == 'beforeText') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -375,9 +375,9 @@ echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" re
                 <?php if ($prefixText) : ?>
                     <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
                 <?php endif; ?>
-                <a class='text' <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
+                <a class='text' <?php
+                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
 
                     <?php if ($iconPosition == 'beforeText') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>

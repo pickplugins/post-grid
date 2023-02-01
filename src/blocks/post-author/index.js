@@ -68,7 +68,7 @@ registerBlockType("post-grid/post-author", {
         options: { tag: 'div', class: '', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -96,7 +96,7 @@ registerBlockType("post-grid/post-author", {
         styles:
         {
           display: {},
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -118,7 +118,7 @@ registerBlockType("post-grid/post-author", {
         options: { class: 'name', prefix: '', postfix: '', linkTo: '', linkToMeta: '', customUrl: '', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -140,7 +140,7 @@ registerBlockType("post-grid/post-author", {
         options: { class: 'description', prefix: '', postfix: '', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},

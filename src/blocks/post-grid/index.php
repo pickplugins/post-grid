@@ -45,7 +45,7 @@ class PGBlockPostGrid
                             ]
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -65,7 +65,7 @@ class PGBlockPostGrid
                             "busyIcon" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -87,7 +87,7 @@ class PGBlockPostGrid
                             "class" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "backgroundImage" => [],
@@ -103,7 +103,7 @@ class PGBlockPostGrid
                             "class" => "items-loop"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "wordBreak" => [],
@@ -119,7 +119,7 @@ class PGBlockPostGrid
                             "class" => "item"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "wordBreak" => [],
@@ -149,7 +149,7 @@ class PGBlockPostGrid
                             "class" => "no-posts text-center"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "wordBreak" => [],
@@ -165,7 +165,7 @@ class PGBlockPostGrid
                             "class" => "spinner"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "wordBreak" => [],
@@ -185,7 +185,7 @@ class PGBlockPostGrid
                             "gridTemplateRows" => [],
                             "colGap" => [],
                             "rowGap" => [],
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -240,7 +240,7 @@ class PGBlockPostGrid
                             "class" => "page-numbers inline-block"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "display" => [
                                 "Desktop" => "inline-block"
                             ],
@@ -287,7 +287,7 @@ class PGBlockPostGrid
                             "class" => "page-numbers inline-block"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "display" => [],
                             "color" => [],
                             "bgColor" => [],

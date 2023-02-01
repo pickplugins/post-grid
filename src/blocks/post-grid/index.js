@@ -123,7 +123,7 @@ registerBlockType("post-grid/post-grid", {
 
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -138,7 +138,7 @@ registerBlockType("post-grid/post-grid", {
         options: { class: 'search', enable: 'no', type: '', placeholder: '', icon: '', busyIcon: '' },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -161,7 +161,7 @@ registerBlockType("post-grid/post-grid", {
         options: { class: '', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           backgroundImage: {},
@@ -179,7 +179,7 @@ registerBlockType("post-grid/post-grid", {
         options: { class: 'items-loop', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -196,7 +196,7 @@ registerBlockType("post-grid/post-grid", {
         options: { class: 'item', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -233,7 +233,7 @@ registerBlockType("post-grid/post-grid", {
         options: { class: 'no-posts text-center', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -250,7 +250,7 @@ registerBlockType("post-grid/post-grid", {
         options: { class: 'spinner', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -276,7 +276,7 @@ registerBlockType("post-grid/post-grid", {
           gridTemplateRows: {},
           colGap: {},
           rowGap: {},
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -339,7 +339,7 @@ registerBlockType("post-grid/post-grid", {
 
         styles:
         {
-          textAlign: {},
+
           display: { "Desktop": "inline-block" },
           color: { "Desktop": "#18978F" },
           bgColor: { "Desktop": "#9DD6DF" },
@@ -371,7 +371,7 @@ registerBlockType("post-grid/post-grid", {
 
         styles:
         {
-          textAlign: {},
+
           display: {},
           color: {},
           bgColor: {},

@@ -34,7 +34,7 @@ class PGBlockPostCategories
                         ],
                         "styles" => [
                             "display" => [],
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -55,7 +55,7 @@ class PGBlockPostCategories
                             "linkAttr" => []
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "display" => [],
                             "color" => [],
                             "bgColor" => [],
@@ -86,7 +86,7 @@ class PGBlockPostCategories
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -105,7 +105,7 @@ class PGBlockPostCategories
                             "text" => ", "
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -121,7 +121,7 @@ class PGBlockPostCategories
                             "text" => ", "
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -137,7 +137,7 @@ class PGBlockPostCategories
                             "class" => "inline-block"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -200,7 +200,6 @@ class PGBlockPostCategories
 
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'h2';
 
-        $wrapperTextAlign = isset($wrapperStyles['textAlign']) ? $wrapperStyles['textAlign'] : '';
 
 
         $items = isset($attributes['items']) ? $attributes['items'] : [];
@@ -329,9 +328,9 @@ class PGBlockPostCategories
                     if ($i > $maxCount) break;
 
             ?>
-                <a href="<?php echo esc_url_raw($link); ?>" <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
+                <a href="<?php echo esc_url_raw($link); ?>" <?php
+                                                            /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                                            echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
 
                     <?php if ($iconPosition == 'beforeItem') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>

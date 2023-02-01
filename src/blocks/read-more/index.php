@@ -34,7 +34,7 @@ class PGBlockReadmore
                             "class" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -59,7 +59,7 @@ class PGBlockReadmore
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -88,7 +88,7 @@ class PGBlockReadmore
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -290,9 +290,9 @@ class PGBlockReadmore
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-                <a class='readmore' <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>">
+                <a class='readmore' <?php
+                                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                    echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>">
                     <?php if ($iconPosition == 'beforeRedmore') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
@@ -326,9 +326,9 @@ echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget)
             <?php if ($prefixText) : ?>
                 <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
             <?php endif; ?>
-            <a class='readmore' <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo wp_kses_post($readMoreText); ?></a>
+            <a class='readmore' <?php
+                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                echo ($linkAttrStrReadmore); ?> target="<?php echo esc_attr($readMoreLinkTarget); ?>" rel="<?php echo esc_attr($readMoreRel); ?>" href="<?php echo (!empty($readMoreCustomUrl)) ? esc_url_raw($readMoreCustomUrl) :  esc_url_raw($post_url); ?>"><?php echo wp_kses_post($readMoreText); ?></a>
 
 
             <?php if ($postfixText) : ?>

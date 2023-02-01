@@ -33,7 +33,7 @@ class PGBlockPostAuthorields
                             "class" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -58,7 +58,7 @@ class PGBlockPostAuthorields
                             "linkAttr" => []
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -90,7 +90,7 @@ class PGBlockPostAuthorields
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -113,7 +113,7 @@ class PGBlockPostAuthorields
                             "class" => "inline-block"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],

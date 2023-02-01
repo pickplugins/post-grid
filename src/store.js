@@ -92,6 +92,23 @@ var selectors = {
       cssProp = 'border';
     }
 
+
+    else if (key == 'borderTop') {
+      cssProp = 'border-top';
+    }
+
+    else if (key == 'borderRight') {
+      cssProp = 'border-right';
+    }
+
+    else if (key == 'borderBottom') {
+      cssProp = 'border-bottom';
+    }
+
+    else if (key == 'borderLeft') {
+      cssProp = 'border-left';
+    }
+
     else if (key == 'borderRadius') {
       cssProp = 'border-radius';
     }

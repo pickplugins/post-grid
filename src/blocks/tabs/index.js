@@ -68,7 +68,7 @@ registerBlockType("post-grid/tabs", {
 
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -199,7 +199,7 @@ registerBlockType("post-grid/tabs", {
           backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
+
 
           fontSize: {}, //{ val: '18', unit: 'px' }
           lineHeight: {}, // { val: '18', unit: 'px' }

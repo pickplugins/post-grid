@@ -69,7 +69,6 @@ registerBlockType("post-grid/accordion", {
 
         styles:
         {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -100,7 +99,6 @@ registerBlockType("post-grid/accordion", {
         {
           color: {},
           backgroundColor: {},
-          textAlign: {},
 
           padding: {},
           margin: {},
@@ -121,12 +119,10 @@ registerBlockType("post-grid/accordion", {
 
         styles:
         {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
           margin: {},
-          display: {},
 
         },
       },
@@ -142,7 +138,6 @@ registerBlockType("post-grid/accordion", {
 
         styles:
         {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -889,46 +884,6 @@ registerBlockType("post-grid/accordion", {
         <div>
 
           <BlockControls >
-            <AlignmentToolbar
-              value={wrapper.styles.textAlign}
-              onChange={(newVal) => {
-
-
-                var newValuesObj = {};
-
-
-                if (Object.keys(wrapper.styles.textAlign).length == 0) {
-                  newValuesObj[breakPointX] = newVal;
-                } else {
-                  newValuesObj = wrapper.styles.textAlign;
-                  newValuesObj[breakPointX] = newVal;
-                }
-
-
-                var styles = { ...wrapper.styles, textAlign: newValuesObj };
-                setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-
-
-
-                var itemsX = { ...blockCssY.items };
-                itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-align': newValuesObj };
-
-                setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-
-
-
-              }}
-            />
-
-
-
-
-
-
 
           </BlockControls>
 

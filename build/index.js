@@ -1793,7 +1793,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion'
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -1824,7 +1823,6 @@ var myStore = wp.data.select('postgrid-shop');
         styles: {
           color: {},
           backgroundColor: {},
-          textAlign: {},
           padding: {},
           margin: {}
         }
@@ -1839,12 +1837,10 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion-header '
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
-          margin: {},
-          display: {}
+          margin: {}
         }
       }
     },
@@ -1857,7 +1853,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion-content'
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -2536,38 +2531,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "px-2",
@@ -3068,7 +3032,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -4785,37 +4748,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          wrapper: {
-            options: wrapper.options,
-            styles: styles
-          }
-        });
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "px-3",
@@ -6864,37 +6797,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          wrapper: {
-            options: wrapper.options,
-            styles: styles
-          }
-        });
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "px-3",
@@ -7727,7 +7630,6 @@ var myStore = wp.data.select('postgrid-shop');
           text: '»'
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -7748,7 +7650,6 @@ var myStore = wp.data.select('postgrid-shop');
 
         },
         styles: {
-          textAlign: {},
           color: {
             Desktop: '#18978F'
           },
@@ -7978,7 +7879,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8001,7 +7901,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8024,7 +7923,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8047,7 +7945,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8070,7 +7967,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8093,7 +7989,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8117,7 +8012,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8141,7 +8035,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8165,7 +8058,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8189,7 +8081,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8214,7 +8105,6 @@ var myStore = wp.data.select('postgrid-shop');
         count: ''
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8237,7 +8127,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8260,7 +8149,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8283,7 +8171,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8308,7 +8195,6 @@ var myStore = wp.data.select('postgrid-shop');
         maxCount: 3
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8333,7 +8219,6 @@ var myStore = wp.data.select('postgrid-shop');
         maxCount: 3
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8358,7 +8243,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8383,7 +8267,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8406,7 +8289,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8431,7 +8313,6 @@ var myStore = wp.data.select('postgrid-shop');
         count: 0
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8456,7 +8337,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8479,7 +8359,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8502,7 +8381,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8526,7 +8404,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8550,7 +8427,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8573,7 +8449,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8596,7 +8471,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8619,7 +8493,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8643,7 +8516,6 @@ var myStore = wp.data.select('postgrid-shop');
         format: 'Y-m-d'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8667,7 +8539,6 @@ var myStore = wp.data.select('postgrid-shop');
         format: 'Y-m'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8691,7 +8562,6 @@ var myStore = wp.data.select('postgrid-shop');
         format: 'Y'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -8714,7 +8584,6 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -10223,9 +10092,7 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
-          bgColor: {},
           padding: {},
           margin: {},
           display: {}
@@ -10241,19 +10108,10 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           display: {},
           width: {},
-          height: {
-            "Desktop": {
-              val: 50,
-              unit: 'px'
-            }
-          },
+          height: {},
           color: {},
-          bgColor: {
-            "Desktop": '#dddddd'
-          },
           padding: {
             "Desktop": {
               top: '0px',
@@ -10262,18 +10120,7 @@ var myStore = wp.data.select('postgrid-shop');
               left: '0px'
             }
           },
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {}
+          margin: {}
         }
       }
     },
@@ -10831,37 +10678,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          wrapper: {
-            options: wrapper.options,
-            styles: styles
-          }
-        });
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("div", {
       className: "px-3",
@@ -10944,186 +10761,7 @@ var myStore = wp.data.select('postgrid-shop');
     })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Divider",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: divider.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(divider.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = divider.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...divider.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          divider: { ...divider,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[dividerSelector] = { ...blockCssY.items[dividerSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-      value: divider.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_15__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(divider.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = divider.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...divider.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          divider: { ...divider,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[dividerSelector] = { ...blockCssY.items[dividerSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-      label: "",
-      value: divider.styles.display[breakPointX],
-      options: [{
-        label: 'Select..',
-        value: ''
-      }, {
-        label: 'inline',
-        value: 'inline'
-      }, {
-        label: 'inline-block',
-        value: 'inline-block'
-      }, {
-        label: 'block',
-        value: 'block'
-      }, {
-        label: 'none',
-        value: 'none'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(divider.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = divider.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...divider.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          divider: { ...divider,
-            styles: styles
-          }
-        });
-        var newValuesObjX = {};
-
-        if (blockCssY.items[dividerSelector] == undefined) {
-          newValuesObjX[dividerSelector] = { ...blockCssY.items[dividerSelector],
-            display: newValuesObj
-          };
-        } else {
-          newValuesObjX[dividerSelector] = { ...blockCssY.items[dividerSelector],
-            display: newValuesObj
-          };
-        }
-
-        setAttributes({
-          blockCssY: {
-            items: newValuesObjX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: divider.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paddingControl(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_8__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalBoxControl, {
-      label: "",
-      values: divider.styles.margin[breakPointX],
-      onChange: nextValues => {
-        marginControl(nextValues);
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("p", null, "Please use following class selector to apply your custom CSS"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.createElement)("div", {
@@ -12642,36 +12280,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign,
-      onChange: nextAlign => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = nextAlign;
-        } else {
-          newValuesObj = wrapper.styles.textAlign;
-          newValuesObj[breakPointX] = nextAlign;
-        }
-
-        var styles = { ...wrapper.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "px-3",
@@ -13560,7 +13169,6 @@ var myStore = wp.data.select('postgrid-shop');
           useAsBackground: 'no'
         },
         styles: {
-          textAlign: {},
           width: {},
           height: {},
           overflow: {},
@@ -13608,20 +13216,9 @@ var myStore = wp.data.select('postgrid-shop');
           }
         },
         styles: {
-          textAlign: {},
           display: {},
-          width: {
-            "Desktop": {
-              "val": "100",
-              "unit": "%"
-            }
-          },
-          height: {
-            "Desktop": {
-              "val": "",
-              "unit": "auto"
-            }
-          },
+          width: {},
+          height: {},
           filter: {},
           objectFit: {},
           padding: {},
@@ -14571,37 +14168,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          wrapper: {
-            options: wrapper.options,
-            styles: styles
-          }
-        });
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Wrapper",
@@ -16730,38 +16297,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "px-3",
@@ -17531,38 +17067,7 @@ function EditComponent() {
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "px-3",
@@ -17783,7 +17288,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -17819,7 +17323,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'item'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -17848,7 +17351,6 @@ var myStore = wp.data.select('postgrid-shop');
           bgColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
           display: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
@@ -18575,38 +18077,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "px-2",
@@ -19277,7 +18748,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -19325,7 +18795,6 @@ var myStore = wp.data.select('postgrid-shop');
           backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
           display: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
@@ -19351,7 +18820,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -20438,19 +19906,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign,
-      onChange: newVal => {
-        var styles = { ...postfix.styles,
-          textAlign: newVal
-        };
-        setAttributes({
-          postfix: { ...postfix,
-            styles: styles
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "px-3"
@@ -21104,7 +20560,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -21139,7 +20594,6 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           display: {},
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -21162,7 +20616,6 @@ var myStore = wp.data.select('postgrid-shop');
           customUrl: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -21183,7 +20636,6 @@ var myStore = wp.data.select('postgrid-shop');
           postfix: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -23294,7 +22746,6 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           display: {},
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -23315,7 +22766,6 @@ var myStore = wp.data.select('postgrid-shop');
           linkAttr: []
         },
         styles: {
-          textAlign: {},
           display: {},
           color: {},
           bgColor: {},
@@ -23354,7 +22804,6 @@ var myStore = wp.data.select('postgrid-shop');
           bgColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
           display: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
@@ -23376,7 +22825,6 @@ var myStore = wp.data.select('postgrid-shop');
           text: ', '
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -23392,7 +22840,6 @@ var myStore = wp.data.select('postgrid-shop');
           text: ', '
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -23408,7 +22855,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -24627,19 +24073,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign,
-      onChange: newVal => {
-        var styles = { ...postfix.styles,
-          textAlign: newVal
-        };
-        setAttributes({
-          postfix: { ...postfix,
-            styles: styles
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Items Wrapper",
@@ -26774,7 +26208,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -26799,7 +26232,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           display: {},
           width: {},
           color: {},
@@ -26839,7 +26271,6 @@ var myStore = wp.data.select('postgrid-shop');
           backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
           display: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
@@ -30659,14 +30090,9 @@ var myStore = wp.data.select('postgrid-shop');
           useAsBackground: 'no'
         },
         styles: {
-          textAlign: {},
           height: {},
           overflow: {},
           color: {},
-          bgColor: {},
-          bgImage: {},
-          bgPosition: {},
-          bgSize: {},
           display: {},
           padding: {},
           margin: {}
@@ -30696,22 +30122,9 @@ var myStore = wp.data.select('postgrid-shop');
           }
         },
         styles: {
-          textAlign: {},
-          display: {},
-          width: {
-            "Desktop": {
-              "val": "100",
-              "unit": "%"
-            }
-          },
-          height: {
-            "Desktop": {
-              "val": "",
-              "unit": "auto"
-            }
-          },
+          width: {},
+          height: {},
           filter: {},
-          objectFit: {},
           padding: {},
           margin: {}
         },
@@ -31608,37 +31021,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(wrapper.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = wrapper.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...wrapper.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          wrapper: {
-            options: wrapper.options,
-            styles: styles
-          }
-        });
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Wrapper",
@@ -33762,7 +33145,6 @@ var myStore = wp.data.select('postgrid-shop');
           }
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -33782,7 +33164,6 @@ var myStore = wp.data.select('postgrid-shop');
           busyIcon: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -33808,7 +33189,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           backgroundImage: {},
@@ -33824,7 +33204,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'items-loop'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -33840,7 +33219,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'item'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -33881,7 +33259,6 @@ var myStore = wp.data.select('postgrid-shop');
           parPage: 6
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -33903,7 +33280,6 @@ var myStore = wp.data.select('postgrid-shop');
           slug: 'all'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -33917,7 +33293,6 @@ var myStore = wp.data.select('postgrid-shop');
       default: {
         options: {},
         styles: {
-          textAlign: {},
           color: {
             "Desktop": "#18978F"
           },
@@ -33940,7 +33315,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'no-posts text-center'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -33956,7 +33330,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'spinner'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -33976,7 +33349,6 @@ var myStore = wp.data.select('postgrid-shop');
           gridTemplateRows: {},
           colGap: {},
           rowGap: {},
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -34041,7 +33413,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'page-numbers inline-block'
         },
         styles: {
-          textAlign: {},
           display: {
             "Desktop": "inline-block"
           },
@@ -34092,7 +33463,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'page-numbers inline-block'
         },
         styles: {
-          textAlign: {},
           display: {},
           color: {},
           bgColor: {},
@@ -41904,7 +41274,6 @@ var myStore = wp.data.select('postgrid-shop');
           }
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -41924,7 +41293,6 @@ var myStore = wp.data.select('postgrid-shop');
           busyIcon: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -41950,7 +41318,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           backgroundImage: {},
@@ -41966,7 +41333,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'items-loop'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -41982,7 +41348,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'item'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -42016,7 +41381,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'no-posts text-center'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -42032,7 +41396,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'spinner'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -42052,7 +41415,6 @@ var myStore = wp.data.select('postgrid-shop');
           gridTemplateRows: {},
           colGap: {},
           rowGap: {},
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -42113,7 +41475,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'page-numbers inline-block'
         },
         styles: {
-          textAlign: {},
           display: {
             "Desktop": "inline-block"
           },
@@ -42164,7 +41525,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'page-numbers inline-block'
         },
         styles: {
-          textAlign: {},
           display: {},
           color: {},
           bgColor: {},
@@ -47847,7 +47207,6 @@ var myStore = wp.data.select('postgrid-shop');
           tag: 'div'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -47868,7 +47227,6 @@ var myStore = wp.data.select('postgrid-shop');
           postfix: ''
         },
         styles: {
-          textAlign: {},
           display: {},
           width: {},
           color: {},
@@ -48741,7 +48099,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -48763,7 +48120,6 @@ var myStore = wp.data.select('postgrid-shop');
           linkAttr: []
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -48801,7 +48157,6 @@ var myStore = wp.data.select('postgrid-shop');
           bgColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
           display: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
@@ -48823,7 +48178,6 @@ var myStore = wp.data.select('postgrid-shop');
           text: ', '
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -48839,7 +48193,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -50648,7 +50001,6 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           display: {},
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -50677,7 +50029,6 @@ var myStore = wp.data.select('postgrid-shop');
           linkAttr: []
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -50715,7 +50066,6 @@ var myStore = wp.data.select('postgrid-shop');
           bgColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
           display: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
@@ -50737,7 +50087,6 @@ var myStore = wp.data.select('postgrid-shop');
           text: ', '
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -50753,7 +50102,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          textAlign: {},
           color: {},
           bgColor: {},
           padding: {},
@@ -52004,19 +51352,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.AlignmentToolbar, {
-      value: wrapper.styles.textAlign,
-      onChange: newVal => {
-        var styles = { ...postfix.styles,
-          textAlign: newVal
-        };
-        setAttributes({
-          postfix: { ...postfix,
-            styles: styles
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.InspectorControls, {
+    return [(0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_9__.InspectorControls, {
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "px-3"
@@ -54019,7 +53355,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -54047,7 +53382,6 @@ var myStore = wp.data.select('postgrid-shop');
           backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
           display: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
@@ -54084,7 +53418,6 @@ var myStore = wp.data.select('postgrid-shop');
           backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
           display: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
@@ -56909,7 +56242,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -56928,7 +56260,6 @@ var myStore = wp.data.select('postgrid-shop');
 
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -56944,7 +56275,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -56960,7 +56290,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -56981,7 +56310,6 @@ var myStore = wp.data.select('postgrid-shop');
 
         },
         styles: {
-          textAlign: {},
           color: {
             Desktop: '#18978F'
           },
@@ -57025,7 +56353,6 @@ var myStore = wp.data.select('postgrid-shop');
             iconSrc: 'fab fa-facebook-square'
           },
           styles: {
-            textAlign: {},
             color: {},
             backgroundColor: {},
             padding: {},
@@ -57045,7 +56372,6 @@ var myStore = wp.data.select('postgrid-shop');
             iconSrc: 'fab fa-twitter-square'
           },
           styles: {
-            textAlign: {},
             color: {},
             backgroundColor: {},
             padding: {},
@@ -57065,7 +56391,6 @@ var myStore = wp.data.select('postgrid-shop');
             iconSrc: 'fab fa-linkedin'
           },
           styles: {
-            textAlign: {},
             color: {},
             backgroundColor: {},
             padding: {},
@@ -57208,7 +56533,6 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fas fa-envelope'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -57228,7 +56552,6 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fab fa-skype'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -57248,7 +56571,6 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fab fa-whatsapp-square'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -57268,7 +56590,6 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fas fa-square-tumblr'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -57288,7 +56609,6 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fab fa-viber'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -57298,7 +56618,7 @@ var myStore = wp.data.select('postgrid-shop');
     }, // {
     //   id: 'instagram', label: 'Instagram', count: 125, url: 'https://www.facebook.com/sharer.php?u={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-square-instagram', },
     //   styles: {
-    //     textAlign: {},
+    //     
     //     color: {},
     //     backgroundColor: {},
     //     padding: {},
@@ -57319,7 +56639,6 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fab fa-square-reddit'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -57339,7 +56658,6 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fas fa-square-facebook'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -57359,7 +56677,6 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fas fa-square-twitter'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -57379,7 +56696,6 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fas fa-square-facebook'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -57399,7 +56715,6 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fab fa-pinterest-square'
       },
       styles: {
-        textAlign: {},
         color: {},
         backgroundColor: {},
         padding: {},
@@ -58800,7 +58115,6 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion'
         },
         styles: {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -58925,7 +58239,6 @@ var myStore = wp.data.select('postgrid-shop');
           backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
           fontSize: {},
           //{ val: '18', unit: 'px' }
           lineHeight: {},
@@ -64889,6 +64202,278 @@ class PGcssBgColor extends Component {
 
 /***/ }),
 
+/***/ "./src/components/css-border-bottom/index.js":
+/*!***************************************************!*\
+  !*** ./src/components/css-border-bottom/index.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+
+const {
+  Component,
+  RawHTML
+} = wp.element;
+
+
+
+
+
+class PGcssBorderBottom extends Component {
+  render() {
+    const {
+      val,
+      onChange
+    } = this.props;
+    var args = {
+      fill: {
+        "label": "fill",
+        "value": "fill"
+      },
+      contain: {
+        "label": "contain",
+        "value": "contain"
+      },
+      cover: {
+        "label": "cover",
+        "value": "cover"
+      },
+      'scale-down': {
+        "label": "scale-down",
+        "value": "scale-down"
+      },
+      none: {
+        "label": "none",
+        "value": "none"
+      }
+    };
+    var outlineStyleArgs = {
+      none: {
+        "label": "None",
+        "value": "none"
+      },
+      hidden: {
+        "label": "Hidden",
+        "value": "hidden"
+      },
+      dotted: {
+        "label": "Dotted",
+        "value": "dotted"
+      },
+      dashed: {
+        "label": "Dashed",
+        "value": "dashed"
+      },
+      solid: {
+        "label": "Solid",
+        "value": "solid"
+      },
+      double: {
+        "label": "Double",
+        "value": "double"
+      },
+      groove: {
+        "label": "Groove",
+        "value": "groove"
+      },
+      ridge: {
+        "label": "Ridge",
+        "value": "ridge"
+      },
+      inset: {
+        "label": "Inset",
+        "value": "inset"
+      },
+      outset: {
+        "label": "Outset",
+        "value": "outset"
+      }
+    };
+
+    function Html() {
+      var valParts = val != undefined ? val.split(" ") : ['0px', 'solid', '#000000'];
+      var widthVal = valParts[0] != undefined ? valParts[0] : '0px';
+      var styleVal = valParts[1] != undefined ? valParts[1] : 'solid';
+      var colorVal = valParts[2] != undefined ? valParts[2] : '#000000';
+      var unitArgs = {
+        px: {
+          "label": "PX",
+          "value": "px"
+        },
+        em: {
+          "label": "EM",
+          "value": "em"
+        },
+        rem: {
+          "label": "REM",
+          "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
+        }
+      }; //console.log(widthVal);
+      //console.log(widthVal.match(/\d+/g));
+
+      var widthValX = widthVal.match(/\d+/g) != null ? widthVal.match(/\d+/g)[0] : 1;
+      var widthUnitX = widthVal.match(/[a-zA-Z]+/g) != null ? widthVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      const [widthValY, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
+      const [widthUnitY, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
+      const [outlineWidthVal, setoutlineWidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthVal);
+      const [outlineStyleVal, setoutlineStyleVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(styleVal);
+      const [outlineColorVal, setoutlineColorVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(colorVal);
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Width"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex justify-between items-center"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+        value: widthValY,
+        type: "number",
+        onChange: newVal => {
+          setwidthVal(newVal);
+          onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderBottom');
+        }
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+        position: "bottom right",
+        renderToggle: _ref => {
+          let {
+            isOpen,
+            onToggle
+          } = _ref;
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            title: "",
+            onClick: onToggle,
+            "aria-expanded": isOpen
+          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: " "
+          }, widthUnitY != undefined ? unitArgs[widthUnitY].label : 'Select...'));
+        },
+        renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "w-32"
+        }, Object.entries(unitArgs).map(y => {
+          var index = y[0];
+          var x = y[1];
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
+            onClick: ev => {
+              setwidthUnit(x.value);
+              onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderBottom');
+            }
+          }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+        }))
+      })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2 flex justify-between items-center"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Style"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+        position: "bottom right",
+        renderToggle: _ref2 => {
+          let {
+            isOpen,
+            onToggle
+          } = _ref2;
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            title: "Clear",
+            onClick: onToggle,
+            "aria-expanded": isOpen
+          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: " "
+          }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : 'Select...'));
+        },
+        renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "w-32"
+        }, Object.entries(outlineStyleArgs).map(arg => {
+          var index = arg[0];
+          var x = arg[1];
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
+            onClick: ev => {
+              onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'borderBottom');
+            }
+          }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+        }))
+      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+        value: outlineColorVal,
+        colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
+        enableAlpha: true,
+        onChange: newVal => {
+          onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'borderBottom');
+        }
+      })));
+    }
+
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, null));
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGcssBorderBottom);
+
+/***/ }),
+
 /***/ "./src/components/css-border-collapse/index.js":
 /*!*****************************************************!*\
   !*** ./src/components/css-border-collapse/index.js ***!
@@ -64960,6 +64545,278 @@ class PGcssBorderCollapse extends Component {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGcssBorderCollapse);
+
+/***/ }),
+
+/***/ "./src/components/css-border-left/index.js":
+/*!*************************************************!*\
+  !*** ./src/components/css-border-left/index.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+
+const {
+  Component,
+  RawHTML
+} = wp.element;
+
+
+
+
+
+class PGcssBorderLeft extends Component {
+  render() {
+    const {
+      val,
+      onChange
+    } = this.props;
+    var args = {
+      fill: {
+        "label": "fill",
+        "value": "fill"
+      },
+      contain: {
+        "label": "contain",
+        "value": "contain"
+      },
+      cover: {
+        "label": "cover",
+        "value": "cover"
+      },
+      'scale-down': {
+        "label": "scale-down",
+        "value": "scale-down"
+      },
+      none: {
+        "label": "none",
+        "value": "none"
+      }
+    };
+    var outlineStyleArgs = {
+      none: {
+        "label": "None",
+        "value": "none"
+      },
+      hidden: {
+        "label": "Hidden",
+        "value": "hidden"
+      },
+      dotted: {
+        "label": "Dotted",
+        "value": "dotted"
+      },
+      dashed: {
+        "label": "Dashed",
+        "value": "dashed"
+      },
+      solid: {
+        "label": "Solid",
+        "value": "solid"
+      },
+      double: {
+        "label": "Double",
+        "value": "double"
+      },
+      groove: {
+        "label": "Groove",
+        "value": "groove"
+      },
+      ridge: {
+        "label": "Ridge",
+        "value": "ridge"
+      },
+      inset: {
+        "label": "Inset",
+        "value": "inset"
+      },
+      outset: {
+        "label": "Outset",
+        "value": "outset"
+      }
+    };
+
+    function Html() {
+      var valParts = val != undefined ? val.split(" ") : ['0px', 'solid', '#000000'];
+      var widthVal = valParts[0] != undefined ? valParts[0] : '0px';
+      var styleVal = valParts[1] != undefined ? valParts[1] : 'solid';
+      var colorVal = valParts[2] != undefined ? valParts[2] : '#000000';
+      var unitArgs = {
+        px: {
+          "label": "PX",
+          "value": "px"
+        },
+        em: {
+          "label": "EM",
+          "value": "em"
+        },
+        rem: {
+          "label": "REM",
+          "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
+        }
+      }; //console.log(widthVal);
+      //console.log(widthVal.match(/\d+/g));
+
+      var widthValX = widthVal.match(/\d+/g) != null ? widthVal.match(/\d+/g)[0] : 1;
+      var widthUnitX = widthVal.match(/[a-zA-Z]+/g) != null ? widthVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      const [widthValY, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
+      const [widthUnitY, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
+      const [outlineWidthVal, setoutlineWidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthVal);
+      const [outlineStyleVal, setoutlineStyleVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(styleVal);
+      const [outlineColorVal, setoutlineColorVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(colorVal);
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Width"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex justify-between items-center"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+        value: widthValY,
+        type: "number",
+        onChange: newVal => {
+          setwidthVal(newVal);
+          onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderLeft');
+        }
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+        position: "bottom right",
+        renderToggle: _ref => {
+          let {
+            isOpen,
+            onToggle
+          } = _ref;
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            title: "",
+            onClick: onToggle,
+            "aria-expanded": isOpen
+          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: " "
+          }, widthUnitY != undefined ? unitArgs[widthUnitY].label : 'Select...'));
+        },
+        renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "w-32"
+        }, Object.entries(unitArgs).map(y => {
+          var index = y[0];
+          var x = y[1];
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
+            onClick: ev => {
+              setwidthUnit(x.value);
+              onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderLeft');
+            }
+          }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+        }))
+      })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2 flex justify-between items-center"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Style"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+        position: "bottom right",
+        renderToggle: _ref2 => {
+          let {
+            isOpen,
+            onToggle
+          } = _ref2;
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            title: "Clear",
+            onClick: onToggle,
+            "aria-expanded": isOpen
+          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: " "
+          }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : 'Select...'));
+        },
+        renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "w-32"
+        }, Object.entries(outlineStyleArgs).map(arg => {
+          var index = arg[0];
+          var x = arg[1];
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
+            onClick: ev => {
+              onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'borderLeft');
+            }
+          }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+        }))
+      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+        value: outlineColorVal,
+        colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
+        enableAlpha: true,
+        onChange: newVal => {
+          onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'borderLeft');
+        }
+      })));
+    }
+
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, null));
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGcssBorderLeft);
 
 /***/ }),
 
@@ -65040,6 +64897,278 @@ class PGcssBorderRadius extends Component {
 
 /***/ }),
 
+/***/ "./src/components/css-border-right/index.js":
+/*!**************************************************!*\
+  !*** ./src/components/css-border-right/index.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+
+const {
+  Component,
+  RawHTML
+} = wp.element;
+
+
+
+
+
+class PGcssBorderRight extends Component {
+  render() {
+    const {
+      val,
+      onChange
+    } = this.props;
+    var args = {
+      fill: {
+        "label": "fill",
+        "value": "fill"
+      },
+      contain: {
+        "label": "contain",
+        "value": "contain"
+      },
+      cover: {
+        "label": "cover",
+        "value": "cover"
+      },
+      'scale-down': {
+        "label": "scale-down",
+        "value": "scale-down"
+      },
+      none: {
+        "label": "none",
+        "value": "none"
+      }
+    };
+    var outlineStyleArgs = {
+      none: {
+        "label": "None",
+        "value": "none"
+      },
+      hidden: {
+        "label": "Hidden",
+        "value": "hidden"
+      },
+      dotted: {
+        "label": "Dotted",
+        "value": "dotted"
+      },
+      dashed: {
+        "label": "Dashed",
+        "value": "dashed"
+      },
+      solid: {
+        "label": "Solid",
+        "value": "solid"
+      },
+      double: {
+        "label": "Double",
+        "value": "double"
+      },
+      groove: {
+        "label": "Groove",
+        "value": "groove"
+      },
+      ridge: {
+        "label": "Ridge",
+        "value": "ridge"
+      },
+      inset: {
+        "label": "Inset",
+        "value": "inset"
+      },
+      outset: {
+        "label": "Outset",
+        "value": "outset"
+      }
+    };
+
+    function Html() {
+      var valParts = val != undefined ? val.split(" ") : ['0px', 'solid', '#000000'];
+      var widthVal = valParts[0] != undefined ? valParts[0] : '0px';
+      var styleVal = valParts[1] != undefined ? valParts[1] : 'solid';
+      var colorVal = valParts[2] != undefined ? valParts[2] : '#000000';
+      var unitArgs = {
+        px: {
+          "label": "PX",
+          "value": "px"
+        },
+        em: {
+          "label": "EM",
+          "value": "em"
+        },
+        rem: {
+          "label": "REM",
+          "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
+        }
+      }; //console.log(widthVal);
+      //console.log(widthVal.match(/\d+/g));
+
+      var widthValX = widthVal.match(/\d+/g) != null ? widthVal.match(/\d+/g)[0] : 1;
+      var widthUnitX = widthVal.match(/[a-zA-Z]+/g) != null ? widthVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      const [widthValY, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
+      const [widthUnitY, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
+      const [outlineWidthVal, setoutlineWidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthVal);
+      const [outlineStyleVal, setoutlineStyleVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(styleVal);
+      const [outlineColorVal, setoutlineColorVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(colorVal);
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Width"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex justify-between items-center"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+        value: widthValY,
+        type: "number",
+        onChange: newVal => {
+          setwidthVal(newVal);
+          onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderRight');
+        }
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+        position: "bottom right",
+        renderToggle: _ref => {
+          let {
+            isOpen,
+            onToggle
+          } = _ref;
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            title: "",
+            onClick: onToggle,
+            "aria-expanded": isOpen
+          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: " "
+          }, widthUnitY != undefined ? unitArgs[widthUnitY].label : 'Select...'));
+        },
+        renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "w-32"
+        }, Object.entries(unitArgs).map(y => {
+          var index = y[0];
+          var x = y[1];
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
+            onClick: ev => {
+              setwidthUnit(x.value);
+              onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderRight');
+            }
+          }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+        }))
+      })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2 flex justify-between items-center"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Style"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+        position: "bottom right",
+        renderToggle: _ref2 => {
+          let {
+            isOpen,
+            onToggle
+          } = _ref2;
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            title: "Clear",
+            onClick: onToggle,
+            "aria-expanded": isOpen
+          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: " "
+          }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : 'Select...'));
+        },
+        renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "w-32"
+        }, Object.entries(outlineStyleArgs).map(arg => {
+          var index = arg[0];
+          var x = arg[1];
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
+            onClick: ev => {
+              onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'borderRight');
+            }
+          }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+        }))
+      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+        value: outlineColorVal,
+        colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
+        enableAlpha: true,
+        onChange: newVal => {
+          onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'borderRight');
+        }
+      })));
+    }
+
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, null));
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGcssBorderRight);
+
+/***/ }),
+
 /***/ "./src/components/css-border-spacing/index.js":
 /*!****************************************************!*\
   !*** ./src/components/css-border-spacing/index.js ***!
@@ -65115,6 +65244,58 @@ class PGcssBorderSpacing extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var horizontalValX = horizontalVal != undefined ? horizontalVal.match(/\d+/g)[0] : 1;
@@ -65225,6 +65406,278 @@ class PGcssBorderSpacing extends Component {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGcssBorderSpacing);
+
+/***/ }),
+
+/***/ "./src/components/css-border-top/index.js":
+/*!************************************************!*\
+  !*** ./src/components/css-border-top/index.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+
+const {
+  Component,
+  RawHTML
+} = wp.element;
+
+
+
+
+
+class PGcssBorderTop extends Component {
+  render() {
+    const {
+      val,
+      onChange
+    } = this.props;
+    var args = {
+      fill: {
+        "label": "fill",
+        "value": "fill"
+      },
+      contain: {
+        "label": "contain",
+        "value": "contain"
+      },
+      cover: {
+        "label": "cover",
+        "value": "cover"
+      },
+      'scale-down': {
+        "label": "scale-down",
+        "value": "scale-down"
+      },
+      none: {
+        "label": "none",
+        "value": "none"
+      }
+    };
+    var outlineStyleArgs = {
+      none: {
+        "label": "None",
+        "value": "none"
+      },
+      hidden: {
+        "label": "Hidden",
+        "value": "hidden"
+      },
+      dotted: {
+        "label": "Dotted",
+        "value": "dotted"
+      },
+      dashed: {
+        "label": "Dashed",
+        "value": "dashed"
+      },
+      solid: {
+        "label": "Solid",
+        "value": "solid"
+      },
+      double: {
+        "label": "Double",
+        "value": "double"
+      },
+      groove: {
+        "label": "Groove",
+        "value": "groove"
+      },
+      ridge: {
+        "label": "Ridge",
+        "value": "ridge"
+      },
+      inset: {
+        "label": "Inset",
+        "value": "inset"
+      },
+      outset: {
+        "label": "Outset",
+        "value": "outset"
+      }
+    };
+
+    function Html() {
+      var valParts = val != undefined ? val.split(" ") : ['0px', 'solid', '#000000'];
+      var widthVal = valParts[0] != undefined ? valParts[0] : '0px';
+      var styleVal = valParts[1] != undefined ? valParts[1] : 'solid';
+      var colorVal = valParts[2] != undefined ? valParts[2] : '#000000';
+      var unitArgs = {
+        px: {
+          "label": "PX",
+          "value": "px"
+        },
+        em: {
+          "label": "EM",
+          "value": "em"
+        },
+        rem: {
+          "label": "REM",
+          "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
+        }
+      }; //console.log(widthVal);
+      //console.log(widthVal.match(/\d+/g));
+
+      var widthValX = widthVal.match(/\d+/g) != null ? widthVal.match(/\d+/g)[0] : 1;
+      var widthUnitX = widthVal.match(/[a-zA-Z]+/g) != null ? widthVal.match(/[a-zA-Z]+/g)[0] : 'px';
+      const [widthValY, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
+      const [widthUnitY, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
+      const [outlineWidthVal, setoutlineWidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthVal);
+      const [outlineStyleVal, setoutlineStyleVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(styleVal);
+      const [outlineColorVal, setoutlineColorVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(colorVal);
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Width"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex justify-between items-center"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+        value: widthValY,
+        type: "number",
+        onChange: newVal => {
+          setwidthVal(newVal);
+          onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderTop');
+        }
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+        position: "bottom right",
+        renderToggle: _ref => {
+          let {
+            isOpen,
+            onToggle
+          } = _ref;
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            title: "",
+            onClick: onToggle,
+            "aria-expanded": isOpen
+          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: " "
+          }, widthUnitY != undefined ? unitArgs[widthUnitY].label : 'Select...'));
+        },
+        renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "w-32"
+        }, Object.entries(unitArgs).map(y => {
+          var index = y[0];
+          var x = y[1];
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
+            onClick: ev => {
+              setwidthUnit(x.value);
+              onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderTop');
+            }
+          }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+        }))
+      })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2 flex justify-between items-center"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Style"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+        position: "bottom right",
+        renderToggle: _ref2 => {
+          let {
+            isOpen,
+            onToggle
+          } = _ref2;
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+            title: "Clear",
+            onClick: onToggle,
+            "aria-expanded": isOpen
+          }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: " "
+          }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : 'Select...'));
+        },
+        renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "w-32"
+        }, Object.entries(outlineStyleArgs).map(arg => {
+          var index = arg[0];
+          var x = arg[1];
+          return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+            className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
+            onClick: ev => {
+              onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'borderTop');
+            }
+          }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
+        }))
+      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "my-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+        for: ""
+      }, "Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+        value: outlineColorVal,
+        colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
+        enableAlpha: true,
+        onChange: newVal => {
+          onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'borderTop');
+        }
+      })));
+    }
+
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, null));
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGcssBorderTop);
 
 /***/ }),
 
@@ -65342,6 +65795,58 @@ class PGcssBorder extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       }; //console.log(widthVal);
       //console.log(widthVal.match(/\d+/g));
@@ -65491,6 +65996,58 @@ class PGcssBottom extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -66370,6 +66927,82 @@ class PGcssDisplay extends Component {
       'inline-block': {
         "label": "Inline Block",
         "value": "inline-block"
+      },
+      grid: {
+        "label": "Grid",
+        "value": "grid"
+      },
+      flex: {
+        "label": "Flex",
+        "value": "flex"
+      },
+      contents: {
+        "label": "contents",
+        "value": "contents"
+      },
+      'inline-flex': {
+        "label": "inline-flex",
+        "value": "inline-flex"
+      },
+      'inline-grid': {
+        "label": "inline-grid",
+        "value": "inline-grid"
+      },
+      'inline-table': {
+        "label": "inline-table",
+        "value": "inline-table"
+      },
+      'list-item': {
+        "label": "list-item",
+        "value": "list-item"
+      },
+      'run-in': {
+        "label": "run-in",
+        "value": "run-in"
+      },
+      table: {
+        "label": "table",
+        "value": "table"
+      },
+      'table-caption': {
+        "label": "table-caption",
+        "value": "table-caption"
+      },
+      'table-column-group': {
+        "label": "table-column-group",
+        "value": "table-column-group"
+      },
+      'table-header-group': {
+        "label": "table-header-group",
+        "value": "table-header-group"
+      },
+      'table-footer-group': {
+        "label": "table-footer-group",
+        "value": "table-footer-group"
+      },
+      'table-row-group': {
+        "label": "table-row-group",
+        "value": "table-row-group"
+      },
+      'table-cell': {
+        "label": "table-cell",
+        "value": "table-cell"
+      },
+      'table-column': {
+        "label": "table-column",
+        "value": "table-column"
+      },
+      'table-row': {
+        "label": "table-row",
+        "value": "table-row"
+      },
+      initial: {
+        "label": "initial",
+        "value": "initial"
+      },
+      inherit: {
+        "label": "inherit",
+        "value": "inherit"
       }
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
@@ -66746,6 +67379,58 @@ class PGcssFontSize extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -67248,6 +67933,58 @@ class PGcssHeight extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       console.log(val);
@@ -67348,6 +68085,58 @@ class PGcssLeft extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -67446,6 +68235,58 @@ class PGcssLetterSpacing extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -67545,9 +68386,57 @@ class PGcssLineHeight extends Component {
           "label": "REM",
           "value": "rem"
         },
-        rem: {
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
           "label": "%",
           "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -67898,6 +68787,58 @@ class PGcssMaxHeight extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -67997,6 +68938,58 @@ class PGcssMaxWidth extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -68096,6 +69089,58 @@ class PGcssMinHeight extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -68195,6 +69240,58 @@ class PGcssMinWidth extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -68454,6 +69551,58 @@ class PGcssOutlineOffset extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -68626,6 +69775,58 @@ class PGcssOutline extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = widthVal != undefined ? widthVal.match(/\d+/g)[0] : 1;
@@ -69105,6 +70306,58 @@ class PGcssPerspective extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -69290,6 +70543,58 @@ class PGcssRight extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -69563,6 +70868,58 @@ class PGcssTextDecoration extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var thicknessValX = thicknessVal != undefined ? thicknessVal.match(/\d+/g)[0] : 1;
@@ -69778,6 +71135,58 @@ class PGcssTextIndent extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -70086,6 +71495,58 @@ class PGcssTextShadow extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var horizontalValX = horizontalVal != undefined ? horizontalVal.match(/\d+/g)[0] : 1;
@@ -70335,6 +71796,58 @@ class PGcssTop extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -71599,8 +73112,61 @@ class PGcssWidth extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
+      console.log(val);
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
       var widthUnitX = val != undefined ? val.match(/[a-zA-Z]+/g)[0] : 'px';
       const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
@@ -71780,6 +73346,58 @@ class PGcssWordSpacing extends Component {
         rem: {
           "label": "REM",
           "value": "rem"
+        },
+        auto: {
+          "label": "AUTO",
+          "value": "auto"
+        },
+        "%": {
+          "label": "%",
+          "value": "%"
+        },
+        cm: {
+          "label": "CM",
+          "value": "cm"
+        },
+        mm: {
+          "label": "MM",
+          "value": "mm"
+        },
+        in: {
+          "label": "IN",
+          "value": "in"
+        },
+        pt: {
+          "label": "PT",
+          "value": "pt"
+        },
+        pc: {
+          "label": "PC",
+          "value": "pc"
+        },
+        ex: {
+          "label": "EX",
+          "value": "ex"
+        },
+        ch: {
+          "label": "CH",
+          "value": "ch"
+        },
+        vw: {
+          "label": "VW",
+          "value": "vw"
+        },
+        vh: {
+          "label": "VH",
+          "value": "vh"
+        },
+        vmin: {
+          "label": "VMIN",
+          "value": "vmin"
+        },
+        vmax: {
+          "label": "VMAX",
+          "value": "vmax"
         }
       };
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
@@ -73087,9 +74705,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/arrow-right.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/arrow-right.js");
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
 /* harmony import */ var _components_breakpoint_toggle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/breakpoint-toggle */ "./src/components/breakpoint-toggle/index.js");
 /* harmony import */ var _components_dropdown_sudo_selector__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/dropdown-sudo-selector */ "./src/components/dropdown-sudo-selector/index.js");
@@ -73107,68 +74725,72 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_css_background_repeat__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/css-background-repeat */ "./src/components/css-background-repeat/index.js");
 /* harmony import */ var _components_css_background_size__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../components/css-background-size */ "./src/components/css-background-size/index.js");
 /* harmony import */ var _components_css_border__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/css-border */ "./src/components/css-border/index.js");
-/* harmony import */ var _components_css_border_radius__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/css-border-radius */ "./src/components/css-border-radius/index.js");
-/* harmony import */ var _components_css_bottom__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../components/css-bottom */ "./src/components/css-bottom/index.js");
-/* harmony import */ var _components_css_border_collapse__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../components/css-border-collapse */ "./src/components/css-border-collapse/index.js");
-/* harmony import */ var _components_css_border_spacing__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../components/css-border-spacing */ "./src/components/css-border-spacing/index.js");
-/* harmony import */ var _components_css_backdrop_filter__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../components/css-backdrop-filter */ "./src/components/css-backdrop-filter/index.js");
-/* harmony import */ var _components_css_box_shadow__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../components/css-box-shadow */ "./src/components/css-box-shadow/index.js");
-/* harmony import */ var _components_css_box_sizing__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../components/css-box-sizing */ "./src/components/css-box-sizing/index.js");
-/* harmony import */ var _components_css_clear__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../components/css-clear */ "./src/components/css-clear/index.js");
-/* harmony import */ var _components_css_color__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../components/css-color */ "./src/components/css-color/index.js");
-/* harmony import */ var _components_css_cursor__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../components/css-cursor */ "./src/components/css-cursor/index.js");
-/* harmony import */ var _components_css_content__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../components/css-content */ "./src/components/css-content/index.js");
-/* harmony import */ var _components_css_column_count__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../components/css-column-count */ "./src/components/css-column-count/index.js");
-/* harmony import */ var _components_css_display__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../components/css-display */ "./src/components/css-display/index.js");
-/* harmony import */ var _components_css_direction__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../components/css-direction */ "./src/components/css-direction/index.js");
-/* harmony import */ var _components_css_filter__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../../components/css-filter */ "./src/components/css-filter/index.js");
-/* harmony import */ var _components_css_float__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../components/css-float */ "./src/components/css-float/index.js");
-/* harmony import */ var _components_css_font_size__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../../components/css-font-size */ "./src/components/css-font-size/index.js");
-/* harmony import */ var _components_css_font_stretch__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../../components/css-font-stretch */ "./src/components/css-font-stretch/index.js");
-/* harmony import */ var _components_css_font_style__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../../components/css-font-style */ "./src/components/css-font-style/index.js");
-/* harmony import */ var _components_css_font_weight__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../components/css-font-weight */ "./src/components/css-font-weight/index.js");
-/* harmony import */ var _components_css_font_variant_caps__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../components/css-font-variant-caps */ "./src/components/css-font-variant-caps/index.js");
-/* harmony import */ var _components_css_height__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../../components/css-height */ "./src/components/css-height/index.js");
-/* harmony import */ var _components_css_left__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../../components/css-left */ "./src/components/css-left/index.js");
-/* harmony import */ var _components_css_letter_spacing__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../../components/css-letter-spacing */ "./src/components/css-letter-spacing/index.js");
-/* harmony import */ var _components_css_line_height__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../../components/css-line-height */ "./src/components/css-line-height/index.js");
-/* harmony import */ var _components_css_list_style__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ../../components/css-list-style */ "./src/components/css-list-style/index.js");
-/* harmony import */ var _components_css_margin__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ../../components/css-margin */ "./src/components/css-margin/index.js");
-/* harmony import */ var _components_css_max_height__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ../../components/css-max-height */ "./src/components/css-max-height/index.js");
-/* harmony import */ var _components_css_max_width__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ../../components/css-max-width */ "./src/components/css-max-width/index.js");
-/* harmony import */ var _components_css_min_height__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ../../components/css-min-height */ "./src/components/css-min-height/index.js");
-/* harmony import */ var _components_css_min_width__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ../../components/css-min-width */ "./src/components/css-min-width/index.js");
-/* harmony import */ var _components_css_perspective__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ../../components/css-perspective */ "./src/components/css-perspective/index.js");
-/* harmony import */ var _components_css_object_fit__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ../../components/css-object-fit */ "./src/components/css-object-fit/index.js");
-/* harmony import */ var _components_css_opacity__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ../../components/css-opacity */ "./src/components/css-opacity/index.js");
-/* harmony import */ var _components_css_outline__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ../../components/css-outline */ "./src/components/css-outline/index.js");
-/* harmony import */ var _components_css_outline_offset__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ../../components/css-outline-offset */ "./src/components/css-outline-offset/index.js");
-/* harmony import */ var _components_css_overflow__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ../../components/css-overflow */ "./src/components/css-overflow/index.js");
-/* harmony import */ var _components_css_overflow_x__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ../../components/css-overflow-x */ "./src/components/css-overflow-x/index.js");
-/* harmony import */ var _components_css_overflow_y__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ../../components/css-overflow-y */ "./src/components/css-overflow-y/index.js");
-/* harmony import */ var _components_css_padding__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ../../components/css-padding */ "./src/components/css-padding/index.js");
-/* harmony import */ var _components_css_position__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ../../components/css-position */ "./src/components/css-position/index.js");
-/* harmony import */ var _components_css_right__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ../../components/css-right */ "./src/components/css-right/index.js");
-/* harmony import */ var _components_css_text_align__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ../../components/css-text-align */ "./src/components/css-text-align/index.js");
-/* harmony import */ var _components_css_text_decoration__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ../../components/css-text-decoration */ "./src/components/css-text-decoration/index.js");
-/* harmony import */ var _components_css_text_indent__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ../../components/css-text-indent */ "./src/components/css-text-indent/index.js");
-/* harmony import */ var _components_css_text_justify__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ../../components/css-text-justify */ "./src/components/css-text-justify/index.js");
-/* harmony import */ var _components_css_text_overflow__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ../../components/css-text-overflow */ "./src/components/css-text-overflow/index.js");
-/* harmony import */ var _components_css_text_shadow__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ../../components/css-text-shadow */ "./src/components/css-text-shadow/index.js");
-/* harmony import */ var _components_css_text_transform__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ../../components/css-text-transform */ "./src/components/css-text-transform/index.js");
-/* harmony import */ var _components_css_top__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ../../components/css-top */ "./src/components/css-top/index.js");
-/* harmony import */ var _components_css_transform__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ../../components/css-transform */ "./src/components/css-transform/index.js");
-/* harmony import */ var _components_css_transition__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ../../components/css-transition */ "./src/components/css-transition/index.js");
-/* harmony import */ var _components_css_vertical_align__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ../../components/css-vertical-align */ "./src/components/css-vertical-align/index.js");
-/* harmony import */ var _components_css_visibility__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ../../components/css-visibility */ "./src/components/css-visibility/index.js");
-/* harmony import */ var _components_css_width__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ../../components/css-width */ "./src/components/css-width/index.js");
-/* harmony import */ var _components_css_word_break__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ../../components/css-word-break */ "./src/components/css-word-break/index.js");
-/* harmony import */ var _components_css_word_spacing__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ../../components/css-word-spacing */ "./src/components/css-word-spacing/index.js");
-/* harmony import */ var _components_css_writing_mode__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ../../components/css-writing-mode */ "./src/components/css-writing-mode/index.js");
-/* harmony import */ var _components_css_word_wrap__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ../../components/css-word-wrap */ "./src/components/css-word-wrap/index.js");
-/* harmony import */ var _components_css_z_index__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ../../components/css-z-index */ "./src/components/css-z-index/index.js");
-/* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
-/* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
+/* harmony import */ var _components_css_border_top__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/css-border-top */ "./src/components/css-border-top/index.js");
+/* harmony import */ var _components_css_border_right__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../components/css-border-right */ "./src/components/css-border-right/index.js");
+/* harmony import */ var _components_css_border_bottom__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../components/css-border-bottom */ "./src/components/css-border-bottom/index.js");
+/* harmony import */ var _components_css_border_left__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../components/css-border-left */ "./src/components/css-border-left/index.js");
+/* harmony import */ var _components_css_border_radius__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../components/css-border-radius */ "./src/components/css-border-radius/index.js");
+/* harmony import */ var _components_css_bottom__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../components/css-bottom */ "./src/components/css-bottom/index.js");
+/* harmony import */ var _components_css_border_collapse__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../components/css-border-collapse */ "./src/components/css-border-collapse/index.js");
+/* harmony import */ var _components_css_border_spacing__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../components/css-border-spacing */ "./src/components/css-border-spacing/index.js");
+/* harmony import */ var _components_css_backdrop_filter__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../components/css-backdrop-filter */ "./src/components/css-backdrop-filter/index.js");
+/* harmony import */ var _components_css_box_shadow__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../../components/css-box-shadow */ "./src/components/css-box-shadow/index.js");
+/* harmony import */ var _components_css_box_sizing__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../components/css-box-sizing */ "./src/components/css-box-sizing/index.js");
+/* harmony import */ var _components_css_clear__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../components/css-clear */ "./src/components/css-clear/index.js");
+/* harmony import */ var _components_css_color__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../components/css-color */ "./src/components/css-color/index.js");
+/* harmony import */ var _components_css_cursor__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../components/css-cursor */ "./src/components/css-cursor/index.js");
+/* harmony import */ var _components_css_content__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../../components/css-content */ "./src/components/css-content/index.js");
+/* harmony import */ var _components_css_column_count__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../../components/css-column-count */ "./src/components/css-column-count/index.js");
+/* harmony import */ var _components_css_display__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../../components/css-display */ "./src/components/css-display/index.js");
+/* harmony import */ var _components_css_direction__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../../components/css-direction */ "./src/components/css-direction/index.js");
+/* harmony import */ var _components_css_filter__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../../components/css-filter */ "./src/components/css-filter/index.js");
+/* harmony import */ var _components_css_float__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../../components/css-float */ "./src/components/css-float/index.js");
+/* harmony import */ var _components_css_font_size__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../../components/css-font-size */ "./src/components/css-font-size/index.js");
+/* harmony import */ var _components_css_font_stretch__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../../components/css-font-stretch */ "./src/components/css-font-stretch/index.js");
+/* harmony import */ var _components_css_font_style__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ../../components/css-font-style */ "./src/components/css-font-style/index.js");
+/* harmony import */ var _components_css_font_weight__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../../components/css-font-weight */ "./src/components/css-font-weight/index.js");
+/* harmony import */ var _components_css_font_variant_caps__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../../components/css-font-variant-caps */ "./src/components/css-font-variant-caps/index.js");
+/* harmony import */ var _components_css_height__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ../../components/css-height */ "./src/components/css-height/index.js");
+/* harmony import */ var _components_css_left__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ../../components/css-left */ "./src/components/css-left/index.js");
+/* harmony import */ var _components_css_letter_spacing__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ../../components/css-letter-spacing */ "./src/components/css-letter-spacing/index.js");
+/* harmony import */ var _components_css_line_height__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ../../components/css-line-height */ "./src/components/css-line-height/index.js");
+/* harmony import */ var _components_css_list_style__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ../../components/css-list-style */ "./src/components/css-list-style/index.js");
+/* harmony import */ var _components_css_margin__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ../../components/css-margin */ "./src/components/css-margin/index.js");
+/* harmony import */ var _components_css_max_height__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ../../components/css-max-height */ "./src/components/css-max-height/index.js");
+/* harmony import */ var _components_css_max_width__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ../../components/css-max-width */ "./src/components/css-max-width/index.js");
+/* harmony import */ var _components_css_min_height__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ../../components/css-min-height */ "./src/components/css-min-height/index.js");
+/* harmony import */ var _components_css_min_width__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ../../components/css-min-width */ "./src/components/css-min-width/index.js");
+/* harmony import */ var _components_css_perspective__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ../../components/css-perspective */ "./src/components/css-perspective/index.js");
+/* harmony import */ var _components_css_object_fit__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ../../components/css-object-fit */ "./src/components/css-object-fit/index.js");
+/* harmony import */ var _components_css_opacity__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ../../components/css-opacity */ "./src/components/css-opacity/index.js");
+/* harmony import */ var _components_css_outline__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ../../components/css-outline */ "./src/components/css-outline/index.js");
+/* harmony import */ var _components_css_outline_offset__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ../../components/css-outline-offset */ "./src/components/css-outline-offset/index.js");
+/* harmony import */ var _components_css_overflow__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ../../components/css-overflow */ "./src/components/css-overflow/index.js");
+/* harmony import */ var _components_css_overflow_x__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ../../components/css-overflow-x */ "./src/components/css-overflow-x/index.js");
+/* harmony import */ var _components_css_overflow_y__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ../../components/css-overflow-y */ "./src/components/css-overflow-y/index.js");
+/* harmony import */ var _components_css_padding__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ../../components/css-padding */ "./src/components/css-padding/index.js");
+/* harmony import */ var _components_css_position__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ../../components/css-position */ "./src/components/css-position/index.js");
+/* harmony import */ var _components_css_right__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ../../components/css-right */ "./src/components/css-right/index.js");
+/* harmony import */ var _components_css_text_align__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ../../components/css-text-align */ "./src/components/css-text-align/index.js");
+/* harmony import */ var _components_css_text_decoration__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ../../components/css-text-decoration */ "./src/components/css-text-decoration/index.js");
+/* harmony import */ var _components_css_text_indent__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ../../components/css-text-indent */ "./src/components/css-text-indent/index.js");
+/* harmony import */ var _components_css_text_justify__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ../../components/css-text-justify */ "./src/components/css-text-justify/index.js");
+/* harmony import */ var _components_css_text_overflow__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ../../components/css-text-overflow */ "./src/components/css-text-overflow/index.js");
+/* harmony import */ var _components_css_text_shadow__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ../../components/css-text-shadow */ "./src/components/css-text-shadow/index.js");
+/* harmony import */ var _components_css_text_transform__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ../../components/css-text-transform */ "./src/components/css-text-transform/index.js");
+/* harmony import */ var _components_css_top__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ../../components/css-top */ "./src/components/css-top/index.js");
+/* harmony import */ var _components_css_transform__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ../../components/css-transform */ "./src/components/css-transform/index.js");
+/* harmony import */ var _components_css_transition__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ../../components/css-transition */ "./src/components/css-transition/index.js");
+/* harmony import */ var _components_css_vertical_align__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ../../components/css-vertical-align */ "./src/components/css-vertical-align/index.js");
+/* harmony import */ var _components_css_visibility__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ../../components/css-visibility */ "./src/components/css-visibility/index.js");
+/* harmony import */ var _components_css_width__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ../../components/css-width */ "./src/components/css-width/index.js");
+/* harmony import */ var _components_css_word_break__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ../../components/css-word-break */ "./src/components/css-word-break/index.js");
+/* harmony import */ var _components_css_word_spacing__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ../../components/css-word-spacing */ "./src/components/css-word-spacing/index.js");
+/* harmony import */ var _components_css_writing_mode__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ../../components/css-writing-mode */ "./src/components/css-writing-mode/index.js");
+/* harmony import */ var _components_css_word_wrap__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ../../components/css-word-wrap */ "./src/components/css-word-wrap/index.js");
+/* harmony import */ var _components_css_z_index__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ../../components/css-z-index */ "./src/components/css-z-index/index.js");
+/* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
+/* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
 
 const {
   Component,
@@ -73193,6 +74815,10 @@ const {
 
 
  // import PGcssBackgroundImage from '../../components/css-background-image'
+
+
+
+
 
 
 
@@ -73392,6 +75018,22 @@ function Html(props) {
     border: {
       id: 'border',
       label: 'Border'
+    },
+    borderTop: {
+      id: 'borderTop',
+      label: 'Border Top'
+    },
+    borderRight: {
+      id: 'borderRight',
+      label: 'Border Right'
+    },
+    borderBottom: {
+      id: 'borderBottom',
+      label: 'Border Bottom'
+    },
+    borderLeft: {
+      id: 'borderLeft',
+      label: 'Border Left'
     },
     borderCollapse: {
       id: 'borderCollapse',
@@ -73690,8 +75332,8 @@ function Html(props) {
       onClick: ev => {
         props.onRemove(sudoScource, keyX);
       }
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_83__["default"], {
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_84__["default"]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_87__["default"], {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_88__["default"]
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "mx-2"
     }, title));
@@ -73714,8 +75356,8 @@ function Html(props) {
   } = wp.data.dispatch('core/edit-post');
   var breakPointList = [];
 
-  for (var x in _breakpoints__WEBPACK_IMPORTED_MODULE_81__["default"]) {
-    var item = _breakpoints__WEBPACK_IMPORTED_MODULE_81__["default"][x];
+  for (var x in _breakpoints__WEBPACK_IMPORTED_MODULE_85__["default"]) {
+    var item = _breakpoints__WEBPACK_IMPORTED_MODULE_85__["default"][x];
     breakPointList.push({
       label: item.name,
       icon: item.icon,
@@ -73735,8 +75377,8 @@ function Html(props) {
       setSudoScource(option.value);
     },
     values: ""
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_83__["default"], {
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_85__["default"]
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_87__["default"], {
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_89__["default"]
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
     position: "bottom right",
     variant: "secondary",
@@ -73746,7 +75388,7 @@ function Html(props) {
     values: ""
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "inline-block"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_82__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_86__["default"], {
     position: "bottom",
     variant: "secondary",
     iconList: breakPointList,
@@ -73758,7 +75400,7 @@ function Html(props) {
         setBreakPointX(res.breakpoint);
       });
     },
-    activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_81__["default"][breakPointX].icon,
+    activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_85__["default"][breakPointX].icon,
     value: breakPointX
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-5"
@@ -73827,187 +75469,199 @@ function Html(props) {
     }), key == 'backgroundPosition' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_background_position__WEBPACK_IMPORTED_MODULE_17__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'boxShadow' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_box_shadow__WEBPACK_IMPORTED_MODULE_26__["default"], {
+    }), key == 'boxShadow' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_box_shadow__WEBPACK_IMPORTED_MODULE_30__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
     }), key == 'border' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border__WEBPACK_IMPORTED_MODULE_20__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'borderRadius' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border_radius__WEBPACK_IMPORTED_MODULE_21__["default"], {
+    }), key == 'borderTop' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border_top__WEBPACK_IMPORTED_MODULE_21__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'borderCollapse' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border_collapse__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    }), key == 'borderRight' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border_right__WEBPACK_IMPORTED_MODULE_22__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'borderSpacing' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border_spacing__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    }), key == 'borderBottom' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border_bottom__WEBPACK_IMPORTED_MODULE_23__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'backdropFilter' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_backdrop_filter__WEBPACK_IMPORTED_MODULE_25__["default"], {
+    }), key == 'borderLeft' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border_left__WEBPACK_IMPORTED_MODULE_24__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'bottom' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_bottom__WEBPACK_IMPORTED_MODULE_22__["default"], {
+    }), key == 'borderRadius' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border_radius__WEBPACK_IMPORTED_MODULE_25__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'cursor' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_cursor__WEBPACK_IMPORTED_MODULE_30__["default"], {
+    }), key == 'borderCollapse' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border_collapse__WEBPACK_IMPORTED_MODULE_27__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'content' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_content__WEBPACK_IMPORTED_MODULE_31__["default"], {
+    }), key == 'borderSpacing' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_border_spacing__WEBPACK_IMPORTED_MODULE_28__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'columnCount' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_column_count__WEBPACK_IMPORTED_MODULE_32__["default"], {
+    }), key == 'backdropFilter' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_backdrop_filter__WEBPACK_IMPORTED_MODULE_29__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'top' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_top__WEBPACK_IMPORTED_MODULE_70__["default"], {
+    }), key == 'bottom' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_bottom__WEBPACK_IMPORTED_MODULE_26__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'left' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_left__WEBPACK_IMPORTED_MODULE_43__["default"], {
+    }), key == 'cursor' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_cursor__WEBPACK_IMPORTED_MODULE_34__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'right' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_right__WEBPACK_IMPORTED_MODULE_62__["default"], {
+    }), key == 'content' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_content__WEBPACK_IMPORTED_MODULE_35__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'boxSizing' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_box_sizing__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    }), key == 'columnCount' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_column_count__WEBPACK_IMPORTED_MODULE_36__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'clear' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_clear__WEBPACK_IMPORTED_MODULE_28__["default"], {
+    }), key == 'top' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_top__WEBPACK_IMPORTED_MODULE_74__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'direction' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_direction__WEBPACK_IMPORTED_MODULE_34__["default"], {
+    }), key == 'left' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_left__WEBPACK_IMPORTED_MODULE_47__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'color' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_color__WEBPACK_IMPORTED_MODULE_29__["default"], {
+    }), key == 'right' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_right__WEBPACK_IMPORTED_MODULE_66__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'filter' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_filter__WEBPACK_IMPORTED_MODULE_35__["default"], {
+    }), key == 'boxSizing' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_box_sizing__WEBPACK_IMPORTED_MODULE_31__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'float' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_float__WEBPACK_IMPORTED_MODULE_36__["default"], {
+    }), key == 'clear' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_clear__WEBPACK_IMPORTED_MODULE_32__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'fontSize' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_font_size__WEBPACK_IMPORTED_MODULE_37__["default"], {
+    }), key == 'direction' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_direction__WEBPACK_IMPORTED_MODULE_38__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'fontStyle' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_font_style__WEBPACK_IMPORTED_MODULE_39__["default"], {
+    }), key == 'color' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_color__WEBPACK_IMPORTED_MODULE_33__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'fontStretch' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_font_stretch__WEBPACK_IMPORTED_MODULE_38__["default"], {
+    }), key == 'filter' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_filter__WEBPACK_IMPORTED_MODULE_39__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'fontWeight' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_font_weight__WEBPACK_IMPORTED_MODULE_40__["default"], {
+    }), key == 'float' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_float__WEBPACK_IMPORTED_MODULE_40__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'fontVariantCaps' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_font_variant_caps__WEBPACK_IMPORTED_MODULE_41__["default"], {
+    }), key == 'fontSize' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_font_size__WEBPACK_IMPORTED_MODULE_41__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'letterSpacing' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_letter_spacing__WEBPACK_IMPORTED_MODULE_44__["default"], {
+    }), key == 'fontStyle' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_font_style__WEBPACK_IMPORTED_MODULE_43__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'lineHeight' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_line_height__WEBPACK_IMPORTED_MODULE_45__["default"], {
+    }), key == 'fontStretch' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_font_stretch__WEBPACK_IMPORTED_MODULE_42__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'listStyle' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_list_style__WEBPACK_IMPORTED_MODULE_46__["default"], {
+    }), key == 'fontWeight' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_font_weight__WEBPACK_IMPORTED_MODULE_44__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'objectFit' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_object_fit__WEBPACK_IMPORTED_MODULE_53__["default"], {
+    }), key == 'fontVariantCaps' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_font_variant_caps__WEBPACK_IMPORTED_MODULE_45__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'opacity' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_opacity__WEBPACK_IMPORTED_MODULE_54__["default"], {
+    }), key == 'letterSpacing' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_letter_spacing__WEBPACK_IMPORTED_MODULE_48__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'outline' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_outline__WEBPACK_IMPORTED_MODULE_55__["default"], {
+    }), key == 'lineHeight' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_line_height__WEBPACK_IMPORTED_MODULE_49__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'outlineOffset' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_outline_offset__WEBPACK_IMPORTED_MODULE_56__["default"], {
+    }), key == 'listStyle' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_list_style__WEBPACK_IMPORTED_MODULE_50__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'position' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_position__WEBPACK_IMPORTED_MODULE_61__["default"], {
+    }), key == 'objectFit' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_object_fit__WEBPACK_IMPORTED_MODULE_57__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'transition' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_transition__WEBPACK_IMPORTED_MODULE_72__["default"], {
+    }), key == 'opacity' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_opacity__WEBPACK_IMPORTED_MODULE_58__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'transform' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_transform__WEBPACK_IMPORTED_MODULE_71__["default"], {
+    }), key == 'outline' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_outline__WEBPACK_IMPORTED_MODULE_59__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'textIndent' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_indent__WEBPACK_IMPORTED_MODULE_65__["default"], {
+    }), key == 'outlineOffset' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_outline_offset__WEBPACK_IMPORTED_MODULE_60__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'textJustify' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_justify__WEBPACK_IMPORTED_MODULE_66__["default"], {
+    }), key == 'position' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_position__WEBPACK_IMPORTED_MODULE_65__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'textOverflow' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_overflow__WEBPACK_IMPORTED_MODULE_67__["default"], {
+    }), key == 'transition' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_transition__WEBPACK_IMPORTED_MODULE_76__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'textTransform' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_transform__WEBPACK_IMPORTED_MODULE_69__["default"], {
+    }), key == 'transform' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_transform__WEBPACK_IMPORTED_MODULE_75__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'textDecoration' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_decoration__WEBPACK_IMPORTED_MODULE_64__["default"], {
+    }), key == 'textIndent' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_indent__WEBPACK_IMPORTED_MODULE_69__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'textShadow' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_shadow__WEBPACK_IMPORTED_MODULE_68__["default"], {
+    }), key == 'textJustify' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_justify__WEBPACK_IMPORTED_MODULE_70__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'textAlign' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_align__WEBPACK_IMPORTED_MODULE_63__["default"], {
+    }), key == 'textOverflow' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_overflow__WEBPACK_IMPORTED_MODULE_71__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'visibility' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_visibility__WEBPACK_IMPORTED_MODULE_74__["default"], {
+    }), key == 'textTransform' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_transform__WEBPACK_IMPORTED_MODULE_73__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'wordBreak' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_word_break__WEBPACK_IMPORTED_MODULE_76__["default"], {
+    }), key == 'textDecoration' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_decoration__WEBPACK_IMPORTED_MODULE_68__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'wordSpacing' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_word_spacing__WEBPACK_IMPORTED_MODULE_77__["default"], {
+    }), key == 'textShadow' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_shadow__WEBPACK_IMPORTED_MODULE_72__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'zIndex' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_z_index__WEBPACK_IMPORTED_MODULE_80__["default"], {
+    }), key == 'textAlign' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_text_align__WEBPACK_IMPORTED_MODULE_67__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'padding' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_padding__WEBPACK_IMPORTED_MODULE_60__["default"], {
+    }), key == 'visibility' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_visibility__WEBPACK_IMPORTED_MODULE_78__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'margin' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_margin__WEBPACK_IMPORTED_MODULE_47__["default"], {
+    }), key == 'wordBreak' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_word_break__WEBPACK_IMPORTED_MODULE_80__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'maxHeight' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_max_height__WEBPACK_IMPORTED_MODULE_48__["default"], {
+    }), key == 'wordSpacing' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_word_spacing__WEBPACK_IMPORTED_MODULE_81__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'maxWidth' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_max_width__WEBPACK_IMPORTED_MODULE_49__["default"], {
+    }), key == 'zIndex' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_z_index__WEBPACK_IMPORTED_MODULE_84__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'minHeight' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_min_height__WEBPACK_IMPORTED_MODULE_50__["default"], {
+    }), key == 'padding' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_padding__WEBPACK_IMPORTED_MODULE_64__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'minWidth' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_min_width__WEBPACK_IMPORTED_MODULE_51__["default"], {
+    }), key == 'margin' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_margin__WEBPACK_IMPORTED_MODULE_51__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'display' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_33__["default"], {
+    }), key == 'maxHeight' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_max_height__WEBPACK_IMPORTED_MODULE_52__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'width' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_width__WEBPACK_IMPORTED_MODULE_75__["default"], {
+    }), key == 'maxWidth' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_max_width__WEBPACK_IMPORTED_MODULE_53__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'height' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_height__WEBPACK_IMPORTED_MODULE_42__["default"], {
+    }), key == 'minHeight' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_min_height__WEBPACK_IMPORTED_MODULE_54__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'verticalAlign' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_vertical_align__WEBPACK_IMPORTED_MODULE_73__["default"], {
+    }), key == 'minWidth' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_min_width__WEBPACK_IMPORTED_MODULE_55__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'overflow' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_overflow__WEBPACK_IMPORTED_MODULE_57__["default"], {
+    }), key == 'display' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_37__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'overflowX' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_overflow_x__WEBPACK_IMPORTED_MODULE_58__["default"], {
+    }), key == 'width' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_width__WEBPACK_IMPORTED_MODULE_79__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'overflowY' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_overflow_y__WEBPACK_IMPORTED_MODULE_59__["default"], {
+    }), key == 'height' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_height__WEBPACK_IMPORTED_MODULE_46__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'writingMode' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_writing_mode__WEBPACK_IMPORTED_MODULE_78__["default"], {
+    }), key == 'verticalAlign' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_vertical_align__WEBPACK_IMPORTED_MODULE_77__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'wordWrap' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_word_wrap__WEBPACK_IMPORTED_MODULE_79__["default"], {
+    }), key == 'overflow' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_overflow__WEBPACK_IMPORTED_MODULE_61__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
-    }), key == 'perspective' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_perspective__WEBPACK_IMPORTED_MODULE_52__["default"], {
+    }), key == 'overflowX' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_overflow_x__WEBPACK_IMPORTED_MODULE_62__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == 'overflowY' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_overflow_y__WEBPACK_IMPORTED_MODULE_63__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == 'writingMode' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_writing_mode__WEBPACK_IMPORTED_MODULE_82__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == 'wordWrap' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_word_wrap__WEBPACK_IMPORTED_MODULE_83__["default"], {
+      val: value[breakPointX],
+      onChange: onChangeCssVal
+    }), key == 'perspective' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_perspective__WEBPACK_IMPORTED_MODULE_56__["default"], {
       val: value[breakPointX],
       onChange: onChangeCssVal
     }));
@@ -74988,6 +76642,14 @@ var selectors = {
       cssProp = 'background-position';
     } else if (key == 'border') {
       cssProp = 'border';
+    } else if (key == 'borderTop') {
+      cssProp = 'border-top';
+    } else if (key == 'borderRight') {
+      cssProp = 'border-right';
+    } else if (key == 'borderBottom') {
+      cssProp = 'border-bottom';
+    } else if (key == 'borderLeft') {
+      cssProp = 'border-left';
     } else if (key == 'borderRadius') {
       cssProp = 'border-radius';
     } else if (key == 'borderCollapse') {

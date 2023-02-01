@@ -35,7 +35,7 @@ class PGBlockLayer
                             "class" => "pg-layers"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],

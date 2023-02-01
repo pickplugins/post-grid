@@ -64,7 +64,7 @@ registerBlockType("post-grid/post-author-fields", {
         options: { class: '' },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -110,7 +110,7 @@ registerBlockType("post-grid/post-author-fields", {
           backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
+
           display: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }
@@ -136,7 +136,7 @@ registerBlockType("post-grid/post-author-fields", {
         options: { text: 'Author: ', class: 'inline-block', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -1444,16 +1444,7 @@ registerBlockType("post-grid/post-author-fields", {
         <div>
 
           <BlockControls >
-            <AlignmentToolbar
-              value={wrapper.styles.textAlign}
-              onChange={(newVal) => {
 
-
-                var styles = { ...postfix.styles, textAlign: newVal };
-                setAttributes({ postfix: { ...postfix, styles: styles } });
-
-              }}
-            />
           </BlockControls>
 
 

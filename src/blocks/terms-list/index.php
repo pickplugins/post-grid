@@ -37,7 +37,7 @@ class PGBlockTermsList
                         ],
                         "styles" => [
                             "display" => [],
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -76,7 +76,7 @@ class PGBlockTermsList
                             "linkAttr" => []
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -106,7 +106,7 @@ class PGBlockTermsList
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -125,7 +125,7 @@ class PGBlockTermsList
                             "text" => ", "
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -141,7 +141,7 @@ class PGBlockTermsList
                             "class" => "inline-block"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],

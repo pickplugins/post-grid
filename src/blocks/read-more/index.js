@@ -69,7 +69,7 @@ registerBlockType("post-grid/read-more", {
         options: { tag: 'div', class: '' },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -94,7 +94,7 @@ registerBlockType("post-grid/read-more", {
           backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
+
           display: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }
@@ -121,7 +121,7 @@ registerBlockType("post-grid/read-more", {
           backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
+
           display: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }

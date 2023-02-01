@@ -34,7 +34,7 @@ class PGBlocPostDate
                             "class" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -58,7 +58,7 @@ class PGBlocPostDate
                             "class" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "display" => [],
                             "width" => [],
                             "color" => [],
@@ -90,7 +90,7 @@ class PGBlocPostDate
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -318,9 +318,9 @@ class PGBlocPostDate
                 <?php endif; ?>
 
                 <?php if (!empty($postDateLinkTo)) : ?>
-                    <a class='postDate' <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget); ?>" rel="<?php echo esc_attr($postDateRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
+                    <a class='postDate' <?php
+                                        /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                        echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget); ?>" rel="<?php echo esc_attr($postDateRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
                         <?php if ($iconPosition == 'beforePostDate') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -332,9 +332,9 @@ echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget)
 
                 <?php else : ?>
 
-                    <span class='postDate' <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStrpostDate); ?>>
+                    <span class='postDate' <?php
+                                            /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                            echo ($linkAttrStrpostDate); ?>>
                         <?php if ($iconPosition == 'beforePostDate') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -384,9 +384,9 @@ echo ($linkAttrStrpostDate); ?>>
 
             <?php if (!empty($postDateLinkTo)) : ?>
 
-                <a class='postDate' <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget); ?>" rel="<?php echo esc_attr($postDateRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
+                <a class='postDate' <?php
+                                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                    echo ($linkAttrStrpostDate); ?> target="<?php echo esc_attr($postDateLinkTarget); ?>" rel="<?php echo esc_attr($postDateRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
                     <?php if ($iconPosition == 'beforePostDate') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>

@@ -66,7 +66,6 @@ registerBlockType("post-grid/archive-description", {
 
         styles:
         {
-          textAlign: {},
           color: {},
           backgroundColor: {},
           padding: {},
@@ -2011,35 +2010,6 @@ registerBlockType("post-grid/archive-description", {
         <div>
 
           <BlockControls>
-            <AlignmentToolbar
-              value={wrapper.styles.textAlign[breakPointX]}
-
-              onChange={(newVal) => {
-
-                var newValuesObj = {};
-
-
-                if (Object.keys(wrapper.styles.textAlign).length == 0) {
-                  newValuesObj[breakPointX] = newVal;
-                } else {
-                  newValuesObj = wrapper.styles.textAlign;
-                  newValuesObj[breakPointX] = newVal;
-                }
-
-
-                var styles = { ...wrapper.styles, textAlign: newValuesObj };
-                setAttributes({ wrapper: { options: wrapper.options, styles: styles } });
-
-                blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'text-align': newValuesObj };
-                setAttributes({ blockCssY: { items: blockCssY.items } });
-
-              }}
-            />
-
-
-
-
-
 
           </BlockControls>
 

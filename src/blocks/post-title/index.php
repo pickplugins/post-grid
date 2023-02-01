@@ -35,7 +35,7 @@ class PGBlockPostTitle
                         ],
                         "styles" => [
                             "display" => [],
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -60,7 +60,7 @@ class PGBlockPostTitle
                             "class" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "display" => [],
                             "width" => [],
                             "color" => [],
@@ -201,10 +201,9 @@ class PGBlockPostTitle
         if (!empty($linkAttr))
             foreach ($linkAttr as $attr) {
 
-                if (!empty($attr['val'])){
+                if (!empty($attr['val'])) {
                     $linkAttrStr .= esc_attr($attr['id']) . '="' . esc_attr($attr['val']) . '" ';
                     $attrArr[$attr['id']] = $attr['val'];
-
                 }
             }
 
@@ -238,23 +237,26 @@ class PGBlockPostTitle
         ?>
             <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
                 <?php if ($postTitleIsLink) : ?>
-                    <a href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" 
+                    <a href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php
 
-<?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStr); ?>
->
-                        <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
-
+                                                                                                                                                                                                        /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                                                                                                                                                                                        echo ($linkAttrStr); ?>>
+                        <?php if (!empty($prefixText)) : ?>
+                            <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                        <?php endif; ?>
                         <?php echo  wp_kses_post($post_title); ?>
-
-                        <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                        <?php if (!empty($postfixText)) : ?>
+                            <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                        <?php endif; ?>
                     </a>
                 <?php else : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                    <?php if (!empty($prefixText)) : ?>
+                        <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                    <?php endif; ?>
                     <?php echo wp_kses_post($post_title); ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
-
+                    <?php if (!empty($postfixText)) : ?>
+                        <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                    <?php endif; ?>
                 <?php endif; ?>
             </<?php echo esc_attr($wrapperTag); ?>>
         <?php
@@ -266,20 +268,25 @@ echo ($linkAttrStr); ?>
         ?>
 
             <?php if ($postTitleIsLink) : ?>
-                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStr); ?>>
-
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
-
+                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php
+                                                                                                                                                                                                                                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                                                                                                                                                                                                                                echo ($linkAttrStr); ?>>
+                    <?php if (!empty($prefixText)) : ?>
+                        <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                    <?php endif; ?>
                     <?php echo wp_kses_post($post_title); ?>
-
-                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                    <?php if (!empty($postfixText)) : ?>
+                        <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                    <?php endif; ?>
                 </a>
             <?php else : ?>
-                <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                <?php if (!empty($prefixText)) : ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                <?php endif; ?>
                 <?php echo wp_kses_post($post_title); ?>
-                <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                <?php if (!empty($postfixText)) : ?>
+                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                <?php endif; ?>
             <?php endif; ?>
 
         <?php

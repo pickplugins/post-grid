@@ -35,7 +35,7 @@ class PGBlockFeaturedImage
                             "useAsBackground" => "no"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "height" => [],
                             "overflow" => [],
                             "color" => [],
@@ -70,7 +70,7 @@ class PGBlockFeaturedImage
                             ]
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "display" => [],
                             "width" => [
                                 "Desktop" => [

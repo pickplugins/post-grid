@@ -34,7 +34,7 @@ class PGBlockPostAuthor
                             "class" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -72,7 +72,7 @@ class PGBlockPostAuthor
                         ],
                         "styles" => [
                             "display" => [],
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -94,7 +94,7 @@ class PGBlockPostAuthor
                             "customUrl" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -120,7 +120,7 @@ class PGBlockPostAuthor
                             "postfix" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],

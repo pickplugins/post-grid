@@ -64,7 +64,7 @@ registerBlockType("post-grid/social-share", {
         options: { tag: 'div', class: '', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -79,7 +79,7 @@ registerBlockType("post-grid/social-share", {
         options: { class: 'icon', position: 'beforeLabel'/*beforeLabel, afterLabel, beforeCount, afterCount*/ },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -94,7 +94,7 @@ registerBlockType("post-grid/social-share", {
         options: { class: '', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -110,7 +110,7 @@ registerBlockType("post-grid/social-share", {
         options: { class: '', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -127,7 +127,7 @@ registerBlockType("post-grid/social-share", {
           linkTarget: '_blank', showLabel: false, showCount: false, showIcon: true, iconPositon: 'beforeLabel' // beforeLabel, afterLabel, beforeCount, afterCount
         },
         styles: {
-          textAlign: {},
+
           color: { Desktop: '#18978F' },
           backgroundColor: {},
           padding: {},
@@ -149,7 +149,7 @@ registerBlockType("post-grid/social-share", {
           {
             id: 'facebook', label: 'Facebook', count: 125, url: 'https://www.facebook.com/sharer.php?u={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-facebook-square', },
             styles: {
-              textAlign: {},
+
               color: {},
               backgroundColor: {},
               padding: {},
@@ -161,7 +161,7 @@ registerBlockType("post-grid/social-share", {
           {
             id: 'twitter', label: 'Twitter', count: 125, url: 'https://twitter.com/intent/tweet?url={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-twitter-square', },
             styles: {
-              textAlign: {},
+
               color: {},
               backgroundColor: {},
               padding: {},
@@ -173,7 +173,7 @@ registerBlockType("post-grid/social-share", {
           {
             id: 'linkedin', label: 'Linkedin', count: 125, url: 'https://www.linkedin.com/shareArticle?mini=true&url={URL}&title={TITLE}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-linkedin', },
             styles: {
-              textAlign: {},
+
               color: {},
               backgroundColor: {},
               padding: {},
@@ -363,7 +363,7 @@ registerBlockType("post-grid/social-share", {
       {
         id: 'email', label: 'Mail', count: 125, url: 'mailto:?subject={TITLE}&body={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-envelope', },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -377,7 +377,7 @@ registerBlockType("post-grid/social-share", {
       {
         id: 'skype', label: 'Skype', count: 125, url: 'https://web.skype.com/share?url={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-skype', },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -390,7 +390,7 @@ registerBlockType("post-grid/social-share", {
       {
         id: 'whatsapp', label: 'WhatsApp', count: 125, url: 'https://api.whatsapp.com/send?text={URL} - {TITLE}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-whatsapp-square', },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -402,7 +402,7 @@ registerBlockType("post-grid/social-share", {
       {
         id: 'tumblr', label: 'Tumblr', count: 125, url: 'https://www.tumblr.com/share/link?url={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-square-tumblr', },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -415,7 +415,7 @@ registerBlockType("post-grid/social-share", {
       {
         id: 'viber', label: 'Viber', count: 125, url: 'viber://chat?number=12345678', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-viber', },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -428,7 +428,7 @@ registerBlockType("post-grid/social-share", {
       // {
       //   id: 'instagram', label: 'Instagram', count: 125, url: 'https://www.facebook.com/sharer.php?u={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-square-instagram', },
       //   styles: {
-      //     textAlign: {},
+      //     
       //     color: {},
       //     backgroundColor: {},
       //     padding: {},
@@ -441,7 +441,7 @@ registerBlockType("post-grid/social-share", {
       {
         id: 'reddit', label: 'Reddit', count: 125, url: 'http://www.reddit.com/submit?title={TITLE}&url={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-square-reddit', },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -454,7 +454,7 @@ registerBlockType("post-grid/social-share", {
       {
         id: 'facebook', label: 'Facebook', count: 125, url: 'https://www.facebook.com/sharer.php?u={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-square-facebook', },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -466,7 +466,7 @@ registerBlockType("post-grid/social-share", {
       {
         id: 'twitter', label: 'Twitter', count: 125, url: 'https://twitter.com/intent/tweet?url={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-square-twitter', },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -478,7 +478,7 @@ registerBlockType("post-grid/social-share", {
       {
         id: 'linkedin', label: 'Linkedin', count: 125, url: 'https://www.linkedin.com/shareArticle?mini=true&url={URL}&title={TITLE}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-square-facebook', },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -489,7 +489,7 @@ registerBlockType("post-grid/social-share", {
       {
         id: 'pinterest', label: 'Pinterest', count: 125, url: 'https://www.pinterest.com/pin/create/button/?url={URL}&media={IMAGE}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-pinterest-square', },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},

@@ -34,7 +34,6 @@ class PGBlocArchiveTitle
                             "class" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -60,7 +59,7 @@ class PGBlocArchiveTitle
                             "class" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "display" => [],
                             "width" => [],
                             "color" => [],
@@ -92,7 +91,7 @@ class PGBlocArchiveTitle
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -372,9 +371,9 @@ class PGBlocArchiveTitle
                 <?php endif; ?>
 
                 <?php if (!empty($archiveTitleLinkTo)) : ?>
-                    <a class='archiveTitle' <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
+                    <a class='archiveTitle' <?php
+                                            /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                            echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
                         <?php if ($iconPosition == 'beforeArchiveTitle') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -386,9 +385,9 @@ echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLin
 
                 <?php else : ?>
 
-                    <span class='archiveTitle' <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStrarchiveTitle); ?>>
+                    <span class='archiveTitle' <?php
+                                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                                echo ($linkAttrStrarchiveTitle); ?>>
                         <?php if ($iconPosition == 'beforeArchiveTitle') : ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
@@ -438,9 +437,9 @@ echo ($linkAttrStrarchiveTitle); ?>>
 
             <?php if (!empty($archiveTitleLinkTo)) : ?>
 
-                <a class='archiveTitle' <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
+                <a class='archiveTitle' <?php
+                                        /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                        echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
                     <?php if ($iconPosition == 'beforeArchiveTitle') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>

@@ -35,7 +35,7 @@ class PGBlockImage
                             "useAsBackground" => "no"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "width" => [],
                             "height" => [],
                             "overflow" => [],
@@ -78,7 +78,7 @@ class PGBlockImage
                             ]
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "display" => [],
                             "width" => [
                                 "Desktop" => [
@@ -150,7 +150,6 @@ class PGBlockImage
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'h2';
         $useAsBackground = isset($wrapperOptions['useAsBackground']) ? $wrapperOptions['useAsBackground'] : 'no';
 
-        $wrapperTextAlign = isset($wrapperStyles['textAlign']) ? $wrapperStyles['textAlign'] : '';
 
 
         $featuredImage = isset($attributes['image']) ? $attributes['image'] : [];

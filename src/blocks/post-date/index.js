@@ -69,7 +69,7 @@ registerBlockType("post-grid/post-date", {
 
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -97,7 +97,7 @@ registerBlockType("post-grid/post-date", {
         },
 
         styles: {
-          textAlign: {},
+
           display: {},
           width: {},
           color: {},
@@ -126,7 +126,7 @@ registerBlockType("post-grid/post-date", {
           backgroundColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
+
           display: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }

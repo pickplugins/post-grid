@@ -34,7 +34,7 @@ class PGBlockPostTaxonomies
                         ],
                         "styles" => [
                             "display" => [],
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -63,7 +63,7 @@ class PGBlockPostTaxonomies
                             "linkAttr" => []
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -93,7 +93,7 @@ class PGBlockPostTaxonomies
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -112,7 +112,7 @@ class PGBlockPostTaxonomies
                             "text" => ", "
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -128,7 +128,7 @@ class PGBlockPostTaxonomies
                             "class" => "inline-block"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -310,9 +310,9 @@ class PGBlockPostTaxonomies
                     if ($i > $maxCount) break;
 
             ?>
-                <a href="<?php echo esc_url_raw($link); ?>" <?php 
-/* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
+                <a href="<?php echo esc_url_raw($link); ?>" <?php
+                                                            /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                                                            echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
 
                     <?php if ($iconPosition == 'beforeItem') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>

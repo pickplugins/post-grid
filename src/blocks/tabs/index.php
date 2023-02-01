@@ -40,7 +40,7 @@ class PGBlockTabs
                             "class" => "pg-accordion"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -71,7 +71,7 @@ class PGBlockTabs
                             "class" => "tab-nav "
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -101,7 +101,7 @@ class PGBlockTabs
                             "activeIndex" => 0
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -118,7 +118,7 @@ class PGBlockTabs
                             "class" => "tabs-navs "
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -136,7 +136,7 @@ class PGBlockTabs
                             "class" => "pg-accordion-content"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -161,7 +161,7 @@ class PGBlockTabs
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -186,7 +186,7 @@ class PGBlockTabs
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],

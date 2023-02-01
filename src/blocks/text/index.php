@@ -35,7 +35,7 @@ class PGBlockPostText
                             "class" => "pg-text"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],

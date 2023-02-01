@@ -31,10 +31,18 @@ import PGcssBackgroundPosition from '../../components/css-background-position'
 import PGcssBackgroundRepeat from '../../components/css-background-repeat'
 import PGcssBackgroundSize from '../../components/css-background-size'
 import PGcssBorder from '../../components/css-border'
+import PGcssBorderTop from '../../components/css-border-top'
+import PGcssBorderRight from '../../components/css-border-right'
+import PGcssBorderBottom from '../../components/css-border-bottom'
+import PGcssBorderLeft from '../../components/css-border-left'
+
+
 import PGcssBorderRadius from '../../components/css-border-radius'
 import PGcssBottom from '../../components/css-bottom'
 import PGcssBorderCollapse from '../../components/css-border-collapse'
 import PGcssBorderSpacing from '../../components/css-border-spacing'
+
+
 
 import PGcssBackdropFilter from '../../components/css-backdrop-filter'
 
@@ -176,6 +184,13 @@ function Html(props) {
     backgroundPosition: { id: 'backgroundPosition', label: 'Background Position' },
     backgroundSize: { id: 'backgroundSize', label: 'Background Size' },
     border: { id: 'border', label: 'Border' },
+    borderTop: { id: 'borderTop', label: 'Border Top' },
+
+    borderRight: { id: 'borderRight', label: 'Border Right' },
+    borderBottom: { id: 'borderBottom', label: 'Border Bottom' },
+    borderLeft: { id: 'borderLeft', label: 'Border Left' },
+
+
     borderCollapse: { id: 'borderCollapse', label: 'Border Collapse', isPro: true },
     borderImage: { id: 'borderImage', label: 'Border Image', isPro: true },
     borderRadius: { id: 'borderRadius', label: 'Border Radius' },
@@ -462,6 +477,26 @@ function Html(props) {
               {(key == 'border') && (
                 <PGcssBorder val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
+
+              {(key == 'borderTop') && (
+                <PGcssBorderTop val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+
+              {(key == 'borderRight') && (
+                <PGcssBorderRight val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+
+              {(key == 'borderBottom') && (
+                <PGcssBorderBottom val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+
+
+              {(key == 'borderLeft') && (
+                <PGcssBorderLeft val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
+
+
+
 
               {(key == 'borderRadius') && (
                 <PGcssBorderRadius val={value[breakPointX]} onChange={onChangeCssVal} />

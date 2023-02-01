@@ -65,7 +65,7 @@ registerBlockType("post-grid/post-meta", {
         },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -85,7 +85,7 @@ registerBlockType("post-grid/post-meta", {
         },
 
         styles: {
-          textAlign: {},
+
           display: {},
           width: {},
           color: {},

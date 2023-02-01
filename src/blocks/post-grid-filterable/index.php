@@ -66,7 +66,7 @@ class PGBlockPostGridFilterable
                             ]
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -86,7 +86,7 @@ class PGBlockPostGridFilterable
                             "busyIcon" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -108,7 +108,7 @@ class PGBlockPostGridFilterable
                             "class" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "backgroundImage" => [],
@@ -124,7 +124,7 @@ class PGBlockPostGridFilterable
                             "class" => "items-loop"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "wordBreak" => [],
@@ -140,7 +140,7 @@ class PGBlockPostGridFilterable
                             "class" => "item"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "wordBreak" => [],
@@ -176,7 +176,7 @@ class PGBlockPostGridFilterable
                             "activeFilter" => ""
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "wordBreak" => [],
@@ -198,7 +198,7 @@ class PGBlockPostGridFilterable
                             "slug" => "all"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "wordBreak" => [],
@@ -212,7 +212,7 @@ class PGBlockPostGridFilterable
                     "default" => [
                         "options" => [],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [
                                 "Desktop" => "#18978F"
                             ],
@@ -235,7 +235,7 @@ class PGBlockPostGridFilterable
                             "class" => "no-posts text-center"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "wordBreak" => [],
@@ -251,7 +251,7 @@ class PGBlockPostGridFilterable
                             "class" => "spinner"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "wordBreak" => [],
@@ -271,7 +271,7 @@ class PGBlockPostGridFilterable
                             "gridTemplateRows" => [],
                             "colGap" => [],
                             "rowGap" => [],
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -330,7 +330,7 @@ class PGBlockPostGridFilterable
                             "class" => "page-numbers inline-block"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "display" => [
                                 "Desktop" => "inline-block"
                             ],
@@ -377,7 +377,7 @@ class PGBlockPostGridFilterable
                             "class" => "page-numbers inline-block"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "display" => [],
                             "color" => [],
                             "bgColor" => [],
@@ -1077,7 +1077,7 @@ class PGBlockPostGridFilterable
                                             $itemTitle = isset($item['title']) ? $item['title'] : '';
                                             $itemCount = isset($item['count']) ? $item['count'] : '';
                                     ?>
-                                        <span class="pg-filter pg-filter-<?php echo  esc_attr($blockId); ?>" <?php if ($filterToggle=='yes') : ?> data-toggle="<?php echo  '.' . esc_attr($itemSlug); ?>" <?php else : ?> data-filter="<?php echo  '.' . esc_attr($itemSlug); ?>" <?php endif; ?>>
+                                        <span class="pg-filter pg-filter-<?php echo  esc_attr($blockId); ?>" <?php if ($filterToggle == 'yes') : ?> data-toggle="<?php echo  '.' . esc_attr($itemSlug); ?>" <?php else : ?> data-filter="<?php echo  '.' . esc_attr($itemSlug); ?>" <?php endif; ?>>
                                             <?php echo esc_html($itemTitle) ?>
                                             <?php echo ($groupshowPostCount == 'yes') ?  '(' . esc_html($itemCount) . ')' : '' ?>
                                         </span>

@@ -105,7 +105,7 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: '', text: '»', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -122,7 +122,7 @@ registerBlockType("post-grid/breadcrumb", {
           linkTarget: '_blank', showLabel: true, showSeparator: true, showIcon: false, iconPositon: 'beforeLabel' // beforeLabel, afterLabel, beforeSeparator, afterSeparator
         },
         styles: {
-          textAlign: {},
+
           color: { Desktop: '#18978F' },
           backgroundColor: {},
           padding: {},
@@ -376,7 +376,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -395,7 +395,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -412,7 +412,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -429,7 +429,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -447,7 +447,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -463,7 +463,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -482,7 +482,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -499,7 +499,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -516,7 +516,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -534,7 +534,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -551,7 +551,7 @@ registerBlockType("post-grid/breadcrumb", {
           count: '',
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -567,7 +567,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -583,7 +583,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -599,7 +599,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -616,7 +616,7 @@ registerBlockType("post-grid/breadcrumb", {
 
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -634,7 +634,7 @@ registerBlockType("post-grid/breadcrumb", {
 
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -652,7 +652,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -670,7 +670,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -690,7 +690,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -708,7 +708,7 @@ registerBlockType("post-grid/breadcrumb", {
 
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -725,7 +725,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -743,7 +743,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -758,7 +758,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -773,7 +773,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -788,7 +788,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -805,7 +805,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -821,7 +821,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -837,7 +837,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -855,7 +855,7 @@ registerBlockType("post-grid/breadcrumb", {
           format: 'Y-m-d',
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -871,7 +871,7 @@ registerBlockType("post-grid/breadcrumb", {
           format: 'Y-m',
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -888,7 +888,7 @@ registerBlockType("post-grid/breadcrumb", {
           format: 'Y',
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},
@@ -904,7 +904,7 @@ registerBlockType("post-grid/breadcrumb", {
           showSeparator: true,
         },
         styles: {
-          textAlign: {},
+
           color: {},
           backgroundColor: {},
           padding: {},

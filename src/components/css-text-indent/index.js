@@ -33,7 +33,19 @@ class PGcssTextIndent extends Component {
         px: { "label": "PX", "value": "px" },
         em: { "label": "EM", "value": "em" },
         rem: { "label": "REM", "value": "rem" },
-
+        auto: { "label": "AUTO", "value": "auto" },
+        "%": { "label": "%", "value": "%" },
+        cm: { "label": "CM", "value": "cm" },
+        mm: { "label": "MM", "value": "mm" },
+        in: { "label": "IN", "value": "in" },
+        pt: { "label": "PT", "value": "pt" },
+        pc: { "label": "PC", "value": "pc" },
+        ex: { "label": "EX", "value": "ex" },
+        ch: { "label": "CH", "value": "ch" },
+        vw: { "label": "VW", "value": "vw" },
+        vh: { "label": "VH", "value": "vh" },
+        vmin: { "label": "VMIN", "value": "vmin" },
+        vmax: { "label": "VMAX", "value": "vmax" },
       }
 
       var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;

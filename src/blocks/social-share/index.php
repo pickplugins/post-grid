@@ -37,7 +37,7 @@ class PGBlockSocialShare
                         ),
                         'styles' =>
                         array(
-                            'textAlign' => [],
+
                             'color' => [],
                             'bgColor' => [],
                             'padding' => [],
@@ -58,7 +58,7 @@ class PGBlockSocialShare
                         ),
                         'styles' =>
                         array(
-                            'textAlign' => [],
+
                             'color' => [],
                             'bgColor' => [],
                             'padding' => [],
@@ -78,7 +78,7 @@ class PGBlockSocialShare
                         ),
                         'styles' =>
                         array(
-                            'textAlign' => [],
+
                             'color' => [],
                             'bgColor' => [],
                             'padding' => [],
@@ -98,7 +98,7 @@ class PGBlockSocialShare
                         ),
                         'styles' =>
                         array(
-                            'textAlign' => [],
+
                             'color' => [],
                             'bgColor' => [],
                             'padding' => [],
@@ -122,7 +122,7 @@ class PGBlockSocialShare
                         ),
                         'styles' =>
                         array(
-                            'textAlign' => [],
+
                             'color' =>
                             array(
                                 'Desktop' => '#18978F',
@@ -170,7 +170,7 @@ class PGBlockSocialShare
                                 ),
                                 'styles' =>
                                 array(
-                                    'textAlign' => [],
+
                                     'color' => [],
                                     'bgColor' => [],
                                     'padding' => [],
@@ -192,7 +192,7 @@ class PGBlockSocialShare
                                 ),
                                 'styles' =>
                                 array(
-                                    'textAlign' => [],
+
                                     'color' => [],
                                     'bgColor' => [],
                                     'padding' => [],
@@ -214,7 +214,7 @@ class PGBlockSocialShare
                                 ),
                                 'styles' =>
                                 array(
-                                    'textAlign' => [],
+
                                     'color' => [],
                                     'bgColor' => [],
                                     'padding' => [],

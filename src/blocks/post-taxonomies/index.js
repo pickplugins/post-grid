@@ -65,7 +65,7 @@ registerBlockType("post-grid/post-taxonomies", {
         {
           display: {},
 
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -91,7 +91,7 @@ registerBlockType("post-grid/post-taxonomies", {
         options: { prefix: '', postfix: '', maxCount: 99, postCount: false, class: ' item', linkTarget: '', linkAttr: [], },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -119,7 +119,7 @@ registerBlockType("post-grid/post-taxonomies", {
           bgColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
+
           display: {},
           fontSize: {}, //{ val: '18', unit: 'px' }
           lineHeight: {}, // { val: '18', unit: 'px' }
@@ -136,7 +136,7 @@ registerBlockType("post-grid/post-taxonomies", {
 
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -152,7 +152,7 @@ registerBlockType("post-grid/post-taxonomies", {
         options: { text: 'Tags: ', class: 'inline-block', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -1584,16 +1584,7 @@ registerBlockType("post-grid/post-taxonomies", {
         <div>
 
           <BlockControls >
-            <AlignmentToolbar
-              value={wrapper.styles.textAlign}
-              onChange={(newVal) => {
 
-
-                var styles = { ...postfix.styles, textAlign: newVal };
-                setAttributes({ postfix: { ...postfix, styles: styles } });
-
-              }}
-            />
           </BlockControls>
 
 

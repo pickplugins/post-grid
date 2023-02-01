@@ -22,6 +22,30 @@ class PGcssDisplay extends Component {
       block: { "label": "Block", "value": "block" },
       inline: { "label": "Inline", "value": "inline" },
       'inline-block': { "label": "Inline Block", "value": "inline-block" },
+      grid: { "label": "Grid", "value": "grid" },
+      flex: { "label": "Flex", "value": "flex" },
+      contents: { "label": "contents", "value": "contents" },
+      'inline-flex': { "label": "inline-flex", "value": "inline-flex" },
+      'inline-grid': { "label": "inline-grid", "value": "inline-grid" },
+      'inline-table': { "label": "inline-table", "value": "inline-table" },
+      'list-item': { "label": "list-item", "value": "list-item" },
+      'run-in': { "label": "run-in", "value": "run-in" },
+      table: { "label": "table", "value": "table" },
+      'table-caption': { "label": "table-caption", "value": "table-caption" },
+      'table-column-group': { "label": "table-column-group", "value": "table-column-group" },
+      'table-header-group': { "label": "table-header-group", "value": "table-header-group" },
+      'table-footer-group': { "label": "table-footer-group", "value": "table-footer-group" },
+      'table-row-group': { "label": "table-row-group", "value": "table-row-group" },
+      'table-cell': { "label": "table-cell", "value": "table-cell" },
+      'table-column': { "label": "table-column", "value": "table-column" },
+      'table-row': { "label": "table-row", "value": "table-row" },
+      initial: { "label": "initial", "value": "initial" },
+      inherit: { "label": "inherit", "value": "inherit" },
+
+
+
+
+
 
     }
 

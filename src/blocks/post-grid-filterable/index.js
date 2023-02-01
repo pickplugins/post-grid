@@ -116,7 +116,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -131,7 +131,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         options: { class: 'search', enable: 'no', type: '', placeholder: '', icon: '', busyIcon: '' },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -154,7 +154,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         options: { class: '', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           backgroundImage: {},
@@ -172,7 +172,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         options: { class: 'items-loop', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -189,7 +189,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         options: { class: 'item', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -221,7 +221,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -241,7 +241,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         options: { slug: 'all' },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -258,7 +258,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         options: {},
         styles:
         {
-          textAlign: {},
+
           color: { "Desktop": "#18978F" },
           bgColor: { "Desktop": "#9DD6DF" },
           wordBreak: {},
@@ -279,7 +279,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         options: { class: 'no-posts text-center', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -296,7 +296,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         options: { class: 'spinner', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           wordBreak: {},
@@ -322,7 +322,7 @@ registerBlockType("post-grid/post-grid-filterable", {
           gridTemplateRows: {},
           colGap: {},
           rowGap: {},
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -385,7 +385,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
         styles:
         {
-          textAlign: {},
+
           display: { "Desktop": "inline-block" },
           color: { "Desktop": "#18978F" },
           bgColor: { "Desktop": "#9DD6DF" },
@@ -417,7 +417,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
         styles:
         {
-          textAlign: {},
+
           display: {},
           color: {},
           bgColor: {},

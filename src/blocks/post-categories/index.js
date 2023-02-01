@@ -66,7 +66,7 @@ registerBlockType("post-grid/post-categories", {
         {
           display: {},
 
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -81,7 +81,7 @@ registerBlockType("post-grid/post-categories", {
         options: { prefix: '', postfix: '', maxCount: 99, postCount: false, class: ' item ', linkTarget: '', linkAttr: [], },
         styles:
         {
-          textAlign: {},
+
           display: {},
 
           color: {},
@@ -111,7 +111,7 @@ registerBlockType("post-grid/post-categories", {
           bgColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
+
           display: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }
@@ -129,7 +129,7 @@ registerBlockType("post-grid/post-categories", {
 
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -146,7 +146,7 @@ registerBlockType("post-grid/post-categories", {
 
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -162,7 +162,7 @@ registerBlockType("post-grid/post-categories", {
         options: { text: 'Categories: ', class: 'inline-block', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -1561,21 +1561,7 @@ registerBlockType("post-grid/post-categories", {
         <div>
 
           <BlockControls >
-            <AlignmentToolbar
-              value={wrapper.styles.textAlign}
-              onChange={(newVal) => {
 
-
-                var styles = { ...postfix.styles, textAlign: newVal };
-                setAttributes({ postfix: { ...postfix, styles: styles } });
-
-
-
-
-
-
-              }}
-            />
           </BlockControls>
 
 

@@ -62,7 +62,7 @@ registerBlockType("post-grid/post-tags", {
         options: { class: '' },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -79,7 +79,7 @@ registerBlockType("post-grid/post-tags", {
         options: { prefix: '', postfix: '', maxCount: 99, postCount: false, class: ' item', linkTarget: '', linkAttr: [], },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -108,7 +108,7 @@ registerBlockType("post-grid/post-tags", {
           bgColor: {},
           padding: {},
           margin: {},
-          textAlign: {},
+
           display: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }
@@ -126,7 +126,7 @@ registerBlockType("post-grid/post-tags", {
 
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},
@@ -142,7 +142,7 @@ registerBlockType("post-grid/post-tags", {
         options: { text: 'Tags: ', class: 'inline-block', },
         styles:
         {
-          textAlign: {},
+
           color: {},
           bgColor: {},
           padding: {},

@@ -59,7 +59,7 @@ class PGBlockAccordion
                             "class" => "pg-accordion"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -90,7 +90,7 @@ class PGBlockAccordion
                             "class" => "pg-accordion-header"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -108,7 +108,7 @@ class PGBlockAccordion
                             "class" => "pg-accordion-header "
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -126,7 +126,7 @@ class PGBlockAccordion
                             "class" => "pg-accordion-content"
                         ],
                         "styles" => [
-                            "textAlign" => [],
+
                             "color" => [],
                             "bgColor" => [],
                             "padding" => [],
@@ -151,7 +151,7 @@ class PGBlockAccordion
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],
@@ -176,7 +176,7 @@ class PGBlockAccordion
                             "bgColor" => [],
                             "padding" => [],
                             "margin" => [],
-                            "textAlign" => [],
+
                             "display" => [],
                             "fontSize" => [],
                             "lineHeight" => [],

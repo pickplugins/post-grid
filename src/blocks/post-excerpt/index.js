@@ -1783,7 +1783,7 @@ registerBlockType("post-grid/post-excerpt", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={wrapper} onChange={onChangeStyleRedmore} onAdd={onAddStyleRedmore} onRemove={onRemoveStyleRedmore} />
+                  <PGStyles obj={readMore} onChange={onChangeStyleRedmore} onAdd={onAddStyleRedmore} onRemove={onRemoveStyleRedmore} />
                 </PGtab>
               </PGtabs>
 

@@ -268,8 +268,7 @@ function Html(props) {
 
 
                     var hellox = valArgs.splice(i, 1);
-                    console.log(valArgs);
-                    console.log(hellox);
+
 
 
                     setvalArgs(valArgs);

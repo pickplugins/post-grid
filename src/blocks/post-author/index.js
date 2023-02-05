@@ -34,9 +34,6 @@ import PGStyles from '../../components/styles'
 
 
 
-
-
-
 var myStore = wp.data.select('postgrid-shop');
 
 
@@ -2215,7 +2212,7 @@ registerBlockType("post-grid/post-author", {
 
                       </PGtab>
                       <PGtab name="styles">
-                        <PGStyles obj={wrapper} onChange={onChangeStyleAvatar} onAdd={onAddStyleAvatar} onRemove={onRemoveStyleAvatar} />
+                        <PGStyles obj={avatar} onChange={onChangeStyleAvatar} onAdd={onAddStyleAvatar} onRemove={onRemoveStyleAvatar} />
                       </PGtab>
                     </PGtabs>
 
@@ -2401,7 +2398,7 @@ registerBlockType("post-grid/post-author", {
 
                       </PGtab>
                       <PGtab name="styles">
-                        <PGStyles obj={wrapper} onChange={onChangeStyleName} onAdd={onAddStyleName} onRemove={onRemoveStyleName} />
+                        <PGStyles obj={name} onChange={onChangeStyleName} onAdd={onAddStyleName} onRemove={onRemoveStyleName} />
                       </PGtab>
                     </PGtabs>
 
@@ -2463,7 +2460,7 @@ registerBlockType("post-grid/post-author", {
                         </PanelRow>
                       </PGtab>
                       <PGtab name="styles">
-                        <PGStyles obj={wrapper} onChange={onChangeStyleDescription} onAdd={onAddStyleDescription} onRemove={onRemoveStyleDescription} />
+                        <PGStyles obj={description} onChange={onChangeStyleDescription} onAdd={onAddStyleDescription} onRemove={onRemoveStyleDescription} />
                       </PGtab>
                     </PGtabs>
 

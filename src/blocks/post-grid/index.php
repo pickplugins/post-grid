@@ -805,23 +805,23 @@ class PGBlockPostGrid
         $postGridScriptData[$blockId]['layout']['rawData'] = isset($layout['rawData']) ? $layout['rawData'] : '';
         $postGridScriptData[$blockId]['pagination']['type'] = $paginationType;
 
-
+        $layout_id = isset($layout['id']) ? $layout['id'] : '';
+        $layout_id = apply_filters('pgb_post_grid_post_layout_id',  $layout_id);
 
         ob_start();
 
         $rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
         $rawData      = !empty($layout['rawData']) ? $layout['rawData'] : $rawData;
 
+
         $srcServer      = !empty($layout['srcServer']) ? $layout['srcServer'] : 'library';
 
+
         if ($srcServer == 'saved') {
-            $postData = get_post($layout['id']);
+            $postData = get_post($layout_id);
             $rawDatabyId = !empty($layout['id']) ? $postData->post_content : '';
             $rawData = !empty($rawDatabyId) ? $rawDatabyId : $rawData;
         }
-
-
-
 
 
 

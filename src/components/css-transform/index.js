@@ -16,7 +16,6 @@ function Html(props) {
     return null;
   }
 
-  console.log(props.val);
 
 
   var valParts = (props.val != undefined) ? props.val.split(") ") : [];
@@ -170,8 +169,6 @@ function Html(props) {
                             //var argVal = arg.val != undefined ? arg.val.match(/\d+/g)[0] : 1;
                             //var argUnit = arg.val != undefined ? arg.val.match(/[a-zA-Z]+/g)[0] : '';
 
-                            console.log(newVal);
-                            //console.log(argUnit);
 
 
 
@@ -220,7 +217,6 @@ function Html(props) {
 
                             })
 
-                            console.log(str);
 
 
                             props.onChange(str, 'transform');
@@ -274,8 +270,7 @@ function Html(props) {
                             //var argVal = arg.val != undefined ? arg.val.match(/\d+/g)[0] : 1;
                             //var argUnit = arg.val != undefined ? arg.val.match(/[a-zA-Z]+/g)[0] : '';
 
-                            console.log(newVal);
-                            //console.log(argUnit);
+
                             var valPartsX = arg.val.split(",")[0].match(/\d+/g)[0];
                             var valPartsY = arg.val.split(",")[1].match(/\d+/g)[0];
 
@@ -440,8 +435,7 @@ function Html(props) {
                             //var argVal = arg.val != undefined ? arg.val.match(/\d+/g)[0] : 1;
                             //var argUnit = arg.val != undefined ? arg.val.match(/[a-zA-Z]+/g)[0] : '';
 
-                            console.log(newVal);
-                            //console.log(argUnit);
+
                             var valPartsX = arg.val.split(",")[0].match(/\d+/g)[0];
                             var valPartsY = arg.val.split(",")[1].match(/\d+/g)[0];
                             var valPartsZ = arg.val.split(",")[2].match(/\d+/g)[0];

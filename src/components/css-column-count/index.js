@@ -8,8 +8,55 @@ import { __experimentalInputControl as InputControl, ColorPalette } from '@wordp
 
 
 
+function Html(props) {
+
+
+  if (!props.warn) {
+    return null;
+  }
+
+
+  return (
+
+    <div className='mt-4'>
+
+
+      <InputControl
+        value={props.val}
+        type="number"
+        onChange={(newVal) => {
+
+          //setwidthVal(newVal);
+          props.onChange(newVal, 'columnCount');
+
+
+        }}
+      />
+
+    </div>
+
+
+
+
+  )
+
+}
+
 
 class PGcssColumnCount extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { showWarning: true };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+
 
 
   render() {
@@ -26,43 +73,11 @@ class PGcssColumnCount extends Component {
 
 
 
-    function Html() {
-
-
-
-
-
-      return (
-
-        <div className='mt-4'>
-
-
-          <InputControl
-            value={val}
-            type="number"
-            onChange={(newVal) => {
-
-              //setwidthVal(newVal);
-              onChange(newVal, 'columnCount');
-
-
-            }}
-          />
-
-        </div>
-
-
-
-
-      )
-
-    }
-
 
     return (
 
 
-      <Html />
+      <Html val={val} onChange={onChange} warn={this.state.showWarning} />
 
 
     )

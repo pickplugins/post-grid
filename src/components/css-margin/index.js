@@ -13,7 +13,65 @@ import colorsPresets from '../../colors-presets'
 
 
 
+function Html(props) {
+
+  if (!props.warn) {
+    return null;
+  }
+
+  var valParts = (props.val != undefined) ? props.val.split(" ") : ['5px', '5px', '5px', '5px'];
+
+  var topX = valParts[0];
+  var rightX = valParts[1];
+  var bottomX = valParts[2];
+  var leftX = valParts[3];
+
+
+  const [valX, setvalX] = useState({ top: topX, right: rightX, bottom: bottomX, left: leftX });
+
+
+  return (
+
+    <div>
+
+      <BoxControl
+        label=""
+        values={valX}
+        onChange={(nextValues) => {
+
+          console.log(nextValues);
+
+          setvalX({ top: nextValues.top, right: nextValues.right, bottom: nextValues.bottom, left: nextValues.left })
+          //nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left
+
+          props.onChange(nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left, 'margin');
+        }}
+      />
+
+
+    </div>
+
+
+
+
+  )
+
+}
 class PGcssMargin extends Component {
+
+
+
+  constructor(props) {
+    super(props);
+    this.state = { showWarning: true };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
 
 
   render() {
@@ -30,56 +88,12 @@ class PGcssMargin extends Component {
 
 
 
-    function Html() {
-
-      console.log(val);
-
-
-      var valParts = (val != undefined) ? val.split(" ") : ['5px', '5px', '5px', '5px'];
-
-      var topX = valParts[0];
-      var rightX = valParts[1];
-      var bottomX = valParts[2];
-      var leftX = valParts[3];
-
-
-      const [valX, setvalX] = useState({ top: topX, right: rightX, bottom: bottomX, left: leftX });
-
-
-      return (
-
-        <div>
-
-          <BoxControl
-            label=""
-            values={valX}
-            onChange={(nextValues) => {
-
-              console.log(val);
-              console.log(nextValues);
-
-              setvalX({ top: nextValues.top, right: nextValues.right, bottom: nextValues.bottom, left: nextValues.left })
-              //nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left
-
-              onChange(nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left, 'margin');
-            }}
-          />
-
-
-        </div>
-
-
-
-
-      )
-
-    }
 
 
     return (
 
 
-      <Html />
+      <Html val={val} onChange={onChange} warn={this.state.showWarning} />
 
 
     )

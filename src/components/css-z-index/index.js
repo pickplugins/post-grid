@@ -8,8 +8,57 @@ import { memo, useMemo, useState } from '@wordpress/element'
 
 
 
+function Html(props) {
+  if (!props.warn) {
+    return null;
+  }
+
+
+
+  return (
+
+    <div className='flex mt-4'>
+
+
+      <InputControl
+        value={val}
+        type="number"
+        onChange={(newVal) => {
+
+          props.onChange(newVal, 'zIndex');
+
+
+        }}
+      />
+      <div>
+
+      </div>
+
+
+    </div>
+
+
+
+
+  )
+
+}
+
 
 class PGcssZIndex extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { showWarning: true };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+
 
 
   render() {
@@ -26,44 +75,11 @@ class PGcssZIndex extends Component {
 
 
 
-    function Html() {
-
-
-
-      return (
-
-        <div className='flex mt-4'>
-
-
-          <InputControl
-            value={val}
-            type="number"
-            onChange={(newVal) => {
-
-              onChange(newVal, 'zIndex');
-
-
-            }}
-          />
-          <div>
-
-          </div>
-
-
-        </div>
-
-
-
-
-      )
-
-    }
-
 
     return (
 
 
-      <Html />
+      <Html val={val} onChange={onChange} warn={this.state.showWarning} />
 
 
     )

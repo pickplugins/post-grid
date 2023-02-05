@@ -74,7 +74,11 @@ registerBlockType("post-grid/post-featured-image", {
           color: {},
           display: {},
           padding: {},
-          margin: {}
+          margin: {},
+          backgroundPosition: {},
+          backgroundSize: {},
+
+
         },
       },
     },
@@ -1359,7 +1363,7 @@ registerBlockType("post-grid/post-featured-image", {
 
 
                     <SelectControl className='mb-0'
-                      value={(wrapper.styles.bgPosition[breakPointX] != undefined) ? wrapper.styles.bgPosition[breakPointX] : 'hidden'}
+                      value={(wrapper.styles.backgroundPosition[breakPointX] != undefined) ? wrapper.styles.backgroundPosition[breakPointX] : 'hidden'}
                       options={[
                         { label: 'left top', value: 'left top' },
                         { label: 'left center', value: 'left center' },
@@ -1378,14 +1382,14 @@ registerBlockType("post-grid/post-featured-image", {
                         var newValuesObj = {};
 
 
-                        if (Object.keys(wrapper.styles.bgPosition).length == 0) {
+                        if (Object.keys(wrapper.styles.backgroundPosition).length == 0) {
                           newValuesObj[breakPointX] = newVal;
                         } else {
-                          newValuesObj = wrapper.styles.bgPosition;
+                          newValuesObj = wrapper.styles.backgroundPosition;
                           newValuesObj[breakPointX] = newVal;
                         }
 
-                        var styles = { ...wrapper.styles, bgPosition: newValuesObj };
+                        var styles = { ...wrapper.styles, backgroundPosition: newValuesObj };
                         setAttributes({ wrapper: { ...wrapper, styles: styles } });
 
 
@@ -1413,7 +1417,7 @@ registerBlockType("post-grid/post-featured-image", {
 
 
                     <SelectControl className='mb-0'
-                      value={(wrapper.styles.bgSize[breakPointX] != undefined) ? wrapper.styles.bgSize[breakPointX] : 'hidden'}
+                      value={(wrapper.styles.backgroundSize[breakPointX] != undefined) ? wrapper.styles.backgroundSize[breakPointX] : 'hidden'}
                       options={[
                         { label: 'auto', value: 'auto' },
                         { label: 'cover', value: 'cover' },
@@ -1426,14 +1430,14 @@ registerBlockType("post-grid/post-featured-image", {
                         var newValuesObj = {};
 
 
-                        if (Object.keys(wrapper.styles.bgSize).length == 0) {
+                        if (Object.keys(wrapper.styles.backgroundSize).length == 0) {
                           newValuesObj[breakPointX] = newVal;
                         } else {
-                          newValuesObj = wrapper.styles.bgSize;
+                          newValuesObj = wrapper.styles.backgroundSize;
                           newValuesObj[breakPointX] = newVal;
                         }
 
-                        var styles = { ...wrapper.styles, bgSize: newValuesObj };
+                        var styles = { ...wrapper.styles, backgroundSize: newValuesObj };
                         setAttributes({ wrapper: { ...wrapper, styles: styles } });
 
 

@@ -87,6 +87,10 @@ var selectors = {
     else if (key == 'backgroundPosition') {
       cssProp = 'background-position';
     }
+    else if (key == 'backgroundImage') {
+      cssProp = 'background-image';
+    }
+
 
     else if (key == 'border') {
       cssProp = 'border';

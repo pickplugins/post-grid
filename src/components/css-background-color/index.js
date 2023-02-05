@@ -9,7 +9,7 @@ import colorsPresets from '../../colors-presets'
 import { memo, useMemo, useState, useRef, useEffect, useCallback } from '@wordpress/element'
 
 
-function WarningBanner(props) {
+function Html(props) {
   if (!props.warn) {
     return null;
   }
@@ -108,7 +108,7 @@ class PGcssBackgroundColor extends Component {
 
 
         </div>
-        <WarningBanner enableAlpha={enableAlpha} value={val} onChange={onChange} warn={this.state.showWarning} />
+        <Html enableAlpha={enableAlpha} value={val} onChange={onChange} warn={this.state.showWarning} />
 
 
 

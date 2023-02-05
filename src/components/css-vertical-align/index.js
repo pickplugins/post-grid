@@ -23,6 +23,11 @@ class PGcssVerticalAlign extends Component {
       'text-bottom': { "label": "Text Bottom", "value": "text-bottom" },
       sub: { "label": "Sub", "value": "sub" },
       super: { "label": "Super", "value": "super" },
+      top: { "label": "Top", "value": "top" },
+      middle: { "label": "Middle", "value": "middle" },
+      bottom: { "label": "Bottom", "value": "bottom" },
+      initial: { "label": "Initial", "value": "initial" },
+      inherit: { "label": "Inherit", "value": "inherit" },
 
     }
 

@@ -7,6 +7,7 @@ import colorsPresets from '../../colors-presets'
 import { __experimentalInputControl as InputControl, ColorPalette, PanelRow, RangeControl } from '@wordpress/components';
 import PGDropdown from '../../components/dropdown'
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
+import PGColorPicker from '../../components/input-color-picker'
 
 
 function Html(props) {
@@ -41,7 +42,7 @@ function Html(props) {
         }}
       />
       <PanelRow>
-        <label for="">H-Offset</label>
+        <label for="">V-Offset</label>
 
       </PanelRow>
       <RangeControl
@@ -54,7 +55,7 @@ function Html(props) {
         }}
       />
       <PanelRow>
-        <label for="">H-Offset</label>
+        <label for="">Blur</label>
 
       </PanelRow>
       <RangeControl
@@ -87,20 +88,17 @@ function Html(props) {
 
       </PanelRow>
 
-      <ColorPalette
+
+      <PGColorPicker
         value={color}
         enableAlpha
         onChange={(newVal) => {
-
-          console.log(newVal)
 
           props.onChange(h + 'px ' + h + 'px ' + blur + 'px ' + spread + 'px ' + newVal, 'boxShadow');
 
 
         }}
       />
-
-
 
 
     </div>

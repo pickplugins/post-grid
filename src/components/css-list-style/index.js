@@ -9,7 +9,115 @@ import PGDropdown from '../../components/dropdown'
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 
 
+
+function Html(props) {
+
+  if (!props.warn) {
+    return null;
+  }
+
+
+
+  var valParts = (props.val != undefined) ? props.val.split(" ") : ['square', 'inside', 'url("sqpurple.gif")'];
+
+  var type = (valParts[0] != undefined) ? valParts[0] : 'square';
+  var position = (valParts[1] != undefined) ? valParts[1] : 'inside';
+  var image = (valParts[2] != undefined) ? valParts[2] : 'url("sqpurple.gif")';
+
+  var imageVal = image.replace('url("', '');
+  imageVal = imageVal.replace('")', '');
+
+
+
+  return (
+
+    <div>
+
+      <PanelRow>
+        <label for="">Type</label>
+        <PGDropdown position="bottom right" variant="secondary" options={typeArgs} buttonTitle={type} onChange={(option, index) => {
+
+          props.onChange(option.value + ' ' + position + ' ' + image, 'listStyle');
+
+
+        }} ></PGDropdown>
+
+      </PanelRow>
+
+
+      <PanelRow>
+        <label for="">Position</label>
+        <PGDropdown position="bottom right" variant="secondary" options={[{ label: 'inside', value: 'inside' }, { label: 'outside', value: 'outside' }]} buttonTitle={position} onChange={(option, index) => {
+
+          props.onChange(type + ' ' + option.value + ' ' + image, 'listStyle');
+
+
+        }} ></PGDropdown>
+
+      </PanelRow>
+
+
+
+      <div className='my-3'>
+        <img src={imageVal} alt="" />
+      </div>
+
+
+
+      <MediaUploadCheck>
+        <MediaUpload
+          class="bg-blue-500"
+          onSelect={(media) => {
+            // media.id
+
+            props.onChange(type + ' ' + position + ' url("' + media.url + '")', 'listStyle');
+
+
+          }
+
+
+          }
+          onClose={() => {
+          }
+
+
+          }
+
+          allowedTypes={ALLOWED_MEDIA_TYPES}
+          render={({ open }) => (
+            <Button className='my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full' onClick={open}>Open Media Library</Button>
+          )}
+        />
+      </MediaUploadCheck>
+
+
+
+
+    </div>
+
+  )
+
+
+}
+
+
+
+
 class PGcssListStyle extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { showWarning: true };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+
+
   render() {
 
 
@@ -52,95 +160,11 @@ class PGcssListStyle extends Component {
     const ALLOWED_MEDIA_TYPES = ['image'];
 
 
-    function Html() {
-
-      var valParts = (val != undefined) ? val.split(" ") : ['square', 'inside', 'url("sqpurple.gif")'];
-
-      var type = (valParts[0] != undefined) ? valParts[0] : 'square';
-      var position = (valParts[1] != undefined) ? valParts[1] : 'inside';
-      var image = (valParts[2] != undefined) ? valParts[2] : 'url("sqpurple.gif")';
-
-      var imageVal = image.replace('url("', '');
-      imageVal = imageVal.replace('")', '');
-
-
-
-      return (
-
-        <div>
-
-          <PanelRow>
-            <label for="">Type</label>
-            <PGDropdown position="bottom right" variant="secondary" options={typeArgs} buttonTitle={type} onChange={(option, index) => {
-
-              onChange(option.value + ' ' + position + ' ' + image, 'listStyle');
-
-
-            }} ></PGDropdown>
-
-          </PanelRow>
-
-
-          <PanelRow>
-            <label for="">Position</label>
-            <PGDropdown position="bottom right" variant="secondary" options={[{ label: 'inside', value: 'inside' }, { label: 'outside', value: 'outside' }]} buttonTitle={position} onChange={(option, index) => {
-
-              onChange(type + ' ' + option.value + ' ' + image, 'listStyle');
-
-
-            }} ></PGDropdown>
-
-          </PanelRow>
-
-
-
-          <div className='my-3'>
-            <img src={imageVal} alt="" />
-          </div>
-
-
-
-          <MediaUploadCheck>
-            <MediaUpload
-              class="bg-blue-500"
-              onSelect={(media) => {
-                // media.id
-
-                onChange(type + ' ' + position + ' url("' + media.url + '")', 'listStyle');
-
-
-              }
-
-
-              }
-              onClose={() => {
-              }
-
-
-              }
-
-              allowedTypes={ALLOWED_MEDIA_TYPES}
-              render={({ open }) => (
-                <Button className='my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full' onClick={open}>Open Media Library</Button>
-              )}
-            />
-          </MediaUploadCheck>
-
-
-
-
-        </div>
-
-      )
-
-
-    }
-
 
     return (
       <div>
 
-        <Html />
+        <Html val={val} onChange={onChange} warn={this.state.showWarning} />
       </div>
 
     )

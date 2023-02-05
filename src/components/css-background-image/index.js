@@ -2,10 +2,207 @@
 
 const { Component, RawHTML } = wp.element;
 import { Button, Dropdown } from '@wordpress/components'
+import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
+import colorsPresets from '../../colors-presets'
+import { __experimentalInputControl as InputControl, ColorPalette, PanelRow } from '@wordpress/components';
+import PGDropdown from '../../components/dropdown'
+import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 
 
-class PGcssAlignItems extends Component {
+
+function Html(props) {
+
+  if (!props.warn) {
+    return null;
+  }
+
+
+  console.log(props.val);
+  const [type, setType] = useState('url');
+  const [imageUrl, setimageUrl] = useState('');
+  const [colorArgs, setColorArgs] = useState([]);
+
+
+
+  if (props.val != undefined && props.val.includes("url")) {
+    setType('url');
+
+    var imageVal = props.val.replace('url("', '');
+    imageVal = imageVal.replace('")', '');
+
+    setimageUrl(imageVal);
+
+  }
+
+  if (props.val != undefined && props.val.includes("conic-gradient")) {
+    setType('conicGradient');
+    var imageVal = props.val.replace('conic-gradient("', '');
+    imageVal = imageVal.replace('")', '');
+
+    setColorArgs(imageVal.split(','))
+
+
+
+  }
+
+  if (props.val != undefined && props.val.includes("linear-gradient")) {
+    setType('linearGradient');
+  }
+
+  if (props.val != undefined && props.val.includes("radial-gradient")) {
+    setType('radialGradient');
+  }
+
+  if (props.val != undefined && props.val.includes("repeating-conic-gradient")) {
+    setType('repeatingConicGradient');
+  }
+  if (props.val != undefined && props.val.includes("repeating-linear-gradient")) {
+    setType('repeatingLinearGradient');
+  }
+
+  if (props.val != undefined && props.val.includes("repeating-radial-gradient")) {
+    setType('repeatingRadialGradient');
+  }
+
+
+  console.log(type);
+
+  const ALLOWED_MEDIA_TYPES = ['image'];
+
+  var typeArgs = {
+    url: { label: 'Image URL', id: 'url' },
+    conicGradient: { label: 'Conic Gradient', id: 'conicGradient' },
+    linearGradient: { label: 'Linear Gradient', id: 'linearGradient' },
+    radialGradient: { label: 'Radial Gradient', id: 'radialGradient' },
+    repeatingConicGradient: { label: 'Repeating Conic Gradient', id: 'repeatingConicGradient' },
+    repeatingLinearGradient: { label: 'Repeating Linear Gradient', id: 'repeatingLinearGradient' },
+    repeatingRadialGradient: { label: 'Repeating Radial Gradient', id: 'repeatingRadialGradient' },
+
+
+
+  }
+
+
+
+
+
+
+
+  return (
+
+    <div>
+
+
+
+
+
+
+
+
+
+
+      <PanelRow>
+        <PGDropdown position="bottom right" variant="secondary" options={typeArgs} buttonTitle={(typeArgs[type] != undefined) ? typeArgs[type].label : 'Background Type'}
+          onChange={(option, index) => {
+
+            setType(option.id);
+          }} values=""></PGDropdown>
+      </PanelRow>
+
+
+      {type == 'url' && (
+
+
+
+        <>
+          <div className='my-3'>
+            <img src={imageUrl} alt="" />
+          </div>
+
+          <MediaUploadCheck>
+            <MediaUpload
+              class="bg-blue-500"
+              onSelect={(media) => {
+                // media.id
+                props.onChange(' url("' + media.url + '")', 'backgroundImage');
+              }}
+              onClose={() => { }}
+
+              allowedTypes={ALLOWED_MEDIA_TYPES}
+              render={({ open }) => (
+                <Button className='my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full' onClick={open}>Open Media Library</Button>
+              )}
+            />
+          </MediaUploadCheck>
+        </>
+      )}
+
+
+
+
+      {type == 'conicGradient' && (
+        <></>
+      )}
+      {type == 'linearGradient' && (
+        <></>
+      )}
+
+      {type == 'radialGradient' && (
+        <></>
+      )}
+
+      {type == 'repeatingConicGradient' && (
+        <></>
+      )}
+
+      {type == 'repeatingLinearGradient' && (
+        <></>
+      )}
+
+      {type == 'repeatingRadialGradient' && (
+        <></>
+      )}
+
+
+
+
+
+
+
+    </div>
+
+  )
+
+
+}
+
+
+
+
+
+class PGcssBackgroundImage extends Component {
+
+
+  constructor(props) {
+    super(props);
+    this.state = { showWarning: true };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+
+
+
+
   render() {
+
+
+
+
 
 
     const {
@@ -17,58 +214,15 @@ class PGcssAlignItems extends Component {
     } = this.props;
 
 
-    var args = [
-      { "label": "Stretch", "value": "stretch" },
-      { "label": "Center", "value": "center" },
-      { "label": "Flex start	", "value": "flex-start" },
-      { "label": "Flex end	", "value": "flex-end" },
-      { "label": "Baseline", "value": "baseline" },
-    ];
+    const ALLOWED_MEDIA_TYPES = ['image'];
+
+
 
 
     return (
       <div>
 
-        <Dropdown
-          position="bottom"
-          renderToggle={({ isOpen, onToggle }) => (
-            <Button
-              title="Align Items"
-
-              onClick={onToggle}
-              aria-expanded={isOpen}
-            >
-              <div className=" ">{val ? val : 'Select...'}</div>
-
-
-            </Button>
-          )}
-          renderContent={() => <div className='w-32'>
-
-            {args.map((x) => {
-
-              return (
-
-                <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
-
-                  onChange(x.value, 'alignItems');
-
-
-                }}>
-
-                  {x.value && (
-
-                    <>{x.label}</>
-
-                  )}
-
-                </div>
-
-              )
-
-            })}
-          </div>}
-        />
+        <Html val={val} onChange={onChange} warn={this.state.showWarning} />
       </div>
 
     )
@@ -76,4 +230,4 @@ class PGcssAlignItems extends Component {
 }
 
 
-export default PGcssAlignItems;
+export default PGcssBackgroundImage;

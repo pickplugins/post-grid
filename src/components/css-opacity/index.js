@@ -58,6 +58,9 @@ class PGcssOpacity extends Component {
       showWarning: !state.showWarning
     }));
   }
+
+
+
   render() {
 
     var {

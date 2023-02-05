@@ -67,7 +67,6 @@ registerBlockType("post-grid/post-taxonomies", {
 
 
           color: {},
-          bgColor: {},
           padding: {},
           margin: {}
         },
@@ -93,7 +92,7 @@ registerBlockType("post-grid/post-taxonomies", {
         {
 
           color: {},
-          bgColor: {},
+
           padding: {},
           margin: {},
 
@@ -116,7 +115,7 @@ registerBlockType("post-grid/post-taxonomies", {
         styles:
         {
           color: {},
-          bgColor: {},
+
           padding: {},
           margin: {},
 
@@ -138,7 +137,7 @@ registerBlockType("post-grid/post-taxonomies", {
         {
 
           color: {},
-          bgColor: {},
+
           padding: {},
           margin: {}
         },
@@ -154,7 +153,7 @@ registerBlockType("post-grid/post-taxonomies", {
         {
 
           color: {},
-          bgColor: {},
+
           padding: {},
           margin: {},
 

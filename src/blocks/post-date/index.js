@@ -448,7 +448,7 @@ registerBlockType("post-grid/post-date", {
 
     function onChangeStylePostDate(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...readMore[sudoScource] }
+      var sudoScourceX = { ...postDate[sudoScource] }
       var elementSelector = postDateSelector;
 
       if (sudoScource == 'styles') {
@@ -491,7 +491,7 @@ registerBlockType("post-grid/post-date", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ readMore: { ...readMore } });
+      setAttributes({ postDate: { ...postDate } });
     }
 
 
@@ -500,13 +500,13 @@ registerBlockType("post-grid/post-date", {
 
 
     function onRemoveStylePostDate(sudoScource, key) {
-      var sudoScourceX = { ...readMore[sudoScource] }
+      var sudoScourceX = { ...postDate[sudoScource] }
       if (sudoScourceX[key] != undefined) {
         delete sudoScourceX[key];
       }
 
-      readMore[sudoScource] = sudoScourceX;
-      setAttributes({ readMore: { ...readMore } });
+      postDate[sudoScource] = sudoScourceX;
+      setAttributes({ postDate: { ...postDate } });
 
       if (blockCssY.items[postDateSelector] == undefined) {
         blockCssY.items[postDateSelector] = {};
@@ -526,10 +526,10 @@ registerBlockType("post-grid/post-date", {
 
 
     function onAddStylePostDate(sudoScource, key) {
-      var sudoScourceX = { ...readMore[sudoScource] }
+      var sudoScourceX = { ...postDate[sudoScource] }
       sudoScourceX[key] = {};
-      readMore[sudoScource] = sudoScourceX;
-      setAttributes({ readMore: { ...readMore } });
+      postDate[sudoScource] = sudoScourceX;
+      setAttributes({ postDate: { ...postDate } });
     }
 
 
@@ -2106,7 +2106,7 @@ registerBlockType("post-grid/post-date", {
 
                     </PGtab>
                     <PGtab name="styles">
-                      <PGStyles obj={wrapper} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                      <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
                     </PGtab>
                   </PGtabs>
 
@@ -2169,7 +2169,7 @@ registerBlockType("post-grid/post-date", {
                       </PanelRow>
                     </PGtab>
                     <PGtab name="styles">
-                      <PGStyles obj={wrapper} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
+                      <PGStyles obj={prefix} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
                     </PGtab>
                   </PGtabs>
 
@@ -2224,7 +2224,7 @@ registerBlockType("post-grid/post-date", {
                       </PanelRow>
                     </PGtab>
                     <PGtab name="styles">
-                      <PGStyles obj={wrapper} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
+                      <PGStyles obj={postfix} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
                     </PGtab>
                   </PGtabs>
 

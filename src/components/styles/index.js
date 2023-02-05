@@ -25,7 +25,7 @@ import PGcssBackgroundClip from '../../components/css-background-clip'
 import PGcssBackgroundColor from '../../components/css-background-color'
 import PGcssBgColor from '../../components/css-bg-color'
 
-// import PGcssBackgroundImage from '../../components/css-background-image'
+import PGcssBackgroundImage from '../../components/css-background-image'
 import PGcssBackgroundOrigin from '../../components/css-background-origin'
 import PGcssBackgroundPosition from '../../components/css-background-position'
 import PGcssBackgroundRepeat from '../../components/css-background-repeat'
@@ -177,7 +177,7 @@ function Html(props) {
     backgroundBlendMode: { id: 'backgroundBlendMode', label: 'Background Blend Mode', isPro: true },
     backgroundClip: { id: 'backgroundClip', label: 'Background Clip', isPro: true },
     backgroundColor: { id: 'backgroundColor', label: 'Background Color' },
-    bgColor: { id: 'bgColor', label: 'Background Color' },
+    // bgColor: { id: 'bgColor', label: 'Background Color' },
     backgroundImage: { id: 'backgroundImage', label: 'Background Image' },
     backgroundOrigin: { id: 'backgroundOrigin', label: 'Background Origin' },
     backgroundRepeat: { id: 'backgroundRepeat', label: 'Background Repeat' },
@@ -228,6 +228,8 @@ function Html(props) {
     minHeight: { id: 'minHeight', label: 'Min Height' },
     minWidth: { id: 'minWidth', label: 'Min Width' },
     opacity: { id: 'opacity', label: 'Opacity' },
+    objectFit: { id: 'objectFit', label: 'Objec tFit' },
+
     outline: { id: 'outline', label: 'Outline', isPro: true },
     overflow: { id: 'overflow', label: 'Overflow' },
     overflowX: { id: 'overflowX', label: 'OverflowX', isPro: true },
@@ -442,7 +444,9 @@ function Html(props) {
                 <PGcssBackgroundBlendMode val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
 
-
+              {(key == 'backgroundImage') && (
+                <PGcssBackgroundImage val={value[breakPointX]} onChange={onChangeCssVal} />
+              )}
 
               {(key == 'backgroundClip') && (
                 <PGcssBackgroundClip val={value[breakPointX]} onChange={onChangeCssVal} />

@@ -31,7 +31,6 @@ import { Icon, close } from '@wordpress/icons';
 import Typography from '../../components/typography'
 import IconToggle from '../../components/icon-toggle'
 import PGDropdown from '../../components/dropdown'
-import PGproWrapper from '../../components/pro-wrapper'
 import PGIconPicker from '../../components/icon-picker'
 
 import PGMailSubsctibe from '../../components/mail-subscribe'
@@ -523,6 +522,7 @@ registerBlockType("post-grid/post-grid-filterable", {
     var [isBusy, setIsBusy] = useState(false); // Using the hook.
     var [importLayoutOpen, setimportLayoutOpen] = useState({ id: 0, isOpen: false }); // Using the hook.
 
+    let isProFeature = applyFilters('isProFeature', true);
 
 
     var containerSelector = blockClass;
@@ -3016,15 +3016,7 @@ registerBlockType("post-grid/post-grid-filterable", {
               <div>
 
 
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-metaQuery"}>
-                  <p> <span className='underline'>Meta Query</span> Only avilable in Premium</p>
-                </PGproWrapper>
-
-
-
-
-
-                <div className={(postGridData.license_status != 'active') ? '' : ''}>
+                <div>
                   <div
                     className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
                     onClick={(_ev) => {
@@ -3199,9 +3191,7 @@ registerBlockType("post-grid/post-grid-filterable", {
             {item.id == 'dateQuery' &&
               <div>
 
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-dateQuery"}>
-                  <p> <span className='underline'>Date Query</span> Only avilable in Premium</p>
-                </PGproWrapper>
+
 
 
 
@@ -3571,13 +3561,11 @@ registerBlockType("post-grid/post-grid-filterable", {
             {item.id == 'taxQuery' &&
               <div >
 
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryargsTaxonomy"}>
-                  <p> <span className='underline'>Taxonomy Query</span> Only avilable in Premium</p>
-                </PGproWrapper>
 
 
 
-                <div className={(postGridData.license_status != 'active') ? '' : ''}>
+
+                <div>
 
 
                   <div
@@ -3793,9 +3781,6 @@ registerBlockType("post-grid/post-grid-filterable", {
 
               <div >
 
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryArgs"}>
-                  <p> <span className='underline'>Post Parent, Post Password</span> Only avilable in Premium</p>
-                </PGproWrapper>
 
 
 
@@ -3814,9 +3799,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
               <div>
 
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-postQueryArgs"}>
-                  <p>Only avilable in Premium</p>
-                </PGproWrapper>
+
 
 
 
@@ -3922,9 +3905,6 @@ registerBlockType("post-grid/post-grid-filterable", {
             {(item.id == 'ignoreStickyPosts') &&
               <div >
 
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-stickyPost"}>
-                  <p> <span className='underline'>Ignore Sticky Posts</span> Only avilable in Premium</p>
-                </PGproWrapper>
 
 
 
@@ -4159,16 +4139,13 @@ registerBlockType("post-grid/post-grid-filterable", {
 
                         <span className='mx-1 inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer' >#{x.post_id}</span>
 
-                        {/* {(postGridData.license_status != 'active') && (
-                          
-                        )} */}
 
 
                         {layoutData.source == 'library' && (
 
                           <>
                             <div className='mx-1 relative inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer' onClick={ev => {
-                              if (postGridData.license_status == 'active') {
+                              if (isProFeature == false) {
 
                                 if (!importLayoutOpen.isOpen) {
                                   setlayoutImporting(true);
@@ -4184,7 +4161,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                             }} ><span class="dashicons dashicons-download"></span> Import</div>
                             {importLayoutOpen.id == x.post_id && importLayoutOpen.isOpen && (
                               <Popover position="bottom left p-2 ">
-                                {postGridData.license_status != 'active' && (
+                                {isProFeature == true && (
                                   <div className='w-48 bg-amber-100 px-3 py-2'>
                                     <p className=''> <span className='underline'>Importing Layouts</span> Only avilable in Premium</p>
                                     <p className=''>After import the layout you customize and make your own.</p>
@@ -4193,7 +4170,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                                   </div>
                                 )}
 
-                                {postGridData.license_status == 'active' && (
+                                {isProFeature == false && (
                                   <div className='w-48 bg-sky-300 px-3 py-2'>
 
 
@@ -4292,9 +4269,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
-                <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-queryPreset"}>
-                  <p> <span className='underline'>Query Presets</span> Only avilable in Premium</p>
-                </PGproWrapper>
+
 
                 <PanelRow className='mb-4'>
                   <label for="">Query Presets</label>
@@ -4600,14 +4575,6 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
-                {(postGridData.license_status != 'active') && grid.options.itemCss[breakPointX] != undefined && Object.entries(grid.options.itemCss[breakPointX]).length > 0 && (
-
-                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-nthcss"}>
-                    <p> <span className='underline'>N'th Item CSS</span> Only avilable in Premium</p>
-                  </PGproWrapper>
-
-                )}
-
                 <div >
 
                   <PanelRow>
@@ -4616,7 +4583,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                     <Button className='my-3' variant="secondary"
                       onClick={(_newVal) => {
 
-                        if (postGridData != null && postGridData.license_status == 'active') {
+                        if (isProFeature) {
 
                           if (grid.options.itemCss[breakPointX] != undefined) {
 
@@ -4651,7 +4618,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                       }}
 
                     >Add
-                      {postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white'>
+                      {isProFeature && (<span className='bg-amber-400 mx-2 rounded-sm px-3  text-white hover:text-white'>
                         <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=nthItemCSS&utm_term=blockPostgrid&utm_campaign=pluginPostGrid&utm_medium=nthItemCSS'}>Pro</a>
                       </span>)}
                     </Button>
@@ -4775,7 +4742,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                         <div className='cursor-pointer relative hover:bg-blue-200 my-3' onClick={(_ev) => {
 
                           if (x.isPro) {
-                            if (postGridData != null && postGridData.license_status == 'active') {
+                            if (isProFeature == false) {
                               setAttributes({ grid: x.data })
                             }
                           } else {
@@ -4785,7 +4752,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
                         }}>
 
-                          {x.isPro && postGridData != null && postGridData.license_status != 'active' && (<span className='bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white'>
+                          {x.isPro && isProFeature == false && (<span className='bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white'>
                             <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
                           </span>)}
                           {x.icon != undefined && (
@@ -5094,11 +5061,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                   >Add Filter Group</Button>
 
 
-                  {filterable.options.filters.length > 1 && (
-                    <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-multifilter"}>
-                      <p> <span className='underline'>Multi Filter</span> Only avilable in Premium</p>
-                    </PGproWrapper>
-                  )}
+
 
 
 
@@ -5376,13 +5339,6 @@ registerBlockType("post-grid/post-grid-filterable", {
                   })
                   }
                 </div>
-
-                {filterable.options.multifilter && (
-                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridFilterableBlock&utm_campaign=pluginPostGrid&utm_medium=postGridFilterableBlock-multifilter"}>
-                    <p><span className='underline'>Multifilter</span> Only avilable in Premium</p>
-                  </PGproWrapper>
-                )}
-
 
 
 
@@ -5986,16 +5942,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
 
 
-                {((pagination.options.type == 'filterable')) && (
 
-
-                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-pagination_type"}>
-                    <p> <span className='underline'>Filterable pagination</span> Only avilable in Premium</p>
-                  </PGproWrapper>
-
-
-
-                )}
 
 
 
@@ -6441,11 +6388,7 @@ registerBlockType("post-grid/post-grid-filterable", {
                   }} />
                 </PanelRow>
 
-                {lazyLoad.options.srcUrl.length > 0 && (
-                  <PGproWrapper utmUrl={"?utm_source=editor&utm_term=postGridBlock&utm_campaign=pluginPostGrid&utm_medium=postGridBlock-lazyload"}>
-                    <p> <span className='underline'>Lazy Load Image</span> Only avilable in Premium</p>
-                  </PGproWrapper>
-                )}
+
 
 
                 <label for="">Lazy Load Image</label>

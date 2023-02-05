@@ -54,7 +54,7 @@ function Html(props) {
 
 
   var widthValX = (widthVal.match(/\d+/g) != null) ? widthVal.match(/\d+/g)[0] : 1;
-  var widthUnitX = (widthVal.match(/[a-zA-Z]+/g) != null) ? widthVal.match(/[a-zA-Z]+/g)[0] : 'px';
+  var widthUnitX = (widthVal.match(/[a-zA-Z%]+/g) != null) ? widthVal.match(/[a-zA-Z%]+/g)[0] : 'px';
 
 
   const [widthValY, setwidthVal] = useState(widthValX);

@@ -64,7 +64,7 @@ function Html(props) {
   }
 
   var thicknessValX = thicknessVal != undefined ? thicknessVal.match(/\d+/g)[0] : 1;
-  var thicknessUnitX = thicknessVal != undefined ? thicknessVal.match(/[a-zA-Z]+/g)[0] : 'px';
+  var thicknessUnitX = thicknessVal != undefined ? thicknessVal.match(/[a-zA-Z%]+/g)[0] : 'px';
 
 
   const [thicknessValY, setthicknessVal] = useState(thicknessValX);

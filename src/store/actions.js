@@ -12,15 +12,7 @@ const actions = {
       clientdata,
     };
   },
-  setproinfo(proinfo) {
 
-    console.log('step: 2');
-
-    return {
-      type: 'SET_PROINFO',
-      proinfo,
-    };
-  },
   setLicense(license) {
     return {
       type: 'SET_LICENSE',
@@ -39,14 +31,7 @@ const actions = {
       path,
     };
   },
-  fetchproinfo(path) {
-    console.log('step: 3');
 
-    return {
-      type: 'FETCH_PRO_INFO_FROM_API',
-      path,
-    };
-  },
 
 };
 

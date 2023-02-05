@@ -45,10 +45,10 @@ function Html(props) {
   }
 
   var horizontalValX = horizontalVal != undefined ? horizontalVal.match(/\d+/g)[0] : 1;
-  var horizontalUnitX = horizontalVal != undefined ? horizontalVal.match(/[a-zA-Z]+/g)[0] : 'px';
+  var horizontalUnitX = horizontalVal != undefined ? horizontalVal.match(/[a-zA-Z%]+/g)[0] : 'px';
 
   var vericalValX = vericalVal != undefined ? vericalVal.match(/\d+/g)[0] : 1;
-  var vericalUnitX = vericalVal != undefined ? vericalVal.match(/[a-zA-Z]+/g)[0] : 'px';
+  var vericalUnitX = vericalVal != undefined ? vericalVal.match(/[a-zA-Z%]+/g)[0] : 'px';
 
 
 

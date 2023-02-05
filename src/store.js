@@ -9,7 +9,6 @@ import { createReduxStore, register, subscribe, select } from '@wordpress/data';
 const DEFAULT_STATE = {
   breakPoint: 'Desktop',
   clientdata: {},
-  proinfo: { proInstalled: false, status: 'inactive-initial' },
   license: { license_status: '', license_key: '' },
   blockCss: '',
 
@@ -25,13 +24,7 @@ var selectors = {
     const { clientdata } = state;
     return clientdata;
   },
-  getproinfo(state) {
 
-    const { proinfo } = state;
-
-
-    return proinfo;
-  },
   getLicense(state) {
     const { license } = state;
     return license;
@@ -535,18 +528,7 @@ var resolvers = {
   },
 
 
-  * getproinfo() {
 
-
-
-
-    const path = '/post-grid/v2/get_pro_info';
-    const res = yield actions.fetchproinfo(path);
-
-
-
-    return actions.setproinfo(res);
-  },
 
 
 
@@ -567,14 +549,7 @@ const actions = {
       clientdata,
     };
   },
-  setproinfo(proinfo) {
 
-
-    return {
-      type: 'SET_PROINFO',
-      proinfo,
-    };
-  },
   setLicense(license) {
     return {
       type: 'SET_LICENSE',
@@ -593,13 +568,7 @@ const actions = {
       path,
     };
   },
-  fetchproinfo(path) {
 
-    return {
-      type: 'FETCH_PRO_INFO_FROM_API',
-      path,
-    };
-  },
 
 };
 
@@ -645,14 +614,7 @@ const store = createReduxStore('postgrid-shop', {
           clientdata: action.clientdata,
         };
 
-      case 'SET_PROINFO':
 
-
-
-        return {
-          ...state,
-          proinfo: action.proinfo,
-        };
 
       case 'SET_LICENSE':
         return {

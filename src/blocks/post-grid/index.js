@@ -34,7 +34,6 @@ import { Icon, close } from '@wordpress/icons';
 import Typography from '../../components/typography'
 import IconToggle from '../../components/icon-toggle'
 import PGDropdown from '../../components/dropdown'
-import PGproWrapper from '../../components/pro-wrapper'
 import PGIconPicker from '../../components/icon-picker'
 
 import PGMailSubsctibe from '../../components/mail-subscribe'
@@ -495,7 +494,6 @@ registerBlockType("post-grid/post-grid", {
     var [debounce, setDebounce] = useState(null); // Using the hook.
     const [breakPointX, setBreakPointX] = useState((myStore != null) ? myStore.getBreakPoint() : 'Desktop');
     const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
-    const [proInfo, setproInfo] = useState((myStore != null) ? myStore.getproinfo() : {});
 
     let isProFeature = applyFilters('isProFeature', true);
 
@@ -522,18 +520,6 @@ registerBlockType("post-grid/post-grid", {
       setClientData((myStore != null) ? myStore.getclientdata() : '');
 
     }, [clientDataX]);
-
-
-    useEffect(() => {
-
-      var proinfo = (myStore != null) ? myStore.getproinfo() : {};
-
-
-
-      setproInfo(proinfo);
-
-    }, [proInfo]);
-
 
 
 
@@ -2672,7 +2658,7 @@ registerBlockType("post-grid/post-grid", {
             {item.id == 'metaQuery' &&
               <div>
 
-                <div className={(proInfo.status != 'active') ? '' : ''}>
+                <div>
                   <div
                     className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
                     onClick={(_ev) => {
@@ -3235,7 +3221,7 @@ registerBlockType("post-grid/post-grid", {
 
             {item.id == 'taxQuery' &&
               <div >
-                <div className={(proInfo.status != 'active') ? '' : ''}>
+                <div >
 
 
                   <div
@@ -3829,8 +3815,9 @@ registerBlockType("post-grid/post-grid", {
                         {layoutData.source == 'library' && (
 
                           <>
+
                             <div className='mx-1 relative inline-block bg-blue-500 hover:bg-blue-400 px-2 py-1 text-white rounded-sm cursor-pointer' onClick={ev => {
-                              if (proInfo.status == 'active') {
+                              if (isProFeature == false) {
 
                                 if (!importLayoutOpen.isOpen) {
                                   setlayoutImporting(true);
@@ -3846,16 +3833,16 @@ registerBlockType("post-grid/post-grid", {
                             }} ><span class="dashicons dashicons-download"></span> Import</div>
                             {importLayoutOpen.id == x.post_id && importLayoutOpen.isOpen && (
                               <Popover position="bottom left p-2 ">
-                                {proInfo.status != 'active' && (
+                                {isProFeature == true && (
                                   <div className='w-48 bg-amber-100 px-3 py-2'>
                                     <p className=''> <span className='underline'>Importing Layouts</span> Only avilable in Premium</p>
-                                    <p className=''>After import the layout you customize and make your own.</p>
+                                    <p className=''>After import the layout you can customize and make your own.</p>
 
 
                                   </div>
                                 )}
 
-                                {proInfo.status == 'active' && (
+                                {isProFeature == false && (
                                   <div className='w-48 bg-sky-300 px-3 py-2'>
 
 

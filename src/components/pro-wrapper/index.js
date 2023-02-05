@@ -37,7 +37,7 @@ class PGproWrapper extends Component {
 
           <div className='proWrapper my-5'>
 
-            <div className='proInfo ' >
+            <div className='' >
               <div className='bg-amber-400 px-3 py-2 '>
                 <a className='text-lg text-white hover:text-white font-bold flex justify-between' target='_blank' href={postGridData.proUrl + utmUrl}>
                   <span className=' underline'>Pre Order</span>

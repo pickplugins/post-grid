@@ -9,12 +9,7 @@ var selectors = {
         const { clientdata } = state;
         return clientdata;
     },
-    getproinfo(state) {
-        console.log('step: 1');
 
-        const { proinfo } = state;
-        return proinfo;
-    },
     getLicense(state) {
         const { license } = state;
         return license;

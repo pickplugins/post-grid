@@ -24,20 +24,7 @@ var resolvers = {
     },
 
 
-    * getproinfo() {
 
-        console.log('step: 2');
-
-
-
-        const path = '/post-grid/v2/get_pro_info';
-        const res = yield actions.fetchproinfo(path);
-
-        //console.log(res);
-
-
-        return actions.setproinfo(res);
-    },
 
 
 

@@ -7,6 +7,7 @@ import { useState, useEffect } from '@wordpress/element'
 import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
 import PGDropdown from '../../components/dropdown'
 import { Icon, close } from '@wordpress/icons';
+import { applyFilters } from '@wordpress/hooks';
 
 
 
@@ -35,7 +36,7 @@ function Html(props) {
   ]
 
 
-  var propertyArgs = {
+  var transitionPropertiesBasic = {
     'background-color': { value: 'background-color', label: 'Background Color' },
     color: { value: 'color', label: 'Color' },
     'box-shadow': { value: 'box-shadow', label: 'Box Shadow' },
@@ -115,6 +116,7 @@ function Html(props) {
     'writing-mode': { value: 'writing-mode', label: 'Writing Mode', isPro: true },
   };
 
+  let transitionProperties = applyFilters('transitionProperties', transitionPropertiesBasic);
 
 
   useEffect(() => {
@@ -147,7 +149,7 @@ function Html(props) {
     <div className='mt-4'>
       <div className='flex mb-3'>
 
-        <PGDropdown position="bottom right" variant="secondary" options={propertyArgs} buttonTitle="Choose"
+        <PGDropdown position="bottom right" variant="secondary" options={transitionProperties} buttonTitle="Choose"
           onChange={(option, index) => {
 
             valArgs.push({ property: option.value, duration: '1s', timingFunction: 'ease', delay: '0s' });
@@ -183,22 +185,31 @@ function Html(props) {
 
             return (
 
-              <PanelBody title={(arg.property != null && propertyArgs[arg.property] != undefined) ? propertyArgs[arg.property].label : 'property'} initialOpen={false}>
+              <PanelBody title={(arg.property != null && transitionProperties[arg.property] != undefined) ? transitionProperties[arg.property].label : 'property'} initialOpen={false}>
 
                 <PanelRow>
                   <label for="">Duration</label>
                   <InputControl
-                    value={arg.duration}
-                    type="text"
+                    value={arg.duration.slice(0, -1)}
+                    type="number"
 
                     onChange={(newVal) => {
                       valArgs[i].duration = newVal;
 
                       var str = '';
-                      valArgs.map(x => {
+                      valArgs.map((x, j) => {
 
-                        str += x.property + ' ' + newVal + ' ' + x.timingFunction + ' ' + x.delay;
-                        str += ',';
+
+                        if (i == j) {
+                          str += x.property + ' ' + newVal + 's ' + x.timingFunction + ' ' + x.delay;
+                          str += ',';
+                        } else {
+                          str += x.property + ' ' + x.duration + ' ' + x.timingFunction + ' ' + x.delay;
+                          str += ',';
+                        }
+
+
+
                       })
                       var strX = str.slice(0, -1);
                       props.onChange(strX, 'transition');
@@ -218,10 +229,18 @@ function Html(props) {
                     valArgs[i].timingFunction = option.value;
 
                     var str = '';
-                    valArgs.map(x => {
+                    valArgs.map((x, j) => {
 
-                      str += x.property + ' ' + x.duration + ' ' + option.value + ' ' + x.delay;
-                      str += ',';
+                      if (i == j) {
+                        str += x.property + ' ' + x.duration + ' ' + option.value + ' ' + x.delay;
+                        str += ',';
+                      }
+                      else {
+                        str += x.property + ' ' + x.duration + ' ' + x.timingFunction + ' ' + x.delay;
+                        str += ',';
+                      }
+
+
                     })
                     var strX = str.slice(0, -1);
                     props.onChange(strX, 'transition');
@@ -238,17 +257,26 @@ function Html(props) {
                 <PanelRow>
                   <label for="">Delay</label>
                   <InputControl
-                    value={arg.delay}
-                    type="text"
+                    value={arg.delay.slice(0, -1)}
+                    type="number"
 
                     onChange={(newVal) => {
                       valArgs[i].delay = newVal;
 
                       var str = '';
-                      valArgs.map(x => {
+                      valArgs.map((x, j) => {
 
-                        str += x.property + ' ' + x.duration + ' ' + x.timingFunction + ' ' + newVal;
-                        str += ',';
+                        if (i == j) {
+                          str += x.property + ' ' + x.duration + ' ' + x.timingFunction + ' ' + newVal + 's';
+                          str += ',';
+                        }
+                        else {
+                          str += x.property + ' ' + x.duration + ' ' + x.timingFunction + ' ' + x.delay;
+                          str += ',';
+
+                        }
+
+
                       })
                       var strX = str.slice(0, -1);
                       props.onChange(strX, 'transition');
@@ -274,10 +302,13 @@ function Html(props) {
                     setvalArgs(valArgs);
 
                     var str = '';
-                    valArgs.map(x => {
+                    valArgs.map((x, j) => {
+
 
                       str += x.property + ' ' + x.duration + ' ' + x.timingFunction + ' ' + x.delay;
                       str += ',';
+
+
                     })
                     var strX = str.slice(0, -1);
                     props.onChange(strX, 'transition');

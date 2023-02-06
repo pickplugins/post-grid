@@ -1085,10 +1085,11 @@ registerBlockType("post-grid/post-title", {
                     {postTitle.options.isLink && (
                       <>
 
+
                         <PanelRow>
                           <label for="">Link To</label>
 
-                          <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={postTitle.options.linkTo.length == 0 ? 'Choose' : linkToArgs[postTitle.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
+                          <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={(postTitle.options.linkTo == undefined) ? 'Choose' : linkToArgs[postTitle.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
 
                         </PanelRow>
 

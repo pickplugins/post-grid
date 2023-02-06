@@ -660,7 +660,7 @@ registerBlockType("post-grid/post-excerpt", {
 
     function onChangeStyleRedmore(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...postExcerpt[sudoScource] }
+      var sudoScourceX = { ...readMore[sudoScource] }
       var elementSelector = redmoreSelector;
 
       if (sudoScource == 'styles') {
@@ -703,7 +703,7 @@ registerBlockType("post-grid/post-excerpt", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postExcerpt: { ...postExcerpt } });
+      setAttributes({ readMore: { ...readMore } });
     }
 
 
@@ -712,13 +712,13 @@ registerBlockType("post-grid/post-excerpt", {
 
 
     function onRemoveStyleRedmore(sudoScource, key) {
-      var sudoScourceX = { ...postExcerpt[sudoScource] }
+      var sudoScourceX = { ...readMore[sudoScource] }
       if (sudoScourceX[key] != undefined) {
         delete sudoScourceX[key];
       }
 
-      postExcerpt[sudoScource] = sudoScourceX;
-      setAttributes({ postExcerpt: { ...postExcerpt } });
+      readMore[sudoScource] = sudoScourceX;
+      setAttributes({ readMore: { ...readMore } });
 
       if (blockCssY.items[redmoreSelector] == undefined) {
         blockCssY.items[redmoreSelector] = {};
@@ -743,10 +743,10 @@ registerBlockType("post-grid/post-excerpt", {
 
 
     function onAddStyleRedmore(sudoScource, key) {
-      var sudoScourceX = { ...postExcerpt[sudoScource] }
+      var sudoScourceX = { ...readMore[sudoScource] }
       sudoScourceX[key] = {};
-      postExcerpt[sudoScource] = sudoScourceX;
-      setAttributes({ postExcerpt: { ...postExcerpt } });
+      readMore[sudoScource] = sudoScourceX;
+      setAttributes({ readMore: { ...readMore } });
     }
 
 

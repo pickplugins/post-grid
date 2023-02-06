@@ -39,8 +39,8 @@ function Html(props) {
 
   }
 
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var widthValX = props.val == undefined ? 10 : props.val.match(/\d+/g)[0];
+  var widthUnitX = (props.val == undefined || props.val.match(/[a-zA-Z%]+/g) == undefined) ? 'px' : props.val.match(/[a-zA-Z%]+/g)[0];
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
@@ -49,8 +49,6 @@ function Html(props) {
   return (
 
     <div className='flex mt-4'>
-
-
       <InputControl
         value={widthVal}
         type="number"
@@ -58,7 +56,6 @@ function Html(props) {
 
           setwidthVal(newVal);
           props.onChange(newVal + widthUnit, 'lineHeight');
-
 
         }}
       />

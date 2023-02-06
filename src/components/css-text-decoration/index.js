@@ -14,7 +14,7 @@ function Html(props) {
     return null;
   }
 
-  var valParts = (val != undefined) ? val.split(" ") : ['underline', '#000000', 'wavy', '1px'];
+  var valParts = (props.val != undefined) ? props.val.split(" ") : ['underline', '#000000', 'wavy', '1px'];
 
   //console.log(valParts);
 
@@ -103,10 +103,10 @@ function Html(props) {
 
     ////console.log(val);
 
-    var valParts = (val != undefined) ? val.split(" ") : ['underline', '#000000', 'wavy', '1px'];
+    var valParts = (props.val != undefined) ? props.val.split(" ") : ['underline', '#000000', 'wavy', '1px'];
 
 
-  }, [val]);
+  }, [props.val]);
 
 
 

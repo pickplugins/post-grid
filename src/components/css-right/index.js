@@ -46,7 +46,7 @@ function Html(props) {
         type="number"
         onChange={(newVal) => {
           setwidthVal(newVal);
-          onChange(newVal + widthUnit, 'right');
+          props.onChange(newVal + widthUnit, 'right');
         }}
       />
       <div>
@@ -70,7 +70,7 @@ function Html(props) {
               return (
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
                   setwidthUnit(x.value);
-                  onChange(widthVal + x.value, 'right');
+                  props.onChange(widthVal + x.value, 'right');
                 }}>
                   {x.value && (
                     <>{x.label}</>

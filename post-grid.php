@@ -66,6 +66,9 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/archive-description/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-comment-count/index.php');
 
+            require_once(post_grid_plugin_dir . 'src/blocks/star-rate/index.php');
+
+
 
             $postGridCss = [];
             $postGridCssY = [];

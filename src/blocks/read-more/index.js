@@ -1584,7 +1584,7 @@ registerBlockType("post-grid/read-more", {
                           <PanelRow>
                             <label for="">Link To</label>
 
-                            <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={readMore.options.linkTo.length == 0 ? 'Choose' : linkToArgs[readMore.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
+                            <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={(readMore.options.linkTo == undefined) ? 'Choose' : linkToArgs[readMore.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
 
                           </PanelRow>
 

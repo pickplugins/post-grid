@@ -1701,7 +1701,7 @@ registerBlockType("post-grid/social-share", {
 
 
                               <ColorPalette
-                                value={elements.items[index].styles.backgroundColor[breakPointX]}
+                                value={(elements.items[index].styles.backgroundColor != undefined) ? elements.items[index].styles.backgroundColor[breakPointX] : ''}
                                 colors={colorsPresets}
                                 enableAlpha
                                 onChange={(newVal) => {

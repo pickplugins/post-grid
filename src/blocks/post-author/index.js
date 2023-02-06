@@ -522,6 +522,11 @@ registerBlockType("post-grid/post-author", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -614,6 +619,11 @@ registerBlockType("post-grid/post-author", {
         blockCssY.items[redmoreSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[redmoreSelector][key] != undefined) {
+        delete blockCssY.items[redmoreSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -705,6 +715,11 @@ registerBlockType("post-grid/post-author", {
         blockCssY.items[avatarSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[avatarSelector][key] != undefined) {
+        delete blockCssY.items[avatarSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -790,6 +805,11 @@ registerBlockType("post-grid/post-author", {
         var argAttrVal = args[1];
         blockCssY.items[nameSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[nameSelector][key] != undefined) {
+        delete blockCssY.items[nameSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -877,6 +897,11 @@ registerBlockType("post-grid/post-author", {
         var argAttrVal = args[1];
         blockCssY.items[descriptionSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[descriptionSelector][key] != undefined) {
+        delete blockCssY.items[descriptionSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -968,6 +993,12 @@ registerBlockType("post-grid/post-author", {
 
       })
 
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
@@ -1057,6 +1088,11 @@ registerBlockType("post-grid/post-author", {
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
 
       })
+
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 

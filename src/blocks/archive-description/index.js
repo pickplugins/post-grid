@@ -405,6 +405,11 @@ registerBlockType("post-grid/archive-description", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -497,6 +502,12 @@ registerBlockType("post-grid/archive-description", {
         blockCssY.items[redmoreSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[redmoreSelector][key] != undefined) {
+        delete blockCssY.items[redmoreSelector][key];
+      }
+
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -585,6 +596,12 @@ registerBlockType("post-grid/archive-description", {
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       })
+
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -682,6 +699,12 @@ registerBlockType("post-grid/archive-description", {
 
       })
 
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
@@ -771,6 +794,11 @@ registerBlockType("post-grid/archive-description", {
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
 
       })
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
@@ -1097,6 +1125,11 @@ registerBlockType("post-grid/archive-description", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -1189,6 +1222,11 @@ registerBlockType("post-grid/archive-description", {
         blockCssY.items[archiveTitleSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[archiveTitleSelector][key] != undefined) {
+        delete blockCssY.items[archiveTitleSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -1277,6 +1315,12 @@ registerBlockType("post-grid/archive-description", {
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -1374,6 +1418,11 @@ registerBlockType("post-grid/archive-description", {
 
       })
 
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
@@ -1463,6 +1512,11 @@ registerBlockType("post-grid/archive-description", {
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
 
       })
+
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 

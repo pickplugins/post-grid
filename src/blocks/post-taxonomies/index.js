@@ -523,6 +523,11 @@ registerBlockType("post-grid/post-taxonomies", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -608,6 +613,10 @@ registerBlockType("post-grid/post-taxonomies", {
         blockCssY.items[itemSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[itemSelector][key] != undefined) {
+        delete blockCssY.items[itemSelector][key];
+      }
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -690,6 +699,11 @@ registerBlockType("post-grid/post-taxonomies", {
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -774,6 +788,11 @@ registerBlockType("post-grid/post-taxonomies", {
         blockCssY.items[frontTextSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[frontTextSelector][key] != undefined) {
+        delete blockCssY.items[frontTextSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -856,8 +875,13 @@ registerBlockType("post-grid/post-taxonomies", {
       Object.entries(sudoScourceX).map(args => {
         var argAttr = myStore.cssAttrParse(args[0]);
         var argAttrVal = args[1];
-        blockCssY.items[fieldSelector][argAttr] = argAttrVal;
+        blockCssY.items[separatorSelector][argAttr] = argAttrVal;
       })
+
+
+      if (blockCssY.items[separatorSelector][key] != undefined) {
+        delete blockCssY.items[separatorSelector][key];
+      }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }

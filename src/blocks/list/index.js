@@ -339,6 +339,11 @@ registerBlockType("post-grid/list", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -419,6 +424,11 @@ registerBlockType("post-grid/list", {
         var argAttrVal = args[1];
         blockCssY.items[itemSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[itemSelector][key] != undefined) {
+        delete blockCssY.items[itemSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -501,6 +511,11 @@ registerBlockType("post-grid/list", {
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       })
+
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }

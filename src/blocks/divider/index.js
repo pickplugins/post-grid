@@ -320,6 +320,11 @@ registerBlockType("post-grid/divider", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 

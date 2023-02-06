@@ -426,6 +426,12 @@ registerBlockType("post-grid/post-date", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -518,6 +524,11 @@ registerBlockType("post-grid/post-date", {
         blockCssY.items[postDateSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[postDateSelector][key] != undefined) {
+        delete blockCssY.items[postDateSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -606,6 +617,11 @@ registerBlockType("post-grid/post-date", {
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -703,6 +719,11 @@ registerBlockType("post-grid/post-date", {
 
       })
 
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
@@ -792,6 +813,11 @@ registerBlockType("post-grid/post-date", {
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
 
       })
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 

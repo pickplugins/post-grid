@@ -235,6 +235,11 @@ registerBlockType("post-grid/layer", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 

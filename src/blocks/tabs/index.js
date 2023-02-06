@@ -441,6 +441,11 @@ registerBlockType("post-grid/tabs", {
         blockCssY.items[headerWrapSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[headerWrapSelector][key] != undefined) {
+        delete blockCssY.items[headerWrapSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -530,6 +535,11 @@ registerBlockType("post-grid/tabs", {
         blockCssY.items[headerSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[headerSelector][key] != undefined) {
+        delete blockCssY.items[headerSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -618,6 +628,11 @@ registerBlockType("post-grid/tabs", {
         var argAttrVal = args[1];
         blockCssY.items[contentSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[contentSelector][key] != undefined) {
+        delete blockCssY.items[contentSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -710,6 +725,11 @@ registerBlockType("post-grid/tabs", {
 
       })
 
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
@@ -799,6 +819,12 @@ registerBlockType("post-grid/tabs", {
         blockCssY.items[headerActiveSelector][argAttr] = argAttrVal;
 
       })
+
+      if (blockCssY.items[headerActiveSelector][key] != undefined) {
+        delete blockCssY.items[headerActiveSelector][key];
+      }
+
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 

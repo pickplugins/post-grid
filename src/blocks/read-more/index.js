@@ -448,6 +448,11 @@ registerBlockType("post-grid/read-more", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -540,6 +545,10 @@ registerBlockType("post-grid/read-more", {
         blockCssY.items[redmoreSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[redmoreSelector][key] != undefined) {
+        delete blockCssY.items[redmoreSelector][key];
+      }
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -628,6 +637,11 @@ registerBlockType("post-grid/read-more", {
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -725,6 +739,11 @@ registerBlockType("post-grid/read-more", {
 
       })
 
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
@@ -814,6 +833,11 @@ registerBlockType("post-grid/read-more", {
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
 
       })
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 

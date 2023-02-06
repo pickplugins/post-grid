@@ -192,7 +192,7 @@ function Html(props) {
                   <InputControl
                     value={arg.duration.slice(0, -1)}
                     type="number"
-
+                    autocomplete="off"
                     onChange={(newVal) => {
                       valArgs[i].duration = newVal;
 
@@ -259,7 +259,7 @@ function Html(props) {
                   <InputControl
                     value={arg.delay.slice(0, -1)}
                     type="number"
-
+                    autocomplete="off"
                     onChange={(newVal) => {
                       valArgs[i].delay = newVal;
 

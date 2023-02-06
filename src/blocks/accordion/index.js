@@ -412,6 +412,13 @@ registerBlockType("post-grid/accordion", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -501,6 +508,11 @@ registerBlockType("post-grid/accordion", {
         blockCssY.items[headerSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[headerSelector][key] != undefined) {
+        delete blockCssY.items[headerSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -589,6 +601,11 @@ registerBlockType("post-grid/accordion", {
         var argAttrVal = args[1];
         blockCssY.items[contentSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[contentSelector][key] != undefined) {
+        delete blockCssY.items[contentSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -681,6 +698,12 @@ registerBlockType("post-grid/accordion", {
 
       })
 
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
@@ -770,6 +793,11 @@ registerBlockType("post-grid/accordion", {
         blockCssY.items[headerActiveSelector][argAttr] = argAttrVal;
 
       })
+
+
+      if (blockCssY.items[headerActiveSelector][key] != undefined) {
+        delete blockCssY.items[headerActiveSelector][key];
+      }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 

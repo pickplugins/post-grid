@@ -343,6 +343,11 @@ registerBlockType("post-grid/post-meta", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -428,6 +433,11 @@ registerBlockType("post-grid/post-meta", {
         var argAttrVal = args[1];
         blockCssY.items[metaValueSelector][argAttr] = argAttrVal;
       })
+
+
+      if (blockCssY.items[metaValueSelector][key] != undefined) {
+        delete blockCssY.items[metaValueSelector][key];
+      }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }

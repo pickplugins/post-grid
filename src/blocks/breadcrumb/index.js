@@ -1034,6 +1034,13 @@ registerBlockType("post-grid/breadcrumb", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -1123,6 +1130,11 @@ registerBlockType("post-grid/breadcrumb", {
         blockCssY.items[itemSelector][argAttr] = argAttrVal;
       })
 
+
+      if (blockCssY.items[itemSelector][key] != undefined) {
+        delete blockCssY.items[itemSelector][key];
+      }
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -1211,6 +1223,11 @@ registerBlockType("post-grid/breadcrumb", {
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -1303,6 +1320,11 @@ registerBlockType("post-grid/breadcrumb", {
 
       })
 
+      if (blockCssY.items[labelSelector][key] != undefined) {
+        delete blockCssY.items[labelSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
@@ -1392,6 +1414,11 @@ registerBlockType("post-grid/breadcrumb", {
         blockCssY.items[separatorSelector][argAttr] = argAttrVal;
 
       })
+
+      if (blockCssY.items[separatorSelector][key] != undefined) {
+        delete blockCssY.items[separatorSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 

@@ -382,6 +382,11 @@ registerBlockType("post-grid/post-author-fields", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -477,6 +482,11 @@ registerBlockType("post-grid/post-author-fields", {
 
       })
 
+      if (blockCssY.items[fieldSelector][key] != undefined) {
+        delete blockCssY.items[fieldSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -565,6 +575,11 @@ registerBlockType("post-grid/post-author-fields", {
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       })
+
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
@@ -658,6 +673,11 @@ registerBlockType("post-grid/post-author-fields", {
         var argAttrVal = args[1];
         blockCssY.items[frontTextSelector][argAttr] = argAttrVal;
       })
+
+      if (blockCssY.items[frontTextSelector][key] != undefined) {
+        delete blockCssY.items[frontTextSelector][key];
+      }
+
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }

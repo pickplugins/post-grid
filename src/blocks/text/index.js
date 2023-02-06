@@ -260,6 +260,11 @@ registerBlockType("post-grid/text", {
         blockCssY.items[textSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[textSelector][key] != undefined) {
+        delete blockCssY.items[textSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 

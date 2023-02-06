@@ -485,13 +485,13 @@ registerBlockType("post-grid/post-title", {
 
     function onRemoveStyleWrapper(sudoScource, key) {
 
+
       var sudoScourceX = { ...wrapper[sudoScource] }
       if (sudoScourceX[key] != undefined) {
         delete sudoScourceX[key];
       }
 
       wrapper[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
 
       setAttributes({ wrapper: { ...wrapper } });
 
@@ -499,13 +499,20 @@ registerBlockType("post-grid/post-title", {
         blockCssY.items[wrapperSelector] = {};
       }
 
+
+
       Object.entries(sudoScourceX).map(args => {
 
         var argAttr = myStore.cssAttrParse(args[0]);
         var argAttrVal = args[1];
+
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
 
       })
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
@@ -599,6 +606,10 @@ registerBlockType("post-grid/post-title", {
 
       })
 
+      if (blockCssY.items[postTitleSelector][key] != undefined) {
+        delete blockCssY.items[postTitleSelector][key];
+      }
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
@@ -691,6 +702,10 @@ registerBlockType("post-grid/post-title", {
 
       })
 
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
@@ -780,6 +795,10 @@ registerBlockType("post-grid/post-title", {
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
 
       })
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
 

@@ -627,6 +627,11 @@ registerBlockType("post-grid/image", {
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       })
 
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
+
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
@@ -707,6 +712,11 @@ registerBlockType("post-grid/image", {
         var argAttrVal = args[1];
         blockCssY.items[imgSelector][argAttr] = argAttrVal;
       })
+
+
+      if (blockCssY.items[imgSelector][key] != undefined) {
+        delete blockCssY.items[imgSelector][key];
+      }
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
     }

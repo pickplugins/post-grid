@@ -2101,6 +2101,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -2193,6 +2198,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[headerSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[headerSelector][key] != undefined) {
+        delete blockCssY.items[headerSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -2285,6 +2295,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[contentSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[contentSelector][key] != undefined) {
+        delete blockCssY.items[contentSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -2378,6 +2393,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -2471,6 +2491,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[headerActiveSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[headerActiveSelector][key] != undefined) {
+        delete blockCssY.items[headerActiveSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -3366,6 +3391,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -3458,6 +3488,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[redmoreSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[redmoreSelector][key] != undefined) {
+        delete blockCssY.items[redmoreSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -3550,6 +3585,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -3643,6 +3683,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[prefixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -3736,6 +3781,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -3974,6 +4024,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -4066,6 +4121,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[archiveTitleSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[archiveTitleSelector][key] != undefined) {
+        delete blockCssY.items[archiveTitleSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -4158,6 +4218,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -4251,6 +4316,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[prefixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -4344,6 +4414,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -5860,6 +5935,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -5952,6 +6032,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[archiveTitleSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[archiveTitleSelector][key] != undefined) {
+        delete blockCssY.items[archiveTitleSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -6044,6 +6129,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -6137,6 +6227,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[prefixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -6230,6 +6325,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -8695,6 +8795,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -8787,6 +8892,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[itemSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[itemSelector][key] != undefined) {
+        delete blockCssY.items[itemSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -8879,6 +8989,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -8972,6 +9087,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[labelSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[labelSelector][key] != undefined) {
+        delete blockCssY.items[labelSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -9065,6 +9185,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[separatorSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[separatorSelector][key] != undefined) {
+        delete blockCssY.items[separatorSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -10288,6 +10413,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -11250,6 +11380,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -11342,6 +11477,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[textSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[textSelector][key] != undefined) {
+        delete blockCssY.items[textSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -11434,6 +11574,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -11527,6 +11672,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[prefixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -11620,6 +11770,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -13746,6 +13901,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -13838,6 +13998,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[imgSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[imgSelector][key] != undefined) {
+        delete blockCssY.items[imgSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -15998,6 +16163,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -16685,6 +16855,11 @@ function EditComponent() {
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -17539,6 +17714,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -17631,6 +17811,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[itemSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[itemSelector][key] != undefined) {
+        delete blockCssY.items[itemSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -17723,6 +17908,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -19070,6 +19260,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -19162,6 +19357,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[fieldSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[fieldSelector][key] != undefined) {
+        delete blockCssY.items[fieldSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -19254,6 +19454,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -19346,6 +19551,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[frontTextSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[frontTextSelector][key] != undefined) {
+        delete blockCssY.items[frontTextSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -20940,6 +21150,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -21032,6 +21247,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[redmoreSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[redmoreSelector][key] != undefined) {
+        delete blockCssY.items[redmoreSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -21124,6 +21344,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[avatarSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[avatarSelector][key] != undefined) {
+        delete blockCssY.items[avatarSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -21216,6 +21441,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[nameSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[nameSelector][key] != undefined) {
+        delete blockCssY.items[nameSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -21308,6 +21538,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[descriptionSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[descriptionSelector][key] != undefined) {
+        delete blockCssY.items[descriptionSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -21401,6 +21636,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[prefixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -21494,6 +21734,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -23161,6 +23406,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -23253,6 +23503,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[itemSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[itemSelector][key] != undefined) {
+        delete blockCssY.items[itemSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -23345,6 +23600,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -23437,6 +23697,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[frontTextSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[frontTextSelector][key] != undefined) {
+        delete blockCssY.items[frontTextSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -23527,8 +23792,13 @@ var myStore = wp.data.select('postgrid-shop');
       Object.entries(sudoScourceX).map(args => {
         var argAttr = myStore.cssAttrParse(args[0]);
         var argAttrVal = args[1];
-        blockCssY.items[fieldSelector][argAttr] = argAttrVal;
+        blockCssY.items[separatorSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[separatorSelector][key] != undefined) {
+        delete blockCssY.items[separatorSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -24940,6 +25210,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -25032,6 +25307,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[commentCountSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[commentCountSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -25124,6 +25404,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -25217,6 +25502,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[prefixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -25310,6 +25600,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -26572,6 +26867,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -26664,6 +26964,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postDateSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postDateSelector][key] != undefined) {
+        delete blockCssY.items[postDateSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -26756,6 +27061,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -26849,6 +27159,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[prefixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -26942,6 +27257,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -28682,6 +29002,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -28774,6 +29099,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[excerptSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[excerptSelector][key] != undefined) {
+        delete blockCssY.items[excerptSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -28866,6 +29196,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[redmoreSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[redmoreSelector][key] != undefined) {
+        delete blockCssY.items[redmoreSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -28959,6 +29294,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[prefixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -29052,6 +29392,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -30601,6 +30946,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -30693,6 +31043,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[imgSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[imgSelector][key] != undefined) {
+        delete blockCssY.items[imgSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -47413,6 +47768,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -47505,6 +47865,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[metaValueSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[metaValueSelector][key] != undefined) {
+        delete blockCssY.items[metaValueSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -48439,6 +48804,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -48531,6 +48901,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[itemSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[itemSelector][key] != undefined) {
+        delete blockCssY.items[itemSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -48623,6 +48998,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -48715,6 +49095,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[frontTextSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[frontTextSelector][key] != undefined) {
+        delete blockCssY.items[frontTextSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -48805,8 +49190,13 @@ var myStore = wp.data.select('postgrid-shop');
       Object.entries(sudoScourceX).map(args => {
         var argAttr = myStore.cssAttrParse(args[0]);
         var argAttrVal = args[1];
-        blockCssY.items[fieldSelector][argAttr] = argAttrVal;
+        blockCssY.items[separatorSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[separatorSelector][key] != undefined) {
+        delete blockCssY.items[separatorSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -50389,6 +50779,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -50481,6 +50876,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[itemSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[itemSelector][key] != undefined) {
+        delete blockCssY.items[itemSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -50573,6 +50973,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -50665,6 +51070,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[frontTextSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[frontTextSelector][key] != undefined) {
+        delete blockCssY.items[frontTextSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -50755,8 +51165,13 @@ var myStore = wp.data.select('postgrid-shop');
       Object.entries(sudoScourceX).map(args => {
         var argAttr = myStore.cssAttrParse(args[0]);
         var argAttrVal = args[1];
-        blockCssY.items[fieldSelector][argAttr] = argAttrVal;
+        blockCssY.items[separatorSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[separatorSelector][key] != undefined) {
+        delete blockCssY.items[separatorSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -52271,8 +52686,7 @@ var myStore = wp.data.select('postgrid-shop');
         delete sudoScourceX[key];
       }
 
-      wrapper[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
-
+      wrapper[sudoScource] = sudoScourceX;
       setAttributes({
         wrapper: { ...wrapper
         }
@@ -52287,6 +52701,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -52381,6 +52800,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postTitleSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postTitleSelector][key] != undefined) {
+        delete blockCssY.items[postTitleSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -52474,6 +52898,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[prefixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -52567,6 +52996,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -53644,6 +54078,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -53736,6 +54175,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[redmoreSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[redmoreSelector][key] != undefined) {
+        delete blockCssY.items[redmoreSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -53828,6 +54272,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -53921,6 +54370,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[prefixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[prefixSelector][key] != undefined) {
+        delete blockCssY.items[prefixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -54014,6 +54468,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[postfixSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[postfixSelector][key] != undefined) {
+        delete blockCssY.items[postfixSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -55574,6 +56033,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -56759,6 +57223,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -56851,6 +57320,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[itemSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[itemSelector][key] != undefined) {
+        delete blockCssY.items[itemSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -56943,6 +57417,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -57036,6 +57515,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[labelSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[labelSelector][key] != undefined) {
+        delete blockCssY.items[labelSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -57129,6 +57613,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[countSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[countSelector][key] != undefined) {
+        delete blockCssY.items[countSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -58385,6 +58874,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[headerWrapSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[headerWrapSelector][key] != undefined) {
+        delete blockCssY.items[headerWrapSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -58477,6 +58971,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[headerSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[headerSelector][key] != undefined) {
+        delete blockCssY.items[headerSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -58569,6 +59068,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[contentSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[contentSelector][key] != undefined) {
+        delete blockCssY.items[contentSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -58662,6 +59166,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -58755,6 +59264,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[headerActiveSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[headerActiveSelector][key] != undefined) {
+        delete blockCssY.items[headerActiveSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -60404,6 +60918,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[wrapperSelector][key] != undefined) {
+        delete blockCssY.items[wrapperSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -60496,6 +61015,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[itemSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[itemSelector][key] != undefined) {
+        delete blockCssY.items[itemSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -60588,6 +61112,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[iconSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[iconSelector][key] != undefined) {
+        delete blockCssY.items[iconSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -60680,6 +61209,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[frontTextSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[separatorSelector][key] != undefined) {
+        delete blockCssY.items[separatorSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -60770,8 +61304,13 @@ var myStore = wp.data.select('postgrid-shop');
       Object.entries(sudoScourceX).map(args => {
         var argAttr = myStore.cssAttrParse(args[0]);
         var argAttrVal = args[1];
-        blockCssY.items[fieldSelector][argAttr] = argAttrVal;
+        blockCssY.items[separatorSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[separatorSelector][key] != undefined) {
+        delete blockCssY.items[separatorSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -61913,6 +62452,11 @@ var myStore = wp.data.select('postgrid-shop');
         var argAttrVal = args[1];
         blockCssY.items[textSelector][argAttr] = argAttrVal;
       });
+
+      if (blockCssY.items[textSelector][key] != undefined) {
+        delete blockCssY.items[textSelector][key];
+      }
+
       setAttributes({
         blockCssY: {
           items: blockCssY.items
@@ -73633,6 +74177,7 @@ function Html(props) {
     }, "Duration"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
       value: arg.duration.slice(0, -1),
       type: "number",
+      autocomplete: "off",
       onChange: newVal => {
         valArgs[i].duration = newVal;
         var str = '';
@@ -73675,6 +74220,7 @@ function Html(props) {
     }, "Delay"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
       value: arg.delay.slice(0, -1),
       type: "number",
+      autocomplete: "off",
       onChange: newVal => {
         valArgs[i].delay = newVal;
         var str = '';

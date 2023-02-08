@@ -26,6 +26,7 @@ import PGDropdown from '../../components/dropdown'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
+import PGcssBackgroundColor from '../../components/css-background-color'
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -64,11 +65,9 @@ registerBlockType("post-grid/post-title", {
 
         styles:
         {
-          display: {},
-          color: {},
+
           backgroundColor: {},
-          padding: {},
-          margin: {}
+
         },
       },
     },
@@ -77,7 +76,7 @@ registerBlockType("post-grid/post-title", {
       type: 'object',
       default: {
         options: {
-          tag: 'div',
+          tag: '',
           limitBy: '', /*word, character*/
           limitCount: 99,
           isLink: true,
@@ -92,12 +91,8 @@ registerBlockType("post-grid/post-title", {
         },
 
         styles: {
-          display: {},
-          width: {},
           color: {},
           backgroundColor: {},
-          padding: {},
-          margin: {},
 
           fontSize: {}, //{ val: '18', unit: 'px' }
 
@@ -111,7 +106,11 @@ registerBlockType("post-grid/post-title", {
       type: 'object',
       default: {
         options:
-          { text: '', class: 'prefix', },
+        {
+          text: '',
+          class: 'prefix',
+          position: 'beforebegin ', // beforebegin , afterbegin 
+        },
         styles:
         {
           color: {},
@@ -125,7 +124,12 @@ registerBlockType("post-grid/post-title", {
       type: 'object',
       default: {
         options:
-          { text: '', class: 'postfix', },
+        {
+          text: '',
+          class: 'postfix',
+          position: 'afterend', // beforeend , afterend 
+
+        },
         styles:
         {
           color: {},
@@ -191,11 +195,9 @@ registerBlockType("post-grid/post-title", {
     var postType = context['postType'];
 
     const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
-    const [customTags, setCustomTags] = useState({});
     const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
 
 
-    //console.log(myStore.generateBlockCss(blockCssY.items, blockId, customCss));
 
 
 
@@ -239,74 +241,10 @@ registerBlockType("post-grid/post-title", {
 
       setAttributes({ blockId: blockIdX });
 
-      // setAttributes({ postTitle: postTitle });
-      // setAttributes({ wrapper: wrapper });
+      console.log('useEffect - generateBlockCss');
 
-      //generateBlockCssY()
+
       myStore.generateBlockCss(blockCssY.items, blockId, customCss)
-
-      customTags['currentYear'] = '2022';
-      customTags['currentMonth'] = '07';
-      customTags['currentDay'] = '27';
-      customTags['currentDate'] = '27';
-      customTags['currentTime'] = '27';
-
-      customTags['postPublishDate'] = '123';
-      customTags['postModifiedDate'] = '123';
-
-      customTags['termId'] = '';
-      customTags['termTitle'] = '';
-      customTags['termDescription'] = '';
-      customTags['termPostCount'] = '';
-
-      customTags['postTagTitle'] = 'First Tag Title';
-      customTags['postTagsTitle'] = 'First Tag Title';
-
-      customTags['postCategoryTitle'] = 'First Category Title';
-      customTags['postCategoriesTitle'] = 'First Categories Title';
-
-
-      customTags['postTermTitle'] = 'First Term Title';
-      customTags['postTermsTitle'] = 'List of all terms title';
-
-
-
-      customTags['postId'] = '123';
-      customTags['postStatus'] = '123';
-
-
-      customTags['authorId'] = '123';
-      customTags['authorName'] = 'Nur Hasan';
-      customTags['authorFirstName'] = 'Nur';
-      customTags['authorLastName'] = 'Hasan';
-      customTags['authorDescription'] = 'Hasan';
-
-      customTags['excerpt'] = 'Here is the post excerpt';
-
-      customTags['rankmathTitle'] = 'Hasan';
-      customTags['rankmathPermalink'] = 'Hasan';
-      customTags['rankmathExcerpt'] = 'Hasan';
-      customTags['rankmathFocusKeyword'] = 'Hasan';
-      customTags['rankmathFocusKeywords'] = 'Hasan';
-
-      customTags['rankmathOrgname'] = 'Hasan';
-      customTags['rankmathOrgurl'] = 'Hasan';
-      customTags['rankmathOrglogo'] = 'Hasan';
-
-
-
-      customTags['siteTitle'] = '';
-      customTags['siteDescription'] = '';
-      customTags['siteTagline'] = '';
-
-      customTags['postMeta'] = '';
-
-      customTags['separator'] = '';
-      customTags['searchTerms'] = '';
-
-
-
-      customTags['counter'] = '1';
 
 
 
@@ -331,22 +269,6 @@ registerBlockType("post-grid/post-title", {
     }
 
 
-
-    var PGColorPickerLabel = function ({ title }) {
-
-      return (
-
-        <>
-          <div className='text-sm '>{title}</div>
-          <BreakpointSwitch position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-        </>
-
-
-
-
-      )
-
-    }
 
 
     function setFieldLinkTo(option, index) {
@@ -434,51 +356,71 @@ registerBlockType("post-grid/post-title", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = wrapperSelector;
+      var wrapperX = { ...wrapper }
 
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      }
 
-      else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      }
-      else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
+      var sudoScourceX = wrapperX[sudoScource]
+      console.log(sudoScourceX);
 
       sudoScourceX[attr][breakPointX] = newVal;
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
-      }
+      console.log(sudoScourceX);
+      setAttributes({ wrapper: wrapperX });
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var elementSelector = wrapperSelector;
+
+      //var styles = { ...wrapper.styles, backgroundColor: { Desktop: newVal } }
+      //setAttributes({ wrapper: { ...wrapper, styles: styles } });
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
+      // if (sudoScource == 'styles') {
+      //   elementSelector = wrapperSelector;
+      // }
+      // else if (sudoScource == 'hover') {
+      //   elementSelector = wrapperSelector + ':hover';
+      // } else if (sudoScource == 'after') {
+      //   elementSelector = wrapperSelector + ':after';
+      // } else if (sudoScource == 'before') {
+      //   elementSelector = wrapperSelector + ':before';
+      // } else if (sudoScource == 'first-child') {
+      //   elementSelector = wrapperSelector + ':first-child';
+      // } else if (sudoScource == 'last-child') {
+      //   elementSelector = wrapperSelector + ':last-child';
+      // } else if (sudoScource == 'visited') {
+      //   elementSelector = wrapperSelector + ':visited';
+      // } else if (sudoScource == 'selection') {
+      //   elementSelector = wrapperSelector + ':selection';
+      // } else if (sudoScource == 'first-letter') {
+      //   elementSelector = wrapperSelector + '::first-letter';
+      // } else if (sudoScource == 'first-line') {
+      //   elementSelector = wrapperSelector + '::first-line';
+      // }
+      // else {
+      //   elementSelector = wrapperSelector + ':' + sudoScource;
+      // }
+
+
+      // console.log(sudoScourceX);
+      // console.log('onChangeStyleWrapper');
+      // console.log(wrapper);
+
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //    blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      //setAttributes({ blockCssY: { items: blockCssY.items } });
+      //setAttributes({ wrapper: { ...wrapper } });
 
     }
 
@@ -590,7 +532,6 @@ registerBlockType("post-grid/post-title", {
       }
 
       postTitle[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
 
       setAttributes({ postTitle: { ...postTitle } });
 
@@ -828,6 +769,8 @@ registerBlockType("post-grid/post-title", {
 
     useEffect(() => {
 
+      console.log('useEffect - generateBlockCss');
+
       myStore.generateBlockCss(blockCssY.items, blockId, customCss)
     }, [blockCssY]);
 
@@ -836,7 +779,11 @@ registerBlockType("post-grid/post-title", {
 
       setAttributes({ customCss: customCss });
 
+      console.log('useEffect - customCss');
+
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+
+
     }, [customCss]);
 
 
@@ -866,55 +813,12 @@ registerBlockType("post-grid/post-title", {
 
     }
 
-    const colors = [
-      { name: '9DD6DF', color: '#9DD6DF' },
-      { name: '18978F', color: '#18978F' },
-      { name: 'A084CF', color: '#A084CF' },
-      { name: 'DFBB9D', color: '#DFBB9D' },
-      { name: '774360', color: '#774360' },
-      { name: '3AB0FF', color: '#3AB0FF' },
-      { name: '51557E', color: '#51557E' },
-    ];
-
-
-
-
-    const {
-      __experimentalSetPreviewDeviceType: setPreviewDeviceType,
-
-    } = wp.data.dispatch('core/edit-post')
-
 
     var postUrl = (postTitle.options.customUrl != undefined && postTitle.options.customUrl.length > 0) ? postTitle.options.customUrl : currentPostUrl;
 
 
-    const CustomTag = `${wrapper.options.tag}`;
-    const CustomTagPostTitle = `${postTitle.options.tag}`;
-
-
-
-
-    function onChangeBreakPoint(x, index) {
-
-
-      setPreviewDeviceType(x.value)
-      var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
-
-      asdsdsd.then((res) => {
-
-        setBreakPointX(res.breakpoint);
-        //generateBlockCssY();
-        myStore.generateBlockCss(blockCssY.items, blockId, customCss)
-
-      });
-
-
-
-    }
-
-
-
-
+    const CustomTagWrapper = `${wrapper.options.tag}`;
+    const CustomTagPostTitle = (postTitle.options.tag.length != 0) ? `${postTitle.options.tag}` : 'div';
 
 
 
@@ -940,10 +844,26 @@ registerBlockType("post-grid/post-title", {
           <InspectorControls key="general">
             <div className='px-3' >
 
-              <PanelBody title="Wrapper" initialOpen={false}>
 
+              {wrapper.styles.backgroundColor != undefined && (
+                <PGcssBackgroundColor val={wrapper.styles.backgroundColor[breakPointX]} onChange={(newVal, attr) => {
+
+                  console.log(newVal);
+                  var styles = { ...wrapper.styles, backgroundColor: { Desktop: newVal } };
+
+
+
+                  setAttributes({ wrapper: { ...wrapper, styles: styles } });
+
+                }} />
+              )}
+
+
+
+
+              <PanelBody title="Wrapper" initialOpen={false}>
                 <PGtabs
-                  activeTab="options"
+                  activeTab="styles"
                   orientation="horizontal"
                   activeClass="active-tab"
 
@@ -996,7 +916,12 @@ registerBlockType("post-grid/post-title", {
 
                   </PGtab>
                   <PGtab name="styles">
-                    <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+
+
+
+
+
+                    <PGStyles blockId={blockId} obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
                   </PGtab>
 
 
@@ -1056,6 +981,8 @@ registerBlockType("post-grid/post-title", {
                           label=""
                           value={postTitle.options.tag}
                           options={[
+                            { label: 'No tag', value: '' },
+
                             { label: 'H1', value: 'h1' },
                             { label: 'H2', value: 'h2' },
                             { label: 'H3', value: 'h3' },
@@ -1398,6 +1325,31 @@ registerBlockType("post-grid/post-title", {
                         }
                       />
                     </PanelRow>
+
+
+                    <PanelRow>
+                      <label for="">Position</label>
+                      <SelectControl
+                        label=""
+                        value={prefix.options.position}
+                        options={[
+                          { label: 'None', value: 'none' },
+                          { label: 'Before Post Title', value: 'beforebegin' },
+                          { label: 'Start of Post Title', value: 'afterbegin' },
+
+                        ]}
+                        onChange={(newVal) => {
+                          var options = { ...prefix.options, position: newVal };
+                          setAttributes({ prefix: { ...prefix, options: options } });
+                        }
+
+                        }
+                      />
+                    </PanelRow>
+
+
+
+
                   </PGtab>
                   <PGtab name="styles">
                     <PGStyles obj={prefix} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
@@ -1450,8 +1402,31 @@ registerBlockType("post-grid/post-title", {
                         }
                       />
                     </PanelRow>
+
+
+                    <PanelRow>
+                      <label for="">Position</label>
+                      <SelectControl
+                        label=""
+                        value={postfix.options.position}
+                        options={[
+                          { label: 'None', value: 'none' },
+                          { label: 'After Post Title', value: 'afterend' },
+                          { label: 'End of Post Title', value: 'beforeend' },
+
+                        ]}
+                        onChange={(newVal) => {
+                          var options = { ...postfix.options, position: newVal };
+                          setAttributes({ postfix: { ...postfix, options: options } });
+                        }
+
+                        }
+                      />
+                    </PanelRow>
                   </PGtab>
                   <PGtab name="styles">
+
+
                     <PGStyles obj={postfix} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
                   </PGtab>
                 </PGtabs>
@@ -1511,36 +1486,81 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
+
+          <code>
+            {JSON.stringify(wrapper)}
+
+          </code>
+
+
           {wrapper.options.tag && (
-            <CustomTag className={[blockId]}>
+            <CustomTagWrapper className={[blockId]}>
+
               {postTitle.options.isLink && (
-                <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
-                  {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
-                  {(postTitleEdited)}
-                  {(postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
-                </a>
+                <>
+                  {(prefix.options.position == 'beforebegin' && prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
+                  <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
+
+                    {(prefix.options.position == 'afterbegin' && prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
+                    {(postTitleEdited)}
+                    {(postfix.options.position == 'beforeend' && postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
+                  </a>
+                  {(postfix.options.position == 'afterend' && postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
+
+                </>
               )}
               {!postTitle.options.isLink && (
                 <>
-                  {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
-                  {(postTitleEdited)}
-                  {(postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
+                  {(postTitle.options.tag.length == 0) && (
+                    <>
+                      {(prefix.options.position != 'none' && prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
+                      {(postTitleEdited)}
+                      {(postfix.options.position != 'none' && postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
+                    </>
+                  )}
+
+
+                  {(postTitle.options.tag.length > 0) && (
+                    <>
+
+
+                      {(prefix.options.position == 'beforebegin' && prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
+                      <CustomTagPostTitle>
+                        {(prefix.options.position == 'afterbegin' && prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
+                        {(postTitleEdited)}
+                        {(postfix.options.position == 'beforeend' && postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
+                      </CustomTagPostTitle>
+                      {(postfix.options.position == 'afterend' && postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
+
+
+                    </>
+                  )}
+
+
+
+
+
                 </>
               )}
-            </CustomTag>
+            </CustomTagWrapper>
           )}
 
           {wrapper.options.tag.length == 0 && (
 
             (
               postTitle.options.isLink && (
-                <a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
+                <>
+                  {(prefix.options.position == 'beforebegin' && prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
+                  <a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={postTitle.options.linkTarget}>
+                    {(prefix.options.position == 'afterbegin' && prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
+                    {(postTitleEdited)}
+                    {(postfix.options.position == 'beforeend' && postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
 
-                  {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
-                  {(postTitleEdited)}
-                  {(postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
+                  </a>
+                  {(postfix.options.position == 'afterend' && postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
+                </>
 
-                </a>)
+              )
             )
           )}
 
@@ -1548,20 +1568,22 @@ registerBlockType("post-grid/post-title", {
 
 
             <>
+
               {postTitle.options.tag.length > 0 && (
                 <CustomTagPostTitle className={blockId}>
-                  {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
+                  {(prefix.options.position != 'none' && prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
                   {(postTitleEdited)}
-                  {(postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
+                  {(postfix.options.position != 'none' && postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
                 </CustomTagPostTitle>
 
               )}
               {postTitle.options.tag.length == 0 && (
-                <div className={blockId}>
-                  {(prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
+                <CustomTagPostTitle className={blockId}>
+
+                  {(prefix.options.position != 'none' && prefix.options.text && (<span className={prefix.options.class}>{prefix.options.text}</span>))}
                   {(postTitleEdited)}
-                  {(postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
-                </div>
+                  {(postfix.options.position != 'none' && postfix.options.text && (<span className={postfix.options.class}>{postfix.options.text}</span>))}
+                </CustomTagPostTitle>
 
               )}
             </>

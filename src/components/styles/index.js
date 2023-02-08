@@ -134,6 +134,7 @@ function Html(props) {
   }
 
 
+
   var sudoScourceArgsBasic = {
 
     styles: { label: 'Idle', value: 'styles' },
@@ -260,14 +261,6 @@ function Html(props) {
 
   useEffect(() => {
 
-    // sudoScources.map(sudo => {
-
-    //   if (props.obj[sudo.value] != undefined) {
-    //     sudoScources.push(sudo);
-    //   }
-
-    // })
-
 
   }, [props.obj]);
 
@@ -327,9 +320,7 @@ function Html(props) {
   function onChangeCssVal(newVal, attr) {
 
 
-
     props.onChange(sudoScource, newVal, attr);
-
 
   }
 
@@ -352,6 +343,7 @@ function Html(props) {
 
   return (
     <div >
+
 
 
       <PanelRow className='bg-gray-200 p-2'>
@@ -388,36 +380,15 @@ function Html(props) {
 
       <div className='my-5'>
 
-        {props.obj[sudoScource] == undefined && (
-
-          <PanelRow>
-            <label for="">Copy Style</label>
-            <PGDropdown position="bottom right" variant="secondary" options={sudoScources} buttonTitle="Copy Style"
-              onChange={(option, index) => {
-                console.log(props.obj[option.value]);
-
-                if (props.obj[option.value] != undefined) {
-
-                } else {
-                  alert('No style found on ' + option.label)
-                }
-
-
-              }} values=""></PGDropdown>
-          </PanelRow>
-
-        )}
 
 
         {
-
           //Object.entries(cssAtts).map(([key, value]) => (
           props.obj[sudoScource] != undefined && Object.entries(props.obj[sudoScource]).reverse().map(([key, value]) => (
             <PanelBody
               title={<RemoveQueryPram title={(cssProps[key] != undefined) ? cssProps[key].label : key} sudoScource={sudoScource} keyX={key} />}
 
-              initialOpen={false} key={key}>
-
+              initialOpen={true} key={key}>
 
 
               {(key == 'alignContent') && (
@@ -643,8 +614,6 @@ function Html(props) {
                 <PGcssTextOverflow val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
 
-
-
               {(key == 'textTransform') && (
                 <PGcssTextTransform val={value[breakPointX]} onChange={onChangeCssVal} />
               )}
@@ -776,6 +745,7 @@ class PGStyles extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = { showWarning: true };
     this.handleToggleClick = this.handleToggleClick.bind(this);
   }
@@ -787,9 +757,19 @@ class PGStyles extends Component {
   }
 
 
+
+  componentDidMount(props) {
+
+
+
+
+
+  }
+
   render() {
 
     var {
+      blockId,
       obj,
       onChange,
       onAdd,
@@ -806,7 +786,8 @@ class PGStyles extends Component {
       <>
 
 
-        <Html obj={obj} onAdd={onAdd} onRemove={onRemove} onChange={onChange} warn={this.state.showWarning} />
+
+        <Html blockId={blockId} obj={obj} onAdd={onAdd} onRemove={onRemove} onChange={onChange} warn={this.state.showWarning} />
 
       </>
 

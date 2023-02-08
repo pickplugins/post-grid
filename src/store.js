@@ -327,6 +327,7 @@ var selectors = {
   generateBlockCss(state, items, blockId, customCss) {
     const { blockCss } = state;
 
+    console.log('generateBlockCss');
 
 
 

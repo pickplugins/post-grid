@@ -336,34 +336,8 @@ registerBlockType("post-grid/archive-description", {
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = wrapperSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      }
-      else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -433,34 +407,8 @@ registerBlockType("post-grid/archive-description", {
     function onChangeStyleRedmore(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...readMore[sudoScource] }
-      var elementSelector = redmoreSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = redmoreSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = redmoreSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = redmoreSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = redmoreSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = redmoreSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = redmoreSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = redmoreSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = redmoreSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = redmoreSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = redmoreSelector + '::first-line';
-      }
-      else {
-        elementSelector = redmoreSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -528,34 +476,8 @@ registerBlockType("post-grid/archive-description", {
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...icon[sudoScource] }
-      var elementSelector = iconSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      }
-      else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -627,34 +549,8 @@ registerBlockType("post-grid/archive-description", {
     function onChangeStylePrefix(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...prefix[sudoScource] }
-      var elementSelector = prefixSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      }
-      else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -723,34 +619,8 @@ registerBlockType("post-grid/archive-description", {
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...postfix[sudoScource] }
-      var elementSelector = postfixSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      }
-      else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -1056,34 +926,8 @@ registerBlockType("post-grid/archive-description", {
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = wrapperSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      }
-      else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -1153,34 +997,8 @@ registerBlockType("post-grid/archive-description", {
     function onChangeStyleArchiveTitle(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...archiveTitle[sudoScource] }
-      var elementSelector = archiveTitleSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, archiveTitleSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = archiveTitleSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = archiveTitleSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = archiveTitleSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = archiveTitleSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = archiveTitleSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = archiveTitleSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = archiveTitleSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = archiveTitleSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = archiveTitleSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = archiveTitleSelector + '::first-line';
-      }
-      else {
-        elementSelector = archiveTitleSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -1247,34 +1065,8 @@ registerBlockType("post-grid/archive-description", {
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...icon[sudoScource] }
-      var elementSelector = iconSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      }
-      else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -1346,34 +1138,8 @@ registerBlockType("post-grid/archive-description", {
     function onChangeStylePrefix(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...prefix[sudoScource] }
-      var elementSelector = prefixSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      }
-      else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -1441,34 +1207,8 @@ registerBlockType("post-grid/archive-description", {
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...postfix[sudoScource] }
-      var elementSelector = postfixSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      }
-      else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 

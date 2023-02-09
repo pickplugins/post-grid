@@ -195,34 +195,8 @@ registerBlockType("post-grid/text", {
     function onChangeStyleText(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...text[sudoScource] }
-      var elementSelector = textSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = textSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = textSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = textSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = textSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = textSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = textSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = textSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = textSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = textSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = textSelector + '::first-line';
-      }
-      else {
-        elementSelector = textSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 

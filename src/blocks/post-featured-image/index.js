@@ -476,34 +476,8 @@ registerBlockType("post-grid/post-featured-image", {
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = wrapperSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      }
-      else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -561,34 +535,8 @@ registerBlockType("post-grid/post-featured-image", {
     function onChangeStyleImage(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...featuredImage[sudoScource] }
-      var elementSelector = imgSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = imgSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = imgSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = imgSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = imgSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = imgSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = imgSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = imgSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = imgSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = imgSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = imgSelector + '::first-line';
-      }
-      else {
-        elementSelector = imgSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 

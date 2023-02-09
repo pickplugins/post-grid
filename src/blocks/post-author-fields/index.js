@@ -313,34 +313,8 @@ registerBlockType("post-grid/post-author-fields", {
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = wrapperSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      }
-      else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -409,34 +383,8 @@ registerBlockType("post-grid/post-author-fields", {
     function onChangeStyleField(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...field[sudoScource] }
-      var elementSelector = fieldSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, fieldSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = fieldSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = fieldSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = fieldSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = fieldSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = fieldSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = fieldSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = fieldSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = fieldSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = fieldSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = fieldSelector + '::first-line';
-      }
-      else {
-        elementSelector = fieldSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -509,32 +457,6 @@ registerBlockType("post-grid/post-author-fields", {
       var sudoScourceX = { ...icon[sudoScource] }
       var elementSelector = iconSelector;
 
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      }
-      else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -606,33 +528,8 @@ registerBlockType("post-grid/post-author-fields", {
 
       var sudoScourceX = { ...frontText[sudoScource] }
       var elementSelector = frontTextSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = frontTextSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = frontTextSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = frontTextSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = frontTextSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = frontTextSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = frontTextSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = frontTextSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = frontTextSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = frontTextSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = frontTextSelector + '::first-line';
-      }
-      else {
-        elementSelector = frontTextSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 

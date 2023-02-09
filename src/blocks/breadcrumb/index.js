@@ -965,34 +965,8 @@ registerBlockType("post-grid/breadcrumb", {
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = wrapperSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      }
-      else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -1061,34 +1035,8 @@ registerBlockType("post-grid/breadcrumb", {
     function onChangeStyleElements(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...elements[sudoScource] }
-      var elementSelector = itemSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = itemSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = itemSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = itemSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = itemSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = itemSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = itemSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = itemSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = itemSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = itemSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = itemSelector + '::first-line';
-      }
-      else {
-        elementSelector = itemSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -1156,33 +1104,8 @@ registerBlockType("post-grid/breadcrumb", {
 
       var sudoScourceX = { ...icon[sudoScource] }
       var elementSelector = iconSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      }
-      else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -1248,34 +1171,8 @@ registerBlockType("post-grid/breadcrumb", {
     function onChangeStyleLabel(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...label[sudoScource] }
-      var elementSelector = labelSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, labelSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = labelSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = labelSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = labelSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = labelSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = labelSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = labelSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = labelSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = labelSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = labelSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = labelSelector + '::first-line';
-      }
-      else {
-        elementSelector = labelSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -1343,34 +1240,8 @@ registerBlockType("post-grid/breadcrumb", {
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...separator[sudoScource] }
-      var elementSelector = separatorSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = separatorSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = separatorSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = separatorSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = separatorSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = separatorSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = separatorSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = separatorSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = separatorSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = separatorSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = separatorSelector + '::first-line';
-      }
-      else {
-        elementSelector = separatorSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 

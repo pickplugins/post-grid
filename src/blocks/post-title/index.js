@@ -240,15 +240,18 @@ registerBlockType("post-grid/post-title", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-
-      console.log('useEffect - generateBlockCss');
-
-
       myStore.generateBlockCss(blockCssY.items, blockId, customCss)
 
-
-
     }, [clientId]);
+
+
+    useEffect(() => {
+      console.log('# wrapper Changed');
+      console.log(wrapper);
+
+
+    }, [wrapper]);
+
 
     // Wrapper CSS Class Selectors
     const wrapperSelector = blockClass;
@@ -352,75 +355,45 @@ registerBlockType("post-grid/post-title", {
       return false;
     }
 
+    const setProperty = (obj, path, value) => {
+      const [head, ...rest] = path.split('.')
+
+      return {
+        ...obj,
+        [head]: rest.length
+          ? setProperty(obj[head], rest.join('.'), value)
+          : value
+      }
+    }
+
 
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var wrapperX = { ...wrapper }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ wrapper: updatedObj });
 
 
-      var sudoScourceX = wrapperX[sudoScource]
-      console.log(sudoScourceX);
-
-      sudoScourceX[attr][breakPointX] = newVal;
-
-      console.log(sudoScourceX);
-      setAttributes({ wrapper: wrapperX });
-
-      var elementSelector = wrapperSelector;
-
-      //var styles = { ...wrapper.styles, backgroundColor: { Desktop: newVal } }
-      //setAttributes({ wrapper: { ...wrapper, styles: styles } });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
 
 
-      // if (sudoScource == 'styles') {
-      //   elementSelector = wrapperSelector;
-      // }
-      // else if (sudoScource == 'hover') {
-      //   elementSelector = wrapperSelector + ':hover';
-      // } else if (sudoScource == 'after') {
-      //   elementSelector = wrapperSelector + ':after';
-      // } else if (sudoScource == 'before') {
-      //   elementSelector = wrapperSelector + ':before';
-      // } else if (sudoScource == 'first-child') {
-      //   elementSelector = wrapperSelector + ':first-child';
-      // } else if (sudoScource == 'last-child') {
-      //   elementSelector = wrapperSelector + ':last-child';
-      // } else if (sudoScource == 'visited') {
-      //   elementSelector = wrapperSelector + ':visited';
-      // } else if (sudoScource == 'selection') {
-      //   elementSelector = wrapperSelector + ':selection';
-      // } else if (sudoScource == 'first-letter') {
-      //   elementSelector = wrapperSelector + '::first-letter';
-      // } else if (sudoScource == 'first-line') {
-      //   elementSelector = wrapperSelector + '::first-line';
-      // }
-      // else {
-      //   elementSelector = wrapperSelector + ':' + sudoScource;
-      // }
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
 
-      // console.log(sudoScourceX);
-      // console.log('onChangeStyleWrapper');
-      // console.log(wrapper);
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
 
 
-
-      // sudoScourceX[attr][breakPointX] = newVal;
-
-      // if (blockCssY.items[elementSelector] == undefined) {
-      //   blockCssY.items[elementSelector] = {};
-      // }
-
-      // Object.entries(sudoScourceX).map(args => {
-      //   var argAttr = myStore.cssAttrParse(args[0]);
-      //   var argAttrVal = args[1];
-      //    blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      // })
-
-
-      //setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ wrapper: { ...wrapper } });
+      setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
 
@@ -477,33 +450,8 @@ registerBlockType("post-grid/post-title", {
 
       var sudoScourceX = { ...postTitle[sudoScource] }
       var elementSelector = postTitleSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, postTitleSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = postTitleSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = postTitleSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postTitleSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postTitleSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postTitleSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postTitleSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postTitleSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postTitleSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postTitleSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postTitleSelector + '::first-line';
-      }
-      else {
-        elementSelector = postTitleSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -571,34 +519,8 @@ registerBlockType("post-grid/post-title", {
     function onChangeStylePrefix(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...prefix[sudoScource] }
-      var elementSelector = prefixSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      }
-      else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -665,34 +587,8 @@ registerBlockType("post-grid/post-title", {
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...postfix[sudoScource] }
-      var elementSelector = postfixSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      }
-      else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -769,7 +665,6 @@ registerBlockType("post-grid/post-title", {
 
     useEffect(() => {
 
-      console.log('useEffect - generateBlockCss');
 
       myStore.generateBlockCss(blockCssY.items, blockId, customCss)
     }, [blockCssY]);
@@ -779,7 +674,6 @@ registerBlockType("post-grid/post-title", {
 
       setAttributes({ customCss: customCss });
 
-      console.log('useEffect - customCss');
 
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 

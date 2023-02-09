@@ -324,10 +324,61 @@ var selectors = {
     return cssProp;
 
   },
+
+  setPropertyDeep(state, obj, path, value) {
+
+    const [head, ...rest] = path.split('.')
+
+    return {
+      ...obj,
+      [head]: rest.length
+        ? selectors.setPropertyDeep(state, obj[head], rest.join('.'), value)
+        : value
+    }
+  },
+
+
+  getElementSelector(state, sudoScource, mainSelector) {
+
+    var elementSelector = mainSelector;
+
+
+    if (sudoScource == 'styles') {
+      elementSelector = mainSelector;
+    }
+    else if (sudoScource == 'hover') {
+      elementSelector = mainSelector + ':hover';
+    } else if (sudoScource == 'after') {
+      elementSelector = mainSelector + ':after';
+    } else if (sudoScource == 'before') {
+      elementSelector = mainSelector + ':before';
+    } else if (sudoScource == 'first-child') {
+      elementSelector = mainSelector + ':first-child';
+    } else if (sudoScource == 'last-child') {
+      elementSelector = mainSelector + ':last-child';
+    } else if (sudoScource == 'visited') {
+      elementSelector = mainSelector + ':visited';
+    } else if (sudoScource == 'selection') {
+      elementSelector = mainSelector + ':selection';
+    } else if (sudoScource == 'first-letter') {
+      elementSelector = mainSelector + '::first-letter';
+    } else if (sudoScource == 'first-line') {
+      elementSelector = mainSelector + '::first-line';
+    }
+    else {
+      elementSelector = mainSelector + ':' + sudoScource;
+    }
+
+    return elementSelector;
+
+  },
+
+
+
+
   generateBlockCss(state, items, blockId, customCss) {
     const { blockCss } = state;
 
-    console.log('generateBlockCss');
 
 
 

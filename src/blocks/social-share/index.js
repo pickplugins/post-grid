@@ -543,34 +543,8 @@ registerBlockType("post-grid/social-share", {
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = wrapperSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      }
-      else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -637,34 +611,8 @@ registerBlockType("post-grid/social-share", {
     function onChangeStyleElements(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...elements[sudoScource] }
-      var elementSelector = itemSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = itemSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = itemSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = itemSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = itemSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = itemSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = itemSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = itemSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = itemSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = itemSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = itemSelector + '::first-line';
-      }
-      else {
-        elementSelector = itemSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -731,34 +679,8 @@ registerBlockType("post-grid/social-share", {
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...icon[sudoScource] }
-      var elementSelector = iconSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      }
-      else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -825,34 +747,8 @@ registerBlockType("post-grid/social-share", {
     function onChangeStyleLabel(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...label[sudoScource] }
-      var elementSelector = labelSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, labelSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = labelSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = labelSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = labelSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = labelSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = labelSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = labelSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = labelSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = labelSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = labelSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = labelSelector + '::first-line';
-      }
-      else {
-        elementSelector = labelSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -922,34 +818,8 @@ registerBlockType("post-grid/social-share", {
     function onChangeStyleCount(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...count[sudoScource] }
-      var elementSelector = countSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, countSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = countSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = countSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = countSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = countSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = countSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = countSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = countSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = countSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = countSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = countSelector + '::first-line';
-      }
-      else {
-        elementSelector = countSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 

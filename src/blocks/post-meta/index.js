@@ -278,34 +278,8 @@ registerBlockType("post-grid/post-meta", {
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = wrapperSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      }
-      else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -370,33 +344,7 @@ registerBlockType("post-grid/post-meta", {
 
       var sudoScourceX = { ...wrapper[sudoScource] }
       var elementSelector = metaValueSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = metaValueSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = metaValueSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = metaValueSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = metaValueSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = metaValueSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = metaValueSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = metaValueSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = metaValueSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = metaValueSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = metaValueSelector + '::first-line';
-      }
-      else {
-        elementSelector = metaValueSelector + ':' + sudoScource;
-      }
+      var elementSelector = myStore.getElementSelector(sudoScource, metaValueSelector);
 
       sudoScourceX[attr][breakPointX] = newVal;
 

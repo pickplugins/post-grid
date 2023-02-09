@@ -2030,32 +2030,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -2127,32 +2102,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleHeader(sudoScource, newVal, attr) {
       var sudoScourceX = { ...header[sudoScource]
       };
-      var elementSelector = headerSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = headerSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = headerSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = headerSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = headerSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = headerSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = headerSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = headerSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = headerSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = headerSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = headerSelector + '::first-line';
-      } else {
-        elementSelector = headerSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, headerSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -2224,32 +2174,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleContent(sudoScource, newVal, attr) {
       var sudoScourceX = { ...content[sudoScource]
       };
-      var elementSelector = contentSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = contentSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = contentSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = contentSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = contentSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = contentSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = contentSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = contentSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = contentSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = contentSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = contentSelector + '::first-line';
-      } else {
-        elementSelector = contentSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, contentSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -2321,32 +2246,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -2419,32 +2319,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleHeaderActive(sudoScource, newVal, attr) {
       var sudoScourceX = { ...headerActive[sudoScource]
       };
-      var elementSelector = headerActiveSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = headerActiveSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = headerActiveSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = headerActiveSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = headerActiveSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = headerActiveSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = headerActiveSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = headerActiveSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = headerActiveSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = headerActiveSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = headerActiveSelector + '::first-line';
-      } else {
-        elementSelector = headerActiveSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, headerActiveSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -3320,32 +3195,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -3417,32 +3267,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleRedmore(sudoScource, newVal, attr) {
       var sudoScourceX = { ...readMore[sudoScource]
       };
-      var elementSelector = redmoreSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = redmoreSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = redmoreSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = redmoreSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = redmoreSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = redmoreSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = redmoreSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = redmoreSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = redmoreSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = redmoreSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = redmoreSelector + '::first-line';
-      } else {
-        elementSelector = redmoreSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -3514,32 +3339,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -3611,32 +3411,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePrefix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...prefix[sudoScource]
       };
-      var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -3709,32 +3484,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -3953,32 +3703,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -4050,32 +3775,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleArchiveTitle(sudoScource, newVal, attr) {
       var sudoScourceX = { ...archiveTitle[sudoScource]
       };
-      var elementSelector = archiveTitleSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = archiveTitleSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = archiveTitleSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = archiveTitleSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = archiveTitleSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = archiveTitleSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = archiveTitleSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = archiveTitleSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = archiveTitleSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = archiveTitleSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = archiveTitleSelector + '::first-line';
-      } else {
-        elementSelector = archiveTitleSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, archiveTitleSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -4147,32 +3847,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -4244,32 +3919,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePrefix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...prefix[sudoScource]
       };
-      var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -4342,32 +3992,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -5864,32 +5489,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -5961,32 +5561,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleArchiveTitle(sudoScource, newVal, attr) {
       var sudoScourceX = { ...archiveTitle[sudoScource]
       };
-      var elementSelector = archiveTitleSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = archiveTitleSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = archiveTitleSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = archiveTitleSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = archiveTitleSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = archiveTitleSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = archiveTitleSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = archiveTitleSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = archiveTitleSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = archiveTitleSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = archiveTitleSelector + '::first-line';
-      } else {
-        elementSelector = archiveTitleSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, archiveTitleSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -6058,32 +5633,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -6155,32 +5705,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePrefix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...prefix[sudoScource]
       };
-      var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -6253,32 +5778,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -8724,32 +8224,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -8821,32 +8296,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleElements(sudoScource, newVal, attr) {
       var sudoScourceX = { ...elements[sudoScource]
       };
-      var elementSelector = itemSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = itemSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = itemSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = itemSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = itemSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = itemSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = itemSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = itemSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = itemSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = itemSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = itemSelector + '::first-line';
-      } else {
-        elementSelector = itemSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -8919,31 +8369,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...icon[sudoScource]
       };
       var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -9015,32 +8441,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleLabel(sudoScource, newVal, attr) {
       var sudoScourceX = { ...label[sudoScource]
       };
-      var elementSelector = labelSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = labelSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = labelSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = labelSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = labelSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = labelSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = labelSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = labelSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = labelSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = labelSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = labelSelector + '::first-line';
-      } else {
-        elementSelector = labelSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, labelSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -9113,32 +8514,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
       var sudoScourceX = { ...separator[sudoScource]
       };
-      var elementSelector = separatorSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = separatorSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = separatorSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = separatorSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = separatorSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = separatorSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = separatorSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = separatorSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = separatorSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = separatorSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = separatorSelector + '::first-line';
-      } else {
-        elementSelector = separatorSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -10342,32 +9718,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -11309,32 +10660,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -11406,32 +10732,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleText(sudoScource, newVal, attr) {
       var sudoScourceX = { ...text[sudoScource]
       };
-      var elementSelector = textSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = textSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = textSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = textSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = textSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = textSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = textSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = textSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = textSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = textSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = textSelector + '::first-line';
-      } else {
-        elementSelector = textSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -11503,32 +10804,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -11600,32 +10876,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePrefix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...prefix[sudoScource]
       };
-      var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -11698,32 +10949,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -13830,32 +13056,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -13927,32 +13128,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleImage(sudoScource, newVal, attr) {
       var sudoScourceX = { ...image[sudoScource]
       };
-      var elementSelector = imgSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = imgSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = imgSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = imgSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = imgSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = imgSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = imgSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = imgSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = imgSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = imgSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = imgSelector + '::first-line';
-      } else {
-        elementSelector = imgSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -16092,32 +15268,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -16784,32 +15935,7 @@ function EditComponent() {
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -17643,32 +16769,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -17740,32 +16841,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleItem(sudoScource, newVal, attr) {
       var sudoScourceX = { ...item[sudoScource]
       };
-      var elementSelector = itemSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = itemSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = itemSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = itemSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = itemSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = itemSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = itemSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = itemSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = itemSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = itemSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = itemSelector + '::first-line';
-      } else {
-        elementSelector = itemSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -17837,32 +16913,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -19189,32 +18240,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -19286,32 +18312,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleField(sudoScource, newVal, attr) {
       var sudoScourceX = { ...field[sudoScource]
       };
-      var elementSelector = fieldSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = fieldSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = fieldSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = fieldSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = fieldSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = fieldSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = fieldSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = fieldSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = fieldSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = fieldSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = fieldSelector + '::first-line';
-      } else {
-        elementSelector = fieldSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, fieldSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -19384,31 +18385,6 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...icon[sudoScource]
       };
       var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -19481,31 +18457,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...frontText[sudoScource]
       };
       var elementSelector = frontTextSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = frontTextSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = frontTextSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = frontTextSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = frontTextSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = frontTextSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = frontTextSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = frontTextSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = frontTextSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = frontTextSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = frontTextSelector + '::first-line';
-      } else {
-        elementSelector = frontTextSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -21079,32 +20031,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -21177,31 +20104,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...elements[sudoScource]
       };
       var elementSelector = redmoreSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = redmoreSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = redmoreSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = redmoreSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = redmoreSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = redmoreSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = redmoreSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = redmoreSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = redmoreSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = redmoreSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = redmoreSelector + '::first-line';
-      } else {
-        elementSelector = redmoreSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -21273,32 +20176,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleAvatar(sudoScource, newVal, attr) {
       var sudoScourceX = { ...avatar[sudoScource]
       };
-      var elementSelector = avatarSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = avatarSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = avatarSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = avatarSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = avatarSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = avatarSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = avatarSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = avatarSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = avatarSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = avatarSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = avatarSelector + '::first-line';
-      } else {
-        elementSelector = avatarSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, avatarSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -21370,32 +20248,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleName(sudoScource, newVal, attr) {
       var sudoScourceX = { ...name[sudoScource]
       };
-      var elementSelector = nameSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = nameSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = nameSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = nameSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = nameSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = nameSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = nameSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = nameSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = nameSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = nameSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = nameSelector + '::first-line';
-      } else {
-        elementSelector = nameSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, nameSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -21467,32 +20320,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleDescription(sudoScource, newVal, attr) {
       var sudoScourceX = { ...description[sudoScource]
       };
-      var elementSelector = descriptionSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = descriptionSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = descriptionSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = descriptionSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = descriptionSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = descriptionSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = descriptionSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = descriptionSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = descriptionSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = descriptionSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = descriptionSelector + '::first-line';
-      } else {
-        elementSelector = descriptionSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, descriptionSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -21565,31 +20393,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...prefix[sudoScource]
       };
       var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -21662,32 +20466,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -23335,32 +22114,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -23432,32 +22186,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleItems(sudoScource, newVal, attr) {
       var sudoScourceX = { ...items[sudoScource]
       };
-      var elementSelector = itemSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = itemSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = itemSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = itemSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = itemSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = itemSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = itemSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = itemSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = itemSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = itemSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = itemSelector + '::first-line';
-      } else {
-        elementSelector = itemSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -23530,31 +22259,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...icon[sudoScource]
       };
       var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -23626,32 +22331,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleFrontText(sudoScource, newVal, attr) {
       var sudoScourceX = { ...frontText[sudoScource]
       };
-      var elementSelector = frontTextSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = frontTextSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = frontTextSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = frontTextSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = frontTextSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = frontTextSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = frontTextSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = frontTextSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = frontTextSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = frontTextSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = frontTextSelector + '::first-line';
-      } else {
-        elementSelector = frontTextSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -23723,32 +22403,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
       var sudoScourceX = { ...separator[sudoScource]
       };
-      var elementSelector = separatorSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = separatorSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = separatorSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = separatorSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = separatorSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = separatorSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = separatorSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = separatorSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = separatorSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = separatorSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = separatorSelector + '::first-line';
-      } else {
-        elementSelector = separatorSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -25139,32 +23794,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -25236,32 +23866,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleCommentCount(sudoScource, newVal, attr) {
       var sudoScourceX = { ...commentCount[sudoScource]
       };
-      var elementSelector = commentCountSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = commentCountSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = commentCountSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = commentCountSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = commentCountSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = commentCountSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = commentCountSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = commentCountSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = commentCountSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = commentCountSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = commentCountSelector + '::first-line';
-      } else {
-        elementSelector = commentCountSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, commentCountSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -25334,31 +23939,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...icon[sudoScource]
       };
       var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -25431,31 +24012,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...prefix[sudoScource]
       };
       var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -25528,32 +24085,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -26796,32 +25328,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -26894,31 +25401,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...postDate[sudoScource]
       };
       var elementSelector = postDateSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postDateSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postDateSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postDateSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postDateSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postDateSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postDateSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postDateSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postDateSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postDateSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postDateSelector + '::first-line';
-      } else {
-        elementSelector = postDateSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postDateSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -26990,32 +25473,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -27087,32 +25545,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePrefix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...prefix[sudoScource]
       };
-      var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -27185,32 +25618,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -28931,32 +27339,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -29028,32 +27411,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostExcerpt(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postExcerpt[sudoScource]
       };
-      var elementSelector = excerptSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = excerptSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = excerptSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = excerptSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = excerptSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = excerptSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = excerptSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = excerptSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = excerptSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = excerptSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = excerptSelector + '::first-line';
-      } else {
-        elementSelector = excerptSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, excerptSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -29125,32 +27483,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleRedmore(sudoScource, newVal, attr) {
       var sudoScourceX = { ...readMore[sudoScource]
       };
-      var elementSelector = redmoreSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = redmoreSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = redmoreSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = redmoreSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = redmoreSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = redmoreSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = redmoreSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = redmoreSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = redmoreSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = redmoreSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = redmoreSelector + '::first-line';
-      } else {
-        elementSelector = redmoreSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -29222,32 +27555,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePrefix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...prefix[sudoScource]
       };
-      var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -29320,32 +27628,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -30875,32 +29158,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -30972,32 +29230,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleImage(sudoScource, newVal, attr) {
       var sudoScourceX = { ...featuredImage[sudoScource]
       };
-      var elementSelector = imgSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = imgSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = imgSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = imgSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = imgSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = imgSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = imgSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = imgSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = imgSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = imgSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = imgSelector + '::first-line';
-      } else {
-        elementSelector = imgSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -47391,32 +45624,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -47489,31 +45697,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...wrapper[sudoScource]
       };
       var elementSelector = metaValueSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = metaValueSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = metaValueSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = metaValueSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = metaValueSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = metaValueSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = metaValueSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = metaValueSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = metaValueSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = metaValueSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = metaValueSelector + '::first-line';
-      } else {
-        elementSelector = metaValueSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, metaValueSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -48427,32 +46611,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -48524,32 +46683,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleItems(sudoScource, newVal, attr) {
       var sudoScourceX = { ...items[sudoScource]
       };
-      var elementSelector = itemSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = itemSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = itemSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = itemSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = itemSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = itemSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = itemSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = itemSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = itemSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = itemSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = itemSelector + '::first-line';
-      } else {
-        elementSelector = itemSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -48622,31 +46756,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...icon[sudoScource]
       };
       var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -48719,31 +46829,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...frontText[sudoScource]
       };
       var elementSelector = frontTextSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = frontTextSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = frontTextSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = frontTextSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = frontTextSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = frontTextSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = frontTextSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = frontTextSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = frontTextSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = frontTextSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = frontTextSelector + '::first-line';
-      } else {
-        elementSelector = frontTextSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -48816,31 +46902,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...separator[sudoScource]
       };
       var elementSelector = separatorSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = separatorSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = separatorSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = separatorSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = separatorSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = separatorSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = separatorSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = separatorSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = separatorSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = separatorSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = separatorSelector + '::first-line';
-      } else {
-        elementSelector = separatorSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -50402,32 +48464,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -50499,32 +48536,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleItems(sudoScource, newVal, attr) {
       var sudoScourceX = { ...items[sudoScource]
       };
-      var elementSelector = itemSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = itemSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = itemSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = itemSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = itemSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = itemSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = itemSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = itemSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = itemSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = itemSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = itemSelector + '::first-line';
-      } else {
-        elementSelector = itemSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -50596,32 +48608,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -50693,32 +48680,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleFrontText(sudoScource, newVal, attr) {
       var sudoScourceX = { ...frontText[sudoScource]
       };
-      var elementSelector = frontTextSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = frontTextSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = frontTextSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = frontTextSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = frontTextSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = frontTextSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = frontTextSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = frontTextSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = frontTextSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = frontTextSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = frontTextSelector + '::first-line';
-      } else {
-        elementSelector = frontTextSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -50790,32 +48752,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
       var sudoScourceX = { ...separator[sudoScource]
       };
-      var elementSelector = separatorSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = separatorSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = separatorSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = separatorSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = separatorSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = separatorSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = separatorSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = separatorSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = separatorSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = separatorSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = separatorSelector + '::first-line';
-      } else {
-        elementSelector = separatorSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -52175,9 +50112,12 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockId: blockIdX
       });
-      console.log('useEffect - generateBlockCss');
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-    }, [clientId]); // Wrapper CSS Class Selectors
+    }, [clientId]);
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+      console.log('# wrapper Changed');
+      console.log(wrapper);
+    }, [wrapper]); // Wrapper CSS Class Selectors
 
     const wrapperSelector = blockClass;
     var postTitleSelector = '';
@@ -52258,57 +50198,38 @@ var myStore = wp.data.select('postgrid-shop');
       return false;
     }
 
-    function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var wrapperX = { ...wrapper
+    const setProperty = (obj, path, value) => {
+      const [head, ...rest] = path.split('.');
+      return { ...obj,
+        [head]: rest.length ? setProperty(obj[head], rest.join('.'), value) : value
       };
-      var sudoScourceX = wrapperX[sudoScource];
-      console.log(sudoScourceX);
-      sudoScourceX[attr][breakPointX] = newVal;
-      console.log(sudoScourceX);
+    };
+
+    function onChangeStyleWrapper(sudoScource, newVal, attr) {
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
       setAttributes({
-        wrapper: wrapperX
+        wrapper: updatedObj
       });
-      var elementSelector = wrapperSelector; //var styles = { ...wrapper.styles, backgroundColor: { Desktop: newVal } }
-      //setAttributes({ wrapper: { ...wrapper, styles: styles } });
-      // if (sudoScource == 'styles') {
-      //   elementSelector = wrapperSelector;
-      // }
-      // else if (sudoScource == 'hover') {
-      //   elementSelector = wrapperSelector + ':hover';
-      // } else if (sudoScource == 'after') {
-      //   elementSelector = wrapperSelector + ':after';
-      // } else if (sudoScource == 'before') {
-      //   elementSelector = wrapperSelector + ':before';
-      // } else if (sudoScource == 'first-child') {
-      //   elementSelector = wrapperSelector + ':first-child';
-      // } else if (sudoScource == 'last-child') {
-      //   elementSelector = wrapperSelector + ':last-child';
-      // } else if (sudoScource == 'visited') {
-      //   elementSelector = wrapperSelector + ':visited';
-      // } else if (sudoScource == 'selection') {
-      //   elementSelector = wrapperSelector + ':selection';
-      // } else if (sudoScource == 'first-letter') {
-      //   elementSelector = wrapperSelector + '::first-letter';
-      // } else if (sudoScource == 'first-line') {
-      //   elementSelector = wrapperSelector + '::first-line';
-      // }
-      // else {
-      //   elementSelector = wrapperSelector + ':' + sudoScource;
-      // }
-      // console.log(sudoScourceX);
-      // console.log('onChangeStyleWrapper');
-      // console.log(wrapper);
-      // sudoScourceX[attr][breakPointX] = newVal;
-      // if (blockCssY.items[elementSelector] == undefined) {
-      //   blockCssY.items[elementSelector] = {};
-      // }
-      // Object.entries(sudoScourceX).map(args => {
-      //   var argAttr = myStore.cssAttrParse(args[0]);
-      //   var argAttrVal = args[1];
-      //    blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      // })
-      //setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ wrapper: { ...wrapper } });
+      var sudoScourceX = { ...updatedObj[sudoScource]
+      };
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      });
+      setAttributes({
+        blockCssY: {
+          items: blockCssY.items
+        }
+      });
     }
 
     function onRemoveStyleWrapper(sudoScource, key) {
@@ -52362,31 +50283,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...postTitle[sudoScource]
       };
       var elementSelector = postTitleSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postTitleSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postTitleSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postTitleSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postTitleSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postTitleSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postTitleSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postTitleSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postTitleSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postTitleSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postTitleSelector + '::first-line';
-      } else {
-        elementSelector = postTitleSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postTitleSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -52458,32 +50355,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePrefix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...prefix[sudoScource]
       };
-      var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -52556,32 +50428,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -52654,14 +50501,12 @@ var myStore = wp.data.select('postgrid-shop');
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      console.log('useEffect - generateBlockCss');
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       setAttributes({
         customCss: customCss
       });
-      console.log('useEffect - customCss');
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
@@ -53690,32 +51535,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -53787,32 +51607,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleRedmore(sudoScource, newVal, attr) {
       var sudoScourceX = { ...readMore[sudoScource]
       };
-      var elementSelector = redmoreSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = redmoreSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = redmoreSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = redmoreSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = redmoreSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = redmoreSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = redmoreSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = redmoreSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = redmoreSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = redmoreSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = redmoreSelector + '::first-line';
-      } else {
-        elementSelector = redmoreSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -53884,32 +51679,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -53981,32 +51751,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePrefix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...prefix[sudoScource]
       };
-      var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -54079,32 +51824,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -55645,32 +53365,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -56835,32 +54530,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -56932,32 +54602,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleElements(sudoScource, newVal, attr) {
       var sudoScourceX = { ...elements[sudoScource]
       };
-      var elementSelector = itemSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = itemSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = itemSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = itemSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = itemSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = itemSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = itemSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = itemSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = itemSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = itemSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = itemSelector + '::first-line';
-      } else {
-        elementSelector = itemSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -57029,32 +54674,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -57126,32 +54746,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleLabel(sudoScource, newVal, attr) {
       var sudoScourceX = { ...label[sudoScource]
       };
-      var elementSelector = labelSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = labelSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = labelSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = labelSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = labelSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = labelSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = labelSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = labelSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = labelSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = labelSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = labelSelector + '::first-line';
-      } else {
-        elementSelector = labelSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, labelSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -57224,32 +54819,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleCount(sudoScource, newVal, attr) {
       var sudoScourceX = { ...count[sudoScource]
       };
-      var elementSelector = countSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = countSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = countSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = countSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = countSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = countSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = countSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = countSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = countSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = countSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = countSelector + '::first-line';
-      } else {
-        elementSelector = countSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, countSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -58459,32 +56029,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -58556,32 +56101,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -58653,32 +56173,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePrefix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...prefix[sudoScource]
       };
-      var elementSelector = prefixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = prefixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = prefixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = prefixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = prefixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = prefixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = prefixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = prefixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = prefixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = prefixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = prefixSelector + '::first-line';
-      } else {
-        elementSelector = prefixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -58751,32 +56246,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStylePostfix(sudoScource, newVal, attr) {
       var sudoScourceX = { ...postfix[sudoScource]
       };
-      var elementSelector = postfixSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = postfixSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = postfixSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = postfixSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = postfixSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = postfixSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = postfixSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = postfixSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = postfixSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = postfixSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = postfixSelector + '::first-line';
-      } else {
-        elementSelector = postfixSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -59904,32 +57374,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleHeaderWrap(sudoScource, newVal, attr) {
       var sudoScourceX = { ...headerWrap[sudoScource]
       };
-      var elementSelector = headerWrapSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = headerWrapSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = headerWrapSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = headerWrapSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = headerWrapSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = headerWrapSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = headerWrapSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = headerWrapSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = headerWrapSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = headerWrapSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = headerWrapSelector + '::first-line';
-      } else {
-        elementSelector = headerWrapSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, headerWrapSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -60001,32 +57446,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleHeader(sudoScource, newVal, attr) {
       var sudoScourceX = { ...header[sudoScource]
       };
-      var elementSelector = headerSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = headerSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = headerSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = headerSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = headerSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = headerSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = headerSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = headerSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = headerSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = headerSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = headerSelector + '::first-line';
-      } else {
-        elementSelector = headerSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, headerSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -60099,31 +57519,7 @@ var myStore = wp.data.select('postgrid-shop');
       var sudoScourceX = { ...content[sudoScource]
       };
       var elementSelector = contentSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = contentSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = contentSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = contentSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = contentSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = contentSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = contentSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = contentSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = contentSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = contentSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = contentSelector + '::first-line';
-      } else {
-        elementSelector = contentSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, contentSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -60195,32 +57591,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -60293,32 +57664,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleHeaderActive(sudoScource, newVal, attr) {
       var sudoScourceX = { ...headerActive[sudoScource]
       };
-      var elementSelector = headerActiveSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = headerActiveSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = headerActiveSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = headerActiveSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = headerActiveSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = headerActiveSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = headerActiveSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = headerActiveSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = headerActiveSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = headerActiveSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = headerActiveSelector + '::first-line';
-      } else {
-        elementSelector = headerActiveSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, headerActiveSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -61948,32 +59294,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var sudoScourceX = { ...wrapper[sudoScource]
       };
-      var elementSelector = wrapperSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      } else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -62045,32 +59366,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleItems(sudoScource, newVal, attr) {
       var sudoScourceX = { ...items[sudoScource]
       };
-      var elementSelector = itemSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = itemSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = itemSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = itemSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = itemSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = itemSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = itemSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = itemSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = itemSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = itemSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = itemSelector + '::first-line';
-      } else {
-        elementSelector = itemSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -62142,32 +59438,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var sudoScourceX = { ...icon[sudoScource]
       };
-      var elementSelector = iconSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      } else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -62239,32 +59510,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleFrontText(sudoScource, newVal, attr) {
       var sudoScourceX = { ...frontText[sudoScource]
       };
-      var elementSelector = frontTextSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = frontTextSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = frontTextSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = frontTextSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = frontTextSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = frontTextSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = frontTextSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = frontTextSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = frontTextSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = frontTextSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = frontTextSelector + '::first-line';
-      } else {
-        elementSelector = frontTextSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -62336,32 +59582,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
       var sudoScourceX = { ...separator[sudoScource]
       };
-      var elementSelector = separatorSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = separatorSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = separatorSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = separatorSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = separatorSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = separatorSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = separatorSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = separatorSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = separatorSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = separatorSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = separatorSelector + '::first-line';
-      } else {
-        elementSelector = separatorSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -63482,32 +60703,7 @@ var myStore = wp.data.select('postgrid-shop');
     function onChangeStyleText(sudoScource, newVal, attr) {
       var sudoScourceX = { ...text[sudoScource]
       };
-      var elementSelector = textSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = textSelector;
-      } else if (sudoScource == 'hover') {
-        elementSelector = textSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = textSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = textSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = textSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = textSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = textSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = textSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = textSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = textSelector + '::first-line';
-      } else {
-        elementSelector = textSelector + ':' + sudoScource;
-      }
-
+      var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -79705,11 +76901,47 @@ var selectors = {
     return cssProp;
   },
 
+  setPropertyDeep(state, obj, path, value) {
+    const [head, ...rest] = path.split('.');
+    return { ...obj,
+      [head]: rest.length ? selectors.setPropertyDeep(state, obj[head], rest.join('.'), value) : value
+    };
+  },
+
+  getElementSelector(state, sudoScource, mainSelector) {
+    var elementSelector = mainSelector;
+
+    if (sudoScource == 'styles') {
+      elementSelector = mainSelector;
+    } else if (sudoScource == 'hover') {
+      elementSelector = mainSelector + ':hover';
+    } else if (sudoScource == 'after') {
+      elementSelector = mainSelector + ':after';
+    } else if (sudoScource == 'before') {
+      elementSelector = mainSelector + ':before';
+    } else if (sudoScource == 'first-child') {
+      elementSelector = mainSelector + ':first-child';
+    } else if (sudoScource == 'last-child') {
+      elementSelector = mainSelector + ':last-child';
+    } else if (sudoScource == 'visited') {
+      elementSelector = mainSelector + ':visited';
+    } else if (sudoScource == 'selection') {
+      elementSelector = mainSelector + ':selection';
+    } else if (sudoScource == 'first-letter') {
+      elementSelector = mainSelector + '::first-letter';
+    } else if (sudoScource == 'first-line') {
+      elementSelector = mainSelector + '::first-line';
+    } else {
+      elementSelector = mainSelector + ':' + sudoScource;
+    }
+
+    return elementSelector;
+  },
+
   generateBlockCss(state, items, blockId, customCss) {
     const {
       blockCss
     } = state;
-    console.log('generateBlockCss');
     var reponsiveCssGroups = {};
 
     for (var selector in items) {

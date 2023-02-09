@@ -343,34 +343,8 @@ registerBlockType("post-grid/accordion", {
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = wrapperSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = wrapperSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = wrapperSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = wrapperSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = wrapperSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = wrapperSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = wrapperSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = wrapperSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = wrapperSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = wrapperSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = wrapperSelector + '::first-line';
-      }
-      else {
-        elementSelector = wrapperSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -439,34 +413,8 @@ registerBlockType("post-grid/accordion", {
     function onChangeStyleHeader(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...header[sudoScource] }
-      var elementSelector = headerSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, headerSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = headerSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = headerSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = headerSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = headerSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = headerSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = headerSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = headerSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = headerSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = headerSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = headerSelector + '::first-line';
-      }
-      else {
-        elementSelector = headerSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -533,34 +481,7 @@ registerBlockType("post-grid/accordion", {
     function onChangeStyleContent(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...content[sudoScource] }
-      var elementSelector = contentSelector;
-
-      if (sudoScource == 'styles') {
-        elementSelector = contentSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = contentSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = contentSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = contentSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = contentSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = contentSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = contentSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = contentSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = contentSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = contentSelector + '::first-line';
-      }
-      else {
-        elementSelector = contentSelector + ':' + sudoScource;
-      }
+      var elementSelector = myStore.getElementSelector(sudoScource, contentSelector);
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -626,34 +547,8 @@ registerBlockType("post-grid/accordion", {
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...icon[sudoScource] }
-      var elementSelector = iconSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = iconSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = iconSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = iconSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = iconSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = iconSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = iconSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = iconSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = iconSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = iconSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = iconSelector + '::first-line';
-      }
-      else {
-        elementSelector = iconSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -722,34 +617,8 @@ registerBlockType("post-grid/accordion", {
     function onChangeStyleHeaderActive(sudoScource, newVal, attr) {
 
       var sudoScourceX = { ...headerActive[sudoScource] }
-      var elementSelector = headerActiveSelector;
+      var elementSelector = myStore.getElementSelector(sudoScource, headerActiveSelector);
 
-      if (sudoScource == 'styles') {
-        elementSelector = headerActiveSelector;
-      }
-
-      else if (sudoScource == 'hover') {
-        elementSelector = headerActiveSelector + ':hover';
-      } else if (sudoScource == 'after') {
-        elementSelector = headerActiveSelector + ':after';
-      } else if (sudoScource == 'before') {
-        elementSelector = headerActiveSelector + ':before';
-      } else if (sudoScource == 'first-child') {
-        elementSelector = headerActiveSelector + ':first-child';
-      } else if (sudoScource == 'last-child') {
-        elementSelector = headerActiveSelector + ':last-child';
-      } else if (sudoScource == 'visited') {
-        elementSelector = headerActiveSelector + ':visited';
-      } else if (sudoScource == 'selection') {
-        elementSelector = headerActiveSelector + ':selection';
-      } else if (sudoScource == 'first-letter') {
-        elementSelector = headerActiveSelector + '::first-letter';
-      } else if (sudoScource == 'first-line') {
-        elementSelector = headerActiveSelector + '::first-line';
-      }
-      else {
-        elementSelector = headerActiveSelector + ':' + sudoScource;
-      }
 
       sudoScourceX[attr][breakPointX] = newVal;
 

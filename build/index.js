@@ -50198,13 +50198,6 @@ var myStore = wp.data.select('postgrid-shop');
       return false;
     }
 
-    const setProperty = (obj, path, value) => {
-      const [head, ...rest] = path.split('.');
-      return { ...obj,
-        [head]: rest.length ? setProperty(obj[head], rest.join('.'), value) : value
-      };
-    };
-
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var path = sudoScource + '.' + attr + '.' + breakPointX;
       let obj = Object.assign({}, wrapper);
@@ -51080,7 +51073,7 @@ var myStore = wp.data.select('postgrid-shop');
         utm_campaign: 'PostGridCombo',
         utm_content: 'BlockOptions'
       }
-    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("code", null, JSON.stringify(wrapper)), wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTagWrapper, {
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTagWrapper, {
       className: [blockId]
     }, postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, prefix.options.position == 'beforebegin' && prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: prefix.options.class

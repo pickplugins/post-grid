@@ -355,17 +355,6 @@ registerBlockType("post-grid/post-title", {
       return false;
     }
 
-    const setProperty = (obj, path, value) => {
-      const [head, ...rest] = path.split('.')
-
-      return {
-        ...obj,
-        [head]: rest.length
-          ? setProperty(obj[head], rest.join('.'), value)
-          : value
-      }
-    }
-
 
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
@@ -1380,11 +1369,6 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
-
-          <code>
-            {JSON.stringify(wrapper)}
-
-          </code>
 
 
           {wrapper.options.tag && (

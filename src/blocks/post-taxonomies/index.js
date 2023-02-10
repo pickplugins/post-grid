@@ -457,7 +457,13 @@ registerBlockType("post-grid/post-taxonomies", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ wrapper: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
 
@@ -474,7 +480,6 @@ registerBlockType("post-grid/post-taxonomies", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -521,7 +526,14 @@ registerBlockType("post-grid/post-taxonomies", {
 
     function onChangeStyleItems(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...items[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, items);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ items: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
 
 
@@ -538,7 +550,7 @@ registerBlockType("post-grid/post-taxonomies", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ items: { ...items } });
+      ({ items: { ...items } });
     }
 
 
@@ -582,7 +594,16 @@ registerBlockType("post-grid/post-taxonomies", {
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ icon: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
 
@@ -599,7 +620,6 @@ registerBlockType("post-grid/post-taxonomies", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
     }
 
 
@@ -644,6 +664,14 @@ registerBlockType("post-grid/post-taxonomies", {
 
     function onChangeStyleFrontText(sudoScource, newVal, attr) {
 
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, frontText);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ frontText: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var sudoScourceX = { ...frontText[sudoScource] }
       var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
 
@@ -661,7 +689,6 @@ registerBlockType("post-grid/post-taxonomies", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ frontText: { ...frontText } });
     }
 
 
@@ -708,7 +735,14 @@ registerBlockType("post-grid/post-taxonomies", {
 
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...separator[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, separator);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ separator: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
 
 
@@ -725,7 +759,6 @@ registerBlockType("post-grid/post-taxonomies", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ separator: { ...separator } });
     }
 
 

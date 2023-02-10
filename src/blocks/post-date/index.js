@@ -356,7 +356,15 @@ registerBlockType("post-grid/post-date", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ wrapper: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
 
@@ -373,7 +381,6 @@ registerBlockType("post-grid/post-date", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -428,8 +435,13 @@ registerBlockType("post-grid/post-date", {
 
     function onChangeStylePostDate(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...postDate[sudoScource] }
-      var elementSelector = postDateSelector;
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, postDate);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ postDate: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
       var elementSelector = myStore.getElementSelector(sudoScource, postDateSelector);
 
 
@@ -446,7 +458,6 @@ registerBlockType("post-grid/post-date", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postDate: { ...postDate } });
     }
 
 
@@ -497,7 +508,15 @@ registerBlockType("post-grid/post-date", {
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ icon: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
 
@@ -514,7 +533,6 @@ registerBlockType("post-grid/post-date", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
     }
 
 
@@ -569,6 +587,16 @@ registerBlockType("post-grid/post-date", {
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
 
+
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, prefix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ prefix: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var sudoScourceX = { ...prefix[sudoScource] }
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
 
@@ -587,7 +615,6 @@ registerBlockType("post-grid/post-date", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ prefix: { ...prefix } });
 
     }
 
@@ -638,7 +665,14 @@ registerBlockType("post-grid/post-date", {
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...postfix[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, postfix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ postfix: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
 
 
@@ -656,7 +690,6 @@ registerBlockType("post-grid/post-date", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postfix: { ...postfix } });
 
     }
 
@@ -709,89 +742,6 @@ registerBlockType("post-grid/post-date", {
 
 
 
-
-
-
-
-
-
-
-
-    function onChangeIconTypo(typoX) {
-
-
-
-
-
-      setAttributes({ icon: { ...icon, styles: typoX } });
-
-      var newValuesObjX = {};
-      var itemsX = blockCssY.items;
-
-
-
-
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-
-        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector]['font-size'] : {};
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
-
-      }
-
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-
-        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 16;
-        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[iconSelector]['line-height'] != undefined) ? blockCssY.items[iconSelector]['line-height'] : {};
-
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
-        //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'line-height': lineHeightX };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'line-height': lineHeightX };
-
-      }
-
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'font-weight': typoX.fontWeight };
-
-      }
-
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-
-        var str = {};
-
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
-        str[breakPointX] = textDecorationXStr;
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'text-decoration': str };
-
-
-
-      }
-
-
-
-
-      //setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ blockCssY: { items: itemsX } });
-
-
-    }
     String.prototype.strtr = function (dic) {
       const str = this.toString(),
         makeToken = (inx) => `{{###~${inx}~###}}`,
@@ -826,9 +776,6 @@ registerBlockType("post-grid/post-date", {
 
 
     }, [icon]);
-
-
-
 
 
 

@@ -171,7 +171,7 @@ class PGDropdownSudoSelector extends Component {
                                 //setoptionsX(JSON.parse(sudoScourceArgsLocalX));
 
                                 onChange(x, index)
-                                optionsX[sudoId] = { label: sudoId, value: sudoId, };
+                                optionsX[sudoId] = { label: x.label, value: sudoId, };
 
 
                                 setoptionsX(optionsX)

@@ -561,7 +561,14 @@ registerBlockType("post-grid/image", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ wrapper: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
 
@@ -578,7 +585,6 @@ registerBlockType("post-grid/image", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -621,7 +627,15 @@ registerBlockType("post-grid/image", {
 
     function onChangeStyleImage(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...image[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, image);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ image: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
 
 
@@ -638,7 +652,6 @@ registerBlockType("post-grid/image", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ image: { ...image } });
     }
 
 
@@ -679,316 +692,6 @@ registerBlockType("post-grid/image", {
 
 
 
-
-
-
-    function paddingControl(nextValues) {
-
-
-
-      var responsive = image.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-      var styles = { ...image.styles, padding: responsive };
-      setAttributes({ image: { ...image, styles: styles } });
-
-
-      blockCssY.items[linkSelector] = (blockCssY.items[linkSelector] != undefined) ? blockCssY.items[linkSelector] : {};
-
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[linkSelector]['padding-top'] != undefined) ? blockCssY.items[linkSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector], 'padding-top': paddingTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[linkSelector]['padding-right'] != undefined) ? blockCssY.items[linkSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector], 'padding-right': paddingRight };
-
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var paddingBottom = (blockCssY.items[linkSelector]['padding-bottom'] != undefined) ? blockCssY.items[linkSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector], 'padding-bottom': paddingBottom };
-
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[linkSelector]['padding-left'] != undefined) ? blockCssY.items[linkSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector], 'padding-left': paddingLeft };
-
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-
-
-
-
-    function marginControl(nextValues) {
-
-
-      var responsive = image.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...image.styles, margin: responsive };
-      setAttributes({ image: { ...image, styles: styles } });
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-      blockCssY.items[linkSelector] = (blockCssY.items[linkSelector] != undefined) ? blockCssY.items[linkSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[linkSelector]['margin-top'] != undefined) ? blockCssY.items[linkSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector], 'margin-top': marginTop };
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[linkSelector]['margin-right'] !== undefined) ? blockCssY.items[linkSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector], 'margin-right': marginRight };
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[linkSelector]['margin-bottom'] !== undefined) ? blockCssY.items[linkSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[linkSelector]['margin-left'] !== undefined) ? blockCssY.items[linkSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector], 'margin-left': marginLeft };
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-    }
-
-
-
-    function generateBlockCssY() {
-
-
-      var reponsiveCssGroups = {};
-
-
-      for (var selector in blockCssY.items) {
-
-
-
-        var attrs = blockCssY.items[selector];
-
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = []
-            }
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = []
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = []
-            }
-
-            reponsiveCssGroups[device][selector].push({ 'attr': attr, 'val': attrValue });
-
-          }
-        }
-      }
-
-
-
-      //return false;
-
-
-      var reponsiveCssMobile = '';
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-
-          reponsiveCssMobile += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssMobile += '}';
-        }
-        reponsiveCssMobile += '}';
-
-      }
-
-
-
-      var reponsiveCssTablet = '';
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-
-          reponsiveCssTablet += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssTablet += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssTablet += '}';
-        }
-
-        reponsiveCssTablet += '}';
-      }
-
-      var reponsiveCssDesktop = '';
-
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-
-
-          reponsiveCssDesktop += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssDesktop += '}';
-
-
-        }
-        reponsiveCssDesktop += '}';
-
-
-
-      }
-
-
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
-
-
-
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200)
-
-
-      } else {
-
-
-
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-
-        csswrappg.insertAdjacentHTML('beforeend', str);
-
-
-
-      }
-
-
-
-    }
 
 
 

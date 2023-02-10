@@ -2100,7 +2100,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleHeader(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...header[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, header);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        header: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, headerSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -2172,7 +2178,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleContent(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...content[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, content);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        content: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, contentSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -2189,10 +2201,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        content: { ...content
         }
       });
     }
@@ -2244,7 +2252,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...icon[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        icon: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -2261,10 +2275,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        icon: { ...icon
         }
       });
     }
@@ -2317,7 +2327,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleHeaderActive(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...headerActive[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, headerActive);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        headerActive: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, headerActiveSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -2334,10 +2350,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        headerActive: { ...headerActive
         }
       });
     }
@@ -13054,7 +13066,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -13071,10 +13089,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -13126,7 +13140,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleImage(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...image[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, image);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        image: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -13143,10 +13163,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        image: { ...image
         }
       });
     }
@@ -13195,252 +13211,6 @@ var myStore = wp.data.select('postgrid-shop');
         image: { ...image
         }
       });
-    }
-
-    function paddingControl(nextValues) {
-      var responsive = image.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...image.styles,
-        padding: responsive
-      };
-      setAttributes({
-        image: { ...image,
-          styles: styles
-        }
-      });
-      blockCssY.items[linkSelector] = blockCssY.items[linkSelector] != undefined ? blockCssY.items[linkSelector] : {};
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[linkSelector]['padding-top'] != undefined ? blockCssY.items[linkSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'padding-top': paddingTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[linkSelector]['padding-right'] != undefined ? blockCssY.items[linkSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'padding-right': paddingRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[linkSelector]['padding-bottom'] != undefined ? blockCssY.items[linkSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'padding-bottom': paddingBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[linkSelector]['padding-left'] != undefined ? blockCssY.items[linkSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'padding-left': paddingLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function marginControl(nextValues) {
-      var responsive = image.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...image.styles,
-        margin: responsive
-      };
-      setAttributes({
-        image: { ...image,
-          styles: styles
-        }
-      });
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[linkSelector] = blockCssY.items[linkSelector] != undefined ? blockCssY.items[linkSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[linkSelector]['margin-top'] != undefined ? blockCssY.items[linkSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[linkSelector]['margin-right'] !== undefined ? blockCssY.items[linkSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[linkSelector]['margin-bottom'] !== undefined ? blockCssY.items[linkSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[linkSelector]['margin-left'] !== undefined ? blockCssY.items[linkSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function generateBlockCssY() {
-      var reponsiveCssGroups = {};
-
-      for (var selector in blockCssY.items) {
-        var attrs = blockCssY.items[selector];
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = [];
-            }
-
-            reponsiveCssGroups[device][selector].push({
-              'attr': attr,
-              'val': attrValue
-            });
-          }
-        }
-      } //return false;
-
-
-      var reponsiveCssMobile = '';
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCssMobile += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssMobile += '}';
-        }
-
-        reponsiveCssMobile += '}';
-      }
-
-      var reponsiveCssTablet = '';
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-          reponsiveCssTablet += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssTablet += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssTablet += '}';
-        }
-
-        reponsiveCssTablet += '}';
-      }
-
-      var reponsiveCssDesktop = '';
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCssDesktop += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssDesktop += '}';
-        }
-
-        reponsiveCssDesktop += '}';
-      }
-
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200);
-      } else {
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-        csswrappg.insertAdjacentHTML('beforeend', str);
-      }
     }
 
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
@@ -15266,7 +15036,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -15283,10 +15059,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -15335,245 +15107,6 @@ var myStore = wp.data.select('postgrid-shop');
         wrapper: { ...wrapper
         }
       });
-    }
-
-    function paddingControl(nextValues) {
-      var responsive = wrapper.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...wrapper.styles,
-        padding: responsive
-      };
-      setAttributes({
-        wrapper: { ...wrapper,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[wrapperSelector] = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[wrapperSelector]['padding-top'] != undefined ? blockCssY.items[wrapperSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'padding-top': paddingTop
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-top': paddingTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[wrapperSelector]['padding-right'] != undefined ? blockCssY.items[wrapperSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'padding-right': paddingRight
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-right': paddingRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[wrapperSelector]['padding-bottom'] != undefined ? blockCssY.items[wrapperSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'padding-bottom': paddingBottom
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-bottom': paddingBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[wrapperSelector]['padding-left'] != undefined ? blockCssY.items[wrapperSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'padding-left': paddingLeft
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-left': paddingLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function marginControl(nextValues) {
-      var responsive = wrapper.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...wrapper.styles,
-        margin: responsive
-      };
-      setAttributes({
-        wrapper: { ...wrapper,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[wrapperSelector] = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[wrapperSelector]['margin-top'] != undefined ? blockCssY.items[wrapperSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'margin-top': marginTop
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-top': marginTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[wrapperSelector]['margin-right'] !== undefined ? blockCssY.items[wrapperSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'margin-right': marginRight
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-right': marginRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[wrapperSelector]['margin-bottom'] !== undefined ? blockCssY.items[wrapperSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'margin-bottom': marginBottom
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-bottom': marginBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[wrapperSelector]['margin-left'] !== undefined ? blockCssY.items[wrapperSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'margin-left': marginLeft
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-left': marginLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function generateBlockCssY() {
-      var reponsiveCssGroups = {};
-      var reponsiveCss = '';
-
-      for (var selector in blockCssY.items) {
-        var attrs = blockCssY.items[selector];
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = [];
-            }
-
-            reponsiveCssGroups[device][selector].push({
-              'attr': attr,
-              'val': attrValue
-            });
-          }
-        }
-      }
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200);
-      } else {
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-        csswrappg.insertAdjacentHTML('beforeend', str);
-      }
     }
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -15933,7 +15466,13 @@ function EditComponent() {
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -15950,10 +15489,6 @@ function EditComponent() {
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -16002,328 +15537,6 @@ function EditComponent() {
         wrapper: { ...wrapper
         }
       });
-    }
-
-    function onChangeTextTypo(typoX) {
-      setAttributes({
-        wrapper: { ...wrapper,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-      var itemsX = blockCssY.items;
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'font-family': typoX.fontFamily
-        };
-      } else {
-        //typoX.fontFamily[breakPointX] = {};
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[wrapperSelector]['font-size'] != undefined ? blockCssY.items[wrapperSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit; //blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'font-size': fontSizeX };
-
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 16;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[wrapperSelector]['line-height'] != undefined ? blockCssY.items[wrapperSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit; //blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'line-height': lineHeightX };
-
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[wrapperSelector]['letter-spacing'] != undefined ? blockCssY.items[wrapperSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit; //blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'letter-spacing': letterSpacingX };
-
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr;
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'text-transform': typoX.textTransform
-        };
-      } //setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-      setAttributes({
-        blockCssY: {
-          items: itemsX
-        }
-      });
-    }
-
-    function paddingControl(nextValues) {
-      var responsive = wrapper.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...wrapper.styles,
-        padding: responsive
-      };
-      setAttributes({
-        wrapper: { ...wrapper,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[wrapperSelector] = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[wrapperSelector]['padding-top'] != undefined ? blockCssY.items[wrapperSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'padding-top': paddingTop
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-top': paddingTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[wrapperSelector]['padding-right'] != undefined ? blockCssY.items[wrapperSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'padding-right': paddingRight
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-right': paddingRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[wrapperSelector]['padding-bottom'] != undefined ? blockCssY.items[wrapperSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'padding-bottom': paddingBottom
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-bottom': paddingBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[wrapperSelector]['padding-left'] != undefined ? blockCssY.items[wrapperSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'padding-left': paddingLeft
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'padding-left': paddingLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function marginControl(nextValues) {
-      var responsive = wrapper.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...wrapper.styles,
-        margin: responsive
-      };
-      setAttributes({
-        wrapper: { ...wrapper,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[wrapperSelector] = blockCssY.items[wrapperSelector] != undefined ? blockCssY.items[wrapperSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[wrapperSelector]['margin-top'] != undefined ? blockCssY.items[wrapperSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'margin-top': marginTop
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-top': marginTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[wrapperSelector]['margin-right'] !== undefined ? blockCssY.items[wrapperSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'margin-right': marginRight
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-right': marginRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[wrapperSelector]['margin-bottom'] !== undefined ? blockCssY.items[wrapperSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'margin-bottom': marginBottom
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-bottom': marginBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[wrapperSelector]['margin-left'] !== undefined ? blockCssY.items[wrapperSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector],
-          'margin-left': marginLeft
-        }; //itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'margin-left': marginLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function generateBlockCssY() {
-      var reponsiveCssGroups = {};
-      var reponsiveCss = '';
-
-      for (var selector in blockCssY.items) {
-        var attrs = blockCssY.items[selector];
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = [];
-            }
-
-            reponsiveCssGroups[device][selector].push({
-              'attr': attr,
-              'val': attrValue
-            });
-          }
-        }
-      }
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCss += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCss += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCss += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCss += '}';
-        }
-
-        reponsiveCss += '}';
-      }
-
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200);
-      } else {
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-        csswrappg.insertAdjacentHTML('beforeend', str);
-      }
     }
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -16767,7 +15980,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -16784,10 +16003,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -16839,7 +16054,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleItem(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...item[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, item);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        item: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -16856,10 +16077,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        item: { ...item
         }
       });
     }
@@ -16911,7 +16128,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...icon[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        icon: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -16928,10 +16151,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        icon: { ...icon
         }
       });
     }
@@ -18238,7 +17457,13 @@ var myStore = wp.data.select('postgrid-shop');
     }, [icon]);
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -18255,10 +17480,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -18310,7 +17531,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleField(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...field[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, field);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        field: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, fieldSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -18327,10 +17554,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        field: { ...field
         }
       });
     }
@@ -18382,7 +17605,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...icon[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        icon: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = iconSelector;
       sudoScourceX[attr][breakPointX] = newVal;
@@ -18399,10 +17628,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        icon: { ...icon
         }
       });
     }
@@ -18454,7 +17679,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleFrontText(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...frontText[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, frontText);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        frontText: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = frontTextSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
@@ -18472,10 +17703,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        frontText: { ...frontText
         }
       });
     }
@@ -20029,7 +19256,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -20046,10 +19279,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -20101,7 +19330,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleElements(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...elements[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, elements);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        elements: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = redmoreSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
@@ -20119,10 +19354,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        elements: { ...elements
         }
       });
     }
@@ -20174,7 +19405,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleAvatar(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...avatar[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, avatar);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        avatar: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, avatarSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -20191,10 +19428,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        avatar: { ...avatar
         }
       });
     }
@@ -20246,6 +19479,14 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleName(sudoScource, newVal, attr) {
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, name);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        name: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
+      };
       var sudoScourceX = { ...name[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, nameSelector);
@@ -20263,10 +19504,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        name: { ...name
         }
       });
     }
@@ -20318,7 +19555,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleDescription(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...description[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, description);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        description: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, descriptionSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -20335,10 +19578,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        description: { ...description
         }
       });
     }
@@ -20387,775 +19626,6 @@ var myStore = wp.data.select('postgrid-shop');
         description: { ...description
         }
       });
-    }
-
-    function onChangeStylePrefix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...prefix[sudoScource]
-      };
-      var elementSelector = prefixSelector;
-      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
-      sudoScourceX[attr][breakPointX] = newVal;
-
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      });
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-      setAttributes({
-        prefix: { ...prefix
-        }
-      });
-    }
-
-    function onRemoveStylePrefix(sudoScource, key) {
-      var sudoScourceX = { ...prefix[sudoScource]
-      };
-
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      prefix[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
-
-      setAttributes({
-        prefix: { ...prefix
-        }
-      });
-
-      if (blockCssY.items[prefixSelector] == undefined) {
-        blockCssY.items[prefixSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
-      });
-
-      if (blockCssY.items[prefixSelector][key] != undefined) {
-        delete blockCssY.items[prefixSelector][key];
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function onAddStylePrefix(sudoScource, key) {
-      var sudoScourceX = { ...prefix[sudoScource]
-      };
-      sudoScourceX[key] = {};
-      prefix[sudoScource] = sudoScourceX;
-      setAttributes({
-        prefix: { ...prefix
-        }
-      });
-    }
-
-    function onChangeStylePostfix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...postfix[sudoScource]
-      };
-      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
-      sudoScourceX[attr][breakPointX] = newVal;
-
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      });
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-      setAttributes({
-        postfix: { ...postfix
-        }
-      });
-    }
-
-    function onRemoveStylePostfix(sudoScource, key) {
-      var sudoScourceX = { ...postfix[sudoScource]
-      };
-
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      postfix[sudoScource] = sudoScourceX; //sudoScourceX[attr][breakPointX] = newVal;
-
-      setAttributes({
-        postfix: { ...postfix
-        }
-      });
-
-      if (blockCssY.items[postfixSelector] == undefined) {
-        blockCssY.items[postfixSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
-      });
-
-      if (blockCssY.items[postfixSelector][key] != undefined) {
-        delete blockCssY.items[postfixSelector][key];
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function onAddStylePostfix(sudoScource, key) {
-      var sudoScourceX = { ...postfix[sudoScource]
-      };
-      sudoScourceX[key] = {};
-      postfix[sudoScource] = sudoScourceX;
-      setAttributes({
-        postfix: { ...postfix
-        }
-      });
-    }
-
-    function paddingControl(nextValues) {
-      var responsive = name.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...name.styles,
-        padding: responsive
-      };
-      setAttributes({
-        name: { ...name,
-          styles: styles
-        }
-      });
-      blockCssY.items[nameSelector] = blockCssY.items[nameSelector] != undefined ? blockCssY.items[nameSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[nameSelector]['padding-top'] != undefined ? blockCssY.items[nameSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'padding-top': paddingTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[nameSelector]['padding-right'] != undefined ? blockCssY.items[nameSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'padding-right': paddingRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[nameSelector]['padding-bottom'] != undefined ? blockCssY.items[nameSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'padding-bottom': paddingBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[nameSelector]['padding-left'] != undefined ? blockCssY.items[nameSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'padding-left': paddingLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function borderRadiusControlAvatar(nextValues) {
-      var responsive = avatar.styles.borderRadius;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...avatar.styles,
-        borderRadius: responsive
-      };
-      setAttributes({
-        avatar: { ...avatar,
-          styles: styles
-        }
-      });
-      blockCssY.items[avatarImgSelector] = blockCssY.items[avatarImgSelector] != undefined ? blockCssY.items[avatarImgSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var borderRadiusX = blockCssY.items[avatarImgSelector]['border-radius'] != undefined ? blockCssY.items[avatarImgSelector]['border-radius'] : {};
-        borderRadiusX[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
-        blockCssY.items[avatarImgSelector] = { ...blockCssY.items[avatarImgSelector],
-          'border-radius': borderRadiusX
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function paddingControlAvatar(nextValues) {
-      var responsive = avatar.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...avatar.styles,
-        padding: responsive
-      };
-      setAttributes({
-        avatar: { ...avatar,
-          styles: styles
-        }
-      });
-      blockCssY.items[avatarSelector] = blockCssY.items[avatarSelector] != undefined ? blockCssY.items[avatarSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[avatarSelector]['padding-top'] != undefined ? blockCssY.items[avatarSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector],
-          'padding-top': paddingTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[avatarSelector]['padding-right'] != undefined ? blockCssY.items[avatarSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector],
-          'padding-right': paddingRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[avatarSelector]['padding-bottom'] != undefined ? blockCssY.items[avatarSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector],
-          'padding-bottom': paddingBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[avatarSelector]['padding-left'] != undefined ? blockCssY.items[avatarSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector],
-          'padding-left': paddingLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function paddingControlDescription(nextValues) {
-      var responsive = description.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...description.styles,
-        padding: responsive
-      };
-      setAttributes({
-        description: { ...description,
-          styles: styles
-        }
-      });
-      blockCssY.items[descriptionSelector] = blockCssY.items[descriptionSelector] != undefined ? blockCssY.items[descriptionSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[descriptionSelector]['padding-top'] != undefined ? blockCssY.items[descriptionSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'padding-top': paddingTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[descriptionSelector]['padding-right'] != undefined ? blockCssY.items[descriptionSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'padding-right': paddingRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[descriptionSelector]['padding-bottom'] != undefined ? blockCssY.items[descriptionSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'padding-bottom': paddingBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[descriptionSelector]['padding-left'] != undefined ? blockCssY.items[descriptionSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'padding-left': paddingLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function marginControlAvatar(nextValues) {
-      var responsive = avatar.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...avatar.styles,
-        padding: responsive
-      };
-      setAttributes({
-        avatar: { ...avatar,
-          styles: styles
-        }
-      });
-      blockCssY.items[avatarSelector] = blockCssY.items[avatarSelector] != undefined ? blockCssY.items[avatarSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[avatarSelector]['margin-top'] != undefined ? blockCssY.items[avatarSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[avatarSelector]['margin-right'] !== undefined ? blockCssY.items[avatarSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[avatarSelector]['margin-bottom'] !== undefined ? blockCssY.items[avatarSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[avatarSelector]['margin-left'] !== undefined ? blockCssY.items[avatarSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function marginControl(nextValues) {
-      var responsive = name.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...name.styles,
-        margin: responsive
-      };
-      setAttributes({
-        name: { ...name,
-          styles: styles
-        }
-      });
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[nameSelector] = blockCssY.items[nameSelector] != undefined ? blockCssY.items[nameSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[nameSelector]['margin-top'] != undefined ? blockCssY.items[nameSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[nameSelector]['margin-right'] !== undefined ? blockCssY.items[nameSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[nameSelector]['margin-bottom'] !== undefined ? blockCssY.items[nameSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[nameSelector]['margin-left'] !== undefined ? blockCssY.items[nameSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function marginControlDescription(nextValues) {
-      var responsive = description.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...description.styles,
-        padding: responsive
-      };
-      setAttributes({
-        description: { ...description,
-          styles: styles
-        }
-      });
-      blockCssY.items[descriptionSelector] = blockCssY.items[descriptionSelector] != undefined ? blockCssY.items[descriptionSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[descriptionSelector]['margin-top'] != undefined ? blockCssY.items[descriptionSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[descriptionSelector]['margin-right'] !== undefined ? blockCssY.items[descriptionSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[descriptionSelector]['margin-bottom'] !== undefined ? blockCssY.items[descriptionSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[descriptionSelector]['margin-left'] !== undefined ? blockCssY.items[descriptionSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function onChangeTypoName(typoX) {
-      setAttributes({
-        name: { ...name,
-          styles: typoX
-        }
-      });
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[nameSelector] != undefined ? blockCssY.items[nameSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[nameSelector]['line-height'] != undefined ? blockCssY.items[nameSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[nameSelector]['letter-spacing'] != undefined ? blockCssY.items[nameSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector],
-          'text-transform': typoX.textTransform
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function onChangeTypoDescription(typoX) {
-      setAttributes({
-        description: { ...description,
-          styles: typoX
-        }
-      });
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[descriptionSelector] != undefined ? blockCssY.items[descriptionSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[descriptionSelector]['line-height'] != undefined ? blockCssY.items[descriptionSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[descriptionSelector]['letter-spacing'] != undefined ? blockCssY.items[descriptionSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector],
-          'text-transform': typoX.textTransform
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function generateBlockCssY() {
-      var reponsiveCssGroups = {};
-
-      for (var selector in blockCssY.items) {
-        var attrs = blockCssY.items[selector];
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = [];
-            }
-
-            reponsiveCssGroups[device][selector].push({
-              'attr': attr,
-              'val': attrValue
-            });
-          }
-        }
-      } //return false;
-
-
-      var reponsiveCssMobile = '';
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCssMobile += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssMobile += '}';
-        }
-
-        reponsiveCssMobile += '}';
-      }
-
-      var reponsiveCssTablet = '';
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-          reponsiveCssTablet += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssTablet += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssTablet += '}';
-        }
-
-        reponsiveCssTablet += '}';
-      }
-
-      var reponsiveCssDesktop = '';
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCssDesktop += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssDesktop += '}';
-        }
-
-        reponsiveCssDesktop += '}';
-      }
-
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200);
-      } else {
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-        csswrappg.insertAdjacentHTML('beforeend', str);
-      }
     }
 
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}); // Using the hook.
@@ -22112,7 +20582,13 @@ var myStore = wp.data.select('postgrid-shop');
     }, [icon]);
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -22129,10 +20605,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -22184,7 +20656,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleItems(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...items[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, items);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        items: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -22201,10 +20679,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        items: { ...items
         }
       });
     }
@@ -22256,9 +20730,14 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...icon[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        icon: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
-      var elementSelector = iconSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -22274,10 +20753,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        icon: { ...icon
         }
       });
     }
@@ -22329,7 +20804,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleFrontText(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...frontText[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, frontText);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        frontText: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -22346,10 +20827,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        frontText: { ...frontText
         }
       });
     }
@@ -22401,7 +20878,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...separator[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, separator);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        separator: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -22418,10 +20901,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        separator: { ...separator
         }
       });
     }
@@ -23792,7 +22271,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -23809,10 +22294,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -23864,7 +22345,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleCommentCount(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...commentCount[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, commentCount);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        commentCount: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, commentCountSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -23881,10 +22368,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        commentCount: { ...commentCount
         }
       });
     }
@@ -23936,7 +22419,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...icon[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        icon: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = iconSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
@@ -23954,10 +22443,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        icon: { ...icon
         }
       });
     }
@@ -24009,7 +22494,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...prefix[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, prefix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        prefix: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = prefixSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
@@ -24027,10 +22518,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        prefix: { ...prefix
         }
       });
     }
@@ -24083,7 +22570,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...postfix[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, postfix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        postfix: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -24100,10 +22593,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        postfix: { ...postfix
         }
       });
     }
@@ -25326,7 +23815,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -25343,10 +23838,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -25398,9 +23889,14 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePostDate(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...postDate[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, postDate);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        postDate: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
-      var elementSelector = postDateSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, postDateSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -25416,10 +23912,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        postDate: { ...postDate
         }
       });
     }
@@ -25471,7 +23963,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...icon[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        icon: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -25488,10 +23986,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        icon: { ...icon
         }
       });
     }
@@ -25543,6 +24037,14 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, prefix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        prefix: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
+      };
       var sudoScourceX = { ...prefix[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
@@ -25560,10 +24062,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        prefix: { ...prefix
         }
       });
     }
@@ -25616,7 +24114,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...postfix[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, postfix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        postfix: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -25633,10 +24137,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        postfix: { ...postfix
         }
       });
     }
@@ -25684,61 +24184,6 @@ var myStore = wp.data.select('postgrid-shop');
       postfix[sudoScource] = sudoScourceX;
       setAttributes({
         postfix: { ...postfix
-        }
-      });
-    }
-
-    function onChangeIconTypo(typoX) {
-      setAttributes({
-        icon: { ...icon,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-      var itemsX = blockCssY.items;
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit; //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 16;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[iconSelector]['line-height'] != undefined ? blockCssY.items[iconSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit; //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'line-height': lineHeightX };
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr;
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'text-decoration': str
-        };
-      } //setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-      setAttributes({
-        blockCssY: {
-          items: itemsX
         }
       });
     }
@@ -27337,7 +25782,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -27354,10 +25805,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -27409,7 +25856,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePostExcerpt(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...postExcerpt[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, postExcerpt);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        postExcerpt: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, excerptSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -27426,10 +25879,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        postExcerpt: { ...postExcerpt
         }
       });
     }
@@ -27481,7 +25930,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleRedmore(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...readMore[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, readMore);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        readMore: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -27498,10 +25953,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        readMore: { ...readMore
         }
       });
     }
@@ -27553,7 +26004,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...prefix[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, prefix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        prefix: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -27570,10 +26027,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        prefix: { ...prefix
         }
       });
     }
@@ -27626,7 +26079,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...postfix[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, postfix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        postfix: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -27643,10 +26102,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        postfix: { ...postfix
         }
       });
     }
@@ -29156,7 +27611,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -29173,10 +27634,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -29228,7 +27685,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleImage(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...featuredImage[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, featuredImage);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        featuredImage: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -29245,10 +27708,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        featuredImage: { ...featuredImage
         }
       });
     }
@@ -29297,252 +27756,6 @@ var myStore = wp.data.select('postgrid-shop');
         featuredImage: { ...featuredImage
         }
       });
-    }
-
-    function paddingControl(nextValues) {
-      var responsive = featuredImage.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...featuredImage.styles,
-        padding: responsive
-      };
-      setAttributes({
-        featuredImage: { ...featuredImage,
-          styles: styles
-        }
-      });
-      blockCssY.items[linkSelector] = blockCssY.items[linkSelector] != undefined ? blockCssY.items[linkSelector] : {};
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[linkSelector]['padding-top'] != undefined ? blockCssY.items[linkSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'padding-top': paddingTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[linkSelector]['padding-right'] != undefined ? blockCssY.items[linkSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'padding-right': paddingRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[linkSelector]['padding-bottom'] != undefined ? blockCssY.items[linkSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'padding-bottom': paddingBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[linkSelector]['padding-left'] != undefined ? blockCssY.items[linkSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'padding-left': paddingLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function marginControl(nextValues) {
-      var responsive = featuredImage.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...featuredImage.styles,
-        margin: responsive
-      };
-      setAttributes({
-        featuredImage: { ...featuredImage,
-          styles: styles
-        }
-      });
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[linkSelector] = blockCssY.items[linkSelector] != undefined ? blockCssY.items[linkSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[linkSelector]['margin-top'] != undefined ? blockCssY.items[linkSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[linkSelector]['margin-right'] !== undefined ? blockCssY.items[linkSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[linkSelector]['margin-bottom'] !== undefined ? blockCssY.items[linkSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[linkSelector]['margin-left'] !== undefined ? blockCssY.items[linkSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[linkSelector] = { ...blockCssY.items[linkSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function generateBlockCssY() {
-      var reponsiveCssGroups = {};
-
-      for (var selector in blockCssY.items) {
-        var attrs = blockCssY.items[selector];
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = [];
-            }
-
-            reponsiveCssGroups[device][selector].push({
-              'attr': attr,
-              'val': attrValue
-            });
-          }
-        }
-      } //return false;
-
-
-      var reponsiveCssMobile = '';
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCssMobile += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssMobile += '}';
-        }
-
-        reponsiveCssMobile += '}';
-      }
-
-      var reponsiveCssTablet = '';
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-          reponsiveCssTablet += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssTablet += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssTablet += '}';
-        }
-
-        reponsiveCssTablet += '}';
-      }
-
-      var reponsiveCssDesktop = '';
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCssDesktop += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssDesktop += '}';
-        }
-
-        reponsiveCssDesktop += '}';
-      }
-
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200);
-      } else {
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-        csswrappg.insertAdjacentHTML('beforeend', str);
-      }
     }
 
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
@@ -45622,7 +43835,13 @@ var myStore = wp.data.select('postgrid-shop');
     const CustomTag = wrapper.options.tag != undefined && wrapper.options.tag.length != 0 ? `${wrapper.options.tag}` : 'div';
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -45639,10 +43858,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -45694,7 +43909,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleMeta(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, meta);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        meta: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = metaValueSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, metaValueSelector);
@@ -45715,22 +43936,22 @@ var myStore = wp.data.select('postgrid-shop');
         }
       });
       setAttributes({
-        wrapper: { ...wrapper
+        meta: { ...meta
         }
       });
     }
 
     function onRemoveStyleMeta(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var sudoScourceX = { ...meta[sudoScource]
       };
 
       if (sudoScourceX[key] != undefined) {
         delete sudoScourceX[key];
       }
 
-      wrapper[sudoScource] = sudoScourceX;
+      meta[sudoScource] = sudoScourceX;
       setAttributes({
-        wrapper: { ...wrapper
+        meta: { ...meta
         }
       });
 
@@ -45756,148 +43977,14 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onAddStyleMeta(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var sudoScourceX = { ...meta[sudoScource]
       };
       sudoScourceX[key] = {};
-      wrapper[sudoScource] = sudoScourceX;
+      meta[sudoScource] = sudoScourceX;
       setAttributes({
-        wrapper: { ...wrapper
+        meta: { ...meta
         }
       });
-    }
-
-    function generateBlockCssY() {
-      var reponsiveCssGroups = {};
-
-      for (var selector in blockCssY.items) {
-        var attrs = blockCssY.items[selector];
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = [];
-            }
-
-            reponsiveCssGroups[device][selector].push({
-              'attr': attr,
-              'val': attrValue
-            });
-          }
-        }
-      } //return false;
-
-
-      var reponsiveCssMobile = '';
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCssMobile += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssMobile += '}';
-        }
-
-        reponsiveCssMobile += '}';
-      }
-
-      var reponsiveCssTablet = '';
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-          reponsiveCssTablet += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssTablet += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssTablet += '}';
-        }
-
-        reponsiveCssTablet += '}';
-      }
-
-      var reponsiveCssDesktop = '';
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCssDesktop += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssDesktop += '}';
-        }
-
-        reponsiveCssDesktop += '}';
-      }
-
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200);
-      } else {
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-        csswrappg.insertAdjacentHTML('beforeend', str);
-      }
     }
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -46609,7 +44696,13 @@ var myStore = wp.data.select('postgrid-shop');
     }, [items]);
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -46626,10 +44719,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -46681,7 +44770,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleItems(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...items[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, items);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        items: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -46698,10 +44793,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        items: { ...items
         }
       });
     }
@@ -46753,7 +44844,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...icon[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        icon: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = iconSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
@@ -46771,10 +44868,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        icon: { ...icon
         }
       });
     }
@@ -46826,7 +44919,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleFrontText(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...frontText[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, frontText);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        frontText: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = frontTextSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
@@ -46844,10 +44943,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        frontText: { ...frontText
         }
       });
     }
@@ -46899,7 +44994,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...separator[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, separator);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        separator: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = separatorSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
@@ -46917,10 +45018,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        separator: { ...separator
         }
       });
     }
@@ -46971,62 +45068,6 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    function paddingControlItems(nextValues) {
-      var responsive = items.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...items.styles,
-        padding: responsive
-      };
-      setAttributes({
-        items: { ...items,
-          styles: styles
-        }
-      });
-      blockCssY.items[itemSelector] = blockCssY.items[itemSelector] != undefined ? blockCssY.items[itemSelector] : {};
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[itemSelector]['padding-top'] != undefined ? blockCssY.items[itemSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'padding-top': paddingTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[itemSelector]['padding-right'] != undefined ? blockCssY.items[itemSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'padding-right': paddingRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[itemSelector]['padding-bottom'] != undefined ? blockCssY.items[itemSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'padding-bottom': paddingBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[itemSelector]['padding-left'] != undefined ? blockCssY.items[itemSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'padding-left': paddingLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
     function onChangeIcon(arg) {
       var options = { ...icon.options,
         srcType: arg.srcType,
@@ -47036,270 +45077,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         icon: { ...icon,
           options: options
-        }
-      });
-    }
-
-    function onChangeIconTypo(typoX) {
-      setAttributes({
-        icon: { ...icon,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-      var itemsX = blockCssY.items;
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector]['font-size'] : {};
-
-        if (fontSizeX[breakPointX] == undefined) {
-          fontSizeX[breakPointX] = '';
-        }
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit; //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 16;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[iconSelector]['line-height'] != undefined ? blockCssY.items[iconSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit; //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'line-height': lineHeightX };
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr;
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'text-decoration': str
-        };
-      } //setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-      setAttributes({
-        blockCssY: {
-          items: itemsX
-        }
-      });
-    }
-
-    function marginControlItems(nextValues) {
-      var responsive = items.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...items.styles,
-        margin: responsive
-      };
-      setAttributes({
-        items: { ...items,
-          styles: styles
-        }
-      });
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[itemSelector] = blockCssY.items[itemSelector] != undefined ? blockCssY.items[itemSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[itemSelector]['margin-top'] != undefined ? blockCssY.items[itemSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[itemSelector]['margin-right'] !== undefined ? blockCssY.items[itemSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[itemSelector]['margin-bottom'] !== undefined ? blockCssY.items[itemSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[itemSelector]['margin-left'] !== undefined ? blockCssY.items[itemSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function onChangeTypo(typoX) {
-      setAttributes({
-        items: { ...items,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[itemSelector]['font-size'] != undefined ? blockCssY.items[itemSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[itemSelector]['line-height'] != undefined ? blockCssY.items[itemSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[itemSelector]['letter-spacing'] != undefined ? blockCssY.items[itemSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr; //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'text-transform': typoX.textTransform
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function onChangeTypoFrontText(typoX) {
-      setAttributes({
-        items: { ...items,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[frontTextSelector]['font-size'] != undefined ? blockCssY.items[frontTextSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[frontTextSelector]['line-height'] != undefined ? blockCssY.items[frontTextSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[frontTextSelector]['letter-spacing'] != undefined ? blockCssY.items[frontTextSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr; //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'text-transform': typoX.textTransform
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
         }
       });
     }
@@ -48462,7 +46239,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -48479,10 +46262,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -48534,7 +46313,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleItems(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...items[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, items);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        items: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -48553,7 +46338,7 @@ var myStore = wp.data.select('postgrid-shop');
           items: blockCssY.items
         }
       });
-      setAttributes({
+      ({
         items: { ...items
         }
       });
@@ -48606,7 +46391,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...icon[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        icon: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -48623,10 +46414,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        icon: { ...icon
         }
       });
     }
@@ -48678,6 +46465,14 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleFrontText(sudoScource, newVal, attr) {
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, frontText);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        frontText: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
+      };
       var sudoScourceX = { ...frontText[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
@@ -48695,10 +46490,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        frontText: { ...frontText
         }
       });
     }
@@ -48750,7 +46541,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...separator[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, separator);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        separator: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -48767,10 +46564,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        separator: { ...separator
         }
       });
     }
@@ -50114,10 +47907,7 @@ var myStore = wp.data.select('postgrid-shop');
       });
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      console.log('# wrapper Changed');
-      console.log(wrapper);
-    }, [wrapper]); // Wrapper CSS Class Selectors
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {}, [wrapper]); // Wrapper CSS Class Selectors
 
     const wrapperSelector = blockClass;
     var postTitleSelector = '';
@@ -50273,9 +48063,14 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePostTitle(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...postTitle[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, postTitle);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        postTitle: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
-      var elementSelector = postTitleSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, postTitleSelector);
       sudoScourceX[attr][breakPointX] = newVal;
 
@@ -50291,10 +48086,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        postTitle: { ...postTitle
         }
       });
     }
@@ -50346,7 +48137,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...prefix[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, prefix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        prefix: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -50363,10 +48160,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        prefix: { ...prefix
         }
       });
     }
@@ -50419,7 +48212,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...postfix[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, postfix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        postfix: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -50436,10 +48235,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        postfix: { ...postfix
         }
       });
     }
@@ -50521,22 +48316,7 @@ var myStore = wp.data.select('postgrid-shop');
       key: "general"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "px-3"
-    }, wrapper.styles.backgroundColor != undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_background_color__WEBPACK_IMPORTED_MODULE_18__["default"], {
-      val: wrapper.styles.backgroundColor[breakPointX],
-      onChange: (newVal, attr) => {
-        console.log(newVal);
-        var styles = { ...wrapper.styles,
-          backgroundColor: {
-            Desktop: newVal
-          }
-        };
-        setAttributes({
-          wrapper: { ...wrapper,
-            styles: styles
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
       title: "Wrapper",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -51526,7 +49306,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...wrapper[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        wrapper: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -51543,10 +49329,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        wrapper: { ...wrapper
         }
       });
     }
@@ -51598,7 +49380,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleRedmore(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...readMore[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, readMore);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        readMore: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -51615,10 +49403,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        readMore: { ...readMore
         }
       });
     }
@@ -51670,7 +49454,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...icon[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        icon: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -51687,10 +49477,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        icon: { ...icon
         }
       });
     }
@@ -51742,7 +49528,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...prefix[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, prefix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        prefix: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -51759,10 +49551,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        prefix: { ...prefix
         }
       });
     }
@@ -51815,7 +49603,13 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
-      var sudoScourceX = { ...postfix[sudoScource]
+      var path = sudoScource + '.' + attr + '.' + breakPointX;
+      let obj = Object.assign({}, postfix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal);
+      setAttributes({
+        postfix: updatedObj
+      });
+      var sudoScourceX = { ...updatedObj[sudoScource]
       };
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       sudoScourceX[attr][breakPointX] = newVal;
@@ -51832,10 +49626,6 @@ var myStore = wp.data.select('postgrid-shop');
       setAttributes({
         blockCssY: {
           items: blockCssY.items
-        }
-      });
-      setAttributes({
-        postfix: { ...postfix
         }
       });
     }
@@ -62469,7 +60259,7 @@ function Html(props) {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
-    value: props.value,
+    value: props.val,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
     enableAlpha: true,
     onChange: newVal => {
@@ -62532,7 +60322,7 @@ class PGcssBackgroundColor extends Component {
       className: "w-full text-center left-0 top-1/2 -translate-y-1/2\t absolute"
     }, val == undefined ? 'Set Color' : val)))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       enableAlpha: enableAlpha,
-      value: val,
+      val: val,
       onChange: onChange,
       warn: this.state.showWarning
     }));
@@ -62580,7 +60370,6 @@ function Html(props) {
     return null;
   }
 
-  console.log(props.val);
   const [type, setType] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('url');
   const [imageUrl, setimageUrl] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const [colorArgs, setColorArgs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
@@ -62619,7 +60408,6 @@ function Html(props) {
     setType('repeatingRadialGradient');
   }
 
-  console.log(type);
   const ALLOWED_MEDIA_TYPES = ['image'];
   var typeArgs = {
     url: {
@@ -63200,10 +60988,53 @@ function Html(props) {
     return null;
   }
 
+  console.log(props.val);
   var valParts = props.val != undefined ? props.val.split(" ") : ['0px', 'solid', '#000000'];
   var widthVal = valParts[0] != undefined ? valParts[0] : '0px';
   var styleVal = valParts[1] != undefined ? valParts[1] : 'solid';
   var colorVal = valParts[2] != undefined ? valParts[2] : '#000000';
+  var outlineStyleArgs = {
+    none: {
+      "label": "None",
+      "value": "none"
+    },
+    hidden: {
+      "label": "Hidden",
+      "value": "hidden"
+    },
+    dotted: {
+      "label": "Dotted",
+      "value": "dotted"
+    },
+    dashed: {
+      "label": "Dashed",
+      "value": "dashed"
+    },
+    solid: {
+      "label": "Solid",
+      "value": "solid"
+    },
+    double: {
+      "label": "Double",
+      "value": "double"
+    },
+    groove: {
+      "label": "Groove",
+      "value": "groove"
+    },
+    ridge: {
+      "label": "Ridge",
+      "value": "ridge"
+    },
+    inset: {
+      "label": "Inset",
+      "value": "inset"
+    },
+    outset: {
+      "label": "Outset",
+      "value": "outset"
+    }
+  };
   var unitArgs = {
     px: {
       "label": "PX",
@@ -63290,7 +61121,7 @@ function Html(props) {
     type: "number",
     onChange: newVal => {
       setwidthVal(newVal);
-      props.onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderBottom');
+      props.onChange(newVal + widthUnitY + ' ' + styleVal + ' ' + colorVal, 'borderBottom');
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     position: "bottom right",
@@ -63316,7 +61147,7 @@ function Html(props) {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
           setwidthUnit(x.value);
-          props.onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderBottom');
+          props.onChange(widthValY + x.value + ' ' + styleVal + ' ' + colorVal, 'borderBottom');
         }
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
@@ -63347,22 +61178,22 @@ function Html(props) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
-          props.onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'borderBottom');
+          props.onChange(widthVal + ' ' + x.value + ' ' + colorVal, 'borderBottom');
+          setoutlineStyleVal(x.value);
         }
       }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "my-2"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: ""
   }, "Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
     value: outlineColorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
     enableAlpha: true,
     onChange: newVal => {
-      props.onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'borderBottom');
+      props.onChange(widthVal + ' ' + styleVal + ' ' + newVal, 'borderBottom');
+      setoutlineColorVal(newVal);
     }
-  })));
+  }));
 }
 
 class PGcssBorderBottom extends Component {
@@ -63385,70 +61216,6 @@ class PGcssBorderBottom extends Component {
       val,
       onChange
     } = this.props;
-    var args = {
-      fill: {
-        "label": "fill",
-        "value": "fill"
-      },
-      contain: {
-        "label": "contain",
-        "value": "contain"
-      },
-      cover: {
-        "label": "cover",
-        "value": "cover"
-      },
-      'scale-down': {
-        "label": "scale-down",
-        "value": "scale-down"
-      },
-      none: {
-        "label": "none",
-        "value": "none"
-      }
-    };
-    var outlineStyleArgs = {
-      none: {
-        "label": "None",
-        "value": "none"
-      },
-      hidden: {
-        "label": "Hidden",
-        "value": "hidden"
-      },
-      dotted: {
-        "label": "Dotted",
-        "value": "dotted"
-      },
-      dashed: {
-        "label": "Dashed",
-        "value": "dashed"
-      },
-      solid: {
-        "label": "Solid",
-        "value": "solid"
-      },
-      double: {
-        "label": "Double",
-        "value": "double"
-      },
-      groove: {
-        "label": "Groove",
-        "value": "groove"
-      },
-      ridge: {
-        "label": "Ridge",
-        "value": "ridge"
-      },
-      inset: {
-        "label": "Inset",
-        "value": "inset"
-      },
-      outset: {
-        "label": "Outset",
-        "value": "outset"
-      }
-    };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       val: val,
       onChange: onChange,
@@ -63569,10 +61336,53 @@ function Html(props) {
     return null;
   }
 
+  console.log(props.val);
   var valParts = props.val != undefined ? props.val.split(" ") : ['0px', 'solid', '#000000'];
   var widthVal = valParts[0] != undefined ? valParts[0] : '0px';
   var styleVal = valParts[1] != undefined ? valParts[1] : 'solid';
   var colorVal = valParts[2] != undefined ? valParts[2] : '#000000';
+  var outlineStyleArgs = {
+    none: {
+      "label": "None",
+      "value": "none"
+    },
+    hidden: {
+      "label": "Hidden",
+      "value": "hidden"
+    },
+    dotted: {
+      "label": "Dotted",
+      "value": "dotted"
+    },
+    dashed: {
+      "label": "Dashed",
+      "value": "dashed"
+    },
+    solid: {
+      "label": "Solid",
+      "value": "solid"
+    },
+    double: {
+      "label": "Double",
+      "value": "double"
+    },
+    groove: {
+      "label": "Groove",
+      "value": "groove"
+    },
+    ridge: {
+      "label": "Ridge",
+      "value": "ridge"
+    },
+    inset: {
+      "label": "Inset",
+      "value": "inset"
+    },
+    outset: {
+      "label": "Outset",
+      "value": "outset"
+    }
+  };
   var unitArgs = {
     px: {
       "label": "PX",
@@ -63659,7 +61469,7 @@ function Html(props) {
     type: "number",
     onChange: newVal => {
       setwidthVal(newVal);
-      props.onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderLeft');
+      props.onChange(newVal + widthUnitY + ' ' + styleVal + ' ' + colorVal, 'borderLeft');
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     position: "bottom right",
@@ -63685,7 +61495,7 @@ function Html(props) {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
           setwidthUnit(x.value);
-          props.onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderLeft');
+          props.onChange(widthValY + x.value + ' ' + styleVal + ' ' + colorVal, 'borderLeft');
         }
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
@@ -63716,22 +61526,22 @@ function Html(props) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
-          props.onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'borderLeft');
+          props.onChange(widthVal + ' ' + x.value + ' ' + colorVal, 'borderLeft');
+          setoutlineStyleVal(x.value);
         }
       }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "my-2"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: ""
   }, "Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
     value: outlineColorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
     enableAlpha: true,
     onChange: newVal => {
-      props.onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'borderLeft');
+      props.onChange(widthVal + ' ' + styleVal + ' ' + newVal, 'borderLeft');
+      setoutlineColorVal(newVal);
     }
-  })));
+  }));
 }
 
 class PGcssBorderLeft extends Component {
@@ -63754,70 +61564,6 @@ class PGcssBorderLeft extends Component {
       val,
       onChange
     } = this.props;
-    var args = {
-      fill: {
-        "label": "fill",
-        "value": "fill"
-      },
-      contain: {
-        "label": "contain",
-        "value": "contain"
-      },
-      cover: {
-        "label": "cover",
-        "value": "cover"
-      },
-      'scale-down': {
-        "label": "scale-down",
-        "value": "scale-down"
-      },
-      none: {
-        "label": "none",
-        "value": "none"
-      }
-    };
-    var outlineStyleArgs = {
-      none: {
-        "label": "None",
-        "value": "none"
-      },
-      hidden: {
-        "label": "Hidden",
-        "value": "hidden"
-      },
-      dotted: {
-        "label": "Dotted",
-        "value": "dotted"
-      },
-      dashed: {
-        "label": "Dashed",
-        "value": "dashed"
-      },
-      solid: {
-        "label": "Solid",
-        "value": "solid"
-      },
-      double: {
-        "label": "Double",
-        "value": "double"
-      },
-      groove: {
-        "label": "Groove",
-        "value": "groove"
-      },
-      ridge: {
-        "label": "Ridge",
-        "value": "ridge"
-      },
-      inset: {
-        "label": "Inset",
-        "value": "inset"
-      },
-      outset: {
-        "label": "Outset",
-        "value": "outset"
-      }
-    };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       val: val,
       onChange: onChange,
@@ -63961,10 +61707,53 @@ function Html(props) {
     return null;
   }
 
+  console.log(props.val);
   var valParts = props.val != undefined ? props.val.split(" ") : ['0px', 'solid', '#000000'];
   var widthVal = valParts[0] != undefined ? valParts[0] : '0px';
   var styleVal = valParts[1] != undefined ? valParts[1] : 'solid';
   var colorVal = valParts[2] != undefined ? valParts[2] : '#000000';
+  var outlineStyleArgs = {
+    none: {
+      "label": "None",
+      "value": "none"
+    },
+    hidden: {
+      "label": "Hidden",
+      "value": "hidden"
+    },
+    dotted: {
+      "label": "Dotted",
+      "value": "dotted"
+    },
+    dashed: {
+      "label": "Dashed",
+      "value": "dashed"
+    },
+    solid: {
+      "label": "Solid",
+      "value": "solid"
+    },
+    double: {
+      "label": "Double",
+      "value": "double"
+    },
+    groove: {
+      "label": "Groove",
+      "value": "groove"
+    },
+    ridge: {
+      "label": "Ridge",
+      "value": "ridge"
+    },
+    inset: {
+      "label": "Inset",
+      "value": "inset"
+    },
+    outset: {
+      "label": "Outset",
+      "value": "outset"
+    }
+  };
   var unitArgs = {
     px: {
       "label": "PX",
@@ -64051,7 +61840,7 @@ function Html(props) {
     type: "number",
     onChange: newVal => {
       setwidthVal(newVal);
-      props.onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderRight');
+      props.onChange(newVal + widthUnitY + ' ' + styleVal + ' ' + colorVal, 'borderRight');
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     position: "bottom right",
@@ -64077,7 +61866,7 @@ function Html(props) {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
           setwidthUnit(x.value);
-          props.onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderRight');
+          props.onChange(widthValY + x.value + ' ' + styleVal + ' ' + colorVal, 'borderRight');
         }
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
@@ -64108,22 +61897,22 @@ function Html(props) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
-          props.onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'borderRight');
+          props.onChange(widthVal + ' ' + x.value + ' ' + colorVal, 'borderRight');
+          setoutlineStyleVal(x.value);
         }
       }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "my-2"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: ""
   }, "Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
     value: outlineColorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
     enableAlpha: true,
     onChange: newVal => {
-      props.onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'borderRight');
+      props.onChange(widthVal + ' ' + styleVal + ' ' + newVal, 'borderRight');
+      setoutlineColorVal(newVal);
     }
-  })));
+  }));
 }
 
 class PGcssBorderRight extends Component {
@@ -64146,70 +61935,6 @@ class PGcssBorderRight extends Component {
       val,
       onChange
     } = this.props;
-    var args = {
-      fill: {
-        "label": "fill",
-        "value": "fill"
-      },
-      contain: {
-        "label": "contain",
-        "value": "contain"
-      },
-      cover: {
-        "label": "cover",
-        "value": "cover"
-      },
-      'scale-down': {
-        "label": "scale-down",
-        "value": "scale-down"
-      },
-      none: {
-        "label": "none",
-        "value": "none"
-      }
-    };
-    var outlineStyleArgs = {
-      none: {
-        "label": "None",
-        "value": "none"
-      },
-      hidden: {
-        "label": "Hidden",
-        "value": "hidden"
-      },
-      dotted: {
-        "label": "Dotted",
-        "value": "dotted"
-      },
-      dashed: {
-        "label": "Dashed",
-        "value": "dashed"
-      },
-      solid: {
-        "label": "Solid",
-        "value": "solid"
-      },
-      double: {
-        "label": "Double",
-        "value": "double"
-      },
-      groove: {
-        "label": "Groove",
-        "value": "groove"
-      },
-      ridge: {
-        "label": "Ridge",
-        "value": "ridge"
-      },
-      inset: {
-        "label": "Inset",
-        "value": "inset"
-      },
-      outset: {
-        "label": "Outset",
-        "value": "outset"
-      }
-    };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       val: val,
       onChange: onChange,
@@ -64517,10 +62242,53 @@ function Html(props) {
     return null;
   }
 
-  var valParts = val != undefined ? val.split(" ") : ['0px', 'solid', '#000000'];
+  console.log(props.val);
+  var valParts = props.val != undefined ? props.val.split(" ") : ['0px', 'solid', '#000000'];
   var widthVal = valParts[0] != undefined ? valParts[0] : '0px';
   var styleVal = valParts[1] != undefined ? valParts[1] : 'solid';
   var colorVal = valParts[2] != undefined ? valParts[2] : '#000000';
+  var outlineStyleArgs = {
+    none: {
+      "label": "None",
+      "value": "none"
+    },
+    hidden: {
+      "label": "Hidden",
+      "value": "hidden"
+    },
+    dotted: {
+      "label": "Dotted",
+      "value": "dotted"
+    },
+    dashed: {
+      "label": "Dashed",
+      "value": "dashed"
+    },
+    solid: {
+      "label": "Solid",
+      "value": "solid"
+    },
+    double: {
+      "label": "Double",
+      "value": "double"
+    },
+    groove: {
+      "label": "Groove",
+      "value": "groove"
+    },
+    ridge: {
+      "label": "Ridge",
+      "value": "ridge"
+    },
+    inset: {
+      "label": "Inset",
+      "value": "inset"
+    },
+    outset: {
+      "label": "Outset",
+      "value": "outset"
+    }
+  };
   var unitArgs = {
     px: {
       "label": "PX",
@@ -64607,7 +62375,7 @@ function Html(props) {
     type: "number",
     onChange: newVal => {
       setwidthVal(newVal);
-      props.onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderTop');
+      props.onChange(newVal + widthUnitY + ' ' + styleVal + ' ' + colorVal, 'borderTop');
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     position: "bottom right",
@@ -64633,7 +62401,7 @@ function Html(props) {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
           setwidthUnit(x.value);
-          props.onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderTop');
+          props.onChange(widthValY + x.value + ' ' + styleVal + ' ' + colorVal, 'borderTop');
         }
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
@@ -64664,22 +62432,22 @@ function Html(props) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
-          props.onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'borderTop');
+          props.onChange(widthVal + ' ' + x.value + ' ' + colorVal, 'borderTop');
+          setoutlineStyleVal(x.value);
         }
       }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "my-2"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: ""
   }, "Border Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
     value: outlineColorVal,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
     enableAlpha: true,
     onChange: newVal => {
-      props.onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'borderTop');
+      props.onChange(widthVal + ' ' + styleVal + ' ' + newVal, 'borderTop');
+      setoutlineColorVal(newVal);
     }
-  })));
+  }));
 }
 
 class PGcssBorderTop extends Component {
@@ -64702,70 +62470,6 @@ class PGcssBorderTop extends Component {
       val,
       onChange
     } = this.props;
-    var args = {
-      fill: {
-        "label": "fill",
-        "value": "fill"
-      },
-      contain: {
-        "label": "contain",
-        "value": "contain"
-      },
-      cover: {
-        "label": "cover",
-        "value": "cover"
-      },
-      'scale-down': {
-        "label": "scale-down",
-        "value": "scale-down"
-      },
-      none: {
-        "label": "none",
-        "value": "none"
-      }
-    };
-    var outlineStyleArgs = {
-      none: {
-        "label": "None",
-        "value": "none"
-      },
-      hidden: {
-        "label": "Hidden",
-        "value": "hidden"
-      },
-      dotted: {
-        "label": "Dotted",
-        "value": "dotted"
-      },
-      dashed: {
-        "label": "Dashed",
-        "value": "dashed"
-      },
-      solid: {
-        "label": "Solid",
-        "value": "solid"
-      },
-      double: {
-        "label": "Double",
-        "value": "double"
-      },
-      groove: {
-        "label": "Groove",
-        "value": "groove"
-      },
-      ridge: {
-        "label": "Ridge",
-        "value": "ridge"
-      },
-      inset: {
-        "label": "Inset",
-        "value": "inset"
-      },
-      outset: {
-        "label": "Outset",
-        "value": "outset"
-      }
-    };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       val: val,
       onChange: onChange,
@@ -64812,10 +62516,53 @@ function Html(props) {
     return null;
   }
 
+  console.log(props.val);
   var valParts = props.val != undefined ? props.val.split(" ") : ['0px', 'solid', '#000000'];
   var widthVal = valParts[0] != undefined ? valParts[0] : '0px';
   var styleVal = valParts[1] != undefined ? valParts[1] : 'solid';
   var colorVal = valParts[2] != undefined ? valParts[2] : '#000000';
+  var outlineStyleArgs = {
+    none: {
+      "label": "None",
+      "value": "none"
+    },
+    hidden: {
+      "label": "Hidden",
+      "value": "hidden"
+    },
+    dotted: {
+      "label": "Dotted",
+      "value": "dotted"
+    },
+    dashed: {
+      "label": "Dashed",
+      "value": "dashed"
+    },
+    solid: {
+      "label": "Solid",
+      "value": "solid"
+    },
+    double: {
+      "label": "Double",
+      "value": "double"
+    },
+    groove: {
+      "label": "Groove",
+      "value": "groove"
+    },
+    ridge: {
+      "label": "Ridge",
+      "value": "ridge"
+    },
+    inset: {
+      "label": "Inset",
+      "value": "inset"
+    },
+    outset: {
+      "label": "Outset",
+      "value": "outset"
+    }
+  };
   var unitArgs = {
     px: {
       "label": "PX",
@@ -64902,7 +62649,7 @@ function Html(props) {
     type: "number",
     onChange: newVal => {
       setwidthVal(newVal);
-      props.onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'border');
+      props.onChange(newVal + widthUnitY + ' ' + styleVal + ' ' + colorVal, 'border');
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     position: "bottom right",
@@ -64928,7 +62675,7 @@ function Html(props) {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
           setwidthUnit(x.value);
-          props.onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'border');
+          props.onChange(widthValY + x.value + ' ' + styleVal + ' ' + colorVal, 'border');
         }
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
@@ -64959,7 +62706,8 @@ function Html(props) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
-          props.onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'border');
+          props.onChange(widthVal + ' ' + x.value + ' ' + colorVal, 'border');
+          setoutlineStyleVal(x.value);
         }
       }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
@@ -64970,7 +62718,8 @@ function Html(props) {
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
     enableAlpha: true,
     onChange: newVal => {
-      props.onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'border');
+      props.onChange(widthVal + ' ' + styleVal + ' ' + newVal, 'border');
+      setoutlineColorVal(newVal);
     }
   }));
 }
@@ -64995,70 +62744,6 @@ class PGcssBorder extends Component {
       val,
       onChange
     } = this.props;
-    var args = {
-      fill: {
-        "label": "fill",
-        "value": "fill"
-      },
-      contain: {
-        "label": "contain",
-        "value": "contain"
-      },
-      cover: {
-        "label": "cover",
-        "value": "cover"
-      },
-      'scale-down': {
-        "label": "scale-down",
-        "value": "scale-down"
-      },
-      none: {
-        "label": "none",
-        "value": "none"
-      }
-    };
-    var outlineStyleArgs = {
-      none: {
-        "label": "None",
-        "value": "none"
-      },
-      hidden: {
-        "label": "Hidden",
-        "value": "hidden"
-      },
-      dotted: {
-        "label": "Dotted",
-        "value": "dotted"
-      },
-      dashed: {
-        "label": "Dashed",
-        "value": "dashed"
-      },
-      solid: {
-        "label": "Solid",
-        "value": "solid"
-      },
-      double: {
-        "label": "Double",
-        "value": "double"
-      },
-      groove: {
-        "label": "Groove",
-        "value": "groove"
-      },
-      ridge: {
-        "label": "Ridge",
-        "value": "ridge"
-      },
-      inset: {
-        "label": "Inset",
-        "value": "inset"
-      },
-      outset: {
-        "label": "Outset",
-        "value": "outset"
-      }
-    };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       val: val,
       onChange: onChange,
@@ -65559,7 +63244,7 @@ function Html(props) {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-2"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
-    value: props.value,
+    value: props.val,
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
     enableAlpha: true,
     onChange: newVal => {
@@ -65622,7 +63307,7 @@ class PGcssColor extends Component {
       className: "w-full text-center left-0 top-1/2 -translate-y-1/2\t absolute"
     }, val == undefined ? 'Set Color' : val)))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       enableAlpha: enableAlpha,
-      value: val,
+      val: val,
       onChange: onChange,
       warn: this.state.showWarning
     }));
@@ -69087,8 +66772,8 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
-  var widthUnitX = val != undefined ? val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
+  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -69113,7 +66798,7 @@ function Html(props) {
         "aria-expanded": isOpen
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: " "
-      }, val ? unitArgs[widthUnit].label : 'Select...'));
+      }, props.val ? unitArgs[widthUnit].label : 'Select...'));
     },
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
@@ -69195,7 +66880,7 @@ function Html(props) {
     return null;
   }
 
-  var valParts = val != undefined ? val.split(" ") : ['1px', 'solid', '#000000'];
+  var valParts = props.val != undefined ? props.val.split(" ") : ['1px', 'solid', '#000000'];
   var widthVal = valParts[0];
   var styleVal = valParts[1];
   var colorVal = valParts[2]; //console.log(widthVal);
@@ -69902,8 +67587,8 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
-  var widthUnitX = val != undefined ? val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
+  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -69929,7 +67614,7 @@ function Html(props) {
         "aria-expanded": isOpen
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: " "
-      }, val ? unitArgs[widthUnit].label : 'Select...'));
+      }, props.val ? unitArgs[widthUnit].label : 'Select...'));
     },
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
@@ -70463,6 +68148,66 @@ function Html(props) {
     "thicknessVal": "1",
     "thicknessUnit": "px"
   });
+  var lineArgs = {
+    none: {
+      "label": "None",
+      "value": "none"
+    },
+    overline: {
+      "label": "Overline",
+      "value": "overline"
+    },
+    underline: {
+      "label": "Underline",
+      "value": "underline"
+    },
+    'line-through': {
+      "label": "Line Through",
+      "value": "line-through"
+    }
+  };
+  var styleArgs = {
+    none: {
+      "label": "None",
+      "value": "none"
+    },
+    solid: {
+      "label": "Solid",
+      "value": "solid"
+    },
+    double: {
+      "label": "Double",
+      "value": "double"
+    },
+    wavy: {
+      "label": "wavy",
+      "value": "wavy"
+    },
+    dotted: {
+      "label": "Dotted",
+      "value": "dotted"
+    },
+    dashed: {
+      "label": "Dashed",
+      "value": "dashed"
+    },
+    groove: {
+      "label": "Groove",
+      "value": "groove"
+    },
+    ridge: {
+      "label": "Ridge",
+      "value": "ridge"
+    },
+    inset: {
+      "label": "Inset",
+      "value": "inset"
+    },
+    outset: {
+      "label": "Outset",
+      "value": "outset"
+    }
+  };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {}, [textDecoration]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     ////console.log(val);
@@ -70621,66 +68366,6 @@ class PGcssTextDecoration extends Component {
       val,
       onChange
     } = this.props;
-    var lineArgs = {
-      none: {
-        "label": "None",
-        "value": "none"
-      },
-      overline: {
-        "label": "Overline",
-        "value": "overline"
-      },
-      underline: {
-        "label": "Underline",
-        "value": "underline"
-      },
-      'line-through': {
-        "label": "Line Through",
-        "value": "line-through"
-      }
-    };
-    var styleArgs = {
-      none: {
-        "label": "None",
-        "value": "none"
-      },
-      solid: {
-        "label": "Solid",
-        "value": "solid"
-      },
-      double: {
-        "label": "Double",
-        "value": "double"
-      },
-      wavy: {
-        "label": "wavy",
-        "value": "wavy"
-      },
-      dotted: {
-        "label": "Dotted",
-        "value": "dotted"
-      },
-      dashed: {
-        "label": "Dashed",
-        "value": "dashed"
-      },
-      groove: {
-        "label": "Groove",
-        "value": "groove"
-      },
-      ridge: {
-        "label": "Ridge",
-        "value": "ridge"
-      },
-      inset: {
-        "label": "Inset",
-        "value": "inset"
-      },
-      outset: {
-        "label": "Outset",
-        "value": "outset"
-      }
-    };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       val: val,
       onChange: onChange,
@@ -71074,7 +68759,7 @@ function Html(props) {
     return null;
   }
 
-  var valParts = val != undefined ? val.split(" ") : ['1px', '1px', '#000000'];
+  var valParts = props.val != undefined ? props.val.split(" ") : ['1px', '1px', '#000000'];
   var horizontalVal = valParts[0];
   var vericalVal = valParts[1];
   var colorVal = valParts[2]; //console.log(horizontalVal);
@@ -73125,8 +70810,8 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
-  var widthUnitX = val != undefined ? val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
+  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -73152,7 +70837,7 @@ function Html(props) {
         "aria-expanded": isOpen
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: " "
-      }, val ? unitArgs[widthUnit].label : 'Select...'));
+      }, props.val ? unitArgs[widthUnit].label : 'Select...'));
     },
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
@@ -73394,7 +71079,7 @@ function Html(props) {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mt-4"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
-    value: val,
+    value: props.val,
     type: "number",
     onChange: newVal => {
       props.onChange(newVal, 'zIndex');
@@ -73567,7 +71252,7 @@ class PGDropdownSudoSelector extends _wordpress_element__WEBPACK_IMPORTED_MODULE
 
               onChange(x, index);
               optionsX[sudoId] = {
-                label: sudoId,
+                label: x.label,
                 value: sudoId
               };
               setoptionsX(optionsX); //sudoScourceUpdate();

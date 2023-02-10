@@ -12,7 +12,7 @@ function Html(props) {
     return null;
   }
 
-  var valParts = (val != undefined) ? val.split(" ") : ['1px', '1px', '#000000'];
+  var valParts = (props.val != undefined) ? props.val.split(" ") : ['1px', '1px', '#000000'];
 
   var horizontalVal = valParts[0];
   var vericalVal = valParts[1];

@@ -246,8 +246,7 @@ registerBlockType("post-grid/post-title", {
 
 
     useEffect(() => {
-      console.log('# wrapper Changed');
-      console.log(wrapper);
+
 
 
     }, [wrapper]);
@@ -437,8 +436,15 @@ registerBlockType("post-grid/post-title", {
 
     function onChangeStylePostTitle(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...postTitle[sudoScource] }
-      var elementSelector = postTitleSelector;
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, postTitle);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ postTitle: updatedObj });
+
+
+
+      var sudoScourceX = { ...updatedObj[sudoScource] }
       var elementSelector = myStore.getElementSelector(sudoScource, postTitleSelector);
 
 
@@ -456,7 +462,6 @@ registerBlockType("post-grid/post-title", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postTitle: { ...postTitle } });
 
     }
 
@@ -507,7 +512,12 @@ registerBlockType("post-grid/post-title", {
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...prefix[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, prefix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ prefix: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
 
 
@@ -525,7 +535,6 @@ registerBlockType("post-grid/post-title", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ prefix: { ...prefix } });
 
     }
 
@@ -575,7 +584,14 @@ registerBlockType("post-grid/post-title", {
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...postfix[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, postfix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ postfix: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
 
 
@@ -593,7 +609,6 @@ registerBlockType("post-grid/post-title", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postfix: { ...postfix } });
 
     }
 
@@ -726,23 +741,6 @@ registerBlockType("post-grid/post-title", {
 
           <InspectorControls key="general">
             <div className='px-3' >
-
-
-              {wrapper.styles.backgroundColor != undefined && (
-                <PGcssBackgroundColor val={wrapper.styles.backgroundColor[breakPointX]} onChange={(newVal, attr) => {
-
-                  console.log(newVal);
-                  var styles = { ...wrapper.styles, backgroundColor: { Desktop: newVal } };
-
-
-
-                  setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-                }} />
-              )}
-
-
-
 
               <PanelBody title="Wrapper" initialOpen={false}>
                 <PGtabs

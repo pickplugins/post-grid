@@ -21,7 +21,7 @@ function Html(props) {
 
 
       <InputControl
-        value={val}
+        value={props.val}
         type="number"
         onChange={(newVal) => {
 

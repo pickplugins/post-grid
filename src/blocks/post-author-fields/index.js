@@ -312,7 +312,15 @@ registerBlockType("post-grid/post-author-fields", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ wrapper: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
 
@@ -329,7 +337,6 @@ registerBlockType("post-grid/post-author-fields", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -382,7 +389,15 @@ registerBlockType("post-grid/post-author-fields", {
 
     function onChangeStyleField(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...field[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, field);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ field: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, fieldSelector);
 
 
@@ -401,7 +416,6 @@ registerBlockType("post-grid/post-author-fields", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ field: { ...field } });
 
     }
 
@@ -454,7 +468,15 @@ registerBlockType("post-grid/post-author-fields", {
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ icon: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = iconSelector;
 
 
@@ -471,7 +493,6 @@ registerBlockType("post-grid/post-author-fields", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
     }
 
 
@@ -526,7 +547,15 @@ registerBlockType("post-grid/post-author-fields", {
 
     function onChangeStyleFrontText(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...frontText[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, frontText);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ frontText: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var elementSelector = frontTextSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
 
@@ -544,7 +573,6 @@ registerBlockType("post-grid/post-author-fields", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ frontText: { ...frontText } });
     }
 
 

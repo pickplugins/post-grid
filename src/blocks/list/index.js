@@ -273,7 +273,13 @@ registerBlockType("post-grid/list", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ wrapper: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
 
@@ -290,7 +296,6 @@ registerBlockType("post-grid/list", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -333,7 +338,15 @@ registerBlockType("post-grid/list", {
 
     function onChangeStyleItem(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...item[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, item);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ item: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
 
 
@@ -350,7 +363,6 @@ registerBlockType("post-grid/list", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ item: { ...item } });
     }
 
 
@@ -394,7 +406,16 @@ registerBlockType("post-grid/list", {
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ icon: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
 
@@ -411,7 +432,6 @@ registerBlockType("post-grid/list", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
     }
 
 

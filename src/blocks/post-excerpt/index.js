@@ -472,7 +472,14 @@ registerBlockType("post-grid/post-excerpt", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ wrapper: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
 
@@ -489,7 +496,6 @@ registerBlockType("post-grid/post-excerpt", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -540,7 +546,13 @@ registerBlockType("post-grid/post-excerpt", {
 
     function onChangeStylePostExcerpt(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...postExcerpt[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, postExcerpt);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ postExcerpt: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
       var elementSelector = myStore.getElementSelector(sudoScource, excerptSelector);
 
 
@@ -557,7 +569,6 @@ registerBlockType("post-grid/post-excerpt", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postExcerpt: { ...postExcerpt } });
     }
 
 
@@ -608,7 +619,13 @@ registerBlockType("post-grid/post-excerpt", {
 
     function onChangeStyleRedmore(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...readMore[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, readMore);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ readMore: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
 
 
@@ -625,7 +642,6 @@ registerBlockType("post-grid/post-excerpt", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ readMore: { ...readMore } });
     }
 
 
@@ -675,7 +691,14 @@ registerBlockType("post-grid/post-excerpt", {
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...prefix[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, prefix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ prefix: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
 
 
@@ -693,7 +716,6 @@ registerBlockType("post-grid/post-excerpt", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ prefix: { ...prefix } });
 
     }
 
@@ -745,7 +767,14 @@ registerBlockType("post-grid/post-excerpt", {
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...postfix[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, postfix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ postfix: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
 
 
@@ -763,7 +792,6 @@ registerBlockType("post-grid/post-excerpt", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postfix: { ...postfix } });
 
     }
 

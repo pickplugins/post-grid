@@ -91,6 +91,33 @@ function Html(props) {
   });
 
 
+  var lineArgs = {
+    none: { "label": "None", "value": "none" },
+    overline: { "label": "Overline", "value": "overline" },
+    underline: { "label": "Underline", "value": "underline" },
+    'line-through': { "label": "Line Through", "value": "line-through" },
+  };
+
+  var styleArgs = {
+    none: { "label": "None", "value": "none" },
+    solid: { "label": "Solid", "value": "solid" },
+    double: { "label": "Double", "value": "double" },
+    wavy: { "label": "wavy", "value": "wavy" },
+    dotted: { "label": "Dotted", "value": "dotted" },
+    dashed: { "label": "Dashed", "value": "dashed" },
+    groove: { "label": "Groove", "value": "groove" },
+    ridge: { "label": "Ridge", "value": "ridge" },
+    inset: { "label": "Inset", "value": "inset" },
+    outset: { "label": "Outset", "value": "outset" },
+  };
+
+
+
+
+
+
+
+
   useEffect(() => {
 
 
@@ -350,25 +377,7 @@ class PGcssTextDecoration extends Component {
     } = this.props;
 
 
-    var lineArgs = {
-      none: { "label": "None", "value": "none" },
-      overline: { "label": "Overline", "value": "overline" },
-      underline: { "label": "Underline", "value": "underline" },
-      'line-through': { "label": "Line Through", "value": "line-through" },
-    };
 
-    var styleArgs = {
-      none: { "label": "None", "value": "none" },
-      solid: { "label": "Solid", "value": "solid" },
-      double: { "label": "Double", "value": "double" },
-      wavy: { "label": "wavy", "value": "wavy" },
-      dotted: { "label": "Dotted", "value": "dotted" },
-      dashed: { "label": "Dashed", "value": "dashed" },
-      groove: { "label": "Groove", "value": "groove" },
-      ridge: { "label": "Ridge", "value": "ridge" },
-      inset: { "label": "Inset", "value": "inset" },
-      outset: { "label": "Outset", "value": "outset" },
-    };
 
 
 

@@ -277,7 +277,15 @@ registerBlockType("post-grid/post-comment-count", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ wrapper: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
 
@@ -294,7 +302,6 @@ registerBlockType("post-grid/post-comment-count", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -348,7 +355,14 @@ registerBlockType("post-grid/post-comment-count", {
 
     function onChangeStyleCommentCount(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...commentCount[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, commentCount);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ commentCount: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, commentCountSelector);
 
 
@@ -365,7 +379,6 @@ registerBlockType("post-grid/post-comment-count", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ commentCount: { ...commentCount } });
     }
 
 
@@ -416,7 +429,14 @@ registerBlockType("post-grid/post-comment-count", {
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ icon: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var elementSelector = iconSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
@@ -434,7 +454,6 @@ registerBlockType("post-grid/post-comment-count", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
     }
 
 
@@ -491,7 +510,14 @@ registerBlockType("post-grid/post-comment-count", {
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...prefix[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, prefix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ prefix: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = prefixSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
 
@@ -510,7 +536,6 @@ registerBlockType("post-grid/post-comment-count", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ prefix: { ...prefix } });
 
     }
 
@@ -562,7 +587,14 @@ registerBlockType("post-grid/post-comment-count", {
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...postfix[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, postfix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ postfix: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
 
 
@@ -580,7 +612,6 @@ registerBlockType("post-grid/post-comment-count", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postfix: { ...postfix } });
 
     }
 

@@ -23,7 +23,7 @@ function Html(props) {
 
 
           <ColorPalette
-            value={props.value}
+            value={props.val}
             colors={colorsPresets}
 
             enableAlpha
@@ -109,7 +109,7 @@ class PGcssBackgroundColor extends Component {
 
 
         </div>
-        <Html enableAlpha={enableAlpha} value={val} onChange={onChange} warn={this.state.showWarning} />
+        <Html enableAlpha={enableAlpha} val={val} onChange={onChange} warn={this.state.showWarning} />
 
 
 

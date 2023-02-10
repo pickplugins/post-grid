@@ -412,7 +412,13 @@ registerBlockType("post-grid/accordion", {
 
     function onChangeStyleHeader(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...header[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, header);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ header: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
       var elementSelector = myStore.getElementSelector(sudoScource, headerSelector);
 
 
@@ -480,7 +486,14 @@ registerBlockType("post-grid/accordion", {
 
     function onChangeStyleContent(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...content[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, content);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ content: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, contentSelector);
 
       sudoScourceX[attr][breakPointX] = newVal;
@@ -496,7 +509,6 @@ registerBlockType("post-grid/accordion", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ content: { ...content } });
     }
 
 
@@ -546,7 +558,16 @@ registerBlockType("post-grid/accordion", {
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ icon: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
 
@@ -564,7 +585,6 @@ registerBlockType("post-grid/accordion", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
 
     }
 
@@ -616,7 +636,14 @@ registerBlockType("post-grid/accordion", {
 
     function onChangeStyleHeaderActive(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...headerActive[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, headerActive);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ headerActive: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, headerActiveSelector);
 
 
@@ -634,7 +661,6 @@ registerBlockType("post-grid/accordion", {
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ headerActive: { ...headerActive } });
 
     }
 

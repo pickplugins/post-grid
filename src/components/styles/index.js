@@ -184,7 +184,6 @@ function Html(props) {
     backgroundSize: { id: 'backgroundSize', label: 'Background Size' },
     border: { id: 'border', label: 'Border' },
     borderTop: { id: 'borderTop', label: 'Border Top' },
-
     borderRight: { id: 'borderRight', label: 'Border Right' },
     borderBottom: { id: 'borderBottom', label: 'Border Bottom' },
     borderLeft: { id: 'borderLeft', label: 'Border Left' },

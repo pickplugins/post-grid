@@ -17,7 +17,6 @@ function Html(props) {
   }
 
 
-  console.log(props.val);
   const [type, setType] = useState('url');
   const [imageUrl, setimageUrl] = useState('');
   const [colorArgs, setColorArgs] = useState([]);
@@ -65,7 +64,6 @@ function Html(props) {
   }
 
 
-  console.log(type);
 
   const ALLOWED_MEDIA_TYPES = ['image'];
 

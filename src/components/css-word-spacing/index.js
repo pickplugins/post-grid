@@ -33,8 +33,8 @@ function Html(props) {
     vmax: { "label": "VMAX", "value": "vmax" },
   }
 
-  var widthValX = val != undefined ? val.match(/\d+/g)[0] : 10;
-  var widthUnitX = val != undefined ? val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
+  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
@@ -68,7 +68,7 @@ function Html(props) {
               onClick={onToggle}
               aria-expanded={isOpen}
             >
-              <div className=" ">{val ? unitArgs[widthUnit].label : 'Select...'}</div>
+              <div className=" ">{props.val ? unitArgs[widthUnit].label : 'Select...'}</div>
 
 
             </Button>

@@ -17,6 +17,8 @@ function Html(props) {
     return null;
   }
 
+  console.log(props.val);
+
 
   var valParts = (props.val != undefined) ? props.val.split(" ") : ['0px', 'solid', '#000000'];
 
@@ -24,6 +26,21 @@ function Html(props) {
   var styleVal = (valParts[1] != undefined) ? valParts[1] : 'solid';
   var colorVal = (valParts[2] != undefined) ? valParts[2] : '#000000';
 
+
+
+
+  var outlineStyleArgs = {
+    none: { "label": "None", "value": "none" },
+    hidden: { "label": "Hidden", "value": "hidden" },
+    dotted: { "label": "Dotted", "value": "dotted" },
+    dashed: { "label": "Dashed", "value": "dashed" },
+    solid: { "label": "Solid", "value": "solid" },
+    double: { "label": "Double", "value": "double" },
+    groove: { "label": "Groove", "value": "groove" },
+    ridge: { "label": "Ridge", "value": "ridge" },
+    inset: { "label": "Inset", "value": "inset" },
+    outset: { "label": "Outset", "value": "outset" },
+  };
 
 
 
@@ -84,7 +101,7 @@ function Html(props) {
             onChange={(newVal) => {
 
               setwidthVal(newVal);
-              props.onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'border');
+              props.onChange(newVal + widthUnitY + ' ' + styleVal + ' ' + colorVal, 'border');
 
 
             }}
@@ -116,7 +133,7 @@ function Html(props) {
                     <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                       setwidthUnit(x.value);
-                      props.onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'border');
+                      props.onChange(widthValY + x.value + ' ' + styleVal + ' ' + colorVal, 'border');
 
 
                     }}>
@@ -172,8 +189,8 @@ function Html(props) {
 
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
-                  props.onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'border');
-
+                  props.onChange(widthVal + ' ' + x.value + ' ' + colorVal, 'border');
+                  setoutlineStyleVal(x.value)
 
                 }}>
 
@@ -205,8 +222,8 @@ function Html(props) {
         enableAlpha
         onChange={(newVal) => {
 
-          props.onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'border');
-
+          props.onChange(widthVal + ' ' + styleVal + ' ' + newVal, 'border');
+          setoutlineColorVal(newVal)
 
         }}
 
@@ -249,29 +266,6 @@ class PGcssBorder extends Component {
 
 
     } = this.props;
-
-
-    var args = {
-      fill: { "label": "fill", "value": "fill" },
-      contain: { "label": "contain", "value": "contain" },
-      cover: { "label": "cover", "value": "cover" },
-      'scale-down': { "label": "scale-down", "value": "scale-down" },
-      none: { "label": "none", "value": "none" },
-    };
-
-
-    var outlineStyleArgs = {
-      none: { "label": "None", "value": "none" },
-      hidden: { "label": "Hidden", "value": "hidden" },
-      dotted: { "label": "Dotted", "value": "dotted" },
-      dashed: { "label": "Dashed", "value": "dashed" },
-      solid: { "label": "Solid", "value": "solid" },
-      double: { "label": "Double", "value": "double" },
-      groove: { "label": "Groove", "value": "groove" },
-      ridge: { "label": "Ridge", "value": "ridge" },
-      inset: { "label": "Inset", "value": "inset" },
-      outset: { "label": "Outset", "value": "outset" },
-    };
 
 
 

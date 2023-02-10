@@ -386,7 +386,15 @@ registerBlockType("post-grid/post-tags", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ wrapper: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
 
@@ -403,7 +411,6 @@ registerBlockType("post-grid/post-tags", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -450,7 +457,14 @@ registerBlockType("post-grid/post-tags", {
 
     function onChangeStyleItems(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...items[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, items);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ items: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
 
 
@@ -467,7 +481,6 @@ registerBlockType("post-grid/post-tags", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ items: { ...items } });
     }
 
 
@@ -512,7 +525,15 @@ registerBlockType("post-grid/post-tags", {
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, icon);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ icon: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var elementSelector = iconSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
 
@@ -530,7 +551,6 @@ registerBlockType("post-grid/post-tags", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
     }
 
 
@@ -575,7 +595,15 @@ registerBlockType("post-grid/post-tags", {
 
     function onChangeStyleFrontText(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...frontText[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, frontText);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ frontText: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = frontTextSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
 
@@ -593,7 +621,6 @@ registerBlockType("post-grid/post-tags", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ frontText: { ...frontText } });
     }
 
 
@@ -640,7 +667,15 @@ registerBlockType("post-grid/post-tags", {
 
     function onChangeStyleSeparator(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...separator[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, separator);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ separator: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = separatorSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
 
@@ -658,7 +693,6 @@ registerBlockType("post-grid/post-tags", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ separator: { ...separator } });
     }
 
 
@@ -700,80 +734,6 @@ registerBlockType("post-grid/post-tags", {
 
 
 
-    function paddingControlItems(nextValues) {
-
-
-
-      var responsive = items.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-      var styles = { ...items.styles, padding: responsive };
-      setAttributes({ items: { ...items, styles: styles } });
-
-
-      blockCssY.items[itemSelector] = (blockCssY.items[itemSelector] != undefined) ? blockCssY.items[itemSelector] : {};
-
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[itemSelector]['padding-top'] != undefined) ? blockCssY.items[itemSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-top': paddingTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[itemSelector]['padding-right'] != undefined) ? blockCssY.items[itemSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-right': paddingRight };
-
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var paddingBottom = (blockCssY.items[itemSelector]['padding-bottom'] != undefined) ? blockCssY.items[itemSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-bottom': paddingBottom };
-
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[itemSelector]['padding-left'] != undefined) ? blockCssY.items[itemSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'padding-left': paddingLeft };
-
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
 
 
 
@@ -784,335 +744,6 @@ registerBlockType("post-grid/post-tags", {
       setAttributes({ icon: { ...icon, options: options } });
 
     }
-
-
-
-
-    function onChangeIconTypo(typoX) {
-
-
-
-
-
-      setAttributes({ icon: { ...icon, styles: typoX } });
-
-      var newValuesObjX = {};
-      var itemsX = blockCssY.items;
-
-
-
-
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-
-        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[iconSelector] != undefined) ? blockCssY.items[iconSelector]['font-size'] : {};
-
-        if (fontSizeX[breakPointX] == undefined) {
-
-          fontSizeX[breakPointX] = '';
-        }
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
-
-      }
-
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-
-        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 16;
-        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[iconSelector]['line-height'] != undefined) ? blockCssY.items[iconSelector]['line-height'] : {};
-
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
-        //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'line-height': lineHeightX };
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'line-height': lineHeightX };
-
-      }
-
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'font-weight': typoX.fontWeight };
-
-      }
-
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-
-        var str = {};
-
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
-        str[breakPointX] = textDecorationXStr;
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector], 'text-decoration': str };
-
-
-
-      }
-
-
-
-
-      //setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ blockCssY: { items: itemsX } });
-
-
-    }
-
-
-    function marginControlItems(nextValues) {
-
-
-      var responsive = items.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...items.styles, margin: responsive };
-      setAttributes({ items: { ...items, styles: styles } });
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-      blockCssY.items[itemSelector] = (blockCssY.items[itemSelector] != undefined) ? blockCssY.items[itemSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[itemSelector]['margin-top'] != undefined) ? blockCssY.items[itemSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-top': marginTop };
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[itemSelector]['margin-right'] !== undefined) ? blockCssY.items[itemSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-right': marginRight };
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[itemSelector]['margin-bottom'] !== undefined) ? blockCssY.items[itemSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[itemSelector]['margin-left'] !== undefined) ? blockCssY.items[itemSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-left': marginLeft };
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-    }
-
-
-
-
-
-    function onChangeTypo(typoX) {
-
-      setAttributes({ items: { ...items, styles: typoX } });
-
-      var newValuesObjX = {};
-
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-family': typoX.fontFamily };
-
-      }
-
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-
-        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[itemSelector]['font-size'] != undefined) ? blockCssY.items[itemSelector]['font-size'] : {};
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-size': fontSizeX };
-
-      }
-
-
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-
-        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[itemSelector]['line-height'] != undefined) ? blockCssY.items[itemSelector]['line-height'] : {};
-
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'line-height': lineHeightX };
-      }
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-
-        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
-
-
-
-        var letterSpacingX = (blockCssY.items[itemSelector]['letter-spacing'] != undefined) ? blockCssY.items[itemSelector]['letter-spacing'] : {};
-
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'letter-spacing': letterSpacingX };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-weight': typoX.fontWeight };
-
-      }
-
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-
-        var str = {};
-
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
-        str[breakPointX] = textDecorationXStr;
-
-        //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'text-decoration': str };
-
-      }
-      if (typoX.textTransform[breakPointX] != undefined) {
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'text-transform': typoX.textTransform };
-
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-
-
-    function onChangeTypoFrontText(typoX) {
-
-      setAttributes({ items: { ...items, styles: typoX } });
-
-      var newValuesObjX = {};
-
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'font-family': typoX.fontFamily };
-
-      }
-
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-
-        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[frontTextSelector]['font-size'] != undefined) ? blockCssY.items[frontTextSelector]['font-size'] : {};
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'font-size': fontSizeX };
-
-      }
-
-
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-
-        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[frontTextSelector]['line-height'] != undefined) ? blockCssY.items[frontTextSelector]['line-height'] : {};
-
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'line-height': lineHeightX };
-      }
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-
-        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
-
-
-
-        var letterSpacingX = (blockCssY.items[frontTextSelector]['letter-spacing'] != undefined) ? blockCssY.items[frontTextSelector]['letter-spacing'] : {};
-
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'letter-spacing': letterSpacingX };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'font-weight': typoX.fontWeight };
-
-      }
-
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-
-        var str = {};
-
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
-        str[breakPointX] = textDecorationXStr;
-
-        //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'text-decoration': str };
-
-      }
-      if (typoX.textTransform[breakPointX] != undefined) {
-
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector], 'text-transform': typoX.textTransform };
-
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-
-
-
 
 
 

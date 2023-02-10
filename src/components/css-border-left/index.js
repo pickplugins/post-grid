@@ -5,6 +5,8 @@ import { Button, Dropdown } from '@wordpress/components'
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import colorsPresets from '../../colors-presets'
 import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
+
+
 import PGColorPicker from '../../components/input-color-picker'
 
 
@@ -15,6 +17,8 @@ function Html(props) {
     return null;
   }
 
+  console.log(props.val);
+
 
   var valParts = (props.val != undefined) ? props.val.split(" ") : ['0px', 'solid', '#000000'];
 
@@ -22,6 +26,21 @@ function Html(props) {
   var styleVal = (valParts[1] != undefined) ? valParts[1] : 'solid';
   var colorVal = (valParts[2] != undefined) ? valParts[2] : '#000000';
 
+
+
+
+  var outlineStyleArgs = {
+    none: { "label": "None", "value": "none" },
+    hidden: { "label": "Hidden", "value": "hidden" },
+    dotted: { "label": "Dotted", "value": "dotted" },
+    dashed: { "label": "Dashed", "value": "dashed" },
+    solid: { "label": "Solid", "value": "solid" },
+    double: { "label": "Double", "value": "double" },
+    groove: { "label": "Groove", "value": "groove" },
+    ridge: { "label": "Ridge", "value": "ridge" },
+    inset: { "label": "Inset", "value": "inset" },
+    outset: { "label": "Outset", "value": "outset" },
+  };
 
 
 
@@ -82,7 +101,7 @@ function Html(props) {
             onChange={(newVal) => {
 
               setwidthVal(newVal);
-              props.onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderLeft');
+              props.onChange(newVal + widthUnitY + ' ' + styleVal + ' ' + colorVal, 'borderLeft');
 
 
             }}
@@ -114,7 +133,7 @@ function Html(props) {
                     <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                       setwidthUnit(x.value);
-                      props.onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'borderLeft');
+                      props.onChange(widthValY + x.value + ' ' + styleVal + ' ' + colorVal, 'borderLeft');
 
 
                     }}>
@@ -170,8 +189,8 @@ function Html(props) {
 
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
-                  props.onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'borderLeft');
-
+                  props.onChange(widthVal + ' ' + x.value + ' ' + colorVal, 'borderLeft');
+                  setoutlineStyleVal(x.value)
 
                 }}>
 
@@ -196,20 +215,19 @@ function Html(props) {
         />
       </div>
 
-      <div className='my-2'>
-        <label for="">Border Color</label>
+      <label for="">Border Color</label>
 
+      <PGColorPicker value={outlineColorVal}
+        colors={colorsPresets}
+        enableAlpha
+        onChange={(newVal) => {
 
-        <PGColorPicker value={outlineColorVal}
-          colors={colorsPresets}
-          enableAlpha
-          onChange={(newVal) => {
-            props.onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'borderLeft');
-          }}
-        />
-      </div>
+          props.onChange(widthVal + ' ' + styleVal + ' ' + newVal, 'borderLeft');
+          setoutlineColorVal(newVal)
 
+        }}
 
+      />
 
 
 
@@ -224,6 +242,7 @@ function Html(props) {
 
 class PGcssBorderLeft extends Component {
 
+
   constructor(props) {
     super(props);
     this.state = { showWarning: true };
@@ -237,8 +256,6 @@ class PGcssBorderLeft extends Component {
   }
 
 
-
-
   render() {
 
 
@@ -250,28 +267,6 @@ class PGcssBorderLeft extends Component {
 
     } = this.props;
 
-
-    var args = {
-      fill: { "label": "fill", "value": "fill" },
-      contain: { "label": "contain", "value": "contain" },
-      cover: { "label": "cover", "value": "cover" },
-      'scale-down': { "label": "scale-down", "value": "scale-down" },
-      none: { "label": "none", "value": "none" },
-    };
-
-
-    var outlineStyleArgs = {
-      none: { "label": "None", "value": "none" },
-      hidden: { "label": "Hidden", "value": "hidden" },
-      dotted: { "label": "Dotted", "value": "dotted" },
-      dashed: { "label": "Dashed", "value": "dashed" },
-      solid: { "label": "Solid", "value": "solid" },
-      double: { "label": "Double", "value": "double" },
-      groove: { "label": "Groove", "value": "groove" },
-      ridge: { "label": "Ridge", "value": "ridge" },
-      inset: { "label": "Inset", "value": "inset" },
-      outset: { "label": "Outset", "value": "outset" },
-    };
 
 
 

@@ -452,7 +452,14 @@ registerBlockType("post-grid/post-author", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, wrapper);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ wrapper: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
 
@@ -469,7 +476,6 @@ registerBlockType("post-grid/post-author", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -523,7 +529,15 @@ registerBlockType("post-grid/post-author", {
 
     function onChangeStyleElements(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...elements[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, elements);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ elements: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var elementSelector = redmoreSelector;
       var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
 
@@ -541,7 +555,6 @@ registerBlockType("post-grid/post-author", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ elements: { ...elements } });
     }
 
 
@@ -594,7 +607,15 @@ registerBlockType("post-grid/post-author", {
 
     function onChangeStyleAvatar(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...avatar[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, avatar);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ avatar: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, avatarSelector);
 
 
@@ -611,7 +632,6 @@ registerBlockType("post-grid/post-author", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ avatar: { ...avatar } });
     }
 
 
@@ -659,6 +679,15 @@ registerBlockType("post-grid/post-author", {
 
     function onChangeStyleName(sudoScource, newVal, attr) {
 
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, name);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ name: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+
       var sudoScourceX = { ...name[sudoScource] }
       var elementSelector = myStore.getElementSelector(sudoScource, nameSelector);
 
@@ -676,7 +705,6 @@ registerBlockType("post-grid/post-author", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ name: { ...name } });
     }
 
 
@@ -725,7 +753,14 @@ registerBlockType("post-grid/post-author", {
 
     function onChangeStyleDescription(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...description[sudoScource] }
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, description);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ description: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, descriptionSelector);
 
 
@@ -742,7 +777,6 @@ registerBlockType("post-grid/post-author", {
       })
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ description: { ...description } });
     }
 
 
@@ -784,923 +818,6 @@ registerBlockType("post-grid/post-author", {
       description[sudoScource] = sudoScourceX;
       setAttributes({ description: { ...description } });
     }
-
-
-
-
-
-    function onChangeStylePrefix(sudoScource, newVal, attr) {
-
-      var sudoScourceX = { ...prefix[sudoScource] }
-      var elementSelector = prefixSelector;
-      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
-
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ prefix: { ...prefix } });
-
-    }
-
-
-    function onRemoveStylePrefix(sudoScource, key) {
-
-      var sudoScourceX = { ...prefix[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      prefix[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
-
-      setAttributes({ prefix: { ...prefix } });
-
-      if (blockCssY.items[prefixSelector] == undefined) {
-        blockCssY.items[prefixSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
-
-      })
-
-
-      if (blockCssY.items[prefixSelector][key] != undefined) {
-        delete blockCssY.items[prefixSelector][key];
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-    }
-
-
-    function onAddStylePrefix(sudoScource, key) {
-
-      var sudoScourceX = { ...prefix[sudoScource] }
-      sudoScourceX[key] = {};
-      prefix[sudoScource] = sudoScourceX;
-      setAttributes({ prefix: { ...prefix } });
-
-    }
-
-
-    function onChangeStylePostfix(sudoScource, newVal, attr) {
-
-      var sudoScourceX = { ...postfix[sudoScource] }
-      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
-
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postfix: { ...postfix } });
-
-    }
-
-
-    function onRemoveStylePostfix(sudoScource, key) {
-
-      var sudoScourceX = { ...postfix[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      postfix[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
-
-      setAttributes({ postfix: { ...postfix } });
-
-      if (blockCssY.items[postfixSelector] == undefined) {
-        blockCssY.items[postfixSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
-
-      })
-
-
-      if (blockCssY.items[postfixSelector][key] != undefined) {
-        delete blockCssY.items[postfixSelector][key];
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-    }
-
-
-    function onAddStylePostfix(sudoScource, key) {
-
-      var sudoScourceX = { ...postfix[sudoScource] }
-      sudoScourceX[key] = {};
-      postfix[sudoScource] = sudoScourceX;
-      setAttributes({ postfix: { ...postfix } });
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function paddingControl(nextValues) {
-
-
-      var responsive = name.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...name.styles, padding: responsive };
-      setAttributes({ name: { ...name, styles: styles } });
-
-
-      blockCssY.items[nameSelector] = (blockCssY.items[nameSelector] != undefined) ? blockCssY.items[nameSelector] : {};
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[nameSelector]['padding-top'] != undefined) ? blockCssY.items[nameSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'padding-top': paddingTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[nameSelector]['padding-right'] != undefined) ? blockCssY.items[nameSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'padding-right': paddingRight };
-
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var paddingBottom = (blockCssY.items[nameSelector]['padding-bottom'] != undefined) ? blockCssY.items[nameSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'padding-bottom': paddingBottom };
-
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[nameSelector]['padding-left'] != undefined) ? blockCssY.items[nameSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'padding-left': paddingLeft };
-
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-    function borderRadiusControlAvatar(nextValues) {
-
-
-      var responsive = avatar.styles.borderRadius;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...avatar.styles, borderRadius: responsive };
-      setAttributes({ avatar: { ...avatar, styles: styles } });
-
-
-
-
-      blockCssY.items[avatarImgSelector] = (blockCssY.items[avatarImgSelector] != undefined) ? blockCssY.items[avatarImgSelector] : {};
-
-
-
-      if (nextValues.top != undefined) {
-
-        var borderRadiusX = (blockCssY.items[avatarImgSelector]['border-radius'] != undefined) ? blockCssY.items[avatarImgSelector]['border-radius'] : {};
-        borderRadiusX[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left
-
-
-        blockCssY.items[avatarImgSelector] = { ...blockCssY.items[avatarImgSelector], 'border-radius': borderRadiusX };
-
-      }
-
-
-
-
-
-
-
-
-
-
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-
-    function paddingControlAvatar(nextValues) {
-
-
-      var responsive = avatar.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...avatar.styles, padding: responsive };
-      setAttributes({ avatar: { ...avatar, styles: styles } });
-
-
-      blockCssY.items[avatarSelector] = (blockCssY.items[avatarSelector] != undefined) ? blockCssY.items[avatarSelector] : {};
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[avatarSelector]['padding-top'] != undefined) ? blockCssY.items[avatarSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'padding-top': paddingTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[avatarSelector]['padding-right'] != undefined) ? blockCssY.items[avatarSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'padding-right': paddingRight };
-
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var paddingBottom = (blockCssY.items[avatarSelector]['padding-bottom'] != undefined) ? blockCssY.items[avatarSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'padding-bottom': paddingBottom };
-
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[avatarSelector]['padding-left'] != undefined) ? blockCssY.items[avatarSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'padding-left': paddingLeft };
-
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-
-
-
-
-    function paddingControlDescription(nextValues) {
-
-
-      var responsive = description.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...description.styles, padding: responsive };
-      setAttributes({ description: { ...description, styles: styles } });
-
-
-      blockCssY.items[descriptionSelector] = (blockCssY.items[descriptionSelector] != undefined) ? blockCssY.items[descriptionSelector] : {};
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[descriptionSelector]['padding-top'] != undefined) ? blockCssY.items[descriptionSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'padding-top': paddingTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[descriptionSelector]['padding-right'] != undefined) ? blockCssY.items[descriptionSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'padding-right': paddingRight };
-
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var paddingBottom = (blockCssY.items[descriptionSelector]['padding-bottom'] != undefined) ? blockCssY.items[descriptionSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'padding-bottom': paddingBottom };
-
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[descriptionSelector]['padding-left'] != undefined) ? blockCssY.items[descriptionSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'padding-left': paddingLeft };
-
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-
-
-    function marginControlAvatar(nextValues) {
-
-      var responsive = avatar.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...avatar.styles, padding: responsive };
-      setAttributes({ avatar: { ...avatar, styles: styles } });
-
-
-
-      blockCssY.items[avatarSelector] = (blockCssY.items[avatarSelector] != undefined) ? blockCssY.items[avatarSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[avatarSelector]['margin-top'] != undefined) ? blockCssY.items[avatarSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'margin-top': marginTop };
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[avatarSelector]['margin-right'] !== undefined) ? blockCssY.items[avatarSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'margin-right': marginRight };
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[avatarSelector]['margin-bottom'] !== undefined) ? blockCssY.items[avatarSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[avatarSelector]['margin-left'] !== undefined) ? blockCssY.items[avatarSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[avatarSelector] = { ...blockCssY.items[avatarSelector], 'margin-left': marginLeft };
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-    }
-
-
-
-    function marginControl(nextValues) {
-
-      var responsive = name.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...name.styles, margin: responsive };
-      setAttributes({ name: { ...name, styles: styles } });
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-      blockCssY.items[nameSelector] = (blockCssY.items[nameSelector] != undefined) ? blockCssY.items[nameSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[nameSelector]['margin-top'] != undefined) ? blockCssY.items[nameSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'margin-top': marginTop };
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[nameSelector]['margin-right'] !== undefined) ? blockCssY.items[nameSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'margin-right': marginRight };
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[nameSelector]['margin-bottom'] !== undefined) ? blockCssY.items[nameSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[nameSelector]['margin-left'] !== undefined) ? blockCssY.items[nameSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'margin-left': marginLeft };
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-    }
-
-
-
-    function marginControlDescription(nextValues) {
-
-      var responsive = description.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...description.styles, padding: responsive };
-      setAttributes({ description: { ...description, styles: styles } });
-
-
-
-      blockCssY.items[descriptionSelector] = (blockCssY.items[descriptionSelector] != undefined) ? blockCssY.items[descriptionSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[descriptionSelector]['margin-top'] != undefined) ? blockCssY.items[descriptionSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'margin-top': marginTop };
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[descriptionSelector]['margin-right'] !== undefined) ? blockCssY.items[descriptionSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'margin-right': marginRight };
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[descriptionSelector]['margin-bottom'] !== undefined) ? blockCssY.items[descriptionSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[descriptionSelector]['margin-left'] !== undefined) ? blockCssY.items[descriptionSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'margin-left': marginLeft };
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-    }
-
-
-
-
-    function onChangeTypoName(typoX) {
-
-      setAttributes({ name: { ...name, styles: typoX } });
-
-
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'font-family': typoX.fontFamily };
-
-      }
-
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-
-        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[nameSelector] != undefined) ? blockCssY.items[nameSelector]['font-size'] : {};
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'font-size': fontSizeX };
-
-      }
-
-
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-
-        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[nameSelector]['line-height'] != undefined) ? blockCssY.items[nameSelector]['line-height'] : {};
-
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'line-height': lineHeightX };
-      }
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-
-        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
-
-
-
-        var letterSpacingX = (blockCssY.items[nameSelector]['letter-spacing'] != undefined) ? blockCssY.items[nameSelector]['letter-spacing'] : {};
-
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'letter-spacing': letterSpacingX };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'font-weight': typoX.fontWeight };
-
-      }
-
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-
-        var str = {};
-
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
-        str[breakPointX] = textDecorationXStr;
-
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'text-decoration': str };
-
-      }
-      if (typoX.textTransform[breakPointX] != undefined) {
-
-        blockCssY.items[nameSelector] = { ...blockCssY.items[nameSelector], 'text-transform': typoX.textTransform };
-
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-    function onChangeTypoDescription(typoX) {
-
-      setAttributes({ description: { ...description, styles: typoX } });
-
-
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'font-family': typoX.fontFamily };
-
-      }
-
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-
-        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[descriptionSelector] != undefined) ? blockCssY.items[descriptionSelector]['font-size'] : {};
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'font-size': fontSizeX };
-
-      }
-
-
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-
-        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[descriptionSelector]['line-height'] != undefined) ? blockCssY.items[descriptionSelector]['line-height'] : {};
-
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'line-height': lineHeightX };
-      }
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-
-        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
-
-
-
-        var letterSpacingX = (blockCssY.items[descriptionSelector]['letter-spacing'] != undefined) ? blockCssY.items[descriptionSelector]['letter-spacing'] : {};
-
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'letter-spacing': letterSpacingX };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'font-weight': typoX.fontWeight };
-
-      }
-
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-
-        var str = {};
-
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
-        str[breakPointX] = textDecorationXStr;
-
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'text-decoration': str };
-
-      }
-      if (typoX.textTransform[breakPointX] != undefined) {
-
-        blockCssY.items[descriptionSelector] = { ...blockCssY.items[descriptionSelector], 'text-transform': typoX.textTransform };
-
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-    function generateBlockCssY() {
-
-
-      var reponsiveCssGroups = {};
-
-
-      for (var selector in blockCssY.items) {
-
-
-
-        var attrs = blockCssY.items[selector];
-
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = []
-            }
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = []
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = []
-            }
-
-            reponsiveCssGroups[device][selector].push({ 'attr': attr, 'val': attrValue });
-
-          }
-        }
-      }
-
-
-
-      //return false;
-
-
-      var reponsiveCssMobile = '';
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-
-          reponsiveCssMobile += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssMobile += '}';
-        }
-        reponsiveCssMobile += '}';
-
-      }
-
-
-
-      var reponsiveCssTablet = '';
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-
-          reponsiveCssTablet += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssTablet += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssTablet += '}';
-        }
-
-        reponsiveCssTablet += '}';
-      }
-
-      var reponsiveCssDesktop = '';
-
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-
-
-          reponsiveCssDesktop += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssDesktop += '}';
-
-
-        }
-        reponsiveCssDesktop += '}';
-
-
-
-      }
-
-
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
-
-
-
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200)
-
-
-      } else {
-
-
-
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-
-        csswrappg.insertAdjacentHTML('beforeend', str);
-
-
-
-      }
-
-
-
-    }
-
 
 
 

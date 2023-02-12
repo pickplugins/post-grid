@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n'
 
 
 
+import { applyFilters } from '@wordpress/hooks';
 
 import apiFetch from '@wordpress/api-fetch';
 import {

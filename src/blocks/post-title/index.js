@@ -66,8 +66,6 @@ registerBlockType("post-grid/post-title", {
         styles:
         {
 
-          backgroundColor: {},
-
         },
       },
     },
@@ -93,8 +91,7 @@ registerBlockType("post-grid/post-title", {
         styles: {
           color: {},
           backgroundColor: {},
-
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: {},
 
         },
       },
@@ -358,77 +355,84 @@ registerBlockType("post-grid/post-title", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var path = sudoScource + '.' + attr + '.' + breakPointX
+      var path = [sudoScource, attr, breakPointX]
       let obj = Object.assign({}, wrapper);
-      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
-      setAttributes({ wrapper: updatedObj });
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ wrapper: object });
 
 
-      var sudoScourceX = { ...updatedObj[sudoScource] }
 
 
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
-
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+      // var sudoScourceX = { ...object[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+
+
+
+
+
 
     }
 
 
     function onRemoveStyleWrapper(sudoScource, key) {
 
+      var object = myStore.deletePropertyDeep(wrapper, [sudoScource, key, breakPointX]);
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      wrapper[sudoScource] = sudoScourceX;
-
-      setAttributes({ wrapper: { ...wrapper } });
-
-      if (blockCssY.items[wrapperSelector] == undefined) {
-        blockCssY.items[wrapperSelector] = {};
-      }
+      setAttributes({ wrapper: object });
 
 
 
-      Object.entries(sudoScourceX).map(args => {
-
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-
-        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
-
-      })
-
-      if (blockCssY.items[wrapperSelector][key] != undefined) {
-        delete blockCssY.items[wrapperSelector][key];
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
 
     }
 
 
     function onAddStyleWrapper(sudoScource, key) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      sudoScourceX[key] = {};
-      wrapper[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
-      setAttributes({ wrapper: { ...wrapper } });
+
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ wrapper: object });
 
     }
 
@@ -1366,7 +1370,6 @@ registerBlockType("post-grid/post-title", {
 
 
         <>
-
 
 
           {wrapper.options.tag && (

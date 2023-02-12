@@ -1003,6 +1003,10 @@ video {
   overflow-x: auto;
 }
 
+.whitespace-normal {
+  white-space: normal;
+}
+
 .break-words {
   overflow-wrap: break-word;
 }

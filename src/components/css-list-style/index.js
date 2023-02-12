@@ -27,7 +27,34 @@ function Html(props) {
   var imageVal = image.replace('url("', '');
   imageVal = imageVal.replace('")', '');
 
+  var typeArgs = [
+    { label: 'Select..', value: '' },
+    { label: 'disc', value: 'disc' },
+    { label: 'armenian', value: 'armenian' },
+    { label: 'circle', value: 'circle' },
+    { label: 'cjk-ideographic', value: 'cjk-ideographic' },
+    { label: 'decimal', value: 'decimal' },
+    { label: 'decimal-leading-zero', value: 'decimal-leading-zero' },
+    { label: 'georgian', value: 'georgian' },
+    { label: 'hebrew', value: 'hebrew' },
+    { label: 'hiragana', value: 'hiragana' },
+    { label: 'hiragana-iroha', value: 'hiragana-iroha' },
+    { label: 'katakana', value: 'katakana' },
+    { label: 'katakana-iroha', value: 'katakana-iroha' },
+    { label: 'lower-alpha', value: 'lower-alpha' },
+    { label: 'lower-greek', value: 'lower-greek' },
+    { label: 'lower-latin', value: 'lower-latin' },
+    { label: 'lower-roman', value: 'lower-roman' },
+    { label: 'square', value: 'square' },
+    { label: 'upper-alpha', value: 'upper-alpha' },
+    { label: 'upper-greek', value: 'upper-greek' },
+    { label: 'upper-latin', value: 'upper-latin' },
+    { label: 'upper-roman', value: 'upper-roman' },
+    { label: 'none', value: 'none' },
 
+  ];
+
+  const ALLOWED_MEDIA_TYPES = ['image'];
 
   return (
 
@@ -71,7 +98,6 @@ function Html(props) {
             // media.id
 
             props.onChange(type + ' ' + position + ' url("' + media.url + '")', 'listStyle');
-
 
           }
 
@@ -130,34 +156,7 @@ class PGcssListStyle extends Component {
     } = this.props;
 
 
-    var typeArgs = [
-      { label: 'Select..', value: '' },
-      { label: 'disc', value: 'disc' },
-      { label: 'armenian', value: 'armenian' },
-      { label: 'circle', value: 'circle' },
-      { label: 'cjk-ideographic', value: 'cjk-ideographic' },
-      { label: 'decimal', value: 'decimal' },
-      { label: 'decimal-leading-zero', value: 'decimal-leading-zero' },
-      { label: 'georgian', value: 'georgian' },
-      { label: 'hebrew', value: 'hebrew' },
-      { label: 'hiragana', value: 'hiragana' },
-      { label: 'hiragana-iroha', value: 'hiragana-iroha' },
-      { label: 'katakana', value: 'katakana' },
-      { label: 'katakana-iroha', value: 'katakana-iroha' },
-      { label: 'lower-alpha', value: 'lower-alpha' },
-      { label: 'lower-greek', value: 'lower-greek' },
-      { label: 'lower-latin', value: 'lower-latin' },
-      { label: 'lower-roman', value: 'lower-roman' },
-      { label: 'square', value: 'square' },
-      { label: 'upper-alpha', value: 'upper-alpha' },
-      { label: 'upper-greek', value: 'upper-greek' },
-      { label: 'upper-latin', value: 'upper-latin' },
-      { label: 'upper-roman', value: 'upper-roman' },
-      { label: 'none', value: 'none' },
 
-    ];
-
-    const ALLOWED_MEDIA_TYPES = ['image'];
 
 
 

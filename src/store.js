@@ -117,6 +117,11 @@ var selectors = {
     else if (key == 'borderSpacing') {
       cssProp = 'border-spacing';
     }
+
+    else if (key == 'borderImage') {
+      cssProp = 'border-image';
+    }
+
     else if (key == 'boxShadow') {
       cssProp = 'box-shadow';
     }
@@ -325,17 +330,43 @@ var selectors = {
 
   },
 
+  addPropertyDeep(state, obj, path, value) {
+    const [head, ...rest] = path
+
+    return {
+      ...obj,
+      [head]: rest.length ? selectors.addPropertyDeep(state, obj[head], rest, value) : value
+    }
+  },
+
+  updatePropertyDeep(state, obj, path, value) {
+    const [head, ...rest] = path
+
+    return {
+      ...obj,
+      [head]: rest.length ? selectors.updatePropertyDeep(state, obj[head], rest, value) : value
+    }
+  },
+
   setPropertyDeep(state, obj, path, value) {
 
     const [head, ...rest] = path.split('.')
 
+
     return {
       ...obj,
-      [head]: rest.length
-        ? selectors.setPropertyDeep(state, obj[head], rest.join('.'), value)
-        : value
+      [head]: rest.length ? selectors.setPropertyDeep(state, obj[head], rest.join('.'), value) : value
     }
   },
+
+  deletePropertyDeep(state, object, path) {
+
+    var last = path.pop();
+    delete path.reduce((o, k) => o[k] || {}, object)[last];
+
+    return object;
+  },
+
 
 
   getElementSelector(state, sudoScource, mainSelector) {
@@ -349,9 +380,9 @@ var selectors = {
     else if (sudoScource == 'hover') {
       elementSelector = mainSelector + ':hover';
     } else if (sudoScource == 'after') {
-      elementSelector = mainSelector + ':after';
+      elementSelector = mainSelector + '::after';
     } else if (sudoScource == 'before') {
-      elementSelector = mainSelector + ':before';
+      elementSelector = mainSelector + '::before';
     } else if (sudoScource == 'first-child') {
       elementSelector = mainSelector + ':first-child';
     } else if (sudoScource == 'last-child') {
@@ -359,7 +390,7 @@ var selectors = {
     } else if (sudoScource == 'visited') {
       elementSelector = mainSelector + ':visited';
     } else if (sudoScource == 'selection') {
-      elementSelector = mainSelector + ':selection';
+      elementSelector = mainSelector + '::selection';
     } else if (sudoScource == 'first-letter') {
       elementSelector = mainSelector + '::first-letter';
     } else if (sudoScource == 'first-line') {

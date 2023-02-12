@@ -15,6 +15,8 @@ function Html(props) {
   }
 
 
+  var content = (props.val == null || props.val == undefined) ? '' : props.val.replaceAll('"', '')
+
 
   return (
 
@@ -22,12 +24,12 @@ function Html(props) {
 
 
       <InputControl
-        value={props.val}
+        value={content}
         type="text"
         onChange={(newVal) => {
 
           //setwidthVal(newVal);
-          props.onChange(newVal, 'content');
+          props.onChange('"' + newVal + '"', 'content');
 
 
         }}

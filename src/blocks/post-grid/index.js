@@ -5365,8 +5365,6 @@ registerBlockType("post-grid/post-grid", {
 
         <div className={[blockId]}>
 
-          {JSON.stringify(queryLayouts)}
-          {/* <RawHTML>{ItemNthCssadasd2}</RawHTML> */}
 
           {grid.styles.gridTemplateColumns[breakPointX] == undefined && (
 

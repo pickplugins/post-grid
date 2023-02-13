@@ -42620,7 +42620,7 @@ var myStore = wp.data.select('postgrid-shop');
       links: _tutorials_links__WEBPACK_IMPORTED_MODULE_30__["default"]
     }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: [blockId]
-    }, JSON.stringify(queryLayouts), grid.styles.gridTemplateColumns[breakPointX] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, grid.styles.gridTemplateColumns[breakPointX] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "my-5"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "text-center my-5"
@@ -74042,7 +74042,7 @@ function Html(props) {
   }, //Object.entries(cssAtts).map(([key, value]) => (
   props.obj[sudoScource] != undefined && Object.entries(props.obj[sudoScource]).reverse().map(_ref2 => {
     let [key, value] = _ref2;
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, value[breakPointX] != undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
       title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveQueryPram, {
         title: cssProps[key] != undefined ? cssProps[key].label : key,
         sudoScource: sudoScource,

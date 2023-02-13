@@ -33,9 +33,11 @@ function Html(props) {
     vmax: { "label": "VMAX", "value": "vmax" },
   }
 
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
 
+
+  var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
 
   const [widthVal, setwidthVal] = useState(widthValX);
   const [widthUnit, setwidthUnit] = useState(widthUnitX);

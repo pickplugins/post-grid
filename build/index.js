@@ -40906,12 +40906,22 @@ var myStore = wp.data.select('postgrid-shop');
         setLayoutData({
           source: 'library'
         });
+        setQueryLayouts({
+          keyword: '',
+          page: 1,
+          category: ''
+        });
       }
     }, "Library"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: layoutData.source == 'saved' ? 'bg-blue-500 w-1/2 inline-block px-3 py-2 text-[14px] font-bold' : 'bg-blue-300 inline-block px-3 py-2 w-1/2 text-[14px] font-bold',
       onClick: _ev => {
         setLayoutData({
           source: 'saved'
+        });
+        setQueryLayouts({
+          keyword: '',
+          page: 1,
+          category: ''
         });
       }
     }, "Saved")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
@@ -41025,6 +41035,7 @@ var myStore = wp.data.select('postgrid-shop');
       className: "w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center",
       onClick: _ev => {
         var page = queryLayouts.page + 1;
+        console.log(page);
         setQueryLayouts({
           keyword: queryLayouts.keyword,
           page: page,
@@ -42609,7 +42620,7 @@ var myStore = wp.data.select('postgrid-shop');
       links: _tutorials_links__WEBPACK_IMPORTED_MODULE_30__["default"]
     }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: [blockId]
-    }, grid.styles.gridTemplateColumns[breakPointX] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }, JSON.stringify(queryLayouts), grid.styles.gridTemplateColumns[breakPointX] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "my-5"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "text-center my-5"
@@ -62988,8 +62999,9 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -65482,8 +65494,9 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -65653,8 +65666,9 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -67184,8 +67198,9 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -67999,8 +68014,9 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -68257,8 +68273,9 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -69119,8 +69136,9 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -69822,8 +69840,9 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -71575,8 +71594,9 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = props.val != undefined ? props.val.match(/\d+/g)[0] : 10;
-  var widthUnitX = props.val != undefined ? props.val.match(/[a-zA-Z%]+/g)[0] : 'px';
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

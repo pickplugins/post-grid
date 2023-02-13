@@ -667,7 +667,8 @@ class PGBlockTermsList
         global $postGridCustomCss;
         global $postGridCssY;
 
-        $post_ID = $block->context['postId'];
+        $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
+
         $post_url = get_the_permalink($post_ID);
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];

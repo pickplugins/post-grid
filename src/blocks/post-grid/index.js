@@ -3719,6 +3719,7 @@ registerBlockType("post-grid/post-grid", {
                     onClick={(_ev) => {
 
                       setLayoutData({ source: 'library', })
+                      setQueryLayouts({ keyword: '', page: 1, category: '' })
 
 
                     }}
@@ -3727,6 +3728,8 @@ registerBlockType("post-grid/post-grid", {
                   <div className={(layoutData.source == 'saved') ? 'bg-blue-500 w-1/2 inline-block px-3 py-2 text-[14px] font-bold' : 'bg-blue-300 inline-block px-3 py-2 w-1/2 text-[14px] font-bold'} onClick={(_ev) => {
 
                     setLayoutData({ source: 'saved' })
+                    setQueryLayouts({ keyword: '', page: 1, category: '' })
+
                   }}>Saved</div>
 
                 </div>
@@ -3895,6 +3898,9 @@ registerBlockType("post-grid/post-grid", {
                 <div className='w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center' onClick={(_ev) => {
 
                   var page = queryLayouts.page + 1;
+
+                  console.log(page);
+
 
                   setQueryLayouts({ keyword: queryLayouts.keyword, page: page, category: queryLayouts.category, });
 
@@ -5359,7 +5365,7 @@ registerBlockType("post-grid/post-grid", {
 
         <div className={[blockId]}>
 
-          {/* {JSON.stringify(grid)} */}
+          {JSON.stringify(queryLayouts)}
           {/* <RawHTML>{ItemNthCssadasd2}</RawHTML> */}
 
           {grid.styles.gridTemplateColumns[breakPointX] == undefined && (

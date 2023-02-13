@@ -1,7 +1,7 @@
 === Post Grid Combo ===
 	Contributors: PickPlugins
 	Donate link: https://www.pickplugins.com/post-grid
-	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, taxonomy, taxonomy filter,
+	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, 
 	Requires at least: 3.8
 	Tested up to: 6.1.1
 	Stable tag: 2.2.24
@@ -38,6 +38,8 @@ You can display any post types on the grid, query posts are suppoer easy and sup
 ### Filterbale Post Grid
 
 Filterable grids are fancy way to display posts on a grid layout, In our filterable grid blocks you can add custom filters items for creating filterable navs and sort post with many parametrers. 
+
+### Masonry Grid
 
 ### Ready Library Items
 

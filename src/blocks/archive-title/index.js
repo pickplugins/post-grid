@@ -456,30 +456,41 @@ registerBlockType("post-grid/archive-title", {
 
 
     function onRemoveStyleArchiveTitle(sudoScource, key) {
-      var sudoScourceX = { ...archiveTitle[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      archiveTitle[sudoScource] = sudoScourceX;
-      setAttributes({ archiveTitle: { ...archiveTitle } });
-
-      if (blockCssY.items[archiveTitleSelector] == undefined) {
-        blockCssY.items[archiveTitleSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[archiveTitleSelector][argAttr] = argAttrVal;
-      })
-
-      if (blockCssY.items[archiveTitleSelector][key] != undefined) {
-        delete blockCssY.items[archiveTitleSelector][key];
-      }
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+      var object = myStore.deletePropertyDeep(archiveTitle, [sudoScource, key, breakPointX]);
+      setAttributes({ archiveTitle: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, archiveTitleSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+      // var sudoScourceX = { ...archiveTitle[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // archiveTitle[sudoScource] = sudoScourceX;
+      // setAttributes({ archiveTitle: { ...archiveTitle } });
+
+      // if (blockCssY.items[archiveTitleSelector] == undefined) {
+      //   blockCssY.items[archiveTitleSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[archiveTitleSelector][argAttr] = argAttrVal;
+      // })
+
+      // if (blockCssY.items[archiveTitleSelector][key] != undefined) {
+      //   delete blockCssY.items[archiveTitleSelector][key];
+      // }
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 
@@ -556,30 +567,42 @@ registerBlockType("post-grid/archive-title", {
 
 
     function onRemoveStyleIcon(sudoScource, key) {
-      var sudoScourceX = { ...icon[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      icon[sudoScource] = sudoScourceX;
-      setAttributes({ icon: { ...icon } });
-
-      if (blockCssY.items[iconSelector] == undefined) {
-        blockCssY.items[iconSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[iconSelector][argAttr] = argAttrVal;
-      })
-
-      if (blockCssY.items[iconSelector][key] != undefined) {
-        delete blockCssY.items[iconSelector][key];
-      }
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      var object = myStore.deletePropertyDeep(icon, [sudoScource, key, breakPointX]);
+      setAttributes({ icon: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+      // var sudoScourceX = { ...icon[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // icon[sudoScource] = sudoScourceX;
+      // setAttributes({ icon: { ...icon } });
+
+      // if (blockCssY.items[iconSelector] == undefined) {
+      //   blockCssY.items[iconSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[iconSelector][argAttr] = argAttrVal;
+      // })
+
+      // if (blockCssY.items[iconSelector][key] != undefined) {
+      //   delete blockCssY.items[iconSelector][key];
+      // }
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 
@@ -654,34 +677,44 @@ registerBlockType("post-grid/archive-title", {
 
     function onRemoveStylePrefix(sudoScource, key) {
 
-      var sudoScourceX = { ...prefix[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      prefix[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
-
-      setAttributes({ prefix: { ...prefix } });
-
-      if (blockCssY.items[prefixSelector] == undefined) {
-        blockCssY.items[prefixSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
-
-      })
-
-      if (blockCssY.items[prefixSelector][key] != undefined) {
-        delete blockCssY.items[prefixSelector][key];
-      }
+      var object = myStore.deletePropertyDeep(prefix, [sudoScource, key, breakPointX]);
+      setAttributes({ prefix: object });
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+      // var sudoScourceX = { ...prefix[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // prefix[sudoScource] = sudoScourceX;
+      // //sudoScourceX[attr][breakPointX] = newVal;
+
+      // setAttributes({ prefix: { ...prefix } });
+
+      // if (blockCssY.items[prefixSelector] == undefined) {
+      //   blockCssY.items[prefixSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[prefixSelector][argAttr] = argAttrVal;
+
+      // })
+
+      // if (blockCssY.items[prefixSelector][key] != undefined) {
+      //   delete blockCssY.items[prefixSelector][key];
+      // }
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
 
@@ -741,34 +774,42 @@ registerBlockType("post-grid/archive-title", {
 
     function onRemoveStylePostfix(sudoScource, key) {
 
-      var sudoScourceX = { ...postfix[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
+      var object = myStore.deletePropertyDeep(postfix, [sudoScource, key, breakPointX]);
+      setAttributes({ postfix: object });
 
-      postfix[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
 
-      setAttributes({ postfix: { ...postfix } });
+      // var sudoScourceX = { ...postfix[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
 
-      if (blockCssY.items[postfixSelector] == undefined) {
-        blockCssY.items[postfixSelector] = {};
-      }
+      // postfix[sudoScource] = sudoScourceX;
+      // //sudoScourceX[attr][breakPointX] = newVal;
 
-      Object.entries(sudoScourceX).map(args => {
+      // setAttributes({ postfix: { ...postfix } });
 
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+      // if (blockCssY.items[postfixSelector] == undefined) {
+      //   blockCssY.items[postfixSelector] = {};
+      // }
 
-      })
+      // Object.entries(sudoScourceX).map(args => {
 
-      if (blockCssY.items[postfixSelector][key] != undefined) {
-        delete blockCssY.items[postfixSelector][key];
-      }
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+
+      // })
+
+      // if (blockCssY.items[postfixSelector][key] != undefined) {
+      //   delete blockCssY.items[postfixSelector][key];
+      // }
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
 

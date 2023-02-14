@@ -627,30 +627,54 @@ registerBlockType("post-grid/post-featured-image", {
 
 
     function onRemoveStyleImage(sudoScource, key) {
-      var sudoScourceX = { ...featuredImage[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      featuredImage[sudoScource] = sudoScourceX;
-      setAttributes({ featuredImage: { ...featuredImage } });
-
-      if (blockCssY.items[imgSelector] == undefined) {
-        blockCssY.items[imgSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[imgSelector][argAttr] = argAttrVal;
-      })
-
-      if (blockCssY.items[imgSelector][key] != undefined) {
-        delete blockCssY.items[imgSelector][key];
-      }
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      var object = myStore.deletePropertyDeep(featuredImage, [sudoScource, key, breakPointX]);
+      setAttributes({ featuredImage: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // var sudoScourceX = { ...featuredImage[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // featuredImage[sudoScource] = sudoScourceX;
+      // setAttributes({ featuredImage: { ...featuredImage } });
+
+      // if (blockCssY.items[imgSelector] == undefined) {
+      //   blockCssY.items[imgSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[imgSelector][argAttr] = argAttrVal;
+      // })
+
+      // if (blockCssY.items[imgSelector][key] != undefined) {
+      //   delete blockCssY.items[imgSelector][key];
+      // }
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 

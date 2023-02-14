@@ -441,30 +441,43 @@ registerBlockType("post-grid/post-meta", {
 
 
     function onRemoveStyleMeta(sudoScource, key) {
-      var sudoScourceX = { ...meta[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      meta[sudoScource] = sudoScourceX;
-      setAttributes({ meta: { ...meta } });
-
-      if (blockCssY.items[metaValueSelector] == undefined) {
-        blockCssY.items[metaValueSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[metaValueSelector][argAttr] = argAttrVal;
-      })
 
 
-      if (blockCssY.items[metaValueSelector][key] != undefined) {
-        delete blockCssY.items[metaValueSelector][key];
-      }
+      var object = myStore.deletePropertyDeep(meta, [sudoScource, key, breakPointX]);
+      setAttributes({ meta: object });
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      var elementSelector = myStore.getElementSelector(sudoScource, metaValueSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+
+      // var sudoScourceX = { ...meta[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // meta[sudoScource] = sudoScourceX;
+      // setAttributes({ meta: { ...meta } });
+
+      // if (blockCssY.items[metaValueSelector] == undefined) {
+      //   blockCssY.items[metaValueSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[metaValueSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // if (blockCssY.items[metaValueSelector][key] != undefined) {
+      //   delete blockCssY.items[metaValueSelector][key];
+      // }
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 

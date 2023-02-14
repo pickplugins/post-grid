@@ -236,30 +236,42 @@ registerBlockType("post-grid/text", {
 
 
     function onRemoveStyleText(sudoScource, key) {
-      var sudoScourceX = { ...text[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
 
-      text[sudoScource] = sudoScourceX;
-      setAttributes({ text: { ...text } });
+      var object = myStore.deletePropertyDeep(text, [sudoScource, key, breakPointX]);
+      setAttributes({ text: object });
 
-      if (blockCssY.items[textSelector] == undefined) {
-        blockCssY.items[textSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[textSelector][argAttr] = argAttrVal;
-      })
-
-      if (blockCssY.items[textSelector][key] != undefined) {
-        delete blockCssY.items[textSelector][key];
-      }
+      var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+      // var sudoScourceX = { ...text[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // text[sudoScource] = sudoScourceX;
+      // setAttributes({ text: { ...text } });
+
+      // if (blockCssY.items[textSelector] == undefined) {
+      //   blockCssY.items[textSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[textSelector][argAttr] = argAttrVal;
+      // })
+
+      // if (blockCssY.items[textSelector][key] != undefined) {
+      //   delete blockCssY.items[textSelector][key];
+      // }
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 

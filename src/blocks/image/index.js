@@ -723,30 +723,42 @@ registerBlockType("post-grid/image", {
 
 
     function onRemoveStyleImage(sudoScource, key) {
-      var sudoScourceX = { ...image[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      image[sudoScource] = sudoScourceX;
-      setAttributes({ image: { ...image } });
-
-      if (blockCssY.items[imgSelector] == undefined) {
-        blockCssY.items[imgSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[imgSelector][argAttr] = argAttrVal;
-      })
 
 
-      if (blockCssY.items[imgSelector][key] != undefined) {
-        delete blockCssY.items[imgSelector][key];
-      }
+      var object = myStore.deletePropertyDeep(image, [sudoScource, key, breakPointX]);
+      setAttributes({ image: object });
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+      // var sudoScourceX = { ...image[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // image[sudoScource] = sudoScourceX;
+      // setAttributes({ image: { ...image } });
+
+      // if (blockCssY.items[imgSelector] == undefined) {
+      //   blockCssY.items[imgSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[imgSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // if (blockCssY.items[imgSelector][key] != undefined) {
+      //   delete blockCssY.items[imgSelector][key];
+      // }
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 

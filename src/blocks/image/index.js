@@ -560,67 +560,106 @@ registerBlockType("post-grid/image", {
 
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
-
-      var path = sudoScource + '.' + attr + '.' + breakPointX
+      var path = [sudoScource, attr, breakPointX]
       let obj = Object.assign({}, wrapper);
-      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
-      setAttributes({ wrapper: updatedObj });
-      var sudoScourceX = { ...updatedObj[sudoScource] }
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ wrapper: object });
+
 
 
 
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+      // var path = sudoScource + '.' + attr + '.' + breakPointX
+      // let obj = Object.assign({}, wrapper);
+      // const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      // setAttributes({ wrapper: updatedObj });
+      // var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+      // var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 
     function onRemoveStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
 
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
-
-      if (blockCssY.items[wrapperSelector] == undefined) {
-        blockCssY.items[wrapperSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
-      })
-
-      if (blockCssY.items[wrapperSelector][key] != undefined) {
-        delete blockCssY.items[wrapperSelector][key];
-      }
+      var object = myStore.deletePropertyDeep(wrapper, [sudoScource, key, breakPointX]);
+      setAttributes({ wrapper: object });
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // wrapper[sudoScource] = sudoScourceX;
+      // setAttributes({ wrapper: { ...wrapper } });
+
+      // if (blockCssY.items[wrapperSelector] == undefined) {
+      //   blockCssY.items[wrapperSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      // })
+
+      // if (blockCssY.items[wrapperSelector][key] != undefined) {
+      //   delete blockCssY.items[wrapperSelector][key];
+      // }
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 
     function onAddStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      sudoScourceX[key] = {};
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // sudoScourceX[key] = {};
+      // wrapper[sudoScource] = sudoScourceX;
+      // setAttributes({ wrapper: { ...wrapper } });
+
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ wrapper: object });
+
+
     }
 
 
@@ -628,30 +667,58 @@ registerBlockType("post-grid/image", {
     function onChangeStyleImage(sudoScource, newVal, attr) {
 
 
-      var path = sudoScource + '.' + attr + '.' + breakPointX
+
+      var path = [sudoScource, attr, breakPointX]
       let obj = Object.assign({}, image);
-      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
-      setAttributes({ image: updatedObj });
-      var sudoScourceX = { ...updatedObj[sudoScource] }
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
 
-
+      setAttributes({ image: object });
 
       var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+
+
+
+
+
+
+
+
+      // var path = sudoScource + '.' + attr + '.' + breakPointX
+      // let obj = Object.assign({}, image);
+      // const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      // setAttributes({ image: updatedObj });
+      // var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+
+      // var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 
@@ -684,10 +751,17 @@ registerBlockType("post-grid/image", {
 
 
     function onAddStyleImage(sudoScource, key) {
-      var sudoScourceX = { ...image[sudoScource] }
-      sudoScourceX[key] = {};
-      image[sudoScource] = sudoScourceX;
-      setAttributes({ image: { ...image } });
+      // var sudoScourceX = { ...image[sudoScource] }
+      // sudoScourceX[key] = {};
+      // image[sudoScource] = sudoScourceX;
+      // setAttributes({ image: { ...image } });
+
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, image);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ image: object });
     }
 
 

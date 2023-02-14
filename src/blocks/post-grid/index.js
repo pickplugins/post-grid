@@ -3745,6 +3745,8 @@ registerBlockType("post-grid/post-grid", {
                       clearTimeout(debounce);
                       debounce = setTimeout(() => {
 
+
+
                         setQueryLayouts({ keyword: newVal, page: queryLayouts.page, category: queryLayouts.category })
                       }, 1000);
 

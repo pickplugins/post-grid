@@ -33,56 +33,127 @@ Post Grid Combo is best for creating post grid for WordPress, You can create cus
 
 ### Post Grid for Custom Post Types
 
-You can display any post types on the grid, query posts are suppoer easy and supper powerful, we have added all prameters support via WP_Query class, so that, you can query post by any query arguments and display under grid layout.
+Are you looking for a new way to display your posts and pages on your WordPress site? If so, the Post Grid WordPress Plugin can be a great addition to your website. This plugin is easy to install and provides you with a variety of options for displaying content in an attractive grid-like format. With features like customizable layouts, and adjustable row and column sizes, this plugin will allow you to create stunning grids without any coding knowledge whatsoever.
 
-### Filterbale Post Grid
+### Filterable Post Grid
 
-Filterable grids are fancy way to display posts on a grid layout, In our filterable grid blocks you can add custom filters items for creating filterable navs and sort post with many parametrers. 
+Filterable Post Grid plugin offers great flexibility, allowing users to customize the display of their content by setting up different filters. Whether you have eCommerce products, blog posts or special events listed on your website, this plugin can help you make sure they are all displayed beautifully in a nice organized grid format with interactive filters. Users can also customize the styling of their grids through powerful  options and customization tools such as custom CSS code input for more advanced users.
 
 ### Masonry Grid
 
+Masonry grids are a visually stunning and effective way to showcase content on a website. By combining images with text and other elements, masonry grids can create an eye-catching design for your website that will show off your content in an organized and aesthetically pleasing way. Whether you're a novice designer or an experienced web developer, it's easy to create a stunning masonry grid design for your website. With a few simple steps, you can create a beautiful, unique design that will draw in visitors and help you stand out from the competition. Read on to learn more about how to create a stunning masonry grid design for your website.
+
 ### Ready Library Items
 
-We have added library for post layouts, author layouts, archive layouts, grid layouts, taxonomy layouts and CSS layouts for designing any section quickly and beautifully.
+We have added library for post layouts, author layouts, archive layouts, grid layouts, taxonomy layouts and CSS layouts for designing any section quickly and beautifully. Our expert designer team is continuesly working for creating new library items for you. Also you can contribute to our library items to submit your layout ideas, layout design or submit layouts. 
 
 
 ### Advance Pagination
 
-Pagination are the one the most key feature for post grid, so that, we have added advanced pagination types like ajax, load more, infinite load, next-previous. 
+Pagination are the one the most key feature for post grid, so that, we have added advanced pagination types like ajax, load more, infinite load, next-previous. You can use your suitable pagination types as you need by choosing from paginations types options.
 
 
+### Post Category Page Editor
+
+Post Category Page Editors are an essential tool for any website or blog owner. They enable the user to quickly and easily categorize blog posts and other content, helping readers to easily find what they're looking for. With a Post Category Page Editor, users can customize the layout of their post category pages, allowing them to emphasize certain categories or topics more than others.
+
+The editor also enables users to set specific rules around which posts should appear in certain categories. Users can choose which posts should be displayed on the page, as well as how many items should be shown at once. This allows them to curate content in order to best serve their audience. 
+
+### Post Tags Page Editor
+
+Post Tags Page Editor is a powerful tool for creating and maintaining post tags. With this page editor, users can easily add and edit post tags for their blog or website. Post tags are simple keywords or phrases that help categorize content and make it easier to find what you’re looking for.
+
+The Post Tags Page Editor allows you to quickly add new tags, modify existing ones, or rearrange them into categories. You can also create tag hierarchies so that related posts are grouped together in the same category. This makes it easier to navigate your site and quickly find what you need. The page editor also has a search function built-in so that you can quickly locate specific posts by keyword or phrase.
+
+### Taxonomy Term Page Editor
+
+A Taxonomy Term Page Editor is an online application that enables users to create and maintain custom pages for each taxonomy term across a website or blog. It allows users to add content specific to the taxonomy term, such as images, descriptions, and links. This can be used as an effective marketing tool to increase traffic and engagement on the website or blog by offering more relevant content for visitors. 
+
+The Taxonomy Term Page Editor provides an easy-to-use interface that simplifies the creation of new pages while also allowing administrators to configure permissions on who can access them. The ability to customize each page with images, videos and other forms of rich media makes it easier for marketers and administrators alike to create targeted content based on user interests. 
+
+### Archive Page Editor
+
+An archive page editor is an important tool for creating, organizing, and maintaining archives. It allows users to quickly and easily access the content they need from a wide range of sources. With this editor, users can easily search for and select the material they require with minimal effort. 
+
+Archive page editors are typically used by businesses or organizations that have large collections of documents, images, or other digital assets that must be managed over time. These editors provide a simple way to sort through all of the available information in order to find exactly what's needed without having to manually search through each resource individually. 
+### Author Page Editor
+
+When it comes to web publishing, an author page editor can be a valuable asset. An author page editor is a software program that allows authors to design and create their own pages for websites. The software gives authors the power to customize their pages with photos, videos, text, and other media elements. By using an author page editor, authors can make sure that their work is presented in the best possible light on the web.
+
+An author page editor also provides authors with options for sharing their work across social networks such as Twitter, Facebook and Instagram. This makes it easy for readers to follow an author's latest updates and encourages them to share what they read or watch with others in their network. 
+
+### WooCommerce Shop Page Editor
+
+The WooCommerce Shop Page Editor is a great tool for businesses that want to increase their online presence. This page editor helps shop owners quickly and easily customize their website, giving them the freedom to create unique and attractive pages for customers. The editor includes features such as drag-and-drop functionality, which makes it easy to organize content on the page, and an array of customization options that provide full control over how the shop looks and functions. 
+
+With the WooCommerce Shop Page Editor, users can optimize their site by creating pages with specific product searches or categories. It also allows them to include descriptions or images of products they are selling in order to better inform potential customers. 
+
+### WooCommerce Product Page Editor
+
+The WooCommerce Product Page Editor is the perfect tool for retailers who want to maximize their product pages. It enables them to customize and organize product data in an intuitive way, making it easier for customers to make informed decisions. In our post grid combo plugin we have added advance blocks for product price, product title, product gallery, cart buttons, product tabs, related products and many more, with our advanced blocks features you can customize product page as you want. 
+
+
+
+### Home Page Editor
+
+A Home Page Editor is a tool used to make changes and updates to the main page of a website. It allows users to create a visually pleasing and user-friendly experience for visitors.We have added 30+ block elements to customize your home page incliding any other page for responsive design, there is also advance styling component to add custom CSS from a dropdown picker, thers is advance text elements to add text anywhere with custom tags, for example you can add H1-H6 tags or paragraph, list items, Image, accordions, tabs, breadcrumb and many other blocks avilable to design your next home page within a few minutes.
+
+
+
+### Adavnced CSS & Style Generator
+
+Our Styles component for blocks provide advanced and easy way to add custom CSS, like you can add any css property from a drop-down list, without any css knowledge you can see the live CSS styling preview by changing property values. we have also added psudeo selector for CSS styling so you can easily target any elements hover, after, before, first-child and many other psudeo selector, you don't have to write any single line of css. these CSS also supper compatible with responsive view, so you can add any styling for mobile or table or desktop.
 
 ### Avilable Blocks
 
-&#9989; Post Title
-&#9989; Post Excerpt
-&#9989; Post Author
-&#9989; Post Author Fields
-&#9989; Featured Image
-&#9989; Image
-&#9989; Post Categories
-&#9989; Post Tags
-&#9989; Post Terms
-&#9989; Post Date
-&#9989; Read More
-&#9989; Advance Text
-&#9989; Post Grid
-&#9989; Post Grid – Filterable
-&#9989; List Items
-&#9989; Icons
-&#9989; Layers
-&#9989; Layer
-&#9989; Accordion
-&#9989; Tabs
-&#9989; Star Rate
-&#9989; Divider
-&#9989; Post Comment Count
-&#9989; Archive Description
-&#9989; Archive Title
-&#9989; Social Share
-&#9989; Shortcode
-&#9989; Breadcrumb
+&#9989; Post Title Blocks
+Post Title Blocks provide advance customizing feature of post title, you can display post title with link, without link, with prefix, with postfix, with custom wrapper, also there is word limit and character limit option avilable to trim post title text.
 
+&#9989; Post Excerpt Blocks
+Our post excerpt blocks is advance anough to display post excerpt from variuos sorces like, post content, post meta fields, from SEO plugins meta fields and etc. There is customizable read more elements you can linked to post title or custom URL. there is also prefix and postfix for post excerpt you can display.
+ 
+&#9989; Post Author Blocks
+Post Author Blocks is displaying post name, avatar, author descriptions. you can sort their positions by dragging and each elements has styling options for customize look and style.
+
+&#9989; Author Fields Blocks
+Post Author Fields Blocks is displaying post author meta fields, like ID, Login, Nick Name, Email, URL, Display Name, First Name, Last Name, Descriptions and etc, You can also display these elements with icons and front text. there is also custom wrapper support avilable.
+
+&#9989; Featured Image Blocks
+Our Featured Image Blocks is advanced enough to display post thumbnails, You can wrap featired image with a custom wrapper tag, link with post title or custom URL, there is advance alt text sources for featured image you can choose from image title, image descriptions, post title, image caption and etc.
+
+&#9989; Image Blocks
+We added Image Blocks to display advance image from different type of sources like Media, Custom Fields, Post Meta and etc, You can set custom thumbnail size for displaying on front-end, there are different type of link sources you can wrap image to a link, like Home URL, Post URL, Author URL, AUthor Mail, Custom fields, Custom URL and etc. 
+
+
+&#9989; Post Categories Blocks
+Post category blocks specially designed for displaying post categories, you can display post category with link or withour link, with custom separtor text, with front text. Also there is icons option avilable to display on various position like begining of items, front of each items, after of each items and etc.
+
+&#9989; Post Tags Blocks
+Post tags blocks specially designed for displaying post categories, you can display post category with link or withour link, with custom separtor text, with front text. Also there is icons option avilable to display on various position like begining of items, front of each items, after of each items and etc.
+
+&#9989; Post Terms Blocks
+Post category blocks specially designed for displaying custom taxonomy and terms, you can display post terms with link or withour link, with custom separtor text, with front text. Also there is icons option avilable to display on various position like begining of items, front of each items, after of each items and etc.
+
+&#9989; Post Date Blocks
+&#9989; Read More Blocks
+&#9989; Advance Text Blocks
+&#9989; Post Grid Blocks
+&#9989; Post Grid – Filterable Blocks
+&#9989; List Items Blocks
+&#9989; Icons Blocks
+&#9989; Layers Blocks 
+&#9989; Layer Blocks
+&#9989; Accordion Blocks
+&#9989; Tabs Blocks
+&#9989; Star Rate Blocks
+&#9989; Divider Blocks
+&#9989; Post Comment Count Blocks
+&#9989; Archive Description Blocks
+&#9989; Archive Title Blocks
+&#9989; Social Share Blocks
+&#9989; Shortcode Blocks
+&#9989; Breadcrumb Blocks
+ 
 
 
 ### 3rd-party integrations
@@ -102,6 +173,26 @@ To extend the functinality of our post grid plugin we have added many popular pl
 🔥 The SEO Framework
 🔥 SEO SIMPLE PACK
 
+
+## 🏆 Users Feedback For Post Grid Combo ##
+
+
+[Miguelapps](https://wordpress.org/support/topic/easy-and-intuitive-plugin-to-use/): 
+> Easy and intuitive plugin to use
+
+>It meets my expectations and it is what I was looking for to avoid SPA users on my website
+
+
+[Andrewh2016](https://wordpress.org/support/topic/great-customisable-plugin-well-supported/): 
+> Great customisable plugin & well supported
+
+>I use this on several sites to achieve a grid layout of posts. It’s really customisable and the support is excellent. Highly recommended.
+
+
+[Systembit](https://wordpress.org/support/topic/flexible-plugin-excellent-support-2/): 
+> Flexible plugin, excellent support
+
+>We’ve been happily using it for nearly 5 years now. The plugin is flexible, we were able to customise to suit our needs. It is also simple to use despite all the flexibility. But best of all, the support, even for free users, is fast and good. I can’t recommend this enough. Thanks to everyone at PickPlugins for a great product!
 
 
 
@@ -133,6 +224,31 @@ For Manual installation, you download our product from WordPress directory uploa
 3. Activate the plugin from the Plugins menu (Dashboard > Plugins > Installed Plugins > Post Grid Combo) within the WordPress admin.
 
 == Frequently Asked Questions ==
+
+= What is a post grid? =
+
+A post grid is a layout format used to display a collection of blog posts or other types of content in a grid-like structure on a website. The grid displays the featured images and titles of the posts in an organized manner, typically with multiple posts shown in rows and columns. The purpose of a post grid is to provide a visually appealing way to showcase a large number of posts, allowing users to quickly browse and find the content they're interested in. Some common applications of post grids include blog homepages, category pages, and archives.
+
+
+= What is a blog post grid? =
+
+A blog post grid is a type of layout that is used to display a collection of blog posts on a website. The blog posts are arranged in a grid-like structure, with each post represented by its featured image and title. The grid is designed to provide a visually appealing way to showcase a large number of posts, making it easier for users to quickly browse and find the content they're interested in. The post grid is commonly used on blog homepages, category pages, and archives, and can be customized to fit the look and feel of the website. Some popular features of blog post grids include the ability to filter posts by category, the ability to paginate the posts, and the ability to display post metadata such as the date published and the author's name.
+
+
+= What is Masonry Grid? =
+
+Masonry grid is a layout style for arranging elements in a flexible grid, with the ability to have elements of different sizes, just like a masonry wall. It's commonly used in a variety of contexts such as galleries, blog posts, portfolios, and other similar use cases, where the content elements need to be displayed in a dynamic and organized manner, filling the available space in an optimal way.
+
+In web development, Masonry grid can be implemented using CSS grid, flexbox or JavaScript-based libraries such as Masonry.js, Isotope, or Packery. The main idea behind Masonry grid is to create a grid of items that fit together like stones in a wall, filling any gaps and maximizing the use of space in an aesthetically pleasing way.
+
+
+= What is Filterable Post Grid? =
+
+Filterable Post Grid is a WordPress plugin that allows you to display posts or custom post types in a grid layout with the ability to filter the displayed content based on categories, tags, or custom taxonomies. This plugin can be used to create a portfolio, gallery, or any other type of grid-based content display. It provides a user-friendly interface for creating and customizing the grid, and it offers a range of styling options to ensure that the grid fits seamlessly into your website design.
+
+
+
+
 
 = Is this plugin renamed? =
 

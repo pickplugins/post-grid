@@ -298,25 +298,47 @@ registerBlockType("post-grid/archive-title", {
 
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+      setAttributes({ wrapper: object });
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -325,30 +347,40 @@ registerBlockType("post-grid/archive-title", {
 
 
     function onRemoveStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
 
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
 
-      if (blockCssY.items[wrapperSelector] == undefined) {
-        blockCssY.items[wrapperSelector] = {};
-      }
+      // wrapper[sudoScource] = sudoScourceX;
+      // setAttributes({ wrapper: { ...wrapper } });
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
-      })
+      // if (blockCssY.items[wrapperSelector] == undefined) {
+      //   blockCssY.items[wrapperSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      // })
 
 
-      if (blockCssY.items[wrapperSelector][key] != undefined) {
-        delete blockCssY.items[wrapperSelector][key];
-      }
+      // if (blockCssY.items[wrapperSelector][key] != undefined) {
+      //   delete blockCssY.items[wrapperSelector][key];
+      // }
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      var object = myStore.deletePropertyDeep(wrapper, [sudoScource, key, breakPointX]);
+      setAttributes({ wrapper: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
     }
 
 
@@ -356,10 +388,19 @@ registerBlockType("post-grid/archive-title", {
 
 
     function onAddStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      sudoScourceX[key] = {};
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // sudoScourceX[key] = {};
+      // wrapper[sudoScource] = sudoScourceX;
+      // setAttributes({ wrapper: { ...wrapper } });
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ wrapper: object });
+
+
+
     }
 
 
@@ -369,25 +410,44 @@ registerBlockType("post-grid/archive-title", {
 
 
     function onChangeStyleArchiveTitle(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, archiveTitle);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
 
-      var sudoScourceX = { ...archiveTitle[sudoScource] }
+      setAttributes({ archiveTitle: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, archiveTitleSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ archiveTitle: { ...archiveTitle } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+
+      // var sudoScourceX = { ...archiveTitle[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, archiveTitleSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ archiveTitle: { ...archiveTitle } });
     }
 
 
@@ -427,10 +487,17 @@ registerBlockType("post-grid/archive-title", {
 
 
     function onAddStyleArchiveTitle(sudoScource, key) {
-      var sudoScourceX = { ...archiveTitle[sudoScource] }
-      sudoScourceX[key] = {};
-      archiveTitle[sudoScource] = sudoScourceX;
-      setAttributes({ archiveTitle: { ...archiveTitle } });
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, archiveTitle);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ archiveTitle: object });
+
+
+
+
+
+
     }
 
 
@@ -438,24 +505,49 @@ registerBlockType("post-grid/archive-title", {
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+      // var sudoScourceX = { ...icon[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ icon: { ...icon } });
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, icon);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ icon: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+
+
+
+
     }
 
 
@@ -492,10 +584,16 @@ registerBlockType("post-grid/archive-title", {
 
 
     function onAddStyleIcon(sudoScource, key) {
-      var sudoScourceX = { ...icon[sudoScource] }
-      sudoScourceX[key] = {};
-      icon[sudoScource] = sudoScourceX;
-      setAttributes({ icon: { ...icon } });
+      // var sudoScourceX = { ...icon[sudoScource] }
+      // sudoScourceX[key] = {};
+      // icon[sudoScource] = sudoScourceX;
+      // setAttributes({ icon: { ...icon } });
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, icon);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ icon: object });
     }
 
 
@@ -510,25 +608,46 @@ registerBlockType("post-grid/archive-title", {
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...prefix[sudoScource] }
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, prefix);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ prefix: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ prefix: { ...prefix } });
+
+      // var sudoScourceX = { ...prefix[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ prefix: { ...prefix } });
 
     }
 
@@ -579,25 +698,43 @@ registerBlockType("post-grid/archive-title", {
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...postfix[sudoScource] }
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, postfix);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ postfix: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+      //  var sudoScourceX = { ...postfix[sudoScource] }
+      //       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postfix: { ...postfix } });
+      //       sudoScourceX[attr][breakPointX] = newVal;
+
+      //       if (blockCssY.items[elementSelector] == undefined) {
+      //         blockCssY.items[elementSelector] = {};
+      //       }
+
+      //       Object.entries(sudoScourceX).map(args => {
+      //         var argAttr = myStore.cssAttrParse(args[0]);
+      //         var argAttrVal = args[1];
+      //         blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      //       })
+
+
+      //       setAttributes({ blockCssY: { items: blockCssY.items } });
+      //       setAttributes({ postfix: { ...postfix } });
 
     }
 
@@ -638,10 +775,10 @@ registerBlockType("post-grid/archive-title", {
 
     function onAddStylePostfix(sudoScource, key) {
 
-      var sudoScourceX = { ...postfix[sudoScource] }
-      sudoScourceX[key] = {};
-      postfix[sudoScource] = sudoScourceX;
-      setAttributes({ postfix: { ...postfix } });
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, postfix);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ postfix: object });
 
     }
 

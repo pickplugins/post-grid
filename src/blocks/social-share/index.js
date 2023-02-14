@@ -541,25 +541,45 @@ registerBlockType("post-grid/social-share", {
 
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+      setAttributes({ wrapper: object });
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -568,30 +588,42 @@ registerBlockType("post-grid/social-share", {
 
 
     function onRemoveStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
 
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
-
-      if (blockCssY.items[wrapperSelector] == undefined) {
-        blockCssY.items[wrapperSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
-      })
+      var object = myStore.deletePropertyDeep(wrapper, [sudoScource, key, breakPointX]);
+      setAttributes({ wrapper: object });
 
 
-      if (blockCssY.items[wrapperSelector][key] != undefined) {
-        delete blockCssY.items[wrapperSelector][key];
-      }
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // wrapper[sudoScource] = sudoScourceX;
+      // setAttributes({ wrapper: { ...wrapper } });
+
+      // if (blockCssY.items[wrapperSelector] == undefined) {
+      //   blockCssY.items[wrapperSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // if (blockCssY.items[wrapperSelector][key] != undefined) {
+      //   delete blockCssY.items[wrapperSelector][key];
+      // }
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 
@@ -599,10 +631,20 @@ registerBlockType("post-grid/social-share", {
 
 
     function onAddStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      sudoScourceX[key] = {};
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // sudoScourceX[key] = {};
+      // wrapper[sudoScource] = sudoScourceX;
+      // setAttributes({ wrapper: { ...wrapper } });
+
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ wrapper: object });
+
+
+
     }
 
 
@@ -667,10 +709,20 @@ registerBlockType("post-grid/social-share", {
 
 
     function onAddStyleElements(sudoScource, key) {
-      var sudoScourceX = { ...elements[sudoScource] }
-      sudoScourceX[key] = {};
-      elements[sudoScource] = sudoScourceX;
-      setAttributes({ elements: { ...elements } });
+      // var sudoScourceX = { ...elements[sudoScource] }
+      // sudoScourceX[key] = {};
+      // elements[sudoScource] = sudoScourceX;
+      // setAttributes({ elements: { ...elements } });
+
+
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, elements);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ elements: object });
+
+
     }
 
 
@@ -678,24 +730,43 @@ registerBlockType("post-grid/social-share", {
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, icon);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ icon: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+      // var sudoScourceX = { ...icon[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ icon: { ...icon } });
     }
 
 
@@ -736,35 +807,56 @@ registerBlockType("post-grid/social-share", {
 
 
     function onAddStyleIcon(sudoScource, key) {
-      var sudoScourceX = { ...icon[sudoScource] }
-      sudoScourceX[key] = {};
-      icon[sudoScource] = sudoScourceX;
-      setAttributes({ icon: { ...icon } });
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, icon);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ icon: object });
     }
 
 
 
     function onChangeStyleLabel(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...label[sudoScource] }
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, label);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ label: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, labelSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ label: { ...label } });
+      // var sudoScourceX = { ...label[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, labelSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ label: { ...label } });
 
     }
 
@@ -806,10 +898,17 @@ registerBlockType("post-grid/social-share", {
 
     function onAddStyleLabel(sudoScource, key) {
 
-      var sudoScourceX = { ...label[sudoScource] }
-      sudoScourceX[key] = {};
-      label[sudoScource] = sudoScourceX;
-      setAttributes({ label: { ...label } });
+      // var sudoScourceX = { ...label[sudoScource] }
+      // sudoScourceX[key] = {};
+      // label[sudoScource] = sudoScourceX;
+      // setAttributes({ label: { ...label } });
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, label);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ label: object });
+
+
 
     }
 
@@ -817,25 +916,43 @@ registerBlockType("post-grid/social-share", {
 
     function onChangeStyleCount(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...count[sudoScource] }
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, count);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ count: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, countSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+      // var sudoScourceX = { ...count[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, countSelector);
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ count: { ...count } });
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ count: { ...count } });
 
     }
 
@@ -876,10 +993,17 @@ registerBlockType("post-grid/social-share", {
 
     function onAddStyleCount(sudoScource, key) {
 
-      var sudoScourceX = { ...count[sudoScource] }
-      sudoScourceX[key] = {};
-      count[sudoScource] = sudoScourceX;
-      setAttributes({ count: { ...count } });
+      // var sudoScourceX = { ...count[sudoScource] }
+      // sudoScourceX[key] = {};
+      // count[sudoScource] = sudoScourceX;
+      // setAttributes({ count: { ...count } });
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, count);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ count: object });
+
 
     }
 

@@ -333,69 +333,29 @@ registerBlockType("post-grid/archive-description", {
 
 
 
-    function onChangeStyleWrapper(sudoScource, newVal, attr) {
-
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
-
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
-    }
 
 
 
-
-
-
-    function onRemoveStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
-
-      if (blockCssY.items[wrapperSelector] == undefined) {
-        blockCssY.items[wrapperSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
-      })
-
-      if (blockCssY.items[wrapperSelector][key] != undefined) {
-        delete blockCssY.items[wrapperSelector][key];
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-    }
 
 
 
 
 
     function onAddStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      sudoScourceX[key] = {};
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // sudoScourceX[key] = {};
+      // wrapper[sudoScource] = sudoScourceX;
+      // setAttributes({ wrapper: { ...wrapper } });
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ wrapper: object });
+
+
+
+
     }
 
 
@@ -406,24 +366,43 @@ registerBlockType("post-grid/archive-description", {
 
     function onChangeStyleRedmore(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...readMore[sudoScource] }
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, readMore);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ readMore: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ readMore: { ...readMore } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+      // var sudoScourceX = { ...readMore[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ readMore: { ...readMore } });
     }
 
 
@@ -464,10 +443,17 @@ registerBlockType("post-grid/archive-description", {
 
 
     function onAddStyleRedmore(sudoScource, key) {
-      var sudoScourceX = { ...readMore[sudoScource] }
-      sudoScourceX[key] = {};
-      readMore[sudoScource] = sudoScourceX;
-      setAttributes({ readMore: { ...readMore } });
+      // var sudoScourceX = { ...readMore[sudoScource] }
+      // sudoScourceX[key] = {};
+      // readMore[sudoScource] = sudoScourceX;
+      // setAttributes({ readMore: { ...readMore } });
+
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, readMore);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ readMore: object });
     }
 
 
@@ -475,24 +461,43 @@ registerBlockType("post-grid/archive-description", {
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+      // var sudoScourceX = { ...icon[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ icon: { ...icon } });
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, icon);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ icon: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
     }
 
 
@@ -530,10 +535,16 @@ registerBlockType("post-grid/archive-description", {
 
 
     function onAddStyleIcon(sudoScource, key) {
-      var sudoScourceX = { ...icon[sudoScource] }
-      sudoScourceX[key] = {};
-      icon[sudoScource] = sudoScourceX;
-      setAttributes({ icon: { ...icon } });
+      // var sudoScourceX = { ...icon[sudoScource] }
+      // sudoScourceX[key] = {};
+      // icon[sudoScource] = sudoScourceX;
+      // setAttributes({ icon: { ...icon } });
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, icon);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ icon: object });
     }
 
 
@@ -548,25 +559,47 @@ registerBlockType("post-grid/archive-description", {
 
     function onChangeStylePrefix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...prefix[sudoScource] }
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, prefix);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ prefix: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ prefix: { ...prefix } });
+
+
+      // var sudoScourceX = { ...prefix[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ prefix: { ...prefix } });
 
     }
 
@@ -608,35 +641,60 @@ registerBlockType("post-grid/archive-description", {
 
     function onAddStylePrefix(sudoScource, key) {
 
-      var sudoScourceX = { ...prefix[sudoScource] }
-      sudoScourceX[key] = {};
-      prefix[sudoScource] = sudoScourceX;
-      setAttributes({ prefix: { ...prefix } });
+      // var sudoScourceX = { ...prefix[sudoScource] }
+      // sudoScourceX[key] = {};
+      // prefix[sudoScource] = sudoScourceX;
+      // setAttributes({ prefix: { ...prefix } });
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, prefix);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ prefix: object });
 
     }
 
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...postfix[sudoScource] }
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, postfix);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ postfix: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+      // var sudoScourceX = { ...postfix[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postfix: { ...postfix } });
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ postfix: { ...postfix } });
 
     }
 
@@ -677,10 +735,16 @@ registerBlockType("post-grid/archive-description", {
 
     function onAddStylePostfix(sudoScource, key) {
 
-      var sudoScourceX = { ...postfix[sudoScource] }
-      sudoScourceX[key] = {};
-      postfix[sudoScource] = sudoScourceX;
-      setAttributes({ postfix: { ...postfix } });
+      // var sudoScourceX = { ...postfix[sudoScource] }
+      // sudoScourceX[key] = {};
+      // postfix[sudoScource] = sudoScourceX;
+      // setAttributes({ postfix: { ...postfix } });
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, postfix);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ postfix: object });
 
     }
 
@@ -925,24 +989,48 @@ registerBlockType("post-grid/archive-description", {
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...wrapper[sudoScource] }
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ wrapper: object });
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ wrapper: { ...wrapper } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+
+
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ wrapper: { ...wrapper } });
     }
 
 
@@ -951,42 +1039,61 @@ registerBlockType("post-grid/archive-description", {
 
 
     function onRemoveStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
 
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
 
-      if (blockCssY.items[wrapperSelector] == undefined) {
-        blockCssY.items[wrapperSelector] = {};
-      }
+      // wrapper[sudoScource] = sudoScourceX;
+      // setAttributes({ wrapper: { ...wrapper } });
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
-      })
+      // if (blockCssY.items[wrapperSelector] == undefined) {
+      //   blockCssY.items[wrapperSelector] = {};
+      // }
 
-      if (blockCssY.items[wrapperSelector][key] != undefined) {
-        delete blockCssY.items[wrapperSelector][key];
-      }
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[wrapperSelector][argAttr] = argAttrVal;
+      // })
+
+      // if (blockCssY.items[wrapperSelector][key] != undefined) {
+      //   delete blockCssY.items[wrapperSelector][key];
+      // }
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+
+
+      var object = myStore.deletePropertyDeep(wrapper, [sudoScource, key, breakPointX]);
+      setAttributes({ wrapper: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
 
 
 
-    function onAddStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      sudoScourceX[key] = {};
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
-    }
+
 
 
 
@@ -996,24 +1103,44 @@ registerBlockType("post-grid/archive-description", {
 
     function onChangeStyleArchiveTitle(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...archiveTitle[sudoScource] }
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, archiveTitle);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ archiveTitle: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, archiveTitleSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ archiveTitle: { ...archiveTitle } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+      // var sudoScourceX = { ...archiveTitle[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, archiveTitleSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ archiveTitle: { ...archiveTitle } });
     }
 
 
@@ -1053,76 +1180,14 @@ registerBlockType("post-grid/archive-description", {
 
 
     function onAddStyleArchiveTitle(sudoScource, key) {
-      var sudoScourceX = { ...archiveTitle[sudoScource] }
-      sudoScourceX[key] = {};
-      archiveTitle[sudoScource] = sudoScourceX;
-      setAttributes({ archiveTitle: { ...archiveTitle } });
-    }
 
 
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, archiveTitle);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ archiveTitle: object });
 
 
-    function onChangeStyleIcon(sudoScource, newVal, attr) {
-
-      var sudoScourceX = { ...icon[sudoScource] }
-      var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
-
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
-    }
-
-
-
-
-
-
-    function onRemoveStyleIcon(sudoScource, key) {
-      var sudoScourceX = { ...icon[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      icon[sudoScource] = sudoScourceX;
-      setAttributes({ icon: { ...icon } });
-
-      if (blockCssY.items[iconSelector] == undefined) {
-        blockCssY.items[iconSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[iconSelector][argAttr] = argAttrVal;
-      })
-
-      if (blockCssY.items[iconSelector][key] != undefined) {
-        delete blockCssY.items[iconSelector][key];
-      }
-
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-    }
-
-
-    function onAddStyleIcon(sudoScource, key) {
-      var sudoScourceX = { ...icon[sudoScource] }
-      sudoScourceX[key] = {};
-      icon[sudoScource] = sudoScourceX;
-      setAttributes({ icon: { ...icon } });
     }
 
 
@@ -1135,452 +1200,23 @@ registerBlockType("post-grid/archive-description", {
 
 
 
-    function onChangeStylePrefix(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...prefix[sudoScource] }
-      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
 
 
-      sudoScourceX[attr][breakPointX] = newVal;
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
-      }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ prefix: { ...prefix } });
 
-    }
 
 
-    function onRemoveStylePrefix(sudoScource, key) {
 
-      var sudoScourceX = { ...prefix[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
 
-      prefix[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
 
-      setAttributes({ prefix: { ...prefix } });
 
-      if (blockCssY.items[prefixSelector] == undefined) {
-        blockCssY.items[prefixSelector] = {};
-      }
 
-      Object.entries(sudoScourceX).map(args => {
 
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[prefixSelector][argAttr] = argAttrVal;
 
-      })
-
-
-      if (blockCssY.items[prefixSelector][key] != undefined) {
-        delete blockCssY.items[prefixSelector][key];
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-    }
-
-
-    function onAddStylePrefix(sudoScource, key) {
-
-      var sudoScourceX = { ...prefix[sudoScource] }
-      sudoScourceX[key] = {};
-      prefix[sudoScource] = sudoScourceX;
-      setAttributes({ prefix: { ...prefix } });
-
-    }
-
-
-    function onChangeStylePostfix(sudoScource, newVal, attr) {
-
-      var sudoScourceX = { ...postfix[sudoScource] }
-      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
-
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ postfix: { ...postfix } });
-
-    }
-
-
-    function onRemoveStylePostfix(sudoScource, key) {
-
-      var sudoScourceX = { ...postfix[sudoScource] }
-      if (sudoScourceX[key] != undefined) {
-        delete sudoScourceX[key];
-      }
-
-      postfix[sudoScource] = sudoScourceX;
-      //sudoScourceX[attr][breakPointX] = newVal;
-
-      setAttributes({ postfix: { ...postfix } });
-
-      if (blockCssY.items[postfixSelector] == undefined) {
-        blockCssY.items[postfixSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[postfixSelector][argAttr] = argAttrVal;
-
-      })
-
-
-      if (blockCssY.items[postfixSelector][key] != undefined) {
-        delete blockCssY.items[postfixSelector][key];
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-    }
-
-
-    function onAddStylePostfix(sudoScource, key) {
-
-      var sudoScourceX = { ...postfix[sudoScource] }
-      sudoScourceX[key] = {};
-      postfix[sudoScource] = sudoScourceX;
-      setAttributes({ postfix: { ...postfix } });
-
-    }
-
-
-
-    function paddingControl(nextValues) {
-
-
-
-      var responsive = archiveTitle.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-      var styles = { ...archiveTitle.styles, padding: responsive };
-      setAttributes({ archiveTitle: { ...archiveTitle, styles: styles } });
-
-
-      blockCssY.items[archiveTitleSelector] = (blockCssY.items[archiveTitleSelector] != undefined) ? blockCssY.items[archiveTitleSelector] : {};
-
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[archiveTitleSelector]['padding-top'] != undefined) ? blockCssY.items[archiveTitleSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'padding-top': paddingTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[archiveTitleSelector]['padding-right'] != undefined) ? blockCssY.items[archiveTitleSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'padding-right': paddingRight };
-
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var paddingBottom = (blockCssY.items[archiveTitleSelector]['padding-bottom'] != undefined) ? blockCssY.items[archiveTitleSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'padding-bottom': paddingBottom };
-
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[archiveTitleSelector]['padding-left'] != undefined) ? blockCssY.items[archiveTitleSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'padding-left': paddingLeft };
-
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-
-
-
-
-    function marginControl(nextValues) {
-
-
-      var responsive = archiveTitle.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...archiveTitle.styles, margin: responsive };
-      setAttributes({ archiveTitle: { ...archiveTitle, styles: styles } });
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-      blockCssY.items[archiveTitleSelector] = (blockCssY.items[archiveTitleSelector] != undefined) ? blockCssY.items[archiveTitleSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[archiveTitleSelector]['margin-top'] != undefined) ? blockCssY.items[archiveTitleSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'margin-top': marginTop };
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[archiveTitleSelector]['margin-right'] !== undefined) ? blockCssY.items[archiveTitleSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'margin-right': marginRight };
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[archiveTitleSelector]['margin-bottom'] !== undefined) ? blockCssY.items[archiveTitleSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[archiveTitleSelector]['margin-left'] !== undefined) ? blockCssY.items[archiveTitleSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[archiveTitleSelector] = { ...blockCssY.items[archiveTitleSelector], 'margin-left': marginLeft };
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-    }
-
-
-
-    function generateBlockCssY() {
-
-
-      var reponsiveCssGroups = {};
-
-
-      for (var selector in blockCssY.items) {
-
-
-
-        var attrs = blockCssY.items[selector];
-
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = []
-            }
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = []
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = []
-            }
-
-            reponsiveCssGroups[device][selector].push({ 'attr': attr, 'val': attrValue });
-
-          }
-        }
-      }
-
-
-
-      //return false;
-
-
-      var reponsiveCssMobile = '';
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-
-          reponsiveCssMobile += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssMobile += '}';
-        }
-        reponsiveCssMobile += '}';
-
-      }
-
-
-
-      var reponsiveCssTablet = '';
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-
-          reponsiveCssTablet += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssTablet += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssTablet += '}';
-        }
-
-        reponsiveCssTablet += '}';
-      }
-
-      var reponsiveCssDesktop = '';
-
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-
-
-          reponsiveCssDesktop += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssDesktop += '}';
-
-
-        }
-        reponsiveCssDesktop += '}';
-
-
-
-      }
-
-
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
-
-
-
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200)
-
-
-      } else {
-
-
-
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-
-        csswrappg.insertAdjacentHTML('beforeend', str);
-
-
-
-      }
-
-
-
-    }
 
 
 

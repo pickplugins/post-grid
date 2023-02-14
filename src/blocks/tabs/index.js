@@ -371,24 +371,54 @@ registerBlockType("post-grid/tabs", {
 
     function onChangeStyleHeaderWrap(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...headerWrap[sudoScource] }
+      // var sudoScourceX = { ...headerWrap[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, headerWrapSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ headerWrap: { ...headerWrap } });
+
+
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, headerWrap);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ headerWrap: object });
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, headerWrapSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ headerWrap: { ...headerWrap } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+
+
+
+
     }
 
 
@@ -428,10 +458,18 @@ registerBlockType("post-grid/tabs", {
 
 
     function onAddStyleHeaderWrap(sudoScource, key) {
-      var sudoScourceX = { ...headerWrap[sudoScource] }
-      sudoScourceX[key] = {};
-      headerWrap[sudoScource] = sudoScourceX;
-      setAttributes({ headerWrap: { ...headerWrap } });
+      // var sudoScourceX = { ...headerWrap[sudoScource] }
+      // sudoScourceX[key] = {};
+      // headerWrap[sudoScource] = sudoScourceX;
+      // setAttributes({ headerWrap: { ...headerWrap } });
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, header);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ header: object });
+
+
+
     }
 
 
@@ -439,24 +477,57 @@ registerBlockType("post-grid/tabs", {
 
     function onChangeStyleHeader(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...header[sudoScource] }
+      // var sudoScourceX = { ...header[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, headerSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ header: { ...header } });
+
+
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, header);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ header: object });
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, headerSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ header: { ...header } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+
+
+
+
+
+
+
     }
 
 
@@ -496,10 +567,18 @@ registerBlockType("post-grid/tabs", {
 
 
     function onAddStyleHeader(sudoScource, key) {
-      var sudoScourceX = { ...header[sudoScource] }
-      sudoScourceX[key] = {};
-      header[sudoScource] = sudoScourceX;
-      setAttributes({ header: { ...header } });
+      // var sudoScourceX = { ...header[sudoScource] }
+      // sudoScourceX[key] = {};
+      // header[sudoScource] = sudoScourceX;
+      // setAttributes({ header: { ...header } });
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, header);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ header: object });
+
+
     }
 
 
@@ -507,24 +586,46 @@ registerBlockType("post-grid/tabs", {
 
     function onChangeStyleContent(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...content[sudoScource] }
-      var elementSelector = contentSelector;
-      var elementSelector = myStore.getElementSelector(sudoScource, contentSelector);
 
-      sudoScourceX[attr][breakPointX] = newVal;
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, content);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ content: object });
+
+
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, contentSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ content: { ...content } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
+      // var sudoScourceX = { ...content[sudoScource] }
+      // var elementSelector = contentSelector;
+      // var elementSelector = myStore.getElementSelector(sudoScource, contentSelector);
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ content: { ...content } });
     }
 
 
@@ -564,35 +665,59 @@ registerBlockType("post-grid/tabs", {
 
 
     function onAddStyleContent(sudoScource, key) {
-      var sudoScourceX = { ...content[sudoScource] }
-      sudoScourceX[key] = {};
-      content[sudoScource] = sudoScourceX;
-      setAttributes({ content: { ...content } });
+      // var sudoScourceX = { ...content[sudoScource] }
+      // sudoScourceX[key] = {};
+      // content[sudoScource] = sudoScourceX;
+      // setAttributes({ content: { ...content } });
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, content);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ content: object });
     }
 
 
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, icon);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ icon: object });
+
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ icon: { ...icon } });
+      // var sudoScourceX = { ...icon[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ icon: { ...icon } });
 
     }
 
@@ -633,35 +758,67 @@ registerBlockType("post-grid/tabs", {
 
     function onAddStyleIcon(sudoScource, key) {
 
-      var sudoScourceX = { ...icon[sudoScource] }
-      sudoScourceX[key] = {};
-      icon[sudoScource] = sudoScourceX;
-      setAttributes({ icon: { ...icon } });
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, icon);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ icon: object });
 
     }
 
 
     function onChangeStyleHeaderActive(sudoScource, newVal, attr) {
 
-      var sudoScourceX = { ...headerActive[sudoScource] }
+      // var sudoScourceX = { ...headerActive[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, headerActiveSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ headerActive: { ...headerActive } });
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, headerActive);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ headerActive: object });
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, headerActiveSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
         blockCssY.items[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
 
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ headerActive: { ...headerActive } });
+
+
+
+
+
+
+
+
 
     }
 
@@ -703,10 +860,16 @@ registerBlockType("post-grid/tabs", {
 
     function onAddStyleHeaderActive(sudoScource, key) {
 
-      var sudoScourceX = { ...headerActive[sudoScource] }
-      sudoScourceX[key] = {};
-      headerActive[sudoScource] = sudoScourceX;
-      setAttributes({ headerActive: { ...headerActive } });
+      // var sudoScourceX = { ...headerActive[sudoScource] }
+      // sudoScourceX[key] = {};
+      // headerActive[sudoScource] = sudoScourceX;
+      // setAttributes({ headerActive: { ...headerActive } });
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, headerActive);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ headerActive: object });
 
     }
 

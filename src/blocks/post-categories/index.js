@@ -577,8 +577,8 @@ registerBlockType("post-grid/post-categories", {
 
 
 
-      var object = myStore.deletePropertyDeep(item, [sudoScource, key, breakPointX]);
-      setAttributes({ item: object });
+      var object = myStore.deletePropertyDeep(items, [sudoScource, key, breakPointX]);
+      setAttributes({ items: object });
 
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       var cssPropty = myStore.cssAttrParse(key);

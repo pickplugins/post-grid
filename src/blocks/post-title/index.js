@@ -18,7 +18,6 @@ import { store } from '../../store'
 import { link, linkOff } from "@wordpress/icons";
 
 
-import BreakpointSwitch from '../../components/breakpoint-switch'
 
 import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
@@ -26,7 +25,6 @@ import PGDropdown from '../../components/dropdown'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
-import PGcssBackgroundColor from '../../components/css-background-color'
 
 
 var myStore = wp.data.select('postgrid-shop');

@@ -16,11 +16,15 @@ function Html(props) {
     return null;
   }
 
-  var h = (props.val != undefined) ? props.val.split(" ")[0].match(/\d+/g)[0] : 0;
-  var v = (props.val != undefined) ? props.val.split(" ")[1].match(/\d+/g)[0] : 0;
-  var blur = (props.val != undefined) ? props.val.split(" ")[2].match(/\d+/g)[0] : 0;
-  var spread = (props.val != undefined) ? props.val.split(" ")[3].match(/\d+/g)[0] : 0;
-  var color = (props.val != undefined) ? props.val.split(" ")[4] : '#dddddd';
+
+var valZ = (props.val == null || props.val == undefined || props.val.length == 0 ) ? '0px 0px 0px 0px #000' : props.val;
+
+
+  var h = (valZ != undefined) ? valZ.split(" ")[0].match(/\d+/g)[0] : 0;
+  var v = (valZ != undefined) ? valZ.split(" ")[1].match(/\d+/g)[0] : 0;
+  var blur = (valZ != undefined) ? valZ.split(" ")[2].match(/\d+/g)[0] : 0;
+  var spread = (valZ != undefined) ? valZ.split(" ")[3].match(/\d+/g)[0] : 0;
+  var color = (valZ != undefined) ? valZ.split(" ")[4] : '#dddddd';
 
 
 

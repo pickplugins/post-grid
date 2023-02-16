@@ -70,8 +70,8 @@ registerBlockType("post-grid/post-comment-count", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
 
         },
@@ -97,8 +97,8 @@ registerBlockType("post-grid/post-comment-count", {
         },
 
         styles: {
-          color: {},
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          color: { Desktop: '' },
+          fontSize: { Desktop: '' },
 
         },
       },
@@ -110,9 +110,9 @@ registerBlockType("post-grid/post-comment-count", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          fontSize: { Desktop: '' },
 
         },
       },
@@ -126,8 +126,8 @@ registerBlockType("post-grid/post-comment-count", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -140,8 +140,8 @@ registerBlockType("post-grid/post-comment-count", {
           { text: '', class: 'postfix', },
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },

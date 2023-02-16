@@ -70,11 +70,10 @@ registerBlockType("post-grid/read-more", {
         styles:
         {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
@@ -90,14 +89,14 @@ registerBlockType("post-grid/read-more", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
           display: {},
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},
@@ -117,14 +116,14 @@ registerBlockType("post-grid/read-more", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
           display: {},
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           fontWeight: { "Desktop": "700" },
           textDecoration: {}, //overline, line-through, underline
@@ -141,8 +140,8 @@ registerBlockType("post-grid/read-more", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -155,8 +154,8 @@ registerBlockType("post-grid/read-more", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },

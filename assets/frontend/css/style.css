@@ -1,16 +1,16 @@
 @charset "utf-8";
 /* CSS Document */
-
+.post-grid * {box-sizing: border-box}
 .post-grid{
 	overflow:hidden;
 }
 .post-grid .grid-items {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   overflow: hidden;
 }
 .post-grid .item {
-  background: rgb(255, 255, 255) none repeat scroll 0 0;
-  /* display: inline-block; */
+
+  display: inline-block;
   /* vertical-align: top;
   position: relative; */
   word-break: break-word;

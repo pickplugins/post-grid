@@ -394,7 +394,7 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id)
                                     </span>
                                     <label><input type="checkbox" <?php if (!empty($checked)) echo 'checked'; ?> name="post_grid_meta_options[taxonomies][<?php echo esc_attr($taxonomy); ?>][checked]" value="<?php echo esc_attr($taxonomy); ?>" /> <?php echo esc_html($the_taxonomy->labels->name); ?>(<?php echo esc_html($taxonomy); ?>)</label>
                                 </div>
-                                <div class="options <?php echo ($taxonomy=='category') ? 'active':''; ?>">
+                                <div class="options <?php echo ($taxonomy == 'category') ? 'active' : ''; ?>">
                                     <?php
 
                                     $args = array(
@@ -1441,33 +1441,11 @@ function post_grid_metabox_tabs_content_grid_settings($tab, $post_id)
 
 ?>
     <div class="section">
-        <div class="section-title">Layout settings</div>
-        <p class="description section-description">Customize the layout</p>
+        <div class="section-title">Grid settings</div>
+        <p class="description section-description">Customize the grid options</p>
 
         <?php
 
-
-
-        $grid_layout_args['layout_grid'] = array('name' => 'N by N',  'thumb' => post_grid_plugin_url . 'assets/admin/images/layout_grid.png',);
-
-        $grid_layout_args = apply_filters('post_grid_grid_layouts', $grid_layout_args);
-
-
-        $args = array(
-            'id'        => 'name',
-            'parent' => 'post_grid_meta_options[grid_layout]',
-            'title'        => __('Grid layout', 'post-grid'),
-            'details'    => __('Choose grid item layout.', 'post-grid'),
-            'type'        => 'radio_image',
-            'value'        => $grid_layout_name,
-            'default'        => '',
-            'width'        => '100px',
-            'lazy_load_img'        => post_grid_plugin_url . 'assets/admin/images/loading.gif',
-
-            'args'        => $grid_layout_args,
-        );
-
-        $settings_tabs_field->generate_field($args);
 
 
 
@@ -1885,7 +1863,13 @@ function post_grid_metabox_tabs_content_masonry($tab, $post_id)
 
     $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
 
+    $masonry = !empty($post_grid_meta_options['masonry']) ? $post_grid_meta_options['masonry'] : [];
+
     $masonry_enable = !empty($post_grid_meta_options['masonry_enable']) ? $post_grid_meta_options['masonry_enable'] : 'no';
+    $masonry_gutter = isset($masonry['gutter']) ? $masonry['gutter'] : 20;
+
+
+
 
 ?>
     <div class="section">
@@ -1911,7 +1895,36 @@ function post_grid_metabox_tabs_content_masonry($tab, $post_id)
         );
 
         $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+        $args = array(
+            'id'        => 'gutter',
+            'parent'        => 'post_grid_meta_options[masonry]',
+            'title'        => __('Masonry gutter', 'post-grid'),
+            'details'    => __('Set custom gutter size of masonry. ex: 5', 'post-grid'),
+            'type'        => 'number',
+            'value'        => $masonry_gutter,
+            'default'        => '20',
+
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
+
+
+
+
         ?>
+
+
+
+
+
+
 
 
     </div>
@@ -1922,6 +1935,80 @@ function post_grid_metabox_tabs_content_masonry($tab, $post_id)
 
 
 
+
+
+add_action('post_grid_metabox_tabs_content_justified', 'post_grid_metabox_tabs_content_justified', 10, 2);
+
+function post_grid_metabox_tabs_content_justified($tab, $post_id)
+{
+
+    $settings_tabs_field = new settings_tabs_field();
+
+    $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
+
+    $justified = !empty($post_grid_meta_options['justified']) ? $post_grid_meta_options['justified'] : [];
+
+    $justified_gutter = isset($justified['gutter']) ? $justified['gutter'] : 20;
+    $maxHeight = isset($justified['maxHeight']) ? $justified['maxHeight'] : 180;
+
+
+
+?>
+    <div class="section">
+        <div class="section-title">Justified Settings</div>
+        <p class="description section-description">Customize the justified.</p>
+
+
+
+        <?php
+
+
+        $args = array(
+            'id'        => 'gutter',
+            'parent'        => 'post_grid_meta_options[justified]',
+            'title'        => __('Justified gutter', 'post-grid'),
+            'details'    => __('Set custom gutter size of justified. ex: 5', 'post-grid'),
+            'type'        => 'number',
+            'value'        => $justified_gutter,
+            'default'        => '20',
+
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+        $args = array(
+            'id'        => 'maxHeight',
+            'parent'        => 'post_grid_meta_options[justified]',
+            'title'        => __('Justified max height', 'post-grid'),
+            'details'    => __('Set custom max height', 'post-grid'),
+            'type'        => 'number',
+            'value'        => $maxHeight,
+            'default'        => '180',
+
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
+
+
+        ?>
+
+
+
+
+
+
+
+
+    </div>
+
+<?php
+
+}
 
 
 

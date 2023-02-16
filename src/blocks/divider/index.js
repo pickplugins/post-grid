@@ -62,9 +62,9 @@ registerBlockType("post-grid/divider", {
         styles:
         {
 
-          color: {},
-          padding: {},
-          margin: {},
+          color: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           display: {},
 
         },
@@ -87,10 +87,10 @@ registerBlockType("post-grid/divider", {
           width: {},
           height: {},
 
-          color: {},
+          color: { Desktop: '' },
           padding: { "Desktop": { top: '0px', right: '0px', bottom: '0px', left: '0px' } },
 
-          margin: {},
+          margin: { Desktop: '' },
 
         },
       },

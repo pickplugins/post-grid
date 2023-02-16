@@ -117,9 +117,9 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {}
         },
       },
@@ -132,12 +132,12 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},
@@ -155,10 +155,10 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
           backgroundImage: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {}
         },
 
@@ -173,10 +173,10 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {}
         },
       },
@@ -190,12 +190,12 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},
@@ -205,7 +205,7 @@ registerBlockType("post-grid/post-grid-filterable", {
         },
         hoverStyles:
         {
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
         },
 
@@ -222,11 +222,11 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
           wordBreak: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           display: { "Desktop": "inline-block" },
           cursor: { "Desktop": "pointer" },
 
@@ -242,11 +242,11 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
           wordBreak: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -262,8 +262,8 @@ registerBlockType("post-grid/post-grid-filterable", {
           color: { "Desktop": "#18978F" },
           bgColor: { "Desktop": "#9DD6DF" },
           wordBreak: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           display: { "Desktop": "inline-block" },
 
         },
@@ -280,10 +280,10 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {}
         },
       },
@@ -297,10 +297,10 @@ registerBlockType("post-grid/post-grid-filterable", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {}
         },
       },
@@ -323,9 +323,9 @@ registerBlockType("post-grid/post-grid-filterable", {
           colGap: {},
           rowGap: {},
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {}
         },
 
@@ -354,10 +354,10 @@ registerBlockType("post-grid/post-grid-filterable", {
           textAlign: { "Desktop": "center" },
           color: { "Desktop": "#18978F" },
           bgColor: { "Desktop": "#9DD6DF" },
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},
@@ -368,7 +368,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
         hoverStyles:
         {
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
         },
 
@@ -391,7 +391,7 @@ registerBlockType("post-grid/post-grid-filterable", {
           bgColor: { "Desktop": "#9DD6DF" },
           padding: { "Desktop": { "top": "10px", "right": "10px", "bottom": "10px", "left": "10px" } },
           margin: { "Desktop": { "top": "5px", "right": "5px", "bottom": "5px", "left": "5px" } },
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},
@@ -402,7 +402,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
         hoverStyles:
         {
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
         },
 
@@ -419,12 +419,12 @@ registerBlockType("post-grid/post-grid-filterable", {
         {
 
           display: {},
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},
@@ -435,7 +435,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
         hoverStyles:
         {
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
         },
       },

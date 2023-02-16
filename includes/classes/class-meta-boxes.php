@@ -209,6 +209,9 @@ class post_grid_meta_boxs
         $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
 
         $grid_type =     $post_types = !empty($post_grid_meta_options['grid_type']) ? $post_grid_meta_options['grid_type'] : 'grid';
+        $masonry_enable =     $post_types = !empty($post_grid_meta_options['masonry_enable']) ? $post_grid_meta_options['masonry_enable'] : 'no';
+
+        //$grid_type = ($masonry_enable == 'yes') ? 'masonry' : $grid_type;
 
         $current_tab = isset($post_grid_meta_options['current_tab']) ? $post_grid_meta_options['current_tab'] : 'query_post';
 
@@ -246,24 +249,28 @@ class post_grid_meta_boxs
         //            'active' => ($current_tab == 'skin_layout') ? true : false,
         //        );
 
+
+        $settings_tabs[] = array(
+            'id' => 'grid_settings',
+            'title' => sprintf(__('%s Grid settings', 'post-grid'), '<i class="fas fa-th"></i>'),
+            'priority' => 30,
+            'active' => ($current_tab == 'grid_settings') ? true : false,
+            'data_visible' => 'grid masonry justified filterable',
+            'hidden' => ($grid_type == 'slider') ? true : false,
+
+        );
+
+
         $settings_tabs[] = array(
             'id' => 'layouts',
             'title' => sprintf(__('%s Layouts', 'post-grid'), '<i class="fas fa-qrcode"></i>'),
-            'priority' => 30,
+            'priority' => 35,
             'active' => ($current_tab == 'layouts') ? true : false,
         );
 
 
 
-        $settings_tabs[] = array(
-            'id' => 'grid_settings',
-            'title' => sprintf(__('%s Grid settings', 'post-grid'), '<i class="fas fa-th"></i>'),
-            'priority' => 35,
-            'active' => ($current_tab == 'grid_settings') ? true : false,
-            'data_visible' => 'grid filterable',
-            'hidden' => ($grid_type == 'slider') ? true : false,
 
-        );
 
         $settings_tabs[] = array(
             'id' => 'item_style',
@@ -279,16 +286,27 @@ class post_grid_meta_boxs
             'title' => sprintf(__('%s Masonry', 'post-grid'), '<i class="fas fa-th-large"></i>'),
             'priority' => 40,
             'active' => ($current_tab == 'masonry') ? true : false,
-            'data_visible' => 'grid glossary timeline filterable',
+            'data_visible' => 'grid masonry glossary timeline filterable',
+            'hidden' => ((($grid_type == 'slider') ? true : false) || (($grid_type == 'justified') ? true : false)),
+        );
+
+
+        $settings_tabs[] = array(
+            'id' => 'justified',
+            'title' => sprintf(__('%s Justified', 'post-grid'), '<i class="fas fa-th-large"></i>'),
+            'priority' => 40,
+            'active' => ($current_tab == 'justified') ? true : false,
+            'data_visible' => 'grid justified glossary timeline filterable',
             'hidden' => ($grid_type == 'slider') ? true : false,
         );
+
 
         $settings_tabs[] = array(
             'id' => 'pagination',
             'title' => sprintf(__('%s Pagination', 'post-grid'), '<i class="fas fa-pager"></i>'),
             'priority' => 45,
             'active' => ($current_tab == 'pagination') ? true : false,
-            'data_visible' => ' grid glossary timeline filterable collapsible',
+            'data_visible' => ' grid justified masonry glossary timeline filterable collapsible',
             'hidden' => ($grid_type == 'slider') ? true : false,
         );
 
@@ -341,6 +359,33 @@ class post_grid_meta_boxs
                             }
                         });
                     })
+
+
+                    $(document).on('click', '.radio-img label', function() {
+                        var val = $(this).attr('data-value');
+                        console.log(val);
+                        $('.settings-tabs .tab-navs li').each(function(index) {
+                            data_visible = $(this).attr('data_visible');
+                            if (typeof data_visible != 'undefined') {
+                                n = data_visible.indexOf(val);
+                                if (n < 0) {
+                                    $(this).hide();
+                                } else {
+                                    $(this).show();
+                                }
+                            } else {
+                                console.log('Not matched: ' + data_visible);
+                            }
+                        });
+                    })
+
+
+
+
+
+
+
+
                 })
             </script>
 
@@ -350,18 +395,42 @@ class post_grid_meta_boxs
                 <?php
 
 
+
+
+
+                $view_types_args['grid'] = array('name' => 'Grid',  'thumb' => post_grid_plugin_url . 'assets/admin/images/grid.png',);
+                $view_types_args['masonry'] = array('name' => 'Masonry',  'thumb' => post_grid_plugin_url . 'assets/admin/images/masonry.png',);
+                $view_types_args['justified'] = array('name' => 'Justified',  'thumb' => post_grid_plugin_url . 'assets/admin/images/justified.png',);
+
+                $view_types_args = apply_filters('post_grid_view_types', $view_types_args);
+
+
                 $args = array(
                     'id'        => 'grid_type',
                     'parent'        => 'post_grid_meta_options',
                     'title'        => __('View Type', 'post-grid'),
                     'details'    => '',
-                    'type'        => 'radio',
+                    'type'        => 'radio_image',
                     'value'        => $grid_type,
                     'default'        => '',
-                    'args'        => apply_filters('post_grid_view_types', array('grid' => 'Normal grid')),
+                    'width'        => '100px',
+                    'lazy_load_img'        => post_grid_plugin_url . 'assets/admin/images/loading.gif',
+
+                    'args'        => $view_types_args,
                 );
 
                 $settings_tabs_field->generate_field($args);
+
+
+
+
+
+
+
+
+
+
+
 
                 ?>
 

@@ -71,10 +71,10 @@ registerBlockType("post-grid/post-featured-image", {
         {
           height: {},
           overflow: {},
-          color: {},
+          color: { Desktop: '' },
           display: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           backgroundPosition: {},
           backgroundSize: {},
 
@@ -107,7 +107,7 @@ registerBlockType("post-grid/post-featured-image", {
           width: {},
           height: {},
           filter: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {}
         },
         hoverStyles:

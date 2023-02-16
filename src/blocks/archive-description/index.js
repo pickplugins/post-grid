@@ -66,11 +66,10 @@ registerBlockType("post-grid/archive-description", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
@@ -97,12 +96,12 @@ registerBlockType("post-grid/archive-description", {
         },
 
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
 
         },
       },
@@ -114,12 +113,12 @@ registerBlockType("post-grid/archive-description", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
 
         },
       },
@@ -133,8 +132,8 @@ registerBlockType("post-grid/archive-description", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -147,8 +146,8 @@ registerBlockType("post-grid/archive-description", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },

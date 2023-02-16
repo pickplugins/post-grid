@@ -66,11 +66,10 @@ registerBlockType("post-grid/post-author", {
         styles:
         {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -94,11 +93,10 @@ registerBlockType("post-grid/post-author", {
         {
           display: {},
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           verticalAlign: {},
           borderRadius: {},
 
@@ -116,14 +114,13 @@ registerBlockType("post-grid/post-author", {
         styles:
         {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           verticalAlign: {},
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
 
         },
 
@@ -138,13 +135,12 @@ registerBlockType("post-grid/post-author", {
         styles:
         {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           verticalAlign: {},
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},

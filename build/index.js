@@ -1793,11 +1793,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -1821,10 +1828,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion-header'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -1837,10 +1852,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion-header '
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -1853,11 +1876,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion-content'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -1875,11 +1905,18 @@ var myStore = wp.data.select('postgrid-shop');
           enableToggle: 'yes'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -1895,12 +1932,21 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'iconToggle'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -2989,11 +3035,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -3015,12 +3068,21 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -3039,12 +3101,21 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'postdate-icon'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -3056,8 +3127,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -3069,8 +3144,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -4812,10 +4891,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -4837,11 +4924,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -4860,12 +4954,21 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'postdate-icon'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -4877,8 +4980,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -4890,8 +4997,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -6783,10 +6894,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -6800,10 +6919,18 @@ var myStore = wp.data.select('postgrid-shop');
 
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -6814,10 +6941,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -6829,11 +6964,18 @@ var myStore = wp.data.select('postgrid-shop');
           text: '»'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -6853,7 +6995,9 @@ var myStore = wp.data.select('postgrid-shop');
             Desktop: '#18978F'
           },
           backgroundColor: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {
             Desktop: {
               top: '5px',
@@ -6868,8 +7012,7 @@ var myStore = wp.data.select('postgrid-shop');
             Desktop: {
               val: '35'
             }
-          } //{ val: '18', unit: 'px' }
-
+          }
         },
         items: [{
           id: 'text',
@@ -6888,10 +7031,16 @@ var myStore = wp.data.select('postgrid-shop');
             showSeparator: true
           },
           styles: {
-            color: {},
+            color: {
+              Desktop: ''
+            },
             backgroundColor: {},
-            padding: {},
-            margin: {}
+            padding: {
+              Desktop: ''
+            },
+            margin: {
+              Desktop: ''
+            }
           }
         }, {
           id: 'homePage',
@@ -6909,10 +7058,16 @@ var myStore = wp.data.select('postgrid-shop');
             showSeparator: true
           },
           styles: {
-            color: {},
+            color: {
+              Desktop: ''
+            },
             backgroundColor: {},
-            padding: {},
-            margin: {}
+            padding: {
+              Desktop: ''
+            },
+            margin: {
+              Desktop: ''
+            }
           }
         }, {
           id: 'postTitle',
@@ -6930,10 +7085,16 @@ var myStore = wp.data.select('postgrid-shop');
             showSeparator: true
           },
           styles: {
-            color: {},
+            color: {
+              Desktop: ''
+            },
             backgroundColor: {},
-            padding: {},
-            margin: {}
+            padding: {
+              Desktop: ''
+            },
+            margin: {
+              Desktop: ''
+            }
           }
         }]
       } // avatar, name, description, id
@@ -7078,11 +7239,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'homePage',
@@ -7100,11 +7268,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'frontPage',
@@ -7122,11 +7297,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postsPage',
@@ -7144,11 +7326,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postTitle',
@@ -7166,11 +7355,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postAuthor',
@@ -7188,11 +7384,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postDate',
@@ -7211,11 +7414,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postDay',
@@ -7234,11 +7444,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postMonth',
@@ -7257,11 +7474,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postYear',
@@ -7280,11 +7504,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postAncestors',
@@ -7304,11 +7535,18 @@ var myStore = wp.data.select('postgrid-shop');
         count: ''
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postId',
@@ -7326,11 +7564,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postCategory',
@@ -7348,11 +7593,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postTag',
@@ -7370,11 +7622,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postCategories',
@@ -7394,11 +7653,18 @@ var myStore = wp.data.select('postgrid-shop');
         maxCount: 3
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postTags',
@@ -7418,11 +7684,18 @@ var myStore = wp.data.select('postgrid-shop');
         maxCount: 3
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postTerm',
@@ -7442,11 +7715,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'postTerms',
@@ -7466,11 +7746,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'termTitle',
@@ -7488,11 +7775,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'termParents',
@@ -7512,11 +7806,18 @@ var myStore = wp.data.select('postgrid-shop');
         count: 0
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'termAncestors',
@@ -7536,11 +7837,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'wcShop',
@@ -7558,11 +7866,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'wcAccount',
@@ -7580,11 +7895,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'wcCart',
@@ -7603,11 +7925,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'wcCheckout',
@@ -7626,11 +7955,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'searchText',
@@ -7648,11 +7984,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'archiveTitle',
@@ -7670,11 +8013,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: '404Text',
@@ -7692,11 +8042,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'dateText',
@@ -7715,11 +8072,18 @@ var myStore = wp.data.select('postgrid-shop');
         format: 'Y-m-d'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'monthText',
@@ -7738,11 +8102,18 @@ var myStore = wp.data.select('postgrid-shop');
         format: 'Y-m'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'yearText',
@@ -7761,11 +8132,18 @@ var myStore = wp.data.select('postgrid-shop');
         format: 'Y'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'authorName',
@@ -7783,11 +8161,18 @@ var myStore = wp.data.select('postgrid-shop');
         showSeparator: true
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }];
     let linkElementsArgs = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_8__.applyFilters)('linkElementsArgs', linkElementsArgsBasic);
@@ -9226,9 +9611,15 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          padding: {},
-          margin: {},
+          color: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {}
         }
       }
@@ -9245,7 +9636,9 @@ var myStore = wp.data.select('postgrid-shop');
           display: {},
           width: {},
           height: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           padding: {
             "Desktop": {
               top: '0px',
@@ -9254,7 +9647,9 @@ var myStore = wp.data.select('postgrid-shop');
               left: '0px'
             }
           },
-          margin: {}
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -10051,7 +10446,9 @@ var myStore = wp.data.select('postgrid-shop');
           attr: []
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           borderRadius: {}
         }
       }
@@ -10073,9 +10470,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -10094,7 +10494,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'text-icon'
         },
         styles: {
-          color: {}
+          color: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -10106,7 +10508,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {}
+          color: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -10118,7 +10522,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'postfix'
         },
         styles: {
-          color: {}
+          color: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -12133,12 +12539,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link-off.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link-off.js");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
@@ -12224,14 +12628,18 @@ var myStore = wp.data.select('postgrid-shop');
           width: {},
           height: {},
           overflow: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           bgImage: {},
           bgPosition: {},
           bgSize: {},
           display: {},
           borderRadius: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -12273,7 +12681,9 @@ var myStore = wp.data.select('postgrid-shop');
           height: {},
           filter: {},
           objectFit: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         },
         hoverStyles: {
@@ -12585,42 +12995,6 @@ var myStore = wp.data.select('postgrid-shop');
       }
     }, [image.options.imgSrcMetaKey, image.options.imgSrcMetaKeyType, image.options.imgSrcType]);
 
-    function addfilterArgs(option, index) {
-      var filterObj = {};
-
-      if (image.styles.filter[breakPointX] != undefined) {
-        image.styles.filter[breakPointX].push(option);
-      } else {
-        image.styles.filter[breakPointX] = [];
-        image.styles.filter[breakPointX].push(option);
-      }
-
-      var styles = { ...image.styles,
-        filter: image.styles.filter
-      };
-      setAttributes({
-        image: { ...image,
-          styles: styles
-        }
-      });
-    }
-
-    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-      var filterStr = {};
-      filterStr[breakPointX] = '';
-      image.styles.filter[breakPointX] != undefined && image.styles.filter[breakPointX].map(x => {
-        filterStr[breakPointX] += x.value + '(' + x.val + x.unit + ') ';
-      });
-      blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
-        'filter': filterStr
-      };
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }, [image]);
-
     function setFeaturedImageSize(option, index) {
       var newValuesObj = {};
 
@@ -12694,29 +13068,6 @@ var myStore = wp.data.select('postgrid-shop');
         value: item.id
       });
     }
-
-    var BefroeTitle = function (_ref) {
-      let {
-        title,
-        args
-      } = _ref;
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1",
-        onClick: ev => {
-          image.styles.filter[breakPointX].splice(args.index, 1);
-          var styles = image.styles;
-          setAttributes({
-            image: { ...image,
-              styles: styles
-            }
-          });
-        }
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"], {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"]
-      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "mx-2"
-      }, title));
-    };
 
     function handleLinkClick(ev) {
       ev.stopPropagation();
@@ -12969,12 +13320,12 @@ var myStore = wp.data.select('postgrid-shop');
       tabs: [{
         name: 'options',
         title: 'Options',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
         className: 'tab-settings'
       }, {
         name: 'styles',
         title: 'Styles',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
         className: 'tab-style'
       }]
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
@@ -13494,12 +13845,12 @@ var myStore = wp.data.select('postgrid-shop');
       tabs: [{
         name: 'options',
         title: 'Options',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
         className: 'tab-settings'
       }, {
         name: 'styles',
         title: 'Styles',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
         className: 'tab-style'
       }]
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
@@ -13557,10 +13908,10 @@ var myStore = wp.data.select('postgrid-shop');
       onClose: () => {},
       allowedTypes: ALLOWED_MEDIA_TYPES,
       value: image.options.srcId,
-      render: _ref2 => {
+      render: _ref => {
         let {
           open
-        } = _ref2;
+        } = _ref;
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
           className: "my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full",
           onClick: open
@@ -13609,13 +13960,13 @@ var myStore = wp.data.select('postgrid-shop');
       className: "relative"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       className: linkPickerSrcUrl ? "!bg-gray-400" : '',
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"],
       onClick: ev => {
         setlinkPickerSrcUrl(prev => !prev);
       }
     }), image.options.srcUrl.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       className: "!text-red-500 ml-2",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__["default"],
       onClick: ev => {
         var options = { ...image.options,
           srcUrl: ''
@@ -13716,13 +14067,13 @@ var myStore = wp.data.select('postgrid-shop');
       className: "relative"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       className: linkPickerPosttitle ? "!bg-gray-400" : '',
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"],
       onClick: ev => {
         setLinkPickerPosttitle(prev => !prev);
       }
     }), image.options.linkTocustomUrl.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       className: "!text-red-500 ml-2",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__["default"],
       onClick: ev => {
         var options = { ...image.options,
           linkTocustomUrl: ''
@@ -13961,340 +14312,6 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Filters "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_16__["default"], {
-      position: "bottom right",
-      variant: "secondary",
-      options: filterArgs,
-      buttonTitle: "Add",
-      onChange: addfilterArgs,
-      values: ""
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "my-5"
-    }, image.styles.filter[breakPointX] != undefined && image.styles.filter[breakPointX].map((arg, index) => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
-        title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(BefroeTitle, {
-          title: arg.label,
-          args: {
-            index: index,
-            arg: arg
-          }
-        }),
-        initialOpen: false
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.RangeControl, {
-        value: arg.val,
-        onChange: newVal => {
-          arg.val = newVal;
-          image.styles.filter[breakPointX][index] = arg;
-          var styles = image.styles;
-          setAttributes({
-            image: { ...image,
-              styles: styles
-            }
-          });
-        },
-        min: 0,
-        max: 100
-      }))));
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Image Scale"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
-      className: "my-3",
-      value: image.styles.objectFit[breakPointX],
-      options: [{
-        label: 'Fill',
-        value: 'fill'
-      }, {
-        label: 'Contain',
-        value: 'contain'
-      }, {
-        label: 'Cover',
-        value: 'cover'
-      }, {
-        label: 'None',
-        value: 'none'
-      }, {
-        label: 'Scale-down',
-        value: 'scale-down'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(image.styles.objectFit).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = image.styles.objectFit;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...image.styles,
-          objectFit: newValuesObj
-        };
-        setAttributes({
-          image: { ...image,
-            styles: styles
-          }
-        });
-        blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
-          'object-fit': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Width"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
-      disabled: image.styles.width[breakPointX] != undefined && image.styles.width[breakPointX].unit == 'auto' ? true : false,
-      value: image.styles.width[breakPointX] != undefined ? image.styles.width[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(image.styles.width).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: 'auto'
-          };
-        } else {
-          newValuesObj = image.styles.width;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...image.styles,
-          width: newValuesObj
-        };
-        setAttributes({
-          image: { ...image,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
-          'width': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
-      className: "mb-0",
-      value: image.styles.width[breakPointX] != undefined ? image.styles.width[breakPointX].unit : 'auto',
-      options: [{
-        label: 'Auto',
-        value: 'auto'
-      }, {
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'fr',
-        value: 'fr'
-      }, {
-        label: '%',
-        value: '%'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(image.styles.width).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = image.styles.width;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...image.styles,
-          width: newValuesObj
-        };
-        setAttributes({
-          image: { ...image,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
-          'width': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Height"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
-      disabled: image.styles.height[breakPointX] != undefined && image.styles.height[breakPointX].unit == 'auto' ? true : false,
-      value: image.styles.height[breakPointX] != undefined ? image.styles.height[breakPointX].val : 0,
-      type: "number",
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(image.styles.height).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: 'auto'
-          };
-        } else {
-          newValuesObj = image.styles.height;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'auto';
-          newValuesObj[breakPointX] = {
-            val: newVal,
-            unit: unit
-          };
-        }
-
-        var styles = { ...image.styles,
-          height: newValuesObj
-        };
-        setAttributes({
-          image: { ...image,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
-          'height': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
-      className: "mb-0",
-      value: image.styles.height[breakPointX] != undefined ? image.styles.height[breakPointX].unit : 'auto',
-      options: [{
-        label: 'Auto',
-        value: 'auto'
-      }, {
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'fr',
-        value: 'fr'
-      }, {
-        label: '%',
-        value: '%'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(image.styles.height).length == 0) {
-          newValuesObj[breakPointX] = {
-            val: 0,
-            unit: newVal
-          };
-        } else {
-          newValuesObj = image.styles.height;
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 0;
-          newValuesObj[breakPointX] = {
-            val: val,
-            unit: newVal
-          };
-        }
-
-        var styles = { ...image.styles,
-          height: newValuesObj
-        };
-        setAttributes({
-          image: { ...image,
-            styles: styles
-          }
-        });
-        var heightVal = newValuesObj[breakPointX].val ? newValuesObj[breakPointX].val : 0;
-        var heightUnit = newValuesObj[breakPointX].unit ? newValuesObj[breakPointX].unit : 'auto';
-        var heightX = blockCssY.items[imgSelector] != undefined ? blockCssY.items[imgSelector] : {}; //heightX[breakPointX] = heightVal + heightUnit;
-
-        if (heightUnit == 'auto') {
-          heightX[breakPointX] = 'auto';
-        } else {
-          heightX[breakPointX] = heightVal + heightUnit;
-        }
-
-        blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector],
-          'height': heightX
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
       name: "styles"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
@@ -14381,10 +14398,10 @@ var myStore = wp.data.select('postgrid-shop');
       onClose: () => {},
       allowedTypes: ALLOWED_MEDIA_TYPES,
       value: image.options.srcId,
-      render: _ref3 => {
+      render: _ref2 => {
         let {
           open
-        } = _ref3;
+        } = _ref2;
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
           className: "my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full",
           onClick: open
@@ -14433,13 +14450,13 @@ var myStore = wp.data.select('postgrid-shop');
       className: "relative"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       className: linkPickerSrcUrl ? "!bg-gray-400" : '',
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_28__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"],
       onClick: ev => {
         setlinkPickerSrcUrl(prev => !prev);
       }
     }), image.options.srcUrl.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       className: "!text-red-500 ml-2",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_29__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__["default"],
       onClick: ev => {
         var options = { ...image.options,
           srcUrl: ''
@@ -14628,7 +14645,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-layers'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           position: {},
           zIndex: {},
@@ -15070,7 +15089,9 @@ function EditComponent() {
           class: 'pg-layers'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           display: {},
           position: {},
@@ -15497,10 +15518,16 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {}
         }
       }
@@ -15532,10 +15559,16 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'item'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {},
           listStyle: {},
           listStylePosition: {},
@@ -15556,13 +15589,20 @@ var myStore = wp.data.select('postgrid-shop');
           positon: 'before'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           fontWeight: {
@@ -16915,11 +16955,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -16958,13 +17005,22 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'icon'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           fontWeight: {
@@ -16987,12 +17043,21 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -18689,11 +18754,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -18723,11 +18795,18 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           display: {},
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           verticalAlign: {},
           borderRadius: {}
         }
@@ -18745,14 +18824,22 @@ var myStore = wp.data.select('postgrid-shop');
           customUrl: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           verticalAlign: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -18765,14 +18852,22 @@ var myStore = wp.data.select('postgrid-shop');
           postfix: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           verticalAlign: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -20014,9 +20109,13 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           display: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -20035,12 +20134,19 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           display: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -20068,13 +20174,20 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'icon'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           fontWeight: {
@@ -20093,9 +20206,13 @@ var myStore = wp.data.select('postgrid-shop');
           text: ', '
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -20108,9 +20225,13 @@ var myStore = wp.data.select('postgrid-shop');
           text: ', '
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -20123,12 +20244,19 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -20477,9 +20605,9 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onRemoveStyleItems(sudoScource, key) {
-      var object = myStore.deletePropertyDeep(item, [sudoScource, key, breakPointX]);
+      var object = myStore.deletePropertyDeep(items, [sudoScource, key, breakPointX]);
       setAttributes({
-        item: object
+        items: object
       });
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       var cssPropty = myStore.cssAttrParse(key);
@@ -21875,8 +22003,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -21897,9 +22029,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'commentCount'
         },
         styles: {
-          color: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -21918,10 +22053,15 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'commentCount-icon'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -21933,8 +22073,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -21946,8 +22090,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'postfix'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -23363,11 +23511,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -23389,12 +23544,21 @@ var myStore = wp.data.select('postgrid-shop');
         styles: {
           display: {},
           width: {},
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -23422,13 +23586,22 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'postdate-icon'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           fontWeight: {
@@ -23447,8 +23620,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -23460,8 +23637,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -25279,7 +25460,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {}
+          color: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -25309,9 +25492,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'excerpt-text'
         },
         styles: {
-          color: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -25327,9 +25513,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -25341,7 +25530,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {}
+          color: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -25353,7 +25544,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'postfix'
         },
         styles: {
-          color: {}
+          color: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -27076,10 +27269,16 @@ var myStore = wp.data.select('postgrid-shop');
         styles: {
           height: {},
           overflow: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           display: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           backgroundPosition: {},
           backgroundSize: {}
         }
@@ -27111,7 +27310,9 @@ var myStore = wp.data.select('postgrid-shop');
           width: {},
           height: {},
           filter: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         },
         hoverStyles: {
@@ -29562,9 +29763,13 @@ var myStore = wp.data.select('postgrid-shop');
           }
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -29581,12 +29786,19 @@ var myStore = wp.data.select('postgrid-shop');
           busyIcon: ''
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -29606,10 +29818,14 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           backgroundImage: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -29621,10 +29837,14 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'items-loop'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -29636,12 +29856,17 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'item'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           wordBreak: {},
-          padding: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -29653,7 +29878,9 @@ var myStore = wp.data.select('postgrid-shop');
           textTransform: {}
         },
         hoverStyles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {}
         }
       }
@@ -29676,11 +29903,17 @@ var myStore = wp.data.select('postgrid-shop');
           parPage: 6
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           wordBreak: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {
             "Desktop": "inline-block"
           },
@@ -29697,11 +29930,17 @@ var myStore = wp.data.select('postgrid-shop');
           slug: 'all'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           wordBreak: {},
-          padding: {},
-          margin: {}
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -29717,8 +29956,12 @@ var myStore = wp.data.select('postgrid-shop');
             "Desktop": "#9DD6DF"
           },
           wordBreak: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {
             "Desktop": "inline-block"
           }
@@ -29732,10 +29975,14 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'no-posts text-center'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -29747,10 +29994,14 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'spinner'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -29766,9 +30017,13 @@ var myStore = wp.data.select('postgrid-shop');
           gridTemplateRows: {},
           colGap: {},
           rowGap: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -29803,10 +30058,15 @@ var myStore = wp.data.select('postgrid-shop');
           bgColor: {
             "Desktop": "#9DD6DF"
           },
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -29818,7 +30078,9 @@ var myStore = wp.data.select('postgrid-shop');
           textTransform: {}
         },
         hoverStyles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {}
         }
       }
@@ -29855,8 +30117,9 @@ var myStore = wp.data.select('postgrid-shop');
               "left": "5px"
             }
           },
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -29868,7 +30131,9 @@ var myStore = wp.data.select('postgrid-shop');
           textTransform: {}
         },
         hoverStyles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {}
         }
       }
@@ -29881,12 +30146,19 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           display: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -29898,7 +30170,9 @@ var myStore = wp.data.select('postgrid-shop');
           textTransform: {}
         },
         hoverStyles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {}
         }
       }
@@ -37640,9 +37914,13 @@ var myStore = wp.data.select('postgrid-shop');
           }
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -37659,12 +37937,19 @@ var myStore = wp.data.select('postgrid-shop');
           busyIcon: ''
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -37684,10 +37969,14 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           backgroundImage: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -37699,10 +37988,14 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'items-loop'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -37714,16 +38007,21 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'item'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           outline: {},
           border: {},
           boxShadow: {},
           borderRadius: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -37735,7 +38033,9 @@ var myStore = wp.data.select('postgrid-shop');
           fontWeight: {}
         },
         hoverStyles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {}
         }
       }
@@ -37747,10 +38047,14 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'no-posts text-center'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -37762,10 +38066,14 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'spinner'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           wordBreak: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -37781,9 +38089,13 @@ var myStore = wp.data.select('postgrid-shop');
           gridTemplateRows: {},
           colGap: {},
           rowGap: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -37812,12 +38124,19 @@ var myStore = wp.data.select('postgrid-shop');
           textAlign: {
             "Desktop": "center"
           },
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -37829,7 +38148,9 @@ var myStore = wp.data.select('postgrid-shop');
           textTransform: {}
         },
         hoverStyles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {}
         }
       }
@@ -37866,8 +38187,9 @@ var myStore = wp.data.select('postgrid-shop');
               "left": "5px"
             }
           },
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -37879,7 +38201,9 @@ var myStore = wp.data.select('postgrid-shop');
           textTransform: {}
         },
         hoverStyles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {}
         }
       }
@@ -37892,12 +38216,19 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           display: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -37909,7 +38240,9 @@ var myStore = wp.data.select('postgrid-shop');
           textTransform: {}
         },
         hoverStyles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {}
         }
       }
@@ -43575,10 +43908,16 @@ var myStore = wp.data.select('postgrid-shop');
           tag: 'div'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {}
         }
       }
@@ -43597,12 +43936,19 @@ var myStore = wp.data.select('postgrid-shop');
         styles: {
           display: {},
           width: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -44317,10 +44663,16 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {}
         }
       }
@@ -44338,12 +44690,19 @@ var myStore = wp.data.select('postgrid-shop');
           linkAttr: []
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -44371,13 +44730,20 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'icon'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           fontWeight: {
@@ -44396,9 +44762,13 @@ var myStore = wp.data.select('postgrid-shop');
           text: ', '
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -44411,12 +44781,19 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -44765,9 +45142,9 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onRemoveStyleItems(sudoScource, key) {
-      var object = myStore.deletePropertyDeep(item, [sudoScource, key, breakPointX]);
+      var object = myStore.deletePropertyDeep(items, [sudoScource, key, breakPointX]);
       setAttributes({
-        item: object
+        items: object
       });
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       var cssPropty = myStore.cssAttrParse(key);
@@ -45853,8 +46230,12 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           display: {},
-          color: {},
-          padding: {},
+          color: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -45880,11 +46261,18 @@ var myStore = wp.data.select('postgrid-shop');
           linkAttr: []
         },
         styles: {
-          color: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          color: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -45912,12 +46300,19 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'icon'
         },
         styles: {
-          color: {},
-          padding: {},
-          margin: {},
+          color: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           fontWeight: {
@@ -45936,8 +46331,12 @@ var myStore = wp.data.select('postgrid-shop');
           text: ', '
         },
         styles: {
-          color: {},
-          padding: {},
+          color: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
           margin: {}
         }
       }
@@ -45950,11 +46349,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          color: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          color: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -46350,9 +46756,9 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onRemoveStyleItems(sudoScource, key) {
-      var object = myStore.deletePropertyDeep(item, [sudoScource, key, breakPointX]);
+      var object = myStore.deletePropertyDeep(items, [sudoScource, key, breakPointX]);
       setAttributes({
-        item: object
+        items: object
       });
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       var cssPropty = myStore.cssAttrParse(key);
@@ -47789,9 +48195,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          fontSize: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -47805,8 +48220,12 @@ var myStore = wp.data.select('postgrid-shop');
 
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -47820,8 +48239,12 @@ var myStore = wp.data.select('postgrid-shop');
 
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -48064,6 +48487,7 @@ var myStore = wp.data.select('postgrid-shop');
       var path = [sudoScource, key, breakPointX];
       let obj = Object.assign({}, wrapper);
       const object = myStore.addPropertyDeep(obj, path, '');
+      console.log(object);
       setAttributes({
         wrapper: object
       });
@@ -49051,11 +49475,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -49074,13 +49505,22 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -49110,13 +49550,22 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'readmore-icon'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           fontWeight: {
@@ -49135,8 +49584,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -49148,8 +49601,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'postfix'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -50941,7 +51398,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           padding: {},
           margin: {}
@@ -50963,7 +51422,9 @@ var myStore = wp.data.select('postgrid-shop');
           prams: []
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
           padding: {},
           margin: {}
@@ -51867,11 +52328,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -51885,11 +52353,18 @@ var myStore = wp.data.select('postgrid-shop');
 
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -51900,11 +52375,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -51915,11 +52397,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -51939,7 +52428,9 @@ var myStore = wp.data.select('postgrid-shop');
             Desktop: '#18978F'
           },
           backgroundColor: {},
-          padding: {},
+          padding: {
+            Desktop: ''
+          },
           margin: {
             Desktop: {
               top: '5px',
@@ -51955,7 +52446,6 @@ var myStore = wp.data.select('postgrid-shop');
               val: '35'
             }
           },
-          //{ val: '18', unit: 'px' }
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -51978,10 +52468,16 @@ var myStore = wp.data.select('postgrid-shop');
             iconSrc: 'fab fa-facebook-square'
           },
           styles: {
-            color: {},
+            color: {
+              Desktop: ''
+            },
             backgroundColor: {},
-            padding: {},
-            margin: {},
+            padding: {
+              Desktop: ''
+            },
+            margin: {
+              Desktop: ''
+            },
             display: {}
           }
         }, {
@@ -51997,10 +52493,16 @@ var myStore = wp.data.select('postgrid-shop');
             iconSrc: 'fab fa-twitter-square'
           },
           styles: {
-            color: {},
+            color: {
+              Desktop: ''
+            },
             backgroundColor: {},
-            padding: {},
-            margin: {},
+            padding: {
+              Desktop: ''
+            },
+            margin: {
+              Desktop: ''
+            },
             display: {}
           }
         }, {
@@ -52016,10 +52518,16 @@ var myStore = wp.data.select('postgrid-shop');
             iconSrc: 'fab fa-linkedin'
           },
           styles: {
-            color: {},
+            color: {
+              Desktop: ''
+            },
             backgroundColor: {},
-            padding: {},
-            margin: {},
+            padding: {
+              Desktop: ''
+            },
+            margin: {
+              Desktop: ''
+            },
             display: {}
           }
         }]
@@ -52158,11 +52666,18 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fas fa-envelope'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'skype',
@@ -52177,11 +52692,18 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fab fa-skype'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'whatsapp',
@@ -52196,11 +52718,18 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fab fa-whatsapp-square'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'tumblr',
@@ -52215,11 +52744,18 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fas fa-square-tumblr'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'viber',
@@ -52234,20 +52770,27 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fab fa-viber'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, // {
     //   id: 'instagram', label: 'Instagram', count: 125, url: 'https://www.facebook.com/sharer.php?u={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-square-instagram', },
     //   styles: {
     //     
-    //     color: {},
+    //     color: { Desktop: '' },
     //     backgroundColor: {},
-    //     padding: {},
-    //     margin: {},
+    //   padding: { Desktop: '' },
+    //   margin: { Desktop: '' },
     //     display: {},
     //   },
     // },
@@ -52264,11 +52807,18 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fab fa-square-reddit'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'facebook',
@@ -52283,11 +52833,18 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fas fa-square-facebook'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'twitter',
@@ -52302,11 +52859,18 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fas fa-square-twitter'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'linkedin',
@@ -52321,11 +52885,18 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fas fa-square-facebook'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }, {
       id: 'pinterest',
@@ -52340,11 +52911,18 @@ var myStore = wp.data.select('postgrid-shop');
         iconSrc: 'fab fa-pinterest-square'
       },
       styles: {
-        color: {},
-        backgroundColor: {},
-        padding: {},
-        margin: {},
-        display: {}
+        color: {
+          Desktop: ''
+        },
+        backgroundColor: {
+          Desktop: ''
+        },
+        padding: {
+          Desktop: ''
+        },
+        margin: {
+          Desktop: ''
+        }
       }
     }];
 
@@ -53671,7 +54249,9 @@ var myStore = wp.data.select('postgrid-shop');
           attr: []
         },
         styles: {
-          color: {},
+          color: {
+            Desktop: ''
+          },
           borderRadius: {}
         }
       }
@@ -53698,7 +54278,9 @@ var myStore = wp.data.select('postgrid-shop');
           linkAttr: []
         },
         styles: {
-          color: {}
+          color: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -53710,7 +54292,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'prefix'
         },
         styles: {
-          color: {}
+          color: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -53722,7 +54306,9 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'postfix'
         },
         styles: {
-          color: {}
+          color: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -55005,11 +55591,18 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -55033,14 +55626,23 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'tab-nav '
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           cursor: {},
           borderRadius: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -55054,10 +55656,15 @@ var myStore = wp.data.select('postgrid-shop');
           activeIndex: 0
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -55069,10 +55676,15 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'tabs-navs '
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -55085,10 +55697,15 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'pg-accordion-content'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -55106,10 +55723,15 @@ var myStore = wp.data.select('postgrid-shop');
           enableToggle: 'yes'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -55125,12 +55747,21 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'iconToggle'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           fontWeight: {
@@ -56880,8 +57511,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -56919,10 +57554,15 @@ var myStore = wp.data.select('postgrid-shop');
           linkAttr: []
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -56941,10 +57581,15 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'icon'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -56956,8 +57601,12 @@ var myStore = wp.data.select('postgrid-shop');
           text: ', '
         },
         styles: {
-          color: {},
-          backgroundColor: {}
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -56969,10 +57618,15 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'inline-block'
         },
         styles: {
-          color: {},
-          backgroundColor: {},
-          fontSize: {} //{ val: '18', unit: 'px' }
-
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          },
+          fontSize: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -58574,13 +59228,20 @@ var myStore = wp.data.select('postgrid-shop');
         },
         styles: {
           textAlign: {},
-          color: {},
+          color: {
+            Desktop: ''
+          },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: {
+            Desktop: ''
+          },
+          margin: {
+            Desktop: ''
+          },
           display: {},
-          fontSize: {},
-          //{ val: '18', unit: 'px' }
+          fontSize: {
+            Desktop: ''
+          },
           lineHeight: {},
           // { val: '18', unit: 'px' }
           letterSpacing: {},
@@ -62327,7 +62988,8 @@ function Html(props) {
     return null;
   }
 
-  var valParts = props.val != undefined ? props.val.split(" ") : ['1px', '1px', '#000000'];
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '1px 1px #000000' : props.val;
+  var valParts = valZ != undefined ? valZ.split(" ") : ['1px', '1px', '#000000'];
   var horizontalVal = valParts[0];
   var vericalVal = valParts[1];
   var colorVal = valParts[2]; //console.log(horizontalVal);
@@ -63314,11 +63976,12 @@ function Html(props) {
     return null;
   }
 
-  var h = props.val != undefined ? props.val.split(" ")[0].match(/\d+/g)[0] : 0;
-  var v = props.val != undefined ? props.val.split(" ")[1].match(/\d+/g)[0] : 0;
-  var blur = props.val != undefined ? props.val.split(" ")[2].match(/\d+/g)[0] : 0;
-  var spread = props.val != undefined ? props.val.split(" ")[3].match(/\d+/g)[0] : 0;
-  var color = props.val != undefined ? props.val.split(" ")[4] : '#dddddd';
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px 0px 0px 0px #000' : props.val;
+  var h = valZ != undefined ? valZ.split(" ")[0].match(/\d+/g)[0] : 0;
+  var v = valZ != undefined ? valZ.split(" ")[1].match(/\d+/g)[0] : 0;
+  var blur = valZ != undefined ? valZ.split(" ")[2].match(/\d+/g)[0] : 0;
+  var spread = valZ != undefined ? valZ.split(" ")[3].match(/\d+/g)[0] : 0;
+  var color = valZ != undefined ? valZ.split(" ")[4] : '#dddddd';
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
     for: ""
   }, "H-Offset")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.RangeControl, {
@@ -64564,8 +65227,8 @@ function Html(props) {
     return null;
   }
 
-  var valParts = props.val != undefined ? props.val.split(" ") : [];
-  const [valArgs, setvalArgs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  var valParts = props.val == null || props.val == undefined || props.val.length == 0 ? [] : props.val.split(" ");
+  var [valArgs, setvalArgs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
 
   function addFilter(option, index) {
     var isExist = valArgs.find(x => x.id === option.value);
@@ -65510,7 +66173,16 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  console.log(props.val);
+  console.log(typeof props.val);
+
+  if (typeof props.val == 'object') {
+    var valZ = props.val.val + props.val.unit;
+  } else {
+    var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  }
+
+  console.log(valZ);
   var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
   var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
@@ -68905,7 +69577,9 @@ function Html(props) {
     return null;
   }
 
-  var valParts = props.val != undefined ? props.val.split(" ") : ['underline', '#000000', 'wavy', '1px']; //console.log(valParts);
+  console.log(props.val);
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? 'underline #000000 wavy 1px' : props.val;
+  var valParts = valZ != undefined || valZ != null ? valZ.split(" ") : ['underline', '#000000', 'wavy', '1px'];
 
   if (valParts.length == 4) {
     var lineVal = [valParts[0]];
@@ -68996,15 +69670,15 @@ function Html(props) {
   };
   var thicknessValX = thicknessVal != undefined ? thicknessVal.match(/\d+/g)[0] : 1;
   var thicknessUnitX = thicknessVal != undefined ? thicknessVal.match(/[a-zA-Z%]+/g)[0] : 'px';
-  const [thicknessValY, setthicknessVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(thicknessValX);
-  const [thicknessUnitY, setthicknessUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(thicknessUnitX); //console.log(thicknessValY);
+  var [thicknessValY, setthicknessVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(thicknessValX);
+  var [thicknessUnitY, setthicknessUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(thicknessUnitX); //console.log(thicknessValY);
   //console.log(thicknessUnitY);
 
-  const [outlinelineVal, setoutlinelineVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(lineVal);
-  const [outlineColorVal, setoutlineColorVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(colorVal);
-  const [outlineStyleVal, setoutlineStyleVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(styleVal);
-  const [outlineThicknessVal, setoutlineThicknessVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(thicknessValY + thicknessUnitY);
-  const [textDecoration, setTextDecoration] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  var [outlinelineVal, setoutlinelineVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(lineVal);
+  var [outlineColorVal, setoutlineColorVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(colorVal);
+  var [outlineStyleVal, setoutlineStyleVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(styleVal);
+  var [outlineThicknessVal, setoutlineThicknessVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(thicknessValY + thicknessUnitY);
+  var [textDecoration, setTextDecoration] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
     "line": ['underline'],
     "style": 'double',
     "color": "#000000",

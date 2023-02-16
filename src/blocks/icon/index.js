@@ -67,7 +67,7 @@ registerBlockType("post-grid/icon", {
         },
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
           borderRadius: {},
 
 
@@ -94,8 +94,8 @@ registerBlockType("post-grid/icon", {
 
         styles:
         {
-          color: {},
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          color: { Desktop: '' },
+          fontSize: { Desktop: '' },
 
 
         },
@@ -110,7 +110,7 @@ registerBlockType("post-grid/icon", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
 
 
         },
@@ -126,7 +126,7 @@ registerBlockType("post-grid/icon", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
 
         },
       },
@@ -139,7 +139,7 @@ registerBlockType("post-grid/icon", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
 
         },
       },

@@ -78,14 +78,14 @@ registerBlockType("post-grid/image", {
 
           overflow: {},
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
           bgImage: {},
           bgPosition: {},
           bgSize: {},
           display: {},
           borderRadius: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {}
         },
       },
@@ -125,7 +125,7 @@ registerBlockType("post-grid/image", {
           height: {},
           filter: {},
           objectFit: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {}
         },
         hoverStyles:
@@ -401,57 +401,6 @@ registerBlockType("post-grid/image", {
 
 
 
-
-
-
-
-
-    function addfilterArgs(option, index) {
-
-
-      var filterObj = {};
-
-      if (image.styles.filter[breakPointX] != undefined) {
-        image.styles.filter[breakPointX].push(option)
-
-      } else {
-
-        image.styles.filter[breakPointX] = [];
-        image.styles.filter[breakPointX].push(option)
-      }
-
-
-
-      var styles = { ...image.styles, filter: image.styles.filter };
-      setAttributes({ image: { ...image, styles: styles } });
-
-    }
-
-
-
-    useEffect(() => {
-      var filterStr = {};
-
-      filterStr[breakPointX] = '';
-      (image.styles.filter[breakPointX] != undefined && image.styles.filter[breakPointX].map(x => {
-
-        filterStr[breakPointX] += x.value + '(' + x.val + x.unit + ') ';
-
-      }))
-
-
-      blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'filter': filterStr };
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-
-
-    }, [image]);
-
-
     function setFeaturedImageSize(option, index) {
 
       var newValuesObj = {};
@@ -527,25 +476,6 @@ registerBlockType("post-grid/image", {
     }
 
 
-    var BefroeTitle = function ({ title, args }) {
-
-      return (
-
-        <>
-          <span className='cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1' onClick={ev => {
-
-
-            image.styles.filter[breakPointX].splice(args.index, 1);
-            var styles = image.styles;
-
-            setAttributes({ image: { ...image, styles: styles } });
-
-          }}><Icon icon={close} /></span>
-          <span className='mx-2'>{title}</span>
-        </>
-      )
-
-    }
 
 
     function handleLinkClick(ev) {
@@ -1940,326 +1870,6 @@ registerBlockType("post-grid/image", {
                   )}
 
 
-
-
-
-
-
-
-
-
-
-                  <PanelRow>
-                    <label>Filters </label>
-                    <PGDropdown position="bottom right" variant="secondary" options={filterArgs} buttonTitle="Add" onChange={addfilterArgs} values=""></PGDropdown>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-
-                  <div className='my-5'>
-
-                    {
-                      image.styles.filter[breakPointX] != undefined && (
-
-
-
-                        image.styles.filter[breakPointX].map((arg, index) => {
-
-                          return (
-                            <div>
-
-                              <PanelBody title={<BefroeTitle title={arg.label} args={{ index: index, arg: arg }} />} initialOpen={false}>
-
-                                <div>
-
-
-                                  <RangeControl
-                                    value={arg.val}
-                                    onChange={(newVal) => {
-                                      arg.val = newVal;
-
-                                      image.styles.filter[breakPointX][index] = arg;
-                                      var styles = image.styles;
-
-                                      setAttributes({ image: { ...image, styles: styles } });
-                                    }}
-                                    min={0}
-                                    max={100}
-                                  />
-
-
-                                </div>
-
-                              </PanelBody>
-
-
-
-
-
-
-
-                            </div>
-                          )
-
-
-                        }))
-                    }
-
-                  </div>
-
-                  <PanelRow>
-                    <label>Image Scale</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-
-                  <SelectControl
-                    className='my-3'
-                    value={image.styles.objectFit[breakPointX]}
-                    options={[
-                      { label: 'Fill', value: 'fill' },
-                      { label: 'Contain', value: 'contain' },
-                      { label: 'Cover', value: 'cover' },
-
-                      { label: 'None', value: 'none' },
-                      { label: 'Scale-down', value: 'scale-down' },
-
-
-                    ]}
-                    onChange={(newVal) => {
-
-
-                      var newValuesObj = {};
-
-                      if (Object.keys(image.styles.objectFit).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = image.styles.objectFit;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...image.styles, objectFit: newValuesObj };
-                      setAttributes({ image: { ...image, styles: styles } });
-
-                      blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'object-fit': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                    }}
-                  />
-
-
-
-
-
-
-                  <PanelRow>
-                    <label>Width</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <InputControl
-                      disabled={(image.styles.width[breakPointX] != undefined && image.styles.width[breakPointX].unit == 'auto') ? true : false}
-                      value={(image.styles.width[breakPointX] != undefined ? image.styles.width[breakPointX].val : 0)}
-                      type="number"
-                      onChange={(newVal) => {
-
-                        var newValuesObj = {};
-                        if (Object.keys(image.styles.width).length == 0) {
-                          newValuesObj[breakPointX] = { val: newVal, unit: 'auto' };
-                        } else {
-                          newValuesObj = image.styles.width;
-                          var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'auto';
-
-                          newValuesObj[breakPointX] = { val: newVal, unit: unit };
-                        }
-
-
-                        var styles = { ...image.styles, width: newValuesObj };
-                        setAttributes({ image: { ...image, styles: styles } });
-
-
-
-                        var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
-                        var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
-
-
-                        var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
-
-                        //heightX[breakPointX] = heightVal + heightUnit;
-
-                        if (heightUnit == 'auto') {
-                          heightX[breakPointX] = 'auto';
-                        } else {
-                          heightX[breakPointX] = heightVal + heightUnit;
-                        }
-
-
-                        blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': heightX };
-
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                      }}
-
-                    />
-
-                    <SelectControl className='mb-0'
-                      value={(image.styles.width[breakPointX] != undefined) ? image.styles.width[breakPointX].unit : 'auto'}
-                      options={[
-                        { label: 'Auto', value: 'auto' },
-                        { label: 'px', value: 'px' },
-                        { label: 'fr', value: 'fr' },
-                        { label: '%', value: '%' },
-                        { label: 'em', value: 'em' },
-                      ]}
-                      onChange={(newVal) => {
-
-
-                        var newValuesObj = {};
-                        if (Object.keys(image.styles.width).length == 0) {
-                          newValuesObj[breakPointX] = { val: 0, unit: newVal };
-                        } else {
-                          newValuesObj = image.styles.width;
-                          var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 0;
-
-                          newValuesObj[breakPointX] = { val: val, unit: newVal };
-                        }
-
-
-                        var styles = { ...image.styles, width: newValuesObj };
-                        setAttributes({ image: { ...image, styles: styles } });
-
-                        var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
-                        var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
-
-                        var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
-
-                        //heightX[breakPointX] = heightVal + heightUnit;
-
-                        if (heightUnit == 'auto') {
-                          heightX[breakPointX] = 'auto';
-                        } else {
-                          heightX[breakPointX] = heightVal + heightUnit;
-                        }
-
-
-                        blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'width': heightX };
-
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                      }}
-                    />
-
-                  </PanelRow>
-
-
-
-
-                  <PanelRow>
-                    <label>Height</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <InputControl
-                      disabled={(image.styles.height[breakPointX] != undefined && image.styles.height[breakPointX].unit == 'auto') ? true : false}
-                      value={(image.styles.height[breakPointX] != undefined ? image.styles.height[breakPointX].val : 0)}
-                      type="number"
-                      onChange={(newVal) => {
-
-                        var newValuesObj = {};
-                        if (Object.keys(image.styles.height).length == 0) {
-                          newValuesObj[breakPointX] = { val: newVal, unit: 'auto' };
-                        } else {
-                          newValuesObj = image.styles.height;
-                          var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'auto';
-
-                          newValuesObj[breakPointX] = { val: newVal, unit: unit };
-                        }
-
-
-                        var styles = { ...image.styles, height: newValuesObj };
-                        setAttributes({ image: { ...image, styles: styles } });
-
-
-
-                        var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
-                        var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
-
-
-                        var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
-
-                        //heightX[breakPointX] = heightVal + heightUnit;
-
-                        if (heightUnit == 'auto') {
-                          heightX[breakPointX] = 'auto';
-                        } else {
-                          heightX[breakPointX] = heightVal + heightUnit;
-                        }
-
-
-                        blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'height': heightX };
-
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                      }}
-
-                    />
-
-                    <SelectControl className='mb-0'
-                      value={(image.styles.height[breakPointX] != undefined) ? image.styles.height[breakPointX].unit : 'auto'}
-                      options={[
-                        { label: 'Auto', value: 'auto' },
-                        { label: 'px', value: 'px' },
-                        { label: 'fr', value: 'fr' },
-                        { label: '%', value: '%' },
-                        { label: 'em', value: 'em' },
-                      ]}
-                      onChange={(newVal) => {
-
-
-                        var newValuesObj = {};
-                        if (Object.keys(image.styles.height).length == 0) {
-                          newValuesObj[breakPointX] = { val: 0, unit: newVal };
-                        } else {
-                          newValuesObj = image.styles.height;
-                          var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 0;
-
-                          newValuesObj[breakPointX] = { val: val, unit: newVal };
-                        }
-
-
-                        var styles = { ...image.styles, height: newValuesObj };
-                        setAttributes({ image: { ...image, styles: styles } });
-
-                        var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 0;
-                        var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'auto';
-
-                        var heightX = (blockCssY.items[imgSelector] != undefined) ? blockCssY.items[imgSelector] : {};
-
-                        //heightX[breakPointX] = heightVal + heightUnit;
-
-                        if (heightUnit == 'auto') {
-                          heightX[breakPointX] = 'auto';
-                        } else {
-                          heightX[breakPointX] = heightVal + heightUnit;
-                        }
-
-
-                        blockCssY.items[imgSelector] = { ...blockCssY.items[imgSelector], 'height': heightX };
-
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                      }}
-                    />
-
-                  </PanelRow>
 
 
                 </PGtab>

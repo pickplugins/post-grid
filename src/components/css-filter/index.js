@@ -17,8 +17,10 @@ function Html(props) {
   }
 
 
-  var valParts = (props.val != undefined) ? props.val.split(" ") : [];
-  const [valArgs, setvalArgs] = useState([]);
+
+
+  var valParts = (props.val == null ||  props.val == undefined || props.val.length == 0) ? [] : props.val.split(" ");
+  var [valArgs, setvalArgs] = useState([]);
 
 
 

@@ -63,10 +63,10 @@ registerBlockType("post-grid/post-tags", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           display: {},
 
         },
@@ -80,12 +80,12 @@ registerBlockType("post-grid/post-tags", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},
@@ -104,14 +104,14 @@ registerBlockType("post-grid/post-tags", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
           display: {},
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           fontWeight: { "Desktop": "700" },
           textDecoration: {}, //overline, line-through, underline
@@ -127,9 +127,9 @@ registerBlockType("post-grid/post-tags", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {}
         },
 
@@ -143,12 +143,12 @@ registerBlockType("post-grid/post-tags", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},

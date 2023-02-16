@@ -66,10 +66,10 @@ registerBlockType("post-grid/post-meta", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           display: {},
 
         },
@@ -88,12 +88,12 @@ registerBlockType("post-grid/post-meta", {
 
           display: {},
           width: {},
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           letterSpacing: {}, // { val: '18', unit: 'px' }
           fontFamily: {},

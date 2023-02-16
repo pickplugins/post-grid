@@ -67,7 +67,7 @@ registerBlockType("post-grid/star-rate", {
         },
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
           borderRadius: {},
 
 
@@ -104,7 +104,7 @@ registerBlockType("post-grid/star-rate", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
 
 
         },
@@ -120,7 +120,7 @@ registerBlockType("post-grid/star-rate", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
 
         },
       },
@@ -133,7 +133,7 @@ registerBlockType("post-grid/star-rate", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
 
         },
       },

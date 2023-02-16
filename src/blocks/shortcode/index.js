@@ -50,7 +50,7 @@ registerBlockType("post-grid/shortcode", {
         options: {
           class: 'inline-block',
         },
-        styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
+        styles: { color: { Desktop: '' }, bgColor: {}, padding: {}, margin: {} }
 
 
       },
@@ -66,7 +66,7 @@ registerBlockType("post-grid/shortcode", {
         options: {
           key: '', id: '', prefix: '', postfix: '', prams: [],
         },
-        styles: { color: {}, bgColor: {}, padding: {}, margin: {} }
+        styles: { color: { Desktop: '' }, bgColor: {}, padding: {}, margin: {} }
 
       },
     },

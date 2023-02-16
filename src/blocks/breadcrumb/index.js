@@ -65,10 +65,10 @@ registerBlockType("post-grid/breadcrumb", {
         options: { tag: 'div', class: '', },
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -78,10 +78,10 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: 'icon', position: 'beforeLabel'/*beforeLabel, afterLabel, beforeSeparator, afterSeparator*/ },
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -91,10 +91,10 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: '', },
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -106,11 +106,10 @@ registerBlockType("post-grid/breadcrumb", {
         styles:
         {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -125,14 +124,14 @@ registerBlockType("post-grid/breadcrumb", {
 
           color: { Desktop: '#18978F' },
           backgroundColor: {},
-          padding: {},
+          padding: { Desktop: '' },
           margin: {
             Desktop: { top: '5px', right: '5px', bottom: '5px', left: '5px' }
           },
           display: {},
           borderRadius: {},
 
-          fontSize: { Desktop: { val: '35' } }, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: { val: '35' } },
 
 
         },
@@ -146,10 +145,10 @@ registerBlockType("post-grid/breadcrumb", {
 
             },
             styles: {
-              color: {},
+              color: { Desktop: '' },
               backgroundColor: {},
-              padding: {},
-              margin: {},
+              padding: { Desktop: '' },
+              margin: { Desktop: '' },
             },
 
           },
@@ -160,10 +159,10 @@ registerBlockType("post-grid/breadcrumb", {
               showSeparator: true,
             },
             styles: {
-              color: {},
+              color: { Desktop: '' },
               backgroundColor: {},
-              padding: {},
-              margin: {},
+              padding: { Desktop: '' },
+              margin: { Desktop: '' },
             },
 
           },
@@ -174,10 +173,10 @@ registerBlockType("post-grid/breadcrumb", {
               showSeparator: true,
             },
             styles: {
-              color: {},
+              color: { Desktop: '' },
               backgroundColor: {},
-              padding: {},
-              margin: {},
+              padding: { Desktop: '' },
+              margin: { Desktop: '' },
             },
 
           },
@@ -377,11 +376,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -396,11 +394,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -413,11 +410,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -430,11 +426,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -448,11 +443,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -464,11 +458,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -483,11 +476,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -500,11 +492,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -517,11 +508,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -535,11 +525,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -552,11 +541,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -568,11 +556,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -584,11 +571,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -600,11 +586,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
       {
@@ -617,11 +602,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -635,11 +619,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
 
@@ -653,11 +636,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -671,11 +653,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -691,11 +672,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -709,11 +689,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -726,11 +705,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
 
       },
@@ -744,11 +722,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
       {
@@ -759,11 +736,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
       {
@@ -774,11 +750,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
       {
@@ -789,11 +764,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
 
@@ -806,11 +780,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
 
@@ -822,11 +795,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
 
@@ -838,11 +810,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
 
@@ -856,11 +827,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
       {
@@ -872,11 +842,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
 
@@ -889,11 +858,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
 
@@ -905,11 +873,10 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
 

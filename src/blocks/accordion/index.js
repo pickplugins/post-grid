@@ -69,11 +69,10 @@ registerBlockType("post-grid/accordion", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
@@ -97,11 +96,11 @@ registerBlockType("post-grid/accordion", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
@@ -119,10 +118,10 @@ registerBlockType("post-grid/accordion", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
@@ -138,11 +137,10 @@ registerBlockType("post-grid/accordion", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
-          display: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
@@ -155,11 +153,11 @@ registerBlockType("post-grid/accordion", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
 
         },
       },
@@ -171,12 +169,12 @@ registerBlockType("post-grid/accordion", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          padding: {},
-          margin: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
 
         },
       },

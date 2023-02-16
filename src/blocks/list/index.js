@@ -67,10 +67,10 @@ registerBlockType("post-grid/list", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           display: {},
 
         },
@@ -101,10 +101,10 @@ registerBlockType("post-grid/list", {
         styles:
         {
 
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
           display: {},
           listStyle: {},
           listStylePosition: {},
@@ -123,14 +123,14 @@ registerBlockType("post-grid/list", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
           bgColor: {},
-          padding: {},
-          margin: {},
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
           display: {},
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
           lineHeight: {}, // { val: '18', unit: 'px' }
           fontWeight: { "Desktop": "700" },
           textDecoration: {}, //overline, line-through, underline

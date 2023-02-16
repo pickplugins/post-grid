@@ -14,9 +14,13 @@ function Html(props) {
     return null;
   }
 
-  var valParts = (props.val != undefined) ? props.val.split(" ") : ['underline', '#000000', 'wavy', '1px'];
+  console.log(props.val);
 
-  //console.log(valParts);
+var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? 'underline #000000 wavy 1px' : props.val;
+
+
+  var valParts = (valZ != undefined || valZ != null) ? valZ.split(" ") : ['underline', '#000000', 'wavy', '1px'];
+
 
   if (valParts.length == 4) {
     var lineVal = [valParts[0]];
@@ -67,22 +71,22 @@ function Html(props) {
   var thicknessUnitX = thicknessVal != undefined ? thicknessVal.match(/[a-zA-Z%]+/g)[0] : 'px';
 
 
-  const [thicknessValY, setthicknessVal] = useState(thicknessValX);
-  const [thicknessUnitY, setthicknessUnit] = useState(thicknessUnitX);
+  var [thicknessValY, setthicknessVal] = useState(thicknessValX);
+  var [thicknessUnitY, setthicknessUnit] = useState(thicknessUnitX);
 
   //console.log(thicknessValY);
   //console.log(thicknessUnitY);
 
 
 
-  const [outlinelineVal, setoutlinelineVal] = useState(lineVal);
-  const [outlineColorVal, setoutlineColorVal] = useState(colorVal);
-  const [outlineStyleVal, setoutlineStyleVal] = useState(styleVal);
-  const [outlineThicknessVal, setoutlineThicknessVal] = useState(thicknessValY + thicknessUnitY);
+  var [outlinelineVal, setoutlinelineVal] = useState(lineVal);
+  var [outlineColorVal, setoutlineColorVal] = useState(colorVal);
+  var [outlineStyleVal, setoutlineStyleVal] = useState(styleVal);
+  var [outlineThicknessVal, setoutlineThicknessVal] = useState(thicknessValY + thicknessUnitY);
 
 
 
-  const [textDecoration, setTextDecoration] = useState({
+  var [textDecoration, setTextDecoration] = useState({
     "line": ['underline'],
     "style": 'double',
     "color": "#000000",

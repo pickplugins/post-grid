@@ -10,7 +10,7 @@ class class_post_grid_post_types
         add_action('init', array($this, '_posttype_post_grid'), 0);
 
         add_action('init', array($this, '_posttype_post_grid_layout'), 80);
-        add_action('init', array($this, '_posttype_saved_template'),);
+        add_action('init', array($this, '_posttype_saved_template'));
     }
 
 

@@ -1041,14 +1041,14 @@ if (!class_exists('settings_tabs_field')) {
             $css_id             = isset($option['css_id']) ? $option['css_id'] : $id;
             $parent             = isset($option['parent']) ? $option['parent'] : "";
             $placeholder     = isset($option['placeholder']) ? $option['placeholder'] : "";
-            $value     = isset($option['value']) ? $option['value'] : '';
             $default     = isset($option['default']) ? $option['default'] : '';
+
+            $value     = isset($option['value']) ? $option['value'] : $default;
             $field_template     = isset($option['field_template']) ? $option['field_template'] : $this->field_template($option);
 
             $is_pro     = isset($option['is_pro']) ? $option['is_pro'] : false;
             $pro_text     = isset($option['pro_text']) ? $option['pro_text'] : '';
 
-            $value = !empty($value) ? $value : $default;
 
             $title            = isset($option['title']) ? $option['title'] : "";
             $details             = isset($option['details']) ? $option['details'] : "";
@@ -1621,15 +1621,15 @@ if (!class_exists('settings_tabs_field')) {
                     //var_dump($checked);
 
                 ?>
-                    <label style="width: <?php echo esc_attr($width); ?>;" title="<?php echo esc_attr($name); ?>" class="<?php if ($checked == 'checked') echo 'active'; ?> <?php if ($disabled == true) echo 'disabled'; ?>">
+                    <label style="width: <?php echo esc_attr($width); ?>;" title="<?php echo esc_attr($name); ?>" data-value="<?php echo esc_attr($key); ?>" class="<?php if ($checked == 'checked') echo 'active'; ?> <?php if ($disabled == true) echo 'disabled'; ?>">
                         <input <?php if ($disabled) echo 'disabled'; ?> name="<?php echo esc_attr($field_name); ?>" type="radio" id="<?php echo esc_attr($css_id); ?>-<?php echo esc_attr($key); ?>" value="<?php echo esc_attr($key); ?>" <?php echo esc_attr($checked); ?>>
 
                         <?php
                         if (!empty($thumb)) :
 
                         ?>
-                            <img class="lazy" alt="<?php echo esc_attr($name); ?>" data-src="<?php echo esc_url($thumb); ?>" src="<?php echo esc_url($lazy_load_img); ?>">
-                            <div style="padding: 5px;" class="name"><?php echo esc_html($name); ?></div>
+                            <img alt="<?php echo esc_attr($name); ?>" src="<?php echo esc_url($thumb); ?>">
+                            <div class="name"><?php echo esc_html($name); ?></div>
 
                         <?php
                         else :
@@ -1651,66 +1651,7 @@ if (!class_exists('settings_tabs_field')) {
                 ?>
             </div>
 
-            <style type="text/css">
-                .radio-img {}
 
-                .radio-img label {
-                    display: inline-block;
-                    vertical-align: top;
-                    margin: 5px;
-                    padding: 2px;
-                    background: #eee;
-                    position: relative;
-                }
-
-                .radio-img label.active {
-                    background: #fd730d;
-                }
-
-                .radio-img label.disabled {
-                    background: #e2e2e2;
-
-                }
-
-                .radio-img label.disabled img {
-                    background: #e2e2e2;
-                    opacity: .3;
-                }
-
-                .radio-img label.disabled .pro-msg {
-                    background: #ffd87f;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    padding: 0 10px;
-
-                }
-
-                .radio-img label .link {
-                    background: hsl(200, 7%, 42%);
-                    position: absolute;
-                    top: 2px;
-                    /* transform: translate(0%,-50%); */
-                    padding: 3px 14px;
-                    text-decoration: none;
-                    font-size: 14px;
-                    color: #fff;
-                    right: 2px;
-
-                }
-
-
-                .radio-img input[type=radio] {
-                    display: none;
-                }
-
-                .radio-img img {
-
-                    vertical-align: top;
-                    width: 100%;
-                }
-            </style>
         <?php
 
             $input_html = ob_get_clean();

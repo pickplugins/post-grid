@@ -66,8 +66,8 @@ registerBlockType("post-grid/terms-list", {
         styles:
         {
 
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -107,11 +107,11 @@ registerBlockType("post-grid/terms-list", {
         },
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
 
         },
 
@@ -124,9 +124,9 @@ registerBlockType("post-grid/terms-list", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          fontSize: { Desktop: '' },
 
         },
       },
@@ -139,8 +139,8 @@ registerBlockType("post-grid/terms-list", {
 
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
 
@@ -153,11 +153,11 @@ registerBlockType("post-grid/terms-list", {
         options: { text: 'Tags: ', class: 'inline-block', },
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
 
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          fontSize: { Desktop: '' },
 
         },
 

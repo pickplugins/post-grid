@@ -67,7 +67,7 @@ registerBlockType("post-grid/post-excerpt", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
 
 
         },
@@ -97,8 +97,8 @@ registerBlockType("post-grid/post-excerpt", {
         },
         styles:
         {
-          color: {},
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          color: { Desktop: '' },
+        fontSize: { Desktop: '' },
 
 
         },
@@ -114,8 +114,8 @@ registerBlockType("post-grid/post-excerpt", {
 
         styles:
         {
-          color: {},
-          fontSize: {}, //{ val: '18', unit: 'px' }
+          color: { Desktop: '' },
+        fontSize: { Desktop: '' },
 
 
         },
@@ -129,7 +129,7 @@ registerBlockType("post-grid/post-excerpt", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
 
         },
       },
@@ -142,7 +142,7 @@ registerBlockType("post-grid/post-excerpt", {
 
         styles:
         {
-          color: {},
+          color: { Desktop: '' },
 
         },
       },

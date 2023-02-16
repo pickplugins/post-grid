@@ -87,10 +87,13 @@ registerBlockType("post-grid/post-title", {
         },
 
         styles: {
-          color: {},
-          backgroundColor: {},
-          fontSize: {},
 
+
+
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -108,8 +111,8 @@ registerBlockType("post-grid/post-title", {
         },
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -127,8 +130,8 @@ registerBlockType("post-grid/post-title", {
         },
         styles:
         {
-          color: {},
-          backgroundColor: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -431,7 +434,11 @@ registerBlockType("post-grid/post-title", {
 
       var path = [sudoScource, key, breakPointX]
       let obj = Object.assign({}, wrapper);
-      const object = myStore.addPropertyDeep(obj, path, '')
+      const object = myStore.addPropertyDeep(obj, path, '');
+
+console.log(object);
+
+
       setAttributes({ wrapper: object });
 
 

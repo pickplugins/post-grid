@@ -286,6 +286,7 @@ padding-bottom: 30px;
 }
 
 .settings-tabs input[type="text"],
+.settings-tabs input[type="number"],
 .settings-tabs .range-slider,
 .settings-tabs input[type="email"],
 .settings-tabs textarea,
@@ -463,6 +464,7 @@ padding-bottom: 30px;
 /*input*/
 
 .settings-tabs input[type="text"],
+.settings-tabs input[type="number"],
 .settings-tabs .range-slider,
 .settings-tabs input[type="email"],
 .settings-tabs textarea,

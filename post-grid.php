@@ -3,7 +3,7 @@
 Plugin Name: Post Grid Combo
 Plugin URI: https://www.pickplugins.com/post-grid
 Description: Post Grid Combo is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.27
+Version: 2.2.29
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid Combo');
-            define('post_grid_version', '2.2.27');
+            define('post_grid_version', '2.2.29');
             define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
 
 
@@ -231,6 +231,7 @@ if (!class_exists('PostGrid')) {
             wp_register_script('justifiedGallery', post_grid_plugin_url . 'assets/frontend/js/jquery.justifiedGallery.min.js', array('jquery'));
 
 
+            wp_register_style('justifiedGallery', post_grid_plugin_url . 'assets/frontend/css/justifiedGallery.min.css');
 
             // Register CSS & Styles
             wp_register_style('post-grid-style', post_grid_plugin_url . 'assets/frontend/css/style.css');

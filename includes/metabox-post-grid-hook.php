@@ -1868,6 +1868,9 @@ function post_grid_metabox_tabs_content_masonry($tab, $post_id)
     $masonry_enable = !empty($post_grid_meta_options['masonry_enable']) ? $post_grid_meta_options['masonry_enable'] : 'no';
     $masonry_gutter = isset($masonry['gutter']) ? $masonry['gutter'] : 20;
 
+    $columns_desktop = !empty($masonry['columns']['desktop']) ? $masonry['columns']['desktop'] : '3';
+    $columns_tablet = !empty($masonry['columns']['tablet']) ? $masonry['columns']['tablet'] : '2';
+    $columns_mobile = !empty($masonry['columns']['mobile']) ? $masonry['columns']['mobile'] : '1';
 
 
 
@@ -1879,22 +1882,42 @@ function post_grid_metabox_tabs_content_masonry($tab, $post_id)
 
 
         <?php
+
+
+
+        ob_start();
+
+        ?>
+        <div class="">
+            Desktop:(min-width:1024px)<br>
+            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[masonry][columns][desktop]" value="<?php echo esc_attr($columns_desktop); ?>" />
+        </div>
+        <br>
+        <div class="">
+            Tablet:( min-width: 768px and max-width: 1023px )<br>
+            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[masonry][columns][tablet]" value="<?php echo esc_attr($columns_tablet); ?>" />
+        </div>
+        <br>
+        <div class="">
+            Mobile:( max-width : 767px, )<br>
+            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[masonry][columns][mobile]" value="<?php echo esc_attr($columns_mobile); ?>" />
+        </div>
+        <?php
+
+        $html = ob_get_clean();
+
         $args = array(
-            'id'        => 'masonry_enable',
-            'parent'        => 'post_grid_meta_options',
-            'title'        => __('Masonry enable', 'post-grid'),
-            'details'    => __('Enable or disable masonry style grid.', 'post-grid'),
-            'type'        => 'radio',
-            'multiple'        => true,
-            'value'        => $masonry_enable,
-            'default'        => 'inline',
-            'args'        => array(
-                'yes' => __('Yes', 'post-grid'),
-                'no' => __('No', 'post-grid'),
-            ),
+            'id'        => 'html',
+            'title'        => __('Masonry Column number', 'post-grid'),
+            'details'    => __('Number of columns for responsive device', 'post-grid'),
+            'type'        => 'custom_html',
+            'html'        => $html,
+
+
         );
 
         $settings_tabs_field->generate_field($args, $post_id);
+
 
 
 
@@ -1935,6 +1958,111 @@ function post_grid_metabox_tabs_content_masonry($tab, $post_id)
 
 
 
+add_action('post_grid_metabox_tabs_content_tiles', 'post_grid_metabox_tabs_content_tiles', 10, 2);
+
+function post_grid_metabox_tabs_content_tiles($tab, $post_id)
+{
+
+    $settings_tabs_field = new settings_tabs_field();
+
+    $post_grid_meta_options = get_post_meta($post_id, 'post_grid_meta_options', true);
+
+    $tiles = !empty($post_grid_meta_options['tiles']) ? $post_grid_meta_options['tiles'] : [];
+
+    $tiles_gutter = isset($tiles['gutter']) ? $tiles['gutter'] : 20;
+
+
+    $columns_desktop = !empty($tiles['columns']['desktop']) ? $tiles['columns']['desktop'] : '3';
+    $columns_tablet = !empty($tiles['columns']['tablet']) ? $tiles['columns']['tablet'] : '2';
+    $columns_mobile = !empty($tiles['columns']['mobile']) ? $tiles['columns']['mobile'] : '1';
+
+
+
+
+?>
+    <div class="section">
+        <div class="section-title">Tiles Settings</div>
+        <p class="description section-description">Customize the tiles.</p>
+
+
+
+        <?php
+
+
+
+        ob_start();
+
+        ?>
+        <div class="">
+            Desktop:(min-width:1024px)<br>
+            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[tiles][columns][desktop]" value="<?php echo esc_attr($columns_desktop); ?>" />
+        </div>
+        <br>
+        <div class="">
+            Tablet:( min-width: 768px and max-width: 1023px )<br>
+            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[tiles][columns][tablet]" value="<?php echo esc_attr($columns_tablet); ?>" />
+        </div>
+        <br>
+        <div class="">
+            Mobile:( max-width : 767px, )<br>
+            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[tiles][columns][mobile]" value="<?php echo esc_attr($columns_mobile); ?>" />
+        </div>
+        <?php
+
+        $html = ob_get_clean();
+
+        $args = array(
+            'id'        => 'skins',
+            'title'        => __('Grid item width or column number', 'post-grid'),
+            'details'    => __('Number of columns for responsive device', 'post-grid'),
+            'type'        => 'custom_html',
+            'html'        => $html,
+
+
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
+
+
+        $args = array(
+            'id'        => 'gutter',
+            'parent'        => 'post_grid_meta_options[tiles]',
+            'title'        => __('Tiles gutter', 'post-grid'),
+            'details'    => __('Set custom gutter size of tiles. ex: 5', 'post-grid'),
+            'type'        => 'number',
+            'value'        => $tiles_gutter,
+            'default'        => '20',
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
+
+
+
+
+        ?>
+
+
+
+
+
+
+
+
+    </div>
+
+<?php
+
+}
+
+
 
 
 add_action('post_grid_metabox_tabs_content_justified', 'post_grid_metabox_tabs_content_justified', 10, 2);
@@ -1951,7 +2079,9 @@ function post_grid_metabox_tabs_content_justified($tab, $post_id)
     $justified_gutter = isset($justified['gutter']) ? $justified['gutter'] : 20;
     $maxHeight = isset($justified['maxHeight']) ? $justified['maxHeight'] : 180;
 
-
+    $columns_desktop = !empty($justified['columns']['desktop']) ? $justified['columns']['desktop'] : '3';
+    $columns_tablet = !empty($justified['columns']['tablet']) ? $justified['columns']['tablet'] : '2';
+    $columns_mobile = !empty($justified['columns']['mobile']) ? $justified['columns']['mobile'] : '1';
 
 ?>
     <div class="section">
@@ -1961,6 +2091,50 @@ function post_grid_metabox_tabs_content_justified($tab, $post_id)
 
 
         <?php
+
+
+
+
+        ob_start();
+
+        ?>
+        <div class="">
+            Desktop:(min-width:1024px)<br>
+            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[justified][columns][desktop]" value="<?php echo esc_attr($columns_desktop); ?>" />
+        </div>
+        <br>
+        <div class="">
+            Tablet:( min-width: 768px and max-width: 1023px )<br>
+            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[justified][columns][tablet]" value="<?php echo esc_attr($columns_tablet); ?>" />
+        </div>
+        <br>
+        <div class="">
+            Mobile:( max-width : 767px, )<br>
+            <input placeholder="250px or 30% or column number(3)" type="number" name="post_grid_meta_options[justified][columns][mobile]" value="<?php echo esc_attr($columns_mobile); ?>" />
+        </div>
+        <?php
+
+        $html = ob_get_clean();
+
+        $args = array(
+            'id'        => 'html',
+            'title'        => __('Masonry Column number', 'post-grid'),
+            'details'    => __('Number of columns for responsive device', 'post-grid'),
+            'type'        => 'custom_html',
+            'html'        => $html,
+
+
+        );
+
+        $settings_tabs_field->generate_field($args, $post_id);
+
+
+
+
+
+
+
+
 
 
         $args = array(

@@ -1444,6 +1444,266 @@ function post_grid_loop($args)
         }
 
 
+
+        add_action('post_grid_view_type_css_tiles', 'post_grid_view_type_css_tiles', 90);
+
+        function post_grid_view_type_css_tiles($args)
+        {
+
+            $post_grid_options = $args['options'];
+            $grid_id = $args['grid_id'];
+
+            $items_width_desktop = isset($post_grid_options['width']['desktop']) ? $post_grid_options['width']['desktop'] : '';
+            $items_width_tablet = isset($post_grid_options['width']['tablet']) ? $post_grid_options['width']['tablet'] : '';
+            $items_width_mobile = isset($post_grid_options['width']['mobile']) ? $post_grid_options['width']['mobile'] : '';
+
+
+            $tiles = !empty($post_grid_options['tiles']) ? $post_grid_options['tiles'] : [];
+
+            $tiles_gutter = isset($tiles['gutter']) ? $tiles['gutter'] : 20;
+
+
+            $columns_desktop = !empty($tiles['columns']['desktop']) ? $tiles['columns']['desktop'] : '3';
+            $columns_tablet = !empty($tiles['columns']['tablet']) ? $tiles['columns']['tablet'] : '2';
+            $columns_mobile = !empty($tiles['columns']['mobile']) ? $tiles['columns']['mobile'] : '1';
+
+
+
+
+            $items_height_style = !empty($post_grid_options['item_height']['style']) ? $post_grid_options['item_height']['style'] : 'auto_height';
+            $items_height_style_tablet = !empty($post_grid_options['item_height']['style_tablet']) ? $post_grid_options['item_height']['style_tablet'] : 'auto_height';
+            $items_height_style_mobile = !empty($post_grid_options['item_height']['style_mobile']) ? $post_grid_options['item_height']['style_mobile'] : 'auto_height';
+
+            $items_fixed_height = !empty($post_grid_options['item_height']['fixed_height']) ? $post_grid_options['item_height']['fixed_height'] : '220px';
+            $items_fixed_height_tablet = !empty($post_grid_options['item_height']['fixed_height_tablet']) ? $post_grid_options['item_height']['fixed_height_tablet'] : '220px';
+            $items_fixed_height_mobile = !empty($post_grid_options['item_height']['fixed_height_mobile']) ? $post_grid_options['item_height']['fixed_height_mobile'] : '220px';
+
+            $items_margin = isset($post_grid_options['margin']) ? $post_grid_options['margin'] : '';
+            $item_padding = isset($post_grid_options['item_padding']) ? $post_grid_options['item_padding'] : '';
+
+            $items_media_height_style = !empty($post_grid_options['media_height']['style']) ? $post_grid_options['media_height']['style'] : 'auto_height';
+            $items_media_fixed_height = !empty($post_grid_options['media_height']['fixed_height']) ? $post_grid_options['media_height']['fixed_height'] : '';
+
+
+
+            if ($items_height_style == 'auto_height') {
+                $items_height = 'auto';
+            } elseif ($items_height_style == 'fixed_height') {
+                $items_height = $items_fixed_height;
+            } elseif ($items_height_style == 'max_height') {
+                $items_height = $items_fixed_height;
+            } else {
+                $items_height = '220px';
+            }
+
+            if ($items_media_height_style == 'auto_height') {
+                $items_media_height = 'auto';
+            } elseif ($items_media_height_style == 'fixed_height') {
+                $items_media_height = $items_media_fixed_height;
+            } elseif ($items_media_height_style == 'max_height') {
+                $items_media_height = $items_media_fixed_height;
+            } else {
+                $items_media_height = '220px';
+            }
+
+            $container_padding = isset($post_grid_options['container']['padding']) ? $post_grid_options['container']['padding'] : '';
+            $container_bg_color = isset($post_grid_options['container']['bg_color']) ? $post_grid_options['container']['bg_color'] : '';
+            $container_bg_image = isset($post_grid_options['container']['bg_image']) ? $post_grid_options['container']['bg_image'] : '';
+
+            $items_bg_color_type = isset($post_grid_options['items_bg_color_type']) ? $post_grid_options['items_bg_color_type'] : '';
+            $items_bg_color = isset($post_grid_options['items_bg_color']) ? $post_grid_options['items_bg_color'] : '#fff';
+
+
+            $masonry = !empty($post_grid_options['masonry']) ? $post_grid_options['masonry'] : [];
+
+            $masonry_gutter = isset($masonry['gutter']) ? $masonry['gutter'] : 20;
+
+
+            $colDesktop = 100 / $columns_desktop;
+            $parcentWidth = number_format($colDesktop, 0)
+
+
+?>
+    <style type="text/css">
+        <?php echo '#post-grid-' . esc_attr($grid_id); ?> {
+            overflow: hidden;
+            box-sizing: border-box;
+            <?php if (!empty($container_padding)) : ?>padding: <?php echo esc_attr($container_padding); ?>;
+            <?php endif; ?><?php if (!empty($container_bg_color)) : ?>background-color: <?php echo esc_attr($container_bg_color); ?>;
+            <?php endif; ?><?php if (!empty($container_bg_image)) : ?>background-image: url(<?php echo esc_attr($container_bg_image); ?>);
+            <?php endif; ?>
+        }
+
+
+
+
+        .post-grid .layer-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-grid .layer-wrapper:before {
+
+            padding-top: 100%;
+            content: "";
+            box-sizing: inherit;
+            display: block;
+            overflow: hidden;
+        }
+
+        .layout-110742 .element_1673686211673 {
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .post-grid .layer-wrapper img {
+            width: 100%;
+            height: 100% !important;
+            object-fit: cover;
+        }
+
+
+        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .grid-items'; ?> {
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
+            /** Column  margin **/
+            flex: 0 0 <?php echo $parcentWidth ?>%;
+            max-width: <?php echo $parcentWidth ?>%;
+            padding: <?php echo $tiles_gutter; ?>px;
+        }
+
+        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .layer-wrapper'; ?> {
+
+            <?php if ($items_bg_color_type == 'fixed') : ?>background: <?php echo esc_attr($items_bg_color); ?>;
+            <?php endif; ?>
+        }
+
+
+        <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item .layer-media'; ?> {
+            overflow: hidden;
+            <?php
+            if ($items_media_height_style == 'fixed_height' || $items_media_height_style == 'auto_height') {
+                echo 'height:' . esc_attr($items_media_height) . ';';
+            } elseif ($items_media_height_style == 'max_height') {
+                echo 'max-height:' . esc_attr($items_media_height) . ';';
+            } else {
+                echo 'height:' . $items_media_height . ';';
+            }
+            ?>
+        }
+
+        @media only screen and (min-width: 0px) and (max-width: 767px) {
+            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
+
+
+                <?php
+
+
+                if (is_integer($items_width_mobile)) {
+                    $parcentWidth = 100 / $items_width_mobile;
+                    $parcentWidth = number_format($parcentWidth, 2)
+                ?>width: <?php echo $parcentWidth; ?>%;
+                <?php
+                } else if (strpos($items_width_mobile, '%')) {
+
+                    $parcentWidthX = (100 / (int) $items_width_mobile);
+                    $parcentWidthX = floor($parcentWidthX);
+
+
+                ?>width: calc((100% - <?php echo ($masonry_gutter * ($parcentWidthX - 1)); ?>px) / <?php echo esc_attr($parcentWidthX); ?>);
+                <?php
+                } else {
+                    if (!empty($items_width_mobile)) {
+                        echo 'width:' . $items_width_mobile . ';';
+                    }
+                }
+
+
+                ?><?php
+                    if ($items_height_style == 'fixed_height') {
+                        echo 'height:' . esc_attr($items_height) . ';';
+                    } elseif ($items_height_style == 'max_height') {
+                        echo 'max-height:' . esc_attr($items_height) . ';';
+                    } elseif ($items_height_style == 'auto_height') {
+                        echo 'height:auto;';
+                    } else {
+                        echo 'height:auto;';
+                    }
+                    ?>
+            }
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 1023px) {
+            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
+                <?php
+
+
+
+
+                ?><?php
+                    if ($items_height_style_tablet == 'fixed_height') {
+                        echo 'height:' . esc_attr($items_fixed_height_tablet) . ';';
+                    } elseif ($items_height_style_tablet == 'max_height') {
+                        echo 'max-height:' . esc_attr($items_fixed_height_tablet) . ';';
+                    } elseif ($items_height_style_tablet == 'auto_height') {
+                        echo 'max-height:auto;';
+                    } else {
+                        echo 'height:auto;';
+                    }
+                    ?>
+            }
+        }
+
+        @media only screen and (min-width: 1024px) {
+            <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
+
+                <?php
+
+                if (is_integer($items_width_desktop)) {
+                    $masonry_gutter = $masonry_gutter * ($items_width_desktop - 1)
+                ?>width: calc((100% - <?php echo $masonry_gutter; ?>px) / <?php echo esc_attr($items_width_desktop); ?>);
+                <?php
+                } else if (strpos($items_width_desktop, '%')) {
+
+                    $parcentWidthX = (100 / (int) $items_width_desktop);
+                    $parcentWidthX = floor($parcentWidthX);
+
+
+                ?>width: calc((100% - <?php echo ($masonry_gutter * ($parcentWidthX - 1)); ?>px) / <?php echo esc_attr($parcentWidthX); ?>);
+                <?php
+                } else {
+                    if (!empty($items_width_desktop)) {
+                        echo 'width:' . $items_width_desktop . ';';
+                    }
+                }
+
+                ?><?php
+                    if ($items_height_style == 'fixed_height') {
+                        echo 'height:' . esc_attr($items_height) . ';';
+                    } elseif ($items_height_style == 'max_height') {
+                        echo 'max-height:' . esc_attr($items_height) . ';';
+                    } elseif ($items_height_style == 'auto_height') {
+                        echo 'height:auto;';
+                    } else {
+                        echo 'height:auto;';
+                    }
+                    ?>
+            }
+        }
+    </style>
+<?php
+
+
+        }
+
         add_action('post_grid_container', 'post_grid_main_scripts', 80);
 
         function post_grid_main_scripts($args)
@@ -1545,7 +1805,7 @@ function post_grid_loop($args)
 
             $masonry_load = apply_filters('post_grid_masonry_load', true, $args);
 
-            if ($masonry_enable == 'yes' && $masonry_load == true) :
+            if ($grid_type == 'masonry') :
         ?>
             jQuery('#post-grid-<?php echo esc_attr($grid_id); ?>').ready(function($) {
                 var $container = $('#post-grid-<?php echo esc_attr($grid_id); ?>  .grid-items');
@@ -1574,13 +1834,16 @@ function post_grid_loop($args)
 
                 wp_enqueue_script('imagesloaded');
                 wp_enqueue_script('justifiedGallery');
+                wp_enqueue_style('justifiedGallery');
+
+
             ?>
             jQuery('#post-grid-<?php echo esc_attr($grid_id); ?>').ready(function($) {
                 var $container = $('#post-grid-<?php echo esc_attr($grid_id); ?>  .grid-items');
                 $container.imagesLoaded().done(function() {
                     $container.justifiedGallery({
                         rowHeight: <?php echo esc_attr($maxHeight); ?>,
-                        margins: <?php echo esc_attr($justified_gutter); ?>
+                        margins: <?php echo esc_attr($justified_gutter); ?>,
                     });
                 });
             })

@@ -286,8 +286,8 @@ class post_grid_meta_boxs
             'title' => sprintf(__('%s Masonry', 'post-grid'), '<i class="fas fa-th-large"></i>'),
             'priority' => 40,
             'active' => ($current_tab == 'masonry') ? true : false,
-            'data_visible' => 'grid masonry glossary timeline filterable',
-            'hidden' => ((($grid_type == 'slider') ? true : false) || (($grid_type == 'justified') ? true : false)),
+            'data_visible' => 'masonry',
+            'hidden' => ((($grid_type == 'grid') ? true : false) || (($grid_type == 'tiles') ? true : false) || (($grid_type == 'slider') ? true : false) || (($grid_type == 'justified') ? true : false) || (($grid_type == 'filterable') ? true : false)),
         );
 
 
@@ -296,8 +296,17 @@ class post_grid_meta_boxs
             'title' => sprintf(__('%s Justified', 'post-grid'), '<i class="fas fa-th-large"></i>'),
             'priority' => 40,
             'active' => ($current_tab == 'justified') ? true : false,
-            'data_visible' => 'grid justified glossary timeline filterable',
-            'hidden' => ($grid_type == 'slider') ? true : false,
+            'data_visible' => 'justified',
+            'hidden' => ((($grid_type == 'grid') ? true : false) || (($grid_type == 'tiles') ? true : false) || (($grid_type == 'slider') ? true : false) || (($grid_type == 'masonry') ? true : false) || (($grid_type == 'filterable') ? true : false)),
+        );
+
+        $settings_tabs[] = array(
+            'id' => 'tiles',
+            'title' => sprintf(__('%s Tiles', 'post-grid'), '<i class="fas fa-th-large"></i>'),
+            'priority' => 40,
+            'active' => ($current_tab == 'tiles') ? true : false,
+            'data_visible' => 'tiles',
+            'hidden' => ((($grid_type == 'grid') ? true : false) ||  (($grid_type == 'slider') ? true : false) || (($grid_type == 'masonry') ? true : false) || (($grid_type == 'filterable') ? true : false)),
         );
 
 
@@ -306,7 +315,7 @@ class post_grid_meta_boxs
             'title' => sprintf(__('%s Pagination', 'post-grid'), '<i class="fas fa-pager"></i>'),
             'priority' => 45,
             'active' => ($current_tab == 'pagination') ? true : false,
-            'data_visible' => ' grid justified masonry glossary timeline filterable collapsible',
+            'data_visible' => ' grid justified masonry tiles glossary timeline filterable collapsible',
             'hidden' => ($grid_type == 'slider') ? true : false,
         );
 
@@ -395,14 +404,18 @@ class post_grid_meta_boxs
                 <?php
 
 
-
-
-
                 $view_types_args['grid'] = array('name' => 'Grid',  'thumb' => post_grid_plugin_url . 'assets/admin/images/grid.png',);
                 $view_types_args['masonry'] = array('name' => 'Masonry',  'thumb' => post_grid_plugin_url . 'assets/admin/images/masonry.png',);
                 $view_types_args['justified'] = array('name' => 'Justified',  'thumb' => post_grid_plugin_url . 'assets/admin/images/justified.png',);
+                $view_types_args['tiles'] = array('name' => 'Tiles',  'thumb' => post_grid_plugin_url . 'assets/admin/images/tiles.png',);
 
-                $view_types_args = apply_filters('post_grid_view_types', $view_types_args);
+                $view_types_args['filterable'] = array('name' => 'Filterable',  'disabled' => true, 'pro_msg' => 'Pro', 'thumb' => post_grid_plugin_url . 'assets/admin/images/filterable.png',);
+                $view_types_args['glossary'] = array('name' => 'Glossary', 'disabled' => true, 'pro_msg' => 'Pro', 'thumb' => post_grid_plugin_url . 'assets/admin/images/glossary.png',);
+                $view_types_args['slider'] = array('name' => 'Carousel', 'disabled' => true, 'pro_msg' => 'Pro',  'thumb' => post_grid_plugin_url . 'assets/admin/images/carousel.png',);
+
+
+
+                //$view_types_args = apply_filters('post_grid_view_types', $view_types_args);
 
 
                 $args = array(

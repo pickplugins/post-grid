@@ -25,6 +25,9 @@ import PGDropdown from '../../components/dropdown'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
+import PGCssLibrary from '../../components/css-library'
+
+
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -245,6 +248,7 @@ registerBlockType("post-grid/post-title", {
 
     useEffect(() => {
 
+      console.log("###wrapper");
 
 
     }, [wrapper]);
@@ -353,6 +357,59 @@ registerBlockType("post-grid/post-title", {
     }
 
 
+    function onPickCssLibrary(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        wrapper[sudoScource] = sudoScourceArgs;
+      })
+
+      var wrapperX = Object.assign({}, wrapper);
+      setAttributes({ wrapper: wrapperX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+        console.log(sudoScourceArgs);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+
+
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+
+          sudoObj[cssProptyKey] = cssProptyVal;
+
+        })
+
+        styleObj[elementSelector] = sudoObj;
+
+
+      })
+
+      console.log(styleObj);
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+
+    }
+
+
+
+
+
+
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
@@ -436,7 +493,7 @@ registerBlockType("post-grid/post-title", {
       let obj = Object.assign({}, wrapper);
       const object = myStore.addPropertyDeep(obj, path, '');
 
-console.log(object);
+      console.log(object);
 
 
       setAttributes({ wrapper: object });
@@ -873,7 +930,12 @@ console.log(object);
                       icon: styles,
                       className: 'tab-style',
                     },
-
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
+                    },
 
 
                   ]}
@@ -908,14 +970,12 @@ console.log(object);
 
                   </PGtab>
                   <PGtab name="styles">
-
-
-
-
-
                     <PGStyles blockId={blockId} obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
                   </PGtab>
 
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibrary} />
+                  </PGtab>
 
                 </PGtabs>
 
@@ -1477,6 +1537,8 @@ console.log(object);
 
 
         <>
+
+
 
 
           {wrapper.options.tag && (

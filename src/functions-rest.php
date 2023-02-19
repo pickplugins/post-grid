@@ -194,6 +194,10 @@ class BlockPostGridRest
             )
         );
 
+
+
+
+
         register_rest_route(
             'post-grid/v2',
             '/import_post_grid_template',
@@ -1320,11 +1324,11 @@ class BlockPostGridRest
 
         $response = [];
         $post_grid_license = get_option('post_grid_license');
-                
+
         $response['proInstalled'] = false;
         $response['status'] = (isset($post_grid_license['license_status']) && !empty($post_grid_license['license_status'])) ? $post_grid_license['license_status'] : 'inactive';
 
-        if ( is_plugin_active( 'post-grid-pro/post-grid-pro.php' ) ) {
+        if (is_plugin_active('post-grid-pro/post-grid-pro.php')) {
             $response['proInstalled'] = true;
         }
 
@@ -1332,6 +1336,7 @@ class BlockPostGridRest
 
         die(wp_json_encode($response));
     }
+
 
 
 

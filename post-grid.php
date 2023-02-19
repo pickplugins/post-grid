@@ -3,7 +3,7 @@
 Plugin Name: Post Grid Combo
 Plugin URI: https://www.pickplugins.com/post-grid
 Description: Post Grid Combo is extremely easy to use for creating grid-layout and post-layout. Also, we're offering many small blocks with extensive flexibility.
-Version: 2.2.29
+Version: 2.2.30
 Author: PickPlugins
 Author URI: https://www.pickplugins.com/
 License: GPLv2 or later
@@ -28,7 +28,7 @@ if (!class_exists('PostGrid')) {
             define('post_grid_plugin_dir', plugin_dir_path(__FILE__));
             define('post_grid_plugin_basename', plugin_basename(__FILE__));
             define('post_grid_plugin_name', 'Post Grid Combo');
-            define('post_grid_version', '2.2.29');
+            define('post_grid_version', '2.2.30');
             define('post_grid_server_url', 'https://www.pickplugins.com/demo/post-grid/');
 
 
@@ -104,6 +104,7 @@ if (!class_exists('PostGrid')) {
             include('includes/media-source-options.php');
             include('includes/layout-elements/3rd-party.php');
             include('includes/functions-layout-api.php');
+            include('includes/metabox-post-grid-editor-hook.php');
 
 
             include('includes/functions-data-upgrade.php');
@@ -262,6 +263,7 @@ if (!class_exists('PostGrid')) {
 
             wp_register_script('select2', post_grid_plugin_url . 'assets/admin/js/select2.full.js', array('jquery'));
             wp_register_style('select2', post_grid_plugin_url . 'assets/admin/css/select2.min.css');
+            wp_register_style('postgrid-editor', post_grid_plugin_url . 'assets/admin/css/postgrid-editor.css');
 
             wp_register_script('jquery.lazy', post_grid_plugin_url . 'assets/admin/js/jquery.lazy.js', array('jquery'));
 

@@ -255,8 +255,8 @@ class post_grid_meta_boxs
             'title' => sprintf(__('%s Grid settings', 'post-grid'), '<i class="fas fa-th"></i>'),
             'priority' => 30,
             'active' => ($current_tab == 'grid_settings') ? true : false,
-            'data_visible' => 'grid masonry justified filterable',
-            'hidden' => ($grid_type == 'slider') ? true : false,
+            'data_visible' => 'grid   ',
+            'hidden' => ((($grid_type == 'slider') ? true : false) || (($grid_type == 'masonry') ? true : false) || (($grid_type == 'justified') ? true : false) || (($grid_type == 'filterable') ? true : false) || (($grid_type == 'tiles') ? true : false) ),
 
         );
 
@@ -287,7 +287,7 @@ class post_grid_meta_boxs
             'priority' => 40,
             'active' => ($current_tab == 'masonry') ? true : false,
             'data_visible' => 'masonry',
-            'hidden' => ((($grid_type == 'grid') ? true : false) || (($grid_type == 'tiles') ? true : false) || (($grid_type == 'slider') ? true : false) || (($grid_type == 'justified') ? true : false) || (($grid_type == 'filterable') ? true : false)),
+            'hidden' => ((($grid_type == 'grid') ? true : false) || (($grid_type == 'tiles') ? true : false) || (($grid_type == 'slider') ? true : false) || (($grid_type == 'justified') ? true : false) || (($grid_type == 'filterable') ? true : false) || (($grid_type == 'glossary') ? true : false)),
         );
 
 
@@ -297,7 +297,7 @@ class post_grid_meta_boxs
             'priority' => 40,
             'active' => ($current_tab == 'justified') ? true : false,
             'data_visible' => 'justified',
-            'hidden' => ((($grid_type == 'grid') ? true : false) || (($grid_type == 'tiles') ? true : false) || (($grid_type == 'slider') ? true : false) || (($grid_type == 'masonry') ? true : false) || (($grid_type == 'filterable') ? true : false)),
+            'hidden' => ((($grid_type == 'grid') ? true : false) || (($grid_type == 'tiles') ? true : false) || (($grid_type == 'slider') ? true : false) || (($grid_type == 'masonry') ? true : false) || (($grid_type == 'filterable') ? true : false) || (($grid_type == 'glossary') ? true : false)),
         );
 
         $settings_tabs[] = array(
@@ -306,7 +306,7 @@ class post_grid_meta_boxs
             'priority' => 40,
             'active' => ($current_tab == 'tiles') ? true : false,
             'data_visible' => 'tiles',
-            'hidden' => ((($grid_type == 'grid') ? true : false) ||  (($grid_type == 'slider') ? true : false) || (($grid_type == 'masonry') ? true : false) || (($grid_type == 'filterable') ? true : false)),
+            'hidden' => ((($grid_type == 'grid') ? true : false) ||  (($grid_type == 'slider') ? true : false) || (($grid_type == 'masonry') ? true : false) || (($grid_type == 'filterable') ? true : false)) || (($grid_type == 'justified') ? true : false) || (($grid_type == 'glossary') ? true : false),
         );
 
 
@@ -345,6 +345,13 @@ class post_grid_meta_boxs
         wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
 
     ?>
+
+        <div id="post-grid-editor">
+            <?php
+
+            do_action('postgrid_editor', $post_id)
+            ?>
+        </div>
 
 
         <div class="post-grid-meta-box">
@@ -415,7 +422,7 @@ class post_grid_meta_boxs
 
 
 
-                //$view_types_args = apply_filters('post_grid_view_types', $view_types_args);
+                $view_types_args = apply_filters('post_grid_view_types', $view_types_args);
 
 
                 $args = array(

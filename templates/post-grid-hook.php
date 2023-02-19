@@ -1174,14 +1174,6 @@ function post_grid_loop($args)
             $post_grid_options = $args['options'];
             $grid_id = $args['grid_id'];
 
-            $items_width_desktop = isset($post_grid_options['width']['desktop']) ? $post_grid_options['width']['desktop'] : '';
-            $items_width_tablet = isset($post_grid_options['width']['tablet']) ? $post_grid_options['width']['tablet'] : '';
-            $items_width_mobile = isset($post_grid_options['width']['mobile']) ? $post_grid_options['width']['mobile'] : '';
-
-            $items_width_desktop = (strpos($items_width_desktop, 'px') === false && strpos($items_width_desktop, '%') === false) ? (int)$items_width_desktop : $items_width_desktop;
-
-            $items_width_tablet = (strpos($items_width_tablet, 'px') === false && strpos($items_width_tablet, '%') === false) ? (int)$items_width_tablet : $items_width_tablet;
-            $items_width_mobile = (strpos($items_width_mobile, 'px') === false && strpos($items_width_mobile, '%') === false) ? (int)$items_width_mobile : $items_width_mobile;
 
 
 
@@ -1231,7 +1223,15 @@ function post_grid_loop($args)
 
             $masonry = !empty($post_grid_options['masonry']) ? $post_grid_options['masonry'] : [];
 
-            $masonry_gutter = isset($masonry['gutter']) ? $masonry['gutter'] : 20;
+            $masonry_gutter = isset($masonry['gutter']) ? (int) $masonry['gutter'] : 20;
+
+
+            $columns_desktop = !empty($masonry['columns']['desktop']) ? (int) $masonry['columns']['desktop'] : 3;
+            $columns_tablet = !empty($masonry['columns']['tablet']) ? (int) $masonry['columns']['tablet'] : 2;
+            $columns_mobile = !empty($masonry['columns']['mobile']) ? (int) $masonry['columns']['mobile'] : 1;
+
+            wp_enqueue_script('masonry');
+            wp_enqueue_script('imagesloaded');
 
 
 
@@ -1253,7 +1253,7 @@ function post_grid_loop($args)
         }
 
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
-            /** Column  margin **/
+
             margin-bottom: <?php echo esc_attr($masonry_gutter . 'px'); ?>;
         }
 
@@ -1283,79 +1283,43 @@ function post_grid_loop($args)
 
 
                 <?php
+                $masonry_gutter_mobile = $masonry_gutter * ($columns_mobile - 1);
 
 
-                if (is_integer($items_width_mobile)) {
-                    $parcentWidth = 100 / $items_width_mobile;
-                    $parcentWidth = number_format($parcentWidth, 2)
-                ?>width: <?php echo $parcentWidth; ?>%;
+
+
+                ?>width: calc((100% - <?php echo $masonry_gutter_mobile; ?>px) / <?php echo esc_attr($columns_mobile); ?>);
                 <?php
-                } else if (strpos($items_width_mobile, '%')) {
-
-                    $parcentWidthX = (100 / (int) $items_width_mobile);
-                    $parcentWidthX = floor($parcentWidthX);
-
-
-                ?>width: calc((100% - <?php echo ($masonry_gutter * ($parcentWidthX - 1)); ?>px) / <?php echo esc_attr($parcentWidthX); ?>);
-                <?php
+                if ($items_height_style == 'fixed_height') {
+                    echo 'height:' . esc_attr($items_height) . ';';
+                } elseif ($items_height_style == 'max_height') {
+                    echo 'max-height:' . esc_attr($items_height) . ';';
+                } elseif ($items_height_style == 'auto_height') {
+                    echo 'height:auto;';
                 } else {
-                    if (!empty($items_width_mobile)) {
-                        echo 'width:' . $items_width_mobile . ';';
-                    }
+                    echo 'height:auto;';
                 }
-
-
-                ?><?php
-                    if ($items_height_style == 'fixed_height') {
-                        echo 'height:' . esc_attr($items_height) . ';';
-                    } elseif ($items_height_style == 'max_height') {
-                        echo 'max-height:' . esc_attr($items_height) . ';';
-                    } elseif ($items_height_style == 'auto_height') {
-                        echo 'height:auto;';
-                    } else {
-                        echo 'height:auto;';
-                    }
-                    ?>
+                ?>
             }
         }
 
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
             <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
                 <?php
+                $masonry_gutter_tablet = $masonry_gutter * ($columns_tablet - 1);
 
-                if (is_integer($items_width_tablet)) {
-                    $parcentWidth = 100 / $items_width_tablet;
-                    $parcentWidth = number_format($parcentWidth, 2)
-                ?>width: <?php echo $parcentWidth; ?>%;
-
-
+                ?>width: calc((100% - <?php echo $masonry_gutter_tablet; ?>px) / <?php echo esc_attr($columns_tablet); ?>);
                 <?php
-                } else if (strpos($items_width_tablet, '%')) {
-
-                    $parcentWidthX = (100 / (int) $items_width_tablet);
-                    $parcentWidthX = floor($parcentWidthX);
-
-
-                ?>width: calc((100% - <?php echo ($masonry_gutter * ($parcentWidthX - 1)); ?>px) / <?php echo esc_attr($parcentWidthX); ?>);
-                <?php
+                if ($items_height_style_tablet == 'fixed_height') {
+                    echo 'height:' . esc_attr($items_fixed_height_tablet) . ';';
+                } elseif ($items_height_style_tablet == 'max_height') {
+                    echo 'max-height:' . esc_attr($items_fixed_height_tablet) . ';';
+                } elseif ($items_height_style_tablet == 'auto_height') {
+                    echo 'max-height:auto;';
                 } else {
-                    if (!empty($items_width_tablet)) {
-                        echo 'width:' . $items_width_tablet . ';';
-                    }
+                    echo 'height:auto;';
                 }
-
-
-                ?><?php
-                    if ($items_height_style_tablet == 'fixed_height') {
-                        echo 'height:' . esc_attr($items_fixed_height_tablet) . ';';
-                    } elseif ($items_height_style_tablet == 'max_height') {
-                        echo 'max-height:' . esc_attr($items_fixed_height_tablet) . ';';
-                    } elseif ($items_height_style_tablet == 'auto_height') {
-                        echo 'max-height:auto;';
-                    } else {
-                        echo 'height:auto;';
-                    }
-                    ?>
+                ?>
             }
         }
 
@@ -1363,36 +1327,21 @@ function post_grid_loop($args)
             <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
 
                 <?php
+                $masonry_gutter_desktop = $masonry_gutter * ($columns_desktop - 1)
 
-                if (is_integer($items_width_desktop)) {
-                    $masonry_gutter = $masonry_gutter * ($items_width_desktop - 1)
-                ?>width: calc((100% - <?php echo $masonry_gutter; ?>px) / <?php echo esc_attr($items_width_desktop); ?>);
+
+                ?>width: calc((100% - <?php echo $masonry_gutter_desktop; ?>px) / <?php echo esc_attr($columns_desktop); ?>);
                 <?php
-                } else if (strpos($items_width_desktop, '%')) {
-
-                    $parcentWidthX = (100 / (int) $items_width_desktop);
-                    $parcentWidthX = floor($parcentWidthX);
-
-
-                ?>width: calc((100% - <?php echo ($masonry_gutter * ($parcentWidthX - 1)); ?>px) / <?php echo esc_attr($parcentWidthX); ?>);
-                <?php
+                if ($items_height_style == 'fixed_height') {
+                    echo 'height:' . esc_attr($items_height) . ';';
+                } elseif ($items_height_style == 'max_height') {
+                    echo 'max-height:' . esc_attr($items_height) . ';';
+                } elseif ($items_height_style == 'auto_height') {
+                    echo 'height:auto;';
                 } else {
-                    if (!empty($items_width_desktop)) {
-                        echo 'width:' . $items_width_desktop . ';';
-                    }
+                    echo 'height:auto;';
                 }
-
-                ?><?php
-                    if ($items_height_style == 'fixed_height') {
-                        echo 'height:' . esc_attr($items_height) . ';';
-                    } elseif ($items_height_style == 'max_height') {
-                        echo 'max-height:' . esc_attr($items_height) . ';';
-                    } elseif ($items_height_style == 'auto_height') {
-                        echo 'height:auto;';
-                    } else {
-                        echo 'height:auto;';
-                    }
-                    ?>
+                ?>
             }
         }
 
@@ -1463,9 +1412,9 @@ function post_grid_loop($args)
             $tiles_gutter = isset($tiles['gutter']) ? $tiles['gutter'] : 20;
 
 
-            $columns_desktop = !empty($tiles['columns']['desktop']) ? $tiles['columns']['desktop'] : '3';
-            $columns_tablet = !empty($tiles['columns']['tablet']) ? $tiles['columns']['tablet'] : '2';
-            $columns_mobile = !empty($tiles['columns']['mobile']) ? $tiles['columns']['mobile'] : '1';
+            $columns_desktop = !empty($tiles['columns']['desktop']) ? $tiles['columns']['desktop'] : 3;
+            $columns_tablet = !empty($tiles['columns']['tablet']) ? $tiles['columns']['tablet'] : 2;
+            $columns_mobile = !empty($tiles['columns']['mobile']) ? $tiles['columns']['mobile'] : 1;
 
 
 
@@ -1519,8 +1468,7 @@ function post_grid_loop($args)
             $masonry_gutter = isset($masonry['gutter']) ? $masonry['gutter'] : 20;
 
 
-            $colDesktop = 100 / $columns_desktop;
-            $parcentWidth = number_format($colDesktop, 0)
+
 
 
 ?>
@@ -1544,24 +1492,32 @@ function post_grid_loop($args)
 
         .post-grid .layer-wrapper:before {
 
-            padding-top: 100%;
+            padding-top: 100% !important;
             content: "";
             box-sizing: inherit;
             display: block;
             overflow: hidden;
         }
 
-        .layout-110742 .element_1673686211673 {
+        .layer-media {
             overflow: hidden;
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+
+        .element-media,
+        .thumb,
+        .thumb_link {
+            width: 100% !important;
+            height: 100% !important;
         }
 
         .post-grid .layer-wrapper img {
-            width: 100%;
+            width: 100% !important;
             height: 100% !important;
             object-fit: cover;
         }
@@ -1575,8 +1531,7 @@ function post_grid_loop($args)
 
         <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
             /** Column  margin **/
-            flex: 0 0 <?php echo $parcentWidth ?>%;
-            max-width: <?php echo $parcentWidth ?>%;
+
             padding: <?php echo $tiles_gutter; ?>px;
         }
 
@@ -1606,59 +1561,49 @@ function post_grid_loop($args)
 
                 <?php
 
+                $colDesktop = 100 / $columns_mobile;
+                $parcentWidth = number_format($colDesktop, 0);
+                $masonry_gutter_mobile = $masonry_gutter * ($columns_mobile - 1);
 
-                if (is_integer($items_width_mobile)) {
-                    $parcentWidth = 100 / $items_width_mobile;
-                    $parcentWidth = number_format($parcentWidth, 2)
-                ?>width: <?php echo $parcentWidth; ?>%;
+                ?>width: calc((100% - <?php echo $masonry_gutter_mobile; ?>px) / <?php echo esc_attr($columns_mobile); ?>);
+                flex: 0 0 <?php echo $parcentWidth; ?>%;
+                max-width: <?php echo $parcentWidth; ?>%;
                 <?php
-                } else if (strpos($items_width_mobile, '%')) {
-
-                    $parcentWidthX = (100 / (int) $items_width_mobile);
-                    $parcentWidthX = floor($parcentWidthX);
-
-
-                ?>width: calc((100% - <?php echo ($masonry_gutter * ($parcentWidthX - 1)); ?>px) / <?php echo esc_attr($parcentWidthX); ?>);
-                <?php
+                if ($items_height_style == 'fixed_height') {
+                    echo 'height:' . esc_attr($items_height) . ';';
+                } elseif ($items_height_style == 'max_height') {
+                    echo 'max-height:' . esc_attr($items_height) . ';';
+                } elseif ($items_height_style == 'auto_height') {
+                    echo 'height:auto;';
                 } else {
-                    if (!empty($items_width_mobile)) {
-                        echo 'width:' . $items_width_mobile . ';';
-                    }
+                    echo 'height:auto;';
                 }
-
-
-                ?><?php
-                    if ($items_height_style == 'fixed_height') {
-                        echo 'height:' . esc_attr($items_height) . ';';
-                    } elseif ($items_height_style == 'max_height') {
-                        echo 'max-height:' . esc_attr($items_height) . ';';
-                    } elseif ($items_height_style == 'auto_height') {
-                        echo 'height:auto;';
-                    } else {
-                        echo 'height:auto;';
-                    }
-                    ?>
+                ?>
             }
         }
 
         @media only screen and (min-width: 768px) and (max-width: 1023px) {
             <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
                 <?php
+                $masonry_gutter_tablet = $masonry_gutter * ($columns_tablet - 1);
+                $colDesktop = 100 / $columns_tablet;
+                $parcentWidth = number_format($colDesktop, 0);
 
 
-
-
-                ?><?php
-                    if ($items_height_style_tablet == 'fixed_height') {
-                        echo 'height:' . esc_attr($items_fixed_height_tablet) . ';';
-                    } elseif ($items_height_style_tablet == 'max_height') {
-                        echo 'max-height:' . esc_attr($items_fixed_height_tablet) . ';';
-                    } elseif ($items_height_style_tablet == 'auto_height') {
-                        echo 'max-height:auto;';
-                    } else {
-                        echo 'height:auto;';
-                    }
-                    ?>
+                ?>width: calc((100% - <?php echo $masonry_gutter_tablet; ?>px) / <?php echo esc_attr($columns_tablet); ?>);
+                flex: 0 0 <?php echo $parcentWidth; ?>%;
+                max-width: <?php echo $parcentWidth; ?>%;
+                <?php
+                if ($items_height_style_tablet == 'fixed_height') {
+                    echo 'height:' . esc_attr($items_fixed_height_tablet) . ';';
+                } elseif ($items_height_style_tablet == 'max_height') {
+                    echo 'max-height:' . esc_attr($items_fixed_height_tablet) . ';';
+                } elseif ($items_height_style_tablet == 'auto_height') {
+                    echo 'max-height:auto;';
+                } else {
+                    echo 'height:auto;';
+                }
+                ?>
             }
         }
 
@@ -1666,36 +1611,24 @@ function post_grid_loop($args)
             <?php echo '#post-grid-' . esc_attr($grid_id) . ' .item'; ?> {
 
                 <?php
+                $masonry_gutter_desktop = $masonry_gutter * ($columns_desktop - 1);
+                $colDesktop = 100 / $columns_desktop;
+                $parcentWidth = number_format($colDesktop, 0);
 
-                if (is_integer($items_width_desktop)) {
-                    $masonry_gutter = $masonry_gutter * ($items_width_desktop - 1)
-                ?>width: calc((100% - <?php echo $masonry_gutter; ?>px) / <?php echo esc_attr($items_width_desktop); ?>);
+                ?>width: calc((100% - <?php echo $masonry_gutter_desktop; ?>px) / <?php echo esc_attr($columns_desktop); ?>);
+                flex: 0 0 <?php echo $parcentWidth; ?>%;
+                max-width: <?php echo $parcentWidth; ?>%;
                 <?php
-                } else if (strpos($items_width_desktop, '%')) {
-
-                    $parcentWidthX = (100 / (int) $items_width_desktop);
-                    $parcentWidthX = floor($parcentWidthX);
-
-
-                ?>width: calc((100% - <?php echo ($masonry_gutter * ($parcentWidthX - 1)); ?>px) / <?php echo esc_attr($parcentWidthX); ?>);
-                <?php
+                if ($items_height_style == 'fixed_height') {
+                    echo 'height:' . esc_attr($items_height) . ';';
+                } elseif ($items_height_style == 'max_height') {
+                    echo 'max-height:' . esc_attr($items_height) . ';';
+                } elseif ($items_height_style == 'auto_height') {
+                    echo 'height:auto;';
                 } else {
-                    if (!empty($items_width_desktop)) {
-                        echo 'width:' . $items_width_desktop . ';';
-                    }
+                    echo 'height:auto;';
                 }
-
-                ?><?php
-                    if ($items_height_style == 'fixed_height') {
-                        echo 'height:' . esc_attr($items_height) . ';';
-                    } elseif ($items_height_style == 'max_height') {
-                        echo 'max-height:' . esc_attr($items_height) . ';';
-                    } elseif ($items_height_style == 'auto_height') {
-                        echo 'height:auto;';
-                    } else {
-                        echo 'height:auto;';
-                    }
-                    ?>
+                ?>
             }
         }
     </style>

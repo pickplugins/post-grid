@@ -28,12 +28,12 @@ function MyFunction(props) {
 
     <div className='tabsWrapper'>
 
-      <div className='flex overflow-x-auto'>
+      <div className='flex  overflow-x-auto 	'>
 
         {props.tabs.map(tab => {
 
           return (
-            <div className={(tab.name == selected) ? 'flex bg-gray-400 grow  border-right border-solid border-gray-600 p-2 cursor-pointer' : 'flex bg-gray-200 grow border-right border-solid border-gray-600 p-2 cursor-pointer'} onClick={ev => {
+            <div className={(tab.name == selected) ? 'flex flex-none bg-gray-400  grow border-right border-solid border-gray-600 p-2 cursor-pointer' : 'flex flex-none grow bg-gray-200  border-right border-solid border-gray-600 p-2 cursor-pointer'} onClick={ev => {
               props.onSelect(tab);
               setSelected(tab.name);
 

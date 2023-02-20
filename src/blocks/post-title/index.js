@@ -248,7 +248,6 @@ registerBlockType("post-grid/post-title", {
 
     useEffect(() => {
 
-      console.log("###wrapper");
 
 
     }, [wrapper]);
@@ -357,7 +356,7 @@ registerBlockType("post-grid/post-title", {
     }
 
 
-    function onPickCssLibrary(args) {
+    function onPickCssLibraryWrapper(args) {
 
 
       Object.entries(args).map(x => {
@@ -376,34 +375,155 @@ registerBlockType("post-grid/post-title", {
         var sudoScourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
 
-        console.log(sudoScourceArgs);
+
         var sudoObj = {};
         Object.entries(sudoScourceArgs).map(y => {
 
           var cssPropty = y[0];
           var cssProptyVal = y[1];
-
-
           var cssProptyKey = myStore.cssAttrParse(cssPropty);
-
           sudoObj[cssProptyKey] = cssProptyVal;
-
         })
 
         styleObj[elementSelector] = sudoObj;
-
-
       })
 
-      console.log(styleObj);
 
       var cssItems = Object.assign(blockCssY.items, styleObj);
-
       setAttributes({ blockCssY: { items: cssItems } });
-
-
-
     }
+
+
+
+
+    function onPickCssLibraryPostTitle(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        postTitle[sudoScource] = sudoScourceArgs;
+      })
+
+      var postTitleX = Object.assign({}, postTitle);
+      setAttributes({ postTitle: postTitleX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, postTitleSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+    function onPickCssLibraryPrefix(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        prefix[sudoScource] = sudoScourceArgs;
+      })
+
+      var prefixX = Object.assign({}, prefix);
+      setAttributes({ prefix: prefixX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+    function onPickCssLibraryPostfix(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        postfix[sudoScource] = sudoScourceArgs;
+      })
+
+      var postfixX = Object.assign({}, postfix);
+      setAttributes({ postfix: postfixX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -493,7 +613,6 @@ registerBlockType("post-grid/post-title", {
       let obj = Object.assign({}, wrapper);
       const object = myStore.addPropertyDeep(obj, path, '');
 
-      console.log(object);
 
 
       setAttributes({ wrapper: object });
@@ -938,6 +1057,8 @@ registerBlockType("post-grid/post-title", {
                     },
 
 
+
+
                   ]}
                 >
                   <PGtab name="options">
@@ -974,7 +1095,7 @@ registerBlockType("post-grid/post-title", {
                   </PGtab>
 
                   <PGtab name="css">
-                    <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibrary} />
+                    <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
                   </PGtab>
 
                 </PGtabs>
@@ -1002,6 +1123,12 @@ registerBlockType("post-grid/post-title", {
                       title: 'Styles',
                       icon: styles,
                       className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
                     },
                   ]}
                 >
@@ -1333,6 +1460,9 @@ registerBlockType("post-grid/post-title", {
                   <PGtab name="styles">
                     <PGStyles obj={postTitle} onChange={onChangeStylePostTitle} onAdd={onAddStylePostTitle} onRemove={onRemoveStylePostTitle} />
                   </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={postTitle} onChange={onPickCssLibraryPostTitle} />
+                  </PGtab>
                 </PGtabs>
 
 
@@ -1359,6 +1489,12 @@ registerBlockType("post-grid/post-title", {
                       title: 'Styles',
                       icon: styles,
                       className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
                     },
                   ]}
                 >
@@ -1406,6 +1542,9 @@ registerBlockType("post-grid/post-title", {
                   <PGtab name="styles">
                     <PGStyles obj={prefix} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
                   </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={prefix} onChange={onPickCssLibraryPrefix} />
+                  </PGtab>
                 </PGtabs>
 
 
@@ -1436,6 +1575,12 @@ registerBlockType("post-grid/post-title", {
                       title: 'Styles',
                       icon: styles,
                       className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
                     },
                   ]}
                 >
@@ -1480,6 +1625,9 @@ registerBlockType("post-grid/post-title", {
 
 
                     <PGStyles obj={postfix} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
+                  </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={postfix} onChange={onPickCssLibraryPostfix} />
                   </PGtab>
                 </PGtabs>
 

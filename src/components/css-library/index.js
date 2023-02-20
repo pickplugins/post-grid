@@ -9,6 +9,7 @@ import { memo, useMemo, useState, useEffect } from '@wordpress/element'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import { Icon, styles, settings } from '@wordpress/icons';
+import html2canvas from 'html2canvas';
 
 
 
@@ -90,7 +91,15 @@ function Html(props) {
 
   }
 
+  const printDocument = () => {
+    const input = document.getElementById("divToPrint");
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
 
+      console.log(imgData);
+
+    });
+  };
 
 
 
@@ -228,6 +237,7 @@ function Html(props) {
         </PGtab>
         <PGtab name="submit">
 
+          <div onClick={printDocument}>printDocument</div>
 
           <div>
             <label for="">Item Title</label>
@@ -414,7 +424,7 @@ class PGCssLibrary extends Component {
   render() {
 
     var {
-      val,
+      blockId,
       obj,
       onChange,
 
@@ -431,7 +441,7 @@ class PGCssLibrary extends Component {
     return (
 
 
-      <Html obj={obj} onChange={onChange} warn={this.state.showWarning} />
+      <Html blockId={blockId} obj={obj} onChange={onChange} warn={this.state.showWarning} />
 
 
     )

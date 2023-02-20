@@ -66888,11 +66888,12 @@ function Html(props) {
   }
 
   const printDocument = () => {
-    console.log(props.blockId); // const input = document.getElementById("divToPrint");
-    // html2canvas(input).then((canvas) => {
-    //   const imgData = canvas.toDataURL("image/png");
-    //   console.log(imgData);
-    // });
+    console.log(props.blockId);
+    const input = document.querySelector('#' + props.blockId + ' a');
+    html2canvas__WEBPACK_IMPORTED_MODULE_4___default()(input).then(canvas => {
+      const imgData = canvas.toDataURL("image/png");
+      console.log(imgData);
+    });
   };
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

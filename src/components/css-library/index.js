@@ -95,13 +95,13 @@ function Html(props) {
 
     console.log(props.blockId);
 
-    // const input = document.getElementById("divToPrint");
-    // html2canvas(input).then((canvas) => {
-    //   const imgData = canvas.toDataURL("image/png");
+    const input = document.querySelector('#' + props.blockId + ' a');
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
 
-    //   console.log(imgData);
+      console.log(imgData);
 
-    // });
+    });
   };
 
 

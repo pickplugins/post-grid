@@ -1690,7 +1690,7 @@ registerBlockType("post-grid/post-title", {
 
 
           {wrapper.options.tag && (
-            <CustomTagWrapper className={[blockId]}>
+            <CustomTagWrapper className={[blockId]} id={[blockId]}>
 
               {postTitle.options.isLink && (
                 <>

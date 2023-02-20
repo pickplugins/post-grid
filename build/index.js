@@ -49477,7 +49477,8 @@ var myStore = wp.data.select('postgrid-shop');
         utm_content: 'BlockOptions'
       }
     })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTagWrapper, {
-      className: [blockId]
+      className: [blockId],
+      id: [blockId]
     }, postTitle.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, prefix.options.position == 'beforebegin' && prefix.options.text && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
       className: prefix.options.class
     }, prefix.options.text), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
@@ -68702,6 +68703,70 @@ function Html(props) {
   //console.log(styleVal);
   //console.log(colorVal);
 
+  var args = {
+    fill: {
+      "label": "fill",
+      "value": "fill"
+    },
+    contain: {
+      "label": "contain",
+      "value": "contain"
+    },
+    cover: {
+      "label": "cover",
+      "value": "cover"
+    },
+    'scale-down': {
+      "label": "scale-down",
+      "value": "scale-down"
+    },
+    none: {
+      "label": "none",
+      "value": "none"
+    }
+  };
+  var outlineStyleArgs = {
+    none: {
+      "label": "None",
+      "value": "none"
+    },
+    hidden: {
+      "label": "Hidden",
+      "value": "hidden"
+    },
+    dotted: {
+      "label": "Dotted",
+      "value": "dotted"
+    },
+    dashed: {
+      "label": "Dashed",
+      "value": "dashed"
+    },
+    solid: {
+      "label": "Solid",
+      "value": "solid"
+    },
+    double: {
+      "label": "Double",
+      "value": "double"
+    },
+    groove: {
+      "label": "Groove",
+      "value": "groove"
+    },
+    ridge: {
+      "label": "Ridge",
+      "value": "ridge"
+    },
+    inset: {
+      "label": "Inset",
+      "value": "inset"
+    },
+    outset: {
+      "label": "Outset",
+      "value": "outset"
+    }
+  };
   var unitArgs = {
     px: {
       "label": "PX",
@@ -68883,70 +68948,6 @@ class PGcssOutline extends Component {
       val,
       onChange
     } = this.props;
-    var args = {
-      fill: {
-        "label": "fill",
-        "value": "fill"
-      },
-      contain: {
-        "label": "contain",
-        "value": "contain"
-      },
-      cover: {
-        "label": "cover",
-        "value": "cover"
-      },
-      'scale-down': {
-        "label": "scale-down",
-        "value": "scale-down"
-      },
-      none: {
-        "label": "none",
-        "value": "none"
-      }
-    };
-    var outlineStyleArgs = {
-      none: {
-        "label": "None",
-        "value": "none"
-      },
-      hidden: {
-        "label": "Hidden",
-        "value": "hidden"
-      },
-      dotted: {
-        "label": "Dotted",
-        "value": "dotted"
-      },
-      dashed: {
-        "label": "Dashed",
-        "value": "dashed"
-      },
-      solid: {
-        "label": "Solid",
-        "value": "solid"
-      },
-      double: {
-        "label": "Double",
-        "value": "double"
-      },
-      groove: {
-        "label": "Groove",
-        "value": "groove"
-      },
-      ridge: {
-        "label": "Ridge",
-        "value": "ridge"
-      },
-      inset: {
-        "label": "Inset",
-        "value": "inset"
-      },
-      outset: {
-        "label": "Outset",
-        "value": "outset"
-      }
-    };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       val: val,
       onChange: onChange,

@@ -15,7 +15,10 @@ function Html(props) {
     return null;
   }
 
-  var valParts = (props.val != undefined) ? props.val.split(" ") : ['1px', 'solid', '#000000'];
+  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '1px solid 000000' : props.val;
+
+
+  var valParts = (valZ != undefined) ? valZ.split(" ") : ['1px', 'solid', '#000000'];
 
   var widthVal = valParts[0];
   var styleVal = valParts[1];

@@ -92,13 +92,16 @@ function Html(props) {
   }
 
   const printDocument = () => {
-    const input = document.getElementById("divToPrint");
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
 
-      console.log(imgData);
+    console.log(props.blockId);
 
-    });
+    // const input = document.getElementById("divToPrint");
+    // html2canvas(input).then((canvas) => {
+    //   const imgData = canvas.toDataURL("image/png");
+
+    //   console.log(imgData);
+
+    // });
   };
 
 

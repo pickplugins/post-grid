@@ -99,7 +99,7 @@ function Html(props) {
     html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
 
-      console.log(imgData);
+      //console.log(imgData);
 
     });
   };

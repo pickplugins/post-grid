@@ -66891,8 +66891,7 @@ function Html(props) {
     console.log(props.blockId);
     const input = document.querySelector('#' + props.blockId + ' a');
     html2canvas__WEBPACK_IMPORTED_MODULE_4___default()(input).then(canvas => {
-      const imgData = canvas.toDataURL("image/png");
-      console.log(imgData);
+      const imgData = canvas.toDataURL("image/png"); //console.log(imgData);
     });
   };
 

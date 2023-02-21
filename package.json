@@ -26,6 +26,7 @@
     "animejs": "^3.2.1",
     "classnames": "^2.3.1",
     "gutenberg-sortable": "^1.0.5",
+    "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
     "masonry-layout": "^4.2.2",
     "npmignore": "^0.3.0",

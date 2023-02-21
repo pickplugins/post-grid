@@ -11,6 +11,9 @@ import PGtab from '../../components/tab'
 import { Icon, styles, settings } from '@wordpress/icons';
 import html2canvas from 'html2canvas';
 
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+
 
 
 
@@ -36,6 +39,7 @@ function Html(props) {
     title: '',
     category: "",
     tags: "",
+    thumb: '',
 
     status: '', // idle => ready to submit, busy => submission process, falied => submission falied, success=> Successfully submitted!
     successMessage: 'Successfully submitted!',
@@ -63,7 +67,7 @@ function Html(props) {
     postData = JSON.stringify(postData)
 
 
-    fetch("https://getpostgrid.com/wp-json/post-grid/v2/get_post_css", {
+    fetch("http://localhost/wp-22/wp-json/post-grid/v2/get_post_css", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -91,18 +95,24 @@ function Html(props) {
 
   }
 
-  const printDocument = () => {
 
-    console.log(props.blockId);
 
-    const input = document.querySelector('#' + props.blockId + ' a');
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
+  const htmlToImageCapt = () => {
 
-      //console.log(imgData);
+    const eleementToCapture = document.querySelector('#' + props.blockId);
 
-    });
+
+    htmlToImage.toPng(eleementToCapture)
+      .then(function (dataUrl) {
+
+        setCssSubmission({ ...cssSubmission, thumb: dataUrl });
+
+        //download(dataUrl, 'my-node.png');
+      });
+
   };
+
+
 
 
 
@@ -178,7 +188,7 @@ function Html(props) {
 
               return (
 
-                <div className='p-4 text-center border cursor-pointer my-3 relative'
+                <div className='p-4 text-center border cursor-pointer pb-5 my-3 relative'
                   onClick={(ev) => {
 
                     console.log(x.post_content);
@@ -240,7 +250,6 @@ function Html(props) {
         </PGtab>
         <PGtab name="submit">
 
-          <div onClick={printDocument}>printDocument</div>
 
           <div>
             <label for="">Item Title</label>
@@ -292,6 +301,18 @@ function Html(props) {
             />
           </div>
 
+          <div className='my-4'>
+            <div onClick={htmlToImageCapt} className="bg-green-700 text-white p-3 px-5 cursor-pointer">Take Screenshot</div>
+
+            <label for="">Preview Thumbnail</label>
+            <img
+              src={cssSubmission.thumb}
+
+            />
+          </div>
+
+
+
 
           <div
             className='bg-blue-500 my-5 px-10 py-3 text-white cursor-pointer text-center rounded-sm mb-5'
@@ -309,12 +330,12 @@ function Html(props) {
 
 
 
-              var postData = { title: cssSubmission.title, content: objX, category: cssSubmission.category, tags: cssSubmission.tags }
+              var postData = { title: cssSubmission.title, content: objX, thumb: cssSubmission.thumb, category: cssSubmission.category, tags: cssSubmission.tags }
               postData = JSON.stringify(postData)
 
 
 
-              fetch("https://getpostgrid.com/wp-json/post-grid/v2/submit_css", {
+              fetch("http://localhost/wp-22/wp-json/post-grid/v2/submit_css", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json;charset=utf-8",

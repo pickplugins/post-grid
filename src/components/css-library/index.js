@@ -13,6 +13,7 @@ import html2canvas from 'html2canvas';
 
 import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+import apiFetch from '@wordpress/api-fetch';
 
 
 
@@ -40,7 +41,7 @@ function Html(props) {
     category: "",
     tags: "",
     thumb: '',
-
+    email: '',
     status: '', // idle => ready to submit, busy => submission process, falied => submission falied, success=> Successfully submitted!
     successMessage: 'Successfully submitted!',
     failedMessage: 'Submission was failed!',
@@ -59,6 +60,24 @@ function Html(props) {
 
 
 
+  useEffect(() => {
+    apiFetch({
+      path: '/post-grid/v2/get_site_details',
+      method: 'POST',
+      data: {},
+    }).then((res) => {
+      ////console.log(res);
+      //setEmailSubscribe({ ...userDetails, email: res.email, status: res.subscribe_status });
+      setCssSubmission({ ...cssSubmission, email: res.email });
+
+
+
+
+    });
+  }, []);
+
+
+
   function fetchCss() {
 
     setIsLoading(true);
@@ -67,7 +86,7 @@ function Html(props) {
     postData = JSON.stringify(postData)
 
 
-    fetch("http://localhost/wp-22/wp-json/post-grid/v2/get_post_css", {
+    fetch("https://getpostgrid.com/wp-json/post-grid/v2/get_post_css", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -188,7 +207,7 @@ function Html(props) {
 
               return (
 
-                <div className='p-4 text-center border cursor-pointer pb-5 my-3 relative'
+                <div className='p-4 text-center border cursor-pointer pb-7 my-3 relative'
                   onClick={(ev) => {
 
                     console.log(x.post_content);
@@ -311,7 +330,21 @@ function Html(props) {
             />
           </div>
 
+          <div>
+            <label for="">Your Email</label>
+            <InputControl
+              className="w-full"
+              value={cssSubmission.email}
+              type="text"
+              placeholder=""
+              onChange={(newVal) => {
 
+                setCssSubmission({ ...cssSubmission, email: newVal });
+
+              }}
+
+            />
+          </div>
 
 
           <div
@@ -335,7 +368,7 @@ function Html(props) {
 
 
 
-              fetch("http://localhost/wp-22/wp-json/post-grid/v2/submit_css", {
+              fetch("https://getpostgrid.com/wp-json/post-grid/v2/submit_css", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json;charset=utf-8",
@@ -356,7 +389,7 @@ function Html(props) {
 
 
                         setTimeout(() => {
-                          setCssSubmission({ ...cssSubmission, status: 'idle', title: '', tags: '', message: res.message });
+                          setCssSubmission({ ...cssSubmission, status: 'idle', message: res.message });
 
                         }, 3000)
 

@@ -66807,15 +66807,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
 /* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
 /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! html2canvas */ "./node_modules/html2canvas/dist/html2canvas.js");
 /* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var html_to_image__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! html-to-image */ "./node_modules/html-to-image/es/index.js");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6__);
 
 const {
   Component
 } = wp.element;
+
 
 
 
@@ -66849,6 +66852,7 @@ function Html(props) {
     category: "",
     tags: "",
     thumb: '',
+    email: '',
     status: '',
     // idle => ready to submit, busy => submission process, falied => submission falied, success=> Successfully submitted!
     successMessage: 'Successfully submitted!',
@@ -66860,6 +66864,19 @@ function Html(props) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     fetchCss();
   }, [queryCss]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6___default()({
+      path: '/post-grid/v2/get_site_details',
+      method: 'POST',
+      data: {}
+    }).then(res => {
+      ////console.log(res);
+      //setEmailSubscribe({ ...userDetails, email: res.email, status: res.subscribe_status });
+      setCssSubmission({ ...cssSubmission,
+        email: res.email
+      });
+    });
+  }, []);
 
   function fetchCss() {
     setIsLoading(true);
@@ -66869,7 +66886,7 @@ function Html(props) {
       category: queryCss.category
     };
     postData = JSON.stringify(postData);
-    fetch("http://localhost/wp-22/wp-json/post-grid/v2/get_post_css", {
+    fetch("https://getpostgrid.com/wp-json/post-grid/v2/get_post_css", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8"
@@ -66910,12 +66927,12 @@ function Html(props) {
     tabs: [{
       name: 'cssItems',
       title: 'Library',
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
       className: 'tab-cssItems'
     }, {
       name: 'submit',
       title: 'Submission',
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
       className: 'tab-submit'
     }]
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -66953,7 +66970,7 @@ function Html(props) {
     className: "items"
   }, cssLibrary.items.map(x => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "p-4 text-center border cursor-pointer pb-5 my-3 relative",
+      className: "p-4 text-center border cursor-pointer pb-7 my-3 relative",
       onClick: ev => {
         console.log(x.post_content);
         var objCss = JSON.parse(x.post_content);
@@ -67036,6 +67053,18 @@ function Html(props) {
     for: ""
   }, "Preview Thumbnail"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: cssSubmission.thumb
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    for: ""
+  }, "Your Email"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+    className: "w-full",
+    value: cssSubmission.email,
+    type: "text",
+    placeholder: "",
+    onChange: newVal => {
+      setCssSubmission({ ...cssSubmission,
+        email: newVal
+      });
+    }
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-500 my-5 px-10 py-3 text-white cursor-pointer text-center rounded-sm mb-5",
     onClick: ev => {
@@ -67057,7 +67086,7 @@ function Html(props) {
         tags: cssSubmission.tags
       };
       postData = JSON.stringify(postData);
-      fetch("http://localhost/wp-22/wp-json/post-grid/v2/submit_css", {
+      fetch("https://getpostgrid.com/wp-json/post-grid/v2/submit_css", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8"
@@ -67078,8 +67107,6 @@ function Html(props) {
               setTimeout(() => {
                 setCssSubmission({ ...cssSubmission,
                   status: 'idle',
-                  title: '',
-                  tags: '',
                   message: res.message
                 });
               }, 3000);

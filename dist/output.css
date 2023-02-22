@@ -1329,20 +1329,12 @@ img {
   padding-bottom: 0.25rem;
 }
 
-.pb-10 {
-  padding-bottom: 2.5rem;
-}
-
-.pb-5 {
-  padding-bottom: 1.25rem;
-}
-
-.pb-6 {
-  padding-bottom: 1.5rem;
-}
-
 .pb-7 {
   padding-bottom: 1.75rem;
+}
+
+.pb-10 {
+  padding-bottom: 2.5rem;
 }
 
 .text-center {

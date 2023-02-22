@@ -4,9 +4,11 @@ const { Component, RawHTML } = wp.element;
 import { Button, Dropdown } from '@wordpress/components'
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import colorsPresets from '../../colors-presets'
-import { __experimentalInputControl as InputControl, ColorPalette, PanelRow } from '@wordpress/components';
+import { __experimentalInputControl as InputControl, ColorPalette, PanelBody, PanelRow } from '@wordpress/components';
 import PGDropdown from '../../components/dropdown'
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
+import { Icon, close, arrowRight } from '@wordpress/icons';
+import { GradientPicker } from '@wordpress/components';
 
 
 
@@ -29,55 +31,67 @@ function Html(props) {
 
   }
 
-
-
-
-  const [type, setType] = useState('url');
-  const [imageUrl, setimageUrl] = useState('');
-
-
-  var image = (props.val != undefined) ? props.val : '';
+  var valX = (props.val == null || props.val == undefined || props.val.length == 0) ? 'linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)' : props.val;
 
 
 
 
 
-  var imageVal = image.replace('url("', '');
-  imageVal = imageVal.replace('")', '');
+  const [valArgs, setValArgs] = useState(valX.split(",  "));
 
 
-  if (image.includes("url")) {
-    //setType('url');
 
+  var RemoveQueryPram = function ({ index, arg }) {
+    var typeName = '';
+
+    if (arg.includes("url")) {
+      typeName = 'URL';
+    }
+    else if (arg.includes("conic-gradient")) {
+      typeName = 'Conic Gradient';
+    }
+    else if (arg.includes("linear-gradient")) {
+      typeName = 'Linear Gradient';
+    }
+    else if (arg.includes("radial-gradient")) {
+      typeName = 'Radial Gradient';
+    }
+    else if (arg.includes("repeating-conic-gradient")) {
+      typeName = 'R Conic Gradient';
+    }
+    else if (arg.includes("repeating-linear-gradient")) {
+      typeName = 'R Linear Gradient';
+    }
+    else if (arg.includes("repeating-radial-gradient")) {
+      typeName = 'R Radial Gradient';
+    }
+
+
+
+    return (
+
+      <>
+        <span className='cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1' onClick={ev => {
+
+
+          valArgs.splice(index, 1);
+          var ssdsd = valArgs.concat([]);
+
+          setValArgs(ssdsd);
+
+          var valString = ssdsd.join(',  ');
+          props.onChange(valString, 'backgroundImage');
+
+        }}><Icon icon={close} /></span>
+        <span className='mx-2'>{typeName.length == 0 ? '#' + index : typeName}</span>
+      </>
+
+
+
+
+    )
 
   }
-  else if (image.includes("conic-gradient")) {
-    //setType('conicGradient');
-
-  }
-
-  else if (image.includes("linear-gradient")) {
-    //setType('linearGradient');
-  }
-
-  else if (image.includes("radial-gradient")) {
-    //setType('radialGradient');
-  }
-
-  else if (image.includes("repeating-conic-gradient")) {
-    //setType('repeatingConicGradient');
-  }
-  else if (image.includes("repeating-linear-gradient")) {
-    // setType('repeatingLinearGradient');
-  }
-
-  else if (image.includes("repeating-radial-gradient")) {
-    //setType('repeatingRadialGradient');
-  }
-
-
-
-
 
 
 
@@ -88,75 +102,127 @@ function Html(props) {
   return (
 
     <div>
-      {/* 
-      <PanelRow>
-        <PGDropdown position="bottom right" variant="secondary" options={typeArgs} buttonTitle={(typeArgs[type] != undefined) ? typeArgs[type].label : 'Background Type'}
-          onChange={(option, index) => {
-
-
-            if (option.id == 'conicGradient') {
-              props.onChange('conic-gradient(red, yellow, green)', 'backgroundImage');
-            }
-            else if (option.id == 'linearGradient') {
-              props.onChange('linear-gradient(to bottom right, red , blue)', 'backgroundImage');
-            } else if (option.id == 'radialGradient') {
-              props.onChange('conic-gradient(red, yellow, green)', 'backgroundImage');
-            } else if (option.id == 'radialGradient') {
-              props.onChange('radial-gradient(red, yellow, green)', 'backgroundImage');
-            } else if (option.id == 'repeatingConicGradient') {
-              props.onChange('repeating-conic-gradient(red 10%, yellow 20%)', 'backgroundImage');
-            } else if (option.id == 'repeatingLinearGradient') {
-              props.onChange('repeating-linear-gradient(red, yellow 10%, green 20%)', 'backgroundImage');
-            } else if (option.id == 'repeatingRadialGradient') {
-              props.onChange('repeating-radial-gradient(red, yellow 10%, green 15%)', 'backgroundImage');
-            }
 
 
 
 
+      <div className="my-4">
+
+        <PGDropdown position="bottom right" variant="secondary" options={typeArgs} buttonTitle="Add" onChange={(option, index) => {
+
+
+          if (option.id == 'url') {
+            var dsdsf = valArgs.concat('url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/owl1.jpg)')
+
+          }
+
+          else if (option.id == 'linearGradient') {
+            var dsdsf = valArgs.concat("linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)")
+
+          } else if (option.id == 'radialGradient') {
+            var dsdsf = valArgs.concat("radial-gradient(#12c2e9 0%,#c471ed 50%,#f64f59 100%)")
+
+          }
+          else if (option.id == 'conicGradient') {
+            var dsdsf = valArgs.concat("conic-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)")
+
+          }
 
 
 
-            setType(option.id);
-          }} values=""></PGDropdown>
-      </PanelRow> */}
+          setValArgs(dsdsf);
+
+          var valString = valArgs.join(',  ');
+          props.onChange(valString, 'backgroundImage');
 
 
-
-
-
-
-      <div className='my-3'>
-        <img src={imageVal} alt="" />
+        }} values=""></PGDropdown>
       </div>
 
 
+      {valArgs.map((x, index) => {
 
-      <MediaUploadCheck>
-        <MediaUpload
-          class="bg-blue-500"
-          onSelect={(media) => {
-            // media.id
+        return (
 
-            props.onChange('url("' + media.url + '")', 'backgroundImage');
+          <PanelBody initialOpen={false} title={<RemoveQueryPram index={index} arg={x} />}>
 
+            {x.includes("url") && (
 
-          }
+              <div>
+                <div className='my-3'>
 
-
-          }
-          onClose={() => {
-          }
+                  <img src={x.replace('url(', '').replace(')', '')} alt="" />
+                </div>
 
 
-          }
 
-          allowedTypes={ALLOWED_MEDIA_TYPES}
-          render={({ open }) => (
-            <Button className='my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full' onClick={open}>Open Media Library</Button>
-          )}
-        />
-      </MediaUploadCheck>
+                <MediaUploadCheck>
+                  <MediaUpload
+                    class="bg-blue-500"
+                    onSelect={(media) => {
+                      // media.id
+
+
+
+                      valArgs[index] = 'url(' + media.url + ')';
+
+                      setValArgs(valArgs);
+                      var valString = valArgs.join(',  ');
+
+                      props.onChange(valString, 'backgroundImage');
+
+
+                    }
+                    }
+                    onClose={() => {
+                    }
+                    }
+                    allowedTypes={ALLOWED_MEDIA_TYPES}
+                    render={({ open }) => (
+                      <Button className='my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full' onClick={open}>Open Media Library</Button>
+                    )}
+                  />
+                </MediaUploadCheck>
+
+
+
+              </div>
+            )}
+
+
+            {!x.includes("url") && (
+
+
+              <GradientPicker
+
+                value={x}
+                onChange={(newVal) => {
+
+
+                  valArgs[index] = newVal;
+
+                  setValArgs(valArgs);
+                  var valString = valArgs.join(',  ');
+
+                  props.onChange(valString, 'backgroundImage');
+
+
+                }}
+
+              />
+
+
+            )}
+
+
+
+
+          </PanelBody>
+
+        )
+
+      })}
+
 
 
 

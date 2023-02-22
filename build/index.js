@@ -48616,7 +48616,7 @@ var myStore = wp.data.select('postgrid-shop');
       // setAttributes({ wrapper: object });
       var path = [sudoScource, key, breakPointX];
       let obj = Object.assign({}, wrapper);
-      const object = myStore.addPropertyDeep(obj, path, '');
+      var object = myStore.addPropertyDeep(obj, path, '');
       setAttributes({
         wrapper: object
       });
@@ -61400,18 +61400,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
+
 const {
   Component,
   RawHTML
 } = wp.element;
+
+
 
 
 
@@ -61454,45 +61459,114 @@ function Html(props) {
       id: 'repeatingRadialGradient'
     }
   };
-  const [type, setType] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('url');
-  const [imageUrl, setimageUrl] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('');
-  var image = props.val != undefined ? props.val : '';
-  var imageVal = image.replace('url("', '');
-  imageVal = imageVal.replace('")', '');
+  var valX = props.val == null || props.val == undefined || props.val.length == 0 ? 'linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)' : props.val;
+  const [valArgs, setValArgs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(valX.split(",  "));
 
-  if (image.includes("url")) {//setType('url');
-  } else if (image.includes("conic-gradient")) {//setType('conicGradient');
-  } else if (image.includes("linear-gradient")) {//setType('linearGradient');
-  } else if (image.includes("radial-gradient")) {//setType('radialGradient');
-  } else if (image.includes("repeating-conic-gradient")) {//setType('repeatingConicGradient');
-  } else if (image.includes("repeating-linear-gradient")) {// setType('repeatingLinearGradient');
-  } else if (image.includes("repeating-radial-gradient")) {//setType('repeatingRadialGradient');
-  }
+  var RemoveQueryPram = function (_ref) {
+    let {
+      index,
+      arg
+    } = _ref;
+    var typeName = '';
+
+    if (arg.includes("url")) {
+      typeName = 'URL';
+    } else if (arg.includes("conic-gradient")) {
+      typeName = 'Conic Gradient';
+    } else if (arg.includes("linear-gradient")) {
+      typeName = 'Linear Gradient';
+    } else if (arg.includes("radial-gradient")) {
+      typeName = 'Radial Gradient';
+    } else if (arg.includes("repeating-conic-gradient")) {
+      typeName = 'R Conic Gradient';
+    } else if (arg.includes("repeating-linear-gradient")) {
+      typeName = 'R Linear Gradient';
+    } else if (arg.includes("repeating-radial-gradient")) {
+      typeName = 'R Radial Gradient';
+    }
+
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1",
+      onClick: ev => {
+        valArgs.splice(index, 1);
+        var ssdsd = valArgs.concat([]);
+        setValArgs(ssdsd);
+        var valString = ssdsd.join(',  ');
+        props.onChange(valString, 'backgroundImage');
+      }
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"]
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "mx-2"
+    }, typeName.length == 0 ? '#' + index : typeName));
+  };
 
   const ALLOWED_MEDIA_TYPES = ['image'];
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-    className: "my-3"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
-    src: imageVal,
-    alt: ""
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.MediaUpload, {
-    class: "bg-blue-500",
-    onSelect: media => {
-      // media.id
-      props.onChange('url("' + media.url + '")', 'backgroundImage');
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-4"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    position: "bottom right",
+    variant: "secondary",
+    options: typeArgs,
+    buttonTitle: "Add",
+    onChange: (option, index) => {
+      if (option.id == 'url') {
+        var dsdsf = valArgs.concat('url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/owl1.jpg)');
+      } else if (option.id == 'linearGradient') {
+        var dsdsf = valArgs.concat("linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)");
+      } else if (option.id == 'radialGradient') {
+        var dsdsf = valArgs.concat("radial-gradient(#12c2e9 0%,#c471ed 50%,#f64f59 100%)");
+      } else if (option.id == 'conicGradient') {
+        var dsdsf = valArgs.concat("conic-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)");
+      }
+
+      setValArgs(dsdsf);
+      var valString = valArgs.join(',  ');
+      props.onChange(valString, 'backgroundImage');
     },
-    onClose: () => {},
-    allowedTypes: ALLOWED_MEDIA_TYPES,
-    render: _ref => {
-      let {
-        open
-      } = _ref;
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.Button, {
-        className: "my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full",
-        onClick: open
-      }, "Open Media Library");
-    }
-  })));
+    values: ""
+  })), valArgs.map((x, index) => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+      initialOpen: false,
+      title: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(RemoveQueryPram, {
+        index: index,
+        arg: x
+      })
+    }, x.includes("url") && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: x.replace('url(', '').replace(')', ''),
+      alt: ""
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.MediaUpload, {
+      class: "bg-blue-500",
+      onSelect: media => {
+        // media.id
+        valArgs[index] = 'url(' + media.url + ')';
+        setValArgs(valArgs);
+        var valString = valArgs.join(',  ');
+        props.onChange(valString, 'backgroundImage');
+      },
+      onClose: () => {},
+      allowedTypes: ALLOWED_MEDIA_TYPES,
+      render: _ref2 => {
+        let {
+          open
+        } = _ref2;
+        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+          className: "my-3 bg-blue-500 text-white border border-solid border-gray-300 text-center w-full",
+          onClick: open
+        }, "Open Media Library");
+      }
+    }))), !x.includes("url") && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.GradientPicker, {
+      value: x,
+      onChange: newVal => {
+        valArgs[index] = newVal;
+        setValArgs(valArgs);
+        var valString = valArgs.join(',  ');
+        props.onChange(valString, 'backgroundImage');
+      }
+    }));
+  }));
 }
 
 class PGcssBackgroundImage extends Component {
@@ -61515,7 +61589,7 @@ class PGcssBackgroundImage extends Component {
       val,
       onChange
     } = this.props;
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Html, {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       val: val,
       onChange: onChange,
       warn: this.state.showWarning

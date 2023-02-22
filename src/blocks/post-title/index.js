@@ -611,7 +611,10 @@ registerBlockType("post-grid/post-title", {
 
       var path = [sudoScource, key, breakPointX]
       let obj = Object.assign({}, wrapper);
-      const object = myStore.addPropertyDeep(obj, path, '');
+
+
+      var object = myStore.addPropertyDeep(obj, path, '');
+
 
 
 

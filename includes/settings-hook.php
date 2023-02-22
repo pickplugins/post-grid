@@ -158,10 +158,7 @@ if (!function_exists('post_grid_settings_content_help_support')) {
             <p><?php echo __('Watch video tutorials.', 'post-grid'); ?></p>
             <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94Yut5Y0MSVg1wqmqWz0UYpt"><i class="fab fa-youtube"></i> <?php echo __('All tutorials', 'post-grid'); ?></a>
 
-            <ul>
-                <li><i class="far fa-dot-circle"></i> <a href="https://youtu.be/YVtsIbEb9zs">Latest Version 2.0.46 Overview</a></li>
 
-            </ul>
 
 
 
@@ -283,7 +280,7 @@ if (!function_exists('post_grid_settings_content_disable_blocks')) {
 
 
         </div>
-    <?php
+<?php
 
 
     }

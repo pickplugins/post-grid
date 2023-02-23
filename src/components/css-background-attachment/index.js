@@ -22,7 +22,10 @@ class PGcssBackgroundAttachment extends Component {
       fixed: { "label": "Fixed", "value": "fixed" },
       local: { "label": "Local", "value": "local" },
 
-
+      inherit: { "label": "inherit", "value": "inherit" },
+      initial: { "label": "initial", "value": "initial" },
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
 
     }
 

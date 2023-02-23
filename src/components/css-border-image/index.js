@@ -99,7 +99,7 @@ function Html(props) {
         step="1"
         value={width}
         onChange={(newVal) => {
-          props.onChange(source + ' ' + slice + ' ' + newVal + 'px ' + outset + ' ' + repeat, 'borderImage');
+          props.onChange(source + ' ' + slice + ' ' + newVal + ' ' + outset + ' ' + repeat, 'borderImage');
         }}
       />
       <PanelRow>
@@ -128,9 +128,6 @@ function Html(props) {
             { label: 'repeat', value: 'repeat' },
             { label: 'round', value: 'round' },
             { label: 'space', value: 'space' },
-            { label: 'initial', value: 'initial' },
-            { label: 'inherit', value: 'inherit' },
-
 
           ]}
           onChange={

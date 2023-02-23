@@ -9,8 +9,6 @@ import { __experimentalInputControl as InputControl, ColorPalette } from '@wordp
 
 
 function Html(props) {
-
-
   if (!props.warn) {
     return null;
   }
@@ -40,7 +38,18 @@ function Html(props) {
 
   }
 
-  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
+  console.log(props.val);
+  console.log(typeof props.val);
+
+  if (typeof props.val == 'object') {
+    var valZ = props.val.val + props.val.unit;
+
+  } else {
+    var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
+
+  }
+
+  console.log(valZ);
 
 
   var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
@@ -52,19 +61,31 @@ function Html(props) {
 
   return (
 
-    <div className='flex mt-4'>
+    <div className='flex justify-between'>
+
+      {widthUnit != 'auto' && (
+        <InputControl
+          value={widthVal}
+          type="number"
+          disabled={(widthUnit == 'auto') ? true : false}
+          onChange={(newVal) => {
+
+            //console.log(newVal);
+            setwidthVal(newVal);
+
+            if (widthUnit == 'auto') {
+              props.onChange(widthUnit, 'left');
+            } else {
+              props.onChange(newVal + widthUnit, 'left');
+            }
 
 
-      <InputControl
-        value={widthVal}
-        type="number"
-        onChange={(newVal) => {
 
-          setwidthVal(newVal);
-          props.onChange(newVal + widthUnit, 'left');
 
-        }}
-      />
+          }}
+        />
+      )}
+
       <div>
 
         <Dropdown
@@ -76,7 +97,7 @@ function Html(props) {
               onClick={onToggle}
               aria-expanded={isOpen}
             >
-              <div className=" ">{props.val ? unitArgs[widthUnit].label : 'Select...'}</div>
+              <div className=" ">{valZ ? unitArgs[widthUnit].label : 'Select...'}</div>
 
 
             </Button>
@@ -92,8 +113,15 @@ function Html(props) {
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                   setwidthUnit(x.value);
-                  props.onChange(widthVal + x.value, 'left');
 
+
+                  if (x.value == 'auto') {
+                    props.onChange(x.value, 'left');
+
+                  } else {
+                    props.onChange(widthVal + x.value, 'left');
+
+                  }
 
                 }}>
 
@@ -113,6 +141,9 @@ function Html(props) {
       </div>
 
 
+
+
+
     </div>
 
 
@@ -125,7 +156,6 @@ function Html(props) {
 
 class PGcssLeft extends Component {
 
-
   constructor(props) {
     super(props);
     this.state = { showWarning: true };
@@ -137,7 +167,6 @@ class PGcssLeft extends Component {
       showWarning: !state.showWarning
     }));
   }
-
 
 
   render() {

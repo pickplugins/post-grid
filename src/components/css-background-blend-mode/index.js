@@ -28,6 +28,19 @@ class PGcssBackgroundBlendMode extends Component {
       saturation: { "label": "Saturation", "value": "saturation" },
       color: { "label": "Color", "value": "color" },
       luminosity: { "label": "Luminosity", "value": "luminosity" },
+      exclusion: { "label": "exclusion", "value": "exclusion" },
+      hue: { "label": "hue", "value": "hue" },
+
+
+      'color-burn': { "label": "color-burn", "value": "color-burn" },
+      'difference': { "label": "difference", "value": "difference" },
+      'hard-light': { "label": "hard-light", "value": "hard-light" },
+      'soft-light': { "label": "soft-light", "value": "soft-light" },
+      inherit: { "label": "inherit", "value": "inherit" },
+      initial: { "label": "initial", "value": "initial" },
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
+
 
 
 

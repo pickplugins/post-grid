@@ -503,10 +503,10 @@ registerBlockType("post-grid/post-tags", {
 
 
       var path = [sudoScource, attr, breakPointX]
-      let obj = Object.assign({}, item);
+      let obj = Object.assign({}, items);
       const object = myStore.updatePropertyDeep(obj, path, newVal)
 
-      setAttributes({ item: object });
+      setAttributes({ items: object });
 
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       var cssPropty = myStore.cssAttrParse(attr);

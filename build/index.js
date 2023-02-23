@@ -20568,10 +20568,10 @@ var myStore = wp.data.select('postgrid-shop');
 
     function onChangeStyleItems(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
-      let obj = Object.assign({}, item);
+      let obj = Object.assign({}, items);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
       setAttributes({
-        item: object
+        items: object
       });
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       var cssPropty = myStore.cssAttrParse(attr);
@@ -20895,192 +20895,6 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    function paddingControlItems(nextValues) {
-      var responsive = items.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...items.styles,
-        padding: responsive
-      };
-      setAttributes({
-        items: { ...items,
-          styles: styles
-        }
-      });
-      blockCssY.items[itemSelector] = blockCssY.items[itemSelector] != undefined ? blockCssY.items[itemSelector] : {};
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[itemSelector]['padding-top'] != undefined ? blockCssY.items[itemSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'padding-top': paddingTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[itemSelector]['padding-right'] != undefined ? blockCssY.items[itemSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'padding-right': paddingRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[itemSelector]['padding-bottom'] != undefined ? blockCssY.items[itemSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'padding-bottom': paddingBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[itemSelector]['padding-left'] != undefined ? blockCssY.items[itemSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'padding-left': paddingLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function marginControlItems(nextValues) {
-      var responsive = items.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...items.styles,
-        margin: responsive
-      };
-      setAttributes({
-        items: { ...items,
-          styles: styles
-        }
-      });
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[itemSelector] = blockCssY.items[itemSelector] != undefined ? blockCssY.items[itemSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[itemSelector]['margin-top'] != undefined ? blockCssY.items[itemSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[itemSelector]['margin-right'] !== undefined ? blockCssY.items[itemSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[itemSelector]['margin-bottom'] !== undefined ? blockCssY.items[itemSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[itemSelector]['margin-left'] !== undefined ? blockCssY.items[itemSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function onChangeTypo(typoX) {
-      setAttributes({
-        items: { ...items,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[itemSelector] != undefined ? blockCssY.items[itemSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[itemSelector]['line-height'] != undefined ? blockCssY.items[itemSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[itemSelector]['letter-spacing'] != undefined ? blockCssY.items[itemSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr; //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector],
-          'text-transform': typoX.textTransform
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
     function onChangeIcon(arg) {
       var options = { ...icon.options,
         srcType: arg.srcType,
@@ -21094,279 +20908,10 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
-    function onChangeIconTypo(typoX) {
-      setAttributes({
-        icon: { ...icon,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-      var itemsX = blockCssY.items;
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[iconSelector] != undefined ? blockCssY.items[iconSelector]['font-size'] : {};
-
-        if (fontSizeX[breakPointX] == undefined) {
-          fontSizeX[breakPointX] = '';
-        }
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit; //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'font-size': fontSizeX };
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 16;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[iconSelector]['line-height'] != undefined ? blockCssY.items[iconSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit; //blockCssY.items[iconSelector] = { ...blockCssY.items[iconSelector], 'line-height': lineHeightX };
-
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr;
-        itemsX[iconSelector] = { ...blockCssY.items[iconSelector],
-          'text-decoration': str
-        };
-      } //setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-      setAttributes({
-        blockCssY: {
-          items: itemsX
-        }
-      });
-    }
-
-    function onChangeTypoFrontText(typoX) {
-      setAttributes({
-        frontText: { ...frontText,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[frontTextSelector]['font-size'] != undefined ? blockCssY.items[frontTextSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[frontTextSelector]['line-height'] != undefined ? blockCssY.items[frontTextSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[frontTextSelector]['letter-spacing'] != undefined ? blockCssY.items[frontTextSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr; //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[frontTextSelector] = { ...blockCssY.items[frontTextSelector],
-          'text-transform': typoX.textTransform
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
       //generateBlockCssY()
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
-
-    function generateBlockCssY() {
-      var reponsiveCssGroups = {};
-
-      for (var selector in blockCssY.items) {
-        var attrs = blockCssY.items[selector];
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = [];
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = [];
-            }
-
-            reponsiveCssGroups[device][selector].push({
-              'attr': attr,
-              'val': attrValue
-            });
-          }
-        }
-      } //return false;
-
-
-      var reponsiveCssMobile = '';
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-          reponsiveCssMobile += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssMobile += '}';
-        }
-
-        reponsiveCssMobile += '}';
-      }
-
-      var reponsiveCssTablet = '';
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-          reponsiveCssTablet += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssTablet += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssTablet += '}';
-        }
-
-        reponsiveCssTablet += '}';
-      }
-
-      var reponsiveCssDesktop = '';
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-          reponsiveCssDesktop += selector + '{';
-
-          for (var index in attrs) {
-            var attr = attrs[index];
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
-          }
-
-          reponsiveCssDesktop += '}';
-        }
-
-        reponsiveCssDesktop += '}';
-      }
-
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200);
-      } else {
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-        csswrappg.insertAdjacentHTML('beforeend', str);
-      }
-    }
-
     var [linkAttrItems, setlinkAttrItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({}); // Using the hook.
 
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
@@ -41582,24 +41127,24 @@ var myStore = wp.data.select('postgrid-shop');
       value: grid.styles.colGap[breakPointX] != undefined ? grid.styles.colGap[breakPointX].val : 1,
       type: "number",
       onChange: newVal => {
-        var newValuesObj = {};
+        var colGapX = grid.styles.colGap;
+        console.log(colGapX);
+        var unit = colGapX[breakPointX] != undefined ? colGapX[breakPointX].unit : 'em';
 
         if (Object.keys(grid.styles.colGap).length == 0) {
-          newValuesObj[breakPointX] = {
+          colGapX[breakPointX] = {
             val: newVal,
             unit: 'em'
           };
         } else {
-          newValuesObj = grid.styles.colGap;
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'em';
-          newValuesObj[breakPointX] = {
+          colGapX[breakPointX] = {
             val: newVal,
             unit: unit
           };
         }
 
         var styles = { ...grid.styles,
-          colGap: newValuesObj
+          colGap: colGapX
         };
         setAttributes({
           grid: { ...grid,
@@ -41611,9 +41156,6 @@ var myStore = wp.data.select('postgrid-shop');
       className: "mb-0",
       value: grid.styles.colGap[breakPointX] != undefined ? grid.styles.colGap[breakPointX].unit : 'em',
       options: [{
-        label: 'fr',
-        value: 'fr'
-      }, {
         label: 'px',
         value: 'px'
       }, {
@@ -41624,24 +41166,24 @@ var myStore = wp.data.select('postgrid-shop');
         value: 'em'
       }],
       onChange: newVal => {
-        var newValuesObj = {};
+        var colGapX = grid.styles.colGap;
+        var val = colGapX[breakPointX] != undefined ? colGapX[breakPointX].val : 1;
 
         if (Object.keys(grid.styles.colGap).length == 0) {
-          newValuesObj[breakPointX] = {
+          colGapX[breakPointX] = {
             val: 1,
             unit: newVal
           };
         } else {
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 1;
-          newValuesObj = grid.styles.colGap;
-          newValuesObj[breakPointX] = {
+          colGapX = grid.styles.colGap;
+          colGapX[breakPointX] = {
             val: val,
             unit: newVal
           };
         }
 
         var styles = { ...grid.styles,
-          colGap: newValuesObj
+          colGap: colGapX
         };
         setAttributes({
           grid: { ...grid,
@@ -41663,24 +41205,24 @@ var myStore = wp.data.select('postgrid-shop');
       value: grid.styles.rowGap[breakPointX] != undefined ? grid.styles.rowGap[breakPointX].val : 1,
       type: "number",
       onChange: newVal => {
-        var newValuesObj = {};
+        var rowGapX = grid.styles.rowGap;
+        console.log(rowGapX);
+        var unit = rowGapX[breakPointX] != undefined ? rowGapX[breakPointX].unit : 'em';
 
         if (Object.keys(grid.styles.rowGap).length == 0) {
-          newValuesObj[breakPointX] = {
+          rowGapX[breakPointX] = {
             val: newVal,
             unit: 'em'
           };
         } else {
-          var unit = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].unit : 'em';
-          newValuesObj = grid.styles.rowGap;
-          newValuesObj[breakPointX] = {
+          rowGapX[breakPointX] = {
             val: newVal,
             unit: unit
           };
         }
 
         var styles = { ...grid.styles,
-          rowGap: newValuesObj
+          rowGap: rowGapX
         };
         setAttributes({
           grid: { ...grid,
@@ -41692,9 +41234,6 @@ var myStore = wp.data.select('postgrid-shop');
       className: "mb-0",
       value: grid.styles.rowGap[breakPointX] != undefined ? grid.styles.rowGap[breakPointX].unit : 'em',
       options: [{
-        label: 'fr',
-        value: 'fr'
-      }, {
         label: 'px',
         value: 'px'
       }, {
@@ -41705,24 +41244,24 @@ var myStore = wp.data.select('postgrid-shop');
         value: 'em'
       }],
       onChange: newVal => {
-        var newValuesObj = {};
+        var rowGapX = grid.styles.rowGap;
+        var val = rowGapX[breakPointX] != undefined ? rowGapX[breakPointX].val : 1;
 
         if (Object.keys(grid.styles.rowGap).length == 0) {
-          newValuesObj[breakPointX] = {
+          rowGapX[breakPointX] = {
             val: 1,
             unit: newVal
           };
         } else {
-          var val = newValuesObj[breakPointX] != undefined ? newValuesObj[breakPointX].val : 'em';
-          newValuesObj = grid.styles.rowGap;
-          newValuesObj[breakPointX] = {
+          rowGapX = grid.styles.rowGap;
+          rowGapX[breakPointX] = {
             val: val,
             unit: newVal
           };
         }
 
         var styles = { ...grid.styles,
-          rowGap: newValuesObj
+          rowGap: rowGapX
         };
         setAttributes({
           grid: { ...grid,
@@ -45105,10 +44644,10 @@ var myStore = wp.data.select('postgrid-shop');
 
     function onChangeStyleItems(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
-      let obj = Object.assign({}, item);
+      let obj = Object.assign({}, items);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
       setAttributes({
-        item: object
+        items: object
       });
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       var cssPropty = myStore.cssAttrParse(attr);
@@ -46718,10 +46257,10 @@ var myStore = wp.data.select('postgrid-shop');
 
     function onChangeStyleItems(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
-      let obj = Object.assign({}, item);
+      let obj = Object.assign({}, items);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
       setAttributes({
-        item: object
+        items: object
       });
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
       var cssPropty = myStore.cssAttrParse(attr);
@@ -51119,7 +50658,7 @@ var myStore = wp.data.select('postgrid-shop');
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
       name: "styles"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
-      obj: wrapper,
+      obj: readMore,
       onChange: onChangeStyleRedmore,
       onAdd: onAddStyleRedmore,
       onRemove: onRemoveStyleRedmore
@@ -60502,6 +60041,42 @@ function Html(props) {
     'space-evenly': {
       "label": "space evenly",
       "value": "space-evenly"
+    },
+    start: {
+      "label": "start",
+      "value": "start"
+    },
+    end: {
+      "label": "end",
+      "value": "end"
+    },
+    normal: {
+      "label": "normal",
+      "value": "normal"
+    },
+    start: {
+      "label": "start",
+      "value": "start"
+    },
+    baseline: {
+      "label": "baseline",
+      "value": "baseline"
+    },
+    revert: {
+      "label": "revert",
+      "value": "revert"
+    },
+    unset: {
+      "label": "unset",
+      "value": "unset"
+    },
+    inherit: {
+      "label": "inherit",
+      "value": "inherit"
+    },
+    initial: {
+      "label": "initial",
+      "value": "initial"
     }
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
@@ -60610,6 +60185,33 @@ class PGcssAlignItems extends Component {
     }, {
       "label": "Baseline",
       "value": "baseline"
+    }, {
+      "label": "end",
+      "value": "end"
+    }, {
+      "label": "normal",
+      "value": "normal"
+    }, {
+      "label": "revert",
+      "value": "revert"
+    }, {
+      "label": "self-end",
+      "value": "self-end"
+    }, {
+      "label": "self-start",
+      "value": "self-start"
+    }, {
+      "label": "start",
+      "value": "start"
+    }, {
+      "label": "unset",
+      "value": "unset"
+    }, {
+      "label": "inherit",
+      "value": "inherit"
+    }, {
+      "label": "initial",
+      "value": "initial"
     }];
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
       position: "bottom",
@@ -60674,11 +60276,15 @@ class PGcssAlignSelf extends Component {
       onChange
     } = this.props;
     var args = {
-      'stretch': {
+      auto: {
+        "label": "auto",
+        "value": "auto"
+      },
+      stretch: {
         "label": "Stretch",
         "value": "stretch"
       },
-      'center': {
+      center: {
         "label": "Center",
         "value": "center"
       },
@@ -60690,17 +60296,49 @@ class PGcssAlignSelf extends Component {
         "label": "Flex end	",
         "value": "flex-end"
       },
-      'space-between': {
-        "label": "Space between",
-        "value": "space-between"
+      normal: {
+        "label": "normal",
+        "value": "normal"
       },
-      'space-around': {
-        "label": "Space around",
-        "value": "space-around"
+      revert: {
+        "label": "revert",
+        "value": "revert"
       },
-      'space-evenly': {
-        "label": "Space evenly",
-        "value": "space-evenly"
+      'self-end': {
+        "label": "self-end",
+        "value": "self-end"
+      },
+      ' self-start': {
+        "label": " self-start",
+        "value": " self-start"
+      },
+      start: {
+        "label": "start",
+        "value": "start"
+      },
+      end: {
+        "label": "end",
+        "value": "end"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
+      },
+      inherit: {
+        "label": "inherit",
+        "value": "inherit"
+      },
+      initial: {
+        "label": "initial",
+        "value": "initial"
+      },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
       }
     }; //console.log(val);
 
@@ -60978,6 +60616,22 @@ class PGcssBackfaceVisibility extends Component {
       hidden: {
         "label": "Hidden",
         "value": "hidden"
+      },
+      inherit: {
+        "label": "inherit",
+        "value": "inherit"
+      },
+      initial: {
+        "label": "initial",
+        "value": "initial"
+      },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
       }
     }; //console.log(val);
 
@@ -61057,6 +60711,22 @@ class PGcssBackgroundAttachment extends Component {
       local: {
         "label": "Local",
         "value": "local"
+      },
+      inherit: {
+        "label": "inherit",
+        "value": "inherit"
+      },
+      initial: {
+        "label": "initial",
+        "value": "initial"
+      },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
       }
     }; //console.log(val);
 
@@ -61164,6 +60834,46 @@ class PGcssBackgroundBlendMode extends Component {
       luminosity: {
         "label": "Luminosity",
         "value": "luminosity"
+      },
+      exclusion: {
+        "label": "exclusion",
+        "value": "exclusion"
+      },
+      hue: {
+        "label": "hue",
+        "value": "hue"
+      },
+      'color-burn': {
+        "label": "color-burn",
+        "value": "color-burn"
+      },
+      'difference': {
+        "label": "difference",
+        "value": "difference"
+      },
+      'hard-light': {
+        "label": "hard-light",
+        "value": "hard-light"
+      },
+      'soft-light': {
+        "label": "soft-light",
+        "value": "soft-light"
+      },
+      inherit: {
+        "label": "inherit",
+        "value": "inherit"
+      },
+      initial: {
+        "label": "initial",
+        "value": "initial"
+      },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
       }
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
@@ -61242,6 +60952,22 @@ class PGcssBackgroundClip extends Component {
       'content-box': {
         "label": "Content box",
         "value": "content-box"
+      },
+      inherit: {
+        "label": "inherit",
+        "value": "inherit"
+      },
+      initial: {
+        "label": "initial",
+        "value": "initial"
+      },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
       }
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
@@ -61642,6 +61368,22 @@ class PGcssBackgroundOrigin extends Component {
       'content-box': {
         "label": "content-box",
         "value": "content-box"
+      },
+      inherit: {
+        "label": "inherit",
+        "value": "inherit"
+      },
+      initial: {
+        "label": "initial",
+        "value": "initial"
+      },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
       }
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
@@ -61735,6 +61477,18 @@ class PGcssBackgroundPosition extends Component {
     }, {
       label: 'center bottom',
       value: 'center bottom'
+    }, {
+      label: "inherit",
+      value: "inherit"
+    }, {
+      label: "initial",
+      value: "initial"
+    }, {
+      label: "revert",
+      value: "revert"
+    }, {
+      label: "unset",
+      value: "unset"
     }]; //console.log(val);
 
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
@@ -61823,6 +61577,22 @@ class PGcssBackgroundRepeat extends Component {
       round: {
         "label": "Round",
         "value": "round"
+      },
+      inherit: {
+        "label": "inherit",
+        "value": "inherit"
+      },
+      initial: {
+        "label": "initial",
+        "value": "initial"
+      },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
       }
     }; //console.log(val);
 
@@ -61892,6 +61662,10 @@ class PGcssBackgroundSize extends Component {
       onChange
     } = this.props;
     var args = {
+      auto: {
+        "label": "auto",
+        "value": "auto"
+      },
       cover: {
         "label": "Cover",
         "value": "cover"
@@ -61903,6 +61677,22 @@ class PGcssBackgroundSize extends Component {
       custom: {
         "label": "Custom",
         "value": "custom"
+      },
+      inherit: {
+        "label": "inherit",
+        "value": "inherit"
+      },
+      initial: {
+        "label": "initial",
+        "value": "initial"
+      },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
       }
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
@@ -62143,14 +61933,7 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
-    "%": {
-      "label": "%",
-      "value": "%"
-    },
+    // "%": { "label": "%", "value": "%" },
     cm: {
       "label": "CM",
       "value": "cm"
@@ -62194,7 +61977,12 @@ function Html(props) {
     vmax: {
       "label": "VMAX",
       "value": "vmax"
-    }
+    } // none: { "label": "none", "value": "none" },
+    // inherit: { "label": "inherit", "value": "inherit" },
+    // initial: { "label": "initial", "value": "initial" },
+    // revert: { "label": "revert", "value": "revert" },
+    // unset: { "label": "unset", "value": "unset" },
+
   }; //console.log(widthVal);
   //console.log(widthVal.match(/\d+/g));
 
@@ -62364,6 +62152,12 @@ class PGcssBorderCollapse extends Component {
     }, {
       "label": "inherit",
       "value": "inherit"
+    }, {
+      "label": "revert",
+      "value": "revert"
+    }, {
+      "label": "unset",
+      "value": "unset"
     }];
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
       position: "bottom",
@@ -62485,7 +62279,7 @@ function Html(props) {
     step: "1",
     value: width,
     onChange: newVal => {
-      props.onChange(source + ' ' + slice + ' ' + newVal + 'px ' + outset + ' ' + repeat, 'borderImage');
+      props.onChange(source + ' ' + slice + ' ' + newVal + ' ' + outset + ' ' + repeat, 'borderImage');
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
     for: ""
@@ -62514,12 +62308,6 @@ function Html(props) {
     }, {
       label: 'space',
       value: 'space'
-    }, {
-      label: 'initial',
-      value: 'initial'
-    }, {
-      label: 'inherit',
-      value: 'inherit'
     }],
     onChange: newVal => {
       props.onChange(source + ' ' + slice + ' ' + width + ' ' + outset + ' ' + newVal, 'borderImage');
@@ -62653,14 +62441,7 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
-    "%": {
-      "label": "%",
-      "value": "%"
-    },
+    // "%": { "label": "%", "value": "%" },
     cm: {
       "label": "CM",
       "value": "cm"
@@ -62704,7 +62485,12 @@ function Html(props) {
     vmax: {
       "label": "VMAX",
       "value": "vmax"
-    }
+    } // none: { "label": "none", "value": "none" },
+    // inherit: { "label": "inherit", "value": "inherit" },
+    // initial: { "label": "initial", "value": "initial" },
+    // revert: { "label": "revert", "value": "revert" },
+    // unset: { "label": "unset", "value": "unset" },
+
   }; //console.log(widthVal);
   //console.log(widthVal.match(/\d+/g));
 
@@ -63024,14 +62810,7 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
-    "%": {
-      "label": "%",
-      "value": "%"
-    },
+    // "%": { "label": "%", "value": "%" },
     cm: {
       "label": "CM",
       "value": "cm"
@@ -63075,7 +62854,12 @@ function Html(props) {
     vmax: {
       "label": "VMAX",
       "value": "vmax"
-    }
+    } // none: { "label": "none", "value": "none" },
+    // inherit: { "label": "inherit", "value": "inherit" },
+    // initial: { "label": "initial", "value": "initial" },
+    // revert: { "label": "revert", "value": "revert" },
+    // unset: { "label": "unset", "value": "unset" },
+
   }; //console.log(widthVal);
   //console.log(widthVal.match(/\d+/g));
 
@@ -63240,10 +63024,7 @@ function Html(props) {
   var valParts = valZ != undefined ? valZ.split(" ") : ['1px', '1px', '#000000'];
   var horizontalVal = valParts[0];
   var vericalVal = valParts[1];
-  var colorVal = valParts[2]; //console.log(horizontalVal);
-  //console.log(vericalVal);
-  //console.log(colorVal);
-
+  var colorVal = valParts[2];
   var unitArgs = {
     px: {
       "label": "PX",
@@ -63257,14 +63038,8 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
-    "%": {
-      "label": "%",
-      "value": "%"
-    },
+    // auto: { "label": "AUTO", "value": "auto" },
+    // "%": { "label": "%", "value": "%" },
     cm: {
       "label": "CM",
       "value": "cm"
@@ -63308,6 +63083,22 @@ function Html(props) {
     vmax: {
       "label": "VMAX",
       "value": "vmax"
+    },
+    initial: {
+      "label": "initial",
+      "value": "initial"
+    },
+    inherit: {
+      "label": "inherit",
+      "value": "inherit"
+    },
+    revert: {
+      "label": "revert",
+      "value": "revert"
+    },
+    unset: {
+      "label": "unset",
+      "value": "unset"
     }
   };
   var horizontalValX = horizontalVal != undefined ? horizontalVal.match(/\d+/g)[0] : 1;
@@ -63560,14 +63351,7 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
-    "%": {
-      "label": "%",
-      "value": "%"
-    },
+    // "%": { "label": "%", "value": "%" },
     cm: {
       "label": "CM",
       "value": "cm"
@@ -63611,7 +63395,12 @@ function Html(props) {
     vmax: {
       "label": "VMAX",
       "value": "vmax"
-    }
+    } // none: { "label": "none", "value": "none" },
+    // inherit: { "label": "inherit", "value": "inherit" },
+    // initial: { "label": "initial", "value": "initial" },
+    // revert: { "label": "revert", "value": "revert" },
+    // unset: { "label": "unset", "value": "unset" },
+
   }; //console.log(widthVal);
   //console.log(widthVal.match(/\d+/g));
 
@@ -63834,14 +63623,7 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
-    "%": {
-      "label": "%",
-      "value": "%"
-    },
+    // "%": { "label": "%", "value": "%" },
     cm: {
       "label": "CM",
       "value": "cm"
@@ -63885,7 +63667,12 @@ function Html(props) {
     vmax: {
       "label": "VMAX",
       "value": "vmax"
-    }
+    } // none: { "label": "none", "value": "none" },
+    // inherit: { "label": "inherit", "value": "inherit" },
+    // initial: { "label": "initial", "value": "initial" },
+    // revert: { "label": "revert", "value": "revert" },
+    // unset: { "label": "unset", "value": "unset" },
+
   }; //console.log(widthVal);
   //console.log(widthVal.match(/\d+/g));
 
@@ -64109,19 +63896,35 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  console.log(props.val);
+  console.log(typeof props.val);
+
+  if (typeof props.val == 'object') {
+    var valZ = props.val.val + props.val.unit;
+  } else {
+    var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  }
+
+  console.log(valZ);
   var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
   var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex mt-4"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+    className: "flex justify-between"
+  }, widthUnit != 'auto' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
     value: widthVal,
     type: "number",
+    disabled: widthUnit == 'auto' ? true : false,
     onChange: newVal => {
+      //console.log(newVal);
       setwidthVal(newVal);
-      props.onChange(newVal + widthUnit, 'bottom');
+
+      if (widthUnit == 'auto') {
+        props.onChange(widthUnit, 'bottom');
+      } else {
+        props.onChange(newVal + widthUnit, 'bottom');
+      }
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     position: "bottom",
@@ -64136,7 +63939,7 @@ function Html(props) {
         "aria-expanded": isOpen
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: " "
-      }, props.val ? unitArgs[widthUnit].label : 'Select...'));
+      }, valZ ? unitArgs[widthUnit].label : 'Select...'));
     },
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
@@ -64147,7 +63950,12 @@ function Html(props) {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
           setwidthUnit(x.value);
-          props.onChange(widthVal + x.value, 'bottom');
+
+          if (x.value == 'auto') {
+            props.onChange(x.value, 'bottom');
+          } else {
+            props.onChange(widthVal + x.value, 'bottom');
+          }
         }
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
@@ -66614,19 +66422,35 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  console.log(props.val);
+  console.log(typeof props.val);
+
+  if (typeof props.val == 'object') {
+    var valZ = props.val.val + props.val.unit;
+  } else {
+    var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  }
+
+  console.log(valZ);
   var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
   var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex mt-4"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+    className: "flex justify-between"
+  }, widthUnit != 'auto' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
     value: widthVal,
     type: "number",
+    disabled: widthUnit == 'auto' ? true : false,
     onChange: newVal => {
+      //console.log(newVal);
       setwidthVal(newVal);
-      props.onChange(newVal + widthUnit, 'left');
+
+      if (widthUnit == 'auto') {
+        props.onChange(widthUnit, 'left');
+      } else {
+        props.onChange(newVal + widthUnit, 'left');
+      }
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     position: "bottom",
@@ -66641,7 +66465,7 @@ function Html(props) {
         "aria-expanded": isOpen
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: " "
-      }, props.val ? unitArgs[widthUnit].label : 'Select...'));
+      }, valZ ? unitArgs[widthUnit].label : 'Select...'));
     },
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
@@ -66652,7 +66476,12 @@ function Html(props) {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
           setwidthUnit(x.value);
-          props.onChange(widthVal + x.value, 'left');
+
+          if (x.value == 'auto') {
+            props.onChange(x.value, 'left');
+          } else {
+            props.onChange(widthVal + x.value, 'left');
+          }
         }
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
@@ -69776,19 +69605,35 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  console.log(props.val);
+  console.log(typeof props.val);
+
+  if (typeof props.val == 'object') {
+    var valZ = props.val.val + props.val.unit;
+  } else {
+    var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  }
+
+  console.log(valZ);
   var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
   var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex mt-4"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+    className: "flex justify-between"
+  }, widthUnit != 'auto' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
     value: widthVal,
     type: "number",
+    disabled: widthUnit == 'auto' ? true : false,
     onChange: newVal => {
+      //console.log(newVal);
       setwidthVal(newVal);
-      props.onChange(newVal + widthUnit, 'right');
+
+      if (widthUnit == 'auto') {
+        props.onChange(widthUnit, 'right');
+      } else {
+        props.onChange(newVal + widthUnit, 'right');
+      }
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     position: "bottom",
@@ -69803,7 +69648,7 @@ function Html(props) {
         "aria-expanded": isOpen
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: " "
-      }, props.val ? unitArgs[widthUnit].label : 'Select...'));
+      }, valZ ? unitArgs[widthUnit].label : 'Select...'));
     },
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
@@ -69814,7 +69659,12 @@ function Html(props) {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
           setwidthUnit(x.value);
-          props.onChange(widthVal + x.value, 'right');
+
+          if (x.value == 'auto') {
+            props.onChange(x.value, 'right');
+          } else {
+            props.onChange(widthVal + x.value, 'right');
+          }
         }
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
@@ -71189,19 +71039,35 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  console.log(props.val);
+  console.log(typeof props.val);
+
+  if (typeof props.val == 'object') {
+    var valZ = props.val.val + props.val.unit;
+  } else {
+    var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  }
+
+  console.log(valZ);
   var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
   var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex mt-4"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+    className: "flex justify-between"
+  }, widthUnit != 'auto' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
     value: widthVal,
     type: "number",
+    disabled: widthUnit == 'auto' ? true : false,
     onChange: newVal => {
+      //console.log(newVal);
       setwidthVal(newVal);
-      props.onChange(newVal + widthUnit, 'top');
+
+      if (widthUnit == 'auto') {
+        props.onChange(widthUnit, 'top');
+      } else {
+        props.onChange(newVal + widthUnit, 'top');
+      }
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     position: "bottom",
@@ -71216,7 +71082,7 @@ function Html(props) {
         "aria-expanded": isOpen
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: " "
-      }, props.val ? unitArgs[widthUnit].label : 'Select...'));
+      }, valZ ? unitArgs[widthUnit].label : 'Select...'));
     },
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
@@ -71227,7 +71093,12 @@ function Html(props) {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
           setwidthUnit(x.value);
-          props.onChange(widthVal + x.value, 'top');
+
+          if (x.value == 'auto') {
+            props.onChange(x.value, 'top');
+          } else {
+            props.onChange(widthVal + x.value, 'top');
+          }
         }
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))

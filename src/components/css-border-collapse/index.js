@@ -22,6 +22,8 @@ class PGcssBorderCollapse extends Component {
       { "label": "collapse", "value": "collapse" },
       { "label": "initial", "value": "initial" },
       { "label": "inherit", "value": "inherit" },
+      { "label": "revert", "value": "revert" },
+      { "label": "unset", "value": "unset" },
     ];
 
 

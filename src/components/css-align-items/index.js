@@ -23,6 +23,17 @@ class PGcssAlignItems extends Component {
       { "label": "Flex start	", "value": "flex-start" },
       { "label": "Flex end	", "value": "flex-end" },
       { "label": "Baseline", "value": "baseline" },
+      { "label": "end", "value": "end" },
+      { "label": "normal", "value": "normal" },
+      { "label": "revert", "value": "revert" },
+      { "label": "self-end", "value": "self-end" },
+      { "label": "self-start", "value": "self-start" },
+      { "label": "start", "value": "start" },
+      { "label": "unset", "value": "unset" },
+      { "label": "inherit", "value": "inherit" },
+      { "label": "initial", "value": "initial" },
+
+
     ];
 
 

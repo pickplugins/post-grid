@@ -15,25 +15,41 @@ function Html(props) {
 
 
   var unitArgs = {
+
+
     px: { "label": "PX", "value": "px" },
     em: { "label": "EM", "value": "em" },
     rem: { "label": "REM", "value": "rem" },
     auto: { "label": "AUTO", "value": "auto" },
     "%": { "label": "%", "value": "%" },
+
     cm: { "label": "CM", "value": "cm" },
     mm: { "label": "MM", "value": "mm" },
     in: { "label": "IN", "value": "in" },
     pt: { "label": "PT", "value": "pt" },
     pc: { "label": "PC", "value": "pc" },
     ex: { "label": "EX", "value": "ex" },
+
     ch: { "label": "CH", "value": "ch" },
     vw: { "label": "VW", "value": "vw" },
     vh: { "label": "VH", "value": "vh" },
     vmin: { "label": "VMIN", "value": "vmin" },
     vmax: { "label": "VMAX", "value": "vmax" },
+
   }
 
-  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
+  console.log(props.val);
+  console.log(typeof props.val);
+
+  if (typeof props.val == 'object') {
+    var valZ = props.val.val + props.val.unit;
+
+  } else {
+    var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
+
+  }
+
+  console.log(valZ);
 
 
   var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
@@ -45,20 +61,31 @@ function Html(props) {
 
   return (
 
-    <div className='flex mt-4'>
+    <div className='flex justify-between'>
+
+      {widthUnit != 'auto' && (
+        <InputControl
+          value={widthVal}
+          type="number"
+          disabled={(widthUnit == 'auto') ? true : false}
+          onChange={(newVal) => {
+
+            //console.log(newVal);
+            setwidthVal(newVal);
+
+            if (widthUnit == 'auto') {
+              props.onChange(widthUnit, 'top');
+            } else {
+              props.onChange(newVal + widthUnit, 'top');
+            }
 
 
-      <InputControl
-        value={widthVal}
-        type="number"
-        onChange={(newVal) => {
-
-          setwidthVal(newVal);
-          props.onChange(newVal + widthUnit, 'top');
 
 
-        }}
-      />
+          }}
+        />
+      )}
+
       <div>
 
         <Dropdown
@@ -70,7 +97,7 @@ function Html(props) {
               onClick={onToggle}
               aria-expanded={isOpen}
             >
-              <div className=" ">{props.val ? unitArgs[widthUnit].label : 'Select...'}</div>
+              <div className=" ">{valZ ? unitArgs[widthUnit].label : 'Select...'}</div>
 
 
             </Button>
@@ -86,8 +113,15 @@ function Html(props) {
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                   setwidthUnit(x.value);
-                  props.onChange(widthVal + x.value, 'top');
 
+
+                  if (x.value == 'auto') {
+                    props.onChange(x.value, 'top');
+
+                  } else {
+                    props.onChange(widthVal + x.value, 'top');
+
+                  }
 
                 }}>
 
@@ -107,6 +141,9 @@ function Html(props) {
       </div>
 
 
+
+
+
     </div>
 
 
@@ -115,6 +152,7 @@ function Html(props) {
   )
 
 }
+
 
 class PGcssTop extends Component {
 
@@ -139,7 +177,6 @@ class PGcssTop extends Component {
 
 
     } = this.props;
-
 
 
 

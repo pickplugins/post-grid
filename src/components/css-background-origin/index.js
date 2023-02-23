@@ -21,6 +21,10 @@ class PGcssBackgroundOrigin extends Component {
       'border-box': { "label": "border-box", "value": "border-box" },
       'padding-box': { "label": "padding-box", "value": "padding-box" },
       'content-box': { "label": "content-box", "value": "content-box" },
+      inherit: { "label": "inherit", "value": "inherit" },
+      initial: { "label": "initial", "value": "initial" },
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
 
 
     };

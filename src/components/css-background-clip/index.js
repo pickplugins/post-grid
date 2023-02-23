@@ -21,6 +21,10 @@ class PGcssBackgroundClip extends Component {
       'border-box': { "label": "Border box", "value": "border-box" },
       'padding-box': { "label": "Padding box", "value": "padding-box" },
       'content-box': { "label": "Content box", "value": "content-box" },
+      inherit: { "label": "inherit", "value": "inherit" },
+      initial: { "label": "initial", "value": "initial" },
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
 
 
     };

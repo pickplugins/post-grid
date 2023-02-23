@@ -27,6 +27,10 @@ class PGcssBackgroundRepeat extends Component {
       round: { "label": "Round", "value": "round" },
 
 
+      inherit: { "label": "inherit", "value": "inherit" },
+      initial: { "label": "initial", "value": "initial" },
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
 
     }
 

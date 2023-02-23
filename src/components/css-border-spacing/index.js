@@ -16,7 +16,7 @@ function Html(props) {
   }
 
 
-var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '1px 1px #000000' : props.val;
+  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '1px 1px #000000' : props.val;
 
 
   var valParts = (valZ != undefined) ? valZ.split(" ") : ['1px', '1px', '#000000'];
@@ -25,21 +25,14 @@ var valZ = (props.val == null || props.val == undefined || props.val.length == 0
   var vericalVal = valParts[1];
   var colorVal = valParts[2];
 
-
-  //console.log(horizontalVal);
-  //console.log(vericalVal);
-  //console.log(colorVal);
-
-
-
   var unitArgs = {
 
 
     px: { "label": "PX", "value": "px" },
     em: { "label": "EM", "value": "em" },
     rem: { "label": "REM", "value": "rem" },
-    auto: { "label": "AUTO", "value": "auto" },
-    "%": { "label": "%", "value": "%" },
+    // auto: { "label": "AUTO", "value": "auto" },
+    // "%": { "label": "%", "value": "%" },
 
     cm: { "label": "CM", "value": "cm" },
     mm: { "label": "MM", "value": "mm" },
@@ -53,6 +46,12 @@ var valZ = (props.val == null || props.val == undefined || props.val.length == 0
     vh: { "label": "VH", "value": "vh" },
     vmin: { "label": "VMIN", "value": "vmin" },
     vmax: { "label": "VMAX", "value": "vmax" },
+    initial: { "label": "initial", "value": "initial" },
+    inherit: { "label": "inherit", "value": "inherit" },
+    revert: { "label": "revert", "value": "revert" },
+    unset: { "label": "unset", "value": "unset" },
+
+
 
   }
 

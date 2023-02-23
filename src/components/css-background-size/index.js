@@ -19,9 +19,14 @@ class PGcssBackgroundSize extends Component {
 
 
     var args = {
+      auto: { "label": "auto", "value": "auto" },
       cover: { "label": "Cover", "value": "cover" },
       contain: { "label": "Contain", "value": "contain" },
       custom: { "label": "Custom", "value": "custom" },
+      inherit: { "label": "inherit", "value": "inherit" },
+      initial: { "label": "initial", "value": "initial" },
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
     };
 
 

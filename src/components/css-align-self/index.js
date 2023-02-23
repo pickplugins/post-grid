@@ -18,13 +18,27 @@ class PGcssAlignSelf extends Component {
 
 
     var args = {
-      'stretch': { "label": "Stretch", "value": "stretch" },
-      'center': { "label": "Center", "value": "center" },
+      auto: { "label": "auto", "value": "auto" },
+
+      stretch: { "label": "Stretch", "value": "stretch" },
+      center: { "label": "Center", "value": "center" },
       'flex-start': { "label": "Flex start	", "value": "flex-start" },
       'flex-end': { "label": "Flex end	", "value": "flex-end" },
-      'space-between': { "label": "Space between", "value": "space-between" },
-      'space-around': { "label": "Space around", "value": "space-around" },
-      'space-evenly': { "label": "Space evenly", "value": "space-evenly" },
+
+      normal: { "label": "normal", "value": "normal" },
+      revert: { "label": "revert", "value": "revert" },
+      'self-end': { "label": "self-end", "value": "self-end" },
+      ' self-start': { "label": " self-start", "value": " self-start" },
+      start: { "label": "start", "value": "start" },
+      end: { "label": "end", "value": "end" },
+
+      unset: { "label": "unset", "value": "unset" },
+
+      inherit: { "label": "inherit", "value": "inherit" },
+      initial: { "label": "initial", "value": "initial" },
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
+
     };
 
     //console.log(val);

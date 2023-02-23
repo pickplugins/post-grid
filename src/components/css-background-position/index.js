@@ -27,7 +27,10 @@ class PGcssBackgroundPosition extends Component {
       { label: 'center top', value: 'center top' },
       { label: 'center center', value: 'center center' },
       { label: 'center bottom', value: 'center bottom' },
-
+      { label: "inherit", value: "inherit" },
+      { label: "initial", value: "initial" },
+      { label: "revert", value: "revert" },
+      { label: "unset", value: "unset" },
     ];
 
     //console.log(val);

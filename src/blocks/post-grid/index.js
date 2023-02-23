@@ -4130,19 +4130,21 @@ registerBlockType("post-grid/post-grid", {
                     type="number"
                     onChange={(newVal) => {
 
+                      var colGapX = grid.styles.colGap;
+                      console.log(colGapX);
 
-                      var newValuesObj = {};
+
+                      var unit = (colGapX[breakPointX] != undefined) ? colGapX[breakPointX].unit : 'em';
+
                       if (Object.keys(grid.styles.colGap).length == 0) {
-                        newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
+                        colGapX[breakPointX] = { val: newVal, unit: 'em' };
                       } else {
-                        newValuesObj = grid.styles.colGap;
-                        var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'em';
 
-                        newValuesObj[breakPointX] = { val: newVal, unit: unit };
+                        colGapX[breakPointX] = { val: newVal, unit: unit };
                       }
 
 
-                      var styles = { ...grid.styles, colGap: newValuesObj };
+                      var styles = { ...grid.styles, colGap: colGapX };
                       setAttributes({ grid: { ...grid, styles: styles } });
 
 
@@ -4152,25 +4154,25 @@ registerBlockType("post-grid/post-grid", {
                   <SelectControl className='mb-0'
                     value={(grid.styles.colGap[breakPointX] != undefined) ? grid.styles.colGap[breakPointX].unit : 'em'}
                     options={[
-                      { label: 'fr', value: 'fr' },
                       { label: 'px', value: 'px' },
                       { label: '%', value: '%' },
                       { label: 'em', value: 'em' },
                     ]}
                     onChange={(newVal) => {
 
-                      var newValuesObj = {};
-                      if (Object.keys(grid.styles.colGap).length == 0) {
-                        newValuesObj[breakPointX] = { val: 1, unit: newVal };
-                      } else {
-                        var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 1;
+                      var colGapX = grid.styles.colGap;
+                      var val = (colGapX[breakPointX] != undefined) ? colGapX[breakPointX].val : 1;
 
-                        newValuesObj = grid.styles.colGap;
-                        newValuesObj[breakPointX] = { val: val, unit: newVal };
+                      if (Object.keys(grid.styles.colGap).length == 0) {
+                        colGapX[breakPointX] = { val: 1, unit: newVal };
+                      } else {
+
+                        colGapX = grid.styles.colGap;
+                        colGapX[breakPointX] = { val: val, unit: newVal };
                       }
 
 
-                      var styles = { ...grid.styles, colGap: newValuesObj };
+                      var styles = { ...grid.styles, colGap: colGapX };
                       setAttributes({ grid: { ...grid, styles: styles } });
 
 
@@ -4190,19 +4192,21 @@ registerBlockType("post-grid/post-grid", {
                     type="number"
                     onChange={(newVal) => {
 
+                      var rowGapX = grid.styles.rowGap;
+                      console.log(rowGapX);
 
-                      var newValuesObj = {};
+
+                      var unit = (rowGapX[breakPointX] != undefined) ? rowGapX[breakPointX].unit : 'em';
+
                       if (Object.keys(grid.styles.rowGap).length == 0) {
-                        newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
+                        rowGapX[breakPointX] = { val: newVal, unit: 'em' };
                       } else {
-                        var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'em';
 
-                        newValuesObj = grid.styles.rowGap;
-                        newValuesObj[breakPointX] = { val: newVal, unit: unit };
+                        rowGapX[breakPointX] = { val: newVal, unit: unit };
                       }
 
 
-                      var styles = { ...grid.styles, rowGap: newValuesObj };
+                      var styles = { ...grid.styles, rowGap: rowGapX };
                       setAttributes({ grid: { ...grid, styles: styles } });
 
 
@@ -4212,25 +4216,25 @@ registerBlockType("post-grid/post-grid", {
                   <SelectControl className='mb-0'
                     value={(grid.styles.rowGap[breakPointX] != undefined) ? grid.styles.rowGap[breakPointX].unit : 'em'}
                     options={[
-                      { label: 'fr', value: 'fr' },
                       { label: 'px', value: 'px' },
                       { label: '%', value: '%' },
                       { label: 'em', value: 'em' },
                     ]}
                     onChange={(newVal) => {
 
-                      var newValuesObj = {};
-                      if (Object.keys(grid.styles.rowGap).length == 0) {
-                        newValuesObj[breakPointX] = { val: 1, unit: newVal };
-                      } else {
-                        var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 'em';
+                      var rowGapX = grid.styles.rowGap;
+                      var val = (rowGapX[breakPointX] != undefined) ? rowGapX[breakPointX].val : 1;
 
-                        newValuesObj = grid.styles.rowGap;
-                        newValuesObj[breakPointX] = { val: val, unit: newVal };
+                      if (Object.keys(grid.styles.rowGap).length == 0) {
+                        rowGapX[breakPointX] = { val: 1, unit: newVal };
+                      } else {
+
+                        rowGapX = grid.styles.rowGap;
+                        rowGapX[breakPointX] = { val: val, unit: newVal };
                       }
 
 
-                      var styles = { ...grid.styles, rowGap: newValuesObj };
+                      var styles = { ...grid.styles, rowGap: rowGapX };
                       setAttributes({ grid: { ...grid, styles: styles } });
 
 
@@ -4239,10 +4243,6 @@ registerBlockType("post-grid/post-grid", {
 
 
                 </PanelRow>
-
-
-
-
 
                 <div >
 

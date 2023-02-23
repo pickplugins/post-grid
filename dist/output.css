@@ -1007,6 +1007,14 @@ img {
   gap: 2.5rem;
 }
 
+.self-start {
+  align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
+}
+
 .overflow-x-auto {
   overflow-x: auto;
 }

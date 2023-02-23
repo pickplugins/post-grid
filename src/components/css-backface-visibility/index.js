@@ -20,6 +20,10 @@ class PGcssBackfaceVisibility extends Component {
     var args = {
       visible: { "label": "Visible", "value": "visible" },
       hidden: { "label": "Hidden", "value": "hidden" },
+      inherit: { "label": "inherit", "value": "inherit" },
+      initial: { "label": "initial", "value": "initial" },
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
 
     }
 

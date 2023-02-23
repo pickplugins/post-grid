@@ -1,12 +1,8 @@
 
 
 const { Component, RawHTML } = wp.element;
-import { Button, Dropdown } from '@wordpress/components'
-import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import colorsPresets from '../../colors-presets'
-import { __experimentalInputControl as InputControl, ColorPalette, PanelRow, RangeControl } from '@wordpress/components';
-import PGDropdown from '../../components/dropdown'
-import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
+import { __experimentalInputControl as InputControl, ColorPalette, PanelRow, RangeControl, Popover } from '@wordpress/components';
 import PGColorPicker from '../../components/input-color-picker'
 
 
@@ -17,15 +13,19 @@ function Html(props) {
   }
 
 
-var valZ = (props.val == null || props.val == undefined || props.val.length == 0 ) ? '0px 0px 0px 0px #000' : props.val;
+  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px 0px 10px 5px #50547d4f' : props.val;
+
+  console.log(valZ);
 
 
-  var h = (valZ != undefined) ? valZ.split(" ")[0].match(/\d+/g)[0] : 0;
-  var v = (valZ != undefined) ? valZ.split(" ")[1].match(/\d+/g)[0] : 0;
-  var blur = (valZ != undefined) ? valZ.split(" ")[2].match(/\d+/g)[0] : 0;
-  var spread = (valZ != undefined) ? valZ.split(" ")[3].match(/\d+/g)[0] : 0;
+  var h = (valZ != undefined) ? parseInt(valZ.split(" ")[0].match(/\d+/g)[0]) : 0;
+  var v = (valZ != undefined) ? parseInt(valZ.split(" ")[1].match(/\d+/g)[0]) : 0;
+  var blur = (valZ != undefined) ? parseInt(valZ.split(" ")[2].match(/\d+/g)[0]) : 10;
+  var spread = (valZ != undefined) ? parseInt(valZ.split(" ")[3].match(/\d+/g)[0]) : 5;
   var color = (valZ != undefined) ? valZ.split(" ")[4] : '#dddddd';
 
+  console.log(h);
+  console.log(typeof h);
 
 
   return (
@@ -40,6 +40,7 @@ var valZ = (props.val == null || props.val == undefined || props.val.length == 0
         min="-100"
         max="100"
         step="1"
+        currentInput={h}
         value={h}
         onChange={(newVal) => {
           props.onChange(newVal + 'px ' + v + 'px ' + blur + 'px ' + spread + 'px ' + color, 'boxShadow');
@@ -86,23 +87,23 @@ var valZ = (props.val == null || props.val == undefined || props.val.length == 0
       />
 
 
-      <PanelRow>
-        <label for="">Color</label>
 
 
-      </PanelRow>
 
+      <label for="">Color</label>
 
-      <PGColorPicker
-        value={color}
+      <PGColorPicker value={color}
+        colors={colorsPresets}
         enableAlpha
         onChange={(newVal) => {
 
           props.onChange(h + 'px ' + h + 'px ' + blur + 'px ' + spread + 'px ' + newVal, 'boxShadow');
 
-
         }}
+
       />
+
+
 
 
     </div>

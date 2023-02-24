@@ -32,6 +32,7 @@ import MyImage from './placeholder.jpg';
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
+import PGCssLibrary from '../../components/css-library'
 
 var myStore = wp.data.select('postgrid-shop');
 
@@ -473,6 +474,105 @@ registerBlockType("post-grid/post-featured-image", {
 
 
 
+    function onPickCssLibraryWrapper(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        wrapper[sudoScource] = sudoScourceArgs;
+      })
+
+      var wrapperX = Object.assign({}, wrapper);
+      setAttributes({ wrapper: wrapperX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+    function onPickCssLibraryImage(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        featuredImage[sudoScource] = sudoScourceArgs;
+      })
+
+      var featuredImageX = Object.assign({}, featuredImage);
+      setAttributes({ featuredImage: featuredImageX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var path = [sudoScource, attr, breakPointX]
@@ -862,6 +962,12 @@ registerBlockType("post-grid/post-featured-image", {
                     icon: styles,
                     className: 'tab-style',
                   },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
+                  },
                 ]}
               >
                 <PGtab name="options">
@@ -963,6 +1069,9 @@ registerBlockType("post-grid/post-featured-image", {
                 <PGtab name="styles">
                   <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
                 </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
+                </PGtab>
               </PGtabs>
 
 
@@ -990,6 +1099,12 @@ registerBlockType("post-grid/post-featured-image", {
                     title: 'Styles',
                     icon: styles,
                     className: 'tab-style',
+                  },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
                   },
                 ]}
               >
@@ -1332,6 +1447,9 @@ registerBlockType("post-grid/post-featured-image", {
                 </PGtab>
                 <PGtab name="styles">
                   <PGStyles obj={featuredImage} onChange={onChangeStyleImage} onAdd={onAddStyleImage} onRemove={onRemoveStyleImage} />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={featuredImage} onChange={onPickCssLibraryImage} />
                 </PGtab>
               </PGtabs>
 

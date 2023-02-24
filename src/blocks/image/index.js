@@ -33,6 +33,7 @@ import MyImage from './placeholder.jpg';
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
+import PGCssLibrary from '../../components/css-library'
 
 
 
@@ -72,21 +73,11 @@ registerBlockType("post-grid/image", {
         styles:
         {
 
-          width: {},
-
-          height: {},
-
-          overflow: {},
-
-          color: { Desktop: '' },
-          bgColor: {},
-          bgImage: {},
-          bgPosition: {},
-          bgSize: {},
-          display: {},
-          borderRadius: {},
+          width: { Desktop: '' },
+          height: { Desktop: '' },
+          overflow: { Desktop: '' },
           padding: { Desktop: '' },
-          margin: {}
+          margin: { Desktop: '' }
         },
       },
     },
@@ -120,19 +111,14 @@ registerBlockType("post-grid/image", {
 
         styles: {
 
-          display: {},
-          width: {},
-          height: {},
+          width: { Desktop: '' },
+          height: { Desktop: '' },
           filter: {},
-          objectFit: {},
+          objectFit: { Desktop: '' },
           padding: { Desktop: '' },
-          margin: {}
+          margin: { Desktop: '' }
         },
-        hoverStyles:
-        {
 
-          filter: {},
-        },
       },
     },
 
@@ -484,6 +470,103 @@ registerBlockType("post-grid/image", {
       ev.preventDefault();
       return false;
     }
+
+
+
+
+
+    function onPickCssLibraryWrapper(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        wrapper[sudoScource] = sudoScourceArgs;
+      })
+
+      var wrapperX = Object.assign({}, wrapper);
+      setAttributes({ wrapper: wrapperX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+    function onPickCssLibraryImage(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        image[sudoScource] = sudoScourceArgs;
+      })
+
+      var imageX = Object.assign({}, image);
+      setAttributes({ image: imageX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -880,6 +963,12 @@ registerBlockType("post-grid/image", {
                     icon: styles,
                     className: 'tab-style',
                   },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
+                  },
                 ]}
               >
                 <PGtab name="options">
@@ -969,340 +1058,14 @@ registerBlockType("post-grid/image", {
                   </PanelRow>
 
 
-                  <PanelRow>
-                    <label>Width</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
 
-                  <PanelRow>
-                    <InputControl
-                      value={(wrapper.styles.width[breakPointX] != undefined ? wrapper.styles.width[breakPointX].val : 10)}
-                      type="number"
-                      onChange={(newVal) => {
-
-                        var newValuesObj = {};
-                        if (Object.keys(wrapper.styles.width).length == 0) {
-                          newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
-                        } else {
-                          newValuesObj = wrapper.styles.width;
-                          var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'em';
-
-                          newValuesObj[breakPointX] = { val: newVal, unit: unit };
-                        }
-
-
-                        var styles = { ...wrapper.styles, width: newValuesObj };
-                        setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-
-
-                        var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
-                        var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
-
-
-                        var heightX = (blockCssY.items[wrapperSelector] != undefined) ? blockCssY.items[wrapperSelector] : {};
-
-                        heightX[breakPointX] = heightVal + heightUnit;
-                        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'width': heightX };
-
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                      }}
-
-                    />
-
-                    <SelectControl className='mb-0'
-                      value={(wrapper.styles.width[breakPointX] != undefined) ? wrapper.styles.width[breakPointX].unit : 'em'}
-                      options={[
-                        { label: 'fr', value: 'fr' },
-                        { label: 'px', value: 'px' },
-                        { label: '%', value: '%' },
-                        { label: 'em', value: 'em' },
-                      ]}
-                      onChange={(newVal) => {
-
-
-                        var newValuesObj = {};
-                        if (Object.keys(wrapper.styles.width).length == 0) {
-                          newValuesObj[breakPointX] = { val: 10, unit: newVal };
-                        } else {
-                          newValuesObj = wrapper.styles.width;
-                          var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 10;
-
-                          newValuesObj[breakPointX] = { val: val, unit: newVal };
-                        }
-
-
-                        var styles = { ...wrapper.styles, width: newValuesObj };
-                        setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-                        var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
-                        var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
-
-                        var heightX = (blockCssY.items[wrapperSelector] != undefined) ? blockCssY.items[wrapperSelector] : {};
-
-                        heightX[breakPointX] = heightVal + heightUnit;
-                        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'width': heightX };
-
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                      }}
-                    />
-
-                  </PanelRow>
-
-
-
-                  <PanelRow>
-                    <label>Height</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <InputControl
-                      value={(wrapper.styles.height[breakPointX] != undefined ? wrapper.styles.height[breakPointX].val : 10)}
-                      type="number"
-                      onChange={(newVal) => {
-
-                        var newValuesObj = {};
-                        if (Object.keys(wrapper.styles.height).length == 0) {
-                          newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
-                        } else {
-                          newValuesObj = wrapper.styles.height;
-                          var unit = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].unit : 'em';
-
-                          newValuesObj[breakPointX] = { val: newVal, unit: unit };
-                        }
-
-
-                        var styles = { ...wrapper.styles, height: newValuesObj };
-                        setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-
-
-                        var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
-                        var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
-
-
-                        var heightX = (blockCssY.items[wrapperSelector] != undefined) ? blockCssY.items[wrapperSelector] : {};
-
-                        heightX[breakPointX] = heightVal + heightUnit;
-                        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'height': heightX };
-
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                      }}
-
-                    />
-
-                    <SelectControl className='mb-0'
-                      value={(wrapper.styles.height[breakPointX] != undefined) ? wrapper.styles.height[breakPointX].unit : 'em'}
-                      options={[
-                        { label: 'fr', value: 'fr' },
-                        { label: 'px', value: 'px' },
-                        { label: '%', value: '%' },
-                        { label: 'em', value: 'em' },
-                      ]}
-                      onChange={(newVal) => {
-
-
-                        var newValuesObj = {};
-                        if (Object.keys(wrapper.styles.height).length == 0) {
-                          newValuesObj[breakPointX] = { val: 10, unit: newVal };
-                        } else {
-                          newValuesObj = wrapper.styles.height;
-                          var val = (newValuesObj[breakPointX] != undefined) ? newValuesObj[breakPointX].val : 10;
-
-                          newValuesObj[breakPointX] = { val: val, unit: newVal };
-                        }
-
-
-                        var styles = { ...wrapper.styles, height: newValuesObj };
-                        setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-                        var heightVal = (newValuesObj[breakPointX].val) ? newValuesObj[breakPointX].val : 10;
-                        var heightUnit = (newValuesObj[breakPointX].unit) ? newValuesObj[breakPointX].unit : 'em';
-
-                        var heightX = (blockCssY.items[wrapperSelector] != undefined) ? blockCssY.items[wrapperSelector] : {};
-
-                        heightX[breakPointX] = heightVal + heightUnit;
-                        blockCssY.items[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'height': heightX };
-
-                        setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                      }}
-                    />
-
-                  </PanelRow>
-
-
-
-                  <PanelRow>
-                    <label>Overflow </label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <PanelRow>
-
-
-                    <SelectControl className='mb-0'
-                      value={(wrapper.styles.overflow[breakPointX] != undefined) ? wrapper.styles.overflow[breakPointX] : 'hidden'}
-                      options={[
-                        { label: 'scroll', value: 'scroll' },
-                        { label: 'hidden', value: 'hidden' },
-                        { label: 'auto', value: 'auto' },
-                        { label: 'clip', value: 'clip' },
-                        { label: 'visible', value: 'visible' },
-
-                      ]}
-                      onChange={(newVal) => {
-
-
-                        var newValuesObj = {};
-
-
-                        if (Object.keys(wrapper.styles.overflow).length == 0) {
-                          newValuesObj[breakPointX] = newVal;
-                        } else {
-                          newValuesObj = wrapper.styles.overflow;
-                          newValuesObj[breakPointX] = newVal;
-                        }
-
-                        var styles = { ...wrapper.styles, overflow: newValuesObj };
-                        setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-
-
-
-                        var itemsX = { ...blockCssY.items };
-                        itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'overflow': newValuesObj };
-
-                        setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                      }}
-                    />
-
-                  </PanelRow>
-
-
-
-                  {wrapper.options.useAsBackground == 'yes' && (
-
-                    <>
-
-                      <PanelRow>
-                        <label>Background Position </label>
-                        <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                      </PanelRow>
-
-                      <PanelRow>
-
-
-                        <SelectControl className='mb-0'
-                          value={(wrapper.styles.bgPosition[breakPointX] != undefined) ? wrapper.styles.bgPosition[breakPointX] : 'hidden'}
-                          options={[
-                            { label: 'left top', value: 'left top' },
-                            { label: 'left center', value: 'left center' },
-                            { label: 'left bottom', value: 'left bottom' },
-                            { label: 'right top', value: 'right top' },
-                            { label: 'right center', value: 'right center' },
-                            { label: 'right bottom', value: 'right bottom' },
-                            { label: 'center top', value: 'center top' },
-                            { label: 'center center', value: 'center center' },
-                            { label: 'center bottom', value: 'center bottom' },
-
-                          ]}
-                          onChange={(newVal) => {
-
-
-                            var newValuesObj = {};
-
-
-                            if (Object.keys(wrapper.styles.bgPosition).length == 0) {
-                              newValuesObj[breakPointX] = newVal;
-                            } else {
-                              newValuesObj = wrapper.styles.bgPosition;
-                              newValuesObj[breakPointX] = newVal;
-                            }
-
-                            var styles = { ...wrapper.styles, bgPosition: newValuesObj };
-                            setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-
-
-
-                            var itemsX = { ...blockCssY.items };
-                            itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-position': newValuesObj };
-
-                            setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                          }}
-                        />
-
-                      </PanelRow>
-
-
-                      <PanelRow>
-                        <label>Background Size </label>
-                        <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                      </PanelRow>
-
-                      <PanelRow>
-
-
-                        <SelectControl className='mb-0'
-                          value={(wrapper.styles.bgSize[breakPointX] != undefined) ? wrapper.styles.bgSize[breakPointX] : 'hidden'}
-                          options={[
-                            { label: 'auto', value: 'auto' },
-                            { label: 'cover', value: 'cover' },
-                            { label: 'contain', value: 'contain' },
-
-                          ]}
-                          onChange={(newVal) => {
-
-
-                            var newValuesObj = {};
-
-
-                            if (Object.keys(wrapper.styles.bgSize).length == 0) {
-                              newValuesObj[breakPointX] = newVal;
-                            } else {
-                              newValuesObj = wrapper.styles.bgSize;
-                              newValuesObj[breakPointX] = newVal;
-                            }
-
-                            var styles = { ...wrapper.styles, bgSize: newValuesObj };
-                            setAttributes({ wrapper: { ...wrapper, styles: styles } });
-
-
-
-
-                            var itemsX = { ...blockCssY.items };
-                            itemsX[wrapperSelector] = { ...blockCssY.items[wrapperSelector], 'background-size': newValuesObj };
-
-                            setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-                          }}
-                        />
-
-                      </PanelRow>
-
-                    </>
-                  )}
 
                 </PGtab>
                 <PGtab name="styles">
                   <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
                 </PGtab>
               </PGtabs>
 
@@ -1339,6 +1102,12 @@ registerBlockType("post-grid/image", {
                     title: 'Styles',
                     icon: styles,
                     className: 'tab-style',
+                  },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
                   },
                 ]}
               >
@@ -1874,7 +1643,11 @@ registerBlockType("post-grid/image", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={wrapper} onChange={onChangeStyleImage} onAdd={onAddStyleImage} onRemove={onRemoveStyleImage} />
+                  <PGStyles obj={image} onChange={onChangeStyleImage} onAdd={onAddStyleImage} onRemove={onRemoveStyleImage} />
+                </PGtab>
+
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={image} onChange={onPickCssLibraryImage} />
                 </PGtab>
               </PGtabs>
 

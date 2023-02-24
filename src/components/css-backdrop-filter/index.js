@@ -31,13 +31,14 @@ function Html(props) {
 
       obj['id'] = option.value;
       obj['val'] = option.val;
+      obj['unit'] = option.unit;
 
       valArgs.push(obj);
 
       var str = '';
       valArgs.map(x => {
 
-        str += x.id + '(' + x.val + '%) ';
+        str += x.id + '(' + x.val + x.unit + ') ';
 
 
       })
@@ -154,7 +155,7 @@ function Html(props) {
                       var str = '';
                       valArgs.map(x => {
 
-                        str += x.id + '(' + x.val + '%) ';
+                        str += x.id + '(' + x.val + x.unit + ') ';
 
 
                       })

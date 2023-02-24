@@ -9,7 +9,6 @@ import { __experimentalInputControl as InputControl, ColorPalette } from '@wordp
 
 
 function Html(props) {
-
   if (!props.warn) {
     return null;
   }
@@ -21,7 +20,6 @@ function Html(props) {
     px: { "label": "PX", "value": "px" },
     em: { "label": "EM", "value": "em" },
     rem: { "label": "REM", "value": "rem" },
-    auto: { "label": "AUTO", "value": "auto" },
     "%": { "label": "%", "value": "%" },
 
     cm: { "label": "CM", "value": "cm" },
@@ -39,8 +37,22 @@ function Html(props) {
 
   }
 
-  var widthValX = props.val == undefined ? 10 : props.val.match(/\d+/g)[0];
-  var widthUnitX = (props.val == undefined || props.val.match(/[a-zA-Z%]+/g) == undefined) ? 'px' : props.val.match(/[a-zA-Z%]+/g)[0];
+  console.log(props.val);
+  console.log(typeof props.val);
+
+  if (typeof props.val == 'object') {
+    var valZ = props.val.val + props.val.unit;
+
+  } else {
+    var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
+
+  }
+
+  console.log(valZ);
+
+
+  var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
@@ -48,29 +60,43 @@ function Html(props) {
 
   return (
 
-    <div className='flex mt-4'>
-      <InputControl
-        value={widthVal}
-        type="number"
-        onChange={(newVal) => {
+    <div className='flex justify-between'>
 
-          setwidthVal(newVal);
-          props.onChange(newVal + widthUnit, 'lineHeight');
+      {widthUnit != 'auto' && (
+        <InputControl
+          value={widthVal}
+          type="number"
+          disabled={(widthUnit == 'auto') ? true : false}
+          onChange={(newVal) => {
 
-        }}
-      />
+            //console.log(newVal);
+            setwidthVal(newVal);
+
+            if (widthUnit == 'auto') {
+              props.onChange(widthUnit, 'lineHeight');
+            } else {
+              props.onChange(newVal + widthUnit, 'lineHeight');
+            }
+
+
+
+
+          }}
+        />
+      )}
+
       <div>
 
         <Dropdown
           position="bottom"
           renderToggle={({ isOpen, onToggle }) => (
             <Button
-              title="Letter Spacing"
+              title=""
 
               onClick={onToggle}
               aria-expanded={isOpen}
             >
-              <div className=" ">{props.val ? unitArgs[widthUnit].label : 'Select...'}</div>
+              <div className=" ">{valZ ? unitArgs[widthUnit].label : 'Select...'}</div>
 
 
             </Button>
@@ -86,8 +112,15 @@ function Html(props) {
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                   setwidthUnit(x.value);
-                  props.onChange(widthVal + x.value, 'lineHeight');
 
+
+                  if (x.value == 'auto') {
+                    props.onChange(x.value, 'lineHeight');
+
+                  } else {
+                    props.onChange(widthVal + x.value, 'lineHeight');
+
+                  }
 
                 }}>
 
@@ -107,6 +140,9 @@ function Html(props) {
       </div>
 
 
+
+
+
     </div>
 
 
@@ -115,6 +151,7 @@ function Html(props) {
   )
 
 }
+
 
 class PGcssLineHeight extends Component {
 
@@ -131,7 +168,6 @@ class PGcssLineHeight extends Component {
   }
 
 
-
   render() {
 
     var {
@@ -140,7 +176,6 @@ class PGcssLineHeight extends Component {
 
 
     } = this.props;
-
 
 
 

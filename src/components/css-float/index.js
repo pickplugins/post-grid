@@ -21,7 +21,14 @@ class PGcssFloat extends Component {
       none: { "label": "None", "value": "none" },
       left: { "label": "Left", "value": "left" },
       right: { "label": "Right", "value": "right" },
+      "inline-end": { "label": "inline-end", "value": "inline-end" },
+      "inline-start": { "label": "inline-start", "value": "inline-start" },
 
+
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
+      initial: { "label": "initial", "value": "initial" },
+      inherit: { "label": "inherit", "value": "inherit" },
     };
 
 

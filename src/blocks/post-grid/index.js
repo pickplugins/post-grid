@@ -29,7 +29,7 @@ import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
-import { Icon, close } from '@wordpress/icons';
+import { Icon, close, settings, cloud, pencil } from '@wordpress/icons';
 
 import Typography from '../../components/typography'
 import IconToggle from '../../components/icon-toggle'
@@ -61,7 +61,13 @@ import tutorialsLinks from './tutorials-links'
 
 
 import colorsPresets from '../../colors-presets'
-import anime from 'animejs/lib/anime.es.js';
+//import anime from 'animejs/lib/anime.es.js';
+
+import PGtabs from '../../components/tabs'
+import PGtab from '../../components/tab'
+import PGCssLibrary from '../../components/css-library'
+
+
 
 
 
@@ -123,10 +129,8 @@ registerBlockType("post-grid/post-grid", {
         styles:
         {
 
-          color: { Desktop: '' },
-          bgColor: {},
           padding: { Desktop: '' },
-          margin: {}
+          margin: { Desktop: '' }
         },
       },
     },
@@ -139,17 +143,8 @@ registerBlockType("post-grid/post-grid", {
         {
 
           color: { Desktop: '' },
-          bgColor: {},
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
           fontSize: { Desktop: '' },
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+
         },
 
       },
@@ -161,11 +156,8 @@ registerBlockType("post-grid/post-grid", {
         styles:
         {
 
-          color: { Desktop: '' },
-          bgColor: {},
-          backgroundImage: {},
           padding: { Desktop: '' },
-          margin: {}
+          margin: { Desktop: '' }
         },
 
       },
@@ -180,10 +172,8 @@ registerBlockType("post-grid/post-grid", {
         {
 
           color: { Desktop: '' },
-          bgColor: {},
-          wordBreak: {},
+          wordBreak: { Desktop: '' },
           padding: { Desktop: '' },
-          margin: {}
         },
       },
     },
@@ -196,30 +186,10 @@ registerBlockType("post-grid/post-grid", {
         styles:
         {
 
-          color: { Desktop: '' },
-          bgColor: {},
-          wordBreak: {},
+          wordBreak: { Desktop: '' },
           padding: { Desktop: '' },
-          outline: {},
-          border: {},
-          boxShadow: {},
-          borderRadius: {},
-
-
-          fontSize: { Desktop: '' },
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          letterSpacing: {}, // { val: '18', unit: 'px' }
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
-
-          fontFamily: {},
-          fontWeight: {},
         },
-        hoverStyles:
-        {
-          color: { Desktop: '' },
-          bgColor: {},
-        },
+
 
       },
     },
@@ -234,10 +204,8 @@ registerBlockType("post-grid/post-grid", {
         {
 
           color: { Desktop: '' },
-          bgColor: {},
           wordBreak: {},
           padding: { Desktop: '' },
-          margin: {}
         },
       },
     },
@@ -250,11 +218,8 @@ registerBlockType("post-grid/post-grid", {
         styles:
         {
 
-          color: { Desktop: '' },
-          bgColor: {},
-          wordBreak: {},
           padding: { Desktop: '' },
-          margin: {}
+          margin: { Desktop: '' }
         },
       },
     },
@@ -271,15 +236,19 @@ registerBlockType("post-grid/post-grid", {
 
         styles:
         {
-          gridTemplateColumns: {},
+          gridTemplateColumns: {
+
+            Tablet: [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }],
+            Mobile: [{ "val": 1, "unit": "fr" }],
+
+          },
           gridTemplateRows: {},
           colGap: {},
           rowGap: {},
 
           color: { Desktop: '' },
-          bgColor: {},
           padding: { Desktop: '' },
-          margin: {}
+          margin: { Desktop: '' }
         },
 
 
@@ -305,26 +274,11 @@ registerBlockType("post-grid/post-grid", {
         styles:
         {
           textAlign: { "Desktop": "center" },
-          color: { Desktop: '' },
-          bgColor: {},
           padding: { Desktop: '' },
           margin: { Desktop: '' },
-
           fontSize: { Desktop: '' },
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
-        },
 
-        hoverStyles:
-        {
-          color: { Desktop: '' },
-          bgColor: {},
         },
-
 
       },
     },
@@ -341,23 +295,11 @@ registerBlockType("post-grid/post-grid", {
 
           display: { "Desktop": "inline-block" },
           color: { "Desktop": "#18978F" },
-          bgColor: { "Desktop": "#9DD6DF" },
-          padding: { "Desktop": { "top": "10px", "right": "10px", "bottom": "10px", "left": "10px" } },
-          margin: { "Desktop": { "top": "5px", "right": "5px", "bottom": "5px", "left": "5px" } },
           fontSize: { Desktop: '' },
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+
         },
 
-        hoverStyles:
-        {
-          color: { Desktop: '' },
-          bgColor: {},
-        },
+
 
       },
     },
@@ -373,24 +315,14 @@ registerBlockType("post-grid/post-grid", {
 
           display: {},
           color: { Desktop: '' },
-          bgColor: {},
           padding: { Desktop: '' },
           margin: { Desktop: '' },
 
           fontSize: { Desktop: '' },
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          letterSpacing: {}, // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+
         },
 
-        hoverStyles:
-        {
-          color: { Desktop: '' },
-          bgColor: {},
-        },
+
       },
     },
 
@@ -486,7 +418,7 @@ registerBlockType("post-grid/post-grid", {
     const searchWrapSelector = blockClass + ' .search';
     const lazyloadWrapSelector = blockClass + ' .lazyLoad';
     const spinnerSelector = blockClass + ' .spinner';
-    const paginationWrapSelector = blockClass + ' .pagination';
+    const paginationSelector = blockClass + ' .pagination';
     const paginationItemSelector = blockClass + ' .pagination .page-numbers';
     const paginationItemActiveSelector = blockClass + ' .pagination .page-numbers.current';
 
@@ -528,6 +460,439 @@ registerBlockType("post-grid/post-grid", {
       ['post-grid/post-title', {}],
       ['post-grid/read-more', {}],
     ];
+
+
+
+    function onPickCssLibraryContainer(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        container[sudoScource] = sudoScourceArgs;
+      })
+
+      var containerX = Object.assign({}, container);
+      setAttributes({ container: containerX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, containerSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+    function onChangeStyleContainer(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, container);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ container: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, containerSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+    }
+
+
+    function onRemoveStyleContainer(sudoScource, key) {
+
+      var object = myStore.deletePropertyDeep(container, [sudoScource, key, breakPointX]);
+      setAttributes({ container: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, containerSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+    }
+
+
+    function onAddStyleContainer(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, container);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ container: object });
+
+
+
+    }
+
+
+
+
+
+    function onPickCssLibraryItemWrap(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        itemWrap[sudoScource] = sudoScourceArgs;
+      })
+
+      var itemWrapX = Object.assign({}, itemWrap);
+      setAttributes({ itemWrap: itemWrapX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, loopItemSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+    function onChangeStyleItemWrap(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, itemWrap);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ itemWrap: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, loopItemSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+    }
+
+
+    function onRemoveStyleItemWrap(sudoScource, key) {
+
+      var object = myStore.deletePropertyDeep(itemWrap, [sudoScource, key, breakPointX]);
+      setAttributes({ itemWrap: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, loopItemSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+    }
+
+
+    function onAddStyleItemWrap(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, itemWrap);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ itemWrap: object });
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function onPickCssLibraryPagination(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        pagination[sudoScource] = sudoScourceArgs;
+      })
+
+      var paginationX = Object.assign({}, pagination);
+      setAttributes({ pagination: paginationX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, paginationSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+    function onChangeStylePagination(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, pagination);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ pagination: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, paginationSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+    }
+
+
+    function onRemoveStylePagination(sudoScource, key) {
+
+      var object = myStore.deletePropertyDeep(pagination, [sudoScource, key, breakPointX]);
+      setAttributes({ pagination: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, paginationSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+    }
+
+
+    function onAddStylePagination(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, pagination);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ pagination: object });
+
+
+
+    }
+
+
+    function onPickCssLibraryPaginationItem(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        paginationItem[sudoScource] = sudoScourceArgs;
+      })
+
+      var paginationX = Object.assign({}, paginationItem);
+      setAttributes({ paginationItem: paginationX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, paginationItemSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+    function onChangeStylePaginationItem(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, paginationItem);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ paginationItem: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, paginationItemSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+    }
+
+
+    function onRemoveStylePaginationItem(sudoScource, key) {
+
+      var object = myStore.deletePropertyDeep(paginationItem, [sudoScource, key, breakPointX]);
+      setAttributes({ paginationItem: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, paginationItemSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+    }
+
+
+    function onAddStylePaginationItem(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, paginationItem);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ paginationItem: object });
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -595,7 +960,7 @@ registerBlockType("post-grid/post-grid", {
 
 
       blockCssY.items[loopItemSelector] = (blockCssY.items[loopItemSelector] != undefined) ? blockCssY.items[loopItemSelector] : {};
-      blockCssY.items[paginationWrapSelector] = (blockCssY.items[paginationWrapSelector] != undefined) ? blockCssY.items[paginationWrapSelector] : {};
+      blockCssY.items[paginationSelector] = (blockCssY.items[paginationSelector] != undefined) ? blockCssY.items[paginationSelector] : {};
 
 
       var wordBreak = (blockCssY.items[loopItemSelector]['word-break'] != undefined) ? blockCssY.items[loopItemSelector]['word-break'] : {};
@@ -604,7 +969,7 @@ registerBlockType("post-grid/post-grid", {
       blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'word-break': wordBreak };
 
 
-      blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'text-align': { "Desktop": "center" } };
+      blockCssY.items[paginationSelector] = { ...blockCssY.items[paginationSelector], 'text-align': { "Desktop": "center" } };
 
       blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'display': { "Desktop": "inline-block" } };
       blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'cursor': { "Desktop": "pointer" } };
@@ -989,22 +1354,10 @@ registerBlockType("post-grid/post-grid", {
     const [activeBlockContextId, setActiveBlockContextId] = useState();
 
 
-    function PostLoopItem() {
-
-
-      return (
-
-        <div> </div>
-
-      )
-
-    }
 
 
 
-    function generateDateQueryArgs(_args) {
 
-    }
 
     function onChangeBreakPoint(x, _index) {
 
@@ -1024,578 +1377,18 @@ registerBlockType("post-grid/post-grid", {
     }
 
 
-    function containerPaddingControl(nextValues) {
 
 
-      var responsive = container.styles.padding;
-      responsive[breakPointX] = nextValues;
 
 
-      var styles = { ...container.styles, padding: responsive };
-      setAttributes({ container: { ...container, styles: styles } });
 
 
-      var itemsX = { ...blockCssY.items };
 
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
 
-      blockCssY.items[containerSelector] = (blockCssY.items[containerSelector] != undefined) ? blockCssY.items[containerSelector] : {};
 
-      if (nextValues.top != undefined) {
-        var paddingTop = (blockCssY.items[containerSelector]['padding-top'] != undefined) ? blockCssY.items[containerSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector], 'padding-top': paddingTop };
-      }
 
 
-      if (nextValues.right != undefined) {
-        var paddingRight = (blockCssY.items[containerSelector]['padding-right'] != undefined) ? blockCssY.items[containerSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector], 'padding-right': paddingRight };
-      }
 
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = (blockCssY.items[containerSelector]['padding-bottom'] != undefined) ? blockCssY.items[containerSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector], 'padding-bottom': paddingBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = (blockCssY.items[containerSelector]['padding-left'] != undefined) ? blockCssY.items[containerSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector], 'padding-left': paddingLeft };
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-    }
-
-
-    function containerMarginControl(nextValues) {
-
-      var responsive = container.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-
-      var styles = { ...container.styles, margin: responsive };
-      setAttributes({ container: { ...container, styles: styles } });
-
-
-
-
-      var itemsX = { ...blockCssY.items };
-
-
-
-
-      blockCssY.items[containerSelector] = (blockCssY.items[containerSelector] != undefined) ? blockCssY.items[containerSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[containerSelector]['margin-top'] != undefined) ? blockCssY.items[containerSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector], 'margin-top': marginTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[containerSelector]['margin-right'] !== undefined) ? blockCssY.items[containerSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector], 'margin-right': marginRight };
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[containerSelector]['margin-bottom'] !== undefined) ? blockCssY.items[containerSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[containerSelector]['margin-left'] !== undefined) ? blockCssY.items[containerSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector], 'margin-left': marginLeft };
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-    }
-
-
-
-
-
-    function paginationPaddingControl(nextValues) {
-
-
-      var responsive = pagination.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...pagination.styles, padding: responsive };
-      setAttributes({ pagination: { ...pagination, styles: styles } });
-
-
-      var itemsX = { ...blockCssY.items };
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-      blockCssY.items[paginationWrapSelector] = (blockCssY.items[paginationWrapSelector] != undefined) ? blockCssY.items[paginationWrapSelector] : {};
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[paginationWrapSelector]['padding-top'] != undefined) ? blockCssY.items[paginationWrapSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-top': paddingTop };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-top': paddingTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[paginationWrapSelector]['padding-right'] != undefined) ? blockCssY.items[paginationWrapSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-right': paddingRight };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-right': paddingRight };
-
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var paddingBottom = (blockCssY.items[paginationWrapSelector]['padding-bottom'] != undefined) ? blockCssY.items[paginationWrapSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-bottom': paddingBottom };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-bottom': paddingBottom };
-
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[paginationWrapSelector]['padding-left'] != undefined) ? blockCssY.items[paginationWrapSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-left': paddingLeft };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-left': paddingLeft };
-
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-    }
-
-
-    function paginationItemPaddingControl(nextValues) {
-
-
-      var responsive = paginationItem.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...paginationItem.styles, padding: responsive };
-      setAttributes({ paginationItem: { ...paginationItem, styles: styles } });
-
-
-      var itemsX = { ...blockCssY.items };
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-      blockCssY.items[paginationItemSelector] = (blockCssY.items[paginationItemSelector] != undefined) ? blockCssY.items[paginationItemSelector] : {};
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[paginationItemSelector]['padding-top'] != undefined) ? blockCssY.items[paginationItemSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-top': paddingTop };
-        //itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-top': paddingTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[paginationItemSelector]['padding-right'] != undefined) ? blockCssY.items[paginationItemSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-right': paddingRight };
-        //itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-right': paddingRight };
-
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var paddingBottom = (blockCssY.items[paginationItemSelector]['padding-bottom'] != undefined) ? blockCssY.items[paginationItemSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-bottom': paddingBottom };
-        //itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-bottom': paddingBottom };
-
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[paginationItemSelector]['padding-left'] != undefined) ? blockCssY.items[paginationItemSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-left': paddingLeft };
-        //itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-left': paddingLeft };
-
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-    }
-
-    function onChangeItemBorder(nextValues) {
-
-
-
-      var width = (nextValues.width == undefined) ? '0px' : nextValues.width;
-      var style = (nextValues.style == undefined) ? 'solid' : nextValues.style;
-      var color = (nextValues.color == undefined) ? '#ddd' : nextValues.color;
-
-
-      var responsive = itemWrap.styles.border;
-      responsive[breakPointX] = width + ' ' + style + ' ' + color;
-
-
-      var styles = { ...itemWrap.styles, border: responsive };
-      setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
-
-
-
-    }
-
-
-
-    function itemwrapPaddingControl(nextValues) {
-
-
-      var responsive = itemWrap.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...itemWrap.styles, padding: responsive };
-      setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
-
-
-      var itemsX = { ...blockCssY.items };
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-      blockCssY.items[loopItemSelector] = (blockCssY.items[loopItemSelector] != undefined) ? blockCssY.items[loopItemSelector] : {};
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[loopItemSelector]['padding-top'] != undefined) ? blockCssY.items[loopItemSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'padding-top': paddingTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[loopItemSelector]['padding-right'] != undefined) ? blockCssY.items[loopItemSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'padding-right': paddingRight };
-
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var paddingBottom = (blockCssY.items[loopItemSelector]['padding-bottom'] != undefined) ? blockCssY.items[loopItemSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'padding-bottom': paddingBottom };
-
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[loopItemSelector]['padding-left'] != undefined) ? blockCssY.items[loopItemSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'padding-left': paddingLeft };
-
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-    }
-
-
-    function paginationMarginControl(nextValues) {
-
-      var responsive = pagination.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-
-      var styles = { ...pagination.styles, margin: responsive };
-      setAttributes({ pagination: { ...pagination, styles: styles } });
-
-
-
-
-      var itemsX = { ...blockCssY.items };
-
-
-
-
-      blockCssY.items[paginationWrapSelector] = (blockCssY.items[paginationWrapSelector] != undefined) ? blockCssY.items[paginationWrapSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[paginationWrapSelector]['margin-top'] != undefined) ? blockCssY.items[paginationWrapSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-top': marginTop };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-top': marginTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[paginationWrapSelector]['margin-right'] !== undefined) ? blockCssY.items[paginationWrapSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-right': marginRight };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-right': marginRight };
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[paginationWrapSelector]['margin-bottom'] !== undefined) ? blockCssY.items[paginationWrapSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-bottom': marginBottom };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[paginationWrapSelector]['margin-left'] !== undefined) ? blockCssY.items[paginationWrapSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-left': marginLeft };
-        //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-left': marginLeft };
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      //setAttributes({ blockCssY: { items: itemsX } });
-
-    }
-
-
-
-
-    function paginationItemMarginControl(nextValues) {
-
-      var responsive = paginationItem.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-
-      var styles = { ...paginationItem.styles, margin: responsive };
-      setAttributes({ paginationItem: { ...paginationItem, styles: styles } });
-
-
-
-
-      var itemsX = { ...blockCssY.items };
-
-
-
-
-      blockCssY.items[paginationItemSelector] = (blockCssY.items[paginationItemSelector] != undefined) ? blockCssY.items[paginationItemSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[paginationItemSelector]['margin-top'] != undefined) ? blockCssY.items[paginationItemSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'margin-top': marginTop };
-
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[paginationItemSelector]['margin-right'] !== undefined) ? blockCssY.items[paginationItemSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'margin-right': marginRight };
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[paginationItemSelector]['margin-bottom'] !== undefined) ? blockCssY.items[paginationItemSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'margin-bottom': marginBottom };
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[paginationItemSelector]['margin-left'] !== undefined) ? blockCssY.items[paginationItemSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'margin-left': marginLeft };
-
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-    }
-
-
-    function itemwrapMarginControl(nextValues) {
-
-      var responsive = itemWrap.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-
-      var styles = { ...itemWrap.styles, margin: responsive };
-      setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
-
-
-
-
-      var itemsX = { ...blockCssY.items };
-
-
-
-
-      blockCssY.items[loopItemSelector] = (blockCssY.items[loopItemSelector] != undefined) ? blockCssY.items[loopItemSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[loopItemSelector]['margin-top'] != undefined) ? blockCssY.items[loopItemSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'margin-top': marginTop };
-
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[loopItemSelector]['margin-right'] !== undefined) ? blockCssY.items[loopItemSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'margin-right': marginRight };
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[loopItemSelector]['margin-bottom'] !== undefined) ? blockCssY.items[loopItemSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'margin-bottom': marginBottom };
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[loopItemSelector]['margin-left'] !== undefined) ? blockCssY.items[loopItemSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'margin-left': marginLeft };
-
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-    }
 
 
 
@@ -1897,199 +1690,6 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-    function onChangePaginationTypo(typoX) {
-
-      setAttributes({ paginationItem: { ...paginationItem, styles: typoX } });
-
-      var newValuesObjX = {};
-
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'font-family': typoX.fontFamily };
-
-      }
-
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-
-        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[paginationItemSelector]['font-size'] != undefined) ? blockCssY.items[paginationItemSelector]['font-size'] : {};
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'font-size': fontSizeX };
-
-      }
-
-
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-
-        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[paginationItemSelector]['line-height'] != undefined) ? blockCssY.items[paginationItemSelector]['line-height'] : {};
-
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'line-height': lineHeightX };
-      }
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-
-        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
-
-
-
-        var letterSpacingX = (blockCssY.items[paginationItemSelector]['letter-spacing'] != undefined) ? blockCssY.items[paginationItemSelector]['letter-spacing'] : {};
-
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'letter-spacing': letterSpacingX };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'font-weight': typoX.fontWeight };
-
-      }
-
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-
-        var str = {};
-
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
-        str[breakPointX] = textDecorationXStr;
-
-        //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'text-decoration': str };
-
-      }
-      if (typoX.textTransform[breakPointX] != undefined) {
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'text-transform': typoX.textTransform };
-
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-
-
-    function onChangeItemWrapTypo(typoX) {
-
-      setAttributes({ itemWrap: { ...itemWrap, styles: typoX } });
-
-      var newValuesObjX = {};
-
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'font-family': typoX.fontFamily };
-
-      }
-
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-
-        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[loopItemSelector]['font-size'] != undefined) ? blockCssY.items[loopItemSelector]['font-size'] : {};
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'font-size': fontSizeX };
-
-      }
-
-
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-
-        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[loopItemSelector]['line-height'] != undefined) ? blockCssY.items[loopItemSelector]['line-height'] : {};
-
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'line-height': lineHeightX };
-      }
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-
-        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
-
-
-
-        var letterSpacingX = (blockCssY.items[loopItemSelector]['letter-spacing'] != undefined) ? blockCssY.items[loopItemSelector]['letter-spacing'] : {};
-
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'letter-spacing': letterSpacingX };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'font-weight': typoX.fontWeight };
-
-      }
-
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-
-        var str = {};
-
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
-        str[breakPointX] = textDecorationXStr;
-
-        //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'text-decoration': str };
-
-      }
-      if (typoX.textTransform[breakPointX] != undefined) {
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'text-transform': typoX.textTransform };
-
-
-      }
-
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'font-family': typoX.fontFamily };
-
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'font-weight': typoX.fontWeight };
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
 
     function flatObject(block, flatObj, flatObjCss) {
 
@@ -2451,34 +2051,6 @@ registerBlockType("post-grid/post-grid", {
 
     }
 
-
-
-
-    function generateQueryFieldAuthorIn(_xx) {
-
-
-      var xxts = [12, 24, 32];
-
-
-      var xxt = [1, 2, 3].concat(xxts);
-
-
-      return (
-        xxt.map((x) => {
-          return (
-            <div>{x}</div>
-          )
-        })
-      )
-
-
-
-
-
-
-
-
-    }
 
 
 
@@ -4443,206 +4015,37 @@ registerBlockType("post-grid/post-grid", {
               <PanelBody title="Loop Item" initialOpen={false} >
 
 
-                <label for="">Text Color</label>
 
-                <ColorPalette
-                  color={itemWrap.styles.color[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
 
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(itemWrap.styles.color).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = itemWrap.styles.color;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...itemWrap.styles, color: newValuesObj };
-                    setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
-
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-                  }}
-                />
-
-
-
-                <label for="">Background Color</label>
-
-
-                <ColorPalette
-                  color={itemWrap.styles.bgColor[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
-
-                    var newValuesObj = {};
-
-
-                    if (Object.keys(itemWrap.styles.bgColor).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = itemWrap.styles.bgColor;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...itemWrap.styles, bgColor: newValuesObj };
-                    setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
-
-
-
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'background-color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-
-                  }}
-                />
-
-
-
-                <PanelRow>
-                  <label>Padding</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=''
-                  values={itemWrap.styles.padding[breakPointX]}
-                  onChange={(nextValues) => { itemwrapPaddingControl(nextValues) }}
-                />
-
-
-
-
-
-                {/* <PanelRow>
-                  <label>Margin</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=""
-                  values={itemWrap.styles.margin[breakPointX]}
-                  onChange={(nextValues) => { itemwrapMarginControl(nextValues) }}
-                /> */}
-
-
-
-
-
-                <PanelRow>
-                  <label>Border</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-
-                <PanelRow>
-                  <PGcssBorder val={(itemWrap.styles.border != undefined) ? itemWrap.styles.border[breakPointX] : ''} onChange={(newVal => {
-
-
-                    var newValuesObj = {};
-
-                    if (Object.keys(itemWrap.styles.border).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = itemWrap.styles.border;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...itemWrap.styles, border: newValuesObj };
-                    setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
-
-                    blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'border': newValuesObj };
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                  })} />
-                </PanelRow>
-
-                <PanelRow>
-                  <label>Box Shadow</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-
-                <PanelRow>
-                  <PGcssBoxShadow val={(itemWrap.styles.boxShadow != undefined) ? itemWrap.styles.boxShadow[breakPointX] : ''} onChange={(newVal => {
-
-
-                    var newValuesObj = {};
-
-                    if (Object.keys(itemWrap.styles.boxShadow).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = itemWrap.styles.boxShadow;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...itemWrap.styles, boxShadow: newValuesObj };
-                    setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
-
-                    blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'box-shadow': newValuesObj };
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                  })} />
-                </PanelRow>
-
-
-
-                <PanelRow>
-                  <label>Border Radius</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=""
-                  values={(itemWrap.styles.borderRadius != undefined) ? itemWrap.styles.borderRadius[breakPointX] : ''}
-                  onChange={(nextValues) => {
-
-
-                    var newValuesObj = {};
-
-                    if (Object.keys(itemWrap.styles.borderRadius).length == 0) {
-                      newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
-                    } else {
-                      newValuesObj = itemWrap.styles.borderRadius;
-                      newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;;
-                    }
-
-                    var styles = { ...itemWrap.styles, borderRadius: newValuesObj };
-                    setAttributes({ itemWrap: { ...itemWrap, styles: styles } });
-
-                    blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector], 'border-radius': newValuesObj };
-                    setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-
-                  }}
-                />
-
-
-
-
-                <PanelRow>
-                  <div className='font-bold'>Typography</div>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-
-                <Typography typo={itemWrap.styles} breakPointX={breakPointX} onChange={onChangeItemWrapTypo} setAttributes={setAttributes} obj={itemWrap} />
-
-
+                <PGtabs
+                  activeTab="styles"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: pencil,
+                      className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: cloud,
+                      className: 'tab-css',
+                    },
+                  ]}
+                >
+
+                  <PGtab name="styles">
+                    <PGStyles obj={itemWrap} onChange={onChangeStyleItemWrap} onAdd={onAddStyleItemWrap} onRemove={onRemoveStyleItemWrap} />
+                  </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={itemWrap} onChange={onPickCssLibraryItemWrap} />
+                  </PGtab>
+                </PGtabs>
 
 
 
@@ -4654,145 +4057,37 @@ registerBlockType("post-grid/post-grid", {
               <PanelBody title="Container" initialOpen={false}>
 
 
-                {/* <PGcssPadding val={container.styles.padding[breakPointX]} onChange={(newVal => {
+                <PGtabs
+                  activeTab="styles"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: pencil,
+                      className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: cloud,
+                      className: 'tab-css',
+                    },
+                  ]}
+                >
+
+                  <PGtab name="styles">
+                    <PGStyles obj={container} onChange={onChangeStyleContainer} onAdd={onAddStyleContainer} onRemove={onRemoveStyleContainer} />
+                  </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={container} onChange={onPickCssLibraryContainer} />
+                  </PGtab>
+                </PGtabs>
 
 
-
-
-                })} /> */}
-
-
-
-
-
-
-
-
-
-                <PanelRow>
-                  <label>Padding</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=''
-                  values={container.styles.padding[breakPointX]}
-                  onChange={(nextValues) => { containerPaddingControl(nextValues) }}
-                />
-
-                <PanelRow>
-                  <label>Margin</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-                <BoxControl
-                  label=""
-                  values={container.styles.margin[breakPointX]}
-                  onChange={(nextValues) => { containerMarginControl(nextValues) }}
-                />
-
-                <PanelRow className='my-3'>
-                  <label>Color</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                </PanelRow>
-
-                <ColorPalette
-                  value={container.styles.color[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
-                    var newValuesObj = {};
-                    if (Object.keys(container.styles.color).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = container.styles.color;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...container.styles, color: newValuesObj };
-                    setAttributes({ container: { ...container, styles: styles } });
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[containerSelector] = { ...blockCssY.items[containerSelector], 'color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-                  }}
-                />
-
-                <PanelRow className='my-3'>
-                  <label>Background Color</label>
-                  <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-                </PanelRow>
-
-                <ColorPalette
-                  value={container.styles.bgColor[breakPointX]}
-                  colors={colorsPresets}
-                  enableAlpha
-                  onChange={(newVal) => {
-                    var newValuesObj = {};
-
-                    if (Object.keys(container.styles.bgColor).length == 0) {
-                      newValuesObj[breakPointX] = newVal;
-                    } else {
-                      newValuesObj = container.styles.bgColor;
-                      newValuesObj[breakPointX] = newVal;
-                    }
-
-                    var styles = { ...container.styles, bgColor: newValuesObj };
-                    setAttributes({ container: { ...container, styles: styles } });
-
-                    var itemsX = { ...blockCssY.items };
-                    itemsX[containerSelector] = { ...blockCssY.items[containerSelector], 'background-color': newValuesObj };
-
-                    setAttributes({ blockCssY: { items: itemsX } });
-
-                  }}
-                />
-
-                <label for="">Background Image</label>
-                <img src={(container.styles.backgroundImage[breakPointX] != undefined) ? container.styles.backgroundImage[breakPointX].url : ''} alt="" />
-
-                <MediaUploadCheck>
-                  <MediaUpload
-                    onSelect={(media) => {
-                      var newValuesObj = {};
-
-                      if (Object.keys(container.styles.backgroundImage).length == 0) {
-                        newValuesObj[breakPointX] = { id: media.id, url: media.url };
-                      } else {
-                        newValuesObj = container.styles.backgroundImage;
-                        newValuesObj[breakPointX] = { id: media.id, url: media.url };
-                      }
-
-                      var styles = { ...container.styles, backgroundImage: newValuesObj };
-                      setAttributes({ container: { ...container, styles: styles } });
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[containerSelector] = { ...blockCssY.items[containerSelector], 'background-image': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-                    }
-
-
-                    }
-                    onClose={() => {
-                    }
-
-
-                    }
-
-                    allowedTypes={ALLOWED_MEDIA_TYPES}
-                    value={container.styles.backgroundImage[breakPointX]}
-                    render={({ open }) => (
-
-                      <Button onClick={open}>Open Media Library</Button>
-
-
-                    )}
-                  />
-                </MediaUploadCheck>
 
 
 
@@ -4802,6 +4097,10 @@ registerBlockType("post-grid/post-grid", {
 
 
               <PanelBody title="Pagination" initialOpen={false} >
+
+
+
+
 
                 <PanelRow className='mb-4'>
                   <label for="">Pagination Type</label>
@@ -4821,16 +4120,19 @@ registerBlockType("post-grid/post-grid", {
                 {(pagination.options.type == 'normal' || pagination.options.type == 'ajax') && (
 
                   <>
-                    <label for="">Max Number of Pagination</label>
-                    <InputControl
-                      value={pagination.options.maxPageNum}
-                      onChange={(newVal) => {
+                    <PanelRow>
+                      <label for="">Max Number of Pagination</label>
+                      <InputControl
+                        value={pagination.options.maxPageNum}
+                        onChange={(newVal) => {
 
-                        var options = { ...pagination.options, maxPageNum: newVal };
-                        setAttributes({ pagination: { ...pagination, options: options } });
+                          var options = { ...pagination.options, maxPageNum: newVal };
+                          setAttributes({ pagination: { ...pagination, options: options } });
 
-                      }}
-                    />
+                        }}
+                      />
+                    </PanelRow>
+
                   </>
                 )}
 
@@ -4838,27 +4140,34 @@ registerBlockType("post-grid/post-grid", {
 
                 {(pagination.options.type == 'normal' || pagination.options.type == 'ajax' || pagination.options.type == 'next_previous') && (
                   <>
+                    <PanelRow>
+                      <label for="">Previous Text</label>
+                      <InputControl
+                        value={pagination.options.prevText}
+                        onChange={(newVal) => {
 
-                    <label for="">Previous Text</label>
-                    <InputControl
-                      value={pagination.options.prevText}
-                      onChange={(newVal) => {
+                          var options = { ...pagination.options, prevText: newVal };
+                          setAttributes({ pagination: { ...pagination, options: options } });
+                        }}
+                      />
+                    </PanelRow>
+                    <PanelRow>
+                      <label for="">Next Text</label>
+                      <InputControl
+                        value={pagination.options.nextText}
+                        onChange={(newVal) => {
 
-                        var options = { ...pagination.options, prevText: newVal };
-                        setAttributes({ pagination: { ...pagination, options: options } });
-                      }}
-                    />
+                          var options = { ...pagination.options, nextText: newVal };
+                          setAttributes({ pagination: { ...pagination, options: options } });
+                        }}
+                      />
+                    </PanelRow>
 
 
-                    <label for="">Next Text</label>
-                    <InputControl
-                      value={pagination.options.nextText}
-                      onChange={(newVal) => {
 
-                        var options = { ...pagination.options, nextText: newVal };
-                        setAttributes({ pagination: { ...pagination, options: options } });
-                      }}
-                    />
+
+
+
                   </>
 
                 )}
@@ -4869,39 +4178,51 @@ registerBlockType("post-grid/post-grid", {
                 {(pagination.options.type == 'loadmore' || pagination.options.type == 'infinite') && (
 
                   <>
-                    <label for="">Load More Text</label>
 
-                    <InputControl
-                      value={pagination.options.loadMoreText}
-                      onChange={(newVal) => {
-                        var options = { ...pagination.options, loadMoreText: newVal };
-                        setAttributes({ pagination: { ...pagination, options: options } });
-                      }
-                      }
-                    />
+                    <PanelRow>
+                      <label for="">Load More Text</label>
+
+                      <InputControl
+                        value={pagination.options.loadMoreText}
+                        onChange={(newVal) => {
+                          var options = { ...pagination.options, loadMoreText: newVal };
+                          setAttributes({ pagination: { ...pagination, options: options } });
+                        }
+                        }
+                      />
+                    </PanelRow>
 
 
-                    <label for="">No Posts Text</label>
 
-                    <InputControl
-                      value={pagination.options.noMorePosts}
-                      onChange={(newVal) => {
-                        var options = { ...pagination.options, noMorePosts: newVal };
-                        setAttributes({ pagination: { ...pagination, options: options } });
-                      }
-                      }
-                    />
 
-                    <label for="">Loading Text</label>
+                    <PanelRow>
+                      <label for="">No Posts Text</label>
 
-                    <InputControl
-                      value={pagination.options.loadingText}
-                      onChange={(newVal) => {
-                        var options = { ...pagination.options, loadingText: newVal };
-                        setAttributes({ pagination: { ...pagination, options: options } });
-                      }
-                      }
-                    />
+                      <InputControl
+                        value={pagination.options.noMorePosts}
+                        onChange={(newVal) => {
+                          var options = { ...pagination.options, noMorePosts: newVal };
+                          setAttributes({ pagination: { ...pagination, options: options } });
+                        }
+                        }
+                      />
+                    </PanelRow>
+                    <PanelRow>
+                      <label for="">Loading Text</label>
+
+                      <InputControl
+                        value={pagination.options.loadingText}
+                        onChange={(newVal) => {
+                          var options = { ...pagination.options, loadingText: newVal };
+                          setAttributes({ pagination: { ...pagination, options: options } });
+                        }
+                        }
+                      />
+                    </PanelRow>
+
+
+
+
 
                     <PanelRow>
                       <label for="">Loading Icon</label>
@@ -4921,135 +4242,38 @@ registerBlockType("post-grid/post-grid", {
 
                 )}
 
-                <PanelBody title="Pagination Wrapper" initialOpen={false} >
-
-                  <label for="">Text Color</label>
-
-                  <ColorPalette
-                    color={pagination.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-                      var newValuesObj = {};
+                <PanelBody className="my-4" title="Pagination Wrapper" initialOpen={false} >
 
 
-                      if (Object.keys(pagination.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = pagination.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
+                  <PGtabs
+                    activeTab="styles"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
 
-                      var styles = { ...pagination.styles, color: newValuesObj };
-                      setAttributes({ pagination: { ...pagination, styles: styles } });
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: pencil,
+                        className: 'tab-style',
+                      },
+                      {
+                        name: 'css',
+                        title: 'CSS Library',
+                        icon: cloud,
+                        className: 'tab-css',
+                      },
+                    ]}
+                  >
 
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-                    }}
-                  />
-
-
-
-                  <label for="">Background Color</label>
-
-
-                  <ColorPalette
-                    color={pagination.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(pagination.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = pagination.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...pagination.styles, bgColor: newValuesObj };
-                      setAttributes({ pagination: { ...pagination, styles: styles } });
-
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'background-color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-
-
-                    }}
-                  />
-
-
-
-
-
-                  <PanelRow>
-                    <label>Text Align</label>
-                    <PGcssTextAlign val={pagination.styles.textAlign[breakPointX]} onChange={(newVal => {
-
-
-                      var newValuesObj = {};
-
-                      if (Object.keys(pagination.styles.textAlign).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = pagination.styles.textAlign;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...pagination.styles, textAlign: newValuesObj };
-                      setAttributes({ pagination: { ...pagination, styles: styles } });
-
-                      blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'text-align': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-
-                    })} />
-                  </PanelRow>
-
-
-
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=''
-                    values={pagination.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paginationPaddingControl(nextValues) }}
-                  />
-
-
-
-
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={pagination.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { paginationMarginControl(nextValues) }}
-                  />
-
+                    <PGtab name="styles">
+                      <PGStyles obj={pagination} onChange={onChangeStylePagination} onAdd={onAddStylePagination} onRemove={onRemoveStylePagination} />
+                    </PGtab>
+                    <PGtab name="css">
+                      <PGCssLibrary blockId={blockId} obj={pagination} onChange={onPickCssLibraryPagination} />
+                    </PGtab>
+                  </PGtabs>
 
                 </PanelBody>
 
@@ -5057,152 +4281,35 @@ registerBlockType("post-grid/post-grid", {
                 <PanelBody title="Pagination Items" initialOpen={false} >
 
 
-                  <label for="">Text Color</label>
+                  <PGtabs
+                    activeTab="styles"
+                    orientation="horizontal"
+                    activeClass="active-tab"
+                    onSelect={(tabName) => { }}
+                    tabs={[
 
-                  <ColorPalette
-                    color={paginationItem.styles.color[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
+                      {
+                        name: 'styles',
+                        title: 'Styles',
+                        icon: pencil,
+                        className: 'tab-style',
+                      },
+                      {
+                        name: 'css',
+                        title: 'CSS Library',
+                        icon: cloud,
+                        className: 'tab-css',
+                      },
+                    ]}
+                  >
 
-                      var newValuesObj = {};
-
-
-                      if (Object.keys(paginationItem.styles.color).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = paginationItem.styles.color;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...paginationItem.styles, color: newValuesObj };
-                      setAttributes({ paginationItem: { ...paginationItem, styles: styles } });
-
-
-
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-
-
-                    }}
-                  />
-
-
-                  <label for="">Background Color</label>
-                  <ColorPalette
-                    color={paginationItem.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-                      var newValuesObj = {};
-
-                      if (Object.keys(paginationItem.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = paginationItem.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...paginationItem.styles, bgColor: newValuesObj };
-                      setAttributes({ paginationItem: { ...paginationItem, styles: styles } });
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'background-color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-                    }}
-                  />
-
-
-
-                  <label for="">Active Background Color</label>
-                  <ColorPalette
-                    color={paginationItemActive.styles.bgColor[breakPointX]}
-                    colors={colorsPresets}
-                    enableAlpha
-                    onChange={(newVal) => {
-                      var newValuesObj = {};
-
-                      if (Object.keys(paginationItemActive.styles.bgColor).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = paginationItemActive.styles.bgColor;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...paginationItemActive.styles, bgColor: newValuesObj };
-                      setAttributes({ paginationItemActive: { ...paginationItemActive, styles: styles } });
-
-                      var itemsX = { ...blockCssY.items };
-                      itemsX[paginationItemActiveSelector] = { ...blockCssY.items[paginationItemActiveSelector], 'background-color': newValuesObj };
-
-                      setAttributes({ blockCssY: { items: itemsX } });
-                    }}
-                  />
-
-
-                  <PanelRow>
-                    <label>Display</label>
-                    <PGcssDisplay val={paginationItem.styles.display[breakPointX]} onChange={(newVal => {
-
-
-                      var newValuesObj = {};
-
-                      if (Object.keys(paginationItem.styles.display).length == 0) {
-                        newValuesObj[breakPointX] = newVal;
-                      } else {
-                        newValuesObj = paginationItem.styles.display;
-                        newValuesObj[breakPointX] = newVal;
-                      }
-
-                      var styles = { ...paginationItem.styles, display: newValuesObj };
-                      setAttributes({ paginationItem: { ...paginationItem, styles: styles } });
-
-                      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'display': newValuesObj };
-                      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-                    })} />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label>Padding</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=''
-                    values={paginationItem.styles.padding[breakPointX]}
-                    onChange={(nextValues) => { paginationItemPaddingControl(nextValues) }}
-                  />
-
-
-
-
-
-                  <PanelRow>
-                    <label>Margin</label>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-                  <BoxControl
-                    label=""
-                    values={paginationItem.styles.margin[breakPointX]}
-                    onChange={(nextValues) => { paginationItemMarginControl(nextValues) }}
-                  />
-
-
-
-
-
-                  <PanelRow>
-                    <div className='font-bold'>Typography</div>
-                    <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-                  </PanelRow>
-
-                  <Typography typo={paginationItem.styles} breakPointX={breakPointX} onChange={onChangePaginationTypo} setAttributes={setAttributes} obj={paginationItem} />
-
-
+                    <PGtab name="styles">
+                      <PGStyles obj={paginationItem} onChange={onChangeStylePaginationItem} onAdd={onAddStylePaginationItem} onRemove={onRemoveStylePaginationItem} />
+                    </PGtab>
+                    <PGtab name="css">
+                      <PGCssLibrary blockId={blockId} obj={paginationItem} onChange={onPickCssLibraryPaginationItem} />
+                    </PGtab>
+                  </PGtabs>
 
 
 

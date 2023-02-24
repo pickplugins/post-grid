@@ -29,7 +29,7 @@ class PGcssDisplay extends Component {
       'inline-grid': { "label": "inline-grid", "value": "inline-grid" },
       'inline-table': { "label": "inline-table", "value": "inline-table" },
       'list-item': { "label": "list-item", "value": "list-item" },
-      'run-in': { "label": "run-in", "value": "run-in" },
+      // 'run-in': { "label": "run-in", "value": "run-in" },
       table: { "label": "table", "value": "table" },
       'table-caption': { "label": "table-caption", "value": "table-caption" },
       'table-column-group': { "label": "table-column-group", "value": "table-column-group" },
@@ -39,8 +39,13 @@ class PGcssDisplay extends Component {
       'table-cell': { "label": "table-cell", "value": "table-cell" },
       'table-column': { "label": "table-column", "value": "table-column" },
       'table-row': { "label": "table-row", "value": "table-row" },
+      'flow-root': { "label": "flow-root", "value": "flow-root" },
+      'inline-grid': { "label": "inline-grid", "value": "inline-grid" },
+
       initial: { "label": "initial", "value": "initial" },
       inherit: { "label": "inherit", "value": "inherit" },
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
 
 
 

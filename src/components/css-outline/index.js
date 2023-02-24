@@ -15,7 +15,7 @@ function Html(props) {
     return null;
   }
 
-  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '1px solid 000000' : props.val;
+  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '1px solid #000000' : props.val;
 
 
   var valParts = (valZ != undefined) ? valZ.split(" ") : ['1px', 'solid', '#000000'];
@@ -55,8 +55,7 @@ function Html(props) {
     px: { "label": "PX", "value": "px" },
     em: { "label": "EM", "value": "em" },
     rem: { "label": "REM", "value": "rem" },
-    auto: { "label": "AUTO", "value": "auto" },
-    "%": { "label": "%", "value": "%" },
+
     cm: { "label": "CM", "value": "cm" },
     mm: { "label": "MM", "value": "mm" },
     in: { "label": "IN", "value": "in" },

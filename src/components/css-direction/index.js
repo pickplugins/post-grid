@@ -20,6 +20,8 @@ class PGcssDirection extends Component {
     var args = {
       ltr: { "label": "ltr", "value": "ltr" },
       rtl: { "label": "rtl", "value": "rtl" },
+      revert: { "label": "revert", "value": "revert" },
+      unset: { "label": "unset", "value": "unset" },
       initial: { "label": "initial", "value": "initial" },
       inherit: { "label": "inherit", "value": "inherit" },
     };

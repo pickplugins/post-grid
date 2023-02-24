@@ -20,7 +20,6 @@ function Html(props) {
     px: { "label": "PX", "value": "px" },
     em: { "label": "EM", "value": "em" },
     rem: { "label": "REM", "value": "rem" },
-    auto: { "label": "AUTO", "value": "auto" },
     "%": { "label": "%", "value": "%" },
 
     cm: { "label": "CM", "value": "cm" },

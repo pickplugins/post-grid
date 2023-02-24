@@ -20,7 +20,11 @@ class PGcssBoxSizing extends Component {
     var args = {
       'border-box': { "label": "border-box", "value": "border-box" },
       'content-box': { "label": "content-box", "value": "content-box" },
-
+      // none: { "label": "none", "value": "none" },
+      // inherit: { "label": "inherit", "value": "inherit" },
+      // initial: { "label": "initial", "value": "initial" },
+      // revert: { "label": "revert", "value": "revert" },
+      // unset: { "label": "unset", "value": "unset" },
 
     };
 

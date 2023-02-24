@@ -80,7 +80,7 @@ class PGcssTextOverflow extends Component {
 
 
 
-        {(val != 'clip' || val != 'ellipsis' || val != 'initial' || val != 'inherit') && (
+        {/* {(val != 'clip' || val != 'ellipsis' || val != 'initial' || val != 'inherit') && (
 
           <PanelRow>
             <label for="">
@@ -99,7 +99,7 @@ class PGcssTextOverflow extends Component {
 
 
 
-        )}
+        )} */}
 
 
 

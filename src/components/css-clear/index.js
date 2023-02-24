@@ -22,7 +22,12 @@ class PGcssClear extends Component {
       left: { "label": "Left", "value": "left" },
       right: { "label": "Right", "value": "right" },
       both: { "label": "Both", "value": "both" },
-
+      "inline-end": { "label": "inline-end", "value": "inline-end" },
+      "inline-start": { "label": "inline-start", "value": "inline-start" },
+      // inherit: { "label": "inherit", "value": "inherit" },
+      // initial: { "label": "initial", "value": "initial" },
+      // revert: { "label": "revert", "value": "revert" },
+      // unset: { "label": "unset", "value": "unset" },
 
     };
 

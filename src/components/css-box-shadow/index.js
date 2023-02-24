@@ -15,7 +15,6 @@ function Html(props) {
 
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px 0px 10px 5px #50547d4f' : props.val;
 
-  console.log(valZ);
 
 
   var h = (valZ != undefined) ? parseInt(valZ.split(" ")[0].match(/\d+/g)[0]) : 0;
@@ -24,8 +23,6 @@ function Html(props) {
   var spread = (valZ != undefined) ? parseInt(valZ.split(" ")[3].match(/\d+/g)[0]) : 5;
   var color = (valZ != undefined) ? valZ.split(" ")[4] : '#dddddd';
 
-  console.log(h);
-  console.log(typeof h);
 
 
   return (

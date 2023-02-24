@@ -176,6 +176,38 @@ const close = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(
 
 /***/ }),
 
+/***/ "./node_modules/@wordpress/icons/build-module/library/cloud.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/cloud.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * WordPress dependencies
+ */
+
+const cloud = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M17.3 10.1c0-2.5-2.1-4.4-4.8-4.4-2.2 0-4.1 1.4-4.6 3.3h-.2C5.7 9 4 10.7 4 12.8c0 2.1 1.7 3.8 3.7 3.8h9c1.8 0 3.2-1.5 3.2-3.3.1-1.6-1.1-2.9-2.6-3.2zm-.5 5.1h-9c-1.2 0-2.2-1.1-2.2-2.3s1-2.4 2.2-2.4h1.3l.3-1.1c.4-1.3 1.7-2.2 3.2-2.2 1.8 0 3.3 1.3 3.3 2.9v1.3l1.3.2c.8.1 1.4.9 1.4 1.8-.1 1-.9 1.8-1.8 1.8z"
+}));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (cloud);
+//# sourceMappingURL=cloud.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@wordpress/icons/build-module/library/link-off.js":
 /*!************************************************************************!*\
   !*** ./node_modules/@wordpress/icons/build-module/library/link-off.js ***!
@@ -269,6 +301,38 @@ const menu = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_
 }));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (menu);
 //# sourceMappingURL=menu.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@wordpress/icons/build-module/library/pencil.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/pencil.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * WordPress dependencies
+ */
+
+const pencil = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M20.1 5.1L16.9 2 6.2 12.7l-1.3 4.4 4.5-1.3L20.1 5.1zM4 20.8h8v-1.5H4v1.5z"
+}));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (pencil);
+//# sourceMappingURL=pencil.js.map
 
 /***/ }),
 
@@ -37310,8 +37374,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
 /* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/pencil.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/cloud.js");
 /* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/typography */ "./src/components/typography/index.js");
 /* harmony import */ var _components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/icon-toggle */ "./src/components/icon-toggle/index.js");
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
@@ -37334,7 +37400,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pagination_types__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./pagination-types */ "./src/blocks/post-grid/pagination-types.js");
 /* harmony import */ var _tutorials_links__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./tutorials-links */ "./src/blocks/post-grid/tutorials-links.js");
 /* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
-/* harmony import */ var animejs_lib_anime_es_js__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! animejs/lib/anime.es.js */ "./node_modules/animejs/lib/anime.es.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_css_library__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../../components/css-library */ "./src/components/css-library/index.js");
 
 
 
@@ -37379,6 +37447,9 @@ var select = wp.data.select('core/block-editor');
 
 
 
+
+
+ //import anime from 'animejs/lib/anime.es.js';
 
 
 
@@ -37459,14 +37530,12 @@ var myStore = wp.data.select('postgrid-shop');
           }
         },
         styles: {
-          color: {
-            Desktop: ''
-          },
-          bgColor: {},
           padding: {
             Desktop: ''
           },
-          margin: {}
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -37485,25 +37554,9 @@ var myStore = wp.data.select('postgrid-shop');
           color: {
             Desktop: ''
           },
-          bgColor: {},
-          padding: {
-            Desktop: ''
-          },
-          margin: {
-            Desktop: ''
-          },
           fontSize: {
             Desktop: ''
-          },
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {}
+          }
         }
       }
     },
@@ -37514,15 +37567,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: ''
         },
         styles: {
-          color: {
-            Desktop: ''
-          },
-          bgColor: {},
-          backgroundImage: {},
           padding: {
             Desktop: ''
           },
-          margin: {}
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -37536,12 +37586,12 @@ var myStore = wp.data.select('postgrid-shop');
           color: {
             Desktop: ''
           },
-          bgColor: {},
-          wordBreak: {},
-          padding: {
+          wordBreak: {
             Desktop: ''
           },
-          margin: {}
+          padding: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -37552,36 +37602,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'item'
         },
         styles: {
-          color: {
+          wordBreak: {
             Desktop: ''
           },
-          bgColor: {},
-          wordBreak: {},
           padding: {
             Desktop: ''
-          },
-          outline: {},
-          border: {},
-          boxShadow: {},
-          borderRadius: {},
-          fontSize: {
-            Desktop: ''
-          },
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {},
-          fontFamily: {},
-          fontWeight: {}
-        },
-        hoverStyles: {
-          color: {
-            Desktop: ''
-          },
-          bgColor: {}
+          }
         }
       }
     },
@@ -37595,12 +37621,10 @@ var myStore = wp.data.select('postgrid-shop');
           color: {
             Desktop: ''
           },
-          bgColor: {},
           wordBreak: {},
           padding: {
             Desktop: ''
-          },
-          margin: {}
+          }
         }
       }
     },
@@ -37611,15 +37635,12 @@ var myStore = wp.data.select('postgrid-shop');
           class: 'spinner'
         },
         styles: {
-          color: {
-            Desktop: ''
-          },
-          bgColor: {},
-          wordBreak: {},
           padding: {
             Desktop: ''
           },
-          margin: {}
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -37630,18 +37651,31 @@ var myStore = wp.data.select('postgrid-shop');
           itemCss: {}
         },
         styles: {
-          gridTemplateColumns: {},
+          gridTemplateColumns: {
+            Tablet: [{
+              "val": 1,
+              "unit": "fr"
+            }, {
+              "val": 1,
+              "unit": "fr"
+            }],
+            Mobile: [{
+              "val": 1,
+              "unit": "fr"
+            }]
+          },
           gridTemplateRows: {},
           colGap: {},
           rowGap: {},
           color: {
             Desktop: ''
           },
-          bgColor: {},
           padding: {
             Desktop: ''
           },
-          margin: {}
+          margin: {
+            Desktop: ''
+          }
         }
       }
     },
@@ -37669,10 +37703,6 @@ var myStore = wp.data.select('postgrid-shop');
           textAlign: {
             "Desktop": "center"
           },
-          color: {
-            Desktop: ''
-          },
-          bgColor: {},
           padding: {
             Desktop: ''
           },
@@ -37681,22 +37711,7 @@ var myStore = wp.data.select('postgrid-shop');
           },
           fontSize: {
             Desktop: ''
-          },
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {}
-        },
-        hoverStyles: {
-          color: {
-            Desktop: ''
-          },
-          bgColor: {}
+          }
         }
       }
     },
@@ -37713,43 +37728,9 @@ var myStore = wp.data.select('postgrid-shop');
           color: {
             "Desktop": "#18978F"
           },
-          bgColor: {
-            "Desktop": "#9DD6DF"
-          },
-          padding: {
-            "Desktop": {
-              "top": "10px",
-              "right": "10px",
-              "bottom": "10px",
-              "left": "10px"
-            }
-          },
-          margin: {
-            "Desktop": {
-              "top": "5px",
-              "right": "5px",
-              "bottom": "5px",
-              "left": "5px"
-            }
-          },
           fontSize: {
             Desktop: ''
-          },
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {}
-        },
-        hoverStyles: {
-          color: {
-            Desktop: ''
-          },
-          bgColor: {}
+          }
         }
       }
     },
@@ -37764,7 +37745,6 @@ var myStore = wp.data.select('postgrid-shop');
           color: {
             Desktop: ''
           },
-          bgColor: {},
           padding: {
             Desktop: ''
           },
@@ -37773,22 +37753,7 @@ var myStore = wp.data.select('postgrid-shop');
           },
           fontSize: {
             Desktop: ''
-          },
-          lineHeight: {},
-          // { val: '18', unit: 'px' }
-          letterSpacing: {},
-          // { val: '18', unit: 'px' }
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {},
-          //overline, line-through, underline
-          textTransform: {}
-        },
-        hoverStyles: {
-          color: {
-            Desktop: ''
-          },
-          bgColor: {}
+          }
         }
       }
     },
@@ -37940,7 +37905,7 @@ var myStore = wp.data.select('postgrid-shop');
     const searchWrapSelector = blockClass + ' .search';
     const lazyloadWrapSelector = blockClass + ' .lazyLoad';
     const spinnerSelector = blockClass + ' .spinner';
-    const paginationWrapSelector = blockClass + ' .pagination';
+    const paginationSelector = blockClass + ' .pagination';
     const paginationItemSelector = blockClass + ' .pagination .page-numbers';
     const paginationItemActiveSelector = blockClass + ' .pagination .page-numbers.current';
     var [debounce, setDebounce] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(null); // Using the hook.
@@ -37957,6 +37922,323 @@ var myStore = wp.data.select('postgrid-shop');
       setClientData(myStore != null ? myStore.getclientdata() : '');
     }, [clientDataX]);
     const BLOCKS_TEMPLATE = [['post-grid/post-title', {}], ['post-grid/read-more', {}]];
+
+    function onPickCssLibraryContainer(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        container[sudoScource] = sudoScourceArgs;
+      });
+      var containerX = Object.assign({}, container);
+      setAttributes({
+        container: containerX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, containerSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onChangeStyleContainer(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, container);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+      setAttributes({
+        container: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, containerSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onRemoveStyleContainer(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(container, [sudoScource, key, breakPointX]);
+      setAttributes({
+        container: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, containerSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({
+        blockCssY: {
+          items: cssObject
+        }
+      });
+    }
+
+    function onAddStyleContainer(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, container);
+      const object = myStore.addPropertyDeep(obj, path, '');
+      setAttributes({
+        container: object
+      });
+    }
+
+    function onPickCssLibraryItemWrap(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        itemWrap[sudoScource] = sudoScourceArgs;
+      });
+      var itemWrapX = Object.assign({}, itemWrap);
+      setAttributes({
+        itemWrap: itemWrapX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, loopItemSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onChangeStyleItemWrap(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, itemWrap);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+      setAttributes({
+        itemWrap: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, loopItemSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onRemoveStyleItemWrap(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(itemWrap, [sudoScource, key, breakPointX]);
+      setAttributes({
+        itemWrap: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, loopItemSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({
+        blockCssY: {
+          items: cssObject
+        }
+      });
+    }
+
+    function onAddStyleItemWrap(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, itemWrap);
+      const object = myStore.addPropertyDeep(obj, path, '');
+      setAttributes({
+        itemWrap: object
+      });
+    }
+
+    function onPickCssLibraryPagination(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        pagination[sudoScource] = sudoScourceArgs;
+      });
+      var paginationX = Object.assign({}, pagination);
+      setAttributes({
+        pagination: paginationX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, paginationSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onChangeStylePagination(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, pagination);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+      setAttributes({
+        pagination: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, paginationSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onRemoveStylePagination(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(pagination, [sudoScource, key, breakPointX]);
+      setAttributes({
+        pagination: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, paginationSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({
+        blockCssY: {
+          items: cssObject
+        }
+      });
+    }
+
+    function onAddStylePagination(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, pagination);
+      const object = myStore.addPropertyDeep(obj, path, '');
+      setAttributes({
+        pagination: object
+      });
+    }
+
+    function onPickCssLibraryPaginationItem(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        paginationItem[sudoScource] = sudoScourceArgs;
+      });
+      var paginationX = Object.assign({}, paginationItem);
+      setAttributes({
+        paginationItem: paginationX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, paginationItemSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onChangeStylePaginationItem(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, paginationItem);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+      setAttributes({
+        paginationItem: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, paginationItemSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onRemoveStylePaginationItem(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(paginationItem, [sudoScource, key, breakPointX]);
+      setAttributes({
+        paginationItem: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, paginationItemSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({
+        blockCssY: {
+          items: cssObject
+        }
+      });
+    }
+
+    function onAddStylePaginationItem(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, paginationItem);
+      const object = myStore.addPropertyDeep(obj, path, '');
+      setAttributes({
+        paginationItem: object
+      });
+    }
+
     const columnPresets = [{
       label: '1 Column',
       args: [{
@@ -38101,13 +38383,13 @@ var myStore = wp.data.select('postgrid-shop');
 
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
       blockCssY.items[loopItemSelector] = blockCssY.items[loopItemSelector] != undefined ? blockCssY.items[loopItemSelector] : {};
-      blockCssY.items[paginationWrapSelector] = blockCssY.items[paginationWrapSelector] != undefined ? blockCssY.items[paginationWrapSelector] : {};
+      blockCssY.items[paginationSelector] = blockCssY.items[paginationSelector] != undefined ? blockCssY.items[paginationSelector] : {};
       var wordBreak = blockCssY.items[loopItemSelector]['word-break'] != undefined ? blockCssY.items[loopItemSelector]['word-break'] : {};
       wordBreak[breakPointX] = 'break-word';
       blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
         'word-break': wordBreak
       };
-      blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
+      blockCssY.items[paginationSelector] = { ...blockCssY.items[paginationSelector],
         'text-align': {
           "Desktop": "center"
         }
@@ -38419,12 +38701,6 @@ var myStore = wp.data.select('postgrid-shop');
     const MemoizedPostTemplateBlockPreview = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.memo)(PostTemplateBlockPreview);
     const [activeBlockContextId, setActiveBlockContextId] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)();
 
-    function PostLoopItem() {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, " ");
-    }
-
-    function generateDateQueryArgs(_args) {}
-
     function onChangeBreakPoint(x, _index) {
       setPreviewDeviceType(x.value);
       var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value);
@@ -38432,470 +38708,6 @@ var myStore = wp.data.select('postgrid-shop');
         setBreakPointX(res.breakpoint); //generateBlockCssY();
 
         myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-      });
-    }
-
-    function containerPaddingControl(nextValues) {
-      var responsive = container.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...container.styles,
-        padding: responsive
-      };
-      setAttributes({
-        container: { ...container,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[containerSelector] = blockCssY.items[containerSelector] != undefined ? blockCssY.items[containerSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[containerSelector]['padding-top'] != undefined ? blockCssY.items[containerSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector],
-          'padding-top': paddingTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[containerSelector]['padding-right'] != undefined ? blockCssY.items[containerSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector],
-          'padding-right': paddingRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[containerSelector]['padding-bottom'] != undefined ? blockCssY.items[containerSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector],
-          'padding-bottom': paddingBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[containerSelector]['padding-left'] != undefined ? blockCssY.items[containerSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector],
-          'padding-left': paddingLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function containerMarginControl(nextValues) {
-      var responsive = container.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...container.styles,
-        margin: responsive
-      };
-      setAttributes({
-        container: { ...container,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      blockCssY.items[containerSelector] = blockCssY.items[containerSelector] != undefined ? blockCssY.items[containerSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[containerSelector]['margin-top'] != undefined ? blockCssY.items[containerSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[containerSelector]['margin-right'] !== undefined ? blockCssY.items[containerSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[containerSelector]['margin-bottom'] !== undefined ? blockCssY.items[containerSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[containerSelector]['margin-left'] !== undefined ? blockCssY.items[containerSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[containerSelector] = { ...blockCssY.items[containerSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function paginationPaddingControl(nextValues) {
-      var responsive = pagination.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...pagination.styles,
-        padding: responsive
-      };
-      setAttributes({
-        pagination: { ...pagination,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[paginationWrapSelector] = blockCssY.items[paginationWrapSelector] != undefined ? blockCssY.items[paginationWrapSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[paginationWrapSelector]['padding-top'] != undefined ? blockCssY.items[paginationWrapSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'padding-top': paddingTop
-        }; //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-top': paddingTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[paginationWrapSelector]['padding-right'] != undefined ? blockCssY.items[paginationWrapSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'padding-right': paddingRight
-        }; //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-right': paddingRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[paginationWrapSelector]['padding-bottom'] != undefined ? blockCssY.items[paginationWrapSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'padding-bottom': paddingBottom
-        }; //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-bottom': paddingBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[paginationWrapSelector]['padding-left'] != undefined ? blockCssY.items[paginationWrapSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'padding-left': paddingLeft
-        }; //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'padding-left': paddingLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function paginationItemPaddingControl(nextValues) {
-      var responsive = paginationItem.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...paginationItem.styles,
-        padding: responsive
-      };
-      setAttributes({
-        paginationItem: { ...paginationItem,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[paginationItemSelector] = blockCssY.items[paginationItemSelector] != undefined ? blockCssY.items[paginationItemSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[paginationItemSelector]['padding-top'] != undefined ? blockCssY.items[paginationItemSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'padding-top': paddingTop
-        }; //itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-top': paddingTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[paginationItemSelector]['padding-right'] != undefined ? blockCssY.items[paginationItemSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'padding-right': paddingRight
-        }; //itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-right': paddingRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[paginationItemSelector]['padding-bottom'] != undefined ? blockCssY.items[paginationItemSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'padding-bottom': paddingBottom
-        }; //itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-bottom': paddingBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[paginationItemSelector]['padding-left'] != undefined ? blockCssY.items[paginationItemSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'padding-left': paddingLeft
-        }; //itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-left': paddingLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function onChangeItemBorder(nextValues) {
-      var width = nextValues.width == undefined ? '0px' : nextValues.width;
-      var style = nextValues.style == undefined ? 'solid' : nextValues.style;
-      var color = nextValues.color == undefined ? '#ddd' : nextValues.color;
-      var responsive = itemWrap.styles.border;
-      responsive[breakPointX] = width + ' ' + style + ' ' + color;
-      var styles = { ...itemWrap.styles,
-        border: responsive
-      };
-      setAttributes({
-        itemWrap: { ...itemWrap,
-          styles: styles
-        }
-      });
-    }
-
-    function itemwrapPaddingControl(nextValues) {
-      var responsive = itemWrap.styles.padding;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...itemWrap.styles,
-        padding: responsive
-      };
-      setAttributes({
-        itemWrap: { ...itemWrap,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      nextValues.top = nextValues.top == undefined ? '0px' : nextValues.top;
-      nextValues.right = nextValues.right == undefined ? '0px' : nextValues.right;
-      nextValues.bottom = nextValues.bottom == undefined ? '0px' : nextValues.bottom;
-      nextValues.left = nextValues.left == undefined ? '0px' : nextValues.left;
-      blockCssY.items[loopItemSelector] = blockCssY.items[loopItemSelector] != undefined ? blockCssY.items[loopItemSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var paddingTop = blockCssY.items[loopItemSelector]['padding-top'] != undefined ? blockCssY.items[loopItemSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'padding-top': paddingTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var paddingRight = blockCssY.items[loopItemSelector]['padding-right'] != undefined ? blockCssY.items[loopItemSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'padding-right': paddingRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var paddingBottom = blockCssY.items[loopItemSelector]['padding-bottom'] != undefined ? blockCssY.items[loopItemSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'padding-bottom': paddingBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var paddingLeft = blockCssY.items[loopItemSelector]['padding-left'] != undefined ? blockCssY.items[loopItemSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'padding-left': paddingLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function paginationMarginControl(nextValues) {
-      var responsive = pagination.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...pagination.styles,
-        margin: responsive
-      };
-      setAttributes({
-        pagination: { ...pagination,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      blockCssY.items[paginationWrapSelector] = blockCssY.items[paginationWrapSelector] != undefined ? blockCssY.items[paginationWrapSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[paginationWrapSelector]['margin-top'] != undefined ? blockCssY.items[paginationWrapSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'margin-top': marginTop
-        }; //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-top': marginTop };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[paginationWrapSelector]['margin-right'] !== undefined ? blockCssY.items[paginationWrapSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'margin-right': marginRight
-        }; //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-right': marginRight };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[paginationWrapSelector]['margin-bottom'] !== undefined ? blockCssY.items[paginationWrapSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'margin-bottom': marginBottom
-        }; //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-bottom': marginBottom };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[paginationWrapSelector]['margin-left'] !== undefined ? blockCssY.items[paginationWrapSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'margin-left': marginLeft
-        }; //itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector], 'margin-left': marginLeft };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      }); //setAttributes({ blockCssY: { items: itemsX } });
-    }
-
-    function paginationItemMarginControl(nextValues) {
-      var responsive = paginationItem.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...paginationItem.styles,
-        margin: responsive
-      };
-      setAttributes({
-        paginationItem: { ...paginationItem,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      blockCssY.items[paginationItemSelector] = blockCssY.items[paginationItemSelector] != undefined ? blockCssY.items[paginationItemSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[paginationItemSelector]['margin-top'] != undefined ? blockCssY.items[paginationItemSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[paginationItemSelector]['margin-right'] !== undefined ? blockCssY.items[paginationItemSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[paginationItemSelector]['margin-bottom'] !== undefined ? blockCssY.items[paginationItemSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[paginationItemSelector]['margin-left'] !== undefined ? blockCssY.items[paginationItemSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function itemwrapMarginControl(nextValues) {
-      var responsive = itemWrap.styles.margin;
-      responsive[breakPointX] = nextValues;
-      var styles = { ...itemWrap.styles,
-        margin: responsive
-      };
-      setAttributes({
-        itemWrap: { ...itemWrap,
-          styles: styles
-        }
-      });
-      var itemsX = { ...blockCssY.items
-      };
-      blockCssY.items[loopItemSelector] = blockCssY.items[loopItemSelector] != undefined ? blockCssY.items[loopItemSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = blockCssY.items[loopItemSelector]['margin-top'] != undefined ? blockCssY.items[loopItemSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'margin-top': marginTop
-        };
-      }
-
-      if (nextValues.right != undefined) {
-        var marginRight = blockCssY.items[loopItemSelector]['margin-right'] !== undefined ? blockCssY.items[loopItemSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'margin-right': marginRight
-        };
-      }
-
-      if (nextValues.bottom != undefined) {
-        var marginBottom = blockCssY.items[loopItemSelector]['margin-bottom'] !== undefined ? blockCssY.items[loopItemSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'margin-bottom': marginBottom
-        };
-      }
-
-      if (nextValues.left != undefined) {
-        var marginLeft = blockCssY.items[loopItemSelector]['margin-left'] !== undefined ? blockCssY.items[loopItemSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'margin-left': marginLeft
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
       });
     }
 
@@ -39094,166 +38906,6 @@ var myStore = wp.data.select('postgrid-shop');
       fetchLayouts();
       fetchLayoutData();
     }, [container]);
-
-    function onChangePaginationTypo(typoX) {
-      setAttributes({
-        paginationItem: { ...paginationItem,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[paginationItemSelector]['font-size'] != undefined ? blockCssY.items[paginationItemSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[paginationItemSelector]['line-height'] != undefined ? blockCssY.items[paginationItemSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[paginationItemSelector]['letter-spacing'] != undefined ? blockCssY.items[paginationItemSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr; //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'text-transform': typoX.textTransform
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
-
-    function onChangeItemWrapTypo(typoX) {
-      setAttributes({
-        itemWrap: { ...itemWrap,
-          styles: typoX
-        }
-      });
-      var newValuesObjX = {};
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-        var fontSizeVal = typoX.fontSize[breakPointX].val ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = typoX.fontSize[breakPointX].unit ? typoX.fontSize[breakPointX].unit : 'px';
-        var fontSizeX = blockCssY.items[loopItemSelector]['font-size'] != undefined ? blockCssY.items[loopItemSelector]['font-size'] : {};
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'font-size': fontSizeX
-        };
-      }
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-        var lineHeightVal = typoX.lineHeight[breakPointX].val ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = typoX.lineHeight[breakPointX].unit ? typoX.lineHeight[breakPointX].unit : 'px';
-        var lineHeightX = blockCssY.items[loopItemSelector]['line-height'] != undefined ? blockCssY.items[loopItemSelector]['line-height'] : {};
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'line-height': lineHeightX
-        };
-      }
-
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-        var letterSpacingVal = typoX.letterSpacing[breakPointX].val ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = typoX.letterSpacing[breakPointX].unit ? typoX.letterSpacing[breakPointX].unit : 'px';
-        var letterSpacingX = blockCssY.items[loopItemSelector]['letter-spacing'] != undefined ? blockCssY.items[loopItemSelector]['letter-spacing'] : {};
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'letter-spacing': letterSpacingX
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-        var str = {};
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = textDecorationX.length > 0 ? textDecorationX.join(' ') : '';
-        str[breakPointX] = textDecorationXStr; //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'text-decoration': str
-        };
-      }
-
-      if (typoX.textTransform[breakPointX] != undefined) {
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'text-transform': typoX.textTransform
-        };
-      }
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'font-family': typoX.fontFamily
-        };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'font-weight': typoX.fontWeight
-        };
-      }
-
-      setAttributes({
-        blockCssY: {
-          items: blockCssY.items
-        }
-      });
-    }
 
     function flatObject(block, flatObj, flatObjCss) {
       flatObj.push(block);
@@ -39464,14 +39116,6 @@ var myStore = wp.data.select('postgrid-shop');
           page: queryLayouts.page,
           category: queryLayouts.category
         });
-      });
-    }
-
-    function generateQueryFieldAuthorIn(_xx) {
-      var xxts = [12, 24, 32];
-      var xxt = [1, 2, 3].concat(xxts);
-      return xxt.map(x => {
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, x);
       });
     }
 
@@ -40657,8 +40301,8 @@ var myStore = wp.data.select('postgrid-shop');
             }
           });
         }
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_33__["default"], {
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_34__["default"]
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_35__["default"], {
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_36__["default"]
       })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
         className: "mx-2"
       }, title));
@@ -41423,389 +41067,68 @@ var myStore = wp.data.select('postgrid-shop');
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Loop Item",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      color: itemWrap.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_31__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(itemWrap.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = itemWrap.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...itemWrap.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          itemWrap: { ...itemWrap,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      color: itemWrap.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_31__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(itemWrap.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = itemWrap.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...itemWrap.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          itemWrap: { ...itemWrap,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
-      label: "",
-      values: itemWrap.styles.padding[breakPointX],
-      onChange: nextValues => {
-        itemwrapPaddingControl(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Border"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_border__WEBPACK_IMPORTED_MODULE_22__["default"], {
-      val: itemWrap.styles.border != undefined ? itemWrap.styles.border[breakPointX] : '',
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(itemWrap.styles.border).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = itemWrap.styles.border;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...itemWrap.styles,
-          border: newValuesObj
-        };
-        setAttributes({
-          itemWrap: { ...itemWrap,
-            styles: styles
-          }
-        });
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'border': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Box Shadow"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_box_shadow__WEBPACK_IMPORTED_MODULE_23__["default"], {
-      val: itemWrap.styles.boxShadow != undefined ? itemWrap.styles.boxShadow[breakPointX] : '',
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(itemWrap.styles.boxShadow).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = itemWrap.styles.boxShadow;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...itemWrap.styles,
-          boxShadow: newValuesObj
-        };
-        setAttributes({
-          itemWrap: { ...itemWrap,
-            styles: styles
-          }
-        });
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'box-shadow': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Border Radius"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
-      label: "",
-      values: itemWrap.styles.borderRadius != undefined ? itemWrap.styles.borderRadius[breakPointX] : '',
-      onChange: nextValues => {
-        var newValuesObj = {};
-
-        if (Object.keys(itemWrap.styles.borderRadius).length == 0) {
-          newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
-        } else {
-          newValuesObj = itemWrap.styles.borderRadius;
-          newValuesObj[breakPointX] = nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left;
-          ;
-        }
-
-        var styles = { ...itemWrap.styles,
-          borderRadius: newValuesObj
-        };
-        setAttributes({
-          itemWrap: { ...itemWrap,
-            styles: styles
-          }
-        });
-        blockCssY.items[loopItemSelector] = { ...blockCssY.items[loopItemSelector],
-          'border-radius': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      typo: itemWrap.styles,
-      breakPointX: breakPointX,
-      onChange: onChangeItemWrapTypo,
-      setAttributes: setAttributes,
-      obj: itemWrap
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_32__["default"], {
+      activeTab: "styles",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_37__["default"],
+        className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_38__["default"],
+        className: 'tab-css'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      obj: itemWrap,
+      onChange: onChangeStyleItemWrap,
+      onAdd: onAddStyleItemWrap,
+      onRemove: onRemoveStyleItemWrap
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_34__["default"], {
+      blockId: blockId,
+      obj: itemWrap,
+      onChange: onPickCssLibraryItemWrap
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Container",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
-      label: "",
-      values: container.styles.padding[breakPointX],
-      onChange: nextValues => {
-        containerPaddingControl(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
-      label: "",
-      values: container.styles.margin[breakPointX],
-      onChange: nextValues => {
-        containerMarginControl(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      value: container.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_31__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(container.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = container.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...container.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          container: { ...container,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[containerSelector] = { ...blockCssY.items[containerSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
-      className: "my-3"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      value: container.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_31__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(container.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = container.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...container.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          container: { ...container,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[containerSelector] = { ...blockCssY.items[containerSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Background Image"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
-      src: container.styles.backgroundImage[breakPointX] != undefined ? container.styles.backgroundImage[breakPointX].url : '',
-      alt: ""
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.MediaUpload, {
-      onSelect: media => {
-        var newValuesObj = {};
-
-        if (Object.keys(container.styles.backgroundImage).length == 0) {
-          newValuesObj[breakPointX] = {
-            id: media.id,
-            url: media.url
-          };
-        } else {
-          newValuesObj = container.styles.backgroundImage;
-          newValuesObj[breakPointX] = {
-            id: media.id,
-            url: media.url
-          };
-        }
-
-        var styles = { ...container.styles,
-          backgroundImage: newValuesObj
-        };
-        setAttributes({
-          container: { ...container,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[containerSelector] = { ...blockCssY.items[containerSelector],
-          'background-image': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      },
-      onClose: () => {},
-      allowedTypes: ALLOWED_MEDIA_TYPES,
-      value: container.styles.backgroundImage[breakPointX],
-      render: _ref4 => {
-        let {
-          open
-        } = _ref4;
-        return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
-          onClick: open
-        }, "Open Media Library");
-      }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_32__["default"], {
+      activeTab: "styles",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_37__["default"],
+        className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_38__["default"],
+        className: 'tab-css'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      obj: container,
+      onChange: onChangeStyleContainer,
+      onAdd: onAddStyleContainer,
+      onRemove: onRemoveStyleContainer
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_34__["default"], {
+      blockId: blockId,
+      obj: container,
+      onChange: onPickCssLibraryContainer
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Pagination",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
@@ -41830,7 +41153,7 @@ var myStore = wp.data.select('postgrid-shop');
       values: ''
     })), pagination.options.type.length != 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: "bg-gray-500 text-white px-3 py-2 my-5"
-    }, _pagination_types__WEBPACK_IMPORTED_MODULE_29__["default"][pagination.options.type] != undefined ? _pagination_types__WEBPACK_IMPORTED_MODULE_29__["default"][pagination.options.type].label : ''), (pagination.options.type == 'normal' || pagination.options.type == 'ajax') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    }, _pagination_types__WEBPACK_IMPORTED_MODULE_29__["default"][pagination.options.type] != undefined ? _pagination_types__WEBPACK_IMPORTED_MODULE_29__["default"][pagination.options.type].label : ''), (pagination.options.type == 'normal' || pagination.options.type == 'ajax') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Max Number of Pagination"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.maxPageNum,
@@ -41844,7 +41167,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (pagination.options.type == 'normal' || pagination.options.type == 'ajax' || pagination.options.type == 'next_previous') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    }))), (pagination.options.type == 'normal' || pagination.options.type == 'ajax' || pagination.options.type == 'next_previous') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Previous Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.prevText,
@@ -41858,7 +41181,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Next Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.nextText,
@@ -41872,7 +41195,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (pagination.options.type == 'loadmore' || pagination.options.type == 'infinite') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    }))), (pagination.options.type == 'loadmore' || pagination.options.type == 'infinite') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Load More Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.loadMoreText,
@@ -41886,7 +41209,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "No Posts Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.noMorePosts,
@@ -41900,7 +41223,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Loading Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
       value: pagination.options.loadingText,
@@ -41914,7 +41237,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Loading Icon"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_13__["default"], {
       library: pagination.options.loadingIcon.library,
@@ -41935,317 +41258,71 @@ var myStore = wp.data.select('postgrid-shop');
         });
       }
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+      className: "my-4",
       title: "Pagination Wrapper",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      color: pagination.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_31__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(pagination.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = pagination.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...pagination.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          pagination: { ...pagination,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      color: pagination.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_31__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(pagination.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = pagination.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...pagination.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          pagination: { ...pagination,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Text Align"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_text_align__WEBPACK_IMPORTED_MODULE_17__["default"], {
-      val: pagination.styles.textAlign[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(pagination.styles.textAlign).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = pagination.styles.textAlign;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...pagination.styles,
-          textAlign: newValuesObj
-        };
-        setAttributes({
-          pagination: { ...pagination,
-            styles: styles
-          }
-        });
-        blockCssY.items[paginationWrapSelector] = { ...blockCssY.items[paginationWrapSelector],
-          'text-align': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
-      label: "",
-      values: pagination.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paginationPaddingControl(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
-      label: "",
-      values: pagination.styles.margin[breakPointX],
-      onChange: nextValues => {
-        paginationMarginControl(nextValues);
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_32__["default"], {
+      activeTab: "styles",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_37__["default"],
+        className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_38__["default"],
+        className: 'tab-css'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      obj: pagination,
+      onChange: onChangeStylePagination,
+      onAdd: onAddStylePagination,
+      onRemove: onRemoveStylePagination
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_34__["default"], {
+      blockId: blockId,
+      obj: pagination,
+      onChange: onPickCssLibraryPagination
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Pagination Items",
       initialOpen: false
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Text Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      color: paginationItem.styles.color[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_31__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(paginationItem.styles.color).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = paginationItem.styles.color;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...paginationItem.styles,
-          color: newValuesObj
-        };
-        setAttributes({
-          paginationItem: { ...paginationItem,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      color: paginationItem.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_31__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(paginationItem.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = paginationItem.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...paginationItem.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          paginationItem: { ...paginationItem,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Active Background Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.ColorPalette, {
-      color: paginationItemActive.styles.bgColor[breakPointX],
-      colors: _colors_presets__WEBPACK_IMPORTED_MODULE_31__["default"],
-      enableAlpha: true,
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(paginationItemActive.styles.bgColor).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = paginationItemActive.styles.bgColor;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...paginationItemActive.styles,
-          bgColor: newValuesObj
-        };
-        setAttributes({
-          paginationItemActive: { ...paginationItemActive,
-            styles: styles
-          }
-        });
-        var itemsX = { ...blockCssY.items
-        };
-        itemsX[paginationItemActiveSelector] = { ...blockCssY.items[paginationItemActiveSelector],
-          'background-color': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: itemsX
-          }
-        });
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Display"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_display__WEBPACK_IMPORTED_MODULE_18__["default"], {
-      val: paginationItem.styles.display[breakPointX],
-      onChange: newVal => {
-        var newValuesObj = {};
-
-        if (Object.keys(paginationItem.styles.display).length == 0) {
-          newValuesObj[breakPointX] = newVal;
-        } else {
-          newValuesObj = paginationItem.styles.display;
-          newValuesObj[breakPointX] = newVal;
-        }
-
-        var styles = { ...paginationItem.styles,
-          display: newValuesObj
-        };
-        setAttributes({
-          paginationItem: { ...paginationItem,
-            styles: styles
-          }
-        });
-        blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector],
-          'display': newValuesObj
-        };
-        setAttributes({
-          blockCssY: {
-            items: blockCssY.items
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Padding"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
-      label: "",
-      values: paginationItem.styles.padding[breakPointX],
-      onChange: nextValues => {
-        paginationItemPaddingControl(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Margin"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalBoxControl, {
-      label: "",
-      values: paginationItem.styles.margin[breakPointX],
-      onChange: nextValues => {
-        paginationItemMarginControl(nextValues);
-      }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: "font-bold"
-    }, "Typography"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_icon_toggle__WEBPACK_IMPORTED_MODULE_11__["default"], {
-      position: "bottom",
-      variant: "secondary",
-      iconList: breakPointList,
-      buttonTitle: "Break Point Switch",
-      onChange: onChangeBreakPoint,
-      activeIcon: _breakpoints__WEBPACK_IMPORTED_MODULE_25__["default"][breakPointX].icon,
-      value: breakPointX
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_typography__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      typo: paginationItem.styles,
-      breakPointX: breakPointX,
-      onChange: onChangePaginationTypo,
-      setAttributes: setAttributes,
-      obj: paginationItem
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_32__["default"], {
+      activeTab: "styles",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_37__["default"],
+        className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_38__["default"],
+        className: 'tab-css'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      obj: paginationItem,
+      onChange: onChangeStylePaginationItem,
+      onAdd: onAddStylePaginationItem,
+      onRemove: onRemoveStylePaginationItem
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_33__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_34__["default"], {
+      blockId: blockId,
+      obj: paginationItem,
+      onChange: onPickCssLibraryPaginationItem
+    }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Lazy load",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.SelectControl, {
@@ -42309,10 +41386,10 @@ var myStore = wp.data.select('postgrid-shop');
       onClose: () => {},
       allowedTypes: ALLOWED_MEDIA_TYPES,
       value: lazyLoad.options.srcId,
-      render: _ref5 => {
+      render: _ref4 => {
         let {
           open
-        } = _ref5;
+        } = _ref4;
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
           onClick: open
         }, "Open Media Library");
@@ -60419,10 +59496,11 @@ function Html(props) {
       var obj = {};
       obj['id'] = option.value;
       obj['val'] = option.val;
+      obj['unit'] = option.unit;
       valArgs.push(obj);
       var str = '';
       valArgs.map(x => {
-        str += x.id + '(' + x.val + '%) ';
+        str += x.id + '(' + x.val + x.unit + ') ';
       });
       props.onChange(str, 'backdropFilter');
     }
@@ -60531,7 +59609,7 @@ function Html(props) {
 
         var str = '';
         valArgs.map(x => {
-          str += x.id + '(' + x.val + '%) ';
+          str += x.id + '(' + x.val + x.unit + ') ';
         });
         props.onChange(str, 'backdropFilter');
       }
@@ -64027,14 +63105,11 @@ function Html(props) {
   }
 
   var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px 0px 10px 5px #50547d4f' : props.val;
-  console.log(valZ);
   var h = valZ != undefined ? parseInt(valZ.split(" ")[0].match(/\d+/g)[0]) : 0;
   var v = valZ != undefined ? parseInt(valZ.split(" ")[1].match(/\d+/g)[0]) : 0;
   var blur = valZ != undefined ? parseInt(valZ.split(" ")[2].match(/\d+/g)[0]) : 10;
   var spread = valZ != undefined ? parseInt(valZ.split(" ")[3].match(/\d+/g)[0]) : 5;
   var color = valZ != undefined ? valZ.split(" ")[4] : '#dddddd';
-  console.log(h);
-  console.log(typeof h);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: ""
   }, "H-Offset")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
@@ -64157,7 +63232,12 @@ class PGcssBoxSizing extends Component {
       'content-box': {
         "label": "content-box",
         "value": "content-box"
-      }
+      } // none: { "label": "none", "value": "none" },
+      // inherit: { "label": "inherit", "value": "inherit" },
+      // initial: { "label": "initial", "value": "initial" },
+      // revert: { "label": "revert", "value": "revert" },
+      // unset: { "label": "unset", "value": "unset" },
+
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
       position: "bottom",
@@ -64239,7 +63319,19 @@ class PGcssClear extends Component {
       both: {
         "label": "Both",
         "value": "both"
-      }
+      },
+      "inline-end": {
+        "label": "inline-end",
+        "value": "inline-end"
+      },
+      "inline-start": {
+        "label": "inline-start",
+        "value": "inline-start"
+      } // inherit: { "label": "inherit", "value": "inherit" },
+      // initial: { "label": "initial", "value": "initial" },
+      // revert: { "label": "revert", "value": "revert" },
+      // unset: { "label": "unset", "value": "unset" },
+
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
       position: "bottom",
@@ -65047,6 +64139,14 @@ class PGcssDirection extends Component {
         "label": "rtl",
         "value": "rtl"
       },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
+      },
       initial: {
         "label": "initial",
         "value": "initial"
@@ -65166,10 +64266,7 @@ class PGcssDisplay extends Component {
         "label": "list-item",
         "value": "list-item"
       },
-      'run-in': {
-        "label": "run-in",
-        "value": "run-in"
-      },
+      // 'run-in': { "label": "run-in", "value": "run-in" },
       table: {
         "label": "table",
         "value": "table"
@@ -65206,6 +64303,14 @@ class PGcssDisplay extends Component {
         "label": "table-row",
         "value": "table-row"
       },
+      'flow-root': {
+        "label": "flow-root",
+        "value": "flow-root"
+      },
+      'inline-grid': {
+        "label": "inline-grid",
+        "value": "inline-grid"
+      },
       initial: {
         "label": "initial",
         "value": "initial"
@@ -65213,6 +64318,14 @@ class PGcssDisplay extends Component {
       inherit: {
         "label": "inherit",
         "value": "inherit"
+      },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
       }
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
@@ -65508,6 +64621,30 @@ class PGcssFloat extends Component {
       right: {
         "label": "Right",
         "value": "right"
+      },
+      "inline-end": {
+        "label": "inline-end",
+        "value": "inline-end"
+      },
+      "inline-start": {
+        "label": "inline-start",
+        "value": "inline-start"
+      },
+      revert: {
+        "label": "revert",
+        "value": "revert"
+      },
+      unset: {
+        "label": "unset",
+        "value": "unset"
+      },
+      initial: {
+        "label": "initial",
+        "value": "initial"
+      },
+      inherit: {
+        "label": "inherit",
+        "value": "inherit"
       }
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
@@ -65587,10 +64724,6 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
     "%": {
       "label": "%",
       "value": "%"
@@ -65638,7 +64771,21 @@ function Html(props) {
     vmax: {
       "label": "VMAX",
       "value": "vmax"
-    }
+    } // large: { "label": "large", "value": "large" },
+    // larger: { "label": "larger", "value": "larger" },
+    // medium: { "label": "medium", "value": "medium" },
+    // small: { "label": "small", "value": "small" },
+    // smaller: { "label": "smaller", "value": "smaller" },
+    // "x-large": { "label": "x-large", "value": "x-large" },
+    // "x-small": { "label": "x-small", "value": "x-small" },
+    // "xx-large": { "label": "xx-large", "value": "xx-large" },
+    // "xx-small": { "label": "xx-small", "value": "xx-small" },
+    // "xxx-large": { "label": "xxx-large", "value": "xxx-large" },
+    // revert: { "label": "revert", "value": "revert" },
+    // unset: { "label": "unset", "value": "unset" },
+    // initial: { "label": "initial", "value": "initial" },
+    // inherit: { "label": "inherit", "value": "inherit" },
+
   };
   var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
   var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
@@ -66561,14 +65708,6 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
-    "%": {
-      "label": "%",
-      "value": "%"
-    },
     cm: {
       "label": "CM",
       "value": "cm"
@@ -67115,10 +66254,6 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
     "%": {
       "label": "%",
       "value": "%"
@@ -67168,18 +66303,35 @@ function Html(props) {
       "value": "vmax"
     }
   };
-  var widthValX = props.val == undefined ? 10 : props.val.match(/\d+/g)[0];
-  var widthUnitX = props.val == undefined || props.val.match(/[a-zA-Z%]+/g) == undefined ? 'px' : props.val.match(/[a-zA-Z%]+/g)[0];
+  console.log(props.val);
+  console.log(typeof props.val);
+
+  if (typeof props.val == 'object') {
+    var valZ = props.val.val + props.val.unit;
+  } else {
+    var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '0px' : props.val;
+  }
+
+  console.log(valZ);
+  var widthValX = valZ == undefined || valZ.match(/\d+/g) == null ? 0 : valZ.match(/\d+/g)[0];
+  var widthUnitX = valZ == undefined || valZ.match(/\d+/g) == null ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
   const [widthVal, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
   const [widthUnit, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex mt-4"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
+    className: "flex justify-between"
+  }, widthUnit != 'auto' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
     value: widthVal,
     type: "number",
+    disabled: widthUnit == 'auto' ? true : false,
     onChange: newVal => {
+      //console.log(newVal);
       setwidthVal(newVal);
-      props.onChange(newVal + widthUnit, 'lineHeight');
+
+      if (widthUnit == 'auto') {
+        props.onChange(widthUnit, 'lineHeight');
+      } else {
+        props.onChange(newVal + widthUnit, 'lineHeight');
+      }
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
     position: "bottom",
@@ -67189,12 +66341,12 @@ function Html(props) {
         onToggle
       } = _ref;
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-        title: "Letter Spacing",
+        title: "",
         onClick: onToggle,
         "aria-expanded": isOpen
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: " "
-      }, props.val ? unitArgs[widthUnit].label : 'Select...'));
+      }, valZ ? unitArgs[widthUnit].label : 'Select...'));
     },
     renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-32"
@@ -67205,7 +66357,12 @@ function Html(props) {
         className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
         onClick: ev => {
           setwidthUnit(x.value);
-          props.onChange(widthVal + x.value, 'lineHeight');
+
+          if (x.value == 'auto') {
+            props.onChange(x.value, 'lineHeight');
+          } else {
+            props.onChange(widthVal + x.value, 'lineHeight');
+          }
         }
       }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
     }))
@@ -67578,10 +66735,6 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
     "%": {
       "label": "%",
       "value": "%"
@@ -67761,10 +66914,6 @@ function Html(props) {
     rem: {
       "label": "REM",
       "value": "rem"
-    },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
     },
     "%": {
       "label": "%",
@@ -68637,7 +67786,7 @@ function Html(props) {
     return null;
   }
 
-  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '1px solid 000000' : props.val;
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '1px solid #000000' : props.val;
   var valParts = valZ != undefined ? valZ.split(" ") : ['1px', 'solid', '#000000'];
   var widthVal = valParts[0];
   var styleVal = valParts[1];
@@ -68721,14 +67870,6 @@ function Html(props) {
     rem: {
       "label": "REM",
       "value": "rem"
-    },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
-    "%": {
-      "label": "%",
-      "value": "%"
     },
     cm: {
       "label": "CM",
@@ -69291,14 +68432,6 @@ function Html(props) {
     rem: {
       "label": "REM",
       "value": "rem"
-    },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
-    "%": {
-      "label": "%",
-      "value": "%"
     },
     cm: {
       "label": "CM",
@@ -70437,10 +69570,6 @@ function Html(props) {
       "label": "REM",
       "value": "rem"
     },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
     "%": {
       "label": "%",
       "value": "%"
@@ -70728,16 +69857,7 @@ class PGcssTextOverflow extends Component {
           }
         }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
       }))
-    }), (val != 'clip' || val != 'ellipsis' || val != 'initial' || val != 'inherit') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-      for: ""
-    }, "Custom String"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
-      className: "mr-2",
-      value: val,
-      onChange: newVal => {
-        var string = '"' + newVal + '"';
-        onChange(string, 'textOverflow');
-      }
-    })));
+    }));
   }
 
 }
@@ -72759,14 +71879,6 @@ function Html(props) {
     rem: {
       "label": "REM",
       "value": "rem"
-    },
-    auto: {
-      "label": "AUTO",
-      "value": "auto"
-    },
-    "%": {
-      "label": "%",
-      "value": "%"
     },
     cm: {
       "label": "CM",

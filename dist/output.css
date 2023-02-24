@@ -854,6 +854,10 @@ img {
   display: table-row;
 }
 
+.flow-root {
+  display: flow-root;
+}
+
 .grid {
   display: grid;
 }

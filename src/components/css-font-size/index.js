@@ -20,7 +20,6 @@ function Html(props) {
     px: { "label": "PX", "value": "px" },
     em: { "label": "EM", "value": "em" },
     rem: { "label": "REM", "value": "rem" },
-    auto: { "label": "AUTO", "value": "auto" },
     "%": { "label": "%", "value": "%" },
 
     cm: { "label": "CM", "value": "cm" },
@@ -35,7 +34,21 @@ function Html(props) {
     vh: { "label": "VH", "value": "vh" },
     vmin: { "label": "VMIN", "value": "vmin" },
     vmax: { "label": "VMAX", "value": "vmax" },
+    // large: { "label": "large", "value": "large" },
+    // larger: { "label": "larger", "value": "larger" },
+    // medium: { "label": "medium", "value": "medium" },
+    // small: { "label": "small", "value": "small" },
+    // smaller: { "label": "smaller", "value": "smaller" },
+    // "x-large": { "label": "x-large", "value": "x-large" },
+    // "x-small": { "label": "x-small", "value": "x-small" },
+    // "xx-large": { "label": "xx-large", "value": "xx-large" },
+    // "xx-small": { "label": "xx-small", "value": "xx-small" },
+    // "xxx-large": { "label": "xxx-large", "value": "xxx-large" },
 
+    // revert: { "label": "revert", "value": "revert" },
+    // unset: { "label": "unset", "value": "unset" },
+    // initial: { "label": "initial", "value": "initial" },
+    // inherit: { "label": "inherit", "value": "inherit" },
   }
 
 

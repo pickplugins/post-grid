@@ -26,6 +26,7 @@ import PGcssTextAlign from '../../components/css-text-align'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
+import PGCssLibrary from '../../components/css-library'
 
 var myStore = wp.data.select('postgrid-shop');
 
@@ -67,7 +68,6 @@ registerBlockType("post-grid/text", {
         {
           textAlign: {},
           color: { Desktop: '' },
-          bgColor: {},
           padding: { Desktop: '' },
           margin: { Desktop: '' },
           display: {},
@@ -189,6 +189,59 @@ registerBlockType("post-grid/text", {
       ev.preventDefault();
       return false;
     }
+
+
+
+    function onPickCssLibraryText(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        text[sudoScource] = sudoScourceArgs;
+      })
+
+      var textX = Object.assign({}, text);
+      setAttributes({ text: textX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -869,6 +922,12 @@ registerBlockType("post-grid/text", {
                         icon: styles,
                         className: 'tab-style',
                       },
+                      {
+                        name: 'css',
+                        title: 'CSS Library',
+                        icon: styles,
+                        className: 'tab-css',
+                      },
                     ]}
                   >
                     <PGtab name="options">
@@ -924,6 +983,9 @@ registerBlockType("post-grid/text", {
                     </PGtab>
                     <PGtab name="styles">
                       <PGStyles obj={text} onChange={onChangeStyleText} onAdd={onAddStyleText} onRemove={onRemoveStyleText} />
+                    </PGtab>
+                    <PGtab name="css">
+                      <PGCssLibrary blockId={blockId} obj={text} onChange={onPickCssLibraryText} />
                     </PGtab>
                   </PGtabs>
 

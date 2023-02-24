@@ -29,6 +29,7 @@ import PGcssDisplay from '../../components/css-display'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
+import PGCssLibrary from '../../components/css-library'
 
 var myStore = wp.data.select('postgrid-shop');
 
@@ -68,7 +69,6 @@ registerBlockType("post-grid/list", {
         {
 
           color: { Desktop: '' },
-          bgColor: {},
           padding: { Desktop: '' },
           margin: { Desktop: '' },
           display: {},
@@ -102,13 +102,12 @@ registerBlockType("post-grid/list", {
         {
 
           color: { Desktop: '' },
-          bgColor: {},
           padding: { Desktop: '' },
           margin: { Desktop: '' },
-          display: {},
-          listStyle: {},
-          listStylePosition: {},
-          listStyleType: {},
+          display: { Desktop: '' },
+          listStyle: { Desktop: '' },
+          listStylePosition: { Desktop: '' },
+          listStyleType: { Desktop: '' },
 
         },
       },
@@ -124,16 +123,10 @@ registerBlockType("post-grid/list", {
         styles:
         {
           color: { Desktop: '' },
-          bgColor: {},
           padding: { Desktop: '' },
           margin: { Desktop: '' },
 
-          display: {},
-
           fontSize: { Desktop: '' },
-          lineHeight: {}, // { val: '18', unit: 'px' }
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
         },
       },
     },
@@ -268,6 +261,149 @@ registerBlockType("post-grid/list", {
       setAttributes({ icon: { ...icon, options: options } });
 
     }
+
+
+
+
+
+
+
+    function onPickCssLibraryWrapper(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        wrapper[sudoScource] = sudoScourceArgs;
+      })
+
+      var wrapperX = Object.assign({}, wrapper);
+      setAttributes({ wrapper: wrapperX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+    function onPickCssLibraryItem(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        item[sudoScource] = sudoScourceArgs;
+      })
+
+      var itemX = Object.assign({}, item);
+      setAttributes({ item: itemX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+    function onPickCssLibraryIcon(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        icon[sudoScource] = sudoScourceArgs;
+      })
+
+      var iconX = Object.assign({}, icon);
+      setAttributes({ icon: iconX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1074,6 +1210,12 @@ registerBlockType("post-grid/list", {
                       icon: styles,
                       className: 'tab-style',
                     },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
+                    },
                   ]}
                 >
                   <PGtab name="options">
@@ -1117,6 +1259,9 @@ registerBlockType("post-grid/list", {
                   <PGtab name="styles">
                     <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
                   </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
+                  </PGtab>
                 </PGtabs>
 
 
@@ -1142,6 +1287,12 @@ registerBlockType("post-grid/list", {
                       title: 'Styles',
                       icon: styles,
                       className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
                     },
                   ]}
                 >
@@ -1250,136 +1401,12 @@ registerBlockType("post-grid/list", {
 
 
 
-                    <PanelRow>
-                      <label for="">List style type?</label>
-
-                      <SelectControl
-                        label=""
-                        value={item.styles.listStyleType[breakPointX]}
-
-                        options={[
-                          { label: 'Select..', value: '' },
-                          { label: 'disc', value: 'disc' },
-                          { label: 'armenian', value: 'armenian' },
-                          { label: 'circle', value: 'circle' },
-                          { label: 'cjk-ideographic', value: 'cjk-ideographic' },
-                          { label: 'decimal', value: 'decimal' },
-                          { label: 'decimal-leading-zero', value: 'decimal-leading-zero' },
-                          { label: 'georgian', value: 'georgian' },
-                          { label: 'hebrew', value: 'hebrew' },
-                          { label: 'hiragana', value: 'hiragana' },
-                          { label: 'hiragana-iroha', value: 'hiragana-iroha' },
-                          { label: 'katakana', value: 'katakana' },
-                          { label: 'katakana-iroha', value: 'katakana-iroha' },
-                          { label: 'lower-alpha', value: 'lower-alpha' },
-                          { label: 'lower-greek', value: 'lower-greek' },
-                          { label: 'lower-latin', value: 'lower-latin' },
-                          { label: 'lower-roman', value: 'lower-roman' },
-                          { label: 'square', value: 'square' },
-                          { label: 'upper-alpha', value: 'upper-alpha' },
-                          { label: 'upper-greek', value: 'upper-greek' },
-                          { label: 'upper-latin', value: 'upper-latin' },
-                          { label: 'upper-roman', value: 'upper-roman' },
-                          { label: 'none', value: 'none' },
-
-                        ]}
-                        onChange={(newVal) => {
-
-
-
-                          var newValuesObj = {};
-
-
-                          if (Object.keys(item.styles.listStyleType).length == 0) {
-                            newValuesObj[breakPointX] = newVal;
-                          } else {
-                            newValuesObj = item.styles.listStyleType;
-                            newValuesObj[breakPointX] = newVal;
-                          }
-
-
-                          var styles = { ...item.styles, listStyleType: newValuesObj };
-                          setAttributes({ item: { ...item, styles: styles } });
-
-
-                          var newValuesObjX = {};
-                          if (blockCssY.items[itemSelector] == undefined) {
-
-                            newValuesObjX[itemSelector] = { ...blockCssY.items[itemSelector], 'list-style-type': newValuesObj };
-
-                          } else {
-
-                            newValuesObjX[itemSelector] = { ...blockCssY.items[itemSelector], 'list-style-type': newValuesObj };
-                          }
-
-
-                          setAttributes({ blockCssY: { items: newValuesObjX } });
-
-
-                        }
-
-                        }
-                      />
-                    </PanelRow>
-
-
-
-                    <PanelRow>
-                      <label for="">List style position?</label>
-
-                      <SelectControl
-                        label=""
-                        value={item.styles.listStylePosition[breakPointX]}
-
-                        options={[
-                          { label: 'Select..', value: '' },
-                          { label: 'inside', value: 'inside' },
-                          { label: 'outside', value: 'outside' },
-
-
-                        ]}
-                        onChange={(newVal) => {
-
-
-
-                          var newValuesObj = {};
-
-
-                          if (Object.keys(item.styles.listStylePosition).length == 0) {
-                            newValuesObj[breakPointX] = newVal;
-                          } else {
-                            newValuesObj = item.styles.listStylePosition;
-                            newValuesObj[breakPointX] = newVal;
-                          }
-
-
-                          var styles = { ...item.styles, listStylePosition: newValuesObj };
-                          setAttributes({ item: { ...item, styles: styles } });
-
-
-                          var newValuesObjX = {};
-                          if (blockCssY.items[itemSelector] == undefined) {
-
-                            newValuesObjX[itemSelector] = { ...blockCssY.items[itemSelector], 'list-style-position': newValuesObj };
-
-                          } else {
-
-                            newValuesObjX[itemSelector] = { ...blockCssY.items[itemSelector], 'list-style-position': newValuesObj };
-                          }
-
-
-                          setAttributes({ blockCssY: { items: newValuesObjX } });
-
-
-                        }
-
-                        }
-                      />
-                    </PanelRow>
-
                   </PGtab>
                   <PGtab name="styles">
                     <PGStyles obj={item} onChange={onChangeStyleItem} onAdd={onAddStyleItem} onRemove={onRemoveStyleItem} />
+                  </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={item} onChange={onPickCssLibraryItem} />
                   </PGtab>
                 </PGtabs>
 
@@ -1410,6 +1437,12 @@ registerBlockType("post-grid/list", {
                       title: 'Styles',
                       icon: styles,
                       className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
                     },
                   ]}
                 >
@@ -1443,6 +1476,9 @@ registerBlockType("post-grid/list", {
                   </PGtab>
                   <PGtab name="styles">
                     <PGStyles obj={wrapper} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                  </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={icon} onChange={onPickCssLibraryIcon} />
                   </PGtab>
                 </PGtabs>
 

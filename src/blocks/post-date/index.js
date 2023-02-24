@@ -32,6 +32,7 @@ import PGcssDisplay from '../../components/css-display'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
+import PGCssLibrary from '../../components/css-library'
 
 
 
@@ -347,6 +348,221 @@ registerBlockType("post-grid/post-date", {
       setAttributes({ postDate: { ...postDate, options: options } });
 
     }
+
+
+
+
+
+
+    function onPickCssLibraryWrapper(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        wrapper[sudoScource] = sudoScourceArgs;
+      })
+
+      var wrapperX = Object.assign({}, wrapper);
+      setAttributes({ wrapper: wrapperX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+    function onPickCssLibraryPostDate(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        postDate[sudoScource] = sudoScourceArgs;
+      })
+
+      var postDateX = Object.assign({}, postDate);
+      setAttributes({ postDate: postDateX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, postDateSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+    function onPickCssLibraryIcon(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        icon[sudoScource] = sudoScourceArgs;
+      })
+
+      var iconX = Object.assign({}, icon);
+      setAttributes({ icon: iconX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+    function onPickCssLibraryPrefix(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        prefix[sudoScource] = sudoScourceArgs;
+      })
+
+      var prefixX = Object.assign({}, prefix);
+      setAttributes({ prefix: prefixX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+    function onPickCssLibraryPostfix(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        postfix[sudoScource] = sudoScourceArgs;
+      })
+
+      var postfixX = Object.assign({}, postfix);
+      setAttributes({ postfix: postfixX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1633,6 +1849,12 @@ registerBlockType("post-grid/post-date", {
                         icon: styles,
                         className: 'tab-style',
                       },
+                      {
+                        name: 'css',
+                        title: 'CSS Library',
+                        icon: styles,
+                        className: 'tab-css',
+                      },
                     ]}
                   >
                     <PGtab name="options">
@@ -1668,6 +1890,9 @@ registerBlockType("post-grid/post-date", {
                     </PGtab>
                     <PGtab name="styles">
                       <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                    </PGtab>
+                    <PGtab name="css">
+                      <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
                     </PGtab>
                   </PGtabs>
 
@@ -1706,6 +1931,12 @@ registerBlockType("post-grid/post-date", {
                         title: 'Styles',
                         icon: styles,
                         className: 'tab-style',
+                      },
+                      {
+                        name: 'css',
+                        title: 'CSS Library',
+                        icon: styles,
+                        className: 'tab-css',
                       },
                     ]}
                   >
@@ -2017,6 +2248,9 @@ registerBlockType("post-grid/post-date", {
                     <PGtab name="styles">
                       <PGStyles obj={postDate} onChange={onChangeStylePostDate} onAdd={onAddStylePostDate} onRemove={onRemoveStylePostDate} />
                     </PGtab>
+                    <PGtab name="css">
+                      <PGCssLibrary blockId={blockId} obj={postDate} onChange={onPickCssLibraryPostDate} />
+                    </PGtab>
                   </PGtabs>
 
 
@@ -2053,6 +2287,12 @@ registerBlockType("post-grid/post-date", {
                         title: 'Styles',
                         icon: styles,
                         className: 'tab-style',
+                      },
+                      {
+                        name: 'css',
+                        title: 'CSS Library',
+                        icon: styles,
+                        className: 'tab-css',
                       },
                     ]}
                   >
@@ -2103,6 +2343,9 @@ registerBlockType("post-grid/post-date", {
                     <PGtab name="styles">
                       <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
                     </PGtab>
+                    <PGtab name="css">
+                      <PGCssLibrary blockId={blockId} obj={icon} onChange={onPickCssLibraryIcon} />
+                    </PGtab>
                   </PGtabs>
 
 
@@ -2140,6 +2383,12 @@ registerBlockType("post-grid/post-date", {
                         icon: styles,
                         className: 'tab-style',
                       },
+                      {
+                        name: 'css',
+                        title: 'CSS Library',
+                        icon: styles,
+                        className: 'tab-css',
+                      },
                     ]}
                   >
                     <PGtab name="options">
@@ -2165,6 +2414,9 @@ registerBlockType("post-grid/post-date", {
                     </PGtab>
                     <PGtab name="styles">
                       <PGStyles obj={prefix} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
+                    </PGtab>
+                    <PGtab name="css">
+                      <PGCssLibrary blockId={blockId} obj={prefix} onChange={onPickCssLibraryPrefix} />
                     </PGtab>
                   </PGtabs>
 
@@ -2196,6 +2448,12 @@ registerBlockType("post-grid/post-date", {
                         icon: styles,
                         className: 'tab-style',
                       },
+                      {
+                        name: 'css',
+                        title: 'CSS Library',
+                        icon: styles,
+                        className: 'tab-css',
+                      },
                     ]}
                   >
                     <PGtab name="options">
@@ -2220,6 +2478,9 @@ registerBlockType("post-grid/post-date", {
                     </PGtab>
                     <PGtab name="styles">
                       <PGStyles obj={postfix} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
+                    </PGtab>
+                    <PGtab name="css">
+                      <PGCssLibrary blockId={blockId} obj={postfix} onChange={onPickCssLibraryPostfix} />
                     </PGtab>
                   </PGtabs>
 

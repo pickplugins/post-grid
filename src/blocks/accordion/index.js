@@ -26,6 +26,7 @@ import PGIconPicker from '../../components/icon-picker'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
+import PGCssLibrary from '../../components/css-library'
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -334,6 +335,123 @@ registerBlockType("post-grid/accordion", {
 
     }
 
+
+
+    function onPickCssLibraryHeader(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        header[sudoScource] = sudoScourceArgs;
+      })
+
+      var headerX = Object.assign({}, header);
+      setAttributes({ header: headerX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, headerSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+    function onPickCssLibraryContent(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        content[sudoScource] = sudoScourceArgs;
+      })
+
+      var contentX = Object.assign({}, content);
+      setAttributes({ content: contentX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, contentSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+    function onPickCssLibraryIcon(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        icon[sudoScource] = sudoScourceArgs;
+      })
+
+      var iconX = Object.assign({}, icon);
+      setAttributes({ icon: iconX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
 
 
 
@@ -1090,6 +1208,12 @@ registerBlockType("post-grid/accordion", {
                       icon: styles,
                       className: 'tab-style',
                     },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
+                    },
                   ]}
                 >
                   <PGtab name="options">
@@ -1129,6 +1253,9 @@ registerBlockType("post-grid/accordion", {
                   <PGtab name="styles">
                     <PGStyles obj={header} onChange={onChangeStyleHeader} onAdd={onAddStyleHeader} onRemove={onRemoveStyleHeader} />
                   </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={header} onChange={onPickCssLibraryHeader} />
+                  </PGtab>
                 </PGtabs>
 
 
@@ -1155,6 +1282,12 @@ registerBlockType("post-grid/accordion", {
                       title: 'Styles',
                       icon: styles,
                       className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
                     },
                   ]}
                 >
@@ -1190,6 +1323,12 @@ registerBlockType("post-grid/accordion", {
                       title: 'Styles',
                       icon: styles,
                       className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
                     },
                   ]}
                 >
@@ -1229,6 +1368,9 @@ registerBlockType("post-grid/accordion", {
                   <PGtab name="styles">
                     <PGStyles obj={content} onChange={onChangeStyleContent} onAdd={onAddStyleContent} onRemove={onRemoveStyleContent} />
                   </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={content} onChange={onPickCssLibraryContent} />
+                  </PGtab>
                 </PGtabs>
 
 
@@ -1264,6 +1406,12 @@ registerBlockType("post-grid/accordion", {
                       title: 'Styles',
                       icon: styles,
                       className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
                     },
                   ]}
                 >
@@ -1341,6 +1489,9 @@ registerBlockType("post-grid/accordion", {
                   </PGtab>
                   <PGtab name="styles">
                     <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                  </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={icon} onChange={onPickCssLibraryIcon} />
                   </PGtab>
                 </PGtabs>
 

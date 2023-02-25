@@ -17264,10 +17264,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link-off.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link-off.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../breakpoints */ "./src/breakpoints.js");
@@ -17284,6 +17284,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_contact_support__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/contact-support */ "./src/components/contact-support/index.js");
 /* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
 /* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_css_library__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../components/css-library */ "./src/components/css-library/index.js");
 
 
 
@@ -17303,6 +17304,7 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
 
 
 
@@ -17462,6 +17464,40 @@ var myStore = wp.data.select('postgrid-shop');
         }
       }
     },
+    prefix: {
+      type: 'object',
+      default: {
+        options: {
+          text: '',
+          class: 'prefix'
+        },
+        styles: {
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
+        }
+      }
+    },
+    postfix: {
+      type: 'object',
+      default: {
+        options: {
+          text: '',
+          class: 'postfix'
+        },
+        styles: {
+          color: {
+            Desktop: ''
+          },
+          backgroundColor: {
+            Desktop: ''
+          }
+        }
+      }
+    },
     customCss: {
       "type": "string",
       "default": ''
@@ -17492,6 +17528,8 @@ var myStore = wp.data.select('postgrid-shop');
     var blockClass = '.' + blockIdX;
     var wrapper = attributes.wrapper;
     var frontText = attributes.frontText;
+    var prefix = attributes.prefix;
+    var postfix = attributes.postfix;
     var blockCssY = attributes.blockCssY;
     var customCss = attributes.customCss;
     var metaKey = attributes.metaKey;
@@ -17581,6 +17619,8 @@ var myStore = wp.data.select('postgrid-shop');
     const fieldSelector = blockClass + ' .fieldVal';
     const frontTextSelector = blockClass + ' .frontText';
     const iconSelector = blockClass + ' .icon';
+    const prefixSelector = blockClass + ' .prefix';
+    const postfixSelector = blockClass + ' .postfix';
     var breakPointList = [];
 
     for (var x in _breakpoints__WEBPACK_IMPORTED_MODULE_9__["default"]) {
@@ -17619,6 +17659,166 @@ var myStore = wp.data.select('postgrid-shop');
       var iconHtml = `<span class="${iconSrc}"></span>`;
       setIconHtml(iconHtml);
     }, [icon]);
+
+    function onPickCssLibraryWrapper(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        wrapper[sudoScource] = sudoScourceArgs;
+      });
+      var wrapperX = Object.assign({}, wrapper);
+      setAttributes({
+        wrapper: wrapperX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onPickCssLibraryFrontText(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        frontText[sudoScource] = sudoScourceArgs;
+      });
+      var frontTextX = Object.assign({}, frontText);
+      setAttributes({
+        frontText: frontTextX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onPickCssLibraryIcon(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        icon[sudoScource] = sudoScourceArgs;
+      });
+      var iconX = Object.assign({}, icon);
+      setAttributes({
+        icon: iconX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onPickCssLibraryPrefix(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        prefix[sudoScource] = sudoScourceArgs;
+      });
+      var prefixX = Object.assign({}, prefix);
+      setAttributes({
+        prefix: prefixX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onPickCssLibraryPostfix(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        postfix[sudoScource] = sudoScourceArgs;
+      });
+      var postfixX = Object.assign({}, postfix);
+      setAttributes({
+        postfix: postfixX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
@@ -17947,6 +18147,160 @@ var myStore = wp.data.select('postgrid-shop');
       const object = myStore.addPropertyDeep(obj, path, '');
       setAttributes({
         frontText: object
+      });
+    }
+
+    function onChangeStylePrefix(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, prefix);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+      setAttributes({
+        prefix: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      }); // var sudoScourceX = { ...prefix[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+      // sudoScourceX[attr][breakPointX] = newVal;
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ prefix: { ...prefix } });
+    }
+
+    function onRemoveStylePrefix(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(prefix, [sudoScource, key, breakPointX]);
+      setAttributes({
+        prefix: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({
+        blockCssY: {
+          items: cssObject
+        }
+      }); // var sudoScourceX = { ...prefix[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+      // prefix[sudoScource] = sudoScourceX;
+      // //sudoScourceX[attr][breakPointX] = newVal;
+      // setAttributes({ prefix: { ...prefix } });
+      // if (blockCssY.items[prefixSelector] == undefined) {
+      //   blockCssY.items[prefixSelector] = {};
+      // }
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[prefixSelector][argAttr] = argAttrVal;
+      // })
+      // if (blockCssY.items[prefixSelector][key] != undefined) {
+      //   delete blockCssY.items[prefixSelector][key];
+      // }
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+    function onAddStylePrefix(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, prefix);
+      const object = myStore.addPropertyDeep(obj, path, '');
+      setAttributes({
+        prefix: object
+      });
+    }
+
+    function onChangeStylePostfix(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, postfix);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+      setAttributes({
+        postfix: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      }); // var sudoScourceX = { ...postfix[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+      // sudoScourceX[attr][breakPointX] = newVal;
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ postfix: { ...postfix } });
+    }
+
+    function onRemoveStylePostfix(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(postfix, [sudoScource, key, breakPointX]);
+      setAttributes({
+        postfix: object
+      });
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({
+        blockCssY: {
+          items: cssObject
+        }
+      }); // var sudoScourceX = { ...postfix[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+      // postfix[sudoScource] = sudoScourceX;
+      // //sudoScourceX[attr][breakPointX] = newVal;
+      // setAttributes({ postfix: { ...postfix } });
+      // if (blockCssY.items[postfixSelector] == undefined) {
+      //   blockCssY.items[postfixSelector] = {};
+      // }
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+      // })
+      // if (blockCssY.items[postfixSelector][key] != undefined) {
+      //   delete blockCssY.items[postfixSelector][key];
+      // }
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+    }
+
+    function onAddStylePostfix(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, postfix);
+      const object = myStore.addPropertyDeep(obj, path, '');
+      setAttributes({
+        postfix: object
       });
     }
 
@@ -18525,13 +18879,18 @@ var myStore = wp.data.select('postgrid-shop');
       tabs: [{
         name: 'options',
         title: 'Options',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
         className: 'tab-settings'
       }, {
         name: 'styles',
         title: 'Styles',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
         className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-css'
       }]
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
       name: "options"
@@ -18556,6 +18915,12 @@ var myStore = wp.data.select('postgrid-shop');
       onChange: onChangeStyleWrapper,
       onAdd: onAddStyleWrapper,
       onRemove: onRemoveStyleWrapper
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      blockId: blockId,
+      obj: wrapper,
+      onChange: onPickCssLibraryWrapper
     })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Field Settings",
       initialOpen: false
@@ -18567,13 +18932,18 @@ var myStore = wp.data.select('postgrid-shop');
       tabs: [{
         name: 'options',
         title: 'Options',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
         className: 'tab-settings'
       }, {
         name: 'style',
         title: 'Style',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
         className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-css'
       }]
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
       name: "options"
@@ -18636,13 +19006,13 @@ var myStore = wp.data.select('postgrid-shop');
       className: "relative"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       className: linkPickerPosttitle ? "!bg-gray-400" : '',
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"],
       onClick: ev => {
         setLinkPickerPosttitle(prev => !prev);
       }
     }), field.options.customUrl.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Button, {
       className: "!text-red-500 ml-2",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_26__["default"],
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_27__["default"],
       onClick: ev => {
         var options = { ...field.options,
           customUrl: ''
@@ -18708,34 +19078,6 @@ var myStore = wp.data.select('postgrid-shop');
       onChange: newVal => {
         var options = { ...field.options,
           customUrl: newVal
-        };
-        setAttributes({
-          field: { ...field,
-            options: options
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-      for: ""
-    }, "Prefix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
-      value: field.options.prefix,
-      onChange: newVal => {
-        var options = { ...field.options,
-          prefix: newVal
-        };
-        setAttributes({
-          field: { ...field,
-            options: options
-          }
-        });
-      }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-      for: ""
-    }, "Postfix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
-      value: field.options.postfix,
-      onChange: newVal => {
-        var options = { ...field.options,
-          postfix: newVal
         };
         setAttributes({
           field: { ...field,
@@ -18818,8 +19160,12 @@ var myStore = wp.data.select('postgrid-shop');
       onAdd: onAddStyleField,
       onRemove: onRemoveStyleField
     })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
-      name: "animation"
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      blockId: blockId,
+      obj: icon,
+      onChange: onPickCssLibraryIcon
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Icon",
       initialOpen: false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_21__["default"], {
@@ -18830,13 +19176,18 @@ var myStore = wp.data.select('postgrid-shop');
       tabs: [{
         name: 'options',
         title: 'Options',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
         className: 'tab-settings'
       }, {
         name: 'styles',
         title: 'Styles',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
         className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-css'
       }]
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
       name: "options"
@@ -18881,10 +19232,16 @@ var myStore = wp.data.select('postgrid-shop');
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
       name: "styles"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_17__["default"], {
-      obj: wrapper,
+      obj: icon,
       onChange: onChangeStyleIcon,
       onAdd: onAddStyleIcon,
       onRemove: onRemoveStyleIcon
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      blockId: blockId,
+      obj: icon,
+      onChange: onPickCssLibraryIcon
     })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Front Text",
       initialOpen: false
@@ -18896,13 +19253,18 @@ var myStore = wp.data.select('postgrid-shop');
       tabs: [{
         name: 'options',
         title: 'Options',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_23__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
         className: 'tab-settings'
       }, {
         name: 'styles',
         title: 'Styles',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
         className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-css'
       }]
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
       name: "options"
@@ -18923,10 +19285,123 @@ var myStore = wp.data.select('postgrid-shop');
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
       name: "styles"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_17__["default"], {
-      obj: wrapper,
+      obj: frontText,
       onChange: onChangeStyleFrontText,
       onAdd: onAddStyleFrontText,
       onRemove: onRemoveStyleFrontText
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      blockId: blockId,
+      obj: frontText,
+      onChange: onPickCssLibraryFrontText
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+      title: "Prefix",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-css'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "options"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Prefix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
+      value: prefix.options.text,
+      onChange: newVal => {
+        var options = { ...prefix.options,
+          text: newVal
+        };
+        setAttributes({
+          prefix: {
+            styles: prefix.styles,
+            options: options
+          }
+        }); // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
+      }
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      obj: prefix,
+      onChange: onChangeStylePrefix,
+      onAdd: onAddStylePrefix,
+      onRemove: onRemoveStylePrefix
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      blockId: blockId,
+      obj: prefix,
+      onChange: onPickCssLibraryPrefix
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
+      title: "Postfix",
+      initialOpen: false
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_21__["default"], {
+      activeTab: "options",
+      orientation: "horizontal",
+      activeClass: "active-tab",
+      onSelect: tabName => {},
+      tabs: [{
+        name: 'options',
+        title: 'Options',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_24__["default"],
+        className: 'tab-settings'
+      }, {
+        name: 'styles',
+        title: 'Styles',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_25__["default"],
+        className: 'tab-css'
+      }]
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "options"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      for: ""
+    }, "Postfix"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
+      value: postfix.options.text,
+      onChange: newVal => {
+        var options = { ...postfix.options,
+          text: newVal
+        };
+        setAttributes({
+          postfix: { ...postfix,
+            options: options
+          }
+        }); // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, backgroundColor: postfix.backgroundColor } })
+      }
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "styles"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      obj: postfix,
+      onChange: onChangeStylePostfix,
+      onAdd: onAddStylePostfix,
+      onRemove: onRemoveStylePostfix
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      blockId: blockId,
+      obj: postfix,
+      onChange: onPickCssLibraryPostfix
     })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
@@ -18996,30 +19471,30 @@ var myStore = wp.data.select('postgrid-shop');
       dangerouslySetInnerHTML: {
         __html: iconHtml
       }
-    }), !field.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, field.options.prefix.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }), !field.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, prefix.options.text.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "prefix"
-    }, field.options.prefix), metaKey == 'avatar' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    }, prefix.options.text), metaKey == 'avatar' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       className: "fieldVal",
       src: postAuthorData['avatar_url'],
       alt: postAuthorData['display_name']
     }), metaKey != 'avatar' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "fieldVal"
-    }, postAuthorData[metaKey]), field.options.postfix.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, postAuthorData[metaKey]), postfix.options.text.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "postfix"
-    }, field.options.postfix)), field.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    }, postfix.options.text)), field.options.isLink && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: "#",
       target: field.options.linkTarget
-    }, field.options.prefix.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, prefix.options.text.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "prefix"
-    }, field.options.prefix), metaKey == 'avatar' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    }, prefix.options.text), metaKey == 'avatar' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       className: "fieldVal",
       src: postAuthorData['avatar_url'],
       alt: postAuthorData['display_name']
     }), metaKey != 'avatar' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "fieldVal"
-    }, postAuthorData[metaKey]), field.options.postfix.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, postAuthorData[metaKey]), postfix.options.text.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "postfix"
-    }, field.options.postfix)), icon.options.position == 'afterField' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, postfix.options.text)), icon.options.position == 'afterField' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: icon.options.class,
       dangerouslySetInnerHTML: {
         __html: iconHtml
@@ -43728,8 +44203,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/styles.js");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
@@ -43743,6 +44218,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
 /* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
 /* harmony import */ var _components_styles__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/styles */ "./src/components/styles/index.js");
+/* harmony import */ var _components_css_library__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../components/css-library */ "./src/components/css-library/index.js");
 
 
 
@@ -43761,6 +44237,7 @@ __webpack_require__.r(__webpack_exports__);
 const {
   RawHTML
 } = wp.element;
+
 
 
 
@@ -43861,6 +44338,34 @@ var myStore = wp.data.select('postgrid-shop');
         }
       }
     },
+    prefix: {
+      type: 'object',
+      default: {
+        options: {
+          text: '',
+          class: 'prefix'
+        },
+        styles: {
+          color: {
+            Desktop: ''
+          }
+        }
+      }
+    },
+    postfix: {
+      type: 'object',
+      default: {
+        options: {
+          text: '',
+          class: 'postfix'
+        },
+        styles: {
+          color: {
+            Desktop: ''
+          }
+        }
+      }
+    },
     customCss: {
       "type": "string",
       "default": ''
@@ -43892,6 +44397,8 @@ var myStore = wp.data.select('postgrid-shop');
     var meta = attributes.meta;
     var template = attributes.template;
     var templateLoop = attributes.templateLoop;
+    var prefix = attributes.prefix;
+    var postfix = attributes.postfix;
     var wrapper = attributes.wrapper;
     var items = attributes.items;
     var blockCssY = attributes.blockCssY;
@@ -44011,7 +44518,72 @@ var myStore = wp.data.select('postgrid-shop');
       });
     }
 
+    const WrapperTag = wrapper.options.tag != undefined && wrapper.options.tag.length != 0 ? `${wrapper.options.tag}` : 'div';
     const CustomTag = wrapper.options.tag != undefined && wrapper.options.tag.length != 0 ? `${wrapper.options.tag}` : 'div';
+
+    function onPickCssLibraryWrapper(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        wrapper[sudoScource] = sudoScourceArgs;
+      });
+      var wrapperX = Object.assign({}, wrapper);
+      setAttributes({
+        wrapper: wrapperX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
+
+    function onPickCssLibraryMeta(args) {
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        meta[sudoScource] = sudoScourceArgs;
+      });
+      var metaX = Object.assign({}, meta);
+      setAttributes({
+        meta: metaX
+      });
+      var styleObj = {};
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, metaValueSelector);
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+        styleObj[elementSelector] = sudoObj;
+      });
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({
+        blockCssY: {
+          items: cssItems
+        }
+      });
+    }
 
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
@@ -44235,13 +44807,18 @@ var myStore = wp.data.select('postgrid-shop');
       tabs: [{
         name: 'options',
         title: 'Options',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
         className: 'tab-settings'
       }, {
         name: 'styles',
         title: 'Styles',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
         className: 'tab-style'
+      }, {
+        name: 'css',
+        title: 'CSS Library',
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
+        className: 'tab-css'
       }]
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
       name: "options"
@@ -44313,6 +44890,12 @@ var myStore = wp.data.select('postgrid-shop');
       onChange: onChangeStyleWrapper,
       onAdd: onAddStyleWrapper,
       onRemove: onRemoveStyleWrapper
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      blockId: blockId,
+      obj: wrapper,
+      onChange: onPickCssLibraryWrapper
     })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Meta Key",
       initialOpen: true
@@ -44324,14 +44907,20 @@ var myStore = wp.data.select('postgrid-shop');
       tabs: [{
         name: 'options',
         title: 'Options',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
         className: 'tab-settings'
       }, {
         name: 'styles',
         title: 'Styles',
-        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_20__["default"],
         className: 'tab-style'
-      }]
+      } // {
+      //   name: 'css',
+      //   title: 'CSS Library',
+      //   icon: styles,
+      //   className: 'tab-css',
+      // },
+      ]
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
       name: "options"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
@@ -44376,8 +44965,8 @@ var myStore = wp.data.select('postgrid-shop');
           template: newVal
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-      className: "my-3",
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "You can use following ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, "{metaValue}"), " to display output"), meta.options.type != 'string' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      className: "mt-5 block",
       for: ""
     }, "Loop Template "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.TextareaControl, {
       placeholder: "<div>{title}</div><div>{details}</div>",
@@ -44406,13 +44995,19 @@ var myStore = wp.data.select('postgrid-shop');
       }, key), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "px-3 py-2"
       }, val));
-    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
       name: "styles"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_17__["default"], {
       obj: meta,
       onChange: onChangeStyleMeta,
       onAdd: onAddStyleMeta,
       onRemove: onRemoveStyleMeta
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      name: "css"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_css_library__WEBPACK_IMPORTED_MODULE_18__["default"], {
+      blockId: blockId,
+      obj: meta,
+      onChange: onPickCssLibraryMeta
     })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelBody, {
       title: "Custom Style",
       initialOpen: false
@@ -44442,7 +45037,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(CustomTag, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(WrapperTag, {
       className: [blockId],
       dangerouslySetInnerHTML: {
         __html: metaHtml

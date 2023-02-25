@@ -26,6 +26,7 @@ import PGDropdown from '../../components/dropdown'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
+import PGCssLibrary from '../../components/css-library'
 
 
 var myStore = wp.data.select('postgrid-shop');
@@ -104,7 +105,31 @@ registerBlockType("post-grid/post-meta", {
 
       },
     },
+    prefix: {
+      type: 'object',
+      default: {
+        options: { text: '', class: 'prefix' },
 
+        styles:
+        {
+          color: { Desktop: '' },
+
+        },
+      },
+    },
+
+    postfix: {
+      type: 'object',
+      default: {
+        options: { text: '', class: 'postfix' },
+
+        styles:
+        {
+          color: { Desktop: '' },
+
+        },
+      },
+    },
 
     customCss: {
       "type": "string",
@@ -145,6 +170,8 @@ registerBlockType("post-grid/post-meta", {
     var template = attributes.template;
     var templateLoop = attributes.templateLoop;
 
+    var prefix = attributes.prefix;
+    var postfix = attributes.postfix;
 
 
     var wrapper = attributes.wrapper;
@@ -264,8 +291,105 @@ registerBlockType("post-grid/post-meta", {
 
 
 
+    const WrapperTag = (wrapper.options.tag != undefined && wrapper.options.tag.length != 0) ? `${wrapper.options.tag}` : 'div';
 
     const CustomTag = (wrapper.options.tag != undefined && wrapper.options.tag.length != 0) ? `${wrapper.options.tag}` : 'div';
+
+
+
+
+
+
+
+
+    function onPickCssLibraryWrapper(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        wrapper[sudoScource] = sudoScourceArgs;
+      })
+
+      var wrapperX = Object.assign({}, wrapper);
+      setAttributes({ wrapper: wrapperX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+    function onPickCssLibraryMeta(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        meta[sudoScource] = sudoScourceArgs;
+      })
+
+      var metaX = Object.assign({}, meta);
+      setAttributes({ meta: metaX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, metaValueSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -601,6 +725,12 @@ registerBlockType("post-grid/post-meta", {
                     icon: styles,
                     className: 'tab-style',
                   },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
+                  },
                 ]}
               >
                 <PGtab name="options">
@@ -653,6 +783,9 @@ registerBlockType("post-grid/post-meta", {
                 <PGtab name="styles">
                   <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
                 </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
+                </PGtab>
               </PGtabs>
 
 
@@ -680,6 +813,12 @@ registerBlockType("post-grid/post-meta", {
                     icon: styles,
                     className: 'tab-style',
                   },
+                  // {
+                  //   name: 'css',
+                  //   title: 'CSS Library',
+                  //   icon: styles,
+                  //   className: 'tab-css',
+                  // },
                 ]}
               >
                 <PGtab name="options">
@@ -731,55 +870,72 @@ registerBlockType("post-grid/post-meta", {
                     }}
                   />
 
+                  <p>You can use following <code>&#123;metaValue&#125;</code> to display output</p>
 
-                  <label className='my-3' for="">Loop Template </label>
+                  {meta.options.type != 'string' && (
 
-
-                  <TextareaControl
-                    placeholder='<div>{title}</div><div>{details}</div>'
-
-                    value={templateLoop}
-                    onChange={(newVal) => {
-
-                      setAttributes({ templateLoop: newVal });
+                    <>
 
 
-                    }}
-                  />
+                      <label className='mt-5 block' for="">Loop Template </label>
+                      <TextareaControl
+                        placeholder='<div>{title}</div><div>{details}</div>'
 
-                  <p>You can use following for loop template to iterate array elements <code>&#60;div&#62; &#123;itemIndex1&#125;&#60;/div&#62;&#60;div&#62;&#123;itemIndex2&#125;&#60;/div&#62;</code></p>
+                        value={templateLoop}
+                        onChange={(newVal) => {
 
-                  <div className='my-3'>
-
-                    <label for="">Parameters</label>
-                    <div className=''>
-
-                      {metaArgs != undefined && Object.entries(metaArgs).map((arg, i) => {
-
-                        var key = arg[0]
-                        var val = arg[1]
-
-                        return (
-                          <div className='my-2 bg-gray-300'>
-                            <div onClick={ev => {
-                              var target = ev.target;
+                          setAttributes({ templateLoop: newVal });
 
 
-                            }} className='bg-gray-500 px-3 py-2 text-white'>{key}</div>
-                            <div className='px-3 py-2'>{val}</div>
-                          </div>
+                        }}
+                      />
 
-                        )
+                      <p>You can use following for loop template to iterate array elements <code>&#60;div&#62; &#123;itemIndex1&#125;&#60;/div&#62;&#60;div&#62;&#123;itemIndex2&#125;&#60;/div&#62;</code></p>
 
-                      })}
+                      <div className='my-3'>
+
+                        <label for="">Parameters</label>
+                        <div className=''>
+
+                          {metaArgs != undefined && Object.entries(metaArgs).map((arg, i) => {
+
+                            var key = arg[0]
+                            var val = arg[1]
+
+                            return (
+                              <div className='my-2 bg-gray-300'>
+                                <div onClick={ev => {
+                                  var target = ev.target;
 
 
-                    </div>
+                                }} className='bg-gray-500 px-3 py-2 text-white'>{key}</div>
+                                <div className='px-3 py-2'>{val}</div>
+                              </div>
 
-                  </div>
+                            )
+
+                          })}
+
+
+                        </div>
+
+                      </div>
+
+                    </>
+
+                  )}
+
+
+
+
+
+
                 </PGtab>
                 <PGtab name="styles">
                   <PGStyles obj={meta} onChange={onChangeStyleMeta} onAdd={onAddStyleMeta} onRemove={onRemoveStyleMeta} />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={meta} onChange={onPickCssLibraryMeta} />
                 </PGtab>
               </PGtabs>
 
@@ -844,7 +1000,7 @@ registerBlockType("post-grid/post-meta", {
           />)}
 
 
-          <CustomTag className={[blockId]} dangerouslySetInnerHTML={{ __html: metaHtml }} />
+          <WrapperTag className={[blockId]} dangerouslySetInnerHTML={{ __html: metaHtml }} />
 
         </>
       ]

@@ -31,6 +31,7 @@ import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
+import PGCssLibrary from '../../components/css-library'
 
 var myStore = wp.data.select('postgrid-shop');
 
@@ -151,6 +152,34 @@ registerBlockType("post-grid/post-author-fields", {
 
       },
     },
+
+    prefix: {
+      type: 'object',
+      default: {
+        options:
+          { text: '', class: 'prefix', },
+        styles:
+        {
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+
+        },
+      },
+    },
+
+    postfix: {
+      type: 'object',
+      default: {
+        options:
+          { text: '', class: 'postfix', },
+        styles:
+        {
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+
+        },
+      },
+    },
     customCss: {
       "type": "string",
       "default": ''
@@ -190,7 +219,8 @@ registerBlockType("post-grid/post-author-fields", {
 
     var wrapper = attributes.wrapper;
     var frontText = attributes.frontText;
-
+    var prefix = attributes.prefix;
+    var postfix = attributes.postfix;
     var blockCssY = attributes.blockCssY;
     var customCss = attributes.customCss;
     var metaKey = attributes.metaKey;
@@ -243,6 +273,10 @@ registerBlockType("post-grid/post-author-fields", {
     const fieldSelector = blockClass + ' .fieldVal';
     const frontTextSelector = blockClass + ' .frontText';
     const iconSelector = blockClass + ' .icon';
+    const prefixSelector  = blockClass + ' .prefix';
+    const postfixSelector  = blockClass + ' .postfix';
+
+
 
     var breakPointList = [];
 
@@ -306,6 +340,219 @@ registerBlockType("post-grid/post-author-fields", {
 
 
     }, [icon]);
+
+
+
+
+
+
+
+    function onPickCssLibraryWrapper(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        wrapper[sudoScource] = sudoScourceArgs;
+      })
+
+      var wrapperX = Object.assign({}, wrapper);
+      setAttributes({ wrapper: wrapperX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+    function onPickCssLibraryFrontText(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        frontText[sudoScource] = sudoScourceArgs;
+      })
+
+      var frontTextX = Object.assign({}, frontText);
+      setAttributes({ frontText: frontTextX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, frontTextSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+    function onPickCssLibraryIcon(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        icon[sudoScource] = sudoScourceArgs;
+      })
+
+      var iconX = Object.assign({}, icon);
+      setAttributes({ icon: iconX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+    function onPickCssLibraryPrefix(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        prefix[sudoScource] = sudoScourceArgs;
+      })
+
+      var prefixX = Object.assign({}, prefix);
+      setAttributes({ prefix: prefixX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+    function onPickCssLibraryPostfix(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        postfix[sudoScource] = sudoScourceArgs;
+      })
+
+      var postfixX = Object.assign({}, postfix);
+      setAttributes({ postfix: postfixX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -777,6 +1024,204 @@ registerBlockType("post-grid/post-author-fields", {
 
 
 
+
+    function onChangeStylePrefix(sudoScource, newVal, attr) {
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, prefix);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ prefix: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+
+      // var sudoScourceX = { ...prefix[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ prefix: { ...prefix } });
+
+    }
+
+
+    function onRemoveStylePrefix(sudoScource, key) {
+
+
+      var object = myStore.deletePropertyDeep(prefix, [sudoScource, key, breakPointX]);
+      setAttributes({ prefix: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+      // var sudoScourceX = { ...prefix[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // prefix[sudoScource] = sudoScourceX;
+      // //sudoScourceX[attr][breakPointX] = newVal;
+
+      // setAttributes({ prefix: { ...prefix } });
+
+      // if (blockCssY.items[prefixSelector] == undefined) {
+      //   blockCssY.items[prefixSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[prefixSelector][argAttr] = argAttrVal;
+
+      // })
+
+
+      // if (blockCssY.items[prefixSelector][key] != undefined) {
+      //   delete blockCssY.items[prefixSelector][key];
+      // }
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePrefix(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, prefix);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ prefix: object });
+
+    }
+
+
+    function onChangeStylePostfix(sudoScource, newVal, attr) {
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, postfix);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ postfix: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+      // var sudoScourceX = { ...postfix[sudoScource] }
+      // var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+
+
+      // sudoScourceX[attr][breakPointX] = newVal;
+
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //   blockCssY.items[elementSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      // })
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+      // setAttributes({ postfix: { ...postfix } });
+
+    }
+
+
+    function onRemoveStylePostfix(sudoScource, key) {
+
+
+      var object = myStore.deletePropertyDeep(postfix, [sudoScource, key, breakPointX]);
+      setAttributes({ postfix: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+      // var sudoScourceX = { ...postfix[sudoScource] }
+      // if (sudoScourceX[key] != undefined) {
+      //   delete sudoScourceX[key];
+      // }
+
+      // postfix[sudoScource] = sudoScourceX;
+      // //sudoScourceX[attr][breakPointX] = newVal;
+
+      // setAttributes({ postfix: { ...postfix } });
+
+      // if (blockCssY.items[postfixSelector] == undefined) {
+      //   blockCssY.items[postfixSelector] = {};
+      // }
+
+      // Object.entries(sudoScourceX).map(args => {
+
+      //   var argAttr = myStore.cssAttrParse(args[0]);
+      //   var argAttrVal = args[1];
+      //   blockCssY.items[postfixSelector][argAttr] = argAttrVal;
+
+      // })
+
+      // if (blockCssY.items[postfixSelector][key] != undefined) {
+      //   delete blockCssY.items[postfixSelector][key];
+      // }
+
+
+      // setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    }
+
+
+    function onAddStylePostfix(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, postfix);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ postfix: object });
+
+    }
 
 
 
@@ -1595,6 +2040,12 @@ registerBlockType("post-grid/post-author-fields", {
                     icon: styles,
                     className: 'tab-style',
                   },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
+                  },
                 ]}
               >
                 <PGtab name="options">
@@ -1615,6 +2066,9 @@ registerBlockType("post-grid/post-author-fields", {
                 </PGtab>
                 <PGtab name="styles">
                   <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
                 </PGtab>
               </PGtabs>
 
@@ -1649,7 +2103,12 @@ registerBlockType("post-grid/post-author-fields", {
                     icon: styles,
                     className: 'tab-style',
                   },
-
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
+                  },
 
 
                 ]}
@@ -1833,33 +2292,6 @@ registerBlockType("post-grid/post-author-fields", {
 
 
 
-                    <PanelRow>
-                      <label for="">Prefix</label>
-                      <InputControl
-                        value={field.options.prefix}
-                        onChange={(newVal) => {
-                          var options = { ...field.options, prefix: newVal };
-                          setAttributes({ field: { ...field, options: options } });
-                        }
-                        }
-                      />
-                    </PanelRow>
-
-                    <PanelRow>
-                      <label for="">Postfix</label>
-                      <InputControl
-                        value={field.options.postfix}
-                        onChange={(newVal) => {
-
-
-                          var options = { ...field.options, postfix: newVal };
-                          setAttributes({ field: { ...field, options: options } });
-
-
-                        }}
-                      />
-                    </PanelRow>
-
 
 
 
@@ -1932,429 +2364,15 @@ registerBlockType("post-grid/post-author-fields", {
                 <PGtab name="style">
                   <PGStyles obj={field} onChange={onChangeStyleField} onAdd={onAddStyleField} onRemove={onRemoveStyleField} />
                 </PGtab>
-                <PGtab name="animation">
-
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={icon} onChange={onPickCssLibraryIcon} />
                 </PGtab>
 
               </PGtabs>
 
-              {/* 
-              <TabPanel
-                className=""
-                activeClass="active-tab bg-gray-200"
-                orientation="horizontal"
-                initialTabName="settings"
-                onSelect={(tabName) => {}}
-                tabs={[
-                  {
-                    name: 'settings',
-                    title: 'Options',
-                    className: 'tab-settings',
-                  },
-                  {
-                    name: 'style',
-                    title: 'Style',
-                    className: 'tab-style',
-                  },
-                ]}>
-                {
-                  (tab) => (
-                    <div className='my-4'>
-                      {tab.name == 'settings' && (
 
-                        <>
 
-                          <ToggleControl
-                            label="Is linked?"
-                            help={(field.options != undefined && field.options.isLink) ? 'User field is linked' : 'User field is not linked'}
-                            checked={(field.options != undefined && field.options.isLink) ? true : false}
-                            onChange={(e) => {
 
-
-                              var options = { ...field.options, isLink: field.options.isLink ? false : true };
-                              setAttributes({ field: { ...field, options: options } });
-
-
-
-                            }}
-                          />
-
-                          {field.options.isLink && (
-                            <>
-
-                              <PanelRow>
-                                <label for="">Link To</label>
-
-
-
-                                <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle="Choose" onChange={setFieldLinkTo} values={metaKey}></PGDropdown>
-
-
-                              </PanelRow>
-
-
-                              <div className='bg-gray-500 p-2 my-3 text-white'>{(linkToArgs[field.options.linkTo] != undefined) ? linkToArgs[field.options.linkTo].label : ''}</div>
-
-                              {field.options.linkTo == 'authorMeta' && (
-
-                                <PanelRow>
-                                  <label for="">Author Meta Key</label>
-
-                                  <InputControl
-                                    value={field.options.linkToMeta}
-                                    onChange={(newVal) => {
-
-
-                                      var options = { ...field.options, linkToMeta: newVal };
-                                      setAttributes({ field: { ...field, options: options } });
-
-                                    }}
-                                  />
-
-                                </PanelRow>
-
-                              )}
-
-
-                              {field.options.linkTo == 'customField' && (
-
-                                <PanelRow>
-                                  <label for="">Custom Meta Key</label>
-
-                                  <InputControl
-                                    value={field.options.linkToAuthorMeta}
-                                    onChange={(newVal) => {
-
-                                      var options = { ...field.options, linkToAuthorMeta: newVal };
-                                      setAttributes({ field: { ...field, options: options } });
-
-                                    }}
-                                  />
-
-                                </PanelRow>
-
-                              )}
-
-
-
-                              {field.options.linkTo == 'customUrl' && (
-
-                                <>
-
-
-
-                                  <PanelRow>
-                                    <label for="">Custom Url</label>
-
-                                    <div className='relative'>
-                                      <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                                        setLinkPickerPosttitle(prev => !prev);
-
-                                      }}></Button>
-                                      {field.options.customUrl.length > 0 && (
-                                        <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                                          var options = { ...field.options, customUrl: '' };
-                                          setAttributes({ field: { ...field, options: options } });
-                                          setLinkPickerPosttitle(false);
-
-
-
-                                        }}></Button>
-
-                                      )}
-                                      {linkPickerPosttitle && (
-                                        <Popover position="bottom right">
-                                          <LinkControl settings={[]} value={field.options.customUrl} onChange={newVal => {
-
-                                            var options = { ...field.options, customUrl: newVal.url };
-
-                                            setAttributes({ field: { ...field, options: options } });
-
-                                          }} />
-
-                                          <div className='p-2'><span className='font-bold'>Linked to:</span> {(field.options.customUrl.length != 0) ? field.options.customUrl : 'No link'} </div>
-                                        </Popover>
-
-                                      )}
-
-
-                                    </div>
-                                  </PanelRow>
-
-                                </>
-
-
-
-
-
-                              )}
-
-
-
-                              <PanelRow>
-                                <label for="">Link Target</label>
-
-                                <SelectControl
-                                  label=""
-                                  value={field.options.linkTarget}
-                                  options={[
-                                    { label: '_self', value: '_self' },
-                                    { label: '_blank', value: '_blank' },
-                                    { label: '_parent', value: '_parent' },
-                                    { label: '_top', value: '_top' },
-                                  ]}
-                                  onChange={
-                                    (newVal) => {
-                                      var options = { ...field.options, linkTarget: newVal };
-                                      setAttributes({ field: { ...field, options: options } });
-                                    }
-                                  }
-                                />
-                              </PanelRow>
-                            </>
-
-                          )}
-
-
-
-
-                          {field.options.linkTo == 'custom' && (
-
-                            <PanelRow>
-                              <label for="">Custom URL</label>
-                              <InputControl
-                                value={field.options.customUrl}
-                                onChange={
-                                  (newVal) => {
-                                    var options = { ...field.options, customUrl: newVal };
-                                    setAttributes({ field: { ...field, options: options } });
-                                  }
-                                }
-                              />
-                            </PanelRow>
-
-                          )}
-
-
-
-                          <PanelRow>
-                            <label for="">Prefix</label>
-                            <InputControl
-                              value={field.options.prefix}
-                              onChange={(newVal) => {
-                                var options = { ...field.options, prefix: newVal };
-                                setAttributes({ field: { ...field, options: options } });
-                              }
-                              }
-                            />
-                          </PanelRow>
-
-                          <PanelRow>
-                            <label for="">Postfix</label>
-                            <InputControl
-                              value={field.options.postfix}
-                              onChange={(newVal) => {
-
-
-                                var options = { ...field.options, postfix: newVal };
-                                setAttributes({ field: { ...field, options: options } });
-
-
-                              }}
-                            />
-                          </PanelRow>
-
-
-
-
-                          {field.options.isLink && (
-
-                            <>
-                              <PanelRow>
-                                <label for="">Link Attributes</label>
-                                <div
-                                  className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-                                  onClick={(ev) => {
-                                    var sdsd = field.options.linkAttr.concat({ id: '', val: '' })
-                                    var options = { ...field.options, linkAttr: sdsd };
-                                    setAttributes({ field: { ...field, options: options } });
-                                    linkAttrObj()
-                                  }}
-                                >Add</div>
-                              </PanelRow>
-                              {
-                                field.options.linkAttr.length > 0 && field.options.linkAttr.map((x, i) => {
-
-                                  return (
-
-                                    <div className='my-2'>
-                                      <PanelRow>
-                                        <InputControl
-                                          className='mr-2'
-                                          value={field.options.linkAttr[i].id}
-                                          onChange={(newVal) => {
-                                            field.options.linkAttr[i].id = newVal;
-                                            var ssdsd = field.options.linkAttr.concat([]);
-                                            var options = { ...field.options, linkAttr: ssdsd };
-                                            setAttributes({ field: { ...field, options: options } });
-
-                                          }}
-                                        />
-
-                                        <InputControl
-                                          className='mr-2'
-                                          value={x.val}
-                                          onChange={(newVal) => {
-                                            field.options.linkAttr[i].val = newVal
-                                            var ssdsd = field.options.linkAttr.concat([]);
-                                            var options = { ...field.options, linkAttr: ssdsd };
-                                            setAttributes({ field: { ...field, options: options } });
-
-                                          }}
-                                        />
-                                        <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                                          onClick={(ev) => {
-
-                                            field.options.linkAttr.splice(i, 1);
-                                            var ssdsd = field.options.linkAttr.concat([]);
-                                            var options = { ...field.options, linkAttr: ssdsd };
-                                            setAttributes({ field: { ...field, options: options } });
-                                          }}
-
-                                        ></span>
-                                      </PanelRow>
-                                    </div>
-                                  )
-                                })
-                              }
-                            </>
-
-                          )}
-
-
-                        </>
-
-                      )}
-
-                      {tab.name == 'style' && (
-                        <PGStyles obj={field} onChange={onChangeStyleField} onAdd={onAddStyleField} onRemove={onRemoveStyleField} />
-
-                      )}
-
-
-
-                    </div>
-                  )
-                }
-              </TabPanel> */}
-
-
-
-
-
-
-
-              {/* 
-              <PanelRow className='my-3'>
-                <label>Color</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-
-
-              <ColorPalette
-                value={field.styles.color[breakPointX]}
-                colors={colorsPresets}
-                enableAlpha
-                onChange={(newVal) => {
-
-                  var newValuesObj = {};
-
-
-                  if (Object.keys(field.styles.color).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = field.styles.color;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...field.styles, color: newValuesObj };
-                  setAttributes({ field: { ...field, styles: styles } });
-
-                  blockCssY.items[fieldSelector] = { ...blockCssY.items[fieldSelector], color: newValuesObj };
-
-                  setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-                }}
-              />
-
-
-              <PanelRow className='my-3'>
-                <label>Background Color</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-
-
-
-
-              </PanelRow>
-
-
-              <ColorPalette
-                value={field.styles.backgroundColor[breakPointX]}
-                colors={colorsPresets}
-                enableAlpha
-                onChange={(newVal) => {
-
-                  var newValuesObj = {};
-
-
-                  if (Object.keys(field.styles.backgroundColor).length == 0) {
-                    newValuesObj[breakPointX] = newVal;
-                  } else {
-                    newValuesObj = field.styles.backgroundColor;
-                    newValuesObj[breakPointX] = newVal;
-                  }
-
-                  var styles = { ...field.styles, backgroundColor: newValuesObj };
-                  setAttributes({ field: { ...field, styles: styles } });
-
-
-
-                  blockCssY.items[fieldSelector] = { ...blockCssY.items[fieldSelector], 'background-color': newValuesObj };
-
-                  setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-                }}
-              />
-
-
-              <PanelRow>
-                <label>Padding</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-              <BoxControl
-                label=""
-                values={field.styles.padding[breakPointX]}
-                onChange={(nextValues) => { paddingControlItems(nextValues) }}
-              />
-
-
-              <PanelRow>
-                <label>Margin</label>
-                <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-              </PanelRow>
-              <BoxControl
-                label=""
-                values={field.styles.margin[breakPointX]}
-                onChange={(nextValues) => { marginControlItems(nextValues) }}
-              />
-
-
-              <Typography typo={field.styles} breakPointX={breakPointX} onChange={onChangeTypo} setAttributes={setAttributes} obj={field} /> */}
 
 
 
@@ -2381,6 +2399,12 @@ registerBlockType("post-grid/post-author-fields", {
                     title: 'Styles',
                     icon: styles,
                     className: 'tab-style',
+                  },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
                   },
                 ]}
               >
@@ -2430,7 +2454,10 @@ registerBlockType("post-grid/post-author-fields", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={wrapper} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={icon} onChange={onPickCssLibraryIcon} />
                 </PGtab>
               </PGtabs>
 
@@ -2467,6 +2494,12 @@ registerBlockType("post-grid/post-author-fields", {
                     icon: styles,
                     className: 'tab-style',
                   },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
+                  },
                 ]}
               >
                 <PGtab name="options">
@@ -2487,7 +2520,10 @@ registerBlockType("post-grid/post-author-fields", {
                   </PanelRow>
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={wrapper} onChange={onChangeStyleFrontText} onAdd={onAddStyleFrontText} onRemove={onRemoveStyleFrontText} />
+                  <PGStyles obj={frontText} onChange={onChangeStyleFrontText} onAdd={onAddStyleFrontText} onRemove={onRemoveStyleFrontText} />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={frontText} onChange={onPickCssLibraryFrontText} />
                 </PGtab>
               </PGtabs>
 
@@ -2497,6 +2533,136 @@ registerBlockType("post-grid/post-author-fields", {
 
             </PanelBody>
 
+            <PanelBody title="Prefix" initialOpen={false}>
+
+
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
+                  },
+                ]}
+              >
+                <PGtab name="options">
+
+                  <PanelRow>
+                    <label for="">Prefix</label>
+
+                    <InputControl
+                      value={prefix.options.text}
+                      onChange={(newVal) => {
+
+
+
+                        var options = { ...prefix.options, text: newVal };
+                        setAttributes({ prefix: { styles: prefix.styles, options: options } });
+
+
+
+                        // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
+                      }
+                      }
+                    />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={prefix} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={prefix} onChange={onPickCssLibraryPrefix} />
+                </PGtab>
+              </PGtabs>
+
+
+
+
+
+
+            </PanelBody>
+
+
+
+
+            <PanelBody title="Postfix" initialOpen={false}>
+
+
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
+                  },
+                ]}
+              >
+                <PGtab name="options">
+
+                  <PanelRow>
+                    <label for="">Postfix</label>
+
+                    <InputControl
+                      value={postfix.options.text}
+                      onChange={(newVal) => {
+
+
+                        var options = { ...postfix.options, text: newVal };
+                        setAttributes({ postfix: { ...postfix, options: options } });
+
+
+                        // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, backgroundColor: postfix.backgroundColor } })
+                      }
+
+                      }
+                    />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={postfix} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={postfix} onChange={onPickCssLibraryPostfix} />
+                </PGtab>
+              </PGtabs>
+
+
+
+            </PanelBody>
 
 
             <PanelBody title="Custom Style" initialOpen={false}>
@@ -2606,8 +2772,8 @@ registerBlockType("post-grid/post-author-fields", {
 
               {!field.options.isLink && (
                 <>
-                  {field.options.prefix.length > 0 && (
-                    <span className='prefix'>{field.options.prefix}</span>
+                  {prefix.options.text.length > 0 && (
+                    <span className='prefix'>{prefix.options.text}</span>
                   )}
 
                   {metaKey == 'avatar' && (
@@ -2618,8 +2784,8 @@ registerBlockType("post-grid/post-author-fields", {
                     <span className='fieldVal'>{postAuthorData[metaKey]}</span>
                   )}
 
-                  {field.options.postfix.length > 0 && (
-                    <span className='postfix'>{field.options.postfix}</span>
+                  {postfix.options.text.length > 0 && (
+                    <span className='postfix'>{postfix.options.text}</span>
                   )}
                 </>
               )
@@ -2634,8 +2800,8 @@ registerBlockType("post-grid/post-author-fields", {
 
               {field.options.isLink && (
                 <a href='#' target={field.options.linkTarget} >
-                  {field.options.prefix.length > 0 && (
-                    <span className='prefix'>{field.options.prefix}</span>
+                  {prefix.options.text.length > 0 && (
+                    <span className='prefix'>{prefix.options.text}</span>
                   )}
 
                   {metaKey == 'avatar' && (
@@ -2648,8 +2814,8 @@ registerBlockType("post-grid/post-author-fields", {
                   )}
 
 
-                  {field.options.postfix.length > 0 && (
-                    <span className='postfix'>{field.options.postfix}</span>
+                  {postfix.options.text.length > 0 && (
+                    <span className='postfix'>{postfix.options.text}</span>
                   )}
                 </a>
 

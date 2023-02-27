@@ -29,7 +29,7 @@ class PGcssOverflowY extends Component {
 
       ;
 
-    //console.log(val);
+
 
     return (
       <div>

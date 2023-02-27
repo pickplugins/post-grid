@@ -70,12 +70,6 @@ function Html(props) {
   const [vericalValY, setvericalVal] = useState(vericalValX);
   const [vericalUnitY, setvericalUnit] = useState(vericalUnitX);
 
-  //console.log(horizontalValY);
-  //console.log(horizontalUnitY);
-
-  //console.log(vericalValY);
-  //console.log(vericalUnitY);
-
 
 
   const [outlinehorizontalVal, setoutlinehorizontalVal] = useState(horizontalVal);

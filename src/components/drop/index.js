@@ -25,7 +25,7 @@ class PGcssDisplay extends Component {
 
     ];
 
-    //console.log(val);
+
 
     return (
       <div>

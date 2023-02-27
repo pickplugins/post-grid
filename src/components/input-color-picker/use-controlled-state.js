@@ -51,9 +51,6 @@ const defaultOptions = {
 function useControlledState(currentState, options = defaultOptions) {
   const { initial, fallback } = { ...defaultOptions, ...options };
 
-  console.log(options);
-  console.log(currentState);
-
 
   const [internalState, setInternalState] = useState(currentState);
   const hasCurrentState = isValueDefined(currentState);
@@ -77,8 +74,6 @@ function useControlledState(currentState, options = defaultOptions) {
   const setState = useCallback(
     (nextState) => {
 
-      console.log(nextState);
-      console.log('hasCurrentState', hasCurrentState);
 
 
       //if (!hasCurrentState) {

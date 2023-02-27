@@ -33,7 +33,7 @@ class PGcssBackgroundPosition extends Component {
       { label: "unset", value: "unset" },
     ];
 
-    //console.log(val);
+
 
     return (
       <div>

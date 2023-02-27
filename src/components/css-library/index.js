@@ -66,7 +66,7 @@ function Html(props) {
       method: 'POST',
       data: {},
     }).then((res) => {
-      ////console.log(res);
+      //
       //setEmailSubscribe({ ...userDetails, email: res.email, status: res.subscribe_status });
       setCssSubmission({ ...cssSubmission, email: res.email });
 
@@ -101,7 +101,6 @@ function Html(props) {
             setCssLibrary({ items: res.posts })
             setCssLibraryCats(res.terms)
             setIsLoading(false);
-            console.log(isLoading);
 
 
           });
@@ -210,12 +209,10 @@ function Html(props) {
                 <div className='p-4 text-center border cursor-pointer pb-7 my-3 relative'
                   onClick={(ev) => {
 
-                    console.log(x.post_content);
 
                     var objCss = JSON.parse(x.post_content);
 
 
-                    console.log(x);
 
                     // var objCss = {
                     //   styles: { "backgroundColor": { "Desktop": "#9DD6DF" }, "textAlign": { "Desktop": "center" }, "border": { "Desktop": "5px dashed #000000" } }, hover: { "border": { "Desktop": "2px dashed #A084CF" } }
@@ -247,7 +244,6 @@ function Html(props) {
 
             var page = queryCss.page + 1;
 
-            console.log(page);
 
 
             setQueryCss({ keyword: queryCss.keyword, page: page, category: queryCss.category, });
@@ -382,7 +378,6 @@ function Html(props) {
                       // setCssLibrary({ items: res.posts })
                       // setCssLibraryCats(res.terms)
 
-                      console.log(res);
 
                       if (res.status == 'success') {
                         setCssSubmission({ ...cssSubmission, status: 'success', message: res.message });

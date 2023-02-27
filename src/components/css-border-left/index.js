@@ -17,7 +17,6 @@ function Html(props) {
     return null;
   }
 
-  console.log(props.val);
 
 
   var valParts = (props.val != undefined) ? props.val.split(" ") : ['0px', 'solid', '#000000'];
@@ -76,8 +75,8 @@ function Html(props) {
 
   }
 
-  //console.log(widthVal);
-  //console.log(widthVal.match(/\d+/g));
+
+
 
 
   var widthValX = (widthVal.match(/\d+/g) != null) ? widthVal.match(/\d+/g)[0] : 1;

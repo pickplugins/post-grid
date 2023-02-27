@@ -14,9 +14,9 @@ function Html(props) {
     return null;
   }
 
-  console.log(props.val);
 
-var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? 'underline #000000 wavy 1px' : props.val;
+
+  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? 'underline #000000 wavy 1px' : props.val;
 
 
   var valParts = (valZ != undefined || valZ != null) ? valZ.split(" ") : ['underline', '#000000', 'wavy', '1px'];
@@ -74,9 +74,6 @@ var valZ = (props.val == null || props.val == undefined || props.val.length == 0
   var [thicknessValY, setthicknessVal] = useState(thicknessValX);
   var [thicknessUnitY, setthicknessUnit] = useState(thicknessUnitX);
 
-  //console.log(thicknessValY);
-  //console.log(thicknessUnitY);
-
 
 
   var [outlinelineVal, setoutlinelineVal] = useState(lineVal);
@@ -132,7 +129,7 @@ var valZ = (props.val == null || props.val == undefined || props.val.length == 0
 
   useEffect(() => {
 
-    ////console.log(val);
+    //
 
     var valParts = (props.val != undefined) ? props.val.split(" ") : ['underline', '#000000', 'wavy', '1px'];
 

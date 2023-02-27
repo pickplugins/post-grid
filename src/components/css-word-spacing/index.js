@@ -50,7 +50,7 @@ function Html(props) {
         type="number"
         onChange={(newVal) => {
 
-          //console.log(newVal);
+
           setwidthVal(newVal);
           props.onChange(newVal + widthUnit, 'wordSpacing');
 

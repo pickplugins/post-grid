@@ -34,7 +34,7 @@ class PGcssVerticalAlign extends Component {
 
       ;
 
-    //console.log(val);
+
 
     return (
       <div>

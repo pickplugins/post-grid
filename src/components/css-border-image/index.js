@@ -19,11 +19,9 @@ function Html(props) {
 
   const ALLOWED_MEDIA_TYPES = ['image'];
 
-  console.log(props.val);
 
   var valZ = (props.val == undefined || props.val == null || props.val.length == 0) ? 'url(border.png)  27 20 30 40/  36px 28px 18px 8px /  18px 14px 9px 4px  round' : props.val;
 
-  console.log(valZ);
 
 
   var source = (valZ == undefined) ? '' : valZ.split("  ")[0];

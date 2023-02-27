@@ -39,7 +39,6 @@ function Html(props) {
         values={valX}
         onChange={(nextValues) => {
 
-          console.log(nextValues);
 
           setvalX({ top: nextValues.top, right: nextValues.right, bottom: nextValues.bottom, left: nextValues.left })
           //nextValues.top + ' ' + nextValues.right + ' ' + nextValues.bottom + ' ' + nextValues.left

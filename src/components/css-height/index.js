@@ -38,18 +38,16 @@ function Html(props) {
 
   }
 
-console.log(props.val);
-console.log(typeof props.val);
 
-if(typeof props.val == 'object'){
-  var valZ = props.val.val+props.val.unit;
 
-}else{
-  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
+  if (typeof props.val == 'object') {
+    var valZ = props.val.val + props.val.unit;
 
-}
+  } else {
+    var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
 
-console.log(valZ);
+  }
+
 
 
   var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
@@ -70,7 +68,7 @@ console.log(valZ);
           disabled={(widthUnit == 'auto') ? true : false}
           onChange={(newVal) => {
 
-            //console.log(newVal);
+
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {

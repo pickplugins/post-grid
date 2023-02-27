@@ -26,7 +26,7 @@ class PGcssDirection extends Component {
       inherit: { "label": "inherit", "value": "inherit" },
     };
 
-    //console.log(val);
+
 
     return (
       <div>

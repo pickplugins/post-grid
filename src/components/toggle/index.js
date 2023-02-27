@@ -32,7 +32,6 @@ class PGtoggle extends Component {
       // useEffect(() => {
       // }, [keyword]);
 
-      //console.log(isOpen);
 
 
 

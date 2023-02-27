@@ -85,9 +85,7 @@ class Typography extends Component {
               }
               var typoX = { ...postTitleX.typo, fontSize: newValuesObj };
 
-              //console.log(postTitleX.typo);
 
-              //console.log(newValuesObj);
               onChange(typoX)
 
 

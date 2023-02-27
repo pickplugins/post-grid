@@ -33,7 +33,6 @@ function Html(props) {
 
   var valX = (props.val == null || props.val == undefined || props.val.length == 0) ? 'linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)' : props.val;
 
-  console.log(valX);
 
 
 
@@ -143,7 +142,6 @@ function Html(props) {
 
       {valArgs.map((x, index) => {
 
-        console.log(x);
 
 
         return (

@@ -19,7 +19,7 @@ function Html(props) {
 
 
 
-  var valParts = (props.val == null ||  props.val == undefined || props.val.length == 0) ? [] : props.val.split(" ");
+  var valParts = (props.val == null || props.val == undefined || props.val.length == 0) ? [] : props.val.split(" ");
   var [valArgs, setvalArgs] = useState([]);
 
 
@@ -32,7 +32,7 @@ function Html(props) {
     if (isExist == undefined) {
       var obj = {}
 
-      console.log(option.value);
+        .log(option.value);
 
 
       obj['id'] = option.value;
@@ -75,12 +75,10 @@ function Html(props) {
 
     var filtered = valParts.filter(Boolean)
 
-    //console.log(filtered);
 
 
     var res = filtered.map(x => {
 
-      console.log(x);
 
 
 
@@ -88,7 +86,6 @@ function Html(props) {
         var argVal = x != undefined ? x.match(/\d+/g)[0] : 1;
         var argId = x != undefined ? x.match(/[a-zA-Z]+/g)[0] : '';
 
-        console.log(argVal);
 
 
         return { id: argId, val: argVal };
@@ -98,11 +95,10 @@ function Html(props) {
 
     })
 
-    console.log(res);
 
 
     setvalArgs(res);
-    //console.log(res);
+
 
   }, [props.val]);
 
@@ -194,7 +190,6 @@ function Html(props) {
                   />
                   <span class="hover:bg-red-500 bg-red-400 text-white ml-1 inline-block p-1 cursor-pointer" onClick={ev => {
 
-                    console.log(i);
 
 
                     valArgs.splice(i, 1);

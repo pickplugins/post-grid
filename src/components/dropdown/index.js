@@ -54,7 +54,6 @@ function Html(props) {
                   setKeyword(newVal);
                 }
 
-                //console.log(typeof options);
 
 
                 if (typeof options == 'object') {
@@ -77,7 +76,6 @@ function Html(props) {
 
                   })
 
-                  //console.log(newOptions);
 
 
                   setfilteredOptions(newOptions);
@@ -193,7 +191,6 @@ function Html(props) {
                 var index = args[0]
                 var x = args[1]
 
-                ////console.log(x.exclude);
 
                 if (x.exclude == false) {
                   return (

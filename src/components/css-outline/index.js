@@ -16,14 +16,12 @@ function Html(props) {
 
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '10px solid #50547d4f' : props.val;
 
-  console.log(valZ);
 
 
   var blur = (valZ != undefined) ? parseInt(valZ.split(" ")[0].match(/\d+/g)[0]) : 2;
   var style = (valZ != undefined) ? valZ.split(" ")[1] : 'solid';
   var color = (valZ != undefined) ? valZ.split(" ")[2] : '#dddddd';
 
-  console.log(style);
 
 
   var styleArgs = {
@@ -56,8 +54,6 @@ function Html(props) {
         value={blur}
         onChange={(newVal) => {
 
-          console.log(newVal);
-          console.log(style);
 
 
           props.onChange(+ newVal + 'px ' + style + ' ' + color, 'outline');

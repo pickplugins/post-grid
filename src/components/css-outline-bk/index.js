@@ -25,9 +25,7 @@ function Html(props) {
   var colorVal = valParts[2];
 
 
-  //console.log(widthVal);
-  //console.log(styleVal);
-  //console.log(colorVal);
+
   var args = {
     fill: { "label": "fill", "value": "fill" },
     contain: { "label": "contain", "value": "contain" },
@@ -69,7 +67,6 @@ function Html(props) {
     vmax: { "label": "VMAX", "value": "vmax" },
   }
 
-  console.log(widthVal);
 
 
   var widthValX = (widthVal == undefined || widthVal == null || widthVal.length == 0) ? 1 : widthVal.match(/\d+/g)[0];
@@ -78,11 +75,6 @@ function Html(props) {
 
   const [widthValY, setwidthVal] = useState(widthValX);
   const [widthUnitY, setwidthUnit] = useState(widthUnitX);
-
-  //console.log(widthValY);
-  //console.log(widthUnitY);
-
-
 
 
   const [outlineWidthVal, setoutlineWidthVal] = useState(widthVal);

@@ -59,14 +59,12 @@ function Html(props) {
 
   useEffect(() => {
 
-    //console.log(valParts);
     var filtered = valParts.filter(Boolean)
 
 
 
     var res = filtered.map(x => {
 
-      //console.log(x.length);
 
 
 
@@ -82,14 +80,13 @@ function Html(props) {
     })
 
     setvalArgs(res);
-    //console.log(res);
+
 
   }, [props.val]);
 
 
   useEffect(() => {
 
-    //console.log(valArgs);
 
 
     //onChange('contrast(200%) brightness(150%) blur(10%)', 'filter');

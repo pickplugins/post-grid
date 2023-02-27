@@ -36,7 +36,7 @@ class PGMailSubsctibe extends Component {
           method: 'POST',
           data: {},
         }).then((res) => {
-          ////console.log(res);
+          //
           setEmailSubscribe({ ...emailSubscribe, email: res.email, status: res.subscribe_status });
 
           var hasSubscribed = (res.subscribe_status == 'subscribed') ? true : false;
@@ -105,7 +105,7 @@ class PGMailSubsctibe extends Component {
                     data: { email: emailSubscribe.email },
                   }).then((res) => {
 
-                    ////console.log(res);
+                    //
 
                     setEmailSubscribe({ ...emailSubscribe, loading: false, status: res.subscribe_status });
 
@@ -139,7 +139,7 @@ class PGMailSubsctibe extends Component {
                     data: { interested: false },
                   }).then((res) => {
 
-                    ////console.log(res);
+                    //
                     setEmailSubscribe({ ...emailSubscribe, loading: false, status: res.subscribe_status });
 
                   });

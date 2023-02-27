@@ -22,7 +22,6 @@ class PGcssTextOverflow extends Component {
       inherit: { "label": "inherit", "value": "inherit" },
     };
 
-    console.log(typeof val);
 
 
     return (

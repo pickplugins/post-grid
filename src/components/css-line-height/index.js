@@ -37,8 +37,7 @@ function Html(props) {
 
   }
 
-  console.log(props.val);
-  console.log(typeof props.val);
+
 
   if (typeof props.val == 'object') {
     var valZ = props.val.val + props.val.unit;
@@ -48,7 +47,6 @@ function Html(props) {
 
   }
 
-  console.log(valZ);
 
 
   var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
@@ -69,7 +67,7 @@ function Html(props) {
           disabled={(widthUnit == 'auto') ? true : false}
           onChange={(newVal) => {
 
-            //console.log(newVal);
+
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {

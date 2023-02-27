@@ -56,7 +56,7 @@ class PGcssCursor extends Component {
     };
 
 
-    //console.log(val);
+
 
 
     return (

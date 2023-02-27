@@ -70,7 +70,6 @@ class PGDropdownSudoSelector extends Component {
                       setKeyword(newVal);
                     }
 
-                    //console.log(typeof options);
 
 
                     if (typeof optionsX == 'object') {
@@ -93,7 +92,6 @@ class PGDropdownSudoSelector extends Component {
 
                       })
 
-                      //console.log(newOptions);
 
 
                       setfilteredOptions(newOptions);
@@ -255,7 +253,6 @@ class PGDropdownSudoSelector extends Component {
                     var index = args[0]
                     var x = args[1]
 
-                    ////console.log(x.exclude);
 
                     if (x.exclude == false) {
                       return (

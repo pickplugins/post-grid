@@ -59,7 +59,7 @@ function Html(props) {
           disabled={(widthUnit == 'auto') ? true : false}
           onChange={(newVal) => {
 
-            //console.log(newVal);
+
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {

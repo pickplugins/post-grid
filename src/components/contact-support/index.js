@@ -34,7 +34,6 @@ class PGContactSupport extends Component {
 
       var utmPrams = new URLSearchParams(utm).toString();
 
-      ////console.log(utmPrams);
 
       var docUrl = 'https://getpostgrid.com/documentations/?' + utmPrams + '&utm_medium=Docsbutton';
       var tutsUrl = 'https://www.youtube.com/playlist?list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6';

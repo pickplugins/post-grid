@@ -1539,7 +1539,7 @@ registerBlockType("post-grid/list", {
 
           {wrapper.options.tag && (
 
-            <CustomTag className={[blockId]}
+            <CustomTag className={[blockId]} id={[blockId]}
               reversed={item.options.reversed ? 'reversed' : ''}
               start={item.options.start}
 
@@ -1655,7 +1655,7 @@ registerBlockType("post-grid/list", {
             </CustomTag>
           )}
 
-          <div className={[blockId]}>
+          <div className={[blockId]} id={[blockId]}>
 
             <div className='bg-blue-500 p-2 px-5 text-white my-4 text-center cursor-pointer' onClick={ev => {
 

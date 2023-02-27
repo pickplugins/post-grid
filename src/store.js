@@ -66,7 +66,7 @@ var selectors = {
     }
 
     else if (key == 'backgroundOrigin') {
-      cssProp = '-background-origin';
+      cssProp = 'background-origin';
     }
 
 

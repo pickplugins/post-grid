@@ -392,7 +392,8 @@ function post_grid_metabox_tabs_content_query_post($tab, $post_id)
                                         <i class="fas fa-expand"></i>
                                         <i class="fas fa-compress"></i>
                                     </span>
-                                    <label><input type="checkbox" <?php if (!empty($checked)) echo 'checked'; ?> name="post_grid_meta_options[taxonomies][<?php echo esc_attr($taxonomy); ?>][checked]" value="<?php echo esc_attr($taxonomy); ?>" /> <?php echo esc_html($the_taxonomy->labels->name); ?>(<?php echo esc_html($taxonomy); ?>)</label>
+                                    <label><input type="checkbox" <?php if (!empty($checked)) echo 'checked'; ?> name="post_grid_meta_options[taxonomies][<?php echo esc_attr($taxonomy); ?>][checked]" value="<?php echo esc_attr($taxonomy); ?>" /> </label>
+                                    <span class="header-text expand  "><?php echo esc_html($the_taxonomy->labels->name); ?>(<?php echo esc_html($taxonomy); ?>)</span>
                                 </div>
                                 <div class="options <?php echo ($taxonomy == 'category') ? 'active' : ''; ?>">
                                     <?php
@@ -1424,7 +1425,7 @@ function post_grid_metabox_tabs_content_grid_settings($tab, $post_id)
 
     $items_width_desktop = !empty($post_grid_meta_options['width']['desktop']) ? $post_grid_meta_options['width']['desktop'] : 3;
     $items_width_tablet = !empty($post_grid_meta_options['width']['tablet']) ? $post_grid_meta_options['width']['tablet'] : 2;
-    $items_width_mobile = !empty($post_grid_meta_options['width']['mobile']) ? $post_grid_meta_options['width']['mobile'] :1;
+    $items_width_mobile = !empty($post_grid_meta_options['width']['mobile']) ? $post_grid_meta_options['width']['mobile'] : 1;
 
 
 

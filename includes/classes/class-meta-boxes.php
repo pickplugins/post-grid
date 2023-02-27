@@ -256,7 +256,7 @@ class post_grid_meta_boxs
             'priority' => 30,
             'active' => ($current_tab == 'grid_settings') ? true : false,
             'data_visible' => 'grid   ',
-            'hidden' => ((($grid_type == 'slider') ? true : false) || (($grid_type == 'masonry') ? true : false) || (($grid_type == 'justified') ? true : false) || (($grid_type == 'filterable') ? true : false) || (($grid_type == 'tiles') ? true : false) ),
+            'hidden' => ((($grid_type == 'slider') ? true : false) || (($grid_type == 'masonry') ? true : false) || (($grid_type == 'justified') ? true : false) || (($grid_type == 'filterable') ? true : false) || (($grid_type == 'tiles') ? true : false)),
 
         );
 
@@ -358,41 +358,26 @@ class post_grid_meta_boxs
 
             <script>
                 jQuery(document).ready(function($) {
-                    $(document).on('click', '.settings-tabs input[name="post_grid_meta_options[grid_type]"]', function() {
-                        var val = $(this).val();
-                        console.log(val);
-                        $('.settings-tabs .tab-navs li').each(function(index) {
-                            data_visible = $(this).attr('data_visible');
-                            if (typeof data_visible != 'undefined') {
-                                n = data_visible.indexOf(val);
-                                if (n < 0) {
-                                    $(this).hide();
-                                } else {
-                                    $(this).show();
-                                }
-                            } else {
-                                console.log('Not matched: ' + data_visible);
-                            }
-                        });
-                    })
 
 
-                    $(document).on('click', '.radio-img label', function() {
+                    $(document).on('click', '#post-grid-view-types .radio-img label', function() {
                         var val = $(this).attr('data-value');
-                        console.log(val);
-                        $('.settings-tabs .tab-navs li').each(function(index) {
-                            data_visible = $(this).attr('data_visible');
-                            if (typeof data_visible != 'undefined') {
-                                n = data_visible.indexOf(val);
-                                if (n < 0) {
-                                    $(this).hide();
-                                } else {
-                                    $(this).show();
-                                }
-                            } else {
-                                console.log('Not matched: ' + data_visible);
-                            }
-                        });
+
+                        if (!$(this).hasClass('disabled')) {
+                            $('.settings-tabs .tab-navs li').each(function(index) {
+                                data_visible = $(this).attr('data_visible');
+                                if (typeof data_visible != 'undefined') {
+                                    n = data_visible.indexOf(val);
+                                    if (n < 0) {
+                                        $(this).hide();
+                                    } else {
+                                        $(this).show();
+                                    }
+                                } else {}
+                            });
+                        }
+
+
                     })
 
 
@@ -425,21 +410,32 @@ class post_grid_meta_boxs
                 $view_types_args = apply_filters('post_grid_view_types', $view_types_args);
 
 
-                $args = array(
-                    'id'        => 'grid_type',
-                    'parent'        => 'post_grid_meta_options',
-                    'title'        => __('View Type', 'post-grid'),
-                    'details'    => '',
-                    'type'        => 'radio_image',
-                    'value'        => $grid_type,
-                    'default'        => '',
-                    'width'        => '100px',
-                    'lazy_load_img'        => post_grid_plugin_url . 'assets/admin/images/loading.gif',
+                ?>
+                <div id="post-grid-view-types">
 
-                    'args'        => $view_types_args,
-                );
+                    <?php
 
-                $settings_tabs_field->generate_field($args);
+                    $args = array(
+                        'id'        => 'grid_type',
+                        'parent'        => 'post_grid_meta_options',
+                        'title'        => __('View Type', 'post-grid'),
+                        'details'    => '',
+                        'type'        => 'radio_image',
+                        'value'        => $grid_type,
+                        'default'        => '',
+                        'width'        => '100px',
+                        'lazy_load_img'        => post_grid_plugin_url . 'assets/admin/images/loading.gif',
+
+                        'args'        => $view_types_args,
+                    );
+
+                    $settings_tabs_field->generate_field($args);
+
+                    ?>
+
+                </div>
+
+                <?php
 
 
 

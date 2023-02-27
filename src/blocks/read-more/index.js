@@ -2418,7 +2418,7 @@ registerBlockType("post-grid/read-more", {
         <>
 
           {wrapper.options.tag && (
-            <CustomTag className={[blockId]}>
+            <CustomTag className={[blockId]} id={[blockId]}>
 
               {icon.options.position == 'beforePrefix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />

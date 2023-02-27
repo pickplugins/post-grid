@@ -1797,7 +1797,7 @@ registerBlockType("post-grid/star-rate", {
 
 
           {wrapper.options.tag && (
-            <CustomTag className={[blockId]} {...wrapAttrItems}>
+            <CustomTag className={[blockId]} id={[blockId]} {...wrapAttrItems}>
 
 
 

@@ -2316,7 +2316,7 @@ registerBlockType("post-grid/post-excerpt", {
           )}
 
           {wrapper.options.tag && (
-            <CustomTagX className={[blockId]}>
+            <CustomTagX className={[blockId]} id={[blockId]}>
               {postExcerpt.options.isLink && (
                 <a className={postExcerpt.options.class} onClick={handleLinkClick}  {...linkAttrItems} href={postUrl}>
 
@@ -2408,7 +2408,7 @@ registerBlockType("post-grid/post-excerpt", {
                   (
                     postExcerpt.options.isLink && (
                       <>
-                        <a className={[blockId]} onClick={handleLinkClick}  {...linkAttrItems} href={postUrl} target={postExcerpt.options.linkTarget}>
+                        <a className={[blockId]} id={[blockId]} onClick={handleLinkClick}  {...linkAttrItems} href={postUrl} target={postExcerpt.options.linkTarget}>
 
                           {prefix.options.text && (
                             <span className='prefix'>{prefix.options.text}</span>

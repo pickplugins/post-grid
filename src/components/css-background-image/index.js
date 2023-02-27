@@ -33,6 +33,7 @@ function Html(props) {
 
   var valX = (props.val == null || props.val == undefined || props.val.length == 0) ? 'linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)' : props.val;
 
+  console.log(valX);
 
 
 
@@ -142,6 +143,9 @@ function Html(props) {
 
       {valArgs.map((x, index) => {
 
+        console.log(x);
+
+
         return (
 
           <PanelBody initialOpen={false} title={<RemoveQueryPram index={index} arg={x} />}>
@@ -196,13 +200,28 @@ function Html(props) {
               <GradientPicker
 
                 value={x}
+                clearable={false}
                 onChange={(newVal) => {
 
 
-                  valArgs[index] = newVal;
+                  if (newVal == undefined) {
 
-                  setValArgs(valArgs);
-                  var valString = valArgs.join(',  ');
+                    valArgs.splice(index, 1);
+                    var ssdsd = valArgs.concat([]);
+
+                    setValArgs(ssdsd);
+
+                    var valString = ssdsd.join(',  ');
+
+                  } else {
+
+                    valArgs[index] = newVal;
+
+                    setValArgs(valArgs);
+                    var valString = valArgs.join(',  ');
+                  }
+
+
 
                   props.onChange(valString, 'backgroundImage');
 
@@ -220,6 +239,10 @@ function Html(props) {
           </PanelBody>
 
         )
+
+
+
+
 
       })}
 

@@ -8,6 +8,7 @@ import { __experimentalInputControl as InputControl, ColorPalette, PanelRow, Ran
 import PGDropdown from '../../components/dropdown'
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import PGColorPicker from '../../components/input-color-picker'
+import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 
 
 function Html(props) {
@@ -18,12 +19,22 @@ function Html(props) {
 
   const ALLOWED_MEDIA_TYPES = ['image'];
 
+  console.log(props.val);
 
-  var source = (props.val != undefined) ? props.val.split(" ")[0] : '';
-  var slice = (props.val != undefined) ? props.val.split(" ")[1] : 0;
-  var width = (props.val != undefined) ? props.val.split(" ")[2] : 0;
-  var outset = (props.val != undefined) ? props.val.split(" ")[3] : 0;
-  var repeat = (props.val != undefined) ? props.val.split(" ")[4] : '';
+  var valZ = (props.val == undefined || props.val == null || props.val.length == 0) ? 'url(border.png)  27 20 30 40/  36px 28px 18px 8px /  18px 14px 9px 4px  round' : props.val;
+
+  console.log(valZ);
+
+
+  var source = (valZ == undefined) ? '' : valZ.split("  ")[0];
+  var slice = (valZ == undefined) ? 10 : valZ.split("  ")[1].replace('/', '');
+  var width = (valZ == undefined) ? 10 : valZ.split("  ")[2].replace('/', '');
+  var outset = (valZ == undefined) ? 10 : valZ.split("  ")[3];
+  var repeat = (valZ == undefined) ? '' : valZ.split("  ")[4];
+
+  slice = slice.replaceAll(' ', 'px ')
+  slice = slice + 'px'
+
 
   var imageVal = source.replace('url("', '');
   imageVal = imageVal.replace('")', '');
@@ -53,7 +64,10 @@ function Html(props) {
           onSelect={(media) => {
             // media.id
 
-            props.onChange('url("' + media.url + '") ' + slice + ' ' + width + ' ' + outset + ' ' + repeat, 'borderImage');
+
+            var sliceX = slice.replaceAll('px', '')
+
+            props.onChange('url(' + media.url + ')  ' + sliceX + '/  ' + width + '/  ' + outset + '  ' + repeat, 'borderImage');
 
 
           }
@@ -79,40 +93,81 @@ function Html(props) {
         <label for="">Slice</label>
 
       </PanelRow>
-      <RangeControl
-        min="0"
-        max="100"
-        step="1"
-        value={slice}
-        onChange={(newVal) => {
-          props.onChange(source + ' ' + newVal + ' ' + width + ' ' + outset + ' ' + repeat, 'borderImage');
+
+
+      <BoxControl
+        label=""
+        values={{ top: slice.split(' ')[0], right: slice.split(' ')[1], bottom: slice.split(' ')[2], left: slice.split(' ')[3] }}
+        onChange={(nextValues) => {
+
+
+          var top = parseInt(nextValues.top);
+          var right = parseInt(nextValues.right);
+          var bottom = parseInt(nextValues.bottom);
+          var left = parseInt(nextValues.left);
+
+          var sliceX = top + ' ' + right + ' ' + bottom + ' ' + left;
+
+          props.onChange(source + '  ' + sliceX + '/  ' + width + '/  ' + outset + '  ' + repeat, 'borderImage');
 
         }}
       />
+
+
+
+
+
       <PanelRow>
         <label for="">Width</label>
 
       </PanelRow>
-      <RangeControl
-        min="0"
-        max="100"
-        step="1"
-        value={width}
-        onChange={(newVal) => {
-          props.onChange(source + ' ' + slice + ' ' + newVal + ' ' + outset + ' ' + repeat, 'borderImage');
+
+
+      <BoxControl
+        label=""
+        values={{ top: width.split(' ')[0], right: width.split(' ')[1], bottom: width.split(' ')[2], left: width.split(' ')[3] }}
+
+        onChange={(nextValues) => {
+
+          var sliceX = slice.replaceAll('px', '');
+
+          var top = (nextValues.top);
+          var right = (nextValues.right);
+          var bottom = (nextValues.bottom);
+          var left = (nextValues.left);
+
+          var widthX = top + ' ' + right + ' ' + bottom + ' ' + left;
+
+
+
+          props.onChange(source + '  ' + sliceX + '/  ' + widthX + '/  ' + outset + '  ' + repeat, 'borderImage');
+
         }}
       />
       <PanelRow>
         <label for="">Outset</label>
 
       </PanelRow>
-      <RangeControl
-        min="0"
-        max="100"
-        step="1"
-        value={outset}
-        onChange={(newVal) => {
-          props.onChange(source + ' ' + slice + ' ' + width + ' ' + newVal + ' ' + repeat, 'borderImage');
+
+      <BoxControl
+        label=""
+        values={{ top: outset.split(' ')[0], right: outset.split(' ')[1], bottom: outset.split(' ')[2], left: outset.split(' ')[3] }}
+
+        onChange={(nextValues) => {
+
+          var sliceX = slice.replaceAll('px', '')
+
+          var top = (nextValues.top);
+          var right = (nextValues.right);
+          var bottom = (nextValues.bottom);
+          var left = (nextValues.left);
+
+          var outsetX = top + ' ' + right + ' ' + bottom + ' ' + left;
+
+
+          props.onChange(source + '  ' + sliceX + '/  ' + width + '/  ' + outsetX + '  ' + repeat, 'borderImage');
+
+
         }}
       />
 
@@ -124,15 +179,19 @@ function Html(props) {
           label=""
           value={repeat}
           options={[
-            { label: 'stretch', value: 'stretch' },
-            { label: 'repeat', value: 'repeat' },
-            { label: 'round', value: 'round' },
-            { label: 'space', value: 'space' },
+            { label: 'Stretch', value: 'stretch' },
+            { label: 'Repeat', value: 'repeat' },
+            { label: 'Round', value: 'round' },
+            { label: 'Space', value: 'space' },
+            { label: 'Fill', value: 'fill' },
+
 
           ]}
           onChange={
             (newVal) => {
-              props.onChange(source + ' ' + slice + ' ' + width + ' ' + outset + ' ' + newVal, 'borderImage');
+              var sliceX = slice.replaceAll('px', '')
+
+              props.onChange(source + '  ' + sliceX + '/  ' + width + '/  ' + outset + '  ' + newVal, 'borderImage');
 
             }
           }

@@ -1047,6 +1047,7 @@ registerBlockType("post-grid/text", {
         <>
           <RichText
             className={[blockId]}
+            id={[blockId]}
             tagName={text.options.tag}
             value={text.options.content}
             allowedFormats={['core/bold', 'core/italic', 'core/link']}

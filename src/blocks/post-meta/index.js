@@ -1000,7 +1000,7 @@ registerBlockType("post-grid/post-meta", {
           />)}
 
 
-          <WrapperTag className={[blockId]} dangerouslySetInnerHTML={{ __html: metaHtml }} />
+          <WrapperTag className={[blockId]} id={[blockId]} dangerouslySetInnerHTML={{ __html: metaHtml }} />
 
         </>
       ]

@@ -1716,7 +1716,7 @@ registerBlockType("post-grid/image", {
 
 
           {!loading && (
-            <div className={[blockId]}>
+            <div className={[blockId]} id={[blockId]}>
 
 
               {(image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && postImage == null && (
@@ -1907,7 +1907,7 @@ registerBlockType("post-grid/image", {
           )}
 
           {wrapper.options.useAsBackground == 'no' && wrapper.options.tag && (
-            <CustomTag className={[blockId]}>
+            <CustomTag className={[blockId]} id={[blockId]}>
               {image.options.linkTo.length > 0 && (
                 <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
 
@@ -1957,7 +1957,7 @@ registerBlockType("post-grid/image", {
             <>
               {
                 image.options.linkTo.length > 0 && (
-                  <a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
+                  <a onClick={handleLinkClick} className={[blockId]} id={[blockId]} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
 
 
                     {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
@@ -1984,7 +1984,7 @@ registerBlockType("post-grid/image", {
 
             <>
               {image.options.tag.length > 0 && (
-                <CustomTagPostTitle className={blockId}>
+                <CustomTagPostTitle className={blockId} id={[blockId]}>
 
                   {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
@@ -1998,7 +1998,7 @@ registerBlockType("post-grid/image", {
 
               )}
               {image.options.tag.length == 0 && (
-                <div className={blockId}>
+                <div className={blockId} id={[blockId]}>
 
                   {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 

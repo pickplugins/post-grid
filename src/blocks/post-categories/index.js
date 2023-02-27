@@ -1867,7 +1867,7 @@ registerBlockType("post-grid/post-categories", {
 
           {categories.length > 0 && (
 
-            <div className={[blockId]}>
+            <div className={[blockId]} id={[blockId]}>
 
               {icon.options.position == 'beforeFronttext' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />

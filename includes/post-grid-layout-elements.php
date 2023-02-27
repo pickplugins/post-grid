@@ -28,7 +28,7 @@ function post_grid_layout_element_option_wrapper_link_start($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Wrapper Link start', 'post-grid'); ?></span>
+            <span class="header-text expand  "><?php echo __('Wrapper Link start', 'post-grid'); ?></span>
 
             <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
 
@@ -177,7 +177,7 @@ function post_grid_layout_element_option_wrapper_link_end($parameters)
                 <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
                 <span class="sort"><i class="fas fa-sort"></i></span>
 
-                <span class="expand"><?php echo __('Wrapper Link end', 'post-grid'); ?></span>
+                <span class="header-text expand"><?php echo __('Wrapper Link end', 'post-grid'); ?></span>
                 <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
             </div>
             <div class="element-options options">
@@ -253,7 +253,7 @@ function post_grid_layout_element_option_wrapper_start($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Wrapper start', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Wrapper start', 'post-grid'); ?></span>
 
             <span class="handle-start"><i class="fas fa-level-up-alt"></i></span>
 
@@ -441,7 +441,7 @@ function post_grid_layout_element_option_wrapper_end($parameters)
                 <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
                 <span class="sort"><i class="fas fa-sort"></i></span>
 
-                <span class="expand"><?php echo __('Wrapper end', 'post-grid'); ?></span>
+                <span class="header-text expand"><?php echo __('Wrapper end', 'post-grid'); ?></span>
                 <span class="handle-end"><i class="fas fa-level-down-alt"></i></span>
             </div>
             <div class="element-options options">
@@ -520,7 +520,7 @@ function post_grid_layout_element_option_custom_text($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Custom text', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Custom text', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -782,7 +782,7 @@ function post_grid_layout_element_option_title($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post title', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Post title', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -1138,7 +1138,7 @@ function post_grid_layout_element_option_title_link($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post title with link', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Post title with link', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -1472,7 +1472,7 @@ function post_grid_layout_element_option_content($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Content', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Content', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -1668,7 +1668,7 @@ function post_grid_layout_element_option_excerpt($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post excerpt', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Post excerpt', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2079,7 +2079,7 @@ function post_grid_layout_element_option_excerpt_read_more($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Excerpt read more', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Excerpt read more', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2440,7 +2440,7 @@ function post_grid_layout_element_option_read_more($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Read more', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Read more', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -2760,7 +2760,7 @@ function post_grid_layout_element_option_media($parameters)
         <div class="element-title header ">
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
-            <span class="expand"><?php echo __('Media', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Media', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
             <?php
@@ -2822,7 +2822,7 @@ function post_grid_layout_element_option_media($parameters)
                                                             else :
                                                                 ?><i class="fas fa-times"></i><?php
                                                                                             endif; ?>
-                                <span class="expand"><?php echo esc_html($source_name); ?></span>
+                                <span class="header-text expand"><?php echo esc_html($source_name); ?></span>
                             </div>
                             <div class="element-options options">
                                 <?php
@@ -3201,7 +3201,7 @@ function post_grid_layout_element_option_thumb($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Thumbnail', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Thumbnail', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -3577,7 +3577,7 @@ function post_grid_layout_element_option_thumb_link($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Thumbnail with link', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Thumbnail with link', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -3953,7 +3953,7 @@ function post_grid_layout_element_option_post_date($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post date', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Post date', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -4283,7 +4283,7 @@ function post_grid_layout_element_option_author($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Author name', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Author name', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -4599,7 +4599,7 @@ function post_grid_layout_element_option_author_link($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Author name with link', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Author name with link', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -4912,7 +4912,7 @@ function post_grid_layout_element_option_categories($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post categories', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Post categories', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -5260,7 +5260,7 @@ function post_grid_layout_element_option_tags($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Post tag', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Post tag', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -5566,7 +5566,7 @@ function post_grid_layout_element_option_comments_count($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Comment count', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Comment count', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -5844,7 +5844,7 @@ function post_grid_layout_element_option_share_button($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Share button', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Share button', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -6082,7 +6082,7 @@ function post_grid_layout_element_option_hr($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Horizontal line', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Horizontal line', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 
@@ -6287,7 +6287,7 @@ function post_grid_layout_element_option_five_star($parameters)
             <span class="remove" onclick="jQuery(this).parent().parent().remove()"><i class="fas fa-times"></i></span>
             <span class="sort"><i class="fas fa-sort"></i></span>
 
-            <span class="expand"><?php echo __('Five star', 'post-grid'); ?></span>
+            <span class="header-text expand"><?php echo __('Five star', 'post-grid'); ?></span>
         </div>
         <div class="element-options options">
 

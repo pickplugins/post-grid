@@ -1504,7 +1504,7 @@ registerBlockType("post-grid/post-featured-image", {
 
 
           {wrapper.options.useAsBackground == 'yes' && (
-            <CustomTag className={[blockId]} style={{ backgroundImage: 'url(' + ((postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '') + ')' }}></CustomTag>
+            <CustomTag className={[blockId]} id={[blockId]} style={{ backgroundImage: 'url(' + ((postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '') + ')' }}></CustomTag>
 
           )}
 
@@ -1517,7 +1517,7 @@ registerBlockType("post-grid/post-featured-image", {
           )}
 
           {wrapper.options.useAsBackground == 'no' && wrapper.options.tag && (
-            <CustomTag className={[blockId]}>
+            <CustomTag className={[blockId]} id={[blockId]}>
               {featuredImage.options.linkTo.length > 0 && (
                 <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={featuredImage.options.linkTarget}>
 
@@ -1568,7 +1568,7 @@ registerBlockType("post-grid/post-featured-image", {
 
             (
               featuredImage.options.linkTo.length > 0 && (
-                <a onClick={handleLinkClick} className={[blockId]} {...linkAttrItems} href={postUrl} target={featuredImage.options.linkTarget}>
+                <a onClick={handleLinkClick} className={[blockId]} id={[blockId]} {...linkAttrItems} href={postUrl} target={featuredImage.options.linkTarget}>
 
 
                   {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
@@ -1583,7 +1583,7 @@ registerBlockType("post-grid/post-featured-image", {
 
             <>
               {featuredImage.options.tag.length > 0 && (
-                <CustomTagPostTitle className={blockId}>
+                <CustomTagPostTitle className={blockId} id={[blockId]}>
 
                   {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
 
@@ -1591,7 +1591,7 @@ registerBlockType("post-grid/post-featured-image", {
 
               )}
               {featuredImage.options.tag.length == 0 && (
-                <div className={blockId}>
+                <div className={blockId} id={[blockId]}>
 
                   {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
 

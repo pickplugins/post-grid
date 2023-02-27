@@ -273,8 +273,8 @@ registerBlockType("post-grid/post-author-fields", {
     const fieldSelector = blockClass + ' .fieldVal';
     const frontTextSelector = blockClass + ' .frontText';
     const iconSelector = blockClass + ' .icon';
-    const prefixSelector  = blockClass + ' .prefix';
-    const postfixSelector  = blockClass + ' .postfix';
+    const prefixSelector = blockClass + ' .prefix';
+    const postfixSelector = blockClass + ' .postfix';
 
 
 
@@ -2749,7 +2749,7 @@ registerBlockType("post-grid/post-author-fields", {
 
           {metaKey.length > 0 && (
 
-            <div className={[blockId]}>
+            <div className={[blockId]} id={[blockId]}>
 
               {icon.options.position == 'beforeFronttext' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />

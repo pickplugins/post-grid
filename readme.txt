@@ -287,7 +287,7 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 = 2.2.31 =
 * 2023-02-18 - update - CSS Library added to more blocks.
 * 2023-02-18 - update - Dropdown component updated.
-* 2023-02-18 - update - Few.
+* 2023-02-18 - update - Old layout editor expand UI updated.
 
 
 = 2.2.31 =

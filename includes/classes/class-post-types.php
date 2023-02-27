@@ -73,8 +73,8 @@ class class_post_grid_post_types
         if (post_type_exists("post_grid_layout"))
             return;
 
-        $singular  = __('Layout', 'post-grid');
-        $plural    = __('Layouts', 'post-grid');
+        $singular  = __('Saved Layout', 'post-grid');
+        $plural    = __('Saved Layouts', 'post-grid');
 
 
         register_post_type(
@@ -84,7 +84,7 @@ class class_post_grid_post_types
                     'name'                     => $plural,
                     'singular_name'         => $singular,
                     'menu_name'             => $singular,
-                    'all_items'             => sprintf(__('All %s (Old)', 'post-grid'), $plural),
+                    'all_items'             => sprintf(__('All %s', 'post-grid'), $plural),
                     'add_new'                 => __('Add New', 'post-grid'),
                     'add_new_item'             => sprintf(__('Add %s', 'post-grid'), $singular),
                     'edit'                     => __('Edit', 'post-grid'),

@@ -2392,7 +2392,7 @@ registerBlockType("post-grid/tabs", {
 
         <>
 
-          <div className={[blockId]}>
+          <div className={[blockId]} id={[blockId]}>
 
             <div className='bg-blue-500 p-2 px-5 text-white text-center my-4 cursor-pointer' onClick={ev => {
 

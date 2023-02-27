@@ -2763,7 +2763,7 @@ registerBlockType("post-grid/icon", {
 
 
           {wrapper.options.tag && (
-            <CustomTag className={[blockId]} {...wrapAttrItems}>
+            <CustomTag className={[blockId]} id={[blockId]} {...wrapAttrItems}>
 
               {icon.options.position == 'beforePrefix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />

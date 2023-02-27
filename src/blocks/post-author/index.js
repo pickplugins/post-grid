@@ -1691,7 +1691,7 @@ registerBlockType("post-grid/post-author", {
         ,
 
 
-        <div className={blockId}>
+        <div className={blockId} id={[blockId]}>
 
 
           {elements.items.map(x => {

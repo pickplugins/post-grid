@@ -2574,7 +2574,7 @@ registerBlockType("post-grid/archive-title", {
         <>
 
           {wrapper.options.tag && (
-            <CustomTag className={[blockId]}>
+            <CustomTag className={[blockId]} id={[blockId]}>
 
               {icon.options.position == 'beforePrefix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
@@ -2663,7 +2663,7 @@ registerBlockType("post-grid/archive-title", {
 
               {archiveTitle.options.linkTo.length == 0 && (
 
-                <div className={[blockId]}>
+                <div className={[blockId]} id={[blockId]}>
 
                   {icon.options.position == 'beforeArchiveTitle' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />

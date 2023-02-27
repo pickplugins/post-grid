@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, 
 	Requires at least: 3.8
 	Tested up to: 6.1.1
-	Stable tag: 2.2.32
+	Stable tag: 2.2.33
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,7 @@ Post Grid Combo is the #1 Gutenberg Blocks plugin for creating a fully customiza
 
 
 [youtube https://www.youtube.com/watch?v=QaoMrdgkyKw]
+[youtube https://www.youtube.com/watch?v=KCi-41Qf1PE]
 
 
 ### Post Grid Builder

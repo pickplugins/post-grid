@@ -543,68 +543,6 @@ class post_grid_meta_boxs
     {
 
     ?>
-        <div class="plugin-help-search">
-            <input type="search" value="" placeholder="Start typing">
-
-            <ul>
-
-                <?php
-                $class_post_grid_support = new class_post_grid_support();
-
-                $video_tutorials =  $class_post_grid_support->video_tutorials();
-
-                foreach ($video_tutorials as $item) {
-                    $url = isset($item['url']) ? $item['url'] : '';
-                    $title = isset($item['title']) ? $item['title'] : '';
-                    $keywords = isset($item['keywords']) ? $item['keywords'] : '';
-
-                ?>
-                    <li keywords="<?php echo esc_attr($keywords); ?>" class="item">
-                        <a target="_blank" href="<?php echo esc_url($url); ?>"><i class="far fa-dot-circle"></i> <?php echo esc_html($title); ?></a>
-
-                    </li>
-                <?php
-
-                }
-
-                ?>
-
-
-            </ul>
-        </div>
-
-
-
-        <style type="text/css">
-            .plugin-help-search {}
-
-            .plugin-help-search input[type=search] {
-                width: 100%;
-            }
-        </style>
-
-        <script>
-            jQuery(document).ready(function($) {
-                jQuery(document).on('keyup', '.plugin-help-search input', function() {
-                    keyword = jQuery(this).val().toLowerCase();
-                    content_body = [];
-
-                    console.log(keyword);
-
-                    $('.plugin-help-search li').each(function(index) {
-                        $(this).hide();
-                        content = $(this).text().toLowerCase();
-                        content_body[index] = content;
-                        n = content_body[index].indexOf(keyword);
-                        if (n < 0) {
-                            $(this).hide();
-                        } else {
-                            $(this).show();
-                        }
-                    });
-                })
-            })
-        </script>
 
 
 
@@ -612,30 +550,33 @@ class post_grid_meta_boxs
         <div class="post-grid-meta-box">
 
 
-
-
-
-
             <ul>
                 <li>Post Grid Version: <?php echo esc_html(post_grid_version); ?></li>
-                <li>Tested WP: 5.4</li>
 
             </ul>
-
+            <br><br>
             <h3>Try Pro</h3>
+            <br>
             <a class="button" href="https://www.pickplugins.com/post-grid/" target="_blank">Buy Pro</a>
             <p class="description">If you are looking some extra feature you may try our premium version.</p>
-
+            <br><br>
             <h3>Documentation</h3>
+            <br>
             <a class="button" href="https://www.pickplugins.com/documentation/post-grid/?ref=dashboard" target="_blank">Documentation</a>
             <p class="description">Before asking, submitting reviews please take a look on our documentation, may help your issue fast.</p>
+            <br><br>
+            <h3>Video Tutorials</h3>
+            <br>
+            <a class="button" href="https://www.pickplugins.com/documentation/post-grid/?ref=dashboard" target="_blank">Go to YouTube</a>
 
+            <br><br>
             <h3>Looking for support?</h3>
+            <br>
             <a class="button" href="https://www.pickplugins.com/forum/?ref=dashboard" target="_blank">Create Support Ticket</a>
             <p class="description">Its free and you can ask any question about our plugins and get support fast.</p>
-
+            <br><br>
             <h3>Provide your feedback</h3>
-
+            <br>
             <a class="button" href="https://wordpress.org/support/plugin/post-grid/reviews/#new-post" target="_blank">Submit Reviews</a> <a class="button" href="https://wordpress.org/support/plugin/post-grid/#new-topic-0" target="_blank">Ask wordpress.org</a>
             <p>We spent thousand+ hours to development on this plugin, please submit your reviews wisely.</p>
             <p>If you have any issue with this plugin please submit our forums or contact our support first.</p>

@@ -17,18 +17,18 @@ class class_post_grid_support
 
             array(
                 'title' => __('How to create post grid', 'post-grid'),
-                'url' => 'https://www.youtube.com/watch?v=g5kxtJIopXs',
+                'url' => 'https://www.youtube.com/watch?v=QaoMrdgkyKw&list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6&index=9&ab_channel=PickPlugins',
                 'keywords' => '',
             ),
-            array(
-                'title' => __('Custom read more text', 'post-grid'),
-                'url' => 'https://www.youtube.com/watch?v=LY7IjS7SFNk',
-                'keywords' => '',
-            ),
-            array(
-                'title' => __('Remove read more text', 'post-grid'),
-                'url' => 'https://www.youtube.com/watch?v=ZcS2vRcTe4A',
-            ),
+            // array(
+            //     'title' => __('Custom read more text', 'post-grid'),
+            //     'url' => 'https://www.youtube.com/watch?v=LY7IjS7SFNk',
+            //     'keywords' => '',
+            // ),
+            // array(
+            //     'title' => __('Remove read more text', 'post-grid'),
+            //     'url' => 'https://www.youtube.com/watch?v=ZcS2vRcTe4A',
+            // ),
             array(
                 'title' => __('Excerpt word count', 'post-grid'),
                 'url' => 'https://www.youtube.com/watch?v=gZ6E3UiKQqk',

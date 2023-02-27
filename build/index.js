@@ -66259,7 +66259,7 @@ function Html(props) {
     colors: _colors_presets__WEBPACK_IMPORTED_MODULE_1__["default"],
     enableAlpha: true,
     onChange: newVal => {
-      props.onChange(h + 'px ' + h + 'px ' + blur + 'px ' + spread + 'px ' + newVal, 'boxShadow');
+      props.onChange(h + 'px ' + v + 'px ' + blur + 'px ' + spread + 'px ' + newVal, 'boxShadow');
     }
   }));
 }
@@ -70869,9 +70869,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+/* harmony import */ var _colors_presets__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../colors-presets */ "./src/colors-presets.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_input_color_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/input-color-picker */ "./src/components/input-color-picker/index.js");
+/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/dropdown */ "./src/components/dropdown/index.js");
 
 const {
   Component,
@@ -70887,37 +70889,13 @@ function Html(props) {
     return null;
   }
 
-  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '1px solid #000000' : props.val;
-  var valParts = valZ != undefined ? valZ.split(" ") : ['1px', 'solid', '#000000'];
-  var widthVal = valParts[0];
-  var styleVal = valParts[1];
-  var colorVal = valParts[2]; //console.log(widthVal);
-  //console.log(styleVal);
-  //console.log(colorVal);
-
-  var args = {
-    fill: {
-      "label": "fill",
-      "value": "fill"
-    },
-    contain: {
-      "label": "contain",
-      "value": "contain"
-    },
-    cover: {
-      "label": "cover",
-      "value": "cover"
-    },
-    'scale-down': {
-      "label": "scale-down",
-      "value": "scale-down"
-    },
-    none: {
-      "label": "none",
-      "value": "none"
-    }
-  };
-  var outlineStyleArgs = {
+  var valZ = props.val == null || props.val == undefined || props.val.length == 0 ? '10px solid #50547d4f' : props.val;
+  console.log(valZ);
+  var blur = valZ != undefined ? parseInt(valZ.split(" ")[0].match(/\d+/g)[0]) : 2;
+  var style = valZ != undefined ? valZ.split(" ")[1] : 'solid';
+  var color = valZ != undefined ? valZ.split(" ")[2] : '#dddddd';
+  console.log(style);
+  var styleArgs = {
     none: {
       "label": "None",
       "value": "none"
@@ -70959,160 +70937,42 @@ function Html(props) {
       "value": "outset"
     }
   };
-  var unitArgs = {
-    px: {
-      "label": "PX",
-      "value": "px"
-    },
-    em: {
-      "label": "EM",
-      "value": "em"
-    },
-    rem: {
-      "label": "REM",
-      "value": "rem"
-    },
-    cm: {
-      "label": "CM",
-      "value": "cm"
-    },
-    mm: {
-      "label": "MM",
-      "value": "mm"
-    },
-    in: {
-      "label": "IN",
-      "value": "in"
-    },
-    pt: {
-      "label": "PT",
-      "value": "pt"
-    },
-    pc: {
-      "label": "PC",
-      "value": "pc"
-    },
-    ex: {
-      "label": "EX",
-      "value": "ex"
-    },
-    ch: {
-      "label": "CH",
-      "value": "ch"
-    },
-    vw: {
-      "label": "VW",
-      "value": "vw"
-    },
-    vh: {
-      "label": "VH",
-      "value": "vh"
-    },
-    vmin: {
-      "label": "VMIN",
-      "value": "vmin"
-    },
-    vmax: {
-      "label": "VMAX",
-      "value": "vmax"
-    }
-  };
-  var widthValX = widthVal != undefined ? widthVal.match(/\d+/g)[0] : 1;
-  var widthUnitX = widthVal != undefined ? widthVal.match(/[a-zA-Z%]+/g)[0] : 'px';
-  const [widthValY, setwidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthValX);
-  const [widthUnitY, setwidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthUnitX); //console.log(widthValY);
-  //console.log(widthUnitY);
-
-  const [outlineWidthVal, setoutlineWidthVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(widthVal);
-  const [outlineStyleVal, setoutlineStyleVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(styleVal);
-  const [outlineColorVal, setoutlineColorVal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(colorVal);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "my-2"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: ""
-  }, "Outline Width"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex justify-between items-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
-    value: widthValY,
-    type: "number",
+  }, "Blur")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    min: "0",
+    max: "100",
+    step: "1",
+    value: blur,
     onChange: newVal => {
-      setwidthVal(newVal);
-      props.onChange(newVal + widthUnitY + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
+      console.log(newVal);
+      console.log(style);
+      props.onChange(+newVal + 'px ' + style + ' ' + color, 'outline');
     }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
-    position: "bottom right",
-    renderToggle: _ref => {
-      let {
-        isOpen,
-        onToggle
-      } = _ref;
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-        title: "",
-        onClick: onToggle,
-        "aria-expanded": isOpen
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: " "
-      }, widthUnitY != undefined ? unitArgs[widthUnitY].label : 'Select...'));
-    },
-    renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "w-32"
-    }, Object.entries(unitArgs).map(y => {
-      var index = y[0];
-      var x = y[1];
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
-        onClick: ev => {
-          setwidthUnit(x.value);
-          props.onChange(widthValY + x.value + ' ' + outlineStyleVal + ' ' + outlineColorVal, 'outline');
-        }
-      }, x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
-    }))
-  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "my-2 flex justify-between items-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: ""
-  }, "Outline Style"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dropdown, {
+  }, "Style"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_4__["default"], {
     position: "bottom right",
-    renderToggle: _ref2 => {
-      let {
-        isOpen,
-        onToggle
-      } = _ref2;
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-        title: "Clear",
-        onClick: onToggle,
-        "aria-expanded": isOpen
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: " "
-      }, outlineStyleVal ? outlineStyleArgs[outlineStyleVal].label : 'Select...'));
+    variant: "secondary",
+    options: styleArgs,
+    buttonTitle: styleArgs[style] == undefined ? 'Choose' : styleArgs[style].label,
+    onChange: (option, index) => {
+      props.onChange(blur + 'px ' + option.value + ' ' + color, 'outline');
     },
-    renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "w-32"
-    }, Object.entries(outlineStyleArgs).map(arg => {
-      var index = arg[0];
-      var x = arg[1];
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: 'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer',
-        onClick: ev => {
-          props.onChange(outlineWidthVal + ' ' + x.value + ' ' + outlineColorVal, 'outline');
-        }
-      }, !x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Reset"), x.value && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, x.label));
-    }))
+    values: ""
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "my-2"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: ""
-  }, "Outline Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
-    value: outlineColorVal,
-    colors: _colors_presets__WEBPACK_IMPORTED_MODULE_2__["default"],
+  }, "Color"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_color_picker__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    value: color,
+    colors: _colors_presets__WEBPACK_IMPORTED_MODULE_1__["default"],
     enableAlpha: true,
     onChange: newVal => {
-      props.onChange(outlineWidthVal + ' ' + outlineStyleVal + ' ' + newVal, 'outline');
+      props.onChange(blur + 'px ' + style + ' ' + newVal, 'outline');
     }
-  })));
+  }));
 }
 
-class PGcssOutline extends Component {
+class PGcssoutline extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71141,7 +71001,7 @@ class PGcssOutline extends Component {
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGcssOutline);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGcssoutline);
 
 /***/ }),
 

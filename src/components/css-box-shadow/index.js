@@ -94,7 +94,7 @@ function Html(props) {
         enableAlpha
         onChange={(newVal) => {
 
-          props.onChange(h + 'px ' + h + 'px ' + blur + 'px ' + spread + 'px ' + newVal, 'boxShadow');
+          props.onChange(h + 'px ' + v + 'px ' + blur + 'px ' + spread + 'px ' + newVal, 'boxShadow');
 
         }}
 

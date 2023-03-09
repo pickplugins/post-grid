@@ -125,13 +125,9 @@ registerBlockType("post-grid/breadcrumb", {
           color: { Desktop: '#18978F' },
           backgroundColor: {},
           padding: { Desktop: '' },
-          margin: {
-            Desktop: { top: '5px', right: '5px', bottom: '5px', left: '5px' }
-          },
-          display: {},
+          margin: { Desktop: '' },
           borderRadius: {},
-
-          fontSize: { Desktop: { val: '35' } },
+          fontSize: { Desktop: '' },
 
 
         },

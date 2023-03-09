@@ -684,9 +684,9 @@ registerBlockType("post-grid/shortcode", {
                         var shortcodePrams = {};
                         var attrArr = x.split('=');
 
-                        shortcodePrams.id = attrArr[0];
-                        shortcodePrams.label = attrArr[0];
-                        shortcodePrams.val = attrArr[1].replaceAll('"', '');
+                        shortcodePrams.id = (attrArr[0] == undefined) ? '' : attrArr[0];
+                        shortcodePrams.label = (attrArr[0] == undefined) ? '' : attrArr[0];
+                        shortcodePrams.val = (attrArr[1] == undefined) ? '' : attrArr[1].replaceAll('"', '');
 
                         options.prams.push(shortcodePrams);
 

@@ -24,12 +24,7 @@
   transition-timing-function: ease;
 }
 
-.ac .ac-panel .ac-text {
-  font: 15px/24px "Arial", sans-serif;
-  color: #111;
-  padding: 10px;
-  margin: 0;
-}
+.ac .ac-panel .ac-text {}
 
 .ac.js-enabled .ac-panel {
   visibility: hidden;

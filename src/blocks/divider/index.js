@@ -357,330 +357,6 @@ registerBlockType("post-grid/divider", {
 
 
 
-
-
-    function paddingControl(nextValues) {
-
-
-
-      var responsive = divider.styles.padding;
-      responsive[breakPointX] = nextValues;
-
-      var styles = { ...divider.styles, padding: responsive };
-      setAttributes({ divider: { ...divider, styles: styles } });
-
-
-      blockCssY.items[dividerSelector] = (blockCssY.items[dividerSelector] != undefined) ? blockCssY.items[dividerSelector] : {};
-
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-
-
-
-      if (nextValues.top != undefined) {
-
-        var paddingTop = (blockCssY.items[dividerSelector]['padding-top'] != undefined) ? blockCssY.items[dividerSelector]['padding-top'] : {};
-        paddingTop[breakPointX] = nextValues.top
-
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'padding-top': paddingTop };
-
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var paddingRight = (blockCssY.items[dividerSelector]['padding-right'] != undefined) ? blockCssY.items[dividerSelector]['padding-right'] : {};
-        paddingRight[breakPointX] = nextValues.right
-
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'padding-right': paddingRight };
-
-
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var paddingBottom = (blockCssY.items[dividerSelector]['padding-bottom'] != undefined) ? blockCssY.items[dividerSelector]['padding-bottom'] : {};
-        paddingBottom[breakPointX] = nextValues.bottom
-
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'padding-bottom': paddingBottom };
-
-
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var paddingLeft = (blockCssY.items[dividerSelector]['padding-left'] != undefined) ? blockCssY.items[dividerSelector]['padding-left'] : {};
-        paddingLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'padding-left': paddingLeft };
-
-
-      }
-
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-
-
-
-
-    function marginControl(nextValues) {
-
-
-      var responsive = divider.styles.margin;
-      responsive[breakPointX] = nextValues;
-
-
-      var styles = { ...divider.styles, margin: responsive };
-      setAttributes({ divider: { ...divider, styles: styles } });
-
-      nextValues.top = (nextValues.top == undefined) ? '0px' : nextValues.top;
-      nextValues.right = (nextValues.right == undefined) ? '0px' : nextValues.right;
-      nextValues.bottom = (nextValues.bottom == undefined) ? '0px' : nextValues.bottom;
-      nextValues.left = (nextValues.left == undefined) ? '0px' : nextValues.left;
-
-
-      blockCssY.items[dividerSelector] = (blockCssY.items[dividerSelector] != undefined) ? blockCssY.items[dividerSelector] : {};
-
-      if (nextValues.top != undefined) {
-        var marginTop = (blockCssY.items[dividerSelector]['margin-top'] != undefined) ? blockCssY.items[dividerSelector]['margin-top'] : {};
-        marginTop[breakPointX] = nextValues.top
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'margin-top': marginTop };
-      }
-
-
-      if (nextValues.right != undefined) {
-
-        var marginRight = (blockCssY.items[dividerSelector]['margin-right'] !== undefined) ? blockCssY.items[dividerSelector]['margin-right'] : {};
-        marginRight[breakPointX] = nextValues.right
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'margin-right': marginRight };
-
-      }
-
-      if (nextValues.bottom != undefined) {
-
-        var marginBottom = (blockCssY.items[dividerSelector]['margin-bottom'] !== undefined) ? blockCssY.items[dividerSelector]['margin-bottom'] : {};
-        marginBottom[breakPointX] = nextValues.bottom
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'margin-bottom': marginBottom };
-
-      }
-
-      if (nextValues.left != undefined) {
-
-        var marginLeft = (blockCssY.items[dividerSelector]['margin-left'] !== undefined) ? blockCssY.items[dividerSelector]['margin-left'] : {};
-        marginLeft[breakPointX] = nextValues.left
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'margin-left': marginLeft };
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-    }
-
-
-
-    function generateBlockCssY() {
-
-
-      var reponsiveCssGroups = {};
-
-
-      for (var selector in blockCssY.items) {
-
-
-
-        var attrs = blockCssY.items[selector];
-
-
-        for (var attr in attrs) {
-          var breakpoints = attrs[attr];
-
-          for (var device in breakpoints) {
-
-            var attrValue = breakpoints[device];
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = []
-            }
-
-            if (reponsiveCssGroups[device] == undefined) {
-              reponsiveCssGroups[device] = []
-            }
-
-            if (reponsiveCssGroups[device][selector] == undefined) {
-              reponsiveCssGroups[device][selector] = []
-            }
-
-            reponsiveCssGroups[device][selector].push({ 'attr': attr, 'val': attrValue });
-
-          }
-        }
-      }
-
-
-
-      //return false;
-
-
-      var reponsiveCssMobile = '';
-
-      if (reponsiveCssGroups['Mobile'] != undefined) {
-
-        reponsiveCssMobile += '@media only screen and (min-width: 0px) and (max-width: 360px){';
-
-        for (var selector in reponsiveCssGroups['Mobile']) {
-          var attrs = reponsiveCssGroups['Mobile'][selector];
-
-          reponsiveCssMobile += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssMobile += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssMobile += '}';
-        }
-        reponsiveCssMobile += '}';
-
-      }
-
-
-
-      var reponsiveCssTablet = '';
-
-      if (reponsiveCssGroups['Tablet'] != undefined) {
-        reponsiveCssTablet += '@media only screen and (min-width: 361px) and (max-width: 780px){';
-
-        for (var selector in reponsiveCssGroups['Tablet']) {
-          var attrs = reponsiveCssGroups['Tablet'][selector];
-
-          reponsiveCssTablet += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssTablet += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssTablet += '}';
-        }
-
-        reponsiveCssTablet += '}';
-      }
-
-      var reponsiveCssDesktop = '';
-
-
-      if (reponsiveCssGroups['Desktop'] != undefined) {
-        reponsiveCssDesktop += '@media only screen and (min-width: 781px){';
-
-        for (var selector in reponsiveCssGroups['Desktop']) {
-          var attrs = reponsiveCssGroups['Desktop'][selector];
-
-
-          reponsiveCssDesktop += selector + '{';
-          for (var index in attrs) {
-            var attr = attrs[index]
-            var attrName = attr.attr;
-            var attrValue = attr.val;
-            reponsiveCssDesktop += attrName + ':' + attrValue + ';';
-          }
-          reponsiveCssDesktop += '}';
-
-
-        }
-        reponsiveCssDesktop += '}';
-
-
-
-      }
-
-
-      var reponsiveCss = reponsiveCssMobile + reponsiveCssTablet + reponsiveCssDesktop;
-
-
-
-      var iframe = document.querySelectorAll('[name="editor-canvas"]')[0];
-
-      if (iframe) {
-
-        setTimeout(() => {
-          var iframeDocument = iframe.contentDocument;
-          var body = iframeDocument.body;
-          var divWrap = iframeDocument.getElementById("css-block-" + blockId);
-
-          if (divWrap != undefined) {
-            iframeDocument.getElementById("css-block-" + blockId).outerHTML = "";
-
-          }
-
-          var divWrap = '<div id="css-block-' + blockId + '"></div>';
-          body.insertAdjacentHTML('beforeend', divWrap);
-
-          var csswrappg = iframeDocument.getElementById('css-block-' + blockId);
-          var str = '<style>' + reponsiveCss + customCss + '</style>';
-
-          csswrappg.insertAdjacentHTML('beforeend', str);
-        }, 200)
-
-
-      } else {
-
-
-
-        var wpfooter = document.getElementById('wpfooter');
-        var divWrap = document.getElementById("css-block-" + blockId);
-
-        if (divWrap != undefined) {
-          document.getElementById("css-block-" + blockId).outerHTML = "";
-        }
-
-        var divWrap = '<div id="css-block-' + blockId + '"></div>';
-        wpfooter.insertAdjacentHTML('beforeend', divWrap);
-
-        var csswrappg = document.getElementById('css-block-' + blockId);
-        var str = '<style>' + reponsiveCss + customCss + '</style>';
-
-        csswrappg.insertAdjacentHTML('beforeend', str);
-
-
-
-      }
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     useEffect(() => {
 
       //generateBlockCssY()
@@ -746,113 +422,6 @@ registerBlockType("post-grid/divider", {
     const CustomTag = `${wrapper.options.tag}`;
     const CustomTagPostTitle = `${divider.options.tag}`;
 
-
-
-    function onChangeTypo(typoX) {
-
-      setAttributes({ divider: { ...divider, styles: typoX } });
-
-      var newValuesObjX = {};
-
-
-      if (typoX.fontFamily[breakPointX] != undefined) {
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'font-family': typoX.fontFamily };
-
-      }
-
-
-      if (typoX.fontSize[breakPointX] != undefined) {
-
-        var fontSizeVal = (typoX.fontSize[breakPointX].val) ? typoX.fontSize[breakPointX].val : 16;
-        var fontSizeUnit = (typoX.fontSize[breakPointX].unit) ? typoX.fontSize[breakPointX].unit : 'px';
-
-
-        var fontSizeX = (blockCssY.items[dividerSelector] != undefined) ? blockCssY.items[dividerSelector]['font-size'] : {};
-
-        fontSizeX[breakPointX] = fontSizeVal + fontSizeUnit;
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'font-size': fontSizeX };
-
-      }
-
-
-
-      if (typoX.lineHeight[breakPointX] != undefined) {
-
-        var lineHeightVal = (typoX.lineHeight[breakPointX].val) ? typoX.lineHeight[breakPointX].val : 0;
-        var lineHeightUnit = (typoX.lineHeight[breakPointX].unit) ? typoX.lineHeight[breakPointX].unit : 'px';
-
-
-        var lineHeightX = (blockCssY.items[dividerSelector]['line-height'] != undefined) ? blockCssY.items[dividerSelector]['line-height'] : {};
-
-        lineHeightX[breakPointX] = lineHeightVal + lineHeightUnit;
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'line-height': lineHeightX };
-      }
-      if (typoX.letterSpacing[breakPointX] != undefined) {
-
-        var letterSpacingVal = (typoX.letterSpacing[breakPointX].val) ? typoX.letterSpacing[breakPointX].val : 0;
-        var letterSpacingUnit = (typoX.letterSpacing[breakPointX].unit) ? typoX.letterSpacing[breakPointX].unit : 'px';
-
-
-
-        var letterSpacingX = (blockCssY.items[dividerSelector]['letter-spacing'] != undefined) ? blockCssY.items[dividerSelector]['letter-spacing'] : {};
-
-        letterSpacingX[breakPointX] = letterSpacingVal + letterSpacingUnit;
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'letter-spacing': letterSpacingX };
-      }
-
-      if (typoX.fontWeight[breakPointX] != undefined) {
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'font-weight': typoX.fontWeight };
-
-      }
-
-
-      if (typoX.textDecoration[breakPointX] != undefined) {
-
-        var str = {};
-
-        var textDecorationX = typoX.textDecoration[breakPointX];
-        var textDecorationXStr = (textDecorationX.length > 0) ? textDecorationX.join(' ') : '';
-
-        str[breakPointX] = textDecorationXStr;
-
-        //typoX.textDecoration[breakPointX] = typoX.textDecoration[breakPointX].join(' ');
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'text-decoration': str };
-
-      }
-      if (typoX.textTransform[breakPointX] != undefined) {
-
-        blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'text-transform': typoX.textTransform };
-
-
-      }
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-
-
-
-    }
-
-    function onChangeBreakPoint(x, index) {
-
-
-      setPreviewDeviceType(x.value)
-      var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
-
-      asdsdsd.then((res) => {
-
-        setBreakPointX(res.breakpoint);
-        //generateBlockCssY();
-        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-      });
-
-
-
-    }
 
 
 
@@ -1012,38 +581,44 @@ registerBlockType("post-grid/divider", {
         </div >
         ,
 
-        <Resizable className={[blockId]} style={{}}
-
-          onResizeStop={(e, direction, ref, d) => {
-
-            console.log(direction);
-            console.log(d);
-            console.log(paddingTop);
-            console.log(paddingBottom);
+        <>
 
 
 
-            if (direction == 'top') {
-              setPaddingTop(paddingTop + d.height)
-            }
+          <Resizable className={[blockId]} style={{}}
 
-            if (direction == 'bottom') {
-              setPaddingBottom(paddingBottom + d.height)
-            }
+            onResize={(e, direction, ref, d) => {
 
-
-
+              console.log(direction);
+              console.log(d);
+              console.log(paddingTop);
+              console.log(paddingBottom);
 
 
-          }}
 
-        >
-          {JSON.stringify(paddingTop)} - {JSON.stringify(paddingBottom)}
+              if (direction == 'top') {
+                setPaddingTop(paddingTop + d.height)
+              }
+
+              if (direction == 'bottom') {
+                setPaddingBottom(paddingBottom + d.height)
+              }
 
 
 
 
-        </Resizable>
+
+            }}
+
+          >
+            {JSON.stringify(paddingTop)} - {JSON.stringify(paddingBottom)}
+
+
+
+
+          </Resizable>
+
+        </>
       ]
 
     )

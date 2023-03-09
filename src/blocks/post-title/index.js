@@ -30,6 +30,7 @@ import PGCssLibrary from '../../components/css-library'
 
 
 
+
 var myStore = wp.data.select('postgrid-shop');
 
 registerBlockType("post-grid/post-title", {

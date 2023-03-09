@@ -368,7 +368,7 @@ function post_grid_posts_loop($args)
     $query_args = apply_filters('post_grid_filter_query_args', $query_args, $grid_id);
     $query_args = apply_filters('post_grid_query_args', $query_args, $args);
 
-
+    //echo '<pre>' . var_export($query_args, true) . '</pre>';
 
 
 

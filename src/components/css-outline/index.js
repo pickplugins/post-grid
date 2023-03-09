@@ -44,7 +44,7 @@ function Html(props) {
     <div>
 
       <PanelRow>
-        <label for="">Blur</label>
+        <label for="">Width</label>
 
       </PanelRow>
       <RangeControl

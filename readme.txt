@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, 
 	Requires at least: 3.8
 	Tested up to: 6.1.1
-	Stable tag: 2.2.33
+	Stable tag: 2.2.34
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -285,15 +285,24 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 == Changelog ==
 
 
-= 2.2.31 =
-* 2023-02-18 - update - CSS Library added to more blocks.
-* 2023-02-18 - update - Dropdown component updated.
-* 2023-02-18 - update - Old layout editor expand UI updated.
+= 2.2.34 =
+* 2023-02-28 - fix - layout css messedup issue fixed
+
+= 2.2.33 =
+* 2023-02-28 - update - CSS Library added to more block elements
+* 2023-02-28 - fix - CSS component outline issue fixed.
+* 2023-02-28 - fix - CSS component background origin issue fixed.
+
+
+= 2.2.32 =
+* 2023-02-26 - update - CSS Library added to more blocks.
+* 2023-02-26 - update - Dropdown component updated.
+* 2023-02-26 - update - Old layout editor expand UI updated.
 
 
 = 2.2.31 =
-* 2023-02-18 - add - Introduce CSS Library.
-* 2023-02-18 - add - Background-Image component udpated.
+* 2023-02-23 - add - Introduce CSS Library.
+* 2023-02-23 - add - Background-Image component udpated.
 
 
 = 2.2.30 =

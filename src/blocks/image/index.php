@@ -8,6 +8,7 @@ class PGBlockImage
     function __construct()
     {
         add_action('init', array($this, 'register_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
     }
 
 
@@ -15,13 +16,33 @@ class PGBlockImage
     function register_scripts()
     {
         //wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/image/index.css');
-        //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/image/index.js', array('wp-blocks', 'wp-element'));
+        //wp_register_script('fslightbox', post_grid_plugin_url . 'src/blocks/image/fslightbox.js', array());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         register_block_type('post-grid/image', array(
             //'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
+            'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
             'render_callback' => array($this, 'theHTML'),
@@ -51,6 +72,18 @@ class PGBlockImage
                         ]
                     ]
                 ],
+                "lightbox" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "enable" => false,
+
+                        ],
+                        "styles" => []
+                    ]
+                ],
+
+
                 "image" => [
                     "type" => "object",
                     "default" => [
@@ -123,13 +156,46 @@ class PGBlockImage
     function front_script($attributes)
     {
     }
+
+    function front_scripts($attributes)
+    {
+    }
+
+
+
+
     function front_style($attributes)
     {
     }
 
+
+
+
+
     // front-end output from the gutenberg editor 
     function theHTML($attributes, $content, $block)
     {
+
+
+        wp_register_script('fslightbox', post_grid_plugin_url . 'src/blocks/image/fslightbox.js', [], '', true);
+        wp_register_script('pgimage_front_script', post_grid_plugin_url . 'src/blocks/post-grid/front-scripts.js', [], '', true);
+
+        if (has_block('post-grid/image')) {
+
+            $lightbox = isset($attributes['lightbox']) ? $attributes['lightbox'] : [];
+            $lightboxOptions = isset($lightbox['options']) ? $lightbox['options'] : [];
+
+            $lightboxEnable = isset($lightboxOptions['enable']) ? $lightboxOptions['enable'] : false;
+
+            //error_log('$lightboxEnable' . serialize($attributes));
+
+            if ($lightboxEnable === 'true') {
+                wp_enqueue_script('fslightbox');
+                wp_enqueue_script('pgimage_front_script');
+            }
+        }
+
+
 
 
         global $postGridCss;
@@ -149,6 +215,13 @@ class PGBlockImage
 
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'h2';
         $useAsBackground = isset($wrapperOptions['useAsBackground']) ? $wrapperOptions['useAsBackground'] : 'no';
+
+
+        $lightbox = isset($attributes['lightbox']) ? $attributes['lightbox'] : [];
+        $lightboxOptions = isset($lightbox['options']) ? $lightbox['options'] : [];
+        $lightboxStyles = isset($lightbox['styles']) ? $lightbox['styles'] : [];
+
+        $lightboxEnable = isset($lightboxOptions['enable']) ? $lightboxOptions['enable'] : '';
 
 
 
@@ -188,7 +261,7 @@ class PGBlockImage
         $postGridCustomCss .= $customCss;
 
 
-        // echo '<pre>' . var_export($featuredImageSrcType, true) . '</pre>';
+        //echo '<pre>' . var_export($lightboxEnable, true) . '</pre>';
         // echo '<pre>' . var_export($featuredImageSrcMetaKey, true) . '</pre>';
         // echo '<pre>' . var_export($featuredImageSrcMetaKeyType, true) . '</pre>';
 
@@ -263,6 +336,13 @@ class PGBlockImage
             $linkUrl = $customUrl;
         }
 
+
+        if ($lightboxEnable == 'true') {
+
+            $linkUrl = $attachment_url;
+        }
+
+
         $altText = '';
 
         if ($featuredImageAltTextSrc == 'imgAltText') {
@@ -296,7 +376,6 @@ class PGBlockImage
 
 
 
-
         ob_start();
 
 
@@ -306,13 +385,24 @@ class PGBlockImage
 ?>
             <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
                 <?php if (!empty($featuredImageLinkTo)) : ?>
-                    <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                    <a <?php if ($lightboxEnable == 'true') : ?> data-fslightbox="<?php echo esc_attr($blockId); ?>" <?php endif; ?> href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
 
-                        <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>">
+                        <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" />
 
                     </a>
                 <?php else : ?>
-                    <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>">
+
+                    <?php if ($lightboxEnable == 'true') : ?>
+                        <a href="<?php echo esc_url_raw($attachment_url); ?>" data-fslightbox="<?php echo esc_attr($blockId); ?>">
+                            <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" />
+                        </a>
+                    <?php else : ?>
+                        <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" />
+                    <?php endif; ?>
+
+
+
+
 
                 <?php endif; ?>
             </<?php echo esc_attr($wrapperTag); ?>>
@@ -325,14 +415,19 @@ class PGBlockImage
         ?>
 
             <?php if (!empty($featuredImageLinkTo)) : ?>
-                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?> <?php if ($lightboxEnable == 'true') : ?> data-fslightbox="<?php echo esc_attr($blockId); ?>" <?php endif; ?>>
 
 
-                    <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>">
+                    <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" />
 
                 </a>
             <?php else : ?>
-                <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>">
+
+                <?php if ($lightboxEnable == 'true') : ?><a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" data-fslightbox="<?php echo esc_attr($blockId); ?>" <?php endif; ?>>
+                        <img src="<?php echo esc_url_raw($attachment_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>" alt="<?php echo esc_attr($altText); ?>" />
+
+                        <?php if ($lightboxEnable == 'true') : ?></a> <?php endif; ?>
+
             <?php endif; ?>
 
         <?php

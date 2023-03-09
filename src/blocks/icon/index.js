@@ -14,6 +14,7 @@ import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
 import { store } from '../../store'
 import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import { applyFilters } from '@wordpress/hooks';
 
 import IconToggle from '../../components/icon-toggle'
 import Typography from '../../components/typography'
@@ -253,7 +254,7 @@ registerBlockType("post-grid/icon", {
     }
 
 
-    var linkToArgs = {
+    var linkToArgsBasic = {
       postUrl: { label: 'Post URL', value: 'postUrl' },
       homeUrl: { label: 'Home URL', value: 'homeUrl' },
       authorUrl: { label: 'Author URL', value: 'authorUrl' },
@@ -266,6 +267,7 @@ registerBlockType("post-grid/icon", {
 
     };
 
+    let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
 
 
     useEffect(() => {

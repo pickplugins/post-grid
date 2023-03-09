@@ -567,12 +567,12 @@ class post_grid_meta_boxs
             <br><br>
             <h3>Video Tutorials</h3>
             <br>
-            <a class="button" href="https://www.pickplugins.com/documentation/post-grid/?ref=dashboard" target="_blank">Go to YouTube</a>
+            <a class="button" href="https://www.youtube.com/playlist?list=PL0QP7T2SN94bpTVghETSePuVvRROpuEW6" target="_blank">Go to YouTube</a>
 
             <br><br>
             <h3>Looking for support?</h3>
             <br>
-            <a class="button" href="https://www.pickplugins.com/forum/?ref=dashboard" target="_blank">Create Support Ticket</a>
+            <a class="button" href="https://pickplugins.com/create-support-ticket/" target="_blank">Create Support Ticket</a>
             <p class="description">Its free and you can ask any question about our plugins and get support fast.</p>
             <br><br>
             <h3>Provide your feedback</h3>

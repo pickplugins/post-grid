@@ -649,6 +649,22 @@ img {
   bottom: 0px;
 }
 
+.top-5 {
+  top: 1.25rem;
+}
+
+.top-6 {
+  top: 1.5rem;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.z-\[999\] {
+  z-index: 999;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
@@ -963,8 +979,17 @@ img {
   cursor: pointer;
 }
 
+.cursor-grabbing {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
 .cursor-move {
   cursor: move;
+}
+
+.resize {
+  resize: both;
 }
 
 .grid-cols-4 {
@@ -1537,6 +1562,14 @@ img {
 .line-through {
   -webkit-text-decoration-line: line-through;
           text-decoration-line: line-through;
+}
+
+.opacity-10 {
+  opacity: 0.1;
+}
+
+.opacity-80 {
+  opacity: 0.8;
 }
 
 .outline {

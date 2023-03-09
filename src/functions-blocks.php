@@ -193,7 +193,7 @@ function post_grid_global_cssY()
 
 
 
-if (!empty($reponsiveCssGroups['Desktop'])) {
+    if (!empty($reponsiveCssGroups['Desktop'])) {
         //$reponsiveCss .= '@media only screen and (min-width: 782px){';
 
 
@@ -235,7 +235,7 @@ if (!empty($reponsiveCssGroups['Desktop'])) {
 
         $reponsiveCss .= '}';
     }
-    
+
 
     if (!empty($reponsiveCssGroups['Mobile'])) {
         //$reponsiveCss .= '@media only screen and (min-width: 0px) and (max-width: 360px){';
@@ -311,6 +311,10 @@ function post_grid_block_categories($categories, $context)
                     'slug'  => 'post-grid',
                     'title' => __('Post Grid Combo', 'boilerplate'),
                 ),
+                array(
+                    'slug'  => 'post-grid-woo',
+                    'title' => __('Post Grid Combo - WooCommerce', 'boilerplate'),
+                ),
             ),
             $categories
         );
@@ -364,18 +368,20 @@ function post_grid_allowed_block_types($allowed_block_types, $editor_context)
 //add_filter('allowed_block_types_all', 'post_grid_allowed_block_types', 99, 2);
 
 // enable gutenberg for woocommerce
-function activate_gutenberg_product( $can_edit, $post_type ) {
- if ( $post_type == 'product' ) {
+function activate_gutenberg_product($can_edit, $post_type)
+{
+    if ($post_type == 'product') {
         $can_edit = true;
     }
     return $can_edit;
 }
-add_filter( 'use_block_editor_for_post_type', 'activate_gutenberg_product', 10, 2 );
+add_filter('use_block_editor_for_post_type', 'activate_gutenberg_product', 10, 2);
 
 // enable taxonomy fields for woocommerce with gutenberg on
-function enable_taxonomy_rest( $args ) {
+function enable_taxonomy_rest($args)
+{
     $args['show_in_rest'] = true;
     return $args;
 }
-add_filter( 'woocommerce_taxonomy_args_product_cat', 'enable_taxonomy_rest' );
-add_filter( 'woocommerce_taxonomy_args_product_tag', 'enable_taxonomy_rest' );
+add_filter('woocommerce_taxonomy_args_product_cat', 'enable_taxonomy_rest');
+add_filter('woocommerce_taxonomy_args_product_tag', 'enable_taxonomy_rest');

@@ -143,7 +143,11 @@ registerBlockType("post-grid/social-share", {
         },
         items: [
           {
-            id: 'facebook', label: 'Facebook', count: 125, url: 'https://www.facebook.com/sharer.php?u={URL}', siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-facebook-square', },
+            id: 'facebook',
+            label: 'Facebook',
+            count: 125,
+            url: 'https://www.facebook.com/sharer.php?u={URL}',
+            siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fab fa-facebook-square', },
             styles: {
 
               color: { Desktop: '' },

@@ -652,14 +652,6 @@ function Html(props) {
                     <PGcssTextShadow val={value[breakPointX]} onChange={onChangeCssVal} />
                   )}
 
-
-
-
-
-
-
-
-
                   {(key == 'textAlign') && (
                     <PGcssTextAlign val={value[breakPointX]} onChange={onChangeCssVal} />
                   )}

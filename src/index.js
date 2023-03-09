@@ -37,6 +37,12 @@ apiFetch({
 
 
 
+
+
+
+
+
+
 import './store'
 
 
@@ -73,7 +79,9 @@ import './blocks/archive-title'
 import './blocks/archive-description'
 import './blocks/post-comment-count'
 
-import './blocks/divider'
+// import './blocks/divider'
 import './blocks/star-rate'
+import './blocks/woo-product-excerpt'
 
 
+import './templates'

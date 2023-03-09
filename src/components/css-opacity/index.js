@@ -30,10 +30,6 @@ function Html(props) {
 
         }}
       />
-      <div>
-
-      </div>
-
 
     </div>
 

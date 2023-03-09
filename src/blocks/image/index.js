@@ -17,6 +17,7 @@ import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
 import { store } from '../../store'
 import apiFetch from '@wordpress/api-fetch';
+require("fslightbox")
 
 
 import IconToggle from '../../components/icon-toggle'
@@ -123,6 +124,23 @@ registerBlockType("post-grid/image", {
     },
 
 
+    lightbox: {
+      type: 'object',
+      default: {
+        options: {
+          enable: false,
+
+
+        },
+
+        styles: {
+
+
+        },
+
+      },
+    },
+
 
 
 
@@ -164,6 +182,9 @@ registerBlockType("post-grid/image", {
 
     let image = attributes.image;
     var wrapper = attributes.wrapper;
+    var lightbox = attributes.lightbox;
+
+
     var blockId = attributes.blockId;
 
     var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
@@ -466,6 +487,7 @@ registerBlockType("post-grid/image", {
 
     function handleLinkClick(ev) {
 
+
       ev.stopPropagation();
       ev.preventDefault();
       return false;
@@ -473,6 +495,19 @@ registerBlockType("post-grid/image", {
 
 
 
+    function handleLinkClickX(ev, src) {
+
+      console.log(lightbox.options.enable);
+      if (lightbox.options.enable == true) {
+
+        var lightboxHandle = new FsLightbox();
+        lightboxHandle.props.sources = [src];
+        lightboxHandle.open();
+      }
+
+
+
+    }
 
 
     function onPickCssLibraryWrapper(args) {
@@ -1664,7 +1699,42 @@ registerBlockType("post-grid/image", {
 
             </PanelBody>
 
+            <PanelBody title="Lightbox" initialOpen={false}>
 
+              <PanelRow>
+                <label for="">Enable</label>
+
+                <SelectControl
+                  label=""
+                  value={lightbox.options.enable}
+                  options={[
+                    { label: 'Choose...', value: '' },
+
+                    { label: 'True', value: 'true' },
+                    { label: 'False', value: 'false' },
+
+
+                  ]}
+                  onChange={(newVal) => {
+
+
+
+                    var options = { ...lightbox.options, enable: newVal };
+                    setAttributes({ lightbox: { ...lightbox, options: options } });
+
+
+
+                  }
+
+
+
+                  }
+                />
+              </PanelRow>
+
+
+
+            </PanelBody>
             <PanelBody title="Custom Style" initialOpen={false}>
 
 
@@ -1909,7 +1979,13 @@ registerBlockType("post-grid/image", {
           {wrapper.options.useAsBackground == 'no' && wrapper.options.tag && (
             <CustomTag className={[blockId]} id={[blockId]}>
               {image.options.linkTo.length > 0 && (
-                <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
+                <a
+                  onClick={(e) => {
+                    handleLinkClickX(e, postImage.media_details.sizes[image.options.size[breakPointX]].source_url);
+                  }}
+
+
+                  {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
 
                   {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
@@ -1926,12 +2002,28 @@ registerBlockType("post-grid/image", {
 
                   {(image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && (
                     <>
-                      {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+                      {postImage != null && (
+
+                        <img
+                          onClick={(e) => {
+                            handleLinkClickX(e, postImage.media_details.sizes[image.options.size[breakPointX]].source_url);
+                          }}
+
+
+                          src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />
+
+                      )}
 
 
                       {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
                         <>
-                          {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                          {postImage != null && <img
+                            onClick={(e) => {
+                              handleLinkClickX(e, postImage.media_details.sizes[image.options.size[breakPointX]].source_url);
+                            }}
+
+
+                            src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
                         </>
                       )}
 

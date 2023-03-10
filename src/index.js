@@ -44,6 +44,7 @@ apiFetch({
 
 
 import './store'
+import './templates'
 
 
 import './blocks/post-grid'
@@ -84,4 +85,3 @@ import './blocks/star-rate'
 import './blocks/woo-product-excerpt'
 
 
-import './templates'

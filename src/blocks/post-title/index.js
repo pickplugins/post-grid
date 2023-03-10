@@ -26,6 +26,7 @@ import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
+import PGTemplates from '../../components/templates'
 
 
 
@@ -1690,7 +1691,7 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
-
+          <PGTemplates />
 
 
           {wrapper.options.tag && (

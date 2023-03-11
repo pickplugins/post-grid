@@ -7,8 +7,10 @@ import apiFetch from '@wordpress/api-fetch';
 
 import { __experimentalInputControl as InputControl, ColorPalette, RangeControl } from '@wordpress/components';
 import { memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { Icon, styles, close, settings } from '@wordpress/icons';
+import { Icon, styles, close, settings, download } from '@wordpress/icons';
 import PGDropdown from '../../components/dropdown'
+import PGinputText from '../../components/input-text'
+
 
 
 function Html(props) {
@@ -16,7 +18,7 @@ function Html(props) {
     return null;
   }
 
-  const [queryCss, setQueryCss] = useState({ keyword: '', page: 1, category: '', });
+  const [queryCss, setQueryCss] = useState({ keyword: '', page: 1, category: '', loading: false });
 
   const [searchPrams, setsearchPrams] = useState({ keyword: "", categories: [] });
   var [cssLibrary, setCssLibrary] = useState({ items: [] });
@@ -46,6 +48,7 @@ function Html(props) {
   function fetchCss() {
 
     setIsLoading(true);
+    setQueryCss({ ...queryCss, loading: true })
 
     var postData = { keyword: queryCss.keyword, page: queryCss.page, category: queryCss.category }
     postData = JSON.stringify(postData)
@@ -67,6 +70,8 @@ function Html(props) {
             setCssLibraryCats(res.terms)
             setIsLoading(false);
 
+            setQueryCss({ ...queryCss, loading: false })
+
 
           });
         }
@@ -86,7 +91,7 @@ function Html(props) {
 
   return (
 
-    <div className='fixed top-32 p-2 left-40 w-full h-full bg-slate-400 bg-opacity-75 z-50'>
+    <div className=''>
 
       <div className='flex justify-between items-center p-3 bg-white '>
 
@@ -94,8 +99,10 @@ function Html(props) {
         <div className='flex  items-center '>
           <div className='px-4'><Icon icon={styles} /></div>
           <div>
-            <InputControl
-              className="w-40 py-1"
+            <PGinputText
+
+              className="w-60 !px-3 !rounded-none text-lg"
+              type="text"
               placeholder="Search..."
               value={searchPrams.keyword}
               onChange={(newVal) => {
@@ -136,7 +143,7 @@ function Html(props) {
 
                 return (
 
-                  <div className=' mx-1 text-sm  bg-slate-500 text-white'><Icon className='cursor-pointer bg-red-500 inline-block' icon={close} /> <span className='px-2 p-1 inline-block'>{categoriesArgs[x].label}</span></div>
+                  <div className='flex items-center mx-1 text-sm  bg-slate-500 text-white'><span className='cursor-pointer p-1 bg-red-500 inline-block'><Icon icon={close} /></span> <span className='px-2 inline-block'>{categoriesArgs[x].label}</span></div>
 
                 )
 
@@ -150,7 +157,7 @@ function Html(props) {
 
         </div>
         <div>
-          <div className='px-4'><Icon icon={close} /></div>
+          {/* <div className='px-4'><span className='cursor-pointer p-1 bg-red-500 inline-block'><Icon icon={close} /></span></div> */}
 
         </div>
 
@@ -158,16 +165,18 @@ function Html(props) {
 
       </div>
 
-      <div className='p-5'>
+      <div className='p-5 overflow-y-scroll'>
 
         <div className='grid grid-cols-5 gap-5 gap'>
+
+          {JSON.stringify(queryCss)}
 
 
           {cssLibrary.items.map(x => {
 
             return (
 
-              <div className='bg-white p-5'
+              <div className='bg-white p-5 relative'
                 onClick={(ev) => {
 
 
@@ -184,7 +193,17 @@ function Html(props) {
 
               >
                 <img className='!shadow-none' src={x.thumb_url} alt="" />
-                <div className=''>
+
+                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-lime-600 text-white p-2 px-5 text-lg cursor-pointer rounded-sm flex items-center'>
+                  <span className='inline-block'>
+                    <Icon icon={download} />
+                  </span>
+                  <span className='mx-2'>
+                    Import
+                  </span>
+
+                </div>
+                <div className='text-center text-md'>
 
                   <a className='' target="_blank" href={x.url}>{x.post_title}</a>
                 </div>
@@ -197,6 +216,11 @@ function Html(props) {
 
         </div>
 
+        <div className='my-5 p-5  text-center'>
+
+          <div className='inline-block bg-lime-600 p-3 px-5 cursor-pointer hover:bg-lime-500 text-white font-bold'>Load More</div>
+
+        </div>
 
       </div>
 

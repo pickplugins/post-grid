@@ -1691,7 +1691,7 @@ registerBlockType("post-grid/post-title", {
 
         <>
 
-          <PGTemplates />
+          {/* <PGTemplates /> */}
 
 
           {wrapper.options.tag && (

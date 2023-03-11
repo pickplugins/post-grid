@@ -9,7 +9,7 @@ function TemplatesBtn(props) {
 
     return (
 
-        <div id="pgTemplatesEnable" class="bg-blue-700 text-white font-bold hover:text-white"
+        <div id="pgTemplatesEnable" class="bg-blue-700 px-5 py-2 cursor-pointer rounded-sm text-white font-bold hover:text-white"
             onClick={(ev) => {
                 setEnable(!enable);
 
@@ -26,7 +26,7 @@ function TemplatesBtn(props) {
 
 
 
-            <span className='inline-block mx-3'>Templates</span>
+            <span className='inline-block mx-2'>Templates</span>
         </div>
 
     )
@@ -82,7 +82,7 @@ function DOMContentLoadedImport() {
         var html2 = '';
         var importEl = document.createElement('div');
 
-        html2 += '<div   id="pgTemplates-items" class="pgTemplates-items pl-[160px] mt-[70px] hidden fixed z-[999] top-6 left-0 w-full h-full bg-gray-400"></div>';
+        html2 += '<div   id="pgTemplates-items" class="pgTemplates-items pl-[160px] mt-[70px] hidden fixed z-[999] top-6 left-0 w-full h-full "></div>';
         importEl.innerHTML = html2;
         //headerSettings.appendChild(importEl);
         wpbody.prepend(importEl);

@@ -1,11 +1,10 @@
 
 
 const { Component } = wp.element;
-import { Button, Dropdown, } from '@wordpress/components'
 import { applyFilters } from '@wordpress/hooks';
 import apiFetch from '@wordpress/api-fetch';
+import { PanelBody, RangeControl, Button, ButtonGroup, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, Spinner, CustomSelectControl, Popover } from '@wordpress/components'
 
-import { __experimentalInputControl as InputControl, ColorPalette, RangeControl } from '@wordpress/components';
 import { memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { Icon, styles, close, settings, download } from '@wordpress/icons';
 import PGDropdown from '../../components/dropdown'
@@ -18,9 +17,8 @@ function Html(props) {
     return null;
   }
 
-  const [queryCss, setQueryCss] = useState({ keyword: '', page: 1, category: '', loading: false });
 
-  const [searchPrams, setsearchPrams] = useState({ keyword: "", categories: [] });
+  const [searchPrams, setsearchPrams] = useState({ keyword: "", categories: [], page: 1, });
   var [cssLibrary, setCssLibrary] = useState({ items: [] });
   var [cssLibraryCats, setCssLibraryCats] = useState([]);
   var [debounce, setDebounce] = useState(null); // Using the hook.
@@ -40,7 +38,7 @@ function Html(props) {
 
     fetchCss();
 
-  }, [queryCss]);
+  }, [searchPrams]);
 
 
 
@@ -48,13 +46,12 @@ function Html(props) {
   function fetchCss() {
 
     setIsLoading(true);
-    setQueryCss({ ...queryCss, loading: true })
 
-    var postData = { keyword: queryCss.keyword, page: queryCss.page, category: queryCss.category }
+    var postData = { keyword: searchPrams.keyword, page: searchPrams.page, categories: searchPrams.categories }
     postData = JSON.stringify(postData)
 
 
-    fetch("https://getpostgrid.com/wp-json/post-grid/v2/get_post_css", {
+    fetch("https://getpostgrid.com/wp-json/post-grid/v2/get_post_section", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -66,11 +63,13 @@ function Html(props) {
         if (response.ok && response.status < 400) {
           response.json().then((res) => {
 
+            console.log(res.terms);
+
+
             setCssLibrary({ items: res.posts })
             setCssLibraryCats(res.terms)
             setIsLoading(false);
 
-            setQueryCss({ ...queryCss, loading: false })
 
 
           });
@@ -91,7 +90,7 @@ function Html(props) {
 
   return (
 
-    <div className=''>
+    <div className='bg-gray-400'>
 
       <div className='flex justify-between items-center p-3 bg-white '>
 
@@ -106,8 +105,10 @@ function Html(props) {
               placeholder="Search..."
               value={searchPrams.keyword}
               onChange={(newVal) => {
-                setsearchPrams({ ...searchPrams, keyword: newVal })
-
+                clearTimeout(debounce);
+                debounce = setTimeout(() => {
+                  setsearchPrams({ ...searchPrams, keyword: newVal })
+                }, 1000);
 
 
               }}
@@ -115,7 +116,9 @@ function Html(props) {
           </div>
 
           <div className='px-2'>
-            <PGDropdown position="bottom right" variant="secondary" options={categoriesArgs} buttonTitle="Categories" onChange={(option, index) => {
+            <PGDropdown position="bottom right" variant="secondary" options={cssLibraryCats} buttonTitle="Categories" onChange={(option, index) => {
+
+              console.log(option);
 
 
 
@@ -129,21 +132,42 @@ function Html(props) {
 
               }
 
-              //var categoriesX = option.value;
-
               setsearchPrams({ ...searchPrams, categories: categoriesX })
 
             }} values={[]}></PGDropdown>
 
           </div>
 
+
           <div className='px-4 flex items-center'>
             {
-              searchPrams.categories.length > 0 && searchPrams.categories.map(x => {
+              searchPrams.categories.length > 0 && searchPrams.categories.map((x, index) => {
 
                 return (
 
-                  <div className='flex items-center mx-1 text-sm  bg-slate-500 text-white'><span className='cursor-pointer p-1 bg-red-500 inline-block'><Icon icon={close} /></span> <span className='px-2 inline-block'>{categoriesArgs[x].label}</span></div>
+                  <div className='flex items-center mx-1 text-sm  bg-slate-500 text-white'>
+                    <span className='cursor-pointer p-1 bg-red-500 inline-block'
+                      onClick={() => {
+
+                        console.log(x);
+
+
+
+                        var categoriesX = searchPrams.categories.splice(x, 1);
+
+                        console.log(categoriesX);
+
+
+                        setsearchPrams({ ...searchPrams, categories: searchPrams.categories })
+
+
+
+
+                      }}
+
+                    >
+                      <Icon icon={close} /></span> <span className='px-2 inline-block'>{cssLibraryCats[index].label}</span>
+                  </div>
 
                 )
 
@@ -167,9 +191,17 @@ function Html(props) {
 
       <div className='p-5 overflow-y-scroll'>
 
+        {isLoading && (
+          <div className='text-center'><Spinner /></div>
+        )}
+
+
+
         <div className='grid grid-cols-5 gap-5 gap'>
 
-          {JSON.stringify(queryCss)}
+
+
+
 
 
           {cssLibrary.items.map(x => {
@@ -180,13 +212,18 @@ function Html(props) {
                 onClick={(ev) => {
 
 
-                  //var objCss = JSON.parse(x.post_content);
-                  // var objCss = {
-                  //   styles: { "backgroundColor": { "Desktop": "#9DD6DF" }, "textAlign": { "Desktop": "center" }, "border": { "Desktop": "5px dashed #000000" } }, hover: { "border": { "Desktop": "2px dashed #A084CF" } }
-                  // }
+                  var content = x.post_content;
+                  console.log(content);
 
 
-                  //props.onChange(objCss);
+                  var wp_editor = wp.data.dispatch("core/editor");
+                  var wp_insertBlocks = wp_editor.insertBlocks;
+                  wp_insertBlocks(wp.blocks.parse(content));
+
+                  var pgTemplatesItems = document.querySelector('#pgTemplates-items');
+
+                  pgTemplatesItems.classList.toggle("hidden");
+
 
 
                 }}
@@ -216,11 +253,20 @@ function Html(props) {
 
         </div>
 
-        <div className='my-5 p-5  text-center'>
 
-          <div className='inline-block bg-lime-600 p-3 px-5 cursor-pointer hover:bg-lime-500 text-white font-bold'>Load More</div>
+        {!isLoading && (
+          <div className='my-5 p-5  text-center'>
+            <div className='inline-block bg-lime-600 p-3 px-5 cursor-pointer hover:bg-lime-500 text-white font-bold'
+              onClick={(ev) => {
+                var pageX = parseInt(searchPrams.page) + 1;
+                setsearchPrams({ ...searchPrams, page: pageX })
+              }}
+            >Load More</div>
+          </div>
+        )}
 
-        </div>
+
+
 
       </div>
 

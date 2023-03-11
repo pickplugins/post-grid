@@ -25,15 +25,6 @@ function Html(props) {
   var [isLoading, setIsLoading] = useState(false);
 
 
-  var categoriesArgs = {
-    none: { label: 'Choose..', value: '' },
-    meattheteam: { label: 'Meet the Team', value: 'meattheteam' },
-    testimonial: { label: 'Testimonial', value: 'testimonial' },
-    header: { label: 'Header', value: 'header' },
-    footer: { label: 'Footer', value: 'footer' },
-    character: { label: 'Character', value: 'character' },
-  };
-
   useEffect(() => {
 
     fetchCss();
@@ -63,10 +54,29 @@ function Html(props) {
         if (response.ok && response.status < 400) {
           response.json().then((res) => {
 
-            console.log(res.terms);
+            console.log(res.posts);
+
+            var items = cssLibrary.items;
+
+            if (res.posts.length > 0) {
+              res.posts.map(x => {
+
+                console.log(x);
 
 
-            setCssLibrary({ items: res.posts })
+                return items.push(x)
+
+
+              })
+
+              console.log(items);
+
+
+              setCssLibrary({ items: items })
+
+            }
+
+
             setCssLibraryCats(res.terms)
             setIsLoading(false);
 
@@ -90,7 +100,7 @@ function Html(props) {
 
   return (
 
-    <div className='bg-gray-400'>
+    <div className='bg-gray-400 '>
 
       <div className='flex justify-between items-center p-3 bg-white '>
 
@@ -189,7 +199,7 @@ function Html(props) {
 
       </div>
 
-      <div className='p-5 overflow-y-scroll'>
+      <div className='p-5 '>
 
         {isLoading && (
           <div className='text-center'><Spinner /></div>
@@ -208,7 +218,7 @@ function Html(props) {
 
             return (
 
-              <div className='bg-white p-5 relative'
+              <div className='bg-white p-5 relative pb-16'
                 onClick={(ev) => {
 
 
@@ -231,18 +241,14 @@ function Html(props) {
               >
                 <img className='!shadow-none' src={x.thumb_url} alt="" />
 
-                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-lime-600 text-white p-2 px-5 text-lg cursor-pointer rounded-sm flex items-center'>
-                  <span className='inline-block'>
-                    <Icon icon={download} />
-                  </span>
-                  <span className='mx-2'>
-                    Import
-                  </span>
 
-                </div>
-                <div className='text-center text-md'>
-
-                  <a className='' target="_blank" href={x.url}>{x.post_title}</a>
+                <div className='flex items-center absolute bottom-0 left-0 w-full p-2 bg-slate-600 bg-opacity-80'>
+                  <div className='bg-lime-600 text-white p-1 px-3 cursor-pointer rounded-sm flex items-center hover:bg-lime-500'>
+                    <span className='inline-block'>
+                      <Icon icon={download} />
+                    </span>
+                  </div>
+                  <a className='inline-block mx-2 text-white' target="_blank" href={x.url}>{x.post_title}</a>
                 </div>
               </div>
 

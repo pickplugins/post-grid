@@ -82,7 +82,7 @@ function DOMContentLoadedImport() {
         var html2 = '';
         var importEl = document.createElement('div');
 
-        html2 += '<div   id="pgTemplates-items" class="pgTemplates-items pl-[160px] mt-[70px] hidden fixed z-[999] top-6 left-0 w-full h-full "></div>';
+        html2 += '<div   id="pgTemplates-items" class="pgTemplates-items pl-[160px] mt-[70px] hidden fixed z-[999] top-6 left-0 w-full h-full overflow-y-scroll"></div>';
         importEl.innerHTML = html2;
         //headerSettings.appendChild(importEl);
         wpbody.prepend(importEl);

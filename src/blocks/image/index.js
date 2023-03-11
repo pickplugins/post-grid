@@ -1786,7 +1786,7 @@ registerBlockType("post-grid/image", {
 
 
           {!loading && (
-            <div className={[blockId]} id={[blockId]}>
+            <>
 
 
               {(image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && postImage == null && (
@@ -1972,7 +1972,7 @@ registerBlockType("post-grid/image", {
 
 
 
-            </div>
+            </>
 
           )}
 

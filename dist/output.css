@@ -1424,6 +1424,14 @@ img {
   padding-bottom: 2.5rem;
 }
 
+.pr-\[320\] {
+  padding-right: 320;
+}
+
+.pr-\[320px\] {
+  padding-right: 320px;
+}
+
 .text-center {
   text-align: center;
 }

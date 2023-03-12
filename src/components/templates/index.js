@@ -95,7 +95,7 @@ function Html(props) {
 
 
   return (
-    <div id="pgTemplates-items" class="pgTemplates-items pl-[160px] mt-[70px] fixed z-[999] top-6 left-0 w-full h-full overflow-y-scroll">
+    <div id="pgTemplates-items" class="pgTemplates-items pl-[160px] pr-[320px] mt-[70px] fixed z-[999] top-6 left-0 w-full h-full overflow-y-scroll">
       <div className='bg-gray-400 '>
 
         <div className='flex justify-between items-center p-3 bg-white '>
@@ -214,7 +214,7 @@ function Html(props) {
 
         <div className='p-5 '>
 
-          <div className='grid grid-cols-5 gap-5 gap'>
+          <div className='grid grid-cols-4 gap-5 gap'>
 
 
             {cssLibrary.items.map(x => {

@@ -79148,7 +79148,7 @@ function Html(props) {
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "pgTemplates-items",
-    class: "pgTemplates-items pl-[160px] mt-[70px] fixed z-[999] top-6 left-0 w-full h-full overflow-y-scroll"
+    class: "pgTemplates-items pl-[160px] pr-[320px] mt-[70px] fixed z-[999] top-6 left-0 w-full h-full overflow-y-scroll"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-gray-400 "
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -79226,7 +79226,7 @@ function Html(props) {
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-5 "
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-5 gap-5 gap"
+    className: "grid grid-cols-4 gap-5 gap"
   }, cssLibrary.items.map(x => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "bg-white p-5 relative pb-16",

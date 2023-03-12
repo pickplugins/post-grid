@@ -79126,15 +79126,12 @@ function Html(props) {
     }).then(response => {
       if (response.ok && response.status < 400) {
         response.json().then(res => {
-          console.log(res.posts);
           var items = cssLibrary.items;
 
           if (res.posts.length > 0) {
             res.posts.map(x => {
-              console.log(x);
               return items.push(x);
             });
-            console.log(items);
             setCssLibrary({
               items: items
             });
@@ -79160,9 +79157,13 @@ function Html(props) {
     className: "flex  items-center "
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "px-4"
+  }, isLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-center"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null)), !isLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"]
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalInputControl, {
     className: "w-60 !px-3 !py-1 !rounded-none !text-lg",
     type: "text",
     placeholder: "Search...",
@@ -79187,8 +79188,6 @@ function Html(props) {
     options: cssLibraryCats,
     buttonTitle: "Categories",
     onChange: (option, index) => {
-      console.log(option);
-
       if (searchPrams.categories.includes(option.value)) {
         var categoriesX = searchPrams.categories.splice(option.value, 1);
       } else {
@@ -79211,9 +79210,10 @@ function Html(props) {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "cursor-pointer p-1 bg-red-500 inline-block",
       onClick: () => {
-        console.log(x);
-        var categoriesX = searchPrams.categories.splice(x, 1);
-        console.log(categoriesX);
+        setCssLibrary({
+          items: []
+        });
+        var categoriesX = searchPrams.categories.splice(index, 1);
         setsearchPrams({ ...searchPrams,
           categories: searchPrams.categories
         });
@@ -79222,8 +79222,8 @@ function Html(props) {
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"]
     })), " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "px-2 inline-block"
-    }, cssLibraryCats[index].label));
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, JSON.stringify(cssLibraryCats)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, JSON.stringify(searchPrams.categories))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    }, cssLibraryCats[cssLibraryCats.findIndex(p => p.value == x)].label));
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-5 "
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-5 gap-5 gap"
@@ -79232,7 +79232,6 @@ function Html(props) {
       className: "bg-white p-5 relative pb-16",
       onClick: ev => {
         var content = x.post_content;
-        console.log(content);
         var wp_editor = wp.data.dispatch("core/editor");
         var wp_insertBlocks = wp_editor.insertBlocks;
         wp_insertBlocks(wp.blocks.parse(content));

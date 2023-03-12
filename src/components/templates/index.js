@@ -54,14 +54,11 @@ function Html(props) {
         if (response.ok && response.status < 400) {
           response.json().then((res) => {
 
-            console.log(res.posts);
 
             var items = cssLibrary.items;
 
             if (res.posts.length > 0) {
               res.posts.map(x => {
-
-                console.log(x);
 
 
                 return items.push(x)
@@ -69,7 +66,6 @@ function Html(props) {
 
               })
 
-              console.log(items);
 
 
               setCssLibrary({ items: items })
@@ -106,7 +102,17 @@ function Html(props) {
 
 
           <div className='flex  items-center '>
-            <div className='px-4'><Icon icon={styles} /></div>
+            <div className='px-4'>
+              {isLoading && (
+                <span className='text-center'><Spinner /></span>
+              )}
+
+              {!isLoading && (
+                <span className='text-center'><Icon icon={styles} /></span>
+              )}
+
+
+            </div>
             <div>
               <InputControl
 
@@ -137,7 +143,6 @@ function Html(props) {
             <div className='px-2'>
               <PGDropdown position="bottom right" variant="secondary" options={cssLibraryCats} buttonTitle="Categories" onChange={(option, index) => {
 
-                console.log(option);
 
 
 
@@ -170,15 +175,10 @@ function Html(props) {
                     <div className='flex items-center mx-1 text-sm  bg-slate-500 text-white'>
                       <span className='cursor-pointer p-1 bg-red-500 inline-block'
                         onClick={() => {
-
-                          console.log(x);
-
+                          setCssLibrary({ items: [] })
 
 
-                          var categoriesX = searchPrams.categories.splice(x, 1);
-
-                          console.log(categoriesX);
-
+                          var categoriesX = searchPrams.categories.splice(index, 1);
 
                           setsearchPrams({ ...searchPrams, categories: searchPrams.categories })
 
@@ -188,7 +188,11 @@ function Html(props) {
                         }}
 
                       >
-                        <Icon icon={close} /></span> <span className='px-2 inline-block'>{cssLibraryCats[index].label}</span>
+                        <Icon icon={close} /></span> <span className='px-2 inline-block'>
+                        {cssLibraryCats[cssLibraryCats.findIndex(p => p.value == x)].label}
+
+
+                      </span>
                     </div>
 
                   )
@@ -197,16 +201,6 @@ function Html(props) {
               }
 
             </div>
-
-            <code>
-              {JSON.stringify(cssLibraryCats)}
-            </code>
-            <code>
-              {JSON.stringify(searchPrams.categories)}
-            </code>
-
-
-
 
           </div>
           <div>
@@ -232,8 +226,6 @@ function Html(props) {
 
 
                     var content = x.post_content;
-                    console.log(content);
-
 
                     var wp_editor = wp.data.dispatch("core/editor");
                     var wp_insertBlocks = wp_editor.insertBlocks;

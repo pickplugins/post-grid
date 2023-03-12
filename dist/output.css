@@ -689,6 +689,10 @@ img {
   margin: 0.25rem;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -946,6 +950,14 @@ img {
   width: 7rem;
 }
 
+.w-\[25\%\] {
+  width: 25%;
+}
+
+.w-\[24\%\] {
+  width: 24%;
+}
+
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -994,10 +1006,6 @@ img {
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-cols-5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .grid-cols-12 {
@@ -1286,12 +1294,26 @@ img {
   background-color: rgb(165 180 252 / var(--tw-bg-opacity));
 }
 
+.bg-lime-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(163 230 53 / var(--tw-bg-opacity));
+}
+
+.bg-lime-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(132 204 22 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-80 {
   --tw-bg-opacity: 0.8;
 }
 
 .bg-opacity-90 {
   --tw-bg-opacity: 0.9;
+}
+
+.fill-white {
+  fill: #fff;
 }
 
 .p-2 {
@@ -1374,6 +1396,11 @@ img {
   padding-right: 0.75rem !important;
 }
 
+.\!py-1 {
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+}
+
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -1399,11 +1426,6 @@ img {
   padding-bottom: 1.5rem;
 }
 
-.\!py-1 {
-  padding-top: 0.25rem !important;
-  padding-bottom: 0.25rem !important;
-}
-
 .pl-\[160px\] {
   padding-left: 160px;
 }
@@ -1416,20 +1438,20 @@ img {
   padding-bottom: 1.75rem;
 }
 
+.pr-\[320px\] {
+  padding-right: 320px;
+}
+
+.pb-\[200px\] {
+  padding-bottom: 200px;
+}
+
 .pb-16 {
   padding-bottom: 4rem;
 }
 
 .pb-10 {
   padding-bottom: 2.5rem;
-}
-
-.pr-\[320\] {
-  padding-right: 320;
-}
-
-.pr-\[320px\] {
-  padding-right: 320px;
 }
 
 .text-center {
@@ -1471,6 +1493,11 @@ img {
   line-height: 1rem;
 }
 
+.\!text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+
 .text-\[40px\] {
   font-size: 40px;
 }
@@ -1497,11 +1524,6 @@ img {
 
 .text-\[18px\] {
   font-size: 18px;
-}
-
-.\!text-lg {
-  font-size: 1.125rem !important;
-  line-height: 1.75rem !important;
 }
 
 .font-bold {
@@ -1773,6 +1795,11 @@ img {
 .hover\:bg-indigo-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-lime-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(101 163 13 / var(--tw-bg-opacity));
 }
 
 .hover\:text-white:hover {

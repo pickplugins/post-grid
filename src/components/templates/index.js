@@ -9,6 +9,7 @@ import { memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { Icon, styles, close, settings, download } from '@wordpress/icons';
 import PGDropdown from '../../components/dropdown'
 import PGinputText from '../../components/input-text'
+import Masonry from 'masonry-layout'
 
 
 
@@ -76,6 +77,21 @@ function Html(props) {
             setCssLibraryCats(res.terms)
             setIsLoading(false);
 
+            setTimeout(() => {
+              var elem = document.querySelector('#itemsWrap');
+
+              var msnry = new Masonry(elem, {
+                // options
+                itemSelector: '.item',
+                gutter: 15,
+                horizontalOrder: true,
+                percentPosition: true,
+                fitWidth: true
+
+              });
+
+
+            }, 500)
 
 
           });
@@ -95,7 +111,7 @@ function Html(props) {
 
 
   return (
-    <div id="pgTemplates-items" class="pgTemplates-items pl-[160px] pr-[320px] mt-[70px] fixed z-[999] top-6 left-0 w-full h-full overflow-y-scroll">
+    <div id="pgTemplates-items" class="pgTemplates-items pl-[160px] pr-[320px] mt-[70px] fixed z-[999] top-6 left-0 w-full h-full overflow-y-scroll pb-[200px]">
       <div className='bg-gray-400 '>
 
         <div className='flex justify-between items-center p-3 bg-white '>
@@ -214,40 +230,43 @@ function Html(props) {
 
         <div className='p-5 '>
 
-          <div className='grid grid-cols-4 gap-5 gap'>
+          <div id="itemsWrap" className='m-auto'>
 
 
             {cssLibrary.items.map(x => {
 
               return (
 
-                <div className='bg-white p-5 relative pb-16'
-                  onClick={(ev) => {
+                <div className='bg-white inline-block relative pb-16 item mb-3 w-[24%]'
 
-
-                    var content = x.post_content;
-
-                    var wp_editor = wp.data.dispatch("core/editor");
-                    var wp_insertBlocks = wp_editor.insertBlocks;
-                    wp_insertBlocks(wp.blocks.parse(content));
-
-
-                    props.setEnable(false)
-
-
-                  }}
 
                 >
                   <img className='!shadow-none' src={x.thumb_url} alt="" />
 
 
                   <div className='flex items-center absolute bottom-0 left-0 w-full p-2 bg-slate-600 bg-opacity-80'>
-                    <div className='bg-lime-600 text-white p-1 px-3 cursor-pointer rounded-sm flex items-center hover:bg-lime-500'>
+                    <div className='bg-lime-500 text-white p-1 px-3 cursor-pointer rounded-sm flex items-center hover:bg-lime-600'
+                      onClick={(ev) => {
+
+
+                        var content = x.post_content;
+
+                        var wp_editor = wp.data.dispatch("core/editor");
+                        var wp_insertBlocks = wp_editor.insertBlocks;
+                        wp_insertBlocks(wp.blocks.parse(content));
+
+
+                        props.setEnable(false)
+
+
+                      }}
+
+                    >
                       <span className='inline-block'>
-                        <Icon icon={download} />
+                        <Icon icon={download} className="fill-white	" />
                       </span>
                     </div>
-                    <a className='inline-block mx-2 text-white' target="_blank" href={x.url}>{x.post_title}</a>
+                    <a className='inline-block mx-2 text-white text-lg' target="_blank" href={x.url}>{x.post_title}</a>
                   </div>
                 </div>
 
@@ -261,7 +280,7 @@ function Html(props) {
 
 
           <div className='my-5 p-5  text-center'>
-            <div className='inline-block bg-lime-600 p-3 px-5 cursor-pointer hover:bg-lime-500 text-white font-bold'
+            <div className='inline-block bg-lime-500 p-3 px-5 cursor-pointer hover:bg-lime-600 text-white font-bold'
               onClick={(ev) => {
                 var pageX = parseInt(searchPrams.page) + 1;
                 setsearchPrams({ ...searchPrams, page: pageX })

@@ -4,30 +4,39 @@ import { memo, useMemo, useState, useEffect } from '@wordpress/element'
 
 function TemplatesBtn(props) {
 
+    // if (!props.warn) {
+    //     return null;
+    // }
+
     const [enable, setEnable] = useState(false);
 
 
     return (
 
-        <div id="pgTemplatesEnable" class="bg-blue-700 px-5 py-2 cursor-pointer rounded-sm text-white font-bold hover:text-white"
-            onClick={(ev) => {
-                setEnable(!enable);
+        <>
+            <div id="pgTemplatesEnable" class="bg-blue-700 px-5 py-2 cursor-pointer rounded-sm text-white font-bold hover:text-white"
+                onClick={(ev) => {
+                    setEnable(!enable);
 
-            }}
+                }}
 
-        >
-            {enable && (
-                <span class="dashicons dashicons-no-alt"></span>
-            )}
-            {!enable && (
-                <span class="dashicons dashicons-buddicons-groups"></span>
-            )}
-
-
+            >
+                {enable && (
+                    <span class="dashicons dashicons-no-alt"></span>
+                )}
+                {!enable && (
+                    <span class="dashicons dashicons-buddicons-groups"></span>
+                )}
 
 
-            <span className='inline-block mx-2'>Templates</span>
-        </div>
+
+
+                <span className='inline-block mx-2'>Templates</span>
+            </div>
+
+            {enable && <PGTemplates setEnable={setEnable} />}
+
+        </>
 
     )
 
@@ -79,36 +88,36 @@ function DOMContentLoadedImport() {
 
 
 
-        var html2 = '';
-        var importEl = document.createElement('div');
+        // var html2 = '';
+        // var importEl = document.createElement('div');
 
-        html2 += '<div   id="pgTemplates-items" class="pgTemplates-items pl-[160px] mt-[70px] hidden fixed z-[999] top-6 left-0 w-full h-full overflow-y-scroll"></div>';
-        importEl.innerHTML = html2;
-        //headerSettings.appendChild(importEl);
-        wpbody.prepend(importEl);
-
-
-
-
-        var pgTemplatesEnable = document.querySelector('#pgTemplatesEnable');
-        var pgTemplatesItems = document.querySelector('#pgTemplates-items');
+        // html2 += '<div   id="pgTemplates-items" class="pgTemplates-items pl-[160px] mt-[70px] hidden fixed z-[999] top-6 left-0 w-full h-full overflow-y-scroll"></div>';
+        // importEl.innerHTML = html2;
+        // //headerSettings.appendChild(importEl);
+        // wpbody.prepend(importEl);
 
 
 
-        console.log(pgTemplatesEnable);
-        console.log(pgTemplatesItems);
+
+        // var pgTemplatesEnable = document.querySelector('#pgTemplatesEnable');
+        // var pgTemplatesItems = document.querySelector('#pgTemplates-items');
 
 
-        if (pgTemplatesEnable != null) {
 
-            pgTemplatesEnable.addEventListener('click', function () {
+        // console.log(pgTemplatesEnable);
+        // console.log(pgTemplatesItems);
 
 
-                pgTemplatesItems.classList.toggle("hidden");
-                wp.element.render(<PGTemplates />, pgTemplatesItems)
+        // if (pgTemplatesEnable != null) {
 
-            })
-        }
+        //     pgTemplatesEnable.addEventListener('click', function () {
+
+
+        //         pgTemplatesItems.classList.toggle("hidden");
+        //         wp.element.render(<PGTemplates />, pgTemplatesItems)
+
+        //     })
+        // }
 
 
 

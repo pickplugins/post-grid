@@ -19,6 +19,8 @@ function Html(props) {
 
   var position = props.position;
   var variant = props.variant;
+  var btnClass = props.btnClass;
+
   var options = props.options;
   var buttonTitle = props.buttonTitle;
   var value = props.value;
@@ -34,7 +36,7 @@ function Html(props) {
         setPickerOpen(prev => !prev);
 
       }}>
-        <Button variant={variant} >{options[value] != undefined ? options[value].label : buttonTitle}</Button>
+        <Button className={btnClass} variant={variant} >{options[value] != undefined ? options[value].label : buttonTitle}</Button>
       </div>
 
 
@@ -317,6 +319,7 @@ class PGDropdown extends Component {
     const {
       position,
       variant,
+      btnClass,
       options, //[{"label":"Select..","icon":"","value":""}]
       buttonTitle,
       onChange,
@@ -338,7 +341,7 @@ class PGDropdown extends Component {
 
 
 
-        <Html value={value} position={position} variant={variant} options={options} buttonTitle={buttonTitle} onChange={onChange} warn={this.state.showWarning} />
+        <Html value={value} position={position} btnClass={btnClass} variant={variant} options={options} buttonTitle={buttonTitle} onChange={onChange} warn={this.state.showWarning} />
 
       </div>
 

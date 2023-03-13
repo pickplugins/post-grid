@@ -9,6 +9,8 @@ import { memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { Icon, styles, close, settings, download } from '@wordpress/icons';
 import PGDropdown from '../../components/dropdown'
 import PGinputText from '../../components/input-text'
+import PGRequestTemplate from '../../components/request-a-template'
+
 import Masonry from 'masonry-layout'
 
 
@@ -24,6 +26,7 @@ function Html(props) {
   var [cssLibraryCats, setCssLibraryCats] = useState([]);
   var [debounce, setDebounce] = useState(null); // Using the hook.
   var [isLoading, setIsLoading] = useState(false);
+  var [customTemplate, setcustomTemplate] = useState(false);
 
 
   useEffect(() => {
@@ -219,8 +222,26 @@ function Html(props) {
             </div>
 
           </div>
-          <div>
-            {/* <div className='px-4'><span className='cursor-pointer p-1 bg-red-500 inline-block'><Icon icon={close} /></span></div> */}
+          <div className='flex'>
+            <div className='bg-blue-600 flex items-center hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white'
+              onClick={() => {
+
+                setcustomTemplate(!customTemplate)
+
+              }}
+            >
+              <span class="dashicons dashicons-slides mr-2"></span>
+              <span>Request a Template</span>
+            </div>
+
+
+
+            <div className='px-4'><span className='cursor-pointer rounded-sm p-1 bg-red-500 hover:bg-red-600 inline-block'
+              onClick={() => {
+                props.setEnable(false)
+
+              }}
+            ><Icon icon={close} className="fill-white" /></span></div>
 
           </div>
 
@@ -230,71 +251,70 @@ function Html(props) {
 
         <div className='p-5 '>
 
-          <div id="itemsWrap" className='m-auto'>
+          {!customTemplate && (
 
+            <PGRequestTemplate />
+          )}
 
-            {cssLibrary.items.map(x => {
+          {customTemplate && (
 
-              return (
+            <>
+              <div id="itemsWrap" className='m-auto'>
+                {cssLibrary.items.map(x => {
 
-                <div className='bg-white inline-block relative pb-16 item mb-3 w-[24%]'
-
-
-                >
-                  <img className='!shadow-none' src={x.thumb_url} alt="" />
-
-
-                  <div className='flex items-center absolute bottom-0 left-0 w-full p-2 bg-slate-600 bg-opacity-80'>
-                    <div className='bg-lime-500 text-white p-1 px-3 cursor-pointer rounded-sm flex items-center hover:bg-lime-600'
-                      onClick={(ev) => {
-
-
-                        var content = x.post_content;
-
-                        var wp_editor = wp.data.dispatch("core/editor");
-                        var wp_insertBlocks = wp_editor.insertBlocks;
-                        wp_insertBlocks(wp.blocks.parse(content));
-
-
-                        props.setEnable(false)
-
-
-                      }}
-
+                  return (
+                    <div className='bg-white inline-block relative pb-16 item mb-3 w-[24%]'
                     >
-                      <span className='inline-block'>
-                        <Icon icon={download} className="fill-white	" />
-                      </span>
+                      <img className='!shadow-none' src={x.thumb_url} alt="" />
+
+                      <div className='flex items-center absolute bottom-0 left-0 w-full p-2 bg-slate-600 bg-opacity-80'>
+                        <div className='bg-lime-500 text-white p-1 px-3 cursor-pointer rounded-sm flex items-center hover:bg-lime-600'
+                          onClick={(ev) => {
+
+
+                            var content = x.post_content;
+
+                            var wp_editor = wp.data.dispatch("core/editor");
+                            var wp_insertBlocks = wp_editor.insertBlocks;
+                            wp_insertBlocks(wp.blocks.parse(content));
+
+
+                            props.setEnable(false)
+
+
+                          }}
+
+                        >
+                          <span className='inline-block'>
+                            <Icon icon={download} className="fill-white	" />
+                          </span>
+                        </div>
+                        <a className='inline-block mx-2 text-white text-lg' target="_blank" href={x.url}>{x.post_title}</a>
+                      </div>
                     </div>
-                    <a className='inline-block mx-2 text-white text-lg' target="_blank" href={x.url}>{x.post_title}</a>
-                  </div>
+
+                  )
+
+                })}
+              </div>
+              <div className='my-5 p-5  text-center'>
+                <div className='inline-block bg-lime-500 p-3 px-5 cursor-pointer hover:bg-lime-600 text-white font-bold'
+                  onClick={(ev) => {
+                    var pageX = parseInt(searchPrams.page) + 1;
+                    setsearchPrams({ ...searchPrams, page: pageX })
+                  }}
+                >
+                  {isLoading && (
+                    <span className='text-center'><Spinner /></span>
+                  )}
+
+                  Load More
                 </div>
+              </div>
 
-              )
+            </>
 
-            })}
-
-
-          </div>
-
-
-
-          <div className='my-5 p-5  text-center'>
-            <div className='inline-block bg-lime-500 p-3 px-5 cursor-pointer hover:bg-lime-600 text-white font-bold'
-              onClick={(ev) => {
-                var pageX = parseInt(searchPrams.page) + 1;
-                setsearchPrams({ ...searchPrams, page: pageX })
-              }}
-            >
-              {isLoading && (
-                <span className='text-center'><Spinner /></span>
-              )}
-
-              Load More
-
-
-            </div>
-          </div>
+          )}
 
 
 

@@ -35,7 +35,22 @@ function Html(props) {
 
   }, [searchPrams]);
 
+  function loadMasonry() {
 
+
+    var elem = document.querySelector('#itemsWrap');
+
+    var msnry = new Masonry(elem, {
+      // options
+      itemSelector: '.item',
+      gutter: 15,
+      horizontalOrder: true,
+      percentPosition: true,
+      fitWidth: true
+
+    });
+
+  }
 
 
   function fetchCss() {
@@ -81,18 +96,8 @@ function Html(props) {
             setIsLoading(false);
 
             setTimeout(() => {
-              var elem = document.querySelector('#itemsWrap');
 
-              var msnry = new Masonry(elem, {
-                // options
-                itemSelector: '.item',
-                gutter: 15,
-                horizontalOrder: true,
-                percentPosition: true,
-                fitWidth: true
-
-              });
-
+              loadMasonry()
 
             }, 500)
 
@@ -226,7 +231,16 @@ function Html(props) {
             <div className='bg-blue-600 flex items-center hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white'
               onClick={() => {
 
-                setcustomTemplate(!customTemplate)
+                setcustomTemplate(!customTemplate);
+
+                if (!customTemplate) {
+
+                  setTimeout(() => {
+                    loadMasonry()
+                  }, 500)
+                }
+
+
 
               }}
             >
@@ -251,12 +265,12 @@ function Html(props) {
 
         <div className='p-5 '>
 
-          {!customTemplate && (
+          {customTemplate && (
 
             <PGRequestTemplate />
           )}
 
-          {customTemplate && (
+          {!customTemplate && (
 
             <>
               <div id="itemsWrap" className='m-auto'>

@@ -79406,6 +79406,18 @@ function Html(props) {
     fetchCss();
   }, [searchPrams]);
 
+  function loadMasonry() {
+    var elem = document.querySelector('#itemsWrap');
+    var msnry = new (masonry_layout__WEBPACK_IMPORTED_MODULE_7___default())(elem, {
+      // options
+      itemSelector: '.item',
+      gutter: 15,
+      horizontalOrder: true,
+      percentPosition: true,
+      fitWidth: true
+    });
+  }
+
   function fetchCss() {
     setIsLoading(true);
     var postData = {
@@ -79437,15 +79449,7 @@ function Html(props) {
           setCssLibraryCats(res.terms);
           setIsLoading(false);
           setTimeout(() => {
-            var elem = document.querySelector('#itemsWrap');
-            var msnry = new (masonry_layout__WEBPACK_IMPORTED_MODULE_7___default())(elem, {
-              // options
-              itemSelector: '.item',
-              gutter: 15,
-              horizontalOrder: true,
-              percentPosition: true,
-              fitWidth: true
-            });
+            loadMasonry();
           }, 500);
         });
       }
@@ -79537,6 +79541,12 @@ function Html(props) {
     className: "bg-blue-600 flex items-center hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white",
     onClick: () => {
       setcustomTemplate(!customTemplate);
+
+      if (!customTemplate) {
+        setTimeout(() => {
+          loadMasonry();
+        }, 500);
+      }
     }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     class: "dashicons dashicons-slides mr-2"
@@ -79552,7 +79562,7 @@ function Html(props) {
     className: "fill-white"
   }))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-5 "
-  }, !customTemplate && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_request_a_template__WEBPACK_IMPORTED_MODULE_6__["default"], null), customTemplate && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, customTemplate && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_request_a_template__WEBPACK_IMPORTED_MODULE_6__["default"], null), !customTemplate && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "itemsWrap",
     className: "m-auto"
   }, cssLibrary.items.map(x => {

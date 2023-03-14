@@ -79408,14 +79408,17 @@ function Html(props) {
 
   function loadMasonry() {
     var elem = document.querySelector('#itemsWrap');
-    var msnry = new (masonry_layout__WEBPACK_IMPORTED_MODULE_7___default())(elem, {
-      // options
-      itemSelector: '.item',
-      gutter: 15,
-      horizontalOrder: true,
-      percentPosition: true,
-      fitWidth: true
-    });
+
+    if (elem != null) {
+      var msnry = new (masonry_layout__WEBPACK_IMPORTED_MODULE_7___default())(elem, {
+        // options
+        itemSelector: '.item',
+        gutter: 15,
+        horizontalOrder: true,
+        percentPosition: true,
+        fitWidth: true
+      });
+    }
   }
 
   function fetchCss() {
@@ -79538,15 +79541,12 @@ function Html(props) {
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "bg-blue-600 flex items-center hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white",
+    className: "bg-blue-600 flex items-center cursor-pointer hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white",
     onClick: () => {
       setcustomTemplate(!customTemplate);
-
-      if (!customTemplate) {
-        setTimeout(() => {
-          loadMasonry();
-        }, 500);
-      }
+      setTimeout(() => {
+        loadMasonry();
+      }, 500);
     }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     class: "dashicons dashicons-slides mr-2"

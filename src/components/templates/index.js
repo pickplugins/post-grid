@@ -40,15 +40,20 @@ function Html(props) {
 
     var elem = document.querySelector('#itemsWrap');
 
-    var msnry = new Masonry(elem, {
-      // options
-      itemSelector: '.item',
-      gutter: 15,
-      horizontalOrder: true,
-      percentPosition: true,
-      fitWidth: true
+    if (elem != null) {
 
-    });
+      var msnry = new Masonry(elem, {
+        // options
+        itemSelector: '.item',
+        gutter: 15,
+        horizontalOrder: true,
+        percentPosition: true,
+        fitWidth: true
+
+      });
+    }
+
+
 
   }
 
@@ -228,17 +233,14 @@ function Html(props) {
 
           </div>
           <div className='flex'>
-            <div className='bg-blue-600 flex items-center hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white'
+            <div className='bg-blue-600 flex items-center cursor-pointer hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white'
               onClick={() => {
 
                 setcustomTemplate(!customTemplate);
 
-                if (!customTemplate) {
-
-                  setTimeout(() => {
-                    loadMasonry()
-                  }, 500)
-                }
+                setTimeout(() => {
+                  loadMasonry()
+                }, 500)
 
 
 

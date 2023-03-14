@@ -19,11 +19,12 @@ function Html(props) {
     return null;
   }
 
-  const [searchPrams, setsearchPrams] = useState({ title: "", content: '', files: [], budget: "", email: '', name: "" });
+  const [searchPrams, setsearchPrams] = useState({ title: "", content: '', files: [], budget: 50, email: '', name: "" });
 
   const ALLOWED_MEDIA_TYPES = ['image'];
 
   let budgetArgs = {
+    custom: { label: 'Custom', value: '' },
     '50-': { label: 'Less than 50$', value: '50-' },
     50: { label: '50$+', value: 50 },
     100: { label: '100$+', value: 100 },
@@ -41,7 +42,7 @@ function Html(props) {
       data: {},
     }).then((res) => {
 
-      setsearchPrams({ ...searchPrams, email: res.email });
+      setsearchPrams({ ...searchPrams, email: res.email, name: res.name, });
 
 
 
@@ -62,24 +63,26 @@ function Html(props) {
   return (
     <div id="requestTemplate" class="">
 
-      <div className='grid grid-cols-2 gap-5'>
+      <div className='grid grid-cols-2 gap-5 items-center'>
 
         <div>
-          <label for="" className=' mb-3 block text-white'>Template Title</label>
+          <label for="" className=' mb-3 block text-white text-base'>Template Title</label>
           <PGinputText
 
             className="w-full !py-1 !rounded-none "
             type="text"
-            placeholder=""
+            placeholder="Write a short title"
             value={searchPrams.title}
-            onChange={(newVal) => {
+            onChange={(ev) => {
+
+              var newVal = ev.target.value;
 
               setsearchPrams({ ...searchPrams, title: newVal })
             }}
 
           />
 
-          <label for="" className=' mt-5 mb-3 block text-white'>Template Details</label>
+          <label for="" className=' mt-5 mb-3 block text-white text-base'>Template Details</label>
           <RichText
             className="w-full bg-white pb-5 p-2"
             tagName={'div'}
@@ -91,13 +94,13 @@ function Html(props) {
               setsearchPrams({ ...searchPrams, content: content })
 
             }}
-            placeholder={'Start Writing...'}
+            placeholder={'Write details about your design...'}
           />
 
           <PanelRow className='mb-4'>
 
 
-            <label for="" className=' mt-5 mb-3 block text-white'>Design Files</label>
+            <label for="" className=' mt-5 mb-3 block text-white text-base'>Design Files</label>
             <MediaUploadCheck>
               <MediaUpload
                 class="bg-blue-500"
@@ -167,32 +170,61 @@ function Html(props) {
           </div>
 
 
-          <PanelRow className=''>
+          <div className='flex justify-between items-center '>
 
-            <label for="" className=' mt-5 mb-3 block  text-white'>Estimated Budget</label>
-            <PGDropdown className="text-white" position="bottom right" variant="secondary" options={budgetArgs} buttonTitle={'Choose'}
-              btnClass="!bg-white !border-none !bg-blue-500 !text-white"
+            <div className='flex items-center'>
+              <label for="" className=' text-white text-base mr-3'>Estimated Budget</label>
+              <PGDropdown className="text-white" position="bottom right" variant="secondary" options={budgetArgs} buttonTitle={'Choose'}
+                btnClass="!border-none !bg-blue-500 !text-white"
 
-              onChange={(option, index) => {
+                onChange={(option, index) => {
 
-                setsearchPrams({ ...searchPrams, budget: option.value })
+                  setsearchPrams({ ...searchPrams, budget: option.value })
 
-              }}
-            ></PGDropdown>
-          </PanelRow>
-
-          <div className='text-white text-[18px]'>{(budgetArgs[searchPrams.budget] == undefined) ? '' : budgetArgs[searchPrams.budget].label}</div>
-
+                }}
+              ></PGDropdown>
+            </div>
 
 
-          <label for="" className=' my-3 block text-white'>You Email</label>
+            {(budgetArgs[searchPrams.budget] == undefined) && (
+
+              <div className='flex items-center'>
+                <PGinputText
+
+                  className=" !py-1 my-3 !rounded-none inline-block"
+                  type="text"
+                  placeholder=""
+                  value={searchPrams.budget}
+                  onChange={(ev) => {
+                    var newVal = ev.target.value;
+
+                    setsearchPrams({ ...searchPrams, budget: newVal })
+                  }}
+
+                /> <span className='inline-block mx-2 text-white'>USD</span>
+              </div>
+            )}
+
+            {(budgetArgs[searchPrams.budget] != undefined) && (
+              <div className='text-gray-800 text-[18px]'>{(budgetArgs[searchPrams.budget] == undefined) ? '' : budgetArgs[searchPrams.budget].label}</div>
+            )}
+
+
+          </div>
+
+
+
+
+
+          <label for="" className=' mb-3 mt-5 block text-white text-base'>You Email</label>
           <PGinputText
 
             className="w-full !py-1  !rounded-none "
             type="text"
             placeholder=""
             value={searchPrams.email}
-            onChange={(newVal) => {
+            onChange={(ev) => {
+              var newVal = ev.target.value;
 
               setsearchPrams({ ...searchPrams, email: newVal })
             }}
@@ -200,14 +232,15 @@ function Html(props) {
           />
 
 
-          <label for="" className=' my-3 block text-white'>You Name</label>
+          <label for="" className=' my-3 block text-white text-base'>You Name</label>
           <PGinputText
 
             className="w-full !py-1  !rounded-none "
             type="text"
             placeholder=""
             value={searchPrams.name}
-            onChange={(newVal) => {
+            onChange={(ev) => {
+              var newVal = ev.target.value;
 
               setsearchPrams({ ...searchPrams, name: newVal })
             }}
@@ -217,7 +250,22 @@ function Html(props) {
 
         </div>
 
-        <div>
+        <div className='py-5 px-10'>
+
+          <p className='text-base'>By sending mail, you are requested to follow these terms.</p>
+          <ul className='my-3 text-base list-inside'>
+            <li className='list-disc'>We do not provide design made by 3rd party blocks. default blocks may use.</li>
+            <li className='list-disc'>We do not provide immediate/emmargency delivery. But we try our best as soon as possible.</li>
+          </ul>
+
+          <div className='bg-blue-600 rounded-md text-white font-bold text-base text-center cursor-pointer hover:bg-blue-500 px-10 py-3 my-5'
+
+            onClick={ev => {
+              console.log('hello');
+
+            }}
+
+          >Send Mail</div>
 
         </div>
       </div>

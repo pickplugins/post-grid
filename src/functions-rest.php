@@ -1195,9 +1195,12 @@ class BlockPostGridRest
         $admin_email = get_option('admin_email');
         $siteurl = get_option('siteurl');
         $siteAdminurl = admin_url();
+        $adminData = get_user_by('email', $admin_email);
 
 
         $response['email'] = $admin_email;
+        $response['name'] = $adminData->display_name;
+
         $response['siteurl'] = $siteurl;
         $response['siteAdminurl'] = $siteAdminurl;
 

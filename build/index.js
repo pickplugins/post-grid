@@ -77916,12 +77916,16 @@ function Html(props) {
     title: "",
     content: '',
     files: [],
-    budget: "",
+    budget: 50,
     email: '',
     name: ""
   });
   const ALLOWED_MEDIA_TYPES = ['image'];
   let budgetArgs = {
+    custom: {
+      label: 'Custom',
+      value: ''
+    },
     '50-': {
       label: 'Less than 50$',
       value: '50-'
@@ -77954,7 +77958,8 @@ function Html(props) {
       data: {}
     }).then(res => {
       setsearchPrams({ ...searchPrams,
-        email: res.email
+        email: res.email,
+        name: res.name
       });
     });
   }, []);
@@ -77962,23 +77967,24 @@ function Html(props) {
     id: "requestTemplate",
     class: ""
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid grid-cols-2 gap-5"
+    className: "grid grid-cols-2 gap-5 items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: "",
-    className: " mb-3 block text-white"
+    className: " mb-3 block text-white text-base"
   }, "Template Title"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_text__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "w-full !py-1 !rounded-none ",
     type: "text",
-    placeholder: "",
+    placeholder: "Write a short title",
     value: searchPrams.title,
-    onChange: newVal => {
+    onChange: ev => {
+      var newVal = ev.target.value;
       setsearchPrams({ ...searchPrams,
         title: newVal
       });
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: "",
-    className: " mt-5 mb-3 block text-white"
+    className: " mt-5 mb-3 block text-white text-base"
   }, "Template Details"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
     className: "w-full bg-white pb-5 p-2",
     tagName: 'div',
@@ -77989,12 +77995,12 @@ function Html(props) {
         content: content
       });
     },
-    placeholder: 'Start Writing...'
+    placeholder: 'Write details about your design...'
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
     className: "mb-4"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: "",
-    className: " mt-5 mb-3 block text-white"
+    className: " mt-5 mb-3 block text-white text-base"
   }, "Design Files"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
     class: "bg-blue-500",
     onSelect: media => {
@@ -78037,52 +78043,86 @@ function Html(props) {
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
       className: "fill-white"
     })));
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-    className: ""
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex justify-between items-center "
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: "",
-    className: " mt-5 mb-3 block  text-white"
+    className: " text-white text-base mr-3"
   }, "Estimated Budget"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: "text-white",
     position: "bottom right",
     variant: "secondary",
     options: budgetArgs,
     buttonTitle: 'Choose',
-    btnClass: "!bg-white !border-none !bg-blue-500 !text-white",
+    btnClass: "!border-none !bg-blue-500 !text-white",
     onChange: (option, index) => {
       setsearchPrams({ ...searchPrams,
         budget: option.value
       });
     }
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-white text-[18px]"
-  }, budgetArgs[searchPrams.budget] == undefined ? '' : budgetArgs[searchPrams.budget].label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+  })), budgetArgs[searchPrams.budget] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_text__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    className: " !py-1 my-3 !rounded-none inline-block",
+    type: "text",
+    placeholder: "",
+    value: searchPrams.budget,
+    onChange: ev => {
+      var newVal = ev.target.value;
+      setsearchPrams({ ...searchPrams,
+        budget: newVal
+      });
+    }
+  }), " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "inline-block mx-2 text-white"
+  }, "USD")), budgetArgs[searchPrams.budget] != undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-gray-800 text-[18px]"
+  }, budgetArgs[searchPrams.budget] == undefined ? '' : budgetArgs[searchPrams.budget].label)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: "",
-    className: " my-3 block text-white"
+    className: " mb-3 mt-5 block text-white text-base"
   }, "You Email"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_text__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "w-full !py-1  !rounded-none ",
     type: "text",
     placeholder: "",
     value: searchPrams.email,
-    onChange: newVal => {
+    onChange: ev => {
+      var newVal = ev.target.value;
       setsearchPrams({ ...searchPrams,
         email: newVal
       });
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     for: "",
-    className: " my-3 block text-white"
+    className: " my-3 block text-white text-base"
   }, "You Name"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_input_text__WEBPACK_IMPORTED_MODULE_5__["default"], {
     className: "w-full !py-1  !rounded-none ",
     type: "text",
     placeholder: "",
     value: searchPrams.name,
-    onChange: newVal => {
+    onChange: ev => {
+      var newVal = ev.target.value;
       setsearchPrams({ ...searchPrams,
         name: newVal
       });
     }
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null)));
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "py-5 px-10"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "text-base"
+  }, "By sending mail, you are requested to follow these terms."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
+    className: "my-3 text-base list-inside"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    className: "list-disc"
+  }, "We do not provide design made by 3rd party blocks. default blocks may use."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    className: "list-disc"
+  }, "We do not provide immediate/emmargency delivery. But we try our best as soon as possible.")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-blue-600 rounded-md text-white font-bold text-base text-center cursor-pointer hover:bg-blue-500 px-10 py-3 my-5",
+    onClick: ev => {
+      console.log('hello');
+    }
+  }, "Send Mail"))));
 }
 
 class PGRequestTemplate extends Component {

@@ -12718,6 +12718,10 @@ var myStore = wp.data.select('postgrid-shop');
           // imgAltText, imgTitle, imgCaption, imgDescription imgName, imgSlug, postTitle, excerpt, postSlug, customField, custom
           altTextCustom: '',
           altTextMetaKey: '',
+          titleTextSrc: 'imgTitle',
+          // imgAltText, imgTitle, imgCaption, imgDescription imgName, imgSlug, postTitle, excerpt, postSlug, customField, custom
+          titleTextCustom: '',
+          titleTextMetaKey: '',
           linkTarget: '_blank',
           linkAttr: [],
           class: '',
@@ -13929,76 +13933,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
-      for: ""
-    }, "Custom Attributes"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-      className: " cursor-pointer px-3 text-white py-1 bg-blue-600",
-      onClick: ev => {
-        var sdsd = image.options.linkAttr.concat({
-          id: '',
-          val: ''
-        });
-        var options = { ...image.options,
-          linkAttr: sdsd
-        };
-        setAttributes({
-          image: { ...image,
-            options: options
-          }
-        });
-        linkAttrObj();
-      }
-    }, "Add")), image.options.linkAttr.map((x, i) => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-        className: "my-2"
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
-        placeholder: "Name",
-        className: "mr-2",
-        value: image.options.linkAttr[i].id,
-        onChange: newVal => {
-          image.options.linkAttr[i].id = newVal;
-          var ssdsd = image.options.linkAttr.concat([]);
-          var options = { ...image.options,
-            linkAttr: ssdsd
-          };
-          setAttributes({
-            image: { ...image,
-              options: options
-            }
-          });
-        }
-      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
-        className: "mr-2",
-        placeholder: "Value",
-        value: x.val,
-        onChange: newVal => {
-          image.options.linkAttr[i].val = newVal;
-          var ssdsd = image.options.linkAttr.concat([]);
-          var options = { ...image.options,
-            linkAttr: ssdsd
-          };
-          setAttributes({
-            image: { ...image,
-              options: options
-            }
-          });
-        }
-      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
-        className: "text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close",
-        onClick: ev => {
-          image.options.linkAttr.splice(i, 1);
-          var ssdsd = image.options.linkAttr.concat([]);
-          var options = { ...image.options,
-            linkAttr: ssdsd
-          };
-          setAttributes({
-            image: { ...image,
-              options: options
-            }
-          });
-        }
-      })));
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Alt Text Source"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_16__["default"], {
       position: "bottom right",
@@ -14088,7 +14023,166 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Title Text Source"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      position: "bottom right",
+      variant: "secondary",
+      buttonTitle: image.options.titleTextSrc.length == 0 ? 'Choose' : altTextSrcArgs[image.options.titleTextSrc].label,
+      options: altTextSrcArgs,
+      onChange: (option, index) => {
+        var options = { ...image.options,
+          titleTextSrc: option.value
+        };
+        setAttributes({
+          image: { ...image,
+            options: options
+          }
+        });
+      },
+      values: ""
+    })), image.options.titleTextSrc == 'customField' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Custom Field"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      position: "bottom right",
+      variant: "secondary",
+      buttonTitle: 'Choose',
+      options: [{
+        label: 'Custom',
+        value: ''
+      }, {
+        label: 'Yoast meta',
+        value: '_yoast_wpseo_metadesc'
+      }, {
+        label: 'Rank Math meta',
+        value: 'rank_math_description'
+      }, {
+        label: 'AIO SEO meta',
+        value: '_aioseo_og_description'
+      }, {
+        label: 'SEOPress meta',
+        value: '_seopress_titles_desc'
+      }, {
+        label: 'WP Meta SEO meta',
+        value: '_metaseo_metadesc'
+      }, {
+        label: 'The SEO Framework meta',
+        value: '_genesis_description'
+      }, {
+        label: 'SEO SIMPLE PACK meta',
+        value: 'ssp_meta_description'
+      }],
+      onChange: (option, index) => {
+        var options = { ...image.options,
+          titleTextMetaKey: option.value
+        };
+        setAttributes({
+          image: { ...image,
+            options: options
+          }
+        });
+      },
+      values: ""
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Custom Field Key"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
+      className: "mr-2",
+      value: image.options.titleTextMetaKey,
+      onChange: newVal => {
+        var options = { ...image.options,
+          titleTextMetaKey: newVal
+        };
+        setAttributes({
+          image: { ...image,
+            options: options
+          }
+        });
+      }
+    }))), image.options.titleTextSrc == 'custom' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Custom Title Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
+      className: "mr-2",
+      value: image.options.titleTextCustom,
+      onChange: newVal => {
+        var options = { ...image.options,
+          titleTextCustom: newVal
+        };
+        setAttributes({
+          image: { ...image,
+            options: options
+          }
+        });
+      }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Custom Attributes"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+      className: " cursor-pointer px-3 text-white py-1 bg-blue-600",
+      onClick: ev => {
+        var sdsd = image.options.linkAttr.concat({
+          id: '',
+          val: ''
+        });
+        var options = { ...image.options,
+          linkAttr: sdsd
+        };
+        setAttributes({
+          image: { ...image,
+            options: options
+          }
+        });
+        linkAttrObj();
+      }
+    }, "Add")), image.options.linkAttr.map((x, i) => {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+        className: "my-2"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
+        placeholder: "Name",
+        className: "mr-2",
+        value: image.options.linkAttr[i].id,
+        onChange: newVal => {
+          image.options.linkAttr[i].id = newVal;
+          var ssdsd = image.options.linkAttr.concat([]);
+          var options = { ...image.options,
+            linkAttr: ssdsd
+          };
+          setAttributes({
+            image: { ...image,
+              options: options
+            }
+          });
+        }
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
+        className: "mr-2",
+        placeholder: "Value",
+        value: x.val,
+        onChange: newVal => {
+          image.options.linkAttr[i].val = newVal;
+          var ssdsd = image.options.linkAttr.concat([]);
+          var options = { ...image.options,
+            linkAttr: ssdsd
+          };
+          setAttributes({
+            image: { ...image,
+              options: options
+            }
+          });
+        }
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
+        className: "text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close",
+        onClick: ev => {
+          image.options.linkAttr.splice(i, 1);
+          var ssdsd = image.options.linkAttr.concat([]);
+          var options = { ...image.options,
+            linkAttr: ssdsd
+          };
+          setAttributes({
+            image: { ...image,
+              options: options
+            }
+          });
+        }
+      })));
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
       name: "styles"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
       obj: image,
@@ -14301,66 +14395,64 @@ var myStore = wp.data.select('postgrid-shop');
     }, "Image Source URL:"), " ", image.options.srcUrl.length != 0 ? image.options.srcUrl : 'No link', " "))))))), wrapper.options.useAsBackground == 'no' && wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
       className: [blockId],
       id: [blockId]
-    }, image.options.linkTo.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    }, image.options.linkTo.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
       onClick: e => {
         handleLinkClickX(e, postImage.media_details.sizes[image.options.size[breakPointX]].source_url);
-      }
-    }, linkAttrItems, {
+      },
       href: postUrl,
       target: image.options.linkTarget
-    }), postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '',
       alt: postImage.alt_text
-    }), postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    })), postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.guid.rendered != undefined ? postImage.guid.rendered : '',
       alt: postImage.alt_text
-    }))), image.options.linkTo.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    })))), image.options.linkTo.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       onClick: e => {
         handleLinkClickX(e, postImage.media_details.sizes[image.options.size[breakPointX]].source_url);
       },
       src: postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '',
       alt: postImage.alt_text
-    }), postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    })), postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       onClick: e => {
         handleLinkClickX(e, postImage.media_details.sizes[image.options.size[breakPointX]].source_url);
       },
       src: postImage != null && postImage.guid.rendered != undefined ? postImage.guid.rendered : '',
       alt: postImage.alt_text
-    }))), image.options.imgSrcType == 'customUrl' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    })))), image.options.imgSrcType == 'customUrl' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: image.options.srcUrl,
       alt: image.options.altTextCustom
-    }))), wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, image.options.linkTo.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    })))), wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, image.options.linkTo.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
       onClick: handleLinkClick,
       className: [blockId],
-      id: [blockId]
-    }, linkAttrItems, {
+      id: [blockId],
       href: postUrl,
       target: image.options.linkTarget
-    }), postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '',
       alt: postImage.alt_text
-    }), postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    })), postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.guid.rendered != undefined ? postImage.guid.rendered : '',
       alt: postImage.alt_text
-    })))), wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && image.options.linkTo.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, image.options.tag.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTagPostTitle, {
+    }))))), wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && image.options.linkTo.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, image.options.tag.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTagPostTitle, {
       className: blockId,
       id: [blockId]
-    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '',
       alt: postImage.alt_text
-    }), postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    })), postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.guid.rendered != undefined ? postImage.guid.rendered : '',
       alt: postImage.alt_text
-    }))), image.options.tag.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    })))), image.options.tag.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: blockId,
       id: [blockId]
-    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '',
       alt: postImage.alt_text
-    }), postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    })), postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.guid.rendered != undefined ? postImage.guid.rendered : '',
       alt: postImage.alt_text
-    })))))];
+    }))))))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
@@ -27984,6 +28076,10 @@ var myStore = wp.data.select('postgrid-shop');
           // imgAltText, imgTitle, imgCaption, imgDescription imgName, imgSlug, postTitle, excerpt, postSlug, customField, custom
           altTextCustom: '',
           altTextMetaKey: '',
+          titleTextSrc: 'imgTitle',
+          // imgAltText, imgTitle, imgCaption, imgDescription imgName, imgSlug, postTitle, excerpt, postSlug, customField, custom
+          titleTextCustom: '',
+          titleTextMetaKey: '',
           linkTarget: '_blank',
           linkAttr: [],
           class: '',
@@ -29012,7 +29108,7 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
       for: ""
     }, "Custom Attributes"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: " cursor-pointer px-3 text-white py-1 bg-blue-600",
@@ -29081,7 +29177,7 @@ var myStore = wp.data.select('postgrid-shop');
           });
         }
       })));
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
       className: "my-3"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Alt Text Source"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_16__["default"], {
       position: "bottom right",
@@ -29171,6 +29267,96 @@ var myStore = wp.data.select('postgrid-shop');
           }
         });
       }
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Title Text Source"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      position: "bottom right",
+      variant: "secondary",
+      buttonTitle: featuredImage.options.titleTextSrc.length == 0 ? 'Choose' : altTextSrcArgs[featuredImage.options.titleTextSrc].label,
+      options: altTextSrcArgs,
+      onChange: (option, index) => {
+        var options = { ...featuredImage.options,
+          titleTextSrc: option.value
+        };
+        setAttributes({
+          featuredImage: { ...featuredImage,
+            options: options
+          }
+        });
+      },
+      values: ""
+    })), featuredImage.options.titleTextSrc == 'customField' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, {
+      className: "my-3"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", null, "Custom Field"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_dropdown__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      position: "bottom right",
+      variant: "secondary",
+      buttonTitle: 'Choose',
+      options: [{
+        label: 'Custom',
+        value: ''
+      }, {
+        label: 'Yoast meta',
+        value: '_yoast_wpseo_metadesc'
+      }, {
+        label: 'Rank Math meta',
+        value: 'rank_math_description'
+      }, {
+        label: 'AIO SEO meta',
+        value: '_aioseo_og_description'
+      }, {
+        label: 'SEOPress meta',
+        value: '_seopress_titles_desc'
+      }, {
+        label: 'WP Meta SEO meta',
+        value: '_metaseo_metadesc'
+      }, {
+        label: 'The SEO Framework meta',
+        value: '_genesis_description'
+      }, {
+        label: 'SEO SIMPLE PACK meta',
+        value: 'ssp_meta_description'
+      }],
+      onChange: (option, index) => {
+        var options = { ...featuredImage.options,
+          titleTextMetaKey: option.value
+        };
+        setAttributes({
+          featuredImage: { ...featuredImage,
+            options: options
+          }
+        });
+      },
+      values: ""
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Custom Field Key"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
+      className: "mr-2",
+      value: featuredImage.options.titleTextMetaKey,
+      onChange: newVal => {
+        var options = { ...featuredImage.options,
+          titleTextMetaKey: newVal
+        };
+        setAttributes({
+          featuredImage: { ...featuredImage,
+            options: options
+          }
+        });
+      }
+    }))), featuredImage.options.titleTextSrc == 'custom' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("label", {
+      for: ""
+    }, "Custom Title Text"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.__experimentalInputControl, {
+      className: "mr-2",
+      value: featuredImage.options.titleTextCustom,
+      onChange: newVal => {
+        var options = { ...featuredImage.options,
+          titleTextCustom: newVal
+        };
+        setAttributes({
+          featuredImage: { ...featuredImage,
+            options: options
+          }
+        });
+      }
     }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_22__["default"], {
       name: "styles"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_components_styles__WEBPACK_IMPORTED_MODULE_23__["default"], {
@@ -29224,46 +29410,44 @@ var myStore = wp.data.select('postgrid-shop');
     })), wrapper.options.useAsBackground == 'no' && wrapper.options.tag && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTag, {
       className: [blockId],
       id: [blockId]
-    }, featuredImage.options.linkTo.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-      onClick: handleLinkClick
-    }, linkAttrItems, {
+    }, featuredImage.options.linkTo.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
+      onClick: handleLinkClick,
       href: postUrl,
       target: featuredImage.options.linkTarget
-    }), featuredImage.options.size[breakPointX] != undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }, featuredImage.options.size[breakPointX] != undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '',
       alt: postImage.alt_text
-    })), postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }))), postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
       src: postImage != null && postImage.guid.rendered != undefined ? postImage.guid.rendered : '',
       alt: postImage.alt_text
-    }))), featuredImage.options.linkTo.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, featuredImage.options.size[breakPointX] != undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }))), featuredImage.options.linkTo.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, featuredImage.options.size[breakPointX] != undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '',
       alt: postImage.alt_text
-    })), postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }))), postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] == undefined && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage != null && postImage.guid.rendered != undefined ? postImage.guid.rendered : '',
       alt: postImage.alt_text
-    })))), wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && featuredImage.options.linkTo.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    }))))), wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && featuredImage.options.linkTo.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("a", {
       onClick: handleLinkClick,
       className: [blockId],
-      id: [blockId]
-    }, linkAttrItems, {
+      id: [blockId],
       href: postUrl,
       target: featuredImage.options.linkTarget
-    }), postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage.guid.rendered,
       alt: postImage.alt_text
-    })), wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && featuredImage.options.linkTo.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, featuredImage.options.tag.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTagPostTitle, {
+    }))), wrapper.options.useAsBackground == 'no' && wrapper.options.tag.length == 0 && featuredImage.options.linkTo.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, featuredImage.options.tag.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(CustomTagPostTitle, {
       className: blockId,
       id: [blockId]
-    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage.guid.rendered,
       alt: postImage.alt_text
-    })), featuredImage.options.tag.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    }))), featuredImage.options.tag.length == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
       className: blockId,
       id: [blockId]
-    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", {
+    }, postImage != null && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("img", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, linkAttrItems, {
       src: postImage.guid.rendered,
       alt: postImage.alt_text
-    }))))];
+    })))))];
   },
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
@@ -74598,11 +74782,10 @@ function Html(props) {
     }, (arg.id == 'translateX' || arg.id == 'translateY' || arg.id == 'translateZ' || arg.id == 'scaleX' || arg.id == 'scaleY' || arg.id == 'scaleZ' || arg.id == 'rotateX' || arg.id == 'rotateY' || arg.id == 'rotateZ' || arg.id == 'skewX' || arg.id == 'skewY' || arg.id == 'perspective') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "Value"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
-      value: arg.val.match(/\d+/g)[0],
+      value: arg.val.match(/-?\d+/g)[0],
       type: "number",
       onChange: newVal => {
         //var argVal = arg.val != undefined ? arg.val.match(/\d+/g)[0] : 1;
-        //var argUnit = arg.val != undefined ? arg.val.match(/[a-zA-Z]+/g)[0] : '';
         var str = '';
         valArgs.map((x, j) => {
           if (arg.id == x.id) {
@@ -74611,7 +74794,8 @@ function Html(props) {
             }
 
             if (arg.id == 'translateX' || arg.id == 'translateY' || arg.id == 'translateZ' || arg.id == 'perspective') {
-              str += x.id + '(' + newVal + 'px) ';
+              var argUnit = arg.val != undefined ? arg.val.match(/[%a-zA-Z]+/g)[0] : '';
+              str += x.id + '(' + newVal + argUnit + ') ';
             }
 
             if (arg.id == 'rotateX' || arg.id == 'rotateY' || arg.id == 'rotateZ' || arg.id == 'skewX' || arg.id == 'skewY') {
@@ -74623,7 +74807,37 @@ function Html(props) {
         });
         props.onChange(str, 'transform');
       }
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (arg.id == 'translateX' || arg.id == 'translateY' || arg.id == 'translateZ' || arg.id == 'perspective') && "PX", (arg.id == 'rotateX' || arg.id == 'rotateY' || arg.id == 'rotateZ' || arg.id == 'skewX' || arg.id == 'skewY') && "deg"))), (arg.id == 'translate' || arg.id == 'scale' || arg.id == 'skew') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (arg.id == 'translateX' || arg.id == 'translateY' || arg.id == 'translateZ' || arg.id == 'perspective') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+      label: "",
+      value: arg.val.match(/[%a-zA-Z]+/g)[0],
+      options: [{
+        "label": "PX",
+        "value": "px"
+      }, {
+        "label": "EM",
+        "value": "em"
+      }, {
+        "label": "REM",
+        "value": "rem"
+      }, {
+        "label": "%",
+        "value": "%"
+      }],
+      onChange: newVal => {
+        var str = '';
+        valArgs.map((x, j) => {
+          if (arg.id == x.id) {
+            if (arg.id == 'translateX' || arg.id == 'translateY' || arg.id == 'translateZ' || arg.id == 'perspective') {
+              var argVal = arg.val != undefined ? arg.val.match(/\d+/g)[0] : 1;
+              str += x.id + '(' + argVal + newVal + ') ';
+            }
+          } else {
+            str += x.id + '(' + x.val + ') ';
+          }
+        });
+        props.onChange(str, 'transform');
+      }
+    }), (arg.id == 'rotateX' || arg.id == 'rotateY' || arg.id == 'rotateZ' || arg.id == 'skewX' || arg.id == 'skewY') && "deg"))), (arg.id == 'translate' || arg.id == 'scale' || arg.id == 'skew') && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
       for: ""
     }, "X Value"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalInputControl, {
       value: arg.val.split(",")[0].match(/\d+/g)[0],
@@ -77966,6 +78180,38 @@ function Html(props) {
       });
     });
   }, []);
+
+  function senMail() {
+    var htmlBody = '';
+    htmlBody += '<p style="font-weight:bold;font-size:18px">' + searchPrams.title + '</p>';
+    htmlBody += '<p style="font-weight:bold">Budget: ' + searchPrams.budget + '$</p>';
+    htmlBody += '<p style="font-weight:bold">Email: ' + searchPrams.email + '</p>';
+    htmlBody += '<p></p>';
+    htmlBody += searchPrams.content;
+    htmlBody += '<p>Design Files:</p>';
+    searchPrams.files.map(x => {
+      htmlBody += '<p><a href="' + x + '"><img style="width:200px;height:auto" src="' + x + '"/></a></p>';
+    });
+    var postData = {
+      subject: '#Post Grid Combo - Template Request',
+      body: htmlBody,
+      email_to: 'support@pickplugins.com',
+      email_from: searchPrams.email,
+      email_from_name: searchPrams.name,
+      reply_to: searchPrams.email,
+      reply_to_name: searchPrams.name,
+      attachments: searchPrams.files
+    };
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
+      path: '/post-grid/v2/send_mail',
+      method: 'POST',
+      data: postData
+    }).then(res => {
+      console.log(res);
+      console.log(postData);
+    });
+  }
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "requestTemplate",
     class: ""
@@ -78025,7 +78271,7 @@ function Html(props) {
       }, "Open Media Library");
     }
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex"
+    className: "flex mb-5"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, searchPrams.files.map((x, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: " bg-white m-3 my-2 p-3 relative"
@@ -78124,6 +78370,7 @@ function Html(props) {
     className: "bg-blue-600 rounded-md text-white font-bold text-base text-center cursor-pointer hover:bg-blue-500 px-10 py-3 my-5",
     onClick: ev => {
       console.log('hello');
+      senMail();
     }
   }, "Send Mail"))));
 }
@@ -79556,7 +79803,7 @@ function Html(props) {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-600 flex items-center cursor-pointer hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white",
     onClick: () => {
-      //setcustomTemplate(!customTemplate);
+      setcustomTemplate(!customTemplate);
       setTimeout(() => {
         loadMasonry();
       }, 500);

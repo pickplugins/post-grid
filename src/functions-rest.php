@@ -218,6 +218,17 @@ class BlockPostGridRest
                 'permission_callback' => '__return_true',
             )
         );
+
+
+        register_rest_route(
+            'post-grid/v2',
+            '/send_mail',
+            array(
+                'methods'  => 'POST',
+                'callback' => array($this, 'send_mail'),
+                'permission_callback' => '__return_true',
+            )
+        );
     }
 
     /**
@@ -1399,6 +1410,91 @@ class BlockPostGridRest
             die(wp_json_encode($terms));
         }
     }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Return send_mail.
+     *
+     * @since 1.0.0
+     *
+     * @param WP_REST_Request $tax_data The tax data.
+     */
+    public function send_mail($request)
+    {
+
+        error_log(serialize($request));
+
+        $response = [];
+
+        $subject  = isset($request['subject']) ? $request['subject'] : '';
+        $email_body  = isset($request['body']) ? $request['body'] : '';
+
+        $email_to  = isset($request['email_to']) ? $request['email_to'] : '';
+        $email_from  = isset($request['email_from']) ? $request['email_from'] : '';
+        $email_from_name  = isset($request['email_from_name']) ? $request['email_from_name'] : '';
+
+        $reply_to  = isset($request['reply_to']) ? $request['reply_to'] : '';
+        $reply_to_name  = isset($request['reply_to_name']) ? $request['reply_to_name'] : '';
+        $attachments = isset($email_data['attachments']) ? $email_data['attachments'] : '';
+
+
+        $headers = array();
+        $headers[] = "From: " . $email_from_name . " <" . $email_from . ">";
+
+        if (!empty($reply_to)) {
+            $headers[] = "Reply-To: " . $reply_to_name . " <" . $reply_to . ">";
+        }
+
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-Type: text/html; charset=UTF-8";
+
+
+        $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
+
+        if ($status) {
+            $response['mail_sent'] = true;
+        } else {
+            $response['mail_sent'] = false;
+        }
+
+
+
+        die(wp_json_encode($response));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Return terms for taxonomy.

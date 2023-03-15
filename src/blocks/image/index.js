@@ -100,8 +100,14 @@ registerBlockType("post-grid/image", {
           linkToMetaKey: '',
           linkTocustomUrl: '',
           altTextSrc: 'imgAltText', // imgAltText, imgTitle, imgCaption, imgDescription imgName, imgSlug, postTitle, excerpt, postSlug, customField, custom
+
           altTextCustom: '',
           altTextMetaKey: '',
+
+          titleTextSrc: 'imgTitle', // imgAltText, imgTitle, imgCaption, imgDescription imgName, imgSlug, postTitle, excerpt, postSlug, customField, custom
+
+          titleTextCustom: '',
+          titleTextMetaKey: '',
 
           linkTarget: '_blank',
           linkAttr: [],
@@ -1489,101 +1495,6 @@ registerBlockType("post-grid/image", {
 
 
 
-
-
-
-
-                      <PanelRow>
-                        <label for="">Custom Attributes</label>
-                        <div
-                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                          onClick={(ev) => {
-
-                            var sdsd = image.options.linkAttr.concat({ id: '', val: '' })
-
-
-                            var options = { ...image.options, linkAttr: sdsd };
-                            setAttributes({ image: { ...image, options: options } });
-
-                            linkAttrObj()
-                          }}
-
-                        >Add</div>
-
-
-
-                      </PanelRow>
-
-
-
-                      {
-                        image.options.linkAttr.map((x, i) => {
-
-                          return (
-
-                            <div className='my-2'>
-                              <PanelRow>
-                                <InputControl
-                                  placeholder="Name"
-                                  className='mr-2'
-                                  value={image.options.linkAttr[i].id}
-                                  onChange={(newVal) => {
-
-                                    image.options.linkAttr[i].id = newVal;
-
-
-                                    var ssdsd = image.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...image.options, linkAttr: ssdsd };
-                                    setAttributes({ image: { ...image, options: options } });
-
-                                  }}
-                                />
-
-                                <InputControl
-                                  className='mr-2'
-                                  placeholder="Value"
-                                  value={x.val}
-                                  onChange={(newVal) => {
-                                    image.options.linkAttr[i].val = newVal
-                                    var ssdsd = image.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...image.options, linkAttr: ssdsd };
-                                    setAttributes({ image: { ...image, options: options } });
-
-                                  }}
-                                />
-                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                                  onClick={(ev) => {
-
-                                    image.options.linkAttr.splice(i, 1);
-
-                                    var ssdsd = image.options.linkAttr.concat([]);
-
-
-                                    var options = { ...image.options, linkAttr: ssdsd };
-                                    setAttributes({ image: { ...image, options: options } });
-                                  }}
-
-                                ></span>
-                              </PanelRow>
-
-
-
-
-                            </div>
-
-                          )
-
-                        })
-                      }
-
-
                     </div>
 
 
@@ -1673,6 +1584,183 @@ registerBlockType("post-grid/image", {
 
                   )}
 
+
+
+
+                  <PanelRow className='my-3'>
+                    <label>Title Text Source</label>
+                    <PGDropdown position="bottom right" variant="secondary" buttonTitle={image.options.titleTextSrc.length == 0 ? 'Choose' : altTextSrcArgs[image.options.titleTextSrc].label} options={altTextSrcArgs} onChange={(option, index) => {
+
+                      var options = { ...image.options, titleTextSrc: option.value };
+                      setAttributes({ image: { ...image, options: options } });
+
+
+                    }} values=""></PGDropdown>
+                  </PanelRow>
+
+
+
+
+                  {image.options.titleTextSrc == 'customField' && (
+
+                    <div>
+
+                      <PanelRow className='my-3'>
+                        <label>Custom Field</label>
+                        <PGDropdown position="bottom right" variant="secondary" buttonTitle={'Choose'} options={[
+                          { label: 'Custom', value: '' },
+                          { label: 'Yoast meta', value: '_yoast_wpseo_metadesc' },
+                          { label: 'Rank Math meta', value: 'rank_math_description' },
+                          { label: 'AIO SEO meta', value: '_aioseo_og_description' },
+                          { label: 'SEOPress meta', value: '_seopress_titles_desc' },
+                          { label: 'WP Meta SEO meta', value: '_metaseo_metadesc' },
+                          { label: 'The SEO Framework meta', value: '_genesis_description' },
+                          { label: 'SEO SIMPLE PACK meta', value: 'ssp_meta_description' },
+                        ]} onChange={(option, index) => {
+
+                          var options = { ...image.options, titleTextMetaKey: option.value };
+                          setAttributes({ image: { ...image, options: options } });
+
+
+
+
+                        }} values=""></PGDropdown>
+                      </PanelRow>
+                      <PanelRow>
+                        <label for="">Custom Field Key</label>
+                        <InputControl
+                          className='mr-2'
+                          value={image.options.titleTextMetaKey}
+                          onChange={(newVal) => {
+
+
+                            var options = { ...image.options, titleTextMetaKey: newVal };
+                            setAttributes({ image: { ...image, options: options } });
+
+                          }}
+                        />
+                      </PanelRow>
+                    </div>
+                  )}
+
+
+
+
+
+                  {image.options.titleTextSrc == 'custom' && (
+
+
+
+                    <PanelRow>
+                      <label for="">Custom Title Text</label>
+                      <InputControl
+                        className='mr-2'
+                        value={image.options.titleTextCustom}
+                        onChange={(newVal) => {
+
+
+                          var options = { ...image.options, titleTextCustom: newVal };
+                          setAttributes({ image: { ...image, options: options } });
+
+                        }}
+                      />
+                    </PanelRow>
+
+
+                  )}
+
+
+
+
+                  <PanelRow>
+                    <label for="">Custom Attributes</label>
+                    <div
+                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                      onClick={(ev) => {
+
+                        var sdsd = image.options.linkAttr.concat({ id: '', val: '' })
+
+
+                        var options = { ...image.options, linkAttr: sdsd };
+                        setAttributes({ image: { ...image, options: options } });
+
+                        linkAttrObj()
+                      }}
+
+                    >Add</div>
+
+
+
+                  </PanelRow>
+
+
+
+                  {
+                    image.options.linkAttr.map((x, i) => {
+
+                      return (
+
+                        <div className='my-2'>
+                          <PanelRow>
+                            <InputControl
+                              placeholder="Name"
+                              className='mr-2'
+                              value={image.options.linkAttr[i].id}
+                              onChange={(newVal) => {
+
+                                image.options.linkAttr[i].id = newVal;
+
+
+                                var ssdsd = image.options.linkAttr.concat([]);
+
+
+
+                                var options = { ...image.options, linkAttr: ssdsd };
+                                setAttributes({ image: { ...image, options: options } });
+
+                              }}
+                            />
+
+                            <InputControl
+                              className='mr-2'
+                              placeholder="Value"
+                              value={x.val}
+                              onChange={(newVal) => {
+                                image.options.linkAttr[i].val = newVal
+                                var ssdsd = image.options.linkAttr.concat([]);
+
+
+
+                                var options = { ...image.options, linkAttr: ssdsd };
+                                setAttributes({ image: { ...image, options: options } });
+
+                              }}
+                            />
+                            <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                              onClick={(ev) => {
+
+                                image.options.linkAttr.splice(i, 1);
+
+                                var ssdsd = image.options.linkAttr.concat([]);
+
+
+                                var options = { ...image.options, linkAttr: ssdsd };
+                                setAttributes({ image: { ...image, options: options } });
+                              }}
+
+                            ></span>
+                          </PanelRow>
+
+
+
+
+                        </div>
+
+                      )
+
+                    })
+                  }
 
 
 
@@ -1985,13 +2073,13 @@ registerBlockType("post-grid/image", {
                   }}
 
 
-                  {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
+                  href={postUrl} target={image.options.linkTarget}>
 
-                  {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+                  {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
                   {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
                     <>
-                      {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                      {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
                     </>
                   )}
 
@@ -2004,7 +2092,7 @@ registerBlockType("post-grid/image", {
                     <>
                       {postImage != null && (
 
-                        <img
+                        <img {...linkAttrItems}
                           onClick={(e) => {
                             handleLinkClickX(e, postImage.media_details.sizes[image.options.size[breakPointX]].source_url);
                           }}
@@ -2017,7 +2105,7 @@ registerBlockType("post-grid/image", {
 
                       {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
                         <>
-                          {postImage != null && <img
+                          {postImage != null && <img {...linkAttrItems}
                             onClick={(e) => {
                               handleLinkClickX(e, postImage.media_details.sizes[image.options.size[breakPointX]].source_url);
                             }}
@@ -2034,7 +2122,7 @@ registerBlockType("post-grid/image", {
 
 
                   {image.options.imgSrcType == 'customUrl' && (
-                    <img src={image.options.srcUrl} alt={image.options.altTextCustom} />
+                    <img {...linkAttrItems} src={image.options.srcUrl} alt={image.options.altTextCustom} />
                   )}
 
 
@@ -2049,15 +2137,15 @@ registerBlockType("post-grid/image", {
             <>
               {
                 image.options.linkTo.length > 0 && (
-                  <a onClick={handleLinkClick} className={[blockId]} id={[blockId]} {...linkAttrItems} href={postUrl} target={image.options.linkTarget}>
+                  <a onClick={handleLinkClick} className={[blockId]} id={[blockId]} href={postUrl} target={image.options.linkTarget}>
 
 
-                    {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+                    {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
 
                     {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
                       <>
-                        {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                        {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
                       </>
                     )}
 
@@ -2078,11 +2166,11 @@ registerBlockType("post-grid/image", {
               {image.options.tag.length > 0 && (
                 <CustomTagPostTitle className={blockId} id={[blockId]}>
 
-                  {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+                  {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
                   {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
                     <>
-                      {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                      {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
                     </>
                   )}
 
@@ -2092,11 +2180,11 @@ registerBlockType("post-grid/image", {
               {image.options.tag.length == 0 && (
                 <div className={blockId} id={[blockId]}>
 
-                  {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+                  {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[image.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
 
                   {postImage != null && postImage.media_details.sizes[image.options.size[breakPointX]] == undefined && (
                     <>
-                      {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                      {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
                     </>
                   )}
                 </div>

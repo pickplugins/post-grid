@@ -1609,8 +1609,8 @@ if (!class_exists('settings_tabs_field')) {
                 <?php
                 foreach ($args as $key => $value) :
 
-                    $name = $value['name'];
-                    $thumb = $value['thumb'];
+                    $name = isset($value['name']) ? $value['name'] : '';
+                    $thumb = isset($value['thumb']) ? $value['thumb'] : '';
                     $disabled = isset($value['disabled']) ? $value['disabled'] : '';
                     $pro_msg = isset($value['pro_msg']) ? $value['pro_msg'] : '';
                     $link = isset($value['link']) ? $value['link'] : '';

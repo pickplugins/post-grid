@@ -288,6 +288,9 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 = 2.2.36 =
 * 2023-03-14 - add - Block editor section templates added.
 * 2023-03-14 - removed - devider block removed.
+* 2023-03-15 - add - Style component transform unit added.
+* 2023-03-15 - add - Image Block - Title attribute added
+* 2023-03-15 - add - Featured Image Block - Title attribute added
 
 
 = 2.2.34 =

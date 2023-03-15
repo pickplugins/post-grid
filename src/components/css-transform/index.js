@@ -4,7 +4,7 @@ const { Component } = wp.element;
 import { Button, Dropdown, PanelRow, PanelBody, RangeControl } from '@wordpress/components'
 import { useState, useEffect } from '@wordpress/element'
 
-import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
+import { __experimentalInputControl as InputControl, ColorPalette, SelectControl } from '@wordpress/components';
 import PGDropdown from '../../components/dropdown'
 import { Icon, close } from '@wordpress/icons';
 
@@ -162,15 +162,11 @@ function Html(props) {
                       <PanelRow>
                         <label for="">Value</label>
                         <InputControl
-                          value={arg.val.match(/\d+/g)[0]}
+                          value={arg.val.match(/-?\d+/g)[0]}
                           type="number"
 
                           onChange={(newVal) => {
                             //var argVal = arg.val != undefined ? arg.val.match(/\d+/g)[0] : 1;
-                            //var argUnit = arg.val != undefined ? arg.val.match(/[a-zA-Z]+/g)[0] : '';
-
-
-
 
                             var str = '';
                             valArgs.map((x, j) => {
@@ -194,7 +190,9 @@ function Html(props) {
                                   || arg.id == 'perspective'
 
                                 ) {
-                                  str += x.id + '(' + newVal + 'px) ';
+                                  var argUnit = arg.val != undefined ? arg.val.match(/[%a-zA-Z]+/g)[0] : '';
+
+                                  str += x.id + '(' + newVal + argUnit + ') ';
                                 }
 
                                 if (
@@ -231,7 +229,64 @@ function Html(props) {
                               || arg.id == 'translateY'
                               || arg.id == 'translateZ'
                               || arg.id == 'perspective'
-                            ) && "PX"
+                            ) && (
+
+                              <SelectControl
+                                label=""
+                                value={arg.val.match(/[%a-zA-Z]+/g)[0]}
+                                options={[
+                                  { "label": "PX", "value": "px" },
+                                  { "label": "EM", "value": "em" },
+                                  { "label": "REM", "value": "rem" },
+                                  { "label": "%", "value": "%" },
+                                ]}
+                                onChange={(newVal) => {
+
+
+
+                                  var str = '';
+                                  valArgs.map((x, j) => {
+
+                                    if (arg.id == x.id) {
+
+
+                                      if (
+                                        arg.id == 'translateX'
+                                        || arg.id == 'translateY'
+                                        || arg.id == 'translateZ'
+                                        || arg.id == 'perspective'
+
+                                      ) {
+                                        var argVal = arg.val != undefined ? arg.val.match(/\d+/g)[0] : 1;
+
+                                        str += x.id + '(' + argVal + newVal + ') ';
+                                      }
+
+
+
+                                    } else {
+                                      str += x.id + '(' + x.val + ') ';
+                                    }
+
+                                  })
+
+
+
+                                  props.onChange(str, 'transform');
+
+
+
+
+
+
+
+
+
+
+                                }}
+                              />
+
+                            )
                           }
 
                           {

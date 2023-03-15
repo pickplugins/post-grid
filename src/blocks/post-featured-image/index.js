@@ -97,6 +97,11 @@ registerBlockType("post-grid/post-featured-image", {
           altTextCustom: '',
           altTextMetaKey: '',
 
+          titleTextSrc: 'imgTitle', // imgAltText, imgTitle, imgCaption, imgDescription imgName, imgSlug, postTitle, excerpt, postSlug, customField, custom
+
+          titleTextCustom: '',
+          titleTextMetaKey: '',
+
           linkTarget: '_blank',
           linkAttr: [],
           class: '',
@@ -1263,102 +1268,105 @@ registerBlockType("post-grid/post-featured-image", {
 
 
 
-                      <PanelRow>
-                        <label for="">Custom Attributes</label>
-                        <div
-                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                          onClick={(ev) => {
-
-                            var sdsd = featuredImage.options.linkAttr.concat({ id: '', val: '' })
-
-
-                            var options = { ...featuredImage.options, linkAttr: sdsd };
-                            setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-                            linkAttrObj()
-                          }}
-
-                        >Add</div>
-
-
-
-                      </PanelRow>
-
-
-
-                      {
-                        featuredImage.options.linkAttr.map((x, i) => {
-
-                          return (
-
-                            <div className='my-2'>
-                              <PanelRow>
-                                <InputControl
-                                  placeholder="Name"
-                                  className='mr-2'
-                                  value={featuredImage.options.linkAttr[i].id}
-                                  onChange={(newVal) => {
-
-                                    featuredImage.options.linkAttr[i].id = newVal;
-
-
-                                    var ssdsd = featuredImage.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...featuredImage.options, linkAttr: ssdsd };
-                                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-                                  }}
-                                />
-
-                                <InputControl
-                                  className='mr-2'
-                                  placeholder="Value"
-                                  value={x.val}
-                                  onChange={(newVal) => {
-                                    featuredImage.options.linkAttr[i].val = newVal
-                                    var ssdsd = featuredImage.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...featuredImage.options, linkAttr: ssdsd };
-                                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
-
-                                  }}
-                                />
-                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                                  onClick={(ev) => {
-
-                                    featuredImage.options.linkAttr.splice(i, 1);
-
-                                    var ssdsd = featuredImage.options.linkAttr.concat([]);
-
-
-                                    var options = { ...featuredImage.options, linkAttr: ssdsd };
-                                    setAttributes({ featuredImage: { ...featuredImage, options: options } });
-                                  }}
-
-                                ></span>
-                              </PanelRow>
-
-
-
-
-                            </div>
-
-                          )
-
-                        })
-                      }
-
 
                     </div>
 
 
 
                   )}
+
+
+
+                  <PanelRow>
+                    <label for="">Custom Attributes</label>
+                    <div
+                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
+
+                      onClick={(ev) => {
+
+                        var sdsd = featuredImage.options.linkAttr.concat({ id: '', val: '' })
+
+
+                        var options = { ...featuredImage.options, linkAttr: sdsd };
+                        setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                        linkAttrObj()
+                      }}
+
+                    >Add</div>
+
+
+
+                  </PanelRow>
+
+
+
+                  {
+                    featuredImage.options.linkAttr.map((x, i) => {
+
+                      return (
+
+                        <div className='my-2'>
+                          <PanelRow>
+                            <InputControl
+                              placeholder="Name"
+                              className='mr-2'
+                              value={featuredImage.options.linkAttr[i].id}
+                              onChange={(newVal) => {
+
+                                featuredImage.options.linkAttr[i].id = newVal;
+
+
+                                var ssdsd = featuredImage.options.linkAttr.concat([]);
+
+
+
+                                var options = { ...featuredImage.options, linkAttr: ssdsd };
+                                setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                              }}
+                            />
+
+                            <InputControl
+                              className='mr-2'
+                              placeholder="Value"
+                              value={x.val}
+                              onChange={(newVal) => {
+                                featuredImage.options.linkAttr[i].val = newVal
+                                var ssdsd = featuredImage.options.linkAttr.concat([]);
+
+
+
+                                var options = { ...featuredImage.options, linkAttr: ssdsd };
+                                setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                              }}
+                            />
+                            <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
+                              onClick={(ev) => {
+
+                                featuredImage.options.linkAttr.splice(i, 1);
+
+                                var ssdsd = featuredImage.options.linkAttr.concat([]);
+
+
+                                var options = { ...featuredImage.options, linkAttr: ssdsd };
+                                setAttributes({ featuredImage: { ...featuredImage, options: options } });
+                              }}
+
+                            ></span>
+                          </PanelRow>
+
+
+
+
+                        </div>
+
+                      )
+
+                    })
+                  }
+
 
 
 
@@ -1444,6 +1452,99 @@ registerBlockType("post-grid/post-featured-image", {
                   )}
 
 
+
+                  <PanelRow className='my-3'>
+                    <label>Title Text Source</label>
+                    <PGDropdown position="bottom right" variant="secondary" buttonTitle={featuredImage.options.titleTextSrc.length == 0 ? 'Choose' : altTextSrcArgs[featuredImage.options.titleTextSrc].label} options={altTextSrcArgs} onChange={(option, index) => {
+
+                      var options = { ...featuredImage.options, titleTextSrc: option.value };
+                      setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+
+                    }} values=""></PGDropdown>
+                  </PanelRow>
+
+
+
+
+                  {featuredImage.options.titleTextSrc == 'customField' && (
+
+                    <div>
+
+                      <PanelRow className='my-3'>
+                        <label>Custom Field</label>
+                        <PGDropdown position="bottom right" variant="secondary" buttonTitle={'Choose'} options={[
+                          { label: 'Custom', value: '' },
+                          { label: 'Yoast meta', value: '_yoast_wpseo_metadesc' },
+                          { label: 'Rank Math meta', value: 'rank_math_description' },
+                          { label: 'AIO SEO meta', value: '_aioseo_og_description' },
+                          { label: 'SEOPress meta', value: '_seopress_titles_desc' },
+                          { label: 'WP Meta SEO meta', value: '_metaseo_metadesc' },
+                          { label: 'The SEO Framework meta', value: '_genesis_description' },
+                          { label: 'SEO SIMPLE PACK meta', value: 'ssp_meta_description' },
+                        ]} onChange={(option, index) => {
+
+                          var options = { ...featuredImage.options, titleTextMetaKey: option.value };
+                          setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+
+
+
+                        }} values=""></PGDropdown>
+                      </PanelRow>
+                      <PanelRow>
+                        <label for="">Custom Field Key</label>
+                        <InputControl
+                          className='mr-2'
+                          value={featuredImage.options.titleTextMetaKey}
+                          onChange={(newVal) => {
+
+
+                            var options = { ...featuredImage.options, titleTextMetaKey: newVal };
+                            setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                          }}
+                        />
+                      </PanelRow>
+                    </div>
+                  )}
+
+
+
+
+
+                  {featuredImage.options.titleTextSrc == 'custom' && (
+
+
+
+                    <PanelRow>
+                      <label for="">Custom Title Text</label>
+                      <InputControl
+                        className='mr-2'
+                        value={featuredImage.options.titleTextCustom}
+                        onChange={(newVal) => {
+
+
+                          var options = { ...featuredImage.options, titleTextCustom: newVal };
+                          setAttributes({ featuredImage: { ...featuredImage, options: options } });
+
+                        }}
+                      />
+                    </PanelRow>
+
+
+                  )}
+
+
+
+
+
+
+
+
+
+
+
                 </PGtab>
                 <PGtab name="styles">
                   <PGStyles obj={featuredImage} onChange={onChangeStyleImage} onAdd={onAddStyleImage} onRemove={onRemoveStyleImage} />
@@ -1519,12 +1620,12 @@ registerBlockType("post-grid/post-featured-image", {
           {wrapper.options.useAsBackground == 'no' && wrapper.options.tag && (
             <CustomTag className={[blockId]} id={[blockId]}>
               {featuredImage.options.linkTo.length > 0 && (
-                <a onClick={handleLinkClick} {...linkAttrItems} href={postUrl} target={featuredImage.options.linkTarget}>
+                <a onClick={handleLinkClick} href={postUrl} target={featuredImage.options.linkTarget}>
 
 
                   {featuredImage.options.size[breakPointX] != undefined && (
                     <>
-                      {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+                      {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
                     </>
                   )}
 
@@ -1544,14 +1645,14 @@ registerBlockType("post-grid/post-featured-image", {
 
                   {featuredImage.options.size[breakPointX] != undefined && (
                     <>
-                      {postImage != null && <img src={((postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
+                      {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] != undefined) ? postImage.media_details.sizes[featuredImage.options.size[breakPointX]].source_url : '')} alt={postImage.alt_text} />}
                     </>
                   )}
 
                   {postImage != null && postImage.media_details.sizes[featuredImage.options.size[breakPointX]] == undefined && (
                     <>
 
-                      {postImage != null && <img src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
+                      {postImage != null && <img {...linkAttrItems} src={((postImage != null && postImage.guid.rendered != undefined) ? postImage.guid.rendered : '')} alt={postImage.alt_text} />}
                     </>
                   )}
 
@@ -1568,10 +1669,10 @@ registerBlockType("post-grid/post-featured-image", {
 
             (
               featuredImage.options.linkTo.length > 0 && (
-                <a onClick={handleLinkClick} className={[blockId]} id={[blockId]} {...linkAttrItems} href={postUrl} target={featuredImage.options.linkTarget}>
+                <a onClick={handleLinkClick} className={[blockId]} id={[blockId]} href={postUrl} target={featuredImage.options.linkTarget}>
 
 
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                  {postImage != null && <img  {...linkAttrItems} src={postImage.guid.rendered} alt={postImage.alt_text} />}
 
 
                 </a>)
@@ -1585,7 +1686,7 @@ registerBlockType("post-grid/post-featured-image", {
               {featuredImage.options.tag.length > 0 && (
                 <CustomTagPostTitle className={blockId} id={[blockId]}>
 
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                  {postImage != null && <img {...linkAttrItems} src={postImage.guid.rendered} alt={postImage.alt_text} />}
 
                 </CustomTagPostTitle>
 
@@ -1593,7 +1694,7 @@ registerBlockType("post-grid/post-featured-image", {
               {featuredImage.options.tag.length == 0 && (
                 <div className={blockId} id={[blockId]}>
 
-                  {postImage != null && <img src={postImage.guid.rendered} alt={postImage.alt_text} />}
+                  {postImage != null && <img {...linkAttrItems} src={postImage.guid.rendered} alt={postImage.alt_text} />}
 
                 </div>
 

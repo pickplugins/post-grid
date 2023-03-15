@@ -155,6 +155,8 @@ class PGBlockFeaturedImage
         $featuredImageLinkToMetaKey = isset($featuredImageOptions['linkToMetaKey']) ? $featuredImageOptions['linkToMetaKey'] : '';
 
         $featuredImageAltTextSrc = isset($featuredImageOptions['altTextSrc']) ? $featuredImageOptions['altTextSrc'] : 'imgAltText';
+        $featuredImageTitleTextSrc = isset($featuredImageOptions['titleTextSrc']) ? $featuredImageOptions['titleTextSrc'] : 'imgTitle';
+
         $featuredImageAltTextCustom = isset($featuredImageOptions['altTextCustom']) ? $featuredImageOptions['altTextCustom'] : '';
         $featuredImageAltTextMetaKey = isset($featuredImageOptions['altTextMetaKey']) ? $featuredImageOptions['altTextMetaKey'] : '';
 
@@ -237,7 +239,7 @@ class PGBlockFeaturedImage
 
         if ($featuredImageAltTextSrc == 'imgAltText') {
 
-            $altText = get_post_meta($post_ID, '_wp_attachment_image_alt', true);
+            $altText = get_post_meta($thumb_id, '_wp_attachment_image_alt', true);
         } else if ($featuredImageAltTextSrc == 'imgCaption') {
 
             $altText = $attachment_post->post_excerpt;
@@ -261,6 +263,32 @@ class PGBlockFeaturedImage
 
 
 
+        $titleText = '';
+
+        if ($featuredImageTitleTextSrc == 'imgAltText') {
+
+            $titleText = get_post_meta($thumb_id, '_wp_attachment_image_alt', true);
+        } else if ($featuredImageTitleTextSrc == 'imgCaption') {
+
+            $titleText = $attachment_post->post_excerpt;
+        } else if ($featuredImageTitleTextSrc == 'imgDescription') {
+            $titleText = $attachment_post->post_content;
+        } else if ($featuredImageTitleTextSrc == 'imgTitle') {
+            $titleText = get_the_title($thumb_id);
+        } else if ($featuredImageTitleTextSrc == 'imgSlug') {
+            $titleText = get_post_field('post_name', $post_ID);
+        } else if ($featuredImageTitleTextSrc == 'postTitle') {
+            $titleText = get_the_title($post_ID);
+        } else if ($featuredImageTitleTextSrc == 'excerpt') {
+            $titleText = get_the_excerpt($post_ID);
+        } else if ($featuredImageTitleTextSrc == 'postSlug') {
+            $titleText = get_the_excerpt($post_ID);
+        } else if ($featuredImageTitleTextSrc == 'customField') {
+            $titleText = get_post_meta($post_ID, $featuredImageAltTextMetaKey, true);
+        } else if ($featuredImageTitleTextSrc == 'custom') {
+            $titleText = $featuredImageAltTextCustom;
+        }
+
 
 
 
@@ -274,13 +302,13 @@ class PGBlockFeaturedImage
 ?>
             <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
                 <?php if (!empty($featuredImageLinkTo)) : ?>
-                    <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                    <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>">
 
-                        <img srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>" width="<?php echo esc_attr($image_src_w); ?>" height="<?php echo esc_attr($image_src_h); ?>" alt="<?php echo esc_attr($altText); ?>">
+                        <img <?php echo esc_attr($linkAttrStr); ?> srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>" width="<?php echo esc_attr($image_src_w); ?>" height="<?php echo esc_attr($image_src_h); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
 
                     </a>
                 <?php else : ?>
-                    <img srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>" width="<?php echo esc_attr($image_src_w); ?>" height="<?php echo esc_attr($image_src_h); ?>" alt="<?php echo esc_attr($altText); ?>">
+                    <img <?php echo esc_attr($linkAttrStr); ?> srcset="<?php echo esc_attr($image_srcset); ?>" src="<?php echo esc_url_raw($image_src_url); ?>" width="<?php echo esc_attr($image_src_w); ?>" height="<?php echo esc_attr($image_src_h); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
 
                 <?php endif; ?>
             </<?php echo esc_attr($wrapperTag); ?>>
@@ -291,11 +319,11 @@ class PGBlockFeaturedImage
         if (empty($wrapperTag) && $useAsBackground == 'no') :
         ?>
             <?php if (!empty($featuredImageLinkTo)) : ?>
-                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
-                    <img src="<?php echo esc_url_raw($attachment_url); ?>" alt="<?php echo esc_attr($altText); ?>">
+                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>">
+                    <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
                 </a>
             <?php else : ?>
-                <img src="<?php echo esc_url_raw($attachment_url); ?>" alt="<?php echo esc_attr($altText); ?>">
+                <img <?php echo esc_attr($linkAttrStr); ?> src="<?php echo esc_url_raw($attachment_url); ?>" alt="<?php echo esc_attr($altText); ?>" title="<?php echo esc_attr($titleText); ?>" />
             <?php endif; ?>
         <?php
 
@@ -305,7 +333,7 @@ class PGBlockFeaturedImage
         if (!empty($wrapperTag) && $useAsBackground == 'yes') :
         ?>
             <?php if (!empty($featuredImageLinkTo)) : ?>
-                <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php echo esc_attr($linkAttrStr); ?>>
+                <a href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>">
                     <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>" style="background-image: url(<?php echo esc_url_raw($attachment_url) ?>)">
                     </<?php echo esc_attr($wrapperTag); ?>>
                 </a>

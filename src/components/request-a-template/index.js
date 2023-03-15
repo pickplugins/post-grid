@@ -44,16 +44,57 @@ function Html(props) {
 
       setsearchPrams({ ...searchPrams, email: res.email, name: res.name, });
 
-
-
-
     });
   }, []);
 
 
 
 
+  function senMail() {
 
+    var htmlBody = '';
+    htmlBody += '<p style="font-weight:bold;font-size:18px">' + searchPrams.title + '</p>';
+    htmlBody += '<p style="font-weight:bold">Budget: ' + searchPrams.budget + '$</p>';
+    htmlBody += '<p style="font-weight:bold">Email: ' + searchPrams.email + '</p>';
+    htmlBody += '<p></p>';
+
+    htmlBody += searchPrams.content;
+    htmlBody += '<p>Design Files:</p>';
+    searchPrams.files.map(x => {
+      htmlBody += '<p><a href="' + x + '"><img style="width:200px;height:auto" src="' + x + '"/></a></p>';
+    })
+
+
+
+    var postData = {
+
+      subject: '#Post Grid Combo - Template Request',
+      body: htmlBody,
+      email_to: 'support@pickplugins.com',
+      email_from: searchPrams.email,
+      email_from_name: searchPrams.name,
+      reply_to: searchPrams.email,
+      reply_to_name: searchPrams.name,
+      attachments: searchPrams.files,
+
+    }
+
+
+    apiFetch({
+      path: '/post-grid/v2/send_mail',
+      method: 'POST',
+      data: postData,
+
+    }).then((res) => {
+
+      console.log(res);
+      console.log(postData);
+
+
+    });
+
+
+  }
 
 
 
@@ -138,7 +179,7 @@ function Html(props) {
 
 
 
-          <div className='flex'>
+          <div className='flex mb-5'>
 
             <>
               {searchPrams.files.map((x, index) => {
@@ -262,6 +303,8 @@ function Html(props) {
 
             onClick={ev => {
               console.log('hello');
+
+              senMail();
 
             }}
 

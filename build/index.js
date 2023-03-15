@@ -50544,13 +50544,16 @@ var myStore = wp.data.select('postgrid-shop');
     }
 
     function onAddStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource]
-      };
-      sudoScourceX[key] = {};
-      wrapper[sudoScource] = sudoScourceX;
+      // console.log(sudoScource);
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // sudoScourceX[key] = {};
+      // wrapper[sudoScource] = sudoScourceX;
+      // setAttributes({ wrapper: { ...wrapper } });
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, wrapper);
+      const object = myStore.addPropertyDeep(obj, path, '');
       setAttributes({
-        wrapper: { ...wrapper
-        }
+        wrapper: object
       });
     }
 
@@ -79392,7 +79395,8 @@ function Html(props) {
   const [searchPrams, setsearchPrams] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
     keyword: "",
     categories: [],
-    page: 1
+    page: 1,
+    myTemplates: false
   });
   var [cssLibrary, setCssLibrary] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
     items: []
@@ -79538,12 +79542,21 @@ function Html(props) {
     })), " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "px-2 inline-block"
     }, cssLibraryCats[cssLibraryCats.findIndex(p => p.value == x)].label));
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    className: "!mb-0 hidden",
+    label: searchPrams.myTemplates ? 'Loaded Your Teplates?' : 'My Teplates?',
+    checked: searchPrams.myTemplates ? true : false,
+    onChange: e => {
+      setsearchPrams({ ...searchPrams,
+        myTemplates: !searchPrams.myTemplates
+      });
+    }
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-600 flex items-center cursor-pointer hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white",
     onClick: () => {
-      setcustomTemplate(!customTemplate);
+      //setcustomTemplate(!customTemplate);
       setTimeout(() => {
         loadMasonry();
       }, 500);

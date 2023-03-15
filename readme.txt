@@ -4,7 +4,7 @@
 	Tags: post grid, grid, custom post grid, post type grid, grid display, category filter, custom post, filter, filtering, grid, layout, list, masonry, post, post filter, post layout, 
 	Requires at least: 3.8
 	Tested up to: 6.1.1
-	Stable tag: 2.2.34
+	Stable tag: 2.2.36
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -283,6 +283,11 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 8. screenshot-8
 
 == Changelog ==
+
+
+= 2.2.36 =
+* 2023-03-14 - add - Block editor section templates added.
+* 2023-03-14 - removed - devider block removed.
 
 
 = 2.2.34 =

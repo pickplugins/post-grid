@@ -3,7 +3,7 @@
 const { Component } = wp.element;
 import { applyFilters } from '@wordpress/hooks';
 import apiFetch from '@wordpress/api-fetch';
-import { PanelBody, RangeControl, Button, ButtonGroup, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, Spinner, CustomSelectControl, Popover, __experimentalInputControl as InputControl, } from '@wordpress/components'
+import { PanelBody, RangeControl, Button, ButtonGroup, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, Spinner, CustomSelectControl, Popover, ToggleControl, __experimentalInputControl as InputControl } from '@wordpress/components'
 
 import { memo, useMemo, useState, useEffect } from '@wordpress/element'
 import { Icon, styles, close, settings, download } from '@wordpress/icons';
@@ -21,7 +21,7 @@ function Html(props) {
   }
 
 
-  const [searchPrams, setsearchPrams] = useState({ keyword: "", categories: [], page: 1, });
+  const [searchPrams, setsearchPrams] = useState({ keyword: "", categories: [], page: 1, myTemplates: false });
   var [cssLibrary, setCssLibrary] = useState({ items: [] });
   var [cssLibraryCats, setCssLibraryCats] = useState([]);
   var [debounce, setDebounce] = useState(null); // Using the hook.
@@ -159,15 +159,14 @@ function Html(props) {
 
                   }, 1000);
 
-
-
-
                 }}
 
 
 
               />
             </div>
+
+
 
             <div className='px-2'>
               <PGDropdown position="bottom right" variant="secondary" options={cssLibraryCats} buttonTitle="Categories" onChange={(option, index) => {
@@ -230,7 +229,15 @@ function Html(props) {
               }
 
             </div>
+            <ToggleControl
+              className='!mb-0 hidden'
+              label={searchPrams.myTemplates ? 'Loaded Your Teplates?' : 'My Teplates?'}
 
+              checked={searchPrams.myTemplates ? true : false}
+              onChange={(e) => {
+                setsearchPrams({ ...searchPrams, myTemplates: !searchPrams.myTemplates })
+              }}
+            />
           </div>
           <div className='flex'>
             <div className='bg-blue-600 flex items-center cursor-pointer hover:bg-blue-500 text-lg text-white px-4 py-1 rounded-sm hover:text-white'
@@ -268,7 +275,6 @@ function Html(props) {
         <div className='p-5 '>
 
           {customTemplate && (
-
             <PGRequestTemplate />
           )}
 

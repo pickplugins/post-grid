@@ -1,5 +1,5 @@
 <?php
-if ( ! defined('ABSPATH')) exit;  // if direct access
+if (!defined('ABSPATH')) exit;  // if direct access
 
 
 add_shortcode('post_grid_ajax_fetch_block_hub_by_id', 'post_grid_ajax_fetch_block_hub_by_id');
@@ -8,13 +8,14 @@ add_shortcode('post_grid_ajax_fetch_block_hub_by_id', 'post_grid_ajax_fetch_bloc
  * Ajax Function to fetch block from http://post_grid.com/ server
  *
  * */
-function post_grid_ajax_fetch_block_hub_by_id(){
+function post_grid_ajax_fetch_block_hub_by_id()
+{
 
 
 
-    check_ajax_referer( 'post_grid_ajax_nonce', 'post_grid_ajax_nonce' );
+    check_ajax_referer('post_grid_ajax_nonce', 'post_grid_ajax_nonce');
 
-    if(!current_user_can('manage_options')) return;
+    if (!current_user_can('manage_options')) return;
 
 
     $responses = array();
@@ -23,6 +24,8 @@ function post_grid_ajax_fetch_block_hub_by_id(){
 
     $post_grid_settings = get_option('post_grid_license');
     $license_key = isset($post_grid_settings['license_key']) ? $post_grid_settings['license_key'] : '';
+
+    error_log($license_key);
 
     $api_params = array(
         'post_grid_remote_action' => 'layoutSearchByID',
@@ -42,10 +45,9 @@ function post_grid_ajax_fetch_block_hub_by_id(){
      * Check is there any server error occurred
      *
      * */
-    if (is_wp_error($server_response)){
+    if (is_wp_error($server_response)) {
         $responses['error'] = __('There is a server error', 'post-grid');
-    }
-    else{
+    } else {
 
         $response_data = json_decode(wp_remote_retrieve_body($server_response), true);
 
@@ -60,7 +62,7 @@ function post_grid_ajax_fetch_block_hub_by_id(){
 
 
 
-        if($post_found == 'yes'){
+        if ($post_found == 'yes') {
             // Create post object
             $my_post = array(
                 'post_title'    => $post_title,
@@ -68,10 +70,10 @@ function post_grid_ajax_fetch_block_hub_by_id(){
                 'post_author'   => 1,
                 'post_type' => 'post_grid_layout',
             );
-//
-//        // Insert the post into the database
-            $new_post_id = wp_insert_post( $my_post );
-//
+            //
+            //        // Insert the post into the database
+            $new_post_id = wp_insert_post($my_post);
+            //
             update_post_meta($new_post_id, 'layout_options', $layout_options);
             update_post_meta($new_post_id, 'layout_elements_data', $layout_elements_data);
             update_post_meta($new_post_id, 'custom_scripts', $custom_scripts);
@@ -81,19 +83,13 @@ function post_grid_ajax_fetch_block_hub_by_id(){
             //$responses['post_title'] = $post_title;
             $responses['post_id'] = $post_id;
             $responses['response_data'] = $response_data;
-        }else{
+        } else {
             $responses['is_saved'] = 'no';
         }
-
-
-
-
-
-
     }
 
 
-    echo wp_json_encode( $responses );
+    echo wp_json_encode($responses);
     die();
 }
 

@@ -699,10 +699,22 @@ registerBlockType("post-grid/read-more", {
 
 
     function onAddStyleWrapper(sudoScource, key) {
-      var sudoScourceX = { ...wrapper[sudoScource] }
-      sudoScourceX[key] = {};
-      wrapper[sudoScource] = sudoScourceX;
-      setAttributes({ wrapper: { ...wrapper } });
+
+
+      // console.log(sudoScource);
+
+
+      // var sudoScourceX = { ...wrapper[sudoScource] }
+      // sudoScourceX[key] = {};
+      // wrapper[sudoScource] = sudoScourceX;
+      // setAttributes({ wrapper: { ...wrapper } });
+
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ wrapper: object });
     }
 
 

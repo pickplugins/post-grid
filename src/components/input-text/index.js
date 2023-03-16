@@ -22,9 +22,16 @@ function Html(props) {
 
       <input
         className={props.className}
-        value={props.val}
+        id={props.id}
+        value={props.value}
         type="text"
+        size={props.size}
+        name={props.name}
         placeholder={props.placeholder}
+        minlength={props.minlength}
+        maxlength={props.maxlength}
+        required={props.required}
+        disabled={props.disabled}
 
         onChange={(newVal) => {
           props.onChange(newVal);
@@ -68,7 +75,13 @@ class PGinputText extends Component {
       value,
       placeholder,
       className,
-
+      id,
+      name,
+      size,
+      minlength,
+      maxlength,
+      required,
+      disabled,
       onChange,
 
 
@@ -83,7 +96,7 @@ class PGinputText extends Component {
     return (
 
 
-      <Html val={value} placeholder={placeholder} className={className} onChange={onChange} warn={this.state.showWarning} />
+      <Html val={value} name={name} id={id} size={size} placeholder={placeholder} className={className} minlength={minlength} maxlength={maxlength} required={required} disabled={disabled} onChange={onChange} warn={this.state.showWarning} />
 
 
     )

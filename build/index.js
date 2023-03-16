@@ -77834,9 +77834,16 @@ function Html(props) {
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     className: props.className,
-    value: props.val,
+    id: props.id,
+    value: props.value,
     type: "text",
+    size: props.size,
+    name: props.name,
     placeholder: props.placeholder,
+    minlength: props.minlength,
+    maxlength: props.maxlength,
+    required: props.required,
+    disabled: props.disabled,
     onChange: newVal => {
       props.onChange(newVal);
     }
@@ -77863,12 +77870,26 @@ class PGinputText extends Component {
       value,
       placeholder,
       className,
+      id,
+      name,
+      size,
+      minlength,
+      maxlength,
+      required,
+      disabled,
       onChange
     } = this.props;
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
       val: value,
+      name: name,
+      id: id,
+      size: size,
       placeholder: placeholder,
       className: className,
+      minlength: minlength,
+      maxlength: maxlength,
+      required: required,
+      disabled: disabled,
       onChange: onChange,
       warn: this.state.showWarning
     });

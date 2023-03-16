@@ -1,30 +1,29 @@
-jQuery(document).ready(function($){
+jQuery(document).ready(function ($) {
 
-    $(document).on('click','.import-layout',function(){
+    $(document).on('click', '.import-layout', function () {
         _this = this;
         post_id = $(this).attr('post_id');
-
         $(_this).addClass('updating-message');
 
         $.ajax({
             type: 'POST',
             context: _this,
-            url:post_grid_ajax.post_grid_ajaxurl,
+            url: post_grid_ajax.post_grid_ajaxurl,
             data: {
-                "action" 		: "post_grid_ajax_fetch_block_hub_by_id",
-                "post_grid_ajax_nonce"	: post_grid_ajax.ajax_nonce,
-                "post_id" 		: post_id,
+                "action": "post_grid_ajax_fetch_block_hub_by_id",
+                "post_grid_ajax_nonce": post_grid_ajax.ajax_nonce,
+                "post_id": post_id,
             },
-            success: function( response ) {
-                var data = JSON.parse( response );
+            success: function (response) {
+                var data = JSON.parse(response);
                 is_saved = data['is_saved'];
 
                 console.log(data);
 
-                if(is_saved == 'yes'){
+                if (is_saved == 'yes') {
                     $(this).addClass('saved');
                     $(this).text('Saved');
-                }else{
+                } else {
                     $(this).addClass('saved');
                     $(this).text('Not Saved');
                 }
@@ -38,7 +37,7 @@ jQuery(document).ready(function($){
     })
 
 
-    $(document).on('mouseover','.block-thumb',function(){
+    $(document).on('mouseover', '.block-thumb', function () {
 
 
 
@@ -57,7 +56,7 @@ jQuery(document).ready(function($){
     })
 
 
-    $(document).on('mouseout','.block-thumb',function(){
+    $(document).on('mouseout', '.block-thumb', function () {
 
 
 

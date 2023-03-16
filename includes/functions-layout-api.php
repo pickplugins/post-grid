@@ -58,7 +58,7 @@ function post_grid_ajax_fetch_block_hub_by_id()
         $layout_options = isset($response_data['layout_options']) ? ($response_data['layout_options']) : array();
         $post_found = isset($response_data['post_found']) ? ($response_data['post_found']) : 'no';
 
-
+        error_log($post_found);
 
 
 

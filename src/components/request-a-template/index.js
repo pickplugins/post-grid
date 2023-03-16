@@ -19,7 +19,8 @@ function Html(props) {
     return null;
   }
 
-  const [searchPrams, setsearchPrams] = useState({ title: "", content: '', files: [], budget: 50, email: '', name: "" });
+  const [searchPrams, setsearchPrams] = useState({ title: "", content: '', files: [], budget: 50, email: '', name: "", status: 'idle' });
+  var [isLoading, setIsLoading] = useState(false);
 
   const ALLOWED_MEDIA_TYPES = ['image'];
 
@@ -51,6 +52,8 @@ function Html(props) {
 
 
   function senMail() {
+
+    setIsLoading(true);
 
     var htmlBody = '';
     htmlBody += '<p style="font-weight:bold;font-size:18px">' + searchPrams.title + '</p>';
@@ -87,8 +90,23 @@ function Html(props) {
 
     }).then((res) => {
 
-      console.log(res);
-      console.log(postData);
+      var mail_sent = res.mail_sent;
+
+      if (mail_sent) {
+
+        setsearchPrams({ ...searchPrams, status: 'success', });
+
+      } else {
+        setsearchPrams({ ...searchPrams, status: 'fail', });
+      }
+
+      setTimeout(() => {
+        setsearchPrams({ ...searchPrams, status: 'idle', });
+
+      }, 4000)
+
+
+      setIsLoading(false);
 
 
     });
@@ -299,16 +317,29 @@ function Html(props) {
             <li className='list-disc'>We do not provide immediate/emmargency delivery. But we try our best as soon as possible.</li>
           </ul>
 
-          <div className='bg-blue-600 rounded-md text-white font-bold text-base text-center cursor-pointer hover:bg-blue-500 px-10 py-3 my-5'
+          <div className='flex bg-blue-600 justify-center items-center rounded-md text-white font-bold text-base text-center cursor-pointer hover:bg-blue-500 px-10 py-3 my-5'
 
             onClick={ev => {
-              console.log('hello');
 
               senMail();
 
             }}
 
-          >Send Mail</div>
+          >
+            <div>Send Mail</div>
+            {isLoading && (
+              <div className='text-center'><Spinner className="!m-0 !mx-3" /></div>
+            )}
+          </div>
+          {searchPrams.status == 'success' && (
+
+            <div className='bg-white text-green-800 font-bold text-base p-2 px-4'>Mial has sent. Our team will contact soon.</div>
+          )}
+          {searchPrams.status == 'fail' && (
+
+            <div className='bg-white text-red-500 font-bold text-base p-2 px-4'>Sorry, Unable to send mail.</div>
+          )}
+
 
         </div>
       </div>

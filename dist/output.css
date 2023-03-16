@@ -697,6 +697,14 @@ img {
   margin: auto;
 }
 
+.m-0 {
+  margin: 0px;
+}
+
+.\!m-0 {
+  margin: 0px !important;
+}
+
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -742,12 +750,18 @@ img {
   margin-right: auto;
 }
 
-.mt-\[70px\] {
-  margin-top: 70px;
+.mx-3 {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
 }
 
-.mr-3 {
-  margin-right: 0.75rem;
+.\!mx-3 {
+  margin-left: 0.75rem !important;
+  margin-right: 0.75rem !important;
+}
+
+.mt-\[70px\] {
+  margin-top: 70px;
 }
 
 .mb-4 {
@@ -796,6 +810,10 @@ img {
 
 .mr-1 {
   margin-right: 0.25rem;
+}
+
+.mr-3 {
+  margin-right: 0.75rem;
 }
 
 .\!mb-0 {
@@ -1032,8 +1050,16 @@ img {
   align-items: center;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-items-center {
+  justify-items: center;
 }
 
 .justify-items-stretch {
@@ -1159,16 +1185,6 @@ img {
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 
-.bg-lime-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(77 124 15 / var(--tw-bg-opacity));
-}
-
-.bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-}
-
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
@@ -1197,6 +1213,11 @@ img {
 .bg-amber-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(251 191 36 / var(--tw-bg-opacity));
+}
+
+.bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
 
 .bg-red-600 {
@@ -1252,6 +1273,11 @@ img {
 .\!bg-blue-500 {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity)) !important;
+}
+
+.bg-lime-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(77 124 15 / var(--tw-bg-opacity));
 }
 
 .bg-gray-700 {
@@ -1663,6 +1689,11 @@ img {
   color: rgb(67 56 202 / var(--tw-text-opacity));
 }
 
+.text-green-800 {
+  --tw-text-opacity: 1;
+  color: rgb(22 101 52 / var(--tw-text-opacity));
+}
+
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -1676,10 +1707,6 @@ img {
 .line-through {
   -webkit-text-decoration-line: line-through;
           text-decoration-line: line-through;
-}
-
-.opacity-80 {
-  opacity: 0.8;
 }
 
 .\!shadow-none {

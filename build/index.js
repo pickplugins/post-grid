@@ -78135,8 +78135,10 @@ function Html(props) {
     files: [],
     budget: 50,
     email: '',
-    name: ""
+    name: "",
+    status: 'idle'
   });
+  var [isLoading, setIsLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const ALLOWED_MEDIA_TYPES = ['image'];
   let budgetArgs = {
     custom: {
@@ -78182,6 +78184,7 @@ function Html(props) {
   }, []);
 
   function senMail() {
+    setIsLoading(true);
     var htmlBody = '';
     htmlBody += '<p style="font-weight:bold;font-size:18px">' + searchPrams.title + '</p>';
     htmlBody += '<p style="font-weight:bold">Budget: ' + searchPrams.budget + '$</p>';
@@ -78207,8 +78210,24 @@ function Html(props) {
       method: 'POST',
       data: postData
     }).then(res => {
-      console.log(res);
-      console.log(postData);
+      var mail_sent = res.mail_sent;
+
+      if (mail_sent) {
+        setsearchPrams({ ...searchPrams,
+          status: 'success'
+        });
+      } else {
+        setsearchPrams({ ...searchPrams,
+          status: 'fail'
+        });
+      }
+
+      setTimeout(() => {
+        setsearchPrams({ ...searchPrams,
+          status: 'idle'
+        });
+      }, 4000);
+      setIsLoading(false);
     });
   }
 
@@ -78367,12 +78386,19 @@ function Html(props) {
   }, "We do not provide design made by 3rd party blocks. default blocks may use."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
     className: "list-disc"
   }, "We do not provide immediate/emmargency delivery. But we try our best as soon as possible.")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "bg-blue-600 rounded-md text-white font-bold text-base text-center cursor-pointer hover:bg-blue-500 px-10 py-3 my-5",
+    className: "flex bg-blue-600 justify-center items-center rounded-md text-white font-bold text-base text-center cursor-pointer hover:bg-blue-500 px-10 py-3 my-5",
     onClick: ev => {
-      console.log('hello');
       senMail();
     }
-  }, "Send Mail"))));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Send Mail"), isLoading && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-center"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Spinner, {
+    className: "!m-0 !mx-3"
+  }))), searchPrams.status == 'success' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-white text-green-800 font-bold text-base p-2 px-4"
+  }, "Mial has sent. Our team will contact soon."), searchPrams.status == 'fail' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-white text-red-500 font-bold text-base p-2 px-4"
+  }, "Sorry, Unable to send mail."))));
 }
 
 class PGRequestTemplate extends Component {

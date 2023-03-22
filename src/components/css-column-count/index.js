@@ -1,0 +1,88 @@
+
+
+const { Component } = wp.element;
+import { Button, Dropdown, } from '@wordpress/components'
+import { useState, } from '@wordpress/element'
+
+import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
+
+
+
+function Html(props) {
+
+
+  if (!props.warn) {
+    return null;
+  }
+
+
+  return (
+
+    <div className='mt-4'>
+
+
+      <InputControl
+        value={props.val}
+        type="number"
+        onChange={(newVal) => {
+
+          //setwidthVal(newVal);
+          props.onChange(newVal, 'columnCount');
+
+
+        }}
+      />
+
+    </div>
+
+
+
+
+  )
+
+}
+
+
+class PGcssColumnCount extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { showWarning: true };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+
+
+
+  render() {
+
+    var {
+      val,
+      onChange,
+
+
+    } = this.props;
+
+
+
+
+
+
+
+    return (
+
+
+      <Html val={val} onChange={onChange} warn={this.state.showWarning} />
+
+
+    )
+  }
+}
+
+
+export default PGcssColumnCount;

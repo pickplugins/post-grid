@@ -1,0 +1,35 @@
+.PGBlockPostGrid-lazyload {
+    text-align: center;
+    padding: 20px 0;
+}
+
+
+
+.PGBlockPostGrid-pagination.next_previous {
+    display: flex;
+    justify-content: space-between;
+}
+
+.PGBlockPostGrid-pagination.loadmore .page-numbers {
+    cursor: pointer;
+}
+
+.PGBlockPostGrid-pagination.loadmore .loademore-icon {
+    margin: 0 10px;
+}
+
+.PGBlockPostGrid-pagination .infinite-loader {
+    display: none;
+}
+
+.PGBlockPostGrid-pagination .infinite-loader.visible {
+    display: block;
+}
+
+.loop-loading {
+    text-align: center;
+}
+
+.loop-loading .loademore-icon {
+    margin: 0 10px;
+}

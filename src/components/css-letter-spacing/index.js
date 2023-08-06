@@ -60,7 +60,25 @@ function Html(props) {
         onChange={(newVal) => {
 
           setwidthVal(newVal);
-          props.onChange(newVal + widthUnit, 'letterSpacing');
+          if (widthUnit == 'auto') {
+            // props.onChange(widthUnit, 'width');
+
+             if (isImportant) {
+               props.onChange( widthUnit + ' !important', 'letterSpacing');
+             } else {
+               props.onChange( widthUnit, 'letterSpacing');
+             }
+
+
+           } else {
+             //props.onChange(newVal + widthUnit, 'width');
+
+             if (isImportant) {
+               props.onChange(newVal + widthUnit + ' !important', 'letterSpacing');
+             } else {
+               props.onChange(newVal + widthUnit, 'letterSpacing');
+             }
+           }
 
 
         }}
@@ -92,7 +110,19 @@ function Html(props) {
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                   setwidthUnit(x.value);
-                  props.onChange(widthVal + x.value, 'letterSpacing');
+                  if (x.value == 'auto') {
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'letterSpacing');
+                    } else {
+                      props.onChange( x.value, 'letterSpacing');
+                    }
+                  } else {
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'letterSpacing');
+                    } else {
+                      props.onChange(widthVal + x.value, 'letterSpacing');
+                    }
+                  }
 
 
                 }}>
@@ -126,11 +156,22 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'letterSpacing');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'letterSpacing');
+            } else {
+              props.onChange(widthVal + widthUnit , 'letterSpacing');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'letterSpacing');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'letterSpacing');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'letterSpacing');
+            }
           }
 
 

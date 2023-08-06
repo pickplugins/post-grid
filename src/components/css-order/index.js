@@ -32,7 +32,11 @@ function Html(props) {
         type="number"
         onChange={(newVal) => {
           setwidthVal(newVal);
-          props.onChange(newVal, 'order');
+          if (isImportant) {
+            props.onChange(newVal + ' !important', 'order');
+          } else {
+            props.onChange(newVal, 'order');
+          }
 
 
         }}
@@ -52,12 +56,11 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal, 'order');
-
-          } else {
-            props.onChange(widthVal + ' !important', 'order');
-
-          }
+            props.onChange(widthVal , 'order');
+        } else {
+            props.onChange( widthVal + ' !important', 'order');
+          
+        }
 
 
         }}

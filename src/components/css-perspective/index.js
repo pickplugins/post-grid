@@ -56,7 +56,25 @@ function Html(props) {
 
 
           setwidthVal(newVal);
-          props.onChange(newVal + widthUnit, 'perspective');
+          if (widthUnit == 'auto') {
+            // props.onChange(widthUnit, 'width');
+
+             if (isImportant) {
+               props.onChange( widthUnit + ' !important', 'perspective');
+             } else {
+               props.onChange( widthUnit, 'perspective');
+             }
+
+
+           } else {
+             //props.onChange(newVal + widthUnit, 'width');
+
+             if (isImportant) {
+               props.onChange(newVal + widthUnit + ' !important', 'perspective');
+             } else {
+               props.onChange(newVal + widthUnit, 'perspective');
+             }
+           }
 
 
         }}
@@ -88,7 +106,19 @@ function Html(props) {
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                   setwidthUnit(x.value);
-                  props.onChange(widthVal + x.value, 'perspective');
+                  if (x.value == 'auto') {
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'perspective');
+                    } else {
+                      props.onChange( x.value, 'perspective');
+                    }
+                  } else {
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'perspective');
+                    } else {
+                      props.onChange(widthVal + x.value, 'perspective');
+                    }
+                  }
 
 
                 }}>
@@ -122,11 +152,22 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'perspective');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'perspective');
+            } else {
+              props.onChange(widthVal + widthUnit , 'perspective');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'perspective');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'perspective');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'perspective');
+            }
           }
 
 

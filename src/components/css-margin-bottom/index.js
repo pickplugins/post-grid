@@ -67,10 +67,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'marginBottom');
-            } else {
-              props.onChange(newVal + widthUnit, 'marginBottom');
-            }
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'marginBottom');
+               } else {
+                 props.onChange( widthUnit, 'marginBottom');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'marginBottom');
+               } else {
+                 props.onChange(newVal + widthUnit, 'marginBottom');
+               }
+             }
 
 
 
@@ -107,13 +121,18 @@ function Html(props) {
 
                   setwidthUnit(x.value);
 
-
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'marginBottom');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'marginBottom');
+                    } else {
+                      props.onChange( x.value, 'marginBottom');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'marginBottom');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'marginBottom');
+                    } else {
+                      props.onChange(widthVal + x.value, 'marginBottom');
+                    }
                   }
 
                 }}>
@@ -147,11 +166,22 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'marginBottom');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'marginBottom');
+            } else {
+              props.onChange(widthVal + widthUnit , 'marginBottom');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'marginBottom');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'marginBottom');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'marginBottom');
+            }
           }
 
 

@@ -67,10 +67,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'marginRight');
-            } else {
-              props.onChange(newVal + widthUnit, 'marginRight');
-            }
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'marginRight');
+               } else {
+                 props.onChange( widthUnit, 'marginRight');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'marginRight');
+               } else {
+                 props.onChange(newVal + widthUnit, 'marginRight');
+               }
+             }
 
 
 
@@ -109,11 +123,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'marginRight');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'marginRight');
+                    } else {
+                      props.onChange( x.value, 'marginRight');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'marginRight');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'marginRight');
+                    } else {
+                      props.onChange(widthVal + x.value, 'marginRight');
+                    }
                   }
 
                 }}>
@@ -147,11 +167,22 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'marginRight');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'marginRight');
+            } else {
+              props.onChange(widthVal + widthUnit , 'marginRight');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'marginRight');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'marginRight');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'marginRight');
+            }
           }
 
 

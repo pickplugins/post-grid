@@ -69,10 +69,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'paddingTop');
-            } else {
-              props.onChange(newVal + widthUnit, 'paddingTop');
-            }
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'paddingTop');
+               } else {
+                 props.onChange( widthUnit, 'paddingTop');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'paddingTop');
+               } else {
+                 props.onChange(newVal + widthUnit, 'paddingTop');
+               }
+             }
 
 
 
@@ -111,11 +125,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'paddingTop');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'paddingTop');
+                    } else {
+                      props.onChange( x.value, 'paddingTop');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'paddingTop');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'paddingTop');
+                    } else {
+                      props.onChange(widthVal + x.value, 'paddingTop');
+                    }
                   }
 
                 }}>
@@ -149,12 +169,24 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'paddingTop');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'paddingTop');
+            } else {
+              props.onChange(widthVal + widthUnit , 'paddingTop');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'paddingTop');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'paddingTop');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'paddingTop');
+            }
           }
+
 
 
         }}

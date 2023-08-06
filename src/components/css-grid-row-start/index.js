@@ -33,7 +33,13 @@ function Html(props) {
         onChange={(newVal) => {
 
           setwidthVal(newVal);
-          props.onChange(newVal, 'gridRowStart');
+          // props.onChange(newVal, 'gridRowStart');
+          if (isImportant) {
+            props.onChange(newVal + ' !important', 'gridRowStart');
+          } else {
+            props.onChange(newVal, 'gridRowStart');
+          }
+
 
 
         }}
@@ -53,12 +59,11 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthValX, 'gridRowStart');
-
-          } else {
-            props.onChange(widthValX + ' !important', 'gridRowStart');
-
-          }
+            props.onChange(widthVal , 'gridRowStart');
+        } else {
+            props.onChange( widthVal + ' !important', 'gridRowStart');
+          
+        }
 
 
         }}

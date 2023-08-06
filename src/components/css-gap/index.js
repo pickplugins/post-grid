@@ -67,10 +67,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'gap');
-            } else {
-              props.onChange(newVal + widthUnit, 'gap');
-            }
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'gap');
+               } else {
+                 props.onChange( widthUnit, 'gap');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'gap');
+               } else {
+                 props.onChange(newVal + widthUnit, 'gap');
+               }
+             }
 
 
 
@@ -109,11 +123,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'gap');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'gap');
+                    } else {
+                      props.onChange( x.value, 'gap');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'gap');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'gap');
+                    } else {
+                      props.onChange(widthVal + x.value, 'gap');
+                    }
                   }
 
                 }}>
@@ -147,12 +167,24 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'gap');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'gap');
+            } else {
+              props.onChange(widthVal + widthUnit , 'gap');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'gap');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'gap');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'gap');
+            }
           }
+
 
 
         }}

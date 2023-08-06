@@ -53,7 +53,25 @@ function Html(props) {
 
 
           setwidthVal(newVal);
-          props.onChange(newVal + widthUnit, 'wordSpacing');
+          if (widthUnit == 'auto') {
+            // props.onChange(widthUnit, 'width');
+
+             if (isImportant) {
+               props.onChange( widthUnit + ' !important', 'wordSpacing');
+             } else {
+               props.onChange( widthUnit, 'wordSpacing');
+             }
+
+
+           } else {
+             //props.onChange(newVal + widthUnit, 'width');
+
+             if (isImportant) {
+               props.onChange(newVal + widthUnit + ' !important', 'wordSpacing');
+             } else {
+               props.onChange(newVal + widthUnit, 'wordSpacing');
+             }
+           }
 
 
         }}
@@ -85,7 +103,19 @@ function Html(props) {
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                   setwidthUnit(x.value);
-                  props.onChange(widthVal + x.value, 'wordSpacing');
+                  if (x.value == 'auto') {
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'wordSpacing');
+                    } else {
+                      props.onChange( x.value, 'wordSpacing');
+                    }
+                  } else {
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'wordSpacing');
+                    } else {
+                      props.onChange(widthVal + x.value, 'wordSpacing');
+                    }
+                  }
 
 
                 }}>
@@ -119,12 +149,24 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'wordSpacing');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'wordSpacing');
+            } else {
+              props.onChange(widthVal + widthUnit , 'wordSpacing');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'wordSpacing');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'wordSpacing');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'wordSpacing');
+            }
           }
+
 
 
         }}

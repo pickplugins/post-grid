@@ -81,11 +81,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'maxWidth');
-            } else {
-              props.onChange(newVal + widthUnit, 'maxWidth');
-            }
-
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'maxWidth');
+               } else {
+                 props.onChange( widthUnit, 'maxWidth');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'maxWidth');
+               } else {
+                 props.onChange(newVal + widthUnit, 'maxWidth');
+               }
+             }
 
 
 
@@ -121,13 +134,18 @@ function Html(props) {
 
                   setwidthUnit(x.value);
 
-
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'maxWidth');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'maxWidth');
+                    } else {
+                      props.onChange( x.value, 'maxWidth');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'maxWidth');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'maxWidth');
+                    } else {
+                      props.onChange(widthVal + x.value, 'maxWidth');
+                    }
                   }
 
                 }}>
@@ -161,11 +179,22 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal + widthUnit, 'maxWidth');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'maxWidth');
+            } else {
+              props.onChange(widthVal + widthUnit , 'maxWidth');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal + widthUnit + ' !important', 'maxWidth');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'maxWidth');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'maxWidth');
+            }
           }
 
 

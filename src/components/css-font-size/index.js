@@ -80,20 +80,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'fontSize');
-            } else {
-            //  props.onChange(newVal + widthUnit, 'fontSize');
-
-
-              if (isImportant) {
-                props.onChange(widthVal+widthUnit + ' !important', 'fontSize');
-
-              } else {
-                props.onChange(widthVal+widthUnit, 'fontSize');
-
-              }
-
-            }
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'fontSize');
+               } else {
+                 props.onChange( widthUnit, 'fontSize');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'fontSize');
+               } else {
+                 props.onChange(newVal + widthUnit, 'fontSize');
+               }
+             }
 
 
 
@@ -132,19 +136,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'fontSize');
-
-                  } else {
-                    //props.onChange(widthVal + x.value, 'fontSize');
-
                     if (isImportant) {
-                      props.onChange(widthVal+widthUnit + ' !important', 'fontSize');
-
+                      props.onChange( x.value + ' !important', 'fontSize');
                     } else {
-                      props.onChange(widthVal+widthUnit, 'fontSize');
-
+                      props.onChange( x.value, 'fontSize');
                     }
-
+                  } else {
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'fontSize');
+                    } else {
+                      props.onChange(widthVal + x.value, 'fontSize');
+                    }
                   }
 
                 }}>
@@ -178,9 +180,22 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'fontSize');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'fontSize');
+            } else {
+              props.onChange(widthVal + widthUnit , 'fontSize');
+            }
+
+
+           
+
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'fontSize');
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'fontSize');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'fontSize');
+            }
           }
 
 

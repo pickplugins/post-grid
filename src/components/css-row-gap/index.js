@@ -67,10 +67,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'rowGap');
-            } else {
-              props.onChange(newVal + widthUnit, 'rowGap');
-            }
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'width');
+               } else {
+                 props.onChange( widthUnit, 'width');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'width');
+               } else {
+                 props.onChange(newVal + widthUnit, 'width');
+               }
+             }
 
 
 
@@ -109,11 +123,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'rowGap');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'width');
+                    } else {
+                      props.onChange( x.value, 'width');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'rowGap');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'width');
+                    } else {
+                      props.onChange(widthVal + x.value, 'width');
+                    }
                   }
 
                 }}>
@@ -148,12 +168,24 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal + widthUnit, 'rowGap');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'rowGap');
+            } else {
+              props.onChange(widthVal + widthUnit , 'rowGap');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal + widthUnit + ' !important', 'rowGap');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'rowGap');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'rowGap');
+            }
           }
+
 
 
         }}

@@ -81,10 +81,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'minWidth');
-            } else {
-              props.onChange(newVal + widthUnit, 'minWidth');
-            }
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'minWidth');
+               } else {
+                 props.onChange( widthUnit, 'minWidth');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'minWidth');
+               } else {
+                 props.onChange(newVal + widthUnit, 'minWidth');
+               }
+             }
 
 
 
@@ -123,11 +137,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'minWidth');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'minWidth');
+                    } else {
+                      props.onChange( x.value, 'minWidth');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'minWidth');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'minWidth');
+                    } else {
+                      props.onChange(widthVal + x.value, 'minWidth');
+                    }
                   }
 
                 }}>
@@ -161,12 +181,24 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal + widthUnit, 'minWidth');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'minWidth');
+            } else {
+              props.onChange(widthVal + widthUnit , 'minWidth');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal + widthUnit + ' !important', 'minWidth');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'minWidth');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'minWidth');
+            }
           }
+
 
 
         }}

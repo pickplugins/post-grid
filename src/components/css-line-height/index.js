@@ -64,11 +64,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'lineHeight');
-            } else {
-              props.onChange(newVal + widthUnit, 'lineHeight');
-            }
-
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'lineHeight');
+               } else {
+                 props.onChange( widthUnit, 'lineHeight');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'lineHeight');
+               } else {
+                 props.onChange(newVal + widthUnit, 'lineHeight');
+               }
+             }
 
 
 
@@ -106,11 +119,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'lineHeight');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'lineHeight');
+                    } else {
+                      props.onChange( x.value, 'lineHeight');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'lineHeight');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'lineHeight');
+                    } else {
+                      props.onChange(widthVal + x.value, 'lineHeight');
+                    }
                   }
 
                 }}>
@@ -144,11 +163,22 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'lineHeight');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'lineHeight');
+            } else {
+              props.onChange(widthVal + widthUnit , 'lineHeight');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'lineHeight');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'lineHeight');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'lineHeight');
+            }
           }
 
 

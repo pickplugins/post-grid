@@ -67,11 +67,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'marginLeft');
-            } else {
-              props.onChange(newVal + widthUnit, 'marginLeft');
-            }
-
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'marginLeft');
+               } else {
+                 props.onChange( widthUnit, 'marginLeft');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'marginLeft');
+               } else {
+                 props.onChange(newVal + widthUnit, 'marginLeft');
+               }
+             }
 
 
 
@@ -109,11 +122,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'marginLeft');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'marginLeft');
+                    } else {
+                      props.onChange( x.value, 'marginLeft');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'marginLeft');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'marginLeft');
+                    } else {
+                      props.onChange(widthVal + x.value, 'marginLeft');
+                    }
                   }
 
                 }}>
@@ -147,11 +166,22 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'marginLeft');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'marginLeft');
+            } else {
+              props.onChange(widthVal + widthUnit , 'marginLeft');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'marginLeft');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'marginLeft');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'marginLeft');
+            }
           }
 
 

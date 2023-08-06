@@ -30,7 +30,12 @@ function Html(props) {
         type="number"
         onChange={(newVal) => {
 
-          props.onChange(newVal, 'zIndex');
+          if (isImportant) {
+            props.onChange(newVal + ' !important', 'zIndex');
+          } else {
+            props.onChange(newVal, 'zIndex');
+          }
+      
 
 
         }}
@@ -53,12 +58,12 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthValX, 'zIndex');
-
-          } else {
-            props.onChange(widthValX + ' !important', 'zIndex');
-
-          }
+            props.onChange(widthValX , 'zIndex');
+        } else {
+            props.onChange( widthValX + ' !important', 'zIndex');
+          
+        }
+      
 
 
         }}

@@ -66,11 +66,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'maxHeight');
-            } else {
-              props.onChange(newVal + widthUnit, 'maxHeight');
-            }
-
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'maxHeight');
+               } else {
+                 props.onChange( widthUnit, 'maxHeight');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'maxHeight');
+               } else {
+                 props.onChange(newVal + widthUnit, 'maxHeight');
+               }
+             }
 
 
 
@@ -108,11 +121,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'maxHeight');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'maxHeight');
+                    } else {
+                      props.onChange( x.value, 'maxHeight');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'maxHeight');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'maxHeight');
+                    } else {
+                      props.onChange(widthVal + x.value, 'maxHeight');
+                    }
                   }
 
                 }}>
@@ -144,13 +163,23 @@ function Html(props) {
 
           //console.log(arg);
           setImportant(isImportant => !isImportant)
-
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'maxHeight');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'maxHeight');
+            } else {
+              props.onChange(widthVal + widthUnit , 'maxHeight');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'maxHeight');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'maxHeight');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'maxHeight');
+            }
           }
 
 

@@ -74,11 +74,31 @@ function Html(props) {
 
             setwidthVal(newVal);
 
+            // if (widthUnit == 'auto') {
+            //   props.onChange(widthUnit, 'top');
+            // } else {
+            //   props.onChange(newVal + widthUnit, 'top');
+            // }
+
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'top');
-            } else {
-              props.onChange(newVal + widthUnit, 'top');
-            }
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'top');
+               } else {
+                 props.onChange( widthUnit, 'top');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'top');
+               } else {
+                 props.onChange(newVal + widthUnit, 'top');
+               }
+             }
 
 
 
@@ -117,11 +137,21 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'top');
+                    // props.onChange(x.value, 'top');
 
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'top');
+                    } else {
+                      props.onChange( x.value, 'top');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'top');
+                    // props.onChange(widthVal + x.value, 'top');
 
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'top');
+                    } else {
+                      props.onChange(widthVal + x.value, 'top');
+                    }
                   }
 
                 }}>
@@ -154,12 +184,24 @@ function Html(props) {
           //console.log(arg);
           setImportant(isImportant => !isImportant)
 
+
           if (isImportant) {
-            props.onChange(widthVal + widthUnit, 'top');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'top');
+            } else {
+              props.onChange(widthVal + widthUnit , 'top');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal + widthUnit + ' !important', 'top');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'top');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'top');
+            }
           }
 
 

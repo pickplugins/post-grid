@@ -75,11 +75,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'left');
-            } else {
-              props.onChange(newVal + widthUnit, 'left');
-            }
-
+              // props.onChange(widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange( widthUnit + ' !important', 'left');
+               } else {
+                 props.onChange( widthUnit, 'left');
+               }
+ 
+ 
+             } else {
+               //props.onChange(newVal + widthUnit, 'width');
+ 
+               if (isImportant) {
+                 props.onChange(newVal + widthUnit + ' !important', 'left');
+               } else {
+                 props.onChange(newVal + widthUnit, 'left');
+               }
+             }
 
 
 
@@ -117,11 +130,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'left');
-
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'left');
+                    } else {
+                      props.onChange( x.value, 'left');
+                    }
                   } else {
-                    props.onChange(widthVal + x.value, 'left');
-
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'left');
+                    } else {
+                      props.onChange(widthVal + x.value, 'left');
+                    }
                   }
 
                 }}>
@@ -156,11 +175,22 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'left');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'left');
+            } else {
+              props.onChange(widthVal + widthUnit , 'left');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'left');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'left');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'left');
+            }
           }
 
 

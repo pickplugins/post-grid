@@ -53,7 +53,25 @@ function Html(props) {
         onChange={(newVal) => {
 
           setwidthVal(newVal);
-          props.onChange(newVal + widthUnit, 'textIndent');
+          if (widthUnit == 'auto') {
+            // props.onChange(widthUnit, 'width');
+
+             if (isImportant) {
+               props.onChange( widthUnit + ' !important', 'textIndent');
+             } else {
+               props.onChange( widthUnit, 'textIndent');
+             }
+
+
+           } else {
+             //props.onChange(newVal + widthUnit, 'width');
+
+             if (isImportant) {
+               props.onChange(newVal + widthUnit + ' !important', 'textIndent');
+             } else {
+               props.onChange(newVal + widthUnit, 'textIndent');
+             }
+           }
 
 
         }}
@@ -85,7 +103,19 @@ function Html(props) {
                 <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
 
                   setwidthUnit(x.value);
-                  props.onChange(widthVal + x.value, 'textIndent');
+                  if (x.value == 'auto') {
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'textIndent');
+                    } else {
+                      props.onChange( x.value, 'textIndent');
+                    }
+                  } else {
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'textIndent');
+                    } else {
+                      props.onChange(widthVal + x.value, 'textIndent');
+                    }
+                  }
 
 
                 }}>
@@ -119,11 +149,22 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal+widthUnit, 'textIndent');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'textIndent');
+            } else {
+              props.onChange(widthVal + widthUnit , 'textIndent');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal+widthUnit + ' !important', 'textIndent');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'textIndent');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'textIndent');
+            }
           }
 
 

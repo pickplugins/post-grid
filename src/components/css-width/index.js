@@ -47,7 +47,7 @@ function Html(props) {
 
   } else {
     var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
-ß
+
   }
 
   const [valArgs, setValArgs] = useState(valZ.split(" "));
@@ -135,25 +135,17 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    //props.onChange(x.value, 'width');
-
                     if (isImportant) {
                       props.onChange( x.value + ' !important', 'width');
                     } else {
                       props.onChange( x.value, 'width');
                     }
-
                   } else {
-                    //props.onChange(widthVal + x.value, 'width');
-
                     if (isImportant) {
                       props.onChange(widthVal + x.value + ' !important', 'width');
                     } else {
                       props.onChange(widthVal + x.value, 'width');
                     }
-
-
-
                   }
 
                 }}>
@@ -187,12 +179,29 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal + widthUnit, 'width');
+
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit , 'width');
+            } else {
+              props.onChange(widthVal + widthUnit , 'width');
+            }
+
+
+           
 
           } else {
-            props.onChange(widthVal + widthUnit + ' !important', 'width');
-
+            if (widthUnit == 'auto') {
+              props.onChange( widthUnit + ' !important', 'width');
+            } else {
+              props.onChange(widthVal + widthUnit + ' !important', 'width');
+            }
           }
+
+
+
+
+
+
 
 
         }}

@@ -47,9 +47,7 @@ function Html(props) {
 
   } else {
     var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
-
-
-
+ß
   }
 
   const [valArgs, setValArgs] = useState(valZ.split(" "));
@@ -81,9 +79,23 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'width');
+             // props.onChange(widthUnit, 'width');
+
+              if (isImportant) {
+                props.onChange( widthUnit + ' !important', 'width');
+              } else {
+                props.onChange( widthUnit, 'width');
+              }
+
+
             } else {
-              props.onChange(newVal + widthUnit, 'width');
+              //props.onChange(newVal + widthUnit, 'width');
+
+              if (isImportant) {
+                props.onChange(newVal + widthUnit + ' !important', 'width');
+              } else {
+                props.onChange(newVal + widthUnit, 'width');
+              }
             }
 
 
@@ -123,10 +135,24 @@ function Html(props) {
 
 
                   if (x.value == 'auto') {
-                    props.onChange(x.value, 'width');
+                    //props.onChange(x.value, 'width');
+
+                    if (isImportant) {
+                      props.onChange( x.value + ' !important', 'width');
+                    } else {
+                      props.onChange( x.value, 'width');
+                    }
 
                   } else {
-                    props.onChange(widthVal + x.value, 'width');
+                    //props.onChange(widthVal + x.value, 'width');
+
+                    if (isImportant) {
+                      props.onChange(widthVal + x.value + ' !important', 'width');
+                    } else {
+                      props.onChange(widthVal + x.value, 'width');
+                    }
+
+
 
                   }
 

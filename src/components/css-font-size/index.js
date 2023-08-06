@@ -82,7 +82,17 @@ function Html(props) {
             if (widthUnit == 'auto') {
               props.onChange(widthUnit, 'fontSize');
             } else {
-              props.onChange(newVal + widthUnit, 'fontSize');
+            //  props.onChange(newVal + widthUnit, 'fontSize');
+
+
+              if (isImportant) {
+                props.onChange(widthVal+widthUnit + ' !important', 'fontSize');
+
+              } else {
+                props.onChange(widthVal+widthUnit, 'fontSize');
+
+              }
+
             }
 
 
@@ -125,7 +135,15 @@ function Html(props) {
                     props.onChange(x.value, 'fontSize');
 
                   } else {
-                    props.onChange(widthVal + x.value, 'fontSize');
+                    //props.onChange(widthVal + x.value, 'fontSize');
+
+                    if (isImportant) {
+                      props.onChange(widthVal+widthUnit + ' !important', 'fontSize');
+
+                    } else {
+                      props.onChange(widthVal+widthUnit, 'fontSize');
+
+                    }
 
                   }
 
@@ -161,10 +179,8 @@ function Html(props) {
 
           if (isImportant) {
             props.onChange(widthVal+widthUnit, 'fontSize');
-
           } else {
             props.onChange(widthVal+widthUnit + ' !important', 'fontSize');
-
           }
 
 

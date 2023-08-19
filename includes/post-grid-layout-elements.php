@@ -3446,6 +3446,7 @@ function post_grid_layout_element_thumb($args)
 
     if (empty($thumb_url)) return;
 
+    $alt_text = get_post_meta(get_post_thumbnail_id($post_id), '_wp_attachment_image_alt', true);
 
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_thumb_permalink', $post_link, $args);
@@ -3457,7 +3458,11 @@ function post_grid_layout_element_thumb($args)
         <?php
         if ($link_to == 'post_link') :
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img src="<?php echo esc_url($thumb_url); ?>"></a>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img alt="php" 
+src="<?php echo esc_url($thumb_url); ?>"
+alt="<?php echo esc_attr($alt_text); ?>"
+
+></a>
         <?php elseif ($link_to == 'custom_link') :
 
             $post_grid_post_settings = get_post_meta($post_id, 'post_grid_post_settings', true);
@@ -3465,12 +3470,14 @@ function post_grid_layout_element_thumb($args)
 
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img src="<?php echo esc_url($thumb_url); ?>"></a>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img alt="<?php echo esc_attr($alt_text); ?>"
+ src="<?php echo esc_url($thumb_url); ?>"></a>
 
         <?php
         else :
         ?>
-            <img src="<?php echo esc_url($thumb_url); ?>">
+            <img alt="<?php echo esc_attr($alt_text); ?>"
+ src="<?php echo esc_url($thumb_url); ?>">
         <?php
 
         endif;
@@ -3819,6 +3826,8 @@ function post_grid_layout_element_thumb_link($args)
 
     if (empty($thumb_url)) return;
 
+    $alt_text = get_post_meta(get_post_thumbnail_id($post_id), '_wp_attachment_image_alt', true);
+
 
     $post_link = get_permalink($post_id);
     $post_link = apply_filters('post_grid_layout_element_thumb_link_permalink', $post_link, $args);
@@ -3830,7 +3839,8 @@ function post_grid_layout_element_thumb_link($args)
         <?php
         if ($link_to == 'post_link') :
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img src="<?php echo esc_url($thumb_url); ?>"></a>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($post_link); ?>"><img alt="<?php echo esc_attr($alt_text); ?>"
+ src="<?php echo esc_url($thumb_url); ?>"></a>
 
         <?php elseif ($link_to == 'custom_link') :
 
@@ -3839,13 +3849,15 @@ function post_grid_layout_element_thumb_link($args)
 
 
         ?>
-            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img src="<?php echo esc_url($thumb_url); ?>"></a>
+            <a target="<?php echo esc_attr($link_target); ?>" href="<?php echo esc_url($thumb_custom_url); ?>"><img alt="<?php echo esc_attr($alt_text); ?>"
+ src="<?php echo esc_url($thumb_url); ?>"></a>
 
 
         <?php
         else :
         ?>
-            <img src="<?php echo esc_url($thumb_url); ?>">
+            <img alt="<?php echo esc_attr($alt_text); ?>"
+ src="<?php echo esc_url($thumb_url); ?>">
         <?php
 
         endif;

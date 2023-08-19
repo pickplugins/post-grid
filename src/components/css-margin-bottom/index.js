@@ -42,8 +42,9 @@ function Html(props) {
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
 
 
-  var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
-  var widthUnitX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+  var widthValX = (valZ == undefined || valZ.match(/-?\d+/g) == null) ? 0 : valZ.match(/-?\d+/g)[0];
+  var widthUnitX = (valZ == undefined || valZ.match(/[a-zA-Z%]+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
@@ -68,23 +69,23 @@ function Html(props) {
 
             if (widthUnit == 'auto') {
               // props.onChange(widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange( widthUnit + ' !important', 'marginBottom');
-               } else {
-                 props.onChange( widthUnit, 'marginBottom');
-               }
- 
- 
-             } else {
-               //props.onChange(newVal + widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange(newVal + widthUnit + ' !important', 'marginBottom');
-               } else {
-                 props.onChange(newVal + widthUnit, 'marginBottom');
-               }
-             }
+
+              if (isImportant) {
+                props.onChange(widthUnit + ' !important', 'marginBottom');
+              } else {
+                props.onChange(widthUnit, 'marginBottom');
+              }
+
+
+            } else {
+              //props.onChange(newVal + widthUnit, 'width');
+
+              if (isImportant) {
+                props.onChange(newVal + widthUnit + ' !important', 'marginBottom');
+              } else {
+                props.onChange(newVal + widthUnit, 'marginBottom');
+              }
+            }
 
 
 
@@ -123,9 +124,9 @@ function Html(props) {
 
                   if (x.value == 'auto') {
                     if (isImportant) {
-                      props.onChange( x.value + ' !important', 'marginBottom');
+                      props.onChange(x.value + ' !important', 'marginBottom');
                     } else {
-                      props.onChange( x.value, 'marginBottom');
+                      props.onChange(x.value, 'marginBottom');
                     }
                   } else {
                     if (isImportant) {
@@ -168,17 +169,17 @@ function Html(props) {
           if (isImportant) {
 
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit , 'marginBottom');
+              props.onChange(widthUnit, 'marginBottom');
             } else {
-              props.onChange(widthVal + widthUnit , 'marginBottom');
+              props.onChange(widthVal + widthUnit, 'marginBottom');
             }
 
 
-           
+
 
           } else {
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit + ' !important', 'marginBottom');
+              props.onChange(widthUnit + ' !important', 'marginBottom');
             } else {
               props.onChange(widthVal + widthUnit + ' !important', 'marginBottom');
             }

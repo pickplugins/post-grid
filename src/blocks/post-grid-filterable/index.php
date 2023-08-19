@@ -768,7 +768,8 @@ class PGBlockPostGridFilterable
         $the_post = get_post($post_ID);
         $post_excerpt = '';
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
@@ -870,6 +871,7 @@ class PGBlockPostGridFilterable
         $scripts = isset($attributes['scripts']) ? $attributes['scripts'] : [];
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : ['items' => []];
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
 
         $itemCssArr = [];

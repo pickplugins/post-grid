@@ -47,17 +47,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             var wrapHandle = '.' + blockId + ' .progress-fill';
 
+            console.log(wrapHandle);
 
-            if (animate) {
+
+
+            if (animate == "onVisible") {
 
                 document.addEventListener('scroll', function (e) {
 
-                    // console.log(e);
-
-
                     const target = document.querySelector(wrapHandle);
-
-                    //console.log('scroll...');
                     var isInView = isInViewport(target);
 
                     var animateName = 'animateWidthProgress';
@@ -68,16 +66,32 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         var animateName = 'animateHeightProgress';
                     }
 
-
                     if (isInView) {
                         target.classList.add(animateName)
                     } else {
                         target.classList.remove(animateName)
                     }
-
                 })
+            }
+            if (animate == "onLoad") {
 
 
+                const target = document.querySelector(wrapHandle);
+                var isInView = isInViewport(target);
+
+                var animateName = 'animateWidthProgress';
+                if (type == 'horizontal') {
+                    var animateName = 'animateWidthProgress';
+                }
+                if (type == 'vertical') {
+                    var animateName = 'animateHeightProgress';
+                }
+
+                if (isInView) {
+                    target.classList.add(animateName)
+                } else {
+                    target.classList.remove(animateName)
+                }
 
             }
 

@@ -1,7 +1,7 @@
 
 
 const { Component } = wp.element;
-import { Button, Dropdown, ColorPalette, PanelRow, __experimentalInputControl as InputControl, Popover, ToggleControl } from '@wordpress/components'
+import { Button, Dropdown, ColorPalette, SelectControl, PanelRow, __experimentalInputControl as InputControl, Popover, ToggleControl } from '@wordpress/components'
 
 import colorsPresets from '../../colors-presets'
 
@@ -38,15 +38,10 @@ function Html(props) {
             checked={isImportant}
             onChange={(arg) => {
 
-              console.log(valArgs);
-              console.log(isImportant);
-              console.log(val);
-
               setImportant(isImportant => !isImportant)
 
               if (isImportant) {
                 props.onChange(val, 'color');
-
               } else {
                 props.onChange(val + ' !important', 'color');
 
@@ -64,23 +59,49 @@ function Html(props) {
             onChange={(newVal) => {
               //props.onChange(newVal, 'color');
 
-              console.log(valArgs);
-              console.log(isImportant);
-              console.log(val);
-
               setval(newVal)
 
               if (isImportant) {
                 props.onChange(newVal + ' !important', 'color');
-
               } else {
                 props.onChange(newVal, 'color');
-
               }
             }}
           />
+
+
+          <PanelRow>
+            <label for="">Global Value</label>
+            <SelectControl
+              label=""
+              value={val}
+              options={[
+                { label: 'Choose', value: '' },
+
+                { label: 'Inherit', value: 'inherit' },
+                { label: 'Initial', value: 'initial' },
+                { label: 'Revert', value: 'revert' },
+                { label: 'Revert-layer', value: 'revert-layer' },
+                { label: 'Unset', value: 'unset' },
+              ]}
+              onChange={(newVal) => {
+
+                setval(newVal)
+
+                if (isImportant) {
+                  props.onChange(newVal + ' !important', 'color');
+                } else {
+                  props.onChange(newVal, 'color');
+                }
+
+              }
+              }
+            />
+          </PanelRow>
+
         </div>
       </Popover>
+
 
 
     </div>
@@ -161,6 +182,8 @@ class PGcssColor extends Component {
 
         </div>
         <Html enableAlpha={enableAlpha} val={val} onChange={onChange} warn={this.state.showWarning} />
+
+
 
 
 

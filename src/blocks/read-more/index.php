@@ -176,7 +176,8 @@ class PGBlockReadmore
         $the_post = get_post($post_ID);
         $post_excerpt = '';
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -242,7 +243,7 @@ class PGBlockReadmore
             $author_id = get_post_field('post_author', $post_ID);
             $linkUrl = get_author_posts_url($author_id);
         } else if ($readMoreLinkTo == 'homeUrl') {
-            $linkUrl = get_bloginfo('home');
+            $linkUrl = get_bloginfo('url');
         } else if ($readMoreLinkTo == 'custom') {
             $linkUrl = $readMoreCustomUrl;
         }

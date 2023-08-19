@@ -672,7 +672,8 @@ class PGBlockTermsList
 
         $post_url = get_the_permalink($post_ID);
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
 
 

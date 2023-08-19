@@ -53,7 +53,7 @@ wp.domReady(function () {
 
 import './store'
 import './templates'
-//import './sidebars'
+import './sidebars'
 
 
 import './blocks/post-grid'

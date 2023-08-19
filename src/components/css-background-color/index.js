@@ -1,7 +1,7 @@
 
 
 const { Component } = wp.element;
-import { Button, Dropdown, ColorPalette, PanelRow, __experimentalInputControl as InputControl, Popover, ToggleControl } from '@wordpress/components'
+import { Button, Dropdown, SelectControl, ColorPalette, PanelRow, __experimentalInputControl as InputControl, Popover, ToggleControl } from '@wordpress/components'
 
 import colorsPresets from '../../colors-presets'
 
@@ -79,6 +79,35 @@ function Html(props) {
               }
             }}
           />
+
+          <PanelRow>
+            <label for="">Global Value</label>
+            <SelectControl
+              label=""
+              value={val}
+              options={[
+                { label: 'Choose', value: '' },
+
+                { label: 'Inherit', value: 'inherit' },
+                { label: 'Initial', value: 'initial' },
+                { label: 'Revert', value: 'revert' },
+                { label: 'Revert-layer', value: 'revert-layer' },
+                { label: 'Unset', value: 'unset' },
+              ]}
+              onChange={(newVal) => {
+
+                setval(newVal)
+
+                if (isImportant) {
+                  props.onChange(newVal + ' !important', 'backgroundColor');
+                } else {
+                  props.onChange(newVal, 'backgroundColor');
+                }
+
+              }
+              }
+            />
+          </PanelRow>
         </div>
       </Popover>
 

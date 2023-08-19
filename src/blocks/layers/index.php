@@ -90,7 +90,8 @@ class PGBlockLayers
         $the_post = get_post($post_ID);
         $wrapper = '';
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
@@ -113,20 +114,20 @@ class PGBlockLayers
         $postGridCustomCss .= $customCss;
 
 
-
+        //var_dump($blockAlign);
 
 
         ob_start();
 
 
         if ($wrapperTag == 'a') { ?>
-            <a class="pg-layers <?php echo esc_attr($blockId); ?>" href="" target="">
+            <a class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" href="" target="">
                 <?php echo $content ?>
             </a>
         <?php
 
         } else { ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="pg-layers <?php echo esc_attr($blockId); ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
                 <?php echo $content ?>
             </<?php echo esc_attr($wrapperTag); ?>>
 <?php

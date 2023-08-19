@@ -32,13 +32,12 @@ function Html(props) {
   }
 
   var valX = (props.val == undefined || props.val == null || props.val.length == 0) ? '' : props.val;
-  //var valX = (props.val == undefined || props.val == null || props.val.length == 0) ? 'linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)' : props.val;
 
 
 
 
 
-  const [valArgs, setValArgs] = useState(valX.split(",  "));
+  const [valArgs, setValArgs] = useState(valX.split(",  ").filter(n => n));
 
 
 
@@ -103,6 +102,7 @@ function Html(props) {
   return (
 
     <div>
+      
 
       <div className="my-4">
 
@@ -111,9 +111,7 @@ function Html(props) {
 
           if (option.id == 'url') {
             var dsdsf = valArgs.concat('url()')
-
           }
-
           else if (option.id == 'linearGradient') {
             var dsdsf = valArgs.concat("linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)")
 
@@ -138,7 +136,7 @@ function Html(props) {
       </div>
 
 
-      {valArgs.map((x, index) => {
+      {valArgs.length != 0 && valArgs.map((x, index) => {
 
 
 

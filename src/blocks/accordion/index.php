@@ -230,7 +230,8 @@ class PGBlockAccordion
         $post_url = get_the_permalink($post_ID);
         $the_post = get_post($post_ID);
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -299,7 +300,7 @@ class PGBlockAccordion
         if (!empty($wrapperTag)) :
 ?>
 
-            <div class="PGBlockAccordion <?php echo esc_attr($blockId); ?>">
+            <div class="PGBlockAccordion <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
 
 

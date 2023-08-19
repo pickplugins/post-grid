@@ -142,6 +142,7 @@ class BlockPostMeta
         global $postGridCss;
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align'.$attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 

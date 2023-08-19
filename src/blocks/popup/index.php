@@ -104,7 +104,8 @@ class PGBlockPopup
 
 
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
         $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
@@ -167,7 +168,7 @@ class PGBlockPopup
 
 
 ?>
-        <div class="pg-popup   <?php echo esc_attr($blockId); ?>" popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-visible="<?php echo esc_attr(json_encode($visible)) ?>" data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
+        <div class="pg-popup   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-visible="<?php echo esc_attr(json_encode($visible)) ?>" data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
             <div class='inner'>
                 <span class='close' popup-id="<?php echo esc_attr($blockId); ?>" close-animation="<?php echo esc_attr($closeWrapAnimation); ?>">
                     <?php echo $closeIconHtml; ?>

@@ -1,7 +1,7 @@
 
 
 const { Component } = wp.element;
-import { Button, Dropdown, ToggleControl} from '@wordpress/components'
+import { Button, Dropdown, ToggleControl } from '@wordpress/components'
 
 import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
 import { memo, useMemo, useState } from '@wordpress/element'
@@ -15,7 +15,7 @@ function Html(props) {
 
 
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
-  var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
+  var widthValX = (valZ == undefined || valZ.match(/-?\d+/g) == null) ? 0 : valZ.match(/-?\d+/g)[0];
 
   const [isImportant, setImportant] = useState(valZ.includes(" !important") ? true : false);
 
@@ -35,12 +35,12 @@ function Html(props) {
           } else {
             props.onChange(newVal, 'zIndex');
           }
-      
+
 
 
         }}
       />
-      
+
       <div>
 
       </div>
@@ -58,12 +58,12 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthValX , 'zIndex');
-        } else {
-            props.onChange( widthValX + ' !important', 'zIndex');
-          
-        }
-      
+            props.onChange(widthValX, 'zIndex');
+          } else {
+            props.onChange(widthValX + ' !important', 'zIndex');
+
+          }
+
 
 
         }}

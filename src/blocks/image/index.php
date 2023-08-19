@@ -193,6 +193,7 @@ class PGBlockImage
         $post_url = get_the_permalink($post_ID);
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align'.$attributes['align'] : '';
         $galleryId = isset($block->context['post-grid/galleryId']) ? $block->context['post-grid/galleryId'] : $blockId;
 
 
@@ -320,7 +321,7 @@ class PGBlockImage
             $author_id = get_post_field('post_author', $post_ID);
             $linkUrl = get_the_author_link($author_id);
         } else if ($featuredImageLinkTo == 'homeUrl') {
-            $linkUrl = get_bloginfo('home');
+            $linkUrl = get_bloginfo('url');
         } else if ($featuredImageLinkTo == 'customUrl') {
             $linkUrl = $linkTocustomUrl;
         }

@@ -674,27 +674,6 @@ registerBlockType("post-grid/layers", {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
 
     var attributes = props.attributes;
-    var wrapper = attributes.wrapper;
-
-    var blockId = attributes.blockId;
-
-    var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
-    var blockClass = '.' + blockIdX;
-
-    const blockProps = useBlockProps.save({
-      className: ` ${blockId} pg-layers`,
-    });
-
-    const CustomTagWrapper = `${wrapper.options.tag}`;
-
-    const { getCurrentPostId, getCurrentPostType, getPermalink } = wp.data.select("core/editor");
-
-    const postId = getCurrentPostId();
-    const postType = getCurrentPostType();
-    const postLink = getPermalink();
-
-
-    var postUrl = (wrapper.options.customUrl != undefined && wrapper.options.customUrl.length > 0) ? wrapper.options.customUrl : postLink;
 
 
 

@@ -1,8 +1,9 @@
 
 
 const { Component, RawHTML } = wp.element;
-import { Button, Dropdown, ToggleControl} from '@wordpress/components'
+import { Button, Dropdown, ToggleControl, __experimentalInputControl as InputControl, } from '@wordpress/components'
 import { useState } from '@wordpress/element'
+import { Icon, styles, close, settings, link, linkOff } from "@wordpress/icons";
 
 function Html(props) {
   if (!props.warn) {
@@ -20,74 +21,268 @@ function Html(props) {
     unset: { "label": "unset", "value": "unset" },
   };
 
-  const [valArgs, setValArgs] = useState(props.val.split(" "));
-  const [align, setalign] = useState(valArgs[0]);
-  const [isImportant, setImportant] = useState((valArgs[1] == undefined) ? false : true);
+  var unitArgs = {
+    px: { "label": "PX", "value": "px" },
+    em: { "label": "EM", "value": "em" },
+    rem: { "label": "REM", "value": "rem" },
+    "%": { "label": "%", "value": "%" },
+    cm: { "label": "CM", "value": "cm" },
+    mm: { "label": "MM", "value": "mm" },
+    in: { "label": "IN", "value": "in" },
+    pt: { "label": "PT", "value": "pt" },
+    pc: { "label": "PC", "value": "pc" },
+    ex: { "label": "EX", "value": "ex" },
+    ch: { "label": "CH", "value": "ch" },
+    vw: { "label": "VW", "value": "vw" },
+    vh: { "label": "VH", "value": "vh" },
+    vmin: { "label": "VMIN", "value": "vmin" },
+    vmax: { "label": "VMAX", "value": "vmax" },
+  }
+
+
+  const [isMultiple, setisMultiple] = useState(props.val.includes(", ") ? true : false);
+  const [valArgs, setValArgs] = useState(isMultiple ? props.val.split(", ") : props.val.split(" "));
+
+  const [isImportant, setImportant] = useState(props.val.includes("!important") ? true : false);
+
 
   return (
-    <div className="flex justify-between items-center">
-
-      <Dropdown
-        position="bottom"
-        renderToggle={({ isOpen, onToggle }) => (
-          <Button
-            title="Background Repeat"
-
-            onClick={onToggle}
-            aria-expanded={isOpen}
-          >
-            {/* <div className=" ">{val ? args[val].label : 'Select...'}</div> */}
-            <div className=" ">{args[align] == undefined ? 'Select...' : args[align].label}</div>
+    <div className="">
 
 
 
-          </Button>
-        )}
-        renderContent={() => <div className='w-32'>
+      <div className='flex justify-between items-center'>
+        <div className="cursor-pointer bg-blue-500 text-white px-3 py-1 my-3" onClick={ev => {
 
-          {Object.entries(args).map((args) => {
-
-            var index = args[0]
-            var x = args[1]
-            return (
-
-              <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
-
-                // onChange(x.value, 'backgroundSize');
-                setalign(x.value)
+          valArgs.push('auto');
+          setValArgs(valArgs);
+          props.onChange(valArgs.join(' '), 'backgroundSize');
 
 
-                if (isImportant) {
-                  props.onChange(x.value + ' !important', 'backgroundSize');
+        }}>Add</div>
+
+        <ToggleControl
+          label={
+            isMultiple
+              ? 'Multiple (Enabled)'
+              : 'Multiple?'
+          }
+
+          checked={isMultiple}
+          onChange={(arg) => {
+            setisMultiple(isMultiple => !isMultiple)
+
+            console.log(isMultiple);
+
+
+            if (isMultiple) {
+
+              if (isImportant) {
+                props.onChange(valArgs.join(' ') + ' !important', 'backgroundSize');
+              } else {
+                props.onChange(valArgs.join(' '), 'backgroundSize');
+              }
+
+
+            } else {
+
+              if (isImportant) {
+                props.onChange(valArgs.join(', ') + ' !important', 'backgroundSize');
+              } else {
+                props.onChange(valArgs.join(', '), 'backgroundSize');
+              }
+            }
+
+
+          }}
+        />
+
+      </div>
+
+
+      <div>
+
+        {valArgs.map((item, i) => {
+
+          return (
+
+            <div className='flex my-1'>
+              <span className='bg-red-500 text-white' onClick={ev => {
+
+                valArgs.splice(i, 1);
+                if (isMultiple) {
+                  if (isImportant) {
+                    props.onChange(valArgs.join(', ') + ' !important', 'backgroundSize');
+                  } else {
+                    props.onChange(valArgs.join(', '), 'backgroundSize');
+                  }
                 } else {
-                  props.onChange(x.value, 'backgroundSize');
+                  if (isImportant) {
+                    props.onChange(valArgs.join(' ') + ' !important', 'backgroundSize');
+                  } else {
+                    props.onChange(valArgs.join(' '), 'backgroundSize');
+                  }
                 }
 
 
-              }}>
+              }}><Icon fill="#fff" icon={close} /></span>
+              <Dropdown
+                position="bottom"
+                renderToggle={({ isOpen, onToggle }) => (
+                  <Button
+                    title="Background Repeat"
 
-                {!x.value && (
+                    onClick={onToggle}
+                    aria-expanded={isOpen}
+                  >
+                    {/* <div className=" ">{val ? args[val].label : 'Select...'}</div> */}
+                    <div className=" ">{args[item] == undefined ? 'Custom' : args[item].label}</div>
 
-                  <div>Reset</div>
 
+
+                  </Button>
                 )}
+                renderContent={() => <div className='w-32'>
 
-                {x.value && (
+                  {Object.entries(args).map((args) => {
 
-                  <>{x.label}</>
+                    var index = args[0]
+                    var x = args[1]
+                    return (
 
-                )}
+                      <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
+
+
+                        if (x.value == 'custom') {
+                          valArgs[i] = '0px';
+
+                        } else {
+                          valArgs[i] = x.value;
+
+                        }
+
+                        props.onChange(valArgs.join(' '), 'backgroundSize');
+                        setValArgs(valArgs);
+
+                        console.log(x.value);
+
+
+                      }}>
+
+                        {!x.value && (
+
+                          <div>Reset</div>
+
+                        )}
+
+                        {x.value && (
+
+                          <>{x.label}</>
+
+                        )}
+
+                      </div>
+
+                    )
+
+                  })}
+                </div>}
+              />
+
+
+              <div>
+
+              </div>
+              {item.match(/-?\d+/g) != null && (
+
+                <div className='flex justify-between'>
+
+                  <InputControl
+                    value={item.match(/-?\d+/g) == null ? '0' : item.match(/-?\d+/g)[0]}
+                    type="number"
+                    onChange={(newVal) => {
+
+                      //console.log(newVal);
+
+                      if (newVal.length > 0) {
+                        valArgs[i] = newVal + item.match(/[a-zA-Z%]+/g)[0];
+                        props.onChange(valArgs.join(' '), 'backgroundSize');
+                        setValArgs(valArgs);
+                      }
+
+
+
+                    }}
+                  />
+
+                  <Dropdown
+                    position="bottom left"
+                    renderToggle={({ isOpen, onToggle }) => (
+                      <Button
+                        title=""
+
+                        onClick={onToggle}
+                        aria-expanded={isOpen}
+                      >
+                        <div className=" ">{item.match(/[a-zA-Z%]+/g) == null ? 'Select...' : unitArgs[item.match(/[a-zA-Z%]+/g)[0]] == undefined ? '' : unitArgs[item.match(/[a-zA-Z%]+/g)[0]].label}</div>
+
+                      </Button>
+                    )}
+                    renderContent={() => <div className='w-32'>
+
+                      {Object.entries(unitArgs).map((y) => {
+
+                        var index = y[0]
+                        var x = y[1]
+                        return (
+
+                          <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
+
+                            var val = item.match(/-?\d+/g) == null ? 0 : item.match(/-?\d+/g)[0]
+
+                            valArgs[i] = val + x.value;
+                            props.onChange(valArgs.join(' '), 'backgroundSize');
+                            setValArgs(valArgs);
+
+
+                          }}>
+
+                            {x.value && (
+
+                              <>{x.label}</>
+
+                            )}
+
+                          </div>
+
+                        )
+
+                      })}
+                    </div>}
+                  />
+
+                </div>
+
+              )}
+              <div>
+
+
 
               </div>
 
-            )
+            </div>
 
-          })}
-        </div>}
-      />
+          )
+
+        })}
+
+      </div>
+
+
+
 
       <ToggleControl
-        help={
+        label={
           isImportant
             ? 'Important (Enabled)'
             : 'Important?'
@@ -97,10 +292,23 @@ function Html(props) {
         onChange={(arg) => {
           setImportant(isImportant => !isImportant)
 
-          if (isImportant) {
-            props.onChange(align, 'backgroundSize');
+          if (isMultiple) {
+            if (isImportant) {
+              props.onChange(valArgs.join(', ').replace('!important', ''), 'backgroundSize');
+
+            } else {
+              props.onChange(valArgs.join(', ') + ' !important', 'backgroundSize');
+
+
+            }
           } else {
-            props.onChange(align + ' !important', 'backgroundSize');
+            if (isImportant) {
+              props.onChange(valArgs.join(' ').replace('!important', ''), 'backgroundSize');
+
+            } else {
+              props.onChange(valArgs.join(' ') + ' !important', 'backgroundSize');
+
+            }
           }
 
 

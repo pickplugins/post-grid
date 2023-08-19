@@ -164,11 +164,16 @@ function Html(props) {
                       <PanelRow>
                         <label for="">Value</label>
                         <InputControl
-                          value={arg.val.match(/-?\d+/g)[0]}
+                          value={(arg.val.match(/-?\d+/g) == null) ? 0 : arg.val.match(/-?\d+/g)[0]}
                           type="number"
 
                           onChange={(newVal) => {
                             //var argVal = arg.val != undefined ? arg.val.match(/-?\d+/g)[0] : 1;
+
+
+                            if (parseInt(newVal) == NaN) {
+                              return;
+                            }
 
                             var str = '';
                             valArgs.map((x, j) => {
@@ -262,7 +267,6 @@ function Html(props) {
                                       ) {
                                         var argVal = arg.val != undefined ? arg.val.match(/-?\d+/g)[0] : 1;
 
-                                        console.log(argVal);
 
                                         str += x.id + '(' + argVal + newVal + ') ';
                                       }
@@ -310,21 +314,26 @@ function Html(props) {
                 ) && (
 
                     <>
+
                       <PanelRow>
                         <label for="">X Value</label>
                         <InputControl
-                          value={arg.val.split(",")[0].match(/-?\d+/g)[0]}
+                          value={arg.val.split(",")[0].match(/-?\d+/g) == undefined ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0]}
                           type="number"
 
                           onChange={(newVal) => {
                             //var argVal = arg.val != undefined ? arg.val.match(/-?\d+/g)[0] : 1;
 
 
-                            var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
-                            var valPartsXUnit = arg.val != undefined ? arg.val.split(",")[0].match(/[%a-zA-Z]+/g)[0] : 'px';
+                            if (parseInt(newVal) == NaN) {
+                              return;
+                            }
 
-                            var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
-                            var valPartsYUnit = arg.val != undefined ? arg.val.split(",")[1].match(/[%a-zA-Z]+/g)[0] : 'px';
+                            var valPartsX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                            var valPartsXUnit = arg.val.split(",")[0].match(/[%a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[0].match(/[%a-zA-Z]+/g)[0];
+
+                            var valPartsY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                            var valPartsYUnit = arg.val.split(",")[1].match(/[%a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[1].match(/[%a-zA-Z]+/g)[0];
 
 
 
@@ -402,10 +411,10 @@ function Html(props) {
                                           arg.id == 'translate'
                                         ) {
 
-                                          var argValX = arg.val != undefined ? arg.val.split(",")[0].match(/-?\d+/g)[0] : 1;
-                                          var argValXUnit = arg.val != undefined ? arg.val.split(",")[0].match(/[%a-zA-Z]+/g)[0] : 'px';
-                                          var argValY = arg.val != undefined ? arg.val.split(",")[1].match(/-?\d+/g)[0] : 1;
-                                          var argValYUnit = arg.val != undefined ? arg.val.split(",")[1].match(/[%a-zA-Z]+/g)[0] : 'px';
+                                          var argValX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 1 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                                          var argValXUnit = arg.val.split(",")[0].match(/[%a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[0].match(/[%a-zA-Z]+/g)[0];
+                                          var argValY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 1 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                                          var argValYUnit = arg.val.split(",")[1].match(/[%a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[1].match(/[%a-zA-Z]+/g)[0];
 
                                           str += x.id + '(' + argValX + newVal + ',' + argValY + argValYUnit + ') ';
 
@@ -436,17 +445,20 @@ function Html(props) {
                       <PanelRow>
                         <label for="">Y Value</label>
                         <InputControl
-                          value={arg.val.split(",")[1].match(/-?\d+/g)[0]}
+                          value={arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0]}
                           type="number"
 
                           onChange={(newVal) => {
 
+                            if (parseInt(newVal) == NaN) {
+                              return;
+                            }
 
-                            var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
-                            var valPartsXUnit = arg.val != undefined ? arg.val.split(",")[0].match(/[%a-zA-Z]+/g)[0] : 'px';
+                            var valPartsX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                            var valPartsXUnit = arg.val.split(",")[0].match(/[%a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[0].match(/[%a-zA-Z]+/g)[0];
 
-                            var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
-                            var argValYUnit = arg.val != undefined ? arg.val.split(",")[1].match(/[%a-zA-Z]+/g)[0] : 'px';
+                            var valPartsY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                            var argValYUnit = arg.val.split(",")[1].match(/[%a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[1].match(/[%a-zA-Z]+/g)[0];
 
 
 
@@ -506,7 +518,7 @@ function Html(props) {
                               <>
                                 <SelectControl
                                   label=""
-                                  value={arg.val.split(",")[1].match(/[%a-zA-Z]+/g)[0]}
+                                  value={arg.val.split(",")[1].match(/[%a-zA-Z]+/g) == null ? 0 : arg.val.split(",")[1].match(/[%a-zA-Z]+/g)[0]}
                                   options={[
                                     { "label": "PX", "value": "px" },
                                     { "label": "EM", "value": "em" },
@@ -523,10 +535,10 @@ function Html(props) {
                                           arg.id == 'translate'
                                         ) {
 
-                                          var argValX = arg.val != undefined ? arg.val.split(",")[0].match(/-?\d+/g)[0] : 1;
-                                          var argValXUnit = arg.val != undefined ? arg.val.split(",")[0].match(/[%a-zA-Z]+/g)[0] : 'px';
-                                          var argValY = arg.val != undefined ? arg.val.split(",")[1].match(/-?\d+/g)[0] : 1;
-                                          var argValYUnit = arg.val != undefined ? arg.val.split(",")[1].match(/[%a-zA-Z]+/g)[0] : 'px';
+                                          var argValX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 1 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                                          var argValXUnit = arg.val.split(",")[0].match(/[%a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[0].match(/[%a-zA-Z]+/g)[0];
+                                          var argValY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 1 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                                          var argValYUnit = arg.val.split(",")[1].match(/[%a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[1].match(/[%a-zA-Z]+/g)[0];
 
                                           str += x.id + '(' + argValX + argValXUnit + ',' + argValY + newVal + ') ';
 
@@ -567,25 +579,46 @@ function Html(props) {
                 ) && (
 
                     <>
+
+
+
                       <PanelRow>
                         <label for="">X Value</label>
                         <InputControl
-                          value={arg.val.split(",")[0].match(/-?\d+/g)[0]}
+                          value={arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0]}
                           type="number"
 
                           onChange={(newVal) => {
                             //var argVal = arg.val != undefined ? arg.val.match(/-?\d+/g)[0] : 1;
                             //var argUnit = arg.val != undefined ? arg.val.match(/[a-zA-Z]+/g)[0] : '';
 
+                            if (parseInt(newVal) == NaN) {
+                              return;
+                            }
 
-                            var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
-                            var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
+                            // var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
+                            // var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
 
-                            var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
-                            var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
+                            // var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
+                            // var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
 
-                            var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
-                            var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+                            // var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
+                            // var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+
+
+                            var valPartsX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                            var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
+
+                            var valPartsY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                            var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
+
+                            var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[2].match(/-?\d+/g)[0];
+                            var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+
+
+
+
+
 
                             var str = '';
                             valArgs.map((x, j) => {
@@ -650,14 +683,27 @@ function Html(props) {
                                           arg.id == 'translate3d'
                                         ) {
 
-                                          var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
-                                          var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
+                                          // var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
+                                          // var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
 
-                                          var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
-                                          var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
+                                          // var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
+                                          // var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
 
-                                          var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
-                                          var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+                                          // var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
+                                          // var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+
+
+                                          var valPartsX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                                          var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
+
+                                          var valPartsY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                                          var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
+
+                                          var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[2].match(/-?\d+/g)[0];
+                                          var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+
+
+
 
                                           str += x.id + '(' + valPartsX + newVal + ',' + valPartsY + valPartsYUnit + ',' + valPartsZ + valPartsZUnit + ') ';
 
@@ -685,20 +731,23 @@ function Html(props) {
                       <PanelRow>
                         <label for="">Y Value</label>
                         <InputControl
-                          value={arg.val.split(",")[1].match(/-?\d+/g)[0]}
+                          value={arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0]}
                           type="number"
 
                           onChange={(newVal) => {
 
+                            if (parseInt(newVal) == NaN) {
+                              return;
+                            }
 
-                            var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
-                            var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
+                            var valPartsX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                            var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
 
-                            var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
-                            var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
+                            var valPartsY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                            var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
 
-                            var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
-                            var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+                            var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[2].match(/-?\d+/g)[0];
+                            var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
 
 
 
@@ -766,14 +815,14 @@ function Html(props) {
                                           arg.id == 'translate3d'
                                         ) {
 
-                                          var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
-                                          var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
+                                          var valPartsX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                                          var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
 
-                                          var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
-                                          var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
+                                          var valPartsY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                                          var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
 
-                                          var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
-                                          var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+                                          var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[2].match(/-?\d+/g)[0];
+                                          var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
 
                                           str += x.id + '(' + valPartsX + valPartsXUnit + ',' + valPartsY + newVal + ',' + valPartsZ + valPartsZUnit + ') ';
 
@@ -804,24 +853,37 @@ function Html(props) {
                       <PanelRow>
                         <label for="">Z Value</label>
                         <InputControl
-                          value={arg.val.split(",")[2].match(/-?\d+/g)[0]}
+                          value={arg.val.split(",")[2].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[2].match(/-?\d+/g)[0]}
                           type="number"
 
                           onChange={(newVal) => {
 
+                            if (parseInt(newVal) == NaN) {
+                              return;
+                            }
 
                             // var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
                             // var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
                             // var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
 
-                            var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
-                            var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
+                            var valPartsX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                            var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
 
-                            var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
-                            var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
+                            var valPartsY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                            var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
 
-                            var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
-                            var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+                            var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[2].match(/-?\d+/g)[0];
+                            var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+
+
+                            // var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
+                            // var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
+
+                            // var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
+                            // var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
+
+                            // var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
+                            // var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
 
 
 
@@ -888,14 +950,24 @@ function Html(props) {
                                           arg.id == 'translate3d'
                                         ) {
 
-                                          var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
-                                          var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
+                                          var valPartsX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                                          var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
 
-                                          var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
-                                          var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
+                                          var valPartsY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                                          var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
 
-                                          var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
-                                          var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+                                          var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[2].match(/-?\d+/g)[0];
+                                          var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g) == null ? 'px' : arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
+
+
+                                          // var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
+                                          // var valPartsXUnit = arg.val.split(",")[0].match(/[a-zA-Z]+/g)[0];
+
+                                          // var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
+                                          // var valPartsYUnit = arg.val.split(",")[1].match(/[a-zA-Z]+/g)[0];
+
+                                          // var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
+                                          // var valPartsZUnit = arg.val.split(",")[2].match(/[a-zA-Z]+/g)[0];
 
                                           str += x.id + '(' + valPartsX + valPartsXUnit + ',' + valPartsY + valPartsYUnit + ',' + valPartsZ + newVal + ') ';
 
@@ -930,15 +1002,19 @@ function Html(props) {
                           <label for="">Angle</label>
                           <InputControl
 
-                            value={arg.val.split(",")[3].match(/-?\d+/g)[0]}
+                            value={arg.val.split(",")[3].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[3].match(/-?\d+/g)[0]}
                             type="number"
 
                             onChange={(newVal) => {
 
 
-                              var valPartsX = arg.val.split(",")[0].match(/-?\d+/g)[0];
-                              var valPartsY = arg.val.split(",")[1].match(/-?\d+/g)[0];
-                              var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g)[0];
+                              if (parseInt(newVal) == NaN) {
+                                return;
+                              }
+
+                              var valPartsX = arg.val.split(",")[0].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[0].match(/-?\d+/g)[0];
+                              var valPartsY = arg.val.split(",")[1].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[1].match(/-?\d+/g)[0];
+                              var valPartsZ = arg.val.split(",")[2].match(/-?\d+/g) == null ? 0 : arg.val.split(",")[2].match(/-?\d+/g)[0];
 
 
                               var str = '';

@@ -1,7 +1,7 @@
 
 
 const { Component } = wp.element;
-import { Button, Dropdown, ToggleControl} from '@wordpress/components'
+import { Button, Dropdown, ToggleControl } from '@wordpress/components'
 import { useState, } from '@wordpress/element'
 
 import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
@@ -41,8 +41,9 @@ function Html(props) {
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
 
 
-  var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
-  var widthUnitX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+  var widthValX = (valZ == undefined || valZ.match(/-?\d+/g) == null) ? 0 : valZ.match(/-?\d+/g)[0];
+  var widthUnitX = (valZ == undefined || valZ.match(/[a-zA-Z%]+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+
 
   const [isImportant, setImportant] = useState(valZ.includes(" !important") ? true : false);
 
@@ -67,23 +68,23 @@ function Html(props) {
 
             if (widthUnit == 'auto') {
               // props.onChange(widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange( widthUnit + ' !important', 'maxHeight');
-               } else {
-                 props.onChange( widthUnit, 'maxHeight');
-               }
- 
- 
-             } else {
-               //props.onChange(newVal + widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange(newVal + widthUnit + ' !important', 'maxHeight');
-               } else {
-                 props.onChange(newVal + widthUnit, 'maxHeight');
-               }
-             }
+
+              if (isImportant) {
+                props.onChange(widthUnit + ' !important', 'maxHeight');
+              } else {
+                props.onChange(widthUnit, 'maxHeight');
+              }
+
+
+            } else {
+              //props.onChange(newVal + widthUnit, 'width');
+
+              if (isImportant) {
+                props.onChange(newVal + widthUnit + ' !important', 'maxHeight');
+              } else {
+                props.onChange(newVal + widthUnit, 'maxHeight');
+              }
+            }
 
 
 
@@ -122,9 +123,9 @@ function Html(props) {
 
                   if (x.value == 'auto') {
                     if (isImportant) {
-                      props.onChange( x.value + ' !important', 'maxHeight');
+                      props.onChange(x.value + ' !important', 'maxHeight');
                     } else {
-                      props.onChange( x.value, 'maxHeight');
+                      props.onChange(x.value, 'maxHeight');
                     }
                   } else {
                     if (isImportant) {
@@ -166,17 +167,17 @@ function Html(props) {
           if (isImportant) {
 
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit , 'maxHeight');
+              props.onChange(widthUnit, 'maxHeight');
             } else {
-              props.onChange(widthVal + widthUnit , 'maxHeight');
+              props.onChange(widthVal + widthUnit, 'maxHeight');
             }
 
 
-           
+
 
           } else {
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit + ' !important', 'maxHeight');
+              props.onChange(widthUnit + ' !important', 'maxHeight');
             } else {
               props.onChange(widthVal + widthUnit + ' !important', 'maxHeight');
             }

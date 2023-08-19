@@ -88,7 +88,8 @@ class PGBlockGridWrapItem
         global $postGridCssY;
 
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
@@ -105,7 +106,7 @@ class PGBlockGridWrapItem
         ob_start();
 
 ?>
-        <div class="pg-grid-wrap-item <?php echo esc_attr($blockId); ?>">
+        <div class="pg-grid-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
             <?php echo $content ?>
         </div>
 <?php

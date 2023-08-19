@@ -300,7 +300,7 @@ registerBlockType("post-grid/image", {
     useEffect(() => {
 
 
-      if (currentPostImageId.length != 0) {
+      if (currentPostImageId.length != 0 && image.options.imgSrcType == 'media') {
         setLoading(true);
 
 

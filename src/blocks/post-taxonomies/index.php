@@ -188,7 +188,8 @@ class PGBlockPostTaxonomies
 
         $post_url = get_the_permalink($post_ID);
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
 
 
@@ -325,7 +326,7 @@ class PGBlockPostTaxonomies
                         $author_id = get_post_field('post_author', $post_ID);
                         $linkUrl = get_author_posts_url($author_id);
                     } else if ($itemsLinkTo == 'homeUrl') {
-                        $linkUrl = get_bloginfo('home');
+                        $linkUrl = get_bloginfo('url');
                     } else if ($itemsLinkTo == 'custom') {
                         $linkUrl = $itemsCustomUrl;
                     }

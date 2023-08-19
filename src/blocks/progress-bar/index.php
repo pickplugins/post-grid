@@ -355,7 +355,8 @@ class PGBlockProgressBar
         $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
 
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -365,12 +366,14 @@ class PGBlockProgressBar
 
         $progressData = isset($attributes['progressData']) ? $attributes['progressData'] : [];
 
+        //var_dump($progressData);
+
         $type = isset($progressData['type']) ? $progressData['type'] : "horizontal";
         $max = isset($progressData['max']) ? (int)$progressData['max'] : 0;
         $min = isset($progressData['min']) ? (int)$progressData['min'] : 100;
         $fill = isset($progressData['fill']) ? (int) $progressData['fill'] : 45;
         $unit = isset($progressData['unit']) ? $progressData['unit'] : "%";
-        $animate = isset($progressData['animate']) ? $progressData['animate'] : "onVisible";
+        $animate = isset($progressData['animate']) ? $progressData['animate'] : "";
         $animateDuration = isset($progressData['animateDuration']) ? $progressData['animateDuration'] : 1;
         $animateIteration = isset($progressData['animateIteration']) ? $progressData['animateIteration'] : 1;
         $animateDelay = isset($progressData['animateDelay']) ? $progressData['animateDelay'] : 1;
@@ -468,7 +471,7 @@ class PGBlockProgressBar
             $animatename = "animateHeightProgress";
         endif;
 
-
+        //var_dump($dataAtts);
 
         ob_start();
 
@@ -476,7 +479,7 @@ class PGBlockProgressBar
         if (!empty($wrapperTag)) :
 
 ?>
-            <div class="PGBlockProgressBar <?php echo esc_attr($blockId); ?>" data-progress-bar="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+            <div class="PGBlockProgressBar <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-progress-bar="<?php echo esc_attr(json_encode($dataAtts)) ?>">
 
 
                 <?php if ($progressInfoPosition == 'beforeBar') : ?>
@@ -601,6 +604,8 @@ class PGBlockProgressBar
                 endif;
                 ?><?php echo esc_attr('.' . $animatename); ?> {
                     animation: <?php echo esc_attr($animatename); ?> ease <?php echo esc_attr($animateDuration); ?>s;
+                    animation-iteration-count: 1;
+
                 }
             </style>
 

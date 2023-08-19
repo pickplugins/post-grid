@@ -80,6 +80,7 @@ registerBlockType("post-grid/icon", {
         options: {
           enable: true,
           text: 'Custom Text',
+          src:'', // siteTitle, tagline, siteUrl, currentYear, currentDate, postTitle
           linkTo: '', /*postUrl, homeUrl, authorUrl, authorLink, mailTo, custom, customField */
           linkToAuthorMeta: '',
           linkToCustomMeta: '',
@@ -262,6 +263,21 @@ registerBlockType("post-grid/icon", {
     let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
 
 
+    var textSrcArgs = {
+      siteTitle: { label: 'Site Title', value: 'siteTitle' },
+      tagline: { label: 'Tag line', value: 'tagline' },
+      siteUrl: { label: 'Site URL', value: 'siteUrl' },
+      currentYear: { label: 'Current Year', value: 'currentYear' },
+      currentDate: { label: 'Current Date', value: 'currentDate', isPro: true },
+      postTitle: { label: 'Post Title', value: 'postTitle', isPro: true },
+    };
+
+    //var textSrcArgs = applyFilters('textSrcArgs', textSrcArgsX);
+
+
+
+
+
     useEffect(() => {
 
 
@@ -326,10 +342,14 @@ registerBlockType("post-grid/icon", {
       return false;
     }
 
+    function setTextSrc(option, index) {
 
+      var options = { ...text.options, src: option.value };
+      setAttributes({ text: { ...text, options: options } });
+
+    }
 
     function setFieldLinkTo(option, index) {
-
 
       var options = { ...text.options, linkTo: option.value };
       setAttributes({ text: { ...text, options: options } });
@@ -338,9 +358,6 @@ registerBlockType("post-grid/icon", {
 
 
     function onChangeIcon(arg) {
-
-
-
 
       var options = { ...icon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
       setAttributes({ icon: { ...icon, options: options } });
@@ -1371,21 +1388,34 @@ registerBlockType("post-grid/icon", {
                   />
 
 
+<PanelRow>
+                    <label for="">Text Source</label>
 
+                    <PGDropdown position="bottom right" variant="secondary" options={textSrcArgs} buttonTitle={(textSrcArgs[text.options.src] == undefined) ? 'Choose' : textSrcArgs[text.options.src].label} onChange={setTextSrc} values={[]}></PGDropdown>
+
+
+                  </PanelRow>
+
+
+                {text.options.src != undefined && text.options.src.length == 0 && (
 
                   <PanelRow className='my-4'>
                     <label for="">Custom Text</label>
-
                     <InputControl
                       value={text.options.text}
                       onChange={(newVal) => {
-
                         var options = { ...text.options, text: newVal };
                         setAttributes({ text: { ...text, options: options } });
                       }
                       }
                     />
                   </PanelRow>
+
+                )}
+
+                  
+
+
 
 
 

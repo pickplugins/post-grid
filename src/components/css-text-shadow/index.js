@@ -20,19 +20,23 @@ function Html(props) {
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px 0px 0px #000' : props.val;
 
 
-  var h = (valZ != undefined) ? valZ.split(" ")[0].match(/\d+/g)[0] : 0;
-  var v = (valZ != undefined) ? valZ.split(" ")[1].match(/\d+/g)[0] : 0;
-  var blur = (valZ != undefined) ? valZ.split(" ")[2].match(/\d+/g)[0] : 0;
+  var h = (valZ != undefined) ? valZ.split(" ")[0].match(/-?\d+/g)[0] : 0;
+  var v = (valZ != undefined) ? valZ.split(" ")[1].match(/-?\d+/g)[0] : 0;
+  var blur = (valZ != undefined) ? valZ.split(" ")[2].match(/-?\d+/g)[0] : 0;
   var color = (valZ != undefined) ? valZ.split(" ")[3] : '#dddddd';
 
   const [isImportant, setImportant] = useState(valZ.includes(" !important") ? true : false);
 
 
-
-
   return (
 
     <div>
+
+      {JSON.stringify(valZ)}
+      {JSON.stringify(h)}
+      {JSON.stringify(v)}
+      {JSON.stringify(blur)}
+
 
       <PanelRow>
         <label for="">H-Offset</label>
@@ -42,7 +46,7 @@ function Html(props) {
         min="-100"
         max="100"
         step="1"
-        value={h}
+        value={parseInt(h)}
         onChange={(newVal) => {
           props.onChange(newVal + 'px ' + v + 'px ' + blur + 'px ' + color, 'textShadow');
         }}
@@ -55,7 +59,7 @@ function Html(props) {
         min="-100"
         max="100"
         step="1"
-        value={v}
+        value={parseInt(v)}
         onChange={(newVal) => {
           props.onChange(h + 'px ' + newVal + 'px ' + blur + 'px ' + color, 'textShadow');
         }}
@@ -68,7 +72,7 @@ function Html(props) {
         min="0"
         max="100"
         step="1"
-        value={blur}
+        value={parseInt(blur)}
         onChange={(newVal) => {
           props.onChange(h + 'px ' + v + 'px ' + newVal + 'px ' + color, 'textShadow');
         }}
@@ -110,10 +114,10 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(h + 'px' + ' ' + v + 'px' + ' ' + blur + 'px' + ' ' +  color, 'textShadow');
+            props.onChange(h + 'px' + ' ' + v + 'px' + ' ' + blur + 'px' + ' ' + color, 'textShadow');
 
           } else {
-            props.onChange(h + 'px' + ' ' + v + 'px' + ' ' + blur + 'px' + ' ' +  color + ' !important', 'textShadow');
+            props.onChange(h + 'px' + ' ' + v + 'px' + ' ' + blur + 'px' + ' ' + color + ' !important', 'textShadow');
 
           }
 

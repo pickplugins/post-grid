@@ -162,7 +162,8 @@ class PGBlockMenuWrapItem
         global $postGridCssY;
 
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -192,7 +193,7 @@ class PGBlockMenuWrapItem
 ?>
 
 
-        <li class="pg-menu-wrap-item <?php echo esc_attr($blockId); ?>">
+        <li class="pg-menu-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
             <?php if (!empty($linktext)) : ?>
                 <a class='menuLink' href="<?php echo esc_url_raw($linkurl); ?>"><?php echo esc_html($linktext) ?></a>

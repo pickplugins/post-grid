@@ -161,7 +161,8 @@ class PGBlockDateCountdown
         $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
 
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -241,7 +242,7 @@ class PGBlockDateCountdown
         if (!empty($wrapperTag)) :
 
 ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="PGBlockNumberCount <?php echo esc_attr($blockId); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="PGBlockNumberCount <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>">
 
 
                 <?php if ($iconPosition == 'beforePrefix') : ?>

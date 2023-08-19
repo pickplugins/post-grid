@@ -294,7 +294,8 @@ class PGBlockContentSlider
         global $postGridCustomCss;
         global $postGridCssY;
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
         $sliderOptions = isset($attributes['sliderOptions']) ? $attributes['sliderOptions'] : [];
@@ -374,14 +375,14 @@ class PGBlockContentSlider
             foreach ($arg as $view => $value) {
 
                 if ($view == 'Desktop') {
-                    $viewNum = '1024';
+                    $viewNum = '1280';
                 }
 
                 if ($view == 'Tablet') {
-                    $viewNum = '780';
+                    $viewNum = '991';
                 }
                 if ($view == 'Mobile') {
-                    $viewNum = '360';
+                    $viewNum = '767';
                 }
                 $sliderOptionsResNew[$viewNum][$id] = $value;
             }
@@ -405,7 +406,7 @@ class PGBlockContentSlider
 ?>
 
 
-        <div class="pg-content-slider <?php echo esc_attr($blockId); ?>">
+        <div class="pg-content-slider <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
             <div class="splide" id="splide-<?php echo esc_attr($blockId); ?>" data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
 

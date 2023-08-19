@@ -1,7 +1,7 @@
 
 
 const { Component } = wp.element;
-import { Button, Dropdown, ToggleControl} from '@wordpress/components'
+import { Button, Dropdown, ToggleControl } from '@wordpress/components'
 import { useState, } from '@wordpress/element'
 
 import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
@@ -49,13 +49,14 @@ function Html(props) {
 
 
 
-  var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
-  var widthUnitX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+  var widthValX = (valZ == undefined || valZ.match(/-?\d+/g) == null) ? 0 : valZ.match(/-?\d+/g)[0];
+  var widthUnitX = (valZ == undefined || valZ.match(/[a-zA-Z%]+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
   const [widthUnit, setwidthUnit] = useState(widthUnitX);
-  
+
   const [isImportant, setImportant] = useState(valZ.includes(" !important") ? true : false);
 
 
@@ -75,23 +76,23 @@ function Html(props) {
 
             if (widthUnit == 'auto') {
               // props.onChange(widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange( widthUnit + ' !important', 'bottom');
-               } else {
-                 props.onChange( widthUnit, 'bottom');
-               }
- 
- 
-             } else {
-               //props.onChange(newVal + widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange(newVal + widthUnit + ' !important', 'bottom');
-               } else {
-                 props.onChange(newVal + widthUnit, 'bottom');
-               }
-             }
+
+              if (isImportant) {
+                props.onChange(widthUnit + ' !important', 'bottom');
+              } else {
+                props.onChange(widthUnit, 'bottom');
+              }
+
+
+            } else {
+              //props.onChange(newVal + widthUnit, 'width');
+
+              if (isImportant) {
+                props.onChange(newVal + widthUnit + ' !important', 'bottom');
+              } else {
+                props.onChange(newVal + widthUnit, 'bottom');
+              }
+            }
 
 
 
@@ -130,9 +131,9 @@ function Html(props) {
 
                   if (x.value == 'auto') {
                     if (isImportant) {
-                      props.onChange( x.value + ' !important', 'bottom');
+                      props.onChange(x.value + ' !important', 'bottom');
                     } else {
-                      props.onChange( x.value, 'bottom');
+                      props.onChange(x.value, 'bottom');
                     }
                   } else {
                     if (isImportant) {
@@ -176,17 +177,17 @@ function Html(props) {
           if (isImportant) {
 
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit , 'bottom');
+              props.onChange(widthUnit, 'bottom');
             } else {
-              props.onChange(widthVal + widthUnit , 'bottom');
+              props.onChange(widthVal + widthUnit, 'bottom');
             }
 
 
-           
+
 
           } else {
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit + ' !important', 'bottom');
+              props.onChange(widthUnit + ' !important', 'bottom');
             } else {
               props.onChange(widthVal + widthUnit + ' !important', 'bottom');
             }

@@ -52,15 +52,7 @@ class PGMailSubsctibe extends Component {
 
         <div className='grid grid-cols-2 gap-2 mb-5'>
 
-          {/* <div className='col-span-2'>
-            <code className='break-words'>
-              {JSON.stringify(emailSubscribe)}
-            </code>
-
-            <code className='break-words'>
-              {JSON.stringify(PostGridPluginData)}
-            </code>
-          </div> */}
+   
 
           {hasSubscribed && (
             <div className='col-span-2 bg-green-700 text-white py-2 px-2 my-2'>Thanks for subscribe!</div>

@@ -80,7 +80,7 @@ function Html(props) {
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
 
 
-  var widthValX = (widthVal.match(/\d+/g) != null) ? widthVal.match(/\d+/g)[0] : 1;
+  var widthValX = (widthVal.match(/-?\d+/g) != null) ? widthVal.match(/-?\d+/g)[0] : 1;
   var widthUnitX = (widthVal.match(/[a-zA-Z%]+/g) != null) ? widthVal.match(/[a-zA-Z%]+/g)[0] : 'px';
 
 
@@ -239,7 +239,7 @@ function Html(props) {
 
       />
 
-<ToggleControl
+      <ToggleControl
         help={
           isImportant
             ? 'Important (Enabled)'

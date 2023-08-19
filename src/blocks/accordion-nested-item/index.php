@@ -96,6 +96,7 @@ class PGBlockAccordionNestedItem
                         array(
                             'text' => 'Accordion Header Text',
                             'tag' => 'div',
+                            'slug' => '',
                             'class' => 'accordion-header-label',
                         ),
                         'styles' =>
@@ -312,7 +313,8 @@ class PGBlockAccordionNestedItem
 
         $wrapper = '';
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
         $count = isset($attributes['count']) ? $attributes['count'] : '';
@@ -329,6 +331,8 @@ class PGBlockAccordionNestedItem
         $headerLabelOptions = isset($headerLabel['options']) ? $headerLabel['options'] : [];
 
         $headerLabelText = isset($headerLabelOptions['text']) ? $headerLabelOptions['text'] : '';
+        $headerLabelSlug = isset($headerLabelOptions['slug']) ? $headerLabelOptions['slug'] : '';
+        $headerLabelTag = isset($headerLabelOptions['tag']) ? $headerLabelOptions['tag'] : 'div';
 
 
         $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
@@ -404,9 +408,9 @@ class PGBlockAccordionNestedItem
                 </span>
             <?php endif; ?>
 
-            <div class="<?php echo esc_attr($blockId); ?>-accordion-header-label">
+            <<?php echo esc_attr($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
                 <?php echo  wp_kses_post($headerLabelText); ?>
-            </div>
+            </<?php echo esc_attr($headerLabelTag); ?>>
 
             <?php if ($iconPosition == 'right') : ?>
                 <?php echo  wp_kses_post($iconHtml); ?>

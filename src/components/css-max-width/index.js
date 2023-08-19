@@ -58,8 +58,9 @@ function Html(props) {
 
 
 
-  var widthValX = (valArgs[0] == undefined || valArgs[0].match(/\d+/g) == null) ? 0 : valArgs[0].match(/\d+/g)[0];
-  var widthUnitX = (valArgs[0] == undefined || valArgs[0].match(/\d+/g) == null) ? 'px' : valArgs[0].match(/[a-zA-Z%]+/g)[0];
+  var widthValX = (valArgs[0] == undefined || valArgs[0].match(/-?\d+/g) == null) ? 0 : valArgs[0].match(/-?\d+/g)[0];
+  var widthUnitX = (valArgs[0] == undefined || valArgs[0].match(/[a-zA-Z%]+/g) == null) ? 'px' : valArgs[0].match(/[a-zA-Z%]+/g)[0];
+
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
@@ -82,23 +83,23 @@ function Html(props) {
 
             if (widthUnit == 'auto') {
               // props.onChange(widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange( widthUnit + ' !important', 'maxWidth');
-               } else {
-                 props.onChange( widthUnit, 'maxWidth');
-               }
- 
- 
-             } else {
-               //props.onChange(newVal + widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange(newVal + widthUnit + ' !important', 'maxWidth');
-               } else {
-                 props.onChange(newVal + widthUnit, 'maxWidth');
-               }
-             }
+
+              if (isImportant) {
+                props.onChange(widthUnit + ' !important', 'maxWidth');
+              } else {
+                props.onChange(widthUnit, 'maxWidth');
+              }
+
+
+            } else {
+              //props.onChange(newVal + widthUnit, 'width');
+
+              if (isImportant) {
+                props.onChange(newVal + widthUnit + ' !important', 'maxWidth');
+              } else {
+                props.onChange(newVal + widthUnit, 'maxWidth');
+              }
+            }
 
 
 
@@ -136,9 +137,9 @@ function Html(props) {
 
                   if (x.value == 'auto') {
                     if (isImportant) {
-                      props.onChange( x.value + ' !important', 'maxWidth');
+                      props.onChange(x.value + ' !important', 'maxWidth');
                     } else {
-                      props.onChange( x.value, 'maxWidth');
+                      props.onChange(x.value, 'maxWidth');
                     }
                   } else {
                     if (isImportant) {
@@ -181,17 +182,17 @@ function Html(props) {
           if (isImportant) {
 
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit , 'maxWidth');
+              props.onChange(widthUnit, 'maxWidth');
             } else {
-              props.onChange(widthVal + widthUnit , 'maxWidth');
+              props.onChange(widthVal + widthUnit, 'maxWidth');
             }
 
 
-           
+
 
           } else {
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit + ' !important', 'maxWidth');
+              props.onChange(widthUnit + ' !important', 'maxWidth');
             } else {
               props.onChange(widthVal + widthUnit + ' !important', 'maxWidth');
             }

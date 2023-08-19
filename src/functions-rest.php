@@ -172,7 +172,7 @@ class BlockPostGridRest
                 'methods'  => 'POST',
                 'callback' => array($this, 'get_plugin_data'),
                 'permission_callback' => function () {
-                    return current_user_can('manage_options');
+                    return current_user_can('edit_posts');
                 },
             )
         );
@@ -196,7 +196,8 @@ class BlockPostGridRest
                 'methods'  => 'POST',
                 'callback' => array($this, 'get_site_details'),
                 'permission_callback' => function () {
-                    return current_user_can('manage_options');
+                    return current_user_can('edit_posts');
+                    
                 },
             )
         );

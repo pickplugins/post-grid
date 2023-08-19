@@ -15,8 +15,6 @@ function Html(props) {
 
 
   var unitArgs = {
-
-
     px: { "label": "PX", "value": "px" },
     em: { "label": "EM", "value": "em" },
     rem: { "label": "REM", "value": "rem" },
@@ -55,9 +53,8 @@ function Html(props) {
   const [isImportant, setImportant] = useState((valArgs[1] == undefined) ? false : true);
 
 
-
-  var widthValX = (valArgs[0] == undefined || valArgs[0].match(/\d+/g) == null) ? 0 : valArgs[0].match(/\d+/g)[0];
-  var widthUnitX = (valArgs[0] == undefined || valArgs[0].match(/\d+/g) == null) ? 'px' : valArgs[0].match(/[a-zA-Z%]+/g)[0];
+  var widthValX = (valArgs[0] == undefined || valArgs[0].match(/-?\d+/g) == null) ? 0 : valArgs[0].match(/-?\d+/g)[0];
+  var widthUnitX = (valArgs[0] == undefined || valArgs[0].match(/[a-zA-Z%]+/g) == null) ? 'px' : valArgs[0].match(/[a-zA-Z%]+/g)[0];
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
@@ -79,12 +76,12 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-             // props.onChange(widthUnit, 'width');
+              // props.onChange(widthUnit, 'width');
 
               if (isImportant) {
-                props.onChange( widthUnit + ' !important', 'width');
+                props.onChange(widthUnit + ' !important', 'width');
               } else {
-                props.onChange( widthUnit, 'width');
+                props.onChange(widthUnit, 'width');
               }
 
 
@@ -136,9 +133,9 @@ function Html(props) {
 
                   if (x.value == 'auto') {
                     if (isImportant) {
-                      props.onChange( x.value + ' !important', 'width');
+                      props.onChange(x.value + ' !important', 'width');
                     } else {
-                      props.onChange( x.value, 'width');
+                      props.onChange(x.value, 'width');
                     }
                   } else {
                     if (isImportant) {
@@ -181,17 +178,17 @@ function Html(props) {
           if (isImportant) {
 
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit , 'width');
+              props.onChange(widthUnit, 'width');
             } else {
-              props.onChange(widthVal + widthUnit , 'width');
+              props.onChange(widthVal + widthUnit, 'width');
             }
 
 
-           
+
 
           } else {
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit + ' !important', 'width');
+              props.onChange(widthUnit + ' !important', 'width');
             } else {
               props.onChange(widthVal + widthUnit + ' !important', 'width');
             }

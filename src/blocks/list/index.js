@@ -644,7 +644,20 @@ registerBlockType("post-grid/list", {
       <>
 
         <InspectorControls >
-          <div className='px-2' title="Items" initialOpen={false}>
+          <div className='px-2' initialOpen={false}>
+
+            <div className='bg-blue-500 p-2 px-5 text-white my-4 text-center cursor-pointer' onClick={ev => {
+              var itemsZ = { ...itemsX };
+
+              var itemx = itemsZ.items.concat({ text: '', icon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-chevron-right', }, styles: {}, });
+
+              setAttributes({ itemsX: { ...itemsX, items: itemx } });
+
+
+            }}>Add List Item</div>
+
+
+
             <PanelBody title="Wrapper" initialOpen={false}>
 
               <PGtabs
@@ -1021,12 +1034,11 @@ registerBlockType("post-grid/list", {
 
                         onChange={(content) => {
 
-                          var itemX = itemsX.items;
-                          itemX[i].text = content;
-                          var ssdsd = itemX.concat([]);
+                          var itemsZ = { ...itemsX };
+                          var item = { ...itemsZ.items[i], text: content };
+                          itemsZ.items[i] = item;
 
-                          //setAttributes({ items: { items: ssdsd } });
-                          setAttributes({ itemsX: { ...itemsX, items: ssdsd } });
+                          setAttributes({ itemsX: { ...itemsX, items: itemsZ.items } });
 
                         }}
                         placeholder={__('Start Writing...')}
@@ -1057,16 +1069,7 @@ registerBlockType("post-grid/list", {
                 )
 
               })}
-              <CustomTagItem>
-                <div className='bg-blue-500 p-2 px-5 text-white my-4 text-center cursor-pointer' onClick={ev => {
 
-                  var itemx = itemsX.items.concat({ text: '', icon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-chevron-right', }, styles: {}, });
-
-                  setAttributes({ itemsX: { ...itemsX, items: itemx } });
-
-
-                }}>Add</div>
-              </CustomTagItem>
             </CustomTag>
           )}
 

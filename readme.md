@@ -1,9 +1,9 @@
-=== Post Grid Combo - 36+ Blocks for Gutenberg ===
+=== Post Grid Combo - 36+ Gutenberg Blocks ===
 	Contributors: PickPlugins
 	Donate link: https://www.pickplugins.com/post-grid
 	Tags: post grid, post grid block, block, custom post grid, post type grid, grid display,  grid layout, post list, masonry grid
 	Requires at least: 5.0.0
-	Tested up to: 6.2
+	Tested up to: 6.3
 	Stable tag: 2.2.52
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -383,6 +383,16 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 = 2.2.52 =
 * 2023-07-30 - fix - Style Component - Background Position issue fixed
+* 2023-07-30 - fix - Style Component - IMPORTANT issue fixed
+* 2023-08-16 - fix - Style Component - Color inherit, initial value added
+* 2023-08-16 - fix - Style Component - Background Color inherit, initial value added
+* 2023-08-16 - fix - Style Component - Background size multi, custom value support added
+* 2023-08-16 - fix - Style Component - Transform empty value broken issue solved.
+* 2023-08-16 - fix - Style Component - Box Shadow negetive number support adde
+* 2023-08-16 - fix - Style Component - Background size negetive number support adde
+* 2023-08-16 - fix - Shortcode based layout - thumbnail, thambnail with link alt text issue fixed.
+* 2023-08-16 - fix - Accordion nested block - update icons issue, active color issue.
+* 2023-08-16 - fix - Number Counter block - Floating point number support added
 
 
 = 2.2.51 =

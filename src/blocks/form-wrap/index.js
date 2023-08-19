@@ -516,7 +516,16 @@ registerBlockType("post-grid/form-wrap", {
 
 
 
+    function onFormSubmit(ev){
 
+      console.log(ev);
+
+      ev.preventDefault();
+
+      return false;
+      
+      
+    }
 
 
 
@@ -3054,7 +3063,7 @@ registerBlockType("post-grid/form-wrap", {
 
           {hasInnerBlocks && (
             <div {...innerBlocksProps}>
-              <form>
+              <form onSubmit={onFormSubmit}>
                 {innerBlocksProps.children}
               </form>
             </div>

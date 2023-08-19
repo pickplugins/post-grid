@@ -185,9 +185,6 @@ registerBlockType("post-grid/accordion-nested-item", {
   },
   usesContext: [],
 
-  supports: {
-    "align": ["wide", "full"],
-  },
   category: "post-grid",
 
 
@@ -230,6 +227,8 @@ registerBlockType("post-grid/accordion-nested-item", {
 
     const contentSelector = blockClass + '-accordion-content';
     const headerSelector = blockClass + '-accordion-header';
+
+
     const headerLabelSelector = blockClass + '-accordion-header-label';
     const labelIconSelector = blockClass + '-accordion-header-label-icon';
     const labelCounterSelector = blockClass + '-accordion-label-counter';
@@ -237,6 +236,48 @@ registerBlockType("post-grid/accordion-nested-item", {
     const iconSelector = blockClass + '-accordion-icon';
     const iconToggleSelector = blockClass + '-accordion-icon-toggle';
     let isProFeature = applyFilters('isProFeature', true);
+
+
+    const [iconHtml, setIconHtml] = useState('');
+    const [iconToggleHtml, seticonToggleHtml] = useState('');
+    const [labelIconHtml, setlabelIconHtml] = useState('');
+
+
+    useEffect(() => {
+
+      console.log(icon);
+
+
+      var iconSrc = icon.options.iconSrc;
+      var iconHtml = `<span class="accordion-icon ${iconSrc}"></span>`;
+      setIconHtml(iconHtml);
+    }, [icon, icon.options.iconSrc]);
+
+
+
+
+
+
+    useEffect(() => {
+
+      var iconSrc = iconToggle.options.iconSrc;
+      var iconHtml = `<span class="accordion-icon-toggle ${iconSrc}"></span>`;
+      seticonToggleHtml(iconHtml);
+    }, [iconToggle, iconToggle.options.iconSrc]);
+
+    useEffect(() => {
+
+      var iconSrc = labelIcon.options.iconSrc;
+      var iconHtml = `<span class="accordion-icon-toggle ${iconSrc}"></span>`;
+      setlabelIconHtml(iconHtml);
+    }, [labelIcon, labelIcon.options.iconSrc]);
+
+
+
+    useEffect(() => {
+
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+    }, [blockCssY]);
 
 
 
@@ -885,39 +926,6 @@ registerBlockType("post-grid/accordion-nested-item", {
 
 
 
-    const [iconHtml, setIconHtml] = useState('');
-    const [iconToggleHtml, seticonToggleHtml] = useState('');
-    const [labelIconHtml, setlabelIconHtml] = useState('');
-
-
-    useEffect(() => {
-
-      var iconSrc = icon.options.iconSrc;
-      var iconHtml = `<span class="accordion-icon ${iconSrc}"></span>`;
-      setIconHtml(iconHtml);
-    }, [icon]);
-
-
-    useEffect(() => {
-
-      var iconSrc = iconToggle.options.iconSrc;
-      var iconHtml = `<span class="accordion-icon-toggle ${iconSrc}"></span>`;
-      seticonToggleHtml(iconHtml);
-    }, [iconToggle]);
-
-    useEffect(() => {
-
-      var iconSrc = labelIcon.options.iconSrc;
-      var iconHtml = `<span class="accordion-icon-toggle ${iconSrc}"></span>`;
-      setlabelIconHtml(iconHtml);
-    }, [labelIcon]);
-
-
-
-    useEffect(() => {
-
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-    }, [blockCssY]);
 
 
 
@@ -1084,6 +1092,7 @@ registerBlockType("post-grid/accordion-nested-item", {
                         { label: 'SPAN', value: 'span' },
                         { label: 'DIV', value: 'div' },
                         { label: 'P', value: 'p' },
+                        { label: 'a', value: 'a' },
 
 
                       ]}
@@ -1098,6 +1107,24 @@ registerBlockType("post-grid/accordion-nested-item", {
                     />
                   </PanelRow>
 
+                  {headerLabel.options.tag == 'a' && (
+
+                    <PanelRow className='mb-4'>
+                      <label for="">Custom Slug</label>
+                      <InputControl
+                        className='mr-2'
+                        value={headerLabel.options.slug == undefined ? '' : headerLabel.options.slug}
+                        onChange={(newVal) => {
+
+
+                          var options = { ...headerLabel.options, slug: newVal };
+                          setAttributes({ headerLabel: { ...headerLabel, options: options } });
+
+                        }}
+                      />
+                    </PanelRow>
+
+                  )}
 
 
 
@@ -1521,27 +1548,28 @@ registerBlockType("post-grid/accordion-nested-item", {
 
         <>
 
-          <div className={`${blockId}-accordion-header accordion-header`} onClick={ev => { setToggled(!toggled) }}>
+
+          <div className={`${blockId}-accordion-header accordion-header ${toggled ? 'accordion-header-active' : ''}`} onClick={ev => { setToggled(!toggled) }}>
 
             {labelCounter.options.position == 'left' && (
-              <span className={`${blockId}-accordion-label-counter`} >{attributes.count}</span>
+              <span className={`${blockId}-accordion-label-counter accordion-label-counter`} >{attributes.count}</span>
             )}
 
 
             {icon.options.position == 'left' && (
               <>
-                {!toggled && <span className={`${blockId}-accordion-icon}`} dangerouslySetInnerHTML={{ __html: iconHtml }}></span>}
-                {toggled && <span className={`${blockId}-accordion-icon-toggle}`} dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>}
+                {!toggled && <span className={`${blockId}-accordion-icon accordion-icon}`} dangerouslySetInnerHTML={{ __html: iconHtml }}></span>}
+                {toggled && <span className={`${blockId}-accordion-icon-toggle accordion-icon-toggle}`} dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>}
               </>
             )}
 
             {labelIcon.options.enable && (
-              <span className={`${blockId}-accordion-header-label-icon}`} dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+              <span className={`${blockId}-accordion-header-label-icon accordion-header-label-icon}`} dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
             )}
 
 
             <RichText
-              className={`${blockId}-accordion-header-label`}
+              className={`${blockId}-accordion-header-label accordion-header-label`}
               value={headerLabel.options.text}
               allowedFormats={['core/bold', 'core/italic', 'core/link']}
               onChange={(newVal) => {
@@ -1552,12 +1580,12 @@ registerBlockType("post-grid/accordion-nested-item", {
             />
             {icon.options.position == 'right' && (
               <>
-                {!toggled && <span className={`${blockId}-accordion-icon}`} dangerouslySetInnerHTML={{ __html: iconHtml }}></span>}
-                {toggled && <span className={`${blockId}-accordion-icon-toggle}`} dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>}
+                {!toggled && <span className={`${blockId}-accordion-icon accordion-icon}`} dangerouslySetInnerHTML={{ __html: iconHtml }}></span>}
+                {toggled && <span className={`${blockId}-accordion-icon-toggle accordion-icon-toggle}`} dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>}
               </>
             )}
             {labelCounter.options.position == 'right' && (
-              <span className={`${blockId}-accordion-label-counter`} >{attributes.count}</span>
+              <span className={`${blockId}-accordion-label-counter accordion-label-counter`} >{attributes.count}</span>
             )}
           </div>
 

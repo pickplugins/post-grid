@@ -1,7 +1,7 @@
 
 
 const { Component } = wp.element;
-import { Button, Dropdown, ToggleControl} from '@wordpress/components'
+import { Button, Dropdown, ToggleControl } from '@wordpress/components'
 import { useState, } from '@wordpress/element'
 
 import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
@@ -15,7 +15,7 @@ function Html(props) {
 
 
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
-  var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
+  var widthValX = (valZ == undefined || valZ.match(/-?\d+/g) == null) ? 0 : valZ.match(/-?\d+/g)[0];
 
   const [isImportant, setImportant] = useState(valZ.includes(" !important") ? true : false);
 
@@ -57,11 +57,11 @@ function Html(props) {
           setImportant(isImportant => !isImportant)
 
           if (isImportant) {
-            props.onChange(widthVal , 'gridRowEnd');
-        } else {
-            props.onChange( widthVal + ' !important', 'gridRowEnd');
-          
-        }
+            props.onChange(widthVal, 'gridRowEnd');
+          } else {
+            props.onChange(widthVal + ' !important', 'gridRowEnd');
+
+          }
 
 
         }}

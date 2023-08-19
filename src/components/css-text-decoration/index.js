@@ -4,7 +4,7 @@ const { Component, RawHTML } = wp.element;
 import { Button, Dropdown } from '@wordpress/components'
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import colorsPresets from '../../colors-presets'
-import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
+import { __experimentalInputControl as InputControl, ColorPalette, ToggleControl } from '@wordpress/components';
 
 
 
@@ -16,20 +16,20 @@ function Html(props) {
 
 
 
-  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? 'underline #000000 wavy 1px' : props.val;
+  var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? 'underline #000000 wavy 1px !important' : props.val;
 
 
-  var valParts = (valZ != undefined || valZ != null) ? valZ.split(" ") : ['underline', '#000000', 'wavy', '1px'];
+  var valParts = (valZ != undefined || valZ != null) ? valZ.split(" ") : ['underline', '#000000', 'wavy', '1px', '!important'];
 
 
-  if (valParts.length == 4) {
+  if (valParts.length == 5) {
     var lineVal = [valParts[0]];
     var colorVal = valParts[1];
     var styleVal = valParts[2];
     var thicknessVal = valParts[3];
   }
 
-  if (valParts.length == 5) {
+  if (valParts.length == 6) {
     var lineVal = [valParts[0], valParts[1]];
     var colorVal = valParts[2];
     var styleVal = valParts[3];
@@ -37,7 +37,7 @@ function Html(props) {
   }
 
 
-  if (valParts.length == 6) {
+  if (valParts.length == 7) {
     var lineVal = [valParts[0], valParts[1], valParts[2]];
     var colorVal = valParts[3];
     var styleVal = valParts[4];
@@ -67,7 +67,7 @@ function Html(props) {
     vmax: { "label": "VMAX", "value": "vmax" },
   }
 
-  var thicknessValX = thicknessVal != undefined ? thicknessVal.match(/\d+/g)[0] : 1;
+  var thicknessValX = thicknessVal != undefined ? thicknessVal.match(/-?\d+/g)[0] : 1;
   var thicknessUnitX = thicknessVal != undefined ? thicknessVal.match(/[a-zA-Z%]+/g)[0] : 'px';
 
 
@@ -81,6 +81,7 @@ function Html(props) {
   var [outlineStyleVal, setoutlineStyleVal] = useState(styleVal);
   var [outlineThicknessVal, setoutlineThicknessVal] = useState(thicknessValY + thicknessUnitY);
 
+  var [isImportant, setImportant] = useState(valZ.includes(" !important") ? true : false);
 
 
   var [textDecoration, setTextDecoration] = useState({
@@ -175,7 +176,15 @@ function Html(props) {
                     }
                     setoutlinelineVal(outlinelineVal)
                     setTextDecoration({ ...textDecoration, line: outlinelineVal });
-                    props.onChange(outlinelineVal.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal, 'textDecoration');
+
+
+                    if (isImportant) {
+                      props.onChange(outlinelineVal.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal + ' ' + '!important', 'textDecoration');
+                    } else {
+                      props.onChange(outlinelineVal.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal, 'textDecoration');
+                    }
+
+
 
 
                   } else {
@@ -183,7 +192,12 @@ function Html(props) {
 
                     setTextDecoration({ ...textDecoration, line: arr });
                     setoutlinelineVal(arr)
-                    props.onChange(arr.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal, 'textDecoration');
+
+                    if (isImportant) {
+                      props.onChange(arr.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal + ' ' + '!important', 'textDecoration');
+                    } else {
+                      props.onChange(arr.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal, 'textDecoration');
+                    }
 
                   }
 
@@ -212,7 +226,17 @@ function Html(props) {
             setoutlineColorVal(newVal);
             setTextDecoration({ ...textDecoration, color: newVal });
 
-            props.onChange(textDecoration.line.join(' ') + ' ' + newVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal, 'textDecoration');
+
+
+            if (isImportant) {
+              props.onChange(textDecoration.line.join(' ') + ' ' + newVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal + ' ' + '!important', 'textDecoration');
+
+            } else {
+              props.onChange(textDecoration.line.join(' ') + ' ' + newVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal, 'textDecoration');
+
+            }
+
+
           }}
         />
       </div>
@@ -250,7 +274,15 @@ function Html(props) {
 
                   setTextDecoration({ ...textDecoration, style: x.value });
 
-                  props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + x.value + ' ' + outlineThicknessVal, 'textDecoration');
+
+                  if (isImportant) {
+                    props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + x.value + ' ' + outlineThicknessVal + ' ' + '!important', 'textDecoration');
+
+                  } else {
+                    props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + x.value + ' ' + outlineThicknessVal, 'textDecoration');
+
+                  }
+
 
                 }}>
 
@@ -287,7 +319,15 @@ function Html(props) {
               setoutlineThicknessVal(newVal + thicknessUnitY)
 
               setTextDecoration({ ...textDecoration, thicknessVal: newVal });
-              props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + newVal + thicknessUnitY, 'textDecoration');
+
+              if (isImportant) {
+                props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + newVal + thicknessUnitY + ' ' + '!important', 'textDecoration');
+              } else {
+                props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + newVal + thicknessUnitY, 'textDecoration');
+
+              }
+
+
             }}
           />
           <div>
@@ -319,8 +359,14 @@ function Html(props) {
                       setthicknessUnit(x.value);
                       setoutlineThicknessVal(thicknessValY + x.value)
 
-                      props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + thicknessValY + x.value, 'textDecoration');
 
+                      if (isImportant) {
+                        props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + thicknessValY + x.value + ' ' + '!important', 'textDecoration');
+
+                      } else {
+                        props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + thicknessValY + x.value, 'textDecoration');
+
+                      }
 
                     }}>
 
@@ -343,7 +389,24 @@ function Html(props) {
         </div>
 
       </div>
+      <ToggleControl
+        help={
+          isImportant
+            ? 'Important Enabled'
+            : 'Important?'
+        }
+        checked={isImportant}
+        onChange={(arg) => {
 
+          setImportant(isImportant => !isImportant)
+
+          if (isImportant) {
+            props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal, 'textDecoration');
+          } else {
+            props.onChange(textDecoration.line.join(' ') + ' ' + outlineColorVal + ' ' + outlineStyleVal + ' ' + outlineThicknessVal + ' ' + '!important', 'textDecoration');
+          }
+        }}
+      />
     </div>
 
   )

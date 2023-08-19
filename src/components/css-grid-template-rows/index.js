@@ -88,7 +88,7 @@ function Html(props) {
 
       {valArgs.map((part, index) => {
 
-        var valNumber = (part.match(/\d+/g) != null) ? part.match(/\d+/g)[0] : 1;
+        var valNumber = (part.match(/-?\d+/g) != null) ? part.match(/-?\d+/g)[0] : 1;
         var valUnit = (part.match(/[a-zA-Z%]+/g) != null) ? part.match(/[a-zA-Z%]+/g)[0] : 'fr';
 
 

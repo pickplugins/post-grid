@@ -888,19 +888,6 @@ registerBlockType("post-grid/tabs-nested-item", {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
 
     var attributes = props.attributes;
-    var wrapper = attributes.wrapper;
-    var navItem = attributes.navItem;
-    var panelWrap = attributes.panelWrap;
-    var uid = attributes.uid;
-    var activeTab = attributes.activeTab;
-
-    var icon = attributes.icon;
-
-    var blockId = attributes.blockId;
-
-    var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
-    var blockClass = '.' + blockIdX;
-
 
     //const blockProps = useBlockProps.save({});
     //const { children, ...innerBlocksProps } = useInnerBlocksProps.save(blockProps);

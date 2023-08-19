@@ -40,7 +40,6 @@ import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
 import PGIconPicker from '../../components/icon-picker'
-//import PGalertBox from '../../components/alert-box'
 
 //import Splide from '@splidejs/splide';
 

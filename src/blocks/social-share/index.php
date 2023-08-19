@@ -273,7 +273,8 @@ class PGBlockSocialShare
         $post_title = get_the_title($post_ID);
         $post_thumb_url = get_the_post_thumbnail_url($post_ID, 'full');
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];

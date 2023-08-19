@@ -1156,10 +1156,6 @@ img {
   overflow-y: scroll;
 }
 
-.break-words {
-  overflow-wrap: break-word;
-}
-
 .break-all {
   word-break: break-all;
 }

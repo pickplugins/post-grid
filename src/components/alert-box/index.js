@@ -22,13 +22,7 @@ class PGalertBox extends Component {
 
     function Html() {
 
-      const [postGridData, setPostGridData] = useState(window.PostGridPluginData);
 
-      useEffect(() => {
-
-        setPostGridData(window.PostGridPluginData);
-
-      }, [window.PostGridPluginData]);
 
 
       return (

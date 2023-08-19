@@ -69,7 +69,7 @@ function Html(props) {
 
 
       if (x.length != 0) {
-        var argVal = x != undefined ? x.match(/\d+/g)[0] : 1;
+        var argVal = x != undefined ? x.match(/-?\d+/g)[0] : 1;
         var argId = x != undefined ? x.match(/[a-zA-Z]+/g)[0] : '';
 
         return { id: argId, val: argVal };

@@ -42,8 +42,9 @@ function Html(props) {
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
 
 
-  var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
-  var widthUnitX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+  var widthValX = (valZ == undefined || valZ.match(/-?\d+/g) == null) ? 0 : valZ.match(/-?\d+/g)[0];
+  var widthUnitX = (valZ == undefined || valZ.match(/[a-zA-Z%]+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
@@ -68,23 +69,23 @@ function Html(props) {
 
             if (widthUnit == 'auto') {
               // props.onChange(widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange( widthUnit + ' !important', 'marginRight');
-               } else {
-                 props.onChange( widthUnit, 'marginRight');
-               }
- 
- 
-             } else {
-               //props.onChange(newVal + widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange(newVal + widthUnit + ' !important', 'marginRight');
-               } else {
-                 props.onChange(newVal + widthUnit, 'marginRight');
-               }
-             }
+
+              if (isImportant) {
+                props.onChange(widthUnit + ' !important', 'marginRight');
+              } else {
+                props.onChange(widthUnit, 'marginRight');
+              }
+
+
+            } else {
+              //props.onChange(newVal + widthUnit, 'width');
+
+              if (isImportant) {
+                props.onChange(newVal + widthUnit + ' !important', 'marginRight');
+              } else {
+                props.onChange(newVal + widthUnit, 'marginRight');
+              }
+            }
 
 
 
@@ -124,9 +125,9 @@ function Html(props) {
 
                   if (x.value == 'auto') {
                     if (isImportant) {
-                      props.onChange( x.value + ' !important', 'marginRight');
+                      props.onChange(x.value + ' !important', 'marginRight');
                     } else {
-                      props.onChange( x.value, 'marginRight');
+                      props.onChange(x.value, 'marginRight');
                     }
                   } else {
                     if (isImportant) {
@@ -152,7 +153,7 @@ function Html(props) {
           </div>}
         />
       </div>
-      
+
       <ToggleControl
         help={
           isImportant
@@ -169,17 +170,17 @@ function Html(props) {
           if (isImportant) {
 
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit , 'marginRight');
+              props.onChange(widthUnit, 'marginRight');
             } else {
-              props.onChange(widthVal + widthUnit , 'marginRight');
+              props.onChange(widthVal + widthUnit, 'marginRight');
             }
 
 
-           
+
 
           } else {
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit + ' !important', 'marginRight');
+              props.onChange(widthUnit + ' !important', 'marginRight');
             } else {
               props.onChange(widthVal + widthUnit + ' !important', 'marginRight');
             }

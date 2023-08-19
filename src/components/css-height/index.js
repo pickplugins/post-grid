@@ -58,8 +58,9 @@ function Html(props) {
 
 
 
-  var widthValX = (valArgs[0] == undefined || valArgs[0].match(/\d+/g) == null) ? 0 : valArgs[0].match(/\d+/g)[0];
-  var widthUnitX = (valArgs[0] == undefined || valArgs[0].match(/\d+/g) == null) ? 'px' : valArgs[0].match(/[a-zA-Z%]+/g)[0];
+  var widthValX = (valArgs[0] == undefined || valArgs[0].match(/-?\d+/g) == null) ? 0 : valArgs[0].match(/-?\d+/g)[0];
+  var widthUnitX = (valArgs[0] == undefined || valArgs[0].match(/[a-zA-Z%]+/g) == null) ? 'px' : valArgs[0].match(/[a-zA-Z%]+/g)[0];
+
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
@@ -88,23 +89,23 @@ function Html(props) {
 
             if (widthUnit == 'auto') {
               // props.onChange(widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange( widthUnit + ' !important', 'height');
-               } else {
-                 props.onChange( widthUnit, 'height');
-               }
- 
- 
-             } else {
-               //props.onChange(newVal + widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange(newVal + widthUnit + ' !important', 'height');
-               } else {
-                 props.onChange(newVal + widthUnit, 'height');
-               }
-             }
+
+              if (isImportant) {
+                props.onChange(widthUnit + ' !important', 'height');
+              } else {
+                props.onChange(widthUnit, 'height');
+              }
+
+
+            } else {
+              //props.onChange(newVal + widthUnit, 'width');
+
+              if (isImportant) {
+                props.onChange(newVal + widthUnit + ' !important', 'height');
+              } else {
+                props.onChange(newVal + widthUnit, 'height');
+              }
+            }
 
 
 
@@ -144,9 +145,9 @@ function Html(props) {
 
                   if (x.value == 'auto') {
                     if (isImportant) {
-                      props.onChange( x.value + ' !important', 'height');
+                      props.onChange(x.value + ' !important', 'height');
                     } else {
-                      props.onChange( x.value, 'height');
+                      props.onChange(x.value, 'height');
                     }
                   } else {
                     if (isImportant) {
@@ -188,17 +189,17 @@ function Html(props) {
           if (isImportant) {
 
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit , 'height');
+              props.onChange(widthUnit, 'height');
             } else {
-              props.onChange(widthVal + widthUnit , 'height');
+              props.onChange(widthVal + widthUnit, 'height');
             }
 
 
-           
+
 
           } else {
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit + ' !important', 'height');
+              props.onChange(widthUnit + ' !important', 'height');
             } else {
               props.onChange(widthVal + widthUnit + ' !important', 'height');
             }

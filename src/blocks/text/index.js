@@ -57,25 +57,24 @@ registerBlockType("post-grid/text", {
       type: 'object',
       default: {
         options: {
-          content: '',
+          content: 'Hi...',
           tag: 'div',
           class: 'pg-text',
         },
 
         styles:
         {
-          textAlign: {},
-          color: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          display: {},
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+          // textAlign: {Desktop: ''},
+          // color: { Desktop: '' },
+          // padding: { Desktop: '' },
+          // margin: { Desktop: '' },
+          // fontSize: { Desktop: '' },
+          // lineHeight: {Desktop: ''},
+          // letterSpacing: {Desktop: ''},
+          // fontFamily: {Desktop: ''},
+          // fontWeight: {Desktop: ''},
+          // textDecoration: {Desktop: ''}, //overline, line-through, underline
+          // textTransform: {Desktop: ''},
         },
       },
     },
@@ -183,14 +182,17 @@ registerBlockType("post-grid/text", {
 
     function onPickCssLibraryText(args) {
 
+      console.log(args);
+
+      var textX = Object.assign({}, text);
+
 
       Object.entries(args).map(x => {
         var sudoScource = x[0];
         var sudoScourceArgs = x[1];
-        text[sudoScource] = sudoScourceArgs;
+        textX[sudoScource] = sudoScourceArgs;
       })
 
-      var textX = Object.assign({}, text);
       setAttributes({ text: textX });
 
       var styleObj = {};
@@ -213,8 +215,16 @@ registerBlockType("post-grid/text", {
         styleObj[elementSelector] = sudoObj;
       })
 
+      var blockCssYX = { ...blockCssY };
 
-      var cssItems = Object.assign(blockCssY.items, styleObj);
+
+      var items = { ...blockCssYX.items }
+
+      var cssItems = Object.assign(items, styleObj);
+
+
+
+
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
@@ -345,6 +355,8 @@ registerBlockType("post-grid/text", {
         <InspectorControls>
           <div className='px-3' title="Text" initialOpen={false}>
 
+
+
             <PanelBody title="Text" initialOpen={false}>
 
 
@@ -466,6 +478,27 @@ registerBlockType("post-grid/text", {
           </div>
 
         </InspectorControls >
+        {/* 
+        <div>
+
+          <code>
+            {JSON.stringify(blockCssY)}
+
+          </code>
+        </div>
+
+
+        ###########
+
+        <div>
+
+          <code>
+            {JSON.stringify(text)}
+
+          </code>
+        </div> */}
+
+
 
         <RichText
           {...blockProps}

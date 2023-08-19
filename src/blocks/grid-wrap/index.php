@@ -104,7 +104,8 @@ class PGBlockGridWrap
 
         $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
@@ -121,7 +122,7 @@ class PGBlockGridWrap
 
 
 ?>
-        <div class="pg-grid-wrap <?php echo esc_attr($blockId); ?>">
+        <div class="pg-grid-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
             <?php echo $content ?>
         </div>
 <?php

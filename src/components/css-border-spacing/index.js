@@ -55,10 +55,10 @@ function Html(props) {
 
   }
 
-  var horizontalValX = horizontalVal != undefined ? horizontalVal.match(/\d+/g)[0] : 1;
+  var horizontalValX = horizontalVal != undefined ? horizontalVal.match(/-?\d+/g)[0] : 1;
   var horizontalUnitX = horizontalVal != undefined ? horizontalVal.match(/[a-zA-Z%]+/g)[0] : 'px';
 
-  var vericalValX = vericalVal != undefined ? vericalVal.match(/\d+/g)[0] : 1;
+  var vericalValX = vericalVal != undefined ? vericalVal.match(/-?\d+/g)[0] : 1;
   var vericalUnitX = vericalVal != undefined ? vericalVal.match(/[a-zA-Z%]+/g)[0] : 'px';
 
 
@@ -217,7 +217,7 @@ function Html(props) {
               />
             </div>
 
-            
+
 
 
           </div>
@@ -227,29 +227,29 @@ function Html(props) {
       </div>
 
       <ToggleControl
-                help={
-                  isImportant
-                    ? 'Important Enabled'
-                    : 'Important?'
-                }
+        help={
+          isImportant
+            ? 'Important Enabled'
+            : 'Important?'
+        }
 
-                checked={isImportant}
-                onChange={(arg) => {
+        checked={isImportant}
+        onChange={(arg) => {
 
-                  //console.log(arg);
-                  setImportant(isImportant => !isImportant)
+          //console.log(arg);
+          setImportant(isImportant => !isImportant)
 
-                  if (isImportant) {
-                    props.onChange(horizontalVal + ' ' + vericalVal + ' ', 'borderSpacing');
+          if (isImportant) {
+            props.onChange(horizontalVal + ' ' + vericalVal + ' ', 'borderSpacing');
 
-                  } else {
-                    props.onChange(horizontalVal + ' ' + vericalVal + ' ' + ' !important', 'borderSpacing');
+          } else {
+            props.onChange(horizontalVal + ' ' + vericalVal + ' ' + ' !important', 'borderSpacing');
 
-                  }
+          }
 
 
-                }}
-            />
+        }}
+      />
 
 
 

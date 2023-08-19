@@ -148,7 +148,20 @@ registerBlockType("post-grid/accordion-nested", {
         },
       },
     },
+    headerActive: {
+      type: 'object',
+      default: {
+        options: {
+          tag: 'div',
+          class: 'accordion-header',
+        },
 
+        styles:
+        {
+
+        },
+      },
+    },
 
     headerLabel: {
       type: 'object',
@@ -272,6 +285,8 @@ registerBlockType("post-grid/accordion-nested", {
 
     var wrapper = attributes.wrapper;
     var header = attributes.header;
+    var headerActive = attributes.headerActive;
+
     var headerLabel = attributes.headerLabel;
     var labelIcon = attributes.labelIcon;
     var labelCounter = attributes.labelCounter;
@@ -299,6 +314,8 @@ registerBlockType("post-grid/accordion-nested", {
     var wrapperSelector = blockClass;
     const contentSelector = blockClass + ' .accordion-content';
     const headerSelector = blockClass + ' .accordion-header';
+    const headerActiveSelector = blockClass + ' .accordion-header-active';
+
     const headerLabelSelector = blockClass + ' .accordion-header-label';
     const labelIconSelector = blockClass + ' .accordion-label-icon';
     const labelCounterSelector = blockClass + ' .accordion-label-counter';
@@ -557,6 +574,112 @@ registerBlockType("post-grid/accordion-nested", {
       var cssItems = Object.assign(blockCssY.items, styleObj);
       setAttributes({ blockCssY: { items: cssItems } });
     }
+
+
+    // #########
+
+
+    function onChangeStyleHeaderActive(sudoScource, newVal, attr) {
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, headerActive);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ headerActive: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, headerActiveSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      if (blockCssY.items[elementSelector] == undefined) {
+        blockCssY.items[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+
+
+
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+    }
+
+
+
+
+
+
+    function onRemoveStyleHeaderActive(sudoScource, key) {
+
+
+      var object = myStore.deletePropertyDeep(headerActive, [sudoScource, key, breakPointX]);
+      setAttributes({ headerActive: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, headerActiveSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+    }
+
+
+
+
+
+    function onAddStyleHeaderActive(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX]
+
+
+
+      let obj = Object.assign({}, headerActive);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ headerActive: object });
+
+    }
+
+
+    function onPickCssLibraryHeaderActive(args) {
+
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        headerActive[sudoScource] = sudoScourceArgs;
+      })
+
+      var headerActiveX = Object.assign({}, headerActive);
+      setAttributes({ headerActive: headerActiveX });
+
+      var styleObj = {};
+
+      Object.entries(args).map(x => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(sudoScource, headerActiveSelector);
+
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map(y => {
+
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        })
+
+        styleObj[elementSelector] = sudoObj;
+      })
+
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+
+
+    //########
 
 
     function onChangeStyleHeaderLabel(sudoScource, newVal, attr) {
@@ -1307,7 +1430,6 @@ registerBlockType("post-grid/accordion-nested", {
 
             <PanelBody title="Header" initialOpen={false}>
 
-
               <PGtabs
                 activeTab="options"
                 orientation="horizontal"
@@ -1381,6 +1503,55 @@ registerBlockType("post-grid/accordion-nested", {
 
             </PanelBody>
 
+
+
+            <PanelBody title="Header Active" initialOpen={false}>
+
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
+                  },
+                ]}
+              >
+                <PGtab name="options">
+
+
+
+
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={headerActive} onChange={onChangeStyleHeaderActive} onAdd={onAddStyleHeaderActive} onRemove={onRemoveStyleHeaderActive} />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary blockId={blockId} obj={headerActive} onChange={onPickCssLibraryHeaderActive} />
+                </PGtab>
+              </PGtabs>
+
+
+
+
+            </PanelBody>
+
             <PanelBody title="Header Label" initialOpen={false}>
 
 
@@ -1428,6 +1599,7 @@ registerBlockType("post-grid/accordion-nested", {
                         { label: 'SPAN', value: 'span' },
                         { label: 'DIV', value: 'div' },
                         { label: 'P', value: 'p' },
+                        { label: 'a', value: 'a' },
 
 
                       ]}
@@ -1486,6 +1658,8 @@ registerBlockType("post-grid/accordion-nested", {
                           dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
                           wp.data.dispatch('core/block-editor').selectBlock(childClientId)
                         })
+
+                        console.log(clientId);
 
                         wp.data.dispatch('core/block-editor').selectBlock(clientId)
 
@@ -1733,17 +1907,33 @@ registerBlockType("post-grid/accordion-nested", {
 
                       childBlocks.map(childBlock => {
 
-                        var childClientId = childBlock.clientId;
-                        var childAttributes = childBlock.attributes;
-                        childAttributes.icon.options.srcType = arg.srcType;
-                        childAttributes.icon.options.library = arg.library;
-                        childAttributes.icon.options.iconSrc = arg.iconSrc;
 
-                        dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
-                        wp.data.dispatch('core/block-editor').selectBlock(childClientId)
+
+                        setTimeout(() => {
+                          var childClientId = childBlock.clientId;
+
+                          console.log('childClientId', childClientId);
+
+
+                          var childAttributes = childBlock.attributes;
+                          childAttributes.icon.options.srcType = arg.srcType;
+                          childAttributes.icon.options.library = arg.library;
+                          childAttributes.icon.options.iconSrc = arg.iconSrc;
+
+                          dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
+                          wp.data.dispatch('core/block-editor').selectBlock(childClientId);
+                        }, 20, childBlock)
+
+
+
                       })
 
-                      wp.data.dispatch('core/block-editor').selectBlock(clientId)
+                      setTimeout(() => {
+                        wp.data.dispatch('core/block-editor').selectBlock(clientId)
+                        console.log('clientId', clientId);
+
+                      }, 2000)
+
 
                     }} />
                   </PanelRow>
@@ -1768,7 +1958,7 @@ registerBlockType("post-grid/accordion-nested", {
                         childAttributes.iconToggle.options.iconSrc = arg.iconSrc;
 
                         dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
-                        wp.data.dispatch('core/block-editor').selectBlock(childClientId)
+                        //wp.data.dispatch('core/block-editor').selectBlock(childClientId)
                       })
 
                       wp.data.dispatch('core/block-editor').selectBlock(clientId)

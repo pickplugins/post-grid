@@ -21,7 +21,7 @@ function Html(props) {
 
 
 
-  var blur = (valZ != undefined) ? parseInt(valZ.split(" ")[0].match(/\d+/g)[0]) : 2;
+  var blur = (valZ != undefined) ? parseInt(valZ.split(" ")[0].match(/-?\d+/g)[0]) : 2;
   var style = (valZ != undefined) ? valZ.split(" ")[1] : 'solid';
   var color = (valZ != undefined) ? valZ.split(" ")[2] : '#dddddd';
 

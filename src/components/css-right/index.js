@@ -1,7 +1,7 @@
 
 
 const { Component } = wp.element;
-import { Button, Dropdown,ToggleControl } from '@wordpress/components'
+import { Button, Dropdown, ToggleControl } from '@wordpress/components'
 import { useState, } from '@wordpress/element'
 
 import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
@@ -15,35 +15,31 @@ function Html(props) {
 
 
   var unitArgs = {
-
-
     px: { "label": "PX", "value": "px" },
     em: { "label": "EM", "value": "em" },
     rem: { "label": "REM", "value": "rem" },
     auto: { "label": "AUTO", "value": "auto" },
     "%": { "label": "%", "value": "%" },
-
     cm: { "label": "CM", "value": "cm" },
     mm: { "label": "MM", "value": "mm" },
     in: { "label": "IN", "value": "in" },
     pt: { "label": "PT", "value": "pt" },
     pc: { "label": "PC", "value": "pc" },
     ex: { "label": "EX", "value": "ex" },
-
     ch: { "label": "CH", "value": "ch" },
     vw: { "label": "VW", "value": "vw" },
     vh: { "label": "VH", "value": "vh" },
     vmin: { "label": "VMIN", "value": "vmin" },
     vmax: { "label": "VMAX", "value": "vmax" },
-
   }
 
 
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
 
 
-  var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
-  var widthUnitX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+  var widthValX = (valZ == undefined || valZ.match(/-?\d+/g) == null) ? 0 : valZ.match(/-?\d+/g)[0];
+  var widthUnitX = (valZ == undefined || valZ.match(/[a-zA-Z%]+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
@@ -67,23 +63,23 @@ function Html(props) {
 
             if (widthUnit == 'auto') {
               // props.onChange(widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange( widthUnit + ' !important', 'right');
-               } else {
-                 props.onChange( widthUnit, 'right');
-               }
- 
- 
-             } else {
-               //props.onChange(newVal + widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange(newVal + widthUnit + ' !important', 'right');
-               } else {
-                 props.onChange(newVal + widthUnit, 'right');
-               }
-             }
+
+              if (isImportant) {
+                props.onChange(widthUnit + ' !important', 'right');
+              } else {
+                props.onChange(widthUnit, 'right');
+              }
+
+
+            } else {
+              //props.onChange(newVal + widthUnit, 'width');
+
+              if (isImportant) {
+                props.onChange(newVal + widthUnit + ' !important', 'right');
+              } else {
+                props.onChange(newVal + widthUnit, 'right');
+              }
+            }
 
 
 
@@ -123,9 +119,9 @@ function Html(props) {
 
                   if (x.value == 'auto') {
                     if (isImportant) {
-                      props.onChange( x.value + ' !important', 'right');
+                      props.onChange(x.value + ' !important', 'right');
                     } else {
-                      props.onChange( x.value, 'right');
+                      props.onChange(x.value, 'right');
                     }
                   } else {
                     if (isImportant) {
@@ -168,17 +164,17 @@ function Html(props) {
           if (isImportant) {
 
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit , 'right');
+              props.onChange(widthUnit, 'right');
             } else {
-              props.onChange(widthVal + widthUnit , 'right');
+              props.onChange(widthVal + widthUnit, 'right');
             }
 
 
-           
+
 
           } else {
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit + ' !important', 'right');
+              props.onChange(widthUnit + ' !important', 'right');
             } else {
               props.onChange(widthVal + widthUnit + ' !important', 'right');
             }

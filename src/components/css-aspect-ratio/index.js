@@ -53,7 +53,7 @@ function Html(props) {
         <div className='flex mt-4'>
           <InputControl
             value={valX}
-            type="text"
+            type="number"
             onChange={(newVal) => {
 
               props.onChange(newVal + '/' + valY, 'aspectRatio');
@@ -66,7 +66,7 @@ function Html(props) {
 
           <InputControl
             value={valY}
-            type="text"
+            type="number"
             onChange={(newVal) => {
 
               props.onChange(valX + '/' + newVal, 'aspectRatio');

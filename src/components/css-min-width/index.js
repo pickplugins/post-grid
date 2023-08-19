@@ -58,8 +58,9 @@ function Html(props) {
 
 
 
-  var widthValX = (valArgs[0] == undefined || valArgs[0].match(/\d+/g) == null) ? 0 : valArgs[0].match(/\d+/g)[0];
-  var widthUnitX = (valArgs[0] == undefined || valArgs[0].match(/\d+/g) == null) ? 'px' : valArgs[0].match(/[a-zA-Z%]+/g)[0];
+  var widthValX = (valArgs[0] == undefined || valArgs[0].match(/-?\d+/g) == null) ? 0 : valArgs[0].match(/-?\d+/g)[0];
+  var widthUnitX = (valArgs[0] == undefined || valArgs[0].match(/[a-zA-Z%]+/g) == null) ? 'px' : valArgs[0].match(/[a-zA-Z%]+/g)[0];
+
 
 
   const [widthVal, setwidthVal] = useState(widthValX);
@@ -82,23 +83,23 @@ function Html(props) {
 
             if (widthUnit == 'auto') {
               // props.onChange(widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange( widthUnit + ' !important', 'minWidth');
-               } else {
-                 props.onChange( widthUnit, 'minWidth');
-               }
- 
- 
-             } else {
-               //props.onChange(newVal + widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange(newVal + widthUnit + ' !important', 'minWidth');
-               } else {
-                 props.onChange(newVal + widthUnit, 'minWidth');
-               }
-             }
+
+              if (isImportant) {
+                props.onChange(widthUnit + ' !important', 'minWidth');
+              } else {
+                props.onChange(widthUnit, 'minWidth');
+              }
+
+
+            } else {
+              //props.onChange(newVal + widthUnit, 'width');
+
+              if (isImportant) {
+                props.onChange(newVal + widthUnit + ' !important', 'minWidth');
+              } else {
+                props.onChange(newVal + widthUnit, 'minWidth');
+              }
+            }
 
 
 
@@ -138,9 +139,9 @@ function Html(props) {
 
                   if (x.value == 'auto') {
                     if (isImportant) {
-                      props.onChange( x.value + ' !important', 'minWidth');
+                      props.onChange(x.value + ' !important', 'minWidth');
                     } else {
-                      props.onChange( x.value, 'minWidth');
+                      props.onChange(x.value, 'minWidth');
                     }
                   } else {
                     if (isImportant) {
@@ -183,17 +184,17 @@ function Html(props) {
           if (isImportant) {
 
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit , 'minWidth');
+              props.onChange(widthUnit, 'minWidth');
             } else {
-              props.onChange(widthVal + widthUnit , 'minWidth');
+              props.onChange(widthVal + widthUnit, 'minWidth');
             }
 
 
-           
+
 
           } else {
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit + ' !important', 'minWidth');
+              props.onChange(widthUnit + ' !important', 'minWidth');
             } else {
               props.onChange(widthVal + widthUnit + ' !important', 'minWidth');
             }

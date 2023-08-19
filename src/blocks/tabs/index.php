@@ -258,7 +258,8 @@ class PGBlockTabs
         $post_url = get_the_permalink($post_ID);
         $the_post = get_post($post_ID);
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -326,7 +327,7 @@ class PGBlockTabs
         if (!empty($wrapperTag)) :
 ?>
 
-            <div class="PGBlockTabs <?php echo esc_attr($blockId); ?>">
+            <div class="PGBlockTabs <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
                 <div class="tabs-navs">
                     <?php
                     foreach ($items as $index => $item) {

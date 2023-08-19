@@ -2,7 +2,7 @@
 
 const { Component, RawHTML } = wp.element;
 import colorsPresets from '../../colors-presets'
-import { __experimentalInputControl as InputControl, ColorPalette, PanelRow, RangeControl, Popover,ToggleControl } from '@wordpress/components';
+import { __experimentalInputControl as InputControl, ColorPalette, PanelRow, RangeControl, Popover, ToggleControl } from '@wordpress/components';
 import PGColorPicker from '../../components/input-color-picker'
 
 import { useState } from '@wordpress/element'
@@ -22,10 +22,10 @@ function Html(props) {
 
 
 
-  var h = (valZ != undefined) ? parseInt(valZ.split(" ")[0].match(/\d+/g)[0]) : 0;
-  var v = (valZ != undefined) ? parseInt(valZ.split(" ")[1].match(/\d+/g)[0]) : 0;
-  var blur = (valZ != undefined) ? parseInt(valZ.split(" ")[2].match(/\d+/g)[0]) : 10;
-  var spread = (valZ != undefined) ? parseInt(valZ.split(" ")[3].match(/\d+/g)[0]) : 5;
+  var h = (valZ != undefined) ? parseInt(valZ.split(" ")[0].match(/-?\d+/g)[0]) : 0;
+  var v = (valZ != undefined) ? parseInt(valZ.split(" ")[1].match(/-?\d+/g)[0]) : 0;
+  var blur = (valZ != undefined) ? parseInt(valZ.split(" ")[2].match(/-?\d+/g)[0]) : 10;
+  var spread = (valZ != undefined) ? parseInt(valZ.split(" ")[3].match(/-?\d+/g)[0]) : 5;
   var color = (valZ != undefined) ? valZ.split(" ")[4] : '#dddddd';
 
 

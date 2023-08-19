@@ -299,7 +299,8 @@ class PGBlockBreadcrumb
         $post_author_id = $post_data->post_author;
         //$author_data = get_user_by('ID', $post_author_id);
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
         $schema = isset($attributes['schema']) ? $attributes['schema'] : [];
         $schemaOptions = isset($schema['options']) ? $schema['options'] : [];

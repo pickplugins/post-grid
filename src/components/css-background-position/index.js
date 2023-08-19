@@ -29,27 +29,27 @@ function Html(props) {
 
 
 
-  const [isCustom, setisCustom] = useState(  props.val.match(/\d+/g) == null ? false : true);
+  const [isCustom, setisCustom] = useState(props.val.match(/-?\d+/g) == null ? false : true);
   const [valArgs, setValArgs] = useState(props.val.split(" "));
   const [position, setposition] = useState(props.val);
-  const [isImportant, setImportant] = useState(props.val.includes("!important") ? true :  false);
-  const [ValX, setValX] = useState((valArgs[0] == undefined || valArgs[0].match(/\d+/g) == null) ? 0 : valArgs[0].match(/\d+/g)[0]);
+  const [isImportant, setImportant] = useState(props.val.includes("!important") ? true : false);
+  const [ValX, setValX] = useState((valArgs[0] == undefined || valArgs[0].match(/-?\d+/g) == null) ? 0 : valArgs[0].match(/-?\d+/g)[0]);
   const [valUnitX, setvalUnitX] = useState((valArgs[0] == undefined || valArgs[0].match(/[a-zA-Z%]+/g) == null) ? 'px' : valArgs[0].match(/[a-zA-Z%]+/g)[0]);
-  const [ValY, setValY] = useState((valArgs[1] == undefined || valArgs[1].match(/\d+/g) == null) ? 0 : valArgs[1].match(/\d+/g)[0]);
+  const [ValY, setValY] = useState((valArgs[1] == undefined || valArgs[1].match(/-?\d+/g) == null) ? 0 : valArgs[1].match(/-?\d+/g)[0]);
   const [valUnitY, setvalUnitY] = useState((valArgs[1] == undefined || valArgs[1].match(/[a-zA-Z%]+/g) == null) ? 'px' : valArgs[1].match(/[a-zA-Z%]+/g)[0]);
 
 
-  // var ValX = (valArgs[0] == undefined || valArgs[0].match(/\d+/g) == null) ? 0 : valArgs[0].match(/\d+/g)[0];
+  // var ValX = (valArgs[0] == undefined || valArgs[0].match(/-?\d+/g) == null) ? 0 : valArgs[0].match(/-?\d+/g)[0];
   // var valUnitX = (valArgs[0] == undefined || valArgs[0].match(/[a-zA-Z%]+/g) == null) ? 'px' : valArgs[0].match(/[a-zA-Z%]+/g)[0];
 
-  // var ValY = (valArgs[1] == undefined || valArgs[1].match(/\d+/g) == null) ? 0 : valArgs[1].match(/\d+/g)[0];
+  // var ValY = (valArgs[1] == undefined || valArgs[1].match(/-?\d+/g) == null) ? 0 : valArgs[1].match(/-?\d+/g)[0];
   // var valUnitY = (valArgs[1] == undefined || valArgs[1].match(/[a-zA-Z%]+/g) == null) ? 'px' : valArgs[1].match(/[a-zA-Z%]+/g)[0];
 
 
 
   return (
     <div className="">
- 
+
 
       <ToggleControl
         label={
@@ -71,38 +71,38 @@ function Html(props) {
 
       <div className="flex justify-between items-center my-3">
 
-        
-
-
-      {!isCustom && (
-
-<Dropdown
-          position="bottom"
-          renderToggle={({ isOpen, onToggle }) => (
-            <Button
-              title=""
-
-              onClick={onToggle}
-              aria-expanded={isOpen}
-            >
-              {/* <div className=" ">{val ? val : 'Select...'}</div> */}
-              <div className=" ">{position.length == 0 ? 'Select...' : position}</div>
 
 
 
-            </Button>
-          )}
-          renderContent={() => <div className='w-32'>
+        {!isCustom && (
 
-            {args.map((x) => {
+          <Dropdown
+            position="bottom"
+            renderToggle={({ isOpen, onToggle }) => (
+              <Button
+                title=""
+
+                onClick={onToggle}
+                aria-expanded={isOpen}
+              >
+                {/* <div className=" ">{val ? val : 'Select...'}</div> */}
+                <div className=" ">{position.length == 0 ? 'Select...' : position}</div>
 
 
-              return (
 
-                <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
-                  setisCustom(false);
+              </Button>
+            )}
+            renderContent={() => <div className='w-32'>
 
-                  setposition(x.value)
+              {args.map((x) => {
+
+
+                return (
+
+                  <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
+                    setisCustom(false);
+
+                    setposition(x.value)
 
 
                     if (isImportant) {
@@ -114,40 +114,40 @@ function Html(props) {
 
 
 
-                }}>
+                  }}>
 
-                  {!x.value && (
+                    {!x.value && (
 
-                    <div>Reset</div>
+                      <div>Reset</div>
 
-                  )}
+                    )}
 
-                  {x.value && (
+                    {x.value && (
 
-                    <>{x.label}</>
+                      <>{x.label}</>
 
-                  )}
+                    )}
 
-                </div>
+                  </div>
 
-              )
+                )
 
-            })}
-          </div>}
-        />
-
-
-)}
+              })}
+            </div>}
+          />
 
 
-       
+        )}
+
+
+
 
       </div>
-     
 
-{isCustom && (
 
-<div className='flex mt-4'>
+      {isCustom && (
+
+        <div className='flex mt-4'>
           <div>
             <InputControl
               value={ValX}
@@ -158,8 +158,8 @@ function Html(props) {
                 setValX(newVal)
 
                 if (isImportant) {
-                  props.onChange(newVal + valUnitX + ' ' + ValY + valUnitY+' '+'!important', 'backgroundPosition');
-                }else{
+                  props.onChange(newVal + valUnitX + ' ' + ValY + valUnitY + ' ' + '!important', 'backgroundPosition');
+                } else {
                   props.onChange(newVal + valUnitX + ' ' + ValY + valUnitY, 'backgroundPosition');
                 }
 
@@ -180,8 +180,8 @@ function Html(props) {
 
 
                 if (isImportant) {
-                  props.onChange(ValX + valUnitX + ' ' + newVal + valUnitY+' '+'!important', 'backgroundPosition');
-                }else{
+                  props.onChange(ValX + valUnitX + ' ' + newVal + valUnitY + ' ' + '!important', 'backgroundPosition');
+                } else {
                   props.onChange(ValX + valUnitX + ' ' + newVal + valUnitY, 'backgroundPosition');
                 }
 
@@ -191,38 +191,38 @@ function Html(props) {
           </div>
         </div>
 
-)}
-        
-      
-        <ToggleControl
-          label={
-            isImportant
-              ? 'Important (Enabled)'
-              : 'Important?'
+      )}
+
+
+      <ToggleControl
+        label={
+          isImportant
+            ? 'Important (Enabled)'
+            : 'Important?'
+        }
+
+        checked={isImportant}
+        onChange={(arg) => {
+          setImportant(isImportant => !isImportant)
+
+          if (isImportant) {
+
+            if (isCustom) {
+              props.onChange(ValX + valUnitX + ' ' + ValY + valUnitY, 'backgroundPosition');
+            } else {
+              props.onChange(position, 'backgroundPosition');
+            }
+          } else {
+            if (isCustom) {
+              props.onChange(ValX + valUnitX + ' ' + ValY + valUnitY + ' ' + '!important', 'backgroundPosition');
+            } else {
+              props.onChange(position + ' !important', 'backgroundPosition');
+            }
           }
 
-          checked={isImportant}
-          onChange={(arg) => {
-            setImportant(isImportant => !isImportant)
 
-            if (isImportant) {
-
-              if(isCustom){
-                props.onChange(ValX + valUnitX + ' ' + ValY + valUnitY , 'backgroundPosition');
-              }else{
-                props.onChange(position, 'backgroundPosition');
-              }
-            } else {
-              if(isCustom){
-                props.onChange(ValX + valUnitX + ' ' + ValY + valUnitY +' '+'!important', 'backgroundPosition');
-              }else{
-                props.onChange(position + ' !important', 'backgroundPosition');
-              }            
-            }
-
-
-          }}
-        />
+        }}
+      />
 
     </div>
 

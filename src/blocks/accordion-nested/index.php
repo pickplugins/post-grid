@@ -15,6 +15,7 @@ class PGBlockAccordionNested
     function front_scripts($attributes)
     {
         wp_register_script('pgaccordionnested_front_script', post_grid_plugin_url . 'src/blocks/accordion-nested/front-scripts.js', [], '', true);
+        //wp_register_script('pgaccordionnested_accorion', post_grid_plugin_url . 'src/blocks/accordion-nested/accordion.js', [], '', true);
 
         if (has_block('post-grid/accordion-nested')) {
 
@@ -26,6 +27,8 @@ class PGBlockAccordionNested
             wp_enqueue_script('jquery-effects-core');
 
             wp_enqueue_script('pgaccordionnested_front_script');
+            //wp_enqueue_script('pgaccordionnested_accorion');
+
         }
     }
     // loading src files in the gutenberg editor screen
@@ -118,7 +121,8 @@ class PGBlockAccordionNested
         $post_url = get_the_permalink($post_ID);
         $the_post = get_post($post_ID);
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
@@ -195,7 +199,7 @@ class PGBlockAccordionNested
 ?>
 
 
-        <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?>">
+        <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
             <?php echo  $content; ?>
         </div>
 

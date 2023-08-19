@@ -82,7 +82,7 @@ registerBlockType("post-grid/progress-bar", {
       type: 'object',
       default: {
         type: '', // vertical, horizontal, circle, semi-circle, line
-        animate: 'onVisible', // onVisible, onLoad, onPageLoad
+        animate: '', // onVisible, onLoad, onPageLoad
         animateDuration: 1,
         animateIteration: 2,
         animateDelay: 2,
@@ -611,6 +611,8 @@ registerBlockType("post-grid/progress-bar", {
 
     function onChangeStyleProgressFill(sudoScource, newVal, attr) {
 
+
+
       var path = [sudoScource, attr, breakPointX]
       let obj = Object.assign({}, progressFill);
       const object = myStore.updatePropertyDeep(obj, path, newVal)
@@ -1045,42 +1047,107 @@ registerBlockType("post-grid/progress-bar", {
 
 
         <InspectorControls >
-          <div className='px-3' >
+          <div className='' >
+
+
 
 
             {/* <PGcssKeyframes keyframes={keyframes} onChange={onChangeKeyframes} />
             {JSON.stringify(keyframes)} */}
-
-
-            <PanelRow className='my-3'>
-              <label for="">Type</label>
-
-              <SelectControl
-                label=""
-                value={progressData.type}
-                options={[
-
-                  { label: 'Choose Type', value: '' },
-                  { label: 'Vertical', value: 'vertical' },
-                  { label: 'Horizontal', value: 'horizontal' },
-                  // { label: 'Circular Border', value: 'circleBorder' },
-                  // { label: 'Circular Fill', value: 'circleFill' },
-                  // { label: 'Semi Circular', value: 'circleBorderSemi' },
-
-                ]}
-                onChange={(newVal) => {
-
-
-                  setAttributes({ progressData: { ...progressData, type: newVal } });
-
-
-                }
+            <div className='p-3'>
 
 
 
-                }
-              />
-            </PanelRow>
+              <PanelRow className='my-3'>
+                <label for="">Type</label>
+
+                <SelectControl
+                  label=""
+                  value={progressData.type}
+                  options={[
+
+                    { label: 'Choose Type', value: '' },
+                    { label: 'Vertical', value: 'vertical' },
+                    { label: 'Horizontal', value: 'horizontal' },
+                    // { label: 'Circular Border', value: 'circleBorder' },
+                    // { label: 'Circular Fill', value: 'circleFill' },
+                    // { label: 'Semi Circular', value: 'circleBorderSemi' },
+
+                  ]}
+                  onChange={(newVal) => {
+
+
+                    setAttributes({ progressData: { ...progressData, type: newVal } });
+
+
+                  }
+
+
+
+                  }
+                />
+              </PanelRow>
+
+              <PanelRow>
+                <label for="">Fill?</label>
+                <InputControl
+                  type="number"
+                  className='mr-2'
+                  value={progressData.fill}
+                  onChange={(newVal) => {
+                    setAttributes({ progressData: { ...progressData, fill: newVal } });
+
+
+                    //var styles = { ...progressFill.styles, width: { Desktop: newVal + '%' } };
+                    //setAttributes({ progressFill: { ...progressFill, styles: styles } });
+
+                    onChangeStyleProgressFill('styles', newVal + '%', 'width')
+
+                  }}
+                />
+              </PanelRow>
+
+
+              <PanelRow>
+                <label for="">Animate On</label>
+                <SelectControl
+                  label=""
+                  value={progressData.animate == undefined ? '' : progressData.animate}
+                  options={[
+                    { label: 'No Animation', value: '' },
+                    { label: 'onVisible', value: 'onVisible' },
+                    { label: 'onLoad', value: 'onLoad' },
+
+                  ]}
+                  onChange={(newVal) => {
+
+                    // var options = { ...progressData.options, animate: newVal };
+                    setAttributes({ progressData: { ...progressData, animate: newVal } });
+
+                  }
+
+                  }
+                />
+              </PanelRow>
+
+
+              {progressData.animate != undefined && progressData.animate.length > 0 && (
+
+                <PanelRow>
+                  <label for="">Duration?</label>
+                  <InputControl
+                    type="number"
+                    className='mr-2'
+                    value={progressData.duration}
+                    onChange={(newVal) => {
+                      setAttributes({ progressData: { ...progressData, duration: newVal } });
+                    }}
+                  />
+                </PanelRow>
+
+              )}
+
+            </div>
 
             <PanelBody title="Wrapper" initialOpen={false}>
 
@@ -1226,17 +1293,7 @@ registerBlockType("post-grid/progress-bar", {
 
 
 
-                  <PanelRow>
-                    <label for="">Fill?</label>
-                    <InputControl
-                      type="number"
-                      className='mr-2'
-                      value={progressData.fill}
-                      onChange={(newVal) => {
-                        setAttributes({ progressData: { ...progressData, fill: newVal } });
-                      }}
-                    />
-                  </PanelRow>
+
 
 
 
@@ -1270,43 +1327,9 @@ registerBlockType("post-grid/progress-bar", {
                   </PanelRow>
 
 
-                  <PanelRow>
-                    <label for="">Animate On</label>
-                    <SelectControl
-                      label=""
-                      value={progressCount.options.animate}
-                      options={[
-                        { label: 'No Animation', value: '' },
-                        { label: 'onVisible', value: 'onVisible' },
-                        { label: 'onLoad', value: 'onLoad' },
 
-                      ]}
-                      onChange={(newVal) => {
 
-                        var options = { ...progressCount.options, animate: newVal };
-                        setAttributes({ progressCount: { ...progressCount, options: options } });
 
-                      }
-
-                      }
-                    />
-                  </PanelRow>
-
-                  {progressCount.options.animate != undefined && progressCount.options.animate.length > 0 && (
-
-                    <PanelRow>
-                      <label for="">Duration?</label>
-                      <InputControl
-                        type="number"
-                        className='mr-2'
-                        value={progressData.duration}
-                        onChange={(newVal) => {
-                          setAttributes({ progressData: { ...progressData, duration: newVal } });
-                        }}
-                      />
-                    </PanelRow>
-
-                  )}
 
 
 
@@ -1671,6 +1694,7 @@ registerBlockType("post-grid/progress-bar", {
 
 
         <>
+
 
 
 

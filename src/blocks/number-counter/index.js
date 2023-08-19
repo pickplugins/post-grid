@@ -216,7 +216,27 @@ registerBlockType("post-grid/number-counter", {
       const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        target.innerText = Math.floor(progress * (end - start) + start);
+
+        console.log('#####end', end);
+
+        var numberX = progress * (end - start) + start;
+
+        if (Number.isInteger(end)) {
+          console.log('##integer');
+
+          target.innerText = Math.floor(numberX);
+
+        } else {
+          console.log('##float');
+
+          target.innerText = Number(numberX).toFixed(2);
+
+        }
+
+
+
+
+
         if (progress < 1) {
           window.requestAnimationFrame(step);
         }
@@ -230,7 +250,7 @@ registerBlockType("post-grid/number-counter", {
 
 
       var start = parseInt(numberCount.options.start)
-      var end = parseInt(numberCount.options.end)
+      var end = Number.isInteger(numberCount.options.end) ? parseInt(numberCount.options.end) : parseFloat(numberCount.options.end)
       var duration = parseInt(numberCount.options.duration)
 
 
@@ -909,7 +929,6 @@ registerBlockType("post-grid/number-counter", {
 
 
 
-    console.log(blockId);
 
 
 
@@ -1050,6 +1069,7 @@ registerBlockType("post-grid/number-counter", {
                     <label for="">Start?</label>
                     <InputControl
                       type="number"
+                      step="0.01"
                       className='mr-2'
                       value={numberCount.options.start}
                       onChange={(newVal) => {
@@ -1064,6 +1084,7 @@ registerBlockType("post-grid/number-counter", {
                     <label for="">End?</label>
                     <InputControl
                       type="number"
+                      step="0.01"
                       className='mr-2'
                       value={numberCount.options.end}
                       onChange={(newVal) => {

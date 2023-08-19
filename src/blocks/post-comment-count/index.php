@@ -202,7 +202,8 @@ class PGBlocpostCommentCount
         $post_excerpt = '';
         $post_date = $the_post->post_date;
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
@@ -314,7 +315,7 @@ class PGBlocpostCommentCount
             $author_id = get_post_field('post_author', $post_ID);
             $linkUrl = get_the_author_link($author_id);
         } else if ($commentCountLinkTo == 'homeUrl') {
-            $linkUrl = get_bloginfo('home');
+            $linkUrl = get_bloginfo('url');
         } else if ($commentCountLinkTo == 'custom') {
             $linkUrl = $customUrl;
         }

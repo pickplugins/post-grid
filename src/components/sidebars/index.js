@@ -284,11 +284,11 @@ function Html(props) {
                 <InputControl
                   placeholder=""
                   type="number"
-                  value={optionData.container.width == undefined ? '' : optionData.container.width.match(/\d+/g)[0]}
+                  value={optionData.container.width == undefined ? '' : optionData.container.width.match(/-?\d+/g)[0]}
                   onChange={(newVal) => {
 
                     var container = { ...optionData.container }
-                    var widthValX = (container.width == undefined || container.width.match(/\d+/g) == null) ? 0 : container.width.match(/\d+/g)[0];
+                    var widthValX = (container.width == undefined || container.width.match(/-?\d+/g) == null) ? 0 : container.width.match(/-?\d+/g)[0];
                     var widthUnitX = (container.width == undefined || container.width.match(/[a-zA-Z%]+/g) == null) ? 'px' : container.width.match(/[a-zA-Z%]+/g)[0];
                     var containerX = { ...optionData.container, width: newVal + widthUnitX }
 
@@ -299,7 +299,7 @@ function Html(props) {
 
                 <PGDropdown position="bottom right" variant="secondary" options={unitArgs} buttonTitle={(optionData.container.width.match(/[a-zA-Z%]+/g) == null) ? "Choose" : optionData.container.width.match(/[a-zA-Z%]+/g)[0]} onChange={(option, index) => {
                   var container = { ...optionData.container }
-                  var widthValX = (container.width == undefined || container.width.match(/\d+/g) == null) ? 0 : container.width.match(/\d+/g)[0];
+                  var widthValX = (container.width == undefined || container.width.match(/-?\d+/g) == null) ? 0 : container.width.match(/-?\d+/g)[0];
                   var widthUnitX = (container.width == undefined || container.width.match(/[a-zA-Z%]+/g) == null) ? 'px' : container.width.match(/[a-zA-Z%]+/g)[0];
                   var containerX = { ...optionData.container, width: widthValX + option.value }
                   setoptionData({ ...optionData, container: containerX })
@@ -316,11 +316,11 @@ function Html(props) {
                 <InputControl
                   placeholder=""
                   type="number"
-                  value={optionData.editor.width.match(/\d+/g)[0]}
+                  value={optionData.editor.width.match(/-?\d+/g)[0]}
                   onChange={(newVal) => {
 
                     var editor = { ...optionData.editor }
-                    var widthValX = (editor.width == undefined || editor.width.match(/\d+/g) == null) ? 0 : editor.width.match(/\d+/g)[0];
+                    var widthValX = (editor.width == undefined || editor.width.match(/-?\d+/g) == null) ? 0 : editor.width.match(/-?\d+/g)[0];
                     var widthUnitX = (editor.width == undefined || editor.width.match(/[a-zA-Z%]+/g) == null) ? 'px' : editor.width.match(/[a-zA-Z%]+/g)[0];
                     var editorX = { ...optionData.editor, width: newVal + widthUnitX }
 
@@ -331,7 +331,7 @@ function Html(props) {
 
                 <PGDropdown position="bottom right" variant="secondary" options={unitArgs} buttonTitle={(optionData.editor.width.match(/[a-zA-Z%]+/g) == null) ? "Choose" : optionData.editor.width.match(/[a-zA-Z%]+/g)[0]} onChange={(option, index) => {
                   var editor = { ...optionData.editor }
-                  var widthValX = (editor.width == undefined || editor.width.match(/\d+/g) == null) ? 0 : editor.width.match(/\d+/g)[0];
+                  var widthValX = (editor.width == undefined || editor.width.match(/-?\d+/g) == null) ? 0 : editor.width.match(/-?\d+/g)[0];
                   var widthUnitX = (editor.width == undefined || editor.width.match(/[a-zA-Z%]+/g) == null) ? 'px' : editor.width.match(/[a-zA-Z%]+/g)[0];
                   var editorX = { ...optionData.editor, width: widthValX + option.value }
                   setoptionData({ ...optionData, editor: editorX })

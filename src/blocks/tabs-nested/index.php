@@ -283,7 +283,8 @@ class PGBlockTabs
         $the_post = get_post($post_ID);
         $wrapper = '';
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
@@ -356,7 +357,7 @@ class PGBlockTabs
 
 
 ?>
-        <div id="<?php echo esc_attr($blockId); ?>" class="pg-tabs <?php echo esc_attr($blockId); ?>">
+        <div id="<?php echo esc_attr($blockId); ?>" class="pg-tabs <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
             <div class="navs-wrapper">
                 <?php
 

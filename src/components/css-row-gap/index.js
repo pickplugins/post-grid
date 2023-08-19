@@ -1,7 +1,7 @@
 
 
 const { Component } = wp.element;
-import { Button, Dropdown, ToggleControl} from '@wordpress/components'
+import { Button, Dropdown, ToggleControl } from '@wordpress/components'
 import { useState, } from '@wordpress/element'
 
 import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
@@ -41,16 +41,17 @@ function Html(props) {
 
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
 
-  
-  
-  
-  var widthValX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 0 : valZ.match(/\d+/g)[0];
-  var widthUnitX = (valZ == undefined || valZ.match(/\d+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
-  
-  
+
+
+
+  var widthValX = (valZ == undefined || valZ.match(/-?\d+/g) == null) ? 0 : valZ.match(/-?\d+/g)[0];
+  var widthUnitX = (valZ == undefined || valZ.match(/[a-zA-Z%]+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
+
+
+
   const [widthVal, setwidthVal] = useState(widthValX);
   const [widthUnit, setwidthUnit] = useState(widthUnitX);
-  
+
   const [isImportant, setImportant] = useState(valZ.includes(" !important") ? true : false);
   return (
 
@@ -67,24 +68,24 @@ function Html(props) {
             setwidthVal(newVal);
 
             if (widthUnit == 'auto') {
-              // props.onChange(widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange( widthUnit + ' !important', 'width');
-               } else {
-                 props.onChange( widthUnit, 'width');
-               }
- 
- 
-             } else {
-               //props.onChange(newVal + widthUnit, 'width');
- 
-               if (isImportant) {
-                 props.onChange(newVal + widthUnit + ' !important', 'width');
-               } else {
-                 props.onChange(newVal + widthUnit, 'width');
-               }
-             }
+              // props.onChange(widthUnit, 'rowGap');
+
+              if (isImportant) {
+                props.onChange(widthUnit + ' !important', 'rowGap');
+              } else {
+                props.onChange(widthUnit, 'rowGap');
+              }
+
+
+            } else {
+              //props.onChange(newVal + widthUnit, 'rowGap');
+
+              if (isImportant) {
+                props.onChange(newVal + widthUnit + ' !important', 'rowGap');
+              } else {
+                props.onChange(newVal + widthUnit, 'rowGap');
+              }
+            }
 
 
 
@@ -124,15 +125,15 @@ function Html(props) {
 
                   if (x.value == 'auto') {
                     if (isImportant) {
-                      props.onChange( x.value + ' !important', 'width');
+                      props.onChange(x.value + ' !important', 'rowGap');
                     } else {
-                      props.onChange( x.value, 'width');
+                      props.onChange(x.value, 'rowGap');
                     }
                   } else {
                     if (isImportant) {
-                      props.onChange(widthVal + x.value + ' !important', 'width');
+                      props.onChange(widthVal + x.value + ' !important', 'rowGap');
                     } else {
-                      props.onChange(widthVal + x.value, 'width');
+                      props.onChange(widthVal + x.value, 'rowGap');
                     }
                   }
 
@@ -170,17 +171,17 @@ function Html(props) {
           if (isImportant) {
 
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit , 'rowGap');
+              props.onChange(widthUnit, 'rowGap');
             } else {
-              props.onChange(widthVal + widthUnit , 'rowGap');
+              props.onChange(widthVal + widthUnit, 'rowGap');
             }
 
 
-           
+
 
           } else {
             if (widthUnit == 'auto') {
-              props.onChange( widthUnit + ' !important', 'rowGap');
+              props.onChange(widthUnit + ' !important', 'rowGap');
             } else {
               props.onChange(widthVal + widthUnit + ' !important', 'rowGap');
             }
@@ -191,7 +192,7 @@ function Html(props) {
         }}
       />
 
-  
+
 
 
     </div>

@@ -100,7 +100,7 @@ registerBlockType("post-grid/flex-wrap-item", {
   usesContext: ["postId", "loopIndex", "postType", "queryId"],
 
   supports: {
-    "align": ["wide", "full"],
+    "align": false,
   },
   category: "post-grid",
 

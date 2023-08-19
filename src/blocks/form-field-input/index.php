@@ -186,7 +186,8 @@ class PGBlockFormFieldInput
         $formId = isset($block->context['post-grid/formId']) ? $block->context['post-grid/formId'] : '';
 
 
-        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : [];
+        $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 

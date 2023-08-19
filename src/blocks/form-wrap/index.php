@@ -147,6 +147,7 @@ class PGBlockFormWrap
 
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $visible = isset($attributes['visible']) ? $attributes['visible'] : [];
 
 
@@ -196,7 +197,7 @@ class PGBlockFormWrap
 
 ?>
 
-        <div class="pg-form-wrap <?php echo esc_attr($blockId); ?>">
+        <div class="pg-form-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
 
 

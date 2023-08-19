@@ -448,17 +448,8 @@ registerBlockType("post-grid/layer", {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
 
     var attributes = props.attributes;
-    var wrapper = attributes.wrapper;
-
-    var blockId = attributes.blockId;
-
-    var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
-    var blockClass = '.' + blockIdX;
 
 
-    const blockProps = useBlockProps.save({
-      className: ` ${blockId} pg-layer`,
-    });
     return (
       <InnerBlocks.Content />
 

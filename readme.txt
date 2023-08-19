@@ -1,10 +1,10 @@
-=== Post Grid Combo - 36+ Blocks for Gutenberg ===
+=== Post Grid Combo - 36+ Gutenberg Blocks ===
 	Contributors: PickPlugins
 	Donate link: https://www.pickplugins.com/post-grid
 	Tags: post grid, post grid block, block, custom post grid, post type grid, grid display,  grid layout, post list, masonry grid
 	Requires at least: 5.0.0
-	Tested up to: 6.2
-	Stable tag: 2.2.51
+	Tested up to: 6.3
+	Stable tag: 2.2.52
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -381,6 +381,20 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 == Changelog ==
 
 
+= 2.2.52 =
+* 2023-07-30 - fix - Style Component - Background Position issue fixed
+* 2023-07-30 - fix - Style Component - IMPORTANT issue fixed
+* 2023-08-16 - fix - Style Component - Color inherit, initial value added
+* 2023-08-16 - fix - Style Component - Background Color inherit, initial value added
+* 2023-08-16 - fix - Style Component - Background size multi, custom value support added
+* 2023-08-16 - fix - Style Component - Transform empty value broken issue solved.
+* 2023-08-16 - fix - Style Component - Box Shadow negetive number support adde
+* 2023-08-16 - fix - Style Component - Background size negetive number support adde
+* 2023-08-16 - fix - Shortcode based layout - thumbnail, thambnail with link alt text issue fixed.
+* 2023-08-16 - fix - Accordion nested block - update icons issue, active color issue.
+* 2023-08-16 - fix - Number Counter block - Floating point number support added
+
+
 = 2.2.51 =
 * 2023-07-30 - fix - Style Component - Margin undefined issue fixed
 * 2023-07-30 - fix - Style Component - Padding undefined issue fixed
@@ -395,7 +409,7 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 * 2023-07-30 - add - List Block - Add button click issue fixed
 *  2023-07-30 - add - Content Slider Block - Multiple slider issue fixed.
 * 2023-07-30 - add - WordPress.org Block - Missing field values display issue fixed
-* 2023-07-30 - add - Block Inserter - Change Post Grid Combo category position
+* 2023-07-30 - add - Block Insert - Change Post Grid Combo category position
 * 2023-07-30 - add - REST API - Permission updated.
 
 
@@ -410,19 +424,14 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 * 2023-07-29 - add - Style Component - Font Family Added
 * 2023-07-29 - add - Style Component - !Important value added for few CSS attributes 
 
-
 = 2.2.48 =
-* 2023-07-24 - add - Form Block - Fluent-CRM add contact support on process.
-* 2023-07-24 - add - New Block - WordPress.org plugin info
-
+* 2023-07-22 - fix - wp autop function conflict issue fixed
+* 2023-07-22 - fix - Icon block default text enable issue fixed
 
 = 2.2.47 =
 * 2023-06-28 - fix - Text block class issue fixed.
 * 2023-06-28 - update - Form blocks variation updated.
 * 2023-06-28 - update - Form blocks variation updated.
-* 2023-07-08 - fix - wp autop function conflict issue fixed
-* 2023-07-08 - fix - Icon block default text enable issue fixed
-* 2023-07-09 - update - Update readmore.txt
 
 
 

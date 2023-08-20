@@ -638,59 +638,61 @@ registerBlockType("post-grid/wordpress-org", {
     return (
       <>
         <InspectorControls>
-          <div className='p-3' initialOpen={false}>
+          <div className='' >
+
+            <div className='px-3'>
+              <PanelRow>
+                <label for="">Object Type</label>
+                <PGDropdown position="bottom right" variant="secondary" options={objectTypes} buttonTitle={objectTypes[object.options.type] == undefined ? 'Choose' : objectTypes[object.options.type].label} onChange={(option) => {
+                  var options = { ...object.options, type: option.value };
+                  setAttributes({ object: { styles: object.styles, options: options } });
+                }} values=""></PGDropdown>
+              </PanelRow>
 
 
 
-            <PanelRow>
-              <label for="">Object Type</label>
-              <PGDropdown position="bottom right" variant="secondary" options={objectTypes} buttonTitle={objectTypes[object.options.type] == undefined ? 'Choose' : objectTypes[object.options.type].label} onChange={(option) => {
-                var options = { ...object.options, type: option.value };
-                setAttributes({ object: { styles: object.styles, options: options } });
-              }} values=""></PGDropdown>
-            </PanelRow>
+
+              <PanelRow>
+                <label for="">Slug</label>
+
+                <InputControl
+                  value={object.options.slug}
+                  onChange={(newVal) => {
 
 
+                    var options = { ...object.options, slug: newVal };
+                    setAttributes({ object: { ...object, options: options } });
+
+                  }}
+                />
+
+              </PanelRow>
 
 
-            <PanelRow>
-              <label for="">Slug</label>
+              <div className='my-3'>
 
-              <InputControl
-                value={object.options.slug}
-                onChange={(newVal) => {
-
-
-                  var options = { ...object.options, slug: newVal };
-                  setAttributes({ object: { ...object, options: options } });
-
-                }}
-              />
-
-            </PanelRow>
+                {object.options.type == 'plugin' && (
+                  <>
+                    <PanelRow>
+                      <label for="">Add Fields</label>
+                      <PGDropdown position="bottom right" variant="secondary" options={pluginFields} buttonTitle="Choose" onChange={setUserField} values=""></PGDropdown>
+                    </PanelRow>
+                  </>
+                )}
 
 
-            <div className='my-3'>
+                {object.options.type == 'theme' && (
+                  <>
+                    <PanelRow>
+                      <label for="">Add Fields</label>
+                      <PGDropdown position="bottom right" variant="secondary" options={themeFields} buttonTitle="Choose" onChange={setUserField} values=""></PGDropdown>
+                    </PanelRow>
+                  </>
+                )}
+              </div>
 
-              {object.options.type == 'plugin' && (
-                <>
-                  <PanelRow>
-                    <label for="">Add Fields</label>
-                    <PGDropdown position="bottom right" variant="secondary" options={pluginFields} buttonTitle="Choose" onChange={setUserField} values=""></PGDropdown>
-                  </PanelRow>
-                </>
-              )}
-
-
-              {object.options.type == 'theme' && (
-                <>
-                  <PanelRow>
-                    <label for="">Add Fields</label>
-                    <PGDropdown position="bottom right" variant="secondary" options={themeFields} buttonTitle="Choose" onChange={setUserField} values=""></PGDropdown>
-                  </PanelRow>
-                </>
-              )}
             </div>
+
 
             <ReactSortable list={elements.items} setList={(item) => {
               setAttributes({ elements: { items: item } });

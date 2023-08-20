@@ -1133,7 +1133,7 @@ registerBlockType("post-grid/post-date", {
     return (
       <>
         <InspectorControls>
-          <div className='px-3' >
+          <div className='' >
             <PanelBody title="Wrapper" initialOpen={false}>
               <PGtabs
                 activeTab="options"

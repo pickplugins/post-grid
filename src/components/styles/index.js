@@ -651,15 +651,8 @@ function Html(props) {
         <div>
           <div className='inline-block'>
             <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={(x, index) => {
-
-              console.log(x);
-
-
-
               var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
-
               asdsdsd.then((res) => {
-
                 //setBreakPointX(res.breakpoint);
 
               });

@@ -12,7 +12,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            target.innerText = Math.floor(progress * (end - start) + start);
+            //target.innerText = Math.floor(progress * (end - start) + start);
+
+
+            var numberX = progress * (end - start) + start;
+
+            if (Number.isInteger(end)) {
+                target.innerText = Math.floor(numberX);
+            } else {
+                target.innerText = Number(numberX).toFixed(2);
+            }
+
+
             if (progress < 1) {
                 window.requestAnimationFrame(step);
             }
@@ -71,6 +82,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             var end = numberCountArgsObj.end
             var duration = numberCountArgsObj.duration
             var onScroll = numberCountArgsObj.onScroll
+
+
+
 
 
             var wrapHandle = '.' + blockId + ' .number-count';

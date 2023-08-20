@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
             if (content != undefined) {
                 content.style.height = 0;
                 content.style.overflow = 'hidden';
+                content.style.display = 'none'
+
             }
 
 
@@ -36,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 if (accordionHeader.classList.contains('accordion-header-active')) {
                     iconToggle.style.display = 'inline-block'
+                    content.style.display = 'block'
                     iconIdle.style.display = 'none'
                     content.style.height = 'auto';
 
@@ -45,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 } else {
                     iconIdle.style.display = 'inline-block'
                     iconToggle.style.display = 'none'
+                    content.style.display = 'none'
                     content.style.height = 0;
 
 

@@ -1244,7 +1244,7 @@ registerBlockType("post-grid/post-comment-count", {
 
 
         <InspectorControls >
-          <div className='px-3' >
+          <div className='' >
 
 
 
@@ -1942,8 +1942,12 @@ registerBlockType("post-grid/post-comment-count", {
               />
             </PanelBody>
 
-            <PGMailSubsctibe />
-            <PGContactSupport utm={{ utm_source: 'BlockPostTitle', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
+            <div className='px-3'>
+              <PGMailSubsctibe />
+              <PGContactSupport utm={{ utm_source: 'BlockPostTitle', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
+
+
+            </div>
 
 
           </div>

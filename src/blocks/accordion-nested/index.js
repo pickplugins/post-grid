@@ -1356,7 +1356,7 @@ registerBlockType("post-grid/accordion-nested", {
       <>
 
         <InspectorControls >
-          <div className='px-3' >
+          <div className='' >
 
             <PanelBody title="Wrapper" initialOpen={false}>
 
@@ -2179,7 +2179,7 @@ registerBlockType("post-grid/accordion-nested", {
               />
             </PanelBody>
 
-            <div className='px-2'>
+            <div className='px-3'>
               <PGMailSubsctibe />
               <PGContactSupport utm={{ utm_source: 'BlockText', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
             </div>

@@ -1210,7 +1210,7 @@ registerBlockType("post-grid/read-more", {
       <>
 
         <InspectorControls >
-          <div className='px-3' >
+          <div className='' >
 
             <PanelBody title="Wrapper" initialOpen={false}>
               <PGtabs
@@ -1814,7 +1814,7 @@ registerBlockType("post-grid/read-more", {
               />
             </PanelBody>
 
-            <div className='px-2'>
+            <div className='px-3'>
               <PGMailSubsctibe />
               <PGContactSupport utm={{ utm_source: 'BlockReadMore', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
 

@@ -353,7 +353,7 @@ registerBlockType("post-grid/text", {
     return (
       <>
         <InspectorControls>
-          <div className='px-3' title="Text" initialOpen={false}>
+          <div className='' >
 
 
 
@@ -469,7 +469,7 @@ registerBlockType("post-grid/text", {
               />
             </PanelBody>
 
-            <div className='px-2'>
+            <div className='px-3'>
               <PGMailSubsctibe />
               <PGContactSupport utm={{ utm_source: 'BlockText', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
             </div>

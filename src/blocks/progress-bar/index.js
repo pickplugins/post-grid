@@ -1729,7 +1729,7 @@ registerBlockType("post-grid/progress-bar", {
                   {variations.map((variation) => {
 
                     return (
-                      <div className='text-center inline-block m-4 w-32 align-top p-4 bg-gray-400 cursor-pointer hover:bg-gray-500 relative' onClick={(ev) => {
+                      <div className='text-center inline-block m-4 w-64 align-top p-4 bg-gray-400 cursor-pointer hover:bg-gray-500 relative' onClick={(ev) => {
 
 
                         if (variation.isPro) {

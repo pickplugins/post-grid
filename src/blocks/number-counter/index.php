@@ -173,8 +173,8 @@ class PGBlockNumberCounter
         $numberCount = isset($attributes['numberCount']) ? $attributes['numberCount'] : [];
         $numberCountOptions = isset($numberCount['options']) ? $numberCount['options'] : [];
 
-        $start = isset($numberCountOptions['start']) ? (int)$numberCountOptions['start'] : 0;
-        $end = isset($numberCountOptions['end']) ? (int)$numberCountOptions['end'] : 500;
+        $start = isset($numberCountOptions['start']) ? $numberCountOptions['start'] : 0;
+        $end = isset($numberCountOptions['end']) ? $numberCountOptions['end'] : 500;
         $duration = isset($numberCountOptions['duration']) ? (int) $numberCountOptions['duration'] : 1000;
         $onScroll = isset($numberCountOptions['onScroll']) ? $numberCountOptions['onScroll'] : false;
 

@@ -217,20 +217,13 @@ registerBlockType("post-grid/number-counter", {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
 
-        console.log('#####end', end);
 
         var numberX = progress * (end - start) + start;
 
         if (Number.isInteger(end)) {
-          console.log('##integer');
-
           target.innerText = Math.floor(numberX);
-
         } else {
-          console.log('##float');
-
           target.innerText = Number(numberX).toFixed(2);
-
         }
 
 
@@ -950,7 +943,7 @@ registerBlockType("post-grid/number-counter", {
 
 
         <InspectorControls >
-          <div className='px-3' >
+          <div className='' >
 
 
 
@@ -1406,9 +1399,11 @@ registerBlockType("post-grid/number-counter", {
               />
             </PanelBody>
 
-            <PGMailSubsctibe />
-            <PGContactSupport utm={{ utm_source: 'BlockPostTitle', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
+            <div className='px-3'>
+              <PGMailSubsctibe />
+              <PGContactSupport utm={{ utm_source: 'BlockPostTitle', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
 
+            </div>
 
           </div>
 

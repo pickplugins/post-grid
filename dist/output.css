@@ -1017,6 +1017,14 @@ img {
   width: 7rem;
 }
 
+.w-40 {
+  width: 10rem;
+}
+
+.w-52 {
+  width: 13rem;
+}
+
 .max-w-6xl {
   max-width: 72rem;
 }

@@ -644,16 +644,12 @@ registerBlockType("post-grid/list", {
       <>
 
         <InspectorControls >
-          <div className='px-2' initialOpen={false}>
+          <div>
 
-            <div className='bg-blue-500 p-2 px-5 text-white my-4 text-center cursor-pointer' onClick={ev => {
+            <div className='bg-blue-500 p-2 mx-3 px-5 text-white my-4 text-center cursor-pointer' onClick={ev => {
               var itemsZ = { ...itemsX };
-
               var itemx = itemsZ.items.concat({ text: '', icon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-chevron-right', }, styles: {}, });
-
               setAttributes({ itemsX: { ...itemsX, items: itemx } });
-
-
             }}>Add List Item</div>
 
 
@@ -973,7 +969,7 @@ registerBlockType("post-grid/list", {
               />
             </PanelBody>
 
-            <div className='px-2'>
+            <div className='px-3'>
               <PGMailSubsctibe />
               <PGContactSupport utm={{ utm_source: 'BlockText', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
             </div>

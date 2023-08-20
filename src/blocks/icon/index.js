@@ -80,7 +80,7 @@ registerBlockType("post-grid/icon", {
         options: {
           enable: true,
           text: 'Custom Text',
-          src:'', // siteTitle, tagline, siteUrl, currentYear, currentDate, postTitle
+          src: '', // siteTitle, tagline, siteUrl, currentYear, currentDate, postTitle
           linkTo: '', /*postUrl, homeUrl, authorUrl, authorLink, mailTo, custom, customField */
           linkToAuthorMeta: '',
           linkToCustomMeta: '',
@@ -1146,7 +1146,7 @@ registerBlockType("post-grid/icon", {
 
       <>
         <InspectorControls>
-          <div className='px-3' >
+          <div className='' >
 
             <PanelBody title="Wrapper" initialOpen={false}>
 
@@ -1388,7 +1388,7 @@ registerBlockType("post-grid/icon", {
                   />
 
 
-<PanelRow>
+                  <PanelRow>
                     <label for="">Text Source</label>
 
                     <PGDropdown position="bottom right" variant="secondary" options={textSrcArgs} buttonTitle={(textSrcArgs[text.options.src] == undefined) ? 'Choose' : textSrcArgs[text.options.src].label} onChange={setTextSrc} values={[]}></PGDropdown>
@@ -1397,23 +1397,23 @@ registerBlockType("post-grid/icon", {
                   </PanelRow>
 
 
-                {text.options.src != undefined && text.options.src.length == 0 && (
+                  {text.options.src != undefined && text.options.src.length == 0 && (
 
-                  <PanelRow className='my-4'>
-                    <label for="">Custom Text</label>
-                    <InputControl
-                      value={text.options.text}
-                      onChange={(newVal) => {
-                        var options = { ...text.options, text: newVal };
-                        setAttributes({ text: { ...text, options: options } });
-                      }
-                      }
-                    />
-                  </PanelRow>
+                    <PanelRow className='my-4'>
+                      <label for="">Custom Text</label>
+                      <InputControl
+                        value={text.options.text}
+                        onChange={(newVal) => {
+                          var options = { ...text.options, text: newVal };
+                          setAttributes({ text: { ...text, options: options } });
+                        }
+                        }
+                      />
+                    </PanelRow>
 
-                )}
+                  )}
 
-                  
+
 
 
 
@@ -1954,7 +1954,7 @@ registerBlockType("post-grid/icon", {
               />
             </PanelBody>
 
-            <div className='px-2'>
+            <div className='px-3'>
               <PGMailSubsctibe />
               <PGContactSupport utm={{ utm_source: 'BlockReadMore', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
 

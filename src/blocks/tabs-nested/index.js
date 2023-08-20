@@ -1067,7 +1067,7 @@ registerBlockType("post-grid/tabs-nested", {
       <>
 
         <InspectorControls >
-          <div className='px-3' >
+          <div className='' >
 
             <PanelBody title="Wrapper" initialOpen={false}>
 
@@ -1396,7 +1396,7 @@ registerBlockType("post-grid/tabs-nested", {
               />
             </PanelBody>
 
-            <div className='px-2'>
+            <div className='px-3'>
               <PGMailSubsctibe />
               <PGContactSupport utm={{ utm_source: 'BlockText', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
             </div>
@@ -1716,15 +1716,10 @@ registerBlockType("post-grid/tabs-nested", {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
 
     var attributes = props.attributes;
-    var tabs = attributes.tabs;
 
     var blockId = attributes.blockId;
-    var activeTab = attributes.activeTab;
-    var icon = attributes.icon;
 
 
-    var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
-    var blockClass = '.' + blockIdX;
 
     const blockProps = useBlockProps.save({
       className: `${useBlockProps.save().className} ${blockId} pg-tabs`,

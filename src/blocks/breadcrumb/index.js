@@ -1281,7 +1281,7 @@ registerBlockType("post-grid/breadcrumb", {
     return (
       <>
         <InspectorControls >
-          <div className='px-3' >
+          <div className='' >
 
             <PanelBody title="Wrapper" initialOpen={false}>
 
@@ -1909,9 +1909,11 @@ registerBlockType("post-grid/breadcrumb", {
             </PanelBody>
 
 
-            <PGMailSubsctibe />
-            <PGContactSupport utm={{ utm_source: 'BlockPostExcerpt', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
+            <div className='px-3'>
+              <PGMailSubsctibe />
+              <PGContactSupport utm={{ utm_source: 'BlockPostExcerpt', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
 
+            </div>
 
           </div>
         </InspectorControls >

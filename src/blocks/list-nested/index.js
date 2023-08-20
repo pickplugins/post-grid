@@ -667,7 +667,7 @@ registerBlockType("post-grid/list-nested", {
       <>
 
         <InspectorControls >
-          <div className='px-2' title="Items" initialOpen={false}>
+          <div className='' title="Items" initialOpen={false}>
             <PanelBody title="Wrapper" initialOpen={false}>
 
               <PGtabs
@@ -988,7 +988,7 @@ registerBlockType("post-grid/list-nested", {
               />
             </PanelBody>
 
-            <div className='px-2'>
+            <div className='px-3'>
               <PGMailSubsctibe />
               <PGContactSupport utm={{ utm_source: 'BlockText', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
             </div>
@@ -1024,11 +1024,8 @@ registerBlockType("post-grid/list-nested", {
 
     var blockId = attributes.blockId;
 
-    var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
-    var blockClass = '.' + blockIdX;
-
     const blockProps = useBlockProps.save({
-      className: ` ${blockId} pg-list`,
+      className: ` ${blockId} pg-list-nested`,
     });
 
     const CustomTagWrapper = `${wrapper.options.tag}`;

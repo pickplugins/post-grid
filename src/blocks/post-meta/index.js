@@ -243,13 +243,7 @@ registerBlockType("post-grid/post-meta", {
     useEffect(() => {
 
 
-      WooCommerce.get("products/427")
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-        });
+
 
 
       apiFetch({

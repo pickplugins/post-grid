@@ -356,7 +356,7 @@ class PGBlockAccordionNestedItem
         $iconTogglePosition = isset($iconToggleOptions['position']) ? $iconToggleOptions['position'] : '';
         $iconToggleClass = isset($iconToggleOptions['class']) ? $iconToggleOptions['class'] : '';
 
-        $iconToggleHtml = !empty($iconToggleSrc) ? '<span class="accordion-icon-toggle ' . $iconToggleClass . ' ' . $iconToggleSrc . '"></span>' : '';
+        $iconToggleHtml = !empty($iconToggleSrc) ? '<span class="accordion-icon-toggle accordion-icon ' . $iconToggleClass . ' ' . $iconToggleSrc . '"></span>' : '';
 
 
 
@@ -403,12 +403,12 @@ class PGBlockAccordionNestedItem
             <?php endif; ?>
 
             <?php if ($labelCounterEnable) : ?>
-                <span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter">
+                <span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
                     <?php echo  wp_kses_post($count); ?>
                 </span>
             <?php endif; ?>
 
-            <<?php echo esc_attr($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
+            <<?php echo esc_attr($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
                 <?php echo  wp_kses_post($headerLabelText); ?>
             </<?php echo esc_attr($headerLabelTag); ?>>
 
@@ -418,7 +418,7 @@ class PGBlockAccordionNestedItem
             <?php endif; ?>
         </div>
 
-        <div class="<?php echo esc_attr($blockId); ?>-accordion-content">
+        <div class="<?php echo esc_attr($blockId); ?>-accordion-content accordion-content">
             <?php echo  $content; ?>
         </div>
 

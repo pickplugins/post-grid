@@ -812,7 +812,7 @@ registerBlockType("post-grid/wordpress-org", {
                     label=""
                     value={wrapper.options.tag}
                     options={[
-                      { label: 'No Wrapper', value: '' },
+                      { label: 'Choose', value: '' },
                       { label: 'H1', value: 'h1' },
                       { label: 'H2', value: 'h2' },
                       { label: 'H3', value: 'h3' },

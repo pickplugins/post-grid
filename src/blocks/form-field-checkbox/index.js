@@ -384,14 +384,7 @@ registerBlockType("post-grid/form-field-checkbox", {
     }, [blockId]);
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
-    for (var x in breakPoints) {
-
-      var item = breakPoints[x];
-      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-    }
 
 
 

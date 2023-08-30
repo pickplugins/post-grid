@@ -1126,6 +1126,7 @@ registerBlockType("post-grid/post-taxonomies", {
                     label=""
                     value={wrapper.options.tag}
                     options={[
+                      { label: 'Choose', value: '' },
                       { label: 'H1', value: 'h1' },
                       { label: 'H2', value: 'h2' },
                       { label: 'H3', value: 'h3' },

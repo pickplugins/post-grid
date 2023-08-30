@@ -29,7 +29,9 @@ const DEFAULT_STATE = {
   clientdata: {},
   license: { license_status: '', license_key: '' },
   blockCss: '',
-  stylesClipboard: null
+  stylesClipboard: null,
+  postGridBlockEditor: null,
+
 
 };
 
@@ -57,7 +59,26 @@ var selectors = {
     return stylesClipboard;
   },
 
+
+
+  getpostGridBlockEditor(state) {
+    const { postGridBlockEditor } = state;
+
+
+    if (postGridBlockEditor == null) {
+
+
+    }
+
+
+
+    return postGridBlockEditor;
+  },
+
+
   cssAttrParse(state, key) {
+
+
 
     var cssProp = '';
 
@@ -447,20 +468,41 @@ var selectors = {
     else if (key == 'gap') {
       cssProp = 'gap';
     }
-
     else if (key == 'rowGap') {
       cssProp = 'row-gap';
     }
     else if (key == 'columnGap') {
       cssProp = 'column-gap';
     }
-
+    else {
+      cssProp = key;
+    }
     return cssProp;
 
   },
 
+
+
+
+  onAddStyleItem(state, sudoScource, key, obj) {
+    const { breakPoint } = state;
+
+    console.log('obj', obj);
+
+
+    var path = [sudoScource, key, breakPoint];
+
+    let objX = Object.assign({}, obj);
+    const object = selectors.addPropertyDeep(state, objX, path, '')
+
+
+    return object;
+  },
   addPropertyDeep(state, obj, path, value) {
     const [head, ...rest] = path
+
+    console.log('obj', obj);
+
 
     return {
       ...obj,
@@ -469,6 +511,10 @@ var selectors = {
   },
 
   updatePropertyDeep(state, obj, path, value) {
+
+    console.log('obj', obj);
+
+
     const [head, ...rest] = path
 
     return {
@@ -563,7 +609,6 @@ var selectors = {
 
     // var cssItems = { ...blockCssY.items };
     // var cssItemsX = { ...cssItems, ...cssObj }
-    // //console.log(cssItemsX);
 
     // setAttributes({ blockCssY: { items: cssItemsX } });
 
@@ -598,11 +643,22 @@ var selectors = {
 
   },
 
+  generateCssFromElementObject(state, obj, selector) {
+
+    var reponsiveCssGroups = {};
+
+
+
+
+
+  },
 
 
   generateBlockCss(state, items, blockId, customCss) {
     const { blockCss } = state;
     var reponsiveCssGroups = {};
+
+    console.log(items);
 
 
     for (var selector in items) {
@@ -778,6 +834,13 @@ var resolvers = {
 
     return actions.setLicense(res);
   },
+  * getpostGridBlockEditor() {
+    const path = '/post-grid/v2/get_postGridBlockEditor';
+    const res = yield actions.fetchLicense(path);
+    console.log('resolvers', res);
+
+    return actions.setpostGridBlockEditor(res);
+  },
 
 
 
@@ -804,7 +867,6 @@ const actions = {
 
     setPreviewDeviceType(breakpoint)
 
-    console.log('setBreakPoint: ', breakpoint);
 
 
 
@@ -832,6 +894,16 @@ const actions = {
       stylesClipboard,
     };
   },
+
+
+  setpostGridBlockEditor(postGridBlockEditor) {
+    return {
+      type: 'SET_postGridBlockEditor',
+      postGridBlockEditor,
+    };
+  },
+
+
 
   fetchLicense(path) {
     return {
@@ -903,6 +975,14 @@ const store = createReduxStore('postgrid-shop', {
         return {
           ...state,
           stylesClipboard: action.stylesClipboard,
+        };
+
+
+
+      case 'SET_postGridBlockEditor':
+        return {
+          ...state,
+          postGridBlockEditor: action.postGridBlockEditor,
         };
 
 

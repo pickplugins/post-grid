@@ -42,8 +42,8 @@ function Html(props) {
 
       </PanelRow>
       <RangeControl
-        min="-100"
-        max="100"
+        min="-1000"
+        max="1000"
         step="1"
         currentInput={h}
         value={h}
@@ -56,8 +56,8 @@ function Html(props) {
 
       </PanelRow>
       <RangeControl
-        min="-100"
-        max="100"
+        min="-1000"
+        max="1000"
         step="1"
         value={v}
         onChange={(newVal) => {
@@ -70,7 +70,7 @@ function Html(props) {
       </PanelRow>
       <RangeControl
         min="0"
-        max="100"
+        max="1000"
         step="1"
         value={blur}
         onChange={(newVal) => {
@@ -83,7 +83,7 @@ function Html(props) {
       </PanelRow>
       <RangeControl
         min="0"
-        max="100"
+        max="1000"
         step="1"
         value={spread}
         onChange={(newVal) => {

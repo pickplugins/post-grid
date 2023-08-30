@@ -917,7 +917,7 @@ registerBlockType("post-grid/post-grid-filterable", {
     const [clientData, setClientData] = useState({});
     const paginationTypes = {
       none: { label: 'None', value: 'none', isPro: false },
-      filterable: { label: 'Filterable', value: 'filterable', isPro: true },
+      filterable: { label: 'Filterable', value: 'filterable' },
 
     };
 
@@ -1436,7 +1436,7 @@ registerBlockType("post-grid/post-grid-filterable", {
       Object.entries(args).map(x => {
         var sudoScource = x[0];
         var sudoScourceArgs = x[1];
-        var elementSelector = myStore.getElementSelector(sudoScource, paginationSelector);
+        var elementSelector = myStore.getElementSelector(sudoScource, paginationWrapSelector);
 
 
         var sudoObj = {};
@@ -1468,7 +1468,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
       setAttributes({ pagination: object });
 
-      var elementSelector = myStore.getElementSelector(sudoScource, paginationSelector);
+      var elementSelector = myStore.getElementSelector(sudoScource, paginationWrapSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
       if (blockCssY.items[elementSelector] == undefined) {
@@ -1489,7 +1489,7 @@ registerBlockType("post-grid/post-grid-filterable", {
       setAttributes({ pagination: object });
 
 
-      var elementSelector = myStore.getElementSelector(sudoScource, paginationSelector);
+      var elementSelector = myStore.getElementSelector(sudoScource, paginationWrapSelector);
       var cssPropty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
       setAttributes({ blockCssY: { items: cssObject } });
@@ -5836,13 +5836,11 @@ registerBlockType("post-grid/post-grid-filterable", {
               <div className='filterable-group'>
                 {filterable.options.showAll == 'yes' && (
                   <>
-                    <div className='pg-filter mixitup-control-active cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter='all'>All</div>
+                    <div className='pg-filter mixitup-control-active cusror-pointer   filter-34534' data-filter='all'>All</div>
                   </>
                 )}
               </div>
-              <div className='filterable-group  '>
 
-              </div>
               {
 
                 filterable.options.filters.length > 0 && filterable.options.filters.map(x => {
@@ -5883,21 +5881,21 @@ registerBlockType("post-grid/post-grid-filterable", {
                 {filterable.options.showSort == 'yes' && (
 
                   <>
-                    <div className='pg-filter mixitup-control-active cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter=''>ASC</div>
-                    <div className='pg-filter  cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter=''>DESC</div>
+                    <div className='pg-filter mixitup-control-active cusror-pointer  filter-34534' data-filter=''>ASC</div>
+                    <div className='pg-filter  cusror-pointer  filter-34534' data-filter=''>DESC</div>
                   </>
 
                 )}
 
                 {filterable.options.showRandom == 'yes' && (
                   <>
-                    <div className='pg-filter  cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter=''>Random</div>
+                    <div className='pg-filter  cusror-pointer filter-34534' data-filter=''>Random</div>
                   </>
                 )}
 
                 {filterable.options.showClear == 'yes' && (
                   <>
-                    <div className='pg-filter  cusror-pointer px-4 py-2 m-2 inline-block bg-gray-200 filter-34534' data-filter=''>Clear</div>                  </>
+                    <div className='pg-filter  cusror-pointer  filter-34534' data-filter=''>Clear</div>                  </>
                 )}
 
 

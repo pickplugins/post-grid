@@ -96,7 +96,7 @@ function Html(props) {
     <div className=' mt-4'>
 
       <div className='bg-blue-500 inline-block cursor-pointer my-3 text-white px-3 py-2' onClick={ev => {
-        var length = Object.entries(keyframesX).length;
+        var length = (keyframesX == null) ? 0 : Object.entries(keyframesX).length;
         const d = new Date();
         let time = d.getTime();
         var keyframes = { ...keyframesX };
@@ -112,7 +112,7 @@ function Html(props) {
 
       }}>Add</div>
 
-      {Object.entries(keyframesX).map(entry => {
+      {keyframesX != null && Object.entries(keyframesX).map(entry => {
 
         var entryIndex = entry[0];
         var args = entry[1];

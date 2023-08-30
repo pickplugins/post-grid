@@ -36,7 +36,6 @@ import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
-import PGcssKeyframes from '../../components/css-keyframes'
 
 
 
@@ -226,27 +225,6 @@ registerBlockType("post-grid/progress-bar", {
 
 
 
-    // keyframes: {
-    //   type: 'object',
-    //   default: {
-    //     pgAnimate1: {
-    //       name: 'pgAnimate1',
-    //       frames: {
-    //         '0': { 'background-color': 'red', left: '0px', top: '0px' },
-    //         '100': { 'background-color': 'yellow' }
-    //       }
-    //     },
-    //     pgAnimate2: {
-    //       name: 'pgAnimate2',
-    //       frames: {
-    //         '0': { 'background-color': 'red', left: '0px', top: '0px' },
-    //         '100': { 'background-color': 'yellow' }
-    //       }
-    //     },
-
-    //   },
-    // },
-
 
     customCss: {
       "type": "string",
@@ -296,7 +274,6 @@ registerBlockType("post-grid/progress-bar", {
     var progressFill = attributes.progressFill;
     var progressData = attributes.progressData;
     var progressInfo = attributes.progressInfo;
-    var keyframes = attributes.keyframes;
     var circleOverlay = attributes.circleOverlay;
     var circleMask = attributes.circleMask;
 
@@ -959,14 +936,14 @@ registerBlockType("post-grid/progress-bar", {
 
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+    // var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
-    for (var x in breakPoints) {
+    // for (var x in breakPoints) {
 
-      var item = breakPoints[x];
-      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
+    //   var item = breakPoints[x];
+    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
-    }
+    // }
 
 
 
@@ -1022,22 +999,7 @@ registerBlockType("post-grid/progress-bar", {
 
 
 
-    function onChangeKeyframes(args) {
 
-
-      console.log('##########');
-      console.log('KeyFrames New');
-
-      console.log(args);
-      //attributes['keyframes'] = {};
-
-
-      setAttributes({ keyframes: args });
-
-
-
-
-    }
 
 
     return (
@@ -1052,8 +1014,7 @@ registerBlockType("post-grid/progress-bar", {
 
 
 
-            {/* <PGcssKeyframes keyframes={keyframes} onChange={onChangeKeyframes} />
-            {JSON.stringify(keyframes)} */}
+
             <div className='p-3'>
 
 

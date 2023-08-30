@@ -1119,14 +1119,14 @@ registerBlockType("post-grid/post-comment-count", {
 
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+    // var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
-    for (var x in breakPoints) {
+    // for (var x in breakPoints) {
 
-      var item = breakPoints[x];
-      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
+    //   var item = breakPoints[x];
+    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
-    }
+    // }
 
 
 
@@ -1285,6 +1285,7 @@ registerBlockType("post-grid/post-comment-count", {
                       label=""
                       value={wrapper.options.tag}
                       options={[
+                        { label: 'Choose', value: '' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },
                         { label: 'H3', value: 'h3' },
@@ -1495,7 +1496,8 @@ registerBlockType("post-grid/post-comment-count", {
                         label=""
                         value={commentCount.options.tag}
                         options={[
-                          { label: 'H1', value: 'h1' },
+                                                  { label: 'Choose', value: '' },
+                        { label: 'H1', value: 'h1' },
                           { label: 'H2', value: 'h2' },
                           { label: 'H3', value: 'h3' },
                           { label: 'H4', value: 'h4' },

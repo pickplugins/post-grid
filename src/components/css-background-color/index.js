@@ -38,9 +38,7 @@ function Html(props) {
             checked={isImportant}
             onChange={(arg) => {
 
-              console.log(valArgs);
-              console.log(isImportant);
-              console.log(val);
+
 
               setImportant(isImportant => !isImportant)
 
@@ -64,9 +62,7 @@ function Html(props) {
             onChange={(newVal) => {
               //props.onChange(newVal, 'backgroundColor');
 
-              console.log(valArgs);
-              console.log(isImportant);
-              console.log(val);
+
 
               setval(newVal)
 
@@ -143,7 +139,6 @@ class PGcssBackgroundColor extends Component {
 
     } = this.props;
 
-    console.log(val)
 
     var colorVal = val.replace(' !important', '');
 

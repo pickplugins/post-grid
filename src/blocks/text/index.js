@@ -30,6 +30,18 @@ import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
 
+import OpenAI from 'openai';
+
+
+
+
+const openai = new OpenAI({
+  apiKey: "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",
+  dangerouslyAllowBrowser: true,
+});
+
+
+
 var myStore = wp.data.select('postgrid-shop');
 
 
@@ -131,11 +143,20 @@ registerBlockType("post-grid/text", {
     var blockCssY = attributes.blockCssY;
 
 
+    console.log('text', text);
+    console.log('blockCssY', blockCssY);
+
+
+    //var postGridBlockEditor = myStore.getpostGridBlockEditor();
+
 
     //const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
     var breakPointX = myStore.getBreakPoint();
 
     const [isLoading, setisLoading] = useState(false);
+    const [openAiPrams, setopenAiPrams] = useState({ promt: "", model: '', role: "", reponse: null });
+    var [debounce, setDebounce] = useState(null); // Using the hook.
+
     const CustomTag = `${text.options.tag}`;
 
 
@@ -143,46 +164,93 @@ registerBlockType("post-grid/text", {
     var textSelector = blockClass;
 
 
+
+
+
+
+    async function getGTP() {
+
+
+
+      setisLoading(true);
+
+      if (openai != null && openAiPrams.promt.length > 0) {
+        const chatCompletion = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          messages: [{ "role": "user", "content": openAiPrams.promt }],
+        });
+        console.log(chatCompletion.choices[0].message);
+
+
+        var choices = chatCompletion.choices
+
+        console.log(choices);
+
+        var message = choices[0].message.content
+        setopenAiPrams({ ...openAiPrams, reponse: message })
+
+
+
+      }
+
+
+
+      setTimeout(() => {
+        setisLoading(false);
+      }, 1000)
+
+
+    }
+
+
     useEffect(() => {
+
+
 
       setAttributes({ blockId: blockIdX });
 
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+      //myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
+
 
 
     useEffect(() => {
 
+      console.log("customCss", customCss);
 
       setAttributes({ customCss: customCss });
 
 
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+      //myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
 
     useEffect(() => {
+      console.log('blockId', blockId);
 
 
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+      //myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockId]);
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+    useEffect(() => {
 
-    for (var x in breakPoints) {
+      console.log('blockCssY', blockCssY.items);
 
-      var item = breakPoints[x];
-      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
-    }
+      //myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+    }, [blockCssY]);
+
+
+
 
 
 
     function onPickCssLibraryText(args) {
 
-      console.log(args);
+      console.log('onPickCssLibraryText');
+
 
       var textX = Object.assign({}, text);
 
@@ -233,9 +301,12 @@ registerBlockType("post-grid/text", {
 
     function onChangeStyleText(sudoScource, newVal, attr) {
 
+      console.log('onChangeStyleText');
+
 
       var path = [sudoScource, attr, breakPointX]
-      let obj = Object.assign({}, text);
+      //let obj = Object.assign({}, text);
+      let obj = { ...text }
       const object = myStore.updatePropertyDeep(obj, path, newVal)
 
       setAttributes({ text: object });
@@ -250,6 +321,10 @@ registerBlockType("post-grid/text", {
       var cssPath = [elementSelector, cssPropty, breakPointX]
       const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
+      console.log('cssItems', cssItems);
+
+
+
       setAttributes({ blockCssY: { items: cssItems } });
 
 
@@ -257,6 +332,9 @@ registerBlockType("post-grid/text", {
 
 
     function onRemoveStyleText(sudoScource, key) {
+
+      console.log('onRemoveStyleText');
+
 
       var object = myStore.deletePropertyDeep(text, [sudoScource, key, breakPointX]);
       setAttributes({ text: object });
@@ -273,11 +351,19 @@ registerBlockType("post-grid/text", {
 
     function onAddStyleText(sudoScource, key) {
 
+      console.log('onAddStyleText');
 
 
 
       var path = [sudoScource, key, breakPointX]
-      let obj = Object.assign({}, text);
+      //let obj = Object.assign({}, text);
+      let obj = { ...text };
+
+      console.log('path', path);
+      console.log('obj', obj);
+
+
+
       const object = myStore.addPropertyDeep(obj, path, '')
       setAttributes({ text: object });
 
@@ -291,6 +377,11 @@ registerBlockType("post-grid/text", {
 
 
     function onBulkAddText(sudoScource, cssObj) {
+
+      console.log('onBulkAddText');
+
+
+
       // var path = [sudoScource, attr, breakPointX]
       let obj = Object.assign({}, text);
       obj[sudoScource] = cssObj;
@@ -334,10 +425,6 @@ registerBlockType("post-grid/text", {
 
 
 
-    useEffect(() => {
-
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-    }, [blockCssY]);
 
 
 
@@ -356,6 +443,60 @@ registerBlockType("post-grid/text", {
           <div className='' >
 
 
+
+
+
+            <div className='px-3'>
+
+
+
+
+              <TextareaControl
+                label=""
+                help="Write OpenAI Prompt"
+                value={openAiPrams.promt}
+                onChange={(value) => {
+                  setopenAiPrams({ ...openAiPrams, promt: value })
+
+                }}
+              />
+
+              <div className='cursor-pointer text-center my-3 bg-blue-500 rounded-sm text-white px-3 py-2' onClick={ev => {
+                getGTP();
+              }}>
+
+
+                {isLoading && (
+                  <span> Please wait...</span>
+                )}
+                {!isLoading && (
+                  <span> Get Response</span>
+                )}
+
+
+                {isLoading && (
+                  <Spinner />
+                )}
+              </div>
+
+
+              {openAiPrams.reponse != null && (
+
+                <div className='cursor-pointer whitespace-pre-line p-2 hover:bg-gray-200' title="Click to replace text." onClick={ev => {
+
+                  var options = { ...text.options, content: openAiPrams.reponse };
+                  setAttributes({ text: { ...text, options: options } });
+
+                }}>
+                  {openAiPrams.reponse}
+                </div>
+
+              )}
+
+
+
+
+            </div>
 
             <PanelBody title="Text" initialOpen={false}>
 
@@ -410,6 +551,7 @@ registerBlockType("post-grid/text", {
                       label=""
                       value={text.options.tag}
                       options={[
+                        { label: 'Choose', value: '' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },
                         { label: 'H3', value: 'h3' },
@@ -441,7 +583,7 @@ registerBlockType("post-grid/text", {
                   <PGStyles obj={text} onChange={onChangeStyleText} onAdd={onAddStyleText} onRemove={onRemoveStyleText} onBulkAdd={onBulkAddText} />
                 </PGtab>
                 <PGtab name="css">
-                  <PGCssLibrary blockId={blockId} obj={text} onChange={onPickCssLibraryText} />
+                  {/* <PGCssLibrary blockId={blockId} obj={text} onChange={onPickCssLibraryText} /> */}
                 </PGtab>
               </PGtabs>
 
@@ -478,7 +620,19 @@ registerBlockType("post-grid/text", {
           </div>
 
         </InspectorControls >
-        {/* 
+
+
+
+
+        ###########
+
+        <div>
+
+          <code>
+            {JSON.stringify(blockClass)}
+
+          </code>
+        </div>
         <div>
 
           <code>
@@ -488,15 +642,13 @@ registerBlockType("post-grid/text", {
         </div>
 
 
-        ###########
 
         <div>
-
           <code>
             {JSON.stringify(text)}
-
           </code>
-        </div> */}
+        </div>
+
 
 
 

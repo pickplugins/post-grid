@@ -334,14 +334,14 @@ registerBlockType("post-grid/post-meta", {
     }, [clientId]);
 
 
-    var breakPointList = [];
+    // var breakPointList = [];
 
-    for (var x in breakPoints) {
+    // for (var x in breakPoints) {
 
-      var item = breakPoints[x];
-      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
+    //   var item = breakPoints[x];
+    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
-    }
+    // }
 
 
 
@@ -767,7 +767,7 @@ registerBlockType("post-grid/post-meta", {
                     label=""
                     value={wrapper.options.tag}
                     options={[
-                      { label: 'No Wrapper', value: '' },
+                      { label: 'Choose', value: '' },
                       { label: 'H1', value: 'h1' },
                       { label: 'H2', value: 'h2' },
                       { label: 'H3', value: 'h3' },

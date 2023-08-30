@@ -1151,14 +1151,14 @@ registerBlockType("post-grid/archive-title", {
 
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+    // var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
-    for (var x in breakPoints) {
+    // for (var x in breakPoints) {
 
-      var item = breakPoints[x];
-      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
+    //   var item = breakPoints[x];
+    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
-    }
+    // }
 
 
 
@@ -1301,7 +1301,7 @@ registerBlockType("post-grid/archive-title", {
                       label=""
                       value={wrapper.options.tag}
                       options={[
-                        { label: 'No Wrapper', value: '' },
+                        { label: 'Choose', value: '' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },
                         { label: 'H3', value: 'h3' },
@@ -1502,6 +1502,7 @@ registerBlockType("post-grid/archive-title", {
                         label=""
                         value={archiveTitle.options.tag}
                         options={[
+                          { label: 'Choose', value: '' },
                           { label: 'H1', value: 'h1' },
                           { label: 'H2', value: 'h2' },
                           { label: 'H3', value: 'h3' },

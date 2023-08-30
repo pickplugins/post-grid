@@ -371,6 +371,8 @@ function Html(props) {
 
   useEffect(() => {
 
+    //console.log('props.obj', props.obj);
+
 
   }, [props.obj]);
 
@@ -398,7 +400,7 @@ function Html(props) {
       <>
         <span className='cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1' onClick={ev => {
 
-          props.onRemove(sudoScource, keyX)
+          props.onRemove(sudoScource, keyX, props.obj, props.extra)
 
 
 
@@ -417,23 +419,26 @@ function Html(props) {
 
   function setCssAttr(option, index) {
 
-
-    //console.log(breakPointX);
+    //console.log('setCssAttr');
 
 
     if (props.obj[sudoScource][option.id] == undefined) {
       props.obj[sudoScource][option.id] = {};
     }
 
-    props.onAdd(sudoScource, option.id)
+    props.onAdd(sudoScource, option.id, props.obj, props.extra)
 
 
   }
 
   function onChangeCssVal(newVal, attr) {
 
+    // console.log(props.obj);
+    //console.log('onChangeCssVal');
 
-    props.onChange(sudoScource, newVal, attr);
+
+
+    props.onChange(sudoScource, newVal, attr, props.obj, props.extra);
 
   }
 
@@ -568,7 +573,6 @@ function Html(props) {
 
                       var stylesClipboard = myStore.getStylesClipboard();
 
-                      console.log(stylesClipboard);
 
 
 
@@ -586,7 +590,6 @@ function Html(props) {
                       var styleObj = JSON.parse(stylesClipboard);
                       //props.obj[sudoScource] = styleObj;
 
-                      console.log(props.onBulkAdd);
 
                       if (props.onBulkAdd) {
                         props.onBulkAdd(sudoScource, styleObj)
@@ -601,10 +604,8 @@ function Html(props) {
                       //   var attr = args[0];
                       //   var values = args[1];
 
-                      //   console.log(values);
                       //   var newVal = (values[sudoScource] == undefined) ? '' : values[sudoScource];
 
-                      //   console.log(newVal);
 
 
                       //   props.onChange(sudoScource, newVal, attr);
@@ -1192,7 +1193,7 @@ class PGStyles extends Component {
   render() {
 
     var {
-      blockId,
+      extra,
       obj,
       onChange,
       onAdd,
@@ -1211,11 +1212,11 @@ class PGStyles extends Component {
       <>
 
         {onBulkAdd == null && (
-          <Html blockId={blockId} obj={obj} onAdd={onAdd} onRemove={onRemove} onChange={onChange} warn={this.state.showWarning} onReset={onReset} />
+          <Html obj={obj} extra={extra} onAdd={onAdd} onRemove={onRemove} onChange={onChange} warn={this.state.showWarning} onReset={onReset} />
         )}
 
         {onBulkAdd != null && (
-          <Html blockId={blockId} obj={obj} onAdd={onAdd} onRemove={onRemove} onChange={onChange} onBulkAdd={onBulkAdd} onReset={onReset} warn={this.state.showWarning} />
+          <Html obj={obj} extra={extra} onAdd={onAdd} onRemove={onRemove} onChange={onChange} onBulkAdd={onBulkAdd} onReset={onReset} warn={this.state.showWarning} />
         )}
 
 

@@ -405,14 +405,14 @@ registerBlockType("post-grid/accordion-nested", {
 
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+    // var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
-    for (var x in breakPoints) {
+    // for (var x in breakPoints) {
 
-      var item = breakPoints[x];
-      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
+    //   var item = breakPoints[x];
+    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
-    }
+    // }
 
 
 
@@ -1285,28 +1285,6 @@ registerBlockType("post-grid/accordion-nested", {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const ALLOWED_BLOCKS = ['post-grid/accordion-nested-item'];
 
     const MY_TEMPLATE = [
@@ -1323,9 +1301,9 @@ registerBlockType("post-grid/accordion-nested", {
 
     const innerBlocksProps = useInnerBlocksProps(blockProps, {
       allowedBlocks: ALLOWED_BLOCKS,
-      __experimentalDirectInsert: true,
+      // __experimentalDirectInsert: true,
       template: MY_TEMPLATE,
-      templateInsertUpdatesSelection: true,
+      //templateInsertUpdatesSelection: true,
     });
 
     var childBlocks = select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
@@ -1392,6 +1370,7 @@ registerBlockType("post-grid/accordion-nested", {
                       label=""
                       value={wrapper.options.tag}
                       options={[
+                        { label: 'Choose', value: '' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },
                         { label: 'H3', value: 'h3' },
@@ -1465,6 +1444,7 @@ registerBlockType("post-grid/accordion-nested", {
                       label=""
                       value={header.options.tag}
                       options={[
+                        { label: 'Choose', value: '' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },
                         { label: 'H3', value: 'h3' },
@@ -1590,6 +1570,7 @@ registerBlockType("post-grid/accordion-nested", {
                       label=""
                       value={headerLabel.options.tag}
                       options={[
+                        { label: 'Choose', value: '' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },
                         { label: 'H3', value: 'h3' },
@@ -1650,6 +1631,10 @@ registerBlockType("post-grid/accordion-nested", {
                         childBlocks.map(childBlock => {
 
                           var childClientId = childBlock.clientId;
+
+                          console.log('childClientId', childClientId);
+
+
                           var childAttributes = childBlock.attributes;
                           childAttributes.labelIcon.options.srcType = arg.srcType;
                           childAttributes.labelIcon.options.library = arg.library;
@@ -1745,6 +1730,7 @@ registerBlockType("post-grid/accordion-nested", {
                       label=""
                       value={labelCounter.options.tag}
                       options={[
+                        { label: 'Choose', value: '' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },
                         { label: 'H3', value: 'h3' },
@@ -1825,6 +1811,7 @@ registerBlockType("post-grid/accordion-nested", {
                       label=""
                       value={content.options.tag}
                       options={[
+                        { label: 'Choose', value: '' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },
                         { label: 'H3', value: 'h3' },
@@ -1911,9 +1898,6 @@ registerBlockType("post-grid/accordion-nested", {
 
                         setTimeout(() => {
                           var childClientId = childBlock.clientId;
-
-                          console.log('childClientId', childClientId);
-
 
                           var childAttributes = childBlock.attributes;
                           childAttributes.icon.options.srcType = arg.srcType;

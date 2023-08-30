@@ -4,7 +4,7 @@ const { Component } = wp.element;
 import { Button, Dropdown, ToggleControl } from '@wordpress/components'
 import { useState, } from '@wordpress/element'
 
-import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
+import { __experimentalInputControl as InputControl, SelectControl, ColorPalette, PanelRow } from '@wordpress/components';
 
 
 
@@ -27,12 +27,12 @@ function Html(props) {
     pt: { "label": "PT", "value": "pt" },
     pc: { "label": "PC", "value": "pc" },
     ex: { "label": "EX", "value": "ex" },
-
     ch: { "label": "CH", "value": "ch" },
     vw: { "label": "VW", "value": "vw" },
     vh: { "label": "VH", "value": "vh" },
     vmin: { "label": "VMIN", "value": "vmin" },
     vmax: { "label": "VMAX", "value": "vmax" },
+
 
   }
 
@@ -62,151 +62,208 @@ function Html(props) {
 
 
   return (
+    <>
 
-    <div className='flex justify-between items-center'>
+      {(widthUnit != 'max-content' || widthUnit != 'min-content' || widthUnit != 'inherit' || widthUnit != 'initial' || widthUnit != 'revert' || widthUnit != 'revert-layer' || widthUnit != 'unset') && (
 
-      {widthUnit != 'auto' && (
-        <InputControl
-          value={widthVal}
-          type="number"
-          disabled={(widthUnit == 'auto') ? true : false}
-          onChange={(newVal) => {
+        <div className='flex justify-between items-center'>
 
-
-            setwidthVal(newVal);
-
-            if (widthUnit == 'auto') {
-              // props.onChange(widthUnit, 'width');
-
-              if (isImportant) {
-                props.onChange(widthUnit + ' !important', 'width');
-              } else {
-                props.onChange(widthUnit, 'width');
-              }
+          {(widthUnit != 'auto') && (
+            <InputControl
+              value={widthVal}
+              type="number"
+              disabled={(widthUnit == 'auto' || widthUnit == 'max-content' || widthUnit == 'min-content' || widthUnit == 'inherit' || widthUnit == 'initial' || widthUnit == 'revert' || widthUnit == 'revert-layer' || widthUnit == 'unset') ? true : false}
+              onChange={(newVal) => {
 
 
-            } else {
-              //props.onChange(newVal + widthUnit, 'width');
+                setwidthVal(newVal);
 
-              if (isImportant) {
-                props.onChange(newVal + widthUnit + ' !important', 'width');
-              } else {
-                props.onChange(newVal + widthUnit, 'width');
-              }
+                if (widthUnit == 'auto') {
+                  // props.onChange(widthUnit, 'width');
+
+                  if (isImportant) {
+                    props.onChange(widthUnit + ' !important', 'width');
+                  } else {
+                    props.onChange(widthUnit, 'width');
+                  }
+
+
+                } else {
+                  //props.onChange(newVal + widthUnit, 'width');
+
+                  if (isImportant) {
+                    props.onChange(newVal + widthUnit + ' !important', 'width');
+                  } else {
+                    props.onChange(newVal + widthUnit, 'width');
+                  }
+                }
+
+
+
+
+              }}
+            />
+          )}
+
+          <div>
+
+            <Dropdown
+              position="bottom left"
+              renderToggle={({ isOpen, onToggle }) => (
+                <Button
+                  title=""
+
+                  onClick={onToggle}
+                  aria-expanded={isOpen}
+                >
+                  <div className=" ">{unitArgs[widthUnit] == undefined ? 'Select...' : unitArgs[widthUnit].label}</div>
+
+
+                </Button>
+              )}
+              renderContent={() => <div className='w-32'>
+
+                {Object.entries(unitArgs).map((y) => {
+
+                  var index = y[0]
+                  var x = y[1]
+                  return (
+
+                    <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
+
+                      setwidthUnit(x.value);
+
+
+                      if (x.value == 'auto') {
+                        if (isImportant) {
+                          props.onChange(x.value + ' !important', 'width');
+                        } else {
+                          props.onChange(x.value, 'width');
+                        }
+                      } else {
+                        if (isImportant) {
+                          props.onChange(widthVal + x.value + ' !important', 'width');
+                        } else {
+                          props.onChange(widthVal + x.value, 'width');
+                        }
+                      }
+
+                    }}>
+
+                      {x.value && (
+
+                        <>{x.label}</>
+
+                      )}
+
+                    </div>
+
+                  )
+
+                })}
+              </div>}
+            />
+          </div>
+
+          <ToggleControl
+            help={
+              isImportant
+                ? 'Important Enabled'
+                : 'Important?'
             }
 
+            checked={isImportant}
+            onChange={(arg) => {
+
+              //console.log(arg);
+              setImportant(isImportant => !isImportant)
+
+              if (isImportant) {
+
+                if (widthUnit == 'auto') {
+                  props.onChange(widthUnit, 'width');
+                } else {
+                  props.onChange(widthVal + widthUnit, 'width');
+                }
+
+              } else {
+                if (widthUnit == 'auto') {
+                  props.onChange(widthUnit + ' !important', 'width');
+                } else {
+                  props.onChange(widthVal + widthUnit + ' !important', 'width');
+                }
+              }
 
 
 
-          }}
-        />
+
+
+
+
+
+            }}
+          />
+
+
+
+        </div>
+
       )}
+
+
+
 
       <div>
 
-        <Dropdown
-          position="bottom left"
-          renderToggle={({ isOpen, onToggle }) => (
-            <Button
-              title=""
+        <PanelRow>
+          <label for="">Global Value </label>
+          <SelectControl
+            label=""
+            value={widthUnit}
+            options={[
 
-              onClick={onToggle}
-              aria-expanded={isOpen}
-            >
-              <div className=" ">{valZ ? unitArgs[widthUnit].label : 'Select...'}</div>
+              { label: 'Choose', value: 'px' },
 
-
-            </Button>
-          )}
-          renderContent={() => <div className='w-32'>
-
-            {Object.entries(unitArgs).map((y) => {
-
-              var index = y[0]
-              var x = y[1]
-              return (
-
-                <div className={'px-3 py-1 border-b block hover:bg-gray-400 cursor-pointer'} onClick={(ev) => {
-
-                  setwidthUnit(x.value);
+              { label: 'auto', value: 'auto' },
+              { label: 'max-content', value: 'max-content' },
+              { label: 'min-content', value: 'min-content' },
+              { label: 'Inherit', value: 'inherit' },
+              { label: 'Initial', value: 'initial' },
+              { label: 'Revert', value: 'revert' },
+              { label: 'Revert-layer', value: 'revert-layer' },
+              { label: 'Unset', value: 'unset' },
+            ]}
+            onChange={(newVal) => {
 
 
-                  if (x.value == 'auto') {
-                    if (isImportant) {
-                      props.onChange(x.value + ' !important', 'width');
-                    } else {
-                      props.onChange(x.value, 'width');
-                    }
-                  } else {
-                    if (isImportant) {
-                      props.onChange(widthVal + x.value + ' !important', 'width');
-                    } else {
-                      props.onChange(widthVal + x.value, 'width');
-                    }
-                  }
+              setwidthUnit(newVal);
 
-                }}>
 
-                  {x.value && (
+              if (newVal == 'auto' || newVal == 'max-content' || newVal == 'min-content' || newVal == 'inherit' || newVal == 'initial' || newVal == 'revert' || newVal == 'revert-layer' || newVal == 'unset') {
+                if (isImportant) {
+                  props.onChange(newVal + ' !important', 'width');
+                } else {
+                  props.onChange(newVal, 'width');
+                }
+              } else {
+                if (isImportant) {
+                  props.onChange(widthVal + newVal + ' !important', 'width');
+                } else {
+                  props.onChange(widthVal + newVal, 'width');
+                }
+              }
 
-                    <>{x.label}</>
 
-                  )}
+            }
 
-                </div>
+            }
+          />
+        </PanelRow>
 
-              )
-
-            })}
-          </div>}
-        />
       </div>
 
-      <ToggleControl
-        help={
-          isImportant
-            ? 'Important Enabled'
-            : 'Important?'
-        }
+    </>
 
-        checked={isImportant}
-        onChange={(arg) => {
-
-          //console.log(arg);
-          setImportant(isImportant => !isImportant)
-
-          if (isImportant) {
-
-            if (widthUnit == 'auto') {
-              props.onChange(widthUnit, 'width');
-            } else {
-              props.onChange(widthVal + widthUnit, 'width');
-            }
-
-
-
-
-          } else {
-            if (widthUnit == 'auto') {
-              props.onChange(widthUnit + ' !important', 'width');
-            } else {
-              props.onChange(widthVal + widthUnit + ' !important', 'width');
-            }
-          }
-
-
-
-
-
-
-
-
-        }}
-      />
-
-
-
-    </div>
 
 
 

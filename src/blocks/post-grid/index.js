@@ -3246,12 +3246,6 @@ registerBlockType("post-grid/post-grid", {
             }
 
 
-
-
-
-
-
-
             <p>{item.description}</p>
 
 

@@ -101,7 +101,7 @@ function post_grid_global_cssY()
 
     if (!empty($reponsiveCssGroups['Tablet'])) {
         //$reponsiveCss .= '@media only screen and (min-width: 361px) and (max-width: 780px){';
-       // $reponsiveCss .= '@media(max-width: 780px){';
+        // $reponsiveCss .= '@media(max-width: 780px){';
         $reponsiveCss .= '@media(max-width: 991px){';
 
 
@@ -147,30 +147,43 @@ function post_grid_global_cssY()
     //var_dump($postGridFonts);
 
     $fonts = '';
+    $fontsArr = [];
 
     if (!empty($postGridFonts)) {
         foreach ($postGridFonts as $device => $itemFont) {
             if (!empty($itemFont)) {
                 foreach ($itemFont as $itemFon) {
                     $fonts .= $itemFon . ',';
+
+                    if (!in_array($itemFon, $fontsArr)) {
+                        $fontsArr[] = $itemFon . ':wght@100;200;300;400;500;600;700;800;900';
+                    }
                 }
             }
         }
     }
 
 
-    //var_dump($fonts);
-    $fonts = substr($fonts, 0, -1);
 
-    $fonts = str_replace(",", "|", $fonts);
-    $fonts = str_replace(" ", "+", $fonts);
+    $fontsArrStr = implode('&family=', $fontsArr);
+
+    //var_dump($fontsArrStr);
+
+    // $fonts = substr($fonts, 0, -1);
+
+    //$fonts = str_replace(",", "|", $fonts);
+    $fonts = str_replace(" ", "+", $fontsArrStr);
 
     //echo '###############';
     //var_dump($fonts);
 
 
 ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=<?php echo esc_html($fonts);
+
+
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts);
                                                                             ?>">
     <?php
 
@@ -249,3 +262,24 @@ function post_grid_block_categories($categories, $context)
         return $categories;
     }
 }
+
+
+
+// add_action('init', function () {
+
+//     register_post_meta(
+//         'page',
+//         'pg_page_styles',
+//         array(
+//             'single'       => true,
+//             'type'         => 'string',
+//             'show_in_rest' => true,
+//         )
+//     );
+// });
+
+
+register_meta('post', 'pg_page_styles', [
+    //'object_subtype' => 'my_article',
+    'show_in_rest' => true
+]);

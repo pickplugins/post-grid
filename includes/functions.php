@@ -163,12 +163,12 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
         if (!empty($thumb_url)) {
             if ($thumb_linked == 'yes') {
                 if (!empty($thumb_custom_url)) {
-                    $html_thumb .= '<a href="' . $thumb_custom_url . '"><img alt="' . $alt_text . '" src="' . $thumb_url . '" /></a>';
+                    $html_thumb .= '<a href="' . esc_url_raw($thumb_custom_url) . '"><img alt="' . $alt_text . '" src="' . esc_url_raw(esc_url_raw($thumb_url)) . '" /></a>';
                 } else {
-                    $html_thumb .= '<a href="' . $item_post_permalink . '"><img alt="' . $alt_text . '" src="' . $thumb_url . '" /></a>';
+                    $html_thumb .= '<a href="' . esc_url_raw($item_post_permalink) . '"><img alt="' . $alt_text . '" src="' .  esc_url_raw($thumb_url) . '" /></a>';
                 }
             } else {
-                $html_thumb .= '<img alt="' . $alt_text . '" src="' . $thumb_url . '" />';
+                $html_thumb .= '<img alt="' . $alt_text . '" src="' .  esc_url_raw($thumb_url) . '" />';
             }
         } else {
             $html_thumb .= '';
@@ -176,22 +176,22 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     } elseif ($media_source == 'empty_thumb') {
 
         if ($thumb_linked == 'yes') {
-            $html_thumb .= '<a class="custom" href="' . $item_post_permalink . '"><img src="' . post_grid_plugin_url . 'assets/frontend/images/placeholder.png" /></a>';
+            $html_thumb .= '<a class="custom" href="' . esc_url_raw($item_post_permalink) . '"><img src="' . post_grid_plugin_url . 'assets/frontend/images/placeholder.png" /></a>';
         } else {
             $html_thumb .= '<img class="custom" src="' . post_grid_plugin_url . 'assets/frontend/images/placeholder.png" />';
         }
     } elseif ($media_source == 'custom_thumb') {
         if (!empty($custom_thumb_source)) {
             if ($thumb_linked == 'yes') {
-                $html_thumb .= '<a href="' . $item_post_permalink . '"><img src="' . $custom_thumb_source . '" /></a>';
+                $html_thumb .= '<a href="' . esc_url_raw($item_post_permalink) . '"><img src="' .  esc_url_raw($custom_thumb_source) . '" /></a>';
             } else {
-                $html_thumb .= '<img src="' . $custom_thumb_source . '" />';
+                $html_thumb .= '<img src="' .  esc_url_raw($custom_thumb_source) . '" />';
             }
         }
     } elseif ($media_source == 'font_awesome') {
         if (!empty($custom_thumb_source)) {
             if ($thumb_linked == 'yes') {
-                $html_thumb .= '<a href="' . $item_post_permalink . '"><i style="color:' . $font_awesome_icon_color . ';font-size:' . $font_awesome_icon_size . '" class="fa ' . $font_awesome_icon . '"></i></a>';
+                $html_thumb .= '<a href="' . esc_url_raw($item_post_permalink) . '"><i style="color:' . $font_awesome_icon_color . ';font-size:' . $font_awesome_icon_size . '" class="fa ' . $font_awesome_icon . '"></i></a>';
             } else {
                 $html_thumb .= '<i style="color:' . $font_awesome_icon_color . ';font-size:' . $font_awesome_icon_size . '" class="fa ' . $font_awesome_icon . '"></i>';
             }
@@ -199,7 +199,9 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     } elseif ($media_source == 'first_image') {
         //global $post, $posts;
         $post = get_post($item_post_id);
-        $post_content = $post->post_content;
+        // $post_content = $post->post_content;
+        $post_content = isset($post->post_content) ? ($post->post_content) : '';
+
         $first_img = '';
         ob_start();
         ob_end_clean();
@@ -213,9 +215,9 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
         } else {
 
             if ($thumb_linked == 'yes') {
-                $html_thumb .= '<a href="' . $item_post_permalink . '"><img src="' . $first_img . '" /></a>';
+                $html_thumb .= '<a href="' . esc_url_raw($item_post_permalink) . '"><img src="' . esc_url_raw($first_img) . '" /></a>';
             } else {
-                $html_thumb .= '<img src="' . $first_img . '" />';
+                $html_thumb .= '<img src="' . esc_url_raw($first_img) . '" />';
             }
         }
     } elseif ($media_source == 'first_gallery') {
@@ -237,20 +239,22 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
 
                 $src = wp_get_attachment_url($id);
                 $alt_text = get_post_meta($id, '_wp_attachment_image_alt', true);
-                $html_thumb .= '<img src="' . $src . '" class="gallery-item" alt="' . $alt_text . '" />';
+                $html_thumb .= '<img src="' . esc_url_raw($src) . '" class="gallery-item" alt="' . $alt_text . '" />';
             }
 
             $html_thumb .= '</div>';
         }
     } elseif ($media_source == 'first_youtube') {
         $post = get_post($item_post_id);
-        $post_type = $post->post_type;
+        //$post_type = $post->post_type;
+        $post_type = isset($post->post_type) ? $post->post_type : '';
 
         if ($post_type == 'page') {
             $content = '';
             $html_thumb .= '';
         } else {
-            $content = do_shortcode($post->post_content);
+            //$content = do_shortcode($post->post_content);
+            $content = isset($post->post_content) ? do_shortcode($post->post_content) : '';
         }
 
         $content = apply_filters('the_content', $content);
@@ -272,14 +276,16 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     } elseif ($media_source == 'first_vimeo') {
 
         $post = get_post($item_post_id);
-        $post_type = $post->post_type;
+        //$post_type = $post->post_type;
+        $post_type = isset($post->post_type) ? $post->post_type : '';
 
         if ($post_type == 'page') {
             $content = '';
             $html_thumb .= '';
         } else {
 
-            $content = do_shortcode($post->post_content);
+            //$content = do_shortcode($post->post_content);
+            $content = isset($post->post_content) ? do_shortcode($post->post_content) : '';
         }
         $embeds = get_media_embedded_in_content($content);
 
@@ -299,14 +305,14 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     } elseif ($media_source == 'first_dailymotion') {
 
         $post = get_post($item_post_id);
-        $post_type = $post->post_type;
+        $post_type = isset($post->post_type) ? $post->post_type : '';
 
         if ($post_type == 'page') {
             $content = '';
             $html_thumb .= '';
         } else {
 
-            $content = do_shortcode($post->post_content);
+            $content = isset($post->post_content) ? do_shortcode($post->post_content) : '';
         }
 
         $content = apply_filters('the_content', $content);
@@ -328,14 +334,14 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     } elseif ($media_source == 'first_mp3') {
 
         $post = get_post($item_post_id);
-        $post_type = $post->post_type;
+        $post_type = isset($post->post_type) ? $post->post_type : '';
 
         if ($post_type == 'page') {
             $content = '';
             $html_thumb .= '';
         } else {
 
-            $content = do_shortcode($post->post_content);
+            $content = isset($post->post_content) ? do_shortcode($post->post_content) : '';
         }
 
         $content = apply_filters('the_content', $content);
@@ -357,7 +363,9 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     } elseif ($media_source == 'first_soundcloud') {
 
         $post = get_post($item_post_id);
-        $post_type = $post->post_type;
+        //$post_type = $post->post_type;
+        $post_type = isset($post->post_type) ? $post->post_type : '';
+
         //var_dump($post_type);
 
         if ($post_type == 'page') {
@@ -365,7 +373,8 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
             $html_thumb .= '';
         } else {
 
-            $content = do_shortcode($post->post_content);
+            // $content = do_shortcode($post->post_content);
+            $content = isset($post->post_content) ? do_shortcode($post->post_content) : '';
         }
 
         $content = apply_filters('the_content', $content);
@@ -402,7 +411,7 @@ function post_grid_get_media($item_post_id, $media_source, $featured_img_size, $
     } elseif ($media_source == 'custom_mp3') {
 
         if (!empty($custom_mp3_url)) {
-            $html_thumb .= do_shortcode('[audio src="' . $custom_mp3_url . '"]');
+            $html_thumb .= do_shortcode('[audio src="' . esc_url_raw($custom_mp3_url) . '"]');
         }
     } elseif ($media_source == 'custom_video') {
 
@@ -513,7 +522,9 @@ function post_grid_media($post_id, $args)
 
         //global $post, $posts;
         $post = get_post($post_id);
-        $post_content = $post->post_content;
+        //$post_content = $post->post_content;
+        $post_content = isset($post->post_content) ? ($post->post_content) : '';
+
         $first_img = '';
         ob_start();
         ob_end_clean();
@@ -548,9 +559,9 @@ function post_grid_media($post_id, $args)
 
         if (class_exists('SiteOrigin_Widgets_Bundle')) {
             $output = str_replace(array('\/'), "\\", $post_content); // SiteOrigin adds \/ combinations
-            $output = str_replace(array('src=\\'), 'src=', $output);   // SiteOrigin adds \\
-            $output = str_replace(array('"url":'), ' <img src=', $output);  //SiteOrigin does change the src to url
-            $output = str_replace(array('&lt;img src=&quot;'), '<img src="', $output);    //SiteOrigin does add &&lt and &quot combinations which are not removed
+            $output = str_replace(array('src=\\'), 'src=', esc_url_raw($output));   // SiteOrigin adds \\
+            $output = str_replace(array('"url":'), ' <img src=', esc_url_raw($output));  //SiteOrigin does change the src to url
+            $output = str_replace(array('&lt;img src=&quot;'), '<img src="', esc_url_raw($output));    //SiteOrigin does add &&lt and &quot combinations which are not removed
             $output = str_replace(array('&quot;"'), '"', $output); // Remove this quot combination
             $output = str_replace(array('&quot;'), '', $output);   // Remove this quot combination
 

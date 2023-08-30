@@ -442,14 +442,14 @@ registerBlockType("post-grid/woo-product-excerpt", {
 
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+    // var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
-    for (var x in breakPoints) {
+    // for (var x in breakPoints) {
 
-      var item = breakPoints[x];
-      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
+    //   var item = breakPoints[x];
+    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
-    }
+    // }
 
 
 
@@ -1117,7 +1117,7 @@ registerBlockType("post-grid/woo-product-excerpt", {
                     label=""
                     value={wrapper.options.tag}
                     options={[
-                      { label: 'No Wrapper', value: '' },
+                      { label: 'Choose', value: '' },
                       { label: 'H1', value: 'h1' },
                       { label: 'H2', value: 'h2' },
                       { label: 'H3', value: 'h3' },
@@ -1201,6 +1201,7 @@ registerBlockType("post-grid/woo-product-excerpt", {
                       label=""
                       value={postExcerpt.options.tag}
                       options={[
+                        { label: 'Choose', value: '' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },
                         { label: 'H3', value: 'h3' },

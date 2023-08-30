@@ -21,6 +21,16 @@ import { InnerBlocks, useBlockProps, useInnerBlocksProps } from "@wordpress/bloc
 require("fslightbox")
 
 
+import OpenAI from 'openai';
+
+
+const openai = new OpenAI({
+  apiKey: "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",
+  dangerouslyAllowBrowser: true,
+
+});
+
+
 import IconToggle from '../../components/icon-toggle'
 import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
@@ -203,13 +213,14 @@ registerBlockType("post-grid/image", {
 
 
     const [loading, setLoading] = useState(false);
+    const [openAi, setopenAi] = useState({ promt: "", model: '', role: "", size: '512x512', reponse: null });
+    const [isLoading, setisLoading] = useState(false);
 
     const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
     const [linkPickerSrcUrl, setlinkPickerSrcUrl] = useState(false);
 
 
     const [postImage, setPostImage] = useState(null);
-    const [imageObj, setImageObj] = useState({}); //{src:'', altText:'', sizes:{}}
 
     const [imageSizes, setImageSizes] = useState([]);
     let filterArgsBasic = [
@@ -231,6 +242,43 @@ registerBlockType("post-grid/image", {
 
 
 
+
+    async function getGTP() {
+
+      console.log(openAi.promt);
+      setisLoading(true);
+      console.log(openai);
+
+      if (openAi.promt.length > 0) {
+        const image = await openai.images.generate({ prompt: openAi.promt });
+
+        console.log(image.data[0].url);
+
+        var url = image.data[0].url;
+
+        //var choices = chatCompletion.choices
+
+        //console.log(image_url);
+
+        // var message = choices[0].message.content
+        setopenAi({ ...openAi, reponse: url })
+
+
+
+      }
+
+
+
+      setTimeout(() => {
+        setisLoading(false);
+      }, 1000)
+
+
+    }
+
+
+
+
     var linkToArgsBasic = {
       noUrl: { label: 'No URL', value: '' },
       postUrl: { label: 'Post URL', value: 'postUrl' },
@@ -247,6 +295,7 @@ registerBlockType("post-grid/image", {
 
 
     var customTagArgsBasic = {
+      "": { label: 'Choose', value: '' },
       h1: { label: 'H1', value: 'h1' },
       h2: { label: 'H2', value: 'h2' },
       h3: { label: 'H3', value: 'h3' },
@@ -508,14 +557,14 @@ registerBlockType("post-grid/image", {
 
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+    // var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
-    for (var x in breakPoints) {
+    // for (var x in breakPoints) {
 
-      var item = breakPoints[x];
-      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
+    //   var item = breakPoints[x];
+    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
-    }
+    // }
 
 
 
@@ -1036,9 +1085,6 @@ registerBlockType("post-grid/image", {
                         setlinkPickerSrcUrl(false);
 
 
-
-
-
                       }}></Button>
 
                     )}
@@ -1050,8 +1096,7 @@ registerBlockType("post-grid/image", {
                           setAttributes({ image: { ...image, options: options } });
 
 
-                          setImageObj({ ...imageObj, src: newVal.url });
-                          setPostImage({ ...postImage, media_details: { sizes: {} }, guid: { rendered: newVal.url } });
+                          setPostImage({ ...postImage, srcUrl: newVal.url, media_details: { sizes: {} }, guid: { rendered: newVal.url } });
 
                         }} />
 
@@ -1127,7 +1172,7 @@ registerBlockType("post-grid/image", {
                     label=""
                     value={wrapper.options.tag}
                     options={[
-                      { label: 'No Wrapper', value: '' },
+                      { label: 'Choose', value: '' },
                       { label: 'H1', value: 'h1' },
                       { label: 'H2', value: 'h2' },
                       { label: 'H3', value: 'h3' },
@@ -1693,6 +1738,87 @@ registerBlockType("post-grid/image", {
 
 
 
+          <PanelBody title="OpenAI" initialOpen={false}>
+
+            <div className='px-3'>
+
+
+
+
+              <TextareaControl
+                label=""
+                help="Write OpenAI Prompt"
+                value={openAi.promt}
+                onChange={(value) => {
+                  setopenAi({ ...openAi, promt: value })
+
+                }}
+              />
+
+              <PanelRow>
+                <label for="">Image Size</label>
+                <SelectControl
+                  label=""
+                  value={openAi.size}
+                  options={[
+                    { label: '256x256', value: '256x256' },
+                    { label: '512x512', value: '512x512' },
+                    { label: '1024x1024', value: '1024x1024' },
+                  ]}
+                  onChange={(newVal) => {
+                    setopenAi({ ...openAi, size: newVal })
+
+                  }
+
+                  }
+                />
+              </PanelRow>
+
+              <div className='cursor-pointer text-center my-3 bg-blue-500 rounded-sm text-white px-3 py-2' onClick={ev => {
+                getGTP();
+              }}>
+
+
+                {isLoading && (
+                  <span> Please wait...</span>
+                )}
+                {!isLoading && (
+                  <span> Get Response</span>
+                )}
+
+
+                {isLoading && (
+                  <Spinner />
+                )}
+              </div>
+
+
+              {openAi.reponse != null && (
+
+                <div className='cursor-pointer p-2 hover:bg-gray-200' title="Click to insert mage." >
+                  <img src={openAi.reponse} onClick={ev => {
+
+                    //var options = { ...text.options, content: openAi.reponse };
+                    //setAttributes({ text: { ...text, options: options } });
+
+
+                    var options = { ...image.options, srcUrl: openAi.reponse, imgSrcType: 'customUrl' };
+                    setAttributes({ image: { ...image, options: options } });
+
+                  }} />
+                </div>
+
+              )}
+
+
+
+
+            </div>
+
+
+          </PanelBody>
+
+
           <PanelBody title="Custom Style" initialOpen={false}>
 
 
@@ -1737,12 +1863,29 @@ registerBlockType("post-grid/image", {
         <>
 
 
+
+
+
+
+
           {loading && (
             <div {...blockProps}><Spinner /></div>
           )}
 
           {!loading && (
-            <>
+            <>{(image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && (
+
+              <>
+                {postImage == null && (
+                  <div  {...blockProps}>
+                    <img src={MyImage} alt="" />
+
+                  </div>
+                )}
+
+              </>
+            )}
+
 
 
               {postImage != null && (
@@ -1866,10 +2009,13 @@ registerBlockType("post-grid/image", {
 
               )}
 
+              {image.options.imgSrcType == 'customUrl' && image.options.srcUrl.length == 0 && (<div {...blockProps}>C<img src={MyImage} alt="" /></div>)}
+
 
               {image.options.imgSrcType == 'customUrl' && image.options.srcUrl.length != 0 && (
 
                 <>
+
 
 
 

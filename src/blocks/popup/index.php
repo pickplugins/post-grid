@@ -156,7 +156,7 @@ class PGBlockPopup
         $prams = [];
         $prams['isLogged'] = !empty($user_id) ? true : false;
         $prams['userId'] = $user_id;
-        $prams['refererr'] = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+        $prams['refererr'] = isset($_SERVER['HTTP_REFERER']) ? parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST) : "";
 
 
 

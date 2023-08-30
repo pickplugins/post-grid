@@ -14,6 +14,62 @@ class BlockPostGridRest
     public function register_routes()
     {
 
+        // register_rest_field('page', 'karma', array(
+        //     'get_callback' => function ($comment_arr) {
+        //         $comment_obj = get_comment($comment_arr['id']);
+        //         return (int) $comment_obj->comment_karma;
+        //     },
+        //     'update_callback' => function ($karma, $comment_obj) {
+        //         $ret = wp_update_comment(array(
+        //             'comment_ID'    => $comment_obj->comment_ID,
+        //             'comment_karma' => $karma
+        //         ));
+        //         if (false === $ret) {
+        //             return new WP_Error(
+        //                 'rest_comment_karma_failed',
+        //                 __('Failed to update comment karma.'),
+        //                 array('status' => 500)
+        //             );
+        //         }
+        //         return true;
+        //     },
+        //     'schema' => array(
+        //         'description' => __('Comment karma.'),
+        //         'type'        => 'integer'
+        //     ),
+        // ));
+
+
+
+        $field = 'pg_page_styles';
+        register_rest_field(
+            'post',
+            $field,
+            array(
+                'get_callback'    => function ($object) use ($field) {
+                    // Get field as single value from post meta.
+                    return get_post_meta($object['id'], $field, true);
+                },
+                'update_callback' => function ($value, $object) use ($field) {
+                    // Update the field/meta value.
+                    update_post_meta($object->ID, $field, $value);
+                },
+                'schema'          => array(
+                    'type'        => 'array',
+                    // 'arg_options' => array(
+                    //     'sanitize_callback' => function ($value) {
+                    //         // Make the value safe for storage.
+                    //         return sanitize_text_field($value);
+                    //     },
+                    //     'validate_callback' => function ($value) {
+                    //         // Valid if it contains exactly 10 English letters.
+                    //         return (bool) preg_match('/\A[a-z]{10}\Z/', $value);
+                    //     },
+                    // ),
+                ),
+            )
+        );
+
 
         register_rest_route(
             'post-grid/v2',
@@ -26,6 +82,7 @@ class BlockPostGridRest
                 },
             )
         );
+
 
         register_rest_route(
             'post-grid/v2',
@@ -46,6 +103,17 @@ class BlockPostGridRest
             array(
                 'methods'  => 'POST',
                 'callback' => array($this, 'get_options'),
+                'permission_callback' => function () {
+                    return current_user_can('manage_options');
+                },
+            )
+        );
+        register_rest_route(
+            'post-grid/v2',
+            '/get_postGridBlockEditor',
+            array(
+                'methods'  => 'POST',
+                'callback' => array($this, 'get_postGridBlockEditor'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
                 },
@@ -197,7 +265,6 @@ class BlockPostGridRest
                 'callback' => array($this, 'get_site_details'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
-                    
                 },
             )
         );
@@ -463,7 +530,7 @@ class BlockPostGridRest
                 $thumb_url = isset($thumb[0]) ? $thumb[0] : '';
                 $post->thumb_url = !empty($thumb_url) ? $thumb_url : post_grid_plugin_url . 'assets/frontend/images/placeholder.png';
 
-                $post->is_pro = ($post_id % 2 == 0) ? true : false;
+                $post->is_pro =  false;
 
 
                 $price = get_post_meta($post_id, 'price', true);
@@ -666,18 +733,19 @@ class BlockPostGridRest
         $response = [];
 
 
-        $name     = isset($request['name']) ? $request['name'] : '';
-        $value      = isset($request['value']) ? $request['value'] : '';
+        $name     = isset($request['name']) ? sanitize_text_field($request['name']) : '';
+        $value      = isset($request['value']) ?  post_grid_recursive_sanitize_arr($request['value'])  : '';
 
 
         $status = update_option($name, $value);
 
         $response['status'] = $status;
 
-
-
         die(wp_json_encode($response));
     }
+
+
+
 
 
 
@@ -730,8 +798,6 @@ class BlockPostGridRest
         //error_log($option);
         $response = get_option($option);
 
-
-
         // $response['customFonts'] = [];
         // $response['googleFonts'] = [];
 
@@ -747,10 +813,33 @@ class BlockPostGridRest
         // $response['license']['renewed'] = '';
         // $response['license']['expire'] = '';
 
+        die(wp_json_encode($response));
+    }
+
+    /**
+     * Return get_postGridBlockEditor
+     *
+     * @since 1.0.0
+     * @param WP_REST_Request $post_data Post data.
+     */
+    public function get_postGridBlockEditor($request)
+    {
+        $response = [];
+
+
+        $option      =  'post_grid_block_editor';
+
+        //error_log($option);
+        $response = get_option($option);
 
 
         die(wp_json_encode($response));
     }
+
+
+
+
+
 
     /**
      * Return process_form_data

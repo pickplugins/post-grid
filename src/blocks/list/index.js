@@ -255,14 +255,14 @@ registerBlockType("post-grid/list", {
     }, [customCss]);
 
 
-    var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+    // var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
 
-    for (var x in breakPoints) {
+    // for (var x in breakPoints) {
 
-      var itemX = breakPoints[x];
-      breakPointList.push({ label: itemX.name, icon: itemX.icon, value: itemX.id })
+    //   var itemX = breakPoints[x];
+    //   breakPointList.push({ label: itemX.name, icon: itemX.icon, value: itemX.id })
 
-    }
+    // }
 
 
 
@@ -691,6 +691,8 @@ registerBlockType("post-grid/list", {
                       label=""
                       value={wrapper.options.tag}
                       options={[
+                        { label: 'Choose', value: '' },
+
                         { label: 'Ul', value: 'ul' },
                         { label: 'Ol', value: 'ol' },
                         { label: 'H1', value: 'h1' },
@@ -767,6 +769,8 @@ registerBlockType("post-grid/list", {
                       label=""
                       value={item.options.tag}
                       options={[
+                        { label: 'Choose', value: '' },
+
                         { label: 'li', value: 'li' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },

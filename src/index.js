@@ -2,6 +2,18 @@
 import apiFetch from '@wordpress/api-fetch';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
+import { subscribe, select } from '@wordpress/data';
+
+//const { Configuration, OpenAIApi } = require("openai");
+
+
+// const configuration = new Configuration({
+//     apiKey: "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",
+// });
+
+// const openai = new OpenAIApi(configuration);
+
+
 
 window.PostGridPluginData = {
     freeUrl: "https://wordpress.org/plugins/post-grid/",
@@ -25,16 +37,33 @@ window.PostGridPluginData = {
 
 };
 
+
+window.postGridBlockEditor = null;
+
+
+
 apiFetch({
     path: '/post-grid/v2/get_plugin_data',
     method: 'POST',
     data: {},
 }).then((res) => {
 
-    //console.log(res);
-
     window.PostGridPluginData = res;
 });
+
+
+apiFetch({
+    path: '/post-grid/v2/get_options',
+    method: 'POST',
+    data: { option: 'post_grid_block_editor' },
+}).then((res) => {
+
+    window.postGridBlockEditor = res;
+
+
+})
+
+
 
 
 
@@ -47,7 +76,25 @@ wp.domReady(function () {
 });
 
 
+//var generalSidebarName = wp.data.select('core/edit-post').getActiveGeneralSidebarName();
+//const isSidebarOpened = wp.data.select('post-grid-sidebar').isPluginSidebarOpened();
 
+// if (!isSidebarOpened) {
+//     wp.data.dispatch('post-grid-sidebar').openGeneralSidebar();
+// }
+
+
+// subscribe(() => {
+//     if (select('core/edit-post').isPluginSidebarOpened()) {
+//         // Is open..
+//         console.log(generalSidebarName);
+
+//     } else {
+//         // Is closed..
+//         console.log(generalSidebarName);
+
+//     }
+// });
 
 
 

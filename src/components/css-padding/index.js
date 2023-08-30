@@ -44,7 +44,7 @@ function Html(props) {
 
   const [valX, setvalX] = useState({ top: topX, right: rightX, bottom: bottomX, left: leftX });
 
-  const [isImportant, setImportant] = useState(valParts.includes("!important") ? true : false);
+  const [isImportant, setImportant] = useState(valParts == undefined ? false : valParts.includes("!important") ? true : false);
 
 
   return (

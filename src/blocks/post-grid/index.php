@@ -817,7 +817,7 @@ class PGBlockPostGrid
 
         if ($srcServer == 'saved') {
             $postData = get_post($layout_id);
-            $rawDatabyId = !empty($layout['id']) ? $postData->post_content : '';
+            $rawDatabyId = isset($postData->post_content) ? $postData->post_content : '';
             $rawData = !empty($rawDatabyId) ? $rawDatabyId : $rawData;
         }
 

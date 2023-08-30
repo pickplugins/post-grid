@@ -9,7 +9,12 @@ import { createElement, memo, useMemo, useState, useEffect } from '@wordpress/el
 
 import PGDropdown from '../../components/dropdown'
 
+import PGcssKeyframes from '../../components/css-keyframes'
+import PGcssOpenaiArticleWriter from '../../components/openai-article-writer'
+import PGGlobalStyles from '../../components/global-styles'
+import PGPageStyles from '../../components/page-styles'
 
+var myStore = wp.data.select('postgrid-shop');
 
 
 function Html(props) {
@@ -29,24 +34,43 @@ function Html(props) {
     editor: { width: '1150px' },
     blocks: { disabled: [] },
     blockInserter: { postGridPositon: '' }, // Category positon
+    openAI: { apiKey: '' },
+    keyframes: {},
+    globalStyles: [
+      { options: { selector: "a" }, styles: {} },
+      { options: { selector: "h1" }, styles: {} },
+      { options: { selector: "h2" }, styles: {} },
+    ],
+    pageStyles: [
+      { options: { selector: "a" }, styles: {} },
+      { options: { selector: "h1" }, styles: {} },
+      { options: { selector: "h2" }, styles: {} },
+    ],
+
+
+
 
   }
 
 
   var [optionData, setoptionData] = useState(optionDataDefault); // Using the hook.
+
+
   var [dataLoaded, setdataLoaded] = useState(false); // Using the hook.
   var [isLoading, setisLoading] = useState(false); // Using the hook.
 
   var [debounce, setDebounce] = useState(null); // Using the hook.
   var [colorPopup, setcolorPopup] = useState(null); // Using the hook.
   var [blockCategories, setblockCategories] = useState(null); // Using the hook.
-
+  var postGridBlockEditor = myStore.getpostGridBlockEditor();
 
 
   var isLoaded = props.isLoaded;
 
 
   useEffect(() => {
+
+
 
 
     apiFetch({
@@ -68,7 +92,6 @@ function Html(props) {
       data: {},
     }).then((res) => {
 
-      console.log(res);
       var items = [];
       res.map(x => {
         items.push({ label: x.title, value: x.slug })
@@ -79,11 +102,7 @@ function Html(props) {
 
     })
 
-
-
-
-  },
-    [isLoaded]);
+  }, [isLoaded]);
 
 
   useEffect(() => {
@@ -93,19 +112,21 @@ function Html(props) {
       debounce = setTimeout(() => {
 
         updateOption();
+
+
       },
         1000);
     }
 
-
-
-
   }, [optionData]);
+
+
+
+
 
 
   useEffect(() => {
 
-    console.log(optionData.blocks.disabled);
 
 
     wp.domReady(function () {
@@ -125,19 +146,31 @@ function Html(props) {
   function updateOption() {
 
     setisLoading(true)
+    console.log(postGridBlockEditor);
+
+    console.log(optionData);
+
+
 
     apiFetch({
       path: '/post-grid/v2/update_options',
       method: 'POST',
       data: { name: 'post_grid_block_editor', value: optionData },
     }).then((res) => {
-      console.log(res);
       setisLoading(false)
 
       //setoptionData(res)
+
+      var asdsdsd = wp.data.dispatch('postgrid-shop').setpostGridBlockEditor(optionData)
+
+      asdsdsd.then((res) => {
+
+      });
     })
 
   }
+
+
 
 
 
@@ -277,7 +310,7 @@ function Html(props) {
 
           <div className=''>
 
-            <div className='p-3'>
+            {/* <div className='p-3'>
 
               <PanelRow>
                 <label>Container Width</label>
@@ -344,10 +377,10 @@ function Html(props) {
 
 
 
-            </div>
+            </div> */}
 
 
-            <PanelBody title="Custom Fonts" initialOpen={false}>
+            {/* <PanelBody  title="Custom Fonts" initialOpen={false}>
 
               <div className='my-3'>
                 <div className='inline-block px-4 py-1 my-3 bg-gray-400 text-white rounded-sm cursor-pointer' onClick={ev => {
@@ -386,7 +419,6 @@ function Html(props) {
                             customFonts.splice(i, 1);
                             setoptionData({ ...optionData, customFonts: customFonts })
 
-                            console.log(newVal);
 
 
                           }}><Icon fill={'#fff'} icon={close} /></span>
@@ -429,7 +461,6 @@ function Html(props) {
                               var customFonts = optionData.customFonts
                               customFonts[i].src.push({ url: '', format: '' })
 
-                              console.log(customFonts);
 
                               setoptionData({ ...optionData, customFonts: customFonts })
 
@@ -549,10 +580,9 @@ function Html(props) {
 
 
 
-            </PanelBody>
-            <PanelBody title="Disable Blocks" initialOpen={false}>
+            </PanelBody> */}
+            {/* <PanelBody title="Disable Blocks" initialOpen={false}>
 
-              {/* {JSON.stringify(optionData.blocks.disabled)} */}
 
 
               {Object.entries(pgBlocks).map(x => {
@@ -603,9 +633,9 @@ function Html(props) {
 
               })}
 
-            </PanelBody>
+            </PanelBody> */}
 
-            <PanelBody title="Block Inserter" initialOpen={false}>
+            {/* <PanelBody title="Block Inserter" initialOpen={false}>
 
               <PanelRow>
                 <label for="">Post Grid Combo Position</label>
@@ -624,8 +654,8 @@ function Html(props) {
                 />
               </PanelRow>
 
-            </PanelBody>
-
+            </PanelBody> */}
+            {/* 
             <PanelBody title="Colors" initialOpen={false}>
 
 
@@ -703,7 +733,6 @@ function Html(props) {
                                   colors[i] = newVal;
                                   setoptionData({ ...optionData, colors: colors })
 
-                                  console.log(newVal);
 
                                 }}
                               />
@@ -721,6 +750,75 @@ function Html(props) {
                 })}
 
               </div>
+
+
+            </PanelBody> */}
+
+            {/* <PanelBody title="Keyframes" initialOpen={false}>
+
+
+
+              {optionData.keyframes != null && (
+                <PGcssKeyframes keyframes={optionData.keyframes} onChange={(args) => {
+
+
+                  setoptionData({ ...optionData, keyframes: args })
+
+                }} />
+              )}
+
+
+
+            </PanelBody> */}
+            {/* 
+            <PanelBody title="Global Styles" initialOpen={false}>
+              <p className='my-3'>Global styles will used to all pages.</p>
+
+              <PGGlobalStyles args={optionData.globalStyles == undefined ? optionDataDefault.globalStyles : optionData.globalStyles} onChange={(prams) => {
+                setoptionData({ ...optionData, globalStyles: prams })
+              }} />
+            </PanelBody> */}
+
+            {/* <PanelBody title="Page Styles" initialOpen={false}>
+              <PGPageStyles args={optionData.pageStyles == undefined ? optionDataDefault.pageStyles : optionData.pageStyles} onChange={(prams) => {
+                setoptionData({ ...optionData, pageStyles: prams })
+              }} />
+            </PanelBody> */}
+
+
+
+
+            {/* <PanelBody title="Article Writer" initialOpen={false}>
+              <PGcssOpenaiArticleWriter args={''} onChange={(args) => {
+
+
+
+
+              }} />
+
+
+            </PanelBody> */}
+
+            <PanelBody title="OpenAI" initialOpen={false}>
+
+              <PanelRow>
+                <label>API Key</label>
+                <InputControl
+                  placeholder=""
+                  type="text"
+                  value={optionData.openAI == undefined ? '' : optionData.openAI.apiKey}
+                  onChange={(newVal) => {
+
+                    var openAI = { ...optionData.openAI, apiKey: newVal }
+                    setoptionData({ ...optionData, openAI: openAI })
+
+                  }}
+                />
+
+
+
+              </PanelRow>
+
 
 
             </PanelBody>

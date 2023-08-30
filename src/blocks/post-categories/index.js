@@ -247,14 +247,14 @@ registerBlockType("post-grid/post-categories", {
     const postCountSelector = blockClass + ' .postCount';
     const iconSelector = blockClass + ' .icon';
 
-    var breakPointList = [];
+    // var breakPointList = [];
 
-    for (var x in breakPoints) {
+    // for (var x in breakPoints) {
 
-      var item = breakPoints[x];
-      breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
+    //   var item = breakPoints[x];
+    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
 
-    }
+    // }
 
 
     var dummyCats = [
@@ -1091,6 +1091,7 @@ registerBlockType("post-grid/post-categories", {
                     label=""
                     value={wrapper.options.tag}
                     options={[
+                      { label: 'Choose', value: '' },
                       { label: 'H1', value: 'h1' },
                       { label: 'H2', value: 'h2' },
                       { label: 'H3', value: 'h3' },

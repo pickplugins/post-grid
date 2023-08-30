@@ -11,7 +11,7 @@ var iconPostGrid = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><
 const PostGridSidebar = () => (
 
 
-// hello
+    // hello
 
 
     <PluginSidebar name="post-grid-sidebar" title="Post Grid Combo" icon={iconPostGrid}>
@@ -20,7 +20,6 @@ const PostGridSidebar = () => (
 );
 
 registerPlugin('post-grid-sidebar', { render: PostGridSidebar });
-
 
 
 

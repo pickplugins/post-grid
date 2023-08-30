@@ -1,4 +1,7 @@
-const queryPrams = [
+import { applyFilters } from '@wordpress/hooks';
+
+
+const queryPramsBasic = [
   { val: ['post'], multiple: false, id: 'postType', label: 'Post Types', description: "Select Post Types to Query" },
   { val: [], multiple: false, id: 'taxQuery', label: 'Tax Query', description: "Taxonomies query arguments", isPro: true },
   { val: 'OR', multiple: false, id: 'taxQueryRelation', label: 'Tax Query Relation', description: "Taxonomies query relation" },
@@ -82,6 +85,8 @@ const queryPrams = [
   { val: false, multiple: false, id: 'updatePostTermCache', label: 'Update Post Term Cache', description: "Enable Post term information cache" },
 
 ];
+
+let queryPrams = applyFilters('queryPrams', queryPramsBasic);
 
 
 export default queryPrams;

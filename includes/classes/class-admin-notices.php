@@ -51,10 +51,10 @@ class class_post_grid_notices
 
 
 
-                wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
+                // wp_enqueue_style('post-grid-output', post_grid_plugin_url . '/dist/output.css', [], time(), 'all');
 
 ?>
-                <div class="p-3 bg-white my-10">
+                <div class="notice error">
                     <p class="text-lg flex justify-between">
                         <span>
                             <span class="dashicons dashicons-warning align-middle text-red-600"></span> Your license for Post Grid plugin has expried, please <a target="_blank" class="bg-blue-600 rounded-sm inline-block text-white hover:text-white hover:bg-blue-700 px-5 py-1" href="https://pickplugins.com/post-grid/purchase-license/?licenseKey=<?php echo $license_key; ?>">Renew</a>

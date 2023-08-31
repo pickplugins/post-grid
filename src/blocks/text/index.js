@@ -30,7 +30,6 @@ import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
 
-import OpenAI from 'openai';
 
 
 
@@ -126,19 +125,11 @@ registerBlockType("post-grid/text", {
     var blockCssY = attributes.blockCssY;
 
 
-
-
-    // var postGridBlockEditor = myStore.getpostGridBlockEditor();
-
-
     //const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
     var breakPointX = myStore.getBreakPoint();
 
-    const [postGridBlockEditor, setpostGridBlockEditor] = useState(myStore.getpostGridBlockEditor());
     const [isLoading, setisLoading] = useState(false);
-    const [openAiPrams, setopenAiPrams] = useState({ promt: "", model: '', role: "", reponse: null });
     var [debounce, setDebounce] = useState(null); // Using the hook.
-    var [openai, setopenai] = useState(null); // Using the hook.
 
     const CustomTag = `${text.options.tag}`;
 
@@ -146,58 +137,9 @@ registerBlockType("post-grid/text", {
     // Wrapper CSS Class Selectors
     var textSelector = blockClass;
 
-    useEffect(() => {
-
-      console.log(postGridBlockEditor);
-
-      console.log(myStore.getpostGridBlockEditor());
-
-
-      const openai = new OpenAI({
-        apiKey: "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",
-        dangerouslyAllowBrowser: true,
-      });
-      setopenai(openai)
-
-    }, [postGridBlockEditor]);
 
 
 
-
-
-    async function getGTP() {
-
-
-
-      setisLoading(true);
-
-      if (openai != null && openAiPrams.promt.length > 0) {
-        const chatCompletion = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
-          messages: [{ "role": "user", "content": openAiPrams.promt }],
-        });
-        console.log(chatCompletion.choices[0].message);
-
-
-        var choices = chatCompletion.choices
-
-        console.log(choices);
-
-        var message = choices[0].message.content
-        setopenAiPrams({ ...openAiPrams, reponse: message })
-
-
-
-      }
-
-
-
-      setTimeout(() => {
-        setisLoading(false);
-      }, 1000)
-
-
-    }
 
 
     useEffect(() => {
@@ -226,6 +168,7 @@ registerBlockType("post-grid/text", {
 
     useEffect(() => {
       //console.log('blockId', blockId);
+
 
 
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
@@ -535,61 +478,7 @@ registerBlockType("post-grid/text", {
               </PGtabs>
 
             </PanelBody>
-            <PanelBody title="OpenAI" initialOpen={false}>
 
-
-              <div className=''>
-
-
-
-
-                <TextareaControl
-                  label=""
-                  placeholder="Write OpenAI Prompt"
-                  value={openAiPrams.promt}
-                  onChange={(value) => {
-                    setopenAiPrams({ ...openAiPrams, promt: value })
-
-                  }}
-                />
-
-                <div className='cursor-pointer text-center my-3 bg-blue-500 rounded-sm text-white px-3 py-2' onClick={ev => {
-                  getGTP();
-                }}>
-
-
-                  {isLoading && (
-                    <span> Please wait...</span>
-                  )}
-                  {!isLoading && (
-                    <span> Get Response</span>
-                  )}
-
-
-                  {isLoading && (
-                    <Spinner />
-                  )}
-                </div>
-
-
-                {openAiPrams.reponse != null && (
-
-                  <div className='cursor-pointer whitespace-pre-line p-2 hover:bg-gray-200' title="Click to replace text." onClick={ev => {
-
-                    var options = { ...text.options, content: openAiPrams.reponse };
-                    setAttributes({ text: { ...text, options: options } });
-
-                  }}>
-                    {openAiPrams.reponse}
-                  </div>
-
-                )}
-
-
-
-
-              </div>
-            </PanelBody>
 
             <PanelBody title="Custom Style" initialOpen={false}>
 

@@ -30,7 +30,6 @@ const DEFAULT_STATE = {
   license: { license_status: '', license_key: '' },
   blockCss: '',
   stylesClipboard: null,
-  postGridBlockEditor: null,
 
 
 };
@@ -61,19 +60,7 @@ var selectors = {
 
 
 
-  getpostGridBlockEditor(state) {
-    const { postGridBlockEditor } = state;
 
-
-    if (postGridBlockEditor == null) {
-
-
-    }
-
-
-
-    return postGridBlockEditor;
-  },
 
 
   cssAttrParse(state, key) {
@@ -834,15 +821,6 @@ var resolvers = {
 
     return actions.setLicense(res);
   },
-  * getpostGridBlockEditor() {
-    const path = '/post-grid/v2/get_postGridBlockEditor';
-    const res = yield actions.fetchLicense(path);
-    //console.log('resolvers', res);
-
-    return actions.setpostGridBlockEditor(res);
-  },
-
-
 
   * getclientdata() {
     const path = '/post-grid/v2/get_site_details';
@@ -895,13 +873,6 @@ const actions = {
     };
   },
 
-
-  setpostGridBlockEditor(postGridBlockEditor) {
-    return {
-      type: 'SET_postGridBlockEditor',
-      postGridBlockEditor,
-    };
-  },
 
 
 
@@ -979,11 +950,6 @@ const store = createReduxStore('postgrid-shop', {
 
 
 
-      case 'SET_postGridBlockEditor':
-        return {
-          ...state,
-          postGridBlockEditor: action.postGridBlockEditor,
-        };
 
 
     }

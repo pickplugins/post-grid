@@ -4,7 +4,7 @@
 	Tags: post grid, post grid block, block, custom post grid, post type grid, grid display,  grid layout, post list, masonry grid
 	Requires at least: 5.0.0
 	Tested up to: 6.3
-	Stable tag: 2.2.53
+	Stable tag: 2.2.54
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -383,7 +383,7 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 
 
-= 2.2.53 =
+= 2.2.54 =
 * 2023-08-31 - fix - Style Component - Class duplicate issue fixed.
 * 2023-08-31 - fix - Social Share block - Default style issue fixed
 * 2023-08-31 - fix - Image block - Double image issue fixed for source image url

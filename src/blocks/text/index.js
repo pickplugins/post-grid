@@ -473,7 +473,7 @@ registerBlockType("post-grid/text", {
                   <PGStyles obj={text} onChange={onChangeStyleText} onAdd={onAddStyleText} onRemove={onRemoveStyleText} onBulkAdd={onBulkAddText} />
                 </PGtab>
                 <PGtab name="css">
-                  {/* <PGCssLibrary blockId={blockId} obj={text} onChange={onPickCssLibraryText} /> */}
+                  <PGCssLibrary blockId={blockId} obj={text} onChange={onPickCssLibraryText} />
                 </PGtab>
               </PGtabs>
 

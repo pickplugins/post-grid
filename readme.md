@@ -383,7 +383,7 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 
 
-= 2.2.52 =
+= 2.2.53 =
 * 2023-08-31 - fix - Style Component - Class duplicate issue fixed.
 * 2023-08-31 - fix - Social Share block - Default style issue fixed
 * 2023-08-31 - fix - Image block - Double image issue fixed for source image url

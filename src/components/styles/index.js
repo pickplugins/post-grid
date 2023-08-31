@@ -423,9 +423,6 @@ function Html(props) {
     //var objX = { ...props.obj }
     let objX = Object.assign({}, props.obj);
 
-
-
-
     if (objX[sudoScource][option.id] == undefined) {
 
       var path = [sudoScource, option.id]
@@ -434,7 +431,19 @@ function Html(props) {
 
       //props.obj[sudoScource][option.id] = {};
     } else {
-      alert('Property already added');
+      //alert('Property already added');
+
+      if (objX[sudoScource][option.id][breakPointX] == undefined) {
+        var path = [sudoScource, option.id, breakPointX]
+        const object = myStore.addPropertyDeep(objX, path, '');
+        props.onAdd(sudoScource, option.id, object, props.extra)
+      } else {
+        alert('Property already added');
+      }
+
+
+
+
     }
 
     //props.onAdd(sudoScource, option.id, props.obj, props.extra)

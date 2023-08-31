@@ -266,12 +266,12 @@ registerBlockType("post-grid/social-share", {
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
-      blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-size': { "Desktop": "30px" } };
+      // blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'font-size': { "Desktop": "30px" } };
 
-      blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-top': { "Desktop": "10px" } };
-      blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-right': { "Desktop": "10px" } };
-      blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-bottom': { "Desktop": "10px" } };
-      blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-left': { "Desktop": "10px" } };
+      // blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-top': { "Desktop": "10px" } };
+      // blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-right': { "Desktop": "10px" } };
+      // blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-bottom': { "Desktop": "10px" } };
+      // blockCssY.items[itemSelector] = { ...blockCssY.items[itemSelector], 'margin-left': { "Desktop": "10px" } };
 
 
       setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -546,12 +546,14 @@ registerBlockType("post-grid/social-share", {
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -606,8 +608,10 @@ registerBlockType("post-grid/social-share", {
 
       sudoScourceX[attr][breakPointX] = newVal;
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       Object.entries(sudoScourceX).map(args => {
@@ -673,12 +677,14 @@ registerBlockType("post-grid/social-share", {
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -728,12 +734,14 @@ registerBlockType("post-grid/social-share", {
       var elementSelector = myStore.getElementSelector(sudoScource, labelSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -784,12 +792,14 @@ registerBlockType("post-grid/social-share", {
       var elementSelector = myStore.getElementSelector(sudoScource, countSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 

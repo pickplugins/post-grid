@@ -307,12 +307,14 @@ registerBlockType("post-grid/form-field-file", {
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -403,12 +405,14 @@ registerBlockType("post-grid/form-field-file", {
       var elementSelector = myStore.getElementSelector(sudoScource, labelSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -509,12 +513,14 @@ registerBlockType("post-grid/form-field-file", {
       var elementSelector = myStore.getElementSelector(sudoScource, inputSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -601,12 +607,14 @@ registerBlockType("post-grid/form-field-file", {
       var elementSelector = myStore.getElementSelector(sudoScource, labelWrapSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -690,12 +698,14 @@ registerBlockType("post-grid/form-field-file", {
       var elementSelector = myStore.getElementSelector(sudoScource, inputWrapSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -777,12 +787,14 @@ registerBlockType("post-grid/form-field-file", {
       var elementSelector = myStore.getElementSelector(sudoScource, errorWrapSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 

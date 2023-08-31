@@ -686,12 +686,14 @@ registerBlockType("post-grid/image", {
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -740,12 +742,14 @@ registerBlockType("post-grid/image", {
       var elementSelector = myStore.getElementSelector(sudoScource, imgSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -1869,7 +1873,7 @@ registerBlockType("post-grid/image", {
 
 
           {loading && (
-            <div {...blockProps}><Spinner /></div>
+            <div {...blockProps}>A<Spinner /></div>
           )}
 
           {!loading && (
@@ -1895,7 +1899,7 @@ registerBlockType("post-grid/image", {
                     <CustomTag {...blockProps}></CustomTag>
                   )}
 
-                  {wrapper.options.useAsBackground == 'no' && (
+                  {wrapper.options.useAsBackground == 'no' && (image.options.imgSrcType == 'media' || image.options.imgSrcType == 'customField') && (
                     <>
 
                       {wrapper.options.tag.length == 0 && (
@@ -2009,15 +2013,12 @@ registerBlockType("post-grid/image", {
 
               )}
 
-              {image.options.imgSrcType == 'customUrl' && image.options.srcUrl.length == 0 && (<div {...blockProps}>C<img src={MyImage} alt="" /></div>)}
+              {image.options.imgSrcType == 'customUrl' && image.options.srcUrl.length == 0 && (<div {...blockProps}><img src={MyImage} alt="" /></div>)}
 
 
               {image.options.imgSrcType == 'customUrl' && image.options.srcUrl.length != 0 && (
 
                 <>
-
-
-
 
                   {wrapper.options.tag.length == 0 && (
 

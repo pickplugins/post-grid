@@ -476,12 +476,14 @@ registerBlockType("post-grid/date-countdown", {
       var elementSelector = myStore.getElementSelector(sudoScource, wrapperSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -539,12 +541,14 @@ registerBlockType("post-grid/date-countdown", {
       var elementSelector = myStore.getElementSelector(sudoScource, commentCountSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -602,12 +606,14 @@ registerBlockType("post-grid/date-countdown", {
       var elementSelector = myStore.getElementSelector(sudoScource, iconSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -664,12 +670,14 @@ registerBlockType("post-grid/date-countdown", {
       var elementSelector = myStore.getElementSelector(sudoScource, prefixSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
 
@@ -722,8 +730,10 @@ registerBlockType("post-grid/date-countdown", {
 
       sudoScourceX[attr][breakPointX] = newVal;
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
       Object.entries(sudoScourceX).map(args => {

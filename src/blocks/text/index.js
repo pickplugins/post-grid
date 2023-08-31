@@ -35,10 +35,6 @@ import OpenAI from 'openai';
 
 
 
-const openai = new OpenAI({
-  apiKey: "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",
-  dangerouslyAllowBrowser: true,
-});
 
 
 
@@ -132,15 +128,17 @@ registerBlockType("post-grid/text", {
 
 
 
-    //var postGridBlockEditor = myStore.getpostGridBlockEditor();
+    // var postGridBlockEditor = myStore.getpostGridBlockEditor();
 
 
     //const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
     var breakPointX = myStore.getBreakPoint();
 
+    const [postGridBlockEditor, setpostGridBlockEditor] = useState(myStore.getpostGridBlockEditor());
     const [isLoading, setisLoading] = useState(false);
     const [openAiPrams, setopenAiPrams] = useState({ promt: "", model: '', role: "", reponse: null });
     var [debounce, setDebounce] = useState(null); // Using the hook.
+    var [openai, setopenai] = useState(null); // Using the hook.
 
     const CustomTag = `${text.options.tag}`;
 
@@ -148,6 +146,20 @@ registerBlockType("post-grid/text", {
     // Wrapper CSS Class Selectors
     var textSelector = blockClass;
 
+    useEffect(() => {
+
+      console.log(postGridBlockEditor);
+
+      console.log(myStore.getpostGridBlockEditor());
+
+
+      const openai = new OpenAI({
+        apiKey: "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",
+        dangerouslyAllowBrowser: true,
+      });
+      setopenai(openai)
+
+    }, [postGridBlockEditor]);
 
 
 
@@ -196,6 +208,7 @@ registerBlockType("post-grid/text", {
 
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
+
 
 
 
@@ -299,12 +312,18 @@ registerBlockType("post-grid/text", {
       var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
-      if (blockCssY.items[elementSelector] == undefined) {
-        blockCssY.items[elementSelector] = {};
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
       }
 
+      // if (blockCssY.items[elementSelector] == undefined) {
+      //     blockCssY.items[elementSelector] = {};
+      //   }
+
       var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       //console.log('cssItems', cssItems);
 
@@ -425,57 +444,6 @@ registerBlockType("post-grid/text", {
 
 
 
-            <div className='px-3'>
-
-
-
-
-              <TextareaControl
-                label=""
-                help="Write OpenAI Prompt"
-                value={openAiPrams.promt}
-                onChange={(value) => {
-                  setopenAiPrams({ ...openAiPrams, promt: value })
-
-                }}
-              />
-
-              <div className='cursor-pointer text-center my-3 bg-blue-500 rounded-sm text-white px-3 py-2' onClick={ev => {
-                getGTP();
-              }}>
-
-
-                {isLoading && (
-                  <span> Please wait...</span>
-                )}
-                {!isLoading && (
-                  <span> Get Response</span>
-                )}
-
-
-                {isLoading && (
-                  <Spinner />
-                )}
-              </div>
-
-
-              {openAiPrams.reponse != null && (
-
-                <div className='cursor-pointer whitespace-pre-line p-2 hover:bg-gray-200' title="Click to replace text." onClick={ev => {
-
-                  var options = { ...text.options, content: openAiPrams.reponse };
-                  setAttributes({ text: { ...text, options: options } });
-
-                }}>
-                  {openAiPrams.reponse}
-                </div>
-
-              )}
-
-
-
-
-            </div>
 
             <PanelBody title="Text" initialOpen={false}>
 
@@ -567,6 +535,62 @@ registerBlockType("post-grid/text", {
               </PGtabs>
 
             </PanelBody>
+            <PanelBody title="OpenAI" initialOpen={false}>
+
+
+              <div className=''>
+
+
+
+
+                <TextareaControl
+                  label=""
+                  placeholder="Write OpenAI Prompt"
+                  value={openAiPrams.promt}
+                  onChange={(value) => {
+                    setopenAiPrams({ ...openAiPrams, promt: value })
+
+                  }}
+                />
+
+                <div className='cursor-pointer text-center my-3 bg-blue-500 rounded-sm text-white px-3 py-2' onClick={ev => {
+                  getGTP();
+                }}>
+
+
+                  {isLoading && (
+                    <span> Please wait...</span>
+                  )}
+                  {!isLoading && (
+                    <span> Get Response</span>
+                  )}
+
+
+                  {isLoading && (
+                    <Spinner />
+                  )}
+                </div>
+
+
+                {openAiPrams.reponse != null && (
+
+                  <div className='cursor-pointer whitespace-pre-line p-2 hover:bg-gray-200' title="Click to replace text." onClick={ev => {
+
+                    var options = { ...text.options, content: openAiPrams.reponse };
+                    setAttributes({ text: { ...text, options: options } });
+
+                  }}>
+                    {openAiPrams.reponse}
+                  </div>
+
+                )}
+
+
+
+
+              </div>
+            </PanelBody>
+
             <PanelBody title="Custom Style" initialOpen={false}>
 
               <p>Please use following class selector to apply your custom CSS</p>
@@ -601,39 +625,8 @@ registerBlockType("post-grid/text", {
         </InspectorControls >
 
 
-
-
-        ###########
-
-        <div>
-
-          <code>
-            {JSON.stringify(blockClass)}
-
-          </code>
-        </div>
-        <div>
-
-          <code>
-            {JSON.stringify(blockCssY)}
-
-          </code>
-        </div>
-
-
-
-        <div>
-          <code>
-            {JSON.stringify(text)}
-          </code>
-        </div>
-
-
-
-
         <RichText
           {...blockProps}
-
 
           tagName={CustomTag}
           value={text.options.content}

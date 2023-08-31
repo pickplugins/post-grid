@@ -487,7 +487,7 @@ var selectors = {
   onAddStyleItem(state, sudoScource, key, obj) {
     const { breakPoint } = state;
 
-    console.log('obj', obj);
+    //console.log('obj', obj);
 
 
     var path = [sudoScource, key, breakPoint];
@@ -501,7 +501,7 @@ var selectors = {
   addPropertyDeep(state, obj, path, value) {
     const [head, ...rest] = path
 
-    console.log('obj', obj);
+    //console.log('obj', obj);
 
 
     return {
@@ -512,7 +512,7 @@ var selectors = {
 
   updatePropertyDeep(state, obj, path, value) {
 
-    console.log('obj', obj);
+    // console.log('obj', obj);
 
 
     const [head, ...rest] = path
@@ -658,7 +658,7 @@ var selectors = {
     const { blockCss } = state;
     var reponsiveCssGroups = {};
 
-    console.log(items);
+    // console.log(items);
 
 
     for (var selector in items) {
@@ -837,7 +837,7 @@ var resolvers = {
   * getpostGridBlockEditor() {
     const path = '/post-grid/v2/get_postGridBlockEditor';
     const res = yield actions.fetchLicense(path);
-    console.log('resolvers', res);
+    //console.log('resolvers', res);
 
     return actions.setpostGridBlockEditor(res);
   },

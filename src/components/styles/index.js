@@ -419,14 +419,25 @@ function Html(props) {
 
   function setCssAttr(option, index) {
 
-    //console.log('setCssAttr');
+
+    //var objX = { ...props.obj }
+    let objX = Object.assign({}, props.obj);
 
 
-    if (props.obj[sudoScource][option.id] == undefined) {
-      props.obj[sudoScource][option.id] = {};
+
+
+    if (objX[sudoScource][option.id] == undefined) {
+
+      var path = [sudoScource, option.id]
+      const object = myStore.addPropertyDeep(objX, path, {});
+      props.onAdd(sudoScource, option.id, object, props.extra)
+
+      //props.obj[sudoScource][option.id] = {};
+    } else {
+      alert('Property already added');
     }
 
-    props.onAdd(sudoScource, option.id, props.obj, props.extra)
+    //props.onAdd(sudoScource, option.id, props.obj, props.extra)
 
 
   }

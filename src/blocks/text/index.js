@@ -74,20 +74,7 @@ registerBlockType("post-grid/text", {
           class: 'pg-text',
         },
 
-        styles:
-        {
-          // textAlign: {Desktop: ''},
-          // color: { Desktop: '' },
-          // padding: { Desktop: '' },
-          // margin: { Desktop: '' },
-          // fontSize: { Desktop: '' },
-          // lineHeight: {Desktop: ''},
-          // letterSpacing: {Desktop: ''},
-          // fontFamily: {Desktop: ''},
-          // fontWeight: {Desktop: ''},
-          // textDecoration: {Desktop: ''}, //overline, line-through, underline
-          // textTransform: {Desktop: ''},
-        },
+
       },
     },
 
@@ -143,8 +130,6 @@ registerBlockType("post-grid/text", {
     var blockCssY = attributes.blockCssY;
 
 
-    console.log('text', text);
-    console.log('blockCssY', blockCssY);
 
 
     //var postGridBlockEditor = myStore.getpostGridBlockEditor();
@@ -209,37 +194,37 @@ registerBlockType("post-grid/text", {
 
       setAttributes({ blockId: blockIdX });
 
-      //myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
 
     useEffect(() => {
 
-      console.log("customCss", customCss);
+      //console.log("customCss", customCss);
 
       setAttributes({ customCss: customCss });
 
 
-      //myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
 
 
     useEffect(() => {
-      console.log('blockId', blockId);
+      //console.log('blockId', blockId);
 
 
-      //myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockId]);
 
 
     useEffect(() => {
 
-      console.log('blockCssY', blockCssY.items);
+      //console.log('blockCssY', blockCssY.items);
 
 
-      //myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [blockCssY]);
 
 
@@ -321,7 +306,7 @@ registerBlockType("post-grid/text", {
       var cssPath = [elementSelector, cssPropty, breakPointX]
       const cssItems = myStore.updatePropertyDeep(blockCssY.items, cssPath, newVal)
 
-      console.log('cssItems', cssItems);
+      //console.log('cssItems', cssItems);
 
 
 
@@ -333,7 +318,7 @@ registerBlockType("post-grid/text", {
 
     function onRemoveStyleText(sudoScource, key) {
 
-      console.log('onRemoveStyleText');
+      //console.log('onRemoveStyleText');
 
 
       var object = myStore.deletePropertyDeep(text, [sudoScource, key, breakPointX]);
@@ -351,17 +336,11 @@ registerBlockType("post-grid/text", {
 
     function onAddStyleText(sudoScource, key) {
 
-      console.log('onAddStyleText');
-
 
 
       var path = [sudoScource, key, breakPointX]
-      //let obj = Object.assign({}, text);
+      //let objX = Object.assign({}, text);
       let obj = { ...text };
-
-      console.log('path', path);
-      console.log('obj', obj);
-
 
 
       const object = myStore.addPropertyDeep(obj, path, '')

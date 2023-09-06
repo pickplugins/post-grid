@@ -1062,8 +1062,6 @@ registerBlockType("post-grid/post-title", {
 
     const blockProps = useBlockProps({
       className: ` ${blockId} pg-post-title`,
-
-
     });
 
 

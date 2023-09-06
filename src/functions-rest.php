@@ -14,6 +14,33 @@ class BlockPostGridRest
     public function register_routes()
     {
 
+        register_rest_field(
+            'page',
+            'pgc_meta',
+            array(
+                'get_callback' => function () {
+
+
+
+                    $metaValue = get_post_meta(get_the_ID(), 'pgc_meta', true);
+
+
+                    return $metaValue;
+                },
+                'update_callback' => function ($value, $object, $field_name) {
+
+                    error_log('pgc_meta - Update');
+                    error_log($object->ID);
+
+                    error_log(serialize($value));
+
+                    return update_post_meta($object->ID, 'pgc_meta', $value);
+                },
+            )
+        );
+
+
+
 
 
 
@@ -251,7 +278,7 @@ class BlockPostGridRest
                 'methods'  => 'POST',
                 'callback' => array($this, 'get_post_meta'),
                 'permission_callback' => function () {
-                    return current_user_can('edit_posts');
+                    return current_user_can('manage_options');
                 },
             )
         );

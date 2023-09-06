@@ -34,6 +34,7 @@
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "@wordpress/api-fetch": "^6.6.0",
     "@wordpress/core-data": "^6.7.0",
     "@wordpress/element": "^5.5.0",

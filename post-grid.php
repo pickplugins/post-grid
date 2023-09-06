@@ -109,6 +109,10 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/form-field-radio/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/form-field-select/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/form-field-textarea/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/woo-sku/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/woo-total-sales/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/woo-stock-quantity/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/woo-dimensions/index.php');
 
 
 
@@ -351,6 +355,12 @@ if (!class_exists('PostGrid')) {
             wp_register_style('post-grid-addons', post_grid_plugin_url . 'assets/admin/css/addons.css');
 
             wp_register_script('post_grid_layouts', post_grid_plugin_url . 'assets/admin/js/scripts-layouts.js', array('jquery'));
+
+
+            // wp_localize_script('wp-api', 'wpApiSettings', array('root' => esc_url_raw(rest_url()), 'nonce' => wp_create_nonce('wp_rest')));
+            // wp_enqueue_script('wp-api');
+
+
 
             wp_localize_script(
                 'post_grid_layouts',

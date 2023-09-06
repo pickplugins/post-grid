@@ -888,6 +888,317 @@ registerBlockType("post-grid/progress-bar", {
 
 
 
+    function onBulkAddWrapper(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ wrapper: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+
+
+    function onBulkAddProgressLabel(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, progressLabel);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ progressLabel: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, progressLabelSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+
+    function onBulkAddProgressCount(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, progressCount);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ progressCount: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, progressCountSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+
+    function onBulkAddProgressBar(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, progressBar);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ progressBar: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, progressBarSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+
+    function onBulkAddProgressFill(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, progressFill);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ progressFill: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, progressFillSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+
+    function onBulkAddCircleOverlay(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, circleOverlay);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ circleOverlay: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, circleOverlaySelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+
+    function onBulkAddCircleMask(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, circleMask);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ circleMask: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, circleMaskSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+
+    function onBulkAddIcon(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, icon);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ icon: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, iconSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddProgressInfo(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, progressInfo);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ progressInfo: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, progressInfoSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
 
 
 
@@ -1156,7 +1467,7 @@ registerBlockType("post-grid/progress-bar", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} onBulkAdd={onBulkAddWrapper} />
                 </PGtab>
 
               </PGtabs>
@@ -1236,7 +1547,7 @@ registerBlockType("post-grid/progress-bar", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={progressLabel} onChange={onChangeStyleProgressLabel} onAdd={onAddStyleProgressLabel} onRemove={onRemoveStyleProgressLabel} />
+                  <PGStyles obj={progressLabel} onChange={onChangeStyleProgressLabel} onAdd={onAddStyleProgressLabel} onRemove={onRemoveStyleProgressLabel} onBulkAdd={onBulkAddProgressLabel} />
                 </PGtab>
 
               </PGtabs>
@@ -1317,7 +1628,7 @@ registerBlockType("post-grid/progress-bar", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={progressCount} onChange={onChangeStyleProgressCount} onAdd={onAddStyleProgressCount} onRemove={onRemoveStyleProgressCount} />
+                  <PGStyles obj={progressCount} onChange={onChangeStyleProgressCount} onAdd={onAddStyleProgressCount} onRemove={onRemoveStyleProgressCount} onBulkAdd={onBulkAddProgressCount} />
                 </PGtab>
 
 
@@ -1360,7 +1671,7 @@ registerBlockType("post-grid/progress-bar", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={progressBar} onChange={onChangeStyleProgressBar} onAdd={onAddStyleProgressBar} onRemove={onRemoveStyleProgressBar} />
+                  <PGStyles obj={progressBar} onChange={onChangeStyleProgressBar} onAdd={onAddStyleProgressBar} onRemove={onRemoveStyleProgressBar} onBulkAdd={onBulkAddProgressBar} />
                 </PGtab>
 
 
@@ -1397,7 +1708,7 @@ registerBlockType("post-grid/progress-bar", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={progressFill} onChange={onChangeStyleProgressFill} onAdd={onAddStyleProgressFill} onRemove={onRemoveStyleProgressFill} />
+                  <PGStyles obj={progressFill} onChange={onChangeStyleProgressFill} onAdd={onAddStyleProgressFill} onRemove={onRemoveStyleProgressFill} onBulkAdd={onBulkAddProgressFill} />
                 </PGtab>
 
 
@@ -1436,7 +1747,7 @@ registerBlockType("post-grid/progress-bar", {
 
                     </PGtab>
                     <PGtab name="styles">
-                      <PGStyles obj={circleOverlay} onChange={onChangeStyleCircleOverlay} onAdd={onAddStyleCircleOverlay} onRemove={onRemoveStyleCircleOverlay} />
+                      <PGStyles obj={circleOverlay} onChange={onChangeStyleCircleOverlay} onAdd={onAddStyleCircleOverlay} onRemove={onRemoveStyleCircleOverlay} onBulkAdd={onBulkAddCircleOverlay} />
                     </PGtab>
 
 
@@ -1472,7 +1783,7 @@ registerBlockType("post-grid/progress-bar", {
 
                     </PGtab>
                     <PGtab name="styles">
-                      <PGStyles obj={circleMask} onChange={onChangeStyleCircleMask} onAdd={onAddStyleCircleMask} onRemove={onRemoveStyleCircleMask} />
+                      <PGStyles obj={circleMask} onChange={onChangeStyleCircleMask} onAdd={onAddStyleCircleMask} onRemove={onRemoveStyleCircleMask} onBulkAdd={onBulkAddCircleMask} />
                     </PGtab>
 
 
@@ -1566,7 +1877,7 @@ registerBlockType("post-grid/progress-bar", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} onBulkAdd={onBulkAddIcon} />
                 </PGtab>
 
               </PGtabs>
@@ -1640,7 +1951,7 @@ registerBlockType("post-grid/progress-bar", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={progressInfo} onChange={onChangeStyleProgressInfo} onAdd={onAddStyleProgressInfo} onRemove={onRemoveStyleProgressInfo} />
+                  <PGStyles obj={progressInfo} onChange={onChangeStyleProgressInfo} onAdd={onAddStyleProgressInfo} onRemove={onRemoveStyleProgressInfo} onBulkAdd={onBulkAddProgressInfo} />
                 </PGtab>
 
               </PGtabs>

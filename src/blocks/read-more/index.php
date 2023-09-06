@@ -190,7 +190,7 @@ class PGBlockReadmore
 
         $readMoreText = isset($readMoreOptions['text']) ? $readMoreOptions['text'] : __('Read More', 'post-grid');
 
-        $readMoreLinkTo = isset($readMoreOptions['linkTo']) ? $readMoreOptions['linkTo'] : '_blank';
+        $readMoreLinkTo = isset($readMoreOptions['linkTo']) ? $readMoreOptions['linkTo'] : '';
 
         $readMoreLinkTarget = isset($readMoreOptions['linkTarget']) ? $readMoreOptions['linkTarget'] : '_blank';
         $readMoreCustomUrl = isset($readMoreOptions['customUrl']) ? $readMoreOptions['customUrl'] : '';

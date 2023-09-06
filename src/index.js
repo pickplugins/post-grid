@@ -100,7 +100,7 @@ wp.domReady(function () {
 
 import './store'
 import './templates'
-// import './sidebars'
+import './sidebars'
 
 
 import './blocks/post-grid'
@@ -196,6 +196,10 @@ import './blocks/tabs-nested-item'
 
 
 // import './blocks/woo-product-excerpt'
+import './blocks/woo-sku'
+import './blocks/woo-total-sales'
+import './blocks/woo-stock-quantity'
+import './blocks/woo-dimensions'
 
 import './blocks/wordpress-org'
 

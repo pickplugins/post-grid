@@ -57,7 +57,7 @@ class PGBlockImage
                     "type" => "object",
                     "default" => [
                         "options" => [
-                            "enable" => false,
+                            "enable" => true,
 
                         ],
                         "styles" => []
@@ -193,7 +193,7 @@ class PGBlockImage
         $post_url = get_the_permalink($post_ID);
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
-        $blockAlign = isset($attributes['align']) ? 'align'.$attributes['align'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $galleryId = isset($block->context['post-grid/galleryId']) ? $block->context['post-grid/galleryId'] : $blockId;
 
 

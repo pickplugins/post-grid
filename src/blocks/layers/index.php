@@ -100,11 +100,19 @@ class PGBlockLayers
 
 
         $wrapper = isset($attributes['wrapper']) ? $attributes['wrapper'] : [];
-        $textOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
+        $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
-        $wrapperTag = isset($textOptions['tag']) ? $textOptions['tag'] : 'div';
-        //$content = isset($textOptions['content']) ? $textOptions['content'] : '';
+        $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
+        $wrapperLinkTo = isset($wrapperOptions['linkTo']) ? $wrapperOptions['linkTo'] : '';
+        //$content = isset($wrapperOptions['content']) ? $wrapperOptions['content'] : '';
 
+        $wrapperLinkTo = isset($wrapperOptions['linkTo']) ? $wrapperOptions['linkTo'] : '';
+
+        $wrapperLinkTarget = isset($wrapperOptions['linkTarget']) ? $wrapperOptions['linkTarget'] : '_blank';
+        $wrapperCustomUrl = isset($wrapperOptions['customUrl']) ? $wrapperOptions['customUrl'] : '';
+        $wrapperLinkAttr = isset($wrapperOptions['linkAttr']) ? $wrapperOptions['linkAttr'] : [];
+        $wrapperRel = isset($wrapperOptions['rel']) ? $wrapperOptions['rel'] : '';
+        $wrapperLinkToMetaKey = isset($wrapperOptions['linkToMetaKey']) ? $wrapperOptions['linkToMetaKey'] : '';
 
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
@@ -113,6 +121,25 @@ class PGBlockLayers
 
         $postGridCustomCss .= $customCss;
 
+        $linkUrl = '';
+
+        if ($wrapperLinkTo == 'postUrl') {
+
+            $linkUrl = get_permalink($post_ID);
+        } else if ($wrapperLinkTo == 'customField') {
+            $linkUrl = get_post_meta($post_ID, $wrapperLinkToMetaKey, true);
+        } else if ($wrapperLinkTo == 'authorUrl') {
+            $author_id = get_post_field('post_author', $post_ID);
+            $user = get_user_by('ID', $author_id);
+            $linkUrl = $user->user_url;
+        } else if ($wrapperLinkTo == 'authorLink') {
+            $author_id = get_post_field('post_author', $post_ID);
+            $linkUrl = get_author_posts_url($author_id);
+        } else if ($wrapperLinkTo == 'homeUrl') {
+            $linkUrl = get_bloginfo('url');
+        } else if ($wrapperLinkTo == 'custom') {
+            $linkUrl = $wrapperCustomUrl;
+        }
 
         //var_dump($blockAlign);
 
@@ -121,7 +148,7 @@ class PGBlockLayers
 
 
         if ($wrapperTag == 'a') { ?>
-            <a class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" href="" target="">
+            <a class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
                 <?php echo $content ?>
             </a>
         <?php

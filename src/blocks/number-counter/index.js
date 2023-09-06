@@ -221,7 +221,11 @@ registerBlockType("post-grid/number-counter", {
         var numberX = progress * (end - start) + start;
 
         if (Number.isInteger(end)) {
-          target.innerText = Math.floor(numberX);
+
+          if (target != null) {
+            target.innerText = Math.floor(numberX);
+
+          }
         } else {
           target.innerText = Number(numberX).toFixed(2);
         }
@@ -694,9 +698,6 @@ registerBlockType("post-grid/number-counter", {
 
       setAttributes({ blockCssY: { items: cssItems } });
 
-
-
-
     }
 
 
@@ -728,20 +729,18 @@ registerBlockType("post-grid/number-counter", {
     }
 
 
+
+
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
-      var path = sudoScource + '.' + attr + '.' + breakPointX
+      var path = [sudoScource, attr, breakPointX]
       let obj = Object.assign({}, postfix);
-      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
-      setAttributes({ postfix: updatedObj });
-      var sudoScourceX = { ...updatedObj[sudoScource] }
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
 
-
+      setAttributes({ postfix: object });
 
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -749,16 +748,16 @@ registerBlockType("post-grid/number-counter", {
         itemsX[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+      setAttributes({ blockCssY: { items: cssItems } });
 
     }
+
+
+
+
 
 
     function onRemoveStylePostfix(sudoScource, key) {

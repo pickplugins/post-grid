@@ -1,6 +1,14 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
 
+register_meta('post', 'pgc_meta', [
+    'type' => 'string',
+    'single' => true,
+    'show_in_rest' => true,
+]);
+
+
+
 add_action('wp_footer', 'post_grid_global_css', 999);
 
 function post_grid_global_css()
@@ -279,7 +287,14 @@ function post_grid_block_categories($categories, $context)
 // });
 
 
-register_meta('post', 'pg_page_styles', [
-    //'object_subtype' => 'my_article',
-    'show_in_rest' => true
-]);
+// register_meta('post', 'pg_page_styles', [
+//     //'object_subtype' => 'my_article',
+//     'show_in_rest' => true
+// ]);
+
+// add_filter('woocommerce_rest_check_permissions', 'my_woocommerce_rest_check_permissions', 90, 4);
+
+// function my_woocommerce_rest_check_permissions($permission, $context, $object_id, $post_type)
+// {
+//     return true;
+// }

@@ -62,7 +62,6 @@ function Html(props) {
   var [debounce, setDebounce] = useState(null); // Using the hook.
   var [colorPopup, setcolorPopup] = useState(null); // Using the hook.
   var [blockCategories, setblockCategories] = useState(null); // Using the hook.
-  var postGridBlockEditor = myStore.getpostGridBlockEditor();
 
 
   var isLoaded = props.isLoaded;
@@ -146,7 +145,6 @@ function Html(props) {
   function updateOption() {
 
     setisLoading(true)
-    console.log(postGridBlockEditor);
 
     console.log(optionData);
 
@@ -161,11 +159,6 @@ function Html(props) {
 
       //setoptionData(res)
 
-      var asdsdsd = wp.data.dispatch('postgrid-shop').setpostGridBlockEditor(optionData)
-
-      asdsdsd.then((res) => {
-
-      });
     })
 
   }
@@ -779,11 +772,11 @@ function Html(props) {
               }} />
             </PanelBody> */}
 
-            {/* <PanelBody title="Page Styles" initialOpen={false}>
-              <PGPageStyles args={optionData.pageStyles == undefined ? optionDataDefault.pageStyles : optionData.pageStyles} onChange={(prams) => {
-                setoptionData({ ...optionData, pageStyles: prams })
+            <PanelBody title="Page Styles" initialOpen={false}>
+              <PGPageStyles onChange={(prams) => {
+                //setoptionData({ ...optionData, pageStyles: prams })
               }} />
-            </PanelBody> */}
+            </PanelBody>
 
 
 
@@ -799,7 +792,7 @@ function Html(props) {
 
             </PanelBody> */}
 
-            <PanelBody title="OpenAI" initialOpen={false}>
+            {/* <PanelBody title="OpenAI" initialOpen={false}>
 
               <PanelRow>
                 <label>API Key</label>
@@ -821,7 +814,7 @@ function Html(props) {
 
 
 
-            </PanelBody>
+            </PanelBody> */}
 
 
           </div>

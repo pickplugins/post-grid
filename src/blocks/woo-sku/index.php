@@ -375,9 +375,6 @@ class PGBlockWooASku
         }
 
 
-        var_dump($product->get_price());
-        var_dump($product->get_regular_price());
-        var_dump($product->get_sale_price());
 
 
 

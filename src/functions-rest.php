@@ -183,6 +183,8 @@ class BlockPostGridRest
                 },
             )
         );
+
+
         register_rest_route(
             'post-grid/v2',
             '/get_comment_count',
@@ -202,7 +204,7 @@ class BlockPostGridRest
                 'methods'  => 'POST',
                 'callback' => array($this, 'get_plugin_data'),
                 'permission_callback' => function () {
-                    return current_user_can('edit_posts');
+                    return current_user_can('manage_options');
                 },
             )
         );
@@ -226,7 +228,7 @@ class BlockPostGridRest
                 'methods'  => 'POST',
                 'callback' => array($this, 'get_site_details'),
                 'permission_callback' => function () {
-                    return current_user_can('edit_posts');
+                    return current_user_can('manage_options');
                 },
             )
         );
@@ -239,7 +241,7 @@ class BlockPostGridRest
                 'methods'  => 'POST',
                 'callback' => array($this, 'email_subscribe'),
                 'permission_callback' => function () {
-                    return current_user_can('edit_posts');
+                    return current_user_can('manage_options');
                 },
             )
         );
@@ -1243,7 +1245,77 @@ class BlockPostGridRest
         // $thumb_url = isset($thumb[0]) ? $thumb[0] : '';
         // $post->thumb_url = !empty($thumb_url) ? $thumb_url : post_grid_plugin_url . 'assets/frontend/images/placeholder.png';
 
+        if ($post->post_type == 'product') {
 
+            $product = wc_get_product($post->ID);
+
+
+
+            $response->total_sales = $product->get_total_sales();
+
+            $response->type = $product->get_type();
+            $response->sku = $product->get_sku();
+            $response->manage_stock = $product->get_manage_stock();
+            $response->stock_quantity = $product->get_stock_quantity();
+            $response->stock_status = $product->get_stock_status();
+            $response->weight = $product->get_weight();
+            $response->length = $product->get_length();
+            $response->width = $product->get_width();
+            $response->height = $product->get_height();
+            $response->dimensions = $product->get_dimensions();
+
+
+            $response->currency = get_woocommerce_currency();
+            $response->currency_symbol = get_woocommerce_currency_symbol();
+            $response->currency_pos = get_option('woocommerce_currency_pos');
+
+
+
+            $formatted_attributes = array();
+
+            $attributes = $product->get_attributes();
+
+            foreach ($attributes as $attr => $attr_deets) {
+
+                $attribute_label = wc_attribute_label($attr);
+
+                if (isset($attributes[$attr]) || isset($attributes['pa_' . $attr])) {
+
+                    $attribute = isset($attributes[$attr]) ? $attributes[$attr] : $attributes['pa_' . $attr];
+
+                    if ($attribute['is_taxonomy']) {
+
+                        $formatted_attributes[$attr] = ['label' => $attribute_label, 'values' => implode(', ', wc_get_product_terms($product->id, $attribute['name'], array('fields' => 'names')))];
+                    } else {
+
+                        $formatted_attributes[$attr] = ['label' => $attribute_label, 'values' => $attribute['value']];
+                    }
+                }
+            }
+
+
+
+
+            $response->attributes =  $formatted_attributes;
+
+
+
+
+            $productType = $product->get_type();
+
+            if ($productType == 'variable') {
+                $response->variation_prices = $product->get_variation_prices();
+                $response->min_price = $product->get_variation_price();
+                $response->max_price = $product->get_variation_price('max');
+            }
+            if ($productType != 'variable') {
+                $response->regular_price = $product->get_regular_price();
+                $response->sale_price = $product->get_sale_price();
+                $response->date_on_sale_from = $product->get_date_on_sale_from();
+                $response->date_on_sale_to = $product->get_date_on_sale_to();
+                $response->price = $product->get_price();
+            }
+        }
 
 
         die(wp_json_encode($response));

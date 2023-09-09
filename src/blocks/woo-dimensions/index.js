@@ -43,7 +43,7 @@ var myStore = wp.data.select('postgrid-shop');
 
 registerBlockType("post-grid/woo-dimensions", {
   apiVersion: 2,
-  title: "woo-dimensions",
+  title: "Woo Dimensions",
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: '#fff',
@@ -320,8 +320,9 @@ registerBlockType("post-grid/woo-dimensions", {
 
 
     var [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
+    const [productData, setproductData] = useState(null);
 
-    var [loading, setLoading] = useState(false);
+    const [loading, setloading] = useState(false);
 
 
     const CustomTagWrapper = `${wrapper.options.tag}`;
@@ -329,11 +330,180 @@ registerBlockType("post-grid/woo-dimensions", {
 
 
 
+    var elementsArgsBase = [
+
+
+      {
+        id: 'text', label: 'Text', prefix: '', postfix: '', value: '',
+
+        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
+        options: {
+          text: 'You are here: ',
+
+        },
+        styles: {
+
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+
+      },
+
+
+      {
+        id: 'weight', label: 'Weight', prefix: 'Weight: ', postfix: '', value: '10kg',
+
+        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
+        options: {
+
+        },
+        styles: {
+
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+
+      },
+
+      {
+        id: 'length', label: 'Length', prefix: 'Length: ', postfix: '', value: '10cm',
+        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
+        options: {
+
+        },
+        styles: {
+
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+
+      },
+
+      {
+        id: 'width', label: 'Width', prefix: 'Width: ', postfix: '', value: '10cm',
+        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
+        options: {
+
+        },
+        styles: {
+
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+
+      },
+      {
+        id: 'height', label: 'Height', prefix: 'Height: ', postfix: '', value: '10cm',
+
+        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
+        options: {
+
+        },
+        styles: {
+
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+
+      },
+
+      {
+        id: 'dimensions', label: 'Dimensions', prefix: 'Dimensions: ', postfix: '', value: '10cm X 10cm X 10cm',
+        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
+        options: {
+
+        },
+        styles: {
+
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+
+      },
+
+
+
+
+
+    ]
+    //let elementsArgs = applyFilters('elementsArgs', elementsArgsBase);
+    var [elementsArgs, setelementsArgs] = useState(elementsArgsBase);
+
 
     var [
       currentPostUrl,
       setCurrentPostUrl,
     ] = useEntityProp('postType', postType, 'link', postId);
+
+
+
+    useEffect(() => {
+      setloading(true)
+
+      apiFetch({
+        path: '/post-grid/v2/get_post_data',
+        method: 'POST',
+        data: { postId: postId },
+      }).then((res) => {
+
+        console.log(res)
+        setproductData(res)
+
+
+
+        var attributes = res.attributes;
+
+        console.log(attributes);
+
+        Object.entries(attributes).map(item => {
+
+          var index = item[0];
+          var value = item[1];
+
+
+          elementsArgs.push(
+
+            {
+              id: index, label: value.label, prefix: value.label + ': ', postfix: '', value: value.values,
+              siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
+              options: {
+
+              },
+              styles: {
+
+                color: { Desktop: '' },
+                backgroundColor: { Desktop: '' },
+                padding: { Desktop: '' },
+                margin: { Desktop: '' },
+              },
+
+            }
+          );
+
+        })
+
+        setelementsArgs(elementsArgs);
+
+        setloading(false)
+
+      });
+
+    }, []);
+
+
+
 
     useEffect(() => {
 
@@ -436,116 +606,7 @@ registerBlockType("post-grid/woo-dimensions", {
 
 
 
-    var linkElementsArgsBasic = [
-
-
-      {
-        id: 'text', label: 'Text', prefix: '', postfix: '', value: '',
-
-        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
-        options: {
-          text: 'You are here: ',
-
-        },
-        styles: {
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-        },
-
-      },
-
-
-      {
-        id: 'weight', label: 'Weight', prefix: '', postfix: '', value: '10kg',
-
-        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
-        options: {
-
-        },
-        styles: {
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-        },
-
-      },
-
-      {
-        id: 'length', label: 'Length', prefix: '', postfix: '', value: '10cm',
-        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
-        options: {
-
-        },
-        styles: {
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-        },
-
-      },
-
-      {
-        id: 'width', label: 'Width', prefix: '', postfix: '', value: '10cm',
-        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
-        options: {
-
-        },
-        styles: {
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-        },
-
-      },
-      {
-        id: 'height', label: 'Height', prefix: '', postfix: '', value: '10cm',
-
-        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
-        options: {
-
-        },
-        styles: {
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-        },
-
-      },
-
-      {
-        id: 'dimensions', label: 'Dimensions', prefix: '', postfix: '', value: '10cm X 10cm X 10cm',
-        siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
-        options: {
-
-        },
-        styles: {
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-        },
-
-      },
-
-
-
-
-
-    ]
-    //let linkElementsArgs = applyFilters('linkElementsArgs', linkElementsArgsBasic);
-    let linkElementsArgs = linkElementsArgsBasic
+    //let elementsArgs = elementsArgsBase
     let isProFeature = applyFilters('isProFeature', true);
 
 
@@ -1270,7 +1331,7 @@ registerBlockType("post-grid/woo-dimensions", {
                   <div className='my-4'>
                     <PanelRow>
                       <label for="">Add Element</label>
-                      <PGDropdown position="bottom right" variant="secondary" options={linkElementsArgs} buttonTitle="Choose" onChange={addMedia} values=""></PGDropdown>
+                      <PGDropdown position="bottom right" variant="secondary" options={elementsArgs} buttonTitle="Choose" onChange={addMedia} values=""></PGDropdown>
                     </PanelRow>
                   </div>
 
@@ -1697,30 +1758,60 @@ registerBlockType("post-grid/woo-dimensions", {
             return (
               <CustomTagPostTitle className={'item item-' + index}>
 
-                <span>
-                  {icon.options.position == 'beforePrefix' && (
-                    <span className={`icon ${x.siteIcon.iconSrc}`}></span>
-                  )}
-                  {x.prefix.length > 0 && (
-                    <span className='prefix'>{x.prefix}</span>
-                  )}
-                  {icon.options.position == 'afterPrefix' && (
-                    <span className={`icon ${x.siteIcon.iconSrc}`}></span>
-                  )}
 
-                  <span className='value'>{x.value}</span>
+                {icon.options.position == 'beforePrefix' && (
+                  <span className={`icon ${x.siteIcon.iconSrc}`}></span>
+                )}
+                {x.prefix.length > 0 && (
+                  <span className='prefix'>{x.prefix}</span>
+                )}
+                {icon.options.position == 'afterPrefix' && (
+                  <span className={`icon ${x.siteIcon.iconSrc}`}></span>
+                )}
 
-                  {icon.options.position == 'beforePostfix' && (
-                    <span className={`icon ${x.siteIcon.iconSrc}`}></span>
-                  )}
 
-                  {x.postfix.length > 0 && (
-                    <span className='postfix'>{x.postfix}</span>
-                  )}
-                  {icon.options.position == 'afterPostfix' && (
-                    <span className={`icon ${x.siteIcon.iconSrc}`}></span>
-                  )}
-                </span>
+                {productData != null && (
+
+                  <>
+
+                    {x.id == 'weight' && (
+                      <span className='value'>{productData.weight}kg</span>
+                    )}
+                    {x.id == 'length' && (
+                      <span className='value'>{productData.length}cm</span>
+                    )}
+                    {x.id == 'width' && (
+                      <span className='value'>{productData.width}cm</span>
+                    )}
+                    {x.id == 'height' && (
+                      <span className='value'>{productData.height}cm</span>
+                    )}
+                    {x.id == 'dimensions' && (
+                      <span className='value' dangerouslySetInnerHTML={{ __html: productData.dimensions + 'cm' }}></span>
+                    )}
+                  </>
+
+                )}
+
+
+
+
+
+
+
+
+
+                {icon.options.position == 'beforePostfix' && (
+                  <span className={`icon ${x.siteIcon.iconSrc}`}></span>
+                )}
+
+                {x.postfix.length > 0 && (
+                  <span className='postfix'>{x.postfix}</span>
+                )}
+                {icon.options.position == 'afterPostfix' && (
+                  <span className={`icon ${x.siteIcon.iconSrc}`}></span>
+                )}
+
 
 
 

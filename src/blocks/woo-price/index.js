@@ -7,7 +7,7 @@ import { applyFilters } from '@wordpress/hooks';
 import { InnerBlocks, useBlockProps, useInnerBlocksProps } from "@wordpress/block-editor"
 import apiFetch from '@wordpress/api-fetch';
 
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover } from '@wordpress/components'
+import { PanelBody, RangeControl, Button, Panel, PanelRow, Spinner, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
 
@@ -78,46 +78,66 @@ registerBlockType("post-grid/woo-price", {
       },
     },
 
-    sku: {
+    currency: {
       type: 'object',
       default: {
-        options: {
-          tag: 'div',
-          text: 'dummy-sku',
-
-          linkTo: '', // postUrl, customField, authorUrl, authorLink, homeUrl, custom
-          linkToUrl: '',
-          linkToMetaKey: '',
-
-          linkTarget: '_blank',
-          linkAttr: [],
-          customUrl: '',
-          class: '',
-        },
-
-        styles: {
-
-          display: {},
-          width: {},
+        options: { tag: '', symbole: '$', position: '', /*left, right*/ class: '' },
+        styles:
+        {
           color: { Desktop: '' },
           backgroundColor: { Desktop: '' },
           padding: { Desktop: '' },
           margin: { Desktop: '' },
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
         },
       },
     },
+    discounted: {
+      type: 'object',
+      default: {
+        options: { value: 123, tag: 'span',  /*left, right*/ class: '' },
+        styles:
+        {
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+      },
+    },
+    regular: {
+      type: 'object',
+      default: {
+        options: { value: 123, tag: 'span', class: '' },
+        styles:
+        {
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+      },
+    },
+    separator: {
+      type: 'object',
+      default: {
+        options: { text: '-', tag: 'span', class: '' },
+        styles:
+        {
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+      },
+    },
+
+
+
+
     icon: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: 'beforeSku', /*before, after, prefix, postfix */ class: 'sku-icon', },
+        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: '', /*before, after, prefix, postfix */ class: 'regular-icon', },
 
         styles:
         {
@@ -141,7 +161,7 @@ registerBlockType("post-grid/woo-price", {
       type: 'object',
       default: {
         options:
-          { text: 'SKU: ', class: 'prefix', },
+          { text: '', class: 'prefix', },
         styles:
         {
           color: { Desktop: '' },
@@ -202,7 +222,9 @@ registerBlockType("post-grid/woo-price", {
     var clientId = props.clientId;
 
 
-    let sku = attributes.sku;
+    let regular = attributes.regular;
+    let currency = attributes.currency;
+    let discounted = attributes.discounted;
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
@@ -212,6 +234,7 @@ registerBlockType("post-grid/woo-price", {
 
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
+    var separator = attributes.separator;
     var customCss = attributes.customCss;
     var blockCssY = attributes.blockCssY;
 
@@ -224,25 +247,23 @@ registerBlockType("post-grid/woo-price", {
     var breakPointX = myStore.getBreakPoint();
 
     const [customTags, setCustomTags] = useState({});
+    const [productData, setproductData] = useState(null);
     const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
+    const [loading, setloading] = useState(false);
 
 
-    var linkToArgsBasic = {
-      postUrl: { label: 'Post URL', value: 'postUrl' },
-      homeUrl: { label: 'Home URL', value: 'homeUrl' },
-      archiveDate: { label: 'Date Archive', value: 'archiveDate' },
-      archiveYear: { label: 'Year Archive', value: 'archiveYear' },
-      archiveMonth: { label: 'Month Archive', value: 'archiveMonth' },
 
-      authorUrl: { label: 'Author URL', value: 'authorUrl' },
-      authorLink: { label: 'Author Link', value: 'authorLink' },
-      authorMail: { label: 'Author Mail', value: 'authorMail', isPro: true },
-      authorMeta: { label: 'Author Meta', value: 'authorMeta', isPro: true },
-      customField: { label: 'Custom Field', value: 'customField', isPro: true },
-      customUrl: { label: 'Custom URL', value: 'customUrl', isPro: true },
-    };
+    // Wrapper CSS Class Selectors
+    const wrapperSelector = blockClass;
 
-    let linkToArgs = applyFilters('linkToArgs', linkToArgsBasic);
+    var regularSelector = blockClass + ' .regular';
+    var currencySelector = blockClass + ' .currency';
+    var discountedSelector = blockClass + ' .discounted';
+    const iconSelector = blockClass + ' .icon';
+    const separatorSelector = blockClass + ' .separator';
+
+    const prefixSelector = blockClass + ' .prefix';
+    const postfixSelector = blockClass + ' .postfix';
 
 
 
@@ -253,41 +274,30 @@ registerBlockType("post-grid/woo-price", {
 
 
 
-    // const [
-    //   currentPostSKU,
-    //   setcurrentPostSKU,
-    // ] = useEntityProp('postType', postType, 'date', postId);
+
+    const [postPriceEdited, setpostPriceEdited] = useState(regular.options.text);
 
 
-    //const [postSKUEdited, setpostSKUEdited] = useState(currentPostSKU == null ? );
-    const [postSKUEdited, setpostSKUEdited] = useState(sku.options.text);
+    useEffect(() => {
+      setloading(true)
+
+      apiFetch({
+        path: '/post-grid/v2/get_post_data',
+        method: 'POST',
+        data: { postId: postId },
+      }).then((res) => {
+
+        console.log(res)
+        setproductData(res)
 
 
-    // useEffect(() => {
-
-    //   var postTypeX = postType;
-
-    //   if (postType == 'post') {
-    //     var postTypeX = 'posts';
-    //   }
-    //   if (postType == 'page') {
-    //     var postTypeX = 'pages';
-    //   }
 
 
-    //   apiFetch({
-    //     path: '/wp/v2/' + postTypeX + '/' + postId,
-    //     method: 'POST',
+        setloading(false)
 
-    //   }).then((res) => {
+      });
 
-    //     console.log(res);
-
-
-    //   });
-
-
-    // }, []);
+    }, []);
 
 
 
@@ -301,12 +311,7 @@ registerBlockType("post-grid/woo-price", {
     }
 
 
-    function setFieldLinkTo(option, index) {
 
-      var options = { ...sku.options, linkTo: option.value };
-      setAttributes({ sku: { ...sku, options: options } });
-
-    }
 
 
 
@@ -353,24 +358,24 @@ registerBlockType("post-grid/woo-price", {
 
 
 
-    function onPickCssLibrarySku(args) {
+    function onPickCssLibraryRegular(args) {
 
 
       Object.entries(args).map(x => {
         var sudoScource = x[0];
         var sudoScourceArgs = x[1];
-        sku[sudoScource] = sudoScourceArgs;
+        regular[sudoScource] = sudoScourceArgs;
       })
 
-      var skuX = Object.assign({}, sku);
-      setAttributes({ sku: skuX });
+      var regularX = Object.assign({}, regular);
+      setAttributes({ regular: regularX });
 
       var styleObj = {};
 
       Object.entries(args).map(x => {
         var sudoScource = x[0];
         var sudoScourceArgs = x[1];
-        var elementSelector = myStore.getElementSelector(sudoScource, skuSelector);
+        var elementSelector = myStore.getElementSelector(sudoScource, regularSelector);
 
 
         var sudoObj = {};
@@ -597,16 +602,16 @@ registerBlockType("post-grid/woo-price", {
 
 
 
-    function onChangeStyleSku(sudoScource, newVal, attr) {
+    function onChangeStyleRegular(sudoScource, newVal, attr) {
 
 
       var path = [sudoScource, attr, breakPointX]
-      let obj = Object.assign({}, sku);
+      let obj = Object.assign({}, regular);
       const object = myStore.updatePropertyDeep(obj, path, newVal)
 
-      setAttributes({ sku: object });
+      setAttributes({ regular: object });
 
-      var elementSelector = myStore.getElementSelector(sudoScource, skuSelector);
+      var elementSelector = myStore.getElementSelector(sudoScource, regularSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
@@ -628,14 +633,14 @@ registerBlockType("post-grid/woo-price", {
 
 
 
-    function onRemoveStyleSku(sudoScource, key) {
+    function onRemoveStyleRegular(sudoScource, key) {
 
 
-      var object = myStore.deletePropertyDeep(sku, [sudoScource, key, breakPointX]);
-      setAttributes({ sku: object });
+      var object = myStore.deletePropertyDeep(regular, [sudoScource, key, breakPointX]);
+      setAttributes({ regular: object });
 
 
-      var elementSelector = myStore.getElementSelector(sudoScource, skuSelector);
+      var elementSelector = myStore.getElementSelector(sudoScource, regularSelector);
       var cssPropty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
       setAttributes({ blockCssY: { items: cssObject } });
@@ -647,15 +652,139 @@ registerBlockType("post-grid/woo-price", {
 
 
 
-    function onAddStyleSku(sudoScource, key) {
+    function onAddStyleRegular(sudoScource, key) {
 
 
 
 
       var path = [sudoScource, key, breakPointX]
-      let obj = Object.assign({}, sku);
+      let obj = Object.assign({}, regular);
       const object = myStore.addPropertyDeep(obj, path, '')
-      setAttributes({ sku: object });
+      setAttributes({ regular: object });
+
+    }
+
+    function onChangeStyleDiscounted(sudoScource, newVal, attr) {
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, discounted);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ discounted: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, discountedSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+    }
+
+
+
+
+
+
+    function onRemoveStyleDiscounted(sudoScource, key) {
+
+
+      var object = myStore.deletePropertyDeep(discounted, [sudoScource, key, breakPointX]);
+      setAttributes({ discounted: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, discountedSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+    }
+
+
+
+
+
+    function onAddStyleDiscounted(sudoScource, key) {
+
+
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, discounted);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ discounted: object });
+
+    }
+    ///
+    function onChangeStyleCurrency(sudoScource, newVal, attr) {
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, currency);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ currency: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, currencySelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+    }
+
+
+
+
+
+
+    function onRemoveStyleCurrency(sudoScource, key) {
+
+
+      var object = myStore.deletePropertyDeep(currency, [sudoScource, key, breakPointX]);
+      setAttributes({ currency: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, currencySelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+    }
+
+
+
+
+
+    function onAddStyleCurrency(sudoScource, key) {
+
+
+
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, currency);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ currency: object });
 
     }
 
@@ -889,7 +1018,7 @@ registerBlockType("post-grid/woo-price", {
 
       setAttributes({ blockId: blockIdX });
 
-      // setAttributes({ sku: sku });
+      // setAttributes({ regular: regular });
       // setAttributes({ wrapper: wrapper });
 
 
@@ -962,14 +1091,6 @@ registerBlockType("post-grid/woo-price", {
 
     }, [clientId]);
 
-    // Wrapper CSS Class Selectors
-    const wrapperSelector = blockClass;
-
-    var skuSelector = blockClass + ' .sku-text';
-    const iconSelector = blockClass + ' .sku-icon';
-
-    const prefixSelector = blockClass + ' .prefix';
-    const postfixSelector = blockClass + ' .postfix';
 
 
 
@@ -1007,7 +1128,6 @@ registerBlockType("post-grid/woo-price", {
 
 
 
-    var [linkAttrItems, setlinkAttrItems] = useState({}); // Using the hook.
 
 
 
@@ -1031,29 +1151,8 @@ registerBlockType("post-grid/woo-price", {
 
 
     useEffect(() => {
-      linkAttrObj();
 
-    }, [sku]);
-
-
-
-
-
-
-    var linkAttrObj = () => {
-
-      var sdsd = {};
-
-      sku.options.linkAttr.map(x => {
-
-        if (x.val)
-          sdsd[x.id] = x.val;
-
-      })
-
-      setlinkAttrItems(sdsd);
-
-    }
+    }, [regular]);
 
 
 
@@ -1072,18 +1171,24 @@ registerBlockType("post-grid/woo-price", {
 
 
 
-    var postUrl = (sku.options.customUrl != undefined && sku.options.customUrl.length > 0) ? sku.options.customUrl : currentPostUrl;
+
+
+
+
+
+
+
 
 
     const CustomTag = `${wrapper.options.tag}`;
-    const CustomTagPostTitle = `${sku.options.tag}`;
+    const CustomTagPostTitle = `${regular.options.tag}`;
 
 
 
 
 
     const blockProps = useBlockProps({
-      className: ` ${blockId} pg-woo-sku`,
+      className: ` ${blockId} pg-woo-price`,
 
     });
 
@@ -1161,7 +1266,7 @@ registerBlockType("post-grid/woo-price", {
               </PGtabs>
             </PanelBody>
 
-            <PanelBody title="SKU" initialOpen={false}>
+            <PanelBody title="Regular" initialOpen={false}>
 
               <PGtabs
                 activeTab="options"
@@ -1194,270 +1299,116 @@ registerBlockType("post-grid/woo-price", {
 
 
 
-                  <PanelRow>
-                    <label for="">Link To</label>
-
-                    <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle={sku.options.linkTo.length == 0 ? 'Choose' : linkToArgs[sku.options.linkTo].label} onChange={setFieldLinkTo} values={[]}></PGDropdown>
-
-
-                  </PanelRow>
-
-                  {(sku.options.linkTo == 'authorMeta' || sku.options.linkTo == 'customField') && (
-
-
-
-                    <PanelRow>
-                      <label for="">
-                        {sku.options.linkTo == 'authorMeta' && (
-                          <>Author Meta Key</>
-                        )}
-
-                        {sku.options.linkTo == 'customField' && (
-                          <>Custom Field Key</>
-                        )}
-
-                      </label>
-                      <InputControl
-                        className='mr-2'
-                        value={sku.options.linkToMetaKey}
-                        onChange={(newVal) => {
-
-
-                          var options = { ...sku.options, linkToMetaKey: newVal };
-                          setAttributes({ sku: { ...sku, options: options } });
-
-                        }}
-                      />
-                    </PanelRow>
-
-
-                  )}
-
-
-
-
-
-
-                  {sku.options.linkTo == 'customUrl' && (
-
-                    <PanelRow>
-                      <label for="">Custom URL</label>
-
-                      <div className='relative'>
-                        <Button className={(linkPickerPosttitle) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                          setLinkPickerPosttitle(prev => !prev);
-
-                        }}></Button>
-                        {sku.options.customUrl.length > 0 && (
-                          <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                            var options = { ...sku.options, customUrl: '' };
-                            setAttributes({ sku: { ...sku, options: options } });
-                            setLinkPickerPosttitle(false);
-
-                          }}></Button>
-
-                        )}
-                        {linkPickerPosttitle && (
-                          <Popover position="bottom right">
-                            <LinkControl settings={[]} value={sku.options.customUrl} onChange={newVal => {
-
-                              var options = { ...sku.options, customUrl: newVal.url };
-
-                              setAttributes({ sku: { ...sku, options: options } });
-
-                            }} />
-
-                            <div className='p-2'><span className='font-bold'>Linked to:</span> {(sku.options.customUrl.length != 0) ? sku.options.customUrl : 'No link'} </div>
-                          </Popover>
-
-                        )}
-
-
-                      </div>
-                    </PanelRow>
-
-                  )}
-
-
-
-                  {sku.options.linkTo.length == 0 && (
-
-                    <PanelRow>
-                      <label for="">Custom Tag</label>
-                      <SelectControl
-                        label=""
-                        value={sku.options.tag}
-                        options={[
-                          { label: 'Choose', value: '' },
-                          { label: 'H1', value: 'h1' },
-                          { label: 'H2', value: 'h2' },
-                          { label: 'H3', value: 'h3' },
-                          { label: 'H4', value: 'h4' },
-                          { label: 'H5', value: 'h5' },
-                          { label: 'H6', value: 'h6' },
-                          { label: 'SPAN', value: 'span' },
-                          { label: 'DIV', value: 'div' },
-                          { label: 'P', value: 'p' },
-                        ]}
-                        onChange={(newVal) => {
-                          var options = { ...sku.options, tag: newVal };
-                          setAttributes({ sku: { ...sku, options: options } });
-                        }
-
-                        }
-                      />
-                    </PanelRow>
-                  )}
-
-
-
-
-                  {sku.options.linkTo.length > 0 && (
-
-                    <div>
-                      <PanelRow>
-                        <label for="">Link Target</label>
-
-                        <SelectControl
-                          label=""
-                          value={sku.options.linkTarget}
-                          options={[
-                            { label: 'Choose...', value: '' },
-
-                            { label: '_self', value: '_self' },
-                            { label: '_blank', value: '_blank' },
-                            { label: '_parent', value: '_parent' },
-                            { label: '_top', value: '_top' },
-
-
-                          ]}
-                          onChange={(newVal) => {
-
-
-
-                            var options = { ...sku.options, linkTarget: newVal };
-                            setAttributes({ sku: { ...sku, options: options } });
-
-
-
-                          }
-
-
-
-                          }
-                        />
-                      </PanelRow>
-
-                      <PanelRow>
-                        <label for="">Custom Attributes</label>
-                        <div
-                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                          onClick={(ev) => {
-
-                            var sdsd = sku.options.linkAttr.concat({ id: '', val: '' })
-
-
-                            var options = { ...sku.options, linkAttr: sdsd };
-                            setAttributes({ sku: { ...sku, options: options } });
-
-                            linkAttrObj()
-                          }}
-
-                        >Add</div>
-
-
-
-                      </PanelRow>
-
-
-
-                      {
-                        sku.options.linkAttr.map((x, i) => {
-
-                          return (
-
-                            <div className='my-2'>
-                              <PanelRow>
-                                <InputControl
-                                  placeholder="Name"
-                                  className='mr-2'
-                                  value={sku.options.linkAttr[i].id}
-                                  onChange={(newVal) => {
-
-                                    sku.options.linkAttr[i].id = newVal;
-
-
-                                    var ssdsd = sku.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...sku.options, linkAttr: ssdsd };
-                                    setAttributes({ sku: { ...sku, options: options } });
-
-                                  }}
-                                />
-
-                                <InputControl
-                                  className='mr-2'
-                                  placeholder="Value"
-                                  value={x.val}
-                                  onChange={(newVal) => {
-                                    sku.options.linkAttr[i].val = newVal
-                                    var ssdsd = sku.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...sku.options, linkAttr: ssdsd };
-                                    setAttributes({ sku: { ...sku, options: options } });
-
-                                  }}
-                                />
-                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                                  onClick={(ev) => {
-
-                                    sku.options.linkAttr.splice(i, 1);
-
-                                    var ssdsd = sku.options.linkAttr.concat([]);
-
-
-                                    var options = { ...sku.options, linkAttr: ssdsd };
-                                    setAttributes({ sku: { ...sku, options: options } });
-                                  }}
-
-                                ></span>
-                              </PanelRow>
-
-
-
-
-                            </div>
-
-                          )
-
-                        })
-                      }
-
-
-                    </div>
-
-
-
-                  )}
-
-
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={sku} onChange={onChangeStyleSku} onAdd={onAddStyleSku} onRemove={onRemoveStyleSku} />
+                  <PGStyles obj={regular} onChange={onChangeStyleRegular} onAdd={onAddStyleRegular} onRemove={onRemoveStyleRegular} />
                 </PGtab>
                 <PGtab name="css">
-                  <PGCssLibrary blockId={blockId} obj={sku} onChange={onPickCssLibrarySku} />
+                  <PGCssLibrary blockId={blockId} obj={regular} onChange={onPickCssLibraryRegular} />
                 </PGtab>
               </PGtabs>
 
             </PanelBody>
+
+            {productData != null && productData.type != "variable" && (
+              <PanelBody title="Discounted" initialOpen={false}>
+
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
+                    },
+                  ]}
+                >
+                  <PGtab name="options">
+
+
+
+
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={discounted} onChange={onChangeStyleDiscounted} onAdd={onAddStyleDiscounted} onRemove={onRemoveStyleDiscounted} />
+                  </PGtab>
+                  <PGtab name="css">
+
+                  </PGtab>
+                </PGtabs>
+
+              </PanelBody>
+            )}
+
+
+
+            <PanelBody title="Currency" initialOpen={false}>
+
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+                  {
+                    name: 'css',
+                    title: 'CSS Library',
+                    icon: styles,
+                    className: 'tab-css',
+                  },
+                ]}
+              >
+                <PGtab name="options">
+
+
+
+
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={currency} onChange={onChangeStyleCurrency} onAdd={onAddStyleCurrency} onRemove={onRemoveStyleCurrency} />
+                </PGtab>
+                <PGtab name="css">
+
+                </PGtab>
+              </PGtabs>
+
+            </PanelBody>
+
+
+
+
+
+
+
+
 
             <PanelBody title="Icon" initialOpen={false}>
 
@@ -1508,8 +1459,7 @@ registerBlockType("post-grid/woo-price", {
 
                         { label: 'Choose Position', value: '' },
 
-                        { label: 'Before SKU', value: 'beforeSku' },
-                        { label: 'After SKU', value: 'afterSku' },
+
                         { label: 'Before Prefix', value: 'beforePrefix' },
                         { label: 'After Prefix', value: 'afterPrefix' },
                         { label: 'Before Postfix', value: 'beforePostfix' },
@@ -1674,7 +1624,7 @@ registerBlockType("post-grid/woo-price", {
 
               <div className='my-3'>
                 <p className='font-bold'>Title link</p>
-                <p><code>{skuSelector}{'{/* your CSS here*/}'} </code></p>
+                <p><code>{regularSelector}{'{/* your CSS here*/}'} </code></p>
               </div>
 
               <div className='my-3'>
@@ -1714,6 +1664,19 @@ registerBlockType("post-grid/woo-price", {
 
         <>
 
+          {/* <div>
+            {JSON.stringify(productData)}
+          </div> */}
+
+          {loading && (
+
+            <div>
+              <Spinner />
+            </div>
+
+          )}
+
+
           {wrapper.options.tag && (
             <CustomTag {...blockProps}>
 
@@ -1729,33 +1692,49 @@ registerBlockType("post-grid/woo-price", {
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
               )}
 
-              {sku.options.linkTo.length > 0 && (
-                <a className='sku' onClick={handleLinkClick}  {...linkAttrItems} target={sku.options.linkTarget} href={postUrl}>
+              {productData != null && (
 
-                  {icon.options.position == 'beforeSku' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                  <span className='sku-text'>{postSKUEdited}</span>
-                  {icon.options.position == 'afterSku' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                </a>
-              )}
-
-
-              {sku.options.linkTo.length == 0 && (
                 <>
-                  {icon.options.position == 'beforeSku' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+
+                  {productData.type != "variable" && (
+                    <>
+
+                      <span className='regular'>
+                        <span className='currency' dangerouslySetInnerHTML={{ __html: productData.currency_symbol }} />
+                        {productData.regular_price}</span>
+
+                      {productData.sale_price.length != 0 && (
+                        <span className='discounted'>
+                          <span className='currency' dangerouslySetInnerHTML={{ __html: productData.currency_symbol }} />
+                          {productData.sale_price}</span>
+                      )}
+
+
+
+                    </>
+                  )}
+                  {productData.type == "variable" && (
+                    <>
+
+                      <span className='regular'>                          <span className='currency' dangerouslySetInnerHTML={{ __html: productData.currency_symbol }} />
+                        {productData.min_price}</span>
+                      <span className='regular'> {separator.options.text} </span>
+                      <span className='regular'>                          <span className='currency' dangerouslySetInnerHTML={{ __html: productData.currency_symbol }} />
+                        {productData.max_price}</span>
+
+                    </>
                   )}
 
-                  <span className='sku-text'>{postSKUEdited}</span>
-
-                  {icon.options.position == 'afterSku' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
                 </>
               )}
+
+
+
+
+
+
+
+
 
               {icon.options.position == 'beforePostfix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
@@ -1763,6 +1742,7 @@ registerBlockType("post-grid/woo-price", {
 
               {postfix.options.text &&
                 (<span className={postfix.options.class}>{postfix.options.text}</span>)}
+
               {icon.options.position == 'afterPostfix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
               )}
@@ -1775,60 +1755,7 @@ registerBlockType("post-grid/woo-price", {
 
 
 
-          {wrapper.options.tag.length == 0 && (
 
-            <>
-
-
-
-              {sku.options.linkTo.length > 0 && (
-                <a {...blockProps} onClick={handleLinkClick}  {...linkAttrItems} target={sku.options.linkTarget} href={postUrl}>
-
-
-                  {icon.options.position == 'beforePostfix' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                  {prefix.options.text && (
-                    <span className={prefix.options.class}>{prefix.options.text}</span>
-                  )}
-
-                  {icon.options.position == 'beforePostfix' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-
-
-                  {icon.options.position == 'beforeSku' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-
-                  <span className='sku-text'>{postSKUEdited}</span>
-
-                  {icon.options.position == 'afterSku' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                </a>
-              )}
-
-
-              {sku.options.linkTo.length == 0 && (
-
-                <div {...blockProps}>
-
-                  {icon.options.position == 'beforeSku' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                  <span className='sku-text'>{postSKUEdited}</span>
-                  {icon.options.position == 'afterSku' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                </div>
-
-
-
-              )}
-
-            </>
-          )}
         </>
       </>
 

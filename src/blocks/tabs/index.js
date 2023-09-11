@@ -848,6 +848,38 @@ registerBlockType("post-grid/tabs", {
     }
 
 
+    function onBulkAddHeaderWrap(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]s
+      let obj = Object.assign({}, headerWrap);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ headerWrap: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, headerWrapSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
 
 
 
@@ -997,7 +1029,7 @@ registerBlockType("post-grid/tabs", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={headerWrap} onChange={onChangeStyleHeaderWrap} onAdd={onAddStyleHeaderWrap} onRemove={onRemoveStyleHeaderWrap} />
+                  <PGStyles obj={headerWrap} onChange={onChangeStyleHeaderWrap} onAdd={onAddStyleHeaderWrap} onBulkAdd={onBulkAddHeaderWrap} onRemove={onRemoveStyleHeaderWrap} />
                 </PGtab>
               </PGtabs>
 

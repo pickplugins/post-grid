@@ -669,8 +669,72 @@ registerBlockType("post-grid/post-featured-image", {
 
     }
 
+    function onBulkAddWrapper(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ wrapper: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
 
 
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+    function onBulkAddFeaturedImage(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]s
+      let obj = Object.assign({}, featuredImage);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ featuredImage: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, featuredImageSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
 
 
 
@@ -903,7 +967,7 @@ registerBlockType("post-grid/post-featured-image", {
 
               </PGtab>
               <PGtab name="styles">
-                <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onBulkAdd={onBulkAddWrapper} onRemove={onRemoveStyleWrapper} />
               </PGtab>
               <PGtab name="css">
                 <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
@@ -1358,7 +1422,7 @@ registerBlockType("post-grid/post-featured-image", {
 
               </PGtab>
               <PGtab name="styles">
-                <PGStyles obj={featuredImage} onChange={onChangeStyleImage} onAdd={onAddStyleImage} onRemove={onRemoveStyleImage} />
+                <PGStyles obj={featuredImage} onChange={onChangeStyleImage} onAdd={onAddStyleImage} onBulkAdd={onBulkAddFeaturedImage} onRemove={onRemoveStyleImage} />
               </PGtab>
               <PGtab name="css">
                 <PGCssLibrary blockId={blockId} obj={featuredImage} onChange={onPickCssLibraryImage} />

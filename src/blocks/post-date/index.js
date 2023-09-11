@@ -768,6 +768,173 @@ registerBlockType("post-grid/post-date", {
     }
 
 
+    function onBulkAddWrapper(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ wrapper: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddPostDate(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, postDate);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ postDate: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, postDateSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddIcon(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, icon);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ icon: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, iconSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+    function onBulkAddPrefix(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, prefix);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ prefix: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, prefixSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddPostfix(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]s
+      let obj = Object.assign({}, postfix);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ postfix: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, postfixSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
 
 
 
@@ -1205,7 +1372,7 @@ registerBlockType("post-grid/post-date", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onBulkAdd={onBulkAddWrapper} onRemove={onRemoveStyleWrapper} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
@@ -1532,7 +1699,7 @@ registerBlockType("post-grid/post-date", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={postDate} onChange={onChangeStylePostDate} onAdd={onAddStylePostDate} onRemove={onRemoveStylePostDate} />
+                  <PGStyles obj={postDate} onChange={onChangeStylePostDate} onAdd={onAddStylePostDate} onBulkAdd={onBulkAddPostDate} onRemove={onRemoveStylePostDate} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={postDate} onChange={onPickCssLibraryPostDate} />
@@ -1615,7 +1782,7 @@ registerBlockType("post-grid/post-date", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onBulkAdd={onBulkAddIcon} onRemove={onRemoveStyleIcon} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={icon} onChange={onPickCssLibraryIcon} />
@@ -1672,7 +1839,7 @@ registerBlockType("post-grid/post-date", {
                   </PanelRow>
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={prefix} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onRemove={onRemoveStylePrefix} />
+                  <PGStyles obj={prefix} onChange={onChangeStylePrefix} onAdd={onAddStylePrefix} onBulkAdd={onBulkAddPrefix} onRemove={onRemoveStylePrefix} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={prefix} onChange={onPickCssLibraryPrefix} />
@@ -1734,7 +1901,7 @@ registerBlockType("post-grid/post-date", {
                   </PanelRow>
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={postfix} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onRemove={onRemoveStylePostfix} />
+                  <PGStyles obj={postfix} onChange={onChangeStylePostfix} onAdd={onAddStylePostfix} onBulkAdd={onBulkAddPostfix} onRemove={onRemoveStylePostfix} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={postfix} onChange={onPickCssLibraryPostfix} />

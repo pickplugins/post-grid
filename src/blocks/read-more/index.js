@@ -926,7 +926,7 @@ registerBlockType("post-grid/read-more", {
 
 
     function onBulkAddWrapper(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, wrapper);
       obj[sudoScource] = cssObj;
 

@@ -300,7 +300,7 @@ registerBlockType("post-grid/menu-wrap", {
 
 
     function onBulkAddWrapper(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, wrapper);
       obj[sudoScource] = cssObj;
 
@@ -1012,7 +1012,7 @@ registerBlockType("post-grid/menu-wrap", {
                         <div>{variation.title}</div>
 
                         {variation.isPro && (<span className='bg-amber-400 rounded-sm text-sm inline-block  bg-opacity-90 text-white hover:text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-                          <a target="_blank" className='block px-3' href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
+                          <a target="_blank" className='block px-3' href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + variation.label}>Pro</a>
                         </span>)}
                       </div>
                     )

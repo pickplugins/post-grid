@@ -119,8 +119,8 @@ registerBlockType("post-grid/image", {
 
         styles: {
 
-          width: { Desktop: '100%' },
-          height: { Desktop: '100%' },
+          maxWidth: { Desktop: '100%' },
+          height: { Desktop: 'auto' },
           filter: {},
           objectFit: { Desktop: 'cover' },
           margin: { Desktop: '' }
@@ -751,7 +751,7 @@ registerBlockType("post-grid/image", {
 
 
     function onBulkAddWrapper(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, wrapper);
       obj[sudoScource] = cssObj;
 

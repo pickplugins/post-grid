@@ -620,6 +620,105 @@ registerBlockType("post-grid/list", {
 
     }
 
+    function onBulkAddWrapper(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]s
+      let obj = Object.assign({}, wrapper);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ wrapper: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddItems(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, items);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ items: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, itemsSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+    function onBulkAddIcon(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, icon);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ icon: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, iconSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
 
 
 
@@ -727,7 +826,7 @@ registerBlockType("post-grid/list", {
                   </PanelRow>
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onBulkAdd={onBulkAddWrapper} onRemove={onRemoveStyleWrapper} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
@@ -874,7 +973,7 @@ registerBlockType("post-grid/list", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={item} onChange={onChangeStyleItem} onAdd={onAddStyleItem} onRemove={onRemoveStyleItem} />
+                  <PGStyles obj={item} onChange={onChangeStyleItem} onAdd={onAddStyleItem} onBulkAdd={onBulkAddItems} onRemove={onRemoveStyleItem} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={item} onChange={onPickCssLibraryItem} />
@@ -944,7 +1043,7 @@ registerBlockType("post-grid/list", {
                   </PanelRow>
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onBulkAdd={onBulkAddIcon} onRemove={onRemoveStyleIcon} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={icon} onChange={onPickCssLibraryIcon} />

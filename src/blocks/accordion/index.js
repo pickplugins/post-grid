@@ -801,6 +801,138 @@ registerBlockType("post-grid/accordion", {
 
     }
 
+    function onBulkAddHeader(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]s
+      let obj = Object.assign({}, header);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ header: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, headerSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddHeaderLabel(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, headerActive);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ headerActive: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, headerActiveSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddLabelContent(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, content);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ content: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, contentSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddIcon(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, icon);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ icon: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, iconSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
 
 
 
@@ -885,7 +1017,7 @@ registerBlockType("post-grid/accordion", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={header} onChange={onChangeStyleHeader} onAdd={onAddStyleHeader} onRemove={onRemoveStyleHeader} />
+                  <PGStyles obj={header} onChange={onChangeStyleHeader} onBulkAdd={onBulkAddHeader} onAdd={onAddStyleHeader} onRemove={onRemoveStyleHeader} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={header} onChange={onPickCssLibraryHeader} />
@@ -929,7 +1061,7 @@ registerBlockType("post-grid/accordion", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={headerActive} onChange={onChangeStyleHeaderActive} onAdd={onAddStyleHeaderActive} onRemove={onRemoveStyleHeaderActive} />
+                  <PGStyles obj={headerActive} onChange={onChangeStyleHeaderActive} onAdd={onAddStyleHeaderActive} onBulkAdd={onBulkAddHeaderLabel} onRemove={onRemoveStyleHeaderActive} />
                 </PGtab>
               </PGtabs>
 
@@ -1001,7 +1133,7 @@ registerBlockType("post-grid/accordion", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={content} onChange={onChangeStyleContent} onAdd={onAddStyleContent} onRemove={onRemoveStyleContent} />
+                  <PGStyles obj={content} onChange={onChangeStyleContent} onBulkAdd={onBulkAddLabelContent} onAdd={onAddStyleContent} onRemove={onRemoveStyleContent} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={content} onChange={onPickCssLibraryContent} />
@@ -1123,7 +1255,7 @@ registerBlockType("post-grid/accordion", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onBulkAdd={onBulkAddIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
                 </PGtab>
                 <PGtab name="css">
                   <PGCssLibrary blockId={blockId} obj={icon} onChange={onPickCssLibraryIcon} />

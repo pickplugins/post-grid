@@ -729,6 +729,171 @@ registerBlockType("post-grid/terms-list", {
 
     }
 
+    function onBulkAddWrapper(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]s
+      let obj = Object.assign({}, wrapper);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ wrapper: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddItems(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, items);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ items: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, itemsSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddIcon(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, icon);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ icon: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, iconSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddFrontText(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, frontText);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ frontText: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, frontTextSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddSeperator(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, separator);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ separator: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, separatorSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
 
 
 
@@ -895,7 +1060,7 @@ registerBlockType("post-grid/terms-list", {
                 </PanelRow>
               </PGtab>
               <PGtab name="styles">
-                <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onBulkAdd={onBulkAddWrapper} onRemove={onRemoveStyleWrapper} />
               </PGtab>
             </PGtabs>
 
@@ -1375,7 +1540,7 @@ registerBlockType("post-grid/terms-list", {
                 }
               </PGtab>
               <PGtab name="styles">
-                <PGStyles obj={items} onChange={onChangeStyleItems} onAdd={onAddStyleItems} onRemove={onRemoveStyleItems} />
+                <PGStyles obj={items} onChange={onChangeStyleItems} onBulkAdd={onBulkAddItems} onAdd={onAddStyleItems} onRemove={onRemoveStyleItems} />
               </PGtab>
             </PGtabs>
 
@@ -1455,7 +1620,7 @@ registerBlockType("post-grid/terms-list", {
                 </PanelRow>
               </PGtab>
               <PGtab name="styles">
-                <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                <PGStyles obj={icon} onChange={onChangeStyleIcon} onBulkAdd={onBulkAddIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
               </PGtab>
             </PGtabs>
 
@@ -1510,7 +1675,7 @@ registerBlockType("post-grid/terms-list", {
                 </PanelRow>
               </PGtab>
               <PGtab name="styles">
-                <PGStyles obj={wrapper} onChange={onChangeStyleFrontText} onAdd={onAddStyleFrontText} onRemove={onRemoveStyleFrontText} />
+                <PGStyles obj={frontText} onChange={onChangeStyleFrontText} onAdd={onAddStyleFrontText} onBulkAdd={onBulkAddFrontText} onRemove={onRemoveStyleFrontText} />
               </PGtab>
             </PGtabs>
 
@@ -1558,7 +1723,7 @@ registerBlockType("post-grid/terms-list", {
                 </PanelRow>
               </PGtab>
               <PGtab name="styles">
-                <PGStyles obj={wrapper} onChange={onChangeStyleSeparator} onAdd={onAddStyleSeparator} onRemove={onRemoveStyleSeparator} />
+                <PGStyles obj={separator} onChange={onChangeStyleSeparator} onAdd={onAddStyleSeparator} onBulkAdd={onBulkAddSeperator} onRemove={onRemoveStyleSeparator} />
               </PGtab>
             </PGtabs>
 

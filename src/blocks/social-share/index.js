@@ -836,7 +836,170 @@ registerBlockType("post-grid/social-share", {
 
     }
 
+    function onBulkAddWrapper(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      obj[sudoScource] = cssObj;
 
+      setAttributes({ wrapper: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddItems(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]s
+      let obj = Object.assign({}, elements);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ elements: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, elementsSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddIcon(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, icon);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ icon: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, iconSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddLabel(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, label);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ label: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, labelSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddCount(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, count);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ count: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, countSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
 
 
 
@@ -958,7 +1121,7 @@ registerBlockType("post-grid/social-share", {
                   </PanelRow>
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onBulkAdd={onBulkAddWrapper} onRemove={onRemoveStyleWrapper} />
                 </PGtab>
               </PGtabs>
 
@@ -1207,7 +1370,7 @@ registerBlockType("post-grid/social-share", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={elements} onChange={onChangeStyleElements} onAdd={onAddStyleElements} onRemove={onRemoveStyleElements} />
+                  <PGStyles obj={elements} onChange={onChangeStyleElements} onAdd={onAddStyleElements} onBulkAdd={onBulkAddItems} onRemove={onRemoveStyleElements} />
                 </PGtab>
               </PGtabs>
 
@@ -1290,7 +1453,7 @@ registerBlockType("post-grid/social-share", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
+                  <PGStyles obj={icon} onChange={onChangeStyleIcon} onBulkAdd={onBulkAddIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
                 </PGtab>
               </PGtabs>
 
@@ -1340,7 +1503,7 @@ registerBlockType("post-grid/social-share", {
                   />
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={label} onChange={onChangeStyleLabel} onAdd={onAddStyleLabel} onRemove={onRemoveStyleLabel} />
+                  <PGStyles obj={label} onChange={onChangeStyleLabel} onAdd={onAddStyleLabel} onBulkAdd={onBulkAddLabel} onRemove={onRemoveStyleLabel} />
                 </PGtab>
               </PGtabs>
 
@@ -1390,7 +1553,7 @@ registerBlockType("post-grid/social-share", {
                   />
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={count} onChange={onChangeStyleCount} onAdd={onAddStyleCount} onRemove={onRemoveStyleCount} />
+                  <PGStyles obj={count} onChange={onChangeStyleCount} onAdd={onAddStyleCount} onBulkAdd={onBulkAddCount} onRemove={onRemoveStyleCount} />
                 </PGtab>
               </PGtabs>
 

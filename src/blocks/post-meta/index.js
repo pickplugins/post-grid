@@ -680,6 +680,73 @@ registerBlockType("post-grid/post-meta", {
       setAttributes({ meta: object });
     }
 
+    function onBulkAddWrapper(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, wrapper);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ wrapper: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, wrapperSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+    function onBulkAddMeta(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]s
+      let obj = Object.assign({}, meta);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ meta: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, metaSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
 
 
 
@@ -811,7 +878,7 @@ registerBlockType("post-grid/post-meta", {
                 </PanelRow>
               </PGtab>
               <PGtab name="styles">
-                <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
+                <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onBulkAdd={onBulkAddWrapper} onRemove={onRemoveStyleWrapper} />
               </PGtab>
               <PGtab name="css">
                 <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
@@ -961,7 +1028,7 @@ registerBlockType("post-grid/post-meta", {
 
               </PGtab>
               <PGtab name="styles">
-                <PGStyles obj={meta} onChange={onChangeStyleMeta} onAdd={onAddStyleMeta} onRemove={onRemoveStyleMeta} />
+                <PGStyles obj={meta} onChange={onChangeStyleMeta} onAdd={onAddStyleMeta} onBulkAdd={onBulkAddMeta} onRemove={onRemoveStyleMeta} />
               </PGtab>
               <PGtab name="css">
                 <PGCssLibrary blockId={blockId} obj={meta} onChange={onPickCssLibraryMeta} />

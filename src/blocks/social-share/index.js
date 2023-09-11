@@ -870,7 +870,7 @@ registerBlockType("post-grid/social-share", {
     }
 
     function onBulkAddItems(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, elements);
       obj[sudoScource] = cssObj;
 

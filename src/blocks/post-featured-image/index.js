@@ -704,7 +704,7 @@ registerBlockType("post-grid/post-featured-image", {
 
 
     function onBulkAddFeaturedImage(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, featuredImage);
       obj[sudoScource] = cssObj;
 

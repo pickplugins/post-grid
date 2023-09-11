@@ -849,7 +849,7 @@ registerBlockType("post-grid/tabs", {
 
 
     function onBulkAddHeaderWrap(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, headerWrap);
       obj[sudoScource] = cssObj;
 

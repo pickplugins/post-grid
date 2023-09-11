@@ -802,7 +802,7 @@ registerBlockType("post-grid/accordion", {
     }
 
     function onBulkAddHeader(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, header);
       obj[sudoScource] = cssObj;
 

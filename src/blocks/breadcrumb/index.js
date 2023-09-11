@@ -894,7 +894,7 @@ registerBlockType("post-grid/breadcrumb", {
 
     function addMedia(option, index) {
 
-      //var isExist = elements.items.find(x => x.label === option.label);
+      //var isExist = elements.items.find(x => x.label === option.label);s
 
 
       //if (isExist == undefined) {

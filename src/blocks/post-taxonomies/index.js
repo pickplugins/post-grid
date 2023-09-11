@@ -1013,7 +1013,7 @@ registerBlockType("post-grid/post-taxonomies", {
     }
 
     function onBulkAddItems(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, items);
       obj[sudoScource] = cssObj;
 

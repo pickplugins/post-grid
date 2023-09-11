@@ -1150,7 +1150,7 @@ registerBlockType("post-grid/post-author-fields", {
     }
 
     function onBulkAddPostfix(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, postfix);
       obj[sudoScource] = cssObj;
 

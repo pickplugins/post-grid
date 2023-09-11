@@ -713,7 +713,7 @@ registerBlockType("post-grid/list-nested", {
     }
 
     function onBulkAddIcon(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, icon);
       obj[sudoScource] = cssObj;
 

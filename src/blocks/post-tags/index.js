@@ -1063,7 +1063,7 @@ registerBlockType("post-grid/post-tags", {
     }
 
     function onBulkAddSeperator(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, separator);
       obj[sudoScource] = cssObj;
 

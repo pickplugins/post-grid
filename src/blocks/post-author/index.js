@@ -901,7 +901,7 @@ registerBlockType("post-grid/post-author", {
 
 
     function onBulkAddDescription(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
+      // var path = [sudoScource, attr, breakPointX]s
       let obj = Object.assign({}, description);
       obj[sudoScource] = cssObj;
 

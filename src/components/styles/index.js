@@ -436,7 +436,7 @@ function Html(props) {
       if (objX[sudoScource][option.id][breakPointX] == undefined) {
         var path = [sudoScource, option.id, breakPointX]
         const object = myStore.addPropertyDeep(objX, path, '');
-        props.onAdd(sudoScource, option.id, object, props.extra)
+        props.onAdd(sudoScource, option.id, object, props.extra);
       } else {
         alert('Property already added');
       }
@@ -454,7 +454,7 @@ function Html(props) {
   function onChangeCssVal(newVal, attr) {
 
     // console.log(props.obj);
-    //console.log('onChangeCssVal');
+
 
 
 
@@ -503,7 +503,7 @@ function Html(props) {
 
             <div className={extraOpt ? 'bg-gray-400 hover:bg-gray-400 cursor-pointer p-2 ' : 'cursor-pointer p-2 '} onClick={ev => {
 
-              setextraOpt(!extraOpt)
+              setextraOpt(!extraOpt);
             }}>
 
               <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-ellipsis" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" ><path d="M0 5.75C0 4.784.784 4 1.75 4h12.5c.966 0 1.75.784 1.75 1.75v4.5A1.75 1.75 0 0 1 14.25 12H1.75A1.75 1.75 0 0 1 0 10.25ZM12 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM7 8a1 1 0 1 0 2 0 1 1 0 0 0-2 0ZM4 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"></path></svg>
@@ -515,11 +515,8 @@ function Html(props) {
 
           {extraOpt && (
             <Popover position="bottom left">
-
               <div className='p-3 w-80'>
-
                 <div className=''>
-
                   <div className='px-4 inline-block m-2 py-2 bg-sky-600 text-white cursor-pointer'
                     onClick={ev => {
                       var styleStr = JSON.stringify(props.obj[sudoScource]);

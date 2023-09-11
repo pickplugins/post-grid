@@ -193,14 +193,13 @@ import './blocks/tabs'
 import './blocks/tabs-nested'
 import './blocks/tabs-nested-item'
 
-
-
 // import './blocks/woo-product-excerpt'
 import './blocks/woo-sku'
 import './blocks/woo-total-sales'
 import './blocks/woo-stock-quantity'
 import './blocks/woo-dimensions'
 import './blocks/woo-price'
+import './blocks/woo-add-to-cart'
 
 import './blocks/wordpress-org'
 

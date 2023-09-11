@@ -170,7 +170,7 @@ registerBlockType("post-grid/woo-dimensions", {
 
 
           {
-            id: 'weight', label: 'Weight', prefix: '', postfix: '', value: '10kg',
+            id: 'weight', label: 'Weight', prefix: 'Weight: ', postfix: '', value: '10kg',
 
             siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
             options: {
@@ -187,7 +187,7 @@ registerBlockType("post-grid/woo-dimensions", {
           },
 
           {
-            id: 'length', label: 'Length', prefix: '', postfix: '', value: '10cm',
+            id: 'length', label: 'Length', prefix: 'Length: ', postfix: '', value: '10cm',
             siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
             options: {
 
@@ -203,7 +203,7 @@ registerBlockType("post-grid/woo-dimensions", {
           },
 
           {
-            id: 'width', label: 'Width', prefix: '', postfix: '', value: '10cm',
+            id: 'width', label: 'Width', prefix: 'Width: ', postfix: '', value: '10cm',
             siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
             options: {
 
@@ -218,7 +218,7 @@ registerBlockType("post-grid/woo-dimensions", {
 
           },
           {
-            id: 'height', label: 'Height', prefix: '', postfix: '', value: '10cm',
+            id: 'height', label: 'Height', prefix: 'Height: ', postfix: '', value: '10cm',
 
             siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
             options: {
@@ -235,7 +235,7 @@ registerBlockType("post-grid/woo-dimensions", {
           },
 
           {
-            id: 'dimensions', label: 'Dimensions', prefix: '', postfix: '', value: '10cm X 10cm X 10cm',
+            id: 'dimensions', label: 'Dimensions', prefix: 'Dimensions: ', postfix: '', value: '10cm X 10cm X 10cm',
             siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
             options: {
 
@@ -458,25 +458,17 @@ registerBlockType("post-grid/woo-dimensions", {
         data: { postId: postId },
       }).then((res) => {
 
-        console.log(res)
         setproductData(res)
-
-
-
         var attributes = res.attributes;
-
-        console.log(attributes);
-
         Object.entries(attributes).map(item => {
 
           var index = item[0];
           var value = item[1];
 
-
           elementsArgs.push(
 
             {
-              id: index, label: value.label, prefix: value.label + ': ', postfix: '', value: value.values,
+              id: index, label: value.label, type: 'taxonomy', separator: ', ', linkTo: 'termUrl', prefix: value.label + ': ', postfix: '', value: value.values,
               siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
               options: {
 
@@ -508,7 +500,7 @@ registerBlockType("post-grid/woo-dimensions", {
     useEffect(() => {
 
       setAttributes({ blockId: blockIdX });
-      ;
+
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
@@ -740,9 +732,6 @@ registerBlockType("post-grid/woo-dimensions", {
 
       setAttributes({ blockCssY: { items: cssItems } });
 
-
-
-
     }
 
 
@@ -765,9 +754,6 @@ registerBlockType("post-grid/woo-dimensions", {
 
 
     }
-
-
-
 
 
     function onAddStyleItems(sudoScource, key) {
@@ -1154,6 +1140,136 @@ registerBlockType("post-grid/woo-dimensions", {
 
 
 
+    function onChangeStyleItem(sudoScource, newVal, attr, obj, extra) {
+      var index = extra.index;
+
+      console.log(extra);
+
+      var path = [sudoScource, attr, breakPointX]
+      let objX = Object.assign({}, obj);
+      const object = myStore.updatePropertyDeep(objX, path, newVal)
+
+      var itemsX = { ...items }
+
+      itemsX.elements[index] = object
+
+      setAttributes({ items: itemsX });
+
+
+      //setAttributes({ obj: object });
+
+      // var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
+      // var cssPropty = myStore.cssAttrParse(attr);
+
+      // let itemsX = Object.assign({}, blockCssY.items);
+
+      // if (itemsX[elementSelector] == undefined) {
+      //   itemsX[elementSelector] = {};
+      // }
+
+      // var cssPath = [elementSelector, cssPropty, breakPointX]
+      // const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      // setAttributes({ blockCssY: { items: cssItems } });
+
+
+
+
+    }
+
+
+
+
+
+
+    function onRemoveStyleItem(sudoScource, key, obj, extra) {
+      var index = extra.index;
+
+      console.log(extra);
+
+      var object = myStore.deletePropertyDeep(obj, [sudoScource, key, breakPointX]);
+
+      var itemsX = { ...items }
+      itemsX.elements[index] = object
+      setAttributes({ items: itemsX });
+
+
+
+      //setAttributes({ items: object });
+
+      // var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
+      // var cssPropty = myStore.cssAttrParse(key);
+      // var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      // setAttributes({ blockCssY: { items: cssObject } });
+
+    }
+
+
+    function onAddStyleItem(sudoScource, key, obj, extra) {
+
+      var index = extra.index;
+
+
+
+      var path = [sudoScource, key, breakPointX]
+      let objX = Object.assign({}, obj);
+      const object = myStore.addPropertyDeep(objX, path, '')
+
+
+      var itemsX = { ...items }
+
+      itemsX.elements[index] = object
+
+      //setAttributes({ items: object });
+      setAttributes({ items: itemsX });
+
+
+
+
+    }
+
+
+
+
+
+    function onBulkAddItem(sudoScource, cssObj) {
+      // var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, items);
+      obj[sudoScource] = cssObj;
+
+      setAttributes({ items: obj });
+
+      var selector = myStore.getElementSelector(sudoScource, itemsSelector);
+      var stylesObj = {};
+
+      Object.entries(cssObj).map(args => {
+
+        var attr = args[0];
+        var cssPropty = myStore.cssAttrParse(attr);
+
+        if (stylesObj[selector] == undefined) {
+          stylesObj[selector] = {};
+        }
+
+        if (stylesObj[selector][cssPropty] == undefined) {
+          stylesObj[selector][cssPropty] = {};
+        }
+
+        stylesObj[selector][cssPropty] = args[1]
+      })
+
+
+      var cssItems = { ...blockCssY.items };
+      var cssItemsX = { ...cssItems, ...stylesObj }
+
+      setAttributes({ blockCssY: { items: cssItemsX } });
+    }
+
+
+
+
+
+
 
 
     useEffect(() => {
@@ -1364,64 +1480,94 @@ registerBlockType("post-grid/woo-dimensions", {
 
                         } initialOpen={false}>
 
-                          <div>
-                            <label for="">Prefix</label>
-                            <InputControl
-                              value={item.prefix}
-                              placeholder=""
-                              onChange={(newVal) => {
-                                items.elements[index].prefix = newVal
-                                setAttributes({ items: { ...items, elements: items.elements } });
-                              }}
-                            />
-                          </div>
 
-                          {item.id == 'text' && (
-                            <div>
-                              <label for="">Value</label>
-                              <InputControl
-                                value={item.value}
-                                placeholder=""
-                                onChange={(newVal) => {
-                                  items.elements[index].value = newVal
+                          <PGtabs
+                            activeTab="options"
+                            orientation="horizontal"
+                            activeClass="active-tab"
+                            onSelect={(tabName) => { }}
+                            tabs={[
+                              {
+                                name: 'options',
+                                title: 'Options',
+                                icon: settings,
+                                className: 'tab-settings',
+                              },
+                              {
+                                name: 'styles',
+                                title: 'Styles',
+                                icon: styles,
+                                className: 'tab-style',
+                              },
+
+                            ]}
+                          >
+                            <PGtab name="options">
+
+
+                              <div>
+                                <label for="">Prefix</label>
+                                <InputControl
+                                  value={item.prefix}
+                                  placeholder=""
+                                  onChange={(newVal) => {
+                                    items.elements[index].prefix = newVal
+                                    setAttributes({ items: { ...items, elements: items.elements } });
+                                  }}
+                                />
+                              </div>
+
+                              {item.id == 'text' && (
+                                <div>
+                                  <label for="">Value</label>
+                                  <InputControl
+                                    value={item.value}
+                                    placeholder=""
+                                    onChange={(newVal) => {
+                                      items.elements[index].value = newVal
+                                      setAttributes({ items: { ...items, elements: items.elements } });
+                                    }}
+                                  />
+                                </div>
+                              )}
+
+
+                              <div>
+                                <label for="">Postfix</label>
+                                <InputControl
+                                  value={item.postfix}
+                                  placeholder=""
+                                  onChange={(newVal) => {
+
+                                    items.elements[index].postfix = newVal
+                                    setAttributes({ items: { ...items, elements: items.elements } });
+                                  }}
+                                />
+                              </div>
+
+
+                              <PanelRow>
+                                <label for="">Choose Icon</label>
+                                <PGIconPicker library={item.siteIcon.library} srcType={item.siteIcon.srcType} iconSrc={item.siteIcon.iconSrc} onChange={arg => {
+
+                                  items.elements[index].siteIcon = { srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc }
                                   setAttributes({ items: { ...items, elements: items.elements } });
-                                }}
-                              />
-                            </div>
-                          )}
+
+                                }} />
+                              </PanelRow>
 
 
-                          <div>
-                            <label for="">Postfix</label>
-                            <InputControl
-                              value={item.postfix}
-                              placeholder=""
-                              onChange={(newVal) => {
+                            </PGtab>
+                            <PGtab name="styles">
+                              <PGStyles obj={item} extra={{ index: index }} onChange={onChangeStyleItem} onAdd={onAddStyleItem} onRemove={onRemoveStyleItem} onBulkAdd={onBulkAddItem} />
+                            </PGtab>
 
-                                items.elements[index].postfix = newVal
-                                setAttributes({ items: { ...items, elements: items.elements } });
-                              }}
-                            />
-                          </div>
-
-
-                          <PanelRow>
-                            <label for="">Choose Icon</label>
-                            <PGIconPicker library={item.siteIcon.library} srcType={item.siteIcon.srcType} iconSrc={item.siteIcon.iconSrc} onChange={arg => {
-
-
-                              //var options = { ...icon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
-                              //setAttributes({ icon: { ...icon, options: options } });
-
-
-                              items.elements[index].siteIcon = { srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc }
-                              setAttributes({ items: { ...items, elements: items.elements } });
+                          </PGtabs>
 
 
 
 
-                            }} />
-                          </PanelRow>
+
 
 
 
@@ -1492,8 +1638,6 @@ registerBlockType("post-grid/woo-dimensions", {
                               items.elements[index].styles = styles
 
                               setAttributes({ items: { ...items, elements: items.elements } });
-
-
                             }}
                           />
 
@@ -1521,7 +1665,7 @@ registerBlockType("post-grid/woo-dimensions", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={items} onChange={onChangeStyleItems} onAdd={onAddStyleItems} onRemove={onRemoveStyleItems} />
+                  <PGStyles obj={items} onChange={onChangeStyleItems} onAdd={onAddStyleItems} onRemove={onRemoveStyleItem} />
                 </PGtab>
               </PGtabs>
 
@@ -1759,13 +1903,13 @@ registerBlockType("post-grid/woo-dimensions", {
               <CustomTagPostTitle className={'item item-' + index}>
 
 
-                {icon.options.position == 'beforePrefix' && (
+                {icon.options.position == 'beforePrefix' && x.siteIcon.iconSrc.length != 0 && (
                   <span className={`icon ${x.siteIcon.iconSrc}`}></span>
                 )}
                 {x.prefix.length > 0 && (
                   <span className='prefix'>{x.prefix}</span>
                 )}
-                {icon.options.position == 'afterPrefix' && (
+                {icon.options.position == 'afterPrefix' && x.siteIcon.iconSrc.length != 0 && (
                   <span className={`icon ${x.siteIcon.iconSrc}`}></span>
                 )}
 
@@ -1773,7 +1917,9 @@ registerBlockType("post-grid/woo-dimensions", {
                 {productData != null && (
 
                   <>
-
+                    {x.id == 'text' && (
+                      <span className='value'>{x.value}</span>
+                    )}
                     {x.id == 'weight' && (
                       <span className='value'>{productData.weight}kg</span>
                     )}
@@ -1787,8 +1933,14 @@ registerBlockType("post-grid/woo-dimensions", {
                       <span className='value'>{productData.height}cm</span>
                     )}
                     {x.id == 'dimensions' && (
-                      <span className='value' dangerouslySetInnerHTML={{ __html: productData.dimensions + 'cm' }}></span>
+                      <span className='value' dangerouslySetInnerHTML={{ __html: productData.dimensions }}></span>
                     )}
+
+                    {x.type == 'taxonomy' && (
+                      <span className='value' dangerouslySetInnerHTML={{ __html: x.value }}></span>
+                    )}
+
+
                   </>
 
                 )}
@@ -1801,14 +1953,14 @@ registerBlockType("post-grid/woo-dimensions", {
 
 
 
-                {icon.options.position == 'beforePostfix' && (
+                {icon.options.position == 'beforePostfix' && x.siteIcon.iconSrc.length != 0 && (
                   <span className={`icon ${x.siteIcon.iconSrc}`}></span>
                 )}
 
                 {x.postfix.length > 0 && (
                   <span className='postfix'>{x.postfix}</span>
                 )}
-                {icon.options.position == 'afterPostfix' && (
+                {icon.options.position == 'afterPostfix' && x.siteIcon.iconSrc.length != 0 && (
                   <span className={`icon ${x.siteIcon.iconSrc}`}></span>
                 )}
 

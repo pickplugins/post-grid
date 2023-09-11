@@ -3,42 +3,46 @@ import { __ } from '@wordpress/i18n'
 import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
 import { useEntityRecord } from '@wordpress/core-data';
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover, Spinner } from '@wordpress/components'
+import { applyFilters } from '@wordpress/hooks';
+import { InnerBlocks, useBlockProps, useInnerBlocksProps } from "@wordpress/block-editor"
+import apiFetch from '@wordpress/api-fetch';
+
+import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover } from '@wordpress/components'
 import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { useEntityProp } from '@wordpress/core-data';
-import apiFetch from '@wordpress/api-fetch';
-import { InnerBlocks, useBlockProps, useInnerBlocksProps } from "@wordpress/block-editor"
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
 import { __experimentalInputControl as InputControl } from '@wordpress/components';
 import breakPoints from '../../breakpoints'
 const { RawHTML } = wp.element;
 import { store } from '../../store'
+
 import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+
 
 import IconToggle from '../../components/icon-toggle'
 import Typography from '../../components/typography'
-import PGIconPicker from '../../components/icon-picker'
 import PGMailSubsctibe from '../../components/mail-subscribe'
 import PGContactSupport from '../../components/contact-support'
-
 import BreakpointToggle from '../../components/breakpoint-toggle'
 import colorsPresets from '../../colors-presets'
-import PGcssDisplay from '../../components/css-display'
 import PGDropdown from '../../components/dropdown'
+import PGIconPicker from '../../components/icon-picker'
+import PGcssDisplay from '../../components/css-display'
+
 
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
 
+
+
 var myStore = wp.data.select('postgrid-shop');
-
-
 
 registerBlockType("post-grid/woo-add-to-cart", {
   apiVersion: 2,
-  title: "Woo add to cart",
+  title: "WooCommerce Add To Cart",
 
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
@@ -47,13 +51,7 @@ registerBlockType("post-grid/woo-add-to-cart", {
     foreground: '#fff',
     // Specifying an icon for the block
     src:
-
-
-
-
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.4211 13.1053V21.5263H2V13.1053H10.4211ZM8.31579 15.2105H4.10526V19.4211H8.31579V15.2105ZM11.4737 1L17.2632 10.4737H5.68421L11.4737 1ZM11.4737 5.06316L9.45263 8.36842H13.4947L11.4737 5.06316ZM17.2632 12.5789C19.8947 12.5789 22 14.6842 22 17.3158C22 19.9474 19.8947 22.0526 17.2632 22.0526C14.6316 22.0526 12.5263 19.9474 12.5263 17.3158C12.5263 14.6842 14.6316 12.5789 17.2632 12.5789ZM17.2632 14.6842C16.5652 14.6842 15.8959 14.9615 15.4024 15.455C14.9088 15.9485 14.6316 16.6179 14.6316 17.3158C14.6316 18.0137 14.9088 18.6831 15.4024 19.1766C15.8959 19.6701 16.5652 19.9474 17.2632 19.9474C17.9611 19.9474 18.6304 19.6701 19.124 19.1766C19.6175 18.6831 19.8947 18.0137 19.8947 17.3158C19.8947 16.6179 19.6175 15.9485 19.124 15.455C18.6304 14.9615 17.9611 14.6842 17.2632 14.6842Z" />
-      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect fill="#8db1ff" y="30.98" width="13.97" height="2" /><rect fill="#8db1ff" x="16.42" y="30.98" width="9.96" height="2" /><rect fill="#8db1ff" y="26.28" width="36" height="2" /><rect fill="#8db1ff" y="21.58" width="36" height="2" /><rect fill="#1d4ed8" x="20.7" y="9.61" width="15.3" height="2.35" /><path fill="#1d4ed8" d="M12.42,18.54H1.55A1.54,1.54,0,0,1,0,17V6.13A1.55,1.55,0,0,1,1.55,4.57H3.1V3H4.66V4.57H9.31V3h1.56V4.57h1.55A1.55,1.55,0,0,1,14,6.13V17A1.54,1.54,0,0,1,12.42,18.54ZM1.55,9.23V17H12.42V9.23Zm0-3.1V7.68H12.42V6.13Zm9.32,9.31H9.31V13.89h1.56Zm-3.11,0H6.21V13.89H7.76Zm-3.1,0H3.1V13.89H4.66Zm6.21-3.1H9.31V10.78h1.56Zm-3.11,0H6.21V10.78H7.76Zm-3.1,0H3.1V10.78H4.66Z" /></svg>
 
 
     ,
@@ -62,74 +60,171 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
   attributes: {
 
+
     wrapper: {
       type: 'object',
       default: {
-        options: {
-          tag: 'div', class: '', attr: [],
-        },
+        options: { tag: 'div', class: '' },
+
         styles:
         {
+
           color: { Desktop: '' },
-          borderRadius: {},
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
+        },
+      },
+    },
+    viewCart: {
+      type: 'object',
+      default: {
+        options: { class: '' },
 
+        styles:
+        {
+
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
     },
 
-    text: {
+    cartBtn: {
       type: 'object',
       default: {
         options: {
-          text: 'Custom Text',
-          isLink: true,
-          linkTo: 'postUrl', /*postUrl, homeUrl, authorUrl, authorLink, mailTo, custom, customField */
-          linkToAuthorMeta: '',
-          linkToCustomMeta: '',
-
-          linkTarget: '_blank',
-          customUrl: '',
-          linkAttr: [],
+          tag: 'div',
+          productId: '',
+          sku: '',
+          ajax: true,
+          text: 'Add to cart',
           class: '',
         },
 
-        styles:
-        {
+        styles: {
+
+          display: {},
+          width: {},
           color: { Desktop: '' },
-          fontSize: { Desktop: '' },
-
-
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
+    quantityWrap: {
+      type: 'object',
+      default: {
+        options: {
+          enable: true,
+          class: '',
+        },
+
+        styles: {
+
+          display: {},
+          width: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+      },
+    },
+    quantityInput: {
+      type: 'object',
+      default: {
+        options: {
+          class: '',
+          quantity: 1
+        },
+
+        styles: {
+
+          display: {},
+          width: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+      },
+    },
+    quantityIncrease: {
+      type: 'object',
+      default: {
+        options: {
+          class: '',
+        },
+
+        styles: {
+
+          display: {},
+          width: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+      },
+    },
+    quantityDecrease: {
+      type: 'object',
+      default: {
+        options: {
+          class: '',
+        },
+        styles: {
+          display: {},
+          width: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+        },
+      },
+    },
+
+
 
 
     icon: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-check-circle', position: 'beforeText', /*before, after, prefix, postfix */ class: 'text-icon', },
+        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: 'beforeSku', /*before, after, prefix, postfix */ class: 'sku-icon', },
 
         styles:
         {
           color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
+          display: {},
 
+          fontSize: { Desktop: '' },
+          lineHeight: {},
+          fontWeight: { "Desktop": "700" },
+          textDecoration: {}, //overline, line-through, underline
         },
       },
     },
 
 
-
     prefix: {
       type: 'object',
       default: {
-        options: { text: '', class: 'prefix' },
-
+        options:
+          { text: ' ', class: 'prefix', },
         styles:
         {
           color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -138,14 +233,22 @@ registerBlockType("post-grid/woo-add-to-cart", {
     postfix: {
       type: 'object',
       default: {
-        options: { text: '', class: 'postfix' },
-
+        options:
+          { text: '', class: 'postfix', },
         styles:
         {
           color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
+    },
+
+
+
+    customCss: {
+      "type": "string",
+      "default": ''
     },
 
 
@@ -153,17 +256,6 @@ registerBlockType("post-grid/woo-add-to-cart", {
       "type": "string",
       "default": ''
     },
-
-    customCss: {
-      "type": "string",
-      "default": ''
-    },
-
-    linkAttr: {
-      "type": "array",
-      "default": []
-    },
-
     blockCssY: {
       "type": "object",
       "default": { items: {} }
@@ -175,6 +267,7 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
   supports: {
     "align": ["wide", "full"],
+
   },
   category: "post-grid",
 
@@ -188,20 +281,24 @@ registerBlockType("post-grid/woo-add-to-cart", {
     var clientId = props.clientId;
 
 
+    let cartBtn = attributes.cartBtn;
+    let quantityWrap = attributes.quantityWrap;
+    let quantityInput = attributes.quantityInput;
+    let quantityIncrease = attributes.quantityIncrease;
+    let quantityDecrease = attributes.quantityDecrease;
+    let viewCart = attributes.viewCart;
+    var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
     var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
     var blockClass = '.' + blockIdX;
-
-    var wrapper = attributes.wrapper;
-    var text = attributes.text;
     var icon = attributes.icon;
-
 
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
     var customCss = attributes.customCss;
     var blockCssY = attributes.blockCssY;
+
 
 
     var postId = context['postId'];
@@ -210,151 +307,83 @@ registerBlockType("post-grid/woo-add-to-cart", {
     //const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
     var breakPointX = myStore.getBreakPoint();
 
-    const [isLoading, setisLoading] = useState(false);
-    const [currentPostContent, setCurrentpostContent] = useEntityProp('postType', postType, 'content', postId);
-    const [customFields, setCustomFields] = useState({});
+    const [customTags, setCustomTags] = useState({});
+    const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
 
-    const [currentPostUrl, setCurrentPostUrl] = useEntityProp('postType', postType, 'link', postId);
-
-    const [iconHtml, setIconHtml] = useState('');
 
 
 
     // Wrapper CSS Class Selectors
     const wrapperSelector = blockClass;
-    const textSelector = blockClass + ' .text';
-    const iconSelector = blockClass + ' .text-icon';
+
+    var cartBtnSelector = blockClass + ' .cartBtn';
+    const iconSelector = blockClass + ' .sku-icon';
+    const viewCartSelector = blockClass + ' .added_to_cart';
 
     const prefixSelector = blockClass + ' .prefix';
     const postfixSelector = blockClass + ' .postfix';
+    const quantityWrapSelector = blockClass + ' .quantity-wrap';
+    const quantityIncreaseSelector = blockClass + ' .quantity-increase';
+    const quantityDecreaseSelector = blockClass + ' .quantity-decrease';
+    const quantityInputSelector = blockClass + ' .quantity-input';
 
 
-    function getMetaField(metaKey) {
 
 
-      apiFetch({
-        path: '/post-grid/v2/get_post_meta',
-        method: 'POST',
-        data: { postId: postId, meta_key: metaKey },
-      }).then((res) => {
 
 
-        if (res['meta_value'] != undefined && res['meta_value'].length > 0) {
-          customFields[metaKey] = res['meta_value'];
-          setCustomFields({})
-          setCustomFields(customFields)
 
-        }
 
 
 
-      });
+    // const [
+    //   currentPostSKU,
+    //   setcurrentPostSKU,
+    // ] = useEntityProp('postType', postType, 'date', postId);
 
 
+    const [postSKUEdited, setpostSKUEdited] = useState(cartBtn.options.text);
 
 
-    }
+    // useEffect(() => {
 
+    //   var postTypeX = postType;
 
-    var linkToArgs = {
-      postUrl: { label: 'Post URL', value: 'postUrl' },
-      homeUrl: { label: 'Home URL', value: 'homeUrl' },
-      authorUrl: { label: 'Author URL', value: 'authorUrl' },
-      authorLink: { label: 'Author Link', value: 'authorLink' },
-      authorMail: { label: 'Author Mail', value: 'authorMail', isPro: true },
-      authorMeta: { label: 'Author Meta', value: 'authorMeta', isPro: true },
-      customField: { label: 'Custom Field', value: 'customField', isPro: true },
+    //   if (postType == 'post') {
+    //     var postTypeX = 'posts';
+    //   }
+    //   if (postType == 'page') {
+    //     var postTypeX = 'pages';
+    //   }
 
-      customUrl: { label: 'Custom URL', value: 'customUrl', isPro: true },
 
-    };
+    //   apiFetch({
+    //     path: '/wp/v2/' + postTypeX + '/' + postId,
+    //     method: 'POST',
 
+    //   }).then((res) => {
 
+    //     console.log(res);
 
-    useEffect(() => {
 
+    //   });
 
-      setAttributes({ customCss: customCss });
 
+    // }, []);
 
 
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-    }, [customCss]);
-
-
-
-
-
-
-    const [linkPickerExcerpt, setLinkPickerExcerpt] = useState(false);
-    const [linkPickerText, setLinkPickerText] = useState(false);
-
-
-
-
-
-    useEffect(() => {
-
-      setAttributes({ blockId: blockIdX });
-
-      ;
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-
-    }, [clientId]);
-
-
-
-    useEffect(() => {
-
-      var iconSrc = icon.options.iconSrc;
-
-      var iconHtml = `<span class="${iconSrc}"></span>`;
-
-      setIconHtml(iconHtml);
-
-
-
-    }, [icon]);
-
-
-    // var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-    // for (var x in breakPoints) {
-
-    //   var item = breakPoints[x];
-    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-    // }
-
-
-
-    function handleLinkClick(ev) {
-
-      ev.stopPropagation();
-      ev.preventDefault();
-      return false;
-    }
-
-
-
-    function setFieldLinkTo(option, index) {
-
-
-      var options = { ...text.options, linkTo: option.value };
-      setAttributes({ text: { ...text, options: options } });
-
-    }
 
 
     function onChangeIcon(arg) {
-
-
 
 
       var options = { ...icon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
       setAttributes({ icon: { ...icon, options: options } });
 
     }
+
+
+
 
 
 
@@ -401,24 +430,24 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
 
-    function onPickCssLibraryText(args) {
+    function onPickCssLibrarySku(args) {
 
 
       Object.entries(args).map(x => {
         var sudoScource = x[0];
         var sudoScourceArgs = x[1];
-        text[sudoScource] = sudoScourceArgs;
+        cartBtn[sudoScource] = sudoScourceArgs;
       })
 
-      var textX = Object.assign({}, text);
-      setAttributes({ text: textX });
+      var skuX = Object.assign({}, cartBtn);
+      setAttributes({ cartBtn: skuX });
 
       var styleObj = {};
 
       Object.entries(args).map(x => {
         var sudoScource = x[0];
         var sudoScourceArgs = x[1];
-        var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
+        var elementSelector = myStore.getElementSelector(sudoScource, cartBtnSelector);
 
 
         var sudoObj = {};
@@ -618,6 +647,7 @@ registerBlockType("post-grid/woo-add-to-cart", {
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
       setAttributes({ blockCssY: { items: cssObject } });
 
+
     }
 
 
@@ -625,6 +655,7 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
     function onAddStyleWrapper(sudoScource, key) {
+
 
 
 
@@ -640,18 +671,19 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
 
-    function onChangeStyleText(sudoScource, newVal, attr) {
 
 
+
+    function onChangeStyleSku(sudoScource, newVal, attr) {
 
 
       var path = [sudoScource, attr, breakPointX]
-      let obj = Object.assign({}, text);
+      let obj = Object.assign({}, cartBtn);
       const object = myStore.updatePropertyDeep(obj, path, newVal)
 
-      setAttributes({ text: object });
+      setAttributes({ cartBtn: object });
 
-      var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
+      var elementSelector = myStore.getElementSelector(sudoScource, cartBtnSelector);
       var cssPropty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
@@ -664,6 +696,8 @@ registerBlockType("post-grid/woo-add-to-cart", {
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
       setAttributes({ blockCssY: { items: cssItems } });
+
+
     }
 
 
@@ -671,14 +705,14 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
 
-    function onRemoveStyleText(sudoScource, key) {
+    function onRemoveStyleSku(sudoScource, key) {
 
 
+      var object = myStore.deletePropertyDeep(cartBtn, [sudoScource, key, breakPointX]);
+      setAttributes({ cartBtn: object });
 
-      var object = myStore.deletePropertyDeep(text, [sudoScource, key, breakPointX]);
-      setAttributes({ text: object });
 
-      var elementSelector = myStore.getElementSelector(sudoScource, textSelector);
+      var elementSelector = myStore.getElementSelector(sudoScource, cartBtnSelector);
       var cssPropty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
       setAttributes({ blockCssY: { items: cssObject } });
@@ -690,17 +724,15 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
 
-    function onAddStyleText(sudoScource, key) {
+    function onAddStyleSku(sudoScource, key) {
 
 
 
 
       var path = [sudoScource, key, breakPointX]
-      let obj = Object.assign({}, text);
+      let obj = Object.assign({}, cartBtn);
       const object = myStore.addPropertyDeep(obj, path, '')
-      setAttributes({ text: object });
-
-
+      setAttributes({ cartBtn: object });
 
     }
 
@@ -708,8 +740,6 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
-
-
 
       var path = [sudoScource, attr, breakPointX]
       let obj = Object.assign({}, icon);
@@ -754,9 +784,6 @@ registerBlockType("post-grid/woo-add-to-cart", {
     }
 
 
-
-
-
     function onAddStyleIcon(sudoScource, key) {
 
       var path = [sudoScource, key, breakPointX]
@@ -767,8 +794,15 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
 
-    function onChangeStylePrefix(sudoScource, newVal, attr) {
 
+
+
+
+
+
+
+
+    function onChangeStylePrefix(sudoScource, newVal, attr) {
 
       var path = [sudoScource, attr, breakPointX]
       let obj = Object.assign({}, prefix);
@@ -791,13 +825,10 @@ registerBlockType("post-grid/woo-add-to-cart", {
       setAttributes({ blockCssY: { items: cssItems } });
 
 
-
-
     }
 
 
     function onRemoveStylePrefix(sudoScource, key) {
-
 
       var object = myStore.deletePropertyDeep(prefix, [sudoScource, key, breakPointX]);
       setAttributes({ prefix: object });
@@ -807,7 +838,6 @@ registerBlockType("post-grid/woo-add-to-cart", {
       var cssPropty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
       setAttributes({ blockCssY: { items: cssObject } });
-
 
 
 
@@ -825,7 +855,6 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
     function onChangeStylePostfix(sudoScource, newVal, attr) {
-
 
       var path = [sudoScource, attr, breakPointX]
       let obj = Object.assign({}, postfix);
@@ -853,14 +882,15 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
     function onRemoveStylePostfix(sudoScource, key) {
 
-
       var object = myStore.deletePropertyDeep(postfix, [sudoScource, key, breakPointX]);
       setAttributes({ postfix: object });
+
 
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
       var cssPropty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
       setAttributes({ blockCssY: { items: cssObject } });
+
 
 
     }
@@ -876,6 +906,404 @@ registerBlockType("post-grid/woo-add-to-cart", {
     }
 
 
+    function onChangeStyleQuantityWrap(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, quantityWrap);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ quantityWrap: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, quantityWrapSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+    }
+
+
+    function onRemoveStyleQuantityWrap(sudoScource, key) {
+
+      var object = myStore.deletePropertyDeep(quantityWrap, [sudoScource, key, breakPointX]);
+      setAttributes({ quantityWrap: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, quantityWrapSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+    }
+
+
+    function onAddStyleQuantityWrap(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, quantityWrap);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ quantityWrap: object });
+
+    }
+
+
+    function onChangeStyleQuantityInput(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, quantityInput);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ quantityInput: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, quantityInputSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+    }
+
+
+    function onRemoveStyleQuantityInput(sudoScource, key) {
+
+      var object = myStore.deletePropertyDeep(quantityInput, [sudoScource, key, breakPointX]);
+      setAttributes({ quantityInput: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, quantityInputSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+    }
+
+
+    function onAddStyleQuantityInput(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, quantityInput);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ quantityInput: object });
+
+    }
+
+
+    function onChangeStyleQuantityIncrease(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, quantityIncrease);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ quantityIncrease: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, quantityIncreaseSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+    }
+
+
+    function onRemoveStyleQuantityIncrease(sudoScource, key) {
+
+      var object = myStore.deletePropertyDeep(quantityIncrease, [sudoScource, key, breakPointX]);
+      setAttributes({ quantityIncrease: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, quantityIncreaseSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+    }
+
+
+    function onAddStyleQuantityIncrease(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, quantityIncrease);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ quantityIncrease: object });
+
+    }
+
+    ////############///
+
+    function onChangeStyleQuantityDecrease(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, quantityDecrease);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ quantityDecrease: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, quantityDecreaseSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+    }
+
+
+    function onRemoveStyleQuantityDecrease(sudoScource, key) {
+
+      var object = myStore.deletePropertyDeep(quantityDecrease, [sudoScource, key, breakPointX]);
+      setAttributes({ quantityDecrease: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, quantityDecreaseSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+    }
+
+
+    function onAddStyleQuantityDecrease(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, quantityDecrease);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ quantityDecrease: object });
+
+    }
+
+    ////############///
+
+    function onChangeStyleViewCart(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, viewCart);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ viewCart: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, viewCartSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+
+    }
+
+
+    function onRemoveStyleViewCart(sudoScource, key) {
+
+      var object = myStore.deletePropertyDeep(viewCart, [sudoScource, key, breakPointX]);
+      setAttributes({ viewCart: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, viewCartSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+
+    }
+
+
+    function onAddStyleViewCart(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, viewCart);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ viewCart: object });
+
+    }
+
+
+
+
+
+
+
+
+    String.prototype.strtr = function (dic) {
+      const str = this.toString(),
+        makeToken = (inx) => `{{###~${inx}~###}}`,
+
+        tokens = Object.keys(dic)
+          .map((key, inx) => ({
+            key,
+            val: dic[key],
+            token: makeToken(inx)
+          })),
+
+        tokenizedStr = tokens.reduce((carry, entry) =>
+          carry.replace(new RegExp(entry.key, "g"), entry.token), str);
+
+      return tokens.reduce((carry, entry) =>
+        carry.replace(new RegExp(entry.token, "g"), entry.val), tokenizedStr);
+    };
+
+
+
+    const [iconHtml, setIconHtml] = useState('');
+
+    useEffect(() => {
+
+      var iconSrc = icon.options.iconSrc;
+
+      var iconHtml = `<span class="${iconSrc}"></span>`;
+
+      setIconHtml(iconHtml);
+
+
+
+
+    }, [icon]);
+
+
+
+    const [
+      currentPostUrl,
+      setCurrentPostUrl,
+    ] = useEntityProp('postType', postType, 'link', postId);
+
+
+    useEffect(() => {
+
+      setAttributes({ blockId: blockIdX });
+
+      // setAttributes({ cartBtn: cartBtn });
+      // setAttributes({ wrapper: wrapper });
+
+
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+
+      customTags['currentYear'] = '2022';
+      customTags['currentMonth'] = '07';
+      customTags['currentDay'] = '27';
+      customTags['currentDate'] = '27';
+      customTags['currentTime'] = '27';
+
+      customTags['postPublishDate'] = '123';
+      customTags['postModifiedDate'] = '123';
+
+      customTags['termId'] = '';
+      customTags['termTitle'] = '';
+      customTags['termDescription'] = '';
+      customTags['termPostCount'] = '';
+
+      customTags['postTagTitle'] = 'First Tag Title';
+      customTags['postTagsTitle'] = 'First Tag Title';
+
+      customTags['postCategoryTitle'] = 'First Category Title';
+      customTags['postCategoriesTitle'] = 'First Categories Title';
+
+
+      customTags['postTermTitle'] = 'First Term Title';
+      customTags['postTermsTitle'] = 'List of all terms title';
+
+
+
+      customTags['postId'] = '123';
+      customTags['postStatus'] = '123';
+
+
+      customTags['authorId'] = '123';
+      customTags['authorName'] = 'Nur Hasan';
+      customTags['authorFirstName'] = 'Nur';
+      customTags['authorLastName'] = 'Hasan';
+      customTags['authorDescription'] = 'Hasan';
+
+      customTags['excerpt'] = 'Here is the post excerpt';
+
+      customTags['rankmathTitle'] = 'Hasan';
+      customTags['rankmathPermalink'] = 'Hasan';
+      customTags['rankmathExcerpt'] = 'Hasan';
+      customTags['rankmathFocusKeyword'] = 'Hasan';
+      customTags['rankmathFocusKeywords'] = 'Hasan';
+
+      customTags['rankmathOrgname'] = 'Hasan';
+      customTags['rankmathOrgurl'] = 'Hasan';
+      customTags['rankmathOrglogo'] = 'Hasan';
+
+
+
+      customTags['siteTitle'] = '';
+      customTags['siteDescription'] = '';
+      customTags['siteTagline'] = '';
+
+      customTags['postMeta'] = '';
+
+      customTags['separator'] = '';
+      customTags['searchTerms'] = '';
+
+
+
+      customTags['counter'] = '1';
+
+
+
+    }, [clientId]);
+
+
+
+    // var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
+
+    // for (var x in breakPoints) {
+
+    //   var item = breakPoints[x];
+    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
+
+    // }
 
 
 
@@ -886,8 +1314,21 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
 
-    var [linkAttrItemsText, setlinkAttrItemsText] = useState({}); // Using the hook.
-    var [wrapAttrItems, setwrapAttrItems] = useState({}); // Using the hook.
+
+
+    function handleLinkClick(ev) {
+
+      ev.stopPropagation();
+      ev.preventDefault();
+      return false;
+    }
+
+
+
+
+
+
+
 
 
 
@@ -898,32 +1339,15 @@ registerBlockType("post-grid/woo-add-to-cart", {
     }, [blockCssY]);
 
 
-
-
-
-
-
     useEffect(() => {
-      var sdsd = {};
-      text.options.linkAttr.map(x => {
-        if (x.val)
-          sdsd[x.id] = x.val;
-      })
 
-      setlinkAttrItemsText(sdsd);
-    }, [text]);
 
-    useEffect(() => {
-      var sdsd = {};
-      if (wrapper.options.attr != undefined) {
-        wrapper.options.attr.map(x => {
-          if (x.val)
-            sdsd[x.id] = x.val;
-        })
-      }
+      setAttributes({ customCss: customCss });
 
-      setwrapAttrItems(sdsd);
-    }, [wrapper]);
+
+
+      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+    }, [customCss]);
 
 
 
@@ -946,29 +1370,31 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
 
-    var postUrl = (text.options.customUrl != undefined && text.options.customUrl.length > 0) ? text.options.customUrl : currentPostUrl;
+
+
+
+
+
+    var postUrl = currentPostUrl;
 
 
     const CustomTag = `${wrapper.options.tag}`;
-
-
-
+    const CustomTagPostTitle = `${cartBtn.options.tag}`;
 
 
 
 
 
     const blockProps = useBlockProps({
-      className: ` ${blockId} pg-woo-add-to-cart`,
+      className: ` ${blockId} pg-woo-sku`,
 
     });
 
 
     return (
       <>
-        <InspectorControls >
-          <div className='px-3' >
-
+        <InspectorControls>
+          <div className='' >
             <PanelBody title="Wrapper" initialOpen={false}>
               <PGtabs
                 activeTab="options"
@@ -999,14 +1425,13 @@ registerBlockType("post-grid/woo-add-to-cart", {
                 <PGtab name="options">
 
 
+
                   <PanelRow>
                     <label for="">Wrapper Tag</label>
-
                     <SelectControl
                       label=""
                       value={wrapper.options.tag}
                       options={[
-
                         { label: 'Choose', value: '' },
                         { label: 'H1', value: 'h1' },
                         { label: 'H2', value: 'h2' },
@@ -1014,136 +1439,20 @@ registerBlockType("post-grid/woo-add-to-cart", {
                         { label: 'H4', value: 'h4' },
                         { label: 'H5', value: 'h5' },
                         { label: 'H6', value: 'h6' },
-                        { label: 'SPAN', value: 'span' },
+                        { label: 'Span', value: 'span' },
                         { label: 'DIV', value: 'div' },
                         { label: 'P', value: 'p' },
-                        { label: 'BUTTON', value: 'button' },
-
-
                       ]}
                       onChange={(newVal) => {
 
-
-
                         var options = { ...wrapper.options, tag: newVal };
-                        setAttributes({ wrapper: { ...wrapper, options: options } });
-
-
+                        setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
 
                       }
 
                       }
                     />
                   </PanelRow>
-
-
-                  <PanelRow>
-                    <label for="">Custom Attributes</label>
-                    <div
-                      className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                      onClick={(ev) => {
-
-                        if (wrapper.options.attr == undefined) {
-                          wrapper.options.attr = {};
-                        }
-                        var sdsd = wrapper.options.attr.concat({ id: '', val: '' })
-
-
-
-                        var options = { ...wrapper.options, attr: sdsd };
-                        setAttributes({ wrapper: { ...wrapper, options: options } });
-
-
-
-
-
-
-                      }}
-
-                    >Add</div>
-
-
-
-                  </PanelRow>
-
-
-
-
-                  {
-                    wrapper.options.attr != undefined && wrapper.options.attr.map((x, i) => {
-
-                      return (
-
-                        <div className='my-2'>
-                          <PanelRow>
-                            <InputControl
-                              placeholder="Name"
-                              className='mr-2'
-                              value={wrapper.options.attr[i].id}
-                              onChange={(newVal) => {
-
-                                wrapper.options.attr[i].id = newVal;
-
-
-                                var ssdsd = wrapper.options.attr.concat([]);
-
-
-
-                                var options = { ...wrapper.options, attr: ssdsd };
-                                setAttributes({ wrapper: { ...wrapper, options: options } });
-
-
-
-                              }}
-                            />
-
-                            <InputControl
-                              className='mr-2'
-                              placeholder="Value"
-                              value={x.val}
-                              onChange={(newVal) => {
-                                wrapper.options.attr[i].val = newVal
-                                var ssdsd = wrapper.options.attr.concat([]);
-
-
-
-                                var options = { ...wrapper.options, attr: ssdsd };
-                                setAttributes({ wrapper: { ...wrapper, options: options } });
-
-
-                              }}
-                            />
-                            <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                              onClick={(ev) => {
-
-                                wrapper.options.attr.splice(i, 1);
-
-                                var ssdsd = wrapper.options.attr.concat([]);
-
-
-
-
-                                var options = { ...wrapper.options, attr: ssdsd };
-                                setAttributes({ wrapper: { ...wrapper, options: options } });
-
-
-                              }}
-
-                            ></span>
-                          </PanelRow>
-
-
-
-
-                        </div>
-
-                      )
-
-                    })
-                  }
-
-
 
                 </PGtab>
                 <PGtab name="styles">
@@ -1153,23 +1462,9 @@ registerBlockType("post-grid/woo-add-to-cart", {
                   <PGCssLibrary blockId={blockId} obj={wrapper} onChange={onPickCssLibraryWrapper} />
                 </PGtab>
               </PGtabs>
-
-
-
-
-
-
-
-
             </PanelBody>
 
-
-
-
-
-            <PanelBody title="Text" initialOpen={false}>
-
-
+            <PanelBody title="Cart Button" initialOpen={false}>
 
               <PGtabs
                 activeTab="options"
@@ -1200,15 +1495,54 @@ registerBlockType("post-grid/woo-add-to-cart", {
                 <PGtab name="options">
 
 
-                  <PanelRow>
-                    <label for="">Custom Text</label>
 
-                    <InputControl
-                      value={text.options.text}
+
+                  <PanelRow>
+                    <label for="">Enable Ajax Cart</label>
+                    <SelectControl
+                      label=""
+                      value={cartBtn.options.ajax}
+                      options={[
+                        { label: 'True', value: 1 },
+                        { label: 'False', value: 0 },
+
+                      ]}
                       onChange={(newVal) => {
 
-                        var options = { ...text.options, text: newVal };
-                        setAttributes({ text: { ...text, options: options } });
+                        var options = { ...cartBtn.options, ajax: newVal };
+                        setAttributes({ cartBtn: { ...cartBtn, options: options } });
+
+                      }
+
+                      }
+                    />
+                  </PanelRow>
+
+
+
+                  <PanelRow>
+                    <label for="">Quantity</label>
+
+                    <InputControl
+                      value={quantityInput.options.quantity}
+                      onChange={(newVal) => {
+
+                        var options = { ...quantityInput.options, quantity: newVal };
+                        setAttributes({ quantityInput: { ...quantityInput, options: options } });
+                      }
+                      }
+                    />
+                  </PanelRow>
+
+                  <PanelRow>
+                    <label for="">Product Id / Variation ID</label>
+
+                    <InputControl
+                      value={cartBtn.options.productId}
+                      onChange={(newVal) => {
+
+                        var options = { ...cartBtn.options, productId: newVal };
+                        setAttributes({ cartBtn: { ...cartBtn, options: options } });
                       }
                       }
                     />
@@ -1218,320 +1552,151 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
 
-
-                  <ToggleControl
-                    label="Linked to URL?"
-                    help={text.options.isLink ? 'Linked to URL?' : 'Not Linked.'}
-                    checked={text.options.isLink ? true : false}
-                    onChange={(e) => {
-
-
-                      var options = { ...text.options, isLink: text.options.isLink ? false : true, };
-                      setAttributes({ text: { ...text, options: options } });
-
-
-
-                    }}
-                  />
-
-
-
-
-                  {text.options.isLink && (
-                    <>
-
-                      <PanelRow>
-                        <label for="">Link To</label>
-
-
-
-                        <PGDropdown position="bottom right" variant="secondary" options={linkToArgs} buttonTitle="Choose" onChange={setFieldLinkTo} values={[]}></PGDropdown>
-
-
-                      </PanelRow>
-
-
-                      <div className='bg-gray-500 p-2 my-3 text-white'>{(linkToArgs[text.options.linkTo] != undefined) ? linkToArgs[text.options.linkTo].label : ''}</div>
-
-                      {text.options.linkTo == 'authorMeta' && (
-
-                        <PanelRow>
-                          <label for="">Author Meta Key</label>
-
-                          <InputControl
-                            value={text.options.linkToAuthorMeta}
-                            onChange={(newVal) => {
-
-
-                              var options = { ...text.options, linkToAuthorMeta: newVal };
-                              setAttributes({ text: { ...text, options: options } });
-
-                            }}
-                          />
-
-                        </PanelRow>
-
-                      )}
-
-
-                      {text.options.linkTo == 'customField' && (
-
-                        <PanelRow>
-                          <label for="">Custom Meta Key</label>
-
-                          <InputControl
-                            value={text.options.linkToAuthorMeta}
-                            onChange={(newVal) => {
-
-
-                              var options = { ...text.options, linkToAuthorMeta: newVal };
-                              setAttributes({ text: { ...text, options: options } });
-
-                            }}
-                          />
-
-                        </PanelRow>
-
-                      )}
-
-
-
-
-
-
-
-
-
-
-                      <PanelRow>
-                        <label for="">Link Target</label>
-
-                        <SelectControl
-                          label=""
-                          value={text.options.linkTarget}
-                          options={[
-                            { label: '_self', value: '_self' },
-                            { label: '_blank', value: '_blank' },
-                            { label: '_parent', value: '_parent' },
-                            { label: '_top', value: '_top' },
-                          ]}
-                          onChange={
-                            (newVal) => {
-                              var options = { ...text.options, linkTarget: newVal };
-                              setAttributes({ text: { ...text, options: options } });
-                            }
-                          }
-                        />
-                      </PanelRow>
-                    </>
-
-                  )}
-
-
-
-
-                  {text.options.linkTo == 'customUrl' && (
-
-
-                    <PanelRow>
-                      <label for="">Custom Url</label>
-
-                      <div className='relative'>
-                        <Button className={(linkPickerText) ? "!bg-gray-400" : ''} icon={link} onClick={ev => {
-
-                          setLinkPickerText(prev => !prev)
-                        }}></Button>
-                        {text.options.customUrl.length > 0 && (
-                          <Button className='!text-red-500 ml-2' icon={linkOff} onClick={ev => {
-
-                            var options = { ...text.options, customUrl: '' };
-                            setAttributes({ text: { ...text, options: options } });
-
-
-
-                          }}></Button>
-
-                        )}
-                        {linkPickerText && (
-                          <Popover position="bottom right">
-                            <LinkControl settings={[]} value={text.options.customUrl} onChange={newVal => {
-
-                              var options = { ...text.options, customUrl: newVal.url };
-                              setAttributes({ text: { ...text, options: options } });
-                              //setLinkPickerText(false)
-
-                            }} />
-
-                            <div className='p-2'><span className='font-bold'>Linked to:</span> {(text.options.customUrl.length != 0) ? text.options.customUrl : 'No link'} </div>
-                          </Popover>
-
-                        )}
-
-
-                      </div>
-                    </PanelRow>
-
-
-                  )}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  {text.options.isLink && (
-
-                    <div>
-
-
-
-
-                      <PanelRow>
-                        <label for="">Custom Attributes</label>
-                        <div
-                          className=' cursor-pointer px-3 text-white py-1 bg-blue-600'
-
-                          onClick={(ev) => {
-
-                            var sdsd = text.options.linkAttr.concat({ id: '', val: '' })
-
-
-
-                            var options = { ...text.options, linkAttr: sdsd };
-                            setAttributes({ text: { ...text, options: options } });
-
-
-
-
-
-
-                          }}
-
-                        >Add</div>
-
-
-
-                      </PanelRow>
-
-
-
-                      {
-                        text.options.linkAttr != undefined && text.options.linkAttr.map((x, i) => {
-
-                          return (
-
-                            <div className='my-2'>
-                              <PanelRow>
-                                <InputControl
-                                  placeholder="Name"
-                                  className='mr-2'
-                                  value={text.options.linkAttr[i].id}
-                                  onChange={(newVal) => {
-
-                                    text.options.linkAttr[i].id = newVal;
-
-
-                                    var ssdsd = text.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...text.options, linkAttr: ssdsd };
-                                    setAttributes({ text: { ...text, options: options } });
-
-
-
-                                  }}
-                                />
-
-                                <InputControl
-                                  className='mr-2'
-                                  placeholder="Value"
-                                  value={x.val}
-                                  onChange={(newVal) => {
-                                    text.options.linkAttr[i].val = newVal
-                                    var ssdsd = text.options.linkAttr.concat([]);
-
-
-
-                                    var options = { ...text.options, linkAttr: ssdsd };
-                                    setAttributes({ text: { ...text, options: options } });
-
-
-                                  }}
-                                />
-                                <span className='text-lg cursor-pointer px-3 text-white py-1 bg-red-400 icon-close'
-                                  onClick={(ev) => {
-
-                                    text.options.linkAttr.splice(i, 1);
-
-                                    var ssdsd = text.options.linkAttr.concat([]);
-
-
-
-
-                                    var options = { ...text.options, linkAttr: ssdsd };
-                                    setAttributes({ text: { ...text, options: options } });
-
-
-                                  }}
-
-                                ></span>
-                              </PanelRow>
-
-
-
-
-                            </div>
-
-                          )
-
-                        })
-                      }
-
-
-                    </div>
-
-
-
-                  )}
-
-
-
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={text} onChange={onChangeStyleText} onAdd={onAddStyleText} onRemove={onRemoveStyleText} />
+                  <PGStyles obj={cartBtn} onChange={onChangeStyleSku} onAdd={onAddStyleSku} onRemove={onRemoveStyleSku} />
                 </PGtab>
                 <PGtab name="css">
-                  <PGCssLibrary blockId={blockId} obj={text} onChange={onPickCssLibraryText} />
+                  <PGCssLibrary blockId={blockId} obj={cartBtn} onChange={onPickCssLibrarySku} />
                 </PGtab>
               </PGtabs>
 
+            </PanelBody>
+
+            <PanelBody title="Quantity" initialOpen={false}>
+
+
+              <PanelBody title="Quantity Wrap" initialOpen={false}>
+
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+
+                  ]}
+                >
+                  <PGtab name="options">
+
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={quantityWrap} onChange={onChangeStyleQuantityWrap} onAdd={onAddStyleQuantityWrap} onRemove={onRemoveStyleQuantityWrap} />
+                  </PGtab>
+
+                </PGtabs>
+              </PanelBody>
+
+              <PanelBody title="Quantity Increase" initialOpen={false}>
+
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+
+                  ]}
+                >
+                  <PGtab name="options">
+
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={quantityIncrease} onChange={onChangeStyleQuantityIncrease} onAdd={onAddStyleQuantityIncrease} onRemove={onRemoveStyleQuantityIncrease} />
+                  </PGtab>
+
+                </PGtabs>
+              </PanelBody>
+
+              <PanelBody title="Quantity Decrease" initialOpen={false}>
+
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+
+                  ]}
+                >
+                  <PGtab name="options">
+
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={quantityDecrease} onChange={onChangeStyleQuantityDecrease} onAdd={onAddStyleQuantityDecrease} onRemove={onRemoveStyleQuantityDecrease} />
+                  </PGtab>
+
+                </PGtabs>
+              </PanelBody>
+
+              <PanelBody title="Quantity Input" initialOpen={false}>
+
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+
+                  ]}
+                >
+                  <PGtab name="options">
+
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={quantityInput} onChange={onChangeStyleQuantityInput} onAdd={onAddStyleQuantityInput} onRemove={onRemoveStyleQuantityInput} />
+                  </PGtab>
+
+                </PGtabs>
+              </PanelBody>
 
 
 
@@ -1540,7 +1705,6 @@ registerBlockType("post-grid/woo-add-to-cart", {
             </PanelBody>
 
             <PanelBody title="Icon" initialOpen={false}>
-
 
 
               <PGtabs
@@ -1589,15 +1753,12 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
                         { label: 'Choose Position', value: '' },
 
-                        { label: 'Before Text', value: 'beforeText' },
-                        { label: 'After Text', value: 'afterText' },
+                        { label: 'Before Cart Text', value: 'beforeCartText' },
+                        { label: 'After Cart Text', value: 'afterCartText' },
                         { label: 'Before Prefix', value: 'beforePrefix' },
                         { label: 'After Prefix', value: 'afterPrefix' },
                         { label: 'Before Postfix', value: 'beforePostfix' },
                         { label: 'After Postfix', value: 'afterPostfix' },
-                        { label: 'Before Link', value: 'beforeLink' },
-                        { label: 'After Link', value: 'afterLink' },
-
 
                       ]}
                       onChange={(newVal) => {
@@ -1614,6 +1775,7 @@ registerBlockType("post-grid/woo-add-to-cart", {
                       }
                     />
                   </PanelRow>
+
                 </PGtab>
                 <PGtab name="styles">
                   <PGStyles obj={icon} onChange={onChangeStyleIcon} onAdd={onAddStyleIcon} onRemove={onRemoveStyleIcon} />
@@ -1623,17 +1785,46 @@ registerBlockType("post-grid/woo-add-to-cart", {
                 </PGtab>
               </PGtabs>
 
-
-
-
-
-
-
             </PanelBody>
 
+
+            <PanelBody title="View Cart" initialOpen={false}>
+
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+
+                ]}
+              >
+                <PGtab name="options">
+
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={viewCart} onChange={onChangeStyleViewCart} onAdd={onAddStyleViewCart} onRemove={onRemoveStyleViewCart} />
+                </PGtab>
+
+              </PGtabs>
+            </PanelBody>
+
+
+
+
             <PanelBody title="Prefix" initialOpen={false}>
-
-
 
               <PGtabs
                 activeTab="options"
@@ -1670,9 +1861,9 @@ registerBlockType("post-grid/woo-add-to-cart", {
                       onChange={(newVal) => {
 
 
-                        var options = { ...prefix.options, text: newVal };
-                        setAttributes({ prefix: { ...prefix, options: options } });
 
+                        var options = { ...prefix.options, text: newVal };
+                        setAttributes({ prefix: { styles: prefix.styles, options: options } });
 
                       }
                       }
@@ -1686,8 +1877,6 @@ registerBlockType("post-grid/woo-add-to-cart", {
                   <PGCssLibrary blockId={blockId} obj={prefix} onChange={onPickCssLibraryPrefix} />
                 </PGtab>
               </PGtabs>
-
-
 
 
             </PanelBody>
@@ -1733,10 +1922,9 @@ registerBlockType("post-grid/woo-add-to-cart", {
                       value={postfix.options.text}
                       onChange={(newVal) => {
 
+
                         var options = { ...postfix.options, text: newVal };
                         setAttributes({ postfix: { ...postfix, options: options } });
-
-
 
                       }
 
@@ -1754,9 +1942,6 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
 
-
-
-
             </PanelBody>
 
             <PanelBody title="Custom Style" initialOpen={false}>
@@ -1764,28 +1949,24 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
               <p>Please use following class selector to apply your custom CSS</p>
               <div className='my-3'>
-                <p className='font-bold'>Wrapper</p>
+                <p className='font-bold'>Title Wrapper</p>
                 <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
               </div>
 
-
               <div className='my-3'>
-                <p className='font-bold'>Text</p>
-                <p><code>{textSelector}{'{/* your CSS here*/}'} </code></p>
+                <p className='font-bold'>Title link</p>
+                <p><code>{cartBtnSelector}{'{/* your CSS here*/}'} </code></p>
               </div>
 
               <div className='my-3'>
-                <p className='font-bold'>Prefix Selector</p>
+                <p className='font-bold'>Prefix</p>
                 <p><code>{prefixSelector}{'{/* your CSS here*/}'} </code></p>
               </div>
 
-
               <div className='my-3'>
-                <p className='font-bold'>Postfix Selector</p>
+                <p className='font-bold'>Postfix</p>
                 <p><code>{postfixSelector}{'{/* your CSS here*/}'} </code></p>
               </div>
-
-
 
 
 
@@ -1802,30 +1983,20 @@ registerBlockType("post-grid/woo-add-to-cart", {
               />
             </PanelBody>
 
-            <div className='px-2'>
-              <PGMailSubsctibe />
-              <PGContactSupport utm={{ utm_source: 'BlockReadMore', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
-
-            </div>
-
+            <PGMailSubsctibe />
+            <PGContactSupport utm={{ utm_source: 'BlockPostTitle', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
 
 
           </div>
 
 
 
-
-
-
         </InspectorControls >
-
 
         <>
 
-
-
           {wrapper.options.tag && (
-            <CustomTag {...blockProps} {...wrapAttrItems}>
+            <CustomTag {...blockProps}>
 
               {icon.options.position == 'beforePrefix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
@@ -1839,73 +2010,28 @@ registerBlockType("post-grid/woo-add-to-cart", {
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
               )}
 
-
-              {text.options.isLink && (
-
-                <>
-                  {icon.options.position == 'beforeLink' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                  <a className='text' onClick={handleLinkClick}  {...linkAttrItemsText} target={text.options.linkTarget} href={postUrl}>
-
-                    {icon.options.position == 'beforeText' && (
-                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                    )}
-                    <RichText
-
-                      tagName={'span'}
-                      value={text.options.text}
-                      allowedFormats={['core/bold', 'core/italic', 'core/link']}
-                      onChange={(content) => {
-                        var options = { ...text.options, text: content };
-                        setAttributes({ text: { ...text, options: options } });
+              <div className='quantity-wrap'>
+                <span className='quantity-decrease'>-</span>
+                <input className='quantity-input' size="3" type="text" value={quantityInput.options.quantity} />
+                <span className='quantity-increase'>+</span>
+              </div>
 
 
-
-                      }}
-                      placeholder={__('Start Writing...')}
-                    />
-                    {icon.options.position == 'afterText' && (
-                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                    )}
-                  </a>
-                  {icon.options.position == 'afterLink' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                </>
-
-
-
-              )}
-
-              {!text.options.isLink && (
-                <>
-                  {icon.options.position == 'beforeText' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                  <RichText
-                    className='text'
-                    tagName={'span'}
-                    value={text.options.text}
-                    allowedFormats={['core/bold', 'core/italic', 'core/link']}
-                    onChange={(content) => {
-                      var options = { ...text.options, text: content };
-                      setAttributes({ text: { ...text, options: options } });
-                    }}
-                    placeholder={__('Start Writing...')}
-                  />
-                  {icon.options.position == 'afterText' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                </>
-              )}
-
-
+              <a className='cartBtn' onClick={handleLinkClick} href="?add-to-cart=1399" data-quantity="1" data-product_id="1399" data-product_sku="woo-polo" aria-label="Add “Polo” to your cart" aria-describedby="" rel="nofollow">
+                {icon.options.position == 'beforeCartText' && (
+                  <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                )}
+                {postSKUEdited}
+                {icon.options.position == 'afterCartText' && (
+                  <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
+                )}
+              </a>
 
 
               {icon.options.position == 'beforePostfix' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
               )}
+
               {postfix.options.text &&
                 (<span className={postfix.options.class}>{postfix.options.text}</span>)}
               {icon.options.position == 'afterPostfix' && (
@@ -1914,99 +2040,6 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
             </CustomTag>
           )}
-
-          {wrapper.options.tag.length == 0 && (
-            <>
-              {icon.options.position == 'beforePostfix' && (
-                <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-              )}
-              {prefix.options.text && (
-                <span className={prefix.options.class}>{prefix.options.text}</span>
-              )}
-
-              {icon.options.position == 'beforePostfix' && (
-                <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-              )}
-
-              {text.options.isLink && (
-                <>
-                  {icon.options.position == 'beforeLink' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                  <a className='text' onClick={handleLinkClick}  {...linkAttrItemsText} target={text.options.linkTarget} href={postUrl}>
-
-                    {icon.options.position == 'beforeText' && (
-                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                    )}
-
-                    <RichText
-
-                      tagName={'span'}
-                      value={text.options.text}
-                      allowedFormats={['core/bold', 'core/italic', 'core/link']}
-                      onChange={(content) => {
-                        var options = { ...text.options, text: content };
-                        setAttributes({ text: { ...text, options: options } });
-                      }}
-                      placeholder={__('Start Writing...')}
-                    />
-
-                    {icon.options.position == 'afterText' && (
-                      <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                    )}
-                  </a>
-                  {icon.options.position == 'afterLink' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                </>
-              )}
-              {!text.options.isLink && (
-
-                <>
-
-                  {icon.options.position == 'beforeText' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                  <RichText
-                    className='text'
-                    tagName={'span'}
-                    value={text.options.text}
-                    allowedFormats={['core/bold', 'core/italic', 'core/link']}
-                    onChange={(content) => {
-                      var options = { ...text.options, text: content };
-                      setAttributes({ text: { ...text, options: options } });
-                    }}
-                    placeholder={__('Start Writing...')}
-                  />
-                  {icon.options.position == 'afterText' && (
-                    <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-                  )}
-                </>
-
-
-
-              )}
-
-
-
-              {icon.options.position == 'beforePostfix' && (
-                <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-              )}
-              {postfix.options.text &&
-                (<span className={postfix.options.class}>{postfix.options.text}</span>)}
-              {icon.options.position == 'afterPostfix' && (
-                <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
-              )}
-            </>
-
-
-
-
-          )}
-
-
-
-
 
         </>
       </>
@@ -2018,3 +2051,4 @@ registerBlockType("post-grid/woo-add-to-cart", {
     return null;
   }
 })
+

@@ -3,161 +3,368 @@ if (!defined('ABSPATH')) exit();
 
 
 
-class PGBlockIcon
+class PGBlockWooAddToCart
 {
     function __construct()
     {
         add_action('init', array($this, 'register_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'front_scripts'));
     }
+
+
+    function front_scripts($attributes)
+    {
+        wp_register_script('pgwoo-add-to-cart_front_script', post_grid_plugin_url . 'src/blocks/woo-add-to-cart/front-scripts.js', [], '', true);
+        //wp_register_style('pgwoo-add-to-cart_front_style', post_grid_plugin_url . 'src/blocks/woo-add-to-cart/index.css');
+
+        if (has_block('post-grid/woo-add-to-cart')) {
+
+
+            wp_enqueue_script('pgwoo-add-to-cart_front_script');
+            wp_enqueue_style('pgwoo-add-to-cart_front_style');
+        }
+    }
+
 
 
     // loading src files in the gutenberg editor screen
     function register_scripts()
     {
-        //wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/icon/index.css');
-        //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/icon/index.js', array('wp-blocks', 'wp-element'));
+        //wp_register_style('editor_style', post_grid_plugin_url . 'src/blocks/woo-add-to-cart/index.css');
+        //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/woo-add-to-cart/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/icon', array(
-            //'editor_script' => 'editor_script',
+        register_block_type('post-grid/woo-add-to-cart', array(
+            // 'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'style' => 'front_style',
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "tag" => "div",
-                            "class" => "",
-                            "attr" => []
-                        ],
-                        "styles" => [
+            'attributes' =>  array(
+                'wrapper' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'tag' => 'div',
+                            'class' => '',
+                        ),
+                        'styles' =>
+                        array(
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'backgroundColor' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'padding' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'margin' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'cartBtn' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'tag' => 'div',
+                            'postId' => '',
+                            'sku' => '',
+                            'text' => 'Add to cart',
+                            'class' => '',
+                            'ajax' => true,
+                        ),
+                        'styles' =>
+                        array(
+                            'display' =>
+                            array(),
+                            'width' =>
+                            array(),
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'backgroundColor' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'padding' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'margin' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'quantityWrap' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'enable' => true,
+                            'class' => '',
+                        ),
+                        'styles' =>
+                        array(
+                            'display' =>
+                            array(),
+                            'width' =>
+                            array(),
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'backgroundColor' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'padding' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'margin' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'quantityInput' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => '',
+                        ),
+                        'styles' =>
+                        array(
+                            'display' =>
+                            array(),
+                            'width' =>
+                            array(),
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'backgroundColor' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'padding' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'margin' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'quantityIncrease' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => '',
+                        ),
+                        'styles' =>
+                        array(
+                            'display' =>
+                            array(),
+                            'width' =>
+                            array(),
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'backgroundColor' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'padding' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'margin' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'quantityDecrease' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => '',
+                        ),
+                        'styles' =>
+                        array(
+                            'display' =>
+                            array(),
+                            'width' =>
+                            array(),
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'backgroundColor' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'padding' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'margin' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'icon' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'library' => 'fontAwesome',
+                            'srcType' => 'class',
+                            'iconSrc' => '',
+                            'position' => 'beforeCartText',
+                            'class' => 'sku-icon',
+                        ),
+                        'styles' =>
+                        array(
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'backgroundColor' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'padding' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'margin' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'display' =>
+                            array(),
+                            'fontSize' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'lineHeight' =>
+                            array(),
+                            'fontWeight' =>
+                            array(
+                                'Desktop' => '700',
+                            ),
+                            'textDecoration' =>
+                            array(),
+                        ),
+                    ),
+                ),
+                'prefix' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'text' => ' ',
+                            'class' => 'prefix',
+                        ),
+                        'styles' =>
+                        array(
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'backgroundColor' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'postfix' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'text' => '',
+                            'class' => 'postfix',
+                        ),
+                        'styles' =>
+                        array(
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'backgroundColor' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'customCss' =>
+                array(
+                    'type' => 'string',
+                    'default' => '',
+                ),
+                'blockId' =>
+                array(
+                    'type' => 'string',
+                    'default' => '',
+                ),
+                'blockCssY' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'items' =>
+                        array(),
+                    ),
+                ),
+            )
 
-                            "color" => [],
 
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "borderRadius" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "text" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "Custom Text",
-                            "isLink" => true,
-                            "linkTo" => "postUrl",
-                            "linkToAuthorMeta" => "",
-                            "linkToCustomMeta" => "",
-                            "linkTarget" => "_blank",
-                            "customUrl" => "",
-                            "linkAttr" => [],
-                            "class" => ""
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "icon" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "library" => "fontAwesome",
-                            "srcType" => "class",
-                            "iconSrc" => "fas fa-check-circle",
-                            "position" => "beforeText",
-                            "class" => "text-icon"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => []
-                        ]
-                    ]
-                ],
-                "prefix" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "",
-                            "class" => "prefix"
-                        ],
-                        "styles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "postfix" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "",
-                            "class" => "postfix"
-                        ],
-                        "styles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "linkAttr" => [
-                    "type" => "array",
-                    "default" => []
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
         ));
     }
 
@@ -183,10 +390,8 @@ class PGBlockIcon
 
 
 
-        $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
+        $post_ID = get_the_id();
         $post_url = get_the_permalink($post_ID);
-        $the_post = get_post($post_ID);
-        $post_excerpt = '';
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
@@ -196,18 +401,26 @@ class PGBlockIcon
         $wrapperOptions = isset($wrapper['options']) ? $wrapper['options'] : [];
 
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
-        $wrapperAttr = isset($wrapperOptions['attr']) ? $wrapperOptions['attr'] : [];
 
-        $text = isset($attributes['text']) ? $attributes['text'] : [];
-        $textOptions = isset($text['options']) ? $text['options'] : [];
+        $cartBtn = isset($attributes['cartBtn']) ? $attributes['cartBtn'] : [];
+        $cartBtnOptions = isset($cartBtn['options']) ? $cartBtn['options'] : [];
 
-        $textText = isset($textOptions['text']) ? $textOptions['text'] : 'Custom Text';
+        $cartBtnRel = isset($cartBtnOptions['rel']) ? $cartBtnOptions['rel'] : '';
+        $cartBtnText = isset($cartBtnOptions['text']) ? $cartBtnOptions['text'] : '';
+        $cartBtnAjax = isset($cartBtnOptions['ajax']) ? $cartBtnOptions['ajax'] : true;
 
-        $textIsLink = isset($textOptions['isLink']) ? $textOptions['isLink'] : true;
-        $textLinkTarget = isset($textOptions['linkTarget']) ? $textOptions['linkTarget'] : '_blank';
-        $textCustomUrl = isset($textOptions['customUrl']) ? $textOptions['customUrl'] : '';
-        $textLinkAttr = isset($textOptions['linkAttr']) ? $textOptions['linkAttr'] : [];
-        $textRel = isset($textOptions['rel']) ? $textOptions['rel'] : '';
+        $quantityWrap = isset($attributes['quantityWrap']) ? $attributes['quantityWrap'] : [];
+        $quantityWrapOptions = isset($quantityWrap['options']) ? $quantityWrap['options'] : [];
+        $quantityWrapEnable = isset($quantityWrapOptions['enable']) ? $quantityWrapOptions['enable'] : true;
+
+
+        $quantityInput = isset($attributes['quantityInput']) ? $attributes['quantityInput'] : [];
+        $quantityInputOptions = isset($quantityInput['options']) ? $quantityInput['options'] : [];
+
+        $quantityInputQuantity = isset($quantityInputOptions['quantity']) ? $quantityInputOptions['quantity'] : 1;
+
+
+
 
 
 
@@ -240,6 +453,10 @@ class PGBlockIcon
 
 
 
+        global $product;
+
+        $productSku = ($product == null) ? '' : $product->get_sku();
+
         if ($iconLibrary == 'fontAwesome') {
             wp_enqueue_style('fontawesome-icons');
         } else if ($iconLibrary == 'iconFont') {
@@ -248,36 +465,9 @@ class PGBlockIcon
             wp_enqueue_style('bootstrap-icons');
         }
 
-        $linkAttrStr = '';
 
 
 
-        if (!empty($postExcerptlinkAttr))
-            foreach ($postExcerptlinkAttr as $attr) {
-
-                if (!empty($attr['val']))
-                    $linkAttrStr .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
-            }
-
-
-        $linkAttrStrText = '';
-
-        if (!empty($textLinkAttr))
-            foreach ($textLinkAttr as $attr) {
-
-                if (!empty($attr['val']))
-                    $linkAttrStrText .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
-            }
-
-
-        $wrapperAttrText = '';
-
-        if (!empty($wrapperAttr))
-            foreach ($wrapperAttr as $attr) {
-
-                if (!empty($attr['val']))
-                    $wrapperAttrText .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
-            }
 
 
         $postGridCustomCss .= $customCss;
@@ -286,13 +476,19 @@ class PGBlockIcon
         $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 
 
+
+
+        $cartUrl = ($cartBtnAjax) ? '?add-to-cart=' . esc_attr($post_ID) : '?add-to-cart=' . $post_ID . '&quantity=' . esc_attr($quantityInputQuantity);
+
+        // var_dump($cartBtnAjax);
+
         ob_start();
 
 
         if (!empty($wrapperTag)) :
 
 ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
+            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
 
 
                 <?php if ($iconPosition == 'beforePrefix') : ?>
@@ -306,29 +502,24 @@ class PGBlockIcon
                 <?php if ($iconPosition == 'afterPrefix') : ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <?php if ($textIsLink) : ?>
-                    <a class='text' <?php
-                                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                    echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
-                        <?php if ($iconPosition == 'beforeText') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                        <?php echo wp_kses_post($textText); ?>
-                        <?php if ($iconPosition == 'afterText') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                    </a>
 
-                <?php else : ?>
-                    <?php if ($iconPosition == 'beforeText') : ?>
+
+                <div class='quantity-wrap'>
+                    <span data-blockid="<?php echo esc_attr($blockId); ?>" class='quantity-decrease'>-</span>
+                    <input data-blockid="<?php echo esc_attr($blockId); ?>" class='quantity-input' size="3" type="text" value="<?php echo esc_attr($quantityInputQuantity); ?>" />
+                    <span data-blockid="<?php echo esc_attr($blockId); ?>" class='quantity-increase'>+</span>
+                </div>
+
+
+                <a data-blockid="<?php echo esc_attr($blockId); ?>" class='product_type_simple add_to_cart_button <?php echo ($cartBtnAjax) ? 'ajax_add_to_cart' : ''; ?> cartBtn' data-quantity="<?php echo esc_attr($quantityInputQuantity); ?>" data-product_id="<?php echo esc_attr($post_ID); ?>" data-product_sku="<?php echo esc_attr($productSku); ?>" aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
+                    <?php if ($iconPosition == 'beforeCartText') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
-                    <?php echo wp_kses_post($textText); ?>
-                    <?php if ($iconPosition == 'afterText') : ?>
+                    <?php echo wp_kses_post($cartBtnText); ?>
+                    <?php if ($iconPosition == 'afterCartText') : ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
-                <?php endif; ?>
-
+                </a>
 
 
 
@@ -336,7 +527,7 @@ class PGBlockIcon
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
                 <?php if ($postfixText) : ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
                 <?php endif; ?>
 
                 <?php if ($iconPosition == 'afterPostfix') : ?>
@@ -348,58 +539,8 @@ class PGBlockIcon
 
         endif;
 
-        if (empty($wrapperTag)) :
 
         ?>
-
-
-            <?php if (!$textIsLink) : ?>
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
-                <?php endif; ?>
-
-
-                <?php if ($iconPosition == 'beforeText') : ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-                <?php echo wp_kses_post($textText); ?>
-                <?php if ($iconPosition == 'afterText') : ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-
-
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
-                <?php endif; ?>
-            <?php else : ?>
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
-                <?php endif; ?>
-                <a class='text' <?php
-                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
-
-                    <?php if ($iconPosition == 'beforeText') : ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
-                    <?php echo wp_kses_post($textText); ?>
-                    <?php if ($iconPosition == 'afterText') : ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
-
-                </a>
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
-                <?php endif; ?>
-            <?php endif; ?>
-
-
-        <?php
-
-        endif;
-
-        ?>
-
 
 
 
@@ -412,4 +553,4 @@ class PGBlockIcon
     }
 }
 
-$PGBlockIcon = new PGBlockIcon();
+$PGBlockWooAddToCart = new PGBlockWooAddToCart();

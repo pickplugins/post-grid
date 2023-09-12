@@ -1261,12 +1261,13 @@ registerBlockType("post-grid/woo-star-rate", {
 
 
 
-    function replaceAll(str, mapObj) {
-      var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
-
-      return str.replace(re, function (matched) {
-        return mapObj[matched.toLowerCase()];
+    function replaceAll(str, correction) {
+      Object.keys(correction).forEach((key) => {
+        str = str.replaceAll(key, correction[key]);
       });
+
+      return str;
+
     }
 
 
@@ -1580,6 +1581,8 @@ registerBlockType("post-grid/woo-star-rate", {
                     label="Summury Type"
                     selected={summury.options.type}
                     options={[
+
+                      { label: 'None', value: '' },
                       { label: '123 customer reviews', value: '{review_count} customer reviews' },
                       { label: '4.50/5.00', value: '{average_rating}/5.00' },
                       { label: '4.50 out of 5.00', value: '{average_rating} out of 5.00' },
@@ -1808,7 +1811,6 @@ registerBlockType("post-grid/woo-star-rate", {
 
         <>
 
-          {JSON.stringify(ratingMap)}
 
 
           <div {...blockProps}>
@@ -1840,13 +1842,15 @@ registerBlockType("post-grid/woo-star-rate", {
             <div class="summury">
               {summury.options.typeCustom.length == 0 && (
                 <>
-                  {summury.options.type}
+
                   {replaceAll(summury.options.type, ratingMap)}
                 </>
               )}
               {summury.options.typeCustom.length > 0 && (
                 <>
-                  {summury.options.typeCustom}
+
+                  {replaceAll(summury.options.typeCustom, ratingMap)}
+
                 </>
               )}
 

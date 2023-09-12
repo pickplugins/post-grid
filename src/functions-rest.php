@@ -1253,6 +1253,7 @@ class BlockPostGridRest
 
             $response->total_sales = $product->get_total_sales();
 
+
             $response->type = $product->get_type();
             $response->sku = $product->get_sku();
             $response->manage_stock = $product->get_manage_stock();
@@ -1263,6 +1264,9 @@ class BlockPostGridRest
             $response->width = $product->get_width();
             $response->height = $product->get_height();
             $response->dimensions = $product->get_dimensions();
+            $response->rating_count = $product->get_rating_count();
+            $response->review_count = $product->get_review_count();
+            $response->average_rating = $product->get_average_rating();
 
 
             $response->currency = get_woocommerce_currency();

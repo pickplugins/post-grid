@@ -7,32 +7,64 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
     quantityDecrease.addEventListener('click', function (event) {
-        var target = event.target.value;
-        var blockId = target.getAttribute("data-blockid");
+        var blockId = quantityDecrease.parentElement.getAttribute("data-blockid")
+        var quantityInputX = document.querySelector('.' + blockId + ' input');
+        var quantity = parseInt(quantityInputX.value) - 1
 
-        console.log('quantityDecrease');
-        console.log(event.target);
-        console.log(blockId);
 
+        console.log(quantityInputX);
+        console.log(quantity);
+
+        //var  = document.querySelector('a[data-blockid="'+blockId+'"]');
+
+
+        updateQuantity(blockId, quantity);
 
     })
     quantityIncrease.addEventListener('click', function (event) {
-        console.log('quantityIncrease');
-        console.log(event.target);
+        var blockId = quantityIncrease.parentElement.getAttribute("data-blockid")
+        var quantityInputX = document.querySelector('.' + blockId + ' input');
+        var quantity = parseInt(quantityInputX.value) + 1
+
+
+
+        updateQuantity(blockId, quantity);
+
+        console.log(quantityInputX);
+        console.log(quantity);
+
 
     })
     quantityInput.addEventListener('keyup', function (event) {
-        console.log('quantityIncrease');
-        console.log(event.target);
+
 
         var val = event.target.value;
+        var blockId = quantityInput.parentElement.getAttribute("data-blockid")
 
-        console.log(val);
+        updateQuantity(blockId, val);
 
 
     })
 
+    function updateQuantity(blockId, quantity) {
+        var cartBtn = document.querySelector('.' + blockId + ' .cartBtn');
+        //var quantity = parseInt(cartBtn.getAttribute("quantity"))
 
+        var quantityInputX = document.querySelector('.' + blockId + ' input');
+
+        console.log(quantityInputX);
+
+        if (quantity != 0) {
+
+            quantityInputX.value = quantity;
+
+            cartBtn.setAttribute('data-quantity', quantity)
+
+        }
+
+
+
+    }
 
 
     // pgTabs.forEach(pgTab => {

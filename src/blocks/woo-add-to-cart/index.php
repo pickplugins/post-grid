@@ -456,6 +456,7 @@ class PGBlockWooAddToCart
         global $product;
 
         $productSku = ($product == null) ? '' : $product->get_sku();
+        $productType = ($product == null) ? '' : $product->get_type();
 
         if ($iconLibrary == 'fontAwesome') {
             wp_enqueue_style('fontawesome-icons');
@@ -466,7 +467,7 @@ class PGBlockWooAddToCart
         }
 
 
-
+        //var_dump($productType);
 
 
 
@@ -476,9 +477,13 @@ class PGBlockWooAddToCart
         $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 
 
+        if ($productType == 'simple') {
+            $cartUrl = ($cartBtnAjax) ? '?add-to-cart=' . esc_attr($post_ID) : '?add-to-cart=' . $post_ID . '&quantity=' . esc_attr($quantityInputQuantity);
+        } else {
+            $cartUrl = get_permalink($post_ID);
+            $cartBtnText = __("View Product", 'post-grid');
+        }
 
-
-        $cartUrl = ($cartBtnAjax) ? '?add-to-cart=' . esc_attr($post_ID) : '?add-to-cart=' . $post_ID . '&quantity=' . esc_attr($quantityInputQuantity);
 
         // var_dump($cartBtnAjax);
 
@@ -503,23 +508,36 @@ class PGBlockWooAddToCart
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
+                <?php
 
-                <div class='quantity-wrap'>
-                    <span data-blockid="<?php echo esc_attr($blockId); ?>" class='quantity-decrease'>-</span>
-                    <input data-blockid="<?php echo esc_attr($blockId); ?>" class='quantity-input' size="3" type="text" value="<?php echo esc_attr($quantityInputQuantity); ?>" />
-                    <span data-blockid="<?php echo esc_attr($blockId); ?>" class='quantity-increase'>+</span>
-                </div>
+                if ($productType == 'simple') :
+                ?>
+                    <div class='quantity-wrap' data-blockid="<?php echo esc_attr($blockId); ?>">
+                        <span class='quantity-decrease'>-</span>
+                        <input class='quantity-input' size="3" type="text" value="<?php echo esc_attr($quantityInputQuantity); ?>" />
+                        <span class='quantity-increase'>+</span>
+                    </div>
+                    <a class='<?php echo ($cartBtnAjax) ? 'ajax_add_to_cart' : ''; ?> cartBtn' data-quantity="<?php echo esc_attr($quantityInputQuantity); ?>" data-product_id="<?php echo esc_attr($post_ID); ?>" data-product_sku="<?php echo esc_attr($productSku); ?>" aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
+                        <?php if ($iconPosition == 'beforeCartText') : ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                        <?php echo wp_kses_post($cartBtnText); ?>
+                        <?php if ($iconPosition == 'afterCartText') : ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                    </a>
+                <?php else : ?>
+                    <a class='cartBtn' aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
+                        <?php if ($iconPosition == 'beforeCartText') : ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                        <?php echo wp_kses_post($cartBtnText); ?>
+                        <?php if ($iconPosition == 'afterCartText') : ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                    </a>
+                <?php endif; ?>
 
-
-                <a data-blockid="<?php echo esc_attr($blockId); ?>" class='product_type_simple add_to_cart_button <?php echo ($cartBtnAjax) ? 'ajax_add_to_cart' : ''; ?> cartBtn' data-quantity="<?php echo esc_attr($quantityInputQuantity); ?>" data-product_id="<?php echo esc_attr($post_ID); ?>" data-product_sku="<?php echo esc_attr($productSku); ?>" aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
-                    <?php if ($iconPosition == 'beforeCartText') : ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
-                    <?php echo wp_kses_post($cartBtnText); ?>
-                    <?php if ($iconPosition == 'afterCartText') : ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
-                </a>
 
 
 

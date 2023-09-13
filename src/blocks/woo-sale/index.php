@@ -94,38 +94,6 @@ class PGBlockWooSale
                             ),
                         ),
                     ),
-                    'separator' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                        array(
-                            'options' =>
-                            array(
-                                'text' => '-',
-                                'tag' => 'span',
-                                'class' => '',
-                            ),
-                            'styles' =>
-                            array(
-                                'color' =>
-                                array(
-                                    'Desktop' => '',
-                                ),
-                                'backgroundColor' =>
-                                array(
-                                    'Desktop' => '',
-                                ),
-                                'padding' =>
-                                array(
-                                    'Desktop' => '',
-                                ),
-                                'margin' =>
-                                array(
-                                    'Desktop' => '',
-                                ),
-                            ),
-                        ),
-                    ),
                     'icon' =>
                     array(
                         'type' => 'object',
@@ -137,7 +105,7 @@ class PGBlockWooSale
                                 'srcType' => 'class',
                                 'iconSrc' => '',
                                 'position' => '',
-                                'class' => 'sale-icon',
+                                'class' => 'icon',
                             ),
                             'styles' =>
                             array(
@@ -393,13 +361,13 @@ class PGBlockWooSale
 
                         <span class='sale'>
                             <span className=''>
-                                <?php 
+                                <?php
                                 if ($onSale) {
                                     echo wp_kses_post($saleText);
-                                    
+
                                 } else {
                                     echo wp_kses_post($saleNoSale);
-                                    
+
                                 }
                                 ?>
                             </span>

@@ -133,7 +133,7 @@ registerBlockType("post-grid/woo-sale", {
           srcType: "class",
           /*class, html, img, svg */ iconSrc: "",
           position: "",
-          /*before, after, prefix, postfix */ class: "sale-icon",
+          /*before, after, prefix, postfix */ class: "icon",
         },
 
         styles: {

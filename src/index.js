@@ -199,6 +199,7 @@ import './blocks/woo-total-sales'
 import './blocks/woo-stock-quantity'
 import './blocks/woo-dimensions'
 import './blocks/woo-price'
+import './blocks/woo-sale'
 import './blocks/woo-star-rate'
 import './blocks/woo-add-to-cart'
 

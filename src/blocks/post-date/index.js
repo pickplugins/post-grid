@@ -1748,7 +1748,7 @@ registerBlockType("post-grid/post-date", {
 
 
                   <PanelRow>
-                    <label for="">Icon postion</label>
+                    <label for="">Icon position</label>
 
                     <SelectControl
                       label=""

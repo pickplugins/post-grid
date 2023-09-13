@@ -343,7 +343,7 @@ class PGBlockWooPrice
 
         $separator = isset($attributes['separator']) ? $attributes['separator'] : [];
         $separatorOptions = isset($separator['options']) ? $separator['options'] : [];
-        $separatorText = isset($separatorOptions['text']) ? $separatorOptions['text'] : [];
+        $separatorText = isset($separatorOptions['text']) ? $separatorOptions['text'] : '';
 
 
 

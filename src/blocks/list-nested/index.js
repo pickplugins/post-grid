@@ -425,7 +425,7 @@ registerBlockType("post-grid/list-nested", {
     }
 
 
-    
+
     function onChangeStyleWrapper(sudoScource, newVal, attr) {
 
       var path = [sudoScource, attr, breakPointX]
@@ -1062,7 +1062,7 @@ registerBlockType("post-grid/list-nested", {
                   </PanelRow>
 
                   <PanelRow>
-                    <label for="">Icon postion</label>
+                    <label for="">Icon position</label>
                     <SelectControl
                       label=""
                       value={icon.options.position}

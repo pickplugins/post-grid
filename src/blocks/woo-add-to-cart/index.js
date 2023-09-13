@@ -1744,7 +1744,7 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
 
                   <PanelRow>
-                    <label for="">Icon postion</label>
+                    <label for="">Icon position</label>
 
                     <SelectControl
                       label=""

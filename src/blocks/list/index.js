@@ -1025,7 +1025,7 @@ registerBlockType("post-grid/list", {
                   </PanelRow>
 
                   <PanelRow>
-                    <label for="">Icon postion</label>
+                    <label for="">Icon position</label>
                     <SelectControl
                       label=""
                       value={icon.options.position}

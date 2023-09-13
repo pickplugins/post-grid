@@ -137,7 +137,7 @@ registerBlockType("post-grid/woo-price", {
     icon: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: '', /*before, after, prefix, postfix */ class: 'regular-icon', },
+        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: '', /*before, after, prefix, postfix */ class: 'icon', },
 
         styles:
         {
@@ -1450,7 +1450,7 @@ registerBlockType("post-grid/woo-price", {
 
 
                   <PanelRow>
-                    <label for="">Icon postion</label>
+                    <label for="">Icon position</label>
 
                     <SelectControl
                       label=""

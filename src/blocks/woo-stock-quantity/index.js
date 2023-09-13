@@ -1499,7 +1499,7 @@ registerBlockType("post-grid/woo-stock-quantity", {
 
 
                   <PanelRow>
-                    <label for="">Icon postion</label>
+                    <label for="">Icon position</label>
 
                     <SelectControl
                       label=""

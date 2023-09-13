@@ -75,7 +75,27 @@ registerBlockType("post-grid/woo-star-rate", {
       },
     },
 
+    iconsWrap: {
+      type: 'object',
+      default: {
+        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: 'beforeSku', /*before, after, prefix, postfix */ class: '', },
 
+        styles:
+        {
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+
+          display: {},
+
+          fontSize: { Desktop: '' },
+          lineHeight: {},
+          fontWeight: { "Desktop": "700" },
+          textDecoration: {}, //overline, line-through, underline
+        },
+      },
+    },
 
     iconsIdle: {
       type: 'object',
@@ -120,68 +140,14 @@ registerBlockType("post-grid/woo-star-rate", {
 
 
 
-    sku: {
-      type: 'object',
-      default: {
-        options: {
-          tag: 'div',
-          text: 'dummy-sku',
 
-
-
-          linkTarget: '_blank',
-          linkAttr: [],
-          customUrl: '',
-          class: '',
-        },
-
-        styles: {
-
-          display: {},
-          width: {},
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
-        },
-      },
-    },
-    iconsWrap: {
-      type: 'object',
-      default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: 'beforeSku', /*before, after, prefix, postfix */ class: 'sku-icon', },
-
-        styles:
-        {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          display: {},
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
-        },
-      },
-    },
 
 
     prefix: {
       type: 'object',
       default: {
         options:
-          { text: 'SKU: ', class: 'prefix', },
+          { text: '', class: 'prefix', },
         styles:
         {
           color: { Desktop: '' },
@@ -242,7 +208,6 @@ registerBlockType("post-grid/woo-star-rate", {
     var clientId = props.clientId;
 
 
-    let sku = attributes.sku;
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
@@ -282,14 +247,8 @@ registerBlockType("post-grid/woo-star-rate", {
     };
 
 
-    // const [
-    //   currentPostSKU,
-    //   setcurrentPostSKU,
-    // ] = useEntityProp('postType', postType, 'date', postId);
 
 
-    //const [postSKUEdited, setpostSKUEdited] = useState(currentPostSKU == null ? );
-    const [postSKUEdited, setpostSKUEdited] = useState(sku.options.text);
     const [productData, setproductData] = useState(null);
     const [loading, setloading] = useState(false);
     const [ratingMap, setratingMap] = useState(map);
@@ -380,42 +339,6 @@ registerBlockType("post-grid/woo-star-rate", {
 
 
 
-    function onPickCssLibrarySku(args) {
-
-
-      Object.entries(args).map(x => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        sku[sudoScource] = sudoScourceArgs;
-      })
-
-      var skuX = Object.assign({}, sku);
-      setAttributes({ sku: skuX });
-
-      var styleObj = {};
-
-      Object.entries(args).map(x => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        var elementSelector = myStore.getElementSelector(sudoScource, skuSelector);
-
-
-        var sudoObj = {};
-        Object.entries(sudoScourceArgs).map(y => {
-
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
-        })
-
-        styleObj[elementSelector] = sudoObj;
-      })
-
-
-      var cssItems = Object.assign(blockCssY.items, styleObj);
-      setAttributes({ blockCssY: { items: cssItems } });
-    }
 
 
 
@@ -622,69 +545,6 @@ registerBlockType("post-grid/woo-star-rate", {
 
 
 
-
-
-    function onChangeStyleSku(sudoScource, newVal, attr) {
-
-
-      var path = [sudoScource, attr, breakPointX]
-      let obj = Object.assign({}, sku);
-      const object = myStore.updatePropertyDeep(obj, path, newVal)
-
-      setAttributes({ sku: object });
-
-      var elementSelector = myStore.getElementSelector(sudoScource, skuSelector);
-      var cssPropty = myStore.cssAttrParse(attr);
-
-      let itemsX = Object.assign({}, blockCssY.items);
-
-      if (itemsX[elementSelector] == undefined) {
-        itemsX[elementSelector] = {};
-      }
-
-      var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
-
-      setAttributes({ blockCssY: { items: cssItems } });
-
-
-    }
-
-
-
-
-
-
-    function onRemoveStyleSku(sudoScource, key) {
-
-
-      var object = myStore.deletePropertyDeep(sku, [sudoScource, key, breakPointX]);
-      setAttributes({ sku: object });
-
-
-      var elementSelector = myStore.getElementSelector(sudoScource, skuSelector);
-      var cssPropty = myStore.cssAttrParse(key);
-      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
-      setAttributes({ blockCssY: { items: cssObject } });
-
-
-    }
-
-
-
-
-
-    function onAddStyleSku(sudoScource, key) {
-
-
-
-
-      var path = [sudoScource, key, breakPointX]
-      let obj = Object.assign({}, sku);
-      const object = myStore.addPropertyDeep(obj, path, '')
-      setAttributes({ sku: object });
-
-    }
 
 
 
@@ -1083,8 +943,7 @@ registerBlockType("post-grid/woo-star-rate", {
 
       setAttributes({ blockId: blockIdX });
 
-      // setAttributes({ sku: sku });
-      // setAttributes({ wrapper: wrapper });
+
 
 
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
@@ -1159,7 +1018,6 @@ registerBlockType("post-grid/woo-star-rate", {
     // Wrapper CSS Class Selectors
     const wrapperSelector = blockClass;
 
-    var skuSelector = blockClass + ' .sku-text';
 
     const prefixSelector = blockClass + ' .prefix';
     const postfixSelector = blockClass + ' .postfix';
@@ -1227,30 +1085,10 @@ registerBlockType("post-grid/woo-star-rate", {
 
 
 
-    useEffect(() => {
-      linkAttrObj();
-
-    }, [sku]);
 
 
 
 
-
-
-    var linkAttrObj = () => {
-
-      var sdsd = {};
-
-      sku.options.linkAttr.map(x => {
-
-        if (x.val)
-          sdsd[x.id] = x.val;
-
-      })
-
-      setlinkAttrItems(sdsd);
-
-    }
 
 
 
@@ -1275,18 +1113,13 @@ registerBlockType("post-grid/woo-star-rate", {
 
 
 
-    var postUrl = (sku.options.customUrl != undefined && sku.options.customUrl.length > 0) ? sku.options.customUrl : currentPostUrl;
-
-
-    const CustomTag = `${wrapper.options.tag}`;
-    const CustomTagPostTitle = `${sku.options.tag}`;
 
 
 
 
 
     const blockProps = useBlockProps({
-      className: ` ${blockId} pg-woo-sku`,
+      className: ` ${blockId} pg-woo-star-rate`,
 
     });
 
@@ -1364,190 +1197,149 @@ registerBlockType("post-grid/woo-star-rate", {
               </PGtabs>
             </PanelBody>
 
-            <PanelBody title="SKU" initialOpen={false}>
 
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => { }}
-                tabs={[
-                  {
-                    name: 'options',
-                    title: 'Options',
-                    icon: settings,
-                    className: 'tab-settings',
-                  },
-                  {
-                    name: 'styles',
-                    title: 'Styles',
-                    icon: styles,
-                    className: 'tab-style',
-                  },
-                  {
-                    name: 'css',
-                    title: 'CSS Library',
-                    icon: styles,
-                    className: 'tab-css',
-                  },
-                ]}
-              >
-                <PGtab name="options">
+            <PanelBody title="Icons" initialOpen={false}>
+
+              <PanelBody title="Icons Wrap" initialOpen={false}>
 
 
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
+                    },
+                  ]}
+                >
+                  <PGtab name="options">
 
+                    <PanelRow>
+                      <label for="">Choose Icon</label>
 
-
-
-
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles obj={sku} onChange={onChangeStyleSku} onAdd={onAddStyleSku} onRemove={onRemoveStyleSku} />
-                </PGtab>
-                <PGtab name="css">
-                  <PGCssLibrary blockId={blockId} obj={sku} onChange={onPickCssLibrarySku} />
-                </PGtab>
-              </PGtabs>
-
-            </PanelBody>
-
-            <PanelBody title="iconsWrap" initialOpen={false}>
-
-
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => { }}
-                tabs={[
-                  {
-                    name: 'options',
-                    title: 'Options',
-                    icon: settings,
-                    className: 'tab-settings',
-                  },
-                  {
-                    name: 'styles',
-                    title: 'Styles',
-                    icon: styles,
-                    className: 'tab-style',
-                  },
-                  {
-                    name: 'css',
-                    title: 'CSS Library',
-                    icon: styles,
-                    className: 'tab-css',
-                  },
-                ]}
-              >
-                <PGtab name="options">
-
-                  <PanelRow>
-                    <label for="">Choose Icon</label>
-
-                    <PGIconPicker library={iconsWrap.options.library} srcType={iconsWrap.options.srcType} iconSrc={iconsWrap.options.iconSrc} onChange={onChangeIcon} />
-                  </PanelRow>
+                      <PGIconPicker library={iconsWrap.options.library} srcType={iconsWrap.options.srcType} iconSrc={iconsWrap.options.iconSrc} onChange={onChangeIcon} />
+                    </PanelRow>
 
 
 
 
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles obj={iconsWrap} onChange={onChangeStyleIconsWrap} onAdd={onAddStyleIconsWrap} onRemove={onRemoveStyleIconsWrap} />
-                </PGtab>
-                <PGtab name="css">
-                  <PGCssLibrary blockId={blockId} obj={iconsWrap} onChange={onPickCssLibraryiconsWrap} />
-                </PGtab>
-              </PGtabs>
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={iconsWrap} onChange={onChangeStyleIconsWrap} onAdd={onAddStyleIconsWrap} onRemove={onRemoveStyleIconsWrap} />
+                  </PGtab>
+                  <PGtab name="css">
+                    <PGCssLibrary blockId={blockId} obj={iconsWrap} onChange={onPickCssLibraryiconsWrap} />
+                  </PGtab>
+                </PGtabs>
 
-            </PanelBody>
-
-
-            <PanelBody title="iconsIdle" initialOpen={false}>
-
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => { }}
-                tabs={[
-                  {
-                    name: 'options',
-                    title: 'Options',
-                    icon: settings,
-                    className: 'tab-settings',
-                  },
-                  {
-                    name: 'styles',
-                    title: 'Styles',
-                    icon: styles,
-                    className: 'tab-style',
-                  },
-                  {
-                    name: 'css',
-                    title: 'CSS Library',
-                    icon: styles,
-                    className: 'tab-css',
-                  },
-                ]}
-              >
-                <PGtab name="options">
-
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles obj={iconsIdle} onChange={onChangeStyleIconsIdle} onAdd={onAddStyleIconsIdle} onRemove={onRemoveStyleIconsIdle} />
-                </PGtab>
-                <PGtab name="css">
-
-                </PGtab>
-              </PGtabs>
+              </PanelBody>
 
 
-            </PanelBody>
+              <PanelBody title="Icons Idle" initialOpen={false}>
 
-            <PanelBody title="iconsFilled" initialOpen={false}>
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
+                    },
+                  ]}
+                >
+                  <PGtab name="options">
 
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => { }}
-                tabs={[
-                  {
-                    name: 'options',
-                    title: 'Options',
-                    icon: settings,
-                    className: 'tab-settings',
-                  },
-                  {
-                    name: 'styles',
-                    title: 'Styles',
-                    icon: styles,
-                    className: 'tab-style',
-                  },
-                  {
-                    name: 'css',
-                    title: 'CSS Library',
-                    icon: styles,
-                    className: 'tab-css',
-                  },
-                ]}
-              >
-                <PGtab name="options">
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={iconsIdle} onChange={onChangeStyleIconsIdle} onAdd={onAddStyleIconsIdle} onRemove={onRemoveStyleIconsIdle} />
+                  </PGtab>
+                  <PGtab name="css">
 
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles obj={iconsFilled} onChange={onChangeStyleIconsFilled} onAdd={onAddStyleIconsFilled} onRemove={onRemoveStyleIconsFilled} />
-                </PGtab>
-                <PGtab name="css">
+                  </PGtab>
+                </PGtabs>
 
-                </PGtab>
-              </PGtabs>
 
+              </PanelBody>
+
+              <PanelBody title="Icons Filled" initialOpen={false}>
+
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => { }}
+                  tabs={[
+                    {
+                      name: 'options',
+                      title: 'Options',
+                      icon: settings,
+                      className: 'tab-settings',
+                    },
+                    {
+                      name: 'styles',
+                      title: 'Styles',
+                      icon: styles,
+                      className: 'tab-style',
+                    },
+                    {
+                      name: 'css',
+                      title: 'CSS Library',
+                      icon: styles,
+                      className: 'tab-css',
+                    },
+                  ]}
+                >
+                  <PGtab name="options">
+
+                  </PGtab>
+                  <PGtab name="styles">
+                    <PGStyles obj={iconsFilled} onChange={onChangeStyleIconsFilled} onAdd={onAddStyleIconsFilled} onRemove={onRemoveStyleIconsFilled} />
+                  </PGtab>
+                  <PGtab name="css">
+
+                  </PGtab>
+                </PGtabs>
+
+
+              </PanelBody>
 
             </PanelBody>
 
-            <PanelBody title="summury" initialOpen={false}>
+
+            <PanelBody title="Summury" initialOpen={false}>
 
               <PGtabs
                 activeTab="options"

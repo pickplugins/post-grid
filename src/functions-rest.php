@@ -1259,6 +1259,7 @@ class BlockPostGridRest
             $response->manage_stock = $product->get_manage_stock();
             $response->stock_quantity = $product->get_stock_quantity();
             $response->stock_status = $product->get_stock_status();
+            $response->backorders = $product->get_backorders();
             $response->weight = $product->get_weight();
             $response->length = $product->get_length();
             $response->width = $product->get_width();

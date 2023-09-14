@@ -42,7 +42,7 @@ var myStore = wp.data.select('postgrid-shop');
 
 registerBlockType("post-grid/woo-stock-quantity", {
   apiVersion: 2,
-  title: "WooCommerce Stock Quantity",
+  title: "Stock Quantity",
 
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
@@ -190,7 +190,7 @@ registerBlockType("post-grid/woo-stock-quantity", {
     "align": ["wide", "full"],
 
   },
-  category: "post-grid",
+  category: "post-grid-woo",
 
 
   edit: function (props) {

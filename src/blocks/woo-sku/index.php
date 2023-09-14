@@ -1,9 +1,10 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
-class PGBlockWooASku
+class PGBlockWooSku
 {
     function __construct()
     {
@@ -18,221 +19,199 @@ class PGBlockWooASku
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/woo-sku/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/woo-sku', array(
-            // 'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
+        register_block_type(
+            'post-grid/woo-sku',
+            array(
+                // 'editor_script' => 'editor_script',
+                //'editor_style' => 'editor_style',
+                //'script' => 'front_script',
+                'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
+                'style' => 'front_style',
+                'render_callback' => array($this, 'theHTML'),
+                'attributes' => array(
+                    'wrapper' =>
                     array(
-                        'options' =>
+                        'type' => 'object',
+                        'default' =>
                         array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                            'options' =>
                             array(
-                                'Desktop' => '',
+                                'tag' => 'div',
+                                'class' => '',
                             ),
-                            'backgroundColor' =>
+                            'styles' =>
                             array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
+                                'color' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'backgroundColor' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'padding' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'margin' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
                             ),
                         ),
                     ),
-                ),
-                'sku' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
+
+                    'sale' =>
                     array(
-                        'options' =>
+                        'type' => 'object',
+                        'default' =>
                         array(
-                            'tag' => 'div',
-                            'text' => 'dummy-sku',
-                            'linkTo' => '',
-                            'linkToUrl' => '',
-                            'linkToMetaKey' => '',
-                            'linkTarget' => '_blank',
-                            'linkAttr' =>
-                            array(),
-                            'customUrl' => '',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'display' =>
-                            array(),
-                            'width' =>
-                            array(),
-                            'color' =>
+                            'options' =>
                             array(
-                                'Desktop' => '',
+                                'text' => 'sale',
+                                'noSale' => 'No Sale',
+                                'tag' => 'span',
+                                'class' => '',
                             ),
-                            'backgroundColor' =>
+                            'styles' =>
                             array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'lineHeight' =>
-                            array(),
-                            'letterSpacing' =>
-                            array(),
-                            'fontFamily' =>
-                            array(),
-                            'fontWeight' =>
-                            array(),
-                            'textDecoration' =>
-                            array(),
-                            'textTransform' =>
-                            array(),
-                        ),
-                    ),
-                ),
-                'icon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => '',
-                            'position' => 'beforeSku',
-                            'class' => 'sku-icon',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'display' =>
-                            array(),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'lineHeight' =>
-                            array(),
-                            'fontWeight' =>
-                            array(
-                                'Desktop' => '700',
-                            ),
-                            'textDecoration' =>
-                            array(),
-                        ),
-                    ),
-                ),
-                'prefix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => 'SKU: ',
-                            'class' => 'prefix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
+                                'color' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'backgroundColor' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'padding' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'margin' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
                             ),
                         ),
                     ),
-                ),
-                'postfix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
+                    'icon' =>
                     array(
-                        'options' =>
+                        'type' => 'object',
+                        'default' =>
                         array(
-                            'text' => '',
-                            'class' => 'postfix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                            'options' =>
                             array(
-                                'Desktop' => '',
+                                'library' => 'fontAwesome',
+                                'srcType' => 'class',
+                                'iconSrc' => '',
+                                'position' => '',
+                                'class' => 'icon',
                             ),
-                            'backgroundColor' =>
+                            'styles' =>
                             array(
-                                'Desktop' => '',
+                                'color' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'backgroundColor' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'padding' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'margin' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'display' =>
+                                array(),
+                                'fontSize' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'lineHeight' =>
+                                array(),
+                                'fontWeight' =>
+                                array(
+                                    'Desktop' => '700',
+                                ),
+                                'textDecoration' =>
+                                array(),
                             ),
                         ),
                     ),
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
+                    'prefix' =>
                     array(
-                        'items' =>
-                        array(),
+                        'type' => 'object',
+                        'default' =>
+                        array(
+                            'options' =>
+                            array(
+                                'text' => '',
+                                'class' => 'prefix',
+                            ),
+                            'styles' =>
+                            array(
+                                'color' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'backgroundColor' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                            ),
+                        ),
                     ),
-                ),
+                    'postfix' =>
+                    array(
+                        'type' => 'object',
+                        'default' =>
+                        array(
+                            'options' =>
+                            array(
+                                'text' => '',
+                                'class' => 'postfix',
+                            ),
+                            'styles' =>
+                            array(
+                                'color' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                                'backgroundColor' =>
+                                array(
+                                    'Desktop' => '',
+                                ),
+                            ),
+                        ),
+                    ),
+                    'customCss' =>
+                    array(
+                        'type' => 'string',
+                        'default' => '',
+                    ),
+                    'blockId' =>
+                    array(
+                        'type' => 'string',
+                        'default' => '',
+                    ),
+                    'blockCssY' =>
+                    array(
+                        'type' => 'object',
+                        'default' =>
+                        array(
+                            'items' =>
+                            array(),
+                        ),
+                    ),
+                )
+
+
             )
-
-
-        ));
+        );
     }
 
     function front_script($attributes)
@@ -269,17 +248,18 @@ class PGBlockWooASku
 
         $wrapperTag = isset($wrapperOptions['tag']) ? $wrapperOptions['tag'] : 'div';
 
-        $sku = isset($attributes['sku']) ? $attributes['sku'] : [];
-        $skuOptions = isset($sku['options']) ? $sku['options'] : [];
 
 
-        $skuLinkTarget = isset($skuOptions['linkTarget']) ? $skuOptions['linkTarget'] : '_blank';
-        $skuCustomUrl = isset($skuOptions['customUrl']) ? $skuOptions['customUrl'] : '';
-        $skuLinkAttr = isset($skuOptions['linkAttr']) ? $skuOptions['linkAttr'] : [];
-        $skuRel = isset($skuOptions['rel']) ? $skuOptions['rel'] : '';
-        $skuLinkTo = isset($skuOptions['linkTo']) ? $skuOptions['linkTo'] : '';
-        $skuLinkToMetaKey = isset($skuOptions['linkToMetaKey']) ? $skuOptions['linkToMetaKey'] : '';
-        $customUrl = isset($featuredImageOptions['customUrl']) ? $featuredImageOptions['customUrl'] : '';
+        $separator = isset($attributes['separator']) ? $attributes['separator'] : [];
+        $separatorOptions = isset($separator['options']) ? $separator['options'] : [];
+        $separatorText = isset($separatorOptions['text']) ? $separatorOptions['text'] : [];
+
+        $sale = isset($attributes['sale']) ? $attributes['sale'] : [];
+        $saleOptions = isset($sale['options']) ? $sale['options'] : [];
+        $saleText = isset($saleOptions['text']) ? $saleOptions['text'] : [];
+        $saleNoSale = isset($saleOptions['noSale']) ? $saleOptions['noSale'] : [];
+
+
 
 
         $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
@@ -313,7 +293,6 @@ class PGBlockWooASku
 
         global $product;
 
-        $productSKu = ($product == null) ? '' : $product->get_sku();
 
 
         if ($iconLibrary == 'fontAwesome') {
@@ -324,28 +303,13 @@ class PGBlockWooASku
             wp_enqueue_style('bootstrap-icons');
         }
 
-        $linkAttrStr = '';
 
 
 
-        if (!empty($postExcerptlinkAttr))
-            foreach ($postExcerptlinkAttr as $attr) {
-
-                if (!empty($attr['val']))
-                    $linkAttrStr .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
-            }
-
-
-        $linkAttrStrsku = '';
 
 
 
-        if (!empty($skuLinkAttr))
-            foreach ($skuLinkAttr as $attr) {
 
-                if (!empty($attr['val']))
-                    $linkAttrStrsku .= esc_attr($attr['id']) . '=' . esc_attr($attr['val']) . ' ';
-            }
 
 
         $postGridCustomCss .= $customCss;
@@ -353,28 +317,14 @@ class PGBlockWooASku
 
         $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 
-        $linkUrl = '';
 
-        if ($skuLinkTo == 'postUrl') {
-
-            $linkUrl = get_permalink($post_ID);
-        } else if ($skuLinkTo == 'customField') {
-
-            $linkUrl = get_post_meta($post_ID, $skuLinkToMetaKey, true);
-        } else if ($skuLinkTo == 'authorUrl') {
-            $author_id = get_post_field('post_author', $post_ID);
-            $user = get_user_by('ID', $author_id);
-            $linkUrl = $user->user_url;
-        } else if ($skuLinkTo == 'authorLink') {
-            $author_id = get_post_field('post_author', $post_ID);
-            $linkUrl = get_the_author_link($author_id);
-        } else if ($skuLinkTo == 'homeUrl') {
-            $linkUrl = get_bloginfo('url');
-        } else if ($skuLinkTo == 'custom') {
-            $linkUrl = $customUrl;
-        }
+        // var_dump($product->get_price());
+        // var_dump($product->get_onSale());
+        // var_dump($product->get_onSale());
 
 
+        $product_type = ($product != null) ? $product->get_type() : '';
+        $currency_symbol = get_woocommerce_currency_symbol();
 
 
 
@@ -385,7 +335,8 @@ class PGBlockWooASku
         if (!empty($wrapperTag)) :
 
 ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>">
 
 
                 <?php if ($iconPosition == 'beforePrefix') : ?>
@@ -400,109 +351,77 @@ class PGBlockWooASku
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-                <?php if (!empty($skuLinkTo)) :
+                <?php
 
-                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                ?>
-                    <a class='sku-text' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
-                        <?php if ($iconPosition == 'beforeSku') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                        <?php echo wp_kses_post($productSKu); ?>
-                        <?php if ($iconPosition == 'afterSku') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                    </a>
-
-                <?php else :
-                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                if ($product_type != 'variable') :
+                    $onSale = ($product != null) ? $product->is_on_sale() : '';
                 ?>
 
-                    <span class='sku-text' <?php echo ($linkAttrStrsku); ?>>
-                        <?php if ($iconPosition == 'beforeSku') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                        <?php echo wp_kses_post($productSKu); ?>
-                        <?php if ($iconPosition == 'afterSku') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                    </span>
+                    <?php if (empty($onSale)) : ?>
+
+                        <span class='sale'>
+                            <span className=''>
+                                <?php
+                                if ($onSale) {
+                                    echo wp_kses_post($saleText);
+                                } else {
+                                    echo wp_kses_post($saleNoSale);
+                                }
+                                ?>
+                            </span>
+
+                        </span>
+
+                    <?php endif; ?>
+
+                <?php
+                endif;
+                if ($product_type == 'variable') :
+
+                    $onSale = ($product != null) ? $product->is_on_sale() : '';
+
+                ?>
+                    <span className='sale'>
+                        <span className=''>
+                            <?php
+                            if ($onSale) {
+                                echo wp_kses_post($saleText);
+                            } else {
+                                echo wp_kses_post($saleNoSale);
+                            }
+                            ?>
+                        </span>
+
+                    <?php
+
+                endif;
 
 
-                <?php endif; ?>
+
+
+                    ?>
 
 
 
 
 
 
-                <?php if ($iconPosition == 'beforePostfix') : ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
-                <?php endif; ?>
+                    <?php if ($iconPosition == 'beforePostfix') : ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
+                    <?php if ($postfixText) : ?>
+                        <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                    <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPostfix') : ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
+                    <?php if ($iconPosition == 'afterPostfix') : ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
 
             </<?php echo esc_attr($wrapperTag); ?>>
         <?php
 
         endif;
 
-        if (empty($wrapperTag)) :
-
-        ?>
-            <?php if ($iconPosition == 'beforePrefix') : ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-            <?php if ($prefixText) : ?>
-                <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo $prefixText; ?></span>
-            <?php endif; ?>
-
-            <?php if ($iconPosition == 'afterPrefix') : ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-
-            <?php if (!empty($skuLinkTo)) :
-                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-            ?>
-
-                <a class='sku-text' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
-                    <?php if ($iconPosition == 'beforeSku') : ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
-                    <?php echo wp_kses_post($productSKu); ?>C
-                    <?php if ($iconPosition == 'afterSku') : ?>
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-                    <?php endif; ?>
-                </a>
-            <?php else : ?>
-                <?php if ($iconPosition == 'beforeSku') : ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-                <span class='sku-text'><?php echo wp_kses_post($productSKu); ?></span>
-                <?php if ($iconPosition == 'afterSku') : ?>
-                    <?php echo wp_kses_post($fontIconHtml); ?>
-                <?php endif; ?>
-            <?php endif; ?>
-
-
-
-            <?php if ($iconPosition == 'beforePostfix') : ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-            <?php if ($postfixText) : ?>
-                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
-            <?php endif; ?>
-            <?php if ($iconPosition == 'afterPostfix') : ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-        <?php
-
-        endif;
 
         ?>
 
@@ -517,4 +436,4 @@ class PGBlockWooASku
     }
 }
 
-$PGBlockWooASku = new PGBlockWooASku();
+$PGBlockWooSku = new PGBlockWooSku();

@@ -243,10 +243,10 @@ function post_grid_block_categories($categories, $context)
                 'slug'  => 'post-grid',
                 'title' => __('Post Grid Combo', 'boilerplate'),
             ),
-            // array(
-            //     'slug'  => 'post-grid-woo',
-            //     'title' => __('Post Grid Combo - WooCommerce', 'boilerplate'),
-            // ),
+            array(
+                'slug'  => 'post-grid-woo',
+                'title' => __('Post Grid Combo - WooCommerce', 'boilerplate'),
+            ),
         );
 
         array_splice($categories, 3, 0, $inserted); // splice in at position 3

@@ -112,10 +112,11 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/woo-sku/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/woo-total-sales/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/woo-stock-quantity/index.php');
-            require_once(post_grid_plugin_dir . 'src/blocks/woo-dimensions/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/woo-product-info/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/woo-price/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/woo-add-to-cart/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/woo-star-rate/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/woo-sale/index.php');
 
 
 

@@ -1269,6 +1269,8 @@ class BlockPostGridRest
             $response->review_count = $product->get_review_count();
             $response->average_rating = $product->get_average_rating();
             $response->on_sale = $product->is_on_sale();
+            $response->gallery_image_ids = $product->get_gallery_image_ids();
+            $response->image = $product->get_image();
 
 
             $response->currency = get_woocommerce_currency();

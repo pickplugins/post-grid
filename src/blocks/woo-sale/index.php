@@ -438,4 +438,4 @@ class PGBlockWooSale
     }
 }
 
-$PGBlockWooPrice = new PGBlockWooSale();
+$PGBlockWooSale = new PGBlockWooSale();

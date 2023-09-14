@@ -117,6 +117,7 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/woo-add-to-cart/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/woo-star-rate/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/woo-sale/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/woo-stock/index.php');
 
 
 

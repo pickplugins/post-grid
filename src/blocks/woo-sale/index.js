@@ -115,7 +115,7 @@ registerBlockType("post-grid/woo-sale", {
     sale: {
       type: "object",
       default: {
-        options: { text: "Sale", noSale: "No Sale", tag: "span", class: "" },
+        options: { text: "Sale", noSale: "No Sale", tag: "span", class: "sale" },
         styles: {
           color: { Desktop: "" },
           backgroundColor: { Desktop: "" },

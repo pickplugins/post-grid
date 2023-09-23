@@ -69,7 +69,7 @@ registerBlockType("post-grid/woo-add-to-cart", {
         styles:
         {
 
-          display: { Desktop: 'flex' },
+          display: { Desktop: 'flex', Tablet: 'flex', Mobile: 'flex' },
           backgroundColor: { Desktop: '' },
           padding: { Desktop: '' },
           margin: { Desktop: '' },

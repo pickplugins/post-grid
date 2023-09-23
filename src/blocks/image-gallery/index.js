@@ -109,7 +109,6 @@ registerBlockType("post-grid/image-gallery", {
   providesContext: {
     'post-grid/galleryId': 'blockId',
     'post-grid/lightbox': 'lightbox',
-
   },
   supports: {
     "align": ["wide", "full"],

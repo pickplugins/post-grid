@@ -175,6 +175,8 @@ var myStore = wp.data.select('postgrid-shop');
 import breakPoints from '../../breakpoints'
 import IconToggle from '../../components/icon-toggle'
 
+//console.log(myStore);
+
 
 
 
@@ -216,10 +218,10 @@ function Html(props) {
   const [styles, setStyles] = useState({});
 
   const [cssAtts, setcssAtts] = useState({});
-  //const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
+  const [breakPointLocal, setbreakPointLocal] = useState(myStore.getBreakPoint());
   var breakPointX = myStore.getBreakPoint();
 
-
+  //breakPointX = (breakPointLocal != breakPointX) ? breakPointLocal : breakPointX;
 
 
 
@@ -479,8 +481,6 @@ function Html(props) {
   return (
     <div >
 
-
-
       <PanelRow className='bg-gray-200 p-2'>
         <PGDropdownSudoSelector position="bottom right" variant="secondary" options={sudoScources} sudoScourceUpdate={sudoScourceUpdate} buttonTitle={(sudoScources[sudoScource] != undefined) ? sudoScources[sudoScource].label : 'Choose'} onChange={(option, index) => {
 
@@ -671,7 +671,7 @@ function Html(props) {
             <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={(x, index) => {
               var asdsdsd = wp.data.dispatch('postgrid-shop').setBreakPoint(x.value)
               asdsdsd.then((res) => {
-                //setBreakPointX(res.breakpoint);
+                setbreakPointLocal(x.value)
 
               });
 

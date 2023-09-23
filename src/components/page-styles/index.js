@@ -5,11 +5,13 @@ import { Button, Dropdown, } from '@wordpress/components'
 import { Icon, styles, settings, link, linkOff, close, edit, pen } from "@wordpress/icons";
 import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
 import apiFetch from '@wordpress/api-fetch';
+import { useSelect } from "@wordpress/data";
 
 import { __experimentalInputControl as InputControl, Popover, Spinner, PanelBody, PanelRow, ColorPalette, RangeControl, TextareaControl } from '@wordpress/components';
 import PGStyles from '../../components/styles'
 
 var myStore = wp.data.select('postgrid-shop');
+
 
 
 
@@ -21,10 +23,14 @@ function Html(props) {
 
 
 
+
   const [isLoading, setisLoading] = useState(false);
   const [pageCssObj, setpageCssObj] = useState({});
   const [pageStylsObj, setpageStylsObj] = useState(null);
-  var [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
+  //var [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
+
+
+
 
   const [copyPrams, setCopyPrams] = useState({ isCopied: false, isError: false, errorMessage: '' });
   const [pastePrams, setpastePrams] = useState({ init: false, isPasted: false, isError: false, errorMessage: '' });
@@ -35,7 +41,13 @@ function Html(props) {
   const postType = wp.data.select('core/editor').getCurrentPostType();
   const postId = wp.data.select("core/editor").getCurrentPostId();
 
+  const { deviceType } = useSelect(select => {
+    const { __experimentalGetPreviewDeviceType } = select('core/edit-post');
 
+    return {
+      deviceType: __experimentalGetPreviewDeviceType(),
+    }
+  }, []);
 
 
 
@@ -47,6 +59,22 @@ function Html(props) {
     update_post();
 
   }, [pageCssObj]);
+
+
+  // useEffect(() => {
+  //   console.log('generateCss');
+
+  //   if (pageStylsObj != null) {
+
+  //     generateCss();
+  //   }
+
+
+
+  // }, []);
+
+
+
 
   useEffect(() => {
 
@@ -61,7 +89,7 @@ function Html(props) {
 
     update_post();
     //localStorage.setItem("pgPageStyles", JSON.stringify(clipboard));
-
+    generateCss();
 
   }, [pageStylsObj]);
 
@@ -134,8 +162,12 @@ function Html(props) {
 
   function generateCss() {
 
+    var selectorPrefix = ".editor-styles-wrapper ";
 
     var cssObj = {}
+
+    console.log(pageStylsObj);
+
 
 
     pageStylsObj != null && pageStylsObj.map(item => {
@@ -146,7 +178,7 @@ function Html(props) {
         var sudoSrc = arg[0];
         var sudoArgs = arg[1];
         if (sudoSrc != 'options' && sudoArgs != null) {
-          var selector = myStore.getElementSelector(sudoSrc, item.options.selector);
+          var selector = selectorPrefix + myStore.getElementSelector(sudoSrc, item.options.selector);
           var elemetnCssObj = myStore.generateElementCss(item, selector);
 
 
@@ -184,7 +216,7 @@ function Html(props) {
 
 
 
-    var path = [sudoScource, attr, breakPointX]
+    var path = [sudoScource, attr, deviceType]
     let objX = Object.assign({}, obj);
     const itemX = myStore.updatePropertyDeep(objX, path, newVal)
 
@@ -203,7 +235,7 @@ function Html(props) {
       pageCssObj[elementSelector] = {};
     }
 
-    var cssPath = [elementSelector, cssPropty, breakPointX]
+    var cssPath = [elementSelector, cssPropty, deviceType]
     const cssObject = myStore.updatePropertyDeep(pageCssObj, cssPath, newVal)
 
     setpageCssObj(cssObject)
@@ -216,7 +248,7 @@ function Html(props) {
 
   function onRemoveStyleItem(sudoScource, key, obj, extra) {
 
-    var itemX = myStore.deletePropertyDeep(obj, [sudoScource, key, breakPointX]);
+    var itemX = myStore.deletePropertyDeep(obj, [sudoScource, key, deviceType]);
 
     var pageStylsObjX = [...pageStylsObj];
 
@@ -227,7 +259,7 @@ function Html(props) {
 
     var elementSelector = myStore.getElementSelector(sudoScource, obj.options.selector);
     var cssPropty = myStore.cssAttrParse(key);
-    var cssObject = myStore.deletePropertyDeep(pageCssObj, [elementSelector, cssPropty, breakPointX]);
+    var cssObject = myStore.deletePropertyDeep(pageCssObj, [elementSelector, cssPropty, deviceType]);
     setpageCssObj(cssObject)
 
 
@@ -281,13 +313,6 @@ function Html(props) {
   return (
 
     <div className=''>
-
-      <code>
-        {JSON.stringify(pageStylsObj)}
-
-      </code>
-
-
 
 
       <div className='my-3 flex items-center gap-2'>
@@ -473,9 +498,6 @@ function Html(props) {
 
 
         </div>
-
-
-
       </div>
 
 
@@ -504,9 +526,6 @@ function Html(props) {
 
           <PanelBody title={<RemoveStyleObj title={options.selector} index={index} />} initialOpen={false}>
 
-
-
-
             <InputControl
               className="my-3"
               label=""
@@ -520,12 +539,8 @@ function Html(props) {
 
 
                 var pageStylsObjX = [...pageStylsObj];
-
-
                 pageStylsObjX[index].options.selector = value
                 setpageStylsObj(pageStylsObjX)
-
-
               }}
             />
 

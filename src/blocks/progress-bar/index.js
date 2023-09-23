@@ -87,7 +87,6 @@ registerBlockType("post-grid/progress-bar", {
         animateDelay: 2,
 
         fill: 45,
-        unit: '%',
 
       },
     },
@@ -144,6 +143,9 @@ registerBlockType("post-grid/progress-bar", {
       default: {
         options: {
           position: 'afterLabel',
+          prefix: '',
+          postfix: '',
+
           class: '',
         },
 
@@ -1523,6 +1525,8 @@ registerBlockType("post-grid/progress-bar", {
                       label=""
                       value={progressLabel.options.position}
                       options={[
+                        { label: 'Choose Position', value: '' },
+
                         { label: 'Before Bar', value: 'beforeBar' },
                         { label: 'Before Fill', value: 'beforeFill' },
                         { label: 'After Fill', value: 'afterFill' },
@@ -1595,6 +1599,8 @@ registerBlockType("post-grid/progress-bar", {
                       label=""
                       value={progressCount.options.position}
                       options={[
+                        { label: 'Choose Position', value: '' },
+
                         { label: 'Before Bar', value: 'beforeBar' },
                         { label: 'Before Fill', value: 'beforeFill' },
                         { label: 'Inside Fill', value: 'insideFill' },
@@ -1618,11 +1624,33 @@ registerBlockType("post-grid/progress-bar", {
 
 
 
+                  <PanelRow>
+                    <label for="">Prefix</label>
+                    <InputControl
+                      type="text"
+                      className='mr-2'
+                      value={progressCount.options.prefix}
+                      onChange={(newVal) => {
+                        var options = { ...progressCount.options, prefix: newVal };
+                        setAttributes({ progressCount: { ...progressCount, options: options } });
+                      }}
+                    />
+                  </PanelRow>
 
 
 
-
-
+                  <PanelRow>
+                    <label for="">Postfix</label>
+                    <InputControl
+                      type="text"
+                      className='mr-2'
+                      value={progressCount.options.postfix}
+                      onChange={(newVal) => {
+                        var options = { ...progressCount.options, postfix: newVal };
+                        setAttributes({ progressCount: { ...progressCount, options: options } });
+                      }}
+                    />
+                  </PanelRow>
 
 
 
@@ -2121,21 +2149,33 @@ registerBlockType("post-grid/progress-bar", {
 
           {progressData.type == 'horizontal' && (
             <div {...blockProps}>
+
+
+
+
               {progressInfo.options.position == 'beforeBar' && (
                 <div className="progress-info">
                   {icon.options.position == 'beforeLabel' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
                   {progressCount.options.position == 'beforeLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                   {progressLabel.options.position.length == 0 && (
                     <div className="progress-label">{progressLabel.options.text}</div>
                   )}
                   {progressCount.options.position == 'afterLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                 </div>
+              )}
+
+              {progressLabel.options.position == 'beforeBar' && (
+                <div className="progress-label">{progressLabel.options.text}</div>
+              )}
+
+              {progressCount.options.position == 'beforeBar' && (
+                <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
               )}
 
               <div className="progress-bar">
@@ -2143,21 +2183,21 @@ registerBlockType("post-grid/progress-bar", {
                   <div className="progress-label">{progressLabel.options.text}</div>
                 )}
                 {progressCount.options.position == 'beforeFill' && (
-                  <div className="progress-count">{progressData.fill}</div>
+                  <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                 )}
                 <div className="progress-fill">
                   {progressLabel.options.position == 'insideFill' && (
                     <div className="progress-label">{progressLabel.options.text}</div>
                   )}
                   {progressCount.options.position == 'insideFill' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                 </div>
                 {progressLabel.options.position == 'afterFill' && (
                   <div className="progress-label">{progressLabel.options.text}</div>
                 )}
                 {progressCount.options.position == 'afterFill' && (
-                  <div className="progress-count">{progressData.fill}</div>
+                  <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                 )}
               </div>
               {progressInfo.options.position == 'afterBar' && (
@@ -2166,15 +2206,23 @@ registerBlockType("post-grid/progress-bar", {
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
                   {progressCount.options.position == 'beforeLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                   {progressLabel.options.position.length == 0 && (
                     <div className="progress-label">{progressLabel.options.text}</div>
                   )}
                   {progressCount.options.position == 'afterLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                 </div>
+              )}
+
+              {progressCount.options.position == 'afterBar' && (
+                <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
+              )}
+
+              {progressLabel.options.position == 'afterBar' && (
+                <div className="progress-label">{progressLabel.options.text}</div>
               )}
             </div>
 
@@ -2188,13 +2236,13 @@ registerBlockType("post-grid/progress-bar", {
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
                   {progressCount.options.position == 'beforeLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                   {progressLabel.options.position.length == 0 && (
                     <div className="progress-label">{progressLabel.options.text}</div>
                   )}
                   {progressCount.options.position == 'afterLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                 </div>
               )}
@@ -2204,21 +2252,21 @@ registerBlockType("post-grid/progress-bar", {
                   <div className="progress-label">{progressLabel.options.text}</div>
                 )}
                 {progressCount.options.position == 'beforeFill' && (
-                  <div className="progress-count">{progressData.fill}</div>
+                  <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                 )}
                 <div className="progress-fill">
                   {progressLabel.options.position == 'insideFill' && (
                     <div className="progress-label">{progressLabel.options.text}</div>
                   )}
                   {progressCount.options.position == 'insideFill' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                 </div>
                 {progressLabel.options.position == 'afterFill' && (
                   <div className="progress-label">{progressLabel.options.text}</div>
                 )}
                 {progressCount.options.position == 'afterFill' && (
-                  <div className="progress-count">{progressData.fill}</div>
+                  <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                 )}
               </div>
               {progressInfo.options.position == 'afterBar' && (
@@ -2227,13 +2275,13 @@ registerBlockType("post-grid/progress-bar", {
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
                   {progressCount.options.position == 'beforeLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                   {progressLabel.options.position.length == 0 && (
                     <div className="progress-label">{progressLabel.options.text}</div>
                   )}
                   {progressCount.options.position == 'afterLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                 </div>
               )}
@@ -2246,7 +2294,7 @@ registerBlockType("post-grid/progress-bar", {
               {progressInfo.options.position == 'beforeBar' && (
                 <div className="progress-info">
                   {progressCount.options.position == 'beforeLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                   {icon.options.position == 'beforeLabel' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
@@ -2256,7 +2304,7 @@ registerBlockType("post-grid/progress-bar", {
                     <div className="progress-label">{progressLabel.options.text}</div>
                   )}
                   {progressCount.options.position == 'afterLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                 </div>
               )}
@@ -2274,19 +2322,19 @@ registerBlockType("post-grid/progress-bar", {
               {progressInfo.options.position == 'afterBar' && (
                 <div className="progress-info">
                   {progressInfo.options.position == 'beforeLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                   {icon.options.position == 'beforePrefix' && (
                     <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
                   )}
                   {progressCount.options.position == 'beforeLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                   {progressLabel.options.position.length == 0 && (
                     <div className="progress-label">{progressLabel.options.text}</div>
                   )}
                   {progressCount.options.position == 'afterLabel' && (
-                    <div className="progress-count">{progressData.fill}</div>
+                    <div className="progress-count">{progressCount.options.prefix}{progressData.fill}{progressCount.options.postfix}</div>
                   )}
                 </div>
               )}

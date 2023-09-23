@@ -34,7 +34,6 @@ class PGBlockProgressBar
                     array(
                         'options' =>
                         array(
-                            'tag' => 'div',
                             'class' => '',
                         ),
                         'styles' =>
@@ -55,15 +54,12 @@ class PGBlockProgressBar
                     'type' => 'object',
                     'default' =>
                     array(
-                        'type' => 'horizontal',
-                        'animate' => 'onVisible',
-                        'animateDuration' => 2,
-                        'animateIteration' => 1,
+                        'type' => '',
+                        'animate' => '',
+                        'animateDuration' => 1,
+                        'animateIteration' => 2,
                         'animateDelay' => 2,
-                        'max' => 100,
-                        'min' => 0,
                         'fill' => 45,
-                        'unit' => '%',
                     ),
                 ),
                 'progressInfo' =>
@@ -73,7 +69,6 @@ class PGBlockProgressBar
                     array(
                         'options' =>
                         array(
-                            'tag' => 'div',
                             'class' => '',
                             'position' => 'beforeBar',
                         ),
@@ -88,7 +83,6 @@ class PGBlockProgressBar
                     array(
                         'options' =>
                         array(
-                            'tag' => 'div',
                             'class' => '',
                         ),
                         'styles' =>
@@ -111,7 +105,6 @@ class PGBlockProgressBar
                     array(
                         'options' =>
                         array(
-                            'tag' => 'div',
                             'class' => '',
                         ),
                         'styles' =>
@@ -134,8 +127,9 @@ class PGBlockProgressBar
                     array(
                         'options' =>
                         array(
-                            'tag' => 'div',
                             'position' => 'afterLabel',
+                            'prefix' => '',
+                            'postfix' => '',
                             'class' => '',
                         ),
                         'styles' =>
@@ -151,14 +145,13 @@ class PGBlockProgressBar
                         ),
                     ),
                 ),
-                'progressCountPrefix' =>
+                'circleOverlay' =>
                 array(
                     'type' => 'object',
                     'default' =>
                     array(
                         'options' =>
                         array(
-                            'tag' => 'span',
                             'class' => '',
                         ),
                         'styles' =>
@@ -174,14 +167,13 @@ class PGBlockProgressBar
                         ),
                     ),
                 ),
-                'progressCountPostfix' =>
+                'circleMask' =>
                 array(
                     'type' => 'object',
                     'default' =>
                     array(
                         'options' =>
                         array(
-                            'tag' => 'span',
                             'class' => '',
                         ),
                         'styles' =>
@@ -204,7 +196,6 @@ class PGBlockProgressBar
                     array(
                         'options' =>
                         array(
-                            'tag' => 'div',
                             'text' => 'Digital Marketing',
                             'position' => '',
                             'class' => '',
@@ -230,9 +221,9 @@ class PGBlockProgressBar
                         'options' =>
                         array(
                             'library' => 'fontAwesome',
+                            'position' => 'beforeprogressCount',
                             'srcType' => 'class',
                             'iconSrc' => 'far fa-calendar-alt',
-                            'position' => 'beforeprogressCount',
                             'class' => 'number-count-icon',
                         ),
                         'styles' =>
@@ -246,52 +237,6 @@ class PGBlockProgressBar
                                 'Desktop' => '',
                             ),
                             'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'prefix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'prefix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'postfix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'postfix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
                             array(
                                 'Desktop' => '',
                             ),
@@ -408,6 +353,8 @@ class PGBlockProgressBar
         $progressCountOptions = isset($progressCount['options']) ? $progressCount['options'] : '';
 
         $progressCountPosition = isset($progressCountOptions['position']) ? $progressCountOptions['position'] : '';
+        $progressCountPrefix = isset($progressCountOptions['prefix']) ? $progressCountOptions['prefix'] : '';
+        $progressCountPostfix = isset($progressCountOptions['postfix']) ? $progressCountOptions['postfix'] : '';
 
 
         $progressLabel = isset($attributes['progressLabel']) ? $attributes['progressLabel'] : '';
@@ -471,7 +418,7 @@ class PGBlockProgressBar
             $animatename = "animateHeightProgress";
         endif;
 
-        //var_dump($dataAtts);
+
 
         ob_start();
 
@@ -486,7 +433,7 @@ class PGBlockProgressBar
                     <div class="progress-info">
 
                         <?php if ($progressCountPosition == 'beforeLabel') : ?>
-                            <div class="progress-count"><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($unit); ?></div>
+                            <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
                         <?php endif; ?>
 
                         <div class="progress-label">
@@ -494,14 +441,21 @@ class PGBlockProgressBar
                         </div>
 
                         <?php if ($progressCountPosition == 'afterLabel') : ?>
-                            <div class="progress-count"><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($unit); ?></div>
+                            <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
                         <?php endif; ?>
 
                     </div>
                 <?php endif; ?>
 
 
+                <?php if ($progressLabelPosition == 'beforeBar') : ?>
+                    <div class="progress-label"><?php echo wp_kses_post($progressLabelText); ?></div>
+                <?php endif; ?>
 
+
+                <?php if ($progressCountPosition == 'beforeBar') : ?>
+                    <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
+                <?php endif; ?>
 
                 <div class='progress-bar'>
 
@@ -511,7 +465,7 @@ class PGBlockProgressBar
                         </div>
                     <?php endif; ?>
                     <?php if ($progressCountPosition == 'beforeFill') : ?>
-                        <div class="progress-count"><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($unit); ?></div>
+                        <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
                     <?php endif; ?>
 
                     <div class="progress-fill">
@@ -522,7 +476,7 @@ class PGBlockProgressBar
                             </div>
                         <?php endif; ?>
                         <?php if ($progressCountPosition == 'insideFill') : ?>
-                            <div class="progress-count"><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($unit); ?></div>
+                            <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
                         <?php endif; ?>
 
 
@@ -536,16 +490,26 @@ class PGBlockProgressBar
                         </div>
                     <?php endif; ?>
                     <?php if ($progressCountPosition == 'afterFill') : ?>
-                        <div class="progress-count"><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($unit); ?></div>
+                        <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
                     <?php endif; ?>
 
 
                 </div>
 
+
+                <?php if ($progressLabelPosition == 'afterBar') : ?>
+                    <div class="progress-label"><?php echo wp_kses_post($progressLabelText); ?></div>
+                <?php endif; ?>
+
+
+                <?php if ($progressCountPosition == 'afterBar') : ?>
+                    <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
+                <?php endif; ?>
+
                 <?php if ($progressInfoPosition == 'afterBar') : ?>
                     <div class="progress-info">
                         <?php if ($progressCountPosition == 'beforeLabel') : ?>
-                            <div class="progress-count"><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($unit); ?></div>
+                            <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
                         <?php endif; ?>
 
                         <div class="progress-label">
@@ -553,7 +517,7 @@ class PGBlockProgressBar
                         </div>
 
                         <?php if ($progressCountPosition == 'afterLabel') : ?>
-                            <div class="progress-count"><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($unit); ?></div>
+                            <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>

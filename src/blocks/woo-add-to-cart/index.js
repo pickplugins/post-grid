@@ -51,7 +51,7 @@ registerBlockType("post-grid/woo-add-to-cart", {
     foreground: '#fff',
     // Specifying an icon for the block
     src:
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect fill="#8db1ff" y="30.98" width="13.97" height="2" /><rect fill="#8db1ff" x="16.42" y="30.98" width="9.96" height="2" /><rect fill="#8db1ff" y="26.28" width="36" height="2" /><rect fill="#8db1ff" y="21.58" width="36" height="2" /><rect fill="#1d4ed8" x="20.7" y="9.61" width="15.3" height="2.35" /><path fill="#1d4ed8" d="M12.42,18.54H1.55A1.54,1.54,0,0,1,0,17V6.13A1.55,1.55,0,0,1,1.55,4.57H3.1V3H4.66V4.57H9.31V3h1.56V4.57h1.55A1.55,1.55,0,0,1,14,6.13V17A1.54,1.54,0,0,1,12.42,18.54ZM1.55,9.23V17H12.42V9.23Zm0-3.1V7.68H12.42V6.13Zm9.32,9.31H9.31V13.89h1.56Zm-3.11,0H6.21V13.89H7.76Zm-3.1,0H3.1V13.89H4.66Zm6.21-3.1H9.31V10.78h1.56Zm-3.11,0H6.21V10.78H7.76Zm-3.1,0H3.1V10.78H4.66Z" /></svg>
+      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#1d4ed8" d="M35.76,8a1.38,1.38,0,0,0-.95-.6L9.5,7.42,8.1,4.85A1.21,1.21,0,0,0,8,4.65a1,1,0,0,0-.91-.53h-6A1.07,1.07,0,0,0,0,5.19v.29A1.07,1.07,0,0,0,1.06,6.54H6.6l6.48,11.89-1.81,3.66a1.47,1.47,0,0,0-.1.33v.15a.81.81,0,0,0,0,.25l.1.25a1,1,0,0,0,.33.41,1,1,0,0,0,.52.16h16.4a1.07,1.07,0,1,0,0-2.13H13.79l1-2.09H32.56a.89.89,0,0,0,.86-.72L36,9.17A1.33,1.33,0,0,0,35.76,8Zm-3.48,6.61-.71,2.65H27.45V14.65Zm1.37-5.1-.8,3h-5.4v-3Zm-8.32,5.1V17.3H20.15V14.65Zm0-5.1v3H20.15v-3Zm-7.3,0v3H12.28l-1.62-3Zm0,5.1V17.3H14.88l-1.44-2.65Z" /><path fill="#1d4ed8" d="M15.19,24.63a3.63,3.63,0,1,0,3.62,3.62A3.63,3.63,0,0,0,15.19,24.63Zm0,5.39A1.77,1.77,0,1,1,17,28.25,1.77,1.77,0,0,1,15.19,30Z" /><path fill="#1d4ed8" d="M24.86,24.63a3.63,3.63,0,1,0,3.62,3.62A3.63,3.63,0,0,0,24.86,24.63Zm0,1.86a1.77,1.77,0,1,1-1.77,1.76A1.76,1.76,0,0,1,24.86,26.49Z" /></svg>
 
 
     ,
@@ -69,7 +69,7 @@ registerBlockType("post-grid/woo-add-to-cart", {
         styles:
         {
 
-          color: { Desktop: '' },
+          display: { Desktop: 'flex' },
           backgroundColor: { Desktop: '' },
           padding: { Desktop: '' },
           margin: { Desktop: '' },
@@ -1994,6 +1994,8 @@ registerBlockType("post-grid/woo-add-to-cart", {
         </InspectorControls >
 
         <>
+
+
 
           {wrapper.options.tag && (
             <CustomTag {...blockProps}>

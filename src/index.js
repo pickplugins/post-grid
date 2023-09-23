@@ -104,6 +104,11 @@ import './sidebars'
 
 
 import './blocks/post-grid'
+import './blocks/post-grid-pagination'
+import './blocks/post-grid-query'
+
+
+
 import './blocks/post-grid-filterable'
 
 import './blocks/content-slider'

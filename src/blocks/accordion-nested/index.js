@@ -11,6 +11,7 @@ import { InnerBlocks, useBlockProps, useInnerBlocksProps, store as blockEditorSt
 import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 import { applyFilters } from '@wordpress/hooks';
 import { createBlocksFromInnerBlocksTemplate } from '@wordpress/blocks';
+import { createBlock } from '@wordpress/blocks';
 
 
 import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
@@ -202,7 +203,7 @@ registerBlockType("post-grid/accordion-nested", {
     labelIcon: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-angle-down', position: 'left', /*left, right, before, after */ class: 'accordion-icon', },
+        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: '', class: 'accordion-label-icon', },
 
         styles:
         {
@@ -214,7 +215,7 @@ registerBlockType("post-grid/accordion-nested", {
     icon: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-angle-down', position: 'left', /*left, right, before, after */ class: 'accordion-icon', },
+        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: 'left', class: 'accordion-icon', },
 
         styles:
         {
@@ -225,7 +226,7 @@ registerBlockType("post-grid/accordion-nested", {
     iconToggle: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-angle-up', class: 'accordion-icon-toggle', },
+        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', class: 'accordion-icon-toggle', },
 
         styles:
         {
@@ -259,9 +260,9 @@ registerBlockType("post-grid/accordion-nested", {
     },
   },
   providesContext: {
-    'post-grid/accordion-nested/schema': 'schema',
-
-
+    'post-grid/accordionNestedIcon': 'icon',
+    'post-grid/accordionNestedIconToggle': 'iconToggle',
+    'post-grid/accordionNestedLabelIcon': 'labelIcon',
   },
   supports: {
     "align": ["wide", "full"],
@@ -866,6 +867,58 @@ registerBlockType("post-grid/accordion-nested", {
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
+    ////
+
+
+
+    function onChangeStyleLabelIcon(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, labelIcon);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ labelIcon: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, labelIconSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+    }
+
+
+
+    function onRemoveStyleLabelIcon(sudoScource, key) {
+
+
+      var object = myStore.deletePropertyDeep(labelIcon, [sudoScource, key, breakPointX]);
+      setAttributes({ labelIcon: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, labelIconSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+    }
+
+    function onAddStyleLabelIcon(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, labelIcon);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ labelIcon: object });
+
+    }
+
 
 
 
@@ -1343,7 +1396,16 @@ registerBlockType("post-grid/accordion-nested", {
 
 
 
+    const addSlide = () => {
+      var childBlocks = wp.data.select(blockEditorStore).getBlocks(clientId);
 
+      const slide = createBlock('post-grid/accordion-nested-item');
+      const position = childBlocks.length;
+      dispatch('core/block-editor').insertBlock(slide, position, clientId);
+
+      wp.data.dispatch('core/block-editor').selectBlock(clientId)
+      //setActiveTab(slide.clientId);
+    };
 
 
 
@@ -1354,6 +1416,16 @@ registerBlockType("post-grid/accordion-nested", {
       <>
 
         <InspectorControls >
+
+          <div className='bg-blue-600 mx-3 my-2 cursor-pointer hover:text-white font-bold text-[16px] px-5 py-2 block text-center text-white rounded'
+            onClick={ev => {
+
+              addSlide()
+
+            }}>Add Item</div>
+
+
+
           <div className='' >
 
             <PanelBody title="Wrapper" initialOpen={false}>
@@ -1617,62 +1689,6 @@ registerBlockType("post-grid/accordion-nested", {
 
 
 
-                  <ToggleControl
-                    label="Enable Label Icon?"
-                    help={labelIcon.options.enable ? 'Label Icon Enabled' : 'Label Icon Disabled.'}
-                    checked={labelIcon.options.enable ? true : false}
-                    onChange={(e) => {
-
-
-
-                      var options = { ...labelIcon.options, enable: labelIcon.options.enable ? false : true };
-                      setAttributes({ labelIcon: { ...labelIcon, options: options } });
-
-
-
-
-
-                    }}
-                  />
-
-                  {labelIcon.options.enable && (
-
-                    <PanelRow>
-                      <label for="">Choose Icon</label>
-
-                      <PGIconPicker library={labelIcon.options.library} srcType={labelIcon.options.srcType} iconSrc={labelIcon.options.iconSrc} onChange={(arg) => {
-
-
-                        var options = { ...labelIcon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
-                        setAttributes({ labelIcon: { ...labelIcon, options: options } });
-
-                        var childBlocks = select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
-
-                        childBlocks.map(childBlock => {
-
-                          var childClientId = childBlock.clientId;
-
-                          console.log('childClientId', childClientId);
-
-
-                          var childAttributes = childBlock.attributes;
-                          childAttributes.labelIcon.options.srcType = arg.srcType;
-                          childAttributes.labelIcon.options.library = arg.library;
-                          childAttributes.labelIcon.options.iconSrc = arg.iconSrc;
-
-                          dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
-                          wp.data.dispatch('core/block-editor').selectBlock(childClientId)
-                        })
-
-                        console.log(clientId);
-
-                        wp.data.dispatch('core/block-editor').selectBlock(clientId)
-
-                      }} />
-                    </PanelRow>
-
-                  )}
-
 
 
                 </PGtab>
@@ -1792,6 +1808,136 @@ registerBlockType("post-grid/accordion-nested", {
               </PGtabs>
             </PanelBody>
 
+            <PanelBody title="Label Icon" initialOpen={false}>
+
+
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+
+                ]}
+              >
+                <PGtab name="options">
+
+
+
+                  <PanelRow>
+                    <label for="">Label Icon postion</label>
+
+                    <SelectControl
+                      label=""
+                      value={labelIcon.options.position}
+                      options={[
+
+                        { label: 'Choose Position', value: '' },
+
+                        { label: 'Before Label', value: 'beforeLabel' },
+                        { label: 'After Label', value: 'afterLabel' },
+                        { label: 'Before Label Text', value: 'beforeLabelText' },
+                        { label: 'After Label Text', value: 'afterLabelText' },
+
+                      ]}
+                      onChange={(newVal) => {
+
+                        var options = { ...labelIcon.options, position: newVal };
+                        setAttributes({ labelIcon: { ...labelIcon, options: options } });
+
+
+                        // var childBlocks = select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
+
+                        // childBlocks.map(childBlock => {
+
+                        //   var childClientId = childBlock.clientId;
+
+                        //   var childAttributes = childBlock.attributes;
+                        //   childAttributes.labelIcon.options.position = newVal;
+
+                        //   dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
+                        //   wp.data.dispatch('core/block-editor').selectBlock(childClientId)
+                        // })
+
+
+                        // wp.data.dispatch('core/block-editor').selectBlock(clientId)
+
+
+
+                      }
+                      }
+                    />
+                  </PanelRow>
+
+
+
+
+                  {labelIcon.options.position.length > 0 && (
+
+                    <PanelRow>
+                      <label for="">Choose Icon</label>
+
+                      <PGIconPicker library={labelIcon.options.library} srcType={labelIcon.options.srcType} iconSrc={labelIcon.options.iconSrc} onChange={(arg) => {
+
+
+                        var options = { ...labelIcon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
+                        setAttributes({ labelIcon: { ...labelIcon, options: options } });
+
+                        var childBlocks = select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
+
+                        childBlocks.map(childBlock => {
+
+                          var childClientId = childBlock.clientId;
+
+                          console.log('childClientId', childClientId);
+
+
+                          var childAttributes = childBlock.attributes;
+                          childAttributes.labelIcon.options.srcType = arg.srcType;
+                          childAttributes.labelIcon.options.library = arg.library;
+                          childAttributes.labelIcon.options.iconSrc = arg.iconSrc;
+
+                          dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
+                          wp.data.dispatch('core/block-editor').selectBlock(childClientId)
+                        })
+
+                        console.log(clientId);
+
+                        wp.data.dispatch('core/block-editor').selectBlock(clientId)
+
+                      }} />
+                    </PanelRow>
+
+                  )}
+
+
+
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={labelIcon} onChange={onChangeStyleLabelIcon} onAdd={onAddStyleLabelIcon} onRemove={onRemoveStyleLabelIcon} />
+                </PGtab>
+
+              </PGtabs>
+            </PanelBody>
+
+
+
+
+
+
+
 
             <PanelBody title="Content" initialOpen={false}>
 
@@ -1910,33 +2056,33 @@ registerBlockType("post-grid/accordion-nested", {
                       var options = { ...icon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
                       setAttributes({ icon: { ...icon, options: options } });
 
-                      var childBlocks = select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
+                      // var childBlocks = select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
 
-                      childBlocks.map(childBlock => {
-
-
-
-                        setTimeout(() => {
-                          var childClientId = childBlock.clientId;
-
-                          var childAttributes = childBlock.attributes;
-                          childAttributes.icon.options.srcType = arg.srcType;
-                          childAttributes.icon.options.library = arg.library;
-                          childAttributes.icon.options.iconSrc = arg.iconSrc;
-
-                          dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
-                          wp.data.dispatch('core/block-editor').selectBlock(childClientId);
-                        }, 20, childBlock)
+                      // childBlocks.map(childBlock => {
 
 
 
-                      })
+                      //   setTimeout(() => {
+                      //     var childClientId = childBlock.clientId;
 
-                      setTimeout(() => {
-                        wp.data.dispatch('core/block-editor').selectBlock(clientId)
-                        console.log('clientId', clientId);
+                      //     var childAttributes = childBlock.attributes;
+                      //     childAttributes.icon.options.srcType = arg.srcType;
+                      //     childAttributes.icon.options.library = arg.library;
+                      //     childAttributes.icon.options.iconSrc = arg.iconSrc;
 
-                      }, 2000)
+                      //     dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
+                      //     wp.data.dispatch('core/block-editor').selectBlock(childClientId);
+                      //   }, 20, childBlock)
+
+
+
+                      // })
+
+                      // setTimeout(() => {
+                      //   wp.data.dispatch('core/block-editor').selectBlock(clientId)
+                      //   console.log('clientId', clientId);
+
+                      // }, 2000)
 
 
                     }} />
@@ -1951,21 +2097,21 @@ registerBlockType("post-grid/accordion-nested", {
                       var options = { ...iconToggle.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
                       setAttributes({ iconToggle: { ...iconToggle, options: options } });
 
-                      var childBlocks = select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
+                      // var childBlocks = select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
 
-                      childBlocks.map(childBlock => {
+                      // childBlocks.map(childBlock => {
 
-                        var childClientId = childBlock.clientId;
-                        var childAttributes = childBlock.attributes;
-                        childAttributes.iconToggle.options.srcType = arg.srcType;
-                        childAttributes.iconToggle.options.library = arg.library;
-                        childAttributes.iconToggle.options.iconSrc = arg.iconSrc;
+                      //   var childClientId = childBlock.clientId;
+                      //   var childAttributes = childBlock.attributes;
+                      //   childAttributes.iconToggle.options.srcType = arg.srcType;
+                      //   childAttributes.iconToggle.options.library = arg.library;
+                      //   childAttributes.iconToggle.options.iconSrc = arg.iconSrc;
 
-                        dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
-                        //wp.data.dispatch('core/block-editor').selectBlock(childClientId)
-                      })
+                      //   dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
+                      //   //wp.data.dispatch('core/block-editor').selectBlock(childClientId)
+                      // })
 
-                      wp.data.dispatch('core/block-editor').selectBlock(clientId)
+                      // wp.data.dispatch('core/block-editor').selectBlock(clientId)
 
                     }} />
                   </PanelRow>

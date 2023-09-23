@@ -29,427 +29,426 @@ class PGBlockPostGrid
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'render_callback' => array($this, 'theHTML'),
 
-            'attributes' =>  [
-                "lazyLoad" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "lazyLoad",
-                            "enable" => "no",
-                            "srcUrl" => "",
-                            "srcId" => "",
-                            "icon" => [
-                                "library" => "",
-                                "srcType" => "class",
-                                "iconSrc" => ""
-                            ]
-                        ],
-                        "styles" => [
+            'attributes' =>  array(
+                'lazyLoad' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => 'lazyLoad',
+                            'enable' => 'no',
+                            'srcUrl' => '',
+                            'srcId' => '',
+                            'icon' =>
+                            array(
+                                'library' => '',
+                                'srcType' => 'class',
+                                'iconSrc' => '',
+                            ),
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'search' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => 'search',
+                            'enable' => 'no',
+                            'type' => '',
+                            'placeholder' => '',
+                            'icon' => '',
+                            'busyIcon' => '',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'container' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => '',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'itemsWrap' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => 'items-loop',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'itemWrap' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => 'item',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'noPostsWrap' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => 'no-posts text-center',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'spinnerWrap' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => 'spinner',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'grid' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'itemCss' =>
+                            array(),
+                        ),
+                        'styles' =>
+                        array(
+                            'gridTemplateColumns' =>
+                            array(
+                                'Tablet' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'val' => 1,
+                                        'unit' => 'fr',
+                                    ),
+                                    1 =>
+                                    array(
+                                        'val' => 1,
+                                        'unit' => 'fr',
+                                    ),
+                                ),
+                                'Mobile' =>
+                                array(
+                                    0 =>
+                                    array(
+                                        'val' => 1,
+                                        'unit' => 'fr',
+                                    ),
+                                ),
+                            ),
+                            'gridTemplateRows' =>
+                            array(),
+                            'colGap' =>
+                            array(),
+                            'rowGap' =>
+                            array(),
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'padding' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'margin' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'pagination' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => 'pagination',
+                            'type' => 'normal',
+                            'maxPageNum' => '',
+                            'prevText' => 'Previous',
+                            'nextText' => 'Next',
+                            'loadMoreText' => 'Load More',
+                            'noMorePosts' => 'No More Posts',
+                            'loadingText' => 'Loading...',
+                            'loadingIcon' =>
+                            array(
+                                'library' => '',
+                                'srcType' => 'class',
+                                'iconSrc' => '',
+                            ),
+                        ),
+                        'styles' =>
+                        array(
+                            'textAlign' =>
+                            array(
+                                'Desktop' => 'center',
+                            ),
+                            'padding' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'margin' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'fontSize' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'paginationItem' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => 'page-numbers inline-block',
+                        ),
+                        'styles' =>
+                        array(
+                            'display' =>
+                            array(
+                                'Desktop' => 'inline-block',
+                            ),
+                            'color' =>
+                            array(
+                                'Desktop' => '#18978F',
+                            ),
+                            'fontSize' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'paginationItemActive' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'class' => 'page-numbers inline-block',
+                        ),
+                        'styles' =>
+                        array(
+                            'display' =>
+                            array(),
+                            'color' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'padding' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'margin' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                            'fontSize' =>
+                            array(
+                                'Desktop' => '',
+                            ),
+                        ),
+                    ),
+                ),
+                'layout' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'id' => '',
+                        'srcServer' => 'library',
+                        'data' =>
+                        array(
+                            0 =>
+                            array(
+                                'blockName' => 'core/post-title',
+                                'attrs' =>
+                                array(),
+                                'innerBlocks' =>
+                                array(),
+                                'innerHTML' => '',
+                                'innerContent' =>
+                                array(),
+                            ),
+                            1 =>
+                            array(
+                                'blockName' => NULL,
+                                'attrs' =>
+                                array(),
+                                'innerBlocks' =>
+                                array(),
+                                'innerHTML' => '
 
-                            "color" => [],
+',
+                                'innerContent' =>
+                                array(
+                                    0 => '
 
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "search" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "search",
-                            "enable" => "no",
-                            "type" => "",
-                            "placeholder" => "",
-                            "icon" => "",
-                            "busyIcon" => ""
-                        ],
-                        "styles" => [
+',
+                                ),
+                            ),
+                            2 =>
+                            array(
+                                'blockName' => 'core/post-date',
+                                'attrs' =>
+                                array(),
+                                'innerBlocks' =>
+                                array(),
+                                'innerHTML' => '',
+                                'innerContent' =>
+                                array(),
+                            ),
+                            3 =>
+                            array(
+                                'blockName' => NULL,
+                                'attrs' =>
+                                array(),
+                                'innerBlocks' =>
+                                array(),
+                                'innerHTML' => '
 
-                            "color" => [],
+',
+                                'innerContent' =>
+                                array(
+                                    0 => '
 
-                            "padding" => [],
-                            "margin" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "container" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => ""
-                        ],
-                        "styles" => [
+',
+                                ),
+                            ),
+                            4 =>
+                            array(
+                                'blockName' => 'core/post-excerpt',
+                                'attrs' =>
+                                array(
+                                    'moreText' => '',
+                                    'textColor' => 'primary',
+                                ),
+                                'innerBlocks' =>
+                                array(),
+                                'innerHTML' => '',
+                                'innerContent' =>
+                                array(),
+                            ),
+                        ),
+                        'rawData' => '<!-- wp:post-featured-image  /-->
 
-                            "color" => [],
-
-                            "backgroundImage" => [],
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "itemsWrap" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "items-loop"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "wordBreak" => [],
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "itemWrap" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "item"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "wordBreak" => [],
-                            "padding" => [],
-                            "outline" => [],
-                            "border" => [],
-                            "boxShadow" => [],
-                            "borderRadius" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ],
-                        "hoverStyles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "noPostsWrap" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "no-posts text-center"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "wordBreak" => [],
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "spinnerWrap" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "spinner"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "wordBreak" => [],
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "grid" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "itemCss" => []
-                        ],
-                        "styles" => [
-                            "gridTemplateColumns" => [],
-                            "gridTemplateRows" => [],
-                            "colGap" => [],
-                            "rowGap" => [],
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "pagination" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "pagination",
-                            "type" => "normal",
-                            "maxPageNum" => "",
-                            "prevText" => "Previous",
-                            "nextText" => "Next",
-                            "loadMoreText" => "Load More",
-                            "noMorePosts" => "No More Posts",
-                            "loadingText" => "Loading...",
-                            "loadingIcon" => [
-                                "library" => "",
-                                "srcType" => "class",
-                                "iconSrc" => ""
-                            ]
-                        ],
-                        "styles" => [
-                            "textAlign" => [
-                                "Desktop" => "center"
-                            ],
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ],
-                        "hoverStyles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "paginationItem" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "page-numbers inline-block"
-                        ],
-                        "styles" => [
-
-                            "display" => [
-                                "Desktop" => "inline-block"
-                            ],
-                            "color" => [
-                                "Desktop" => "#18978F"
-                            ],
-                            "backgroundColor" => [
-                                "Desktop" => "#9DD6DF"
-                            ],
-                            "padding" => [
-                                "Desktop" => [
-                                    "top" => "10px",
-                                    "right" => "10px",
-                                    "bottom" => "10px",
-                                    "left" => "10px"
-                                ]
-                            ],
-                            "margin" => [
-                                "Desktop" => [
-                                    "top" => "5px",
-                                    "right" => "5px",
-                                    "bottom" => "5px",
-                                    "left" => "5px"
-                                ]
-                            ],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ],
-                        "hoverStyles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "paginationItemActive" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "page-numbers inline-block"
-                        ],
-                        "styles" => [
-
-                            "display" => [],
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ],
-                        "hoverStyles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "layout" => [
-                    "type" => "object",
-                    "default" => [
-                        "id" => "",
-                        "srcServer" => "library",
-                        "data" => [
-                            [
-                                "blockName" => "core/post-title",
-                                "attrs" => [],
-                                "innerBlocks" => [],
-                                "innerHTML" => "",
-                                "innerContent" => []
-                            ],
-                            [
-                                "blockName" => null,
-                                "attrs" => [],
-                                "innerBlocks" => [],
-                                "innerHTML" => "
-
-",
-                                "innerContent" => [
-                                    "
-
-"
-                                ]
-                            ],
-                            [
-                                "blockName" => "core/post-date",
-                                "attrs" => [],
-                                "innerBlocks" => [],
-                                "innerHTML" => "",
-                                "innerContent" => []
-                            ],
-                            [
-                                "blockName" => null,
-                                "attrs" => [],
-                                "innerBlocks" => [],
-                                "innerHTML" => "
-
-",
-                                "innerContent" => [
-                                    "
-
-"
-                                ]
-                            ],
-                            [
-                                "blockName" => "core/post-excerpt",
-                                "attrs" => [
-                                    "moreText" => "",
-                                    "textColor" => "primary"
-                                ],
-                                "innerBlocks" => [],
-                                "innerHTML" => "",
-                                "innerContent" => []
-                            ]
-                        ],
-                        "rawData" => "<!-- wp:post-featured-image  /-->
 <!-- wp:post-title /-->
-<!-- wp:post-excerpt  /-->"
-                    ]
-                ],
-                "postTypes" => [
-                    "type" => "array",
-                    "default" => []
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "scripts" => [
-                    "type" => "object",
-                    "default" => [
-                        "js" => "",
-                        "css" => ""
-                    ]
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ],
-                "queryArgs" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => [
-                            [
-                                "val" => [
-                                    "post"
-                                ],
-                                "multiple" => false,
-                                "id" => "postType",
-                                "label" => "Post Types",
-                                "description" => "Select Post Types to Query"
-                            ],
-                            [
-                                "val" => [
-                                    "publish"
-                                ],
-                                "multiple" => false,
-                                "id" => "postStatus",
-                                "label" => "Post status",
-                                "description" => "Query post by post status"
-                            ],
-                            [
-                                "val" => "DESC",
-                                "multiple" => false,
-                                "id" => "order",
-                                "label" => "Order",
-                                "description" => "Post query order"
-                            ],
-                            [
-                                "val" => [
-                                    "date"
-                                ],
-                                "multiple" => false,
-                                "id" => "orderby",
-                                "label" => "Orderby",
-                                "description" => "Post query orderby"
-                            ],
-                            [
-                                "val" => 10,
-                                "multiple" => false,
-                                "id" => "postsPerPage",
-                                "label" => "Posts Per Page",
-                                "description" => "Number of post to show per page"
-                            ],
-                            [
-                                "val" => 1,
-                                "multiple" => false,
-                                "id" => "paged",
-                                "label" => "Paged",
-                                "description" => "Pagination start with"
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+
+<!-- wp:post-excerpt  /-->',
+                    ),
+                ),
+                'blockId' =>
+                array(
+                    'type' => 'string',
+                    'default' => '',
+                ),
+                'customCss' =>
+                array(
+                    'type' => 'string',
+                    'default' => '',
+                ),
+                'blockCssY' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'items' =>
+                        array(),
+                    ),
+                ),
+                'queryArgs' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'items' =>
+                        array(
+                            0 =>
+                            array(
+                                'val' =>
+                                array(
+                                    0 => 'post',
+                                ),
+                                'id' => 'postType',
+                            ),
+                            1 =>
+                            array(
+                                'val' =>
+                                array(
+                                    0 => 'publish',
+                                ),
+                                'id' => 'postStatus',
+                            ),
+                            2 =>
+                            array(
+                                'val' => 'DESC',
+                                'id' => 'order',
+                            ),
+                            3 =>
+                            array(
+                                'val' =>
+                                array(
+                                    0 => 'date',
+                                ),
+                                'id' => 'orderby',
+                            ),
+                            4 =>
+                            array(
+                                'val' => 3,
+                                'id' => 'postsPerPage',
+                            ),
+                            5 =>
+                            array(
+                                'val' => 1,
+                                'id' => 'paged',
+                            ),
+                        ),
+                    ),
+                ),
+            )
         ));
     }
 

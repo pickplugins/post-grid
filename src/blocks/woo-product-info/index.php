@@ -583,6 +583,7 @@ class PGBlockWooProductInfo
                             </span>
                         <?php endif; ?>
 
+                        <?php echo wp_kses_post($fontIconHtml); ?>
 
                         <?php
 
@@ -599,6 +600,18 @@ class PGBlockWooProductInfo
                                 </span>
                             <?php
                             }
+                            if ($id == 'text') {
+
+
+                            ?>
+                                <span className='value'>
+                                    <?php echo wp_kses_post($value); ?>
+                                </span>
+                            <?php
+                            }
+
+
+
                             if ($id == 'length') {
                                 $length = $product->get_length();
 

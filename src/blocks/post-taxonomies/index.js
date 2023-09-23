@@ -167,8 +167,37 @@ registerBlockType("post-grid/post-taxonomies", {
 
       },
     },
+    postCount: {
+      type: 'object',
+      default: {
+        options: { class: '', text: ', ', },
+        styles:
+        {
 
+          color: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: {}
+        },
 
+      },
+    },
+    termTitle: {
+      type: 'object',
+      default: {
+
+        options: { class: '', text: ', ', },
+
+        styles:
+        {
+
+          color: { Desktop: '' },
+
+          padding: { Desktop: '' },
+          margin: {}
+        },
+
+      },
+    },
     customCss: {
       "type": "string",
       "default": ''
@@ -211,6 +240,7 @@ registerBlockType("post-grid/post-taxonomies", {
     var separator = attributes.separator;
     var frontText = attributes.frontText;
     var icon = attributes.icon;
+    var termTitle = attributes.termTitle;
 
     var blockCssY = attributes.blockCssY;
     var customCss = attributes.customCss;
@@ -230,7 +260,7 @@ registerBlockType("post-grid/post-taxonomies", {
     // Wrapper CSS Class Selectors
     const wrapperSelector = blockClass;
     const itemSelector = blockClass + ' .item';
-    const itemTitleSelector = blockClass + ' .termTitle';
+    const termTitleSelector = blockClass + ' .termTitle';
 
     const separatorSelector = blockClass + ' .separator';
     const frontTextSelector = blockClass + ' .frontText';
@@ -1151,6 +1181,58 @@ registerBlockType("post-grid/post-taxonomies", {
 
 
 
+    //
+    function onChangeStyleTermTitle(sudoScource, newVal, attr) {
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, termTitle);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ termTitle: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, termTitleSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+    }
+
+
+    function onRemoveStyleTermTitle(sudoScource, key) {
+
+
+
+      var object = myStore.deletePropertyDeep(termTitle, [sudoScource, key, breakPointX]);
+      setAttributes({ termTitle: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, termTitleSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+    }
+
+
+    function onAddStyleTermTitle(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, termTitle);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ termTitle: object });
+
+    }
+
 
 
 
@@ -1847,6 +1929,47 @@ registerBlockType("post-grid/post-taxonomies", {
                 <PGCssLibrary blockId={blockId} obj={frontText} onChange={onPickCssLibraryFrontText} />
               </PGtab>
             </PGtabs>
+
+
+
+
+
+          </PanelBody>
+
+
+          <PanelBody title="Term Title" initialOpen={false}>
+            <PGtabs
+              activeTab="styles"
+              orientation="horizontal"
+              activeClass="active-tab"
+              onSelect={(tabName) => { }}
+              tabs={[
+
+                {
+                  name: 'styles',
+                  title: 'Styles',
+                  icon: styles,
+                  className: 'tab-style',
+                },
+                {
+                  name: 'options',
+                  title: 'Options',
+                  icon: settings,
+                  className: 'tab-settings',
+                },
+
+              ]}
+            >
+
+              <PGtab name="styles">
+                <PGStyles obj={termTitle} onChange={onChangeStyleTermTitle} onAdd={onAddStyleTermTitle} onBulkAdd={onBulkAddSeperator} onRemove={onRemoveStyleTermTitle} />
+              </PGtab>
+              <PGtab name="options">
+
+              </PGtab>
+
+            </PGtabs>
+
 
 
 

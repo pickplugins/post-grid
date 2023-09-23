@@ -59,7 +59,7 @@ registerBlockType("post-grid/list-nested-item", {
         options: {
           content: '',
           tag: 'div',
-          class: 'pg-list-item',
+          class: '',
         },
 
         styles:
@@ -277,7 +277,7 @@ registerBlockType("post-grid/list-nested-item", {
 
 
     const blockProps = useBlockProps({
-      className: ` ${blockId} pg-layer`,
+      className: ` ${blockId} pg-list-nested`,
     });
 
 
@@ -425,12 +425,9 @@ registerBlockType("post-grid/list-nested-item", {
 
     var blockId = attributes.blockId;
 
-    var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
-    var blockClass = '.' + blockIdX;
-
 
     const blockProps = useBlockProps.save({
-      className: ` ${blockId} pg-list-item`,
+      className: ` ${blockId} pg-list-nested-item`,
     });
     return (
       <li {...blockProps}><InnerBlocks.Content /></li>

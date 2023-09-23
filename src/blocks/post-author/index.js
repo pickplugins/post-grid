@@ -513,73 +513,14 @@ registerBlockType("post-grid/post-author", {
 
 
 
-    function onChangeStyleElements(sudoScource, newVal, attr) {
-
-      var path = sudoScource + '.' + attr + '.' + breakPointX
-      let obj = Object.assign({}, elements);
-      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
-      setAttributes({ elements: updatedObj });
-      var sudoScourceX = { ...updatedObj[sudoScource] }
-
-
-
-
-      var elementSelector = redmoreSelector;
-      var elementSelector = myStore.getElementSelector(sudoScource, redmoreSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
-
-      let itemsX = Object.assign({}, blockCssY.items);
-
-      if (itemsX[elementSelector] == undefined) {
-        itemsX[elementSelector] = {};
-      }
-
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
-
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-    }
 
 
 
 
 
 
-    function onRemoveStyleElements(sudoScource, key) {
-
-      var object = myStore.deletePropertyDeep(elements, [sudoScource, key, breakPointX]);
-      setAttributes({ elements: object });
-
-      var elementSelectorX = myStore.getElementSelector(sudoScource, elementSelector);
-      var cssPropty = myStore.cssAttrParse(key);
-      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelectorX, cssPropty, breakPointX]);
-      setAttributes({ blockCssY: { items: cssObject } });
 
 
-    }
-
-
-
-
-
-    function onAddStyleElements(sudoScource, key) {
-
-
-
-
-
-      var path = [sudoScource, key, breakPointX]
-      let obj = Object.assign({}, elements);
-      const object = myStore.addPropertyDeep(obj, path, '')
-      setAttributes({ elements: object });
-
-
-    }
 
 
 
@@ -798,38 +739,6 @@ registerBlockType("post-grid/post-author", {
     }
 
 
-    function onBulkAddStyles(sudoScource, cssObj) {
-      // var path = [sudoScource, attr, breakPointX]
-      let obj = Object.assign({}, elements);
-      obj[sudoScource] = cssObj;
-
-      setAttributes({ elements: obj });
-
-      var selector = myStore.getElementSelector(sudoScource, elementsSelector);
-      var stylesObj = {};
-
-      Object.entries(cssObj).map(args => {
-
-        var attr = args[0];
-        var cssPropty = myStore.cssAttrParse(attr);
-
-        if (stylesObj[selector] == undefined) {
-          stylesObj[selector] = {};
-        }
-
-        if (stylesObj[selector][cssPropty] == undefined) {
-          stylesObj[selector][cssPropty] = {};
-        }
-
-        stylesObj[selector][cssPropty] = args[1]
-      })
-
-
-      var cssItems = { ...blockCssY.items };
-      var cssItemsX = { ...cssItems, ...stylesObj }
-
-      setAttributes({ blockCssY: { items: cssItemsX } });
-    }
 
     function onBulkAddAvatar(sudoScource, cssObj) {
       // var path = [sudoScource, attr, breakPointX]
@@ -1099,34 +1008,6 @@ registerBlockType("post-grid/post-author", {
 
             <PanelBody title="Elements" initialOpen={true}>
 
-
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => { }}
-                tabs={[
-                  {
-                    name: 'options',
-                    title: 'Options',
-                    icon: settings,
-                    className: 'tab-settings',
-                  },
-                  {
-                    name: 'styles',
-                    title: 'Styles',
-                    icon: styles,
-                    className: 'tab-style',
-                  },
-                ]}
-              >
-                <PGtab name="options">
-
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles obj={elements} onChange={onChangeStyleElements} onAdd={onAddStyleElements} onBulkAdd={onBulkAddStyles} onRemove={onRemoveStyleElements} />
-                </PGtab>
-              </PGtabs>
 
 
 

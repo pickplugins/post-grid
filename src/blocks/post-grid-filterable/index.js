@@ -62,10 +62,10 @@ import anime from 'animejs/lib/anime.es.js';
 
 const ALLOWED_MEDIA_TYPES = ['image'];
 
-var queryPramsX = queryPrams.map((x, i) => {
+// var queryPramsX = queryPrams.map((x, i) => {
 
-  return { value: i, label: x.label, description: x.description, isPro: x.isPro, }
-})
+//   return { value: i, label: x.label, description: x.description, isPro: x.isPro, }
+// })
 
 
 
@@ -4111,7 +4111,7 @@ registerBlockType("post-grid/post-grid-filterable", {
 
             <PanelRow className='my-3'>
               <label>Add Query Parameters</label>
-              <PGDropdown position="bottom right" variant="secondary" options={queryPramsX} buttonTitle="Choose" onChange={addQueryPramX} values=""></PGDropdown>
+              <PGDropdown position="bottom right" variant="secondary" options={queryPrams} buttonTitle="Choose" onChange={addQueryPramX} values=""></PGDropdown>
 
 
 

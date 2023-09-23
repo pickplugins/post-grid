@@ -6,6 +6,7 @@ import { ReactSortable } from "react-sortablejs";
 import { PanelBody, RangeControl, Button, ButtonGroup, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, Spinner, CustomSelectControl, Popover, __experimentalInputControl as InputControl, } from '@wordpress/components'
 import apiFetch from '@wordpress/api-fetch';
 import { createElement, memo, useMemo, useState, useEffect } from '@wordpress/element'
+import { useSelect } from "@wordpress/data";
 
 import PGDropdown from '../../components/dropdown'
 
@@ -15,6 +16,7 @@ import PGGlobalStyles from '../../components/global-styles'
 import PGPageStyles from '../../components/page-styles'
 
 var myStore = wp.data.select('postgrid-shop');
+
 
 
 function Html(props) {
@@ -51,6 +53,8 @@ function Html(props) {
 
 
   }
+  var breakPointX = myStore.getBreakPoint();
+
 
 
   var [optionData, setoptionData] = useState(optionDataDefault); // Using the hook.
@@ -146,7 +150,6 @@ function Html(props) {
 
     setisLoading(true)
 
-    console.log(optionData);
 
 
 

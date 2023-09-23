@@ -44,57 +44,221 @@ class PGBlockAccordionNested
             //'script' => 'front_script',
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'provides_context' => array(
-                'post-grid/accordion-nested/schema' => 'schema',
+                'post-grid/accordionNestedIcon' => 'icon',
+                'post-grid/accordionNestedIconToggle' => 'iconToggle',
+                'post-grid/accordionNestedLabelIcon' => 'labelIcon',
 
             ),
             //'style' => [$this, 'front_style'],
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-layers"
-                        ],
-                        "styles" => [
+            'attributes' =>  array(
+                'wrapper' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'content' => '',
+                            'tag' => 'div',
+                            'class' => '',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'searchWrap' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'enable' => false,
+                            'contentSrc' =>
+                            array(
+                                0 => 'content',
+                                1 => 'label',
+                            ),
+                            'tag' => 'div',
+                            'class' => 'accordion-search-wrap',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'searchInput' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'tag' => 'input',
+                            'type' => 'text',
+                            'value' => '',
+                            'placeholder' => 'Search here...',
+                            'class' => 'accordion-search-input',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'content' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'tag' => 'div',
+                            'class' => 'accordion-content',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'header' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'tag' => 'div',
+                            'class' => 'accordion-header',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'headerActive' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'tag' => 'div',
+                            'class' => 'accordion-header',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'headerLabel' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'text' => 'Accordion Header',
+                            'tag' => 'div',
+                            'class' => 'accordion-header-label',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'labelCounter' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'enable' => false,
+                            'position' => 'left',
+                            'tag' => 'div',
+                            'class' => 'label-counter',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'labelIcon' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'library' => 'fontAwesome',
+                            'srcType' => 'class',
+                            'iconSrc' => '',
+                            'position' => '',
+                            'class' => 'accordion-label-icon',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'icon' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'library' => 'fontAwesome',
+                            'srcType' => 'class',
+                            'iconSrc' => '',
+                            'position' => 'left',
+                            'class' => 'accordion-icon',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'iconToggle' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'library' => 'fontAwesome',
+                            'srcType' => 'class',
+                            'iconSrc' => 'fas fa-angle-up',
+                            'class' => 'accordion-icon-toggle',
+                        ),
+                        'styles' =>
+                        array(),
+                    ),
+                ),
+                'schema' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'options' =>
+                        array(
+                            'enable' => true,
+                        ),
+                    ),
+                ),
+                'blockId' =>
+                array(
+                    'type' => 'string',
+                    'default' => '',
+                ),
+                'customCss' =>
+                array(
+                    'type' => 'string',
+                    'default' => '',
+                ),
+                'blockCssY' =>
+                array(
+                    'type' => 'object',
+                    'default' =>
+                    array(
+                        'items' =>
+                        array(),
+                    ),
+                ),
+            )
 
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "position" => [],
-                            "overflow" => [],
-                            "width" => [],
-                            "height" => []
-                        ]
-                    ]
-                ],
-                "schema" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "enable" => false,
-                        ],
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
 
 
         ));
@@ -159,6 +323,8 @@ class PGBlockAccordionNested
 
         $postGridCustomCss .= $customCss;
 
+
+        //echo '<pre>' . var_export($iconOptions, true) . '</pre>';
 
 
         if ($iconLibrary == 'fontAwesome') {

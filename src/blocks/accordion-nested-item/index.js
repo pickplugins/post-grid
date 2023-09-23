@@ -133,10 +133,10 @@ registerBlockType("post-grid/accordion-nested-item", {
         options: {
           library: 'fontAwesome',
           srcType: "class",
-          iconSrc: 'fas fa-angle-down',
-          position: 'left',
+          iconSrc: '',
+          position: '',
           enable: false,
-          class: 'accordion-icon',
+          class: '',
         },
 
         styles:
@@ -149,7 +149,7 @@ registerBlockType("post-grid/accordion-nested-item", {
     icon: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", iconSrc: 'fas fa-angle-down', position: 'left', class: 'accordion-icon', },
+        options: { library: 'fontAwesome', srcType: "class", iconSrc: '', position: '', class: 'accordion-icon', },
 
         styles:
         {
@@ -161,7 +161,7 @@ registerBlockType("post-grid/accordion-nested-item", {
     iconToggle: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", iconSrc: 'fas fa-angle-up', class: 'accordion-icon-toggle', },
+        options: { library: 'fontAwesome', srcType: "class", iconSrc: '', class: 'accordion-icon-toggle', },
 
         styles:
         {
@@ -183,7 +183,7 @@ registerBlockType("post-grid/accordion-nested-item", {
       "default": { items: {} }
     },
   },
-  usesContext: [],
+  usesContext: ['post-grid/accordionNestedIcon', 'post-grid/accordionNestedIconToggle', 'post-grid/accordionNestedLabelIcon'],
 
   category: "post-grid",
 
@@ -195,6 +195,11 @@ registerBlockType("post-grid/accordion-nested-item", {
     var setAttributes = props.setAttributes;
     var context = props.context;
     var clientId = props.clientId;
+
+    var parentIcon = (context['post-grid/accordionNestedIcon'] == undefined) ? null : context['post-grid/accordionNestedIcon'];
+    var parentIconToggle = (context['post-grid/accordionNestedIconToggle'] == undefined) ? null : context['post-grid/accordionNestedIconToggle'];
+    var parentLabelIcon = (context['post-grid/accordionNestedLabelIcon'] == undefined) ? null : context['post-grid/accordionNestedLabelIcon'];
+
 
 
     var blockId = attributes.blockId;
@@ -243,10 +248,9 @@ registerBlockType("post-grid/accordion-nested-item", {
     const [labelIconHtml, setlabelIconHtml] = useState('');
 
 
+    //Icon update from nested item
+
     useEffect(() => {
-
-      console.log(icon);
-
 
       var iconSrc = icon.options.iconSrc;
       var iconHtml = `<span class="accordion-icon ${iconSrc}"></span>`;
@@ -254,23 +258,67 @@ registerBlockType("post-grid/accordion-nested-item", {
     }, [icon, icon.options.iconSrc]);
 
 
+    // Icon update from parent
+    useEffect(() => {
+      setAttributes({ icon: parentIcon });
+
+      var iconSrc = parentIcon.options.iconSrc;
+      var iconHtml = `<span class="accordion-icon ${iconSrc}"></span>`;
+      setIconHtml(iconHtml);
+    }, [parentIcon]);
 
 
+
+
+    //iconToggle update from nested item
 
 
     useEffect(() => {
-
       var iconSrc = iconToggle.options.iconSrc;
+
       var iconHtml = `<span class="accordion-icon-toggle ${iconSrc}"></span>`;
       seticonToggleHtml(iconHtml);
     }, [iconToggle, iconToggle.options.iconSrc]);
 
-    useEffect(() => {
 
-      var iconSrc = labelIcon.options.iconSrc;
+    //iconToggle update from nested item
+
+    useEffect(() => {
+      var iconSrc = parentIconToggle.options.iconSrc;
+      setAttributes({ iconToggle: parentIconToggle });
+
       var iconHtml = `<span class="accordion-icon-toggle ${iconSrc}"></span>`;
+      seticonToggleHtml(iconHtml);
+    }, [parentIconToggle]);
+
+
+
+    //labelIcon update from nested item
+
+    useEffect(() => {
+      var iconSrc = labelIcon.options.iconSrc;
+
+      var iconHtml = `<span class=" ${iconSrc}"></span>`;
       setlabelIconHtml(iconHtml);
     }, [labelIcon, labelIcon.options.iconSrc]);
+
+    //labelIcon update from nested item
+
+    useEffect(() => {
+
+      //console.log('parentLabelIcon', parentLabelIcon);
+
+      setAttributes({ labelIcon: parentLabelIcon });
+
+      var iconSrc = parentLabelIcon.options.iconSrc;
+
+      var iconHtml = `<span class=" ${iconSrc}"></span>`;
+      setlabelIconHtml(iconHtml);
+    }, [parentLabelIcon]);
+
+
+
+
 
 
 
@@ -600,6 +648,56 @@ registerBlockType("post-grid/accordion-nested-item", {
 
 
 
+    function onChangeStyleLabelIcon(sudoScource, newVal, attr) {
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, labelIcon);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ labelIcon: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, labelIconSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+    }
+
+
+
+    function onRemoveStyleLabelIcon(sudoScource, key) {
+
+
+      var object = myStore.deletePropertyDeep(labelIcon, [sudoScource, key, breakPointX]);
+      setAttributes({ labelIcon: object });
+
+
+      var elementSelector = myStore.getElementSelector(sudoScource, labelIconSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+    }
+
+    function onAddStyleLabelIcon(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, labelIcon);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ labelIcon: object });
+
+    }
+
+
+
 
 
 
@@ -839,25 +937,7 @@ registerBlockType("post-grid/accordion-nested-item", {
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    const setActiveTab = (uid) => {
-      //setAttributes({ activeTab: uid });
-      //const parentBlock = select('core/block-editor').getBlock(clientId);
-      const parentClientId = select('core/block-editor').getBlockHierarchyRootClientId(clientId);
 
-
-      wp.data.dispatch('core/block-editor').selectBlock(parentClientId)
-      //wp.data.dispatch( 'core/edit-post' ).openGeneralSidebar( 'edit-post/block' )
-
-
-      // parentBlock.innerBlocks.forEach((innerBlock) => {
-      //   dispatch('core/block-editor').updateBlockAttributes(
-      //     innerBlock.clientId,
-      //     {
-      //       activeTab: uid,
-      //     }
-      //   );
-      // });
-    };
 
 
     function onPickCssLibraryContent(args) {
@@ -1170,21 +1250,7 @@ registerBlockType("post-grid/accordion-nested-item", {
                         var options = { ...labelIcon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
                         setAttributes({ labelIcon: { ...labelIcon, options: options } });
 
-                        var childBlocks = select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
 
-                        childBlocks.map(childBlock => {
-
-                          var childClientId = childBlock.clientId;
-                          var childAttributes = childBlock.attributes;
-                          childAttributes.labelIcon.options.srcType = arg.srcType;
-                          childAttributes.labelIcon.options.library = arg.library;
-                          childAttributes.labelIcon.options.iconSrc = arg.iconSrc;
-
-                          dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
-                          wp.data.dispatch('core/block-editor').selectBlock(childClientId)
-                        })
-
-                        wp.data.dispatch('core/block-editor').selectBlock(clientId)
 
                       }} />
                     </PanelRow>
@@ -1204,6 +1270,96 @@ registerBlockType("post-grid/accordion-nested-item", {
 
 
 
+            </PanelBody>
+
+
+            <PanelBody title="Label Icon" initialOpen={false}>
+
+
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => { }}
+                tabs={[
+                  {
+                    name: 'options',
+                    title: 'Options',
+                    icon: settings,
+                    className: 'tab-settings',
+                  },
+                  {
+                    name: 'styles',
+                    title: 'Styles',
+                    icon: styles,
+                    className: 'tab-style',
+                  },
+
+                ]}
+              >
+                <PGtab name="options">
+
+
+
+                  <PanelRow>
+                    <label for="">Label Icon postion</label>
+
+                    <SelectControl
+                      label=""
+                      value={labelIcon.options.position}
+                      options={[
+
+                        { label: 'Choose Position', value: '' },
+
+                        { label: 'Before Label', value: 'beforeLabel' },
+                        { label: 'After Label', value: 'afterLabel' },
+                        { label: 'Before Label Text', value: 'beforeLabelText' },
+                        { label: 'After Label Text', value: 'afterLabelText' },
+
+                      ]}
+                      onChange={(newVal) => {
+
+                        var options = { ...labelIcon.options, position: newVal };
+                        setAttributes({ labelIcon: { ...labelIcon, options: options } });
+
+
+
+
+
+                      }
+                      }
+                    />
+                  </PanelRow>
+
+
+
+
+                  {labelIcon.options.position.length > 0 && (
+
+                    <PanelRow>
+                      <label for="">Choose Icon</label>
+
+                      <PGIconPicker library={labelIcon.options.library} srcType={labelIcon.options.srcType} iconSrc={labelIcon.options.iconSrc} onChange={(arg) => {
+
+
+                        var options = { ...labelIcon.options, srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc };
+                        setAttributes({ labelIcon: { ...labelIcon, options: options } });
+
+
+
+                      }} />
+                    </PanelRow>
+
+                  )}
+
+
+
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles obj={labelIcon} onChange={onChangeStyleLabelIcon} onAdd={onAddStyleLabelIcon} onRemove={onRemoveStyleLabelIcon} />
+                </PGtab>
+
+              </PGtabs>
             </PanelBody>
 
 
@@ -1250,19 +1406,6 @@ registerBlockType("post-grid/accordion-nested-item", {
                       setAttributes({ labelCounter: { ...labelCounter, options: options } });
 
 
-                      var childBlocks = select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
-
-                      childBlocks.map(childBlock => {
-
-                        var childClientId = childBlock.clientId;
-                        var childAttributes = childBlock.attributes;
-                        childAttributes.labelCounter.options.enable = labelCounter.options.enable ? true : false;
-
-                        dispatch('core/block-editor').updateBlockAttributes(childClientId, childAttributes)
-                        wp.data.dispatch('core/block-editor').selectBlock(childClientId)
-                      })
-
-                      wp.data.dispatch('core/block-editor').selectBlock(clientId)
 
 
 
@@ -1574,30 +1717,47 @@ registerBlockType("post-grid/accordion-nested-item", {
 
             {icon.options.position == 'left' && (
               <>
-                {!toggled && <span className={`${blockId}-accordion-icon accordion-icon}`} dangerouslySetInnerHTML={{ __html: iconHtml }}></span>}
+                {!toggled && <span className={`${blockId}-accordion-icon accordion-icon`} dangerouslySetInnerHTML={{ __html: iconHtml }}></span>}
                 {toggled && <span className={`${blockId}-accordion-icon-toggle accordion-icon-toggle}`} dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>}
               </>
             )}
 
-            {labelIcon.options.enable && (
-              <span className={`${blockId}-accordion-header-label-icon accordion-header-label-icon}`} dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+            {labelIcon.options.position == 'beforeLabel' && (
+              <span className={`${blockId}-accordion-label-icon accordion-label-icon`} dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
             )}
 
+            <span className={`${blockId}-accordion-header-label accordion-header-label`}>
 
-            <RichText
-              className={`${blockId}-accordion-header-label accordion-header-label`}
-              value={headerLabel.options.text}
-              allowedFormats={['core/bold', 'core/italic', 'core/link']}
-              onChange={(newVal) => {
-                var options = { ...headerLabel.options, text: newVal };
-                setAttributes({ headerLabel: { ...headerLabel, options: options } });
-              }}
-              placeholder={__('Start Writing...')}
-            />
+              {labelIcon.options.position == 'beforeLabelText' && (
+                <span className={`${blockId}-accordion-label-icon accordion-label-icon`} dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+              )}
+
+              <RichText
+                tagName={'span'}
+                value={headerLabel.options.text}
+                allowedFormats={['core/bold', 'core/italic', 'core/link']}
+                onChange={(newVal) => {
+                  var options = { ...headerLabel.options, text: newVal };
+                  setAttributes({ headerLabel: { ...headerLabel, options: options } });
+                }}
+                placeholder={__('Start Writing...')}
+              />
+
+              {labelIcon.options.position == 'afterLabelText' && (
+                <span className={`${blockId}-accordion-label-icon accordion-label-icon`} dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+              )}
+
+            </span>
+
+
+            {labelIcon.options.position == 'afterLabel' && (
+              <span className={`${blockId}-accordion-label-icon accordion-label-icon`} dangerouslySetInnerHTML={{ __html: labelIconHtml }}></span>
+            )}
+
             {icon.options.position == 'right' && (
               <>
-                {!toggled && <span className={`${blockId}-accordion-icon accordion-icon}`} dangerouslySetInnerHTML={{ __html: iconHtml }}></span>}
-                {toggled && <span className={`${blockId}-accordion-icon-toggle accordion-icon-toggle}`} dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>}
+                {!toggled && <span className={`${blockId}-accordion-icon accordion-icon`} dangerouslySetInnerHTML={{ __html: iconHtml }}></span>}
+                {toggled && <span className={`${blockId}-accordion-icon-toggle accordion-icon-toggle`} dangerouslySetInnerHTML={{ __html: iconToggleHtml }}></span>}
               </>
             )}
             {labelCounter.options.position == 'right' && (

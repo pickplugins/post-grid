@@ -124,7 +124,7 @@ registerBlockType("post-grid/post-categories", {
       type: 'object',
       default: {
 
-        options: { class: 'inline-block', text: ', ', },
+        options: { class: '', text: ', ', },
 
         styles:
         {
@@ -140,25 +140,38 @@ registerBlockType("post-grid/post-categories", {
     separator: {
       type: 'object',
       default: {
-
-        options: { class: 'inline-block', text: ', ', },
-
+        options: { class: '', text: ', ', },
         styles:
         {
 
           color: { Desktop: '' },
-
           padding: { Desktop: '' },
           margin: {}
         },
 
       },
     },
+    postCount: {
+      type: 'object',
+      default: {
+        options: { class: '', text: ', ', },
+        styles:
+        {
+
+          color: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: {}
+        },
+
+      },
+    },
+
+
     frontText: {
       type: 'object',
       default: {
 
-        options: { text: 'Categories: ', class: 'inline-block', },
+        options: { text: 'Categories: ', class: '', },
         styles:
         {
 
@@ -222,6 +235,7 @@ registerBlockType("post-grid/post-categories", {
     var separator = attributes.separator;
     var frontText = attributes.frontText;
     var icon = attributes.icon;
+    var termTitle = attributes.termTitle;
 
     var blockCssY = attributes.blockCssY;
 
@@ -240,7 +254,7 @@ registerBlockType("post-grid/post-categories", {
     // Wrapper CSS Class Selectors
     const wrapperSelector = blockClass;
     const itemSelector = blockClass + ' .item';
-    const itemTitleSelector = blockClass + ' .termTitle';
+    const termTitleSelector = blockClass + ' .termTitle';
 
     const separatorSelector = blockClass + ' .separator';
     const frontTextSelector = blockClass + ' .frontText';
@@ -292,6 +306,8 @@ registerBlockType("post-grid/post-categories", {
       postCategoriesX,
       setPostCategoriesX,
     ] = useEntityProp('postType', postType, 'categories', postId);
+
+    // console.log(postCategoriesX);
 
 
 
@@ -347,7 +363,7 @@ registerBlockType("post-grid/post-categories", {
 
       setcategoryCount(categories.length - 1);
       if (postCategoriesX != undefined) {
-        for (x in postCategoriesX) {
+        for (var x in postCategoriesX) {
 
           var catId = postCategoriesX[x]
           var assd = x;
@@ -887,31 +903,6 @@ registerBlockType("post-grid/post-categories", {
 
       setAttributes({ blockCssY: { items: cssItems } });
 
-      // var path = sudoScource + '.' + attr + '.' + breakPointX
-      // let obj = Object.assign({}, separator);
-      // const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
-      // setAttributes({ separator: updatedObj });
-      // var sudoScourceX = { ...updatedObj[sudoScource] }
-
-
-
-
-      // var elementSelector = myStore.getElementSelector(sudoScource, separatorSelector);
-
-
-      // sudoScourceX[attr][breakPointX] = newVal;
-
-      // if (blockCssY.items[elementSelector] == undefined) {
-      //   blockCssY.items[elementSelector] = {};
-      // }
-
-      // Object.entries(sudoScourceX).map(args => {
-      //   var argAttr = myStore.cssAttrParse(args[0]);
-      //   var argAttrVal = args[1];
-      //   blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      // })
-
-      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 
@@ -928,41 +919,10 @@ registerBlockType("post-grid/post-categories", {
       setAttributes({ blockCssY: { items: cssObject } });
 
 
-      // var sudoScourceX = { ...separator[sudoScource] }
-      // if (sudoScourceX[key] != undefined) {
-      //   delete sudoScourceX[key];
-      // }
-
-      // separator[sudoScource] = sudoScourceX;
-      // setAttributes({ separator: { ...separator } });
-
-      // if (blockCssY.items[separatorSelector] == undefined) {
-      //   blockCssY.items[separatorSelector] = {};
-      // }
-
-      // Object.entries(sudoScourceX).map(args => {
-      //   var argAttr = myStore.cssAttrParse(args[0]);
-      //   var argAttrVal = args[1];
-      //   blockCssY.items[separatorSelector][argAttr] = argAttrVal;
-      // })
-
-
-      // if (blockCssY.items[separatorSelector][key] != undefined) {
-      //   delete blockCssY.items[separatorSelector][key];
-      // }
-
-
-      // setAttributes({ blockCssY: { items: blockCssY.items } });
     }
 
 
     function onAddStyleSeparator(sudoScource, key) {
-      // var sudoScourceX = { ...separator[sudoScource] }
-      // sudoScourceX[key] = {};
-      // separator[sudoScource] = sudoScourceX;
-      // setAttributes({ separator: { ...separator } });
-
-
 
       var path = [sudoScource, key, breakPointX]
       let obj = Object.assign({}, separator);
@@ -970,6 +930,63 @@ registerBlockType("post-grid/post-categories", {
       setAttributes({ separator: object });
 
     }
+
+    //
+    function onChangeStyleTermTitle(sudoScource, newVal, attr) {
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, termTitle);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ termTitle: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, termTitleSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+    }
+
+
+    function onRemoveStyleTermTitle(sudoScource, key) {
+
+
+
+      var object = myStore.deletePropertyDeep(termTitle, [sudoScource, key, breakPointX]);
+      setAttributes({ termTitle: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, termTitleSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+    }
+
+
+    function onAddStyleTermTitle(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, termTitle);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ termTitle: object });
+
+    }
+
+
+
+
+
 
 
     function onChangeIcon(arg) {
@@ -1863,15 +1880,47 @@ registerBlockType("post-grid/post-categories", {
 
           </PanelBody>
 
+          <PanelBody title="Term Title" initialOpen={false}>
+            <PGtabs
+              activeTab="styles"
+              orientation="horizontal"
+              activeClass="active-tab"
+              onSelect={(tabName) => { }}
+              tabs={[
+
+                {
+                  name: 'styles',
+                  title: 'Styles',
+                  icon: styles,
+                  className: 'tab-style',
+                },
+                {
+                  name: 'options',
+                  title: 'Options',
+                  icon: settings,
+                  className: 'tab-settings',
+                },
+
+              ]}
+            >
+
+              <PGtab name="styles">
+                <PGStyles obj={termTitle} onChange={onChangeStyleTermTitle} onAdd={onAddStyleTermTitle} onBulkAdd={onBulkAddSeperator} onRemove={onRemoveStyleTermTitle} />
+              </PGtab>
+              <PGtab name="options">
+
+              </PGtab>
+
+            </PGtabs>
+
+
+
+
+
+
+          </PanelBody>
+
           <div className=''>
-
-
-            {/* <BreakpointToggle onChange={onChangeBreakPoint} /> */}
-
-
-
-
-
 
 
 
@@ -1938,6 +1987,10 @@ registerBlockType("post-grid/post-categories", {
         </InspectorControls >
 
         <>
+          {JSON.stringify(postCategoriesX)}
+
+
+
           {categories.length == 0 && (<div {...blockProps}>No Categories Found</div>)}
 
           {categories.length > 0 && (
@@ -1947,7 +2000,7 @@ registerBlockType("post-grid/post-categories", {
               {icon.options.position == 'beforeFronttext' && (
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
               )}
-              <span className='frontText inline-block'>
+              <span className='frontText '>
                 <RawHTML>{frontText.options.text}</RawHTML>
               </span>
 

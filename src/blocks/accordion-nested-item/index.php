@@ -22,7 +22,9 @@ class PGBlockAccordionNestedItem
             //'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
             //'script' => 'front_script',
-            'uses_context' =>  [],
+
+            'uses_context' =>  ["post-grid/accordionNestedIcon", "post-grid/accordionNestedIconToggle", "post-grid/accordionNestedLabelIcon"],
+
             //'style' => 'front_style',
             'render_callback' => array($this, 'theHTML'),
             'attributes' => array(
@@ -149,10 +151,10 @@ class PGBlockAccordionNestedItem
                         array(
                             'library' => 'fontAwesome',
                             'srcType' => 'class',
-                            'iconSrc' => 'fas fa-angle-down',
-                            'position' => 'left',
+                            'iconSrc' => '',
+                            'position' => '',
                             'enable' => false,
-                            'class' => 'accordion-icon',
+                            'class' => 'accordion-label-icon',
                         ),
                         'styles' =>
                         array(
@@ -192,7 +194,7 @@ class PGBlockAccordionNestedItem
                         array(
                             'library' => 'fontAwesome',
                             'srcType' => 'class',
-                            'iconSrc' => 'fas fa-angle-down',
+                            'iconSrc' => '',
                             'position' => 'left',
                             'class' => 'accordion-icon',
                         ),
@@ -238,7 +240,7 @@ class PGBlockAccordionNestedItem
                         array(
                             'library' => 'fontAwesome',
                             'srcType' => 'class',
-                            'iconSrc' => 'fas fa-angle-up',
+                            'iconSrc' => '',
                             'class' => 'accordion-icon-toggle',
                         ),
                         'styles' =>
@@ -310,6 +312,9 @@ class PGBlockAccordionNestedItem
         global $postGridCustomCss;
         global $postGridCssY;
 
+        $parentIcon = isset($block->context['post-grid/accordionNestedIcon']) ? $block->context['post-grid/accordionNestedIcon'] : '';
+        $parentIconToggle = isset($block->context['post-grid/accordionNestedIconToggle']) ? $block->context['post-grid/accordionNestedIconToggle'] : '';
+        $parentLabelIcon = isset($block->context['post-grid/accordionNestedLabelIcon']) ? $block->context['post-grid/accordionNestedLabelIcon'] : '';
 
         $wrapper = '';
 
@@ -335,26 +340,27 @@ class PGBlockAccordionNestedItem
         $headerLabelTag = isset($headerLabelOptions['tag']) ? $headerLabelOptions['tag'] : 'div';
 
 
-        $icon = isset($attributes['icon']) ? $attributes['icon'] : '';
+        $icon = isset($attributes['icon']) ? $attributes['icon'] : $parentIcon;
         $iconOptions = isset($icon['options']) ? $icon['options'] : [];
+        $parentIconOptions = isset($parentIcon['options']) ? $parentIcon['options'] : [];
 
-        $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : '';
-        $iconSrcType = isset($iconOptions['srcType']) ? $iconOptions['srcType'] : '';
-        $iconSrc = isset($iconOptions['iconSrc']) ? $iconOptions['iconSrc'] : '';
-        $iconPosition = isset($iconOptions['position']) ? $iconOptions['position'] : '';
-        $iconClass = isset($iconOptions['class']) ? $iconOptions['class'] : '';
+        $iconLibrary = isset($iconOptions['library']) ? $iconOptions['library'] : $parentIconOptions['library'];
+        $iconSrcType = isset($iconOptions['srcType']) ? $iconOptions['srcType'] : $parentIconOptions['srcType'];
+        $iconSrc = !empty($iconOptions['iconSrc']) ? $iconOptions['iconSrc'] : (isset($parentIconOptions['iconSrc']) ? $parentIconOptions['iconSrc'] : '');
+        $iconPosition = isset($iconOptions['position']) ? $iconOptions['position'] : $parentIconOptions['position'];
+        $iconClass = isset($iconOptions['class']) ? $iconOptions['class'] : $parentIconOptions['class'];
 
         $iconHtml = !empty($iconSrc) ? '<span class="accordion-icon ' . $iconClass . ' ' . $iconSrc . '"></span>' : '';
 
 
-        $iconToggle = isset($attributes['iconToggle']) ? $attributes['iconToggle'] : '';
+        $iconToggle = isset($attributes['iconToggle']) ? $attributes['iconToggle'] : $parentIconToggle;
         $iconToggleOptions = isset($iconToggle['options']) ? $iconToggle['options'] : [];
+        $parentIconToggleOptions = isset($iconToggle['options']) ? $iconToggle['options'] : [];
 
-        $iconToggleLibrary = isset($iconToggleOptions['library']) ? $iconToggleOptions['library'] : '';
-        $iconToggleSrcType = isset($iconToggleOptions['srcType']) ? $iconToggleOptions['srcType'] : '';
-        $iconToggleSrc = isset($iconToggleOptions['iconSrc']) ? $iconToggleOptions['iconSrc'] : '';
-        $iconTogglePosition = isset($iconToggleOptions['position']) ? $iconToggleOptions['position'] : '';
-        $iconToggleClass = isset($iconToggleOptions['class']) ? $iconToggleOptions['class'] : '';
+        $iconToggleLibrary = isset($iconToggleOptions['library']) ? $iconToggleOptions['library'] : $parentIconToggleOptions['library'];
+        $iconToggleSrcType = !empty($iconToggleOptions['srcType']) ? $iconToggleOptions['srcType'] : $parentIconToggleOptions['srcType'];
+        $iconToggleSrc = !empty($iconToggleOptions['iconSrc']) ? $iconToggleOptions['iconSrc'] : $parentIconToggleOptions['iconSrc'];
+        $iconToggleClass = !empty($iconToggleOptions['class']) ? $iconToggleOptions['class'] : $parentIconToggleOptions['class'];
 
         $iconToggleHtml = !empty($iconToggleSrc) ? '<span class="accordion-icon-toggle accordion-icon ' . $iconToggleClass . ' ' . $iconToggleSrc . '"></span>' : '';
 
@@ -365,6 +371,21 @@ class PGBlockAccordionNestedItem
         $labelCounterOptions = isset($labelCounter['options']) ? $labelCounter['options'] : [];
 
         $labelCounterEnable = isset($labelCounterOptions['enable']) ? $labelCounterOptions['enable'] : false;
+
+
+
+
+        $labelIcon = isset($attributes['labelIcon']) ? $attributes['labelIcon'] : $parentLabelIcon;
+        $labelIconOptions = isset($labelIcon['options']) ? $labelIcon['options'] : [];
+        $parentLabelIconOptions = isset($labelIcon['options']) ? $labelIcon['options'] : [];
+
+        $labelIconLibrary = isset($labelIconOptions['library']) ? $labelIconOptions['library'] : $parentLabelIconOptions['library'];
+        $labelIconSrcType = !empty($labelIconOptions['srcType']) ? $labelIconOptions['srcType'] : $parentLabelIconOptions['srcType'];
+        $labelIconSrc = !empty($labelIconOptions['iconSrc']) ? $labelIconOptions['iconSrc'] : $parentLabelIconOptions['iconSrc'];
+        $labelIconPosition = !empty($labelIconOptions['position']) ? $labelIconOptions['position'] : $parentLabelIconOptions['position'];
+        $labelIconClass = !empty($labelIconOptions['class']) ? $labelIconOptions['class'] : $parentLabelIconOptions['class'];
+
+        $labelIconHtml = !empty($labelIconSrc) ? '<span class="accordion-label-icon ' . $labelIconClass . ' ' . $labelIconSrc . '"></span>' : '';
 
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
@@ -384,9 +405,32 @@ class PGBlockAccordionNestedItem
         }
 
 
-        //var_dump($iconToggle);
-        //var_dump($iconHtml);
+        if ($iconToggleLibrary == 'fontAwesome') {
+            wp_enqueue_style('fontawesome-icons');
+        } else if ($iconToggleLibrary == 'iconFont') {
+            wp_enqueue_style('icofont-icons');
+        } else if ($iconToggleLibrary == 'bootstrap') {
+            wp_enqueue_style('bootstrap-icons');
+        }
 
+
+
+
+        if ($labelIconLibrary == 'fontAwesome') {
+            wp_enqueue_style('fontawesome-icons');
+        } else if ($labelIconLibrary == 'iconFont') {
+            wp_enqueue_style('icofont-icons');
+        } else if ($labelIconLibrary == 'bootstrap') {
+            wp_enqueue_style('bootstrap-icons');
+        }
+
+
+        //var_dump($labelIconSrc);
+        //var_dump($labelIconOptions);
+
+        // echo '<pre>' . var_export($parentIconOptions, true) . '</pre>';
+        // echo '<pre>' . var_export($iconOptions, true) . '</pre>';
+        // echo '<pre>' . var_export($iconSrc, true) . '</pre>';
 
         ob_start();
 
@@ -408,9 +452,31 @@ class PGBlockAccordionNestedItem
                 </span>
             <?php endif; ?>
 
+
+            <?php if ($labelIconPosition == 'beforeLabel') : ?>
+                <?php echo  wp_kses_post($labelIconHtml); ?>
+            <?php endif; ?>
+
+
             <<?php echo esc_attr($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
+
+                <?php if ($labelIconPosition == 'beforeLabelText') : ?>
+                    <?php echo  wp_kses_post($labelIconHtml); ?>
+                <?php endif; ?>
+
                 <?php echo  wp_kses_post($headerLabelText); ?>
+
+                <?php if ($labelIconPosition == 'afterLabelText') : ?>
+                    <?php echo  wp_kses_post($labelIconHtml); ?>
+                <?php endif; ?>
+
+
             </<?php echo esc_attr($headerLabelTag); ?>>
+
+
+            <?php if ($labelIconPosition == 'afterLabel') : ?>
+                <?php echo  wp_kses_post($labelIconHtml); ?>
+            <?php endif; ?>
 
             <?php if ($iconPosition == 'right') : ?>
                 <?php echo  wp_kses_post($iconHtml); ?>

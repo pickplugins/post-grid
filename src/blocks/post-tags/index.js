@@ -121,7 +121,7 @@ registerBlockType("post-grid/post-tags", {
       type: 'object',
       default: {
 
-        options: { class: 'inline-block', text: ', ', },
+        options: { class: '', text: ', ', },
 
         styles:
         {
@@ -134,11 +134,30 @@ registerBlockType("post-grid/post-tags", {
 
       },
     },
+    termTitle: {
+      type: 'object',
+      default: {
+
+        options: { class: '', text: ', ', },
+
+        styles:
+        {
+
+          color: { Desktop: '' },
+
+          padding: { Desktop: '' },
+          margin: {}
+        },
+
+      },
+    },
+
+
     frontText: {
       type: 'object',
       default: {
 
-        options: { text: 'Tags: ', class: 'inline-block', },
+        options: { text: 'Tags: ', class: '', },
         styles:
         {
 
@@ -158,7 +177,20 @@ registerBlockType("post-grid/post-tags", {
 
       },
     },
+    postCount: {
+      type: 'object',
+      default: {
+        options: { class: '', text: ', ', },
+        styles:
+        {
 
+          color: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: {}
+        },
+
+      },
+    },
 
     customCss: {
       "type": "string",
@@ -200,6 +232,8 @@ registerBlockType("post-grid/post-tags", {
     var separator = attributes.separator;
     var frontText = attributes.frontText;
     var icon = attributes.icon;
+    var termTitle = attributes.termTitle;
+    var postCount = attributes.termTitle;
 
     var blockCssY = attributes.blockCssY;
 
@@ -218,7 +252,7 @@ registerBlockType("post-grid/post-tags", {
     // Wrapper CSS Class Selectors
     const wrapperSelector = blockClass;
     const itemSelector = blockClass + ' .item';
-    const itemTitleSelector = blockClass + ' .termTitle';
+    const termTitleSelector = blockClass + ' .termTitle';
 
     const separatorSelector = blockClass + ' .separator';
     const frontTextSelector = blockClass + ' .frontText';
@@ -1098,6 +1132,58 @@ registerBlockType("post-grid/post-tags", {
 
 
 
+    //
+    function onChangeStyleTermTitle(sudoScource, newVal, attr) {
+
+
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, termTitle);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
+
+      setAttributes({ termTitle: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, termTitleSelector);
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+
+      setAttributes({ blockCssY: { items: cssItems } });
+
+    }
+
+
+    function onRemoveStyleTermTitle(sudoScource, key) {
+
+
+
+      var object = myStore.deletePropertyDeep(termTitle, [sudoScource, key, breakPointX]);
+      setAttributes({ termTitle: object });
+
+      var elementSelector = myStore.getElementSelector(sudoScource, termTitleSelector);
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [elementSelector, cssPropty, breakPointX]);
+      setAttributes({ blockCssY: { items: cssObject } });
+
+
+    }
+
+
+    function onAddStyleTermTitle(sudoScource, key) {
+
+      var path = [sudoScource, key, breakPointX]
+      let obj = Object.assign({}, termTitle);
+      const object = myStore.addPropertyDeep(obj, path, '')
+      setAttributes({ termTitle: object });
+
+    }
+
 
 
 
@@ -1818,6 +1904,48 @@ registerBlockType("post-grid/post-tags", {
 
 
           </PanelBody>
+
+          <PanelBody title="Term Title" initialOpen={false}>
+            <PGtabs
+              activeTab="styles"
+              orientation="horizontal"
+              activeClass="active-tab"
+              onSelect={(tabName) => { }}
+              tabs={[
+
+                {
+                  name: 'styles',
+                  title: 'Styles',
+                  icon: styles,
+                  className: 'tab-style',
+                },
+                {
+                  name: 'options',
+                  title: 'Options',
+                  icon: settings,
+                  className: 'tab-settings',
+                },
+
+              ]}
+            >
+
+              <PGtab name="styles">
+                <PGStyles obj={termTitle} onChange={onChangeStyleTermTitle} onAdd={onAddStyleTermTitle} onBulkAdd={onBulkAddSeperator} onRemove={onRemoveStyleTermTitle} />
+              </PGtab>
+              <PGtab name="options">
+
+              </PGtab>
+
+            </PGtabs>
+
+
+
+
+
+
+          </PanelBody>
+
+
           <PanelBody title="Separator" initialOpen={false}>
 
 
@@ -1971,7 +2099,7 @@ registerBlockType("post-grid/post-tags", {
                 <span className={icon.options.class} dangerouslySetInnerHTML={{ __html: iconHtml }} />
               )}
 
-              <span className='frontText inline-block'>
+              <span className='frontText '>
                 <RawHTML>{frontText.options.text}</RawHTML>
               </span>
 

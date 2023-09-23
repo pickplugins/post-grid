@@ -215,7 +215,7 @@ registerBlockType("post-grid/list-nested", {
 
     // Wrapper CSS Class Selectors
     var wrapperSelector = blockClass;
-    var itemSelector = blockClass + ' .item';
+    var itemSelector = blockClass + ' .pg-list-nested-item';
     const iconSelector = blockClass + ' .icon';
 
     const CustomTagWrapper = `${wrapper.options.tag}`;

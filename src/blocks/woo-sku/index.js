@@ -83,17 +83,7 @@ registerBlockType("post-grid/woo-sku", {
     foreground: "#fff",
     // Specifying an icon for the block
     src: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-        <rect fill="#8db1ff" y="30.98" width="13.97" height="2" />
-        <rect fill="#8db1ff" x="16.42" y="30.98" width="9.96" height="2" />
-        <rect fill="#8db1ff" y="26.28" width="36" height="2" />
-        <rect fill="#8db1ff" y="21.58" width="36" height="2" />
-        <rect fill="#1d4ed8" x="20.7" y="9.61" width="15.3" height="2.35" />
-        <path
-          fill="#1d4ed8"
-          d="M12.42,18.54H1.55A1.54,1.54,0,0,1,0,17V6.13A1.55,1.55,0,0,1,1.55,4.57H3.1V3H4.66V4.57H9.31V3h1.56V4.57h1.55A1.55,1.55,0,0,1,14,6.13V17A1.54,1.54,0,0,1,12.42,18.54ZM1.55,9.23V17H12.42V9.23Zm0-3.1V7.68H12.42V6.13Zm9.32,9.31H9.31V13.89h1.56Zm-3.11,0H6.21V13.89H7.76Zm-3.1,0H3.1V13.89H4.66Zm6.21-3.1H9.31V10.78h1.56Zm-3.11,0H6.21V10.78H7.76Zm-3.1,0H3.1V10.78H4.66Z"
-        />
-      </svg>
+      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#1d4ed8" d="M25.94,20.39v9.77L14.06,34.6V24.81Z" /><path fill="#1d4ed8" d="M12.86,24.8v9.79L1,30.16V20.39Z" /><path fill="#1d4ed8" d="M25.85,14.91,13.47,19.52,1.08,14.91,8.83,12c1.36-.51,2.74-1,4.1-1.51a1.31,1.31,0,0,1,1.08,0Z" /><path fill="#1d4ed8" d="M26.92,15.75v3L14.08,23.56v-3Z" /><path fill="#1d4ed8" d="M12.86,23.56,0,18.78v-3l12.86,4.79Z" /><path fill="#1d4ed8" d="M15.65,1.4l1.61,2.74h.07L19,1.4h1.92l-2.45,4,2.51,4H19L17.33,6.69h-.07L15.62,9.43H13.67l2.52-4-2.47-4Z" /><path fill="#1d4ed8" d="M21.47,1.4h1.9L25.2,4.86h.08L27.11,1.4H29L26.09,6.59V9.43H24.4V6.59Z" /><path fill="#1d4ed8" d="M29.85,9.43v-1l4-5.62h-4V1.4H36v1L32,8h4v1.4Z" /></svg>
     ),
   },
 

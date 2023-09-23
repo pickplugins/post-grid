@@ -1,5 +1,6 @@
 import apiFetch from '@wordpress/api-fetch';
 import { createReduxStore, register, subscribe, select } from '@wordpress/data';
+import { useSelect } from "@wordpress/data";
 
 const {
   __experimentalSetPreviewDeviceType: setPreviewDeviceType,
@@ -31,13 +32,13 @@ const DEFAULT_STATE = {
   blockCss: '',
   stylesClipboard: null,
 
-
 };
 
 var selectors = {
 
   getBreakPoint(state) {
     const { breakPoint } = state;
+
 
 
 
@@ -842,6 +843,9 @@ var resolvers = {
 
 const actions = {
   setBreakPoint(breakpoint) {
+
+    console.log(breakpoint);
+
 
     setPreviewDeviceType(breakpoint)
 

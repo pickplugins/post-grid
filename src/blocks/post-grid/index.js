@@ -56,6 +56,7 @@ import queryPresets from './query-presets'
 import gridLayouts from './grid-layouts'
 import queryPrams from './queryprams'
 import paginationTypes from './pagination-types'
+import columnPresets from './column-presets'
 
 
 import tutorialsLinks from './tutorials-links'
@@ -74,10 +75,10 @@ import PGCssLibrary from '../../components/css-library'
 
 const ALLOWED_MEDIA_TYPES = ['image'];
 
-var queryPramsX = queryPrams.map((x, i) => {
+// var queryPramsX = queryPrams.map((x, i) => {
 
-  return { value: i, label: x.label, description: x.description, isPro: x.isPro, }
-})
+//   return { value: i, label: x.label, description: x.description, isPro: x.isPro, }
+// })
 
 
 
@@ -198,12 +199,7 @@ registerBlockType("post-grid/post-grid", {
 
         styles:
         {
-          gridTemplateColumns: {
-
-            Tablet: [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }],
-            Mobile: [{ "val": 1, "unit": "fr" }],
-
-          },
+          gridTemplateColumns: {},
           gridTemplateRows: {},
           colGap: {},
           rowGap: {},
@@ -274,11 +270,9 @@ registerBlockType("post-grid/post-grid", {
         styles:
         {
 
-          display: {},
           color: { Desktop: '' },
           padding: { Desktop: '' },
           margin: { Desktop: '' },
-
           fontSize: { Desktop: '' },
 
         },
@@ -293,10 +287,7 @@ registerBlockType("post-grid/post-grid", {
       default: { id: '', srcServer: 'library', data: [{ "blockName": "core/post-title", "attrs": {}, "innerBlocks": [], "innerHTML": "", "innerContent": [] }, { "blockName": null, "attrs": {}, "innerBlocks": [], "innerHTML": "\n\n", "innerContent": ["\n\n"] }, { "blockName": "core/post-date", "attrs": {}, "innerBlocks": [], "innerHTML": "", "innerContent": [] }, { "blockName": null, "attrs": {}, "innerBlocks": [], "innerHTML": "\n\n", "innerContent": ["\n\n"] }, { "blockName": "core/post-excerpt", "attrs": { "moreText": "", "textColor": "primary" }, "innerBlocks": [], "innerHTML": "", "innerContent": [] }], rawData: "<!-- wp:post-featured-image  /-->\n\n<!-- wp:post-title /-->\n\n<!-- wp:post-excerpt  /-->" },
     },
 
-    postTypes: {
-      type: 'array',
-      default: [],
-    },
+
     blockId: {
       "type": "string",
       "default": ''
@@ -305,10 +296,7 @@ registerBlockType("post-grid/post-grid", {
       "type": "string",
       "default": ''
     },
-    scripts: {
-      type: 'object',
-      default: { js: '', css: '' },
-    },
+
     blockCssY: {
       "type": "object",
       "default": { items: {} }
@@ -317,16 +305,19 @@ registerBlockType("post-grid/post-grid", {
       type: 'object',
       default: {
         items: [
-          { val: ['post'], multiple: false, id: 'postType', label: 'Post Types', description: "Select Post Types to Query" },
-          { val: ['publish'], multiple: false, id: 'postStatus', label: 'Post status', description: "Query post by post status" },
-          { val: 'DESC', multiple: false, id: 'order', label: 'Order', description: "Post query order" },
-          { val: ['date'], multiple: false, id: 'orderby', label: 'Orderby', description: "Post query orderby" },
-          { val: 10, multiple: false, id: 'postsPerPage', label: 'Posts Per Page', description: "Number of post to show per page" },
-          { val: 1, multiple: false, id: 'paged', label: 'Paged', description: "Pagination start with" },
+          { val: ['post'], id: 'postType', },
+          { val: ['publish'], id: 'postStatus', },
+          { val: 'DESC', id: 'order', },
+          { val: ['date'], id: 'orderby', },
+          { val: 3, id: 'postsPerPage', },
+          { val: 1, id: 'paged', },
 
         ]
       },
     },
+
+
+
 
 
   },
@@ -426,43 +417,6 @@ registerBlockType("post-grid/post-grid", {
     ];
 
 
-
-    function onPickCssLibraryContainer(args) {
-
-
-      Object.entries(args).map(x => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        container[sudoScource] = sudoScourceArgs;
-      })
-
-      var containerX = Object.assign({}, container);
-      setAttributes({ container: containerX });
-
-      var styleObj = {};
-
-      Object.entries(args).map(x => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        var elementSelector = myStore.getElementSelector(sudoScource, containerSelector);
-
-
-        var sudoObj = {};
-        Object.entries(sudoScourceArgs).map(y => {
-
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
-        })
-
-        styleObj[elementSelector] = sudoObj;
-      })
-
-
-      var cssItems = Object.assign(blockCssY.items, styleObj);
-      setAttributes({ blockCssY: { items: cssItems } });
-    }
 
 
 
@@ -1077,55 +1031,6 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-    const columnPresets = [
-      {
-        label: '1 Column', args: [{ "val": 1, "unit": "fr" }], icon:
-          <svg width="23" height="17" viewBox="0 0 23 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 1.36364C0 0.61052 0.610521 0 1.36364 0H21.6364C22.3895 0 23 0.61052 23 1.36364V1.36364C23 2.11675 22.3895 2.72727 21.6364 2.72727H1.36364C0.61052 2.72727 0 2.11675 0 1.36364V1.36364Z" fill="#fff" />
-            <path d="M0 15.6364C0 14.8833 0.610521 14.2727 1.36364 14.2727H21.6364C22.3895 14.2727 23 14.8833 23 15.6364V15.6364C23 16.3895 22.3895 17 21.6364 17H1.36364C0.61052 17 0 16.3895 0 15.6364V15.6364Z" fill="#fff" />
-            <path d="M1.36363 -5.96064e-08C2.11674 -2.66867e-08 2.72726 0.610521 2.72726 1.36364L2.72726 15.6364C2.72726 16.3895 2.11674 17 1.36363 17C0.610513 17 -7.63055e-06 16.3895 -7.59763e-06 15.6364L-6.97375e-06 1.36364C-6.94083e-06 0.610521 0.610513 -9.25261e-08 1.36363 -5.96064e-08Z" fill="#fff" />
-            <path d="M21.6364 -5.96064e-08C22.3895 -2.66867e-08 23 0.610521 23 1.36364L23 15.6364C23 16.3895 22.3895 17 21.6364 17V17C20.8832 17 20.2727 16.3895 20.2727 15.6364L20.2727 1.36364C20.2727 0.610521 20.8832 -9.25261e-08 21.6364 -5.96064e-08V-5.96064e-08Z" fill="#fff" />
-          </svg>
-        ,
-      },
-      {
-        label: '2 Columns', args: [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], icon:
-          <svg width="43" height="17" viewBox="0 0 43 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 1.36364C0 0.61052 0.610521 0 1.36364 0H41.2727C42.0258 0 42.6363 0.61052 42.6363 1.36364C42.6363 2.11675 42.0258 2.72727 41.2727 2.72727H1.36364C0.610521 2.72727 0 2.11675 0 1.36364Z" fill="#fff" />
-            <path d="M0 15.6364C0 14.8833 0.610521 14.2727 1.36364 14.2727H41.2727C42.0258 14.2727 42.6363 14.8833 42.6363 15.6364C42.6363 16.3895 42.0258 17 41.2727 17H1.36364C0.610521 17 0 16.3895 0 15.6364Z" fill="#fff" />
-            <path d="M1.36363 -5.96064e-08C2.11674 -2.66867e-08 2.72726 0.610521 2.72726 1.36364L2.72726 15.6364C2.72726 16.3895 2.11674 17 1.36363 17C0.610513 17 -7.63055e-06 16.3895 -7.59763e-06 15.6364L-6.97375e-06 1.36364C-6.94083e-06 0.610521 0.610513 -9.25261e-08 1.36363 -5.96064e-08Z" fill="#fff" />
-            <path d="M21.6364 -5.96064e-08C22.3895 -2.66867e-08 23 0.610521 23 1.36364L23 15.6364C23 16.3895 22.3895 17 21.6364 17C20.8832 17 20.2727 16.3895 20.2727 15.6364L20.2727 1.36364C20.2727 0.610521 20.8832 -9.25261e-08 21.6364 -5.96064e-08Z" fill="#fff" />
-            <path d="M41.6364 -5.96064e-08C42.3895 -2.66867e-08 43 0.610521 43 1.36364L43 15.6364C43 16.3895 42.3895 17 41.6364 17C40.8832 17 40.2727 16.3895 40.2727 15.6364L40.2727 1.36364C40.2727 0.610521 40.8832 -9.25261e-08 41.6364 -5.96064e-08Z" fill="#fff" />
-          </svg>
-
-      },
-      {
-        label: '3 Columns', args: [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], icon:
-          <svg width="43" height="17" viewBox="0 0 43 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 1.36364C0 0.61052 0.610521 0 1.36364 0H41.2727C42.0258 0 42.6363 0.61052 42.6363 1.36364C42.6363 2.11675 42.0258 2.72727 41.2727 2.72727H1.36364C0.610521 2.72727 0 2.11675 0 1.36364Z" fill="#fff" />
-            <path d="M0 15.6364C0 14.8833 0.610521 14.2727 1.36364 14.2727H41.2727C42.0258 14.2727 42.6363 14.8833 42.6363 15.6364C42.6363 16.3895 42.0258 17 41.2727 17H1.36364C0.610521 17 0 16.3895 0 15.6364Z" fill="#fff" />
-            <path d="M1.36363 -5.96064e-08C2.11674 -2.66867e-08 2.72726 0.610521 2.72726 1.36364L2.72726 15.6364C2.72726 16.3895 2.11674 17 1.36363 17C0.610513 17 -7.63055e-06 16.3895 -7.59763e-06 15.6364L-6.97375e-06 1.36364C-6.94083e-06 0.610521 0.610513 -9.25261e-08 1.36363 -5.96064e-08Z" fill="#fff" />
-            <path d="M14.6364 -5.96064e-08C15.3895 -2.66867e-08 16 0.610521 16 1.36364L16 15.6364C16 16.3895 15.3895 17 14.6364 17C13.8832 17 13.2727 16.3895 13.2727 15.6364L13.2727 1.36364C13.2727 0.610521 13.8832 -9.25261e-08 14.6364 -5.96064e-08Z" fill="#fff" />
-            <path d="M28.6364 -5.96064e-08C29.3895 -2.66867e-08 30 0.610521 30 1.36364L30 15.6364C30 16.3895 29.3895 17 28.6364 17C27.8832 17 27.2727 16.3895 27.2727 15.6364L27.2727 1.36364C27.2727 0.61052 27.8832 -9.25261e-08 28.6364 -5.96064e-08Z" fill="#fff" />
-            <path d="M41.6364 -5.96064e-08C42.3895 -2.66867e-08 43 0.610521 43 1.36364L43 15.6364C43 16.3895 42.3895 17 41.6364 17C40.8832 17 40.2727 16.3895 40.2727 15.6364L40.2727 1.36364C40.2727 0.610521 40.8832 -9.25261e-08 41.6364 -5.96064e-08Z" fill="#fff" />
-          </svg>
-
-      },
-      {
-        label: '4 Columns', args: [{ "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }, { "val": 1, "unit": "fr" }], icon:
-          <svg width="43" height="17" viewBox="0 0 43 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 1.36364C0 0.61052 0.610521 0 1.36364 0H41.2727C42.0258 0 42.6363 0.61052 42.6363 1.36364V1.36364C42.6363 2.11675 42.0258 2.72727 41.2727 2.72727H1.36364C0.610521 2.72727 0 2.11675 0 1.36364V1.36364Z" fill="#fff" />
-            <path d="M0 15.6364C0 14.8833 0.610521 14.2727 1.36364 14.2727H41.2727C42.0258 14.2727 42.6363 14.8833 42.6363 15.6364V15.6364C42.6363 16.3895 42.0258 17 41.2727 17H1.36364C0.610521 17 0 16.3895 0 15.6364V15.6364Z" fill="#fff" />
-            <path d="M1.36366 -5.96064e-08C2.11677 -2.66867e-08 2.72729 0.610521 2.72729 1.36364L2.72729 15.6364C2.72729 16.3895 2.11677 17 1.36366 17V17C0.610543 17 2.2887e-05 16.3895 2.292e-05 15.6364L2.35438e-05 1.36364C2.35768e-05 0.610521 0.610544 -9.25261e-08 1.36366 -5.96064e-08V-5.96064e-08Z" fill="#fff" />
-            <path d="M11.3636 -5.96064e-08C12.1167 -2.66867e-08 12.7273 0.610521 12.7273 1.36364L12.7273 15.6364C12.7273 16.3895 12.1167 17 11.3636 17V17C10.6105 17 9.99999 16.3895 9.99999 15.6364L9.99999 1.36364C9.99999 0.610521 10.6105 -9.25261e-08 11.3636 -5.96064e-08V-5.96064e-08Z" fill="#fff" />
-            <path d="M21.3636 -5.96064e-08C22.1167 -2.66867e-08 22.7273 0.610521 22.7273 1.36364L22.7273 15.6364C22.7273 16.3895 22.1167 17 21.3636 17V17C20.6105 17 20 16.3895 20 15.6364L20 1.36364C20 0.61052 20.6105 -9.25261e-08 21.3636 -5.96064e-08V-5.96064e-08Z" fill="#fff" />
-            <path d="M31.3636 -5.96064e-08C32.1167 -2.66867e-08 32.7273 0.610521 32.7273 1.36364L32.7273 15.6364C32.7273 16.3895 32.1167 17 31.3636 17V17C30.6105 17 30 16.3895 30 15.6364L30 1.36364C30 0.610521 30.6105 -9.25261e-08 31.3636 -5.96064e-08V-5.96064e-08Z" fill="#fff" />
-            <path d="M41.3636 -5.96064e-08C42.1167 -2.66867e-08 42.7273 0.610521 42.7273 1.36364L42.7273 15.6364C42.7273 16.3895 42.1167 17 41.3636 17V17C40.6105 17 40 16.3895 40 15.6364L40 1.36364C40 0.610521 40.6105 -9.25261e-08 41.3636 -5.96064e-08V-5.96064e-08Z" fill="#fff" />
-          </svg>
-
-      },
-
-    ];
 
 
 
@@ -1138,42 +1043,42 @@ registerBlockType("post-grid/post-grid", {
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
 
-      blockCssY.items[itemWrapSelector] = (blockCssY.items[itemWrapSelector] != undefined) ? blockCssY.items[itemWrapSelector] : {};
-      blockCssY.items[paginationSelector] = (blockCssY.items[paginationSelector] != undefined) ? blockCssY.items[paginationSelector] : {};
+      // blockCssY.items[itemWrapSelector] = (blockCssY.items[itemWrapSelector] != undefined) ? blockCssY.items[itemWrapSelector] : {};
+      //blockCssY.items[paginationSelector] = (blockCssY.items[paginationSelector] != undefined) ? blockCssY.items[paginationSelector] : {};
 
 
-      var wordBreak = (blockCssY.items[itemWrapSelector]['word-break'] != undefined) ? blockCssY.items[itemWrapSelector]['word-break'] : {};
-      wordBreak[breakPointX] = 'break-word'
+      // var wordBreak = (blockCssY.items[itemWrapSelector]['word-break'] != undefined) ? blockCssY.items[itemWrapSelector]['word-break'] : {};
+      // wordBreak[breakPointX] = 'break-word'
 
-      blockCssY.items[itemWrapSelector] = { ...blockCssY.items[itemWrapSelector], 'word-break': wordBreak };
-
-
-      blockCssY.items[paginationSelector] = { ...blockCssY.items[paginationSelector], 'text-align': { "Desktop": "center" } };
-
-      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'display': { "Desktop": "inline-block" } };
-      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'cursor': { "Desktop": "pointer" } };
-
-      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'color': { "Desktop": "#18978F" } };
-      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'background-color': { "Desktop": "#9DD6DF" } };
+      // blockCssY.items[itemWrapSelector] = { ...blockCssY.items[itemWrapSelector], 'word-break': wordBreak };
 
 
+      // blockCssY.items[paginationSelector] = { ...blockCssY.items[paginationSelector], 'text-align': { "Desktop": "center" } };
 
-      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'margin-left': { "Desktop": "5px" } };
-      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'margin-right': { "Desktop": "5px" } };
+      // blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'display': { "Desktop": "inline-block" } };
+      // blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'cursor': { "Desktop": "pointer" } };
+
+      // blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'color': { "Desktop": "#18978F" } };
+      // blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'background-color': { "Desktop": "#9DD6DF" } };
 
 
-      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-top': { "Desktop": "10px" } };
-      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-right': { "Desktop": "10px" } };
-      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-bottom': { "Desktop": "10px" } };
-      blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-left': { "Desktop": "10px" } };
 
-      blockCssY.items[itemsWrapSelector] = { ...blockCssY.items[itemsWrapSelector], 'grid-template-columns': { "Desktop": "1fr 1fr 1fr", "Tablet": "1fr 1fr", "Mobile": "1fr" } };
+      // blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'margin-left': { "Desktop": "5px" } };
+      // blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'margin-right': { "Desktop": "5px" } };
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
+
+      // blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-top': { "Desktop": "10px" } };
+      // blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-right': { "Desktop": "10px" } };
+      // blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-bottom': { "Desktop": "10px" } };
+      // blockCssY.items[paginationItemSelector] = { ...blockCssY.items[paginationItemSelector], 'padding-left': { "Desktop": "10px" } };
+
+      // blockCssY.items[itemsWrapSelector] = { ...blockCssY.items[itemsWrapSelector], 'grid-template-columns': { "Desktop": "1fr 1fr 1fr", "Tablet": "1fr 1fr", "Mobile": "1fr" } };
+
+      //setAttributes({ blockCssY: { items: blockCssY.items } });
 
       if (pagination.options.type.length == 0) {
-        var paginationOptons = { ...pagination.options, type: 'normal' }
-        setAttributes({ pagination: { ...pagination, options: paginationOptons } });
+        //var paginationOptons = { ...pagination.options, type: 'normal' }
+        //setAttributes({ pagination: { ...pagination, options: paginationOptons } });
       }
 
 
@@ -1189,45 +1094,6 @@ registerBlockType("post-grid/post-grid", {
 
       blockCssY.items[itemsWrapSelector] = (blockCssY.items[itemsWrapSelector] != undefined) ? blockCssY.items[itemsWrapSelector] : {};
 
-
-      var display = (blockCssY.items[itemsWrapSelector]['display'] != undefined) ? blockCssY.items[itemsWrapSelector]['display'] : {};
-      display[breakPointX] = 'grid'
-
-      blockCssY.items[itemsWrapSelector] = { ...blockCssY.items[itemsWrapSelector], 'display': display };
-
-
-      if (grid.styles.gridTemplateColumns[breakPointX] != undefined) {
-        var gridTemplateColumns = (blockCssY.items[itemsWrapSelector]['grid-template-columns'] != undefined) ? blockCssY.items[itemsWrapSelector]['grid-template-columns'] : {};
-        gridTemplateColumns[breakPointX] = grid.styles.gridTemplateColumns[breakPointX].map((item) => { return item.val + item.unit + ' ' }).join(' ')
-
-        blockCssY.items[itemsWrapSelector] = { ...blockCssY.items[itemsWrapSelector], 'grid-template-columns': gridTemplateColumns };
-
-      }
-
-      if (grid.styles.gridTemplateRows[breakPointX] != undefined) {
-        var gridTemplateRows = (blockCssY.items[itemsWrapSelector]['grid-template-rows'] != undefined) ? blockCssY.items[itemsWrapSelector]['grid-template-rows'] : {};
-        gridTemplateRows[breakPointX] = grid.styles.gridTemplateRows[breakPointX].map((item) => { return item.val + item.unit + ' ' }).join(' ')
-
-        blockCssY.items[itemsWrapSelector] = { ...blockCssY.items[itemsWrapSelector], 'grid-template-rows': gridTemplateRows };
-
-      }
-
-      if (grid.styles.colGap[breakPointX] != undefined) {
-        var colGap = (blockCssY.items[itemsWrapSelector]['column-gap'] != undefined) ? blockCssY.items[itemsWrapSelector]['column-gap'] : {};
-        colGap[breakPointX] = grid.styles.colGap[breakPointX].val + grid.styles.colGap[breakPointX].unit
-
-        blockCssY.items[itemsWrapSelector] = { ...blockCssY.items[itemsWrapSelector], 'column-gap': colGap };
-
-      }
-
-
-      if (grid.styles.rowGap[breakPointX] != undefined) {
-        var rowGap = (blockCssY.items[itemsWrapSelector]['row-gap'] != undefined) ? blockCssY.items[itemsWrapSelector]['row-gap'] : {};
-        rowGap[breakPointX] = grid.styles.rowGap[breakPointX].val + grid.styles.rowGap[breakPointX].unit
-
-        blockCssY.items[itemsWrapSelector] = { ...blockCssY.items[itemsWrapSelector], 'row-gap': rowGap };
-
-      }
 
 
 
@@ -1412,9 +1278,10 @@ registerBlockType("post-grid/post-grid", {
 
     function addQueryPreset(option, index) {
 
+      var queryArgsX = { ...queryArgs };
 
-      queryArgs.items = option.value.items;
-      setAttributes({ queryArgs: { items: queryArgs.items } })
+      queryArgsX.items = option.value.items;
+      setAttributes({ queryArgs: { items: queryArgsX.items } })
       fetchPosts()
 
     }
@@ -2145,33 +2012,43 @@ registerBlockType("post-grid/post-grid", {
 
     function updateQueryPram(newVal, index) {
 
-      var itemData = queryArgs.items[index];
+      console.log(index);
+      console.log(newVal);
+
+      var queryArgsX = { ...queryArgs };
+      // var itemsX = queryArgsX.items;
+
+      // console.log(itemsX);
+
+      // itemsX[index].val = newVal
+
+      // var cssPath = [index, 'val']
+      // const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+      // console.log(cssItems);
+      // var result = [];
+
+      // Object.entries(cssItems).map((arg) => {
+
+      //   var i = arg[0];
+      //   var val = arg[1]
+
+      //   result.push(val)
+
+      // })
+
+      // console.log(result);
+
+      var itemData = queryArgsX.items[index];
 
 
       itemData.val = newVal;
-      queryArgs.items[index] = itemData;
-      setAttributes({ queryArgs: { items: queryArgs.items } });
+      queryArgsX.items[index] = itemData;
+      setAttributes({ queryArgs: { items: queryArgsX.items } });
 
 
       fetchPosts();
 
-      // if (itemData.id == 's' || itemData.id == 'order'  ) {
-      //     itemData.val = newVal;
-      //     queryArgs.items[index] = itemData;
-      //     setAttributes({ queryArgs: { items: queryArgs.items } });
 
-      // }
-
-      // if (itemData.id == 'postType' || itemData.id == 'orderby' || itemData.id == 'postStatus') {
-      //     itemData.val = newVal;
-      //     queryArgs.items[index] = itemData;
-      //     setAttributes({ queryArgs: { items: queryArgs.items } });
-
-      // }
-
-
-
-      //queryArgs.items.splice(i, 1);
 
 
 
@@ -2182,7 +2059,7 @@ registerBlockType("post-grid/post-grid", {
 
     function generateQueryArgOptions(item, index) {
 
-
+      var itemId = item.id;
 
 
       return (
@@ -2190,7 +2067,8 @@ registerBlockType("post-grid/post-grid", {
 
         <div className=' '>
 
-          <PanelBody title={<RemoveQueryPram title={item.label} index={index} />} initialOpen={false}>
+
+          <PanelBody title={<RemoveQueryPram title={queryPrams[itemId] == undefined ? itemId : queryPrams[itemId].label} index={index} />} initialOpen={false}>
 
             {item.id == 'postType' && <div className={item.id == 'postType' ? '' : 'hidden'}>
 
@@ -2323,10 +2201,14 @@ registerBlockType("post-grid/post-grid", {
                   <div
                     className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
                     onClick={(_ev) => {
-                      var itemData = queryArgs.items[index];
+
+                      var queryArgsX = { ...queryArgs };
+
+
+                      var itemData = queryArgsX.items[index];
                       var xx = itemData.val.concat({ fields: [{ key: '', value: '', type: '', compare: '' }], relation: 'OR' });
-                      queryArgs.items[index].val = xx;
-                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                      queryArgsX.items[index].val = xx;
+                      setAttributes({ queryArgs: { items: queryArgsX.items } });
                     }}
 
                   >Add</div>
@@ -2339,10 +2221,13 @@ registerBlockType("post-grid/post-grid", {
                             <div
                               className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm'
                               onClick={(_ev) => {
-                                var itemData = queryArgs.items[index];
+
+                                var queryArgsX = { ...queryArgs };
+
+                                var itemData = queryArgsX.items[index];
                                 var xx = itemData.val.splice(j, 1);
-                                queryArgs.items[index].val = itemData.val;
-                                setAttributes({ queryArgs: { items: queryArgs.items } });
+                                queryArgsX.items[index].val = itemData.val;
+                                setAttributes({ queryArgs: { items: queryArgsX.items } });
                               }}
                             >Remove</div>
 
@@ -2358,7 +2243,10 @@ registerBlockType("post-grid/post-grid", {
                                   { label: 'AND', value: 'AND' },
                                 ]}
                                 onChange={(newVal) => {
-                                  var itemData = queryArgs.items[index];
+
+                                  var queryArgsX = { ...queryArgs };
+
+                                  var itemData = queryArgsX.items[index];
 
                                   //itemData.val.relation = newVal;
                                   itemData.val[j].relation = newVal;
@@ -2367,8 +2255,8 @@ registerBlockType("post-grid/post-grid", {
                                   //term.taxonomy = newVal;
 
 
-                                  queryArgs.items[index].val = itemData.val;
-                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  queryArgsX.items[index].val = itemData.val;
+                                  setAttributes({ queryArgs: { items: queryArgsX.items } });
                                 }}
                               />
                             </PanelRow>
@@ -2380,14 +2268,18 @@ registerBlockType("post-grid/post-grid", {
                                   <div
                                     className='cursor-pointer block text-right mb-2 px-3 py-1 text-white bg-red-600 text-sm'
                                     onClick={(_ev) => {
-                                      var itemData = queryArgs.items[index];
+
+                                      var queryArgsX = { ...queryArgs };
+
+
+                                      var itemData = queryArgsX.items[index];
                                       var fields = itemData.val[j].fields
                                       var xx = itemData.val[j].fields.splice(k, 1);
 
 
 
-                                      queryArgs.items[index].val = itemData.val;
-                                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                                      queryArgsX.items[index].val = itemData.val;
+                                      setAttributes({ queryArgs: { items: queryArgsX.items } });
                                     }}
                                   >Remove</div>
 
@@ -2398,14 +2290,17 @@ registerBlockType("post-grid/post-grid", {
                                     value={y.key}
                                     placeholder="meta_key"
                                     onChange={(newVal) => {
-                                      var itemData = queryArgs.items[index];
+                                      var queryArgsX = { ...queryArgs };
+
+
+                                      var itemData = queryArgsX.items[index];
 
 
                                       var term = itemData.val[j].fields[k]
                                       term.key = newVal;
 
-                                      queryArgs.items[index].val = itemData.val;
-                                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                                      queryArgsX.items[index].val = itemData.val;
+                                      setAttributes({ queryArgs: { items: queryArgsX.items } });
                                     }}
                                   />
 
@@ -2414,14 +2309,18 @@ registerBlockType("post-grid/post-grid", {
                                     value={y.value}
                                     placeholder="25"
                                     onChange={(newVal) => {
-                                      var itemData = queryArgs.items[index];
+
+                                      var queryArgsX = { ...queryArgs };
+
+
+                                      var itemData = queryArgsX.items[index];
 
 
                                       var term = itemData.val[j].fields[k]
                                       term.value = newVal;
 
-                                      queryArgs.items[index].val = itemData.val;
-                                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                                      queryArgsX.items[index].val = itemData.val;
+                                      setAttributes({ queryArgs: { items: queryArgsX.items } });
                                     }}
                                   />
 
@@ -2444,14 +2343,16 @@ registerBlockType("post-grid/post-grid", {
 
                                       ]}
                                       onChange={(newVal) => {
-                                        var itemData = queryArgs.items[index];
+                                        var queryArgsX = { ...queryArgs };
+
+                                        var itemData = queryArgsX.items[index];
 
 
                                         var term = itemData.val[j].fields[k]
                                         term.type = newVal;
 
-                                        queryArgs.items[index].val = itemData.val;
-                                        setAttributes({ queryArgs: { items: queryArgs.items } });
+                                        queryArgsX.items[index].val = itemData.val;
+                                        setAttributes({ queryArgs: { items: queryArgsX.items } });
                                       }}
 
                                     />
@@ -2478,14 +2379,16 @@ registerBlockType("post-grid/post-grid", {
                                         { label: 'NOT EXISTS', value: 'NOT EXISTS' },
                                       ]}
                                       onChange={(newVal) => {
-                                        var itemData = queryArgs.items[index];
+                                        var queryArgsX = { ...queryArgs };
+
+                                        var itemData = queryArgsX.items[index];
 
 
                                         var term = itemData.val[j].fields[k]
                                         term.compare = newVal;
 
-                                        queryArgs.items[index].val = itemData.val;
-                                        setAttributes({ queryArgs: { items: queryArgs.items } });
+                                        queryArgsX.items[index].val = itemData.val;
+                                        setAttributes({ queryArgs: { items: queryArgsX.items } });
                                       }}
                                     />
                                   </PanelRow>
@@ -2495,13 +2398,14 @@ registerBlockType("post-grid/post-grid", {
                             <div
                               className='cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm'
                               onClick={(_ev) => {
+                                var queryArgsX = { ...queryArgs };
 
-                                var itemData = queryArgs.items[index];
+                                var itemData = queryArgsX.items[index];
 
                                 var xx = itemData.val[j].fields.concat({ key: '', value: '', type: '', compare: '' });
-                                queryArgs.items[index].val[j].fields = xx;
+                                queryArgsX.items[index].val[j].fields = xx;
 
-                                setAttributes({ queryArgs: { items: queryArgs.items } });
+                                setAttributes({ queryArgs: { items: queryArgsX.items } });
                               }}
                             >Add</div>
                           </PanelBody>
@@ -2539,8 +2443,9 @@ registerBlockType("post-grid/post-grid", {
                       { "value": "relation", "label": "Relation" },
                     ]}
                     onChange={(newVal) => {
+                      var queryArgsX = { ...queryArgs };
 
-                      var itemData = queryArgs.items[index];
+                      var itemData = queryArgsX.items[index];
 
 
 
@@ -2587,12 +2492,12 @@ registerBlockType("post-grid/post-grid", {
 
                       }
 
-                      queryArgs.items[index].val = xx;
+                      queryArgsX.items[index].val = xx;
 
 
 
 
-                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                      setAttributes({ queryArgs: { items: queryArgsX.items } });
 
                     }}
                   />
@@ -2625,9 +2530,10 @@ registerBlockType("post-grid/post-grid", {
                         <span
                           className='cursor-pointer px-3 py-1 text-white bg-red-600 text-sm my-2 inline-block'
                           onClick={(_ev) => {
+                            var queryArgsX = { ...queryArgs };
 
-                            queryArgs.items[index].val.splice(j, 1);
-                            setAttributes({ queryArgs: { items: queryArgs.items } });
+                            queryArgsX.items[index].val.splice(j, 1);
+                            setAttributes({ queryArgs: { items: queryArgsX.items } });
 
                           }}
 
@@ -2643,13 +2549,14 @@ registerBlockType("post-grid/post-grid", {
                                 placeholder=""
                                 onChange={(newVal) => {
 
+                                  var queryArgsX = { ...queryArgs };
 
 
                                   //clearTimeout(debounce);
                                   // debounce = setTimeout(() => {
 
-                                  queryArgs.items[index].val[j].year = newVal;
-                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  queryArgsX.items[index].val[j].year = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgsX.items } });
                                   //}, 1000);
 
 
@@ -2666,12 +2573,13 @@ registerBlockType("post-grid/post-grid", {
                                 placeholder=""
                                 onChange={(newVal) => {
 
+                                  var queryArgsX = { ...queryArgs };
 
                                   // clearTimeout(debounce);
                                   //debounce = setTimeout(() => {
 
-                                  queryArgs.items[index].val[j].month = newVal;
-                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  queryArgsX.items[index].val[j].month = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgsX.items } });
                                   //}, 1000);
 
 
@@ -2689,9 +2597,10 @@ registerBlockType("post-grid/post-grid", {
 
                                   clearTimeout(debounce);
                                   debounce = setTimeout(() => {
+                                    var queryArgsX = { ...queryArgs };
 
-                                    queryArgs.items[index].val[j].day = newVal;
-                                    setAttributes({ queryArgs: { items: queryArgs.items } });
+                                    queryArgsX.items[index].val[j].day = newVal;
+                                    setAttributes({ queryArgs: { items: queryArgsX.items } });
                                   }, 1000);
 
 
@@ -2717,8 +2626,10 @@ registerBlockType("post-grid/post-grid", {
 
                               ]}
                               onChange={(newVal) => {
-                                queryArgs.items[index].val[j].value = newVal;
-                                setAttributes({ queryArgs: { items: queryArgs.items } });
+                                var queryArgsX = { ...queryArgs };
+
+                                queryArgsX.items[index].val[j].value = newVal;
+                                setAttributes({ queryArgs: { items: queryArgsX.items } });
                               }}
                             />
 
@@ -2752,8 +2663,10 @@ registerBlockType("post-grid/post-grid", {
 
                               ]}
                               onChange={(newVal) => {
-                                queryArgs.items[index].val[j].value = newVal;
-                                setAttributes({ queryArgs: { items: queryArgs.items } });
+                                var queryArgsX = { ...queryArgs };
+
+                                queryArgsX.items[index].val[j].value = newVal;
+                                setAttributes({ queryArgs: { items: queryArgsX.items } });
                               }}
                             />
 
@@ -2770,9 +2683,10 @@ registerBlockType("post-grid/post-grid", {
 
                                 clearTimeout(debounce);
                                 debounce = setTimeout(() => {
+                                  var queryArgsX = { ...queryArgs };
 
-                                  queryArgs.items[index].val[j].value = newVal;
-                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  queryArgsX.items[index].val[j].value = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgsX.items } });
                                 }, 1000);
 
 
@@ -2796,8 +2710,10 @@ registerBlockType("post-grid/post-grid", {
                                 { label: 'AND', value: 'AND' },
                               ]}
                               onChange={(newVal) => {
-                                queryArgs.items[index].val[j].value = newVal;
-                                setAttributes({ queryArgs: { items: queryArgs.items } });
+                                var queryArgsX = { ...queryArgs };
+
+                                queryArgsX.items[index].val[j].value = newVal;
+                                setAttributes({ queryArgs: { items: queryArgsX.items } });
                               }}
                             />
 
@@ -2816,13 +2732,14 @@ registerBlockType("post-grid/post-grid", {
                                 placeholder=""
                                 onChange={(newVal) => {
 
+                                  var queryArgsX = { ...queryArgs };
 
 
                                   //clearTimeout(debounce);
                                   //debounce = setTimeout(() => {
 
-                                  queryArgs.items[index].val[j].value = newVal;
-                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  queryArgsX.items[index].val[j].value = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgsX.items } });
                                   //}, 1000);
 
 
@@ -2848,8 +2765,10 @@ registerBlockType("post-grid/post-grid", {
                                   { label: 'NOT BETWEEN', value: 'NOT BETWEEN' },
                                 ]}
                                 onChange={(newVal) => {
-                                  queryArgs.items[index].val[j].compare = newVal;
-                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  var queryArgsX = { ...queryArgs };
+
+                                  queryArgsX.items[index].val[j].compare = newVal;
+                                  setAttributes({ queryArgs: { items: queryArgsX.items } });
                                 }}
                               />
 
@@ -2888,10 +2807,12 @@ registerBlockType("post-grid/post-grid", {
                   <div
                     className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-blue-600 text-sm'
                     onClick={(_ev) => {
-                      var itemData = queryArgs.items[index];
+                      var queryArgsX = { ...queryArgs };
+
+                      var itemData = queryArgsX.items[index];
                       var xx = itemData.val.concat({ terms: [{ taxonomy: '', field: '', terms: [], operator: '' }], relation: 'OR' });
-                      queryArgs.items[index].val = xx;
-                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                      queryArgsX.items[index].val = xx;
+                      setAttributes({ queryArgs: { items: queryArgsX.items } });
                     }}
 
                   >Add</div>
@@ -2904,11 +2825,13 @@ registerBlockType("post-grid/post-grid", {
                             <div
                               className='cursor-pointer inline-block mb-2 px-3 py-1 text-white bg-red-600 text-sm'
                               onClick={(_ev) => {
+                                var queryArgsX = { ...queryArgs };
 
-                                var itemData = queryArgs.items[index];
+
+                                var itemData = queryArgsX.items[index];
                                 var xx = itemData.val.splice(j, 1);
-                                queryArgs.items[index].val = itemData.val;
-                                setAttributes({ queryArgs: { items: queryArgs.items } });
+                                queryArgsX.items[index].val = itemData.val;
+                                setAttributes({ queryArgs: { items: queryArgsX.items } });
                               }}
 
                             >Remove</div>
@@ -2925,7 +2848,9 @@ registerBlockType("post-grid/post-grid", {
                                   { label: 'AND', value: 'AND' },
                                 ]}
                                 onChange={(newVal) => {
-                                  var itemData = queryArgs.items[index];
+                                  var queryArgsX = { ...queryArgs };
+
+                                  var itemData = queryArgsX.items[index];
 
                                   //itemData.val.relation = newVal;
                                   itemData.val[j].relation = newVal;
@@ -2934,8 +2859,8 @@ registerBlockType("post-grid/post-grid", {
                                   //term.taxonomy = newVal;
 
 
-                                  queryArgs.items[index].val = itemData.val;
-                                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                                  queryArgsX.items[index].val = itemData.val;
+                                  setAttributes({ queryArgs: { items: queryArgsX.items } });
                                 }}
                               />
                             </PanelRow>
@@ -2949,14 +2874,16 @@ registerBlockType("post-grid/post-grid", {
                                     value={y.taxonomy}
                                     placeholder="Taxonomy"
                                     onChange={(newVal) => {
-                                      var itemData = queryArgs.items[index];
+                                      var queryArgsX = { ...queryArgs };
+
+                                      var itemData = queryArgsX.items[index];
 
 
                                       var term = itemData.val[j].terms[k]
                                       term.taxonomy = newVal;
 
-                                      queryArgs.items[index].val = itemData.val;
-                                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                                      queryArgsX.items[index].val = itemData.val;
+                                      setAttributes({ queryArgs: { items: queryArgsX.items } });
                                     }}
                                   />
 
@@ -2965,13 +2892,15 @@ registerBlockType("post-grid/post-grid", {
                                     value={y.terms.join(',')}
                                     placeholder="Comma separated"
                                     onChange={(newVal) => {
-                                      var itemData = queryArgs.items[index];
+                                      var queryArgsX = { ...queryArgs };
+
+                                      var itemData = queryArgsX.items[index];
 
                                       var term = itemData.val[j].terms[k]
                                       term.terms = newVal.split(',');
 
-                                      queryArgs.items[index].val = itemData.val;
-                                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                                      queryArgsX.items[index].val = itemData.val;
+                                      setAttributes({ queryArgs: { items: queryArgsX.items } });
                                     }}
                                   />
 
@@ -2990,14 +2919,16 @@ registerBlockType("post-grid/post-grid", {
 
                                       ]}
                                       onChange={(newVal) => {
-                                        var itemData = queryArgs.items[index];
+                                        var queryArgsX = { ...queryArgs };
+
+                                        var itemData = queryArgsX.items[index];
 
 
                                         var term = itemData.val[j].terms[k]
                                         term.field = newVal;
 
-                                        queryArgs.items[index].val = itemData.val;
-                                        setAttributes({ queryArgs: { items: queryArgs.items } });
+                                        queryArgsX.items[index].val = itemData.val;
+                                        setAttributes({ queryArgs: { items: queryArgsX.items } });
                                       }}
 
                                     />
@@ -3015,14 +2946,16 @@ registerBlockType("post-grid/post-grid", {
                                         { label: 'NOT EXISTS', value: 'NOT EXISTS' },
                                       ]}
                                       onChange={(newVal) => {
-                                        var itemData = queryArgs.items[index];
+                                        var queryArgsX = { ...queryArgs };
+
+                                        var itemData = queryArgsX.items[index];
 
 
                                         var term = itemData.val[j].terms[k]
                                         term.operator = newVal;
 
-                                        queryArgs.items[index].val = itemData.val;
-                                        setAttributes({ queryArgs: { items: queryArgs.items } });
+                                        queryArgsX.items[index].val = itemData.val;
+                                        setAttributes({ queryArgs: { items: queryArgsX.items } });
                                       }}
                                     />
                                   </PanelRow>
@@ -3031,13 +2964,14 @@ registerBlockType("post-grid/post-grid", {
                                   <div
                                     className='cursor-pointer block text-center my-2 px-3 py-1 text-white bg-red-600 text-sm'
                                     onClick={(_ev) => {
+                                      var queryArgsX = { ...queryArgs };
 
-                                      var itemData = queryArgs.items[index];
+                                      var itemData = queryArgsX.items[index];
                                       var terms = itemData.val[j].terms
 
                                       var xx = itemData.val[j].terms.splice(k, 1);
-                                      queryArgs.items[index].val = itemData.val;
-                                      setAttributes({ queryArgs: { items: queryArgs.items } });
+                                      queryArgsX.items[index].val = itemData.val;
+                                      setAttributes({ queryArgs: { items: queryArgsX.items } });
                                     }}
 
                                   >Remove</div>
@@ -3047,13 +2981,14 @@ registerBlockType("post-grid/post-grid", {
                             <div
                               className='cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm'
                               onClick={(_ev) => {
+                                var queryArgsX = { ...queryArgs };
 
-                                var itemData = queryArgs.items[index];
+                                var itemData = queryArgsX.items[index];
 
                                 var xx = itemData.val[j].terms.concat({ taxonomy: '', field: '', terms: [], operator: '' });
-                                queryArgs.items[index].val[j].terms = xx;
+                                queryArgsX.items[index].val[j].terms = xx;
 
-                                setAttributes({ queryArgs: { items: queryArgs.items } });
+                                setAttributes({ queryArgs: { items: queryArgsX.items } });
                               }}
                             >Add</div>
                           </PanelBody>
@@ -3158,12 +3093,14 @@ registerBlockType("post-grid/post-grid", {
               <div
                 className='cursor-pointer text-center px-3 py-1 text-white bg-blue-600 text-sm'
                 onClick={(_ev) => {
-                  var itemData = queryArgs.items[index];
+                  var queryArgsX = { ...queryArgs };
+
+                  var itemData = queryArgsX.items[index];
 
                   var val = itemData.val.concat({ slug: '' });
                   itemData.val = val;
-                  queryArgs.items[index] = itemData;
-                  setAttributes({ queryArgs: { items: queryArgs.items } });
+                  queryArgsX.items[index] = itemData;
+                  setAttributes({ queryArgs: { items: queryArgsX.items } });
                 }}
               >Add</div>
             </div>
@@ -3258,7 +3195,7 @@ registerBlockType("post-grid/post-grid", {
             }
 
 
-            <p>{item.description}</p>
+            <p> {queryPrams[itemId] == undefined ? itemId : queryPrams[itemId].description}</p>
 
 
 
@@ -3274,23 +3211,25 @@ registerBlockType("post-grid/post-grid", {
     }
 
 
-    function addQueryPramX(_option, index) {
+    function addQueryPram(option, index) {
+
+      console.log(option);
+      var id = option.id;
+      var queryArgsX = { ...queryArgs };
 
 
-      var attrExist = false;
-
-      var data = queryPrams[index];
+      var data = { val: queryPrams[id].value, id: id };
       var multiple = data.multiple;
 
-      var isExist = queryArgs.items.map((item) => {
+      var isExist = queryArgsX.items.map((item) => {
 
-        if (item.id == index) {
+        if (item.id == id) {
           return true;
         }
       })
 
 
-      var items = queryArgs.items.concat([data])
+      var items = queryArgsX.items.concat([data])
       setAttributes({ queryArgs: { items: items } });
 
     }
@@ -3306,9 +3245,10 @@ registerBlockType("post-grid/post-grid", {
         <>
           <span className='cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1' onClick={ev => {
 
+            var queryArgsX = { ...queryArgs };
 
-            queryArgs.items.splice(index, 1);
-            setAttributes({ queryArgs: { items: queryArgs.items } });
+            queryArgsX.items.splice(index, 1);
+            setAttributes({ queryArgs: { items: queryArgsX.items } });
 
           }}><Icon icon={close} /></span>
           <span className='mx-2'>{title}</span>
@@ -3324,29 +3264,7 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-    function deleteGridColumn(i) {
 
-
-
-      grid.styles.gridTemplateColumns[breakPointX].splice(i, 1)
-      var styles = { ...grid.styles, gridTemplateColumns: grid.styles.gridTemplateColumns };
-      setAttributes({ grid: { ...grid, styles: styles } });
-
-
-
-
-    }
-
-    function deleteGridRow(i) {
-
-
-      grid.styles.gridTemplateRows[breakPointX].splice(i, 1)
-      var styles = { ...grid.styles, gridTemplateRows: grid.styles.gridTemplateRows };
-      setAttributes({ grid: { ...grid, styles: styles } });
-
-
-
-    }
 
 
 
@@ -3519,7 +3437,7 @@ registerBlockType("post-grid/post-grid", {
                                 )}
 
                                 {!layoutImporting && (
-                                  <p className=''>Layout imported and saved under <a target="_blank" className='font-bold underline ' href={postGridData.siteAdminurl + 'edit.php?post_type=post_grid_template'}>Saved Templates</a></p>
+                                  <p className=''>Layout imported and saved under <a target="_blank" className='font-bold underline ' href={clientData.siteAdminurl + 'edit.php?post_type=post_grid_template'}>Saved Templates</a></p>
                                 )}
 
 
@@ -3598,9 +3516,10 @@ registerBlockType("post-grid/post-grid", {
           <PanelBody title="Query Post" initialOpen={false}>
 
             <PanelRow className='my-3'>
-              <label>Add Query Parameters</label>
-              <PGDropdown position="bottom right" variant="secondary" options={queryPramsX} buttonTitle="Choose" onChange={addQueryPramX} values=""></PGDropdown>
+              <PGDropdown position="bottom right" variant="secondary" options={queryPresets} buttonTitle="Query Presets" onChange={addQueryPreset} values={''}></PGDropdown>
+              <PGDropdown position="bottom right" variant="secondary" options={queryPrams} buttonTitle="Add Query Params" onChange={addQueryPram} values=""></PGDropdown>
             </PanelRow>
+
 
 
             {queryArgs.items.map((item, index) => {
@@ -3616,318 +3535,36 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-            <PanelRow className='mb-4'>
-              <label for="">Query Presets</label>
-              <PGDropdown position="bottom right" variant="secondary" options={queryPresets} buttonTitle="Choose" onChange={addQueryPreset} values={''}></PGDropdown>
-            </PanelRow>
 
 
 
           </PanelBody>
 
 
-          <PanelBody title="Grid Settings" initialOpen={false}>
+          <PanelBody title="Container" initialOpen={false}>
+            <PGStyles obj={container} onChange={onChangeStyleContainer} onAdd={onAddStyleContainer} onRemove={onRemoveStyleContainer} />
 
+          </PanelBody>
 
-            <PanelRow className='my-3'>
-              <Button onClick={_ev => {
+          <PanelBody title="Grid Wrap" initialOpen={false}>
+            <PGStyles obj={itemsWrap} onChange={onChangeStyleItemsWrap} onAdd={onAddStyleItemsWrap} onRemove={onRemoveStyleItemsWrap} />
 
-                var gridTemplateColumns = grid.styles.gridTemplateColumns;
 
-                if (Object.keys(grid.styles.gridTemplateColumns).length == 0) {
-                  gridTemplateColumns[breakPointX] = [{ val: 1, unit: 'fr' }];
-                } else {
-                  var sds = (gridTemplateColumns[breakPointX] != undefined) ? gridTemplateColumns[breakPointX].concat({ val: 1, unit: 'fr' }) : [{ val: 1, unit: 'fr' }];
+          </PanelBody>
 
-                  gridTemplateColumns[breakPointX] = sds;
-                }
 
-                var styles = { ...grid.styles, gridTemplateColumns: gridTemplateColumns };
 
-                setAttributes({ grid: { ...grid, styles: styles } });
+          <PanelBody title="Grid Item Wrap" initialOpen={false} >
+            <PGStyles obj={itemWrap} onChange={onChangeStyleItemWrap} onAdd={onAddStyleItemWrap} onRemove={onRemoveStyleItemWrap} />
+          </PanelBody>
 
-              }} className='my-3 !bg-blue-600 !text-white'  >Add Column</Button>
-              <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-            </PanelRow>
 
+          <PanelBody title="N'th Item CSS" initialOpen={false} >
 
-
-
-
-
-
-            {grid.styles.gridTemplateColumns[breakPointX] != undefined && grid.styles.gridTemplateColumns[breakPointX].map((item, index) => {
-              return (
-
-                <PanelRow>
-                  <InputControl
-                    value={item.val}
-                    type="number"
-                    onChange={(newVal) => {
-                      var newValuesObj = {};
-                      if (Object.keys(grid.styles.gridTemplateColumns).length == 0) {
-                        newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
-                      } else {
-                        var gridTemplateColumns = grid.styles.gridTemplateColumns;
-                        var sds = gridTemplateColumns[breakPointX].map((x, i) => { return (index == i) ? { val: newVal, unit: x.unit, } : x })
-
-                        newValuesObj[breakPointX] = sds;
-                      }
-                      var styles = { ...grid.styles, gridTemplateColumns: newValuesObj };
-                      setAttributes({ grid: { ...grid, styles: styles } });
-
-                    }}
-
-                  />
-                  <SelectControl className='mb-0'
-                    value={item.unit}
-                    options={[
-                      { label: 'fr', value: 'fr' },
-                      { label: 'px', value: 'px' },
-                      { label: '%', value: '%' },
-                      { label: 'em', value: 'em' },
-                    ]}
-                    onChange={(newVal) => {
-
-                      var newValuesObj = {};
-                      if (Object.keys(grid.styles.gridTemplateColumns).length == 0) {
-                        newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
-                      } else {
-                        var gridTemplateColumns = grid.styles.gridTemplateColumns;
-                        var sds = gridTemplateColumns[breakPointX].map((x, i) => { return (index == i) ? { val: x.val, unit: newVal } : x })
-
-                        newValuesObj[breakPointX] = sds;
-                      }
-
-                      var styles = { ...grid.styles, gridTemplateColumns: newValuesObj };
-                      setAttributes({ grid: { ...grid, styles: styles } });
-                    }}
-                  />
-                  <Button icon="no-alt"
-                    onClick={(_ev) => { deleteGridColumn(index) }}
-
-                  ></Button>
-
-                </PanelRow>
-
-
-              )
-            })}
-
-
-            <PanelRow className='my-3'>
-
-              <Button onClick={_ev => {
-                var gridTemplateRows = grid.styles.gridTemplateRows;
-
-                if (Object.keys(grid.styles.gridTemplateRows).length == 0) {
-                  gridTemplateRows[breakPointX] = [{ val: 1, unit: 'fr' }];
-                } else {
-                  var sds = (gridTemplateRows[breakPointX] != undefined) ? gridTemplateRows[breakPointX].concat({ val: 1, unit: 'fr' }) : [{ val: 1, unit: 'fr' }];
-
-                  gridTemplateRows[breakPointX] = sds;
-                }
-
-                var styles = { ...grid.styles, gridTemplateRows: gridTemplateRows };
-                setAttributes({ grid: { ...grid, styles: styles } });
-
-              }} className='my-3 !bg-blue-600 !text-white'  >Add Row</Button>
-
-              <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-            </PanelRow>
-
-
-
-
-            {grid.styles.gridTemplateRows[breakPointX] != undefined && grid.styles.gridTemplateRows[breakPointX].map((item, index) => {
-              return (
-
-                <PanelRow>
-                  <InputControl
-                    value={item.val}
-                    type="number"
-                    onChange={(newVal) => {
-                      var newValuesObj = {};
-                      if (Object.keys(grid.styles.gridTemplateRows).length == 0) {
-                        newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
-                      } else {
-                        var gridTemplateRows = grid.styles.gridTemplateRows;
-                        var sds = gridTemplateRows[breakPointX].map((x, i) => { return (index == i) ? { val: newVal, unit: x.unit, } : x })
-
-                        newValuesObj[breakPointX] = sds;
-                      }
-                      var styles = { ...grid.styles, gridTemplateRows: newValuesObj };
-                      setAttributes({ grid: { ...grid, styles: styles } });
-
-                    }}
-
-                  />
-                  <SelectControl className='mb-0'
-                    value={item.unit}
-                    options={[
-                      { label: 'fr', value: 'fr' },
-                      { label: 'px', value: 'px' },
-                      { label: '%', value: '%' },
-                      { label: 'em', value: 'em' },
-                    ]}
-                    onChange={(newVal) => {
-
-                      var newValuesObj = {};
-                      if (Object.keys(grid.styles.gridTemplateRows).length == 0) {
-                        newValuesObj[breakPointX] = { val: newVal, unit: 'em' };
-                      } else {
-                        var gridTemplateRows = grid.styles.gridTemplateRows;
-                        var sds = gridTemplateRows[breakPointX].map((x, i) => { return (index == i) ? { val: x.val, unit: newVal } : x })
-
-                        newValuesObj[breakPointX] = sds;
-                      }
-
-                      var styles = { ...grid.styles, gridTemplateRows: newValuesObj };
-                      setAttributes({ grid: { ...grid, styles: styles } });
-                    }}
-                  />
-                  <Button icon="no-alt"
-                    onClick={(_ev) => { deleteGridRow(index) }}
-
-                  ></Button>
-
-                </PanelRow>
-
-
-              )
-            })}
-
-
-
-
-            <PanelRow className='my-3'>
-              <label>Column Gap</label>
-              <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-            </PanelRow>
-            <PanelRow>
-              <InputControl
-                value={(grid.styles.colGap[breakPointX] != undefined ? grid.styles.colGap[breakPointX].val : 1)}
-                type="number"
-                onChange={(newVal) => {
-
-                  var colGapX = grid.styles.colGap;
-                  console.log(colGapX);
-
-
-                  var unit = (colGapX[breakPointX] != undefined) ? colGapX[breakPointX].unit : 'em';
-
-                  if (Object.keys(grid.styles.colGap).length == 0) {
-                    colGapX[breakPointX] = { val: newVal, unit: 'em' };
-                  } else {
-
-                    colGapX[breakPointX] = { val: newVal, unit: unit };
-                  }
-
-
-                  var styles = { ...grid.styles, colGap: colGapX };
-                  setAttributes({ grid: { ...grid, styles: styles } });
-
-
-                }}
-
-              />
-              <SelectControl className='mb-0'
-                value={(grid.styles.colGap[breakPointX] != undefined) ? grid.styles.colGap[breakPointX].unit : 'em'}
-                options={[
-                  { label: 'px', value: 'px' },
-                  { label: '%', value: '%' },
-                  { label: 'em', value: 'em' },
-                ]}
-                onChange={(newVal) => {
-
-                  var colGapX = grid.styles.colGap;
-                  var val = (colGapX[breakPointX] != undefined) ? colGapX[breakPointX].val : 1;
-
-                  if (Object.keys(grid.styles.colGap).length == 0) {
-                    colGapX[breakPointX] = { val: 1, unit: newVal };
-                  } else {
-
-                    colGapX = grid.styles.colGap;
-                    colGapX[breakPointX] = { val: val, unit: newVal };
-                  }
-
-
-                  var styles = { ...grid.styles, colGap: colGapX };
-                  setAttributes({ grid: { ...grid, styles: styles } });
-
-
-                }}
-              />
-
-
-            </PanelRow>
-
-            <PanelRow className='my-3'>
-              <label>Row Gap</label>
-              <IconToggle position="bottom" variant="secondary" iconList={breakPointList} buttonTitle="Break Point Switch" onChange={onChangeBreakPoint} activeIcon={breakPoints[breakPointX].icon} value={breakPointX} />
-            </PanelRow>
-            <PanelRow>
-              <InputControl
-                value={(grid.styles.rowGap[breakPointX] != undefined ? grid.styles.rowGap[breakPointX].val : 1)}
-                type="number"
-                onChange={(newVal) => {
-
-                  var rowGapX = grid.styles.rowGap;
-                  console.log(rowGapX);
-
-
-                  var unit = (rowGapX[breakPointX] != undefined) ? rowGapX[breakPointX].unit : 'em';
-
-                  if (Object.keys(grid.styles.rowGap).length == 0) {
-                    rowGapX[breakPointX] = { val: newVal, unit: 'em' };
-                  } else {
-
-                    rowGapX[breakPointX] = { val: newVal, unit: unit };
-                  }
-
-
-                  var styles = { ...grid.styles, rowGap: rowGapX };
-                  setAttributes({ grid: { ...grid, styles: styles } });
-
-
-                }}
-
-              />
-              <SelectControl className='mb-0'
-                value={(grid.styles.rowGap[breakPointX] != undefined) ? grid.styles.rowGap[breakPointX].unit : 'em'}
-                options={[
-                  { label: 'px', value: 'px' },
-                  { label: '%', value: '%' },
-                  { label: 'em', value: 'em' },
-                ]}
-                onChange={(newVal) => {
-
-                  var rowGapX = grid.styles.rowGap;
-                  var val = (rowGapX[breakPointX] != undefined) ? rowGapX[breakPointX].val : 1;
-
-                  if (Object.keys(grid.styles.rowGap).length == 0) {
-                    rowGapX[breakPointX] = { val: 1, unit: newVal };
-                  } else {
-
-                    rowGapX = grid.styles.rowGap;
-                    rowGapX[breakPointX] = { val: val, unit: newVal };
-                  }
-
-
-                  var styles = { ...grid.styles, rowGap: rowGapX };
-                  setAttributes({ grid: { ...grid, styles: styles } });
-
-
-                }}
-              />
-
-
-            </PanelRow>
 
             <div>
 
               <PanelRow>
-                <label for="">N'th Item CSS</label>
                 <Button className='my-3' variant="secondary"
                   disabled={isProFeature}
                   onClick={(_newVal) => {
@@ -4077,180 +3714,56 @@ registerBlockType("post-grid/post-grid", {
 
 
 
-              {
-
-                gridLayouts.map((x, _i) => {
-
-                  return (
-
-                    <div className='cursor-pointer relative hover:bg-blue-200 my-3' onClick={(_ev) => {
-
-
-                      if (x.isPro) {
-                        //setAttributes({ grid: x.data })
-                      } else {
-                        setAttributes({ grid: x.data })
-                      }
-
-
-
-                    }}>
-
-                      {x.isPro && (<span className='bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white'>
-                        <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
-                      </span>)}
-                      {x.icon != undefined && (
-                        <div className='w-full grid-layout-prewview'>{x.icon}</div>
-                      )}
-                      <div className='text-[16px] p-2 bg-blue-600 text-white bg-opacity-90 text-bold  w-full text-center'>
-                        {x.title}
-
-                      </div>
-                    </div>
-
-                  )
-
-                })
-
-
-              }
-
             </div>
 
 
-          </PanelBody>
-          <PanelBody title="Container" initialOpen={false}>
 
 
-            <PGtabs
-              activeTab="styles"
-              orientation="horizontal"
-              activeClass="active-tab"
-              onSelect={(tabName) => { }}
-              tabs={[
-
-                {
-                  name: 'styles',
-                  title: 'Styles',
-                  icon: pencil,
-                  className: 'tab-style',
-                },
-                {
-                  name: 'css',
-                  title: 'CSS Library',
-                  icon: cloud,
-                  className: 'tab-css',
-                },
-              ]}
-            >
-
-              <PGtab name="styles">
-                <PGStyles obj={container} onChange={onChangeStyleContainer} onAdd={onAddStyleContainer} onRemove={onRemoveStyleContainer} />
-              </PGtab>
-              <PGtab name="css">
-                <PGCssLibrary blockId={blockId} obj={container} onChange={onPickCssLibraryContainer} />
-              </PGtab>
-            </PGtabs>
-          </PanelBody>
-
-          <PanelBody title="Items Wrap" initialOpen={false}>
-
-
-            <PGtabs
-              activeTab="styles"
-              orientation="horizontal"
-              activeClass="active-tab"
-              onSelect={(tabName) => { }}
-              tabs={[
-
-                {
-                  name: 'styles',
-                  title: 'Styles',
-                  icon: pencil,
-                  className: 'tab-style',
-                },
-                {
-                  name: 'css',
-                  title: 'CSS Library',
-                  icon: cloud,
-                  className: 'tab-css',
-                },
-              ]}
-            >
-
-              <PGtab name="styles">
-                <PGStyles obj={itemsWrap} onChange={onChangeStyleItemsWrap} onAdd={onAddStyleItemsWrap} onRemove={onRemoveStyleItemsWrap} />
-              </PGtab>
-              <PGtab name="css">
-                <PGCssLibrary blockId={blockId} obj={itemsWrap} onChange={onPickCssLibraryItemsWrap} />
-              </PGtab>
-            </PGtabs>
           </PanelBody>
 
 
+          <PanelBody title="Grid Layouts" initialOpen={false} >
 
-          <PanelBody title="Loop Item" initialOpen={false} >
-            <PGtabs
-              activeTab="styles"
-              orientation="horizontal"
-              activeClass="active-tab"
-              onSelect={(tabName) => { }}
-              tabs={[
-                {
-                  name: 'styles',
-                  title: 'Styles',
-                  icon: pencil,
-                  className: 'tab-style',
-                },
-                {
-                  name: 'css',
-                  title: 'CSS Library',
-                  icon: cloud,
-                  className: 'tab-css',
-                },
-              ]}
-            >
-              <PGtab name="styles">
-                <PGStyles obj={itemWrap} onChange={onChangeStyleItemWrap} onAdd={onAddStyleItemWrap} onRemove={onRemoveStyleItemWrap} />
-              </PGtab>
-              <PGtab name="css">
-                <PGCssLibrary blockId={blockId} obj={itemWrap} onChange={onPickCssLibraryItemWrap} />
-              </PGtab>
-            </PGtabs>
+
+            {
+
+              gridLayouts.map((x, _i) => {
+
+                return (
+
+                  <div className='cursor-pointer relative hover:bg-blue-200 my-3' onClick={(_ev) => {
+
+
+                    if (x.isPro) {
+                      //setAttributes({ grid: x.data })
+                    } else {
+                      setAttributes({ grid: x.data })
+                    }
+
+
+
+                  }}>
+
+                    {x.isPro && (<span className='bg-amber-400 absolute top-2 left-0 rounded-sm px-3 mx-2  text-white hover:text-white'>
+                      <a target="_blank" href={'https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=' + x.label}>Pro</a>
+                    </span>)}
+                    {x.icon != undefined && (
+                      <div className='w-full grid-layout-prewview'>{x.icon}</div>
+                    )}
+                    <div className='text-[16px] p-2 bg-blue-600 text-white bg-opacity-90 text-bold  w-full text-center'>
+                      {x.title}
+
+                    </div>
+                  </div>
+
+                )
+
+              })
+
+
+            }
+
           </PanelBody>
-
-
-          <PanelBody title="N'th Item" initialOpen={false} >
-            <PGtabs
-              activeTab="styles"
-              orientation="horizontal"
-              activeClass="active-tab"
-              onSelect={(tabName) => { }}
-              tabs={[
-                {
-                  name: 'styles',
-                  title: 'Styles',
-                  icon: pencil,
-                  className: 'tab-style',
-                },
-                {
-                  name: 'css',
-                  title: 'CSS Library',
-                  icon: cloud,
-                  className: 'tab-css',
-                },
-              ]}
-            >
-              <PGtab name="styles">
-
-              </PGtab>
-              <PGtab name="css">
-
-              </PGtab>
-            </PGtabs>
-          </PanelBody>
-
-
 
 
 
@@ -4260,148 +3773,150 @@ registerBlockType("post-grid/post-grid", {
 
 
 
+            <div className='my-4'>
 
-            <PanelRow className='mb-4'>
-              <label for="">Pagination Type</label>
-              <PGDropdown position="bottom right" variant="secondary" options={paginationTypes} buttonTitle="Choose" onChange={(arg, index) => {
+              <PanelRow className='mb-4'>
+                <label for="">Pagination Type</label>
+                <PGDropdown position="bottom right" variant="secondary" options={paginationTypes} buttonTitle="Choose" onChange={(arg, index) => {
 
-                var options = { ...pagination.options, type: arg.value };
-                setAttributes({ pagination: { ...pagination, options: options } });
+                  var options = { ...pagination.options, type: arg.value };
+                  setAttributes({ pagination: { ...pagination, options: options } });
 
-              }} values={''}></PGDropdown>
-            </PanelRow>
-
-
-            {(pagination.options.type.length != 0) && (<div className='bg-gray-500 text-white px-3 py-2 my-5'>{(paginationTypes[pagination.options.type] != undefined) ? paginationTypes[pagination.options.type].label : ''}</div>)}
+                }} values={''}></PGDropdown>
+              </PanelRow>
 
 
+              {(pagination.options.type.length != 0) && (<div className='bg-gray-500 text-white px-3 py-2 my-5'>{(paginationTypes[pagination.options.type] != undefined) ? paginationTypes[pagination.options.type].label : ''}</div>)}
 
-            {(pagination.options.type == 'normal' || pagination.options.type == 'ajax') && (
 
-              <>
-                <PanelRow>
-                  <label for="">Max Number of Pagination</label>
-                  <InputControl
-                    value={pagination.options.maxPageNum}
-                    onChange={(newVal) => {
 
-                      var options = { ...pagination.options, maxPageNum: newVal };
+              {(pagination.options.type == 'normal' || pagination.options.type == 'ajax') && (
+
+                <>
+                  <PanelRow>
+                    <label for="">Max Number of Pagination</label>
+                    <InputControl
+                      value={pagination.options.maxPageNum}
+                      onChange={(newVal) => {
+
+                        var options = { ...pagination.options, maxPageNum: newVal };
+                        setAttributes({ pagination: { ...pagination, options: options } });
+
+                      }}
+                    />
+                  </PanelRow>
+
+                </>
+              )}
+
+
+
+              {(pagination.options.type == 'normal' || pagination.options.type == 'ajax' || pagination.options.type == 'next_previous') && (
+                <>
+                  <PanelRow>
+                    <label for="">Previous Text</label>
+                    <InputControl
+                      value={pagination.options.prevText}
+                      onChange={(newVal) => {
+
+                        var options = { ...pagination.options, prevText: newVal };
+                        setAttributes({ pagination: { ...pagination, options: options } });
+                      }}
+                    />
+                  </PanelRow>
+                  <PanelRow>
+                    <label for="">Next Text</label>
+                    <InputControl
+                      value={pagination.options.nextText}
+                      onChange={(newVal) => {
+
+                        var options = { ...pagination.options, nextText: newVal };
+                        setAttributes({ pagination: { ...pagination, options: options } });
+                      }}
+                    />
+                  </PanelRow>
+
+
+
+
+
+
+                </>
+
+              )}
+
+
+
+
+              {(pagination.options.type == 'loadmore' || pagination.options.type == 'infinite') && (
+
+                <>
+
+                  <PanelRow>
+                    <label for="">Load More Text</label>
+
+                    <InputControl
+                      value={pagination.options.loadMoreText}
+                      onChange={(newVal) => {
+                        var options = { ...pagination.options, loadMoreText: newVal };
+                        setAttributes({ pagination: { ...pagination, options: options } });
+                      }
+                      }
+                    />
+                  </PanelRow>
+
+
+
+
+                  <PanelRow>
+                    <label for="">No Posts Text</label>
+
+                    <InputControl
+                      value={pagination.options.noMorePosts}
+                      onChange={(newVal) => {
+                        var options = { ...pagination.options, noMorePosts: newVal };
+                        setAttributes({ pagination: { ...pagination, options: options } });
+                      }
+                      }
+                    />
+                  </PanelRow>
+                  <PanelRow>
+                    <label for="">Loading Text</label>
+
+                    <InputControl
+                      value={pagination.options.loadingText}
+                      onChange={(newVal) => {
+                        var options = { ...pagination.options, loadingText: newVal };
+                        setAttributes({ pagination: { ...pagination, options: options } });
+                      }
+                      }
+                    />
+                  </PanelRow>
+
+
+
+
+
+                  <PanelRow>
+                    <label for="">Loading Icon</label>
+
+                    <PGIconPicker library={pagination.options.loadingIcon.library} srcType={pagination.options.loadingIcon.srcType} iconSrc={pagination.options.loadingIcon.iconSrc} onChange={(arg) => {
+
+                      var options = { ...pagination.options, loadingIcon: { srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc } };
+
                       setAttributes({ pagination: { ...pagination, options: options } });
 
-                    }}
-                  />
-                </PanelRow>
 
-              </>
-            )}
+                    }} />
+                  </PanelRow>
 
 
+                </>
 
-            {(pagination.options.type == 'normal' || pagination.options.type == 'ajax' || pagination.options.type == 'next_previous') && (
-              <>
-                <PanelRow>
-                  <label for="">Previous Text</label>
-                  <InputControl
-                    value={pagination.options.prevText}
-                    onChange={(newVal) => {
+              )}
+            </div>
 
-                      var options = { ...pagination.options, prevText: newVal };
-                      setAttributes({ pagination: { ...pagination, options: options } });
-                    }}
-                  />
-                </PanelRow>
-                <PanelRow>
-                  <label for="">Next Text</label>
-                  <InputControl
-                    value={pagination.options.nextText}
-                    onChange={(newVal) => {
-
-                      var options = { ...pagination.options, nextText: newVal };
-                      setAttributes({ pagination: { ...pagination, options: options } });
-                    }}
-                  />
-                </PanelRow>
-
-
-
-
-
-
-              </>
-
-            )}
-
-
-
-
-            {(pagination.options.type == 'loadmore' || pagination.options.type == 'infinite') && (
-
-              <>
-
-                <PanelRow>
-                  <label for="">Load More Text</label>
-
-                  <InputControl
-                    value={pagination.options.loadMoreText}
-                    onChange={(newVal) => {
-                      var options = { ...pagination.options, loadMoreText: newVal };
-                      setAttributes({ pagination: { ...pagination, options: options } });
-                    }
-                    }
-                  />
-                </PanelRow>
-
-
-
-
-                <PanelRow>
-                  <label for="">No Posts Text</label>
-
-                  <InputControl
-                    value={pagination.options.noMorePosts}
-                    onChange={(newVal) => {
-                      var options = { ...pagination.options, noMorePosts: newVal };
-                      setAttributes({ pagination: { ...pagination, options: options } });
-                    }
-                    }
-                  />
-                </PanelRow>
-                <PanelRow>
-                  <label for="">Loading Text</label>
-
-                  <InputControl
-                    value={pagination.options.loadingText}
-                    onChange={(newVal) => {
-                      var options = { ...pagination.options, loadingText: newVal };
-                      setAttributes({ pagination: { ...pagination, options: options } });
-                    }
-                    }
-                  />
-                </PanelRow>
-
-
-
-
-
-                <PanelRow>
-                  <label for="">Loading Icon</label>
-
-                  <PGIconPicker library={pagination.options.loadingIcon.library} srcType={pagination.options.loadingIcon.srcType} iconSrc={pagination.options.loadingIcon.iconSrc} onChange={(arg) => {
-
-                    var options = { ...pagination.options, loadingIcon: { srcType: arg.srcType, library: arg.library, iconSrc: arg.iconSrc } };
-
-                    setAttributes({ pagination: { ...pagination, options: options } });
-
-
-                  }} />
-                </PanelRow>
-
-
-              </>
-
-            )}
-
-            <PanelBody className="my-5" title="Pagination Wrapper" initialOpen={false} >
+            <PanelBody className="" title="Pagination Wrapper" initialOpen={false} >
 
 
               <PGtabs
@@ -4621,7 +4136,7 @@ registerBlockType("post-grid/post-grid", {
                 { label: 'No', value: 'no' },
                 { label: 'Yes', value: 'yes' },
               ]}
-              onChange={(newVal) => setAttributes({ search: { enable: newVal, type: search.type, placeholder: search.placeholder, icon: search.icon, busyIcon: search.busyIcon } })}
+              onChange={(newVal) => setAttributes({ search: { ...search, enable: newVal } })}
             />
 
 
@@ -4632,28 +4147,28 @@ registerBlockType("post-grid/post-grid", {
                 { label: 'Ajax - On change form data', value: 'ajax' },
                 { label: 'On form submit - GET method', value: 'form_submit' },
               ]}
-              onChange={(newVal) => setAttributes({ search: { enable: search.type, type: newVal, placeholder: search.placeholder, icon: search.icon, busyIcon: search.busyIcon } })}
+              onChange={(newVal) => setAttributes({ search: { ...search, type: newVal } })}
             />
 
             <InputControl
               label="Placeholder text"
 
               value={search.placeholder}
-              onChange={(newVal) => setAttributes({ search: { enable: search.type, type: search.type, placeholder: newVal, icon: search.icon, busyIcon: search.busyIcon } })}
+              onChange={(newVal) => setAttributes({ search: { ...search, placeholder: newVal } })}
             />
 
             <InputControl
               label="Search icon"
 
               value={search.icon}
-              onChange={(newVal) => setAttributes({ search: { enable: search.type, type: search.type, placeholder: search.placeholder, icon: newVal, busyIcon: search.busyIcon } })}
+              onChange={(newVal) => setAttributes({ search: { ...search, icon: newVal, } })}
             />
 
             <InputControl
               label="Loading icon"
 
               value={search.busyIcon}
-              onChange={(newVal) => setAttributes({ search: { enable: search.type, type: search.type, placeholder: search.placeholder, icon: search.icon, busyIcon: newVal } })}
+              onChange={(newVal) => setAttributes({ search: { ...search, busyIcon: newVal } })}
             />
 
           </PanelBody>
@@ -4679,52 +4194,6 @@ registerBlockType("post-grid/post-grid", {
 
 
         <div {...blockProps}>
-
-
-          {grid.styles.gridTemplateColumns[breakPointX] == undefined && (
-
-            <div className='my-5'>
-
-              <div className='text-center my-5'>Please set the column number</div>
-
-              <div className='grid grid-cols-4 gap-4'>
-                {columnPresets.map(x => {
-
-                  return (
-
-                    <div className='cursor-pointer text-center bg-slate-400 hover:bg-slate-500' onClick={ev => {
-
-                      var gridTemplateColumns = grid.styles.gridTemplateColumns;
-                      var colGap = grid.styles.colGap;
-                      var rowGap = grid.styles.rowGap;
-
-                      gridTemplateColumns[breakPointX] = x.args;
-                      colGap[breakPointX] = { val: 1, unit: 'em' };
-                      rowGap[breakPointX] = { val: 1, unit: 'em' };
-
-
-                      var styles = { ...grid.styles, gridTemplateColumns: gridTemplateColumns, colGap: colGap, rowGap: rowGap };
-
-                      setAttributes({ grid: { ...grid, styles: styles } });
-
-
-
-                    }}>
-                      <span className='p-3 py-4 inline-block'>{x.icon}</span>
-                    </div>
-
-                  )
-
-                })}
-              </div>
-
-
-
-            </div>
-
-          )}
-
-
 
 
           {(lazyLoad.options.enable == 'yes' && isBusy) &&
@@ -4836,8 +4305,6 @@ registerBlockType("post-grid/post-grid", {
             {pagination.options.type == 'normal' &&
               (
                 <>
-
-
 
                   {(paginationItems != undefined) && paginationItems.map(item => {
                     return (

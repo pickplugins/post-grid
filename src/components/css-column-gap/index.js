@@ -71,19 +71,19 @@ function Html(props) {
               // props.onChange(widthUnit, 'width');
 
               if (isImportant) {
-                props.onChange(widthUnit + ' !important', 'width');
+                props.onChange(widthUnit + ' !important', 'columnGap');
               } else {
-                props.onChange(widthUnit, 'width');
+                props.onChange(widthUnit, 'columnGap');
               }
 
 
             } else {
-              //props.onChange(newVal + widthUnit, 'width');
+              //props.onChange(newVal + widthUnit, 'columnGap');
 
               if (isImportant) {
-                props.onChange(newVal + widthUnit + ' !important', 'width');
+                props.onChange(newVal + widthUnit + ' !important', 'columnGap');
               } else {
-                props.onChange(newVal + widthUnit, 'width');
+                props.onChange(newVal + widthUnit, 'columnGap');
               }
             }
 

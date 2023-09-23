@@ -51,7 +51,7 @@ registerBlockType("post-grid/woo-product-info", {
     foreground: '#fff',
     // Specifying an icon for the block
     src:
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#1d4ed8" d="M17.55,18a.71.71,0,0,1-.24.53L12.45,22.7a.7.7,0,0,1-.91-1.06L15.79,18l-4.25-3.64a.7.7,0,0,1,.91-1.06l4.86,4.17A.71.71,0,0,1,17.55,18Z" /><path fill="#1d4ed8" d="M36,18a.69.69,0,0,1-.25.53L30.89,22.7a.7.7,0,1,1-.9-1.06L34.23,18,30,14.36a.7.7,0,1,1,.9-1.06l4.86,4.17A.69.69,0,0,1,36,18Z" /><rect fill="#1d4ed8" y="15.5" width="10.66" height="5" /><rect fill="#8db1ff" x="2.49" y="17.34" width="5.68" height="1.32" /><rect fill="#1d4ed8" x="19.08" y="15.5" width="10.66" height="5" /><rect fill="#8db1ff" x="21.57" y="17.34" width="5.68" height="1.32" /></svg>
+      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#1d4ed8" d="M19.29,10v7.27l-8.84,3.3V13.25Z" /><path fill="#1d4ed8" d="M9.56,13.24v7.28L.74,17.23V10Z" /><path fill="#1d4ed8" d="M19.23,5.88,10,9.32.8,5.89,6.56,3.74c1-.38,2-.74,3.05-1.13a1,1,0,0,1,.81,0Z" /><path fill="#1d4ed8" d="M20,6.51V8.76l-9.55,3.56V10.07Z" /><path fill="#1d4ed8" d="M9.56,12.32,0,8.76V6.51l9.56,3.56Z" /><rect fill="#1d4ed8" y="22.68" width="36" height="3.85" /><rect fill="#1d4ed8" y="29.62" width="36" height="3.85" /></svg>
     ,
   },
 
@@ -156,8 +156,7 @@ registerBlockType("post-grid/woo-product-info", {
 
             siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
             options: {
-              text: 'You are here: ',
-
+              text: '',
             },
             styles: {
               color: { Desktop: '' },
@@ -541,32 +540,25 @@ registerBlockType("post-grid/woo-product-info", {
           if (Object.keys(attrVal).length != 0) {
 
             var attrIdX = '';
+            var cssPropty = myStore.cssAttrParse(attrId);
 
-            if (attrId == 'backgroundColor') {
-              attrIdX = 'background-color';
-            }
-            else if (attrId == 'textAlign') {
-              attrIdX = 'text-align';
-            }
-            else {
-              attrIdX = attrId;
+            console.log(cssPropty);
 
-            }
 
 
             if (blockCssY.items[itemSelector + '.item-' + index + ' a'] == undefined) {
               blockCssY.items[itemSelector + '.item-' + index + ' a'] = {}
-              blockCssY.items[itemSelector + '.item-' + index + ' a'][attrIdX] = attrVal;
+              blockCssY.items[itemSelector + '.item-' + index + ' a'][cssPropty] = attrVal;
             } else {
-              blockCssY.items[itemSelector + '.item-' + index + ' a'][attrIdX] = attrVal;
+              blockCssY.items[itemSelector + '.item-' + index + ' a'][cssPropty] = attrVal;
             }
 
 
             if (blockCssY.items[itemSelector + '.item-' + index] == undefined) {
               blockCssY.items[itemSelector + '.item-' + index] = {}
-              blockCssY.items[itemSelector + '.item-' + index][attrIdX] = attrVal;
+              blockCssY.items[itemSelector + '.item-' + index][cssPropty] = attrVal;
             } else {
-              blockCssY.items[itemSelector + '.item-' + index][attrIdX] = attrVal;
+              blockCssY.items[itemSelector + '.item-' + index][cssPropty] = attrVal;
             }
 
 
@@ -1569,7 +1561,7 @@ registerBlockType("post-grid/woo-product-info", {
 
 
 
-
+                          {/* 
 
                           <PanelRow className='my-3'>
                             <label>Color</label>
@@ -1639,7 +1631,7 @@ registerBlockType("post-grid/woo-product-info", {
 
                               setAttributes({ items: { ...items, elements: items.elements } });
                             }}
-                          />
+                          /> */}
 
 
                         </PanelBody>

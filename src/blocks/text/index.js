@@ -144,11 +144,13 @@ registerBlockType("post-grid/text", {
 
     useEffect(() => {
 
+      if (blockId.length == 0) {
+        setAttributes({ blockId: blockIdX });
+
+        myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+      }
 
 
-      setAttributes({ blockId: blockIdX });
-
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [clientId]);
 
 
@@ -156,7 +158,6 @@ registerBlockType("post-grid/text", {
 
     useEffect(() => {
 
-      //console.log("customCss", customCss);
 
       setAttributes({ customCss: customCss });
 

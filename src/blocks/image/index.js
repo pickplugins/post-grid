@@ -1680,22 +1680,25 @@ registerBlockType("post-grid/image", {
 
           <PanelBody title="Lightbox" initialOpen={false} className={(galleryId != null) ? 'hidden' : ''}>
             <PanelRow>
-              <label for="">Enable</label>
-              <SelectControl
-                label=""
-                value={lightbox.options.enable}
-                options={[
-                  { label: 'Choose...', value: '' },
-                  { label: 'True', value: 'true' },
-                  { label: 'False', value: 'false' },
 
-                ]}
-                onChange={(newVal) => {
+              <ToggleControl
+                label="Enable?"
+                help={lightbox.options.enable ? 'Lightbox Enabled' : 'Lightbox Disabled.'}
+                checked={lightbox.options.enable ? true : false}
+                onChange={(e) => {
+
+
                   var options = { ...lightbox.options, enable: newVal };
                   setAttributes({ lightbox: { ...lightbox, options: options } });
-                }
-                }
+
+
+
+
+
+                }}
               />
+
+
             </PanelRow>
           </PanelBody>
 

@@ -169,7 +169,7 @@ class PGBlockImage
         $lightbox = ($galleryLightbox == null) ? $attributes['lightbox'] : $galleryLightbox;
         $lightboxOptions = isset($lightbox['options']) ? $lightbox['options'] : [];
 
-        $lightboxEnable = isset($lightboxOptions['enable']) ? $lightboxOptions['enable'] : '';
+        $lightboxEnable = isset($lightboxOptions['enable']) ? $lightboxOptions['enable'] : false;
 
         if (has_block('post-grid/image')) {
 
@@ -255,6 +255,7 @@ class PGBlockImage
         //echo '<pre>' . var_export($galleryLightbox, true) . '</pre>';
         // echo '<pre>' . var_export($featuredImageSrcMetaKeyType, true) . '</pre>';
 
+        var_dump($lightboxOptions);
 
 
         $linkAttrStr = '';

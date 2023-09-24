@@ -62,10 +62,7 @@ registerBlockType("post-grid/breadcrumb", {
         options: { tag: 'div', class: '', },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          display: { Desktop: 'block' },
         },
       },
     },
@@ -75,10 +72,8 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: 'icon', position: 'beforeLabel'/*beforeLabel, afterLabel, beforeSeparator, afterSeparator*/ },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          color: { Desktop: '#494949' },
+          padding: { Desktop: '0px 5px 0px 0px' },
         },
       },
     },
@@ -88,10 +83,11 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: '', },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          color: { Desktop: '#494949' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
         },
       },
     },
@@ -103,10 +99,11 @@ registerBlockType("post-grid/breadcrumb", {
         styles:
         {
 
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          color: { Desktop: '#494949' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
         },
       },
     },
@@ -119,12 +116,8 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          color: { Desktop: '#18978F' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          borderRadius: { Desktop: '' },
-          fontSize: { Desktop: '' },
+          
+          padding: { Desktop: '0px 5px 0px 0px' },
 
 
         },

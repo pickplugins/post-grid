@@ -72,7 +72,7 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: 'icon', position: 'beforeLabel'/*beforeLabel, afterLabel, beforeSeparator, afterSeparator*/ },
         styles:
         {
-          color: { Desktop: '#494949' },
+          color: { Desktop: '#000000' },
           padding: { Desktop: '0px 5px 0px 0px' },
         },
       },
@@ -83,7 +83,7 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: '', },
         styles:
         {
-          color: { Desktop: '#494949' },
+          color: { Desktop: '#000000' },
           fontSize: { Desktop: '18px' },
           fontFamily: { Desktop: 'Poppins' },
           fontStyle: { Desktop: 'normal' },
@@ -99,7 +99,7 @@ registerBlockType("post-grid/breadcrumb", {
         styles:
         {
 
-          color: { Desktop: '#494949' },
+          color: { Desktop: '#000000' },
           fontSize: { Desktop: '18px' },
           fontFamily: { Desktop: 'Poppins' },
           fontStyle: { Desktop: 'normal' },

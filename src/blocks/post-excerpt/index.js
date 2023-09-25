@@ -61,7 +61,7 @@ registerBlockType("post-grid/post-excerpt", {
 
         styles:
         {
-          color: { Desktop: '' },
+          display: { Desktop: 'block' },
 
 
         },
@@ -91,8 +91,11 @@ registerBlockType("post-grid/post-excerpt", {
         },
         styles:
         {
-          color: { Desktop: '' },
-          fontSize: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
 
 
         },
@@ -108,8 +111,15 @@ registerBlockType("post-grid/post-excerpt", {
 
         styles:
         {
-          color: { Desktop: '' },
-          fontSize: { Desktop: '' },
+          color: { Desktop: '#ffffff !important' },
+          backgroundColor: { Desktop: '#1F2E45 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          padding: { Desktop: '10px 45px 10px 45px' },
+          display: { Desktop: 'inline-block' },
+          borderRadius: { Desktop: '50px 50px 50px 50px' },
 
 
         },
@@ -123,7 +133,12 @@ registerBlockType("post-grid/post-excerpt", {
 
         styles:
         {
-          color: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 10px 0px 0px' },
 
         },
       },
@@ -136,7 +151,12 @@ registerBlockType("post-grid/post-excerpt", {
 
         styles:
         {
-          color: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 0px 0px 10px' },
 
         },
       },

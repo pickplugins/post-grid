@@ -70,7 +70,7 @@ registerBlockType("post-grid/image-gallery-item", {
         styles:
         {
 
-          backgroundColor: { Desktop: '' },
+          backgroundColor: { Desktop: '#F1F7F9' },
 
 
 

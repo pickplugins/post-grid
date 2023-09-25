@@ -91,7 +91,7 @@ registerBlockType("post-grid/archive-title", {
         },
 
         styles: {
-          color: { Desktop: '#494949 !important' },
+          color: { Desktop: '#000000 !important' },
           fontSize: { Desktop: '30px' },
           fontFamily: { Desktop: 'Poppins' },
           fontStyle: { Desktop: 'normal' },
@@ -108,7 +108,7 @@ registerBlockType("post-grid/archive-title", {
 
         styles:
         {
-          color: { Desktop: '#494949 !important' },
+          color: { Desktop: '#000000 !important' },
           fontSize: { Desktop: '18px' },
           margin: { Desktop: '0px 10px 0px 0px' },
 
@@ -124,7 +124,7 @@ registerBlockType("post-grid/archive-title", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: { Desktop: '#494949 !important' },
+          color: { Desktop: '#000000 !important' },
           fontSize: { Desktop: '18px' },
           fontFamily: { Desktop: 'Poppins' },
           fontStyle: { Desktop: 'normal' },
@@ -142,7 +142,7 @@ registerBlockType("post-grid/archive-title", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: { Desktop: '#494949 !important' },
+          color: { Desktop: '#000000 !important' },
           fontSize: { Desktop: '18px' },
           fontFamily: { Desktop: 'Poppins' },
           fontStyle: { Desktop: 'normal' },

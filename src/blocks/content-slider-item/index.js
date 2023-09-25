@@ -69,7 +69,9 @@ registerBlockType("post-grid/content-slider-item", {
 
         styles:
         {
-
+          width: { Desktop: '80%' },
+          marginLeft: { Desktop: 'auto' },
+          marginRight: { Desktop: 'auto' },
 
 
 

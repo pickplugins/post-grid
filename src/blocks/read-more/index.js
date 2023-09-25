@@ -70,10 +70,7 @@ registerBlockType("post-grid/read-more", {
         styles:
         {
 
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          display: { Desktop: 'block' },
 
         },
       },
@@ -91,20 +88,12 @@ registerBlockType("post-grid/read-more", {
 
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          display: {},
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+          color: { Desktop: '#1F2E45' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          display: { Desktop: 'inline-block' },
 
         },
       },
@@ -114,21 +103,13 @@ registerBlockType("post-grid/read-more", {
     icon: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: '', /*before, after, prefix, postfix */ class: 'readmore-icon', },
+        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'bi-arrow-right', position: 'afterReadmore', /*before, after, prefix, postfix */ class: 'readmore-icon', },
 
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          display: {},
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
+          color: { Desktop: 'inherit' },
+          margin: { Desktop: '0px 10px 0px 10px' },
+          fontSize: { Desktop: '18px' },
         },
       },
     },
@@ -142,8 +123,12 @@ registerBlockType("post-grid/read-more", {
 
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 10px 0px 0px' },
 
         },
       },
@@ -156,8 +141,12 @@ registerBlockType("post-grid/read-more", {
 
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 0px 0px 10px' },
 
         },
       },

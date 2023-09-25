@@ -68,6 +68,13 @@ registerBlockType("post-grid/text", {
           tag: 'div',
           class: 'pg-text',
         },
+        styles: {
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+        },
 
 
       },

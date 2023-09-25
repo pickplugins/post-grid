@@ -600,13 +600,48 @@ registerBlockType("post-grid/social-share", {
 
 
 
+    // function onChangeStyleElements(sudoScource, newVal, attr) {
+
+    //   var sudoScourceX = { ...elements[sudoScource] }
+    //   var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
+
+
+    //   sudoScourceX[attr][breakPointX] = newVal;
+
+    //   let itemsX = Object.assign({}, blockCssY.items);
+
+    //   if (itemsX[elementSelector] == undefined) {
+    //     itemsX[elementSelector] = {};
+    //   }
+
+    //   Object.entries(sudoScourceX).map(args => {
+    //     var argAttr = myStore.cssAttrParse(args[0]);
+    //     var argAttrVal = args[1];
+    //     blockCssY.items[elementSelector][argAttr] = argAttrVal;
+    //   })
+
+    //   setAttributes({ blockCssY: { items: blockCssY.items } });
+    //   setAttributes({ elements: { ...elements } });
+    // }
+
+
+
+    
+
+
+
     function onChangeStyleElements(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX]
+      let obj = Object.assign({}, elements);
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
 
-      var sudoScourceX = { ...elements[sudoScource] }
+      setAttributes({ element: object });
+
+
+
+
       var elementSelector = myStore.getElementSelector(sudoScource, itemSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -614,14 +649,11 @@ registerBlockType("post-grid/social-share", {
         itemsX[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
-      setAttributes({ elements: { ...elements } });
+      setAttributes({ blockCssY: { items: cssItems } });
+
     }
 
 

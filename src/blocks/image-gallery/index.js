@@ -77,7 +77,9 @@ registerBlockType("post-grid/image-gallery", {
 
         styles:
         {
-
+          display: { Desktop: 'grid' },
+          gap: { Desktop: '1em' },
+          gridTemplateColumns: { Desktop: '1fr 1fr' },
 
         },
       },

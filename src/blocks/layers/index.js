@@ -77,7 +77,8 @@ registerBlockType("post-grid/layers", {
 
         styles:
         {
-          position: {},
+          display: { Desktop: 'block' },
+          backgroundColor: { Desktop: '#F1F7F9' },
 
         },
       },

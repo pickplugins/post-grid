@@ -189,6 +189,7 @@ registerBlockType("post-grid/post-grid", {
             Tablet: "1fr 1fr",
             Mobile: "1fr",
           },
+          gap: { Desktop: '10px' },
         },
       },
     },

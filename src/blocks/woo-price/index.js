@@ -69,10 +69,8 @@ registerBlockType("post-grid/woo-price", {
         styles:
         {
 
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          
+          display: { Desktop: 'block' },
 
         },
       },
@@ -84,10 +82,13 @@ registerBlockType("post-grid/woo-price", {
         options: { tag: '', symbole: '$', position: '', /*left, right*/ class: '' },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          color: { Desktop: 'inherit' },
+          
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '600' },
+          
         },
       },
     },
@@ -97,10 +98,11 @@ registerBlockType("post-grid/woo-price", {
         options: { value: 123, tag: 'span',  /*left, right*/ class: '' },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          color: { Desktop: '#1F2E45' },
+          fontSize: { Desktop: '24px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
         },
       },
     },
@@ -110,10 +112,13 @@ registerBlockType("post-grid/woo-price", {
         options: { value: 123, tag: 'span', class: '' },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          color: { Desktop: '#a7a7a7' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          textDecoration: { Desktop: 'line-through #a7a7a7 solid 2px' },
+
         },
       },
     },
@@ -123,10 +128,12 @@ registerBlockType("post-grid/woo-price", {
         options: { text: '-', tag: 'span', class: '' },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          color: { Desktop: '#1F2E45' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 10px 0px 10px' },
         },
       },
     },
@@ -141,17 +148,9 @@ registerBlockType("post-grid/woo-price", {
 
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          display: {},
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
+          color: { Desktop: '#000000' },
+          margin: { Desktop: '0px 10px 0px 10px' },
+          fontSize: { Desktop: '18px' },
         },
       },
     },
@@ -164,8 +163,12 @@ registerBlockType("post-grid/woo-price", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 10px 0px 0px' },
 
         },
       },
@@ -178,8 +181,12 @@ registerBlockType("post-grid/woo-price", {
           { text: '', class: 'postfix', },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 0px 0px 10px' },
 
         },
       },

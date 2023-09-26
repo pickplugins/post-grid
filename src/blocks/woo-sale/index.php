@@ -357,13 +357,20 @@ class PGBlockWooSale
                     $onSale = ($product != null) ? $product->is_on_sale() : '';
                 ?>
                     <span class='sale'>
+                    <?php if ($iconPosition == 'beforeSaleText') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
                         <?php
                         if ($onSale) {
                             echo wp_kses_post($saleText);
                         } else {
                             echo wp_kses_post($saleNoSale);
                         }
+                        
                         ?>
+                        <?php if ($iconPosition == 'afterSaleText') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
                     </span>
                 <?php
                 endif;
@@ -373,6 +380,9 @@ class PGBlockWooSale
 
                 ?>
                     <span className='sale'>
+                    <?php if ($iconPosition == 'beforeSaleText') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
                         <?php
                         if ($onSale) {
                             echo wp_kses_post($saleText);
@@ -380,6 +390,9 @@ class PGBlockWooSale
                             echo wp_kses_post($saleNoSale);
                         }
                         ?>
+                        <?php if ($iconPosition == 'afterSaleText') : ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
                     </span>
 
                 <?php

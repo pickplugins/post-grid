@@ -69,10 +69,7 @@ registerBlockType("post-grid/woo-stock-quantity", {
         styles:
         {
 
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          display: { Desktop: 'block' },
 
         },
       },
@@ -97,20 +94,11 @@ registerBlockType("post-grid/woo-stock-quantity", {
 
         styles: {
 
-          display: {},
-          width: {},
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+          color: { Desktop: '#e27c7c' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
         },
       },
     },
@@ -121,17 +109,9 @@ registerBlockType("post-grid/woo-stock-quantity", {
 
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          display: {},
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
+          color: { Desktop: '#000000' },
+          margin: { Desktop: '0px 10px 0px 10px' },
+          fontSize: { Desktop: '18px' },
         },
       },
     },
@@ -144,8 +124,12 @@ registerBlockType("post-grid/woo-stock-quantity", {
           { text: 'In Stock: ', class: 'prefix', },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '600' },
+          margin: { Desktop: '0px 0px 0px 0px' },
 
         },
       },
@@ -158,8 +142,12 @@ registerBlockType("post-grid/woo-stock-quantity", {
           { text: '', class: 'postfix', },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 0px 0px 10px' },
 
         },
       },

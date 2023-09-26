@@ -67,10 +67,9 @@ registerBlockType("post-grid/woo-star-rate", {
         options: { tag: 'div', class: '' },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          display: { Desktop: 'flex' },
+          alignItems: { Desktop: 'center' },
+          gap: { Desktop: '10px' },
         },
       },
     },
@@ -78,21 +77,14 @@ registerBlockType("post-grid/woo-star-rate", {
     iconsWrap: {
       type: 'object',
       default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: 'beforeSku', /*before, after, prefix, postfix */ class: '', },
+        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-star', position: 'beforeSku', /*before, after, prefix, postfix */ class: '', },
 
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          display: {},
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
+          display: { Desktop: 'block' },
+          position: { Desktop: 'relative' },
+          fontSize: { Desktop: '18px' },
+          
         },
       },
     },
@@ -103,10 +95,8 @@ registerBlockType("post-grid/woo-star-rate", {
         options: { tag: 'div', class: '' },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          display: { Desktop: 'flex' },
+          color: { Desktop: '#94a3b8' },
         },
       },
     },
@@ -117,23 +107,26 @@ registerBlockType("post-grid/woo-star-rate", {
         options: { tag: 'div', class: '' },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          display: { Desktop: 'flex' },
+          color: { Desktop: '#1F2E45' },
+          overflow: { Desktop: 'hidden' },
+          left: { Desktop: '0px' },
+          top: { Desktop: '0' },
+          position: { Desktop: 'absolute' },
         },
       },
     },
     summury: {
       type: 'object',
       default: {
-        options: { type: '', typeCustom: '', linkTo: 'reviews',/*postUrl, reviews*/ class: '' },
+        options: { type: '{review_count} customer reviews', typeCustom: '', linkTo: 'reviews',/*postUrl, reviews*/ class: '' },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
         },
       },
     },
@@ -150,8 +143,11 @@ registerBlockType("post-grid/woo-star-rate", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
 
         },
       },
@@ -164,8 +160,11 @@ registerBlockType("post-grid/woo-star-rate", {
           { text: '', class: 'postfix', },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
 
         },
       },

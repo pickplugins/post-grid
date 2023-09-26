@@ -984,20 +984,50 @@ registerBlockType("post-grid/post-date", {
     }
 
 
+    // function onChangeStylePostfix(sudoScource, newVal, attr) {
+
+
+    //   var path = sudoScource + '.' + attr + '.' + breakPointX
+    //   let obj = Object.assign({}, postfix);
+    //   const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+    //   setAttributes({ postfix: updatedObj });
+    //   var sudoScourceX = { ...updatedObj[sudoScource] }
+
+
+    //   var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
+
+
+    //   sudoScourceX[attr][breakPointX] = newVal;
+
+    //   let itemsX = Object.assign({}, blockCssY.items);
+
+    //   if (itemsX[elementSelector] == undefined) {
+    //     itemsX[elementSelector] = {};
+    //   }
+
+    //   Object.entries(sudoScourceX).map(args => {
+    //     var argAttr = myStore.cssAttrParse(args[0]);
+    //     var argAttrVal = args[1];
+    //     blockCssY.items[elementSelector][argAttr] = argAttrVal;
+    //   })
+
+
+    //   setAttributes({ blockCssY: { items: blockCssY.items } });
+
+    // }
+
+
+
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
-
-      var path = sudoScource + '.' + attr + '.' + breakPointX
+      var path = [sudoScource, attr, breakPointX]
       let obj = Object.assign({}, postfix);
-      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
-      setAttributes({ postfix: updatedObj });
-      var sudoScourceX = { ...updatedObj[sudoScource] }
+      const object = myStore.updatePropertyDeep(obj, path, newVal)
 
+      setAttributes({ postfix: object });
 
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
-
-
-      sudoScourceX[attr][breakPointX] = newVal;
+      var cssPropty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1005,14 +1035,11 @@ registerBlockType("post-grid/post-date", {
         itemsX[elementSelector] = {};
       }
 
-      Object.entries(sudoScourceX).map(args => {
-        var argAttr = myStore.cssAttrParse(args[0]);
-        var argAttrVal = args[1];
-        blockCssY.items[elementSelector][argAttr] = argAttrVal;
-      })
+      var cssPath = [elementSelector, cssPropty, breakPointX]
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
+      setAttributes({ blockCssY: { items: cssItems } });
 
-      setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
 

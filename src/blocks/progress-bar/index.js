@@ -69,8 +69,7 @@ registerBlockType("post-grid/progress-bar", {
 
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          display: { Desktop: 'block' },
 
 
         },

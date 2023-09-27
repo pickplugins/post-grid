@@ -1329,7 +1329,7 @@ registerBlockType("post-grid/popup", {
                 <div className='flex justify-between mb-5'>
                   <div className='text-xl rounded-sm'>Click to pick a variation</div>
 
-                  <div className='bg-orange-400 hidden hover:bg-orange-300 px-4 py-1 text-white cursor-pointer'
+                  <div className='bg-orange-400  hover:bg-orange-300 px-4 py-1 text-white cursor-pointer'
                     onClick={(ev) => {
 
 

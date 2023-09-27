@@ -78,11 +78,10 @@ registerBlockType("post-grid/image", {
         styles:
         {
 
-          width: { Desktop: '' },
-          height: { Desktop: '' },
-          overflow: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' }
+          width: { Desktop: '100%' },
+          height: { Desktop: '100%' },
+          overflow: { Desktop: 'hidden' },
+          
         },
       },
     },
@@ -118,12 +117,9 @@ registerBlockType("post-grid/image", {
         },
 
         styles: {
-
+          display: { Desktop: 'block' },
           maxWidth: { Desktop: '100%' },
           height: { Desktop: 'auto' },
-          filter: {},
-          objectFit: { Desktop: 'cover' },
-          margin: { Desktop: '' }
         },
 
       },

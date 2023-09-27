@@ -69,14 +69,9 @@ registerBlockType("post-grid/post-featured-image", {
 
         styles:
         {
-          height: {},
-          overflow: {},
-          color: { Desktop: '' },
-          display: {},
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          backgroundPosition: {},
-          backgroundSize: {},
+          width: { Desktop: '100%' },
+          height: { Desktop: '100%' },
+          overflow: { Desktop: 'hidden' },
 
 
         },
@@ -109,11 +104,9 @@ registerBlockType("post-grid/post-featured-image", {
         },
 
         styles: {
-          width: {},
-          height: {},
-          filter: {},
-          padding: { Desktop: '' },
-          margin: {}
+          display: { Desktop: 'block' },
+          maxWidth: { Desktop: '100%' },
+          height: { Desktop: 'auto' },
         },
         hoverStyles:
         {

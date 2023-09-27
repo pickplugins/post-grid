@@ -65,10 +65,8 @@ registerBlockType("post-grid/post-author", {
         styles:
         {
 
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
+          display: { Desktop: 'block' },
+          
         },
       },
     },
@@ -90,14 +88,13 @@ registerBlockType("post-grid/post-author", {
         options: { class: 'avatar', size: '48', default: '', },
         styles:
         {
-          display: {},
+          display: { Desktop: 'block' },
 
-          color: { Desktop: '' },
           backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          verticalAlign: {},
-          borderRadius: {},
+          overflow: { Desktop: 'hidden' },
+          margin: { Desktop: '0px 20px 0px 0px' },
+          borderRadius: { Desktop: '100px 100px 100px 100px' },
+          float: { Desktop: 'left' },
 
 
         },
@@ -113,13 +110,11 @@ registerBlockType("post-grid/post-author", {
         styles:
         {
 
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          verticalAlign: {},
-
-          fontSize: { Desktop: '' },
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
 
         },
 
@@ -134,18 +129,11 @@ registerBlockType("post-grid/post-author", {
         styles:
         {
 
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          verticalAlign: {},
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
         },
 
       }

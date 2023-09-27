@@ -83,7 +83,25 @@ registerBlockType("post-grid/woo-sale", {
     foreground: "#fff",
     // Specifying an icon for the block
     src: (
-      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#1d4ed8" d="M30.41,27.77a8.24,8.24,0,1,1-2.78-6.17A8.24,8.24,0,0,1,30.41,27.77Z" /><path fill="#1d4ed8" d="M3.81,21.12,19.7,1.2l.11-.13-1.46.17a2.85,2.85,0,0,0-1.91,1.05L2.06,20.38a5.25,5.25,0,0,0,.83,7.35v0l7.41,5.91a2.8,2.8,0,0,0,3,.35L4.47,27a4.14,4.14,0,0,1-.67-5.82ZM35.06,10.87l-1-8.35A2.84,2.84,0,0,0,31,0L22.63.93A2.88,2.88,0,0,0,20.73,2L4.83,22h0a2.84,2.84,0,0,0,.45,4l9.29,7.4a2.94,2.94,0,0,0,.63.38,9.18,9.18,0,0,1,13-12.91L34.46,13A2.82,2.82,0,0,0,35.06,10.87ZM30.94,4.61h-.15A1.3,1.3,0,0,1,30.62,2a1.31,1.31,0,1,1,.32,2.6Z" /><path fill="#fff" d="M16.91,24.34a1.84,1.84,0,1,1,1.84,1.84A1.84,1.84,0,0,1,16.91,24.34Zm6.84,6.85A1.85,1.85,0,1,1,25.6,33,1.85,1.85,0,0,1,23.75,31.19Zm2.19-8.7L27.44,24l-9,9L17,31.51Z" /></svg>
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 36 36"
+      >
+        <path
+          fill="#1d4ed8"
+          d="M30.41,27.77a8.24,8.24,0,1,1-2.78-6.17A8.24,8.24,0,0,1,30.41,27.77Z"
+        />
+        <path
+          fill="#1d4ed8"
+          d="M3.81,21.12,19.7,1.2l.11-.13-1.46.17a2.85,2.85,0,0,0-1.91,1.05L2.06,20.38a5.25,5.25,0,0,0,.83,7.35v0l7.41,5.91a2.8,2.8,0,0,0,3,.35L4.47,27a4.14,4.14,0,0,1-.67-5.82ZM35.06,10.87l-1-8.35A2.84,2.84,0,0,0,31,0L22.63.93A2.88,2.88,0,0,0,20.73,2L4.83,22h0a2.84,2.84,0,0,0,.45,4l9.29,7.4a2.94,2.94,0,0,0,.63.38,9.18,9.18,0,0,1,13-12.91L34.46,13A2.82,2.82,0,0,0,35.06,10.87ZM30.94,4.61h-.15A1.3,1.3,0,0,1,30.62,2a1.31,1.31,0,1,1,.32,2.6Z"
+        />
+        <path
+          fill="#fff"
+          d="M16.91,24.34a1.84,1.84,0,1,1,1.84,1.84A1.84,1.84,0,0,1,16.91,24.34Zm6.84,6.85A1.85,1.85,0,1,1,25.6,33,1.85,1.85,0,0,1,23.75,31.19Zm2.19-8.7L27.44,24l-9,9L17,31.51Z"
+        />
+      </svg>
     ),
   },
 
@@ -94,10 +112,7 @@ registerBlockType("post-grid/woo-sale", {
         options: { tag: "div", class: "" },
 
         styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-          padding: { Desktop: "" },
-          margin: { Desktop: "" },
+          display: { Desktop: "block" },
         },
       },
     },
@@ -105,12 +120,22 @@ registerBlockType("post-grid/woo-sale", {
     sale: {
       type: "object",
       default: {
-        options: { text: "Sale", noSale: "No Sale", tag: "span", class: "sale" },
+        options: {
+          text: "Sale",
+          noSale: "No Sale",
+          tag: "span",
+          class: "sale",
+        },
         styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-          padding: { Desktop: "" },
-          margin: { Desktop: "" },
+          display: { Desktop: "inline-block" },
+          color: { Desktop: "#ffffff" },
+          backgroundColor: { Desktop: "#e27c7c" },
+          fontSize: { Desktop: "18px" },
+          fontFamily: { Desktop: "Poppins" },
+          fontStyle: { Desktop: "normal" },
+          fontWeight: { Desktop: "400" },
+          padding: { Desktop: "5px 10px 5px 10px" },
+
         },
       },
     },
@@ -121,23 +146,15 @@ registerBlockType("post-grid/woo-sale", {
         options: {
           library: "fontAwesome",
           srcType: "class",
-          /*class, html, img, svg */ iconSrc: "",
-          position: "",
+          /*class, html, img, svg */ iconSrc: "fas fa-percent",
+          position: "beforeSaleText",
           /*before, after, prefix, postfix */ class: "icon",
         },
 
         styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-          padding: { Desktop: "" },
-          margin: { Desktop: "" },
-
-          display: {},
-
-          fontSize: { Desktop: "" },
-          lineHeight: {},
-          fontWeight: { Desktop: "700" },
-          textDecoration: {}, //overline, line-through, underline
+          color: { Desktop: "#ffffff" },
+          margin: { Desktop: "0px 10px 0px 0px" },
+          fontSize: { Desktop: "18px" },
         },
       },
     },
@@ -147,8 +164,13 @@ registerBlockType("post-grid/woo-sale", {
       default: {
         options: { text: "", class: "prefix" },
         styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
+          color: { Desktop: "#000000 !important" },
+          fontSize: { Desktop: "18px" },
+          fontFamily: { Desktop: "Poppins" },
+          fontStyle: { Desktop: "normal" },
+          fontWeight: { Desktop: "400" },
+          margin: { Desktop: "0px 10px 0px 0px" },
+          borderRadius: { Desktop: "5px 5px 5px 5px" },
         },
       },
     },
@@ -158,8 +180,12 @@ registerBlockType("post-grid/woo-sale", {
       default: {
         options: { text: "", class: "postfix" },
         styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
+          color: { Desktop: "#000000 !important" },
+          fontSize: { Desktop: "18px" },
+          fontFamily: { Desktop: "Poppins" },
+          fontStyle: { Desktop: "normal" },
+          fontWeight: { Desktop: "400" },
+          margin: { Desktop: "0px 0px 0px 10px" },
         },
       },
     },
@@ -852,7 +878,7 @@ registerBlockType("post-grid/woo-sale", {
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
-    useEffect(() => { }, [sale]);
+    useEffect(() => {}, [sale]);
 
     const CustomTag = `${wrapper.options.tag}`;
     const CustomTagPostTitle = `${sale.options.tag}`;
@@ -872,7 +898,7 @@ registerBlockType("post-grid/woo-sale", {
                 activeTab="options"
                 orientation="horizontal"
                 activeClass="active-tab"
-                onSelect={(tabName) => { }}
+                onSelect={(tabName) => {}}
                 tabs={[
                   {
                     name: "options",
@@ -944,7 +970,7 @@ registerBlockType("post-grid/woo-sale", {
                 activeTab="options"
                 orientation="horizontal"
                 activeClass="active-tab"
-                onSelect={(tabName) => { }}
+                onSelect={(tabName) => {}}
                 tabs={[
                   {
                     name: "options",
@@ -1018,7 +1044,7 @@ registerBlockType("post-grid/woo-sale", {
                 activeTab="options"
                 orientation="horizontal"
                 activeClass="active-tab"
-                onSelect={(tabName) => { }}
+                onSelect={(tabName) => {}}
                 tabs={[
                   {
                     name: "options",
@@ -1063,6 +1089,8 @@ registerBlockType("post-grid/woo-sale", {
 
                         { label: "Before Prefix", value: "beforePrefix" },
                         { label: "After Prefix", value: "afterPrefix" },
+                        { label: "Before Sale Text", value: "beforeSaleText" },
+                        { label: "After Sale Text", value: "afterSaleText" },
                         { label: "Before Postfix", value: "beforePostfix" },
                         { label: "After Postfix", value: "afterPostfix" },
                       ]}
@@ -1096,7 +1124,7 @@ registerBlockType("post-grid/woo-sale", {
                 activeTab="options"
                 orientation="horizontal"
                 activeClass="active-tab"
-                onSelect={(tabName) => { }}
+                onSelect={(tabName) => {}}
                 tabs={[
                   {
                     name: "options",
@@ -1156,7 +1184,7 @@ registerBlockType("post-grid/woo-sale", {
                 activeTab="options"
                 orientation="horizontal"
                 activeClass="active-tab"
-                onSelect={(tabName) => { }}
+                onSelect={(tabName) => {}}
                 tabs={[
                   {
                     name: "options",
@@ -1277,8 +1305,6 @@ registerBlockType("post-grid/woo-sale", {
         </InspectorControls>
 
         <>
-
-
           {loading && (
             <div>
               <Spinner />
@@ -1309,19 +1335,45 @@ registerBlockType("post-grid/woo-sale", {
 
               {productData != null && (
                 <>
-
                   {productData.on_sale && (
                     <span className={sale.options.class}>
+                      {icon.options.position == "beforeSaleText" && (
+                        <span
+                          className={icon.options.class}
+                          dangerouslySetInnerHTML={{ __html: iconHtml }}
+                        />
+                      )}
+
                       {sale.options.text}
+                      {icon.options.position == "afterSaleText" && (
+                        <span
+                          className={icon.options.class}
+                          dangerouslySetInnerHTML={{ __html: iconHtml }}
+                        />
+                      )}
                     </span>
                   )}
 
                   {!productData.on_sale && (
                     <span className={sale.options.class}>
-                      {sale.options.noSale}
+                      <span className={sale.options.class}>
+                        {icon.options.position == "beforeSaleText" && (
+                          <span
+                            className={icon.options.class}
+                            dangerouslySetInnerHTML={{ __html: iconHtml }}
+                          />
+                        )}
+
+                        {sale.options.noSale}
+                        {icon.options.position == "afterSaleText" && (
+                          <span
+                            className={icon.options.class}
+                            dangerouslySetInnerHTML={{ __html: iconHtml }}
+                          />
+                        )}
+                      </span>
                     </span>
                   )}
-
                 </>
               )}
 

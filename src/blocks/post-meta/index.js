@@ -69,11 +69,7 @@ registerBlockType("post-grid/post-meta", {
         styles:
         {
 
-          color: { Desktop: '' },
-
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          display: {},
+          display: { Desktop: 'block' },
 
         },
 
@@ -89,20 +85,11 @@ registerBlockType("post-grid/post-meta", {
 
         styles: {
 
-          display: {},
-          width: {},
-          color: { Desktop: '' },
-
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
         },
 
       },
@@ -114,7 +101,12 @@ registerBlockType("post-grid/post-meta", {
 
         styles:
         {
-          color: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 10px 0px 0px' },
 
         },
       },
@@ -127,7 +119,12 @@ registerBlockType("post-grid/post-meta", {
 
         styles:
         {
-          color: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 0px 0px 10px' },
 
         },
       },

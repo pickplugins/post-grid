@@ -77,6 +77,7 @@ registerBlockType("post-grid/flex-wrap", {
         styles:
         {
           display: { Desktop: 'flex' },
+          gap: { Desktop: '1em' },
 
         },
       },

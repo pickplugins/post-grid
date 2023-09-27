@@ -41,6 +41,7 @@ registerBlockType("post-grid/wordpress-org", {
       "type": "object",
       "default": {
         items: [
+          { id: 'banners', label: "Thumbnail", prefix: 'Thumbnail', size: "high", isLinked: false, },
           { id: 'name', label: "Plugin Name", prefix: 'Plugin Name: ', },
           { id: 'version', label: "Version", prefix: 'Version: ', },
         ],
@@ -53,7 +54,7 @@ registerBlockType("post-grid/wordpress-org", {
 
         styles:
         {
-
+          display: { Desktop: 'block' },
         },
       },
     },
@@ -66,8 +67,12 @@ registerBlockType("post-grid/wordpress-org", {
         },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          listStyle: { Desktop: 'none' },
 
         },
       },
@@ -82,8 +87,8 @@ registerBlockType("post-grid/wordpress-org", {
         },
         styles:
         {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
+          maxWidth: { Desktop: '100%' },
+          height: { Desktop: 'auto' },
 
         },
       },

@@ -64,8 +64,8 @@ registerBlockType("post-grid/star-rate", {
         },
         styles:
         {
-          color: { Desktop: '' },
-          borderRadius: {},
+          display: { Desktop: 'flex' },
+          gap: { Desktop: '8px' },
 
 
 
@@ -85,11 +85,11 @@ registerBlockType("post-grid/star-rate", {
         options: {
           library: 'fontAwesome',
           srcType: "class", /*class, html, img, svg */
-          iconSrc: 'fas fa-check-circle',
+          iconSrc: 'fas fa-star',
           class: 'text-icon',
 
           text: 'Custom Text',
-          isLink: true,
+          isLink: false,
           linkTo: 'postUrl', /*postUrl, homeUrl, authorUrl, authorLink, mailTo, custom, customField */
           linkToAuthorMeta: '',
           linkToCustomMeta: '',
@@ -101,7 +101,8 @@ registerBlockType("post-grid/star-rate", {
 
         styles:
         {
-          color: { Desktop: '' },
+          color: { Desktop: '#fdcc0d' },
+          fontSize: { Desktop: '22px' },
 
 
         },
@@ -117,7 +118,12 @@ registerBlockType("post-grid/star-rate", {
 
         styles:
         {
-          color: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 10px 0px 0px' },
 
         },
       },
@@ -130,7 +136,12 @@ registerBlockType("post-grid/star-rate", {
 
         styles:
         {
-          color: { Desktop: '' },
+          color: { Desktop: '#000000 !important' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 10px 0px 0px' },
 
         },
       },

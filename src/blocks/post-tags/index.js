@@ -62,11 +62,7 @@ registerBlockType("post-grid/post-tags", {
         styles:
         {
 
-          color: { Desktop: '' },
-
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          display: {},
+          display: { Desktop: 'block' },
 
         },
       },
@@ -79,18 +75,13 @@ registerBlockType("post-grid/post-tags", {
         styles:
         {
 
-          color: { Desktop: '' },
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
 
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+          
         },
 
 
@@ -103,16 +94,9 @@ registerBlockType("post-grid/post-tags", {
 
         styles:
         {
-          color: { Desktop: '' },
-
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          display: {},
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          fontWeight: { "Desktop": "700" },
+          color: { Desktop: '#000000' },
+          margin: { Desktop: '0px 10px 0px 10px' },
+          fontSize: { Desktop: '18px' },
           textDecoration: {}, //overline, line-through, underline
         },
       },
@@ -126,10 +110,12 @@ registerBlockType("post-grid/post-tags", {
         styles:
         {
 
-          color: { Desktop: '' },
-
-          padding: { Desktop: '' },
-          margin: {}
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 10px 0px 10px' },
         },
 
       },
@@ -143,10 +129,11 @@ registerBlockType("post-grid/post-tags", {
         styles:
         {
 
-          color: { Desktop: '' },
-
-          padding: { Desktop: '' },
-          margin: {}
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
         },
 
       },
@@ -161,18 +148,11 @@ registerBlockType("post-grid/post-tags", {
         styles:
         {
 
-          color: { Desktop: '' },
-
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
         },
 
       },
@@ -184,9 +164,12 @@ registerBlockType("post-grid/post-tags", {
         styles:
         {
 
-          color: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: {}
+          color: { Desktop: '#000000' },
+          fontSize: { Desktop: '18px' },
+          fontFamily: { Desktop: 'Poppins' },
+          fontStyle: { Desktop: 'normal' },
+          fontWeight: { Desktop: '400' },
+          margin: { Desktop: '0px 10px 0px 10px' },
         },
 
       },

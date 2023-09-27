@@ -462,14 +462,14 @@ class PGBlockWooPrice
                             <span className='currency'>
                                 <?php echo wp_kses_post($currency_symbol); ?>
                             </span>
-                            <?php echo wp_kses_post($sale_price); ?>
+                            <?php echo wp_kses_post($regular_price); ?>
                         </span>
 
                         <span class=' discounted'>
                             <span className='currency'>
                                 <?php echo wp_kses_post($currency_symbol); ?>
                             </span>
-                            <?php echo wp_kses_post($regular_price); ?>
+                            <?php echo wp_kses_post($sale_price); ?>
                         </span>
 
                     <?php endif; ?>

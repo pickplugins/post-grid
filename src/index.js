@@ -158,6 +158,7 @@ import './blocks/form-field-file'
 
 //import './blocks/table-of-contents'
 import './blocks/number-counter'
+import './blocks/date-countdown'
 
 import './blocks/list'
 import './blocks/list-nested'

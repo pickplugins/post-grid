@@ -65,6 +65,7 @@ if (!class_exists('PostGrid')) {
             // require_once(post_grid_plugin_dir . 'src/blocks/list-nested/index.php');
             // require_once(post_grid_plugin_dir . 'src/blocks/list-nested-item/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/number-counter/index.php');
+            require_once(post_grid_plugin_dir . 'src/blocks/date-countdown/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/popup/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/progress-bar/index.php');
 

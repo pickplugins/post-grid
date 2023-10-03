@@ -4,7 +4,10 @@ import {
   InnerBlocks,
   useBlockProps,
   useInnerBlocksProps,
+  store as blockEditorStore,
 } from "@wordpress/block-editor";
+
+import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 
 import { __ } from "@wordpress/i18n";
 import { useSelect, select, useDispatch, dispatch } from "@wordpress/data";
@@ -69,6 +72,7 @@ import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
+import variations from "./variations";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -121,6 +125,17 @@ registerBlockType("post-grid/date-countdown", {
     wrapper: {
       type: "object",
       default: {
+        options: { tag: "div", class: "", startDate: "", endDate: "" },
+
+        styles: {
+          color: { Desktop: "" },
+          backgroundColor: { Desktop: "" },
+        },
+      },
+    },
+    countdownWrapper: {
+      type: "object",
+      default: {
         options: { tag: "div", class: "" },
 
         styles: {
@@ -129,17 +144,55 @@ registerBlockType("post-grid/date-countdown", {
         },
       },
     },
+    inner: {
+      type: "object",
+      default: {
+        options: { enable: true, tag: "div", class: "" },
 
-    setting: {
+        styles: {
+          color: { Desktop: "" },
+          backgroundColor: { Desktop: "" },
+        },
+      },
+    },
+
+    items: {
       type: "object",
       default: {
         options: {
-          startDate: "",
-          endDate: "",
+          tag: "div",
+          class: "items",
+          secondEnable: true,
+          minuteEnable: true,
+          hourEnable: true,
+          dayEnable: true,
+          // endDate: "",
           // start: "0",
           // end: "500",
           // duration: 1000,
-          // class: "number-count",
+          // class: "date-countdown",
+        },
+        styles: {
+          color: { Desktop: "" },
+          fontSize: { Desktop: "" },
+        },
+      },
+    },
+    secondWrap: {
+      type: "object",
+      default: {
+        options: {
+          enable: true,
+          tag: "div",
+          class: "second-wrapper",
+          label: "",
+          prefix: "",
+          prefix: "",
+        },
+
+        styles: {
+          color: { Desktop: "" },
+          fontSize: { Desktop: "" },
         },
       },
     },
@@ -147,8 +200,27 @@ registerBlockType("post-grid/date-countdown", {
       type: "object",
       default: {
         options: {
+          enable: true,
           tag: "div",
           class: "second-countdown",
+          label: "",
+          prefix: "",
+          prefix: "",
+        },
+
+        styles: {
+          color: { Desktop: "" },
+          fontSize: { Desktop: "" },
+        },
+      },
+    },
+    minuteWrap: {
+      type: "object",
+      default: {
+        options: {
+          enable: true,
+          tag: "div",
+          class: "minute-wrapper",
           label: "",
           prefix: "",
           prefix: "",
@@ -164,8 +236,27 @@ registerBlockType("post-grid/date-countdown", {
       type: "object",
       default: {
         options: {
+          enable: true,
           tag: "div",
           class: "minute-countdown",
+          label: "",
+          prefix: "",
+          prefix: "",
+        },
+
+        styles: {
+          color: { Desktop: "" },
+          fontSize: { Desktop: "" },
+        },
+      },
+    },
+    hourWrap: {
+      type: "object",
+      default: {
+        options: {
+          enable: true,
+          tag: "div",
+          class: "hour-wrapper",
           label: "",
           prefix: "",
           prefix: "",
@@ -181,8 +272,27 @@ registerBlockType("post-grid/date-countdown", {
       type: "object",
       default: {
         options: {
+          enable: true,
           tag: "div",
           class: "hour-countdown",
+          label: "",
+          prefix: "",
+          prefix: "",
+        },
+
+        styles: {
+          color: { Desktop: "" },
+          fontSize: { Desktop: "" },
+        },
+      },
+    },
+    dayWrap: {
+      type: "object",
+      default: {
+        options: {
+          enable: true,
+          tag: "div",
+          class: "day-wrapper",
           label: "",
           prefix: "",
           prefix: "",
@@ -198,6 +308,7 @@ registerBlockType("post-grid/date-countdown", {
       type: "object",
       default: {
         options: {
+          enable: true,
           tag: "div",
           class: "day-countdown",
           label: "",
@@ -211,32 +322,33 @@ registerBlockType("post-grid/date-countdown", {
         },
       },
     },
-    numberCount: {
-      type: "object",
-      default: {
-        options: {
-          tag: "div",
-          start: 0,
-          end: 500,
-          duration: 1000,
-          class: "number-count",
-        },
+    // numberCount: {
+    //   type: "object",
+    //   default: {
+    //     options: {
+    //       tag: "div",
+    //       start: 0,
+    //       end: 500,
+    //       duration: 1000,
+    //       class: "date-countdown",
+    //     },
 
-        styles: {
-          color: { Desktop: "" },
-          fontSize: { Desktop: "" },
-        },
-      },
-    },
+    //     styles: {
+    //       color: { Desktop: "" },
+    //       fontSize: { Desktop: "" },
+    //     },
+    //   },
+    // },
     icon: {
       type: "object",
       default: {
         options: {
+          enable: false,
           library: "fontAwesome",
           srcType: "class",
           /*class, html, img, svg */ iconSrc: "far fa-calendar-alt",
-          position: "beforeCommentCount",
-          /*before, after, prefix, postfix */ class: "number-count-icon",
+          position: "",
+          /*before, after, prefix, postfix */ class: "date-countdown-icon",
         },
 
         styles: {
@@ -247,10 +359,20 @@ registerBlockType("post-grid/date-countdown", {
       },
     },
 
+    separator: {
+      type: "object",
+      default: {
+        options: { enable: true, text: ":", class: "separator", position: "" },
+        styles: {
+          color: { Desktop: "" },
+          backgroundColor: { Desktop: "" },
+        },
+      },
+    },
     label: {
       type: "object",
       default: {
-        options: { text: "", class: "label" },
+        options: { enable: true, text: "", class: "label", position: "" },
         styles: {
           color: { Desktop: "" },
           backgroundColor: { Desktop: "" },
@@ -261,7 +383,7 @@ registerBlockType("post-grid/date-countdown", {
     prefix: {
       type: "object",
       default: {
-        options: { text: "", class: "prefix" },
+        options: { enable: true, text: "", class: "prefix" },
         styles: {
           color: { Desktop: "" },
           backgroundColor: { Desktop: "" },
@@ -272,7 +394,7 @@ registerBlockType("post-grid/date-countdown", {
     postfix: {
       type: "object",
       default: {
-        options: { text: "", class: "postfix" },
+        options: { enable: true, text: "", class: "postfix" },
         styles: {
           color: { Desktop: "" },
           backgroundColor: { Desktop: "" },
@@ -283,6 +405,22 @@ registerBlockType("post-grid/date-countdown", {
     customCss: {
       type: "string",
       default: "",
+    },
+
+    editMode: {
+      type: "boolean",
+      default: true,
+    },
+
+    inner: {
+      type: "object",
+      default: {
+        options: {
+          tag: "div",
+          class: "",
+        },
+        styles: {},
+      },
     },
 
     blockId: {
@@ -307,12 +445,18 @@ registerBlockType("post-grid/date-countdown", {
     var context = props.context;
     var clientId = props.clientId;
 
-    let setting = attributes.setting;
+    var inner = attributes.inner;
+    var editMode = attributes.editMode;
+    let items = attributes.items;
+    let dayWrap = attributes.dayWrap;
     let day = attributes.day;
+    let hourWrap = attributes.hourWrap;
     let hour = attributes.hour;
+    let minuteWrap = attributes.minuteWrap;
     let minute = attributes.minute;
+    let secondWrap = attributes.secondWrap;
     let second = attributes.second;
-    let numberCount = attributes.numberCount;
+    var countdownWrapper = attributes.countdownWrapper;
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
@@ -322,6 +466,7 @@ registerBlockType("post-grid/date-countdown", {
     var blockClass = "." + blockIdX;
     var icon = attributes.icon;
 
+    var separator = attributes.separator;
     var label = attributes.label;
     var prefix = attributes.prefix;
     var postfix = attributes.postfix;
@@ -331,25 +476,54 @@ registerBlockType("post-grid/date-countdown", {
     //const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
     var breakPointX = myStore.getBreakPoint();
 
-    const [linkPickerPosttitle, setLinkPickerPosttitle] = useState(false);
-
-    var [commentCountEdited, setcommentCountEdited] = useState(
-      numberCount.options.start
-    );
-
     // Wrapper CSS Class Selectors
     const wrapperSelector = blockClass;
-    var commentCountSelector = blockClass + " .number-count";
-    var secondSelector = blockClass + " .second-countdown";
-    var minuteSelector = blockClass + " .minute-countdown";
-    var hourSelector = blockClass + " .hour-countdown";
-    var daySelector = blockClass + " .day-countdown";
+    const countdownWrapperSelector = blockClass + " .countdown-wrapper";
     const labelSelector = blockClass + " .label";
     const prefixSelector = blockClass + " .prefix";
     const postfixSelector = blockClass + " .postfix";
-    const iconSelector = blockClass + " .number-count-icon";
+    const iconSelector = blockClass + " .date-countdown-icon";
+    var innerSelector = blockClass + " .inner";
 
     // day hours minutes seconds
+    var separatorSelector = blockClass + " .separator";
+    var itemsSelector = blockClass + " .items";
+    var secondWrapSelector = blockClass + " .second-wrapper";
+    var secondSelector = blockClass + " .second-countdown";
+    var minuteWrapSelector = blockClass + " .minute-wrapper";
+    var minuteSelector = blockClass + " .minute-countdown";
+    var hourWrapSelector = blockClass + " .hour-wrapper";
+    var hourSelector = blockClass + " .hour-countdown";
+    var dayWrapSelector = blockClass + " .day-wrapper";
+    var daySelector = blockClass + " .day-countdown";
+
+    const innerEnable =
+      inner.options.enable == undefined ? true : inner.options.enable;
+    const secondEnable =
+      second.options.enable == undefined ? true : second.options.enable;
+    const minuteEnable =
+      minute.options.enable == undefined ? true : minute.options.enable;
+    const hourEnable =
+      hour.options.enable == undefined ? true : hour.options.enable;
+    const dayEnable =
+      day.options.enable == undefined ? true : day.options.enable;
+    const iconEnable =
+      icon.options.enable == undefined ? true : icon.options.enable;
+    const separatorEnable =
+      separator.options.enable == undefined ? true : separator.options.enable;
+    const labelEnable =
+      label.options.enable == undefined ? true : label.options.enable;
+    const prefixEnable =
+      prefix.options.enable == undefined ? true : prefix.options.enable;
+    const postfixEnable =
+      postfix.options.enable == undefined ? true : postfix.options.enable;
+
+    const { replaceInnerBlocks } = useDispatch(blockEditorStore);
+
+    const hasInnerBlocks = useSelect(
+      (select) => select(blockEditorStore).getBlocks(clientId).length > 0,
+      [clientId]
+    );
 
     const [remindTime, setRemindTime] = useState(0);
     const [remindDay, setRemindDay] = useState(0);
@@ -359,12 +533,11 @@ registerBlockType("post-grid/date-countdown", {
     // const [remindMiliSecond, setRemindMiliSecond] = useState(0);
 
     useEffect(() => {
-      const dateInput1 = setting.options.startDate;
-      const dateInput2 = setting.options.endDate;
+      const dateInput1 = wrapper.options.startDate;
+      const dateInput2 = wrapper.options.endDate;
       const currentDate = new Date();
       const options = { year: "numeric", month: "2-digit", day: "2-digit" };
       const formattedDate = currentDate.toLocaleDateString(undefined, options);
-      console.log(formattedDate);
 
       const date1 = new Date(dateInput1);
       const date2 = new Date(dateInput2);
@@ -379,7 +552,7 @@ registerBlockType("post-grid/date-countdown", {
         // If current date is less, set remindTime to 0 to prevent countdown
         setRemindTime(0);
       }
-    }, [clientId, setting.options.startDate, setting.options.endDate]);
+    }, [clientId, wrapper.options.startDate, wrapper.options.endDate]);
 
     // Use the useEffect hook to update the remaining time every second
     useEffect(() => {
@@ -411,31 +584,9 @@ registerBlockType("post-grid/date-countdown", {
 
         return () => clearInterval(intervalId);
       }
-    }, [remindTime, setting.options.startDate, setting.options.endDate]);
+    }, [remindTime, wrapper.options.startDate, wrapper.options.endDate]);
 
     // day hours minutes seconds
-
-    const counterAnim = (qSelector, start = 0, end, duration = 1000) => {
-      const target = document.querySelector(qSelector);
-      let startTimestamp = null;
-      const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        target.innerText = Math.floor(progress * (end - start) + start);
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
-      };
-      window.requestAnimationFrame(step);
-    };
-
-    useEffect(() => {
-      var start = parseInt(numberCount.options.start);
-      var end = parseInt(numberCount.options.end);
-      var duration = parseInt(numberCount.options.duration);
-
-      counterAnim(commentCountSelector, start, end, duration);
-    }, [numberCount]);
 
     function onChangeIcon(arg) {
       var options = {
@@ -482,6 +633,147 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
+    function onPickCssLibraryCountdownWrapper(args) {
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        countdownWrapper[sudoScource] = sudoScourceArgs;
+      });
+
+      var countdownWrapperX = Object.assign({}, countdownWrapper);
+      setAttributes({ countdownWrapper: countdownWrapperX });
+
+      var styleObj = {};
+
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(
+          sudoScource,
+          countdownWrapperSelector
+        );
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map((y) => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+
+        styleObj[elementSelector] = sudoObj;
+      });
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onPickCssLibraryInner(args) {
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        inner[sudoScource] = sudoScourceArgs;
+      });
+
+      var innerX = Object.assign({}, inner);
+      setAttributes({ inner: innerX });
+
+      var styleObj = {};
+
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(
+          sudoScource,
+          innerSelector
+        );
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map((y) => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+
+        styleObj[elementSelector] = sudoObj;
+      });
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    // css library date countdown
+
+    function onPickCssLibraryItems(args) {
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        items[sudoScource] = sudoScourceArgs;
+      });
+
+      var itemsX = Object.assign({}, items);
+      setAttributes({ items: itemsX });
+
+      var styleObj = {};
+
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(
+          sudoScource,
+          itemsSelector
+        );
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map((y) => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+
+        styleObj[elementSelector] = sudoObj;
+      });
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onPickCssLibrarySecondWrap(args) {
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        secondWrap[sudoScource] = sudoScourceArgs;
+      });
+
+      var secondWrapX = Object.assign({}, secondWrap);
+      setAttributes({ secondWrap: secondWrapX });
+
+      var styleObj = {};
+
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(
+          sudoScource,
+          secondWrapSelector
+        );
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map((y) => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+
+        styleObj[elementSelector] = sudoObj;
+      });
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
     function onPickCssLibrarySecondCountdown(args) {
       Object.entries(args).map((x) => {
         var sudoScource = x[0];
@@ -500,6 +792,41 @@ registerBlockType("post-grid/date-countdown", {
         var elementSelector = myStore.getElementSelector(
           sudoScource,
           secondSelector
+        );
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map((y) => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+
+        styleObj[elementSelector] = sudoObj;
+      });
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onPickCssLibraryMinuteWrap(args) {
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        minuteWrap[sudoScource] = sudoScourceArgs;
+      });
+
+      var minuteWrapX = Object.assign({}, minuteWrap);
+      setAttributes({ minuteWrap: minuteWrapX });
+
+      var styleObj = {};
+
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(
+          sudoScource,
+          minuteWrapSelector
         );
 
         var sudoObj = {};
@@ -552,6 +879,41 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
+    function onPickCssLibraryHourWrap(args) {
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        hourWrap[sudoScource] = sudoScourceArgs;
+      });
+
+      var hourWrapX = Object.assign({}, hourWrap);
+      setAttributes({ hourWrap: hourWrapX });
+
+      var styleObj = {};
+
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(
+          sudoScource,
+          hourWrapSelector
+        );
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map((y) => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+
+        styleObj[elementSelector] = sudoObj;
+      });
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
     function onPickCssLibraryHourCountdown(args) {
       Object.entries(args).map((x) => {
         var sudoScource = x[0];
@@ -570,6 +932,41 @@ registerBlockType("post-grid/date-countdown", {
         var elementSelector = myStore.getElementSelector(
           sudoScource,
           hourSelector
+        );
+
+        var sudoObj = {};
+        Object.entries(sudoScourceArgs).map((y) => {
+          var cssPropty = y[0];
+          var cssProptyVal = y[1];
+          var cssProptyKey = myStore.cssAttrParse(cssPropty);
+          sudoObj[cssProptyKey] = cssProptyVal;
+        });
+
+        styleObj[elementSelector] = sudoObj;
+      });
+
+      var cssItems = Object.assign(blockCssY.items, styleObj);
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onPickCssLibraryDayWrap(args) {
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        dayWrap[sudoScource] = sudoScourceArgs;
+      });
+
+      var dayWrapX = Object.assign({}, dayWrap);
+      setAttributes({ dayWrap: dayWrapX });
+
+      var styleObj = {};
+
+      Object.entries(args).map((x) => {
+        var sudoScource = x[0];
+        var sudoScourceArgs = x[1];
+        var elementSelector = myStore.getElementSelector(
+          sudoScource,
+          dayWrapSelector
         );
 
         var sudoObj = {};
@@ -622,15 +1019,15 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onPickCssLibraryCommentCount(args) {
+    function onPickCssLibrarySeparator(args) {
       Object.entries(args).map((x) => {
         var sudoScource = x[0];
         var sudoScourceArgs = x[1];
-        numberCount[sudoScource] = sudoScourceArgs;
+        separator[sudoScource] = sudoScourceArgs;
       });
 
-      var commentCountX = Object.assign({}, numberCount);
-      setAttributes({ numberCount: commentCountX });
+      var separatorX = Object.assign({}, separator);
+      setAttributes({ separator: separatorX });
 
       var styleObj = {};
 
@@ -639,7 +1036,7 @@ registerBlockType("post-grid/date-countdown", {
         var sudoScourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
           sudoScource,
-          commentCountSelector
+          separatorSelector
         );
 
         var sudoObj = {};
@@ -656,6 +1053,8 @@ registerBlockType("post-grid/date-countdown", {
       var cssItems = Object.assign(blockCssY.items, styleObj);
       setAttributes({ blockCssY: { items: cssItems } });
     }
+
+    // css library date countdown  end
 
     function onPickCssLibraryIcon(args) {
       Object.entries(args).map((x) => {
@@ -849,8 +1248,229 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ wrapper: object });
     }
 
+    function onChangeStyleCountdownWrapper(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, countdownWrapper);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+      setAttributes({ countdownWrapper: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        countdownWrapperSelector
+      );
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onRemoveStyleCountdownWrapper(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(countdownWrapper, [
+        sudoScource,
+        key,
+        breakPointX,
+      ]);
+      setAttributes({ countdownWrapper: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        countdownWrapperSelector
+      );
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+        elementSelector,
+        cssPropty,
+        breakPointX,
+      ]);
+      setAttributes({ blockCssY: { items: cssObject } });
+    }
+
+    function onAddStyleCountdownWrapper(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, countdownWrapper);
+      const object = myStore.addPropertyDeep(obj, path, "");
+      setAttributes({ countdownWrapper: object });
+    }
+
+    function onChangeStyleInner(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, inner);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+      setAttributes({ inner: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        innerSelector
+      );
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onRemoveStyleInner(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(inner, [
+        sudoScource,
+        key,
+        breakPointX,
+      ]);
+      setAttributes({ inner: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        innerSelector
+      );
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+        elementSelector,
+        cssPropty,
+        breakPointX,
+      ]);
+      setAttributes({ blockCssY: { items: cssObject } });
+    }
+
+    function onAddStyleInner(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, inner);
+      const object = myStore.addPropertyDeep(obj, path, "");
+      setAttributes({ inner: object });
+    }
+
     // Css edit
 
+    // items style functions
+    // items style functions end
+
+    function onChangeStyleItems(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, items);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+      setAttributes({ items: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        itemsSelector
+      );
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onRemoveStyleItems(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(items, [
+        sudoScource,
+        key,
+        breakPointX,
+      ]);
+      setAttributes({ items: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        itemsSelector
+      );
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+        elementSelector,
+        cssPropty,
+        breakPointX,
+      ]);
+      setAttributes({ blockCssY: { items: cssObject } });
+    }
+
+    function onAddStyleItems(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, items);
+      const object = myStore.addPropertyDeep(obj, path, "");
+      setAttributes({ items: object });
+    }
+
+    // items style functions end
+
+    // second style function
+
+    // second wrap
+    function onChangeStyleSecondWrap(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, secondWrap);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+      setAttributes({ secondWrap: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        secondWrapSelector
+      );
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onRemoveStyleSecondWrap(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(secondWrap, [
+        sudoScource,
+        key,
+        breakPointX,
+      ]);
+      setAttributes({ secondWrap: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        secondWrapSelector
+      );
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+        elementSelector,
+        cssPropty,
+        breakPointX,
+      ]);
+      setAttributes({ blockCssY: { items: cssObject } });
+    }
+
+    function onAddStyleSecondWrap(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, secondWrap);
+      const object = myStore.addPropertyDeep(obj, path, "");
+      setAttributes({ secondWrap: object });
+    }
+
+    // second count
     function onChangeStyleSecondCountdown(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
       let obj = Object.assign({}, second);
@@ -904,6 +1524,66 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ second: object });
     }
 
+    // second style function end
+
+    // minute style function
+
+    // minute count wrap
+
+    function onChangeStyleMinuteWrap(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, minuteWrap);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+      setAttributes({ minuteWrap: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        minuteWrapSelector
+      );
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onRemoveStyleMinuteWrap(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(minuteWrap, [
+        sudoScource,
+        key,
+        breakPointX,
+      ]);
+      setAttributes({ minuteWrap: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        minuteWrapSelector
+      );
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+        elementSelector,
+        cssPropty,
+        breakPointX,
+      ]);
+      setAttributes({ blockCssY: { items: cssObject } });
+    }
+
+    function onAddStyleMinuteWrap(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, minuteWrap);
+      const object = myStore.addPropertyDeep(obj, path, "");
+      setAttributes({ minuteWrap: object });
+    }
+
+    // minute count
     function onChangeStyleMinuteCountdown(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
       let obj = Object.assign({}, minute);
@@ -957,6 +1637,66 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ minute: object });
     }
 
+    // minute style function end
+
+    // hour style function
+
+    // hour wrap
+
+    function onChangeStyleHourWrap(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, hourWrap);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+      setAttributes({ hourWrap: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        hourWrapSelector
+      );
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onRemoveStyleHourWrap(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(hourWrap, [
+        sudoScource,
+        key,
+        breakPointX,
+      ]);
+      setAttributes({ hourWrap: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        hourWrapSelector
+      );
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+        elementSelector,
+        cssPropty,
+        breakPointX,
+      ]);
+      setAttributes({ blockCssY: { items: cssObject } });
+    }
+
+    function onAddStyleHourWrap(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, hourWrap);
+      const object = myStore.addPropertyDeep(obj, path, "");
+      setAttributes({ hourWrap: object });
+    }
+
+    // hour count
     function onChangeStyleHourCountdown(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
       let obj = Object.assign({}, hour);
@@ -1010,6 +1750,65 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ hour: object });
     }
 
+    // hour style function end
+
+    // day style function
+
+    // day wrap
+    function onChangeStyleDayWrap(sudoScource, newVal, attr) {
+      var path = [sudoScource, attr, breakPointX];
+      let obj = Object.assign({}, dayWrap);
+      const object = myStore.updatePropertyDeep(obj, path, newVal);
+
+      setAttributes({ dayWrap: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        dayWrapSelector
+      );
+      var cssPropty = myStore.cssAttrParse(attr);
+
+      let itemsX = Object.assign({}, blockCssY.items);
+
+      if (itemsX[elementSelector] == undefined) {
+        itemsX[elementSelector] = {};
+      }
+
+      var cssPath = [elementSelector, cssPropty, breakPointX];
+      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+      setAttributes({ blockCssY: { items: cssItems } });
+    }
+
+    function onRemoveStyleDayWrap(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(dayWrap, [
+        sudoScource,
+        key,
+        breakPointX,
+      ]);
+      setAttributes({ dayWrap: object });
+
+      var elementSelector = myStore.getElementSelector(
+        sudoScource,
+        dayWrapSelector
+      );
+      var cssPropty = myStore.cssAttrParse(key);
+      var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+        elementSelector,
+        cssPropty,
+        breakPointX,
+      ]);
+      setAttributes({ blockCssY: { items: cssObject } });
+    }
+
+    function onAddStyleDayWrap(sudoScource, key) {
+      var path = [sudoScource, key, breakPointX];
+      let obj = Object.assign({}, dayWrap);
+      const object = myStore.addPropertyDeep(obj, path, "");
+      setAttributes({ dayWrap: object });
+    }
+
+    // day count
     function onChangeStyleDayCountdown(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
       let obj = Object.assign({}, day);
@@ -1063,18 +1862,20 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ day: object });
     }
 
-    // Css edit
+    // day style function end
 
-    function onChangeStyleCommentCount(sudoScource, newVal, attr) {
+    // Separator style functions
+
+    function onChangeStyleSeparator(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
-      let obj = Object.assign({}, numberCount);
+      let obj = Object.assign({}, separator);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
-      setAttributes({ numberCount: object });
+      setAttributes({ separator: object });
 
       var elementSelector = myStore.getElementSelector(
         sudoScource,
-        commentCountSelector
+        separatorSelector
       );
       var cssPropty = myStore.cssAttrParse(attr);
 
@@ -1090,17 +1891,17 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleCommentCount(sudoScource, key) {
-      var object = myStore.deletePropertyDeep(numberCount, [
+    function onRemoveStyleSeparator(sudoScource, key) {
+      var object = myStore.deletePropertyDeep(separator, [
         sudoScource,
         key,
         breakPointX,
       ]);
-      setAttributes({ frontText: object });
+      setAttributes({ separator: object });
 
       var elementSelector = myStore.getElementSelector(
         sudoScource,
-        commentCountSelector
+        separatorSelector
       );
       var cssPropty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
@@ -1111,12 +1912,14 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleCommentCount(sudoScource, key) {
+    function onAddStyleSeparator(sudoScource, key) {
       var path = [sudoScource, key, breakPointX];
-      let obj = Object.assign({}, numberCount);
+      let obj = Object.assign({}, separator);
       const object = myStore.addPropertyDeep(obj, path, "");
-      setAttributes({ numberCount: object });
+      setAttributes({ separator: object });
     }
+
+    // Css edit
 
     function onChangeStyleIcon(sudoScource, newVal, attr) {
       var path = [sudoScource, attr, breakPointX];
@@ -1390,19 +2193,83 @@ registerBlockType("post-grid/date-countdown", {
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
     }, [customCss]);
 
-    useEffect(() => {}, [numberCount]);
+    useEffect(() => {}, [second]);
 
     const CustomTag = `${wrapper.options.tag}`;
-    const CustomTagPostTitle = `${numberCount.options.tag}`;
+    const CustomTagPostTitle = `${second.options.tag}`;
 
     const blockProps = useBlockProps({
       className: ` ${blockId} pg-date-countdown`,
+    });
+
+    const innerBlocksProps = useInnerBlocksProps(blockProps, {
+      //allowedBlocks: ALLOWED_BLOCKS,
+      //template: MY_TEMPLATE,
+      //orientation: 'horizontal',
+      templateInsertUpdatesSelection: true,
+      renderAppender: InnerBlocks.ButtonBlockAppender,
     });
 
     return (
       <>
         <InspectorControls>
           <div className="px-3">
+            <div className="pb-3">
+              <PanelRow className="block mb-4">
+                <label for="" className="font-bold mb-2 ">
+                  Start Date?
+                </label>
+                <br />
+                <InputControl
+                  type="datetime-local"
+                  className="b-2"
+                  value={wrapper.options.startDate}
+                  onChange={(newVal) => {
+                    var options = { ...wrapper.options, startDate: newVal };
+                    setAttributes({
+                      wrapper: { ...wrapper, options: options },
+                    });
+                  }}
+                />
+                {/* <DateTimePicker
+                      
+                      onChange={(newVal) => {
+                        var options = { ...setting.options, startDate: newVal };
+                        setAttributes({
+                          setting: { ...setting, options: options },
+                        });
+                      }}
+                      is12Hour={true}
+                    />
+                    {setting.options.startDate} */}
+              </PanelRow>
+              <PanelRow className="block mb-2">
+                <label for="" className="font-bold mb-2 ">
+                  End Date?
+                </label>
+                <InputControl
+                  type="datetime-local"
+                  className="mr-2"
+                  value={wrapper.options.endDate}
+                  onChange={(newVal) => {
+                    var options = { ...wrapper.options, endDate: newVal };
+                    setAttributes({
+                      wrapper: { ...wrapper, options: options },
+                    });
+                  }}
+                />
+                {/* <DateTimePicker
+                      
+                      onChange={(newVal) => {
+                        var options = { ...setting.options, endDate: newVal };
+                        setAttributes({
+                          setting: { ...setting, options: options },
+                        });
+                      }}
+                      is12Hour={true}
+                    /> */}
+              </PanelRow>
+            </div>
             <PanelBody title="Wrapper" initialOpen={false}>
               <PGtabs
                 activeTab="options"
@@ -1475,7 +2342,46 @@ registerBlockType("post-grid/date-countdown", {
               </PGtabs>
             </PanelBody>
 
-            <PanelBody title="Setting" initialOpen={false}>
+            <PanelBody title="countdown Wrapper" initialOpen={false}>
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => {}}
+                tabs={[
+                  {
+                    name: "styles",
+                    title: "Styles",
+                    icon: styles,
+                    className: "tab-style",
+                  },
+                  {
+                    name: "css",
+                    title: "CSS Library",
+                    icon: styles,
+                    className: "tab-css",
+                  },
+                ]}
+              >
+                <PGtab name="styles">
+                  <PGStyles
+                    obj={countdownWrapper}
+                    onChange={onChangeStyleCountdownWrapper}
+                    onAdd={onAddStyleCountdownWrapper}
+                    onRemove={onRemoveStyleCountdownWrapper}
+                  />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary
+                    blockId={blockId}
+                    obj={countdownWrapper}
+                    onChange={onPickCssLibraryCountdownWrapper}
+                  />
+                </PGtab>
+              </PGtabs>
+            </PanelBody>
+
+            <PanelBody title="Inner" initialOpen={false}>
               <PGtabs
                 activeTab="options"
                 orientation="horizontal"
@@ -1503,592 +2409,656 @@ registerBlockType("post-grid/date-countdown", {
                 ]}
               >
                 <PGtab name="options">
-                  <PanelRow className="block mb-4">
-                    <label for="" className="font-bold mb-2 ">
-                      Start Date?
-                    </label>
-                    <br />
-                    <InputControl
-                      type="datetime-local"
-                      className="b-2"
-                      value={setting.options.startDate}
-                      onChange={(newVal) => {
-                        var options = { ...setting.options, startDate: newVal };
-                        setAttributes({
-                          setting: { ...setting, options: options },
-                        });
-                      }}
-                    />
-                    {/* <DateTimePicker
-                      
-                      onChange={(newVal) => {
-                        var options = { ...setting.options, startDate: newVal };
-                        setAttributes({
-                          setting: { ...setting, options: options },
-                        });
-                      }}
-                      is12Hour={true}
-                    />
-                    {setting.options.startDate} */}
-                  </PanelRow>
-                  <PanelRow className="block mb-2">
-                    <label for="" className="font-bold mb-2 ">
-                      End Date?
-                    </label>
-                    <InputControl
-                      type="datetime-local"
-                      className="mr-2"
-                      value={setting.options.endDate}
-                      onChange={(newVal) => {
-                        var options = { ...setting.options, endDate: newVal };
-                        setAttributes({
-                          setting: { ...setting, options: options },
-                        });
-                      }}
-                    />
-                    {/* <DateTimePicker
-                      
-                      onChange={(newVal) => {
-                        var options = { ...setting.options, endDate: newVal };
-                        setAttributes({
-                          setting: { ...setting, options: options },
-                        });
-                      }}
-                      is12Hour={true}
-                    /> */}
-                  </PanelRow>
-
-                  {/* <PanelRow>
-                    <label for="">Start?</label>
-                    <InputControl
-                      type="number"
-                      className="mr-2"
-                      value={numberCount.options.start}
-                      onChange={(newVal) => {
-                        var options = { ...numberCount.options, start: newVal };
-                        setAttributes({
-                          numberCount: { ...numberCount, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label for="">End?</label>
-                    <InputControl
-                      type="number"
-                      className="mr-2"
-                      value={numberCount.options.end}
-                      onChange={(newVal) => {
-                        var options = { ...numberCount.options, end: newVal };
-                        setAttributes({
-                          numberCount: { ...numberCount, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label for="">Duration?</label>
-                    <InputControl
-                      type="number"
-                      className="mr-2"
-                      value={numberCount.options.duration}
-                      onChange={(newVal) => {
-                        var options = {
-                          ...numberCount.options,
-                          duration: newVal,
-                        };
-                        setAttributes({
-                          numberCount: { ...numberCount, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-
                   <ToggleControl
-                    label="onScroll?"
-                    help={
-                      numberCount.options.onScroll
-                        ? "Play on scroll"
-                        : "Play on page load"
-                    }
-                    checked={numberCount.options.onScroll ? true : false}
+                    label="Enable on Expired?"
+                    className="my-4"
+                    help={innerEnable ? "Inner enabled" : "Inner disabled."}
+                    checked={innerEnable ? true : false}
                     onChange={(e) => {
                       var options = {
-                        ...numberCount.options,
-                        onScroll: numberCount.options.onScroll ? false : true,
+                        ...inner.options,
+                        enable: inner.options.enable ? false : true,
                       };
                       setAttributes({
-                        numberCount: { ...numberCount, options: options },
-                      });
-                    }}
-                  /> */}
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles
-                    obj={numberCount}
-                    onChange={onChangeStyleCommentCount}
-                    onAdd={onAddStyleCommentCount}
-                    onRemove={onRemoveStyleCommentCount}
-                  />
-                </PGtab>
-
-                <PGtab name="css">
-                  <PGCssLibrary
-                    blockId={blockId}
-                    obj={numberCount}
-                    onChange={onPickCssLibraryCommentCount}
-                  />
-                </PGtab>
-              </PGtabs>
-            </PanelBody>
-
-            <PanelBody title="Second Count" initialOpen={false}>
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => {}}
-                tabs={[
-                  {
-                    name: "options",
-                    title: "Options",
-                    icon: settings,
-                    className: "tab-settings",
-                  },
-                  {
-                    name: "styles",
-                    title: "Styles",
-                    icon: styles,
-                    className: "tab-style",
-                  },
-                  {
-                    name: "css",
-                    title: "CSS Library",
-                    icon: styles,
-                    className: "tab-css",
-                  },
-                ]}
-              >
-                <PGtab name="options">
-                  <PanelRow>
-                    <label for="">Label: </label>
-                    <InputControl
-                      value={second.options.label}
-                      onChange={(newVal) => {
-                        var options = { ...second.options, label: newVal };
-                        setAttributes({
-                          second: { styles: second.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                  <PanelRow>
-                    <label for="">Prefix: </label>
-                    <InputControl
-                      value={second.options.prefix}
-                      onChange={(newVal) => {
-                        var options = { ...second.options, prefix: newVal };
-                        setAttributes({
-                          second: { styles: second.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                  <PanelRow>
-                    <label for="">Postfix: </label>
-                    <InputControl
-                      value={second.options.postfix}
-                      onChange={(newVal) => {
-                        var options = { ...second.options, postfix: newVal };
-                        setAttributes({
-                          second: { styles: second.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles
-                    obj={second}
-                    onChange={onChangeStyleSecondCountdown}
-                    onAdd={onAddStyleSecondCountdown}
-                    onRemove={onRemoveStyleSecondCountdown}
-                  />
-                </PGtab>
-
-                <PGtab name="css">
-                  <PGCssLibrary
-                    blockId={blockId}
-                    obj={second}
-                    onChange={onPickCssLibrarySecondCountdown}
-                  />
-                </PGtab>
-              </PGtabs>
-            </PanelBody>
-            <PanelBody title="Minute Count" initialOpen={false}>
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => {}}
-                tabs={[
-                  {
-                    name: "options",
-                    title: "Options",
-                    icon: settings,
-                    className: "tab-settings",
-                  },
-                  {
-                    name: "styles",
-                    title: "Styles",
-                    icon: styles,
-                    className: "tab-style",
-                  },
-                  {
-                    name: "css",
-                    title: "CSS Library",
-                    icon: styles,
-                    className: "tab-css",
-                  },
-                ]}
-              >
-                <PGtab name="options">
-                  <PanelRow>
-                    <label for="">Label: </label>
-                    <InputControl
-                      value={minute.options.label}
-                      onChange={(newVal) => {
-                        var options = { ...minute.options, label: newVal };
-                        setAttributes({
-                          minute: { styles: minute.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                  <PanelRow>
-                    <label for="">Prefix: </label>
-                    <InputControl
-                      value={minute.options.prefix}
-                      onChange={(newVal) => {
-                        var options = { ...minute.options, prefix: newVal };
-                        setAttributes({
-                          minute: { styles: minute.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                  <PanelRow>
-                    <label for="">Postfix: </label>
-                    <InputControl
-                      value={minute.options.postfix}
-                      onChange={(newVal) => {
-                        var options = { ...minute.options, postfix: newVal };
-                        setAttributes({
-                          minute: { styles: minute.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles
-                    obj={minute}
-                    onChange={onChangeStyleMinuteCountdown}
-                    onAdd={onAddStyleMinuteCountdown}
-                    onRemove={onRemoveStyleMinuteCountdown}
-                  />
-                </PGtab>
-
-                <PGtab name="css">
-                  <PGCssLibrary
-                    blockId={blockId}
-                    obj={minute}
-                    onChange={onPickCssLibraryMinuteCountdown}
-                  />
-                </PGtab>
-              </PGtabs>
-            </PanelBody>
-            <PanelBody title="Hour Count" initialOpen={false}>
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => {}}
-                tabs={[
-                  {
-                    name: "options",
-                    title: "Options",
-                    icon: settings,
-                    className: "tab-settings",
-                  },
-                  {
-                    name: "styles",
-                    title: "Styles",
-                    icon: styles,
-                    className: "tab-style",
-                  },
-                  {
-                    name: "css",
-                    title: "CSS Library",
-                    icon: styles,
-                    className: "tab-css",
-                  },
-                ]}
-              >
-                <PGtab name="options">
-                  <PanelRow>
-                    <label for="">Label: </label>
-                    <InputControl
-                      value={hour.options.label}
-                      onChange={(newVal) => {
-                        var options = { ...hour.options, label: newVal };
-                        setAttributes({
-                          hour: { styles: hour.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                  <PanelRow>
-                    <label for="">Prefix: </label>
-                    <InputControl
-                      value={hour.options.prefix}
-                      onChange={(newVal) => {
-                        var options = { ...hour.options, prefix: newVal };
-                        setAttributes({
-                          hour: { styles: hour.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                  <PanelRow>
-                    <label for="">Postfix: </label>
-                    <InputControl
-                      value={hour.options.postfix}
-                      onChange={(newVal) => {
-                        var options = { ...hour.options, postfix: newVal };
-                        setAttributes({
-                          hour: { styles: hour.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles
-                    obj={hour}
-                    onChange={onChangeStyleHourCountdown}
-                    onAdd={onAddStyleHourCountdown}
-                    onRemove={onRemoveStyleHourCountdown}
-                  />
-                </PGtab>
-
-                <PGtab name="css">
-                  <PGCssLibrary
-                    blockId={blockId}
-                    obj={hour}
-                    onChange={onPickCssLibraryHourCountdown}
-                  />
-                </PGtab>
-              </PGtabs>
-            </PanelBody>
-            <PanelBody title="Day Count" initialOpen={false}>
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => {}}
-                tabs={[
-                  {
-                    name: "options",
-                    title: "Options",
-                    icon: settings,
-                    className: "tab-settings",
-                  },
-                  {
-                    name: "styles",
-                    title: "Styles",
-                    icon: styles,
-                    className: "tab-style",
-                  },
-                  {
-                    name: "css",
-                    title: "CSS Library",
-                    icon: styles,
-                    className: "tab-css",
-                  },
-                ]}
-              >
-                <PGtab name="options">
-                  <PanelRow>
-                    <label for="">Label: </label>
-                    <InputControl
-                      value={day.options.label}
-                      onChange={(newVal) => {
-                        var options = { ...day.options, label: newVal };
-                        setAttributes({
-                          day: { styles: day.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                  <PanelRow>
-                    <label for="">Prefix: </label>
-                    <InputControl
-                      value={day.options.prefix}
-                      onChange={(newVal) => {
-                        var options = { ...day.options, prefix: newVal };
-                        setAttributes({
-                          day: { styles: day.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                  <PanelRow>
-                    <label for="">Postfix: </label>
-                    <InputControl
-                      value={day.options.postfix}
-                      onChange={(newVal) => {
-                        var options = { ...day.options, postfix: newVal };
-                        setAttributes({
-                          day: { styles: day.styles, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles
-                    obj={day}
-                    onChange={onChangeStyleDayCountdown}
-                    onAdd={onAddStyleDayCountdown}
-                    onRemove={onRemoveStyleDayCountdown}
-                  />
-                </PGtab>
-
-                <PGtab name="css">
-                  <PGCssLibrary
-                    blockId={blockId}
-                    obj={day}
-                    onChange={onPickCssLibraryDayCountdown}
-                  />
-                </PGtab>
-              </PGtabs>
-            </PanelBody>
-
-            <PanelBody title="Number Count" initialOpen={false}>
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => {}}
-                tabs={[
-                  {
-                    name: "options",
-                    title: "Options",
-                    icon: settings,
-                    className: "tab-settings",
-                  },
-                  {
-                    name: "styles",
-                    title: "Styles",
-                    icon: styles,
-                    className: "tab-style",
-                  },
-                  {
-                    name: "css",
-                    title: "CSS Library",
-                    icon: styles,
-                    className: "tab-css",
-                  },
-                ]}
-              >
-                <PGtab name="options">
-                  <PanelRow>
-                    <label for="">Start?</label>
-                    <InputControl
-                      type="number"
-                      className="mr-2"
-                      value={numberCount.options.start}
-                      onChange={(newVal) => {
-                        var options = { ...numberCount.options, start: newVal };
-                        setAttributes({
-                          numberCount: { ...numberCount, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label for="">End?</label>
-                    <InputControl
-                      type="number"
-                      className="mr-2"
-                      value={numberCount.options.end}
-                      onChange={(newVal) => {
-                        var options = { ...numberCount.options, end: newVal };
-                        setAttributes({
-                          numberCount: { ...numberCount, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-
-                  <PanelRow>
-                    <label for="">Duration?</label>
-                    <InputControl
-                      type="number"
-                      className="mr-2"
-                      value={numberCount.options.duration}
-                      onChange={(newVal) => {
-                        var options = {
-                          ...numberCount.options,
-                          duration: newVal,
-                        };
-                        setAttributes({
-                          numberCount: { ...numberCount, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow>
-
-                  <ToggleControl
-                    label="onScroll?"
-                    help={
-                      numberCount.options.onScroll
-                        ? "Play on scroll"
-                        : "Play on page load"
-                    }
-                    checked={numberCount.options.onScroll ? true : false}
-                    onChange={(e) => {
-                      var options = {
-                        ...numberCount.options,
-                        onScroll: numberCount.options.onScroll ? false : true,
-                      };
-                      setAttributes({
-                        numberCount: { ...numberCount, options: options },
+                        inner: { ...inner, options: options },
                       });
                     }}
                   />
                 </PGtab>
                 <PGtab name="styles">
                   <PGStyles
-                    obj={numberCount}
-                    onChange={onChangeStyleCommentCount}
-                    onAdd={onAddStyleCommentCount}
-                    onRemove={onRemoveStyleCommentCount}
+                    obj={inner}
+                    onChange={onChangeStyleInner}
+                    onAdd={onAddStyleInner}
+                    onRemove={onRemoveStyleInner}
+                  />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary
+                    blockId={blockId}
+                    obj={inner}
+                    onChange={onPickCssLibraryInner}
+                  />
+                </PGtab>
+              </PGtabs>
+            </PanelBody>
+
+            <PanelBody title="Items" initialOpen={false}>
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => {}}
+                tabs={[
+                  {
+                    name: "styles",
+                    title: "Styles",
+                    icon: styles,
+                    className: "tab-style",
+                  },
+                  {
+                    name: "css",
+                    title: "CSS Library",
+                    icon: styles,
+                    className: "tab-css",
+                  },
+                ]}
+              >
+                <PGtab name="styles">
+                  <PGStyles
+                    obj={items}
+                    onChange={onChangeStyleItems}
+                    onAdd={onAddStyleItems}
+                    onRemove={onRemoveStyleItems}
                   />
                 </PGtab>
 
                 <PGtab name="css">
                   <PGCssLibrary
                     blockId={blockId}
-                    obj={numberCount}
-                    onChange={onPickCssLibraryCommentCount}
+                    obj={items}
+                    onChange={onPickCssLibraryItems}
                   />
                 </PGtab>
               </PGtabs>
+            </PanelBody>
+
+            <PanelBody title="Second" initialOpen={false}>
+              <ToggleControl
+                label="Enable Second?"
+                className="my-4"
+                help={secondEnable ? "Second enabled" : "Second disabled."}
+                checked={secondEnable ? true : false}
+                onChange={(e) => {
+                  var options = {
+                    ...second.options,
+                    enable: second.options.enable ? false : true,
+                  };
+                  setAttributes({
+                    second: { ...second, options: options },
+                  });
+                }}
+              />
+              <PanelRow className="mb-4">
+                <label for="">Label: </label>
+                <InputControl
+                  value={second.options.label}
+                  onChange={(newVal) => {
+                    var options = { ...second.options, label: newVal };
+                    setAttributes({
+                      second: { styles: second.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelRow className="mb-4">
+                <label for="">Prefix: </label>
+                <InputControl
+                  value={second.options.prefix}
+                  onChange={(newVal) => {
+                    var options = { ...second.options, prefix: newVal };
+                    setAttributes({
+                      second: { styles: second.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelRow className="mb-4">
+                <label for="">Postfix: </label>
+                <InputControl
+                  value={second.options.postfix}
+                  onChange={(newVal) => {
+                    var options = { ...second.options, postfix: newVal };
+                    setAttributes({
+                      second: { styles: second.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelBody title="Second Wrap" initialOpen={false}>
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => {}}
+                  tabs={[
+                    // {
+                    //   name: "options",
+                    //   title: "Options",
+                    //   icon: settings,
+                    //   className: "tab-settings",
+                    // },
+                    {
+                      name: "styles",
+                      title: "Styles",
+                      icon: styles,
+                      className: "tab-style",
+                    },
+                    {
+                      name: "css",
+                      title: "CSS Library",
+                      icon: styles,
+                      className: "tab-css",
+                    },
+                  ]}
+                >
+                  <PGtab name="styles">
+                    <PGStyles
+                      obj={secondWrap}
+                      onChange={onChangeStyleSecondWrap}
+                      onAdd={onAddStyleSecondWrap}
+                      onRemove={onRemoveStyleSecondWrap}
+                    />
+                  </PGtab>
+
+                  <PGtab name="css">
+                    <PGCssLibrary
+                      blockId={blockId}
+                      obj={secondWrap}
+                      onChange={onPickCssLibrarySecondWrap}
+                    />
+                  </PGtab>
+                </PGtabs>
+              </PanelBody>
+              <PanelBody title="Second Count" initialOpen={false}>
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => {}}
+                  tabs={[
+                    // {
+                    //   name: "options",
+                    //   title: "Options",
+                    //   icon: settings,
+                    //   className: "tab-settings",
+                    // },
+                    {
+                      name: "styles",
+                      title: "Styles",
+                      icon: styles,
+                      className: "tab-style",
+                    },
+                    {
+                      name: "css",
+                      title: "CSS Library",
+                      icon: styles,
+                      className: "tab-css",
+                    },
+                  ]}
+                >
+                  {/* <PGtab name="options">
+                    <PanelRow>
+                      <label for="">Label: </label>
+                      <InputControl
+                        value={second.options.label}
+                        onChange={(newVal) => {
+                          var options = { ...second.options, label: newVal };
+                          setAttributes({
+                            second: { styles: second.styles, options: options },
+                          });
+                        }}
+                      />
+                    </PanelRow>
+                    <PanelRow>
+                      <label for="">Prefix: </label>
+                      <InputControl
+                        value={second.options.prefix}
+                        onChange={(newVal) => {
+                          var options = { ...second.options, prefix: newVal };
+                          setAttributes({
+                            second: { styles: second.styles, options: options },
+                          });
+                        }}
+                      />
+                    </PanelRow>
+                    <PanelRow>
+                      <label for="">Postfix: </label>
+                      <InputControl
+                        value={second.options.postfix}
+                        onChange={(newVal) => {
+                          var options = { ...second.options, postfix: newVal };
+                          setAttributes({
+                            second: { styles: second.styles, options: options },
+                          });
+                        }}
+                      />
+                    </PanelRow>
+                  </PGtab> */}
+                  <PGtab name="styles">
+                    <PGStyles
+                      obj={second}
+                      onChange={onChangeStyleSecondCountdown}
+                      onAdd={onAddStyleSecondCountdown}
+                      onRemove={onRemoveStyleSecondCountdown}
+                    />
+                  </PGtab>
+
+                  <PGtab name="css">
+                    <PGCssLibrary
+                      blockId={blockId}
+                      obj={second}
+                      onChange={onPickCssLibrarySecondCountdown}
+                    />
+                  </PGtab>
+                </PGtabs>
+              </PanelBody>
+            </PanelBody>
+
+            <PanelBody title="Minute" initialOpen={false}>
+              <ToggleControl
+                label="Enable Minute?"
+                className="my-4"
+                help={minuteEnable ? "Minute enabled" : "Minute disabled."}
+                checked={minuteEnable ? true : false}
+                onChange={(e) => {
+                  var options = {
+                    ...minute.options,
+                    enable: minute.options.enable ? false : true,
+                  };
+                  setAttributes({
+                    minute: { ...minute, options: options },
+                  });
+                }}
+              />
+              <PanelRow className="my-4">
+                <label for="">Label: </label>
+                <InputControl
+                  value={minute.options.label}
+                  onChange={(newVal) => {
+                    var options = { ...minute.options, label: newVal };
+                    setAttributes({
+                      minute: { styles: minute.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelRow className="my-4">
+                <label for="">Prefix: </label>
+                <InputControl
+                  value={minute.options.prefix}
+                  onChange={(newVal) => {
+                    var options = { ...minute.options, prefix: newVal };
+                    setAttributes({
+                      minute: { styles: minute.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelRow className="my-4">
+                <label for="">Postfix: </label>
+                <InputControl
+                  value={minute.options.postfix}
+                  onChange={(newVal) => {
+                    var options = { ...minute.options, postfix: newVal };
+                    setAttributes({
+                      minute: { styles: minute.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelBody title="Minute Wrap" initialOpen={false}>
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => {}}
+                  tabs={[
+                    {
+                      name: "styles",
+                      title: "Styles",
+                      icon: styles,
+                      className: "tab-style",
+                    },
+                    {
+                      name: "css",
+                      title: "CSS Library",
+                      icon: styles,
+                      className: "tab-css",
+                    },
+                  ]}
+                >
+                  <PGtab name="styles">
+                    <PGStyles
+                      obj={minuteWrap}
+                      onChange={onChangeStyleMinuteWrap}
+                      onAdd={onAddStyleMinuteWrap}
+                      onRemove={onRemoveStyleMinuteWrap}
+                    />
+                  </PGtab>
+
+                  <PGtab name="css">
+                    <PGCssLibrary
+                      blockId={blockId}
+                      obj={minuteWrap}
+                      onChange={onPickCssLibraryMinuteWrap}
+                    />
+                  </PGtab>
+                </PGtabs>
+              </PanelBody>
+              <PanelBody title="Minute Count" initialOpen={false}>
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => {}}
+                  tabs={[
+                    {
+                      name: "styles",
+                      title: "Styles",
+                      icon: styles,
+                      className: "tab-style",
+                    },
+                    {
+                      name: "css",
+                      title: "CSS Library",
+                      icon: styles,
+                      className: "tab-css",
+                    },
+                  ]}
+                >
+                  <PGtab name="styles">
+                    <PGStyles
+                      obj={minute}
+                      onChange={onChangeStyleMinuteCountdown}
+                      onAdd={onAddStyleMinuteCountdown}
+                      onRemove={onRemoveStyleMinuteCountdown}
+                    />
+                  </PGtab>
+
+                  <PGtab name="css">
+                    <PGCssLibrary
+                      blockId={blockId}
+                      obj={minute}
+                      onChange={onPickCssLibraryMinuteCountdown}
+                    />
+                  </PGtab>
+                </PGtabs>
+              </PanelBody>
+            </PanelBody>
+
+            <PanelBody title="Hour" initialOpen={false}>
+              <ToggleControl
+                label="Enable Hour?"
+                className="my-4"
+                help={hourEnable ? "Hour enabled" : "Hour disabled."}
+                checked={hourEnable ? true : false}
+                onChange={(e) => {
+                  var options = {
+                    ...hour.options,
+                    enable: hour.options.enable ? false : true,
+                  };
+                  setAttributes({
+                    hour: { ...hour, options: options },
+                  });
+                }}
+              />
+              <PanelRow className="my-4">
+                <label for="">Label: </label>
+                <InputControl
+                  value={hour.options.label}
+                  onChange={(newVal) => {
+                    var options = { ...hour.options, label: newVal };
+                    setAttributes({
+                      hour: { styles: hour.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelRow className="my-4">
+                <label for="">Prefix: </label>
+                <InputControl
+                  value={hour.options.prefix}
+                  onChange={(newVal) => {
+                    var options = { ...hour.options, prefix: newVal };
+                    setAttributes({
+                      hour: { styles: hour.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelRow className="my-4">
+                <label for="">Postfix: </label>
+                <InputControl
+                  value={hour.options.postfix}
+                  onChange={(newVal) => {
+                    var options = { ...hour.options, postfix: newVal };
+                    setAttributes({
+                      hour: { styles: hour.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelBody title="Hour Wrap" initialOpen={false}>
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => {}}
+                  tabs={[
+                    {
+                      name: "styles",
+                      title: "Styles",
+                      icon: styles,
+                      className: "tab-style",
+                    },
+                    {
+                      name: "css",
+                      title: "CSS Library",
+                      icon: styles,
+                      className: "tab-css",
+                    },
+                  ]}
+                >
+                  <PGtab name="styles">
+                    <PGStyles
+                      obj={hourWrap}
+                      onChange={onChangeStyleHourWrap}
+                      onAdd={onAddStyleHourWrap}
+                      onRemove={onRemoveStyleHourWrap}
+                    />
+                  </PGtab>
+
+                  <PGtab name="css">
+                    <PGCssLibrary
+                      blockId={blockId}
+                      obj={hourWrap}
+                      onChange={onPickCssLibraryHourWrap}
+                    />
+                  </PGtab>
+                </PGtabs>
+              </PanelBody>
+              <PanelBody title="Hour Count" initialOpen={false}>
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => {}}
+                  tabs={[
+                    {
+                      name: "styles",
+                      title: "Styles",
+                      icon: styles,
+                      className: "tab-style",
+                    },
+                    {
+                      name: "css",
+                      title: "CSS Library",
+                      icon: styles,
+                      className: "tab-css",
+                    },
+                  ]}
+                >
+                  <PGtab name="styles">
+                    <PGStyles
+                      obj={hour}
+                      onChange={onChangeStyleHourCountdown}
+                      onAdd={onAddStyleHourCountdown}
+                      onRemove={onRemoveStyleHourCountdown}
+                    />
+                  </PGtab>
+
+                  <PGtab name="css">
+                    <PGCssLibrary
+                      blockId={blockId}
+                      obj={hour}
+                      onChange={onPickCssLibraryHourCountdown}
+                    />
+                  </PGtab>
+                </PGtabs>
+              </PanelBody>
+            </PanelBody>
+
+            <PanelBody title="Day" initialOpen={false}>
+              <ToggleControl
+                label="Enable Day?"
+                className="my-4"
+                help={dayEnable ? "Day enabled" : "Day disabled."}
+                checked={dayEnable ? true : false}
+                onChange={(e) => {
+                  var options = {
+                    ...day.options,
+                    enable: day.options.enable ? false : true,
+                  };
+                  setAttributes({
+                    day: { ...day, options: options },
+                  });
+                }}
+              />
+              <PanelRow className="my-4">
+                <label for="">Label: </label>
+                <InputControl
+                  value={day.options.label}
+                  onChange={(newVal) => {
+                    var options = { ...day.options, label: newVal };
+                    setAttributes({
+                      day: { styles: day.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelRow className="my-4">
+                <label for="">Prefix: </label>
+                <InputControl
+                  value={day.options.prefix}
+                  onChange={(newVal) => {
+                    var options = { ...day.options, prefix: newVal };
+                    setAttributes({
+                      day: { styles: day.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelRow className="my-4">
+                <label for="">Postfix: </label>
+                <InputControl
+                  value={day.options.postfix}
+                  onChange={(newVal) => {
+                    var options = { ...day.options, postfix: newVal };
+                    setAttributes({
+                      day: { styles: day.styles, options: options },
+                    });
+                  }}
+                />
+              </PanelRow>
+              <PanelBody title="Day Wrap" initialOpen={false}>
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => {}}
+                  tabs={[
+                    {
+                      name: "styles",
+                      title: "Styles",
+                      icon: styles,
+                      className: "tab-style",
+                    },
+                    {
+                      name: "css",
+                      title: "CSS Library",
+                      icon: styles,
+                      className: "tab-css",
+                    },
+                  ]}
+                >
+                  <PGtab name="styles">
+                    <PGStyles
+                      obj={dayWrap}
+                      onChange={onChangeStyleDayWrap}
+                      onAdd={onAddStyleDayWrap}
+                      onRemove={onRemoveStyleDayWrap}
+                    />
+                  </PGtab>
+
+                  <PGtab name="css">
+                    <PGCssLibrary
+                      blockId={blockId}
+                      obj={dayWrap}
+                      onChange={onPickCssLibraryDayWrap}
+                    />
+                  </PGtab>
+                </PGtabs>
+              </PanelBody>
+              <PanelBody title="Day Count" initialOpen={false}>
+                <PGtabs
+                  activeTab="options"
+                  orientation="horizontal"
+                  activeClass="active-tab"
+                  onSelect={(tabName) => {}}
+                  tabs={[
+                    {
+                      name: "styles",
+                      title: "Styles",
+                      icon: styles,
+                      className: "tab-style",
+                    },
+                    {
+                      name: "css",
+                      title: "CSS Library",
+                      icon: styles,
+                      className: "tab-css",
+                    },
+                  ]}
+                >
+                  <PGtab name="styles">
+                    <PGStyles
+                      obj={day}
+                      onChange={onChangeStyleDayCountdown}
+                      onAdd={onAddStyleDayCountdown}
+                      onRemove={onRemoveStyleDayCountdown}
+                    />
+                  </PGtab>
+
+                  <PGtab name="css">
+                    <PGCssLibrary
+                      blockId={blockId}
+                      obj={day}
+                      onChange={onPickCssLibraryDayCountdown}
+                    />
+                  </PGtab>
+                </PGtabs>
+              </PanelBody>
             </PanelBody>
 
             <PanelBody title="Icon" initialOpen={false}>
@@ -2119,7 +3089,7 @@ registerBlockType("post-grid/date-countdown", {
                 ]}
               >
                 <PGtab name="options">
-                  <PanelRow>
+                  <PanelRow className="my-4">
                     <label for="">Choose Icon</label>
 
                     <PGIconPicker
@@ -2130,22 +3100,20 @@ registerBlockType("post-grid/date-countdown", {
                     />
                   </PanelRow>
 
-                  <PanelRow>
-                    <label for="">Icon position</label>
-
-                    <SelectControl
-                      label=""
-                      value={icon.options.position}
-                      options={[
-                        { label: "Choose Position", value: "" },
-                        { label: "Before Prefix", value: "beforePrefix" },
-                        { label: "After Prefix", value: "afterPrefix" },
-                        { label: "Before Postfix", value: "beforePostfix" },
-                        { label: "After Postfix", value: "afterPostfix" },
-                      ]}
-                      onChange={(newVal) => {
-                        var options = { ...icon.options, position: newVal };
-                        setAttributes({ icon: { ...icon, options: options } });
+                  <PanelRow className="my-4">
+                    <ToggleControl
+                      label="Enable Icon?"
+                      className="my-4"
+                      help={iconEnable ? "Icon enabled" : "Icon disabled."}
+                      checked={iconEnable ? true : false}
+                      onChange={(e) => {
+                        var options = {
+                          ...icon.options,
+                          enable: icon.options.enable ? false : true,
+                        };
+                        setAttributes({
+                          icon: { ...icon, options: options },
+                        });
                       }}
                     />
                   </PanelRow>
@@ -2163,6 +3131,122 @@ registerBlockType("post-grid/date-countdown", {
                     blockId={blockId}
                     obj={icon}
                     onChange={onPickCssLibraryIcon}
+                  />
+                </PGtab>
+              </PGtabs>
+            </PanelBody>
+
+            <PanelBody title="Separator" initialOpen={false}>
+              <PGtabs
+                activeTab="options"
+                orientation="horizontal"
+                activeClass="active-tab"
+                onSelect={(tabName) => {}}
+                tabs={[
+                  {
+                    name: "options",
+                    title: "Options",
+                    icon: settings,
+                    className: "tab-settings",
+                  },
+                  {
+                    name: "styles",
+                    title: "Styles",
+                    icon: styles,
+                    className: "tab-style",
+                  },
+                  {
+                    name: "css",
+                    title: "CSS Library",
+                    icon: styles,
+                    className: "tab-css",
+                  },
+                ]}
+              >
+                <PGtab name="options">
+                  <PanelRow className="my-4">
+                    <label for="">Separator</label>
+
+                    <InputControl
+                      value={separator.options.text}
+                      onChange={(newVal) => {
+                        var options = { ...separator.options, text: newVal };
+                        setAttributes({
+                          separator: {
+                            styles: separator.styles,
+                            options: options,
+                          },
+                        });
+
+                        // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
+                      }}
+                    />
+                  </PanelRow>
+                  {/* <PanelRow className="my-4">
+                    <label for="">Separator position</label>
+
+                    <SelectControl
+                      label=""
+                      value={separator.options.position}
+                      options={[
+                        { label: "Choose Position", value: "" },
+
+                        // { label: "Before Prefix", value: "beforePrefix" },
+                        // { label: "After Prefix", value: "afterPrefix" },
+                        { label: "Before Prefix", value: "beforePrefix" },
+                        { label: "After Prefix", value: "afterPrefix" },
+                        { label: "Before Postfix", value: "beforePostfix" },
+                        { label: "After Postfix", value: "afterPostfix" },
+                        // { label: "Before Link", value: "beforeLink" },
+                        // { label: "After Link", value: "afterLink" },
+                      ]}
+                      onChange={(newVal) => {
+                        var options = {
+                          ...separator.options,
+                          position: newVal,
+                        };
+                        setAttributes({
+                          separator: { ...separator, options: options },
+                        });
+                      }}
+                    />
+                  </PanelRow> */}
+
+                  <PanelRow className="my-4">
+                    <ToggleControl
+                      label="Enable Separator?"
+                      className="my-4"
+                      help={
+                        separatorEnable
+                          ? "Separator enabled"
+                          : "Separator disabled."
+                      }
+                      checked={separatorEnable ? true : false}
+                      onChange={(e) => {
+                        var options = {
+                          ...separator.options,
+                          enable: separator.options.enable ? false : true,
+                        };
+                        setAttributes({
+                          separator: { ...separator, options: options },
+                        });
+                      }}
+                    />
+                  </PanelRow>
+                </PGtab>
+                <PGtab name="styles">
+                  <PGStyles
+                    obj={separator}
+                    onChange={onChangeStyleSeparator}
+                    onAdd={onRemoveStyleSeparator}
+                    onRemove={onAddStyleSeparator}
+                  />
+                </PGtab>
+                <PGtab name="css">
+                  <PGCssLibrary
+                    blockId={blockId}
+                    obj={separator}
+                    onChange={onPickCssLibrarySeparator}
                   />
                 </PGtab>
               </PGtabs>
@@ -2196,18 +3280,46 @@ registerBlockType("post-grid/date-countdown", {
                 ]}
               >
                 <PGtab name="options">
-                  <PanelRow>
-                    <label for="">Label</label>
-
-                    <InputControl
-                      value={label.options.text}
-                      onChange={(newVal) => {
-                        var options = { ...label.options, text: newVal };
+                  <PanelRow className="my-4">
+                    <ToggleControl
+                      label="Enable Label?"
+                      className="my-4"
+                      help={labelEnable ? "Label enabled" : "Label disabled."}
+                      checked={labelEnable ? true : false}
+                      onChange={(e) => {
+                        var options = {
+                          ...label.options,
+                          enable: label.options.enable ? false : true,
+                        };
                         setAttributes({
-                          label: { styles: label.styles, options: options },
+                          label: { ...label, options: options },
                         });
+                      }}
+                    />
+                  </PanelRow>
+                  <PanelRow className="my-4">
+                    <label for="">Label position</label>
 
-                        // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
+                    <SelectControl
+                      label=""
+                      value={label.options.position}
+                      options={[
+                        { label: "Choose Position", value: "" },
+
+                        // { label: "Before Prefix", value: "beforePrefix" },
+                        // { label: "After Prefix", value: "afterPrefix" },
+                        { label: "Before Prefix", value: "beforePrefix" },
+                        { label: "After Prefix", value: "afterPrefix" },
+                        { label: "Before Postfix", value: "beforePostfix" },
+                        { label: "After Postfix", value: "afterPostfix" },
+                        // { label: "Before Link", value: "beforeLink" },
+                        // { label: "After Link", value: "afterLink" },
+                      ]}
+                      onChange={(newVal) => {
+                        var options = { ...label.options, position: newVal };
+                        setAttributes({
+                          label: { ...label, options: options },
+                        });
                       }}
                     />
                   </PanelRow>
@@ -2258,7 +3370,26 @@ registerBlockType("post-grid/date-countdown", {
                 ]}
               >
                 <PGtab name="options">
-                  <PanelRow>
+                  <PanelRow className="my-4">
+                    <ToggleControl
+                      label="Enable Prefix?"
+                      className="my-4"
+                      help={
+                        prefixEnable ? "Prefix enabled" : "Prefix disabled."
+                      }
+                      checked={prefixEnable ? true : false}
+                      onChange={(e) => {
+                        var options = {
+                          ...prefix.options,
+                          enable: prefix.options.enable ? false : true,
+                        };
+                        setAttributes({
+                          prefix: { ...prefix, options: options },
+                        });
+                      }}
+                    />
+                  </PanelRow>
+                  {/* <PanelRow className="my-4">
                     <label for="">Prefix</label>
 
                     <InputControl
@@ -2272,7 +3403,7 @@ registerBlockType("post-grid/date-countdown", {
                         // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
                       }}
                     />
-                  </PanelRow>
+                  </PanelRow> */}
                 </PGtab>
                 <PGtab name="styles">
                   <PGStyles
@@ -2320,7 +3451,26 @@ registerBlockType("post-grid/date-countdown", {
                 ]}
               >
                 <PGtab name="options">
-                  <PanelRow>
+                  <PanelRow className="my-4">
+                    <ToggleControl
+                      label="Enable Postfix?"
+                      className="my-4"
+                      help={
+                        postfixEnable ? "Postfix enabled" : "Postfix disabled."
+                      }
+                      checked={postfixEnable ? true : false}
+                      onChange={(e) => {
+                        var options = {
+                          ...postfix.options,
+                          enable: postfix.options.enable ? false : true,
+                        };
+                        setAttributes({
+                          postfix: { ...postfix, options: options },
+                        });
+                      }}
+                    />
+                  </PanelRow>
+                  {/* <PanelRow className="my-4 ">
                     <label for="">Postfix</label>
 
                     <InputControl
@@ -2334,7 +3484,7 @@ registerBlockType("post-grid/date-countdown", {
                         // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, backgroundColor: postfix.backgroundColor } })
                       }}
                     />
-                  </PanelRow>
+                  </PanelRow> */}
                 </PGtab>
                 <PGtab name="styles">
                   <PGStyles
@@ -2372,7 +3522,7 @@ registerBlockType("post-grid/date-countdown", {
                 <p className="font-bold">Title link</p>
                 <p>
                   <code>
-                    {commentCountSelector}
+                    {secondSelector}
                     {"{/* your CSS here*/}"}{" "}
                   </code>
                 </p>
@@ -2420,119 +3570,397 @@ registerBlockType("post-grid/date-countdown", {
         </InspectorControls>
 
         <>
-          {wrapper.options.tag && (
-            <CustomTag {...blockProps}>
-              {icon.options.position == "beforePrefix" && (
-                <span
-                  className={icon.options.class}
-                  dangerouslySetInnerHTML={{ __html: iconHtml }}
-                />
-              )}
-              {prefix.options.text && (
-                <span className={prefix.options.class}>
-                  {prefix.options.text}
-                </span>
-              )}
-              {icon.options.position == "afterPrefix" && (
-                <span
-                  className={icon.options.class}
-                  dangerouslySetInnerHTML={{ __html: iconHtml }}
-                />
-              )}
-              {icon.options.position == "beforeCommentCount" && (
-                <span
-                  className={icon.options.class}
-                  dangerouslySetInnerHTML={{ __html: iconHtml }}
-                />
-              )}
-              <div>
-                <span className={label.options.class}>{day.options.label}</span>
-                <span className={day.options.class}>
-                  <span className={prefix.options.class}>
-                    {day.options.prefix}
-                  </span>
-                  {remindDay}
-                  <span className={postfix.options.class}>
-                    {day.options.postfix}
-                  </span>
-                </span>
+          {!hasInnerBlocks && (
+            <div {...innerBlocksProps}>
+              <div className="border p-5">
+                <div className="flex justify-between mb-5">
+                  <div className="text-xl rounded-sm">
+                    Click to pick a variation
+                  </div>
+
+                  <div
+                    className="bg-orange-400  hover:bg-orange-300 px-4 py-1 text-white cursor-pointer"
+                    onClick={(ev) => {
+                      replaceInnerBlocks(
+                        clientId,
+                        createBlocksFromInnerBlocksTemplate([
+                          ["post-grid/text", {}],
+                        ]),
+                        true
+                      );
+                    }}
+                  >
+                    Skip
+                  </div>
+                </div>
+
+                <div className="">
+                  {variations.map((variation) => {
+                    return (
+                      <div
+                        className="text-center inline-block m-4 w-32 align-top p-4 bg-gray-400 cursor-pointer hover:bg-gray-500 relative"
+                        onClick={(ev) => {
+                          if (variation.isPro) {
+                            alert(
+                              "Sorry this variation only vailable in pro version"
+                            );
+                            return false;
+                          }
+
+                          var atts = variation.atts;
+
+                          var wrapper = { ...atts.wrapper };
+                          var countdownWrapper = { ...atts.countdownWrapper };
+                          var inner = { ...atts.inner };
+                          var items = { ...atts.items };
+                          var dayWrap = { ...atts.dayWrap };
+                          var day = { ...atts.day };
+                          var hourWrap = { ...atts.hourWrap };
+                          var hour = { ...atts.hour };
+                          var minute = { ...atts.minute };
+                          var secondWrap = { ...atts.secondWrap };
+                          var second = { ...atts.second };
+                          var separator = { ...atts.separator };
+                          var label = { ...atts.label };
+                          var prefix = { ...atts.prefix };
+                          var postfix = { ...atts.postfix };
+
+                          var blockCssY = { ...atts.blockCssY };
+                          var customCss = { ...atts.customCss };
+
+                          var blockCssObj = {};
+
+                          blockCssObj[wrapperSelector] = wrapper;
+                          blockCssObj[countdownWrapperSelector] =
+                            countdownWrapper;
+                          blockCssObj[innerSelector] = inner;
+
+                          blockCssObj[itemsSelector] = items;
+                          blockCssObj[dayWrapSelector] = dayWrap;
+                          blockCssObj[daySelector] = day;
+                          blockCssObj[hourWrapSelector] = hourWrap;
+                          blockCssObj[hourSelector] = hour;
+                          blockCssObj[minuteWrapSelector] = minuteWrap;
+                          blockCssObj[minuteSelector] = minute;
+                          blockCssObj[secondWrapSelector] = secondWrap;
+                          blockCssObj[secondSelector] = second;
+                          blockCssObj[separatorSelector] = separator;
+                          blockCssObj[labelSelector] = label;
+                          blockCssObj[prefixSelector] = prefix;
+                          blockCssObj[postfixSelector] = postfix;
+
+                          setAttributes({
+                            wrapper: wrapper,
+                            countdownWrapper: countdownWrapper,
+                            inner: inner,
+                            items: items,
+                            dayWrap: dayWrap,
+                            day: day,
+                            hourWrap: hourWrap,
+                            hour: hour,
+                            minuteWrap: minuteWrap,
+                            minute: minute,
+                            secondWrap: secondWrap,
+                            second: second,
+                            separator: separator,
+                            prefix: prefix,
+                            postfix: postfix,
+                            customCss: customCss,
+                          });
+
+                          var blockCssRules =
+                            myStore.getBlockCssRules(blockCssObj);
+
+                          var items = { ...blockCssY.items, ...blockCssRules };
+
+                          setAttributes({ blockCssY: { items: items } });
+
+                          replaceInnerBlocks(
+                            clientId,
+                            createBlocksFromInnerBlocksTemplate(
+                              variation.innerBlocks
+                            ),
+                            true
+                          );
+                        }}
+                      >
+                        <div>{variation.icon}</div>
+                        <div>{variation.title}</div>
+
+                        {variation.isPro && (
+                          <span className="bg-amber-400 rounded-sm text-sm inline-block  bg-opacity-90 text-white hover:text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <a
+                              target="_blank"
+                              className="block px-3"
+                              href={
+                                "https://pickplugins.com/post-grid/?utm_source=dropdownComponent&utm_term=proFeature&utm_campaign=pluginPostGrid&utm_medium=" +
+                                x.label
+                              }
+                            >
+                              Pro
+                            </a>
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-              <div>
-                <span className={label.options.class}>
-                  {hour.options.label}
-                </span>
-                <span className={hour.options.class}>
-                  <span className={prefix.options.class}>
-                    {hour.options.prefix}
-                  </span>
-                  {remindHour}
-                  <span className={postfix.options.class}>
-                    {hour.options.postfix}
-                  </span>
-                </span>
-              </div>
-              <div>
-                <span className={label.options.class}>
-                  {minute.options.label}
-                </span>
-                <span className={minute.options.class}>
-                  <span className={prefix.options.class}>
-                    {minute.options.prefix}
-                  </span>
-                  {remindMinute}
-                  <span className={postfix.options.class}>
-                    {minute.options.postfix}
-                  </span>
-                </span>
-              </div>
-              <div>
-                <span className={label.options.class}>
-                  {second.options.label}
-                </span>
-                <span className={second.options.class}>
-                  <span className={prefix.options.class}>
-                    {second.options.prefix}
-                  </span>
-                  {remindSecond}
-                  <span className={postfix.options.class}>
-                    {second.options.postfix}
-                  </span>
-                </span>
-              </div>
-              {/* <span className={numberCount.options.class}>
-                {commentCountEdited}
-              </span> */}
-              {icon.options.position == "afterCommentCount" && (
-                <span
-                  className={icon.options.class}
-                  dangerouslySetInnerHTML={{ __html: iconHtml }}
-                />
+            </div>
+          )}
+          {/* day:{JSON.stringify(day)}, dayWrap:{JSON.stringify(dayWrap)}, hour:
+          {JSON.stringify(hour)}, hourWrap:{JSON.stringify(hourWrap)},
+          minuteWrap:{JSON.stringify(minuteWrap)}, minute:
+          {JSON.stringify(minute)}, secondWrap:{JSON.stringify(secondWrap)},
+          second:{JSON.stringify(second)}, wrapper:{JSON.stringify(wrapper)},
+          inner:{JSON.stringify(inner)}, items:{JSON.stringify(items)},
+          separator:{JSON.stringify(separator)}, label:{JSON.stringify(label)},
+          prefix:{JSON.stringify(prefix)}, postfix:{JSON.stringify(postfix)}, */}
+          {hasInnerBlocks && (
+            <div {...innerBlocksProps}>
+              {!editMode && (
+                <div
+                  className="text-center inline-block mx-auto"
+                  onClick={(e) => {
+                    setAttributes({ editMode: editMode ? false : true });
+                  }}
+                >
+                  Enable Edit Mode
+                </div>
               )}
-              {icon.options.position == "beforePostfix" && (
-                <span
-                  className={icon.options.class}
-                  dangerouslySetInnerHTML={{ __html: iconHtml }}
-                />
+
+              {editMode && (
+                <>
+                  {wrapper.options.tag && (
+                    <div className="countdown-wrapper">
+                      {iconEnable && (
+                        <span
+                          className={icon.options.class}
+                          dangerouslySetInnerHTML={{ __html: iconHtml }}
+                        />
+                      )}
+                      {dayEnable && (
+                        <div
+                          className={`${items.options.class} ${dayWrap.options.class}`}
+                        >
+                          {labelEnable &&
+                            label.options.position == "beforePrefix" && (
+                              <span className={label.options.class}>
+                                {day.options.label}
+                              </span>
+                            )}
+                          {prefixEnable && (
+                            <span className={prefix.options.class}>
+                              {day.options.prefix}
+                            </span>
+                          )}
+
+                          {labelEnable &&
+                            label.options.position == "afterPrefix" && (
+                              <span className={label.options.class}>
+                                {day.options.label}
+                              </span>
+                            )}
+
+                          <span className={day.options.class}>{remindDay}</span>
+
+                          {labelEnable &&
+                            label.options.position == "beforePostfix" && (
+                              <span className={label.options.class}>
+                                {day.options.label}
+                              </span>
+                            )}
+                          {postfixEnable && (
+                            <span className={postfix.options.class}>
+                              {day.options.postfix}
+                            </span>
+                          )}
+
+                          {labelEnable &&
+                            label.options.position == "afterPostfix" && (
+                              <span className={label.options.class}>
+                                {day.options.label}
+                              </span>
+                            )}
+                        </div>
+                      )}
+
+                      {dayEnable && separatorEnable && (
+                        <span class={separator.options.class}>
+                          {separator.options.text}
+                        </span>
+                      )}
+
+                      {hourEnable && (
+                        <div
+                          className={`${items.options.class} ${hourWrap.options.class}`}
+                        >
+                          {labelEnable &&
+                            label.options.position == "beforePrefix" && (
+                              <span className={label.options.class}>
+                                {hour.options.label}
+                              </span>
+                            )}
+                          {prefixEnable && (
+                            <span className={prefix.options.class}>
+                              {hour.options.prefix}
+                            </span>
+                          )}
+                          {labelEnable &&
+                            label.options.position == "afterPrefix" && (
+                              <span className={label.options.class}>
+                                {hour.options.label}
+                              </span>
+                            )}
+                          <span className={hour.options.class}>
+                            {remindHour}
+                          </span>
+
+                          {labelEnable &&
+                            label.options.position == "beforePostfix" && (
+                              <span className={label.options.class}>
+                                {hour.options.label}
+                              </span>
+                            )}
+                          {postfixEnable && (
+                            <span className={postfix.options.class}>
+                              {hour.options.postfix}
+                            </span>
+                          )}
+                          {labelEnable &&
+                            label.options.position == "afterPostfix" && (
+                              <span className={label.options.class}>
+                                {hour.options.label}
+                              </span>
+                            )}
+                        </div>
+                      )}
+                      {hourEnable && separatorEnable && (
+                        <span class={separator.options.class}>
+                          {separator.options.text}
+                        </span>
+                      )}
+
+                      {minuteEnable && (
+                        <div
+                          className={`${items.options.class} ${minuteWrap.options.class}`}
+                        >
+                          {labelEnable &&
+                            label.options.position == "beforePrefix" && (
+                              <span className={label.options.class}>
+                                {minute.options.label}
+                              </span>
+                            )}
+                          {prefixEnable && (
+                            <span className={prefix.options.class}>
+                              {minute.options.prefix}
+                            </span>
+                          )}
+                          {labelEnable &&
+                            label.options.position == "afterPrefix" && (
+                              <span className={label.options.class}>
+                                {minute.options.label}
+                              </span>
+                            )}
+                          <span className={minute.options.class}>
+                            {remindMinute}
+                          </span>
+                          {labelEnable &&
+                            label.options.position == "beforePostfix" && (
+                              <span className={label.options.class}>
+                                {minute.options.label}
+                              </span>
+                            )}
+                          {postfixEnable && (
+                            <span className={postfix.options.class}>
+                              {minute.options.postfix}
+                            </span>
+                          )}
+                          {labelEnable &&
+                            label.options.position == "afterPostfix" && (
+                              <span className={label.options.class}>
+                                {minute.options.label}
+                              </span>
+                            )}
+                        </div>
+                      )}
+                      {minuteEnable && separatorEnable && (
+                        <span class={separator.options.class}>
+                          {separator.options.text}
+                        </span>
+                      )}
+
+                      {secondEnable && (
+                        <div
+                          className={`${items.options.class} ${secondWrap.options.class}`}
+                        >
+                          {labelEnable &&
+                            label.options.position == "beforePrefix" && (
+                              <span className={label.options.class}>
+                                {second.options.label}
+                              </span>
+                            )}
+                          {prefixEnable && (
+                            <span className={prefix.options.class}>
+                              {second.options.prefix}
+                            </span>
+                          )}
+                          {labelEnable &&
+                            label.options.position == "afterPrefix" && (
+                              <span className={label.options.class}>
+                                {second.options.label}
+                              </span>
+                            )}
+                          <span className={second.options.class}>
+                            {remindSecond}
+                          </span>
+                          {labelEnable &&
+                            label.options.position == "beforePostfix" && (
+                              <span className={label.options.class}>
+                                {second.options.label}
+                              </span>
+                            )}
+                          {postfixEnable && (
+                            <span className={postfix.options.class}>
+                              {second.options.postfix}
+                            </span>
+                          )}
+                          {labelEnable &&
+                            label.options.position == "afterPostfix" && (
+                              <span className={label.options.class}>
+                                {second.options.label}
+                              </span>
+                            )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  {innerEnable && (
+                    <div className="inner">{innerBlocksProps.children}</div>
+                  )}
+                </>
               )}
-              {postfix.options.text && (
-                <span className={postfix.options.class}>
-                  {postfix.options.text}
-                </span>
-              )}
-              {icon.options.position == "afterPostfix" && (
-                <span
-                  className={icon.options.class}
-                  dangerouslySetInnerHTML={{ __html: iconHtml }}
-                />
-              )}
-            </CustomTag>
+            </div>
           )}
         </>
       </>
     );
   },
+
   save: function (props) {
     // to make a truly dynamic block, we're handling front end by render_callback under index.php file
-    return null;
+
+    var attributes = props.attributes;
+    var wrapper = attributes.wrapper;
+
+    var blockId = attributes.blockId;
+
+    const blockProps = useBlockProps.save({
+      className: ` ${blockId} pg-date-countdown`,
+    });
+
+    return <InnerBlocks.Content />;
+
+    //return null;
   },
 });

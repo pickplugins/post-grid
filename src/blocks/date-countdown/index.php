@@ -578,6 +578,7 @@ class PGBlockDateCountdown
     $separatorOptions = isset($separator['options']) ? $separator['options'] : [];
     $separatorEnable = isset($separatorOptions['enable']) ? $separatorOptions['enable'] : true;
     $separatorText = isset($separatorOptions['text']) ? $separatorOptions['text'] : "";
+    $separatorPosition = isset($separatorOptions['position']) ? $separatorOptions['position'] : "";
 
     $label = isset($attributes['label']) ? $attributes['label'] : [];
     $labelOptions = isset($label['options']) ? $label['options'] : [];
@@ -762,9 +763,15 @@ class PGBlockDateCountdown
                   </span>
                 <?php endif; ?>
 
+                <?php if ($separatorEnable && $separatorPosition == 'afterPostfix'): ?>
+                  <span class="separator">
+                    <?php echo wp_kses_post($separatorText); ?>
+                  </span>
+                <?php endif; ?>
+
               </div>
             <?php endif; ?>
-            <?php if ($separatorEnable): ?>
+            <?php if ($dayEnable && $separatorEnable && $separatorPosition == 'afterEachItems'): ?>
               <span class="separator">
                 <?php echo wp_kses_post($separatorText); ?>
               </span>
@@ -827,9 +834,15 @@ class PGBlockDateCountdown
                   </span>
                 <?php endif; ?>
 
+                <?php if ($separatorEnable && $separatorPosition == 'afterPostfix'): ?>
+                  <span class="separator">
+                    <?php echo wp_kses_post($separatorText); ?>
+                  </span>
+                <?php endif; ?>
+
               </div>
             <?php endif; ?>
-            <?php if ($separatorEnable): ?>
+            <?php if ($hourEnable && $separatorEnable && $separatorPosition == 'afterEachItems'): ?>
               <span class="separator">
                 <?php echo wp_kses_post($separatorText); ?>
               </span>
@@ -885,9 +898,15 @@ class PGBlockDateCountdown
                   </span>
                 <?php endif; ?>
 
+                <?php if ($separatorEnable && $separatorPosition == 'afterPostfix'): ?>
+                  <span class="separator">
+                    <?php echo wp_kses_post($separatorText); ?>
+                  </span>
+                <?php endif; ?>
+
               </div>
             <?php endif; ?>
-            <?php if ($separatorEnable): ?>
+            <?php if ($minuteEnable && $separatorEnable && $separatorPosition == 'afterEachItems'): ?>
               <span class="separator">
                 <?php echo wp_kses_post($separatorText); ?>
               </span>

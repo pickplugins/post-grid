@@ -2484,7 +2484,7 @@ registerBlockType("post-grid/date-countdown", {
             </PanelBody>
 
             <PanelBody title="Second" initialOpen={false}>
-              <ToggleControl
+              {/* <ToggleControl
                 label="Enable Second?"
                 className="my-4"
                 help={secondEnable ? "Second enabled" : "Second disabled."}
@@ -2498,7 +2498,7 @@ registerBlockType("post-grid/date-countdown", {
                     second: { ...second, options: options },
                   });
                 }}
-              />
+              /> */}
               <PanelRow className="mb-4">
                 <label for="">Label: </label>
                 <InputControl
@@ -2607,44 +2607,6 @@ registerBlockType("post-grid/date-countdown", {
                     },
                   ]}
                 >
-                  {/* <PGtab name="options">
-                    <PanelRow>
-                      <label for="">Label: </label>
-                      <InputControl
-                        value={second.options.label}
-                        onChange={(newVal) => {
-                          var options = { ...second.options, label: newVal };
-                          setAttributes({
-                            second: { styles: second.styles, options: options },
-                          });
-                        }}
-                      />
-                    </PanelRow>
-                    <PanelRow>
-                      <label for="">Prefix: </label>
-                      <InputControl
-                        value={second.options.prefix}
-                        onChange={(newVal) => {
-                          var options = { ...second.options, prefix: newVal };
-                          setAttributes({
-                            second: { styles: second.styles, options: options },
-                          });
-                        }}
-                      />
-                    </PanelRow>
-                    <PanelRow>
-                      <label for="">Postfix: </label>
-                      <InputControl
-                        value={second.options.postfix}
-                        onChange={(newVal) => {
-                          var options = { ...second.options, postfix: newVal };
-                          setAttributes({
-                            second: { styles: second.styles, options: options },
-                          });
-                        }}
-                      />
-                    </PanelRow>
-                  </PGtab> */}
                   <PGtab name="styles">
                     <PGStyles
                       obj={second}
@@ -2666,7 +2628,7 @@ registerBlockType("post-grid/date-countdown", {
             </PanelBody>
 
             <PanelBody title="Minute" initialOpen={false}>
-              <ToggleControl
+              {/* <ToggleControl
                 label="Enable Minute?"
                 className="my-4"
                 help={minuteEnable ? "Minute enabled" : "Minute disabled."}
@@ -2680,7 +2642,7 @@ registerBlockType("post-grid/date-countdown", {
                     minute: { ...minute, options: options },
                   });
                 }}
-              />
+              /> */}
               <PanelRow className="my-4">
                 <label for="">Label: </label>
                 <InputControl
@@ -2798,7 +2760,7 @@ registerBlockType("post-grid/date-countdown", {
             </PanelBody>
 
             <PanelBody title="Hour" initialOpen={false}>
-              <ToggleControl
+              {/* <ToggleControl
                 label="Enable Hour?"
                 className="my-4"
                 help={hourEnable ? "Hour enabled" : "Hour disabled."}
@@ -2812,7 +2774,7 @@ registerBlockType("post-grid/date-countdown", {
                     hour: { ...hour, options: options },
                   });
                 }}
-              />
+              /> */}
               <PanelRow className="my-4">
                 <label for="">Label: </label>
                 <InputControl
@@ -2930,7 +2892,7 @@ registerBlockType("post-grid/date-countdown", {
             </PanelBody>
 
             <PanelBody title="Day" initialOpen={false}>
-              <ToggleControl
+              {/* <ToggleControl
                 label="Enable Day?"
                 className="my-4"
                 help={dayEnable ? "Day enabled" : "Day disabled."}
@@ -2944,7 +2906,7 @@ registerBlockType("post-grid/date-countdown", {
                     day: { ...day, options: options },
                   });
                 }}
-              />
+              /> */}
               <PanelRow className="my-4">
                 <label for="">Label: </label>
                 <InputControl
@@ -3182,35 +3144,6 @@ registerBlockType("post-grid/date-countdown", {
                       }}
                     />
                   </PanelRow>
-                  {/* <PanelRow className="my-4">
-                    <label for="">Separator position</label>
-
-                    <SelectControl
-                      label=""
-                      value={separator.options.position}
-                      options={[
-                        { label: "Choose Position", value: "" },
-
-                        // { label: "Before Prefix", value: "beforePrefix" },
-                        // { label: "After Prefix", value: "afterPrefix" },
-                        { label: "Before Prefix", value: "beforePrefix" },
-                        { label: "After Prefix", value: "afterPrefix" },
-                        { label: "Before Postfix", value: "beforePostfix" },
-                        { label: "After Postfix", value: "afterPostfix" },
-                        // { label: "Before Link", value: "beforeLink" },
-                        // { label: "After Link", value: "afterLink" },
-                      ]}
-                      onChange={(newVal) => {
-                        var options = {
-                          ...separator.options,
-                          position: newVal,
-                        };
-                        setAttributes({
-                          separator: { ...separator, options: options },
-                        });
-                      }}
-                    />
-                  </PanelRow> */}
 
                   <PanelRow className="my-4">
                     <ToggleControl
@@ -3226,6 +3159,35 @@ registerBlockType("post-grid/date-countdown", {
                         var options = {
                           ...separator.options,
                           enable: separator.options.enable ? false : true,
+                        };
+                        setAttributes({
+                          separator: { ...separator, options: options },
+                        });
+                      }}
+                    />
+                  </PanelRow>
+                  <PanelRow className="my-4">
+                    <label for="">Separator position</label>
+
+                    <SelectControl
+                      label=""
+                      value={separator.options.position}
+                      options={[
+                        { label: "Choose Position", value: "" },
+
+                        // { label: "Before Prefix", value: "beforePrefix" },
+                        // { label: "After Prefix", value: "afterPrefix" },
+                        // { label: "Before Prefix", value: "beforePrefix" },
+                        { label: "After Postfix", value: "afterPostfix" },
+                        // { label: "Before Postfix", value: "beforePostfix" },
+                        { label: "After Each Items", value: "afterEachItems" },
+                        // { label: "Before Link", value: "beforeLink" },
+                        // { label: "After Link", value: "afterLink" },
+                      ]}
+                      onChange={(newVal) => {
+                        var options = {
+                          ...separator.options,
+                          position: newVal,
                         };
                         setAttributes({
                           separator: { ...separator, options: options },
@@ -3782,14 +3744,22 @@ registerBlockType("post-grid/date-countdown", {
                                 {day.options.label}
                               </span>
                             )}
+                          {separatorEnable &&
+                            separator.options.position == "afterPostfix" && (
+                              <span class={separator.options.class}>
+                                {separator.options.text}
+                              </span>
+                            )}
                         </div>
                       )}
 
-                      {dayEnable && separatorEnable && (
-                        <span class={separator.options.class}>
-                          {separator.options.text}
-                        </span>
-                      )}
+                      {dayEnable &&
+                        separatorEnable &&
+                        separator.options.position == "afterEachItems" && (
+                          <span class={separator.options.class}>
+                            {separator.options.text}
+                          </span>
+                        )}
 
                       {hourEnable && (
                         <div
@@ -3833,13 +3803,22 @@ registerBlockType("post-grid/date-countdown", {
                                 {hour.options.label}
                               </span>
                             )}
+                          {separatorEnable &&
+                            separator.options.position == "afterPostfix" && (
+                              <span class={separator.options.class}>
+                                {separator.options.text}
+                              </span>
+                            )}
                         </div>
                       )}
-                      {hourEnable && separatorEnable && (
-                        <span class={separator.options.class}>
-                          {separator.options.text}
-                        </span>
-                      )}
+
+                      {hourEnable &&
+                        separatorEnable &&
+                        separator.options.position == "afterEachItems" && (
+                          <span class={separator.options.class}>
+                            {separator.options.text}
+                          </span>
+                        )}
 
                       {minuteEnable && (
                         <div
@@ -3882,13 +3861,22 @@ registerBlockType("post-grid/date-countdown", {
                                 {minute.options.label}
                               </span>
                             )}
+                          {separatorEnable &&
+                            separator.options.position == "afterPostfix" && (
+                              <span class={separator.options.class}>
+                                {separator.options.text}
+                              </span>
+                            )}
                         </div>
                       )}
-                      {minuteEnable && separatorEnable && (
-                        <span class={separator.options.class}>
-                          {separator.options.text}
-                        </span>
-                      )}
+
+                      {minuteEnable &&
+                        separatorEnable &&
+                        separator.options.position == "afterEachItems" && (
+                          <span class={separator.options.class}>
+                            {separator.options.text}
+                          </span>
+                        )}
 
                       {secondEnable && (
                         <div

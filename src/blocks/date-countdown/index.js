@@ -125,7 +125,14 @@ registerBlockType("post-grid/date-countdown", {
     wrapper: {
       type: "object",
       default: {
-        options: { tag: "div", class: "", startDate: "", endDate: "" },
+        options: {
+          tag: "div",
+          class: "",
+          startDate: "",
+          endDate: "",
+          startDateSrc: "",
+          endDateSrc: "",
+        },
 
         styles: {
           color: { Desktop: "" },
@@ -432,7 +439,7 @@ registerBlockType("post-grid/date-countdown", {
       default: { items: {} },
     },
   },
-  usesContext: [],
+  usesContext: ["postId", "loopIndex", "postType", "queryId"],
 
   supports: {
     align: ["wide", "full"],
@@ -444,6 +451,10 @@ registerBlockType("post-grid/date-countdown", {
     var setAttributes = props.setAttributes;
     var context = props.context;
     var clientId = props.clientId;
+
+    var postId = context["postId"];
+    console.log(postId);
+    var postType = context["postType"];
 
     var inner = attributes.inner;
     var editMode = attributes.editMode;
@@ -525,6 +536,23 @@ registerBlockType("post-grid/date-countdown", {
       [clientId]
     );
 
+    const [productData, setproductData] = useState(null);
+
+    useEffect(() => {
+      // setloading(true);
+
+      apiFetch({
+        path: "/post-grid/v2/get_post_data",
+        method: "POST",
+        data: { postId: postId },
+      }).then((res) => {
+        console.log(res);
+        setproductData(res);
+
+        // setloading(false);
+      });
+    }, []);
+
     const [remindTime, setRemindTime] = useState(0);
     const [remindDay, setRemindDay] = useState(0);
     const [remindHour, setRemindHour] = useState(0);
@@ -539,12 +567,44 @@ registerBlockType("post-grid/date-countdown", {
       const options = { year: "numeric", month: "2-digit", day: "2-digit" };
       const formattedDate = currentDate.toLocaleDateString(undefined, options);
 
-      const date1 = new Date(dateInput1);
-      const date2 = new Date(dateInput2);
+      var date1 = "";
+      var date2 = "";
+      var startDate = "";
+      console.log(wrapper.options.endDateSrc);
+      if (wrapper.options.startDateSrc?.length == 0) {
+        date1 = new Date(dateInput1);
+      } else {
+        date1 =
+          productData?.date_on_sale_from != null
+            ? new Date(productData.date_on_sale_from.date)
+            : new Date(dateInput1);
+      }
 
-      const startDate = currentDate > date1 ? currentDate : date1;
+      if (wrapper.options.endDateSrc.length == 0) {
+        date2 = new Date(dateInput2);
+      } else {
+        date2 =
+          productData?.date_on_sale_to != null
+            ? new Date(productData.date_on_sale_to.date)
+            : new Date(dateInput2);
+      }
 
-      const timeDifference = Math.abs(date2 - startDate);
+      console.log("date 1", date1);
+      console.log("date 2", date2);
+      console.log("woo date", productData);
+
+      //  date1 = new Date(dateInput1);
+      if (currentDate > date1) {
+        startDate = currentDate;
+      } else if (currentDate < date1) {
+        startDate = currentDate;
+      } else {
+        startDate = date1;
+      }
+      // const startDate = currentDate > date1 ? currentDate : date1;
+      console.log("start date", startDate);
+
+      const timeDifference = date2 - startDate;
       setRemindTime(timeDifference);
 
       // Check if current date is less than date1
@@ -552,7 +612,13 @@ registerBlockType("post-grid/date-countdown", {
         // If current date is less, set remindTime to 0 to prevent countdown
         setRemindTime(0);
       }
-    }, [clientId, wrapper.options.startDate, wrapper.options.endDate]);
+    }, [
+      clientId,
+      wrapper.options.startDate,
+      wrapper.options.startDateSrc,
+      wrapper.options.endDateSrc,
+      wrapper.options.endDate,
+    ]);
 
     // Use the useEffect hook to update the remaining time every second
     useEffect(() => {
@@ -2215,59 +2281,106 @@ registerBlockType("post-grid/date-countdown", {
         <InspectorControls>
           <div className="px-3">
             <div className="pb-3">
-              <PanelRow className="block mb-4">
-                <label for="" className="font-bold mb-2 ">
-                  Start Date?
-                </label>
-                <br />
-                <InputControl
-                  type="datetime-local"
-                  className="b-2"
-                  value={wrapper.options.startDate}
+              {wrapper.options.startDateSrc.length == 0 && (
+                <PanelRow className="block mb-4">
+                  <label for="" className="font-bold mb-2 ">
+                    Start Date?
+                  </label>
+                  <br />
+                  <InputControl
+                    type="datetime-local"
+                    className="b-2"
+                    value={wrapper.options.startDate}
+                    onChange={(newVal) => {
+                      var options = { ...wrapper.options, startDate: newVal };
+                      setAttributes({
+                        wrapper: { ...wrapper, options: options },
+                      });
+                    }}
+                  />
+                </PanelRow>
+              )}
+
+              <PanelRow>
+                <label for="">Start Date Source</label>
+                <SelectControl
+                  label=""
+                  value={wrapper.options.startDateSrc}
+                  options={[
+                    { label: "Choose", value: "" },
+                    {
+                      label: "WooCommerce Sale price dates",
+                      value: "wc_sale_price_date_from",
+                    },
+                    // { label: "H2", value: "h2" },
+                    // { label: "H3", value: "h3" },
+                    // { label: "H4", value: "h4" },
+                    // { label: "H5", value: "h5" },
+                    // { label: "H6", value: "h6" },
+                    // { label: "SPAN", value: "span" },
+                    // { label: "DIV", value: "div" },
+                    // { label: "P", value: "p" },
+                  ]}
                   onChange={(newVal) => {
-                    var options = { ...wrapper.options, startDate: newVal };
+                    var options = { ...wrapper.options, startDateSrc: newVal };
                     setAttributes({
                       wrapper: { ...wrapper, options: options },
                     });
                   }}
                 />
-                {/* <DateTimePicker
-                      
-                      onChange={(newVal) => {
-                        var options = { ...setting.options, startDate: newVal };
-                        setAttributes({
-                          setting: { ...setting, options: options },
-                        });
-                      }}
-                      is12Hour={true}
-                    />
-                    {setting.options.startDate} */}
               </PanelRow>
-              <PanelRow className="block mb-2">
-                <label for="" className="font-bold mb-2 ">
-                  End Date?
-                </label>
-                <InputControl
-                  type="datetime-local"
-                  className="mr-2"
-                  value={wrapper.options.endDate}
+              {/* {JSON.stringify(productData)}
+              {JSON.stringify(postId)} */}
+              {
+                // wrapper.options.endDateSrc != undefined &&
+                wrapper.options.endDateSrc.length == 0 && (
+                  <PanelRow className="block mb-2">
+                    <label for="" className="font-bold mb-2 ">
+                      End Date?
+                    </label>
+
+                    <InputControl
+                      type="datetime-local"
+                      className="mr-2"
+                      value={wrapper.options.endDate}
+                      onChange={(newVal) => {
+                        var options = { ...wrapper.options, endDate: newVal };
+                        setAttributes({
+                          wrapper: { ...wrapper, options: options },
+                        });
+                      }}
+                    />
+                  </PanelRow>
+                )
+              }
+
+              <PanelRow>
+                <label for="">End Date Source</label>
+                <SelectControl
+                  label=""
+                  value={wrapper.options.endDateSrc}
+                  options={[
+                    { label: "Choose", value: "" },
+                    {
+                      label: "WooCommerce Sale price dates",
+                      value: "wc_sale_price_date_to",
+                    },
+                    // { label: "H2", value: "h2" },
+                    // { label: "H3", value: "h3" },
+                    // { label: "H4", value: "h4" },
+                    // { label: "H5", value: "h5" },
+                    // { label: "H6", value: "h6" },
+                    // { label: "SPAN", value: "span" },
+                    // { label: "DIV", value: "div" },
+                    // { label: "P", value: "p" },
+                  ]}
                   onChange={(newVal) => {
-                    var options = { ...wrapper.options, endDate: newVal };
+                    var options = { ...wrapper.options, endDateSrc: newVal };
                     setAttributes({
                       wrapper: { ...wrapper, options: options },
                     });
                   }}
                 />
-                {/* <DateTimePicker
-                      
-                      onChange={(newVal) => {
-                        var options = { ...setting.options, endDate: newVal };
-                        setAttributes({
-                          setting: { ...setting, options: options },
-                        });
-                      }}
-                      is12Hour={true}
-                    /> */}
               </PanelRow>
             </div>
             <PanelBody title="Wrapper" initialOpen={false}>

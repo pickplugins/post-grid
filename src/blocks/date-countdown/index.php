@@ -41,6 +41,8 @@ class PGBlockDateCountdown
                       'class' => '',
                       'startDate' => '',
                       'endDate' => '',
+                      'startDateSrc' => '',
+                      'endDateSrc' => '',
                     ),
                   'styles' =>
                     array(
@@ -519,6 +521,8 @@ class PGBlockDateCountdown
 
 
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
+    $post_ID = !empty($post_ID) ? $post_ID : get_the_ID();
+
 
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -540,7 +544,9 @@ class PGBlockDateCountdown
     // $setting = isset($attributes['setting']) ? $attributes['setting'] : [];
     // $settingOptions = isset($setting['options']) ? $setting['options'] : [];
     $wrapperStartDate = isset($wrapperOptions['startDate']) ? $wrapperOptions['startDate'] : "";
+    $wrapperStartDateSrc = isset($wrapperOptions['startDateSrc']) ? $wrapperOptions['startDateSrc'] : "";
     $wrapperEndDate = isset($wrapperOptions['endDate']) ? $wrapperOptions['endDate'] : "";
+    $wrapperEndDateSrc = isset($wrapperOptions['endDateSrc']) ? $wrapperOptions['endDateSrc'] : "";
 
 
 
@@ -586,29 +592,52 @@ class PGBlockDateCountdown
     $labelPosition = isset($labelOptions['position']) ? $labelOptions['position'] : "";
 
 
-    // Set your target end date and time (in this example, September 30, 2023, at 00:00:00 UTC).
-    $endDate = strtotime($wrapperEndDate);
-    //var_dump($endDate);
+    $_sale_price_dates_to = get_post_meta($post_ID, "_sale_price_dates_to", true);
+
+
+    // var_dump($_sale_price_dates_to);
+
+    // var_dump($dateFormatted);
+
+    if (empty($wrapperStartDateSrc)) {
+      $wrapperStartDate = strtotime($wrapperStartDate);
+    } else {
+      $wrapperStartDate = !empty($_sale_price_dates_from) ? (int) $_sale_price_dates_from : strtotime($wrapperStartDate);
+    }
+    if (empty($wrapperEndDateSrc)) {
+      $wrapperEndDate = strtotime($wrapperEndDate);
+    } else {
+      $wrapperEndDate = !empty($_sale_price_dates_to) ? (int) $_sale_price_dates_to : strtotime($wrapperEndDate);
+    }
+
+
+
+    // $wrapperEndDate = !empty($_sale_price_dates_to) ? (int) $_sale_price_dates_to : strtotime($wrapperEndDate);
+    $endDate = date('Y-m-d\TH:i', $wrapperEndDate);
+    $startDate = date('Y-m-d\TH:i', $wrapperStartDate);
+
+
+    // var_dump($wrapperEndDateSrc);
+    // var_dump($wrapperEndDate);
+    var_dump($endDate);
     $gmt_offset = get_option('gmt_offset');
     $currentDate = date("Y/m/d H:i:s", strtotime('+' . $gmt_offset . ' hour'));
-    // Get the current server time (you may need to adjust the time zone).
-    // $currentDate = time();
-    //var_dump($currentDate);
+
+    ////var_dump($currentDate);
     $currentDate = strtotime($currentDate);
-    // Get the start date, choosing the maximum of the current date and date1.
+
     $date1 = strtotime($wrapperStartDate);
 
-    // Replace this with your date1 value
     $startDate = max($currentDate, $date1);
 
-    // echo "hello".$endDate."hello".$date1."hello".$startDate." ".strtotime("7 October 2023");
 
 
-    // Calculate the time difference between the start date and the end date.
-    $timeDifference = $endDate - $startDate;
-    //var_dump($timeDifference);
 
-    // Calculate days, hours, minutes, and seconds.
+
+    $timeDifference = $wrapperEndDate - $startDate;
+    ////var_dump($timeDifference);
+
+
     $days = floor($timeDifference / (60 * 60 * 24));
     $hours = floor(($timeDifference % (60 * 60 * 24)) / (60 * 60));
     $minutes = floor(($timeDifference % (60 * 60)) / 60);
@@ -691,8 +720,8 @@ class PGBlockDateCountdown
     $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 
     $dataAtts = [
-      "startDate" => $wrapperStartDate,
-      "endDate" => $wrapperEndDate,
+      "startDate" => $startDate,
+      "endDate" => $endDate,
       "blockId" => $blockId,
 
     ];
@@ -704,289 +733,289 @@ class PGBlockDateCountdown
     if (!empty($wrapperTag)):
 
       ?>
-      <<?php echo esc_attr($wrapperTag); ?> class="PGBlockDateCountdown
-        <?php echo esc_attr($blockId); ?>
-        <?php echo esc_attr($blockAlign); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="PGBlockDateCountdown
+              <?php echo esc_attr($blockId); ?>
+              <?php echo esc_attr($blockAlign); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>">
 
-        <?php if ($timeDifference > 0) {
-          ?>
-          <div class="countdown-wrapper">
-            <?php if ($iconEnable): ?>
-              <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-
-
-
-            <?php
-            if ($dayEnable): ?>
-              <div class="items day-wrapper">
-
-                <?php if ($labelEnable && $labelPosition == ''): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($dayLabel); ?>
-                  </span>
-                <?php endif; ?>
+              <?php if ($timeDifference > 0) {
+                ?>
+                  <div class="countdown-wrapper">
+                    <?php if ($iconEnable): ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
 
 
-                <?php if ($labelEnable && $labelPosition == 'beforePrefix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($dayLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($prefixEnable): ?>
-                  <span class="prefix">
-                    <?php echo wp_kses_post($dayPrefix); ?>
-                  </span>
-                <?php endif; ?>
 
-                <?php if ($labelEnable && $labelPosition == 'afterPrefix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($dayLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <span class="day-countdown">
-                  <?php echo wp_kses_post($formattedDays); ?>
-                </span>
-                <?php if ($labelEnable && $labelPosition == 'beforePostfix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($dayLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($postfixEnable): ?>
-                  <span class="postfix">
-                    <?php echo wp_kses_post($dayPostfix); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($labelEnable && $labelPosition == 'afterPostfix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($dayLabel); ?>
-                  </span>
-                <?php endif; ?>
+                    <?php
+                    if ($dayEnable): ?>
+                        <div class="items day-wrapper">
 
-                <?php if ($separatorEnable && $separatorPosition == 'afterPostfix'): ?>
-                  <span class="separator">
-                    <?php echo wp_kses_post($separatorText); ?>
-                  </span>
-                <?php endif; ?>
+                          <?php if ($labelEnable && $labelPosition == ''): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($dayLabel); ?>
+                              </span>
+                          <?php endif; ?>
 
+
+                          <?php if ($labelEnable && $labelPosition == 'beforePrefix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($dayLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($prefixEnable): ?>
+                              <span class="prefix">
+                                <?php echo wp_kses_post($dayPrefix); ?>
+                              </span>
+                          <?php endif; ?>
+
+                          <?php if ($labelEnable && $labelPosition == 'afterPrefix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($dayLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <span class="day-countdown">
+                            <?php echo wp_kses_post($formattedDays); ?>
+                          </span>
+                          <?php if ($labelEnable && $labelPosition == 'beforePostfix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($dayLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($postfixEnable): ?>
+                              <span class="postfix">
+                                <?php echo wp_kses_post($dayPostfix); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($labelEnable && $labelPosition == 'afterPostfix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($dayLabel); ?>
+                              </span>
+                          <?php endif; ?>
+
+                          <?php if ($separatorEnable && $separatorPosition == 'afterPostfix'): ?>
+                              <span class="separator">
+                                <?php echo wp_kses_post($separatorText); ?>
+                              </span>
+                          <?php endif; ?>
+
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($dayEnable && $separatorEnable && $separatorPosition == 'afterEachItems'): ?>
+                        <span class="separator">
+                          <?php echo wp_kses_post($separatorText); ?>
+                        </span>
+                    <?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <?php
+                    if ($hourEnable): ?>
+                        <div class="items hour-wrapper">
+
+                          <?php if ($labelEnable && $labelPosition == ''): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($hourLabel); ?>
+                              </span>
+                          <?php endif; ?>
+
+
+                          <?php if ($labelEnable && $labelPosition == 'beforePrefix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($hourLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($prefixEnable): ?>
+                              <span class="prefix">
+                                <?php echo wp_kses_post($hourPrefix); ?>
+                              </span>
+                          <?php endif; ?>
+
+                          <?php if ($labelEnable && $labelPosition == 'afterPrefix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($hourLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <span class="hour-countdown">
+                            <?php echo wp_kses_post($formattedHours); ?>
+                          </span>
+                          <?php if ($labelEnable && $labelPosition == 'beforePostfix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($hourLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($postfixEnable): ?>
+                              <span class="postfix">
+                                <?php echo wp_kses_post($hourPostfix); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($labelEnable && $labelPosition == 'afterPostfix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($hourLabel); ?>
+                              </span>
+                          <?php endif; ?>
+
+                          <?php if ($separatorEnable && $separatorPosition == 'afterPostfix'): ?>
+                              <span class="separator">
+                                <?php echo wp_kses_post($separatorText); ?>
+                              </span>
+                          <?php endif; ?>
+
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($hourEnable && $separatorEnable && $separatorPosition == 'afterEachItems'): ?>
+                        <span class="separator">
+                          <?php echo wp_kses_post($separatorText); ?>
+                        </span>
+                    <?php endif; ?>
+
+
+
+
+
+                    <?php
+                    if ($minuteEnable): ?>
+                        <div class="items minute-wrapper">
+
+                          <?php if ($labelEnable && $labelPosition == ''): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($minuteLabel); ?>
+                              </span>
+                          <?php endif; ?>
+
+
+                          <?php if ($labelEnable && $labelPosition == 'beforePrefix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($minuteLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($prefixEnable): ?>
+                              <span class="prefix">
+                                <?php echo wp_kses_post($minutePrefix); ?>
+                              </span>
+                          <?php endif; ?>
+
+                          <?php if ($labelEnable && $labelPosition == 'afterPrefix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($minuteLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <span class="minute-countdown">
+                            <?php echo wp_kses_post($formattedMinutes); ?>
+                          </span>
+                          <?php if ($labelEnable && $labelPosition == 'beforePostfix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($minuteLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($postfixEnable): ?>
+                              <span class="postfix">
+                                <?php echo wp_kses_post($minutePostfix); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($labelEnable && $labelPosition == 'afterPostfix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($minuteLabel); ?>
+                              </span>
+                          <?php endif; ?>
+
+                          <?php if ($separatorEnable && $separatorPosition == 'afterPostfix'): ?>
+                              <span class="separator">
+                                <?php echo wp_kses_post($separatorText); ?>
+                              </span>
+                          <?php endif; ?>
+
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($minuteEnable && $separatorEnable && $separatorPosition == 'afterEachItems'): ?>
+                        <span class="separator">
+                          <?php echo wp_kses_post($separatorText); ?>
+                        </span>
+                    <?php endif; ?>
+
+
+
+
+
+
+
+                    <?php
+                    if ($secondEnable): ?>
+                        <div class="items second-wrapper">
+
+                          <?php if ($labelEnable && $labelPosition == ''): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($secondLabel); ?>
+                              </span>
+                          <?php endif; ?>
+
+
+                          <?php if ($labelEnable && $labelPosition == 'beforePrefix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($secondLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($prefixEnable): ?>
+                              <span class="prefix">
+                                <?php echo wp_kses_post($secondPrefix); ?>
+                              </span>
+                          <?php endif; ?>
+
+                          <?php if ($labelEnable && $labelPosition == 'afterPrefix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($secondLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <span class="second-countdown">
+                            <?php echo wp_kses_post($formattedSeconds); ?>
+                          </span>
+                          <?php if ($labelEnable && $labelPosition == 'beforePostfix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($secondLabel); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($postfixEnable): ?>
+                              <span class="postfix">
+                                <?php echo wp_kses_post($secondPostfix); ?>
+                              </span>
+                          <?php endif; ?>
+                          <?php if ($labelEnable && $labelPosition == 'afterPostfix'): ?>
+                              <span class="label">
+                                <?php echo wp_kses_post($secondLabel); ?>
+                              </span>
+                          <?php endif; ?>
+
+                        </div>
+                    <?php endif; ?>
+
+
+
+                  </div>
+
+                  <?php
+              } ?>
+
+
+
+
+
+
+              <div class="inner" id="inner">
+                <?php echo $content ?>
               </div>
-            <?php endif; ?>
-            <?php if ($dayEnable && $separatorEnable && $separatorPosition == 'afterEachItems'): ?>
-              <span class="separator">
-                <?php echo wp_kses_post($separatorText); ?>
-              </span>
-            <?php endif; ?>
 
 
 
-
-
-
-
-
-
-
-
-
+            </<?php echo esc_attr($wrapperTag); ?>>
             <?php
-            if ($hourEnable): ?>
-              <div class="items hour-wrapper">
-
-                <?php if ($labelEnable && $labelPosition == ''): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($hourLabel); ?>
-                  </span>
-                <?php endif; ?>
-
-
-                <?php if ($labelEnable && $labelPosition == 'beforePrefix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($hourLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($prefixEnable): ?>
-                  <span class="prefix">
-                    <?php echo wp_kses_post($hourPrefix); ?>
-                  </span>
-                <?php endif; ?>
-
-                <?php if ($labelEnable && $labelPosition == 'afterPrefix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($hourLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <span class="hour-countdown">
-                  <?php echo wp_kses_post($formattedHours); ?>
-                </span>
-                <?php if ($labelEnable && $labelPosition == 'beforePostfix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($hourLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($postfixEnable): ?>
-                  <span class="postfix">
-                    <?php echo wp_kses_post($hourPostfix); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($labelEnable && $labelPosition == 'afterPostfix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($hourLabel); ?>
-                  </span>
-                <?php endif; ?>
-
-                <?php if ($separatorEnable && $separatorPosition == 'afterPostfix'): ?>
-                  <span class="separator">
-                    <?php echo wp_kses_post($separatorText); ?>
-                  </span>
-                <?php endif; ?>
-
-              </div>
-            <?php endif; ?>
-            <?php if ($hourEnable && $separatorEnable && $separatorPosition == 'afterEachItems'): ?>
-              <span class="separator">
-                <?php echo wp_kses_post($separatorText); ?>
-              </span>
-            <?php endif; ?>
-
-
-
-
-
-            <?php
-            if ($minuteEnable): ?>
-              <div class="items minute-wrapper">
-
-                <?php if ($labelEnable && $labelPosition == ''): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($minuteLabel); ?>
-                  </span>
-                <?php endif; ?>
-
-
-                <?php if ($labelEnable && $labelPosition == 'beforePrefix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($minuteLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($prefixEnable): ?>
-                  <span class="prefix">
-                    <?php echo wp_kses_post($minutePrefix); ?>
-                  </span>
-                <?php endif; ?>
-
-                <?php if ($labelEnable && $labelPosition == 'afterPrefix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($minuteLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <span class="minute-countdown">
-                  <?php echo wp_kses_post($formattedMinutes); ?>
-                </span>
-                <?php if ($labelEnable && $labelPosition == 'beforePostfix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($minuteLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($postfixEnable): ?>
-                  <span class="postfix">
-                    <?php echo wp_kses_post($minutePostfix); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($labelEnable && $labelPosition == 'afterPostfix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($minuteLabel); ?>
-                  </span>
-                <?php endif; ?>
-
-                <?php if ($separatorEnable && $separatorPosition == 'afterPostfix'): ?>
-                  <span class="separator">
-                    <?php echo wp_kses_post($separatorText); ?>
-                  </span>
-                <?php endif; ?>
-
-              </div>
-            <?php endif; ?>
-            <?php if ($minuteEnable && $separatorEnable && $separatorPosition == 'afterEachItems'): ?>
-              <span class="separator">
-                <?php echo wp_kses_post($separatorText); ?>
-              </span>
-            <?php endif; ?>
-
-
-
-
-
-
-
-            <?php
-            if ($secondEnable): ?>
-              <div class="items second-wrapper">
-
-                <?php if ($labelEnable && $labelPosition == ''): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($secondLabel); ?>
-                  </span>
-                <?php endif; ?>
-
-
-                <?php if ($labelEnable && $labelPosition == 'beforePrefix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($secondLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($prefixEnable): ?>
-                  <span class="prefix">
-                    <?php echo wp_kses_post($secondPrefix); ?>
-                  </span>
-                <?php endif; ?>
-
-                <?php if ($labelEnable && $labelPosition == 'afterPrefix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($secondLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <span class="second-countdown">
-                  <?php echo wp_kses_post($formattedSeconds); ?>
-                </span>
-                <?php if ($labelEnable && $labelPosition == 'beforePostfix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($secondLabel); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($postfixEnable): ?>
-                  <span class="postfix">
-                    <?php echo wp_kses_post($secondPostfix); ?>
-                  </span>
-                <?php endif; ?>
-                <?php if ($labelEnable && $labelPosition == 'afterPostfix'): ?>
-                  <span class="label">
-                    <?php echo wp_kses_post($secondLabel); ?>
-                  </span>
-                <?php endif; ?>
-
-              </div>
-            <?php endif; ?>
-
-
-
-          </div>
-
-          <?php
-        } ?>
-
-
-
-
-
-
-        <div class="inner" id="inner">
-          <?php echo $content ?>
-        </div>
-
-
-
-      </<?php echo esc_attr($wrapperTag); ?>>
-      <?php
 
     endif;
 
@@ -1003,7 +1032,7 @@ class PGBlockDateCountdown
 
 
 
-    <?php return ob_get_clean();
+        <?php return ob_get_clean();
   }
 }
 

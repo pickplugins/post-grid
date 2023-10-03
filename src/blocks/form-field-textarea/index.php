@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -22,155 +23,156 @@ class PGBlockFormFieldTextarea
             //'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
             //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
+            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
+            'attributes' => array(
                 'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'options' =>
+                                    array(
+                                        'tag' => 'div',
+                                        'class' => '',
+                                    ),
+                                'styles' =>
+                                    array(),
+                            ),
                     ),
-                ),
                 'label' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'tag' => 'label',
-                            'for' => 'label',
-                            'enable' => true,
-                            'text' => 'Your Name',
-                            'class' => 'pg-form-field-label',
-                        ),
-                        'styles' =>
-                        array(),
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'options' =>
+                                    array(
+                                        'tag' => 'label',
+                                        'for' => 'label',
+                                        'enable' => true,
+                                        'text' => 'Your Name',
+                                        'class' => 'pg-form-field-label',
+                                    ),
+                                'styles' =>
+                                    array(),
+                            ),
                     ),
-                ),
                 'input' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'type' => 'text',
-                            'placeholder' => 'Write your name',
-                            'value' => '',
-                            'name' => '',
-                            'required' => false,
-                            'disabled' => false,
-                            'minLength' => NULL,
-                            'maxLength' => NULL,
-                            'readonly' => false,
-                            'cols' => NULL,
-                            'rows' => 3,
-                            'autocomplete' => 'off',
-                            'autofocus' => false,
-                            'wrap' => false,
-                            'spellcheck' => false,
-                            'autocorrect' => 'off',
-                            'id' => '',
-                            'class' => '',
-                            'postion' => 'afterLabel',
-                        ),
-                        'styles' =>
-                        array(),
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'options' =>
+                                    array(
+                                        'type' => 'text',
+                                        'placeholder' => 'Write your name',
+                                        'value' => '',
+                                        'name' => '',
+                                        'required' => false,
+                                        'disabled' => false,
+                                        'minLength' => NULL,
+                                        'maxLength' => NULL,
+                                        'readonly' => false,
+                                        'cols' => NULL,
+                                        'rows' => 3,
+                                        'autocomplete' => 'off',
+                                        'autofocus' => false,
+                                        'wrap' => false,
+                                        'spellcheck' => false,
+                                        'autocorrect' => 'off',
+                                        'id' => '',
+                                        'class' => '',
+                                        'postion' => 'afterLabel',
+                                    ),
+                                'styles' =>
+                                    array(),
+                            ),
                     ),
-                ),
                 'inputWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'class' => '',
-                        ),
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'options' =>
+                                    array(
+                                        'tag' => 'div',
+                                        'enable' => true,
+                                        'class' => '',
+                                    ),
+                            ),
                     ),
-                ),
                 'labelWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'options' =>
+                                    array(
+                                        'tag' => 'div',
+                                        'enable' => true,
+                                        'class' => '',
+                                    ),
+                                'styles' =>
+                                    array(),
+                            ),
                     ),
-                ),
                 'errorWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'text' => '',
-                            'position' => 'afterInput',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'options' =>
+                                    array(
+                                        'tag' => 'div',
+                                        'enable' => true,
+                                        'text' => '',
+                                        'position' => 'afterInput',
+                                        'class' => '',
+                                    ),
+                                'styles' =>
+                                    array(),
+                            ),
                     ),
-                ),
                 'requiredWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'tag' => 'span',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'options' =>
+                                    array(
+                                        'tag' => 'span',
+                                        'enable' => true,
+                                        'class' => '',
+                                    ),
+                                'styles' =>
+                                    array(),
+                            ),
                     ),
-                ),
                 'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'items' =>
-                        array(),
+                        'type' => 'string',
+                        'default' => '',
                     ),
-                ),
+                'customCss' =>
+                    array(
+                        'type' => 'string',
+                        'default' => '',
+                    ),
+                'blockCssY' =>
+                    array(
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'items' =>
+                                    array(),
+                            ),
+                    ),
             )
 
 
-        ));
+        )
+        );
     }
 
     function front_script($attributes)
@@ -247,48 +249,48 @@ class PGBlockFormFieldTextarea
 
         $postGridCustomCss .= $customCss;
 
-        //var_dump($labelEnable);
-        //var_dump($labelText);
+        ////var_dump($labelEnable);
+        ////var_dump($labelText);
 
 
 
         ob_start();
 
 
-?>
+        ?>
 
-        <div class="<?php echo esc_attr($blockId); ?> pg-form-field" id="<?php echo esc_attr($blockId); ?>">
-
-
-            <div class='label-wrap'>
-
-                <?php if ($labelEnable) : ?>
-                    <label for=""><?php echo wp_kses_post($labelText); ?></label>
-                <?php endif; ?>
+                <div class="<?php echo esc_attr($blockId); ?> pg-form-field" id="<?php echo esc_attr($blockId); ?>">
 
 
-                <?php if ($errorWrapPosition == 'afterlabel') : ?>
-                    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-                <?php endif; ?>
+                    <div class='label-wrap'>
+
+                        <?php if ($labelEnable): ?>
+                                <label for=""><?php echo wp_kses_post($labelText); ?></label>
+                        <?php endif; ?>
 
 
-            </div>
-            <div class='input-wrap'>
-                <textarea type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired) : ?> required <?php endif; ?> <?php if ($inputDisabled) : ?> disabled <?php endif; ?> <?php if ($inputReadonly) : ?> readonly <?php endif; ?> <?php if ($inputAutocomplete) : ?> autocomplete="on" <?php endif; ?> <?php if (!$inputAutocomplete) : ?> autocomplete="off" <?php endif; ?> <?php if ($inputAutocorrect) : ?> autocorrect="on" <?php endif; ?> <?php if (!$inputAutocorrect) : ?> autocorrect="off" <?php endif; ?> <?php if ($inputCols) : ?> cols="<?php echo esc_attr($inputCols); ?>" <?php endif; ?> <?php if ($inputRows) : ?> rows="<?php echo esc_attr($inputRows); ?>" <?php endif; ?> <?php if ($inputMinLength) : ?> minLength="<?php echo esc_attr($inputMinLength); ?>" <?php endif; ?> <?php if ($inputMaxLength) : ?> maxLength="<?php echo esc_attr($inputMaxLength); ?>" <?php endif; ?>><?php echo esc_textarea($inputValue); ?></textarea>
-                <?php if ($errorWrapPosition == 'afterInput') : ?>
-                    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-
-                <?php endif; ?>
-            </div>
+                        <?php if ($errorWrapPosition == 'afterlabel'): ?>
+                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                        <?php endif; ?>
 
 
+                    </div>
+                    <div class='input-wrap'>
+                        <textarea type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>         <?php if ($inputDisabled): ?> disabled <?php endif; ?>         <?php if ($inputReadonly): ?> readonly <?php endif; ?>         <?php if ($inputAutocomplete): ?> autocomplete="on" <?php endif; ?>         <?php if (!$inputAutocomplete): ?> autocomplete="off" <?php endif; ?>         <?php if ($inputAutocorrect): ?> autocorrect="on" <?php endif; ?>         <?php if (!$inputAutocorrect): ?> autocorrect="off" <?php endif; ?>         <?php if ($inputCols): ?> cols="<?php echo esc_attr($inputCols); ?>" <?php endif; ?>         <?php if ($inputRows): ?> rows="<?php echo esc_attr($inputRows); ?>" <?php endif; ?>         <?php if ($inputMinLength): ?> minLength="<?php echo esc_attr($inputMinLength); ?>" <?php endif; ?>         <?php if ($inputMaxLength): ?> maxLength="<?php echo esc_attr($inputMaxLength); ?>" <?php endif; ?>><?php echo esc_textarea($inputValue); ?></textarea>
+                        <?php if ($errorWrapPosition == 'afterInput'): ?>
+                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+
+                        <?php endif; ?>
+                    </div>
 
 
 
 
-        </div>
 
-<?php
+
+                </div>
+
+        <?php
 
         return ob_get_clean();
     }

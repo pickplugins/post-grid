@@ -186,6 +186,7 @@ const variations = [
           class: "",
           endDate: "2023-10-07T15:11",
           startDate: "2023-09-29T15:11",
+          endDateSrc: "",
         },
         styles: {
           //   color: {},

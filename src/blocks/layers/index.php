@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -22,10 +23,10 @@ class PGBlockLayers
             //'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
             //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
+            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
             //'style' => [$this, 'front_style'],
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
+            'attributes' => [
                 "wrapper" => [
                     "type" => "object",
                     "default" => [
@@ -65,7 +66,8 @@ class PGBlockLayers
             ]
 
 
-        ));
+        )
+        );
     }
 
     function front_script($attributes)
@@ -141,23 +143,23 @@ class PGBlockLayers
             $linkUrl = $wrapperCustomUrl;
         }
 
-        //var_dump($blockAlign);
+        ////var_dump($blockAlign);
 
 
         ob_start();
 
 
         if ($wrapperTag == 'a') { ?>
-            <a class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
-                <?php echo $content ?>
-            </a>
-        <?php
+                        <a class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
+                            <?php echo $content ?>
+                        </a>
+                    <?php
 
         } else { ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-                <?php echo $content ?>
-            </<?php echo esc_attr($wrapperTag); ?>>
-<?php
+                        <<?php echo esc_attr($wrapperTag); ?> class="pg-layers <?php echo esc_attr($blockId); ?>             <?php echo esc_attr($blockAlign); ?>">
+                            <?php echo $content ?>
+                        </<?php echo esc_attr($wrapperTag); ?>>
+            <?php
         }
 
         return ob_get_clean();

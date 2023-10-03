@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,283 +19,286 @@ class PGBlockAccordionNestedItem
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layer/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/accordion-nested-item', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
+        register_block_type(
+            'post-grid/accordion-nested-item',
+            array(
+                //'editor_script' => 'editor_script',
+                //'editor_style' => 'editor_style',
+                //'script' => 'front_script',
 
-            'uses_context' =>  ["post-grid/accordionNestedIcon", "post-grid/accordionNestedIconToggle", "post-grid/accordionNestedLabelIcon"],
+                'uses_context' => ["post-grid/accordionNestedIcon", "post-grid/accordionNestedIconToggle", "post-grid/accordionNestedLabelIcon"],
 
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                //'style' => 'front_style',
+                'render_callback' => array($this, 'theHTML'),
+                'attributes' => array(
+                    'wrapper' =>
                         array(
-                            'tag' => 'div',
-                            'class' => '',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'tag' => 'div',
+                                            'class' => '',
+                                        ),
+                                    'styles' =>
+                                        array(
+                                            'backgroundColor' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                        ),
+                                ),
                         ),
-                        'styles' =>
+                    'content' =>
                         array(
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'tag' => 'div',
+                                            'class' => 'accordion-content',
+                                        ),
+                                    'styles' =>
+                                        array(
+                                            'backgroundColor' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'content' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'header' =>
                         array(
-                            'tag' => 'div',
-                            'class' => 'accordion-content',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'tag' => 'div',
+                                            'class' => 'accordion-header',
+                                        ),
+                                    'styles' =>
+                                        array(
+                                            'backgroundColor' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'display' =>
+                                                array(
+                                                    'Desktop' => 'flex',
+                                                ),
+                                        ),
+                                ),
                         ),
-                        'styles' =>
+                    'headerLabel' =>
                         array(
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'text' => 'Accordion Header Text',
+                                            'tag' => 'div',
+                                            'slug' => '',
+                                            'class' => 'accordion-header-label',
+                                        ),
+                                    'styles' =>
+                                        array(
+                                            'backgroundColor' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'header' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'labelCounter' =>
                         array(
-                            'tag' => 'div',
-                            'class' => 'accordion-header',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'position' => '',
+                                            'tag' => 'div',
+                                            'class' => 'accordion-header-counter',
+                                        ),
+                                    'styles' =>
+                                        array(
+                                            'backgroundColor' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'color' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'padding' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'margin' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                        ),
+                                ),
                         ),
-                        'styles' =>
+                    'labelIcon' =>
                         array(
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'display' =>
-                            array(
-                                'Desktop' => 'flex',
-                            ),
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'library' => 'fontAwesome',
+                                            'srcType' => 'class',
+                                            'iconSrc' => '',
+                                            'position' => '',
+                                            'enable' => false,
+                                            'class' => 'accordion-label-icon',
+                                        ),
+                                    'styles' =>
+                                        array(
+                                            'backgroundColor' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'color' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'padding' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'margin' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'fontSize' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'fontWeight' =>
+                                                array(
+                                                    'Desktop' => '700',
+                                                ),
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'headerLabel' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'icon' =>
                         array(
-                            'text' => 'Accordion Header Text',
-                            'tag' => 'div',
-                            'slug' => '',
-                            'class' => 'accordion-header-label',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'library' => 'fontAwesome',
+                                            'srcType' => 'class',
+                                            'iconSrc' => '',
+                                            'position' => 'left',
+                                            'class' => 'accordion-icon',
+                                        ),
+                                    'styles' =>
+                                        array(
+                                            'backgroundColor' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'color' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'padding' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'margin' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'fontSize' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'lineHeight' =>
+                                                array(),
+                                            'fontWeight' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'textDecoration' =>
+                                                array(),
+                                        ),
+                                ),
                         ),
-                        'styles' =>
+                    'iconToggle' =>
                         array(
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'library' => 'fontAwesome',
+                                            'srcType' => 'class',
+                                            'iconSrc' => '',
+                                            'class' => 'accordion-icon-toggle',
+                                        ),
+                                    'styles' =>
+                                        array(
+                                            'backgroundColor' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'color' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'padding' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'margin' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'fontSize' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                            'fontWeight' =>
+                                                array(
+                                                    'Desktop' => '',
+                                                ),
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'labelCounter' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'blockId' =>
                         array(
-                            'position' => '',
-                            'tag' => 'div',
-                            'class' => 'accordion-header-counter',
+                            'type' => 'string',
+                            'default' => '',
                         ),
-                        'styles' =>
+                    'customCss' =>
                         array(
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
+                            'type' => 'string',
+                            'default' => '',
                         ),
-                    ),
-                ),
-                'labelIcon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'blockCssY' =>
                         array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => '',
-                            'position' => '',
-                            'enable' => false,
-                            'class' => 'accordion-label-icon',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'items' =>
+                                        array(),
+                                ),
                         ),
-                        'styles' =>
-                        array(
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontWeight' =>
-                            array(
-                                'Desktop' => '700',
-                            ),
-                        ),
-                    ),
-                ),
-                'icon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => '',
-                            'position' => 'left',
-                            'class' => 'accordion-icon',
-                        ),
-                        'styles' =>
-                        array(
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'lineHeight' =>
-                            array(),
-                            'fontWeight' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'textDecoration' =>
-                            array(),
-                        ),
-                    ),
-                ),
-                'iconToggle' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => '',
-                            'class' => 'accordion-icon-toggle',
-                        ),
-                        'styles' =>
-                        array(
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontWeight' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(),
-                    ),
-                ),
+                )
+
+
             )
-
-
-        ));
+        );
     }
 
     function front_script($attributes)
@@ -425,70 +429,61 @@ class PGBlockAccordionNestedItem
         }
 
 
-        //var_dump($labelIconSrc);
-        //var_dump($labelIconOptions);
+        ////var_dump($labelIconSrc);
+        ////var_dump($labelIconOptions);
 
-        // echo '<pre>' . var_export($parentIconOptions, true) . '</pre>';
-        // echo '<pre>' . var_export($iconOptions, true) . '</pre>';
-        // echo '<pre>' . var_export($iconSrc, true) . '</pre>';
+        // echo '<pre>' . //var_export($parentIconOptions, true) . '</pre>';
+        // echo '<pre>' . //var_export($iconOptions, true) . '</pre>';
+        // echo '<pre>' . //var_export($iconSrc, true) . '</pre>';
 
         ob_start();
 
 
-?>
+        ?>
 
 
-
-        <div class="<?php echo esc_attr($blockId); ?>-accordion-header accordion-header ">
-
-            <?php if ($iconPosition == 'left') : ?>
-                <?php echo  wp_kses_post($iconHtml); ?>
-                <?php echo  wp_kses_post($iconToggleHtml); ?>
-            <?php endif; ?>
-
-            <?php if ($labelCounterEnable) : ?>
-                <span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
-                    <?php echo  wp_kses_post($count); ?>
-                </span>
-            <?php endif; ?>
-
-
-            <?php if ($labelIconPosition == 'beforeLabel') : ?>
-                <?php echo  wp_kses_post($labelIconHtml); ?>
-            <?php endif; ?>
+                <div class="<?php echo esc_attr($blockId); ?>-accordion-header accordion-header ">
+                <?php if ($iconPosition == 'left'): ?>
+                                <?php echo wp_kses_post($iconHtml); ?>
+                                        <?php echo wp_kses_post($iconToggleHtml); ?>
+                    <?php endif; ?>
+                <?php if ($labelCounterEnable): ?>
+                            <span class="<?php echo esc_attr($blockId); ?>-accordion-label-counter accordion-label-counter">
+                                    <?php echo wp_kses_post($count); ?>
+                                        </span>
+                            <?php endif; ?>
+                    <?php if ($labelIconPosition == 'beforeLabel'): ?>
+                                        <?php echo wp_kses_post($labelIconHtml); ?>
+                            <?php endif; ?>
 
 
-            <<?php echo esc_attr($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a') : ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?> <?php if ($headerLabelTag == 'a') : ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
+              
+        
 
-                <?php if ($labelIconPosition == 'beforeLabelText') : ?>
-                    <?php echo  wp_kses_post($labelIconHtml); ?>
-                <?php endif; ?>
+                    <<?php echo esc_attr($headerLabelTag); ?> class="<?php echo esc_attr($blockId); ?>-accordion-header-label accordion-header-label" <?php if ($headerLabelTag == 'a'): ?> href="#<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>                 <?php if ($headerLabelTag == 'a'): ?> id="<?php echo esc_attr($headerLabelSlug); ?>" <?php endif; ?>>
+                        <?php if ($labelIconPosition == 'beforeLabelText'): ?>
+                                            <?php echo wp_kses_post($labelIconHtml); ?>
+                        <?php endif; ?>
 
-                <?php echo  wp_kses_post($headerLabelText); ?>
+                        <?php echo wp_kses_post($headerLabelText); ?>
+                        <?php if ($labelIconPosition == 'afterLabelText'): ?>
+                                            <?php echo wp_kses_post($labelIconHtml); ?>
+                                <?php endif; ?>
 
-                <?php if ($labelIconPosition == 'afterLabelText') : ?>
-                    <?php echo  wp_kses_post($labelIconHtml); ?>
-                <?php endif; ?>
+                            </<?php echo esc_attr($headerLabelTag); ?>>
+                    <?php if ($labelIconPosition == 'afterLabel'): ?>
+                                        <?php echo wp_kses_post($labelIconHtml); ?>
+                    <?php endif; ?>
+                <?php if ($iconPosition == 'right'): ?>
+                                <?php echo wp_kses_post($iconHtml); ?>
+                                <?php echo wp_kses_post($iconToggleHtml); ?>
+                            <?php endif; ?>
+                </div>
+                <div class="<?php echo esc_attr($blockId); ?>-accordion-content accordion-content">
+                            <?php echo $content; ?>
+                        </div>
 
-
-            </<?php echo esc_attr($headerLabelTag); ?>>
-
-
-            <?php if ($labelIconPosition == 'afterLabel') : ?>
-                <?php echo  wp_kses_post($labelIconHtml); ?>
-            <?php endif; ?>
-
-            <?php if ($iconPosition == 'right') : ?>
-                <?php echo  wp_kses_post($iconHtml); ?>
-                <?php echo  wp_kses_post($iconToggleHtml); ?>
-            <?php endif; ?>
-        </div>
-
-        <div class="<?php echo esc_attr($blockId); ?>-accordion-content accordion-content">
-            <?php echo  $content; ?>
-        </div>
-
-<?php return ob_get_clean();
+                <?php return ob_get_clean();
     }
 }
 

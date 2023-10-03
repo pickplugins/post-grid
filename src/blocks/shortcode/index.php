@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -22,10 +23,10 @@ class BlockPostShortcode
             //'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
             //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
+            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'editor_style',
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
+            'attributes' => [
                 "wrapper" => [
                     "type" => "object",
                     "default" => [
@@ -70,7 +71,8 @@ class BlockPostShortcode
             ]
 
 
-        ));
+        )
+        );
     }
 
     function front_script($attributes)
@@ -131,21 +133,21 @@ class BlockPostShortcode
         $shortcodeAtts = '';
 
         if (!empty($shortcodePrams))
-            foreach ($shortcodePrams as  $item) {
+            foreach ($shortcodePrams as $item) {
 
                 $val = isset($item['val']) ? $item['val'] : '';
 
                 $singleArray = ['{currentPostId}' => $post_ID];
-                $val = strtr($val, (array)$singleArray);
+                $val = strtr($val, (array) $singleArray);
 
                 $shortcodeAtts .= $item['id'] . '="' . $val . '" ';
             }
 
 
-        //var_dump($shortcodePrams);
+        ////var_dump($shortcodePrams);
 
 
-        if (!empty($wrapperTag)) :
+        if (!empty($wrapperTag)):
 
             echo do_shortcode('[' . $shortcodeKey . ' ' . $shortcodeAtts . ']');
 

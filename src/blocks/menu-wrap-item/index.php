@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -35,115 +36,116 @@ class PGBlockMenuWrapItem
             //'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
             //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
+            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
             'render_callback' => array($this, 'theHTML'),
             'attributes' => array(
                 'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'tag' => 'li',
-                            'class' => 'flex-item-wrap',
-                            'isActive' => false,
-                        ),
-                        'styles' =>
-                        array(
-                            'backgroundColor' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'tag' => 'li',
+                                        'class' => 'flex-item-wrap',
+                                        'isActive' => false,
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                        ),
                     ),
-                ),
                 'link' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'class' => '',
-                            'text' => '',
-                            'url' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'backgroundColor' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'class' => '',
+                                        'text' => '',
+                                        'url' => '',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                        ),
                     ),
-                ),
                 'subMenuWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'class' => '',
-                            'type' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'backgroundColor' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'class' => '',
+                                        'type' => '',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                        ),
                     ),
-                ),
                 'icon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'enable' => true,
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => 'fas fa-check-circle',
-                            'position' => 'beforeText',
-                            'class' => 'link-icon',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'enable' => true,
+                                        'library' => 'fontAwesome',
+                                        'srcType' => 'class',
+                                        'iconSrc' => 'fas fa-check-circle',
+                                        'position' => 'beforeText',
+                                        'class' => 'link-icon',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'color' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                        ),
                     ),
-                ),
                 'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'items' =>
-                        array(),
+                        'type' => 'string',
+                        'default' => '',
                     ),
-                ),
+                'customCss' =>
+                    array(
+                        'type' => 'string',
+                        'default' => '',
+                    ),
+                'blockCssY' =>
+                    array(
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'items' =>
+                                    array(),
+                            ),
+                    ),
             )
 
 
-        ));
+        )
+        );
     }
 
     function front_script($attributes)
@@ -185,25 +187,25 @@ class PGBlockMenuWrapItem
 
         $postGridCustomCss .= $customCss;
 
-        //var_dump($link);
+        ////var_dump($link);
 
 
         ob_start();
 
-?>
+        ?>
 
 
-        <li class="pg-menu-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                <li class="pg-menu-wrap-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
-            <?php if (!empty($linktext)) : ?>
-                <a class='menuLink' href="<?php echo esc_url_raw($linkurl); ?>"><?php echo esc_html($linktext) ?></a>
-            <?php endif; ?>
+                    <?php if (!empty($linktext)): ?>
+                            <a class='menuLink' href="<?php echo esc_url_raw($linkurl); ?>"><?php echo esc_html($linktext) ?></a>
+                    <?php endif; ?>
 
-            <ul class='subMenu'> <?php echo $content ?></ul>
-        </li>
+                    <ul class='subMenu'> <?php echo $content ?></ul>
+                </li>
 
 
-<?php
+        <?php
         return ob_get_clean();
     }
 }

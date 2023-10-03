@@ -21,12 +21,28 @@ document.addEventListener("DOMContentLoaded", function (event) {
     // Get the current time in UTC
     const dateInput1 = startDate;
     const dateInput2 = endDate;
+    console.log(dateInput1);
+    console.log(dateInput2);
 
     const currentDate = new Date();
     const date1 = new Date(dateInput1);
     const date2 = new Date(dateInput2);
+    var date = "";
+    console.log("date1===", date1);
+    if (currentDate > date1) {
+      date = currentDate;
+    } else if (currentDate < date1) {
+      // document.dispatchEvent(pgDateCountdownExpired);
+      targetCountdown.style.display = "none";
+      console.log("clicked");
+    } else {
+      date = date1;
+    }
 
-    const date = currentDate > date1 ? currentDate : date1;
+    console.log("currentDate===", currentDate);
+    console.log("date===", date);
+
+    // const date = currentDate > date1 ? currentDate : date1;
 
     // const dates = new Date(date);
     const timeDifference = date2 - date;
@@ -43,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     document.addEventListener("pgDateCountdownExpired", (event) => {
-      console.log("clicked");
+      // console.log("clicked");
     });
 
     // Calculate days, hours, minutes, and seconds
@@ -75,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
       var dateCountdownArgsObj = JSON.parse(dateCountdownArgs);
 
-      const pgDateCountdownExpired = new Event("pgDateCountdownExpired");
+      // const pgDateCountdownExpired = new Event("pgDateCountdownExpired");
 
       var blockId = dateCountdownArgsObj.blockId;
       var startDate = dateCountdownArgsObj.startDate;
@@ -87,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       var dayHandle = "." + blockId + " .day-countdown";
       var countdownHandle = "." + blockId + " .countdown-wrapper";
       var innerHandle = "." + blockId + " .inner";
-      console.log(innerHandle);
+      // console.log(innerHandle);
 
       document.querySelector(innerHandle).style.display = "none";
       setInterval(() => {

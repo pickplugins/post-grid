@@ -2383,6 +2383,7 @@ registerBlockType("post-grid/date-countdown", {
                 />
               </PanelRow>
             </div>
+
             <PanelBody title="Wrapper" initialOpen={false}>
               <PGtabs
                 activeTab="options"

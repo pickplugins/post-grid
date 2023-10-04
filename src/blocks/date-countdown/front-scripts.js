@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   // To assign event
   const pgDateCountdownExpired = new Event("pgDateCountdownExpired");
   function countdown(
+    WrapperHandle,
     innerHandle,
     countdownHandle,
     secondSelector,
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     startDate,
     endDate
   ) {
+    const targetWrapper = document.querySelector(WrapperHandle);
     const targetInner = document.querySelector(innerHandle);
     const targetCountdown = document.querySelector(countdownHandle);
     const targetSecond = document.querySelector(secondSelector);
@@ -18,34 +20,42 @@ document.addEventListener("DOMContentLoaded", function (event) {
     const targetHour = document.querySelector(hourSelector);
     const targetDay = document.querySelector(daySelector);
 
-    // Get the current time in UTC
     const dateInput1 = startDate;
     const dateInput2 = endDate;
-    console.log(dateInput1);
-    console.log(dateInput2);
 
     const currentDate = new Date();
     const date1 = new Date(dateInput1);
     const date2 = new Date(dateInput2);
     var date = "";
-    console.log("date1===", date1);
+
+    var customDate = new Date(date1);
+
     if (currentDate > date1) {
       date = currentDate;
-    } else if (currentDate < date1) {
-      // document.dispatchEvent(pgDateCountdownExpired);
-      targetCountdown.style.display = "none";
-      console.log("clicked");
-    } else {
-      date = date1;
     }
 
-    console.log("currentDate===", currentDate);
-    console.log("date===", date);
+    if (currentDate < date1) {
+      // console.log("first");
+      if (targetWrapper != null) {
+        console.log("targetWrapper is null. Selector:", WrapperHandle);
+        targetWrapper.style.display = "none";
+      }
+      date = date1;
+      // document.querySelector(WrapperHandle).style.display = "none";
+    } else {
+      if (targetWrapper != null) {
+        targetWrapper.style.display = "block";
+      }
+    }
 
     // const date = currentDate > date1 ? currentDate : date1;
 
-    // const dates = new Date(date);
     const timeDifference = date2 - date;
+
+    console.log("startDate == ", startDate);
+    console.log("endDate == ", endDate);
+    console.log("currentDate == ", currentDate);
+    console.log("Date == ", date);
 
     if (timeDifference <= 0) {
       document.dispatchEvent(pgDateCountdownExpired);
@@ -58,9 +68,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       return;
     }
 
-    document.addEventListener("pgDateCountdownExpired", (event) => {
-      // console.log("clicked");
-    });
+    document.addEventListener("pgDateCountdownExpired", (event) => {});
 
     // Calculate days, hours, minutes, and seconds
     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
@@ -97,17 +105,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
       var startDate = dateCountdownArgsObj.startDate;
       var endDate = dateCountdownArgsObj.endDate;
 
+      var date = new Date(startDate * 1000);
+      startDate = date.toISOString().slice(0, 16);
+
       var secondHandle = "." + blockId + " .second-countdown";
       var minuteHandle = "." + blockId + " .minute-countdown";
       var hourHandle = "." + blockId + " .hour-countdown";
       var dayHandle = "." + blockId + " .day-countdown";
       var countdownHandle = "." + blockId + " .countdown-wrapper";
       var innerHandle = "." + blockId + " .inner";
-      // console.log(innerHandle);
+      var WrapperHandle = " .PGBlockDateCountdown";
 
       document.querySelector(innerHandle).style.display = "none";
       setInterval(() => {
         countdown(
+          WrapperHandle,
           innerHandle,
           countdownHandle,
           secondHandle,

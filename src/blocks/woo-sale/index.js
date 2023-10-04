@@ -781,12 +781,12 @@ registerBlockType("post-grid/woo-sale", {
       setIconHtml(iconHtml);
     }, [icon]);
 
-    const [currentPostUrl, setCurrentPostUrl] = useEntityProp(
-      "postType",
-      postType,
-      "link",
-      postId
-    );
+    // const [currentPostUrl, setCurrentPostUrl] = useEntityProp(
+    //   "postType",
+    //   postType,
+    //   "link",
+    //   postId
+    // );
 
     useEffect(() => {
       setAttributes({ blockId: blockIdX });

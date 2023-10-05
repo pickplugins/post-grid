@@ -35,13 +35,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     if (currentDate < date1) {
-      // console.log("first");
       if (targetWrapper != null) {
-        console.log("targetWrapper is null. Selector:", WrapperHandle);
         targetWrapper.style.display = "none";
       }
       date = date1;
-      // document.querySelector(WrapperHandle).style.display = "none";
     } else {
       if (targetWrapper != null) {
         targetWrapper.style.display = "block";
@@ -52,17 +49,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     const timeDifference = date2 - date;
 
-    console.log("startDate == ", startDate);
-    console.log("endDate == ", endDate);
-    console.log("currentDate == ", currentDate);
-    console.log("Date == ", date);
-
     if (timeDifference <= 0) {
       document.dispatchEvent(pgDateCountdownExpired);
 
-      targetInner.style.display = "block";
+      // targetInner.style.display = "block";
       if (targetCountdown != null) {
-        targetCountdown.style.display = "none";
+        // targetCountdown.style.display = "none";
       }
 
       return;
@@ -70,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     document.addEventListener("pgDateCountdownExpired", (event) => {});
 
-    // Calculate days, hours, minutes, and seconds
     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
     const hours = Math.floor(
@@ -90,6 +81,87 @@ document.addEventListener("DOMContentLoaded", function (event) {
     targetHour.innerText = formattedHours;
     targetDay.innerText = formattedDays;
   }
+
+  function expiredArg(eventCounter) {
+    var dataVisible = document.querySelectorAll("[countdown-expired-arg]");
+
+    if (dataVisible != null) {
+      dataVisible.forEach((item) => {
+        var countdownExpiredArg = item.getAttribute("countdown-expired-arg");
+        var countdownExpiredArgObject = JSON.parse(countdownExpiredArg);
+
+        var dateCountdownId = item.getAttribute("date-countdown-id");
+
+        var dateCountdownWrap = document.querySelector(
+          '[date-countdown-id="' + dateCountdownId + '"]'
+        );
+        var innerWrap = document.querySelector(".inner");
+        var countdownWrap = document.querySelector(".countdown-wrapper");
+
+        Object.entries(countdownExpiredArgObject).map((group) => {
+          var groupData = group[1];
+          var groupLogic = groupData.logic;
+          var groupArgs = groupData.args;
+
+          groupArgs.map((conditions) => {
+            var conditionId = conditions.id;
+
+            if (conditionId == "redirectURL") {
+              value = conditions.value;
+              delay = conditions.delay;
+              if (value == "") {
+              } else {
+                if (delay > 0) {
+                  setTimeout(function () {
+                    window.location.href = value;
+                  }, delay);
+                } else {
+                  window.location.href = value;
+                }
+              }
+            }
+            if (conditionId == "wcHideCartButton") {
+              var elementWrap = document.querySelector(".cart");
+              var element2Wrap = document.querySelector(".add_to_cart_button");
+              if (elementWrap != null) {
+                elementWrap.style.display = "none";
+              }
+              if (element2Wrap != null) {
+                element2Wrap.style.display = "none";
+              }
+            }
+            if (conditionId == "hideCountdown") {
+              countdownWrap.style.display = "none";
+            }
+            if (conditionId == "showExpiredMsg") {
+              innerWrap.style.display = "block";
+            }
+            if (conditionId == "showElement") {
+              value = conditions.value;
+              var elementWrap = document.querySelector(value);
+              if (elementWrap != null) {
+                elementWrap.style.display = "block";
+              }
+            }
+            if (conditionId == "showPopup") {
+              var elementWrap = document.querySelector(".pg-popup");
+              if (eventCounter < 2) {
+                if (elementWrap != null) {
+                  elementWrap.style.display = "block";
+                }
+              }
+            }
+          });
+        });
+      });
+    }
+  }
+
+  var eventCounter = 0;
+  document.addEventListener("pgDateCountdownExpired", (event) => {
+    eventCounter += 1;
+    expiredArg(eventCounter);
+  });
 
   var PGBlockDateCountdown = document.querySelectorAll(".PGBlockDateCountdown");
 
@@ -116,7 +188,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
       var innerHandle = "." + blockId + " .inner";
       var WrapperHandle = " .PGBlockDateCountdown";
 
-      document.querySelector(innerHandle).style.display = "none";
+      // document.querySelector(innerHandle).style.display = "none";
+
       setInterval(() => {
         countdown(
           WrapperHandle,
@@ -130,6 +203,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
           endDate
         );
       }, 1000);
+
+      // expiredArg();
+
       //   countdown(wrapHandle, startDate, endDate);
     });
   }

@@ -863,14 +863,14 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
                               >
                                 <div>
-                                  No Option avilable for this condition.
+                                  No Option available for this condition.
                                 </div>
                               </PanelBody>
                             )}
@@ -884,8 +884,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -916,8 +916,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -961,8 +961,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -1006,14 +1006,14 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
                               >
                                 <div>
-                                  No Option avilable for this condition.
+                                  No Option available for this condition.
                                 </div>
                               </PanelBody>
                             )}
@@ -1027,8 +1027,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -1058,14 +1058,14 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
                               >
                                 <div>
-                                  No Option avilable for this condition.
+                                  No Option available for this condition.
                                 </div>
                               </PanelBody>
                             )}
@@ -1079,8 +1079,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -1110,8 +1110,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -1143,14 +1143,14 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
                               >
                                 <div>
-                                  No Option avilable for this condition.
+                                  No Option available for this condition.
                                 </div>
                               </PanelBody>
                             )}
@@ -1164,8 +1164,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -1198,19 +1198,19 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
                               >
                                 <ToggleControl
-                                  label="Enable on Expired?"
+                                  label="Is Once?"
                                   className="my-4"
                                   help={
                                     item.once
-                                      ? "Inner enabled"
-                                      : "Inner disabled."
+                                      ? "IsOnce is Enable"
+                                      : "IsOnce is disabled."
                                   }
                                   checked={item.once ? true : false}
                                   onChange={(e) => {
@@ -1245,8 +1245,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -1275,8 +1275,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -1305,14 +1305,14 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
                               >
                                 <div>
-                                  No Option avilable for this condition.
+                                  No Option available for this condition.
                                 </div>
                               </PanelBody>
                             )}
@@ -1326,8 +1326,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -1357,8 +1357,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}
@@ -1387,8 +1387,8 @@ registerBlockType("post-grid/popup", {
                                         ? id
                                         : visbleArgs[id].label
                                     }
-                                    index={id}
-                                    groupId={groupId}
+                                    index={index}
+                                    groupId={groupIndex}
                                   />
                                 }
                                 initialOpen={false}

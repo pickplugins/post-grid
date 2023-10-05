@@ -469,6 +469,13 @@ class PGBlockDateCountdown
               'type' => 'boolean',
               'default' => true,
             ),
+          'expiredArg' =>
+            array(
+              'type' => 'object',
+              'default' =>
+                array(
+                ),
+            ),
           'blockId' =>
             array(
               'type' => 'string',
@@ -547,6 +554,7 @@ class PGBlockDateCountdown
     $wrapperStartDateSrc = isset($wrapperOptions['startDateSrc']) ? $wrapperOptions['startDateSrc'] : "";
     $wrapperEndDate = isset($wrapperOptions['endDate']) ? $wrapperOptions['endDate'] : "";
     $wrapperEndDateSrc = isset($wrapperOptions['endDateSrc']) ? $wrapperOptions['endDateSrc'] : "";
+    $expiredArg = isset($attributes['expiredArg']) ? $attributes['expiredArg'] : [];
 
 
 
@@ -723,6 +731,8 @@ class PGBlockDateCountdown
 
     ];
 
+    // var_dump($expiredArg);
+
 
     ob_start();
 
@@ -732,7 +742,8 @@ class PGBlockDateCountdown
       ?>
       <<?php echo esc_attr($wrapperTag); ?> class="PGBlockDateCountdown
         <?php echo esc_attr($blockId); ?>
-        <?php echo esc_attr($blockAlign); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+        <?php echo esc_attr($blockAlign); ?>" date-countdown-id="<?php echo esc_attr($blockId); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>"
+        countdown-expired-arg="<?php echo esc_attr(json_encode($expiredArg)) ?>">
 
         <?php if ($timeDifference > 0) {
           ?>

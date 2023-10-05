@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     entries = urlParams.entries();
 
     for (const entry of entries) {
-      //console.log(`${entry[0]}: ${entry[1]}`);
       prams[entry[0]] = entry[1];
     }
 
@@ -81,15 +80,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 
   function hasCookie(name) {
-    //console.log(document.cookie);
-
     var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
     if (match) return match[2];
   }
 
-  function checkReferrer() {
-    //console.log(document.referrer);
-  }
+  function checkReferrer() {}
 
   function popupDelay() {
     var dataVisible = document.querySelectorAll("[pgpopup-visible]");
@@ -158,8 +153,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             if (conditionId == "urlPrams") {
               var urlPrams = conditions.value.split(",");
               urlPrams.map((x) => {
-                //console.log(x);
-
                 if (hasUrlPrams(x)) {
                   popupWrap.style.display = "block";
                 }
@@ -252,9 +245,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     var dataVisible = document.querySelectorAll("[pgpopup-visible]");
 
-    //console.log(popupActions);
-    //console.log('scrollAmount', scrollAmount);
-
     if (dataVisible != null) {
       dataVisible.forEach((item) => {
         var attr = item.getAttribute("pgpopup-visible");
@@ -315,8 +305,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     popupActions.clickCount += 1;
     var dataVisible = document.querySelectorAll("[pgpopup-visible]");
 
-    //console.log(e.target);
-
     if (dataVisible != null) {
       dataVisible.forEach((item) => {
         var attr = item.getAttribute("pgpopup-visible");
@@ -373,31 +361,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
           var conditionId = conditions.id;
 
           if (conditionId == "clickElement") {
-            console.log(conditions.value);
-
             var clickHandle = document.querySelector(conditions.value);
-
-            console.log(clickHandle);
 
             clickHandle.addEventListener("click", function (e) {
               event.preventDefault();
               event.stopPropagation();
-
-              console.log(e.target);
 
               popupWrap.style.display = "block";
             });
           }
 
           if (conditionId == "dateCountdownExpired") {
-            console.log(conditions.value);
             var isOnce = conditions.once;
             var count = 0;
             var popupWrap = document.querySelector(".pg-popup");
 
             document.addEventListener("pgDateCountdownExpired", function (e) {
-              //   console.log(clickHandle);
-
               if (isOnce) {
                 if (count < 1) {
                   popupWrap.style.display = "block";

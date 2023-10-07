@@ -306,48 +306,7 @@ const variations = [
       customCss: "",
       blockCssY: { items: {} },
     },
-    innerBlocks: [
-      [
-        "post-grid/text",
-        {
-          wrapper: {
-            options: {
-              tag: "div",
-              class: "pg-layers",
-              linkTo: "postUrl",
-              linkToAuthorMeta: "",
-              linkToCustomMeta: "",
-              linkTarget: "_blank",
-              customUrl: "",
-            },
-            styles: {
-              position: {},
-              textAlign: {
-                Desktop: "center",
-              },
-              backgroundColor: {
-                Desktop: "#9DD6DF",
-              },
-              borderRadius: {
-                Desktop: "20px 20px 20px 20px",
-              },
-              marginRight: {
-                Desktop: "auto",
-              },
-              marginLeft: {
-                Desktop: "auto",
-              },
-              padding: {
-                Desktop: "30px 30px 30px 30px",
-              },
-              width: {
-                Desktop: "max-content",
-              },
-            },
-          },
-        },
-      ],
-    ],
+    innerBlocks: [["post-grid/text", {}]],
     scope: ["block"],
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 236">

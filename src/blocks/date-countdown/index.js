@@ -140,6 +140,16 @@ registerBlockType("post-grid/date-countdown", {
         },
       },
     },
+    dateCountdown: {
+      type: "object",
+      default: {
+        options: {
+          tag: "div",
+          class: "",
+          type: "fixed",
+        },
+      },
+    },
     countdownWrapper: {
       type: "object",
       default: {
@@ -2376,6 +2386,35 @@ registerBlockType("post-grid/date-countdown", {
         <InspectorControls>
           <div className="px-3">
             <div className="pb-3">
+              {/* <PanelRow className="my-4">
+                <label for="">Date Countdown Type</label>
+
+                <SelectControl
+                  label=""
+                  value={dateCountdown.options.type}
+                  options={[
+                    { label: "Choose Type", value: "" },
+
+                    // { label: "Before Prefix", value: "beforePrefix" },
+                    // { label: "After Prefix", value: "afterPrefix" },
+                    { label: "Fixed", value: "fixed" },
+                    { label: "Ever Green", value: "everGreen" },
+                    { label: "Scheduled", value: "scheduled" },
+                    // { label: "After Postfix", value: "afterPostfix" },
+                    // { label: "Before Link", value: "beforeLink" },
+                    // { label: "After Link", value: "afterLink" },
+                  ]}
+                  onChange={(newVal) => {
+                    var options = {
+                      ...dateCountdown.options,
+                      position: newVal,
+                    };
+                    setAttributes({
+                      dateCountdown: { ...dateCountdown, options: options },
+                    });
+                  }}
+                />
+              </PanelRow> */}
               {wrapper.options.startDateSrc?.length == 0 && (
                 <PanelRow className="block mb-4">
                   <label for="" className="font-bold mb-2 ">

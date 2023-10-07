@@ -463,6 +463,7 @@ registerBlockType("post-grid/date-countdown", {
     let second = attributes.second;
     var countdownWrapper = attributes.countdownWrapper;
     var expiredArg = attributes.expiredArg;
+    var dateCountdown = attributes.dateCountdown;
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
@@ -2386,7 +2387,7 @@ registerBlockType("post-grid/date-countdown", {
         <InspectorControls>
           <div className="px-3">
             <div className="pb-3">
-              {/* <PanelRow className="my-4">
+              <PanelRow className="my-4">
                 <label for="">Date Countdown Type</label>
 
                 <SelectControl
@@ -2407,111 +2408,124 @@ registerBlockType("post-grid/date-countdown", {
                   onChange={(newVal) => {
                     var options = {
                       ...dateCountdown.options,
-                      position: newVal,
+                      type: newVal,
                     };
                     setAttributes({
                       dateCountdown: { ...dateCountdown, options: options },
                     });
                   }}
                 />
-              </PanelRow> */}
-              {wrapper.options.startDateSrc?.length == 0 && (
-                <PanelRow className="block mb-4">
-                  <label for="" className="font-bold mb-2 ">
-                    Start Date?
-                  </label>
-                  <br />
-                  <InputControl
-                    type="datetime-local"
-                    className="b-2"
-                    value={wrapper.options.startDate}
-                    onChange={(newVal) => {
-                      var options = { ...wrapper.options, startDate: newVal };
-                      setAttributes({
-                        wrapper: { ...wrapper, options: options },
-                      });
-                    }}
-                  />
-                </PanelRow>
-              )}
-
-              <PanelRow>
-                <label for="">Start Date Source</label>
-                <SelectControl
-                  label=""
-                  value={wrapper.options.startDateSrc}
-                  options={[
-                    { label: "Choose", value: "" },
-                    {
-                      label: "WooCommerce Sale price dates",
-                      value: "wc_sale_price_date_from",
-                    },
-                    // { label: "H2", value: "h2" },
-                    // { label: "H3", value: "h3" },
-                    // { label: "H4", value: "h4" },
-                    // { label: "H5", value: "h5" },
-                    // { label: "H6", value: "h6" },
-                    // { label: "SPAN", value: "span" },
-                    // { label: "DIV", value: "div" },
-                    // { label: "P", value: "p" },
-                  ]}
-                  onChange={(newVal) => {
-                    var options = { ...wrapper.options, startDateSrc: newVal };
-                    setAttributes({
-                      wrapper: { ...wrapper, options: options },
-                    });
-                  }}
-                />
               </PanelRow>
+              {dateCountdown.options.type == "fixed" && (
+                <>
+                  {wrapper.options.startDateSrc?.length == 0 && (
+                    <PanelRow className="block mb-4">
+                      <label for="" className="font-bold mb-2 ">
+                        Start Date?
+                      </label>
+                      <br />
+                      <InputControl
+                        type="datetime-local"
+                        className="b-2"
+                        value={wrapper.options.startDate}
+                        onChange={(newVal) => {
+                          var options = {
+                            ...wrapper.options,
+                            startDate: newVal,
+                          };
+                          setAttributes({
+                            wrapper: { ...wrapper, options: options },
+                          });
+                        }}
+                      />
+                    </PanelRow>
+                  )}
 
-              {wrapper.options.endDateSrc.length == 0 && (
-                <PanelRow className="block mb-2">
-                  <label for="" className="font-bold mb-2 ">
-                    End Date?
-                  </label>
+                  <PanelRow>
+                    <label for="">Start Date Source</label>
+                    <SelectControl
+                      label=""
+                      value={wrapper.options.startDateSrc}
+                      options={[
+                        { label: "Choose", value: "" },
+                        {
+                          label: "WooCommerce Sale price dates",
+                          value: "wc_sale_price_date_from",
+                        },
+                        // { label: "H2", value: "h2" },
+                        // { label: "H3", value: "h3" },
+                        // { label: "H4", value: "h4" },
+                        // { label: "H5", value: "h5" },
+                        // { label: "H6", value: "h6" },
+                        // { label: "SPAN", value: "span" },
+                        // { label: "DIV", value: "div" },
+                        // { label: "P", value: "p" },
+                      ]}
+                      onChange={(newVal) => {
+                        var options = {
+                          ...wrapper.options,
+                          startDateSrc: newVal,
+                        };
+                        setAttributes({
+                          wrapper: { ...wrapper, options: options },
+                        });
+                      }}
+                    />
+                  </PanelRow>
 
-                  <InputControl
-                    type="datetime-local"
-                    className="mr-2"
-                    value={wrapper.options.endDate}
-                    onChange={(newVal) => {
-                      var options = { ...wrapper.options, endDate: newVal };
-                      setAttributes({
-                        wrapper: { ...wrapper, options: options },
-                      });
-                    }}
-                  />
-                </PanelRow>
+                  {wrapper.options.endDateSrc.length == 0 && (
+                    <PanelRow className="block mb-2">
+                      <label for="" className="font-bold mb-2 ">
+                        End Date?
+                      </label>
+
+                      <InputControl
+                        type="datetime-local"
+                        className="mr-2"
+                        value={wrapper.options.endDate}
+                        onChange={(newVal) => {
+                          var options = { ...wrapper.options, endDate: newVal };
+                          setAttributes({
+                            wrapper: { ...wrapper, options: options },
+                          });
+                        }}
+                      />
+                    </PanelRow>
+                  )}
+
+                  <PanelRow>
+                    <label for="">End Date Source</label>
+                    <SelectControl
+                      label=""
+                      value={wrapper.options.endDateSrc}
+                      options={[
+                        { label: "Choose", value: "" },
+                        {
+                          label: "WooCommerce Sale price dates",
+                          value: "wc_sale_price_date_to",
+                        },
+                        // { label: "H2", value: "h2" },
+                        // { label: "H3", value: "h3" },
+                        // { label: "H4", value: "h4" },
+                        // { label: "H5", value: "h5" },
+                        // { label: "H6", value: "h6" },
+                        // { label: "SPAN", value: "span" },
+                        // { label: "DIV", value: "div" },
+                        // { label: "P", value: "p" },
+                      ]}
+                      onChange={(newVal) => {
+                        var options = {
+                          ...wrapper.options,
+                          endDateSrc: newVal,
+                        };
+                        setAttributes({
+                          wrapper: { ...wrapper, options: options },
+                        });
+                      }}
+                    />
+                  </PanelRow>
+                </>
               )}
-
-              <PanelRow>
-                <label for="">End Date Source</label>
-                <SelectControl
-                  label=""
-                  value={wrapper.options.endDateSrc}
-                  options={[
-                    { label: "Choose", value: "" },
-                    {
-                      label: "WooCommerce Sale price dates",
-                      value: "wc_sale_price_date_to",
-                    },
-                    // { label: "H2", value: "h2" },
-                    // { label: "H3", value: "h3" },
-                    // { label: "H4", value: "h4" },
-                    // { label: "H5", value: "h5" },
-                    // { label: "H6", value: "h6" },
-                    // { label: "SPAN", value: "span" },
-                    // { label: "DIV", value: "div" },
-                    // { label: "P", value: "p" },
-                  ]}
-                  onChange={(newVal) => {
-                    var options = { ...wrapper.options, endDateSrc: newVal };
-                    setAttributes({
-                      wrapper: { ...wrapper, options: options },
-                    });
-                  }}
-                />
-              </PanelRow>
             </div>
 
             {/* visibility start */}

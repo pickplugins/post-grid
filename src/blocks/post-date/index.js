@@ -68,7 +68,10 @@ registerBlockType("post-grid/post-date", {
         styles:
         {
 
-          display: { Desktop: 'block' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
@@ -92,11 +95,20 @@ registerBlockType("post-grid/post-date", {
 
         styles: {
 
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
+          display: {},
+          width: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+
+          fontSize: { Desktop: '' },
+          lineHeight: {},
+          letterSpacing: {},
+          fontFamily: {},
+          fontWeight: {},
+          textDecoration: {}, //overline, line-through, underline
+          textTransform: {},
         },
       },
     },
@@ -107,9 +119,17 @@ registerBlockType("post-grid/post-date", {
 
         styles:
         {
-          color: { Desktop: '#000000' },
-          margin: { Desktop: '0px 10px 0px 0px' },
-          fontSize: { Desktop: '18px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+
+          display: {},
+
+          fontSize: { Desktop: '' },
+          lineHeight: {},
+          fontWeight: { "Desktop": "700" },
+          textDecoration: {}, //overline, line-through, underline
         },
       },
     },
@@ -122,12 +142,8 @@ registerBlockType("post-grid/post-date", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 10px 0px 0px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -140,12 +156,8 @@ registerBlockType("post-grid/post-date", {
           { text: '', class: 'postfix', },
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 0px 0px 10px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -984,50 +996,20 @@ registerBlockType("post-grid/post-date", {
     }
 
 
-    // function onChangeStylePostfix(sudoScource, newVal, attr) {
-
-
-    //   var path = sudoScource + '.' + attr + '.' + breakPointX
-    //   let obj = Object.assign({}, postfix);
-    //   const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
-    //   setAttributes({ postfix: updatedObj });
-    //   var sudoScourceX = { ...updatedObj[sudoScource] }
-
-
-    //   var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
-
-
-    //   sudoScourceX[attr][breakPointX] = newVal;
-
-    //   let itemsX = Object.assign({}, blockCssY.items);
-
-    //   if (itemsX[elementSelector] == undefined) {
-    //     itemsX[elementSelector] = {};
-    //   }
-
-    //   Object.entries(sudoScourceX).map(args => {
-    //     var argAttr = myStore.cssAttrParse(args[0]);
-    //     var argAttrVal = args[1];
-    //     blockCssY.items[elementSelector][argAttr] = argAttrVal;
-    //   })
-
-
-    //   setAttributes({ blockCssY: { items: blockCssY.items } });
-
-    // }
-
-
-
     function onChangeStylePostfix(sudoScource, newVal, attr) {
 
-      var path = [sudoScource, attr, breakPointX]
-      let obj = Object.assign({}, postfix);
-      const object = myStore.updatePropertyDeep(obj, path, newVal)
 
-      setAttributes({ postfix: object });
+      var path = sudoScource + '.' + attr + '.' + breakPointX
+      let obj = Object.assign({}, postfix);
+      const updatedObj = myStore.setPropertyDeep(obj, path, newVal)
+      setAttributes({ postfix: updatedObj });
+      var sudoScourceX = { ...updatedObj[sudoScource] }
+
 
       var elementSelector = myStore.getElementSelector(sudoScource, postfixSelector);
-      var cssPropty = myStore.cssAttrParse(attr);
+
+
+      sudoScourceX[attr][breakPointX] = newVal;
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1035,11 +1017,14 @@ registerBlockType("post-grid/post-date", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX]
-      const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
+      Object.entries(sudoScourceX).map(args => {
+        var argAttr = myStore.cssAttrParse(args[0]);
+        var argAttrVal = args[1];
+        blockCssY.items[elementSelector][argAttr] = argAttrVal;
+      })
 
-      setAttributes({ blockCssY: { items: cssItems } });
 
+      setAttributes({ blockCssY: { items: blockCssY.items } });
 
     }
 

@@ -64,7 +64,10 @@ registerBlockType("post-grid/archive-title", {
 
         styles:
         {
-          display: { Desktop: 'block' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
@@ -91,12 +94,12 @@ registerBlockType("post-grid/archive-title", {
         },
 
         styles: {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '30px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '700' },
-          lineHeight: { Desktop: '155%' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+
+
+          fontSize: { Desktop: '' },
 
         },
       },
@@ -108,9 +111,11 @@ registerBlockType("post-grid/archive-title", {
 
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          margin: { Desktop: '0px 10px 0px 0px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+          fontSize: { Desktop: '' },
 
         },
       },
@@ -124,12 +129,8 @@ registerBlockType("post-grid/archive-title", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 10px 0px 0px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -142,12 +143,8 @@ registerBlockType("post-grid/archive-title", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 0px 0px 10px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },

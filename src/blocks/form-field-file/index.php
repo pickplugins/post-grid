@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -22,10 +23,10 @@ class PGBlockFormFieldFile
             //'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
             //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
+            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
             //'style' => 'front_style',
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
+            'attributes' => [
                 "text" => [
                     "type" => "object",
                     "default" => [
@@ -68,7 +69,8 @@ class PGBlockFormFieldFile
             ]
 
 
-        ));
+        )
+        );
     }
 
     function front_script($attributes)
@@ -134,7 +136,7 @@ class PGBlockFormFieldFile
 
 
 
-        //var_dump($content);
+        ////var_dump($content);
 
 
 
@@ -142,40 +144,40 @@ class PGBlockFormFieldFile
         ob_start();
 
 
-?>
+        ?>
 
-        <div class="<?php echo esc_attr($blockId); ?>">
-
-
-            <div class='label-wrap'>
-
-                <?php if ($labelEnable) : ?>
-                    <label for=""><?php echo wp_kses_post($labelText); ?></label>
-                <?php endif; ?>
+                <div class="<?php echo esc_attr($blockId); ?>">
 
 
-                <?php if ($errorWrapPosition == 'afterlabel') : ?>
-                    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-                <?php endif; ?>
+                    <div class='label-wrap'>
+
+                        <?php if ($labelEnable): ?>
+                                <label for=""><?php echo wp_kses_post($labelText); ?></label>
+                        <?php endif; ?>
 
 
-            </div>
-            <div class='input-wrap'>
-                <input type="file" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired) : ?> required <?php endif; ?> <?php if ($inputDisabled) : ?> disabled <?php endif; ?> <?php if ($inputReadonly) : ?> readonly <?php endif; ?> />
-                <?php if ($errorWrapPosition == 'afterInput') : ?>
-                    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-
-                <?php endif; ?>
-            </div>
+                        <?php if ($errorWrapPosition == 'afterlabel'): ?>
+                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                        <?php endif; ?>
 
 
+                    </div>
+                    <div class='input-wrap'>
+                        <input type="file" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>         <?php if ($inputDisabled): ?> disabled <?php endif; ?>         <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
+                        <?php if ($errorWrapPosition == 'afterInput'): ?>
+                                <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+
+                        <?php endif; ?>
+                    </div>
 
 
 
 
-        </div>
 
-<?php
+
+                </div>
+
+        <?php
         return ob_get_clean();
     }
 }

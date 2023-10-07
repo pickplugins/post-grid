@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -22,287 +23,288 @@ class PGBlockWooPrice
             // 'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
             //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
+            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
             'style' => 'front_style',
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
+            'attributes' => array(
                 'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'tag' => 'div',
+                                        'class' => '',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'color' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'padding' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'margin' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
                     ),
-                ),
                 'currency' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'tag' => '',
-                            'symbole' => '$',
-                            'position' => '',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'tag' => '',
+                                        'symbole' => '$',
+                                        'position' => '',
+                                        'class' => '',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'color' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'padding' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'margin' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
                     ),
-                ),
                 'discounted' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'value' => 123,
-                            'tag' => 'span',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'value' => 123,
+                                        'tag' => 'span',
+                                        'class' => '',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'color' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'padding' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'margin' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
                     ),
-                ),
                 'regular' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'value' => 123,
-                            'tag' => 'span',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'value' => 123,
+                                        'tag' => 'span',
+                                        'class' => '',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'color' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'padding' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'margin' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
                     ),
-                ),
                 'separator' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'text' => '-',
-                            'tag' => 'span',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'text' => '-',
+                                        'tag' => 'span',
+                                        'class' => '',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'color' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'padding' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'margin' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
                     ),
-                ),
                 'icon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => '',
-                            'position' => '',
-                            'class' => 'regular-icon',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'library' => 'fontAwesome',
+                                        'srcType' => 'class',
+                                        'iconSrc' => '',
+                                        'position' => '',
+                                        'class' => 'regular-icon',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'color' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'padding' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'margin' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'display' =>
+                                            array(),
+                                        'fontSize' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'lineHeight' =>
+                                            array(),
+                                        'fontWeight' =>
+                                            array(
+                                                'Desktop' => '700',
+                                            ),
+                                        'textDecoration' =>
+                                            array(),
+                                    ),
                             ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'display' =>
-                            array(),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'lineHeight' =>
-                            array(),
-                            'fontWeight' =>
-                            array(
-                                'Desktop' => '700',
-                            ),
-                            'textDecoration' =>
-                            array(),
-                        ),
                     ),
-                ),
                 'prefix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'prefix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'text' => '',
+                                        'class' => 'prefix',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'color' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
                     ),
-                ),
                 'postfix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'postfix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
+                        'type' => 'object',
+                        'default' =>
                             array(
-                                'Desktop' => '',
+                                'options' =>
+                                    array(
+                                        'text' => '',
+                                        'class' => 'postfix',
+                                    ),
+                                'styles' =>
+                                    array(
+                                        'color' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                        'backgroundColor' =>
+                                            array(
+                                                'Desktop' => '',
+                                            ),
+                                    ),
                             ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
                     ),
-                ),
                 'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'items' =>
-                        array(),
+                        'type' => 'string',
+                        'default' => '',
                     ),
-                ),
+                'blockId' =>
+                    array(
+                        'type' => 'string',
+                        'default' => '',
+                    ),
+                'blockCssY' =>
+                    array(
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'items' =>
+                                    array(),
+                            ),
+                    ),
             )
 
 
-        ));
+        )
+        );
     }
 
     function front_script($attributes)
@@ -406,9 +408,9 @@ class PGBlockWooPrice
         $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 
 
-        // var_dump($product->get_price());
-        // var_dump($product->get_regular_price());
-        // var_dump($product->get_sale_price());
+        // //var_dump($product->get_price());
+        // //var_dump($product->get_regular_price());
+        // //var_dump($product->get_sale_price());
 
 
         $product_type = ($product != null) ? $product->get_type() : '';
@@ -420,32 +422,35 @@ class PGBlockWooPrice
         ob_start();
 
 
-        if (!empty($wrapperTag)) :
+        if (!empty($wrapperTag)):
 
-?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+            ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>">
 
 
-                <?php if ($iconPosition == 'beforePrefix') : ?>
+                <?php if ($iconPosition == 'beforePrefix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                <?php if ($prefixText): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
                 <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPrefix') : ?>
+                <?php if ($iconPosition == 'afterPrefix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
                 <?php
 
-                if ($product_type != 'variable') :
+                if ($product_type != 'variable'):
                     $regular_price = ($product != null) ? $product->get_regular_price() : '';
                     $sale_price = ($product != null) ? $product->get_sale_price() : '';
-                ?>
+                    ?>
 
-                    <?php if (empty($sale_price)) : ?>
+                    <?php if (empty($sale_price)): ?>
 
                         <span class=' regular'>
                             <span className='currency'>
@@ -455,21 +460,21 @@ class PGBlockWooPrice
                         </span>
 
                     <?php endif; ?>
-                    <?php if (!empty($sale_price)) : ?>
+                    <?php if (!empty($sale_price)): ?>
 
 
                         <span class='regular'>
                             <span className='currency'>
                                 <?php echo wp_kses_post($currency_symbol); ?>
                             </span>
-                            <?php echo wp_kses_post($regular_price); ?>
+                            <?php echo wp_kses_post($sale_price); ?>
                         </span>
 
                         <span class=' discounted'>
                             <span className='currency'>
                                 <?php echo wp_kses_post($currency_symbol); ?>
                             </span>
-                            <?php echo wp_kses_post($sale_price); ?>
+                            <?php echo wp_kses_post($regular_price); ?>
                         </span>
 
                     <?php endif; ?>
@@ -478,26 +483,32 @@ class PGBlockWooPrice
 
 
 
-                <?php
+                    <?php
 
                 endif;
-                if ($product_type == 'variable') :
+                if ($product_type == 'variable'):
 
                     $min_price = ($product != null) ? $product->get_variation_price() : '';
                     $max_price = ($product != null) ? $product->get_variation_price('max') : '';
 
-                ?>
+                    ?>
                     <span className='regular'>
-                        <span className='currency'><?php echo wp_kses_post($currency_symbol); ?></span>
+                        <span className='currency'>
+                            <?php echo wp_kses_post($currency_symbol); ?>
+                        </span>
                         <?php echo wp_kses_post($min_price); ?>
                     </span>
-                    <span className='regular'> <?php echo wp_kses_post($separatorText); ?> </span>
                     <span className='regular'>
-                        <span className='currency'><?php echo wp_kses_post($currency_symbol); ?></span>
+                        <?php echo wp_kses_post($separatorText); ?>
+                    </span>
+                    <span className='regular'>
+                        <span className='currency'>
+                            <?php echo wp_kses_post($currency_symbol); ?>
+                        </span>
 
                         <?php echo wp_kses_post($max_price); ?>
                     </span>
-                <?php
+                    <?php
 
                 endif;
 
@@ -511,19 +522,21 @@ class PGBlockWooPrice
 
 
 
-                <?php if ($iconPosition == 'beforePostfix') : ?>
+                <?php if ($iconPosition == 'beforePostfix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                <?php if ($postfixText): ?>
+                    <span class="<?php echo $postfixClass; ?>">
+                        <?php echo $postfixText; ?>
+                    </span>
                 <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPostfix') : ?>
+                <?php if ($iconPosition == 'afterPostfix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
             </<?php echo esc_attr($wrapperTag); ?>>
-        <?php
+            <?php
 
         endif;
 
@@ -537,7 +550,7 @@ class PGBlockWooPrice
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

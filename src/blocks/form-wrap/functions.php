@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 add_filter('form_wrap_process_postSubmitForm', 'form_wrap_process_postSubmitForm', 99, 2);
 
@@ -36,7 +37,8 @@ function form_wrap_process_postSubmitForm($formFields, $onprocessargs)
 
 
     $user = get_user_by('email', $email);
-    if (empty($user)) $user = get_user_by('login', $email);
+    if (empty($user))
+        $user = get_user_by('login', $email);
 
     $currentUser = wp_get_current_user();
 
@@ -63,15 +65,15 @@ function form_wrap_process_postSubmitForm($formFields, $onprocessargs)
                 $postParent = isset($arg->postParent) ? $arg->postParent : '';
                 $menuOrder = isset($arg->menuOrder) ? $arg->menuOrder : '';
                 $postPassword = isset($arg->postPassword) ? $arg->postPassword : '';
-                $authorByEmail = isset($arg->authorByEmail) ? $arg->authorByEmail :  false;
+                $authorByEmail = isset($arg->authorByEmail) ? $arg->authorByEmail : false;
                 //$taxonomies = isset($arg->taxonomies) ? $arg->taxonomies :  [];
                 //$metaFields = isset($arg->metaFields) ? $arg->metaFields :  ['email'];
 
 
 
-                $postParent =  (!empty($post_parent)) ? $post_parent : $postParent;
-                $menuOrder =  (!empty($menu_order)) ? $menu_order : $menuOrder;
-                $postPassword =  (!empty($post_password)) ? $post_password : $postPassword;
+                $postParent = (!empty($post_parent)) ? $post_parent : $postParent;
+                $menuOrder = (!empty($menu_order)) ? $menu_order : $menuOrder;
+                $postPassword = (!empty($post_password)) ? $post_password : $postPassword;
 
                 $createUserByEmail = '';
 
@@ -168,7 +170,7 @@ function form_wrap_create_post_author_by_email($email)
         $username = isset($emailArr[0]) ? $emailArr[0] : '';
         $username = form_wrap_process_regenerate_username($username);
         $password = wp_generate_password();
-        $user_id = wp_create_user($username,  $password, $email);
+        $user_id = wp_create_user($username, $password, $email);
 
         return $user_id;
     }
@@ -197,7 +199,8 @@ function form_wrap_process_termSubmitForm($formFields, $onprocessargs)
 
 
     $user = get_user_by('email', $email);
-    if (empty($user)) $user = get_user_by('login', $email);
+    if (empty($user))
+        $user = get_user_by('login', $email);
 
     $currentUser = wp_get_current_user();
 
@@ -265,7 +268,8 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
     error_log($email);
 
     $user = get_user_by('email', $email);
-    if (empty($user)) $user = get_user_by('login', $email);
+    if (empty($user))
+        $user = get_user_by('login', $email);
 
     $currentUser = wp_get_current_user();
 
@@ -291,7 +295,7 @@ function form_wrap_process_optInForm($formFields, $onprocessargs)
 
                 $subscriber = FluentCrm\App\Models\Subscriber::create([
                     'first_name' => $first_name,
-                    'last_name'  => $last_name,
+                    'last_name' => $last_name,
                     'email' => $email,
                     'status' => 'subscribed',
 
@@ -383,7 +387,8 @@ function form_wrap_process_commentSubmit($formFields, $onprocessargs)
     $email_data = [];
 
     $user = get_user_by('email', $email);
-    if (empty($user)) $user = get_user_by('login', $email);
+    if (empty($user))
+        $user = get_user_by('login', $email);
 
     $currentUser = wp_get_current_user();
 
@@ -514,7 +519,8 @@ function form_wrap_process_loginForm($formFields, $onprocessargs)
     $email_data = [];
 
     $user = get_user_by('email', $username);
-    if (empty($user)) $user = get_user_by('login', $username);
+    if (empty($user))
+        $user = get_user_by('login', $username);
 
 
     if (!$user) {
@@ -717,7 +723,7 @@ function form_wrap_process_register_user($credentials)
     $user_id = $user->ID;
 
 
-    $user_id = wp_create_user($credentials['username'],  $credentials['password'], $credentials['email']);
+    $user_id = wp_create_user($credentials['username'], $credentials['password'], $credentials['email']);
 
 
     if ($user_id) {
@@ -1149,7 +1155,7 @@ function form_wrap_process_send_email($email_data)
     $headers = apply_filters('post_grid_mail_headers', $headers);
 
 
-    //var_dump($headers);
+    ////var_dump($headers);
 
     $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
 

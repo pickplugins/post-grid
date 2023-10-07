@@ -68,8 +68,8 @@ registerBlockType("post-grid/icon", {
         },
         styles:
         {
-          display: { Desktop: 'block' },
-          
+          color: { Desktop: '' },
+          borderRadius: {},
         },
       },
     },
@@ -81,7 +81,7 @@ registerBlockType("post-grid/icon", {
           enable: true,
           text: 'Custom Text',
           src: '', // siteTitle, tagline, siteUrl, currentYear, currentDate, postTitle
-          linkTo: 'custom', /*postUrl, homeUrl, authorUrl, authorLink, mailTo, custom, customField */
+          linkTo: '', /*postUrl, homeUrl, authorUrl, authorLink, mailTo, custom, customField */
           linkToAuthorMeta: '',
           linkToCustomMeta: '',
 
@@ -93,15 +93,8 @@ registerBlockType("post-grid/icon", {
 
         styles:
         {
-          display: { Desktop: 'inline-block' },
-          color: { Desktop: '#ffffff' },
-          backgroundColor: { Desktop: '#1F2E45' },
-          padding: { Desktop: '10px 45px 10px 45px' },
-          borderRadius: { Desktop: '50px 50px 50px 50px' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
+          color: { Desktop: '' },
+          fontSize: { Desktop: '' },
         },
       },
     },
@@ -114,8 +107,7 @@ registerBlockType("post-grid/icon", {
 
         styles:
         {
-          fontSize: { Desktop: '18px' },
-          margin: { Desktop: '0px 10px 0px 0px' },
+          color: { Desktop: '' },
         },
       },
     },
@@ -129,12 +121,7 @@ registerBlockType("post-grid/icon", {
 
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 10px 0px 0px' },
+          color: { Desktop: '' },
         },
       },
     },
@@ -146,12 +133,7 @@ registerBlockType("post-grid/icon", {
 
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 0px 0px 10px' },
+          color: { Desktop: '' },
         },
       },
     },

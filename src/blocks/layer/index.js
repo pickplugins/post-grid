@@ -63,16 +63,14 @@ registerBlockType("post-grid/layer", {
 
         styles:
         {
-          display: { Desktop: 'block' },
-          backgroundColor: { Desktop: '#F1F7F9' },
-          // color: { Desktop: '' },
+          color: { Desktop: '' },
 
-          // position: {},
-          // zIndex: {},
-          // top: {},
-          // right: {},
-          // bottom: {},
-          // left: {},
+          position: {},
+          zIndex: {},
+          top: {},
+          right: {},
+          bottom: {},
+          left: {},
 
 
 

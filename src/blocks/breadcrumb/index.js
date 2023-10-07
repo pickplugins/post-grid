@@ -62,7 +62,10 @@ registerBlockType("post-grid/breadcrumb", {
         options: { tag: 'div', class: '', },
         styles:
         {
-          display: { Desktop: 'block' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -72,8 +75,10 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: 'icon', position: 'beforeLabel'/*beforeLabel, afterLabel, beforeSeparator, afterSeparator*/ },
         styles:
         {
-          color: { Desktop: '#000000' },
-          padding: { Desktop: '0px 5px 0px 0px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -83,11 +88,10 @@ registerBlockType("post-grid/breadcrumb", {
         options: { class: '', },
         styles:
         {
-          color: { Desktop: '#000000' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -99,11 +103,10 @@ registerBlockType("post-grid/breadcrumb", {
         styles:
         {
 
-          color: { Desktop: '#000000' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -116,8 +119,12 @@ registerBlockType("post-grid/breadcrumb", {
         },
         styles: {
 
-          
-          padding: { Desktop: '0px 5px 0px 0px' },
+          color: { Desktop: '#18978F' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+          borderRadius: { Desktop: '' },
+          fontSize: { Desktop: '' },
 
 
         },

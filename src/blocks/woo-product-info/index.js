@@ -63,8 +63,10 @@ registerBlockType("post-grid/woo-product-info", {
         options: { tag: 'ul', class: '', },
         styles:
         {
-          display: { Desktop: 'block' },
-          
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -74,9 +76,10 @@ registerBlockType("post-grid/woo-product-info", {
         options: { class: 'icon', position: 'beforePrefix'/*beforePrefix, afterPrefix, */ },
         styles:
         {
-          color: { Desktop: '#000000' },
-          margin: { Desktop: '0px 10px 0px 0px' },
-          fontSize: { Desktop: '18px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -90,12 +93,10 @@ registerBlockType("post-grid/woo-product-info", {
         styles:
         {
 
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 10px 0px 0px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -106,12 +107,10 @@ registerBlockType("post-grid/woo-product-info", {
         styles:
         {
 
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 0px 0px 10px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -141,19 +140,19 @@ registerBlockType("post-grid/woo-product-info", {
         },
         styles: {
 
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          listStyle: { Desktop: 'none' },
+          color: { Desktop: '#18978F' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+          borderRadius: { Desktop: '' },
+          fontSize: { Desktop: '' },
 
 
         },
         elements: [
 
           {
-            id: 'text', label: 'Text', prefix: '', postfix: '', value: 'Product Info',
+            id: 'text', label: 'Text', prefix: '', postfix: '', value: '',
 
             siteIcon: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', },
             options: {
@@ -1658,7 +1657,7 @@ registerBlockType("post-grid/woo-product-info", {
 
                 </PGtab>
                 <PGtab name="styles">
-                  <PGStyles obj={items} onChange={onChangeStyleItems} onAdd={onAddStyleItems} onRemove={onRemoveStyleItems} />
+                  <PGStyles obj={items} onChange={onChangeStyleItems} onAdd={onAddStyleItems} onRemove={onRemoveStyleItem} />
                 </PGtab>
               </PGtabs>
 

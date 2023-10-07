@@ -112,7 +112,10 @@ registerBlockType("post-grid/woo-sale", {
         options: { tag: "div", class: "" },
 
         styles: {
-          display: { Desktop: "block" },
+          color: { Desktop: "" },
+          backgroundColor: { Desktop: "" },
+          padding: { Desktop: "" },
+          margin: { Desktop: "" },
         },
       },
     },
@@ -127,15 +130,10 @@ registerBlockType("post-grid/woo-sale", {
           class: "sale",
         },
         styles: {
-          display: { Desktop: "inline-block" },
-          color: { Desktop: "#ffffff" },
-          backgroundColor: { Desktop: "#e27c7c" },
-          fontSize: { Desktop: "18px" },
-          fontFamily: { Desktop: "Poppins" },
-          fontStyle: { Desktop: "normal" },
-          fontWeight: { Desktop: "400" },
-          padding: { Desktop: "5px 10px 5px 10px" },
-
+          color: { Desktop: "" },
+          backgroundColor: { Desktop: "" },
+          padding: { Desktop: "" },
+          margin: { Desktop: "" },
         },
       },
     },
@@ -146,15 +144,23 @@ registerBlockType("post-grid/woo-sale", {
         options: {
           library: "fontAwesome",
           srcType: "class",
-          /*class, html, img, svg */ iconSrc: "fas fa-percent",
-          position: "beforeSaleText",
+          /*class, html, img, svg */ iconSrc: "",
+          position: "",
           /*before, after, prefix, postfix */ class: "icon",
         },
 
         styles: {
-          color: { Desktop: "#ffffff" },
-          margin: { Desktop: "0px 10px 0px 0px" },
-          fontSize: { Desktop: "18px" },
+          color: { Desktop: "" },
+          backgroundColor: { Desktop: "" },
+          padding: { Desktop: "" },
+          margin: { Desktop: "" },
+
+          display: {},
+
+          fontSize: { Desktop: "" },
+          lineHeight: {},
+          fontWeight: { Desktop: "700" },
+          textDecoration: {}, //overline, line-through, underline
         },
       },
     },
@@ -164,13 +170,8 @@ registerBlockType("post-grid/woo-sale", {
       default: {
         options: { text: "", class: "prefix" },
         styles: {
-          color: { Desktop: "#000000 !important" },
-          fontSize: { Desktop: "18px" },
-          fontFamily: { Desktop: "Poppins" },
-          fontStyle: { Desktop: "normal" },
-          fontWeight: { Desktop: "400" },
-          margin: { Desktop: "0px 10px 0px 0px" },
-          borderRadius: { Desktop: "5px 5px 5px 5px" },
+          color: { Desktop: "" },
+          backgroundColor: { Desktop: "" },
         },
       },
     },
@@ -180,12 +181,8 @@ registerBlockType("post-grid/woo-sale", {
       default: {
         options: { text: "", class: "postfix" },
         styles: {
-          color: { Desktop: "#000000 !important" },
-          fontSize: { Desktop: "18px" },
-          fontFamily: { Desktop: "Poppins" },
-          fontStyle: { Desktop: "normal" },
-          fontWeight: { Desktop: "400" },
-          margin: { Desktop: "0px 0px 0px 10px" },
+          color: { Desktop: "" },
+          backgroundColor: { Desktop: "" },
         },
       },
     },
@@ -233,6 +230,8 @@ registerBlockType("post-grid/woo-sale", {
     var blockCssY = attributes.blockCssY;
 
     var postId = context["postId"];
+    console.log(postId);
+
     var postType = context["postType"];
 
     //const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
@@ -782,12 +781,12 @@ registerBlockType("post-grid/woo-sale", {
       setIconHtml(iconHtml);
     }, [icon]);
 
-    const [currentPostUrl, setCurrentPostUrl] = useEntityProp(
-      "postType",
-      postType,
-      "link",
-      postId
-    );
+    // const [currentPostUrl, setCurrentPostUrl] = useEntityProp(
+    //   "postType",
+    //   postType,
+    //   "link",
+    //   postId
+    // );
 
     useEffect(() => {
       setAttributes({ blockId: blockIdX });
@@ -1089,8 +1088,6 @@ registerBlockType("post-grid/woo-sale", {
 
                         { label: "Before Prefix", value: "beforePrefix" },
                         { label: "After Prefix", value: "afterPrefix" },
-                        { label: "Before Sale Text", value: "beforeSaleText" },
-                        { label: "After Sale Text", value: "afterSaleText" },
                         { label: "Before Postfix", value: "beforePostfix" },
                         { label: "After Postfix", value: "afterPostfix" },
                       ]}
@@ -1337,41 +1334,13 @@ registerBlockType("post-grid/woo-sale", {
                 <>
                   {productData.on_sale && (
                     <span className={sale.options.class}>
-                      {icon.options.position == "beforeSaleText" && (
-                        <span
-                          className={icon.options.class}
-                          dangerouslySetInnerHTML={{ __html: iconHtml }}
-                        />
-                      )}
-
                       {sale.options.text}
-                      {icon.options.position == "afterSaleText" && (
-                        <span
-                          className={icon.options.class}
-                          dangerouslySetInnerHTML={{ __html: iconHtml }}
-                        />
-                      )}
                     </span>
                   )}
 
                   {!productData.on_sale && (
                     <span className={sale.options.class}>
-                      <span className={sale.options.class}>
-                        {icon.options.position == "beforeSaleText" && (
-                          <span
-                            className={icon.options.class}
-                            dangerouslySetInnerHTML={{ __html: iconHtml }}
-                          />
-                        )}
-
-                        {sale.options.noSale}
-                        {icon.options.position == "afterSaleText" && (
-                          <span
-                            className={icon.options.class}
-                            dangerouslySetInnerHTML={{ __html: iconHtml }}
-                          />
-                        )}
-                      </span>
+                      {sale.options.noSale}
                     </span>
                   )}
                 </>

@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -41,89 +42,90 @@ class PGBlockFormWrap
             //'editor_script' => 'editor_script',
             //'editor_style' => 'editor_style',
             //'script' => 'front_script',
-            'uses_context' =>  ["post-grid/popupId"],
+            'uses_context' => ["post-grid/popupId"],
             'provides_context' => array(
                 'post-grid/formId' => 'blockId',
             ),
             //'style' => [$this, 'front_style'],
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
+            'attributes' => array(
                 'form' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'type' => '',
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'type' => '',
+                            ),
                     ),
-                ),
                 'form' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'type' => '',
-                        ),
-                        'styles' =>
-                        array(),
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'options' =>
+                                    array(
+                                        'type' => '',
+                                    ),
+                                'styles' =>
+                                    array(),
+                            ),
                     ),
-                ),
                 'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'options' =>
+                                    array(
+                                        'tag' => 'div',
+                                        'class' => '',
+                                    ),
+                                'styles' =>
+                                    array(),
+                            ),
                     ),
-                ),
                 'visible' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(),
-                ),
-                'onSubmit' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(),
-                ),
-                'afterSubmit' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
                     array(
-                        'items' =>
-                        array(),
+                        'type' => 'object',
+                        'default' =>
+                            array(),
                     ),
-                ),
+                'onSubmit' =>
+                    array(
+                        'type' => 'object',
+                        'default' =>
+                            array(),
+                    ),
+                'afterSubmit' =>
+                    array(
+                        'type' => 'object',
+                        'default' =>
+                            array(),
+                    ),
+                'blockId' =>
+                    array(
+                        'type' => 'string',
+                        'default' => '',
+                    ),
+                'customCss' =>
+                    array(
+                        'type' => 'string',
+                        'default' => '',
+                    ),
+                'blockCssY' =>
+                    array(
+                        'type' => 'object',
+                        'default' =>
+                            array(
+                                'items' =>
+                                    array(),
+                            ),
+                    ),
             )
 
 
-        ));
+        )
+        );
     }
 
     function front_script($attributes)
@@ -174,7 +176,7 @@ class PGBlockFormWrap
 
         $roles = (array) $user->roles;
 
-        //var_dump($formType);
+        ////var_dump($formType);
 
         $formArgs['type'] = $formType;
         $formArgs['isLogged'] = !empty($user_id) ? true : false;
@@ -195,23 +197,23 @@ class PGBlockFormWrap
 
 
 
-?>
+        ?>
 
-        <div class="pg-form-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+                <div class="pg-form-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
 
 
-            <div class="<?php echo esc_attr($blockId); ?>-loading pg-form-loading" style="display: none;">Loading...</div>
+                    <div class="<?php echo esc_attr($blockId); ?>-loading pg-form-loading" style="display: none;">Loading...</div>
 
-            <form class=" " formId="<?php echo esc_attr($blockId); ?>" method="GET" onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>' formArgs='<?php echo esc_attr(json_encode($formArgs)); ?>' <?php if (!empty($onProcess)) : ?> onProcessArgs='<?php echo esc_attr(json_encode($onProcess)); ?>' <?php endif; ?> <?php if (!empty($afterSubmit)) : ?> afterSubmitArgs='<?php echo esc_attr(json_encode($afterSubmit)); ?>' <?php endif; ?> <?php if (!empty($visible)) : ?> data-pgfw-visible='<?php echo esc_attr(json_encode($visible)); ?>' <?php endif; ?>>
-                <?php echo $content ?>
-                <?php wp_nonce_field('form_wrap_nonce', 'form_wrap_nonce'); ?>
-            </form>
+                    <form class=" " formId="<?php echo esc_attr($blockId); ?>" method="GET" onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>' formArgs='<?php echo esc_attr(json_encode($formArgs)); ?>' <?php if (!empty($onProcess)): ?> onProcessArgs='<?php echo esc_attr(json_encode($onProcess)); ?>' <?php endif; ?>         <?php if (!empty($afterSubmit)): ?> afterSubmitArgs='<?php echo esc_attr(json_encode($afterSubmit)); ?>' <?php endif; ?>         <?php if (!empty($visible)): ?> data-pgfw-visible='<?php echo esc_attr(json_encode($visible)); ?>' <?php endif; ?>>
+                        <?php echo $content ?>
+                        <?php wp_nonce_field('form_wrap_nonce', 'form_wrap_nonce'); ?>
+                    </form>
 
-            <div class="<?php echo esc_attr($blockId); ?>-responses pg-form-responses" style="display: none;"></div>
-        </div>
+                    <div class="<?php echo esc_attr($blockId); ?>-responses pg-form-responses" style="display: none;"></div>
+                </div>
 
-<?php
+        <?php
 
         return ob_get_clean();
     }

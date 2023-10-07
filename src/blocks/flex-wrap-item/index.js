@@ -70,7 +70,7 @@ registerBlockType("post-grid/flex-wrap-item", {
         styles:
         {
 
-          backgroundColor: { Desktop: '#F1F7F9' },
+          backgroundColor: { Desktop: '' },
           flexBasis: { Desktop: '0' },
           flexGrow: { Desktop: '1' },
 

@@ -84,7 +84,7 @@ registerBlockType("post-grid/content-slider", {
 
         styles:
         {
-          backgroundColor: { Desktop: '#f1f7f9' },
+
         },
       },
     },
@@ -98,14 +98,8 @@ registerBlockType("post-grid/content-slider", {
 
         styles:
         {
-          display: { Desktop: 'flex' },
-          width: { Desktop: '100%' },
-          justifyContent: { Desktop: 'space-between' },
-          alignItems: { Desktop: 'center' },
-          position: { Desktop: 'absolute !important' },
-          top: { Desktop: '50%' },
-          transform: { Desktop: 'translateY(-50%)' },
-          
+
+
         },
       },
     },
@@ -120,15 +114,6 @@ registerBlockType("post-grid/content-slider", {
 
         styles:
         {
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          textAlign: { Desktop: 'left' },
-          color: { Desktop: '#ffffff' },
-          backgroundColor: { Desktop: '#1F2E45' },
-          borderRadius: { Desktop: '50px' },
-          padding: { Desktop: '5px 15px 5px 15px' },
 
 
         },
@@ -147,8 +132,6 @@ registerBlockType("post-grid/content-slider", {
         },
         styles:
         {
-          padding: { Desktop: '0px 10px 0px 0px' },
-          fontSize: { Desktop: '16px' }
         },
       },
     },
@@ -165,15 +148,7 @@ registerBlockType("post-grid/content-slider", {
 
         styles:
         {
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          textAlign: { Desktop: 'right' },
-          color: { Desktop: '#ffffff' },
-          backgroundColor: { Desktop: '#1F2E45' },
-          borderRadius: { Desktop: '50px' },
-          padding: { Desktop: '5px 15px 5px 15px' },
+
         },
       },
     },
@@ -190,8 +165,7 @@ registerBlockType("post-grid/content-slider", {
 
         styles:
         {
-          padding: { Desktop: '0px 0px 0px 10px' },
-          fontSize: { Desktop: '16px' }
+
         },
       },
     },
@@ -207,9 +181,7 @@ registerBlockType("post-grid/content-slider", {
 
         styles:
         {
-          display: { Desktop: 'flex' },
-          justifyContent: { Desktop: 'center' },
-          gap: { Desktop: '1em' },
+
 
         },
       },
@@ -224,9 +196,7 @@ registerBlockType("post-grid/content-slider", {
 
         styles:
         {
-          border: { Desktop: '1px solid #1f2e45' },
-          height: { Desktop: '10px' },
-          width: { Desktop: '10px' },
+
 
         },
       },
@@ -241,7 +211,8 @@ registerBlockType("post-grid/content-slider", {
 
         styles:
         {
-          backgroundColor: { Desktop: '#1f2e45' },
+
+
         },
       },
     },

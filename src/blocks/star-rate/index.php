@@ -23,126 +23,178 @@ class PGBlockStarRate
             'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
             'style' => 'front_style',
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array (
-                'wrapper' => 
-                array (
-                  'type' => 'object',
-                  'default' => 
-                  array (
-                    'options' => 
-                    array (
-                      'tag' => 'div',
-                      'class' => '',
-                      'attr' => 
-                      array (
-                      ),
-                    ),
-                    'styles' => 
-                    array (
-                      'display' => 
-                      array (
-                        'Desktop' => 'block',
-                      ),
-                    ),
-                  ),
-                ),
-                'icon' => 
-                array (
-                  'type' => 'object',
-                  'default' => 
-                  array (
-                    'options' => 
-                    array (
-                      'library' => 'fontAwesome',
-                      'srcType' => 'class',
-                      'iconSrc' => 'fas fa-star',
-                      'class' => 'text-icon',
-                      'text' => 'Custom Text',
-                      'isLink' => false,
-                      'linkTo' => 'postUrl',
-                      'linkToAuthorMeta' => '',
-                      'linkToCustomMeta' => '',
-                      'linkTarget' => '_blank',
-                      'customUrl' => '',
-                      'linkAttr' => 
-                      array (
-                      ),
-                    ),
-                    'styles' => 
-                    array (
-                      'color' => 
-                      array (
-                        'Desktop' => '',
-                      ),
-                    ),
-                  ),
-                ),
-                'prefix' => 
-                array (
-                  'type' => 'object',
-                  'default' => 
-                  array (
-                    'options' => 
-                    array (
-                      'text' => '',
-                      'class' => 'prefix',
-                    ),
-                    'styles' => 
-                    array (
-                      'color' => 
-                      array (
-                        'Desktop' => '',
-                      ),
-                    ),
-                  ),
-                ),
-                'postfix' => 
-                array (
-                  'type' => 'object',
-                  'default' => 
-                  array (
-                    'options' => 
-                    array (
-                      'text' => '',
-                      'class' => 'postfix',
-                    ),
-                    'styles' => 
-                    array (
-                      'color' => 
-                      array (
-                        'Desktop' => '',
-                      ),
-                    ),
-                  ),
-                ),
-                'blockId' => 
-                array (
-                  'type' => 'string',
-                  'default' => '',
-                ),
-                'customCss' => 
-                array (
-                  'type' => 'string',
-                  'default' => '',
-                ),
-                'linkAttr' => 
-                array (
-                  'type' => 'array',
-                  'default' => 
-                  array (
-                  ),
-                ),
-                'blockCssY' => 
-                array (
-                  'type' => 'object',
-                  'default' => 
-                  array (
-                    'items' => 
-                    array (
-                    ),
-                  ),
-                ),
-              )
+            'attributes' =>  [
+                "wrapper" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "tag" => "div",
+                            "class" => "",
+                            "attr" => []
+                        ],
+                        "styles" => [
+
+                            "color" => [],
+
+                            "padding" => [],
+                            "margin" => [],
+                            "display" => [],
+                            "borderRadius" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+
+
+                "starRate" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "maxCount" => 5,
+                            "count" => 3,
+
+                            "isLink" => true,
+                            "linkTo" => "postUrl",
+                            "linkToAuthorMeta" => "",
+                            "linkToCustomMeta" => "",
+                            "linkTarget" => "_blank",
+                            "customUrl" => "",
+                            "linkAttr" => [],
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "color" => [],
+
+                            "padding" => [],
+                            "margin" => [],
+
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+
+
+                "text" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "Custom Text",
+                            "isLink" => true,
+                            "linkTo" => "postUrl",
+                            "linkToAuthorMeta" => "",
+                            "linkToCustomMeta" => "",
+                            "linkTarget" => "_blank",
+                            "customUrl" => "",
+                            "linkAttr" => [],
+                            "class" => ""
+                        ],
+                        "styles" => [
+                            "color" => [],
+
+                            "padding" => [],
+                            "margin" => [],
+
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "letterSpacing" => [],
+                            "fontFamily" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => [],
+                            "textTransform" => []
+                        ]
+                    ]
+                ],
+                "icon" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "library" => "fontAwesome",
+                            "srcType" => "class",
+                            "iconSrc" => "fas fa-check-circle",
+                            "position" => "beforeText",
+                            "class" => "text-icon"
+                        ],
+                        "styles" => [
+                            "color" => [],
+
+                            "padding" => [],
+                            "margin" => [],
+
+                            "display" => [],
+                            "fontSize" => [],
+                            "lineHeight" => [],
+                            "fontWeight" => [
+                                "Desktop" => "700"
+                            ],
+                            "textDecoration" => []
+                        ]
+                    ]
+                ],
+                "prefix" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "class" => "prefix"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "backgroundColor" => []
+                        ]
+                    ]
+                ],
+                "postfix" => [
+                    "type" => "object",
+                    "default" => [
+                        "options" => [
+                            "text" => "",
+                            "class" => "postfix"
+                        ],
+                        "styles" => [
+                            "color" => [],
+                            "backgroundColor" => []
+                        ]
+                    ]
+                ],
+                "blockId" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "customCss" => [
+                    "type" => "string",
+                    "default" => ""
+                ],
+                "linkAttr" => [
+                    "type" => "array",
+                    "default" => []
+                ],
+                "blockCssY" => [
+                    "type" => "object",
+                    "default" => [
+                        "items" => []
+                    ]
+                ]
+            ]
         ));
     }
 

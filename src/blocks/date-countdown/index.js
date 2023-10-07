@@ -44,7 +44,7 @@ import {
 } from "@wordpress/components";
 import { __experimentalBoxControl as BoxControl } from "@wordpress/components";
 import { useEntityProp } from "@wordpress/core-data";
-import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
+import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
 
 import {
   InspectorControls,
@@ -125,11 +125,28 @@ registerBlockType("post-grid/date-countdown", {
     wrapper: {
       type: "object",
       default: {
-        options: { tag: "div", class: "", startDate: "", endDate: "" },
+        options: {
+          tag: "div",
+          class: "",
+          startDate: "",
+          endDate: "",
+          startDateSrc: "",
+          endDateSrc: "",
+        },
 
         styles: {
           color: { Desktop: "" },
           backgroundColor: { Desktop: "" },
+        },
+      },
+    },
+    dateCountdown: {
+      type: "object",
+      default: {
+        options: {
+          tag: "div",
+          class: "",
+          type: "fixed",
         },
       },
     },
@@ -166,11 +183,6 @@ registerBlockType("post-grid/date-countdown", {
           minuteEnable: true,
           hourEnable: true,
           dayEnable: true,
-          // endDate: "",
-          // start: "0",
-          // end: "500",
-          // duration: 1000,
-          // class: "date-countdown",
         },
         styles: {
           color: { Desktop: "" },
@@ -322,23 +334,7 @@ registerBlockType("post-grid/date-countdown", {
         },
       },
     },
-    // numberCount: {
-    //   type: "object",
-    //   default: {
-    //     options: {
-    //       tag: "div",
-    //       start: 0,
-    //       end: 500,
-    //       duration: 1000,
-    //       class: "date-countdown",
-    //     },
 
-    //     styles: {
-    //       color: { Desktop: "" },
-    //       fontSize: { Desktop: "" },
-    //     },
-    //   },
-    // },
     icon: {
       type: "object",
       default: {
@@ -423,6 +419,11 @@ registerBlockType("post-grid/date-countdown", {
       },
     },
 
+    expiredArg: {
+      type: "object",
+      default: {},
+    },
+
     blockId: {
       type: "string",
       default: "",
@@ -432,7 +433,7 @@ registerBlockType("post-grid/date-countdown", {
       default: { items: {} },
     },
   },
-  usesContext: [],
+  usesContext: ["postId", "loopIndex", "postType", "queryId"],
 
   supports: {
     align: ["wide", "full"],
@@ -444,6 +445,10 @@ registerBlockType("post-grid/date-countdown", {
     var setAttributes = props.setAttributes;
     var context = props.context;
     var clientId = props.clientId;
+
+    var postId = context["postId"];
+
+    var postType = context["postType"];
 
     var inner = attributes.inner;
     var editMode = attributes.editMode;
@@ -457,6 +462,8 @@ registerBlockType("post-grid/date-countdown", {
     let secondWrap = attributes.secondWrap;
     let second = attributes.second;
     var countdownWrapper = attributes.countdownWrapper;
+    var expiredArg = attributes.expiredArg;
+    var dateCountdown = attributes.dateCountdown;
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
@@ -520,10 +527,111 @@ registerBlockType("post-grid/date-countdown", {
 
     const { replaceInnerBlocks } = useDispatch(blockEditorStore);
 
+    // var closeAnimateArgs = {
+    //   backOutDown: { label: "backOutDown", value: "backOutDown" },
+    //   backOutLeft: { label: "backOutLeft", value: "backOutLeft" },
+    //   backOutRight: { label: "backOutRight", value: "backOutRight" },
+    //   backOutUp: { label: "backOutUp", value: "backOutUp" },
+    //   bounceOut: { label: "bounceOut", value: "bounceOut" },
+    //   bounceOutDown: { label: "bounceOutDown", value: "bounceOutDown" },
+    //   bounceOutLeft: { label: "bounceOutLeft", value: "bounceOutLeft" },
+    //   bounceOutRight: { label: "bounceOutRight", value: "bounceOutRight" },
+    //   bounceOutUp: { label: "bounceOutUp", value: "bounceOutUp" },
+    //   fadeOut: { label: "fadeOut", value: "fadeOut" },
+    //   fadeOutDown: { label: "fadeOutDown", value: "fadeOutDown" },
+    //   fadeOutDownBig: { label: "fadeOutDownBig", value: "fadeOutDownBig" },
+    //   fadeOutLeft: { label: "fadeOutLeft", value: "fadeOutLeft" },
+    //   fadeOutLeftBig: { label: "fadeOutLeftBig", value: "fadeOutLeftBig" },
+    //   fadeOutRight: { label: "fadeOutRight", value: "fadeOutRight" },
+    //   fadeOutRightBig: { label: "fadeOutRightBig", value: "fadeOutRightBig" },
+    //   fadeOutUp: { label: "fadeOutUp", value: "fadeOutUp" },
+    //   fadeOutUpBig: { label: "fadeOutUpBig", value: "fadeOutUpBig" },
+    //   fadeOutTopLeft: { label: "fadeOutTopLeft", value: "fadeOutTopLeft" },
+    //   fadeOutTopRight: { label: "fadeOutTopRight", value: "fadeOutTopRight" },
+    //   fadeOutBottomRight: {
+    //     label: "fadeOutBottomRight",
+    //     value: "fadeOutBottomRight",
+    //   },
+    //   fadeOutBottomLeft: {
+    //     label: "fadeOutBottomLeft",
+    //     value: "fadeOutBottomLeft",
+    //   },
+    //   rotateOut: { label: "rotateOut", value: "rotateOut" },
+    //   rotateOutDownLeft: {
+    //     label: "rotateOutDownLeft",
+    //     value: "rotateOutDownLeft",
+    //   },
+    //   rotateOutDownRight: {
+    //     label: "rotateOutDownRight",
+    //     value: "rotateOutDownRight",
+    //   },
+    //   rotateOutUpLeft: { label: "rotateOutUpLeft", value: "rotateOutUpLeft" },
+    //   rotateOutUpRight: {
+    //     label: "rotateOutUpRight",
+    //     value: "rotateOutUpRight",
+    //   },
+    //   zoomOut: { label: "zoomOut", value: "zoomOut" },
+    //   zoomOutDown: { label: "zoomOutDown", value: "zoomOutDown" },
+    //   zoomOutLeft: { label: "zoomOutLeft", value: "zoomOutLeft" },
+    //   zoomOutRight: { label: "zoomOutRight", value: "zoomOutRight" },
+    //   zoomOutUp: { label: "zoomOutUp", value: "zoomOutUp" },
+    //   slideOutDown: { label: "slideOutDown", value: "slideOutDown" },
+    //   slideOutLeft: { label: "slideOutLeft", value: "slideOutLeft" },
+    //   slideOutRight: { label: "slideOutRight", value: "slideOutRight" },
+    //   slideOutUp: { label: "slideOutUp", value: "slideOutUp" },
+    // };
+
+    var expiredArgsBasic = {
+      redirectURL: {
+        label: "Redirect URL",
+        description: "Visible as soon as possible",
+        args: { id: "redirectURL", value: "", delay: "" },
+      },
+      wcHideCartButton: {
+        label: "Hide Cart Button",
+        description: "Visible as soon as possible",
+        args: { id: "wcHideCartButton" },
+      },
+      showExpiredMsg: {
+        label: "Show Expired Message",
+        description: "Visible as soon as possible",
+        args: { id: "showExpiredMsg" },
+      },
+      hideCountdown: {
+        label: "Hide Countdown",
+        description: "Visible as soon as possible",
+        args: { id: "hideCountdown" },
+      },
+      showElement: {
+        label: "Show Element",
+        description: "Visible as soon as possible",
+        args: { id: "showElement", value: "" },
+      },
+      showPopup: {
+        label: "Show Popup",
+        description: "Visible as soon as possible",
+        args: { id: "showPopup" },
+      },
+    };
+
+    let expiredArgs = applyFilters("expiredArgs", expiredArgsBasic);
+
     const hasInnerBlocks = useSelect(
       (select) => select(blockEditorStore).getBlocks(clientId).length > 0,
       [clientId]
     );
+
+    const [productData, setProductData] = useState(null);
+
+    useEffect(() => {
+      apiFetch({
+        path: "/post-grid/v2/get_post_data",
+        method: "POST",
+        data: { postId: postId },
+      }).then((res) => {
+        setProductData(res);
+      });
+    }, []);
 
     const [remindTime, setRemindTime] = useState(0);
     const [remindDay, setRemindDay] = useState(0);
@@ -539,12 +647,38 @@ registerBlockType("post-grid/date-countdown", {
       const options = { year: "numeric", month: "2-digit", day: "2-digit" };
       const formattedDate = currentDate.toLocaleDateString(undefined, options);
 
-      const date1 = new Date(dateInput1);
-      const date2 = new Date(dateInput2);
+      var date1 = "";
+      var date2 = "";
+      var startDate = "";
+      if (wrapper.options.startDateSrc?.length == 0) {
+        date1 = new Date(dateInput1);
+      } else {
+        date1 =
+          productData?.date_on_sale_from != null
+            ? new Date(productData.date_on_sale_from.date)
+            : new Date(dateInput1);
+      }
 
-      const startDate = currentDate > date1 ? currentDate : date1;
+      if (wrapper.options.endDateSrc.length == 0) {
+        date2 = new Date(dateInput2);
+      } else {
+        date2 =
+          productData?.date_on_sale_to != null
+            ? new Date(productData.date_on_sale_to.date)
+            : new Date(dateInput2);
+      }
 
-      const timeDifference = Math.abs(date2 - startDate);
+      //  date1 = new Date(dateInput1);
+      if (currentDate > date1) {
+        startDate = currentDate;
+      } else if (currentDate < date1) {
+        startDate = currentDate;
+      } else {
+        startDate = date1;
+      }
+      // const startDate = currentDate > date1 ? currentDate : date1;
+
+      const timeDifference = date2 - startDate;
       setRemindTime(timeDifference);
 
       // Check if current date is less than date1
@@ -552,7 +686,13 @@ registerBlockType("post-grid/date-countdown", {
         // If current date is less, set remindTime to 0 to prevent countdown
         setRemindTime(0);
       }
-    }, [clientId, wrapper.options.startDate, wrapper.options.endDate]);
+    }, [
+      clientId,
+      wrapper.options.startDate,
+      wrapper.options.startDateSrc,
+      wrapper.options.endDateSrc,
+      wrapper.options.endDate,
+    ]);
 
     // Use the useEffect hook to update the remaining time every second
     useEffect(() => {
@@ -600,9 +740,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryWrapper(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        wrapper[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        wrapper[sudoSource] = sudoSourceArgs;
       });
 
       var wrapperX = Object.assign({}, wrapper);
@@ -611,19 +751,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           wrapperSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -635,9 +775,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryCountdownWrapper(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        countdownWrapper[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        countdownWrapper[sudoSource] = sudoSourceArgs;
       });
 
       var countdownWrapperX = Object.assign({}, countdownWrapper);
@@ -646,19 +786,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           countdownWrapperSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -670,9 +810,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryInner(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        inner[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        inner[sudoSource] = sudoSourceArgs;
       });
 
       var innerX = Object.assign({}, inner);
@@ -681,19 +821,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           innerSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -707,9 +847,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryItems(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        items[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        items[sudoSource] = sudoSourceArgs;
       });
 
       var itemsX = Object.assign({}, items);
@@ -718,19 +858,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           itemsSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -742,9 +882,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibrarySecondWrap(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        secondWrap[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        secondWrap[sudoSource] = sudoSourceArgs;
       });
 
       var secondWrapX = Object.assign({}, secondWrap);
@@ -753,19 +893,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           secondWrapSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -776,9 +916,9 @@ registerBlockType("post-grid/date-countdown", {
     }
     function onPickCssLibrarySecondCountdown(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        second[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        second[sudoSource] = sudoSourceArgs;
       });
 
       var secondX = Object.assign({}, second);
@@ -787,19 +927,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           secondSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -811,9 +951,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryMinuteWrap(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        minuteWrap[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        minuteWrap[sudoSource] = sudoSourceArgs;
       });
 
       var minuteWrapX = Object.assign({}, minuteWrap);
@@ -822,19 +962,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           minuteWrapSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -846,9 +986,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryMinuteCountdown(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        minute[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        minute[sudoSource] = sudoSourceArgs;
       });
 
       var minuteX = Object.assign({}, minute);
@@ -857,19 +997,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           minuteSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -881,9 +1021,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryHourWrap(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        hourWrap[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        hourWrap[sudoSource] = sudoSourceArgs;
       });
 
       var hourWrapX = Object.assign({}, hourWrap);
@@ -892,19 +1032,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           hourWrapSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -916,9 +1056,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryHourCountdown(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        hour[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        hour[sudoSource] = sudoSourceArgs;
       });
 
       var hourX = Object.assign({}, hour);
@@ -927,19 +1067,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           hourSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -951,9 +1091,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryDayWrap(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        dayWrap[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        dayWrap[sudoSource] = sudoSourceArgs;
       });
 
       var dayWrapX = Object.assign({}, dayWrap);
@@ -962,19 +1102,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           dayWrapSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -986,9 +1126,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryDayCountdown(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        day[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        day[sudoSource] = sudoSourceArgs;
       });
 
       var dayX = Object.assign({}, day);
@@ -997,19 +1137,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           daySelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -1021,9 +1161,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibrarySeparator(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        separator[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        separator[sudoSource] = sudoSourceArgs;
       });
 
       var separatorX = Object.assign({}, separator);
@@ -1032,19 +1172,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           separatorSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -1058,9 +1198,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryIcon(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        icon[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        icon[sudoSource] = sudoSourceArgs;
       });
 
       var iconX = Object.assign({}, icon);
@@ -1069,19 +1209,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           iconSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -1093,9 +1233,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryLabel(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        label[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        label[sudoSource] = sudoSourceArgs;
       });
 
       var labelX = Object.assign({}, label);
@@ -1104,19 +1244,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           labelSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -1127,9 +1267,9 @@ registerBlockType("post-grid/date-countdown", {
     }
     function onPickCssLibraryPrefix(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        prefix[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        prefix[sudoSource] = sudoSourceArgs;
       });
 
       var prefixX = Object.assign({}, prefix);
@@ -1138,19 +1278,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           prefixSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -1162,9 +1302,9 @@ registerBlockType("post-grid/date-countdown", {
 
     function onPickCssLibraryPostfix(args) {
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
-        postfix[sudoScource] = sudoScourceArgs;
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
+        postfix[sudoSource] = sudoSourceArgs;
       });
 
       var postfixX = Object.assign({}, postfix);
@@ -1173,19 +1313,19 @@ registerBlockType("post-grid/date-countdown", {
       var styleObj = {};
 
       Object.entries(args).map((x) => {
-        var sudoScource = x[0];
-        var sudoScourceArgs = x[1];
+        var sudoSource = x[0];
+        var sudoSourceArgs = x[1];
         var elementSelector = myStore.getElementSelector(
-          sudoScource,
+          sudoSource,
           postfixSelector
         );
 
         var sudoObj = {};
-        Object.entries(sudoScourceArgs).map((y) => {
-          var cssPropty = y[0];
-          var cssProptyVal = y[1];
-          var cssProptyKey = myStore.cssAttrParse(cssPropty);
-          sudoObj[cssProptyKey] = cssProptyVal;
+        Object.entries(sudoSourceArgs).map((y) => {
+          var cssProperty = y[0];
+          var cssPropertyVal = y[1];
+          var cssPropertyKey = myStore.cssAttrParse(cssProperty);
+          sudoObj[cssPropertyKey] = cssPropertyVal;
         });
 
         styleObj[elementSelector] = sudoObj;
@@ -1195,18 +1335,56 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onChangeStyleWrapper(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    var RemoveExpiredArgGroup = function ({ title, index }) {
+      return (
+        <>
+          <span
+            className="cursor-pointer inline-block hover:bg-red-500 hover:text-white px-1 py-1"
+            onClick={(ev) => {
+              var expiredArgX = { ...expiredArg };
+              delete expiredArgX[index];
+              setAttributes({ expiredArg: expiredArgX });
+            }}
+          >
+            <Icon icon={close} />
+          </span>
+          <span>{title}</span>
+        </>
+      );
+    };
+
+    var RemoveExpiredArgArgs = function ({ title, index, groupId }) {
+      return (
+        <>
+          <span
+            className="cursor-pointer inline-block hover:bg-red-500 hover:text-white px-1 py-1"
+            onClick={(ev) => {
+              var expiredArgX = { ...expiredArg };
+              expiredArgX[groupId].args.splice(index, 1);
+
+              setAttributes({ expiredArg: expiredArgX });
+            }}
+          >
+            <Icon icon={close} />
+          </span>
+
+          <span>{title}</span>
+        </>
+      );
+    };
+
+    function onChangeStyleWrapper(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, wrapper);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ wrapper: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         wrapperSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1214,52 +1392,52 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleWrapper(sudoScource, key) {
+    function onRemoveStyleWrapper(sudoSource, key) {
       var object = myStore.deletePropertyDeep(wrapper, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ wrapper: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         wrapperSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleWrapper(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleWrapper(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, wrapper);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ wrapper: object });
     }
 
-    function onChangeStyleCountdownWrapper(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleCountdownWrapper(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, countdownWrapper);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ countdownWrapper: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         countdownWrapperSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1267,52 +1445,52 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleCountdownWrapper(sudoScource, key) {
+    function onRemoveStyleCountdownWrapper(sudoSource, key) {
       var object = myStore.deletePropertyDeep(countdownWrapper, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ countdownWrapper: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         countdownWrapperSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleCountdownWrapper(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleCountdownWrapper(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, countdownWrapper);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ countdownWrapper: object });
     }
 
-    function onChangeStyleInner(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleInner(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, inner);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ inner: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         innerSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1320,35 +1498,35 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleInner(sudoScource, key) {
+    function onRemoveStyleInner(sudoSource, key) {
       var object = myStore.deletePropertyDeep(inner, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ inner: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         innerSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleInner(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleInner(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, inner);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ inner: object });
@@ -1359,18 +1537,18 @@ registerBlockType("post-grid/date-countdown", {
     // items style functions
     // items style functions end
 
-    function onChangeStyleItems(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleItems(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, items);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ items: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         itemsSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1378,35 +1556,35 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleItems(sudoScource, key) {
+    function onRemoveStyleItems(sudoSource, key) {
       var object = myStore.deletePropertyDeep(items, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ items: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         itemsSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleItems(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleItems(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, items);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ items: object });
@@ -1417,18 +1595,18 @@ registerBlockType("post-grid/date-countdown", {
     // second style function
 
     // second wrap
-    function onChangeStyleSecondWrap(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleSecondWrap(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, secondWrap);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ secondWrap: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         secondWrapSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1436,53 +1614,53 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleSecondWrap(sudoScource, key) {
+    function onRemoveStyleSecondWrap(sudoSource, key) {
       var object = myStore.deletePropertyDeep(secondWrap, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ secondWrap: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         secondWrapSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleSecondWrap(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleSecondWrap(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, secondWrap);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ secondWrap: object });
     }
 
     // second count
-    function onChangeStyleSecondCountdown(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleSecondCountdown(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, second);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ second: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         secondSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1490,35 +1668,35 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleSecondCountdown(sudoScource, key) {
+    function onRemoveStyleSecondCountdown(sudoSource, key) {
       var object = myStore.deletePropertyDeep(second, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ second: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         secondSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleSecondCountdown(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleSecondCountdown(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, second);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ second: object });
@@ -1530,18 +1708,18 @@ registerBlockType("post-grid/date-countdown", {
 
     // minute count wrap
 
-    function onChangeStyleMinuteWrap(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleMinuteWrap(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, minuteWrap);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ minuteWrap: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         minuteWrapSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1549,53 +1727,53 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleMinuteWrap(sudoScource, key) {
+    function onRemoveStyleMinuteWrap(sudoSource, key) {
       var object = myStore.deletePropertyDeep(minuteWrap, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ minuteWrap: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         minuteWrapSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleMinuteWrap(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleMinuteWrap(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, minuteWrap);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ minuteWrap: object });
     }
 
     // minute count
-    function onChangeStyleMinuteCountdown(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleMinuteCountdown(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, minute);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ minute: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         minuteSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1603,35 +1781,35 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleMinuteCountdown(sudoScource, key) {
+    function onRemoveStyleMinuteCountdown(sudoSource, key) {
       var object = myStore.deletePropertyDeep(minute, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ minute: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         minuteSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleMinuteCountdown(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleMinuteCountdown(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, minute);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ minute: object });
@@ -1643,18 +1821,18 @@ registerBlockType("post-grid/date-countdown", {
 
     // hour wrap
 
-    function onChangeStyleHourWrap(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleHourWrap(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, hourWrap);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ hourWrap: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         hourWrapSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1662,53 +1840,53 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleHourWrap(sudoScource, key) {
+    function onRemoveStyleHourWrap(sudoSource, key) {
       var object = myStore.deletePropertyDeep(hourWrap, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ hourWrap: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         hourWrapSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleHourWrap(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleHourWrap(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, hourWrap);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ hourWrap: object });
     }
 
     // hour count
-    function onChangeStyleHourCountdown(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleHourCountdown(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, hour);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ hour: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         hourSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1716,35 +1894,35 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleHourCountdown(sudoScource, key) {
+    function onRemoveStyleHourCountdown(sudoSource, key) {
       var object = myStore.deletePropertyDeep(hour, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ hour: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         hourSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleHourCountdown(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleHourCountdown(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, hour);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ hour: object });
@@ -1755,18 +1933,18 @@ registerBlockType("post-grid/date-countdown", {
     // day style function
 
     // day wrap
-    function onChangeStyleDayWrap(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleDayWrap(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, dayWrap);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ dayWrap: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         dayWrapSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1774,53 +1952,50 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleDayWrap(sudoScource, key) {
+    function onRemoveStyleDayWrap(sudoSource, key) {
       var object = myStore.deletePropertyDeep(dayWrap, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ dayWrap: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         dayWrapSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleDayWrap(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleDayWrap(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, dayWrap);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ dayWrap: object });
     }
 
     // day count
-    function onChangeStyleDayCountdown(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleDayCountdown(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, day);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ day: object });
 
-      var elementSelector = myStore.getElementSelector(
-        sudoScource,
-        daySelector
-      );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var elementSelector = myStore.getElementSelector(sudoSource, daySelector);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1828,35 +2003,32 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleDayCountdown(sudoScource, key) {
+    function onRemoveStyleDayCountdown(sudoSource, key) {
       var object = myStore.deletePropertyDeep(day, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ day: object });
 
-      var elementSelector = myStore.getElementSelector(
-        sudoScource,
-        daySelector
-      );
-      var cssPropty = myStore.cssAttrParse(key);
+      var elementSelector = myStore.getElementSelector(sudoSource, daySelector);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleDayCountdown(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleDayCountdown(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, day);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ day: object });
@@ -1866,18 +2038,18 @@ registerBlockType("post-grid/date-countdown", {
 
     // Separator style functions
 
-    function onChangeStyleSeparator(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleSeparator(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, separator);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ separator: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         separatorSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1885,35 +2057,35 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleSeparator(sudoScource, key) {
+    function onRemoveStyleSeparator(sudoSource, key) {
       var object = myStore.deletePropertyDeep(separator, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ separator: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         separatorSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleSeparator(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleSeparator(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, separator);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ separator: object });
@@ -1921,18 +2093,18 @@ registerBlockType("post-grid/date-countdown", {
 
     // Css edit
 
-    function onChangeStyleIcon(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleIcon(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, icon);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ icon: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         iconSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1940,52 +2112,52 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleIcon(sudoScource, key) {
+    function onRemoveStyleIcon(sudoSource, key) {
       var object = myStore.deletePropertyDeep(icon, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ icon: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         iconSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleIcon(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleIcon(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, icon);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ icon: object });
     }
 
-    function onChangeStyleLabel(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStyleLabel(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, label);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ label: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         labelSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -1993,51 +2165,51 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStyleLabel(sudoScource, key) {
+    function onRemoveStyleLabel(sudoSource, key) {
       var object = myStore.deletePropertyDeep(label, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ label: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         labelSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStyleLabel(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStyleLabel(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, label);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ label: object });
     }
-    function onChangeStylePrefix(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStylePrefix(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, prefix);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ prefix: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         prefixSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -2045,52 +2217,52 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStylePrefix(sudoScource, key) {
+    function onRemoveStylePrefix(sudoSource, key) {
       var object = myStore.deletePropertyDeep(prefix, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ prefix: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         prefixSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStylePrefix(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStylePrefix(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, prefix);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ prefix: object });
     }
 
-    function onChangeStylePostfix(sudoScource, newVal, attr) {
-      var path = [sudoScource, attr, breakPointX];
+    function onChangeStylePostfix(sudoSource, newVal, attr) {
+      var path = [sudoSource, attr, breakPointX];
       let obj = Object.assign({}, postfix);
       const object = myStore.updatePropertyDeep(obj, path, newVal);
 
       setAttributes({ postfix: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         postfixSelector
       );
-      var cssPropty = myStore.cssAttrParse(attr);
+      var cssProperty = myStore.cssAttrParse(attr);
 
       let itemsX = Object.assign({}, blockCssY.items);
 
@@ -2098,35 +2270,35 @@ registerBlockType("post-grid/date-countdown", {
         itemsX[elementSelector] = {};
       }
 
-      var cssPath = [elementSelector, cssPropty, breakPointX];
+      var cssPath = [elementSelector, cssProperty, breakPointX];
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
 
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
-    function onRemoveStylePostfix(sudoScource, key) {
+    function onRemoveStylePostfix(sudoSource, key) {
       var object = myStore.deletePropertyDeep(postfix, [
-        sudoScource,
+        sudoSource,
         key,
         breakPointX,
       ]);
       setAttributes({ postfix: object });
 
       var elementSelector = myStore.getElementSelector(
-        sudoScource,
+        sudoSource,
         postfixSelector
       );
-      var cssPropty = myStore.cssAttrParse(key);
+      var cssProperty = myStore.cssAttrParse(key);
       var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
         elementSelector,
-        cssPropty,
+        cssProperty,
         breakPointX,
       ]);
       setAttributes({ blockCssY: { items: cssObject } });
     }
 
-    function onAddStylePostfix(sudoScource, key) {
-      var path = [sudoScource, key, breakPointX];
+    function onAddStylePostfix(sudoSource, key) {
+      var path = [sudoSource, key, breakPointX];
       let obj = Object.assign({}, postfix);
       const object = myStore.addPropertyDeep(obj, path, "");
       setAttributes({ postfix: object });
@@ -2215,61 +2387,381 @@ registerBlockType("post-grid/date-countdown", {
         <InspectorControls>
           <div className="px-3">
             <div className="pb-3">
-              <PanelRow className="block mb-4">
-                <label for="" className="font-bold mb-2 ">
-                  Start Date?
-                </label>
-                <br />
-                <InputControl
-                  type="datetime-local"
-                  className="b-2"
-                  value={wrapper.options.startDate}
+              <PanelRow className="my-4">
+                <label for="">Date Countdown Type</label>
+
+                <SelectControl
+                  label=""
+                  value={dateCountdown.options.type}
+                  options={[
+                    { label: "Choose Type", value: "" },
+
+                    // { label: "Before Prefix", value: "beforePrefix" },
+                    // { label: "After Prefix", value: "afterPrefix" },
+                    { label: "Fixed", value: "fixed" },
+                    { label: "Ever Green", value: "everGreen" },
+                    { label: "Scheduled", value: "scheduled" },
+                    // { label: "After Postfix", value: "afterPostfix" },
+                    // { label: "Before Link", value: "beforeLink" },
+                    // { label: "After Link", value: "afterLink" },
+                  ]}
                   onChange={(newVal) => {
-                    var options = { ...wrapper.options, startDate: newVal };
+                    var options = {
+                      ...dateCountdown.options,
+                      type: newVal,
+                    };
                     setAttributes({
-                      wrapper: { ...wrapper, options: options },
+                      dateCountdown: { ...dateCountdown, options: options },
                     });
                   }}
                 />
-                {/* <DateTimePicker
-                      
+              </PanelRow>
+              {dateCountdown.options.type == "fixed" && (
+                <>
+                  {wrapper.options.startDateSrc?.length == 0 && (
+                    <PanelRow className="block mb-4">
+                      <label for="" className="font-bold mb-2 ">
+                        Start Date?
+                      </label>
+                      <br />
+                      <InputControl
+                        type="datetime-local"
+                        className="b-2"
+                        value={wrapper.options.startDate}
+                        onChange={(newVal) => {
+                          var options = {
+                            ...wrapper.options,
+                            startDate: newVal,
+                          };
+                          setAttributes({
+                            wrapper: { ...wrapper, options: options },
+                          });
+                        }}
+                      />
+                    </PanelRow>
+                  )}
+
+                  <PanelRow>
+                    <label for="">Start Date Source</label>
+                    <SelectControl
+                      label=""
+                      value={wrapper.options.startDateSrc}
+                      options={[
+                        { label: "Choose", value: "" },
+                        {
+                          label: "WooCommerce Sale price dates",
+                          value: "wc_sale_price_date_from",
+                        },
+                        // { label: "H2", value: "h2" },
+                        // { label: "H3", value: "h3" },
+                        // { label: "H4", value: "h4" },
+                        // { label: "H5", value: "h5" },
+                        // { label: "H6", value: "h6" },
+                        // { label: "SPAN", value: "span" },
+                        // { label: "DIV", value: "div" },
+                        // { label: "P", value: "p" },
+                      ]}
                       onChange={(newVal) => {
-                        var options = { ...setting.options, startDate: newVal };
+                        var options = {
+                          ...wrapper.options,
+                          startDateSrc: newVal,
+                        };
                         setAttributes({
-                          setting: { ...setting, options: options },
+                          wrapper: { ...wrapper, options: options },
                         });
                       }}
-                      is12Hour={true}
                     />
-                    {setting.options.startDate} */}
-              </PanelRow>
-              <PanelRow className="block mb-2">
-                <label for="" className="font-bold mb-2 ">
-                  End Date?
-                </label>
-                <InputControl
-                  type="datetime-local"
-                  className="mr-2"
-                  value={wrapper.options.endDate}
-                  onChange={(newVal) => {
-                    var options = { ...wrapper.options, endDate: newVal };
-                    setAttributes({
-                      wrapper: { ...wrapper, options: options },
-                    });
-                  }}
-                />
-                {/* <DateTimePicker
-                      
+                  </PanelRow>
+
+                  {wrapper.options.endDateSrc.length == 0 && (
+                    <PanelRow className="block mb-2">
+                      <label for="" className="font-bold mb-2 ">
+                        End Date?
+                      </label>
+
+                      <InputControl
+                        type="datetime-local"
+                        className="mr-2"
+                        value={wrapper.options.endDate}
+                        onChange={(newVal) => {
+                          var options = { ...wrapper.options, endDate: newVal };
+                          setAttributes({
+                            wrapper: { ...wrapper, options: options },
+                          });
+                        }}
+                      />
+                    </PanelRow>
+                  )}
+
+                  <PanelRow>
+                    <label for="">End Date Source</label>
+                    <SelectControl
+                      label=""
+                      value={wrapper.options.endDateSrc}
+                      options={[
+                        { label: "Choose", value: "" },
+                        {
+                          label: "WooCommerce Sale price dates",
+                          value: "wc_sale_price_date_to",
+                        },
+                        // { label: "H2", value: "h2" },
+                        // { label: "H3", value: "h3" },
+                        // { label: "H4", value: "h4" },
+                        // { label: "H5", value: "h5" },
+                        // { label: "H6", value: "h6" },
+                        // { label: "SPAN", value: "span" },
+                        // { label: "DIV", value: "div" },
+                        // { label: "P", value: "p" },
+                      ]}
                       onChange={(newVal) => {
-                        var options = { ...setting.options, endDate: newVal };
+                        var options = {
+                          ...wrapper.options,
+                          endDateSrc: newVal,
+                        };
                         setAttributes({
-                          setting: { ...setting, options: options },
+                          wrapper: { ...wrapper, options: options },
                         });
                       }}
-                      is12Hour={true}
-                    /> */}
-              </PanelRow>
+                    />
+                  </PanelRow>
+                </>
+              )}
             </div>
+
+            {/* visibility start */}
+
+            <PanelBody title="Expired Arguments" initialOpen={true}>
+              <div
+                className="bg-blue-500 p-2 px-4 text-white inline-block cursor-pointer rounded-sm"
+                onClick={(ev) => {
+                  var expiredArgX = { ...expiredArg };
+                  var index = Object.entries(expiredArgX).length;
+                  expiredArgX[index] = { logic: "OR", title: "", args: [] };
+                  setAttributes({ expiredArg: expiredArgX });
+                }}
+              >
+                Add Group
+              </div>
+
+              <div class="my-4">
+                {Object.entries(expiredArg).map((group, groupIndex) => {
+                  var groupId = group[0];
+                  var groupData = group[1];
+
+                  return (
+                    <PanelBody
+                      title={
+                        <RemoveExpiredArgGroup
+                          title={groupIndex}
+                          index={groupId}
+                        />
+                      }
+                      initialOpen={false}
+                    >
+                      <PanelRow className="my-3">
+                        <PGDropdown
+                          position="bottom right"
+                          variant="secondary"
+                          buttonTitle={"Add Condition"}
+                          options={expiredArgs}
+                          onChange={(option, index) => {
+                            var expiredArgX = { ...expiredArg };
+
+                            expiredArgX[groupId]["args"].push(option.args);
+                            setAttributes({ expiredArg: expiredArgX });
+                          }}
+                          values=""
+                        ></PGDropdown>
+                      </PanelRow>
+
+                      {expiredArg[groupId]["args"] != undefined &&
+                        expiredArg[groupId]["args"].map((item, index) => {
+                          var id = item.id;
+
+                          return (
+                            <>
+                              {id == "redirectURL" && (
+                                <PanelBody
+                                  title={
+                                    <RemoveExpiredArgArgs
+                                      title={
+                                        expiredArgs[id] == undefined
+                                          ? id
+                                          : expiredArgs[id].label
+                                      }
+                                      index={index}
+                                      groupId={groupIndex}
+                                    />
+                                  }
+                                  initialOpen={false}
+                                >
+                                  <div>
+                                    <PanelRow className="mb-4">
+                                      <label for="">Write URL</label>
+                                      <InputControl
+                                        className="mr-2"
+                                        placeholder="Enter URL"
+                                        value={item.value}
+                                        onChange={(newVal) => {
+                                          var expiredArgX = { ...expiredArg };
+                                          expiredArgX[groupId]["args"][
+                                            index
+                                          ].value = newVal;
+                                          setAttributes({
+                                            expiredArg: expiredArgX,
+                                          });
+                                        }}
+                                      />
+                                    </PanelRow>
+                                    {/* </div>
+                                  <div> */}
+                                    <PanelRow className="mb-4">
+                                      <label for="">Delay</label>
+                                      <InputControl
+                                        className="mr-2"
+                                        placeholder="Add delay in millisecond"
+                                        value={item.delay}
+                                        onChange={(newVal) => {
+                                          var expiredArgX = { ...expiredArg };
+                                          expiredArgX[groupId]["args"][
+                                            index
+                                          ].delay = newVal;
+                                          setAttributes({
+                                            expiredArg: expiredArgX,
+                                          });
+                                        }}
+                                      />
+                                    </PanelRow>
+                                  </div>
+                                </PanelBody>
+                              )}
+                              {id == "wcHideCartButton" && (
+                                <PanelBody
+                                  title={
+                                    <RemoveExpiredArgArgs
+                                      title={
+                                        expiredArgs[id] == undefined
+                                          ? id
+                                          : expiredArgs[id].label
+                                      }
+                                      index={index}
+                                      groupId={groupIndex}
+                                    />
+                                  }
+                                  initialOpen={false}
+                                >
+                                  <div>
+                                    No Option available for this condition.
+                                  </div>
+                                </PanelBody>
+                              )}
+                              {id == "showExpiredMsg" && (
+                                <PanelBody
+                                  title={
+                                    <RemoveExpiredArgArgs
+                                      title={
+                                        expiredArgs[id] == undefined
+                                          ? id
+                                          : expiredArgs[id].label
+                                      }
+                                      index={index}
+                                      groupId={groupIndex}
+                                    />
+                                  }
+                                  initialOpen={false}
+                                >
+                                  <div>
+                                    No Option available for this condition.
+                                  </div>
+                                </PanelBody>
+                              )}
+                              {id == "hideCountdown" && (
+                                <PanelBody
+                                  title={
+                                    <RemoveExpiredArgArgs
+                                      title={
+                                        expiredArgs[id] == undefined
+                                          ? id
+                                          : expiredArgs[id].label
+                                      }
+                                      index={index}
+                                      groupId={groupIndex}
+                                    />
+                                  }
+                                  initialOpen={false}
+                                >
+                                  <div>
+                                    No Option available for this condition.
+                                  </div>
+                                </PanelBody>
+                              )}
+                              {id == "showElement" && (
+                                <PanelBody
+                                  title={
+                                    <RemoveExpiredArgArgs
+                                      title={
+                                        expiredArgs[id] == undefined
+                                          ? id
+                                          : expiredArgs[id].label
+                                      }
+                                      index={index}
+                                      groupId={groupIndex}
+                                    />
+                                  }
+                                  initialOpen={false}
+                                >
+                                  <div>
+                                    <PanelRow className="mb-4">
+                                      <label for="">ID/Class</label>
+                                      <InputControl
+                                        className="mr-2"
+                                        placeholder=".element or #element"
+                                        value={item.value}
+                                        onChange={(newVal) => {
+                                          var expiredArgX = { ...expiredArg };
+                                          expiredArgX[groupId]["args"][
+                                            index
+                                          ].value = newVal;
+                                          setAttributes({
+                                            expiredArg: expiredArgX,
+                                          });
+                                        }}
+                                      />
+                                    </PanelRow>
+                                  </div>
+                                </PanelBody>
+                              )}
+                              {id == "showPopup" && (
+                                <PanelBody
+                                  title={
+                                    <RemoveExpiredArgArgs
+                                      title={
+                                        expiredArgs[id] == undefined
+                                          ? id
+                                          : expiredArgs[id].label
+                                      }
+                                      index={index}
+                                      groupId={groupIndex}
+                                    />
+                                  }
+                                  initialOpen={false}
+                                >
+                                  <div>
+                                    No Option available for this condition.
+                                  </div>
+                                </PanelBody>
+                              )}
+                            </>
+                          );
+                        })}
+                    </PanelBody>
+                  );
+                })}
+              </div>
+            </PanelBody>
+
+            {/* visibility end */}
+
             <PanelBody title="Wrapper" initialOpen={false}>
               <PGtabs
                 activeTab="options"
@@ -3670,14 +4162,7 @@ registerBlockType("post-grid/date-countdown", {
               </div>
             </div>
           )}
-          {/* day:{JSON.stringify(day)}, dayWrap:{JSON.stringify(dayWrap)}, hour:
-          {JSON.stringify(hour)}, hourWrap:{JSON.stringify(hourWrap)},
-          minuteWrap:{JSON.stringify(minuteWrap)}, minute:
-          {JSON.stringify(minute)}, secondWrap:{JSON.stringify(secondWrap)},
-          second:{JSON.stringify(second)}, wrapper:{JSON.stringify(wrapper)},
-          inner:{JSON.stringify(inner)}, items:{JSON.stringify(items)},
-          separator:{JSON.stringify(separator)}, label:{JSON.stringify(label)},
-          prefix:{JSON.stringify(prefix)}, postfix:{JSON.stringify(postfix)}, */}
+
           {hasInnerBlocks && (
             <div {...innerBlocksProps}>
               {!editMode && (

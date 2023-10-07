@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,153 +19,156 @@ class PGBlockFormFieldInput
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/form-field-input/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/form-field-input', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["post-grid/formId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+        register_block_type(
+            'post-grid/form-field-input',
+            array(
+                //'editor_script' => 'editor_script',
+                //'editor_style' => 'editor_style',
+                //'script' => 'front_script',
+                'uses_context' => ["post-grid/formId"],
+                //'style' => 'front_style',
+                'render_callback' => array($this, 'theHTML'),
+                'attributes' => array(
+                    'wrapper' =>
                         array(
-                            'tag' => 'div',
-                            'class' => '',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'tag' => 'div',
+                                            'class' => '',
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'labelWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'labelWrap' =>
                         array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'class' => '',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'tag' => 'div',
+                                            'enable' => true,
+                                            'class' => '',
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'label' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'label' =>
                         array(
-                            'tag' => 'label',
-                            'for' => 'label',
-                            'enable' => true,
-                            'text' => 'Your Name',
-                            'class' => 'pg-form-field-label',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'tag' => 'label',
+                                            'for' => 'label',
+                                            'enable' => true,
+                                            'text' => 'Your Name',
+                                            'class' => 'pg-form-field-label',
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'input' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'input' =>
                         array(
-                            'type' => 'text',
-                            'placeholder' => 'Write your name',
-                            'value' => '',
-                            'valueSource' => '',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'type' => 'text',
+                                            'placeholder' => 'Write your name',
+                                            'value' => '',
+                                            'valueSource' => '',
 
-                            'name' => '',
-                            'required' => false,
-                            'disabled' => false,
-                            'size' => false,
-                            'minLength' => NULL,
-                            'maxLength' => NULL,
-                            'readonly' => false,
-                            'step' => NULL,
-                            'pattern' => NULL,
-                            'patternCustom' => '',
+                                            'name' => '',
+                                            'required' => false,
+                                            'disabled' => false,
+                                            'size' => false,
+                                            'minLength' => NULL,
+                                            'maxLength' => NULL,
+                                            'readonly' => false,
+                                            'step' => NULL,
+                                            'pattern' => NULL,
+                                            'patternCustom' => '',
 
-                            'max' => NULL,
-                            'min' => NULL,
-                            'checked' => false,
-                            'autocomplete' => false,
-                            'includeMailBody' => true,
+                                            'max' => NULL,
+                                            'min' => NULL,
+                                            'checked' => false,
+                                            'autocomplete' => false,
+                                            'includeMailBody' => true,
 
-                            'id' => '',
-                            'class' => 'pg-form-field-input',
-                            'postion' => 'afterLabel',
+                                            'id' => '',
+                                            'class' => 'pg-form-field-input',
+                                            'postion' => 'afterLabel',
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'inputWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'inputWrap' =>
                         array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'class' => '',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'tag' => 'div',
+                                            'enable' => true,
+                                            'class' => '',
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'errorWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'errorWrap' =>
                         array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'text' => '',
-                            'position' => 'afterInput',
-                            'class' => '',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'tag' => 'div',
+                                            'enable' => true,
+                                            'text' => '',
+                                            'position' => 'afterInput',
+                                            'class' => '',
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'requiredWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
+                    'requiredWrap' =>
                         array(
-                            'tag' => 'span',
-                            'enable' => true,
-                            'class' => '',
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'options' =>
+                                        array(
+                                            'tag' => 'span',
+                                            'enable' => true,
+                                            'class' => '',
+                                        ),
+                                ),
                         ),
-                    ),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(),
-                    ),
-                ),
+                    'blockId' =>
+                        array(
+                            'type' => 'string',
+                            'default' => '',
+                        ),
+                    'customCss' =>
+                        array(
+                            'type' => 'string',
+                            'default' => '',
+                        ),
+                    'blockCssY' =>
+                        array(
+                            'type' => 'object',
+                            'default' =>
+                                array(
+                                    'items' =>
+                                        array(),
+                                ),
+                        ),
+                )
+
+
             )
-
-
-        ));
+        );
     }
 
     function front_script($attributes)
@@ -239,7 +243,7 @@ class PGBlockFormFieldInput
         $postGridCustomCss .= $customCss;
 
 
-        //var_dump($formId);
+        ////var_dump($formId);
 
         $PGFormProps[$formId][$blockId] = ['errorText' => $errorWrapText, 'inputName' => $inputName, 'includeMail' => $includeMailBody, 'labelText' => $labelText, 'required' => $inputRequired];
 
@@ -270,7 +274,7 @@ class PGBlockFormFieldInput
             } else if ($inputValueSource == 'userId') {
 
                 $currentUser = wp_get_current_user();
-                echo var_export($currentUser, true);
+                //echo //var_export($currentUser, true);
 
                 $inputValue = isset($currentUser->ID) ? $currentUser->ID : 0;
             } else if ($inputValueSource == 'userEmail') {
@@ -293,47 +297,54 @@ class PGBlockFormFieldInput
 
         ob_start();
 
-?>
+        ?>
 
-        <div class="<?php echo esc_attr($blockId); ?> pg-form-field" id="<?php echo esc_attr($blockId); ?>">
-
-
-            <div class='label-wrap'>
-
-                <?php if ($labelEnable) : ?>
-                    <label for=""><?php echo wp_kses_post($labelText); ?></label>
-                <?php endif; ?>
+                <div class="<?php echo esc_attr($blockId); ?> pg-form-field" id="<?php echo esc_attr($blockId); ?>">
 
 
-                <?php if ($errorWrapPosition == 'afterlabel') : ?>
-                    <?php if (!empty($errorWrapText)) : ?>
-                        <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-                    <?php endif; ?>
-                <?php endif; ?>
+                    <div class='label-wrap'>
 
-            </div>
-            <div class='input-wrap'>
-                <input type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if (!empty($errorWrapText)) : ?> errortext="<?php echo esc_attr($errorWrapText); ?>" <?php endif; ?> <?php if ($inputDisabled) : ?> disabled <?php endif; ?> <?php if ($inputReadonly) : ?> readonly <?php endif; ?> />
-                <?php if ($errorWrapPosition == 'afterInput') : ?>
+                        <?php if ($labelEnable): ?>
+                                <label for="">
+                                    <?php echo wp_kses_post($labelText); ?>
+                                </label>
+                        <?php endif; ?>
 
 
-                    <?php if (!empty($errorWrapText)) : ?>
-                        <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
-                    <?php endif; ?>
+                        <?php if ($errorWrapPosition == 'afterlabel'): ?>
+                                <?php if (!empty($errorWrapText)): ?>
+                                        <div class='error-wrap'>
+                                            <?php echo wp_kses_post($errorWrapText); ?>
+                                        </div>
+                                <?php endif; ?>
+                        <?php endif; ?>
 
-                <?php endif; ?>
-            </div>
+                    </div>
+                    <div class='input-wrap'>
+                        <input type="<?php echo esc_attr($inputType); ?>" placeholder="<?php echo esc_attr($inputPlaceholder); ?>"
+                            value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if (!empty($errorWrapText)): ?> errortext="<?php echo esc_attr($errorWrapText); ?>" <?php endif; ?>                 <?php if ($inputDisabled): ?> disabled <?php endif; ?>                 <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
+                        <?php if ($errorWrapPosition == 'afterInput'): ?>
+
+
+                                <?php if (!empty($errorWrapText)): ?>
+                                        <div class='error-wrap'>
+                                            <?php echo wp_kses_post($errorWrapText); ?>
+                                        </div>
+                                <?php endif; ?>
+
+                        <?php endif; ?>
+                    </div>
 
 
 
 
 
 
-        </div>
+                </div>
 
-<?php
+                <?php
 
-        return ob_get_clean();
+                return ob_get_clean();
     }
 }
 

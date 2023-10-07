@@ -312,7 +312,7 @@ function Html(props) {
     margin: { id: 'margin', label: 'Margin' },
 
     marginTop: { id: 'marginTop', label: 'Margin Top' },
-    marginLeft: { id: 'marginRight', label: 'Margin Right' },
+    marginRight: { id: 'marginRight', label: 'Margin Right' },
     marginBottom: { id: 'marginBottom', label: 'Margin Bottom' },
     marginLeft: { id: 'marginLeft', label: 'Margin Left' },
 

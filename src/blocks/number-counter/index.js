@@ -69,7 +69,8 @@ registerBlockType("post-grid/number-counter", {
 
         styles:
         {
-          display: { Desktop: 'block' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
 
         },
@@ -88,11 +89,8 @@ registerBlockType("post-grid/number-counter", {
         },
 
         styles: {
-          color: { Desktop: '#000000' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
+          color: { Desktop: '' },
+          fontSize: { Desktop: '' },
 
         },
       },
@@ -104,9 +102,9 @@ registerBlockType("post-grid/number-counter", {
 
         styles:
         {
-          color: { Desktop: '#000000' },
-          margin: { Desktop: '0px 10px 0px 0px' },
-          fontSize: { Desktop: '18px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          fontSize: { Desktop: '' },
 
         },
       },
@@ -120,12 +118,8 @@ registerBlockType("post-grid/number-counter", {
           { text: '', class: 'prefix', },
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 10px 0px 0px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -138,12 +132,8 @@ registerBlockType("post-grid/number-counter", {
           { text: '', class: 'postfix', },
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 0px 0px 10px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },

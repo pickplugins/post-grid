@@ -70,7 +70,7 @@ registerBlockType("post-grid/grid-wrap-item", {
         styles:
         {
 
-          backgroundColor: { Desktop: '#F1F7F9' },
+          backgroundColor: { Desktop: '' },
 
 
 

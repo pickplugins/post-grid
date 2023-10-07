@@ -41,6 +41,8 @@ class PGBlockDateCountdown
                       'class' => '',
                       'startDate' => '',
                       'endDate' => '',
+                      'startDateSrc' => '',
+                      'endDateSrc' => '',
                     ),
                   'styles' =>
                     array(
@@ -467,6 +469,13 @@ class PGBlockDateCountdown
               'type' => 'boolean',
               'default' => true,
             ),
+          'expiredArg' =>
+            array(
+              'type' => 'object',
+              'default' =>
+                array(
+                ),
+            ),
           'blockId' =>
             array(
               'type' => 'string',
@@ -519,6 +528,8 @@ class PGBlockDateCountdown
 
 
     $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
+    $post_ID = !empty($post_ID) ? $post_ID : get_the_ID();
+
 
 
     $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
@@ -540,7 +551,10 @@ class PGBlockDateCountdown
     // $setting = isset($attributes['setting']) ? $attributes['setting'] : [];
     // $settingOptions = isset($setting['options']) ? $setting['options'] : [];
     $wrapperStartDate = isset($wrapperOptions['startDate']) ? $wrapperOptions['startDate'] : "";
+    $wrapperStartDateSrc = isset($wrapperOptions['startDateSrc']) ? $wrapperOptions['startDateSrc'] : "";
     $wrapperEndDate = isset($wrapperOptions['endDate']) ? $wrapperOptions['endDate'] : "";
+    $wrapperEndDateSrc = isset($wrapperOptions['endDateSrc']) ? $wrapperOptions['endDateSrc'] : "";
+    $expiredArg = isset($attributes['expiredArg']) ? $attributes['expiredArg'] : [];
 
 
 
@@ -586,29 +600,49 @@ class PGBlockDateCountdown
     $labelPosition = isset($labelOptions['position']) ? $labelOptions['position'] : "";
 
 
-    // Set your target end date and time (in this example, September 30, 2023, at 00:00:00 UTC).
-    $endDate = strtotime($wrapperEndDate);
-    //var_dump($endDate);
+    $_sale_price_dates_to = get_post_meta($post_ID, "_sale_price_dates_to", true);
+    $_sale_price_dates_from = get_post_meta($post_ID, "_sale_price_dates_from", true);
+
+
+
+
+
+
+    if (empty($wrapperStartDateSrc)) {
+      $wrapperStartDate = strtotime($wrapperStartDate);
+    } else {
+      $wrapperStartDate = !empty($_sale_price_dates_from) ? (int) $_sale_price_dates_from : strtotime($wrapperStartDate);
+    }
+    if (empty($wrapperEndDateSrc)) {
+      $wrapperEndDate = strtotime($wrapperEndDate);
+    } else {
+      $wrapperEndDate = !empty($_sale_price_dates_to) ? (int) $_sale_price_dates_to : strtotime($wrapperEndDate);
+    }
+
+    $endDate = date('Y-m-d\TH:i', $wrapperEndDate);
+    $startDate = date('Y-m-d\TH:i', $wrapperStartDate);
+
+
+
+
     $gmt_offset = get_option('gmt_offset');
     $currentDate = date("Y/m/d H:i:s", strtotime('+' . $gmt_offset . ' hour'));
-    // Get the current server time (you may need to adjust the time zone).
-    // $currentDate = time();
-    //var_dump($currentDate);
-    $currentDate = strtotime($currentDate);
-    // Get the start date, choosing the maximum of the current date and date1.
-    $date1 = strtotime($wrapperStartDate);
 
-    // Replace this with your date1 value
+
+    $currentDate = strtotime($currentDate);
+
+    $date1 = strtotime($startDate);
+
     $startDate = max($currentDate, $date1);
 
-    // echo "hello".$endDate."hello".$date1."hello".$startDate." ".strtotime("7 October 2023");
 
 
-    // Calculate the time difference between the start date and the end date.
-    $timeDifference = $endDate - $startDate;
-    //var_dump($timeDifference);
 
-    // Calculate days, hours, minutes, and seconds.
+
+    $timeDifference = $wrapperEndDate - $startDate;
+
+
+
     $days = floor($timeDifference / (60 * 60 * 24));
     $hours = floor(($timeDifference % (60 * 60 * 24)) / (60 * 60));
     $minutes = floor(($timeDifference % (60 * 60)) / 60);
@@ -691,11 +725,13 @@ class PGBlockDateCountdown
     $fontIconHtml = '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>';
 
     $dataAtts = [
-      "startDate" => $wrapperStartDate,
-      "endDate" => $wrapperEndDate,
+      "startDate" => $startDate,
+      "endDate" => $endDate,
       "blockId" => $blockId,
 
     ];
+
+    // var_dump($expiredArg);
 
 
     ob_start();
@@ -706,7 +742,8 @@ class PGBlockDateCountdown
       ?>
       <<?php echo esc_attr($wrapperTag); ?> class="PGBlockDateCountdown
         <?php echo esc_attr($blockId); ?>
-        <?php echo esc_attr($blockAlign); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+        <?php echo esc_attr($blockAlign); ?>" date-countdown-id="<?php echo esc_attr($blockId); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>"
+        countdown-expired-arg="<?php echo esc_attr(json_encode($expiredArg)) ?>">
 
         <?php if ($timeDifference > 0) {
           ?>

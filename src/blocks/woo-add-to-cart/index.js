@@ -70,9 +70,9 @@ registerBlockType("post-grid/woo-add-to-cart", {
         {
 
           display: { Desktop: 'flex', Tablet: 'flex', Mobile: 'flex' },
-          gap: { Desktop: '1em' },
-          alignItems: { Desktop: 'center' },
-          
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
@@ -85,15 +85,10 @@ registerBlockType("post-grid/woo-add-to-cart", {
         styles:
         {
 
-          display: { Desktop: 'inline-block' },
-          color: { Desktop: '#ffffff' },
-          backgroundColor: { Desktop: '#1F2E45' },
-          padding: { Desktop: '10px 20px 10px 20px' },
-          borderRadius: { Desktop: '5px 5px 5px 5px' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '500' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
         },
       },
@@ -113,16 +108,12 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
         styles: {
 
-        
-          display: { Desktop: 'inline-block' },
-          color: { Desktop: '#ffffff' },
-          backgroundColor: { Desktop: '#1F2E45' },
-          padding: { Desktop: '10px 20px 10px 20px' },
-          borderRadius: { Desktop: '5px 5px 5px 5px' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '500' },
+          display: {},
+          width: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -136,15 +127,12 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
         styles: {
 
-          display: { Desktop: 'flex' },
-          alignItems: { Desktop: 'center' },
-          color: { Desktop: '#000000' },
-          border: { Desktop: '1px solid #1f2e45' },
-          borderRadius: { Desktop: '5px 5px 5px 5px'},
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
+          display: {},
+          width: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -158,11 +146,12 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
         styles: {
 
-          color: { Desktop: '#000000' },
-          backgroundColor: { Desktop: '#ffffff00' },
-          textAlign: { Desktop: 'center' },
-          border: { Desktop: '0px solid #1f2e45' },
-          padding: { Desktop: '0px 5px 0px 5px' },
+          display: {},
+          width: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -175,16 +164,12 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
         styles: {
 
-          color: { Desktop: '#000000' },
-          backgroundColor: { Desktop: '#F1F7F9' },
-          padding: { Desktop: '6px 10px 6px 10px' },
-          margin: { Desktop: '5px 5px 5px 5px'},
-          borderRadius: { Desktop: '5px 5px 5px 5px'},
-          cursor: { Desktop: 'pointer' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
+          display: {},
+          width: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -195,17 +180,12 @@ registerBlockType("post-grid/woo-add-to-cart", {
           class: '',
         },
         styles: {
-          
-          color: { Desktop: '#000000' },
-          backgroundColor: { Desktop: '#F1F7F9' },
-          padding: { Desktop: '6px 10px 6px 10px' },
-          margin: { Desktop: '5px 5px 5px 5px'},
-          borderRadius: { Desktop: '5px 5px 5px 5px'},
-          cursor: { Desktop: 'pointer' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
+          display: {},
+          width: {},
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
         },
       },
     },
@@ -220,14 +200,17 @@ registerBlockType("post-grid/woo-add-to-cart", {
 
         styles:
         {
-          color: { Desktop: '#ffffff' },
-          
-          margin: { Desktop: '0px 10px 0px 0px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
 
-          
+          display: {},
 
-          fontSize: { Desktop: '18px' },
-          
+          fontSize: { Desktop: '' },
+          lineHeight: {},
+          fontWeight: { "Desktop": "700" },
+          textDecoration: {}, //overline, line-through, underline
         },
       },
     },
@@ -240,12 +223,8 @@ registerBlockType("post-grid/woo-add-to-cart", {
           { text: ' ', class: 'prefix', },
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 10px 0px 0px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },
@@ -258,12 +237,8 @@ registerBlockType("post-grid/woo-add-to-cart", {
           { text: '', class: 'postfix', },
         styles:
         {
-          color: { Desktop: '#000000 !important' },
-          fontSize: { Desktop: '18px' },
-          fontFamily: { Desktop: 'Poppins' },
-          fontStyle: { Desktop: 'normal' },
-          fontWeight: { Desktop: '400' },
-          margin: { Desktop: '0px 0px 0px 10px' },
+          color: { Desktop: '' },
+          backgroundColor: { Desktop: '' },
 
         },
       },

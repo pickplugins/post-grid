@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -48,7 +49,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/update_options',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'update_options'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -61,7 +62,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/block_categories',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'block_categories'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -74,7 +75,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_options',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_options'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -88,7 +89,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/fluentcrm_lists',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'fluentcrm_lists'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -100,7 +101,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/fluentcrm_tags',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'fluentcrm_tags'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -115,7 +116,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/wordpress_org_data',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'wordpress_org_data'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -127,7 +128,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/user_roles_list',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'user_roles_list'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -140,7 +141,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/process_form_data',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'process_form_data'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -152,7 +153,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/loggedout_current_user',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'loggedout_current_user'),
                 'permission_callback' => '__return_true',
             )
@@ -163,7 +164,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_user_data',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_user_data'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -176,7 +177,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_user_meta',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_user_meta'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -189,7 +190,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_comment_count',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_comment_count'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -201,7 +202,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_plugin_data',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_plugin_data'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -213,7 +214,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_image_sizes',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_image_sizes'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -225,7 +226,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_site_details',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_site_details'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -238,7 +239,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/email_subscribe',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'email_subscribe'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -251,7 +252,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_license',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_license'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -265,7 +266,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_pro_info',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_pro_info'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -277,7 +278,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_post_meta',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_post_meta'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -289,7 +290,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_shortcode',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_shortcode'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -301,7 +302,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_terms',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_all_terms'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -313,7 +314,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/post_types',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_post_types'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -325,7 +326,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_post_statuses',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_post_statuses'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -340,7 +341,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/post_type_objects',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_post_type_objects'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -353,7 +354,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_posts',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_posts'),
                 'permission_callback' => '__return_true',
 
@@ -364,7 +365,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_post_data',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_post_data'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -379,7 +380,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_posts_layout',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_posts_layout'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -395,7 +396,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/import_post_grid_template',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'import_post_grid_template'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -408,7 +409,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/get_tax_terms',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'get_tax_terms'),
                 'permission_callback' => function () {
                     return current_user_can('edit_posts');
@@ -421,7 +422,7 @@ class BlockPostGridRest
             'post-grid/v2',
             '/send_mail',
             array(
-                'methods'  => 'POST',
+                'methods' => 'POST',
                 'callback' => array($this, 'send_mail'),
                 'permission_callback' => function () {
                     return current_user_can('manage_options');
@@ -439,8 +440,8 @@ class BlockPostGridRest
     public function get_posts_layout($post_data)
     {
 
-        $category      = isset($post_data['category']) ? $post_data['category'] : '';
-        $keyword     = isset($post_data['keyword']) ? $post_data['keyword'] : '';
+        $category = isset($post_data['category']) ? $post_data['category'] : '';
+        $keyword = isset($post_data['keyword']) ? $post_data['keyword'] : '';
 
         $response = [];
         $tax_query = [];
@@ -461,8 +462,8 @@ class BlockPostGridRest
         if (!empty($category)) {
             $tax_query[] = array(
                 'taxonomy' => 'template_cat',
-                'field'    => 'term_id',
-                'terms'    => $category,
+                'field' => 'term_id',
+                'terms' => $category,
             );
 
             $query_args['tax_query'] = $tax_query;
@@ -479,9 +480,10 @@ class BlockPostGridRest
         $wp_query = new WP_Query($query_args);
 
 
-        if ($wp_query->have_posts()) :
+        if ($wp_query->have_posts()):
 
-            while ($wp_query->have_posts()) : $wp_query->the_post();
+            while ($wp_query->have_posts()):
+                $wp_query->the_post();
 
                 $post = get_post(get_the_id());
 
@@ -494,7 +496,7 @@ class BlockPostGridRest
                 $thumb_url = isset($thumb[0]) ? $thumb[0] : '';
                 $post->thumb_url = !empty($thumb_url) ? $thumb_url : post_grid_plugin_url . 'assets/frontend/images/placeholder.png';
 
-                $post->is_pro =  false;
+                $post->is_pro = false;
 
 
                 $price = get_post_meta($post_id, 'price', true);
@@ -511,7 +513,7 @@ class BlockPostGridRest
 
 
 
-                $posts[]            = $post;
+                $posts[] = $post;
 
 
 
@@ -531,9 +533,9 @@ class BlockPostGridRest
 
         $terms = get_terms(
             array(
-                'taxonomy'   => 'template_cat',
+                'taxonomy' => 'template_cat',
                 'hide_empty' => true,
-                'post_type'  => 'post_grid_layout',
+                'post_type' => 'post_grid_layout',
             )
         );
 
@@ -574,9 +576,9 @@ class BlockPostGridRest
         }
 
 
-        $objSlug     = isset($request['slug']) ? $request['slug'] : '';
-        $objType     = isset($request['type']) ? $request['type'] : '';
-        $blockId     = isset($request['blockId']) ? $request['blockId'] : '';
+        $objSlug = isset($request['slug']) ? $request['slug'] : '';
+        $objType = isset($request['type']) ? $request['type'] : '';
+        $blockId = isset($request['blockId']) ? $request['blockId'] : '';
 
         $transient_args = serialize(array('slug' => $objSlug, 'type' => $objType));
 
@@ -599,74 +601,124 @@ class BlockPostGridRest
 
                 if ($objType == 'plugin') {
                     $fields = array(
-                        'active_installs' => true,           // rounded int
-                        'added' => true,                     // date
-                        'author' => true,                    // a href html
-                        'author_block_count' => true,        // int
-                        'author_block_rating' => true,       // int
-                        'author_profile' => true,            // url
-                        'banners' => true,                   // array( [low], [high] )
-                        'compatibility' => false,            // empty array?
-                        'contributors' => true,              // array( array( [profile], [avatar], [display_name] )
-                        'description' => false,              // string
-                        'donate_link' => true,               // url
-                        'download_link' => true,             // url
-                        'downloaded' => false,               // int
+                        'active_installs' => true,
+                        // rounded int
+                        'added' => true,
+                        // date
+                        'author' => true,
+                        // a href html
+                        'author_block_count' => true,
+                        // int
+                        'author_block_rating' => true,
+                        // int
+                        'author_profile' => true,
+                        // url
+                        'banners' => true,
+                        // array( [low], [high] )
+                        'compatibility' => false,
+                        // empty array?
+                        'contributors' => true,
+                        // array( array( [profile], [avatar], [display_name] )
+                        'description' => false,
+                        // string
+                        'donate_link' => true,
+                        // url
+                        'download_link' => true,
+                        // url
+                        'downloaded' => false,
+                        // int
                         // 'group' => false,                 // n/a 
-                        'homepage' => true,                  // url
-                        'icons' => false,                    // array( [1x] url, [2x] url )
-                        'last_updated' => true,              // datetime
-                        'name' => true,                      // string
-                        'num_ratings' => true,               // int
-                        'rating' => true,                    // int
-                        'ratings' => true,                   // array( [5..0] )
-                        'requires' => true,                  // version string
-                        'requires_php' => true,              // version string
-                        'reviews' => false,               // n/a, part of 'sections'
-                        'screenshots' => false,               // array( array( [src], [caption] ) )
-                        'sections' => false,                  // array( [description], [installation], [changelog], [reviews], ...)
-                        'short_description' => false,        // string
+                        'homepage' => true,
+                        // url
+                        'icons' => false,
+                        // array( [1x] url, [2x] url )
+                        'last_updated' => true,
+                        // datetime
+                        'name' => true,
+                        // string
+                        'num_ratings' => true,
+                        // int
+                        'rating' => true,
+                        // int
+                        'ratings' => true,
+                        // array( [5..0] )
+                        'requires' => true,
+                        // version string
+                        'requires_php' => true,
+                        // version string
+                        'reviews' => false,
+                        // n/a, part of 'sections'
+                        'screenshots' => false,
+                        // array( array( [src], [caption] ) )
+                        'sections' => false,
+                        // array( [description], [installation], [changelog], [reviews], ...)
+                        'short_description' => false,
+                        // string
                         //'slug' => true,                      // string
-                        'support_threads' => true,           // int
-                        'support_threads_resolved' => true,  // int
-                        'tags' => true,                      // array( )
-                        'tested' => true,                    // version string
-                        'version' => true,                   // version string
-                        'versions' => false,                  // array( [version] url )
+                        'support_threads' => true,
+                        // int
+                        'support_threads_resolved' => true,
+                        // int
+                        'tags' => true,
+                        // array( )
+                        'tested' => true,
+                        // version string
+                        'version' => true,
+                        // version string
+                        'versions' => false,
+                        // array( [version] url )
                     );
 
                     require_once(ABSPATH . 'wp-admin/includes/plugin-install.php');
 
-                    $bodyObj = plugins_api('plugin_information', array('slug' => $objSlug,  'fields' => $fields));
+                    $bodyObj = plugins_api('plugin_information', array('slug' => $objSlug, 'fields' => $fields));
                 }
 
 
 
                 if ($objType == 'theme') {
                     $fields = array(
-                        'description' => true,           // rounded int
-                        'sections' => false,                  // array( [description], [installation], [changelog], [reviews], ...)
-                        'rating' => true,                    // int
-                        'ratings' => true,                   // array( [5..0] )
-                        'downloadlink' => true,             // url
-                        'downloaded' => true,               // int
-                        'last_updated' => true,              // datetime
-                        'tags' => true,                      // array( )
-                        'homepage' => true,                  // url
-                        'screenshots' => true,               // array( array( [src], [caption] ) )
-                        'screenshot_count' => false,               // array( array( [src], [caption] ) )
-                        'screenshot_url' => true,               // array( array( [src], [caption] ) )
-                        'photon_screenshots' => false,               // array( array( [src], [caption] ) )
-                        'template' => true,               // array( array( [src], [caption] ) )
-                        'parent' => true,                     // parent 
-                        'versions' => false,                  // array( [version] url )
-                        'theme_url' => true,                  // array( [version] url )
-                        'extended_author' => false,                  // array( [version] url )
+                        'description' => true,
+                        // rounded int
+                        'sections' => false,
+                        // array( [description], [installation], [changelog], [reviews], ...)
+                        'rating' => true,
+                        // int
+                        'ratings' => true,
+                        // array( [5..0] )
+                        'downloadlink' => true,
+                        // url
+                        'downloaded' => true,
+                        // int
+                        'last_updated' => true,
+                        // datetime
+                        'tags' => true,
+                        // array( )
+                        'homepage' => true,
+                        // url
+                        'screenshots' => true,
+                        // array( array( [src], [caption] ) )
+                        'screenshot_count' => false,
+                        // array( array( [src], [caption] ) )
+                        'screenshot_url' => true,
+                        // array( array( [src], [caption] ) )
+                        'photon_screenshots' => false,
+                        // array( array( [src], [caption] ) )
+                        'template' => true,
+                        // array( array( [src], [caption] ) )
+                        'parent' => true,
+                        // parent 
+                        'versions' => false,
+                        // array( [version] url )
+                        'theme_url' => true,
+                        // array( [version] url )
+                        'extended_author' => false,
+                        // array( [version] url )
                     );
 
                     require_once(ABSPATH . 'wp-admin/includes/theme.php');
 
-                    $bodyObj = themes_api('theme_information', array('slug' => $objSlug,  'fields' => $fields));
+                    $bodyObj = themes_api('theme_information', array('slug' => $objSlug, 'fields' => $fields));
                 }
 
 
@@ -697,8 +749,8 @@ class BlockPostGridRest
         $response = [];
 
 
-        $name     = isset($request['name']) ? sanitize_text_field($request['name']) : '';
-        $value      = isset($request['value']) ?  post_grid_recursive_sanitize_arr($request['value'])  : '';
+        $name = isset($request['name']) ? sanitize_text_field($request['name']) : '';
+        $value = isset($request['value']) ? post_grid_recursive_sanitize_arr($request['value']) : '';
 
 
         $status = update_option($name, $value);
@@ -729,7 +781,7 @@ class BlockPostGridRest
 
 
 
-        $response     = get_default_block_categories();
+        $response = get_default_block_categories();
 
         //$response['status'] = $status;
 
@@ -757,7 +809,7 @@ class BlockPostGridRest
         $response = [];
 
 
-        $option      = isset($request['option']) ? $request['option'] : '';
+        $option = isset($request['option']) ? $request['option'] : '';
 
         //error_log($option);
         $response = get_option($option);
@@ -804,9 +856,12 @@ class BlockPostGridRest
 
 
         foreach ($lists as $list) {
-            $title = $list->title;;
-            $id = $list->id;;
-            $slug = $list->slug;;
+            $title = $list->title;
+            ;
+            $id = $list->id;
+            ;
+            $slug = $list->slug;
+            ;
 
             $response[$id]['title'] = $title;
             $response[$id]['id'] = $id;
@@ -839,9 +894,12 @@ class BlockPostGridRest
 
 
         foreach ($tags as $tag) {
-            $title = $tag->title;;
-            $id = $tag->id;;
-            $slug = $tag->slug;;
+            $title = $tag->title;
+            ;
+            $id = $tag->id;
+            ;
+            $slug = $tag->slug;
+            ;
 
             $response[$id]['title'] = $title;
             $response[$id]['id'] = $id;
@@ -872,7 +930,7 @@ class BlockPostGridRest
         $response = [];
 
 
-        $formdata      = isset($request['formdata']) ? $request['formdata'] : 'no data';
+        $formdata = isset($request['formdata']) ? $request['formdata'] : 'no data';
 
         $data = $request->get_body();
 
@@ -889,7 +947,7 @@ class BlockPostGridRest
 
             $response['errors']['nonce_check_failed'] = __('Security Check Failed', 'post-grid');
 
-            return  $response;
+            return $response;
         }
 
 
@@ -900,7 +958,7 @@ class BlockPostGridRest
 
         foreach ($formFieldArr as $formField) {
 
-            if ($formField == 'formType' || $formField == 'onprocessargs' || $formField == '_wp_http_referer'  || $formField == 'form_wrap_nonce') {
+            if ($formField == 'formType' || $formField == 'onprocessargs' || $formField == '_wp_http_referer' || $formField == 'form_wrap_nonce') {
                 continue;
             }
 
@@ -940,7 +998,7 @@ class BlockPostGridRest
         $response = [];
 
 
-        $formdata      = isset($request['formdata']) ? $request['formdata'] : 'no data';
+        $formdata = isset($request['formdata']) ? $request['formdata'] : 'no data';
 
         global $wp_roles;
 
@@ -984,7 +1042,7 @@ class BlockPostGridRest
         $response = [];
 
 
-        $formdata      = isset($request['formdata']) ? $request['formdata'] : 'no data';
+        $formdata = isset($request['formdata']) ? $request['formdata'] : 'no data';
 
 
         $form_wrap_nonce = $request->get_param('nonce');
@@ -995,7 +1053,7 @@ class BlockPostGridRest
 
             $response['errors']['nonce_check_failed'] = __('Security Check Failed', 'post-grid');
 
-            return  $response;
+            return $response;
         }
 
 
@@ -1024,22 +1082,23 @@ class BlockPostGridRest
         }
 
 
-        $postData      = isset($post_data['postData']) ? $post_data['postData'] : '';
-        $post_content     = isset($postData['post_content']) ? $postData['post_content'] : '';
-        $post_title     = isset($postData['post_title']) ? $postData['post_title'] : '';
+        $postData = isset($post_data['postData']) ? $post_data['postData'] : '';
+        $post_content = isset($postData['post_content']) ? $postData['post_content'] : '';
+        $post_title = isset($postData['post_title']) ? $postData['post_title'] : '';
 
 
 
 
-        if (empty($post_content)) die(wp_json_encode($response));
+        if (empty($post_content))
+            die(wp_json_encode($response));
 
 
         $newPostId = wp_insert_post(
             array(
-                'post_title'    => $post_title,
-                'post_content'  => $post_content,
-                'post_status'   => 'publish',
-                'post_type'       => 'post_grid_template',
+                'post_title' => $post_title,
+                'post_content' => $post_content,
+                'post_status' => 'publish',
+                'post_type' => 'post_grid_template',
             )
         );
 
@@ -1060,12 +1119,13 @@ class BlockPostGridRest
     public function get_user_data($post_data)
     {
 
-        $id      = isset($post_data['id']) ? $post_data['id'] : '';
-        $fields    = isset($post_data['fields']) ? $post_data['fields'] : '';
+        $id = isset($post_data['id']) ? $post_data['id'] : '';
+        $fields = isset($post_data['fields']) ? $post_data['fields'] : '';
 
         $response = [];
 
-        if (empty($id)) die(wp_json_encode($response));
+        if (empty($id))
+            die(wp_json_encode($response));
 
         $user = get_user_by('ID', $id);
 
@@ -1105,12 +1165,13 @@ class BlockPostGridRest
     public function get_user_meta($post_data)
     {
 
-        $id      = isset($post_data['id']) ? $post_data['id'] : '';
-        $meta_key    = isset($post_data['meta_key']) ? $post_data['meta_key'] : '';
+        $id = isset($post_data['id']) ? $post_data['id'] : '';
+        $meta_key = isset($post_data['meta_key']) ? $post_data['meta_key'] : '';
 
         $response = [];
 
-        if (empty($meta_key)) die(wp_json_encode($response));
+        if (empty($meta_key))
+            die(wp_json_encode($response));
 
         $user = get_user_by('ID', $id);
 
@@ -1163,13 +1224,14 @@ class BlockPostGridRest
     public function get_comment_count($post_data)
     {
 
-        $post_id      = isset($post_data['id']) ? $post_data['id'] : '';
+        $post_id = isset($post_data['id']) ? $post_data['id'] : '';
         //$status    = isset($post_data['status']) ? $post_data['status'] : '';
 
 
         $response = [];
 
-        if (empty($post_id)) die(wp_json_encode($response));
+        if (empty($post_id))
+            die(wp_json_encode($response));
 
         $counts = wp_count_comments($post_id);
 
@@ -1196,8 +1258,8 @@ class BlockPostGridRest
     public function get_post_data($post_data)
     {
 
-        $postId      = isset($post_data['postId']) ? $post_data['postId'] : '';
-        $fields    = isset($post_data['fields']) ? $post_data['fields'] : [];
+        $postId = isset($post_data['postId']) ? $post_data['postId'] : '';
+        $fields = isset($post_data['fields']) ? $post_data['fields'] : [];
 
         $response = new stdClass();
 
@@ -1271,6 +1333,9 @@ class BlockPostGridRest
             $response->on_sale = $product->is_on_sale();
             $response->gallery_image_ids = $product->get_gallery_image_ids();
             $response->image = $product->get_image();
+            // $response->date_on_sale_to = $product->get_date_on_sale_to();
+
+
 
 
             $response->currency = get_woocommerce_currency();
@@ -1304,7 +1369,7 @@ class BlockPostGridRest
 
 
 
-            $response->attributes =  $formatted_attributes;
+            $response->attributes = $formatted_attributes;
 
 
 
@@ -1338,7 +1403,7 @@ class BlockPostGridRest
 
 
         if (is_array($array))
-            foreach ($array as $index =>  $item) {
+            foreach ($array as $index => $item) {
 
 
 
@@ -1367,10 +1432,10 @@ class BlockPostGridRest
     public function get_post_meta($post_data)
     {
 
-        $postId      = isset($post_data['postId']) ? $post_data['postId'] : '';
-        $meta_key    = isset($post_data['meta_key']) ? $post_data['meta_key'] : '';
-        $meta_type    = isset($post_data['type']) ? $post_data['type'] : 'string';
-        $template    = isset($post_data['template']) ? $post_data['template'] : '';
+        $postId = isset($post_data['postId']) ? $post_data['postId'] : '';
+        $meta_key = isset($post_data['meta_key']) ? $post_data['meta_key'] : '';
+        $meta_type = isset($post_data['type']) ? $post_data['type'] : 'string';
+        $template = isset($post_data['template']) ? $post_data['template'] : '';
 
         $response = new stdClass();
         $response->meta_key = $meta_key;
@@ -1391,12 +1456,12 @@ class BlockPostGridRest
 
             if (is_array($acf_value)) {
                 $singleArray = $this->nestedToSingle($acf_value);
-                $response->html = strtr($template, (array)$singleArray);
+                $response->html = strtr($template, (array) $singleArray);
                 $response->args = $singleArray;
             } else {
                 $singleArray = ['{metaValue}' => $acf_value];
                 $response->args = $singleArray;
-                $response->html = strtr($template, (array)$singleArray);
+                $response->html = strtr($template, (array) $singleArray);
                 $response->meta_value = $acf_value;
                 $response->meta_key = $meta_key;
             }
@@ -1408,14 +1473,14 @@ class BlockPostGridRest
 
             if (gettype($acf_value) == 'array') {
                 $singleArray = $this->nestedToSingle($acf_value);
-                $response->html = strtr($template, (array)$singleArray);
+                $response->html = strtr($template, (array) $singleArray);
                 $response->args = $singleArray;
             } else if (gettype($acf_value) == 'object') {
             } else {
 
                 $singleArray = ['{metaValue}' => $acf_value];
                 $response->args = $singleArray;
-                $response->html = strtr($template, (array)$singleArray);
+                $response->html = strtr($template, (array) $singleArray);
                 $response->meta_value = $acf_value;
                 $response->meta_key = $meta_key;
             }
@@ -1425,12 +1490,12 @@ class BlockPostGridRest
 
             if (is_array($post_meta)) {
                 $singleArray = $this->nestedToSingle($post_meta);
-                $response->html = strtr($template, (array)$singleArray);
+                $response->html = strtr($template, (array) $singleArray);
                 $response->args = $singleArray;
             } else {
                 $singleArray = ['{metaValue}' => $post_meta];
                 $response->args = $singleArray;
-                $response->html = strtr($template, (array)$singleArray);
+                $response->html = strtr($template, (array) $singleArray);
 
                 $response->meta_value = $post_meta;
                 $response->meta_key = $meta_key;
@@ -1457,9 +1522,9 @@ class BlockPostGridRest
     public function get_shortcode($post_data)
     {
 
-        $postId      = isset($post_data['postId']) ? $post_data['postId'] : '';
-        $key    = isset($post_data['meta_key']) ? $post_data['meta_key'] : '';
-        $prams    = isset($post_data['prams']) ? $post_data['prams'] : '';
+        $postId = isset($post_data['postId']) ? $post_data['postId'] : '';
+        $key = isset($post_data['meta_key']) ? $post_data['meta_key'] : '';
+        $prams = isset($post_data['prams']) ? $post_data['prams'] : '';
 
         $response = new stdClass();
         $response->key = $key;
@@ -1552,13 +1617,13 @@ class BlockPostGridRest
     {
 
 
-        $queryArgs      = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
+        $queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
         $rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
-        $rawData      = !empty($post_data['rawData']) ? $post_data['rawData'] : $rawData;
+        $rawData = !empty($post_data['rawData']) ? $post_data['rawData'] : $rawData;
 
-        $prevText      = !empty($post_data['prevText']) ? $post_data['prevText'] : "";
-        $nextText      = !empty($post_data['nextText']) ? $post_data['nextText'] : "";
-        $maxPageNum      = !empty($post_data['maxPageNum']) ? $post_data['maxPageNum'] : 0;
+        $prevText = !empty($post_data['prevText']) ? $post_data['prevText'] : "";
+        $nextText = !empty($post_data['nextText']) ? $post_data['nextText'] : "";
+        $maxPageNum = !empty($post_data['maxPageNum']) ? $post_data['maxPageNum'] : 0;
 
 
         $paged = 1;
@@ -1605,7 +1670,7 @@ class BlockPostGridRest
                             }
 
 
-                            if ($id == 'inclusive'  || $id == 'compare'  || $id == 'relation') {
+                            if ($id == 'inclusive' || $id == 'compare' || $id == 'relation') {
 
                                 if (!empty($value))
                                     $date_query[$id] = $value;
@@ -1620,7 +1685,7 @@ class BlockPostGridRest
                                     $date_query[$id]['year'] = $year;
 
                                 if (!empty($month))
-                                    $date_query[$id]['month'] =  $month;
+                                    $date_query[$id]['month'] = $month;
 
                                 if (!empty($day))
                                     $date_query[$id]['day'] = $day;
@@ -1709,7 +1774,8 @@ class BlockPostGridRest
                         $query_args['post_name__in'] = !empty($val) ? explode(',', $val) : [];
                     } elseif ($id == 'hasPassword') {
 
-                        $query_args['has_password'] = ($val === 'true') ? true : false;;
+                        $query_args['has_password'] = ($val === 'true') ? true : false;
+                        ;
                     } elseif ($id == 'postPassword') {
                         $query_args['post_password'] = $val;
                     } elseif ($id == 'commentCount') {
@@ -1761,12 +1827,13 @@ class BlockPostGridRest
 
 
 
-        if ($post_grid_wp_query->have_posts()) :
+        if ($post_grid_wp_query->have_posts()):
 
             $responses['noPosts'] = false;
 
 
-            while ($post_grid_wp_query->have_posts()) : $post_grid_wp_query->the_post();
+            while ($post_grid_wp_query->have_posts()):
+                $post_grid_wp_query->the_post();
 
                 global $post;
 
@@ -1793,7 +1860,7 @@ class BlockPostGridRest
 
                 $post->html = $html;
 
-                $posts[]            = $post;
+                $posts[] = $post;
 
 
 
@@ -1812,10 +1879,10 @@ class BlockPostGridRest
                     'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
                     'format' => '?paged=%#%',
                     'current' => max(1, $paged),
-                    'total'                 => $maxPageNum,
-                    'prev_text'          => $prevText,
-                    'next_text'          => $nextText,
-                    'type'          => 'array',
+                    'total' => $maxPageNum,
+                    'prev_text' => $prevText,
+                    'next_text' => $nextText,
+                    'type' => 'array',
 
                 )
             );
@@ -1829,7 +1896,7 @@ class BlockPostGridRest
 
             wp_reset_query();
             wp_reset_postdata();
-        else :
+        else:
             $responses['noPosts'] = true;
 
         endif;
@@ -1898,8 +1965,8 @@ class BlockPostGridRest
         }
 
 
-        $post_types  = isset($request['postTypes']) ? $request['postTypes'] : $postTypes;
-        $search  = isset($request['search']) ? $request['search'] : '';
+        $post_types = isset($request['postTypes']) ? $request['postTypes'] : $postTypes;
+        $search = isset($request['search']) ? $request['search'] : '';
 
         $taxonomies = get_object_taxonomies($post_types);
         $terms = [];
@@ -1999,9 +2066,9 @@ class BlockPostGridRest
         $first_name = isset($request['first_name']) ? sanitize_text_field($request['first_name']) : '';
         $last_name = isset($request['last_name']) ? sanitize_text_field($request['last_name']) : '';
 
-        $subscriber_list  = isset($request['subscriber_list']) ? $request['subscriber_list'] : '';
+        $subscriber_list = isset($request['subscriber_list']) ? $request['subscriber_list'] : '';
 
-        $interested  = isset($request['interested']) ? $request['interested'] : '';
+        $interested = isset($request['interested']) ? $request['interested'] : '';
 
         $post_grid_info = get_option('post_grid_info');
 
@@ -2193,14 +2260,14 @@ class BlockPostGridRest
      */
     public function get_all_terms($tax_data)
     {
-        $taxonomy  = $tax_data['taxonomy'];
+        $taxonomy = $tax_data['taxonomy'];
         $post_type = $tax_data['post_type'];
         add_filter('terms_clauses', array($this, 'terms_clauses'), 10, 3);
         $terms = get_terms(
             array(
-                'taxonomy'   => $taxonomy,
+                'taxonomy' => $taxonomy,
                 'hide_empty' => true,
-                'post_type'  => $post_type,
+                'post_type' => $post_type,
             )
         );
         remove_filter('terms_clauses', array($this, 'terms_clauses'), 10, 3);
@@ -2239,15 +2306,15 @@ class BlockPostGridRest
 
 
 
-        $subject  = isset($request['subject']) ? $request['subject'] : '';
-        $email_body  = isset($request['body']) ? $request['body'] : '';
+        $subject = isset($request['subject']) ? $request['subject'] : '';
+        $email_body = isset($request['body']) ? $request['body'] : '';
 
-        $email_to  = isset($request['email_to']) ? $request['email_to'] : '';
-        $email_from  = isset($request['email_from']) ? $request['email_from'] : '';
-        $email_from_name  = isset($request['email_from_name']) ? $request['email_from_name'] : '';
+        $email_to = isset($request['email_to']) ? $request['email_to'] : '';
+        $email_from = isset($request['email_from']) ? $request['email_from'] : '';
+        $email_from_name = isset($request['email_from_name']) ? $request['email_from_name'] : '';
 
-        $reply_to  = isset($request['reply_to']) ? $request['reply_to'] : '';
-        $reply_to_name  = isset($request['reply_to_name']) ? $request['reply_to_name'] : '';
+        $reply_to = isset($request['reply_to']) ? $request['reply_to'] : '';
+        $reply_to_name = isset($request['reply_to_name']) ? $request['reply_to_name'] : '';
         $attachments = isset($email_data['attachments']) ? $email_data['attachments'] : '';
 
 
@@ -2313,10 +2380,10 @@ class BlockPostGridRest
         $taxonomy = $tax_data['taxonomy'];
         $search = $tax_data['search'];
 
-        $terms    = get_terms(
+        $terms = get_terms(
             array(
-                'taxonomy'   => $taxonomy,
-                'search'   => $search,
+                'taxonomy' => $taxonomy,
+                'search' => $search,
                 'hide_empty' => false,
             )
         );
@@ -2357,9 +2424,9 @@ class BlockPostGridRest
             }
 
             if (!empty($post_types)) {
-                $clauses['fields']  = 'DISTINCT ' . str_replace('tt.*', 'tt.term_taxonomy_id, tt.taxonomy, tt.description, tt.parent', $clauses['fields']) . ', COUNT(p.post_type) AS count';
-                $clauses['join']   .= ' LEFT JOIN ' . $wpdb->term_relationships . ' AS r ON r.term_taxonomy_id = tt.term_taxonomy_id LEFT JOIN ' . $wpdb->posts . ' AS p ON p.ID = r.object_id';
-                $clauses['where']  .= ' AND (p.post_type IN (' . implode(',', $post_types) . ') OR p.post_type IS NULL)';
+                $clauses['fields'] = 'DISTINCT ' . str_replace('tt.*', 'tt.term_taxonomy_id, tt.taxonomy, tt.description, tt.parent', $clauses['fields']) . ', COUNT(p.post_type) AS count';
+                $clauses['join'] .= ' LEFT JOIN ' . $wpdb->term_relationships . ' AS r ON r.term_taxonomy_id = tt.term_taxonomy_id LEFT JOIN ' . $wpdb->posts . ' AS p ON p.ID = r.object_id';
+                $clauses['where'] .= ' AND (p.post_type IN (' . implode(',', $post_types) . ') OR p.post_type IS NULL)';
                 $clauses['orderby'] = 'GROUP BY t.term_id ' . $clauses['orderby'];
             }
         }

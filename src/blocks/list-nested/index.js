@@ -82,10 +82,10 @@ registerBlockType("post-grid/list-nested", {
         styles:
         {
 
-          // color: { Desktop: '' },
-          // padding: { Desktop: '' },
-          // margin: { Desktop: '' },
-          display: { Desktop: "block" },
+          color: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+          display: {},
 
         },
       },
@@ -125,12 +125,10 @@ registerBlockType("post-grid/list-nested", {
         styles:
         {
 
-          color: { Desktop: "#000000" },
-          fontSize: { Desktop: "18px" },
-          fontFamily: { Desktop: "Poppins" },
-          fontStyle: { Desktop: "normal" },
-          fontWeight: { Desktop: "400" },
-          listStyle: { Desktop: "circle outside url(sqpurple.gif)" },
+          color: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+          display: { Desktop: '' },
 
 
         },
@@ -146,9 +144,11 @@ registerBlockType("post-grid/list-nested", {
 
         styles:
         {
-          color: { Desktop: "#000000" },
-          fontSize: { Desktop: "18px" },
-          margin: { Desktop: "0px 10px 0px 10px" },
+          color: { Desktop: '' },
+          padding: { Desktop: '' },
+          margin: { Desktop: '' },
+
+          fontSize: { Desktop: '' },
         },
       },
     },
@@ -608,15 +608,15 @@ registerBlockType("post-grid/list-nested", {
 
 
 
+
+
+
+
+
+
+
+
     }
-
-    
-
-
-
-
-
-
 
 
     function onRemoveStyleIcon(sudoScource, key) {

@@ -1029,8 +1029,8 @@ class PGBlockPostGridFilterable
                 <?php endif; ?>
                 <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>" postgridargs=<?php echo wp_json_encode($postGridArgs); ?>>
                     <div class="loop-loading"></div>
-                    <div class="filters-wrap">
-                        <form>
+                    <div class="">
+                        <form class="filterable-group-wrap">
 
 
 

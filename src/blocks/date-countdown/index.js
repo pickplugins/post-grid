@@ -147,9 +147,28 @@ registerBlockType("post-grid/date-countdown", {
           tag: "div",
           class: "",
           type: "fixed",
+          everGreenTime: {
+            day: "",
+            hour: "",
+            minute: "",
+            second: "",
+          },
+          scheduleTime: [
+            // {
+            //   id: "sStartTime",
+            //   label: "Start Time",
+            //   sStartTime: "",
+            // },
+            // {
+            //   id: "sEndTime",
+            //   label: "End Time",
+            //   sEndTime: "",
+            // },
+          ],
         },
       },
     },
+
     countdownWrapper: {
       type: "object",
       default: {
@@ -423,6 +442,10 @@ registerBlockType("post-grid/date-countdown", {
       type: "object",
       default: {},
     },
+    scheduleArg: {
+      type: "object",
+      default: {},
+    },
 
     blockId: {
       type: "string",
@@ -464,6 +487,7 @@ registerBlockType("post-grid/date-countdown", {
     var countdownWrapper = attributes.countdownWrapper;
     var expiredArg = attributes.expiredArg;
     var dateCountdown = attributes.dateCountdown;
+    var scheduleArg = attributes.scheduleArg;
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
 
@@ -581,6 +605,40 @@ registerBlockType("post-grid/date-countdown", {
     //   slideOutUp: { label: "slideOutUp", value: "slideOutUp" },
     // };
 
+    var scheduleTimeSet = [
+      {
+        id: "startTime",
+        value: "",
+      },
+      {
+        id: "endTime",
+        value: "",
+      },
+    ];
+
+    function addScheduleTime(option, index) {
+      var scheduleTimeX = dateCountdown.scheduleTime.push(option);
+      setAttributes({
+        dateCountdown: {
+          ...dateCountdown,
+          scheduleTime: dateCountdown.scheduleTime,
+        },
+      });
+    }
+
+    var scheduleArgsBasic = {
+      startTime: {
+        label: "Start Time",
+        description: "Visible as soon as possible",
+        args: { id: "startTime", value: "" },
+      },
+      EndTime: {
+        label: "End Time",
+        description: "Visible as soon as possible",
+        args: { id: "EndTime", value: "" },
+      },
+    };
+    let scheduleArgs = applyFilters("scheduleArgs", scheduleArgsBasic);
     var expiredArgsBasic = {
       redirectURL: {
         label: "Redirect URL",
@@ -727,6 +785,105 @@ registerBlockType("post-grid/date-countdown", {
     }, [remindTime, wrapper.options.startDate, wrapper.options.endDate]);
 
     // day hours minutes seconds
+
+    // Ever Green Start
+    const [remindTimes, setRemindTimes] = useState(0);
+    const [remindDays, setRemindDays] = useState(0);
+    const [remindHours, setRemindHours] = useState(0);
+    const [remindMinutes, setRemindMinutes] = useState(0);
+    const [remindSeconds, setRemindSeconds] = useState(0);
+
+    useEffect(() => {
+      console.log("Evergreen:");
+      const days = dateCountdown.options.everGreenTime.day;
+      const hours = dateCountdown.options.everGreenTime.hour;
+      const minutes = dateCountdown.options.everGreenTime.minute;
+
+      const currentTime = new Date().getTime();
+      const endTime =
+        currentTime +
+        days * 24 * 60 * 60 * 1000 +
+        hours * 60 * 60 * 1000 +
+        minutes * 60 * 1000;
+
+      console.log("end Time: ", endTime);
+      const duration = endTime - currentTime;
+      console.log("duration: ", duration);
+      setRemindTimes(duration);
+    }, [dateCountdown.options.everGreenTime]);
+    // const days = dateCountdown.options.durationDay;
+    // const hours = dateCountdown.options.durationHour;
+    // const minutes = dateCountdown.options.durationMinute;
+    // const seconds = dateCountdown.options.durationSecond;
+
+    // const currentTime = new Date().getTime();
+    // const endTime =
+    //   currentTime +
+    //   days * 24 * 60 * 60 * 1000 +
+    //   hours * 60 * 60 * 1000 +
+    //   minutes * 60 * 1000 +
+    //   seconds * 1000;
+
+    // const duration = endTime - currentTime;
+    // console.log("duration: ", duration);
+    // setRemindTimes(duration);
+
+    useEffect(() => {
+      console.log("first");
+
+      if (remindTimes > 0) {
+        const intervalId = setInterval(() => {
+          const remindTimesX = remindTimes - 1000;
+          setRemindTimes(remindTimesX);
+          console.log("remindTimesX", remindTimesX);
+          const days = Math.floor(remindTimesX / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (remindTimesX % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor(
+            (remindTimesX % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((remindTimesX % (1000 * 60)) / 1000);
+          const formattedDays = String(days).padStart(2, "0");
+          const formattedHours = String(hours).padStart(2, "0");
+          const formattedMinutes = String(minutes).padStart(2, "0");
+          const formattedSeconds = String(seconds).padStart(2, "0");
+
+          setRemindDays(formattedDays);
+          setRemindHours(formattedHours);
+          setRemindMinutes(formattedMinutes);
+          setRemindSeconds(formattedSeconds);
+
+          console.log("remindDay", remindDays);
+          console.log("remindHour", remindHours);
+          console.log("remindMinute", remindMinutes);
+          console.log("remindSecond", remindSeconds);
+          // if (remindTimeX <= 0) {
+          //   setRemindDay("0");
+          //   setRemindHour("0");
+          //   setRemindMinute("0");
+          //   setRemindSecond("0");
+          //   clearInterval(intervalId);
+          // }
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+      }
+    }, [remindTimes]);
+
+    // console.log("days: ", days);
+    // console.log("hours: ", hours);
+    // console.log("minutes: ", minutes);
+    // console.log("seconds: ", seconds);
+    // console.log("currentTime: ", currentTime);
+    // console.log("endTime: ", endTime);
+    // console.log("remindTime", remindTime);
+    // console.log("remindDay", remindDay);
+    // console.log("remindHour", remindHour);
+    // console.log("remindMinute", remindMinute);
+    // console.log("remindSecond", remindSecond);
+
+    // Ever Green End
 
     function onChangeIcon(arg) {
       var options = {
@@ -1335,6 +1492,42 @@ registerBlockType("post-grid/date-countdown", {
       setAttributes({ blockCssY: { items: cssItems } });
     }
 
+    var RemoveScheduleArgGroup = function ({ title, index }) {
+      return (
+        <>
+          <span
+            className="cursor-pointer inline-block hover:bg-red-500 hover:text-white px-1 py-1"
+            onClick={(ev) => {
+              var scheduleX = { ...scheduleArg };
+              delete scheduleX[index];
+              setAttributes({ scheduleArg: scheduleX });
+            }}
+          >
+            <Icon icon={close} />
+          </span>
+          <span>{title}</span>
+        </>
+      );
+    };
+    var RemoveScheduleArgArgs = function ({ title, index, groupId }) {
+      return (
+        <>
+          <span
+            className="cursor-pointer inline-block hover:bg-red-500 hover:text-white px-1 py-1"
+            onClick={(ev) => {
+              var scheduleArgX = { ...scheduleArg };
+              scheduleArgX[groupId].args.splice(index, 1);
+
+              setAttributes({ scheduleArg: scheduleArgX });
+            }}
+          >
+            <Icon icon={close} />
+          </span>
+
+          <span>{title}</span>
+        </>
+      );
+    };
     var RemoveExpiredArgGroup = function ({ title, index }) {
       return (
         <>
@@ -2385,8 +2578,8 @@ registerBlockType("post-grid/date-countdown", {
     return (
       <>
         <InspectorControls>
-          <div className="px-3">
-            <div className="pb-3">
+          <div className="px-3 ">
+            <div className="pb-3 mb-4">
               <PanelRow className="my-4">
                 <label for="">Date Countdown Type</label>
 
@@ -2524,6 +2717,236 @@ registerBlockType("post-grid/date-countdown", {
                       }}
                     />
                   </PanelRow>
+                </>
+              )}
+
+              {dateCountdown.options.type == "everGreen" && (
+                <>
+                  {JSON.stringify(dateCountdown.options)}
+                  <PanelRow className="mb-4">
+                    <label for="">Day: </label>
+                    <InputControl
+                      type="number"
+                      className="mr-2"
+                      placeholder="Enter Day"
+                      value={dateCountdown.options.everGreenTime.day}
+                      onChange={(newVal) => {
+                        var options = {
+                          ...dateCountdown.options,
+                        };
+                        var everGreenTimeX = {
+                          ...options.everGreenTime,
+                          day: newVal,
+                        };
+
+                        // var everGreenX = {...options, day: newVal}
+                        var optionX = {
+                          ...options,
+                          everGreenTime: everGreenTimeX,
+                        };
+
+                        setAttributes({
+                          dateCountdown: { ...dateCountdown, options: optionX },
+                        });
+                      }}
+                    />
+                  </PanelRow>
+                  <PanelRow className="mb-4">
+                    <label for="">Hour: </label>
+                    <InputControl
+                      type="number"
+                      className="mr-2"
+                      placeholder="Enter Hour"
+                      value={dateCountdown.options.everGreenTime.hour}
+                      onChange={(newVal) => {
+                        var options = {
+                          ...dateCountdown.options,
+                        };
+                        var everGreenTimeX = {
+                          ...options.everGreenTime,
+                          hour: newVal,
+                        };
+                        var optionX = {
+                          ...options,
+                          everGreenTime: everGreenTimeX,
+                        };
+                        setAttributes({
+                          dateCountdown: { ...dateCountdown, options: optionX },
+                        });
+                      }}
+                    />
+                  </PanelRow>
+                  <PanelRow className="mb-4">
+                    <label for="">Minute: </label>
+                    <InputControl
+                      type="number"
+                      className="mr-2"
+                      placeholder="Enter Minute"
+                      value={dateCountdown.options.everGreenTime.minute}
+                      onChange={(newVal) => {
+                        var options = {
+                          ...dateCountdown.options,
+                          durationMinute: newVal,
+                        };
+                        var everGreenTimeX = {
+                          ...options.everGreenTime,
+                          minute: newVal,
+                        };
+                        var optionX = {
+                          ...options,
+                          everGreenTime: everGreenTimeX,
+                        };
+                        setAttributes({
+                          dateCountdown: { ...dateCountdown, options: optionX },
+                        });
+                      }}
+                    />
+                  </PanelRow>
+                </>
+              )}
+              {dateCountdown.options.type == "scheduled" && (
+                <>
+                  {/* {JSON.stringify(scheduled)} */}
+
+                  <div
+                    className="bg-blue-500 p-2 px-4 text-white inline-block cursor-pointer rounded-sm"
+                    onClick={(ev) => {
+                      var scheduleArgX = { ...scheduleArg };
+                      var index = Object.entries(scheduleArgX).length;
+                      scheduleArgX[index] = {
+                        logic: "OR",
+                        title: "",
+                        args: [],
+                      };
+                      setAttributes({ scheduleArg: scheduleArgX });
+                    }}
+                  >
+                    Add Group
+                  </div>
+
+                  <div class="my-4">
+                    {Object.entries(scheduleArg).map((group, groupIndex) => {
+                      var groupId = group[0];
+                      var groupData = group[1];
+
+                      return (
+                        <PanelBody
+                          title={
+                            <RemoveScheduleArgGroup
+                              title={groupIndex}
+                              index={groupId}
+                            />
+                          }
+                          initialOpen={false}
+                        >
+                          <PanelRow className="my-3">
+                            <label for="" className="font-bold mb-2 ">
+                              Start Date?
+                            </label>
+                            <br />
+                            <InputControl
+                              type="datetime-local"
+                              className="b-2"
+                              value={wrapper.options.startDate}
+                              onChange={(newVal) => {
+                                var options = {
+                                  ...wrapper.options,
+                                  startDate: newVal,
+                                };
+                                setAttributes({
+                                  wrapper: { ...wrapper, options: options },
+                                });
+                              }}
+                            />
+                          </PanelRow>
+                          <PanelRow className="my-3">
+                            <label for="" className="font-bold mb-2 ">
+                              End Date?
+                            </label>
+                            <br />
+                            <InputControl
+                              type="datetime-local"
+                              className="b-2"
+                              value={wrapper.options.startDate}
+                              onChange={(newVal) => {
+                                var options = {
+                                  ...wrapper.options,
+                                  startDate: newVal,
+                                };
+                                setAttributes({
+                                  wrapper: { ...wrapper, options: options },
+                                });
+                              }}
+                            />
+                          </PanelRow>
+                          {/* <PGDropdown
+                              position="bottom right"
+                              variant="secondary"
+                              buttonTitle={"Add Condition"}
+                              options={scheduleArgs}
+                              onChange={(option, index) => {
+                                var scheduleArgX = { ...scheduleArg };
+
+                                scheduleArgX[groupId]["args"].push(option.args);
+                                setAttributes({ scheduleArg: scheduleArgX });
+                              }}
+                              values=""
+                              className="h-30 "
+                            ></PGDropdown> */}
+
+                          {/* {scheduleArg[groupId]["args"] != undefined &&
+                            scheduleArg[groupId]["args"].map((item, index) => {
+                              var id = item.id;
+
+                              return (
+                                <>
+                                  {id == "startTime" && (
+                                    <PanelBody
+                                      title={
+                                        <RemoveScheduleArgArgs
+                                          title={
+                                            scheduleArgs[id] == undefined
+                                              ? id
+                                              : scheduleArgs[id].label
+                                          }
+                                          index={index}
+                                          groupId={groupIndex}
+                                        />
+                                      }
+                                      initialOpen={false}
+                                    >
+                                      <div>
+                                        No Option available for this condition.
+                                      </div>
+                                    </PanelBody>
+                                  )}
+                                  {id == "EndTime" && (
+                                    <PanelBody
+                                      title={
+                                        <RemoveScheduleArgArgs
+                                          title={
+                                            scheduleArgs[id] == undefined
+                                              ? id
+                                              : scheduleArgs[id].label
+                                          }
+                                          index={index}
+                                          groupId={groupIndex}
+                                        />
+                                      }
+                                      initialOpen={false}
+                                    >
+                                      <div>
+                                        No Option available for this condition.
+                                      </div>
+                                    </PanelBody>
+                                  )}
+                                </>
+                              );
+                            })} */}
+                        </PanelBody>
+                      );
+                    })}
+                  </div>
                 </>
               )}
             </div>
@@ -4209,7 +4632,15 @@ registerBlockType("post-grid/date-countdown", {
                               </span>
                             )}
 
-                          <span className={day.options.class}>{remindDay}</span>
+                          <span className={day.options.class}>
+                            {dateCountdown.options.type == "fixed" && (
+                              <>{remindDay}</>
+                            )}
+                            {dateCountdown.options.type == "everGreen" && (
+                              <>{remindDays}</>
+                            )}
+                            {/* {remindDay} */}
+                          </span>
 
                           {labelEnable &&
                             label.options.position == "beforePostfix" && (
@@ -4268,7 +4699,12 @@ registerBlockType("post-grid/date-countdown", {
                               </span>
                             )}
                           <span className={hour.options.class}>
-                            {remindHour}
+                            {dateCountdown.options.type == "fixed" && (
+                              <>{remindHour}</>
+                            )}
+                            {dateCountdown.options.type == "everGreen" && (
+                              <>{remindHours}</>
+                            )}
                           </span>
 
                           {labelEnable &&
@@ -4327,7 +4763,12 @@ registerBlockType("post-grid/date-countdown", {
                               </span>
                             )}
                           <span className={minute.options.class}>
-                            {remindMinute}
+                            {dateCountdown.options.type == "fixed" && (
+                              <>{remindMinute}</>
+                            )}
+                            {dateCountdown.options.type == "everGreen" && (
+                              <>{remindMinutes}</>
+                            )}
                           </span>
                           {labelEnable &&
                             label.options.position == "beforePostfix" && (
@@ -4385,7 +4826,12 @@ registerBlockType("post-grid/date-countdown", {
                               </span>
                             )}
                           <span className={second.options.class}>
-                            {remindSecond}
+                            {dateCountdown.options.type == "fixed" && (
+                              <>{remindSecond}</>
+                            )}
+                            {dateCountdown.options.type == "everGreen" && (
+                              <>{remindSeconds}</>
+                            )}
                           </span>
                           {labelEnable &&
                             label.options.position == "beforePostfix" && (

@@ -53,6 +53,7 @@ function Html(props) {
 
 
   var valZ = (props.val == null || props.val == undefined || props.val.length == 0) ? '0px' : props.val;
+  valZ = (typeof valZ == 'object') ? (valZ.val == undefined ? 'px' : valZ.val)+(valZ.unit == undefined ? 'px' : valZ.unit) : valZ;
   var widthValX = (valZ == undefined || valZ.match(/[+-]?([0-9]*[.])?[0-9]+/g) == null) ? 0 : valZ.match(/[+-]?([0-9]*[.])?[0-9]+/g)[0];
   var widthUnitX = (valZ == undefined || valZ.match(/[a-zA-Z%]+/g) == null) ? 'px' : valZ.match(/[a-zA-Z%]+/g)[0];
 
@@ -67,6 +68,7 @@ function Html(props) {
   return (
 
     <div className='flex justify-between'>
+      
 
       {widthUnit != 'auto' && (
         <InputControl

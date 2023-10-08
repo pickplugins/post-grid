@@ -510,11 +510,11 @@ function post_grid_page_styles()
 
     ?>
 
-    <pre>
+    <!-- <pre> -->
 <?php
-    echo var_export($reponsiveCss, true);
+    //echo //var_export($reponsiveCss, true);
 ?>
-</pre>
+<!-- </pre> -->
 
 <?php
 

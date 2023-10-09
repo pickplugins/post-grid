@@ -183,7 +183,13 @@ registerBlockType("post-grid/date-countdown", {
 				{
 					startTime: "",
 					endTime: "",
-					weekdays: [],
+					weekdays: 
+						{
+							value: "0" ,
+							values: [],
+							compare: "=",
+						},
+					
 				},
 			],
 		},
@@ -506,7 +512,7 @@ registerBlockType("post-grid/date-countdown", {
 		var expiredArg = attributes.expiredArg;
 		var dateCountdown = attributes.dateCountdown;
 		var scheduleTime = attributes.scheduleTime;
-		console.log(scheduleTime);
+		// console.log(scheduleTime);
 		// var scheduleArg = attributes.scheduleArg;
 		var wrapper = attributes.wrapper;
 		var blockId = attributes.blockId;
@@ -569,6 +575,8 @@ registerBlockType("post-grid/date-countdown", {
 			prefix.options.enable == undefined ? true : prefix.options.enable;
 		const postfixEnable =
 			postfix.options.enable == undefined ? true : postfix.options.enable;
+
+			
 
 		const { replaceInnerBlocks } = useDispatch(blockEditorStore);
 
@@ -700,6 +708,25 @@ registerBlockType("post-grid/date-countdown", {
 			[clientId]
 		);
 
+		var visbleArgsBasic = {
+			weekDays: {
+        label: "is Week day",
+        description: "Show when specific week days",
+        args: { id: "weekDays", value: "", values: [], compare: "=" },
+        isPro: true,
+      }, }
+			let visbleArgs = applyFilters("pgFormvisbleArgs", visbleArgsBasic);
+
+		var weekDayNumn = {
+      0: { label: "Sunday", value: 0 },
+      1: { label: "Monday", value: 1 },
+      2: { label: "Tuesday", value: 2 },
+      3: { label: "Wednesday", value: 3 },
+      4: { label: "Thursday", value: 4 },
+      5: { label: "Friday", value: 5 },
+      6: { label: "Saturday", value: 6 },
+    };
+
 		const [productData, setProductData] = useState(null);
 
 		useEffect(() => {
@@ -826,14 +853,14 @@ registerBlockType("post-grid/date-countdown", {
 				hours * 60 * 60 * 1000 +
 				minutes * 60 * 1000;
 
-			console.log("end Time: ", endTime);
+			// console.log("end Time: ", endTime);
 			const duration = endTime - currentTime;
-			console.log("duration: ", duration);
+			// console.log("duration: ", duration);
 			setRemindTimes(duration);
 		}, [dateCountdown.options.everGreenTime]);
 
 		useEffect(() => {
-			console.log("first");
+			// console.log("first");
 
 			if (remindTimes > 0) {
 				const intervalId = setInterval(() => {
@@ -858,10 +885,10 @@ registerBlockType("post-grid/date-countdown", {
 					setRemindMinutes(formattedMinutes);
 					setRemindSeconds(formattedSeconds);
 
-					console.log("remindDay", remindDays);
-					console.log("remindHour", remindHours);
-					console.log("remindMinute", remindMinutes);
-					console.log("remindSecond", remindSeconds);
+					// console.log("remindDay", remindDays);
+					// console.log("remindHour", remindHours);
+					// console.log("remindMinute", remindMinutes);
+					// console.log("remindSecond", remindSeconds);
 					// if (remindTimeX <= 0) {
 					//   setRemindDay("0");
 					//   setRemindHour("0");
@@ -879,7 +906,46 @@ registerBlockType("post-grid/date-countdown", {
 
 		// schedule time start
 
-		console.log("first: ", scheduleTime);
+
+		const [scheduleTimes, setScheduleTimes] = useState(0);
+		const [scheduleDays, setScheduleDays] = useState(0);
+		const [scheduleHours, setScheduleHours] = useState(0);
+		const [scheduleMinutes, setScheduleMinutes] = useState(0);
+		const [scheduleSeconds, setScheduleSeconds] = useState(0);
+scheduleTime.forEach((items) => {
+	console.log(items);
+	var startTime= items.startTime
+	var endTime= items.endTime
+console.log(startTime, endTime)
+	// items.forEach((item) => {
+		if(items.weekdays?.compare == "="){
+		const selectedWeekdays = parseInt(items.weekdays?.value);
+		// console.log("selectedWeekdays: ",selectedWeekdays)
+		const currentDayOfWeek = new Date().getDay();
+		// console.log("currentDayOfWeek: ",currentDayOfWeek)
+		if (selectedWeekdays === currentDayOfWeek) {
+			console.log(startTime)
+			console.log(endTime)
+
+			// useEffect(() => {
+				const date1 = new Date(`2000-01-01T${startTime}:00Z`);
+const date2 = new Date(`2000-01-01T${endTime}:00Z`);
+const timeDifference = date2 - date1;
+console.log(timeDifference)
+			// }, [scheduleTime])
+		} else {
+			
+		}
+	}
+	// }
+	// )
+	
+})
+
+		// if(scheduleTime.weekDays.compare == "="){
+		// 	console.log("hello");
+		// }
+		
 
 		// schedule time end
 
@@ -2833,7 +2899,7 @@ registerBlockType("post-grid/date-countdown", {
 										setList={(item) => {
 											setAttributes({ scheduleTime: scheduleTime });
 										}}>
-										{scheduleTime.map((item, index) => (
+										{scheduleTime?.map((item, index) => (
 											<div key={item.id} className="">
 												<PanelBody
 													title={
@@ -2896,7 +2962,7 @@ registerBlockType("post-grid/date-countdown", {
 																<label for="">Compare</label>
 																<SelectControl
 																	label=""
-																	value={item.compare}
+																	value={item.weekdays.compare}
 																	options={[
 																		{ label: "=", value: "=" },
 																		{ label: "!=", value: "!=" },
@@ -2908,23 +2974,22 @@ registerBlockType("post-grid/date-countdown", {
 																		{ label: "exist", value: "exist" },
 																	]}
 																	onChange={(newVal) => {
-																		var weekdaysX = {
-																			...scheduleTime.weekdays,
-																		};
-																		weekdaysX[groupId]["args"][index][
-																			"compare"
-																		] = newVal;
-																		setAttributes({ scheduleTime: weekdaysX });
+
+																		var scheduleTimeX = [...scheduleTime];
+
+																		scheduleTimeX[index].weekdays.compare = newVal;
+																		setAttributes({ scheduleTime: scheduleTimeX });
 																	}}
 																/>
 															</PanelRow>
+															
 
-															{(item.compare == "=" ||
-																item.compare == "!=" ||
-																item.compare == ">" ||
-																item.compare == "<" ||
-																item.compare == ">=" ||
-																item.compare == "<=") && (
+															{(item.weekdays.compare == "=" ||
+																item.weekdays.compare == "!=" ||
+																item.weekdays.compare == ">" ||
+																item.weekdays.compare == "<" ||
+																item.weekdays.compare == ">=" ||
+																item.weekdays.compare == "<=") && (
 																<>
 																	<PanelRow className="mb-4">
 																		<label for="">Values</label>
@@ -2932,78 +2997,149 @@ registerBlockType("post-grid/date-countdown", {
 																			position="bottom right"
 																			variant="secondary"
 																			buttonTitle={
-																				item.value.length == 0
+																				item.weekdays?.value?.length == 0
 																					? "Choose Day"
-																					: weekDayNumn[item.value].label
+																					: weekDayNumn[item.weekdays?.value]?.label
 																			}
-																			options={weekDayNumn}
-																			onChange={(option, optionIndex) => {
-																				var weekdaysX = {
-																					...scheduleTime.weekdays,
-																				};
-																				weekdaysX[groupId]["args"][index][
-																					"value"
-																				] = option.value;
-																				setAttributes({
-																					scheduleTime: weekdaysX,
-																				});
+																			options={[
+																				{ label: "Sunday", value: 0 },
+																				{ label: "Monday", value: 1 },
+																				{ label: "Tuesday", value: 2 },
+																				{ label: "Wednesday", value: 3 },
+																				{ label: "Thursday", value: 4 },
+																				{ label: "Friday", value: 5 },
+																				{ label: "Saturday", value: 6 },
+																			]}
+																			onChange={(newVal) => {
+
+																				var scheduleTimeX = [...scheduleTime];
+		
+																				scheduleTimeX[index].weekdays.value = newVal.value;
+																				setAttributes({ scheduleTime: scheduleTimeX });
 																			}}
-																			value={item.value}></PGDropdown>
+																			value={item.weekdays.value}></PGDropdown>
 																	</PanelRow>
 																</>
 															)}
+															{(item.weekdays.compare == "between" ||
+																item.weekdays.compare == "exist") && (
+																// <>
+																// 	<PanelRow className="mb-4">
+																// 		<label for="">Values</label>
+																// 		<PGDropdown
+																// 			position="bottom right"
+																// 			variant="secondary"
+																// 			buttonTitle={"Choose Days"}
+																// 			options={[
+																// 				{ label: "Sunday", value: 0 },
+																// 				{ label: "Monday", value: 1 },
+																// 				{ label: "Tuesday", value: 2 },
+																// 				{ label: "Wednesday", value: 3 },
+																// 				{ label: "Thursday", value: 4 },
+																// 				{ label: "Friday", value: 5 },
+																// 				{ label: "Saturday", value: 6 },
+																// 			]}
+																// 			onChange={(newVal) => {
+																// 				var scheduleTimeX = {
+																// 					...scheduleTime,
+																// 				};
+																// 				scheduleTimeX[index].weekdays.values.join(newVal.value);
+																// 				setAttributes({
+																// 					scheduleTime: scheduleTimeX,
+																// 				});
+																// 			}}
+																// 			value={item.weekdays.values}></PGDropdown>
+																// 	</PanelRow>
 
-															{(item.compare == "between" ||
-																item.compare == "exist") && (
+																// 	<div>
+																// 		{item.weekdays.values.map((x, i) => {
+																// 			return (
+																// 				<div className="flex justify-between my-1">
+																// 					<span>{weekDayNumn[x].label}</span>
+																// 					<span
+																// 						className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																// 						onClick={(ev) => {
+																// 							var scheduleTimeX = {
+																// 								...scheduleTime,
+																// 							};
+																// 							item.weekdays.values.splice(i, 1);
+
+																// 							scheduleTimeX[index].weekdays.values= item.weekdays.values;
+																// 							setAttributes({
+																// 								scheduleTime: scheduleTimeX,
+																// 							});
+																// 						}}>
+																// 						<Icon fill="#fff" icon={close} />
+																// 					</span>
+																// 				</div>
+																// 			);
+																// 		})}
+																// 	</div>
+																// </>
 																<>
-																	<PanelRow className="mb-4">
-																		<label for="">Values</label>
-																		<PGDropdown
-																			position="bottom right"
-																			variant="secondary"
-																			buttonTitle={"Choose Days"}
-																			options={weekDayNumn}
-																			onChange={(option, optionIndex) => {
-																				var weekdaysX = {
-																					...scheduleTime.weekdays,
-																				};
-																				weekdaysX[groupId]["args"][index][
-																					"values"
-																				].concat(option.value);
-																				setAttributes({
-																					scheduleTime: weekdaysX,
-																				});
-																			}}
-																			value={item.values}></PGDropdown>
-																	</PanelRow>
-
-																	<div>
-																		{item.values.map((x, i) => {
-																			return (
-																				<div className="flex justify-between my-1">
-																					<span>{weekDayNumn[x].label}</span>
-																					<span
-																						className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																						onClick={(ev) => {
-																							var weekdaysX = {
-																								...scheduleTime.weekdays,
-																							};
-																							item.values.splice(i, 1);
-
-																							weekdaysX[groupId]["args"][index][
-																								"values"
-																							] = item.values;
-																							setAttributes({
-																								scheduleTime: weekdaysX,
-																							});
-																						}}>
-																						<Icon fill="#fff" icon={close} />
-																					</span>
-																				</div>
-																			);
-																		})}
-																	</div>
-																</>
+																<PanelRow className="mb-4">
+																	<label htmlFor="">Values</label>
+																	<PGDropdown
+																		position="bottom right"
+																		variant="secondary"
+																		// buttonTitle={
+																		// 	item.weekdays.values.length === 0
+																		// 		? "Choose Days"
+																		// 		: item.weekdays.values.map((value) => weekDayNumn[value].label).join(", ")
+																		// }
+																		buttonTitle={"Choose Days"}
+																		options={[
+																			{ label: "Sunday", value: 0 },
+																			{ label: "Monday", value: 1 },
+																			{ label: "Tuesday", value: 2 },
+																			{ label: "Wednesday", value: 3 },
+																			{ label: "Thursday", value: 4 },
+																			{ label: "Friday", value: 5 },
+																			{ label: "Saturday", value: 6 },
+																		]}
+																		onChange={(newVal) => {
+																			var scheduleTimeX = [...scheduleTime];
+																			if (scheduleTimeX[index].weekdays.values.includes(newVal.value)) {
+																				// Remove the value if already selected
+																				scheduleTimeX[index].weekdays.values = scheduleTimeX[index].weekdays.values.filter(
+																					(value) => value !== newVal.value
+																				);
+																			} else {
+																				// Add the value if not already selected
+																				scheduleTimeX[index].weekdays.values.push(newVal.value);
+																			}
+																			setAttributes({ scheduleTime: scheduleTimeX });
+																		}}
+																		value={item.weekdays.values}
+																	></PGDropdown>
+																</PanelRow>
+																<br />
+												
+																<div>
+																	{item.weekdays.values.map((x, i) => {
+																		return (
+																			<div className="flex justify-between my-1" key={i}>
+																				<span>{weekDayNumn[x].label}</span>
+																				<span
+																					className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																					onClick={(ev) => {
+																						var scheduleTimeX = [...scheduleTime];
+																						// Remove the value when the "X" is clicked
+																						scheduleTimeX[index].weekdays.values = scheduleTimeX[index].weekdays.values.filter(
+																							(value) => value !== x
+																						);
+																						setAttributes({
+																							scheduleTime: scheduleTimeX,
+																						});
+																					}}
+																				>
+																					<Icon fill="#fff" icon={close} />
+																				</span>
+																			</div>
+																		);
+																	})}
+																</div>
+															</>
 															)}
 														</>
 													</PanelRow>
@@ -4673,6 +4809,9 @@ registerBlockType("post-grid/date-countdown", {
 														)}
 														{dateCountdown.options.type == "everGreen" && (
 															<>{remindDays}</>
+														)}
+														{dateCountdown.options.type == "scheduled" && (
+															<></>
 														)}
 														{/* {remindDay} */}
 													</span>

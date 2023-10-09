@@ -244,6 +244,7 @@ registerBlockType("post-grid/form-wrap", {
     );
 
     //console.log(JSON.stringify(wp.data.select(blockEditorStore).getBlocks(clientId)));
+    console.log(visible)
 
     var visbleArgsBasic = {
       userLogged: {

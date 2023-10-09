@@ -414,7 +414,13 @@ class PGBlockWooPrice
 
 
         $product_type = ($product != null) ? $product->get_type() : '';
-        $currency_symbol = get_woocommerce_currency_symbol();
+
+        if(function_exists("get_woocommerce_currency_symbol")){
+
+            $currency_symbol = get_woocommerce_currency_symbol();
+        }else{
+            $currency_symbol = "$";
+        }
 
 
 

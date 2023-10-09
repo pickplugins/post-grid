@@ -315,7 +315,7 @@ class PGBlockWooStarRate
         $skuRel = isset($skuOptions['rel']) ? $skuOptions['rel'] : '';
         $skuLinkTo = isset($skuOptions['linkTo']) ? $skuOptions['linkTo'] : '';
         $skuLinkToMetaKey = isset($skuOptions['linkToMetaKey']) ? $skuOptions['linkToMetaKey'] : '';
-        $customUrl = isset($featuredImageOptions['customUrl']) ? $featuredImageOptions['customUrl'] : '';
+        
 
 
         $iconsWrap = isset($attributes['iconsWrap']) ? $attributes['iconsWrap'] : '';

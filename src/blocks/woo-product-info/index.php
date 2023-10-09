@@ -525,7 +525,13 @@ class PGBlockWooProductInfo
 
         //$product = wc_get_product($post_ID);
         //global $product;
-        $product = wc_get_product($post_ID);
+        if(function_exists("wc_get_product")){
+
+            $product = wc_get_product($post_ID);
+
+        }else{
+            $product = null;
+        }
 
 
 
@@ -592,7 +598,7 @@ class PGBlockWooProductInfo
 
                             if ($id == 'weight') {
 
-                                $weight = $product->get_weight();
+                                $weight = ($product == null) ? 0 :  $product->get_weight() ;
 
                         ?>
                                 <span className='value'>
@@ -613,7 +619,7 @@ class PGBlockWooProductInfo
 
 
                             if ($id == 'length') {
-                                $length = $product->get_length();
+                                $length = ($product == null) ? 0 :  $product->get_length() ;
 
                             ?>
                                 <span className='value'>
@@ -622,7 +628,7 @@ class PGBlockWooProductInfo
                             <?php
                             }
                             if ($id == 'width') {
-                                $width = $product->get_width();
+                                $width = ($product == null) ? 0 :  $product->get_width() ;
 
                             ?>
                                 <span className='value'>
@@ -631,7 +637,7 @@ class PGBlockWooProductInfo
                             <?php
                             }
                             if ($id == 'height') {
-                                $height = $product->get_height();
+                                $height = ($product == null) ? 0 :  $product->get_height() ;
                             ?>
                                 <span className='value'>
                                     <?php echo wp_kses_post($height); ?>cm
@@ -650,7 +656,13 @@ class PGBlockWooProductInfo
                             }
 
                             if ($type == 'taxonomy') {
-                                $terms = wc_get_product_terms($post_ID, $id, array('fields' => 'names'));
+                                if(function_exists("wc_get_product_terms")){
+
+                                    $terms = wc_get_product_terms($post_ID, $id, array('fields' => 'names'));
+                                }else{
+                                    $terms = [];
+                                }
+                                
                                 $termsCount = count($terms);
 
                                 if (!empty($terms)) {

@@ -279,7 +279,7 @@ class PGBlockWooStockQuantity
         $skuRel = isset($skuOptions['rel']) ? $skuOptions['rel'] : '';
         $skuLinkTo = isset($skuOptions['linkTo']) ? $skuOptions['linkTo'] : '';
         $skuLinkToMetaKey = isset($skuOptions['linkToMetaKey']) ? $skuOptions['linkToMetaKey'] : '';
-        $customUrl = isset($featuredImageOptions['customUrl']) ? $featuredImageOptions['customUrl'] : '';
+        $customUrl = isset($skuOptions['customUrl']) ? $skuOptions['customUrl'] : '';
 
 
         $icon = isset($attributes['icon']) ? $attributes['icon'] : '';

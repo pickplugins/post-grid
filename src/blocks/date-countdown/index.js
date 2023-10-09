@@ -6,6 +6,7 @@ import {
   useInnerBlocksProps,
   store as blockEditorStore,
 } from "@wordpress/block-editor";
+import { ReactSortable } from "react-sortablejs";
 
 import { createBlocksFromInnerBlocksTemplate } from "@wordpress/blocks";
 
@@ -44,7 +45,7 @@ import {
 } from "@wordpress/components";
 import { __experimentalBoxControl as BoxControl } from "@wordpress/components";
 import { useEntityProp } from "@wordpress/core-data";
-import { Icon, styles, settings, link, linkOff, close } from "@wordpress/icons";
+import { Icon, styles, settings, link, linkOff, close, menu } from "@wordpress/icons";
 
 import {
   InspectorControls,
@@ -154,11 +155,11 @@ registerBlockType("post-grid/date-countdown", {
             second: "",
           },
           scheduleTime: [
-            // {
-            //   id: "sStartTime",
-            //   label: "Start Time",
-            //   sStartTime: "",
-            // },
+            {
+              startTime: "",
+              endTime: "",
+              weekdays:[]
+            },
             // {
             //   id: "sEndTime",
             //   label: "End Time",
@@ -168,7 +169,18 @@ registerBlockType("post-grid/date-countdown", {
         },
       },
     },
+    
 
+    scheduleTime: {
+      type: "object",
+      default:[
+        {
+          startTime: "",
+          endTime: "",
+          weekdays:[]
+        },
+      ],
+    },
     countdownWrapper: {
       type: "object",
       default: {
@@ -487,9 +499,11 @@ registerBlockType("post-grid/date-countdown", {
     var countdownWrapper = attributes.countdownWrapper;
     var expiredArg = attributes.expiredArg;
     var dateCountdown = attributes.dateCountdown;
-    var scheduleArg = attributes.scheduleArg;
+    var scheduleTime = attributes.scheduleTime;
+    // var scheduleArg = attributes.scheduleArg;
     var wrapper = attributes.wrapper;
     var blockId = attributes.blockId;
+    // console.log(scheduleArg);
 
     var blockIdX = attributes.blockId
       ? attributes.blockId
@@ -702,8 +716,8 @@ registerBlockType("post-grid/date-countdown", {
       const dateInput1 = wrapper.options.startDate;
       const dateInput2 = wrapper.options.endDate;
       const currentDate = new Date();
-      const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-      const formattedDate = currentDate.toLocaleDateString(undefined, options);
+      // const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+      // const formattedDate = currentDate.toLocaleDateString(undefined, options);
 
       var date1 = "";
       var date2 = "";
@@ -794,7 +808,6 @@ registerBlockType("post-grid/date-countdown", {
     const [remindSeconds, setRemindSeconds] = useState(0);
 
     useEffect(() => {
-      console.log("Evergreen:");
       const days = dateCountdown.options.everGreenTime.day;
       const hours = dateCountdown.options.everGreenTime.hour;
       const minutes = dateCountdown.options.everGreenTime.minute;
@@ -811,22 +824,7 @@ registerBlockType("post-grid/date-countdown", {
       console.log("duration: ", duration);
       setRemindTimes(duration);
     }, [dateCountdown.options.everGreenTime]);
-    // const days = dateCountdown.options.durationDay;
-    // const hours = dateCountdown.options.durationHour;
-    // const minutes = dateCountdown.options.durationMinute;
-    // const seconds = dateCountdown.options.durationSecond;
-
-    // const currentTime = new Date().getTime();
-    // const endTime =
-    //   currentTime +
-    //   days * 24 * 60 * 60 * 1000 +
-    //   hours * 60 * 60 * 1000 +
-    //   minutes * 60 * 1000 +
-    //   seconds * 1000;
-
-    // const duration = endTime - currentTime;
-    // console.log("duration: ", duration);
-    // setRemindTimes(duration);
+    
 
     useEffect(() => {
       console.log("first");
@@ -871,19 +869,47 @@ registerBlockType("post-grid/date-countdown", {
       }
     }, [remindTimes]);
 
-    // console.log("days: ", days);
-    // console.log("hours: ", hours);
-    // console.log("minutes: ", minutes);
-    // console.log("seconds: ", seconds);
-    // console.log("currentTime: ", currentTime);
-    // console.log("endTime: ", endTime);
-    // console.log("remindTime", remindTime);
-    // console.log("remindDay", remindDay);
-    // console.log("remindHour", remindHour);
-    // console.log("remindMinute", remindMinute);
-    // console.log("remindSecond", remindSecond);
+    
 
     // Ever Green End
+
+
+
+
+
+
+    // schedule time start 
+    
+
+
+    console.log("first: ", scheduleTime)
+
+    
+
+
+
+
+
+
+
+
+
+    // schedule time end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function onChangeIcon(arg) {
       var options = {
@@ -2584,6 +2610,7 @@ registerBlockType("post-grid/date-countdown", {
                 <label for="">Date Countdown Type</label>
 
                 <SelectControl
+                  // className="font-bold"
                   label=""
                   value={dateCountdown.options.type}
                   options={[
@@ -2804,149 +2831,114 @@ registerBlockType("post-grid/date-countdown", {
                   </PanelRow>
                 </>
               )}
+
+
+
               {dateCountdown.options.type == "scheduled" && (
                 <>
                   {/* {JSON.stringify(scheduled)} */}
 
-                  <div
-                    className="bg-blue-500 p-2 px-4 text-white inline-block cursor-pointer rounded-sm"
-                    onClick={(ev) => {
-                      var scheduleArgX = { ...scheduleArg };
-                      var index = Object.entries(scheduleArgX).length;
-                      scheduleArgX[index] = {
-                        logic: "OR",
-                        title: "",
-                        args: [],
-                      };
-                      setAttributes({ scheduleArg: scheduleArgX });
+                  <PanelRow className="my-4">
+                    {/* <label for="">Add Media</label> */}
+                   <div onClick={(ev)=>{
+
+                    var scheduleTimeX = scheduleTime.concat({
+  startTime: "",
+  endTime: "",
+  weekdays:[]
+});
+// console.log(scheduleTimeX)
+setAttributes({ scheduleTime: scheduleTimeX });
+
+                   }}>Add Media</div>
+                  </PanelRow>
+
+                  {scheduleTime.length == 0 && (
+                    <div className="bg-red-400 text-white my-3  px-3 py-2 text-center">
+                      No media added
+                    </div>
+                  )}
+                  {JSON.stringify(scheduleTime)}
+
+                  <ReactSortable
+                    list={scheduleTime}
+                    handle={".handle"}
+                    setList={(item) => {
+
+                      
+
+                      setAttributes({ scheduleTime: scheduleTime });
                     }}
                   >
-                    Add Group
-                  </div>
-
-                  <div class="my-4">
-                    {Object.entries(scheduleArg).map((group, groupIndex) => {
-                      var groupId = group[0];
-                      var groupData = group[1];
-
-                      return (
+                    {scheduleTime.map((item, index) => (
+                      <div key={item.id} className="">
                         <PanelBody
                           title={
-                            <RemoveScheduleArgGroup
-                              title={groupIndex}
-                              index={groupId}
-                            />
+                            <>
+                              <span
+                                className="cursor-pointer hover:bg-red-500 hover:text-white px-1 py-1"
+                                onClick={(ev) => {
+                                  var scheduleTimeX = [...scheduleTime]
+                                  scheduleTimeX.splice(
+                                    index,
+                                    1
+                                  );
+
+                                    console.log("scheduleTimeX: ",scheduleTimeX)
+                                    console.log("scheduleTime: ",scheduleTime)
+
+                                  setAttributes({
+                                    scheduleTime: scheduleTimeX,
+                                  });
+                                }}
+                              >
+                                <Icon icon={close} />
+                              </span>
+                              <span className="handle cursor-pointer hover:bg-blue-500 hover:text-white px-1 py-1">
+                                <Icon icon={menu} />
+                              </span>
+
+                              {index}
+                            </>
                           }
                           initialOpen={false}
                         >
-                          <PanelRow className="my-3">
-                            <label for="" className="font-bold mb-2 ">
-                              Start Date?
-                            </label>
-                            <br />
+                          <PanelRow>
+                            <label for="">startTime</label>
                             <InputControl
-                              type="datetime-local"
-                              className="b-2"
-                              value={wrapper.options.startDate}
+                             type="time"
+                              value={item.startTime}
                               onChange={(newVal) => {
-                                var options = {
-                                  ...wrapper.options,
-                                  startDate: newVal,
-                                };
+
+                                var scheduleTimeX = [...scheduleTime]
+                                scheduleTimeX[index].startTime = newVal;
                                 setAttributes({
-                                  wrapper: { ...wrapper, options: options },
+                                  scheduleTime: scheduleTimeX,
                                 });
                               }}
                             />
                           </PanelRow>
-                          <PanelRow className="my-3">
-                            <label for="" className="font-bold mb-2 ">
-                              End Date?
-                            </label>
-                            <br />
+
+                          <PanelRow>
+                            <label for="">endTime</label>
                             <InputControl
-                              type="datetime-local"
-                              className="b-2"
-                              value={wrapper.options.startDate}
+                             type="time"
+                              value={item.endTime}
                               onChange={(newVal) => {
-                                var options = {
-                                  ...wrapper.options,
-                                  startDate: newVal,
-                                };
+                                var scheduleTimeX = [...scheduleTime]
+                                scheduleTimeX[index].endTime = newVal;
                                 setAttributes({
-                                  wrapper: { ...wrapper, options: options },
+                                  scheduleTime: scheduleTimeX,
                                 });
                               }}
                             />
                           </PanelRow>
-                          {/* <PGDropdown
-                              position="bottom right"
-                              variant="secondary"
-                              buttonTitle={"Add Condition"}
-                              options={scheduleArgs}
-                              onChange={(option, index) => {
-                                var scheduleArgX = { ...scheduleArg };
 
-                                scheduleArgX[groupId]["args"].push(option.args);
-                                setAttributes({ scheduleArg: scheduleArgX });
-                              }}
-                              values=""
-                              className="h-30 "
-                            ></PGDropdown> */}
-
-                          {/* {scheduleArg[groupId]["args"] != undefined &&
-                            scheduleArg[groupId]["args"].map((item, index) => {
-                              var id = item.id;
-
-                              return (
-                                <>
-                                  {id == "startTime" && (
-                                    <PanelBody
-                                      title={
-                                        <RemoveScheduleArgArgs
-                                          title={
-                                            scheduleArgs[id] == undefined
-                                              ? id
-                                              : scheduleArgs[id].label
-                                          }
-                                          index={index}
-                                          groupId={groupIndex}
-                                        />
-                                      }
-                                      initialOpen={false}
-                                    >
-                                      <div>
-                                        No Option available for this condition.
-                                      </div>
-                                    </PanelBody>
-                                  )}
-                                  {id == "EndTime" && (
-                                    <PanelBody
-                                      title={
-                                        <RemoveScheduleArgArgs
-                                          title={
-                                            scheduleArgs[id] == undefined
-                                              ? id
-                                              : scheduleArgs[id].label
-                                          }
-                                          index={index}
-                                          groupId={groupIndex}
-                                        />
-                                      }
-                                      initialOpen={false}
-                                    >
-                                      <div>
-                                        No Option available for this condition.
-                                      </div>
-                                    </PanelBody>
-                                  )}
-                                </>
-                              );
-                            })} */}
+                          
                         </PanelBody>
-                      );
-                    })}
-                  </div>
+                      </div>
+                    ))}
+                  </ReactSortable>
                 </>
               )}
             </div>

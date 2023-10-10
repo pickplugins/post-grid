@@ -872,7 +872,7 @@ registerBlockType("post-grid/date-countdown", {
 						(remindTimesX % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
 					);
 					const minutes = Math.floor(
-		(remindTimesX % (1000 * 60 * 60)) / (1000 * 60)
+(remindTimesX % (1000 * 60 * 60)) / (1000 * 60)
 					);
 					const seconds = Math.floor((remindTimesX % (1000 * 60)) / 1000);
 					const formattedDays = String(days).padStart(2, "0");

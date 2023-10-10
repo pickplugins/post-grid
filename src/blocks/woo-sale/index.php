@@ -375,7 +375,7 @@ class PGBlockWooSale
                     $onSale = ($product != null) ? $product->is_on_sale() : '';
 
                     ?>
-                    <span className='sale'>
+                    <span class='sale'>
                         <?php
                         if ($onSale) {
                             echo wp_kses_post($saleText);

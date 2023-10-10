@@ -361,7 +361,7 @@ class PGBlockWooSku
                     <?php if (empty($onSale)): ?>
 
                         <span class='sale'>
-                            <span className=''>
+                            <span class=''>
                                 <?php
                                 if ($onSale) {
                                     echo wp_kses_post($saleText);
@@ -382,8 +382,8 @@ class PGBlockWooSku
                     $onSale = ($product != null) ? $product->is_on_sale() : '';
 
                     ?>
-                    <span className='sale'>
-                        <span className=''>
+                    <span class='sale'>
+                        <span class=''>
                             <?php
                             if ($onSale) {
                                 echo wp_kses_post($saleText);

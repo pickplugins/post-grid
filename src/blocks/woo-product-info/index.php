@@ -584,7 +584,7 @@ class PGBlockWooProductInfo
 
 
                         <?php if (!empty($prefix)) : ?>
-                            <span className='prefix'>
+                            <span class='prefix'>
                                 <?php echo wp_kses_post($prefix); ?>
                             </span>
                         <?php endif; ?>
@@ -601,7 +601,7 @@ class PGBlockWooProductInfo
                                 $weight = ($product == null) ? 0 :  $product->get_weight() ;
 
                         ?>
-                                <span className='value'>
+                                <span class='value'>
                                     <?php echo wp_kses_post($weight); ?>kg
                                 </span>
                             <?php
@@ -610,7 +610,7 @@ class PGBlockWooProductInfo
 
 
                             ?>
-                                <span className='value'>
+                                <span class='value'>
                                     <?php echo wp_kses_post($value); ?>
                                 </span>
                             <?php
@@ -622,7 +622,7 @@ class PGBlockWooProductInfo
                                 $length = ($product == null) ? 0 :  $product->get_length() ;
 
                             ?>
-                                <span className='value'>
+                                <span class='value'>
                                     <?php echo wp_kses_post($length); ?>cm
                                 </span>
                             <?php
@@ -631,7 +631,7 @@ class PGBlockWooProductInfo
                                 $width = ($product == null) ? 0 :  $product->get_width() ;
 
                             ?>
-                                <span className='value'>
+                                <span class='value'>
                                     <?php echo wp_kses_post($width); ?>cm
                                 </span>
                             <?php
@@ -639,7 +639,7 @@ class PGBlockWooProductInfo
                             if ($id == 'height') {
                                 $height = ($product == null) ? 0 :  $product->get_height() ;
                             ?>
-                                <span className='value'>
+                                <span class='value'>
                                     <?php echo wp_kses_post($height); ?>cm
                                 </span>
                             <?php
@@ -648,7 +648,7 @@ class PGBlockWooProductInfo
                                 //$dimensions = $product->get_dimensions();
 
                             ?>
-                                <span className='value'>
+                                <span class='value'>
                                     <?php //echo wp_kses_post($dimensions); 
                                     ?>
                                 </span>
@@ -689,7 +689,7 @@ class PGBlockWooProductInfo
 
 
                         <?php if (!empty($postfix)) : ?>
-                            <span className='postfix'>
+                            <span class='postfix'>
                                 <?php echo wp_kses_post($postfix); ?>
                             </span>
                         <?php endif; ?>

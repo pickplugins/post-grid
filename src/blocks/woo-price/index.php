@@ -459,7 +459,7 @@ class PGBlockWooPrice
                     <?php if (empty($sale_price)): ?>
 
                         <span class=' regular'>
-                            <span className='currency'>
+                            <span class='currency'>
                                 <?php echo wp_kses_post($currency_symbol); ?>
                             </span>
                             <?php echo wp_kses_post($regular_price); ?>
@@ -470,14 +470,14 @@ class PGBlockWooPrice
 
 
                         <span class='regular'>
-                            <span className='currency'>
+                            <span class='currency'>
                                 <?php echo wp_kses_post($currency_symbol); ?>
                             </span>
                             <?php echo wp_kses_post($sale_price); ?>
                         </span>
 
                         <span class=' discounted'>
-                            <span className='currency'>
+                            <span class='currency'>
                                 <?php echo wp_kses_post($currency_symbol); ?>
                             </span>
                             <?php echo wp_kses_post($regular_price); ?>
@@ -498,17 +498,17 @@ class PGBlockWooPrice
                     $max_price = ($product != null) ? $product->get_variation_price('max') : '';
 
                     ?>
-                    <span className='regular'>
-                        <span className='currency'>
+                    <span class='regular'>
+                        <span class='currency'>
                             <?php echo wp_kses_post($currency_symbol); ?>
                         </span>
                         <?php echo wp_kses_post($min_price); ?>
                     </span>
-                    <span className='regular'>
+                    <span class='regular'>
                         <?php echo wp_kses_post($separatorText); ?>
                     </span>
-                    <span className='regular'>
-                        <span className='currency'>
+                    <span class='regular'>
+                        <span class='currency'>
                             <?php echo wp_kses_post($currency_symbol); ?>
                         </span>
 

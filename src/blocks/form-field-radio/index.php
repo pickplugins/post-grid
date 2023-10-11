@@ -104,7 +104,7 @@ class PGBlockFormFieldRadio
                             ),
                             'id' => '',
                             'class' => 'pg-form-field-radio',
-                            'postion' => 'afterLabel',
+                            'position' => 'afterLabel',
                         ),
                         'styles' =>
                         array(),

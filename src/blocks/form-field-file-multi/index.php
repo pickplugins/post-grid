@@ -93,7 +93,7 @@ class PGBlockFormFieldFileMulti
                         'options' =>
                         array(
                             'tag' => 'div',
-                            'postion' => 'afterFiles',
+                            'position' => 'afterFiles',
                             'class' => '',
                             'text' => '',
                         ),
@@ -127,7 +127,7 @@ class PGBlockFormFieldFileMulti
                             ),
                             'id' => '',
                             'class' => 'pg-form-field-file-multi',
-                            'postion' => 'afterLabel',
+                            'position' => 'afterLabel',
                         ),
                         'styles' =>
                         array(),

@@ -92,7 +92,7 @@ class PGBlockFormFieldSubmit
                                         'autocomplete' => false,
                                         'id' => '',
                                         'class' => 'pg-form-field-submit',
-                                        'postion' => 'afterLabel',
+                                        'position' => 'afterLabel',
                                     ),
                             ),
                     ),

@@ -689,7 +689,7 @@ registerBlockType("post-grid/date-countdown", {
 			[clientId]
 		);
 
-		var visbleArgsBasic = {
+		var visibleArgsBasic = {
 			weekDays: {
 				label: "is Week day",
 				description: "Show when specific week days",
@@ -697,7 +697,7 @@ registerBlockType("post-grid/date-countdown", {
 				isPro: true,
 			},
 		};
-		let visbleArgs = applyFilters("pgFormvisbleArgs", visbleArgsBasic);
+		let visibleArgs = applyFilters("pgFormvisibleArgs", visibleArgsBasic);
 
 		var weekDayNumn = {
 			0: { label: "Sunday", value: 0 },

@@ -163,7 +163,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 	var PGBlockDateCountdown = document.querySelectorAll(".PGBlockDateCountdown");
 
-	//console.log("first ", PGBlockDateCountdown);
 	if (PGBlockDateCountdown != null) {
 		PGBlockDateCountdown.forEach((item) => {
 			var dateCountdownArgs = item.getAttribute("data-date-countdown");
@@ -175,10 +174,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var blockId = dateCountdownArgsObj.blockId;
 			var startDate = dateCountdownArgsObj.startDate;
 			var endDate = dateCountdownArgsObj.endDate;
-			//console.log("start date: ", startDate);
+
 			var scheduleTime = dateCountdownArgsObj.scheduleTime;
 			var dateCountdown = dateCountdownArgsObj.dateCountdown;
 			var dateCountdownType = dateCountdownArgsObj.dateCountdown.options.type;
+
 			var everDay =
 				dateCountdownArgsObj.dateCountdown.options.everGreenTime.day;
 			var everHour =
@@ -188,11 +188,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 			var scheduleArgs = [];
 			scheduleTime.forEach((items) => {
-				//console.log(items);
 				var startTime = items.startTime;
 				var endTime = items.endTime;
 				var weekDays = items.weekdays;
-				//console.log(startTime, endTime);
 
 				scheduleArgs.push({
 					startTime: startTime,
@@ -203,28 +201,61 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 			var scheduleTimeDifference = 0;
 			var currentWeekDay = new Date().getDay();
-			//console.log("currentWeekDay: ", currentWeekDay);
 
 			var date = new Date(startDate * 1000);
 			startDate = date.toISOString().slice(0, 16);
 
-			// var secondHandle = "." + blockId + " .second-countdown";
-			// var minuteHandle = "." + blockId + " .minute-countdown";
-			// var hourHandle = "." + blockId + " .hour-countdown";
-			// var dayHandle = "." + blockId + " .day-countdown";
-			// var countdownHandle = "." + blockId + " .countdown-wrapper";
-			// var innerHandle = "." + blockId + " .inner";
-			// var WrapperHandle = " .PGBlockDateCountdown";
+			const totalTime =
+				(everDay * 24 * 60 * 60 + everHour * 60 * 60 + everMinute * 60) * 1000;
+			const everStart = new Date().getTime();
+			const everEnd = everStart + totalTime;
 
-			// document.querySelector(innerHandle).style.display = "none";
-			//console.log("dateCountdownType1: ", dateCountdownType);
+			let everDuration = everEnd - everStart;
+
 			setInterval(() => {
-				if ((dateCountdownType = "fixed")) {
+				if (dateCountdownType == "fixed") {
 					countdown(blockId, startDate, endDate);
 				}
-				if ((dateCountdownType = "everGreen")) {
+				if (dateCountdownType == "everGreen") {
+					var countdownWrap = document.querySelector(".countdown-wrapper");
+					countdownWrap.style.display = "none";
+
+					if (everDuration > 0) {
+						const targetSecond = document.querySelector(
+							"." + blockId + " .second-countdown"
+						);
+						const targetMinute = document.querySelector(
+							"." + blockId + " .minute-countdown"
+						);
+						const targetHour = document.querySelector(
+							"." + blockId + " .hour-countdown"
+						);
+						const targetDay = document.querySelector(
+							"." + blockId + " .day-countdown"
+						);
+
+						countdownWrap.style.display = "flex";
+						everDuration -= 1000;
+						const days = Math.floor(everDuration / (1000 * 60 * 60 * 24));
+						const hours = Math.floor(
+							(everDuration % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+						);
+						const minutes = Math.floor(
+							(everDuration % (1000 * 60 * 60)) / (1000 * 60)
+						);
+						const seconds = Math.floor((everDuration % (1000 * 60)) / 1000);
+						const formattedDays = String(days).padStart(2, "0");
+						const formattedHours = String(hours).padStart(2, "0");
+						const formattedMinutes = String(minutes).padStart(2, "0");
+						const formattedSeconds = String(seconds).padStart(2, "0");
+
+						targetSecond.innerText = formattedSeconds;
+						targetMinute.innerText = formattedMinutes;
+						targetHour.innerText = formattedHours;
+						targetDay.innerText = formattedDays;
+					}
 				}
-				if ((dateCountdownType = "scheduled")) {
+				if (dateCountdownType == "scheduled") {
 					var countdownWrap = document.querySelector(".countdown-wrapper");
 
 					countdownWrap.style.display = "none";

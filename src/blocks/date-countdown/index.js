@@ -449,22 +449,7 @@ registerBlockType("post-grid/date-countdown", {
 			default: true,
 		},
 
-		inner: {
-			type: "object",
-			default: {
-				options: {
-					tag: "div",
-					class: "",
-				},
-				styles: {},
-			},
-		},
-
 		expiredArg: {
-			type: "object",
-			default: {},
-		},
-		scheduleArg: {
 			type: "object",
 			default: {},
 		},
@@ -2656,7 +2641,7 @@ registerBlockType("post-grid/date-countdown", {
 										// { label: "Before Prefix", value: "beforePrefix" },
 										// { label: "After Prefix", value: "afterPrefix" },
 										{ label: "Fixed", value: "fixed" },
-										// { label: "Ever Green", value: "everGreen" },
+										{ label: "Ever Green", value: "everGreen" },
 										{ label: "Scheduled", value: "scheduled" },
 										// { label: "After Postfix", value: "afterPostfix" },
 										// { label: "Before Link", value: "beforeLink" },
@@ -2788,8 +2773,8 @@ registerBlockType("post-grid/date-countdown", {
 								<>
 									{/* {JSON.stringify(dateCountdown.options)} */}
 									<PanelRow className="mb-4">
-										<label for="">Day: </label>
 										<InputControl
+											label="Day"
 											type="number"
 											className="mr-2"
 											placeholder="Enter Day"
@@ -2814,10 +2799,9 @@ registerBlockType("post-grid/date-countdown", {
 												});
 											}}
 										/>
-									</PanelRow>
-									<PanelRow className="mb-4">
-										<label for="">Hour: </label>
+
 										<InputControl
+											label="Hour"
 											type="number"
 											className="mr-2"
 											placeholder="Enter Hour"
@@ -2839,10 +2823,9 @@ registerBlockType("post-grid/date-countdown", {
 												});
 											}}
 										/>
-									</PanelRow>
-									<PanelRow className="mb-4">
-										<label for="">Minute: </label>
+
 										<InputControl
+											label="Minute"
 											type="number"
 											className="mr-2"
 											placeholder="Enter Minute"
@@ -4651,6 +4634,23 @@ registerBlockType("post-grid/date-countdown", {
 				</InspectorControls>
 
 				<>
+					{/* <span>
+						wrapper:{JSON.stringify(wrapper)},dateCountdown:
+						{JSON.stringify(dateCountdown)},scheduleTime:
+						{JSON.stringify(scheduleTime)},countdownWrapper:
+						{JSON.stringify(countdownWrapper)},inner:{JSON.stringify(inner)}
+						,items:{JSON.stringify(items)},secondWrap:
+						{JSON.stringify(secondWrap)}
+						,second:{JSON.stringify(second)},minuteWrap:
+						{JSON.stringify(minuteWrap)},minute:{JSON.stringify(minute)}
+						,hourWrap:
+						{JSON.stringify(hourWrap)},hour:{JSON.stringify(hour)},dayWrap:
+						{JSON.stringify(dayWrap)},day:{JSON.stringify(day)},icon:
+						{JSON.stringify(icon)},separator:{JSON.stringify(separator)},label:
+						{JSON.stringify(label)},prefix:{JSON.stringify(prefix)},postfix:
+						{JSON.stringify(postfix)},expiredArg:
+						{JSON.stringify(expiredArg)},
+					</span> */}
 					{!hasInnerBlocks && (
 						<div {...innerBlocksProps}>
 							<div className="border p-5">
@@ -4714,7 +4714,6 @@ registerBlockType("post-grid/date-countdown", {
 													blockCssObj[countdownWrapperSelector] =
 														countdownWrapper;
 													blockCssObj[innerSelector] = inner;
-
 													blockCssObj[itemsSelector] = items;
 													blockCssObj[dayWrapSelector] = dayWrap;
 													blockCssObj[daySelector] = day;
@@ -4731,6 +4730,8 @@ registerBlockType("post-grid/date-countdown", {
 
 													setAttributes({
 														wrapper: wrapper,
+														dateCountdown: dateCountdown,
+														scheduleTime: scheduleTime,
 														countdownWrapper: countdownWrapper,
 														inner: inner,
 														items: items,
@@ -4742,9 +4743,12 @@ registerBlockType("post-grid/date-countdown", {
 														minute: minute,
 														secondWrap: secondWrap,
 														second: second,
+														icon: icon,
+														label: label,
 														separator: separator,
 														prefix: prefix,
 														postfix: postfix,
+														expiredArg: expiredArg,
 														customCss: customCss,
 													});
 
@@ -4786,7 +4790,6 @@ registerBlockType("post-grid/date-countdown", {
 							</div>
 						</div>
 					)}
-
 					{hasInnerBlocks && (
 						<div {...innerBlocksProps}>
 							{!editMode && (

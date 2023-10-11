@@ -414,8 +414,6 @@ registerBlockType("post-grid/popup", {
 			[clientId]
 		);
 
-		//console.log(JSON.stringify(wp.data.select(blockEditorStore).getBlocks(clientId)));
-
 		const [closeIconHtml, setcloseIconHtml] = useState("");
 
 		useEffect(() => {
@@ -716,8 +714,6 @@ registerBlockType("post-grid/popup", {
 		}
 
 		var RemoveVisibleGroup = function ({ title, index }) {
-			console.log(index);
-
 			return (
 				<>
 					<span
@@ -735,9 +731,6 @@ registerBlockType("post-grid/popup", {
 		};
 
 		var RemoveVisibleArg = function ({ title, index, groupId }) {
-			console.log(groupId);
-			console.log(index);
-
 			return (
 				<>
 					<span
@@ -1523,8 +1516,6 @@ registerBlockType("post-grid/popup", {
 											setAttributes({
 												closeWrap: { ...closeWrap, options: options },
 											});
-
-											console.log(option);
 
 											const element = document.querySelector(
 												wrapperSelector + " .inner"

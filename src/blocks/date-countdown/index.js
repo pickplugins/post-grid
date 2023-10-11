@@ -2771,7 +2771,6 @@ registerBlockType("post-grid/date-countdown", {
 
 							{dateCountdown.options.type == "everGreen" && (
 								<>
-									{/* {JSON.stringify(dateCountdown.options)} */}
 									<PanelRow className="mb-4">
 										<InputControl
 											label="Day"
@@ -2854,8 +2853,6 @@ registerBlockType("post-grid/date-countdown", {
 
 							{dateCountdown.options.type == "scheduled" && (
 								<>
-									{/* {JSON.stringify(scheduled)} */}
-
 									<PanelRow className="my-4">
 										{/* <label for="">Add Media</label> */}
 										<div
@@ -4633,23 +4630,6 @@ registerBlockType("post-grid/date-countdown", {
 				</InspectorControls>
 
 				<>
-					{/* <span>
-						wrapper:{JSON.stringify(wrapper)},dateCountdown:
-						{JSON.stringify(dateCountdown)},scheduleTime:
-						{JSON.stringify(scheduleTime)},countdownWrapper:
-						{JSON.stringify(countdownWrapper)},inner:{JSON.stringify(inner)}
-						,items:{JSON.stringify(items)},secondWrap:
-						{JSON.stringify(secondWrap)}
-						,second:{JSON.stringify(second)},minuteWrap:
-						{JSON.stringify(minuteWrap)},minute:{JSON.stringify(minute)}
-						,hourWrap:
-						{JSON.stringify(hourWrap)},hour:{JSON.stringify(hour)},dayWrap:
-						{JSON.stringify(dayWrap)},day:{JSON.stringify(day)},icon:
-						{JSON.stringify(icon)},separator:{JSON.stringify(separator)},label:
-						{JSON.stringify(label)},prefix:{JSON.stringify(prefix)},postfix:
-						{JSON.stringify(postfix)},expiredArg:
-						{JSON.stringify(expiredArg)},
-					</span> */}
 					{!hasInnerBlocks && (
 						<div {...innerBlocksProps}>
 							<div className="border p-5">
@@ -4692,17 +4672,12 @@ registerBlockType("post-grid/date-countdown", {
 													var countdownWrapper = { ...atts.countdownWrapper };
 													var dateCountdown = { ...atts.dateCountdown };
 													var scheduleTime = { ...atts.scheduleTime };
-													console.log("scheduleTime : ", scheduleTime);
-													console.log("scheduleTime : ", typeof scheduleTime);
-
-													console.log(Object.entries(scheduleTime));
 
 													var scheduleTimeXX = Object.entries(scheduleTime).map(
 														(arg) => {
 															return arg[1];
 														}
 													);
-													console.log(scheduleTimeXX);
 
 													var inner = { ...atts.inner };
 													var items = { ...atts.items };

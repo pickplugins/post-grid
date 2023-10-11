@@ -252,11 +252,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					startTime: everStart,
 					endTime: everEnd,
 				};
-				setCookie(
-					"pgEverGreenCountdownData",
-					JSON.stringify(pgEverGreenCountdownData),
-					10
-				); // Set the cookie for 30 days
+				setCookie("pgEverGreenCountdownData", 10); // Set the cookie for 30 days
 			} else {
 				// The cookie exists, retrieve the JSON object
 				const pgEverGreenCountdownData = JSON.parse(cookieData);

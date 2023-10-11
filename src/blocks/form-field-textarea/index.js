@@ -836,8 +836,6 @@ registerBlockType("post-grid/form-field-textarea", {
 												setAttributes({
 													wrapper: { ...wrapper, options: options },
 												});
-
-												console.log(wrapper);
 											}}
 										/>
 									</PanelRow>

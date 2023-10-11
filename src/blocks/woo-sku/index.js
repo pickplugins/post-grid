@@ -302,7 +302,6 @@ registerBlockType("post-grid/woo-sku", {
 				method: "POST",
 				data: { postId: postId },
 			}).then((res) => {
-				console.log(res);
 				if (res.manage_stock != undefined) {
 					setproductData(res);
 				}
@@ -926,7 +925,6 @@ registerBlockType("post-grid/woo-sku", {
 			className: ` ${blockId} pg-woo-sku`,
 		});
 
-		console.log(icon.options.class);
 
 		return (
 			<>
@@ -1324,9 +1322,7 @@ registerBlockType("post-grid/woo-sku", {
 				</InspectorControls>
 
 				<>
-					{/* <div>
-            {JSON.stringify(productData)}
-          </div> */}
+					
 
 					{loading && (
 						<div>

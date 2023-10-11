@@ -850,7 +850,6 @@ registerBlockType("post-grid/form-field-file", {
 													wrapper: { ...wrapper, options: options },
 												});
 
-												console.log(wrapper);
 											}}
 										/>
 									</PanelRow>

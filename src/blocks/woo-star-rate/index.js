@@ -313,7 +313,6 @@ registerBlockType("post-grid/woo-star-rate", {
 				method: "POST",
 				data: { postId: postId },
 			}).then((res) => {
-				console.log(res);
 				if (res.manage_stock != undefined) {
 					setproductData(res);
 				}

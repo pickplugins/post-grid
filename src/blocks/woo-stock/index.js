@@ -274,7 +274,6 @@ registerBlockType("post-grid/woo-stock", {
 				method: "POST",
 				data: { postId: postId },
 			}).then((res) => {
-				console.log(res);
 				setproductData(res);
 
 				setloading(false);

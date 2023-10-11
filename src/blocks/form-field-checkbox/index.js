@@ -319,7 +319,6 @@ registerBlockType("post-grid/form-field-checkbox", {
 				method: "POST",
 				data: {},
 			}).then((res) => {
-				console.log(res);
 
 				var roles = res.roles == undefined ? [] : res.roles;
 				var rolesX = [];
@@ -336,7 +335,6 @@ registerBlockType("post-grid/form-field-checkbox", {
 				method: "POST",
 				data: {},
 			}).then((res) => {
-				console.log(res);
 				var taxItems = [];
 				Object.entries(res).map((arg) => {
 					var index = arg[0];

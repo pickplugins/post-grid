@@ -154,7 +154,6 @@ registerBlockType("post-grid/image-gallery", {
     );
 
 
-    //console.log(JSON.stringify(wp.data.select(blockEditorStore).getBlocks(clientId)));
 
 
 
@@ -404,7 +403,6 @@ registerBlockType("post-grid/image-gallery", {
                       var options = { ...wrapper.options, tag: newVal };
                       setAttributes({ wrapper: { ...wrapper, options: options } });
 
-                      console.log(wrapper);
 
 
 

@@ -271,7 +271,6 @@ registerBlockType("post-grid/archive-title", {
     useEffect(() => {
 
 
-      console.log(archiveTitle);
       var archiveType = archiveTitle.options.archiveType;
 
       if (archiveType == 'auto') {
@@ -1028,7 +1027,6 @@ registerBlockType("post-grid/archive-title", {
 
       var iconHtml = `<span class="${iconSrc}"></span>`;
 
-      console.log(iconHtml);
 
 
       setIconHtml(iconHtml);

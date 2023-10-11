@@ -243,8 +243,7 @@ registerBlockType("post-grid/form-wrap", {
 			[clientId]
 		);
 
-		//console.log(JSON.stringify(wp.data.select(blockEditorStore).getBlocks(clientId)));
-		console.log(visible);
+		
 
 		var visibleArgsBasic = {
 			userLogged: {
@@ -621,7 +620,6 @@ registerBlockType("post-grid/form-wrap", {
 					};
 				});
 
-				console.log(lists);
 
 				setfluentcrmLists(lists);
 			});
@@ -658,7 +656,6 @@ registerBlockType("post-grid/form-wrap", {
 		}, [blockCssY]);
 
 		function onFormSubmit(ev) {
-			console.log(ev);
 
 			ev.preventDefault();
 
@@ -1021,7 +1018,6 @@ registerBlockType("post-grid/form-wrap", {
 												wrapper: { ...wrapper, options: options },
 											});
 
-											console.log(wrapper);
 										}}
 									/>
 								</PanelRow>
@@ -1178,7 +1174,6 @@ registerBlockType("post-grid/form-wrap", {
 																		{Object.entries(item.roles).map((x, k) => {
 																			var roleId = x[1];
 
-																			console.log(k);
 
 																			return (
 																				<PanelRow className="mb-4">
@@ -1674,7 +1669,6 @@ registerBlockType("post-grid/form-wrap", {
 																					<div className="p-4">
 																						<DatePicker
 																							onChange={(newDate) => {
-																								console.log(newDate);
 
 																								const dateFull = new Date(
 																									newDate
@@ -1735,7 +1729,6 @@ registerBlockType("post-grid/form-wrap", {
 																					<div className="p-4">
 																						<DatePicker
 																							onChange={(newDate) => {
-																								console.log(newDate);
 
 																								const dateFull = new Date(
 																									newDate
@@ -1752,7 +1745,6 @@ registerBlockType("post-grid/form-wrap", {
 																									month +
 																									"-" +
 																									day;
-																								console.log(dateStr);
 
 																								var visibleX = { ...visible };
 
@@ -3176,7 +3168,6 @@ registerBlockType("post-grid/form-wrap", {
 													var blockCssRules =
 														myStore.getBlockCssRules(blockCssObj);
 
-													console.log(blockCssRules);
 
 													var items = { ...blockCssY.items, ...blockCssRules };
 

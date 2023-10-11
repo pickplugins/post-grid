@@ -627,8 +627,6 @@ registerBlockType("post-grid/woo-product-info", {
 						var attrIdX = "";
 						var cssPropty = myStore.cssAttrParse(attrId);
 
-						console.log(cssPropty);
-
 						if (
 							blockCssY.items[itemSelector + ".item-" + index + " a"] ==
 							undefined
@@ -645,13 +643,11 @@ registerBlockType("post-grid/woo-product-info", {
 
 						if (blockCssY.items[itemSelector + ".item-" + index] == undefined) {
 							blockCssY.items[itemSelector + ".item-" + index] = {};
-							blockCssY.items[itemSelector + ".item-" + index][
-								cssPropty
-							] = attrVal;
+							blockCssY.items[itemSelector + ".item-" + index][cssPropty] =
+								attrVal;
 						} else {
-							blockCssY.items[itemSelector + ".item-" + index][
-								cssPropty
-							] = attrVal;
+							blockCssY.items[itemSelector + ".item-" + index][cssPropty] =
+								attrVal;
 						}
 
 						setAttributes({ blockCssY: { items: blockCssY.items } });
@@ -1135,8 +1131,6 @@ registerBlockType("post-grid/woo-product-info", {
 		function onChangeStyleItem(sudoScource, newVal, attr, obj, extra) {
 			var index = extra.index;
 
-			console.log(extra);
-
 			var path = [sudoScource, attr, breakPointX];
 			let objX = Object.assign({}, obj);
 			const object = myStore.updatePropertyDeep(objX, path, newVal);
@@ -1166,8 +1160,6 @@ registerBlockType("post-grid/woo-product-info", {
 
 		function onRemoveStyleItem(sudoScource, key, obj, extra) {
 			var index = extra.index;
-
-			console.log(extra);
 
 			var object = myStore.deletePropertyDeep(obj, [
 				sudoScource,

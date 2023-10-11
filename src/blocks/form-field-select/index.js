@@ -1050,8 +1050,6 @@ registerBlockType("post-grid/form-field-select", {
 
 												var args = arg.args;
 
-												//console.log(args);
-
 												if (args != undefined) {
 													return (
 														<PanelBody
@@ -1069,12 +1067,8 @@ registerBlockType("post-grid/form-field-select", {
 																	// selectOptionsX[index]['args'][length] = { label: '', value: '' }
 																	// setAttributes({ selectOptions: selectOptionsX });
 
-																	console.log(index);
-
 																	var options = { ...select.options };
 																	var args = options.args;
-
-																	console.log(args);
 
 																	var length = Object.entries(
 																		select.options.args[index].args

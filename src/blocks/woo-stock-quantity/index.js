@@ -364,7 +364,6 @@ registerBlockType("post-grid/woo-stock-quantity", {
 				method: "POST",
 				data: { postId: postId },
 			}).then((res) => {
-				console.log(res);
 				if (res.manage_stock != undefined) {
 					setproductData(res);
 				}
@@ -1310,9 +1309,8 @@ registerBlockType("post-grid/woo-stock-quantity", {
 																onChange={(newVal) => {
 																	stockQuantity.options.linkAttr[i].id = newVal;
 
-																	var ssdsd = stockQuantity.options.linkAttr.concat(
-																		[]
-																	);
+																	var ssdsd =
+																		stockQuantity.options.linkAttr.concat([]);
 
 																	var options = {
 																		...stockQuantity.options,
@@ -1332,12 +1330,10 @@ registerBlockType("post-grid/woo-stock-quantity", {
 																placeholder="Value"
 																value={x.val}
 																onChange={(newVal) => {
-																	stockQuantity.options.linkAttr[
-																		i
-																	].val = newVal;
-																	var ssdsd = stockQuantity.options.linkAttr.concat(
-																		[]
-																	);
+																	stockQuantity.options.linkAttr[i].val =
+																		newVal;
+																	var ssdsd =
+																		stockQuantity.options.linkAttr.concat([]);
 
 																	var options = {
 																		...stockQuantity.options,
@@ -1356,9 +1352,8 @@ registerBlockType("post-grid/woo-stock-quantity", {
 																onClick={(ev) => {
 																	stockQuantity.options.linkAttr.splice(i, 1);
 
-																	var ssdsd = stockQuantity.options.linkAttr.concat(
-																		[]
-																	);
+																	var ssdsd =
+																		stockQuantity.options.linkAttr.concat([]);
 
 																	var options = {
 																		...stockQuantity.options,

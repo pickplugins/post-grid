@@ -353,7 +353,6 @@ registerBlockType("post-grid/woo-total-sales", {
 				method: "POST",
 				data: { postId: postId },
 			}).then((res) => {
-				console.log(res);
 				if (res.manage_stock != undefined) {
 					setproductData(res);
 				}

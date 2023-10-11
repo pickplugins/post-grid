@@ -334,7 +334,6 @@ registerBlockType("post-grid/post-date", {
       dateObj["{a}"] = amOrPm.toLowerCase();
 
 
-      console.log(dateObj);
 
 
       setpostDateEdited(dateFormat.strtr(dateObj));

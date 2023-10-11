@@ -465,7 +465,6 @@ registerBlockType("post-grid/accordion-nested", {
     function onAddStyleHeader(sudoScource, key) {
       var path = [sudoScource, key, breakPointX]
 
-      console.log(path);
 
 
       let obj = Object.assign({}, header);

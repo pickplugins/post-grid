@@ -105,7 +105,7 @@ class PGBlockFormFieldSelect
                             ),
                             'id' => '',
                             'class' => 'pg-form-field-select',
-                            'postion' => 'afterLabel',
+                            'position' => 'afterLabel',
                         ),
                         'styles' =>
                         array(),

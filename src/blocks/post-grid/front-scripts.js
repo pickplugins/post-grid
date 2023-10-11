@@ -242,7 +242,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 var loadingText = pagination.loadingText;
                 var loadingIcon = pagination.loadingIcon;
 
-                console.log(pagination);
 
 
                 var queryArgsX = queryArgs.map(x => {

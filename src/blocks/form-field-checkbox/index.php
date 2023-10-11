@@ -132,7 +132,7 @@ class PGBlockFormFieldCheckbox
                             ),
                             'id' => '',
                             'class' => 'pg-form-field-checkbox',
-                            'postion' => 'afterLabel',
+                            'position' => 'afterLabel',
                         ),
                         'styles' =>
                         array(),

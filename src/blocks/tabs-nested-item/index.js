@@ -221,7 +221,6 @@ registerBlockType("post-grid/tabs-nested-item", {
 
     function onChangeStyleNavItem(sudoScource, newVal, attr) {
 
-      console.log(navItemSelector);
 
 
       var path = [sudoScource, attr, breakPointX]
@@ -245,7 +244,6 @@ registerBlockType("post-grid/tabs-nested-item", {
       var cssPath = [elementSelector, cssPropty, breakPointX]
       const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
 
-      console.log(cssItems);
 
 
       setAttributes({ blockCssY: { items: cssItems } });

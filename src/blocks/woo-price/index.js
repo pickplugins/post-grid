@@ -331,7 +331,6 @@ registerBlockType("post-grid/woo-price", {
 				method: "POST",
 				data: { postId: postId },
 			}).then((res) => {
-				console.log(res);
 				if (res.manage_stock != undefined) {
 					setproductData(res);
 				}

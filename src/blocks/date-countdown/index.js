@@ -154,7 +154,7 @@ registerBlockType("post-grid/date-countdown", {
 				options: {
 					tag: "div",
 					class: "",
-					type: "fixed",
+					type: "",
 					everGreenTime: {
 						day: "",
 						hour: "",
@@ -178,18 +178,16 @@ registerBlockType("post-grid/date-countdown", {
 		},
 
 		scheduleTime: {
-			type: "object",
+			type: "array",
 			default: [
 				{
 					startTime: "",
 					endTime: "",
-					weekdays: 
-						{
-							value: "0" ,
-							values: [],
-							compare: "=",
-						},
-					
+					weekdays: {
+						value: "0",
+						values: [],
+						compare: "=",
+					},
 				},
 			],
 		},
@@ -451,22 +449,7 @@ registerBlockType("post-grid/date-countdown", {
 			default: true,
 		},
 
-		inner: {
-			type: "object",
-			default: {
-				options: {
-					tag: "div",
-					class: "",
-				},
-				styles: {},
-			},
-		},
-
 		expiredArg: {
-			type: "object",
-			default: {},
-		},
-		scheduleArg: {
 			type: "object",
 			default: {},
 		},
@@ -575,8 +558,6 @@ registerBlockType("post-grid/date-countdown", {
 			prefix.options.enable == undefined ? true : prefix.options.enable;
 		const postfixEnable =
 			postfix.options.enable == undefined ? true : postfix.options.enable;
-
-			
 
 		const { replaceInnerBlocks } = useDispatch(blockEditorStore);
 
@@ -708,24 +689,25 @@ registerBlockType("post-grid/date-countdown", {
 			[clientId]
 		);
 
-		var visbleArgsBasic = {
+		var visibleArgsBasic = {
 			weekDays: {
-        label: "is Week day",
-        description: "Show when specific week days",
-        args: { id: "weekDays", value: "", values: [], compare: "=" },
-        isPro: true,
-      }, }
-			let visbleArgs = applyFilters("pgFormvisbleArgs", visbleArgsBasic);
+				label: "is Week day",
+				description: "Show when specific week days",
+				args: { id: "weekDays", value: "", values: [], compare: "=" },
+				isPro: true,
+			},
+		};
+		let visibleArgs = applyFilters("pgFormvisibleArgs", visibleArgsBasic);
 
 		var weekDayNumn = {
-      0: { label: "Sunday", value: 0 },
-      1: { label: "Monday", value: 1 },
-      2: { label: "Tuesday", value: 2 },
-      3: { label: "Wednesday", value: 3 },
-      4: { label: "Thursday", value: 4 },
-      5: { label: "Friday", value: 5 },
-      6: { label: "Saturday", value: 6 },
-    };
+			0: { label: "Sunday", value: 0 },
+			1: { label: "Monday", value: 1 },
+			2: { label: "Tuesday", value: 2 },
+			3: { label: "Wednesday", value: 3 },
+			4: { label: "Thursday", value: 4 },
+			5: { label: "Friday", value: 5 },
+			6: { label: "Saturday", value: 6 },
+		};
 
 		const [productData, setProductData] = useState(null);
 
@@ -866,13 +848,13 @@ registerBlockType("post-grid/date-countdown", {
 				const intervalId = setInterval(() => {
 					const remindTimesX = remindTimes - 1000;
 					setRemindTimes(remindTimesX);
-					console.log("remindTimesX", remindTimesX);
+					//console.log("remindTimesX", remindTimesX);
 					const days = Math.floor(remindTimesX / (1000 * 60 * 60 * 24));
 					const hours = Math.floor(
 						(remindTimesX % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
 					);
 					const minutes = Math.floor(
-(remindTimesX % (1000 * 60 * 60)) / (1000 * 60)
+						(remindTimesX % (1000 * 60 * 60)) / (1000 * 60)
 					);
 					const seconds = Math.floor((remindTimesX % (1000 * 60)) / 1000);
 					const formattedDays = String(days).padStart(2, "0");
@@ -906,46 +888,52 @@ registerBlockType("post-grid/date-countdown", {
 
 		// schedule time start
 
+		// const [scheduleTimesDifference, setScheduleTimesDifference] = useState(0);
+		// const [scheduleTimes, setScheduleTimes] = useState(0);
+		// const [scheduleDays, setScheduleDays] = useState(0);
+		// const [scheduleHours, setScheduleHours] = useState(0);
+		// const [scheduleMinutes, setScheduleMinutes] = useState(0);
+		// const [scheduleSeconds, setScheduleSeconds] = useState(0);
+		// console.log("scheduleTimeDiff: ", scheduleTimesDifference);
 
-		const [scheduleTimes, setScheduleTimes] = useState(0);
-		const [scheduleDays, setScheduleDays] = useState(0);
-		const [scheduleHours, setScheduleHours] = useState(0);
-		const [scheduleMinutes, setScheduleMinutes] = useState(0);
-		const [scheduleSeconds, setScheduleSeconds] = useState(0);
-scheduleTime.forEach((items) => {
-	console.log(items);
-	var startTime= items.startTime
-	var endTime= items.endTime
-console.log(startTime, endTime)
-	// items.forEach((item) => {
-		if(items.weekdays?.compare == "="){
-		const selectedWeekdays = parseInt(items.weekdays?.value);
-		// console.log("selectedWeekdays: ",selectedWeekdays)
-		const currentDayOfWeek = new Date().getDay();
-		// console.log("currentDayOfWeek: ",currentDayOfWeek)
-		if (selectedWeekdays === currentDayOfWeek) {
-			console.log(startTime)
-			console.log(endTime)
+		// scheduleTime.forEach((items) => {
+		// 	console.log(items);
+		// 	var startTime = items.startTime;
+		// 	var endTime = items.endTime;
+		// 	console.log(startTime, endTime);
+		// 	// items.forEach((item) => {
+		// 	if (items.weekdays?.compare == "=") {
+		// 		const selectedWeekdays = parseInt(items.weekdays?.value);
+		// 		// console.log("selectedWeekdays: ",selectedWeekdays)
 
-			// useEffect(() => {
-				const date1 = new Date(`2000-01-01T${startTime}:00Z`);
-const date2 = new Date(`2000-01-01T${endTime}:00Z`);
-const timeDifference = date2 - date1;
-console.log(timeDifference)
-			// }, [scheduleTime])
-		} else {
-			
-		}
-	}
-	// }
-	// )
-	
-})
+		// 		const currentDayOfWeek = new Date().getDay();
+		// 		// console.log("currentDayOfWeek: ",currentDayOfWeek)
+
+		// 		if (selectedWeekdays === currentDayOfWeek) {
+		// 			console.log(startTime);
+		// 			console.log(endTime);
+
+		// 			// useEffect(() => {
+		// 			const date1 = new Date(`2000-01-01T${startTime || "00:00"}:00Z`);
+		// 			const date2 = new Date(`2000-01-01T${endTime || "00:00"}:00Z`);
+		// 			const timeDifference = date2 - date1;
+		// 			console.log("timediff: ", timeDifference);
+		// 			// setScheduleTimesDifference(timeDifference);
+		// 			// }, [scheduleTime]);
+		// 		} else {
+		// 		}
+		// 	}
+		// 	// }
+		// 	// )
+		// });
+
+		// useEffect(() => {
+		// 	console.log("first:", scheduleTimesDifference);
+		// }, [scheduleTimesDifference]);
 
 		// if(scheduleTime.weekDays.compare == "="){
 		// 	console.log("hello");
 		// }
-		
 
 		// schedule time end
 
@@ -2783,10 +2771,9 @@ console.log(timeDifference)
 
 							{dateCountdown.options.type == "everGreen" && (
 								<>
-									{JSON.stringify(dateCountdown.options)}
 									<PanelRow className="mb-4">
-										<label for="">Day: </label>
 										<InputControl
+											label="Day"
 											type="number"
 											className="mr-2"
 											placeholder="Enter Day"
@@ -2811,10 +2798,9 @@ console.log(timeDifference)
 												});
 											}}
 										/>
-									</PanelRow>
-									<PanelRow className="mb-4">
-										<label for="">Hour: </label>
+
 										<InputControl
+											label="Hour"
 											type="number"
 											className="mr-2"
 											placeholder="Enter Hour"
@@ -2836,10 +2822,9 @@ console.log(timeDifference)
 												});
 											}}
 										/>
-									</PanelRow>
-									<PanelRow className="mb-4">
-										<label for="">Minute: </label>
+
 										<InputControl
+											label="Minute"
 											type="number"
 											className="mr-2"
 											placeholder="Enter Minute"
@@ -2868,8 +2853,6 @@ console.log(timeDifference)
 
 							{dateCountdown.options.type == "scheduled" && (
 								<>
-									{/* {JSON.stringify(scheduled)} */}
-
 									<PanelRow className="my-4">
 										{/* <label for="">Add Media</label> */}
 										<div
@@ -2877,9 +2860,13 @@ console.log(timeDifference)
 												var scheduleTimeX = scheduleTime.concat({
 													startTime: "",
 													endTime: "",
-													weekdays: [],
+													weekdays: {
+														value: "0",
+														values: [],
+														compare: "=",
+													},
 												});
-												// console.log(scheduleTimeX)
+												//console.log("hello: ", scheduleTimeX);
 												setAttributes({ scheduleTime: scheduleTimeX });
 											}}>
 											Add Media
@@ -2891,7 +2878,6 @@ console.log(timeDifference)
 											No media added
 										</div>
 									)}
-									{JSON.stringify(scheduleTime)}
 
 									<ReactSortable
 										list={scheduleTime}
@@ -2899,7 +2885,7 @@ console.log(timeDifference)
 										setList={(item) => {
 											setAttributes({ scheduleTime: scheduleTime });
 										}}>
-										{scheduleTime?.map((item, index) => (
+										{scheduleTime.map((item, index) => (
 											<div key={item.id} className="">
 												<PanelBody
 													title={
@@ -2910,8 +2896,8 @@ console.log(timeDifference)
 																	var scheduleTimeX = [...scheduleTime];
 																	scheduleTimeX.splice(index, 1);
 
-																	console.log("scheduleTimeX: ", scheduleTimeX);
-																	console.log("scheduleTime: ", scheduleTime);
+																	//console.log("scheduleTimeX: ", scheduleTimeX);
+																	//console.log("scheduleTime: ", scheduleTime);
 
 																	setAttributes({
 																		scheduleTime: scheduleTimeX,
@@ -2962,7 +2948,7 @@ console.log(timeDifference)
 																<label for="">Compare</label>
 																<SelectControl
 																	label=""
-																	value={item.weekdays.compare}
+																	value={item.weekdays?.compare}
 																	options={[
 																		{ label: "=", value: "=" },
 																		{ label: "!=", value: "!=" },
@@ -2974,22 +2960,23 @@ console.log(timeDifference)
 																		{ label: "exist", value: "exist" },
 																	]}
 																	onChange={(newVal) => {
-
 																		var scheduleTimeX = [...scheduleTime];
 
-																		scheduleTimeX[index].weekdays.compare = newVal;
-																		setAttributes({ scheduleTime: scheduleTimeX });
+																		scheduleTimeX[index].weekdays.compare =
+																			newVal;
+																		setAttributes({
+																			scheduleTime: scheduleTimeX,
+																		});
 																	}}
 																/>
 															</PanelRow>
-															
 
-															{(item.weekdays.compare == "=" ||
-																item.weekdays.compare == "!=" ||
-																item.weekdays.compare == ">" ||
-																item.weekdays.compare == "<" ||
-																item.weekdays.compare == ">=" ||
-																item.weekdays.compare == "<=") && (
+															{(item.weekdays?.compare == "=" ||
+																item.weekdays?.compare == "!=" ||
+																item.weekdays?.compare == ">" ||
+																item.weekdays?.compare == "<" ||
+																item.weekdays?.compare == ">=" ||
+																item.weekdays?.compare == "<=") && (
 																<>
 																	<PanelRow className="mb-4">
 																		<label for="">Values</label>
@@ -2999,7 +2986,8 @@ console.log(timeDifference)
 																			buttonTitle={
 																				item.weekdays?.value?.length == 0
 																					? "Choose Day"
-																					: weekDayNumn[item.weekdays?.value]?.label
+																					: weekDayNumn[item.weekdays?.value]
+																							?.label
 																			}
 																			options={[
 																				{ label: "Sunday", value: 0 },
@@ -3011,18 +2999,20 @@ console.log(timeDifference)
 																				{ label: "Saturday", value: 6 },
 																			]}
 																			onChange={(newVal) => {
-
 																				var scheduleTimeX = [...scheduleTime];
-		
-																				scheduleTimeX[index].weekdays.value = newVal.value;
-																				setAttributes({ scheduleTime: scheduleTimeX });
+
+																				scheduleTimeX[index].weekdays.value =
+																					newVal.value;
+																				setAttributes({
+																					scheduleTime: scheduleTimeX,
+																				});
 																			}}
 																			value={item.weekdays.value}></PGDropdown>
 																	</PanelRow>
 																</>
 															)}
-															{(item.weekdays.compare == "between" ||
-																item.weekdays.compare == "exist") && (
+															{(item.weekdays?.compare == "between" ||
+																item.weekdays?.compare == "exist") && (
 																// <>
 																// 	<PanelRow className="mb-4">
 																// 		<label for="">Values</label>
@@ -3077,69 +3067,88 @@ console.log(timeDifference)
 																// 	</div>
 																// </>
 																<>
-																<PanelRow className="mb-4">
-																	<label htmlFor="">Values</label>
-																	<PGDropdown
-																		position="bottom right"
-																		variant="secondary"
-																		// buttonTitle={
-																		// 	item.weekdays.values.length === 0
-																		// 		? "Choose Days"
-																		// 		: item.weekdays.values.map((value) => weekDayNumn[value].label).join(", ")
-																		// }
-																		buttonTitle={"Choose Days"}
-																		options={[
-																			{ label: "Sunday", value: 0 },
-																			{ label: "Monday", value: 1 },
-																			{ label: "Tuesday", value: 2 },
-																			{ label: "Wednesday", value: 3 },
-																			{ label: "Thursday", value: 4 },
-																			{ label: "Friday", value: 5 },
-																			{ label: "Saturday", value: 6 },
-																		]}
-																		onChange={(newVal) => {
-																			var scheduleTimeX = [...scheduleTime];
-																			if (scheduleTimeX[index].weekdays.values.includes(newVal.value)) {
-																				// Remove the value if already selected
-																				scheduleTimeX[index].weekdays.values = scheduleTimeX[index].weekdays.values.filter(
-																					(value) => value !== newVal.value
-																				);
-																			} else {
-																				// Add the value if not already selected
-																				scheduleTimeX[index].weekdays.values.push(newVal.value);
-																			}
-																			setAttributes({ scheduleTime: scheduleTimeX });
-																		}}
-																		value={item.weekdays.values}
-																	></PGDropdown>
-																</PanelRow>
-																<br />
-												
-																<div>
-																	{item.weekdays.values.map((x, i) => {
-																		return (
-																			<div className="flex justify-between my-1" key={i}>
-																				<span>{weekDayNumn[x].label}</span>
-																				<span
-																					className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																					onClick={(ev) => {
-																						var scheduleTimeX = [...scheduleTime];
-																						// Remove the value when the "X" is clicked
-																						scheduleTimeX[index].weekdays.values = scheduleTimeX[index].weekdays.values.filter(
-																							(value) => value !== x
+																	<PanelRow className="mb-4">
+																		<label htmlFor="">Values</label>
+																		<PGDropdown
+																			position="bottom right"
+																			variant="secondary"
+																			// buttonTitle={
+																			// 	item.weekdays.values.length === 0
+																			// 		? "Choose Days"
+																			// 		: item.weekdays.values.map((value) => weekDayNumn[value].label).join(", ")
+																			// }
+																			buttonTitle={"Choose Days"}
+																			options={[
+																				{ label: "Sunday", value: 0 },
+																				{ label: "Monday", value: 1 },
+																				{ label: "Tuesday", value: 2 },
+																				{ label: "Wednesday", value: 3 },
+																				{ label: "Thursday", value: 4 },
+																				{ label: "Friday", value: 5 },
+																				{ label: "Saturday", value: 6 },
+																			]}
+																			onChange={(newVal) => {
+																				var scheduleTimeX = [...scheduleTime];
+																				if (
+																					scheduleTimeX[
+																						index
+																					].weekdays.values.includes(
+																						newVal.value
+																					)
+																				) {
+																					// Remove the value if already selected
+																					scheduleTimeX[index].weekdays.values =
+																						scheduleTimeX[
+																							index
+																						].weekdays.values.filter(
+																							(value) => value !== newVal.value
 																						);
-																						setAttributes({
-																							scheduleTime: scheduleTimeX,
-																						});
-																					}}
-																				>
-																					<Icon fill="#fff" icon={close} />
-																				</span>
-																			</div>
-																		);
-																	})}
-																</div>
-															</>
+																				} else {
+																					// Add the value if not already selected
+																					scheduleTimeX[
+																						index
+																					].weekdays.values.push(newVal.value);
+																				}
+																				setAttributes({
+																					scheduleTime: scheduleTimeX,
+																				});
+																			}}
+																			value={item.weekdays.values}></PGDropdown>
+																	</PanelRow>
+																	<br />
+
+																	<div>
+																		{item.weekdays.values.map((x, i) => {
+																			return (
+																				<div
+																					className="flex justify-between my-1"
+																					key={i}>
+																					<span>{weekDayNumn[x].label}</span>
+																					<span
+																						className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																						onClick={(ev) => {
+																							var scheduleTimeX = [
+																								...scheduleTime,
+																							];
+																							// Remove the value when the "X" is clicked
+																							scheduleTimeX[
+																								index
+																							].weekdays.values = scheduleTimeX[
+																								index
+																							].weekdays.values.filter(
+																								(value) => value !== x
+																							);
+																							setAttributes({
+																								scheduleTime: scheduleTimeX,
+																							});
+																						}}>
+																						<Icon fill="#fff" icon={close} />
+																					</span>
+																				</div>
+																			);
+																		})}
+																	</div>
+																</>
 															)}
 														</>
 													</PanelRow>
@@ -4661,12 +4670,22 @@ console.log(timeDifference)
 
 													var wrapper = { ...atts.wrapper };
 													var countdownWrapper = { ...atts.countdownWrapper };
+													var dateCountdown = { ...atts.dateCountdown };
+													var scheduleTime = { ...atts.scheduleTime };
+
+													var scheduleTimeXX = Object.entries(scheduleTime).map(
+														(arg) => {
+															return arg[1];
+														}
+													);
+
 													var inner = { ...atts.inner };
 													var items = { ...atts.items };
 													var dayWrap = { ...atts.dayWrap };
 													var day = { ...atts.day };
 													var hourWrap = { ...atts.hourWrap };
 													var hour = { ...atts.hour };
+													var minuteWrap = { ...atts.minuteWrap };
 													var minute = { ...atts.minute };
 													var secondWrap = { ...atts.secondWrap };
 													var second = { ...atts.second };
@@ -4674,18 +4693,17 @@ console.log(timeDifference)
 													var label = { ...atts.label };
 													var prefix = { ...atts.prefix };
 													var postfix = { ...atts.postfix };
+													var icon = { ...atts.icon };
+													var expiredArg = { ...atts.expiredArg };
 
 													var blockCssY = { ...atts.blockCssY };
-													var customCss = { ...atts.customCss };
 
 													var blockCssObj = {};
 
 													blockCssObj[wrapperSelector] = wrapper;
-													blockCssObj[
-														countdownWrapperSelector
-													] = countdownWrapper;
+													blockCssObj[countdownWrapperSelector] =
+														countdownWrapper;
 													blockCssObj[innerSelector] = inner;
-
 													blockCssObj[itemsSelector] = items;
 													blockCssObj[dayWrapSelector] = dayWrap;
 													blockCssObj[daySelector] = day;
@@ -4702,6 +4720,8 @@ console.log(timeDifference)
 
 													setAttributes({
 														wrapper: wrapper,
+														dateCountdown: dateCountdown,
+														scheduleTime: scheduleTimeXX,
 														countdownWrapper: countdownWrapper,
 														inner: inner,
 														items: items,
@@ -4713,15 +4733,16 @@ console.log(timeDifference)
 														minute: minute,
 														secondWrap: secondWrap,
 														second: second,
+														icon: icon,
+														label: label,
 														separator: separator,
 														prefix: prefix,
 														postfix: postfix,
-														customCss: customCss,
+														expiredArg: expiredArg,
 													});
 
-													var blockCssRules = myStore.getBlockCssRules(
-														blockCssObj
-													);
+													var blockCssRules =
+														myStore.getBlockCssRules(blockCssObj);
 
 													var items = { ...blockCssY.items, ...blockCssRules };
 
@@ -4758,7 +4779,6 @@ console.log(timeDifference)
 							</div>
 						</div>
 					)}
-
 					{hasInnerBlocks && (
 						<div {...innerBlocksProps}>
 							{!editMode && (
@@ -4811,7 +4831,7 @@ console.log(timeDifference)
 															<>{remindDays}</>
 														)}
 														{dateCountdown.options.type == "scheduled" && (
-															<></>
+															<>00</>
 														)}
 														{/* {remindDay} */}
 													</span>
@@ -4878,6 +4898,9 @@ console.log(timeDifference)
 														{dateCountdown.options.type == "everGreen" && (
 															<>{remindHours}</>
 														)}
+														{dateCountdown.options.type == "scheduled" && (
+															<>00</>
+														)}
 													</span>
 
 													{labelEnable &&
@@ -4941,6 +4964,9 @@ console.log(timeDifference)
 														{dateCountdown.options.type == "everGreen" && (
 															<>{remindMinutes}</>
 														)}
+														{dateCountdown.options.type == "scheduled" && (
+															<>00</>
+														)}
 													</span>
 													{labelEnable &&
 														label.options.position == "beforePostfix" && (
@@ -5002,6 +5028,9 @@ console.log(timeDifference)
 														)}
 														{dateCountdown.options.type == "everGreen" && (
 															<>{remindSeconds}</>
+														)}
+														{dateCountdown.options.type == "scheduled" && (
+															<>00</>
 														)}
 													</span>
 													{labelEnable &&

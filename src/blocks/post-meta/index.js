@@ -252,7 +252,6 @@ registerBlockType("post-grid/post-meta", {
         data: { postId: postId, meta_key: meta.options.key, type: meta.options.type, template: template },
       }).then((res) => {
 
-        console.log(res);
 
 
         if (res.args == undefined) {

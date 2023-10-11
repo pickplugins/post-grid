@@ -229,7 +229,6 @@ registerBlockType("post-grid/list", {
 
       myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 
-      console.log(itemsX);
 
       if (items.length > 0) {
 

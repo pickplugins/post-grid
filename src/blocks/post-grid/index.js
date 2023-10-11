@@ -1200,7 +1200,6 @@ registerBlockType("post-grid/post-grid", {
 		//     };
 		//   }, []);
 
-		//   console.log(deviceType);
 
 		//   return deviceType;
 		// };
@@ -1222,7 +1221,6 @@ registerBlockType("post-grid/post-grid", {
 
 			const gutenbergDeviceType = getPreviewDeviceType();
 
-			console.log(gutenbergDeviceType);
 		}
 
 		useEffect(() => {
@@ -1355,7 +1353,6 @@ registerBlockType("post-grid/post-grid", {
 					getCssfromBlocks(allStyle, innerBlocks);
 				}
 			});
-			console.log(allStyle);
 
 			return allStyle;
 		}
@@ -1379,7 +1376,6 @@ registerBlockType("post-grid/post-grid", {
 
 				var allStyleX = getCssfromBlocks(allStyle, blocks);
 
-				console.log(allStyleX);
 
 				// blocks.map((block, i) => {
 
@@ -1579,19 +1575,15 @@ registerBlockType("post-grid/post-grid", {
 		}
 
 		function updateQueryPram(newVal, index) {
-			console.log(index);
-			console.log(newVal);
 
 			var queryArgsX = { ...queryArgs };
 			// var itemsX = queryArgsX.items;
 
-			// console.log(itemsX);
 
 			// itemsX[index].val = newVal
 
 			// var cssPath = [index, 'val']
 			// const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal)
-			// console.log(cssItems);
 			// var result = [];
 
 			// Object.entries(cssItems).map((arg) => {
@@ -2748,7 +2740,6 @@ registerBlockType("post-grid/post-grid", {
 		}
 
 		function addQueryPram(option, index) {
-			console.log(option);
 			var id = option.id;
 			var queryArgsX = { ...queryArgs };
 
@@ -3045,7 +3036,6 @@ registerBlockType("post-grid/post-grid", {
 							onClick={(_ev) => {
 								var page = queryLayouts.page + 1;
 
-								console.log(page);
 
 								setQueryLayouts({
 									keyword: queryLayouts.keyword,

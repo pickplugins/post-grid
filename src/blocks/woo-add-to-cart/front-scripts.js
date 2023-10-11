@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var quantity = parseInt(quantityInputX.value) - 1
 
 
-        console.log(quantityInputX);
-        console.log(quantity);
 
         //var  = document.querySelector('a[data-blockid="'+blockId+'"]');
 
@@ -30,8 +28,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         updateQuantity(blockId, quantity);
 
-        console.log(quantityInputX);
-        console.log(quantity);
 
 
     })
@@ -52,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         var quantityInputX = document.querySelector('.' + blockId + ' input');
 
-        console.log(quantityInputX);
 
         if (quantity != 0) {
 

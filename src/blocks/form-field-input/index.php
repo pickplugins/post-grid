@@ -100,7 +100,7 @@ class PGBlockFormFieldInput
 
                                             'id' => '',
                                             'class' => 'pg-form-field-input',
-                                            'postion' => 'afterLabel',
+                                            'position' => 'afterLabel',
                                         ),
                                 ),
                         ),

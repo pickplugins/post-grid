@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             var dataSplideargsObj = JSON.parse(dataSplideargs);
-            console.log(dataSplideargsObj);
 
 
             var splide = new Splide('#' + item.id);

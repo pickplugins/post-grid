@@ -290,7 +290,6 @@ registerBlockType("post-grid/post-grid", {
     );
 
 
-    //console.log(JSON.stringify(wp.data.select(blockEditorStore).getBlocks(clientId)));
 
 
     useEffect(() => {

@@ -83,7 +83,7 @@ class PGBlockFormFieldTextarea
                                         'autocorrect' => 'off',
                                         'id' => '',
                                         'class' => '',
-                                        'postion' => 'afterLabel',
+                                        'position' => 'afterLabel',
                                     ),
                                 'styles' =>
                                     array(),

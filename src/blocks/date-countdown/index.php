@@ -29,468 +29,526 @@ class PGBlockDateCountdown
         'uses_context' => [],
         'style' => 'front_style',
         'render_callback' => array($this, 'theHTML'),
-        'attributes' => array(
-          'wrapper' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'tag' => 'div',
-                      'class' => '',
-                      'startDate' => '',
-                      'endDate' => '',
-                      'startDateSrc' => '',
-                      'endDateSrc' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'backgroundColor' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+        'attributes' => array (
+          'wrapper' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'tag' => 'div',
+                'class' => '',
+                'startDate' => '',
+                'endDate' => '',
+                'startDateSrc' => '',
+                'endDateSrc' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
                 ),
-            ),
-          'countdownWrapper' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'tag' => 'div',
-                      'class' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'backgroundColor' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+                'backgroundColor' => 
+                array (
+                  'Desktop' => '',
                 ),
+              ),
             ),
-          'inner' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'tag' => 'div',
-                      'class' => '',
-                    ),
-                  'styles' =>
-                    array(
-                    ),
+          ),
+          'dateCountdown' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'tag' => 'div',
+                'class' => '',
+                'type' => 'fixed',
+                'everGreenTime' => 
+                array (
+                  'day' => '',
+                  'hour' => '',
+                  'minute' => '',
+                  'second' => '',
                 ),
-            ),
-          'items' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'tag' => 'div',
-                      'class' => 'items',
-                      'secondEnable' => true,
-                      'minuteEnable' => true,
-                      'hourEnable' => true,
-                      'dayEnable' => true,
+                'scheduleTime' => 
+                array (
+                  0 => 
+                  array (
+                    'startTime' => '',
+                    'endTime' => '',
+                    'weekdays' => 
+                    array (
                     ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'fontSize' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+                  ),
                 ),
+              ),
             ),
-          'secondWrap' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'tag' => 'div',
-                      'class' => 'second-wrapper',
-                      'label' => '',
-                      'prefix' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'fontSize' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+          ),
+          'scheduleTime' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              0 => 
+              array (
+                'startTime' => '',
+                'endTime' => '',
+                'weekdays' => 
+                array (
+                  'value' => '0',
+                  'values' => 
+                  array (
+                  ),
+                  'compare' => '=',
                 ),
+              ),
             ),
-          'second' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'tag' => 'div',
-                      'class' => 'second-countdown',
-                      'label' => '',
-                      'prefix' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'fontSize' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+          ),
+          'countdownWrapper' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'tag' => 'div',
+                'class' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
                 ),
-            ),
-          'minuteWrap' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'tag' => 'div',
-                      'class' => 'minute-wrapper',
-                      'label' => '',
-                      'prefix' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'fontSize' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+                'backgroundColor' => 
+                array (
+                  'Desktop' => '',
                 ),
+              ),
             ),
-          'minute' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'tag' => 'div',
-                      'class' => 'minute-countdown',
-                      'label' => '',
-                      'prefix' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'fontSize' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+          ),
+          'inner' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'tag' => 'div',
+                'class' => '',
+              ),
+              'styles' => 
+              array (
+              ),
+            ),
+          ),
+          'items' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'tag' => 'div',
+                'class' => 'items',
+                'secondEnable' => true,
+                'minuteEnable' => true,
+                'hourEnable' => true,
+                'dayEnable' => true,
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
                 ),
-            ),
-          'hourWrap' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'tag' => 'div',
-                      'class' => 'hour-wrapper',
-                      'label' => '',
-                      'prefix' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'fontSize' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+                'fontSize' => 
+                array (
+                  'Desktop' => '',
                 ),
+              ),
             ),
-          'hour' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'tag' => 'div',
-                      'class' => 'hour-countdown',
-                      'label' => '',
-                      'prefix' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'fontSize' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+          ),
+          'secondWrap' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'tag' => 'div',
+                'class' => 'second-wrapper',
+                'label' => '',
+                'prefix' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
                 ),
-            ),
-          'dayWrap' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'tag' => 'div',
-                      'class' => 'day-wrapper',
-                      'label' => '',
-                      'prefix' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'fontSize' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+                'fontSize' => 
+                array (
+                  'Desktop' => '',
                 ),
+              ),
             ),
-          'day' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'tag' => 'div',
-                      'class' => 'day-countdown',
-                      'label' => '',
-                      'prefix' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'fontSize' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+          ),
+          'second' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'tag' => 'div',
+                'class' => 'second-countdown',
+                'label' => '',
+                'prefix' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
                 ),
-            ),
-          'icon' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => false,
-                      'library' => 'fontAwesome',
-                      'srcType' => 'class',
-                      'iconSrc' => 'far fa-calendar-alt',
-                      'position' => '',
-                      'class' => 'date-countdown-icon',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'backgroundColor' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'fontSize' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+                'fontSize' => 
+                array (
+                  'Desktop' => '',
                 ),
+              ),
             ),
-          'separator' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'text' => ':',
-                      'class' => 'separator',
-                      'position' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'backgroundColor' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+          ),
+          'minuteWrap' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'tag' => 'div',
+                'class' => 'minute-wrapper',
+                'label' => '',
+                'prefix' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
                 ),
-            ),
-          'label' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'text' => '',
-                      'class' => 'label',
-                      'position' => '',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'backgroundColor' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+                'fontSize' => 
+                array (
+                  'Desktop' => '',
                 ),
+              ),
             ),
-          'prefix' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'text' => '',
-                      'class' => 'prefix',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'backgroundColor' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+          ),
+          'minute' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'tag' => 'div',
+                'class' => 'minute-countdown',
+                'label' => '',
+                'prefix' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
                 ),
-            ),
-          'postfix' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'options' =>
-                    array(
-                      'enable' => true,
-                      'text' => '',
-                      'class' => 'postfix',
-                    ),
-                  'styles' =>
-                    array(
-                      'color' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                      'backgroundColor' =>
-                        array(
-                          'Desktop' => '',
-                        ),
-                    ),
+                'fontSize' => 
+                array (
+                  'Desktop' => '',
                 ),
+              ),
             ),
-          'customCss' =>
-            array(
-              'type' => 'string',
-              'default' => '',
-            ),
-          'editMode' =>
-            array(
-              'type' => 'boolean',
-              'default' => true,
-            ),
-          'expiredArg' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
+          ),
+          'hourWrap' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'tag' => 'div',
+                'class' => 'hour-wrapper',
+                'label' => '',
+                'prefix' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
                 ),
-            ),
-          'blockId' =>
-            array(
-              'type' => 'string',
-              'default' => '',
-            ),
-          'blockCssY' =>
-            array(
-              'type' => 'object',
-              'default' =>
-                array(
-                  'items' =>
-                    array(
-                    ),
+                'fontSize' => 
+                array (
+                  'Desktop' => '',
                 ),
+              ),
             ),
+          ),
+          'hour' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'tag' => 'div',
+                'class' => 'hour-countdown',
+                'label' => '',
+                'prefix' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
+                ),
+                'fontSize' => 
+                array (
+                  'Desktop' => '',
+                ),
+              ),
+            ),
+          ),
+          'dayWrap' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'tag' => 'div',
+                'class' => 'day-wrapper',
+                'label' => '',
+                'prefix' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
+                ),
+                'fontSize' => 
+                array (
+                  'Desktop' => '',
+                ),
+              ),
+            ),
+          ),
+          'day' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'tag' => 'div',
+                'class' => 'day-countdown',
+                'label' => '',
+                'prefix' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
+                ),
+                'fontSize' => 
+                array (
+                  'Desktop' => '',
+                ),
+              ),
+            ),
+          ),
+          'icon' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => false,
+                'library' => 'fontAwesome',
+                'srcType' => 'class',
+                'iconSrc' => 'far fa-calendar-alt',
+                'position' => '',
+                'class' => 'date-countdown-icon',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
+                ),
+                'backgroundColor' => 
+                array (
+                  'Desktop' => '',
+                ),
+                'fontSize' => 
+                array (
+                  'Desktop' => '',
+                ),
+              ),
+            ),
+          ),
+          'separator' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'text' => ':',
+                'class' => 'separator',
+                'position' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
+                ),
+                'backgroundColor' => 
+                array (
+                  'Desktop' => '',
+                ),
+              ),
+            ),
+          ),
+          'label' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'text' => '',
+                'class' => 'label',
+                'position' => '',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
+                ),
+                'backgroundColor' => 
+                array (
+                  'Desktop' => '',
+                ),
+              ),
+            ),
+          ),
+          'prefix' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'text' => '',
+                'class' => 'prefix',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
+                ),
+                'backgroundColor' => 
+                array (
+                  'Desktop' => '',
+                ),
+              ),
+            ),
+          ),
+          'postfix' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'options' => 
+              array (
+                'enable' => true,
+                'text' => '',
+                'class' => 'postfix',
+              ),
+              'styles' => 
+              array (
+                'color' => 
+                array (
+                  'Desktop' => '',
+                ),
+                'backgroundColor' => 
+                array (
+                  'Desktop' => '',
+                ),
+              ),
+            ),
+          ),
+          'customCss' => 
+          array (
+            'type' => 'string',
+            'default' => '',
+          ),
+          'editMode' => 
+          array (
+            'type' => 'boolean',
+            'default' => true,
+          ),
+          'expiredArg' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+            ),
+          ),
+          'scheduleArg' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+            ),
+          ),
+          'blockId' => 
+          array (
+            'type' => 'string',
+            'default' => '',
+          ),
+          'blockCssY' => 
+          array (
+            'type' => 'object',
+            'default' => 
+            array (
+              'items' => 
+              array (
+              ),
+            ),
+          ),
         )
 
 
@@ -541,6 +599,7 @@ class PGBlockDateCountdown
     $countdownWrapper = isset($attributes['countdownWrapper']) ? $attributes['countdownWrapper'] : [];
     $countdownWrapperOptions = isset($countdownWrapper['options']) ? $countdownWrapper['options'] : [];
     $inner = isset($attributes['inner']) ? $attributes['inner'] : [];
+    $dateCountdown = isset($attributes['dateCountdown']) ? $attributes['dateCountdown'] : [];
     $innerOptions = isset($inner['options']) ? $inner['options'] : [];
     $innerEnable = isset($innerOptions['enable']) ? $innerOptions['enable'] : true;
 
@@ -555,6 +614,7 @@ class PGBlockDateCountdown
     $wrapperEndDate = isset($wrapperOptions['endDate']) ? $wrapperOptions['endDate'] : "";
     $wrapperEndDateSrc = isset($wrapperOptions['endDateSrc']) ? $wrapperOptions['endDateSrc'] : "";
     $expiredArg = isset($attributes['expiredArg']) ? $attributes['expiredArg'] : [];
+    $scheduleTime = isset($attributes['scheduleTime']) ? $attributes['scheduleTime'] : [];
 
 
 
@@ -660,6 +720,8 @@ class PGBlockDateCountdown
 
     // date countdown 
 
+    
+
 
 
 
@@ -728,6 +790,11 @@ class PGBlockDateCountdown
       "startDate" => $startDate,
       "endDate" => $endDate,
       "blockId" => $blockId,
+      "dateCountdown" => $dateCountdown,
+      
+      "scheduleTime" => $scheduleTime,
+      
+
 
     ];
 
@@ -745,7 +812,7 @@ class PGBlockDateCountdown
         <?php echo esc_attr($blockAlign); ?>" date-countdown-id="<?php echo esc_attr($blockId); ?>" data-date-countdown="<?php echo esc_attr(json_encode($dataAtts)) ?>"
         countdown-expired-arg="<?php echo esc_attr(json_encode($expiredArg)) ?>">
 
-        <?php if ($timeDifference > 0) {
+        <?php //if ($timeDifference > 0) {
           ?>
           <div class="countdown-wrapper">
             <?php if ($iconEnable): ?>
@@ -1009,7 +1076,7 @@ class PGBlockDateCountdown
           </div>
 
           <?php
-        } ?>
+        //} ?>
 
 
 

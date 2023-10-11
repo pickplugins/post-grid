@@ -358,6 +358,8 @@ function post_grid_posts_loop($args)
 
 
 
+    if (!empty($_GET['lang']))
+        $query_args['lang'] = sanitize_text_field($_GET['lang']);
 
 
 

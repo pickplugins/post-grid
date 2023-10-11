@@ -205,22 +205,92 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			var date = new Date(startDate * 1000);
 			startDate = date.toISOString().slice(0, 16);
 
-			const totalTime =
-				(everDay * 24 * 60 * 60 + everHour * 60 * 60 + everMinute * 60) * 1000;
-			const everStart = new Date().getTime();
-			const everEnd = everStart + totalTime;
+			//cookie
 
-			let everDuration = everEnd - everStart;
+			let everDurationX = 0;
+
+			// Function to read a cookie by name
+			function getCookie(cookieName) {
+				const name = cookieName + "=";
+				const decodedCookie = decodeURIComponent(document.cookie);
+				const cookieArray = decodedCookie.split(";");
+				for (let i = 0; i < cookieArray.length; i++) {
+					let cookie = cookieArray[i].trim();
+					if (cookie.indexOf(name) === 0) {
+						return cookie.substring(name.length, cookie.length);
+					}
+				}
+				return null;
+			}
+
+			// Function to set a cookie with a name, value, and expiration date
+			function setCookie(cookieName, cookieValue, days) {
+				const d = new Date();
+				d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+				const expires = "expires=" + d.toUTCString();
+				document.cookie =
+					cookieName + "=" + cookieValue + "; " + expires + "; path=/";
+			}
+
+			// Check if the cookie exists
+			const cookieData = getCookie("pgEverGreenCountdownData");
+
+			if (!cookieData) {
+				const totalTime =
+					(everDay * 24 * 60 * 60 + everHour * 60 * 60 + everMinute * 60) *
+					1000;
+				// It's the first visit or the cookie is not present, start the countdown from the current time.
+
+				const everStart = new Date().getTime();
+				// Calculate the end time (everEnd) based on your logic
+				const everEnd = everStart + totalTime; // Calculate the end time as needed
+				let everDuration = everEnd - everStart;
+				everDurationX = everDuration;
+
+				// Create a JSON object to store both start and end times
+				const pgEverGreenCountdownData = {
+					startTime: everStart,
+					endTime: everEnd,
+				};
+				setCookie(
+					"pgEverGreenCountdownData",
+					JSON.stringify(pgEverGreenCountdownData),
+					30
+				); // Set the cookie for 30 days
+			} else {
+				// The cookie exists, retrieve the JSON object
+				const pgEverGreenCountdownData = JSON.parse(cookieData);
+				const everStart = new Date().getTime();
+				const everEnd = pgEverGreenCountdownData.endTime;
+
+				// Calculate the remaining time and continue the countdown
+				let everDuration = everEnd - everStart;
+				everDurationX = everDuration;
+			}
+
+			// console.log("everDuration : ", everDuration);
+			//cookie
+
+			// const totalTime =
+			// 	(everDay * 24 * 60 * 60 + everHour * 60 * 60 + everMinute * 60) * 1000;
+			// const everStart = new Date().getTime();
+			// const everEnd = everStart + totalTime;
+
+			// let everDuration = everEnd - everStart;
 
 			setInterval(() => {
 				if (dateCountdownType == "fixed") {
 					countdown(blockId, startDate, endDate);
 				}
+
 				if (dateCountdownType == "everGreen") {
+					// document.cookie = "pgDateCountdownEverGreenTime=" + everDuration;
+					// console.log("pgDateCountdownEverGreenTime");
+
 					var countdownWrap = document.querySelector(".countdown-wrapper");
 					countdownWrap.style.display = "none";
 
-					if (everDuration > 0) {
+					if (everDurationX > 0) {
 						const targetSecond = document.querySelector(
 							"." + blockId + " .second-countdown"
 						);
@@ -235,15 +305,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						);
 
 						countdownWrap.style.display = "flex";
-						everDuration -= 1000;
-						const days = Math.floor(everDuration / (1000 * 60 * 60 * 24));
+						everDurationX -= 1000;
+						const days = Math.floor(everDurationX / (1000 * 60 * 60 * 24));
 						const hours = Math.floor(
-							(everDuration % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+							(everDurationX % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
 						);
 						const minutes = Math.floor(
-							(everDuration % (1000 * 60 * 60)) / (1000 * 60)
+							(everDurationX % (1000 * 60 * 60)) / (1000 * 60)
 						);
-						const seconds = Math.floor((everDuration % (1000 * 60)) / 1000);
+						const seconds = Math.floor((everDurationX % (1000 * 60)) / 1000);
 						const formattedDays = String(days).padStart(2, "0");
 						const formattedHours = String(hours).padStart(2, "0");
 						const formattedMinutes = String(minutes).padStart(2, "0");

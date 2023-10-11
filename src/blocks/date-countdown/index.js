@@ -154,7 +154,7 @@ registerBlockType("post-grid/date-countdown", {
 				options: {
 					tag: "div",
 					class: "",
-					type: "fixed",
+					type: "",
 					everGreenTime: {
 						day: "",
 						hour: "",
@@ -2881,7 +2881,6 @@ registerBlockType("post-grid/date-countdown", {
 											No media added
 										</div>
 									)}
-									{/* {JSON.stringify(scheduleTime)} */}
 
 									<ReactSortable
 										list={scheduleTime}
@@ -2889,7 +2888,7 @@ registerBlockType("post-grid/date-countdown", {
 										setList={(item) => {
 											setAttributes({ scheduleTime: scheduleTime });
 										}}>
-										{scheduleTime?.map((item, index) => (
+										{scheduleTime.map((item, index) => (
 											<div key={item.id} className="">
 												<PanelBody
 													title={
@@ -2952,7 +2951,7 @@ registerBlockType("post-grid/date-countdown", {
 																<label for="">Compare</label>
 																<SelectControl
 																	label=""
-																	value={item.weekdays.compare}
+																	value={item.weekdays?.compare}
 																	options={[
 																		{ label: "=", value: "=" },
 																		{ label: "!=", value: "!=" },
@@ -2975,12 +2974,12 @@ registerBlockType("post-grid/date-countdown", {
 																/>
 															</PanelRow>
 
-															{(item.weekdays.compare == "=" ||
-																item.weekdays.compare == "!=" ||
-																item.weekdays.compare == ">" ||
-																item.weekdays.compare == "<" ||
-																item.weekdays.compare == ">=" ||
-																item.weekdays.compare == "<=") && (
+															{(item.weekdays?.compare == "=" ||
+																item.weekdays?.compare == "!=" ||
+																item.weekdays?.compare == ">" ||
+																item.weekdays?.compare == "<" ||
+																item.weekdays?.compare == ">=" ||
+																item.weekdays?.compare == "<=") && (
 																<>
 																	<PanelRow className="mb-4">
 																		<label for="">Values</label>
@@ -3015,8 +3014,8 @@ registerBlockType("post-grid/date-countdown", {
 																	</PanelRow>
 																</>
 															)}
-															{(item.weekdays.compare == "between" ||
-																item.weekdays.compare == "exist") && (
+															{(item.weekdays?.compare == "between" ||
+																item.weekdays?.compare == "exist") && (
 																// <>
 																// 	<PanelRow className="mb-4">
 																// 		<label for="">Values</label>
@@ -4691,12 +4690,27 @@ registerBlockType("post-grid/date-countdown", {
 
 													var wrapper = { ...atts.wrapper };
 													var countdownWrapper = { ...atts.countdownWrapper };
+													var dateCountdown = { ...atts.dateCountdown };
+													var scheduleTime = { ...atts.scheduleTime };
+													console.log("scheduleTime : ", scheduleTime);
+													console.log("scheduleTime : ", typeof scheduleTime);
+
+													console.log(Object.entries(scheduleTime));
+
+													var scheduleTimeXX = Object.entries(scheduleTime).map(
+														(arg) => {
+															return arg[1];
+														}
+													);
+													console.log(scheduleTimeXX);
+
 													var inner = { ...atts.inner };
 													var items = { ...atts.items };
 													var dayWrap = { ...atts.dayWrap };
 													var day = { ...atts.day };
 													var hourWrap = { ...atts.hourWrap };
 													var hour = { ...atts.hour };
+													var minuteWrap = { ...atts.minuteWrap };
 													var minute = { ...atts.minute };
 													var secondWrap = { ...atts.secondWrap };
 													var second = { ...atts.second };
@@ -4704,9 +4718,10 @@ registerBlockType("post-grid/date-countdown", {
 													var label = { ...atts.label };
 													var prefix = { ...atts.prefix };
 													var postfix = { ...atts.postfix };
+													var icon = { ...atts.icon };
+													var expiredArg = { ...atts.expiredArg };
 
 													var blockCssY = { ...atts.blockCssY };
-													var customCss = { ...atts.customCss };
 
 													var blockCssObj = {};
 
@@ -4731,7 +4746,7 @@ registerBlockType("post-grid/date-countdown", {
 													setAttributes({
 														wrapper: wrapper,
 														dateCountdown: dateCountdown,
-														scheduleTime: scheduleTime,
+														scheduleTime: scheduleTimeXX,
 														countdownWrapper: countdownWrapper,
 														inner: inner,
 														items: items,
@@ -4749,7 +4764,6 @@ registerBlockType("post-grid/date-countdown", {
 														prefix: prefix,
 														postfix: postfix,
 														expiredArg: expiredArg,
-														customCss: customCss,
 													});
 
 													var blockCssRules =

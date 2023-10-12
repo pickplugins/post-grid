@@ -451,7 +451,7 @@ class PGBlockWooPrice
 
                 <?php
 
-                if ($product_type != 'variable'):
+                if ($product_type == 'simple' || $product_type == 'external' ):
                     $regular_price = ($product != null) ? $product->get_regular_price() : '';
                     $sale_price = ($product != null) ? $product->get_sale_price() : '';
                     ?>
@@ -492,7 +492,6 @@ class PGBlockWooPrice
                     <?php
 
                 endif;
-                
                 if ($product_type == 'variable'):
 
                     $min_price = ($product != null) ? $product->get_variation_price() : '';
@@ -526,7 +525,6 @@ class PGBlockWooPrice
                                     $child_prices[] = get_post_meta( $child_id, '_price', true );
                                 }
                                 $child_prices = array_unique( $child_prices );
-                                var_dump($child_prices);
 
                                 $min_price = min( $child_prices );
                                     $max_price = max( $child_prices );

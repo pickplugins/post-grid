@@ -4,7 +4,7 @@
 	Tags: post grid, post grid block, block, custom post grid, post type grid, grid display,  grid layout, post list, masonry grid
 	Requires at least: 5.0.0
 	Tested up to: 6.3
-	Stable tag: 2.2.54
+	Stable tag: 2.2.55
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -382,6 +382,25 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 
 
+
+= 2.2.55 =
+* 2023-10-12 - add - New block added - Date countdown
+* 2023-10-12 - fix - Woo Price Block - Group product price issue fixed.
+* 2023-10-12 - fix - Image Block - Lightbox toggle issue fixed
+* 2023-10-12 - fix - Accordion Block - Icon, Label icon update issue fixed.
+
+
+= 2.2.54 =
+* 2023-09-16 - fix - Post Categories Block - Undefined issue fixed.
+* 2023-09-18 - add - WooCommerce Price Block Added
+* 2023-09-18 - add - WooCommerce Product SKU Block Added
+* 2023-09-18 - add - WooCommerce Total Sale Block Added
+* 2023-09-18 - add - WooCommerce Stock Quantity Block Added
+* 2023-09-18 - add - WooCommerce Product Info Block Added
+* 2023-09-18 - add - WooCommerce On Sale Block Added
+* 2023-09-18 - add - WooCommerce In Stock Badge Block Added
+* 2023-09-18 - add - WooCommerce Ratting Block Added
+* 2023-09-18 - add - WooCommerce Add to Cart Block Added
 
 = 2.2.54 =
 * 2023-08-31 - fix - Style Component - Class duplicate issue fixed.

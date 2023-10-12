@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			}
 
 			// Check if the cookie exists
-			const cookieData = getCookie("pgEverGreenCountdownData");
+			const cookieData = getCookie("pgEverGreenCountdownData" + blockId);
 
 			if (!cookieData) {
 				const totalTime =
@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 					endTime: everEnd,
 				};
 				setCookie(
-					"pgEverGreenCountdownData",
+					"pgEverGreenCountdownData" + blockId,
 					JSON.stringify(pgEverGreenCountdownData),
 					10
 				); // Set the cookie for 30 days

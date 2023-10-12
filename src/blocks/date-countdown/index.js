@@ -136,10 +136,6 @@ registerBlockType("post-grid/date-countdown", {
 				options: {
 					tag: "div",
 					class: "",
-					startDate: "",
-					endDate: "",
-					startDateSrc: "",
-					endDateSrc: "",
 				},
 
 				styles: {
@@ -155,24 +151,16 @@ registerBlockType("post-grid/date-countdown", {
 					tag: "div",
 					class: "",
 					type: "",
+					startDate: "",
+					endDate: "",
+					startDateSrc: "",
+					endDateSrc: "",
 					everGreenTime: {
 						day: "",
 						hour: "",
 						minute: "",
 						second: "",
 					},
-					scheduleTime: [
-						{
-							startTime: "",
-							endTime: "",
-							weekdays: [],
-						},
-						// {
-						//   id: "sEndTime",
-						//   label: "End Time",
-						//   sEndTime: "",
-						// },
-					],
 				},
 			},
 		},
@@ -561,60 +549,6 @@ registerBlockType("post-grid/date-countdown", {
 
 		const { replaceInnerBlocks } = useDispatch(blockEditorStore);
 
-		// var closeAnimateArgs = {
-		//   backOutDown: { label: "backOutDown", value: "backOutDown" },
-		//   backOutLeft: { label: "backOutLeft", value: "backOutLeft" },
-		//   backOutRight: { label: "backOutRight", value: "backOutRight" },
-		//   backOutUp: { label: "backOutUp", value: "backOutUp" },
-		//   bounceOut: { label: "bounceOut", value: "bounceOut" },
-		//   bounceOutDown: { label: "bounceOutDown", value: "bounceOutDown" },
-		//   bounceOutLeft: { label: "bounceOutLeft", value: "bounceOutLeft" },
-		//   bounceOutRight: { label: "bounceOutRight", value: "bounceOutRight" },
-		//   bounceOutUp: { label: "bounceOutUp", value: "bounceOutUp" },
-		//   fadeOut: { label: "fadeOut", value: "fadeOut" },
-		//   fadeOutDown: { label: "fadeOutDown", value: "fadeOutDown" },
-		//   fadeOutDownBig: { label: "fadeOutDownBig", value: "fadeOutDownBig" },
-		//   fadeOutLeft: { label: "fadeOutLeft", value: "fadeOutLeft" },
-		//   fadeOutLeftBig: { label: "fadeOutLeftBig", value: "fadeOutLeftBig" },
-		//   fadeOutRight: { label: "fadeOutRight", value: "fadeOutRight" },
-		//   fadeOutRightBig: { label: "fadeOutRightBig", value: "fadeOutRightBig" },
-		//   fadeOutUp: { label: "fadeOutUp", value: "fadeOutUp" },
-		//   fadeOutUpBig: { label: "fadeOutUpBig", value: "fadeOutUpBig" },
-		//   fadeOutTopLeft: { label: "fadeOutTopLeft", value: "fadeOutTopLeft" },
-		//   fadeOutTopRight: { label: "fadeOutTopRight", value: "fadeOutTopRight" },
-		//   fadeOutBottomRight: {
-		//     label: "fadeOutBottomRight",
-		//     value: "fadeOutBottomRight",
-		//   },
-		//   fadeOutBottomLeft: {
-		//     label: "fadeOutBottomLeft",
-		//     value: "fadeOutBottomLeft",
-		//   },
-		//   rotateOut: { label: "rotateOut", value: "rotateOut" },
-		//   rotateOutDownLeft: {
-		//     label: "rotateOutDownLeft",
-		//     value: "rotateOutDownLeft",
-		//   },
-		//   rotateOutDownRight: {
-		//     label: "rotateOutDownRight",
-		//     value: "rotateOutDownRight",
-		//   },
-		//   rotateOutUpLeft: { label: "rotateOutUpLeft", value: "rotateOutUpLeft" },
-		//   rotateOutUpRight: {
-		//     label: "rotateOutUpRight",
-		//     value: "rotateOutUpRight",
-		//   },
-		//   zoomOut: { label: "zoomOut", value: "zoomOut" },
-		//   zoomOutDown: { label: "zoomOutDown", value: "zoomOutDown" },
-		//   zoomOutLeft: { label: "zoomOutLeft", value: "zoomOutLeft" },
-		//   zoomOutRight: { label: "zoomOutRight", value: "zoomOutRight" },
-		//   zoomOutUp: { label: "zoomOutUp", value: "zoomOutUp" },
-		//   slideOutDown: { label: "slideOutDown", value: "slideOutDown" },
-		//   slideOutLeft: { label: "slideOutLeft", value: "slideOutLeft" },
-		//   slideOutRight: { label: "slideOutRight", value: "slideOutRight" },
-		//   slideOutUp: { label: "slideOutUp", value: "slideOutUp" },
-		// };
-
 		var scheduleTimeSet = [
 			{
 				id: "startTime",
@@ -699,6 +633,19 @@ registerBlockType("post-grid/date-countdown", {
 		};
 		let visibleArgs = applyFilters("pgFormvisibleArgs", visibleArgsBasic);
 
+		var typeArgsBasic = {
+			fixed: { label: "Fixed", value: "fixed" },
+			everGreen: { label: "Ever Green", value: "everGreen", isPro: true },
+			scheduled: { label: "Scheduled", value: "scheduled", isPro: true },
+		};
+
+		let typeArgs = applyFilters("pgDateCountdownTypes", typeArgsBasic);
+
+		function setType(option, index) {
+			var options = { ...dateCountdown.options, type: option.value };
+			setAttributes({ dateCountdown: { ...dateCountdown, options: options } });
+		}
+
 		var weekDayNumn = {
 			0: { label: "Sunday", value: 0 },
 			1: { label: "Monday", value: 1 },
@@ -729,16 +676,19 @@ registerBlockType("post-grid/date-countdown", {
 		// const [remindMiliSecond, setRemindMiliSecond] = useState(0);
 
 		useEffect(() => {
-			const dateInput1 = wrapper.options.startDate;
-			const dateInput2 = wrapper.options.endDate;
+			const dateInput1 = dateCountdown.options.startDate;
+			console.log("Demo : ", dateInput1);
+			const dateInput2 = dateCountdown.options.endDate;
+			console.log("dateInput2 : ", dateInput2);
 			const currentDate = new Date();
-			// const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-			// const formattedDate = currentDate.toLocaleDateString(undefined, options);
 
+			if (dateInput1.length == 0 || dateInput2.length == 0) {
+				return;
+			}
 			var date1 = "";
 			var date2 = "";
 			var startDate = "";
-			if (wrapper.options.startDateSrc?.length == 0) {
+			if (dateCountdown.options.startDateSrc?.length == 0) {
 				date1 = new Date(dateInput1);
 			} else {
 				date1 =
@@ -747,7 +697,7 @@ registerBlockType("post-grid/date-countdown", {
 						: new Date(dateInput1);
 			}
 
-			if (wrapper.options.endDateSrc.length == 0) {
+			if (dateCountdown.options.endDateSrc.length == 0) {
 				date2 = new Date(dateInput2);
 			} else {
 				date2 =
@@ -756,7 +706,6 @@ registerBlockType("post-grid/date-countdown", {
 						: new Date(dateInput2);
 			}
 
-			//  date1 = new Date(dateInput1);
 			if (currentDate > date1) {
 				startDate = currentDate;
 			} else if (currentDate < date1) {
@@ -764,25 +713,21 @@ registerBlockType("post-grid/date-countdown", {
 			} else {
 				startDate = date1;
 			}
-			// const startDate = currentDate > date1 ? currentDate : date1;
 
 			const timeDifference = date2 - startDate;
 			setRemindTime(timeDifference);
 
-			// Check if current date is less than date1
 			if (currentDate < date1) {
-				// If current date is less, set remindTime to 0 to prevent countdown
 				setRemindTime(0);
 			}
 		}, [
 			clientId,
-			wrapper.options.startDate,
-			wrapper.options.startDateSrc,
-			wrapper.options.endDateSrc,
-			wrapper.options.endDate,
+			dateCountdown.options.startDate,
+			dateCountdown.options.startDateSrc,
+			dateCountdown.options.endDateSrc,
+			dateCountdown.options.endDate,
 		]);
 
-		// Use the useEffect hook to update the remaining time every second
 		useEffect(() => {
 			if (remindTime > 0) {
 				const intervalId = setInterval(() => {
@@ -812,7 +757,11 @@ registerBlockType("post-grid/date-countdown", {
 
 				return () => clearInterval(intervalId);
 			}
-		}, [remindTime, wrapper.options.startDate, wrapper.options.endDate]);
+		}, [
+			remindTime,
+			dateCountdown.options.startDate,
+			dateCountdown.options.endDate,
+		]);
 
 		// day hours minutes seconds
 
@@ -866,18 +815,6 @@ registerBlockType("post-grid/date-countdown", {
 					setRemindHours(formattedHours);
 					setRemindMinutes(formattedMinutes);
 					setRemindSeconds(formattedSeconds);
-
-					// console.log("remindDay", remindDays);
-					// console.log("remindHour", remindHours);
-					// console.log("remindMinute", remindMinutes);
-					// console.log("remindSecond", remindSeconds);
-					// if (remindTimeX <= 0) {
-					//   setRemindDay("0");
-					//   setRemindHour("0");
-					//   setRemindMinute("0");
-					//   setRemindSecond("0");
-					//   clearInterval(intervalId);
-					// }
 				}, 1000);
 
 				return () => clearInterval(intervalId);
@@ -885,57 +822,6 @@ registerBlockType("post-grid/date-countdown", {
 		}, [remindTimes]);
 
 		// Ever Green End
-
-		// schedule time start
-
-		// const [scheduleTimesDifference, setScheduleTimesDifference] = useState(0);
-		// const [scheduleTimes, setScheduleTimes] = useState(0);
-		// const [scheduleDays, setScheduleDays] = useState(0);
-		// const [scheduleHours, setScheduleHours] = useState(0);
-		// const [scheduleMinutes, setScheduleMinutes] = useState(0);
-		// const [scheduleSeconds, setScheduleSeconds] = useState(0);
-		// console.log("scheduleTimeDiff: ", scheduleTimesDifference);
-
-		// scheduleTime.forEach((items) => {
-		// 	console.log(items);
-		// 	var startTime = items.startTime;
-		// 	var endTime = items.endTime;
-		// 	console.log(startTime, endTime);
-		// 	// items.forEach((item) => {
-		// 	if (items.weekdays?.compare == "=") {
-		// 		const selectedWeekdays = parseInt(items.weekdays?.value);
-		// 		// console.log("selectedWeekdays: ",selectedWeekdays)
-
-		// 		const currentDayOfWeek = new Date().getDay();
-		// 		// console.log("currentDayOfWeek: ",currentDayOfWeek)
-
-		// 		if (selectedWeekdays === currentDayOfWeek) {
-		// 			console.log(startTime);
-		// 			console.log(endTime);
-
-		// 			// useEffect(() => {
-		// 			const date1 = new Date(`2000-01-01T${startTime || "00:00"}:00Z`);
-		// 			const date2 = new Date(`2000-01-01T${endTime || "00:00"}:00Z`);
-		// 			const timeDifference = date2 - date1;
-		// 			console.log("timediff: ", timeDifference);
-		// 			// setScheduleTimesDifference(timeDifference);
-		// 			// }, [scheduleTime]);
-		// 		} else {
-		// 		}
-		// 	}
-		// 	// }
-		// 	// )
-		// });
-
-		// useEffect(() => {
-		// 	console.log("first:", scheduleTimesDifference);
-		// }, [scheduleTimesDifference]);
-
-		// if(scheduleTime.weekDays.compare == "="){
-		// 	console.log("hello");
-		// }
-
-		// schedule time end
 
 		function onChangeIcon(arg) {
 			var options = {
@@ -2630,37 +2516,34 @@ registerBlockType("post-grid/date-countdown", {
 						<div className="pb-3 mb-4">
 							<PanelRow className="my-4">
 								<label for="">Date Countdown Type</label>
-
-								<SelectControl
-									// className="font-bold"
-									label=""
-									value={dateCountdown.options.type}
-									options={[
-										{ label: "Choose Type", value: "" },
-
-										// { label: "Before Prefix", value: "beforePrefix" },
-										// { label: "After Prefix", value: "afterPrefix" },
-										{ label: "Fixed", value: "fixed" },
-										{ label: "Ever Green", value: "everGreen" },
-										{ label: "Scheduled", value: "scheduled" },
-										// { label: "After Postfix", value: "afterPostfix" },
-										// { label: "Before Link", value: "beforeLink" },
-										// { label: "After Link", value: "afterLink" },
-									]}
-									onChange={(newVal) => {
-										var options = {
-											...dateCountdown.options,
-											type: newVal,
-										};
-										setAttributes({
-											dateCountdown: { ...dateCountdown, options: options },
-										});
-									}}
-								/>
+								<PGDropdown
+									position="bottom right"
+									variant="secondary"
+									// buttonTitle={
+									// 	dateCountdown.options.type.length == 0
+									// 		? "Choose"
+									// 		: dateCountdown.options.type
+									// }
+									buttonTitle={
+										typeArgs[
+											dateCountdown.options == undefined
+												? dateCountdown.type
+												: dateCountdown.options.type
+										] == undefined
+											? "Choose"
+											: typeArgs[
+													dateCountdown.options == undefined
+														? dateCountdown.type
+														: dateCountdown.options.type
+											  ].label
+									}
+									options={typeArgs}
+									onChange={setType}
+									value={[]}></PGDropdown>
 							</PanelRow>
 							{dateCountdown.options.type == "fixed" && (
 								<>
-									{wrapper.options.startDateSrc?.length == 0 && (
+									{dateCountdown.options.startDateSrc?.length == 0 && (
 										<PanelRow className="block mb-4">
 											<label for="" className="font-bold mb-2 ">
 												Start Date?
@@ -2669,14 +2552,17 @@ registerBlockType("post-grid/date-countdown", {
 											<InputControl
 												type="datetime-local"
 												className="b-2"
-												value={wrapper.options.startDate}
+												value={dateCountdown.options.startDate}
 												onChange={(newVal) => {
 													var options = {
-														...wrapper.options,
+														...dateCountdown.options,
 														startDate: newVal,
 													};
 													setAttributes({
-														wrapper: { ...wrapper, options: options },
+														dateCountdown: {
+															...dateCountdown,
+															options: options,
+														},
 													});
 												}}
 											/>
@@ -2687,35 +2573,27 @@ registerBlockType("post-grid/date-countdown", {
 										<label for="">Start Date Source</label>
 										<SelectControl
 											label=""
-											value={wrapper.options.startDateSrc}
+											value={dateCountdown.options.startDateSrc}
 											options={[
 												{ label: "Choose", value: "" },
 												{
 													label: "WooCommerce Sale price dates",
 													value: "wc_sale_price_date_from",
 												},
-												// { label: "H2", value: "h2" },
-												// { label: "H3", value: "h3" },
-												// { label: "H4", value: "h4" },
-												// { label: "H5", value: "h5" },
-												// { label: "H6", value: "h6" },
-												// { label: "SPAN", value: "span" },
-												// { label: "DIV", value: "div" },
-												// { label: "P", value: "p" },
 											]}
 											onChange={(newVal) => {
 												var options = {
-													...wrapper.options,
+													...dateCountdown.options,
 													startDateSrc: newVal,
 												};
 												setAttributes({
-													wrapper: { ...wrapper, options: options },
+													dateCountdown: { ...dateCountdown, options: options },
 												});
 											}}
 										/>
 									</PanelRow>
 
-									{wrapper.options.endDateSrc.length == 0 && (
+									{dateCountdown.options.endDateSrc.length == 0 && (
 										<PanelRow className="block mb-2">
 											<label for="" className="font-bold mb-2 ">
 												End Date?
@@ -2724,11 +2602,17 @@ registerBlockType("post-grid/date-countdown", {
 											<InputControl
 												type="datetime-local"
 												className="mr-2"
-												value={wrapper.options.endDate}
+												value={dateCountdown.options.endDate}
 												onChange={(newVal) => {
-													var options = { ...wrapper.options, endDate: newVal };
+													var options = {
+														...dateCountdown.options,
+														endDate: newVal,
+													};
 													setAttributes({
-														wrapper: { ...wrapper, options: options },
+														dateCountdown: {
+															...dateCountdown,
+															options: options,
+														},
 													});
 												}}
 											/>
@@ -2739,29 +2623,21 @@ registerBlockType("post-grid/date-countdown", {
 										<label for="">End Date Source</label>
 										<SelectControl
 											label=""
-											value={wrapper.options.endDateSrc}
+											value={dateCountdown.options.endDateSrc}
 											options={[
 												{ label: "Choose", value: "" },
 												{
 													label: "WooCommerce Sale price dates",
 													value: "wc_sale_price_date_to",
 												},
-												// { label: "H2", value: "h2" },
-												// { label: "H3", value: "h3" },
-												// { label: "H4", value: "h4" },
-												// { label: "H5", value: "h5" },
-												// { label: "H6", value: "h6" },
-												// { label: "SPAN", value: "span" },
-												// { label: "DIV", value: "div" },
-												// { label: "P", value: "p" },
 											]}
 											onChange={(newVal) => {
 												var options = {
-													...wrapper.options,
+													...dateCountdown.options,
 													endDateSrc: newVal,
 												};
 												setAttributes({
-													wrapper: { ...wrapper, options: options },
+													dateCountdown: { ...dateCountdown, options: options },
 												});
 											}}
 										/>
@@ -2896,9 +2772,6 @@ registerBlockType("post-grid/date-countdown", {
 																	var scheduleTimeX = [...scheduleTime];
 																	scheduleTimeX.splice(index, 1);
 
-																	//console.log("scheduleTimeX: ", scheduleTimeX);
-																	//console.log("scheduleTime: ", scheduleTime);
-
 																	setAttributes({
 																		scheduleTime: scheduleTimeX,
 																	});
@@ -2942,7 +2815,7 @@ registerBlockType("post-grid/date-countdown", {
 															}}
 														/>
 													</PanelRow>
-													<PanelRow>
+													<>
 														<>
 															<PanelRow>
 																<label for="">Compare</label>
@@ -3013,70 +2886,12 @@ registerBlockType("post-grid/date-countdown", {
 															)}
 															{(item.weekdays?.compare == "between" ||
 																item.weekdays?.compare == "exist") && (
-																// <>
-																// 	<PanelRow className="mb-4">
-																// 		<label for="">Values</label>
-																// 		<PGDropdown
-																// 			position="bottom right"
-																// 			variant="secondary"
-																// 			buttonTitle={"Choose Days"}
-																// 			options={[
-																// 				{ label: "Sunday", value: 0 },
-																// 				{ label: "Monday", value: 1 },
-																// 				{ label: "Tuesday", value: 2 },
-																// 				{ label: "Wednesday", value: 3 },
-																// 				{ label: "Thursday", value: 4 },
-																// 				{ label: "Friday", value: 5 },
-																// 				{ label: "Saturday", value: 6 },
-																// 			]}
-																// 			onChange={(newVal) => {
-																// 				var scheduleTimeX = {
-																// 					...scheduleTime,
-																// 				};
-																// 				scheduleTimeX[index].weekdays.values.join(newVal.value);
-																// 				setAttributes({
-																// 					scheduleTime: scheduleTimeX,
-																// 				});
-																// 			}}
-																// 			value={item.weekdays.values}></PGDropdown>
-																// 	</PanelRow>
-
-																// 	<div>
-																// 		{item.weekdays.values.map((x, i) => {
-																// 			return (
-																// 				<div className="flex justify-between my-1">
-																// 					<span>{weekDayNumn[x].label}</span>
-																// 					<span
-																// 						className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																// 						onClick={(ev) => {
-																// 							var scheduleTimeX = {
-																// 								...scheduleTime,
-																// 							};
-																// 							item.weekdays.values.splice(i, 1);
-
-																// 							scheduleTimeX[index].weekdays.values= item.weekdays.values;
-																// 							setAttributes({
-																// 								scheduleTime: scheduleTimeX,
-																// 							});
-																// 						}}>
-																// 						<Icon fill="#fff" icon={close} />
-																// 					</span>
-																// 				</div>
-																// 			);
-																// 		})}
-																// 	</div>
-																// </>
 																<>
 																	<PanelRow className="mb-4">
 																		<label htmlFor="">Values</label>
 																		<PGDropdown
 																			position="bottom right"
 																			variant="secondary"
-																			// buttonTitle={
-																			// 	item.weekdays.values.length === 0
-																			// 		? "Choose Days"
-																			// 		: item.weekdays.values.map((value) => weekDayNumn[value].label).join(", ")
-																			// }
 																			buttonTitle={"Choose Days"}
 																			options={[
 																				{ label: "Sunday", value: 0 },
@@ -3151,7 +2966,7 @@ registerBlockType("post-grid/date-countdown", {
 																</>
 															)}
 														</>
-													</PanelRow>
+													</>
 												</PanelBody>
 											</div>
 										))}
@@ -3595,21 +3410,6 @@ registerBlockType("post-grid/date-countdown", {
 						</PanelBody>
 
 						<PanelBody title="Second" initialOpen={false}>
-							{/* <ToggleControl
-                label="Enable Second?"
-                className="my-4"
-                help={secondEnable ? "Second enabled" : "Second disabled."}
-                checked={secondEnable ? true : false}
-                onChange={(e) => {
-                  var options = {
-                    ...second.options,
-                    enable: second.options.enable ? false : true,
-                  };
-                  setAttributes({
-                    second: { ...second, options: options },
-                  });
-                }}
-              /> */}
 							<PanelRow className="mb-4">
 								<label for="">Label: </label>
 								<InputControl
@@ -3737,21 +3537,6 @@ registerBlockType("post-grid/date-countdown", {
 						</PanelBody>
 
 						<PanelBody title="Minute" initialOpen={false}>
-							{/* <ToggleControl
-                label="Enable Minute?"
-                className="my-4"
-                help={minuteEnable ? "Minute enabled" : "Minute disabled."}
-                checked={minuteEnable ? true : false}
-                onChange={(e) => {
-                  var options = {
-                    ...minute.options,
-                    enable: minute.options.enable ? false : true,
-                  };
-                  setAttributes({
-                    minute: { ...minute, options: options },
-                  });
-                }}
-              /> */}
 							<PanelRow className="my-4">
 								<label for="">Label: </label>
 								<InputControl
@@ -3867,21 +3652,6 @@ registerBlockType("post-grid/date-countdown", {
 						</PanelBody>
 
 						<PanelBody title="Hour" initialOpen={false}>
-							{/* <ToggleControl
-                label="Enable Hour?"
-                className="my-4"
-                help={hourEnable ? "Hour enabled" : "Hour disabled."}
-                checked={hourEnable ? true : false}
-                onChange={(e) => {
-                  var options = {
-                    ...hour.options,
-                    enable: hour.options.enable ? false : true,
-                  };
-                  setAttributes({
-                    hour: { ...hour, options: options },
-                  });
-                }}
-              /> */}
 							<PanelRow className="my-4">
 								<label for="">Label: </label>
 								<InputControl
@@ -3997,21 +3767,6 @@ registerBlockType("post-grid/date-countdown", {
 						</PanelBody>
 
 						<PanelBody title="Day" initialOpen={false}>
-							{/* <ToggleControl
-                label="Enable Day?"
-                className="my-4"
-                help={dayEnable ? "Day enabled" : "Day disabled."}
-                checked={dayEnable ? true : false}
-                onChange={(e) => {
-                  var options = {
-                    ...day.options,
-                    enable: day.options.enable ? false : true,
-                  };
-                  setAttributes({
-                    day: { ...day, options: options },
-                  });
-                }}
-              /> */}
 							<PanelRow className="my-4">
 								<label for="">Label: </label>
 								<InputControl
@@ -4240,8 +3995,6 @@ registerBlockType("post-grid/date-countdown", {
 														options: options,
 													},
 												});
-
-												// setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
 											}}
 										/>
 									</PanelRow>
@@ -4276,14 +4029,9 @@ registerBlockType("post-grid/date-countdown", {
 											options={[
 												{ label: "Choose Position", value: "" },
 
-												// { label: "Before Prefix", value: "beforePrefix" },
-												// { label: "After Prefix", value: "afterPrefix" },
-												// { label: "Before Prefix", value: "beforePrefix" },
 												{ label: "After Postfix", value: "afterPostfix" },
-												// { label: "Before Postfix", value: "beforePostfix" },
+
 												{ label: "After Each Items", value: "afterEachItems" },
-												// { label: "Before Link", value: "beforeLink" },
-												// { label: "After Link", value: "afterLink" },
 											]}
 											onChange={(newVal) => {
 												var options = {
@@ -4368,14 +4116,10 @@ registerBlockType("post-grid/date-countdown", {
 											options={[
 												{ label: "Choose Position", value: "" },
 
-												// { label: "Before Prefix", value: "beforePrefix" },
-												// { label: "After Prefix", value: "afterPrefix" },
 												{ label: "Before Prefix", value: "beforePrefix" },
 												{ label: "After Prefix", value: "afterPrefix" },
 												{ label: "Before Postfix", value: "beforePostfix" },
 												{ label: "After Postfix", value: "afterPostfix" },
-												// { label: "Before Link", value: "beforeLink" },
-												// { label: "After Link", value: "afterLink" },
 											]}
 											onChange={(newVal) => {
 												var options = { ...label.options, position: newVal };
@@ -4450,21 +4194,6 @@ registerBlockType("post-grid/date-countdown", {
 											}}
 										/>
 									</PanelRow>
-									{/* <PanelRow className="my-4">
-                    <label for="">Prefix</label>
-
-                    <InputControl
-                      value={prefix.options.text}
-                      onChange={(newVal) => {
-                        var options = { ...prefix.options, text: newVal };
-                        setAttributes({
-                          prefix: { styles: prefix.styles, options: options },
-                        });
-
-                        // setAttributes({ prefix: { text: newVal, class: prefix.options.class, color: prefix.color, backgroundColor: prefix.backgroundColor } })
-                      }}
-                    />
-                  </PanelRow> */}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles
@@ -4530,21 +4259,6 @@ registerBlockType("post-grid/date-countdown", {
 											}}
 										/>
 									</PanelRow>
-									{/* <PanelRow className="my-4 ">
-                    <label for="">Postfix</label>
-
-                    <InputControl
-                      value={postfix.options.text}
-                      onChange={(newVal) => {
-                        var options = { ...postfix.options, text: newVal };
-                        setAttributes({
-                          postfix: { ...postfix, options: options },
-                        });
-
-                        // setAttributes({ postfix: { text: newVal, class: prefix.options.class, color: postfix.color, backgroundColor: postfix.backgroundColor } })
-                      }}
-                    />
-                  </PanelRow> */}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles

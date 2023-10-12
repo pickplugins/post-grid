@@ -21,10 +21,6 @@ const variations = [
 				options: {
 					tag: "div",
 					class: "",
-					endDate: "2023-11-05T13:17",
-					startDate: "2023-10-29T15:11",
-					endDateSrc: "",
-					startDateSrc: "",
 				},
 				styles: {},
 			},
@@ -32,7 +28,11 @@ const variations = [
 				options: {
 					tag: "div",
 					class: "",
-					type: "everGreen",
+					type: "fixed",
+					endDate: "2023-11-05T13:17",
+					startDate: "2023-10-00T15:11",
+					endDateSrc: "",
+					startDateSrc: "",
 					everGreenTime: { day: "1", hour: "1", minute: "10", second: "" },
 					scheduleTime: [{ startTime: "", endTime: "", weekdays: [] }],
 					durationMinute: "10",

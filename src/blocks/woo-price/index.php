@@ -451,7 +451,7 @@ class PGBlockWooPrice
 
                 <?php
 
-                if ($product_type != 'variable'):
+                if ($product_type == 'simple' || $product_type == 'external' ):
                     $regular_price = ($product != null) ? $product->get_regular_price() : '';
                     $sale_price = ($product != null) ? $product->get_sale_price() : '';
                     ?>
@@ -496,6 +496,40 @@ class PGBlockWooPrice
 
                     $min_price = ($product != null) ? $product->get_variation_price() : '';
                     $max_price = ($product != null) ? $product->get_variation_price('max') : '';
+
+                    ?>
+                    <span class='regular'>
+                        <span class='currency'>
+                            <?php echo wp_kses_post($currency_symbol); ?>
+                        </span>
+                        <?php echo wp_kses_post($min_price); ?>
+                    </span>
+                    <span class='regular'>
+                        <?php echo wp_kses_post($separatorText); ?>
+                    </span>
+                    <span class='regular'>
+                        <span class='currency'>
+                            <?php echo wp_kses_post($currency_symbol); ?>
+                        </span>
+
+                        <?php echo wp_kses_post($max_price); ?>
+                    </span>
+                    <?php
+
+                endif;
+
+                if ($product_type == 'grouped'):
+
+                    $child_prices = array();
+                                foreach ( $product->get_children() as $child_id ) {
+                                    $child_prices[] = get_post_meta( $child_id, '_price', true );
+                                }
+                                $child_prices = array_unique( $child_prices );
+
+                                $min_price = min( $child_prices );
+                                    $max_price = max( $child_prices );
+
+                    
 
                     ?>
                     <span class='regular'>

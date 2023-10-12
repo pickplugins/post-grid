@@ -39,10 +39,6 @@ class PGBlockDateCountdown
               array (
                 'tag' => 'div',
                 'class' => '',
-                'startDate' => '',
-                'endDate' => '',
-                'startDateSrc' => '',
-                'endDateSrc' => '',
               ),
               'styles' => 
               array (
@@ -66,7 +62,11 @@ class PGBlockDateCountdown
               array (
                 'tag' => 'div',
                 'class' => '',
-                'type' => 'fixed',
+                'type' => '',
+                'startDate' => '',
+                'endDate' => '',
+                'startDateSrc' => '',
+                'endDateSrc' => '',
                 'everGreenTime' => 
                 array (
                   'day' => '',
@@ -74,23 +74,12 @@ class PGBlockDateCountdown
                   'minute' => '',
                   'second' => '',
                 ),
-                'scheduleTime' => 
-                array (
-                  0 => 
-                  array (
-                    'startTime' => '',
-                    'endTime' => '',
-                    'weekdays' => 
-                    array (
-                    ),
-                  ),
-                ),
               ),
             ),
           ),
           'scheduleTime' => 
           array (
-            'type' => 'object',
+            'type' => 'array',
             'default' => 
             array (
               0 => 
@@ -138,11 +127,20 @@ class PGBlockDateCountdown
             array (
               'options' => 
               array (
+                'enable' => true,
                 'tag' => 'div',
                 'class' => '',
               ),
               'styles' => 
               array (
+                'color' => 
+                array (
+                  'Desktop' => '',
+                ),
+                'backgroundColor' => 
+                array (
+                  'Desktop' => '',
+                ),
               ),
             ),
           ),
@@ -527,13 +525,6 @@ class PGBlockDateCountdown
             array (
             ),
           ),
-          'scheduleArg' => 
-          array (
-            'type' => 'object',
-            'default' => 
-            array (
-            ),
-          ),
           'blockId' => 
           array (
             'type' => 'string',
@@ -600,6 +591,7 @@ class PGBlockDateCountdown
     $countdownWrapperOptions = isset($countdownWrapper['options']) ? $countdownWrapper['options'] : [];
     $inner = isset($attributes['inner']) ? $attributes['inner'] : [];
     $dateCountdown = isset($attributes['dateCountdown']) ? $attributes['dateCountdown'] : [];
+    $dateCountdownOptions = isset($dateCountdown['options']) ? $dateCountdown['options'] : [];
     $innerOptions = isset($inner['options']) ? $inner['options'] : [];
     $innerEnable = isset($innerOptions['enable']) ? $innerOptions['enable'] : true;
 
@@ -609,10 +601,10 @@ class PGBlockDateCountdown
 
     // $setting = isset($attributes['setting']) ? $attributes['setting'] : [];
     // $settingOptions = isset($setting['options']) ? $setting['options'] : [];
-    $wrapperStartDate = isset($wrapperOptions['startDate']) ? $wrapperOptions['startDate'] : "";
-    $wrapperStartDateSrc = isset($wrapperOptions['startDateSrc']) ? $wrapperOptions['startDateSrc'] : "";
-    $wrapperEndDate = isset($wrapperOptions['endDate']) ? $wrapperOptions['endDate'] : "";
-    $wrapperEndDateSrc = isset($wrapperOptions['endDateSrc']) ? $wrapperOptions['endDateSrc'] : "";
+    $dateCountdownStartDate = isset($dateCountdownOptions['startDate']) ? $dateCountdownOptions['startDate'] : "";
+    $dateCountdownStartDateSrc = isset($dateCountdownOptions['startDateSrc']) ? $dateCountdownOptions['startDateSrc'] : "";
+    $dateCountdownEndDate = isset($dateCountdownOptions['endDate']) ? $dateCountdownOptions['endDate'] : "";
+    $dateCountdownEndDateSrc = isset($dateCountdownOptions['endDateSrc']) ? $dateCountdownOptions['endDateSrc'] : "";
     $expiredArg = isset($attributes['expiredArg']) ? $attributes['expiredArg'] : [];
     $scheduleTime = isset($attributes['scheduleTime']) ? $attributes['scheduleTime'] : [];
 
@@ -668,19 +660,19 @@ class PGBlockDateCountdown
 
 
 
-    if (empty($wrapperStartDateSrc)) {
-      $wrapperStartDate = strtotime($wrapperStartDate);
+    if (empty($dateCountdownStartDateSrc)) {
+      $dateCountdownStartDate = strtotime($dateCountdownStartDate);
     } else {
-      $wrapperStartDate = !empty($_sale_price_dates_from) ? (int) $_sale_price_dates_from : strtotime($wrapperStartDate);
+      $dateCountdownStartDate = !empty($_sale_price_dates_from) ? (int) $_sale_price_dates_from : strtotime($dateCountdownStartDate);
     }
-    if (empty($wrapperEndDateSrc)) {
-      $wrapperEndDate = strtotime($wrapperEndDate);
+    if (empty($dateCountdownEndDateSrc)) {
+      $dateCountdownEndDate = strtotime($dateCountdownEndDate);
     } else {
-      $wrapperEndDate = !empty($_sale_price_dates_to) ? (int) $_sale_price_dates_to : strtotime($wrapperEndDate);
+      $dateCountdownEndDate = !empty($_sale_price_dates_to) ? (int) $_sale_price_dates_to : strtotime($dateCountdownEndDate);
     }
 
-    $endDate = date('Y-m-d\TH:i', $wrapperEndDate);
-    $startDate = date('Y-m-d\TH:i', $wrapperStartDate);
+    $endDate = date('Y-m-d\TH:i', $dateCountdownEndDate);
+    $startDate = date('Y-m-d\TH:i', $dateCountdownStartDate);
 
 
 
@@ -699,7 +691,7 @@ class PGBlockDateCountdown
 
 
 
-    $timeDifference = $wrapperEndDate - $startDate;
+    $timeDifference = $dateCountdownEndDate - $startDate;
 
 
 

@@ -4,4 +4,4 @@ node_modules
 tailwind.config.js
 package-lock.json
 .npmignore
-build
+

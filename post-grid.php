@@ -12,7 +12,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
 
-if (!defined('ABSPATH')) exit;  // if direct access 
+if (!defined('ABSPATH'))
+    exit; // if direct access 
 
 if (!class_exists('PostGrid')) {
     class PostGrid
@@ -40,6 +41,7 @@ if (!class_exists('PostGrid')) {
             require_once(post_grid_plugin_dir . 'src/blocks/menu-wrap/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/menu-wrap-item/index.php');
 
+            require_once(post_grid_plugin_dir . 'src/blocks/table-of-contents/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-title/index.php');
             require_once(post_grid_plugin_dir . 'src/blocks/post-title/patterns.php');
 
@@ -333,7 +335,7 @@ if (!class_exists('PostGrid')) {
 
             wp_enqueue_style('post_grid_skin', post_grid_plugin_url . 'assets/global/css/style.skins.css');
 
-            wp_register_style('jquery-ui',  post_grid_plugin_url . 'assets/admin/css/jquery-ui.css');
+            wp_register_style('jquery-ui', post_grid_plugin_url . 'assets/admin/css/jquery-ui.css');
 
             wp_register_style('font-awesome-4', post_grid_plugin_url . 'assets/global/css/font-awesome-4.css');
             wp_register_style('font-awesome-5', post_grid_plugin_url . 'assets/global/css/font-awesome-5.css', [], '', 'all');

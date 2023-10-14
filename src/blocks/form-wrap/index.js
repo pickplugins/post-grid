@@ -75,6 +75,7 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
+import attributes from "./attributes";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -130,63 +131,7 @@ registerBlockType("post-grid/form-wrap", {
 		),
 	},
 
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: {
-					tag: "div",
-					class: "",
-				},
-
-				styles: {},
-			},
-		},
-
-		form: {
-			type: "object",
-			default: {
-				options: {
-					class: "",
-					type: "contactForm",
-				},
-				styles: {},
-			},
-		},
-
-		visible: {
-			type: "object",
-			default: {},
-		},
-
-		onSubmit: {
-			type: "object",
-			default: {},
-		},
-
-		onProcess: {
-			type: "object",
-			default: {},
-		},
-
-		afterSubmit: {
-			type: "object",
-			default: {},
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
+	attributes: attributes,
 	usesContext: ["post-grid/popupId"],
 	providesContext: {
 		"post-grid/formId": "blockId",
@@ -242,8 +187,6 @@ registerBlockType("post-grid/form-wrap", {
 			(select) => select(blockEditorStore).getBlocks(clientId).length > 0,
 			[clientId]
 		);
-
-		
 
 		var visibleArgsBasic = {
 			userLogged: {
@@ -620,7 +563,6 @@ registerBlockType("post-grid/form-wrap", {
 					};
 				});
 
-
 				setfluentcrmLists(lists);
 			});
 
@@ -656,7 +598,6 @@ registerBlockType("post-grid/form-wrap", {
 		}, [blockCssY]);
 
 		function onFormSubmit(ev) {
-
 			ev.preventDefault();
 
 			return false;
@@ -1017,7 +958,6 @@ registerBlockType("post-grid/form-wrap", {
 											setAttributes({
 												wrapper: { ...wrapper, options: options },
 											});
-
 										}}
 									/>
 								</PanelRow>
@@ -1173,7 +1113,6 @@ registerBlockType("post-grid/form-wrap", {
 																	<div>
 																		{Object.entries(item.roles).map((x, k) => {
 																			var roleId = x[1];
-
 
 																			return (
 																				<PanelRow className="mb-4">
@@ -1669,7 +1608,6 @@ registerBlockType("post-grid/form-wrap", {
 																					<div className="p-4">
 																						<DatePicker
 																							onChange={(newDate) => {
-
 																								const dateFull = new Date(
 																									newDate
 																								);
@@ -1729,7 +1667,6 @@ registerBlockType("post-grid/form-wrap", {
 																					<div className="p-4">
 																						<DatePicker
 																							onChange={(newDate) => {
-
 																								const dateFull = new Date(
 																									newDate
 																								);
@@ -3167,7 +3104,6 @@ registerBlockType("post-grid/form-wrap", {
 
 													var blockCssRules =
 														myStore.getBlockCssRules(blockCssObj);
-
 
 													var items = { ...blockCssY.items, ...blockCssRules };
 

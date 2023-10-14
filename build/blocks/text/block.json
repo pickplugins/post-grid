@@ -1,6 +1,17 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
   "name": "post-grid/text",
+  "title": "Text",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
   "attributes": {
     "text": {
       "type": "object",
@@ -26,13 +37,5 @@
         "items": {}
       }
     }
-  },
-  "supports": {
-    "color": {
-      "link": false
-    }
-  },
-  "textdomain": "post-grid",
-  "title": "Text",
-  "category": "post-grid"
+  }
 }

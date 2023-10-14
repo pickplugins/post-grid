@@ -71,6 +71,7 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
+import attributes from "./attributes";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -93,34 +94,7 @@ registerBlockType("post-grid/flex-wrap", {
 		),
 	},
 
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: {
-					tag: "div",
-					class: "",
-				},
-
-				styles: {
-					display: { Desktop: "flex" },
-				},
-			},
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
+	attributes: attributes,
 	usesContext: ["postId", "loopIndex", "postType", "queryId"],
 
 	supports: {
@@ -161,7 +135,6 @@ registerBlockType("post-grid/flex-wrap", {
 			(select) => select(blockEditorStore).getBlocks(clientId).length > 0,
 			[clientId]
 		);
-
 
 		var icons = { bed: "", layout: "", smiley: "", columns: "", globe: "" };
 

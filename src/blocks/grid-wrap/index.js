@@ -71,6 +71,7 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
+import attributes from "./attributes";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -132,32 +133,7 @@ registerBlockType("post-grid/grid-wrap", {
 		),
 	},
 
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: {
-					tag: "div",
-					class: "",
-				},
-
-				styles: {},
-			},
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
+	attributes: attributes,
 	usesContext: ["postId", "loopIndex", "postType", "queryId"],
 
 	supports: {
@@ -392,7 +368,6 @@ registerBlockType("post-grid/grid-wrap", {
 											setAttributes({
 												wrapper: { ...wrapper, options: options },
 											});
-
 										}}
 									/>
 								</PanelRow>

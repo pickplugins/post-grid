@@ -128,7 +128,7 @@ import "./blocks/form-field-textarea";
 import "./blocks/form-field-file-multi";
 import "./blocks/form-field-file";
 
-import "./blocks/table-of-contents";
+// import "./blocks/table-of-contents";
 import "./blocks/number-counter";
 import "./blocks/date-countdown";
 

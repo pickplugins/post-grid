@@ -71,6 +71,7 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGIconPicker from "../../components/icon-picker";
+import attributes from "./attributes";
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -93,60 +94,7 @@ registerBlockType("post-grid/menu-wrap", {
 		),
 	},
 
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: {
-					tag: "div",
-					class: "",
-				},
-
-				styles: {
-					display: { Desktop: "flex" },
-				},
-			},
-		},
-
-		menuWrap: {
-			type: "object",
-			default: {
-				options: {
-					tag: "ul",
-					class: "",
-				},
-
-				styles: {
-					display: { Desktop: "flex" },
-				},
-			},
-		},
-		subMenuWrap: {
-			type: "object",
-			default: {
-				options: {
-					class: "",
-					type: "",
-				},
-				styles: {
-					backgroundColor: { Desktop: "" },
-				},
-			},
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
+	attributes: attributes,
 	usesContext: ["postId", "loopIndex", "postType", "queryId"],
 
 	supports: {

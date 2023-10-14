@@ -1,12 +1,13 @@
 var attributes = {
-	text: {
+	wrapper: {
 		type: "object",
 		default: {
 			options: {
-				content: "Hello World!",
 				tag: "div",
-				class: "pg-text",
+				class: "flex-item-wrap",
 			},
+
+			styles: {},
 		},
 	},
 
@@ -14,16 +15,13 @@ var attributes = {
 		type: "string",
 		default: "",
 	},
-
 	customCss: {
 		type: "string",
 		default: "",
 	},
-
 	blockCssY: {
 		type: "object",
 		default: { items: {} },
 	},
 };
-
 export default attributes;

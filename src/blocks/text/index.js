@@ -64,6 +64,8 @@ import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
+import attributes from "./attributes";
+console.log(JSON.stringify(attributes));
 
 var myStore = wp.data.select("postgrid-shop");
 
@@ -92,33 +94,7 @@ registerBlockType("post-grid/text", {
 		),
 	},
 
-	attributes: {
-		text: {
-			type: "object",
-			default: {
-				options: {
-					content: "Hi...",
-					tag: "div",
-					class: "pg-text",
-				},
-			},
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-
-		customCss: {
-			type: "string",
-			default: "",
-		},
-
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
+	attributes: attributes,
 	usesContext: [],
 
 	supports: {

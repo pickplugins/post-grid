@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "name": "post-grid/text",
+  "attributes": {
+    "text": {
+      "type": "object",
+      "default": {
+        "options": {
+          "content": "Hello World!",
+          "tag": "div",
+          "class": "pg-text"
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "supports": {
+    "color": {
+      "link": false
+    }
+  },
+  "textdomain": "post-grid",
+  "title": "Text",
+  "category": "post-grid"
+}

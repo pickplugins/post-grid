@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit;  // if direct access
+if (!defined('ABSPATH'))
+    exit; // if direct access
 
 register_meta('post', 'pgc_meta', [
     'type' => 'string',
@@ -16,13 +17,13 @@ function post_grid_global_css()
 
     global $postGridCustomCss;
 
-?>
+    ?>
     <style>
         /*Custom CSS*/
         <?php echo $postGridCustomCss; ?>
     </style>
 
-<?php
+    <?php
 }
 
 
@@ -44,13 +45,13 @@ function post_grid_global_cssY()
         foreach ($postGridCssY as $index => $blockCss) {
 
             if (is_array($blockCss))
-                foreach ($blockCss as  $selector => $atts) {
+                foreach ($blockCss as $selector => $atts) {
 
                     if (is_array($blockCss))
-                        foreach ($atts as  $att => $responsiveVals) {
+                        foreach ($atts as $att => $responsiveVals) {
 
                             if (is_array($responsiveVals))
-                                foreach ($responsiveVals as  $device => $val) {
+                                foreach ($responsiveVals as $device => $val) {
 
                                     if ('font-family' == $att) {
                                         $postGridFonts[$device][] = $val;
@@ -87,13 +88,13 @@ function post_grid_global_cssY()
             $reponsiveCss .= $selector . '{';
 
             if (!empty($atts))
-                foreach ($atts as  $attr => $val) {
+                foreach ($atts as $attr => $val) {
 
 
 
-                    if (!empty($val)) {
+                    if (!empty($val) && !is_array($val)) {
 
-                        $reponsiveCss .=  $attr . ':' . $val . ';';
+                        $reponsiveCss .= $attr . ':' . $val . ';';
                     }
                 }
             $reponsiveCss .= '}';
@@ -118,9 +119,9 @@ function post_grid_global_cssY()
             $reponsiveCss .= $selector . '{';
 
             if (!empty($atts))
-                foreach ($atts as  $attr => $val) {
+                foreach ($atts as $attr => $val) {
                     if (!empty($val))
-                        $reponsiveCss .=  $attr . ':' . $val . ';';
+                        $reponsiveCss .= $attr . ':' . $val . ';';
                 }
             $reponsiveCss .= '}';
         }
@@ -140,9 +141,9 @@ function post_grid_global_cssY()
             $reponsiveCss .= $selector . '{';
 
             if (!empty($atts))
-                foreach ($atts as  $attr => $val) {
+                foreach ($atts as $attr => $val) {
                     if (!empty($val))
-                        $reponsiveCss .=  $attr . ':' . $val . ';';
+                        $reponsiveCss .= $attr . ':' . $val . ';';
                 }
             $reponsiveCss .= '}';
         }
@@ -186,13 +187,13 @@ function post_grid_global_cssY()
     //var_dump($fonts);
 
 
-?>
+    ?>
 
 
 
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts);
-                                                                            ?>">
+    ?>">
     <?php
 
     ?>
@@ -202,7 +203,7 @@ function post_grid_global_cssY()
         <?php echo ($reponsiveCss); ?>
     </style>
 
-<?php
+    <?php
 
 }
 add_action('wp_footer', 'post_grid_global_cssY', 999);
@@ -214,11 +215,11 @@ function post_grid_global_vars()
     $postGridScriptData['siteUrl'] = get_bloginfo('url');
 
 
-?>
+    ?>
     <script>
         var post_grid_vars = <?php echo (wp_json_encode($postGridScriptData)); ?>
     </script>
-<?php
+    <?php
 }
 add_action('wp_footer', 'post_grid_global_vars', 999);
 
@@ -240,11 +241,11 @@ function post_grid_block_categories($categories, $context)
 
         $inserted = array(
             array(
-                'slug'  => 'post-grid',
+                'slug' => 'post-grid',
                 'title' => __('Post Grid Combo', 'boilerplate'),
             ),
             array(
-                'slug'  => 'post-grid-woo',
+                'slug' => 'post-grid-woo',
                 'title' => __('Post Grid Combo - WooCommerce', 'boilerplate'),
             ),
         );
@@ -377,13 +378,13 @@ function post_grid_page_styles()
         foreach ($pageStyles as $index => $blockCss) {
 
             if (is_array($blockCss))
-                foreach ($blockCss as  $selector => $atts) {
+                foreach ($blockCss as $selector => $atts) {
 
                     if (is_array($blockCss))
-                        foreach ($atts as  $att => $responsiveVals) {
+                        foreach ($atts as $att => $responsiveVals) {
 
                             if (is_array($responsiveVals))
-                                foreach ($responsiveVals as  $device => $val) {
+                                foreach ($responsiveVals as $device => $val) {
 
                                     if ('font-family' == $att) {
                                         $postGridFonts[$device][] = $val;
@@ -408,13 +409,13 @@ function post_grid_page_styles()
             $reponsiveCss .= $selector . '{';
 
             if (!empty($atts))
-                foreach ($atts as  $attr => $val) {
+                foreach ($atts as $attr => $val) {
 
 
 
                     if (!empty($val)) {
 
-                        $reponsiveCss .=  $attr . ':' . $val . ';';
+                        $reponsiveCss .= $attr . ':' . $val . ';';
                     }
                 }
             $reponsiveCss .= '}';
@@ -433,9 +434,9 @@ function post_grid_page_styles()
             $reponsiveCss .= $selector . '{';
 
             if (!empty($atts))
-                foreach ($atts as  $attr => $val) {
+                foreach ($atts as $attr => $val) {
                     if (!empty($val))
-                        $reponsiveCss .=  $attr . ':' . $val . ';';
+                        $reponsiveCss .= $attr . ':' . $val . ';';
                 }
             $reponsiveCss .= '}';
         }
@@ -454,9 +455,9 @@ function post_grid_page_styles()
             $reponsiveCss .= $selector . '{';
 
             if (!empty($atts))
-                foreach ($atts as  $attr => $val) {
+                foreach ($atts as $attr => $val) {
                     if (!empty($val))
-                        $reponsiveCss .=  $attr . ':' . $val . ';';
+                        $reponsiveCss .= $attr . ':' . $val . ';';
                 }
             $reponsiveCss .= '}';
         }
@@ -490,13 +491,13 @@ function post_grid_page_styles()
 
     $fonts = str_replace(" ", "+", $fontsArrStr);
 
-?>
+    ?>
 
 
 
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=<?php echo esc_html($fonts);
-                                                                            ?>">
+    ?>">
     <?php
 
     ?>
@@ -511,12 +512,12 @@ function post_grid_page_styles()
     ?>
 
     <!-- <pre> -->
-<?php
+    <?php
     //echo //var_export($reponsiveCss, true);
-?>
-<!-- </pre> -->
+    ?>
+    <!-- </pre> -->
 
-<?php
+    <?php
 
 
 

@@ -1,447 +1,469 @@
-import { registerBlockType } from '@wordpress/blocks'
-import { __ } from '@wordpress/i18n'
-import { useSelect, select, useDispatch, dispatch } from '@wordpress/data';
-import { useEntityRecord } from '@wordpress/core-data';
-import { createElement, useCallback, memo, useMemo, useState, useEffect } from '@wordpress/element'
-import { applyFilters } from '@wordpress/hooks';
-
-import { PanelBody, RangeControl, Button, Panel, PanelRow, Dropdown, DropdownMenu, SelectControl, ColorPicker, ColorPalette, ToolsPanelItem, ComboboxControl, ToggleControl, MenuGroup, MenuItem, TextareaControl, Popover } from '@wordpress/components'
-import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
-import { useEntityProp } from '@wordpress/core-data';
-
-import { InspectorControls, BlockControls, AlignmentToolbar, RichText, __experimentalLinkControl as LinkControl } from '@wordpress/block-editor'
-import { __experimentalInputControl as InputControl } from '@wordpress/components';
-import breakPoints from '../../breakpoints'
-const { RawHTML } = wp.element;
-import { store } from '../../store'
+import { registerBlockType } from "@wordpress/blocks";
+import { __ } from "@wordpress/i18n";
+import { useSelect, select, useDispatch, dispatch } from "@wordpress/data";
+import { useEntityRecord } from "@wordpress/core-data";
+import {
+	createElement,
+	useCallback,
+	memo,
+	useMemo,
+	useState,
+	useEffect,
+} from "@wordpress/element";
+import {
+	PanelBody,
+	RangeControl,
+	Button,
+	Panel,
+	PanelRow,
+	Dropdown,
+	DropdownMenu,
+	SelectControl,
+	ColorPicker,
+	ColorPalette,
+	ToolsPanelItem,
+	ComboboxControl,
+	ToggleControl,
+	MenuGroup,
+	MenuItem,
+	TextareaControl,
+	Popover,
+	Spinner,
+} from "@wordpress/components";
+import { __experimentalBoxControl as BoxControl } from "@wordpress/components";
+import { useEntityProp } from "@wordpress/core-data";
+import apiFetch from "@wordpress/api-fetch";
+import {
+	InnerBlocks,
+	useBlockProps,
+	useInnerBlocksProps,
+} from "@wordpress/block-editor";
 import { Icon, styles, settings, link, linkOff } from "@wordpress/icons";
 
-import { InnerBlocks, useBlockProps } from "@wordpress/block-editor"
+import {
+	InspectorControls,
+	BlockControls,
+	AlignmentToolbar,
+	RichText,
+	__experimentalLinkControl as LinkControl,
+} from "@wordpress/block-editor";
+import { __experimentalInputControl as InputControl } from "@wordpress/components";
+import breakPoints from "../../breakpoints";
+const { RawHTML } = wp.element;
+import { store } from "../../store";
 
-import IconToggle from '../../components/icon-toggle'
-import Typography from '../../components/typography'
-import PGMailSubsctibe from '../../components/mail-subscribe'
-import PGContactSupport from '../../components/contact-support'
-import BreakpointToggle from '../../components/breakpoint-toggle'
-import colorsPresets from '../../colors-presets'
-import PGDropdown from '../../components/dropdown'
-import PGcssDisplay from '../../components/css-display'
-import { Resizable } from 're-resizable';
+import IconToggle from "../../components/icon-toggle";
+import Typography from "../../components/typography";
+import PGMailSubsctibe from "../../components/mail-subscribe";
+import PGContactSupport from "../../components/contact-support";
+import BreakpointToggle from "../../components/breakpoint-toggle";
+import colorsPresets from "../../colors-presets";
+import PGcssTextAlign from "../../components/css-text-align";
 
-import PGtabs from '../../components/tabs'
-import PGtab from '../../components/tab'
-import PGStyles from '../../components/styles'
+import PGtabs from "../../components/tabs";
+import PGtab from "../../components/tab";
+import PGStyles from "../../components/styles";
+import PGCssLibrary from "../../components/css-library";
 
-var myStore = wp.data.select('postgrid-shop');
+var myStore = wp.data.select("postgrid-shop");
 
 registerBlockType("post-grid/table-of-contents", {
-  apiVersion: 2,
-  title: "table-of-contents",
+	apiVersion: 2,
+	title: "Table of Contents",
+	icon: {
+		// Specifying a background color to appear with the icon e.g.: in the inserter.
+		background: "#fff",
+		// Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
+		foreground: "#fff",
+		// Specifying an icon for the block
+		src: (
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+				<path
+					fill="#1d4ed8"
+					d="M17.53,16.56a1.07,1.07,0,0,0-1.06,1.06v7.93H2.12V11.2h7.93a1.06,1.06,0,0,0,0-2.12H1.81A1.81,1.81,0,0,0,0,10.89v15a1.81,1.81,0,0,0,1.81,1.81h15a1.81,1.81,0,0,0,1.81-1.81V17.62A1.06,1.06,0,0,0,17.53,16.56Z"
+				/>
+				<path
+					fill="#1d4ed8"
+					d="M19,11.63l-3-3a1.07,1.07,0,0,0-1.5,0l-9,9a1.06,1.06,0,0,0-.31.75v3A1.07,1.07,0,0,0,6.3,22.43h3a1.06,1.06,0,0,0,.75-.31l9-9A1.07,1.07,0,0,0,19,11.63Zm-4.5,3L8.86,20.31H7.36v-1.5L13,13.14Zm2.25-2.25-.75.75-1.49-1.49.75-.75Z"
+				/>
+				<circle fill="#1d4ed8" cx="24.85" cy="25.36" r="2.31" />
+				<circle fill="#1d4ed8" cx="33.69" cy="25.36" r="2.31" />
+			</svg>
+		),
+	},
+
+	attributes: {
+		text: {
+			type: "object",
+			default: {
+				options: {
+					content: "Hi...",
+					tag: "div",
+					class: "pg-text",
+				},
+			},
+		},
+
+		blockId: {
+			type: "string",
+			default: "",
+		},
+
+		customCss: {
+			type: "string",
+			default: "",
+		},
+
+		blockCssY: {
+			type: "object",
+			default: { items: {} },
+		},
+	},
+	usesContext: [],
+
+	supports: {
+		align: ["wide", "full"],
+	},
+	category: "post-grid",
+
+	edit: function (props) {
+		var attributes = props.attributes;
+		var setAttributes = props.setAttributes;
+		var context = props.context;
+		var clientId = props.clientId;
+
+		var blockId = attributes.blockId;
+
+		var blockIdX = attributes.blockId
+			? attributes.blockId
+			: "pg" + clientId.split("-").pop();
+		var blockClass = "." + blockIdX;
+
+		var text = attributes.text;
+
+		var customCss = attributes.customCss;
+		var blockCssY = attributes.blockCssY;
+
+		//const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
+		var breakPointX = myStore.getBreakPoint();
+
+		const [isLoading, setisLoading] = useState(false);
+		var [debounce, setDebounce] = useState(null); // Using the hook.
+
+		const CustomTag = `${text.options.tag}`;
+
+		// Wrapper CSS Class Selectors
+		var textSelector = blockClass;
+
+		useEffect(() => {
+			if (blockId.length == 0) {
+				setAttributes({ blockId: blockIdX });
+
+				myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+			}
+		}, [clientId]);
+
+		useEffect(() => {
+			setAttributes({ customCss: customCss });
+
+			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+		}, [customCss]);
+
+		useEffect(() => {
+			//console.log('blockId', blockId);
 
-  icon: {
-    // Specifying a background color to appear with the icon e.g.: in the inserter.
-    background: '#fff',
-    // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
-    foreground: '#fff',
-    // Specifying an icon for the block
-    src:
-      <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M25 95C25 92.2386 27.2386 90 30 90H470C472.761 90 475 92.2386 475 95V145C475 147.761 472.761 150 470 150H30C27.2386 150 25 147.761 25 145V95Z" />
-        <path d="M25 234C25 231.239 27.2386 229 30 229H470C472.761 229 475 231.239 475 234V254C475 256.761 472.761 259 470 259H30C27.2386 259 25 256.761 25 254V234Z" />
-        <path d="M25 298C25 295.239 27.2386 293 30 293H470C472.761 293 475 295.239 475 298V318C475 320.761 472.761 323 470 323H30C27.2386 323 25 320.761 25 318V298Z" />
-        <path d="M25 362C25 359.239 27.2386 357 30 357H366C368.761 357 371 359.239 371 362V382C371 384.761 368.761 387 366 387H30C27.2386 387 25 384.761 25 382V362Z" />
-      </svg>
-    ,
-  },
+			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+		}, [blockId]);
 
+		useEffect(() => {
+			//console.log('blockCssY', blockCssY.items);
 
-  attributes: {
-    wrapper: {
-      type: 'object',
-      default: {
-        options: { tag: 'div', class: '' },
-        styles:
-        {
+			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
+		}, [blockCssY]);
 
-          color: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          display: {},
+		function onPickCssLibraryText(args) {
+			var textX = Object.assign({}, text);
 
-        },
-      },
-    },
-    divider: {
-      type: 'object',
-      default: {
-        options: {
-          tag: 'div',
+			Object.entries(args).map((x) => {
+				var sudoScource = x[0];
+				var sudoScourceArgs = x[1];
+				textX[sudoScource] = sudoScourceArgs;
+			});
+
+			setAttributes({ text: textX });
 
+			var styleObj = {};
 
-          customUrl: '',
-          class: '',
-        },
+			Object.entries(args).map((x) => {
+				var sudoScource = x[0];
+				var sudoScourceArgs = x[1];
+				var elementSelector = myStore.getElementSelector(
+					sudoScource,
+					textSelector
+				);
 
-        styles: {
+				var sudoObj = {};
+				Object.entries(sudoScourceArgs).map((y) => {
+					var cssPropty = y[0];
+					var cssProptyVal = y[1];
+					var cssProptyKey = myStore.cssAttrParse(cssPropty);
+					sudoObj[cssProptyKey] = cssProptyVal;
+				});
 
-          display: {},
-          width: {},
-          height: {},
+				styleObj[elementSelector] = sudoObj;
+			});
 
-          color: { Desktop: '' },
-          padding: { "Desktop": { top: '0px', right: '0px', bottom: '0px', left: '0px' } },
+			var blockCssYX = { ...blockCssY };
 
-          margin: { Desktop: '' },
+			var items = { ...blockCssYX.items };
 
-        },
-      },
-    },
+			var cssItems = Object.assign(items, styleObj);
 
+			setAttributes({ blockCssY: { items: cssItems } });
+		}
 
+		function onChangeStyleText(sudoScource, newVal, attr) {
+			var path = [sudoScource, attr, breakPointX];
+			//let obj = Object.assign({}, text);
+			let obj = { ...text };
+			const object = myStore.updatePropertyDeep(obj, path, newVal);
 
-
-
-
-    customCss: {
-      "type": "string",
-      "default": ''
-    },
-
-
-    blockId: {
-      "type": "string",
-      "default": ''
-    },
-    blockCssY: {
-      "type": "object",
-      "default": { items: {} }
-    },
-
-
-  },
-  usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-  supports: {
-    "align": ["wide", "full"],
-
-  },
-  category: "post-grid",
-
-
-  edit: function (props) {
-
-
-    var attributes = props.attributes;
-    var setAttributes = props.setAttributes;
-    var context = props.context;
-    var clientId = props.clientId;
-
-
-    let divider = attributes.divider;
-    var wrapper = attributes.wrapper;
-    var blockId = attributes.blockId;
-
-    var blockIdX = attributes.blockId ? attributes.blockId : 'pg' + clientId.split('-').pop();
-    var blockClass = '.' + blockIdX;
-
-    var customCss = attributes.customCss;
-    var blockCssY = attributes.blockCssY;
-
-
-
-    var postId = context['postId'];
-    var postType = context['postType'];
-
-    //const [breakPointX, setBreakPointX] = useState(myStore.getBreakPoint());
-    var breakPointX = myStore.getBreakPoint();
-
-
-    const [paddingTop, setPaddingTop] = useState(parseInt(divider.styles.padding[breakPointX].top));
-    const [paddingBottom, setPaddingBottom] = useState(parseInt(divider.styles.padding[breakPointX].bottom));
-
-
-
-
-    useEffect(() => {
-
-
-      //console.log(divider);
-
-
-    }, [divider]);
-
-
-
-
-
-
-    String.prototype.strtr = function (dic) {
-      const str = this.toString(),
-        makeToken = (inx) => `{{###~${inx}~###}}`,
-
-        tokens = Object.keys(dic)
-          .map((key, inx) => ({
-            key,
-            val: dic[key],
-            token: makeToken(inx)
-          })),
-
-        tokenizedStr = tokens.reduce((carry, entry) =>
-          carry.replace(new RegExp(entry.key, "g"), entry.token), str);
-
-      return tokens.reduce((carry, entry) =>
-        carry.replace(new RegExp(entry.token, "g"), entry.val), tokenizedStr);
-    };
-
-
-
-    const [iconHtml, setIconHtml] = useState('');
-
-
-
-
-
-
-    useEffect(() => {
-
-      setAttributes({ blockId: blockIdX });
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-
-      blockCssY.items[dividerSelector] = { ...blockCssY.items[dividerSelector], 'background-color': { "Desktop": "#dddddd" } };
-
-
-
-    }, [clientId]);
-
-    // Wrapper CSS Class Selectors
-    const wrapperSelector = blockClass;
-
-
-    var dividerSelector = '';
-
-
-    if (wrapper.options.tag.length != 0) {
-
-      dividerSelector = blockClass;
-
-    } else {
-      dividerSelector = blockClass;
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-    // var breakPointList = [{ label: 'Select..', icon: '', value: '' }];
-
-    // for (var x in breakPoints) {
-
-    //   var item = breakPoints[x];
-    //   breakPointList.push({ label: item.name, icon: item.icon, value: item.id })
-
-    // }
-
-
-
-
-
-
-
-
-
-
-
-
-    useEffect(() => {
-
-
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-    }, [blockCssY]);
-
-
-    useEffect(() => {
-
-
-      setAttributes({ customCss: customCss });
-
-
-
-      myStore.generateBlockCss(blockCssY.items, blockId, customCss);
-    }, [customCss]);
-
-
-
-    useEffect(() => {
-
-    }, [divider]);
-
-
-
-
-
-
-
-
-
-    return (
-
-
-
-      <>
-
-
-
-        <InspectorControls >
-          <div className='px-3' >
-
-
-            <PanelBody title="Wrapper" initialOpen={false}>
-
-
-              <PGtabs
-                activeTab="options"
-                orientation="horizontal"
-                activeClass="active-tab"
-                onSelect={(tabName) => { }}
-                tabs={[
-                  {
-                    name: 'options',
-                    title: 'Options',
-                    icon: settings,
-                    className: 'tab-settings',
-                  },
-                  {
-                    name: 'styles',
-                    title: 'Styles',
-                    icon: styles,
-                    className: 'tab-style',
-                  },
-                ]}
-              >
-                <PGtab name="options">
-
-                  <PanelRow>
-                    <label for="">Wrapper Tag</label>
-                    <SelectControl
-                      label=""
-                      value={wrapper.options.tag}
-                      options={[
-                        { label: 'Choose', value: '' },
-                        { label: 'H1', value: 'h1' },
-                        { label: 'H2', value: 'h2' },
-                        { label: 'H3', value: 'h3' },
-                        { label: 'H4', value: 'h4' },
-                        { label: 'H5', value: 'h5' },
-                        { label: 'H6', value: 'h6' },
-                        { label: 'SPAN', value: 'span' },
-                        { label: 'DIV', value: 'div' },
-                        { label: 'P', value: 'p' },
-                      ]}
+			setAttributes({ text: object });
+
+			var elementSelector = myStore.getElementSelector(
+				sudoScource,
+				textSelector
+			);
+			var cssPropty = myStore.cssAttrParse(attr);
+
+			let itemsX = Object.assign({}, blockCssY.items);
+
+			if (itemsX[elementSelector] == undefined) {
+				itemsX[elementSelector] = {};
+			}
+
+			// if (blockCssY.items[elementSelector] == undefined) {
+			//     blockCssY.items[elementSelector] = {};
+			//   }
+
+			var cssPath = [elementSelector, cssPropty, breakPointX];
+			const cssItems = myStore.updatePropertyDeep(itemsX, cssPath, newVal);
+
+			//console.log('cssItems', cssItems);
+
+			setAttributes({ blockCssY: { items: cssItems } });
+		}
+
+		function onRemoveStyleText(sudoScource, key) {
+			//console.log('onRemoveStyleText');
+
+			var object = myStore.deletePropertyDeep(text, [
+				sudoScource,
+				key,
+				breakPointX,
+			]);
+			setAttributes({ text: object });
+
+			var elementSelector = myStore.getElementSelector(
+				sudoScource,
+				textSelector
+			);
+			var cssPropty = myStore.cssAttrParse(key);
+			var cssObject = myStore.deletePropertyDeep(blockCssY.items, [
+				elementSelector,
+				cssPropty,
+				breakPointX,
+			]);
+			setAttributes({ blockCssY: { items: cssObject } });
+		}
+
+		function onAddStyleText(sudoScource, key) {
+			var path = [sudoScource, key, breakPointX];
+			//let objX = Object.assign({}, text);
+			let obj = { ...text };
+
+			const object = myStore.addPropertyDeep(obj, path, "");
+			setAttributes({ text: object });
+		}
+
+		function onBulkAddText(sudoScource, cssObj) {
+			// var path = [sudoScource, attr, breakPointX]
+			let obj = Object.assign({}, text);
+			obj[sudoScource] = cssObj;
+
+			setAttributes({ text: obj });
+
+			var selector = myStore.getElementSelector(sudoScource, textSelector);
+			var stylesObj = {};
+
+			Object.entries(cssObj).map((args) => {
+				var attr = args[0];
+				var cssPropty = myStore.cssAttrParse(attr);
+
+				if (stylesObj[selector] == undefined) {
+					stylesObj[selector] = {};
+				}
+
+				if (stylesObj[selector][cssPropty] == undefined) {
+					stylesObj[selector][cssPropty] = {};
+				}
+
+				stylesObj[selector][cssPropty] = args[1];
+			});
+
+			var cssItems = { ...blockCssY.items };
+			var cssItemsX = { ...cssItems, ...stylesObj };
+
+			setAttributes({ blockCssY: { items: cssItemsX } });
+		}
+
+		const blockProps = useBlockProps({
+			className: ` ${blockId} pg-text`,
+		});
+
+		return (
+			<>
+				<InspectorControls>
+					<div className="">
+						<PanelBody title="Text" initialOpen={false}>
+							<PGtabs
+								activeTab="options"
+								orientation="horizontal"
+								activeClass="active-tab"
+								onSelect={(tabName) => {}}
+								tabs={[
+									{
+										name: "options",
+										title: "Options",
+										icon: settings,
+										className: "tab-settings",
+									},
+									{
+										name: "styles",
+										title: "Styles",
+										icon: styles,
+										className: "tab-style",
+									},
+									{
+										name: "css",
+										title: "CSS Library",
+										icon: styles,
+										className: "tab-css",
+									},
+								]}>
+								<PGtab name="options">
+									{/* <PanelRow>
+                    <label for="">Block Class</label>
+
+                    <InputControl
+                      value={blockId}
                       onChange={(newVal) => {
 
-                        var options = { ...wrapper.options, tag: newVal };
-                        setAttributes({ wrapper: { styles: wrapper.styles, options: options } });
+                        setAttributes({ blockId: newVal });
 
-                      }
-
-                      }
+                      }}
                     />
-                  </PanelRow>
-                </PGtab>
-                <PGtab name="styles">
-                  <PGStyles obj={wrapper} onChange={onChangeStyleWrapper} onAdd={onAddStyleWrapper} onRemove={onRemoveStyleWrapper} />
-                </PGtab>
-              </PGtabs>
 
+                  </PanelRow> */}
 
+									<PanelRow>
+										<label for="">Wrapper Tag</label>
 
+										<SelectControl
+											label=""
+											value={text.options.tag}
+											options={[
+												{ label: "Choose", value: "" },
+												{ label: "H1", value: "h1" },
+												{ label: "H2", value: "h2" },
+												{ label: "H3", value: "h3" },
+												{ label: "H4", value: "h4" },
+												{ label: "H5", value: "h5" },
+												{ label: "H6", value: "h6" },
+												{ label: "SPAN", value: "span" },
+												{ label: "DIV", value: "div" },
+												{ label: "P", value: "p" },
+											]}
+											onChange={(newVal) => {
+												var options = { ...text.options, tag: newVal };
+												setAttributes({ text: { ...text, options: options } });
+											}}
+										/>
+									</PanelRow>
+								</PGtab>
+								<PGtab name="styles">
+									<PGStyles
+										obj={text}
+										onChange={onChangeStyleText}
+										onAdd={onAddStyleText}
+										onRemove={onRemoveStyleText}
+										onBulkAdd={onBulkAddText}
+									/>
+								</PGtab>
+								<PGtab name="css">
+									<PGCssLibrary
+										blockId={blockId}
+										obj={text}
+										onChange={onPickCssLibraryText}
+									/>
+								</PGtab>
+							</PGtabs>
+						</PanelBody>
 
+						<PanelBody title="Custom Style" initialOpen={false}>
+							<p>
+								Please use following class selector to apply your custom CSS
+							</p>
 
+							<div className="my-3">
+								<p className="font-bold">Text </p>
+								<p>
+									<code>
+										{textSelector}
+										{"{}"}{" "}
+									</code>
+								</p>
+							</div>
 
+							<TextareaControl
+								label="Custom CSS"
+								help="Do not use 'style' tag"
+								value={customCss}
+								onChange={(value) => {
+									setAttributes({ customCss: value });
+								}}
+							/>
+						</PanelBody>
 
+						<div className="px-3">
+							<PGMailSubsctibe />
+							<PGContactSupport
+								utm={{
+									utm_source: "BlockText",
+									utm_campaign: "PostGridCombo",
+									utm_content: "BlockOptions",
+								}}
+							/>
+						</div>
+					</div>
+				</InspectorControls>
 
-
-
-
-            </PanelBody>
-
-
-
-
-
-
-
-
-
-
-
-            <PanelBody title="Custom Style" initialOpen={false}>
-
-
-              <p>Please use following class selector to apply your custom CSS</p>
-              <div className='my-3'>
-                <p className='font-bold'>Title Wrapper</p>
-                <p><code>{wrapperSelector}{'{/* your CSS here*/}'}</code></p>
-              </div>
-
-              <div className='my-3'>
-                <p className='font-bold'>Title link</p>
-                <p><code>{dividerSelector}{'{/* your CSS here*/}'} </code></p>
-              </div>
-
-
-
-
-
-
-              <TextareaControl
-                label="Custom CSS"
-                help="Do not use 'style' tag"
-                value={customCss}
-                onChange={(value) => {
-                  setAttributes({ customCss: value })
-
-                }}
-              />
-            </PanelBody>
-
-            <PGMailSubsctibe />
-            <PGContactSupport utm={{ utm_source: 'BlockPostTitle', utm_campaign: 'PostGridCombo', utm_content: 'BlockOptions' }} />
-
-
-          </div>
-
-
-        </InspectorControls >
-
-        <>
-
-          <div>
-            table-of-contents
-          </div>
-
-        </>
-      </>
-
-    )
-  },
-  save: function (props) {
-    // to make a truly dynamic block, we're handling front end by render_callback under index.php file
-
-    var attributes = props.attributes;
-    var wrapper = attributes.wrapper;
-
-
-
-    return null;
-
-  }
-})
-
+				<RichText
+					{...blockProps}
+					tagName={CustomTag}
+					value={text.options.content}
+					allowedFormats={["core/bold", "core/italic", "core/link"]}
+					onChange={(content) => {
+						var options = { ...text.options, content: content };
+						setAttributes({ text: { ...text, options: options } });
+					}}
+					placeholder={__("Start Writing...")}
+				/>
+			</>
+		);
+	},
+	save: function (props) {
+		// to make a truly dynamic block, we're handling front end by render_callback under index.php file
+		return null;
+	},
+});

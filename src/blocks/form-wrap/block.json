@@ -1,0 +1,78 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/form-wrap",
+  "title": "Form Wrap",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "post-grid/popupId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "providesContext": {
+		"post-grid/formId": "blockId"
+	},
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "div",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "form": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "",
+          "type": "contactForm"
+        },
+        "styles": {}
+      }
+    },
+    "visible": {
+      "type": "object",
+      "default": {}
+    },
+    "onSubmit": {
+      "type": "object",
+      "default": {}
+    },
+    "onProcess": {
+      "type": "object",
+      "default": {}
+    },
+    "afterSubmit": {
+      "type": "object",
+      "default": {}
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "keywords": [
+    "advanced accordion",
+    "nested accordion",
+    "customizable accordion"
+  ],
+  "description": "Shows warning, error or success notices..."
+}

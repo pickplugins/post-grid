@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,204 +19,16 @@ class PGBlockFormFieldFileMulti
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/form-field-file-multi/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/form-field-file-multi', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'label' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'label',
-                            'for' => 'label',
-                            'enable' => true,
-                            'text' => 'Your Name',
-                            'class' => 'pg-form-field-label',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'item' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'itemLabel' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'addItem' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'position' => 'afterFiles',
-                            'class' => '',
-                            'text' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'file' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'value' => NULL,
-                            'name' => '',
-                            'required' => false,
-                            'disabled' => false,
-                            'multiple' => false,
-                            'autofocus' => NULL,
-                            'readonly' => false,
-                            'maxCount' => 5,
-                            'maxSize' => NULL,
-                            'fileTypes' =>
-                            array(
-                                0 => 'jpg',
-                                1 => 'jpeg',
-                                2 => 'png',
-                                3 => 'gif',
-                                4 => 'pdf',
-                            ),
-                            'id' => '',
-                            'class' => 'pg-form-field-file-multi',
-                            'position' => 'afterLabel',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'inputWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                    ),
-                ),
-                'labelWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'errorWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'text' => '',
-                            'position' => 'afterInput',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'requiredWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'span',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(),
-                    ),
-                ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/form-field-file-multi/block.json',
+            array(
+
+                'render_callback' => array($this, 'theHTML'),
+
+
+
             )
-
-
-        ));
+        );
     }
 
     function front_script($attributes)
@@ -299,21 +112,27 @@ class PGBlockFormFieldFileMulti
         ob_start();
 
 
-?>
+        ?>
 
         <div class="<?php echo esc_attr($blockId); ?>">
             <div class='label-wrap'>
 
-                <?php if ($labelEnable) : ?>
-                    <label for=""><?php echo wp_kses_post($labelText); ?></label>
+                <?php if ($labelEnable): ?>
+                    <label for="">
+                        <?php echo wp_kses_post($labelText); ?>
+                    </label>
                 <?php endif; ?>
 
-                <?php if ($addItemPosition == 'afterLabel') : ?>
-                    <div class='add-item'><?php echo wp_kses_post($addItemText); ?></div>
+                <?php if ($addItemPosition == 'afterLabel'): ?>
+                    <div class='add-item'>
+                        <?php echo wp_kses_post($addItemText); ?>
+                    </div>
                 <?php endif; ?>
 
-                <?php if ($errorWrapPosition == 'afterLabel') : ?>
-                    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                <?php if ($errorWrapPosition == 'afterLabel'): ?>
+                    <div class='error-wrap'>
+                        <?php echo wp_kses_post($errorWrapText); ?>
+                    </div>
                 <?php endif; ?>
 
 
@@ -322,8 +141,10 @@ class PGBlockFormFieldFileMulti
             <div class='input-wrap'>
 
 
-                <?php if ($addItemPosition == 'beforeFiles') : ?>
-                    <div class='add-item'><?php echo wp_kses_post($addItemText); ?></div>
+                <?php if ($addItemPosition == 'beforeFiles'): ?>
+                    <div class='add-item'>
+                        <?php echo wp_kses_post($addItemText); ?>
+                    </div>
                 <?php endif; ?>
 
 
@@ -331,11 +152,14 @@ class PGBlockFormFieldFileMulti
 
                 for ($i = 0; $i < $inputMaxCount; $i++) {
 
-                ?><div class="item">
-                        <input type="file" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired) : ?> required <?php endif; ?> <?php if ($inputDisabled) : ?> disabled <?php endif; ?> <?php if ($inputReadonly) : ?> readonly <?php endif; ?> />
+                    ?>
+                    <div class="item">
+                        <input type="file" placeholder="<?php echo esc_attr($inputPlaceholder); ?>"
+                            value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>             <?php if ($inputDisabled): ?> disabled <?php endif; ?>
+                            <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
                     </div>
 
-                <?php
+                    <?php
                 }
 
                 ?>
@@ -344,12 +168,16 @@ class PGBlockFormFieldFileMulti
 
 
 
-                <?php if ($addItemPosition == 'afterFiles') : ?>
-                    <div class='add-item'><?php echo wp_kses_post($addItemText); ?></div>
+                <?php if ($addItemPosition == 'afterFiles'): ?>
+                    <div class='add-item'>
+                        <?php echo wp_kses_post($addItemText); ?>
+                    </div>
                 <?php endif; ?>
 
-                <?php if ($errorWrapPosition == 'afterInput') : ?>
-                    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                <?php if ($errorWrapPosition == 'afterInput'): ?>
+                    <div class='error-wrap'>
+                        <?php echo wp_kses_post($errorWrapText); ?>
+                    </div>
                 <?php endif; ?>
             </div>
 
@@ -360,7 +188,7 @@ class PGBlockFormFieldFileMulti
 
         </div>
 
-<?php
+        <?php
         return ob_get_clean();
     }
 }

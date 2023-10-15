@@ -71,14 +71,11 @@ import PGIconPicker from "../../components/icon-picker";
 import PGDivider from "../../components/divider";
 
 import variations from "./variations";
-import attributes from "./attributes";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/accordion-nested", {
-	apiVersion: 2,
-	title: "Accordion",
-
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -109,18 +106,6 @@ registerBlockType("post-grid/accordion-nested", {
 			</svg>
 		),
 	},
-
-	attributes: attributes,
-	providesContext: {
-		"post-grid/accordionNestedIcon": "icon",
-		"post-grid/accordionNestedIconToggle": "iconToggle",
-		"post-grid/accordionNestedLabelIcon": "labelIcon",
-		"post-grid/accordionNestedLabelCounter": "labelCounter",
-	},
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
 
 	edit: function (props) {
 		var attributes = props.attributes;

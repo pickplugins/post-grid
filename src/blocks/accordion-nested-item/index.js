@@ -65,15 +65,11 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGIconPicker from "../../components/icon-picker";
 import PGCssLibrary from "../../components/css-library";
-import attributes from "./attributes";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/accordion-nested-item", {
-	apiVersion: 2,
-	title: "Accordion Item",
-	parent: ["post-grid/accordion-nested"],
-
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -104,16 +100,6 @@ registerBlockType("post-grid/accordion-nested-item", {
 			</svg>
 		),
 	},
-
-	attributes: attributes,
-	usesContext: [
-		"post-grid/accordionNestedIcon",
-		"post-grid/accordionNestedIconToggle",
-		"post-grid/accordionNestedLabelIcon",
-		"post-grid/accordionNestedLabelCounter",
-	],
-
-	category: "post-grid",
 
 	edit: function (props) {
 		var attributes = props.attributes;
@@ -1196,7 +1182,7 @@ registerBlockType("post-grid/accordion-nested-item", {
 									<ToggleControl
 										label="Enable Header Counter?"
 										help={
-											labelCounter.options.enable
+											labelCounter.options?.enable
 												? "Header Counter Enabled"
 												: "Header Counter Disabled."
 										}

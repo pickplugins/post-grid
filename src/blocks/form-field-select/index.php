@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,169 +19,14 @@ class PGBlockFormFieldSelect
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/text/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/form-field-select', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
+        register_block_type(post_grid_plugin_dir . 'src/blocks/form-field-select/block.json', array(
+
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'label' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'label',
-                            'for' => 'label',
-                            'enable' => true,
-                            'text' => 'Your Name',
-                            'class' => 'pg-form-field-label',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'inputWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                    ),
-                ),
-                'select' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'value' => NULL,
-                            'placeholder' => '-Select-',
-                            'name' => '',
-                            'required' => false,
-                            'disabled' => false,
-                            'multiple' => false,
-                            'autofocus' => NULL,
-                            'readonly' => false,
-                            'args' =>
-                            array(
-                                0 =>
-                                array(
-                                    'label' => 'Option 1',
-                                    'value' => 'option1',
-                                ),
-                                1 =>
-                                array(
-                                    'label' => 'Option 2',
-                                    'value' => 'option2',
-                                ),
-                                2 =>
-                                array(
-                                    'label' => 'Option 3',
-                                    'value' => 'option3',
-                                ),
-                            ),
-                            'id' => '',
-                            'class' => 'pg-form-field-select',
-                            'position' => 'afterLabel',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'labelWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'errorWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'text' => '',
-                            'position' => 'afterInput',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'requiredWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'span',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(),
-                    ),
-                ),
-            )
 
 
-        ));
+
+        )
+        );
     }
 
     function front_script($attributes)
@@ -258,53 +104,58 @@ class PGBlockFormFieldSelect
         ob_start();
 
 
-?>
+        ?>
 
         <div class="<?php echo esc_attr($blockId); ?>">
 
 
             <div class='label-wrap'>
 
-                <?php if ($labelEnable) : ?>
-                    <label for=""><?php echo wp_kses_post($labelText); ?></label>
+                <?php if ($labelEnable): ?>
+                    <label for="">
+                        <?php echo wp_kses_post($labelText); ?>
+                    </label>
                 <?php endif; ?>
 
 
-                <?php if ($errorWrapPosition == 'afterlabel') : ?>
-                    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                <?php if ($errorWrapPosition == 'afterlabel'): ?>
+                    <div class='error-wrap'>
+                        <?php echo wp_kses_post($errorWrapText); ?>
+                    </div>
                 <?php endif; ?>
             </div>
             <div class='input-wrap'>
 
 
-                <select placeholder="<?php echo esc_attr($inputPlaceholder); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired) : ?> required <?php endif; ?> <?php if ($inputDisabled) : ?> disabled <?php endif; ?> <?php if ($inputReadonly) : ?> readonly <?php endif; ?> <?php if ($inputMultiple) : ?> multiple <?php endif; ?>>
+                <select placeholder="<?php echo esc_attr($inputPlaceholder); ?>" name="<?php echo esc_attr($inputName); ?>"
+                    <?php if ($inputRequired): ?> required <?php endif; ?>         <?php if ($inputDisabled): ?> disabled <?php endif; ?>         <?php if ($inputReadonly): ?> readonly <?php endif; ?>         <?php if ($inputMultiple): ?> multiple <?php endif; ?>>
 
 
 
                     <?php
 
-                    if (!empty($inputArgs)) :
-                        foreach ($inputArgs as $index => $inputArg) :
+                    if (!empty($inputArgs)):
+                        foreach ($inputArgs as $index => $inputArg):
 
                             $args = isset($inputArg['args']) ? $inputArg['args'] : [];
 
 
-                            if (!empty($args)) :
+                            if (!empty($args)):
                                 $groupLabel = $inputArg['label'];
 
-                    ?>
+                                ?>
                                 <optgroup label="<?php echo esc_attr($groupLabel); ?>">
 
                                     <?php
 
-                                    if (!empty($args)) :
-                                        foreach ($args as $arg) :
+                                    if (!empty($args)):
+                                        foreach ($args as $arg):
 
-                                    ?>
-                                            <option value="<?php echo esc_attr($arg['value']) ?>" <?php if ($inputMultiple) : ?> <?php if (in_array($arg['value'], $inputValue)) : ?> selected <?php endif; ?> <?php else : ?> <?php if ($inputValue == $arg['value']) : ?> selected <?php endif; ?> <?php endif; ?>>
+                                            ?>
+                                            <option value="<?php echo esc_attr($arg['value']) ?>" <?php if ($inputMultiple): ?>                                 <?php if (in_array($arg['value'], $inputValue)): ?> selected <?php endif; ?>                             <?php else: ?>                                 <?php if ($inputValue == $arg['value']): ?> selected <?php endif; ?>                             <?php endif; ?>>
                                                 <?php echo wp_kses_post($arg['label']); ?>
                                             </option>
-                                    <?php
+                                            <?php
                                         endforeach;
                                     endif;
 
@@ -312,16 +163,16 @@ class PGBlockFormFieldSelect
 
 
                                 </optgroup>
-                            <?php
+                                <?php
                             endif;
 
-                            if (empty($args)) :
-                            ?>
-                                <option value="<?php echo esc_attr($inputArg['value']) ?>" <?php if ($inputMultiple) : ?> <?php if (in_array($inputArg['value'], [$inputValue])) : ?> selected <?php endif; ?> <?php else : ?> <?php if ($inputValue == $inputArg['value']) : ?> selected <?php endif; ?> <?php endif; ?>>
+                            if (empty($args)):
+                                ?>
+                                <option value="<?php echo esc_attr($inputArg['value']) ?>" <?php if ($inputMultiple): ?>                         <?php if (in_array($inputArg['value'], [$inputValue])): ?> selected <?php endif; ?>                     <?php else: ?>                         <?php if ($inputValue == $inputArg['value']): ?> selected <?php endif; ?>                     <?php endif; ?>>
 
                                     <?php echo wp_kses_post($inputArg['label']); ?>
                                 </option>
-                    <?php
+                                <?php
                             endif;
 
 
@@ -333,8 +184,10 @@ class PGBlockFormFieldSelect
                 </select>
 
 
-                <?php if ($errorWrapPosition == 'afterInput') : ?>
-                    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                <?php if ($errorWrapPosition == 'afterInput'): ?>
+                    <div class='error-wrap'>
+                        <?php echo wp_kses_post($errorWrapText); ?>
+                    </div>
 
                 <?php endif; ?>
             </div>
@@ -346,7 +199,7 @@ class PGBlockFormFieldSelect
 
         </div>
 
-<?php
+        <?php
         return ob_get_clean();
     }
 }

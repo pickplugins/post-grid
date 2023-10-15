@@ -163,11 +163,8 @@ registerBlockType("post-grid/date-countdown", {
 		var expiredArg = attributes.expiredArg;
 		var dateCountdown = attributes.dateCountdown;
 		var scheduleTime = attributes.scheduleTime;
-		// console.log(scheduleTime);
-		// var scheduleArg = attributes.scheduleArg;
 		var wrapper = attributes.wrapper;
 		var blockId = attributes.blockId;
-		// console.log(scheduleArg);
 
 		var blockIdX = attributes.blockId
 			? attributes.blockId
@@ -353,13 +350,10 @@ registerBlockType("post-grid/date-countdown", {
 		const [remindHour, setRemindHour] = useState(0);
 		const [remindMinute, setRemindMinute] = useState(0);
 		const [remindSecond, setRemindSecond] = useState(0);
-		// const [remindMiliSecond, setRemindMiliSecond] = useState(0);
 
 		useEffect(() => {
 			const dateInput1 = dateCountdown.options.startDate;
-			console.log("Demo : ", dateInput1);
 			const dateInput2 = dateCountdown.options.endDate;
-			console.log("dateInput2 : ", dateInput2);
 			const currentDate = new Date();
 
 			if (dateInput1.length == 0 || dateInput2.length == 0) {
@@ -464,20 +458,15 @@ registerBlockType("post-grid/date-countdown", {
 				hours * 60 * 60 * 1000 +
 				minutes * 60 * 1000;
 
-			// console.log("end Time: ", endTime);
 			const duration = endTime - currentTime;
-			// console.log("duration: ", duration);
 			setRemindTimes(duration);
 		}, [dateCountdown.options.everGreenTime]);
 
 		useEffect(() => {
-			// console.log("first");
-
 			if (remindTimes > 0) {
 				const intervalId = setInterval(() => {
 					const remindTimesX = remindTimes - 1000;
 					setRemindTimes(remindTimesX);
-					//console.log("remindTimesX", remindTimesX);
 					const days = Math.floor(remindTimesX / (1000 * 60 * 60 * 24));
 					const hours = Math.floor(
 						(remindTimesX % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -2422,7 +2411,6 @@ registerBlockType("post-grid/date-countdown", {
 														compare: "=",
 													},
 												});
-												//console.log("hello: ", scheduleTimeX);
 												setAttributes({ scheduleTime: scheduleTimeX });
 											}}>
 											Add Media

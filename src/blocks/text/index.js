@@ -68,8 +68,7 @@ import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/text", {
-	...metadata,
+registerBlockType(metadata, {
 	title: metadata.title,
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.

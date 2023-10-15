@@ -4,7 +4,7 @@ Donate link: https://www.pickplugins.com/post-grid
 Tags: post grid, post grid block, block, custom post grid, post type grid, grid display, grid layout, post list, masonry grid
 Requires at least: 5.0.0
 Tested up to: 6.3
-Stable tag: 2.2.59
+Stable tag: 2.2.60
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -381,6 +381,10 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 8. screenshot-8
 
 == Changelog ==
+
+= 2.2.60 =
+
+- 2023-10-14 - update - Block.json Metadata file updated for text block.
 
 = 2.2.59 =
 

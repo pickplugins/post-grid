@@ -5,7 +5,12 @@
   "title": "Archive description",
   "textdomain": "post-grid",
   "category": "post-grid",
-  "usesContext": ["postId", "loopIndex", "postType", "queryId"],
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
   "supports": {
     "align": [
       "wide",
@@ -150,9 +155,9 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced archive description block",
+    "archive description block",
+    "customizable archive description"
   ],
   "description": "Shows warning, error or success notices..."
 }

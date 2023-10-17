@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -16,186 +17,13 @@ class PGBlockStarRate
     {
 
 
-        register_block_type('post-grid/star-rate', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'style' => 'front_style',
+        register_block_type(post_grid_plugin_dir . 'src/blocks/star-rate/block.json', array(
+
+
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "tag" => "div",
-                            "class" => "",
-                            "attr" => []
-                        ],
-                        "styles" => [
 
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "borderRadius" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-
-
-                "starRate" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "maxCount" => 5,
-                            "count" => 3,
-
-                            "isLink" => true,
-                            "linkTo" => "postUrl",
-                            "linkToAuthorMeta" => "",
-                            "linkToCustomMeta" => "",
-                            "linkTarget" => "_blank",
-                            "customUrl" => "",
-                            "linkAttr" => [],
-                            "class" => ""
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-
-
-                "text" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "Custom Text",
-                            "isLink" => true,
-                            "linkTo" => "postUrl",
-                            "linkToAuthorMeta" => "",
-                            "linkToCustomMeta" => "",
-                            "linkTarget" => "_blank",
-                            "customUrl" => "",
-                            "linkAttr" => [],
-                            "class" => ""
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "icon" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "library" => "fontAwesome",
-                            "srcType" => "class",
-                            "iconSrc" => "fas fa-check-circle",
-                            "position" => "beforeText",
-                            "class" => "text-icon"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => []
-                        ]
-                    ]
-                ],
-                "prefix" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "",
-                            "class" => "prefix"
-                        ],
-                        "styles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "postfix" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "",
-                            "class" => "postfix"
-                        ],
-                        "styles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "linkAttr" => [
-                    "type" => "array",
-                    "default" => []
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
-        ));
+        )
+        );
     }
 
     function front_script($attributes)
@@ -339,23 +167,27 @@ class PGBlockStarRate
         ob_start();
 
 
-        if (!empty($wrapperTag)) :
+        if (!empty($wrapperTag)):
 
-?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
+            ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>" <?php echo esc_attr($wrapperAttrText); ?>>
 
 
 
 
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                <?php if ($prefixText): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
                 <?php endif; ?>
 
 
-                <?php if ($textIsLink) : ?>
+                <?php if ($textIsLink): ?>
                     <a class='text' <?php
-                                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                    echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
+                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                    echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>"
+                        href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
 
                         <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
@@ -368,7 +200,7 @@ class PGBlockStarRate
 
                     </a>
 
-                <?php else : ?>
+                <?php else: ?>
 
                     <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
@@ -383,25 +215,29 @@ class PGBlockStarRate
 
 
 
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                <?php if ($postfixText): ?>
+                    <span class="<?php echo esc_attr($postfixClass); ?>">
+                        <?php echo wp_kses_post($postfixText); ?>
+                    </span>
                 <?php endif; ?>
 
 
 
             </<?php echo esc_attr($wrapperTag); ?>>
-        <?php
+            <?php
 
         endif;
 
-        if (empty($wrapperTag)) :
+        if (empty($wrapperTag)):
 
-        ?>
+            ?>
 
 
-            <?php if (!$textIsLink) : ?>
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+            <?php if (!$textIsLink): ?>
+                <?php if ($prefixText): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
                 <?php endif; ?>
 
 
@@ -416,16 +252,21 @@ class PGBlockStarRate
 
 
 
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                <?php if ($postfixText): ?>
+                    <span class="<?php echo esc_attr($postfixClass); ?>">
+                        <?php echo wp_kses_post($postfixText); ?>
+                    </span>
                 <?php endif; ?>
-            <?php else : ?>
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+            <?php else: ?>
+                <?php if ($prefixText): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
                 <?php endif; ?>
                 <a class='text' <?php
-                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>" href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) :  esc_url_raw($post_url); ?>">
+                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                echo ($linkAttrStrText); ?> target="<?php echo esc_attr($textLinkTarget); ?>" rel="<?php echo esc_attr($textRel); ?>"
+                    href="<?php echo (!empty($textCustomUrl)) ? esc_url_raw($textCustomUrl) : esc_url_raw($post_url); ?>">
 
 
                     <?php echo wp_kses_post($fontIconHtml); ?>
@@ -438,13 +279,15 @@ class PGBlockStarRate
 
 
                 </a>
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                <?php if ($postfixText): ?>
+                    <span class="<?php echo esc_attr($postfixClass); ?>">
+                        <?php echo wp_kses_post($postfixText); ?>
+                    </span>
                 <?php endif; ?>
             <?php endif; ?>
 
 
-        <?php
+            <?php
 
         endif;
 
@@ -458,7 +301,7 @@ class PGBlockStarRate
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

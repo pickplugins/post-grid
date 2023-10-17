@@ -72,12 +72,11 @@ import PGIconPicker from "../../components/icon-picker";
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/social-share", {
-  apiVersion: 2,
-  title: "Social Share",
+registerBlockType(metadata, {
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: "#fff",
@@ -114,168 +113,7 @@ registerBlockType("post-grid/social-share", {
     ),
   },
 
-  attributes: {
-    wrapper: {
-      type: "object",
-      default: {
-        options: { tag: "div", class: "" },
-        styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-          padding: { Desktop: "" },
-          margin: { Desktop: "" },
-        },
-      },
-    },
-    icon: {
-      type: "object",
-      default: {
-        options: {
-          class: "icon",
-          position:
-            "beforeLabel" /*beforeLabel, afterLabel, beforeCount, afterCount*/,
-        },
-        styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-          padding: { Desktop: "" },
-          margin: { Desktop: "" },
-        },
-      },
-    },
-    label: {
-      type: "object",
-      default: {
-        options: { class: "" },
-        styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-          padding: { Desktop: "" },
-          margin: { Desktop: "" },
-        },
-      },
-    },
 
-    count: {
-      type: "object",
-      default: {
-        options: { class: "" },
-        styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-          padding: { Desktop: "" },
-          margin: { Desktop: "" },
-        },
-      },
-    },
-
-    elements: {
-      type: "object",
-      default: {
-        options: {
-          linkTarget: "_blank",
-          showLabel: false,
-          showCount: false,
-          showIcon: true,
-          iconPositon: "beforeLabel", // beforeLabel, afterLabel, beforeCount, afterCount
-        },
-        styles: {
-          color: { Desktop: "#18978F" },
-          backgroundColor: {},
-          padding: { Desktop: "" },
-          margin: {
-            Desktop: "5px 5px 5px 5px",
-          },
-          display: {},
-          borderRadius: {},
-
-          fontSize: { Desktop: "35px" },
-          lineHeight: {},
-          letterSpacing: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
-        },
-        items: [
-          {
-            id: "facebook",
-            label: "Facebook",
-            count: 125,
-            url: "https://www.facebook.com/sharer.php?u={URL}",
-            siteIcon: {
-              library: "fontAwesome",
-              srcType: "class",
-              /*class, html, img, svg */ iconSrc: "fab fa-facebook-square",
-            },
-            styles: {
-              color: { Desktop: "" },
-              backgroundColor: {},
-              padding: { Desktop: "" },
-              margin: { Desktop: "" },
-              display: {},
-            },
-          },
-          {
-            id: "twitter",
-            label: "Twitter",
-            count: 125,
-            url: "https://twitter.com/intent/tweet?url={URL}",
-            siteIcon: {
-              library: "fontAwesome",
-              srcType: "class",
-              /*class, html, img, svg */ iconSrc: "fab fa-twitter-square",
-            },
-            styles: {
-              color: { Desktop: "" },
-              backgroundColor: {},
-              padding: { Desktop: "" },
-              margin: { Desktop: "" },
-              display: {},
-            },
-          },
-          {
-            id: "linkedin",
-            label: "Linkedin",
-            count: 125,
-            url: "https://www.linkedin.com/shareArticle?mini=true&url={URL}&title={TITLE}",
-            siteIcon: {
-              library: "fontAwesome",
-              srcType: "class",
-              /*class, html, img, svg */ iconSrc: "fab fa-linkedin",
-            },
-            styles: {
-              color: { Desktop: "" },
-              backgroundColor: {},
-              padding: { Desktop: "" },
-              margin: { Desktop: "" },
-              display: {},
-            },
-          },
-        ],
-      }, // avatar, name, description, id
-    },
-
-    customCss: {
-      type: "string",
-      default: "",
-    },
-
-    blockCssY: {
-      type: "object",
-      default: { items: {} },
-    },
-
-    blockId: {
-      type: "string",
-      default: "",
-    },
-  },
-  usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-  supports: {
-    align: ["wide", "full"],
-  },
-  category: "post-grid",
 
   edit: function (props) {
     var attributes = props.attributes;

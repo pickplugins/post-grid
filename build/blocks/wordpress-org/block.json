@@ -1,0 +1,112 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/wordpress-org",
+  "title": "wordpress-org",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "elements": {
+      "type": "object",
+      "default": {
+        "items": [
+          {
+            "id": "name",
+            "label": "Plugin Name",
+            "prefix": "Plugin Name: "
+          },
+          {
+            "id": "version",
+            "label": "Version",
+            "prefix": "Version: "
+          }
+        ]
+      }
+    },
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "ul",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "item": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "item",
+          "tag": "li"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "thumb": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "thumb"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "object": {
+      "type": "object",
+      "default": {
+        "options": {
+          "type": "plugin",
+          "slug": "post-grid"
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "style": "front_style",
+  "keywords": [
+    "advanced accordion",
+    "nested accordion",
+    "customizable accordion"
+  ],
+  "description": "Shows warning, error or success notices..."
+}

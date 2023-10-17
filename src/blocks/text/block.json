@@ -20,7 +20,9 @@
         "options": {
           "content": "Hello World!",
           "tag": "div",
-          "class": "pg-text"
+          "class": "pg-text",
+          "limitBy": "",
+          "limitCount": 99
         }
       }
     },

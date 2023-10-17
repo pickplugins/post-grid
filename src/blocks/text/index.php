@@ -65,6 +65,8 @@ class PGBlockPostText
         $content = isset($textOptions['content']) ? $textOptions['content'] : '';
 
 
+        $limitBy = isset($textOptions['limitBy']) ? $textOptions['limitBy'] : '';
+        $limitCount = !empty($textOptions['limitCount']) ? $textOptions['limitCount'] : 999;
 
         $blockCssY = isset($attributes['blockCssY']) ? $attributes['blockCssY'] : [];
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
@@ -73,6 +75,13 @@ class PGBlockPostText
         $postGridCustomCss .= $customCss;
 
 
+        if ($limitBy == 'character') {
+            $content = wp_strip_all_tags($content);
+            $content = substr($content, 0, (int) $limitCount);
+        } else {
+
+            $content = wp_trim_words($content, (int) $limitCount, '');
+        }
 
 
 

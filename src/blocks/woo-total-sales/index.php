@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,221 +19,16 @@ class PGBlockWooTotalSales
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/woo-total-sales/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/woo-total-sales', array(
-            // 'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'saleCount' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'text' => '12',
-                            'linkTo' => '',
-                            'linkToUrl' => '',
-                            'linkToMetaKey' => '',
-                            'linkTarget' => '_blank',
-                            'linkAttr' =>
-                            array(),
-                            'customUrl' => '',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'display' =>
-                            array(),
-                            'width' =>
-                            array(),
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'lineHeight' =>
-                            array(),
-                            'letterSpacing' =>
-                            array(),
-                            'fontFamily' =>
-                            array(),
-                            'fontWeight' =>
-                            array(),
-                            'textDecoration' =>
-                            array(),
-                            'textTransform' =>
-                            array(),
-                        ),
-                    ),
-                ),
-                'icon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => '',
-                            'position' => 'beforeSaleCount',
-                            'class' => 'saleCount-icon',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'display' =>
-                            array(),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'lineHeight' =>
-                            array(),
-                            'fontWeight' =>
-                            array(
-                                'Desktop' => '700',
-                            ),
-                            'textDecoration' =>
-                            array(),
-                        ),
-                    ),
-                ),
-                'prefix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => 'Total Sale: ',
-                            'class' => 'prefix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'postfix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'postfix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(),
-                    ),
-                ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/woo-total-sales/block.json',
+            array(
+
+                'render_callback' => array($this, 'theHTML'),
+
+
+
             )
-
-
-        ));
+        );
     }
 
     function front_script($attributes)
@@ -388,48 +184,53 @@ class PGBlockWooTotalSales
         ob_start();
 
 
-        if (!empty($wrapperTag)) :
+        if (!empty($wrapperTag)):
 
-?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+            ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>">
 
 
-                <?php if ($iconPosition == 'beforePrefix') : ?>
+                <?php if ($iconPosition == 'beforePrefix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                <?php if ($prefixText): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
                 <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPrefix') : ?>
+                <?php if ($iconPosition == 'afterPrefix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-                <?php if (!empty($skuLinkTo)) :
+                <?php if (!empty($skuLinkTo)):
 
                     /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                ?>
-                    <a class='saleCount-text' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
-                        <?php if ($iconPosition == 'beforeSaleCount') : ?>
+                    ?>
+                    <a class='saleCount-text' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>"
+                        rel="<?php echo esc_attr($skuRel); ?>"
+                        href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+                        <?php if ($iconPosition == 'beforeSaleCount'): ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
                         <?php echo wp_kses_post($productSaleCount); ?>
-                        <?php if ($iconPosition == 'afterSaleCount') : ?>
+                        <?php if ($iconPosition == 'afterSaleCount'): ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
                     </a>
 
-                <?php else :
+                <?php else:
                     /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                ?>
+                    ?>
 
                     <span class='saleCount-text' <?php echo ($linkAttrStrsku); ?>>
-                        <?php if ($iconPosition == 'beforeSaleCount') : ?>
+                        <?php if ($iconPosition == 'beforeSaleCount'): ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
                         <?php echo wp_kses_post($productSaleCount); ?>
-                        <?php if ($iconPosition == 'afterSaleCount') : ?>
+                        <?php if ($iconPosition == 'afterSaleCount'): ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
                     </span>
@@ -442,68 +243,78 @@ class PGBlockWooTotalSales
 
 
 
-                <?php if ($iconPosition == 'beforePostfix') : ?>
+                <?php if ($iconPosition == 'beforePostfix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                <?php if ($postfixText): ?>
+                    <span class="<?php echo $postfixClass; ?>">
+                        <?php echo $postfixText; ?>
+                    </span>
                 <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPostfix') : ?>
+                <?php if ($iconPosition == 'afterPostfix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
             </<?php echo esc_attr($wrapperTag); ?>>
-        <?php
+            <?php
 
         endif;
 
-        if (empty($wrapperTag)) :
+        if (empty($wrapperTag)):
 
-        ?>
-            <?php if ($iconPosition == 'beforePrefix') : ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-            <?php if ($prefixText) : ?>
-                <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo $prefixText; ?></span>
-            <?php endif; ?>
-
-            <?php if ($iconPosition == 'afterPrefix') : ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-
-            <?php if (!empty($skuLinkTo)) :
-                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
             ?>
+            <?php if ($iconPosition == 'beforePrefix'): ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+            <?php if ($prefixText): ?>
+                <span class="<?php echo esc_attr($prefixClass); ?>">
+                    <?php echo $prefixText; ?>
+                </span>
+            <?php endif; ?>
 
-                <a class='saleCount-text' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
-                    <?php if ($iconPosition == 'beforeSaleCount') : ?>
+            <?php if ($iconPosition == 'afterPrefix'): ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+
+            <?php if (!empty($skuLinkTo)):
+                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                ?>
+
+                <a class='saleCount-text' <?php echo ($linkAttrStrsku); ?> target="<?php echo esc_attr($skuLinkTarget); ?>"
+                    rel="<?php echo esc_attr($skuRel); ?>"
+                    href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+                    <?php if ($iconPosition == 'beforeSaleCount'): ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
                     <?php echo wp_kses_post($productSaleCount); ?>C
-                    <?php if ($iconPosition == 'afterSaleCount') : ?>
+                    <?php if ($iconPosition == 'afterSaleCount'): ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
                 </a>
-            <?php else : ?>
-                <?php if ($iconPosition == 'beforeSaleCount') : ?>
+            <?php else: ?>
+                <?php if ($iconPosition == 'beforeSaleCount'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <span class='saleCount-text'><?php echo wp_kses_post($productSaleCount); ?></span>
-                <?php if ($iconPosition == 'afterSaleCount') : ?>
+                <span class='saleCount-text'>
+                    <?php echo wp_kses_post($productSaleCount); ?>
+                </span>
+                <?php if ($iconPosition == 'afterSaleCount'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
             <?php endif; ?>
 
 
 
-            <?php if ($iconPosition == 'beforePostfix') : ?>
+            <?php if ($iconPosition == 'beforePostfix'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
-            <?php if ($postfixText) : ?>
-                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+            <?php if ($postfixText): ?>
+                <span class="<?php echo $postfixClass; ?>">
+                    <?php echo $postfixText; ?>
+                </span>
             <?php endif; ?>
-            <?php if ($iconPosition == 'afterPostfix') : ?>
+            <?php if ($iconPosition == 'afterPostfix'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
         <?php
@@ -520,7 +331,7 @@ class PGBlockWooTotalSales
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

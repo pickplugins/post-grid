@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,257 +19,16 @@ class PGBlockWooStarRate
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/woo-star-rate/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/woo-star-rate', array(
-            // 'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'iconsIdle' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'iconsFilled' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'summury' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'type' => '',
-                            'typeCustom' => '',
-                            'linkTo' => 'reviews',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'iconsWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => '',
-                            'position' => 'beforeSku',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'display' =>
-                            array(),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'lineHeight' =>
-                            array(),
-                            'fontWeight' =>
-                            array(
-                                'Desktop' => '700',
-                            ),
-                            'textDecoration' =>
-                            array(),
-                        ),
-                    ),
-                ),
-                'prefix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'prefix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'postfix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'postfix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(),
-                    ),
-                ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/woo-star-rate/block.json',
+            array(
+
+                'render_callback' => array($this, 'theHTML'),
+
+
+
             )
-
-
-        ));
+        );
     }
 
     function front_script($attributes)
@@ -315,7 +75,7 @@ class PGBlockWooStarRate
         $skuRel = isset($skuOptions['rel']) ? $skuOptions['rel'] : '';
         $skuLinkTo = isset($skuOptions['linkTo']) ? $skuOptions['linkTo'] : '';
         $skuLinkToMetaKey = isset($skuOptions['linkToMetaKey']) ? $skuOptions['linkToMetaKey'] : '';
-        
+
 
 
         $iconsWrap = isset($attributes['iconsWrap']) ? $attributes['iconsWrap'] : '';
@@ -406,15 +166,18 @@ class PGBlockWooStarRate
         ob_start();
 
 
-        if (!empty($wrapperTag)) :
+        if (!empty($wrapperTag)):
 
-?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+            ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>">
 
 
 
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                <?php if ($prefixText): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
                 <?php endif; ?>
 
 
@@ -438,7 +201,7 @@ class PGBlockWooStarRate
                 </div>
 
 
-                <?php if (!empty($summurytypeCustom)) : ?>
+                <?php if (!empty($summurytypeCustom)): ?>
                     <div class="summury">
                         <?php
                         echo wp_kses_post(strtr($summurytypeCustom, $summuryVars));
@@ -446,9 +209,9 @@ class PGBlockWooStarRate
                     </div>
                 <?php endif; ?>
 
-                <?php if (empty($summurytypeCustom)) : ?>
+                <?php if (empty($summurytypeCustom)): ?>
 
-                    <?php if (!empty($summuryType)) : ?>
+                    <?php if (!empty($summuryType)): ?>
                         <div class="summury">
                             <?php
                             echo wp_kses_post(strtr($summuryType, $summuryVars));
@@ -462,62 +225,70 @@ class PGBlockWooStarRate
 
 
 
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                <?php if ($postfixText): ?>
+                    <span class="<?php echo $postfixClass; ?>">
+                        <?php echo $postfixText; ?>
+                    </span>
                 <?php endif; ?>
 
 
 
             </<?php echo esc_attr($wrapperTag); ?>>
-        <?php
+            <?php
 
         endif;
 
-        if (empty($wrapperTag)) :
+        if (empty($wrapperTag)):
 
-        ?>
-            <?php if ($iconsWrapPosition == 'beforePrefix') : ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-            <?php if ($prefixText) : ?>
-                <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo $prefixText; ?></span>
-            <?php endif; ?>
-
-            <?php if ($iconsWrapPosition == 'afterPrefix') : ?>
-                <?php echo wp_kses_post($fontIconHtml); ?>
-            <?php endif; ?>
-
-            <?php if (!empty($skuLinkTo)) :
             ?>
+            <?php if ($iconsWrapPosition == 'beforePrefix'): ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+            <?php if ($prefixText): ?>
+                <span class="<?php echo esc_attr($prefixClass); ?>">
+                    <?php echo $prefixText; ?>
+                </span>
+            <?php endif; ?>
+
+            <?php if ($iconsWrapPosition == 'afterPrefix'): ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+
+            <?php if (!empty($skuLinkTo)):
+                ?>
 
                 <a class='sku-text' target="<?php echo esc_attr($skuLinkTarget); ?>" rel="<?php echo esc_attr($skuRel); ?>">
-                    <?php if ($iconsWrapPosition == 'beforeSku') : ?>
+                    <?php if ($iconsWrapPosition == 'beforeSku'): ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
                     <?php echo wp_kses_post($productSKu); ?>C
-                    <?php if ($iconsWrapPosition == 'afterSku') : ?>
+                    <?php if ($iconsWrapPosition == 'afterSku'): ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
                 </a>
-            <?php else : ?>
-                <?php if ($iconsWrapPosition == 'beforeSku') : ?>
+            <?php else: ?>
+                <?php if ($iconsWrapPosition == 'beforeSku'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <span class='sku-text'><?php echo wp_kses_post($productSKu); ?></span>
-                <?php if ($iconsWrapPosition == 'afterSku') : ?>
+                <span class='sku-text'>
+                    <?php echo wp_kses_post($productSKu); ?>
+                </span>
+                <?php if ($iconsWrapPosition == 'afterSku'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
             <?php endif; ?>
 
 
 
-            <?php if ($iconsWrapPosition == 'beforePostfix') : ?>
+            <?php if ($iconsWrapPosition == 'beforePostfix'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
-            <?php if ($postfixText) : ?>
-                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+            <?php if ($postfixText): ?>
+                <span class="<?php echo $postfixClass; ?>">
+                    <?php echo $postfixText; ?>
+                </span>
             <?php endif; ?>
-            <?php if ($iconsWrapPosition == 'afterPostfix') : ?>
+            <?php if ($iconsWrapPosition == 'afterPostfix'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
         <?php
@@ -533,7 +304,7 @@ class PGBlockWooStarRate
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

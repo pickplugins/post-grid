@@ -59,11 +59,14 @@ import PGContactSupport from "../../components/contact-support";
 import BreakpointToggle from "../../components/breakpoint-toggle";
 import colorsPresets from "../../colors-presets";
 import PGcssTextAlign from "../../components/css-text-align";
+import PGDropdown from "../../components/dropdown";
 
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
+
+import { applyFilters } from "@wordpress/hooks";
 import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
@@ -119,6 +122,14 @@ registerBlockType(metadata, {
 		// Wrapper CSS Class Selectors
 		var textSelector = blockClass;
 
+		var limitByArgsBasic = {
+			none: { label: "Choose..", value: "" },
+			word: { label: "Word", value: "word" },
+			character: { label: "Character", value: "character", isPro: true },
+		};
+
+		let limitByArgs = applyFilters("limitByArgs", limitByArgsBasic);
+
 		useEffect(() => {
 			if (blockId.length == 0) {
 				setAttributes({ blockId: blockIdX });
@@ -144,6 +155,11 @@ registerBlockType(metadata, {
 
 			myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 		}, [blockCssY]);
+
+		function setLimitBy(option, index) {
+			var options = { ...text.options, limitBy: option.value };
+			setAttributes({ text: { ...text, options: options } });
+		}
 
 		function onPickCssLibraryText(args) {
 			var textX = Object.assign({}, text);
@@ -354,6 +370,40 @@ registerBlockType(metadata, {
 											}}
 										/>
 									</PanelRow>
+									<PanelRow>
+										<label for="">Limit By</label>
+
+										<PGDropdown
+											position="bottom right"
+											variant="secondary"
+											options={limitByArgs}
+											buttonTitle="Choose"
+											onChange={setLimitBy}
+											values={[]}></PGDropdown>
+									</PanelRow>
+
+									{text.options.limitBy.length > 0 && (
+										<div className="bg-gray-500 my-3 text-white p-2">
+											{limitByArgs[text.options.limitBy].label}
+										</div>
+									)}
+
+									{(text.options.limitBy == "word" ||
+										text.options.limitBy == "character") && (
+										<PanelRow>
+											<label for="">Limit Count</label>
+
+											<InputControl
+												value={text.options.limitCount}
+												onChange={(newVal) => {
+													var options = { ...text.options, limitCount: newVal };
+													setAttributes({
+														text: { ...text, options: options },
+													});
+												}}
+											/>
+										</PanelRow>
+									)}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles

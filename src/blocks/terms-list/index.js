@@ -70,12 +70,11 @@ import PGIconPicker from "../../components/icon-picker";
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/terms-list", {
-  apiVersion: 2,
-  title: "Terms List",
+registerBlockType(metadata, {
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: "#fff",
@@ -107,121 +106,7 @@ registerBlockType("post-grid/terms-list", {
       </svg>
     ),
   },
-  attributes: {
-    wrapper: {
-      type: "object",
-      default: {
-        options: { class: "inline-block" },
-        styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-        },
-      },
-    },
-
-    taxonomies: {
-      type: "object",
-      default: {
-        options: { taxName: "" },
-      },
-    },
-
-    items: {
-      type: "object",
-      default: {
-        options: {
-          prefix: "",
-          postfix: "",
-          viewType: "list", // inline, grid, list, accordion
-          hierarchicaly: false,
-          queryPosts: false,
-          accordionOpen: false,
-          linkToTerm: false,
-          postCountPosition: "beforeTitle", //beforeTitle, afterTtile, afterPosts, beforePosts
-          postCountText: "Total Posts %s",
-          gridColNumber: {},
-          gridColGap: "15px",
-          gridRowGap: "15px",
-
-          hideEmpty: false,
-
-          maxCount: 99,
-          postCount: false,
-          class: "item inline-block",
-          linkTarget: "",
-          linkAttr: [],
-        },
-        styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-
-          fontSize: { Desktop: "" },
-        },
-      },
-    },
-    icon: {
-      type: "object",
-      default: {
-        options: {
-          library: "fontAwesome",
-          srcType: "class",
-          /*class, html, img, svg */ iconSrc: "",
-          position: "beforeFronttext",
-          /*before, after, prefix, postfix */ class: "icon",
-        },
-
-        styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-          fontSize: { Desktop: "" },
-        },
-      },
-    },
-    separator: {
-      type: "object",
-      default: {
-        options: { class: "inline-block", text: ", " },
-
-        styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-        },
-      },
-    },
-    frontText: {
-      type: "object",
-      default: {
-        options: { text: "Tags: ", class: "inline-block" },
-        styles: {
-          color: { Desktop: "" },
-          backgroundColor: { Desktop: "" },
-
-          fontSize: { Desktop: "" },
-        },
-      },
-    },
-
-    customCss: {
-      type: "string",
-      default: "",
-    },
-
-    blockCssY: {
-      type: "object",
-      default: { items: {} },
-    },
-
-    blockId: {
-      type: "string",
-      default: "",
-    },
-  },
-  usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-  supports: {
-    align: ["wide", "full"],
-  },
-  category: "post-grid",
+ 
 
   edit: function (props) {
     var attributes = props.attributes;

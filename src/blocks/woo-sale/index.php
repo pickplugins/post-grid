@@ -20,194 +20,11 @@ class PGBlockWooSale
 
 
         register_block_type(
-            'post-grid/woo-sale',
+            post_grid_plugin_dir . 'src/blocks/woo-sale/block.json',
             array(
-                // 'editor_script' => 'editor_script',
-                //'editor_style' => 'editor_style',
-                //'script' => 'front_script',
-                'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
-                'style' => 'front_style',
-                'render_callback' => array($this, 'theHTML'),
-                'attributes' => array(
-                    'wrapper' =>
-                        array(
-                            'type' => 'object',
-                            'default' =>
-                                array(
-                                    'options' =>
-                                        array(
-                                            'tag' => 'div',
-                                            'class' => '',
-                                        ),
-                                    'styles' =>
-                                        array(
-                                            'color' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'backgroundColor' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'padding' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'margin' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                        ),
-                                ),
-                        ),
 
-                    'sale' =>
-                        array(
-                            'type' => 'object',
-                            'default' =>
-                                array(
-                                    'options' =>
-                                        array(
-                                            'text' => 'sale',
-                                            'noSale' => 'No Sale',
-                                            'tag' => 'span',
-                                            'class' => '',
-                                        ),
-                                    'styles' =>
-                                        array(
-                                            'color' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'backgroundColor' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'padding' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'margin' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                        ),
-                                ),
-                        ),
-                    'icon' =>
-                        array(
-                            'type' => 'object',
-                            'default' =>
-                                array(
-                                    'options' =>
-                                        array(
-                                            'library' => 'fontAwesome',
-                                            'srcType' => 'class',
-                                            'iconSrc' => '',
-                                            'position' => '',
-                                            'class' => 'icon',
-                                        ),
-                                    'styles' =>
-                                        array(
-                                            'color' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'backgroundColor' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'padding' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'margin' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'display' =>
-                                                array(),
-                                            'fontSize' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'lineHeight' =>
-                                                array(),
-                                            'fontWeight' =>
-                                                array(
-                                                    'Desktop' => '700',
-                                                ),
-                                            'textDecoration' =>
-                                                array(),
-                                        ),
-                                ),
-                        ),
-                    'prefix' =>
-                        array(
-                            'type' => 'object',
-                            'default' =>
-                                array(
-                                    'options' =>
-                                        array(
-                                            'text' => '',
-                                            'class' => 'prefix',
-                                        ),
-                                    'styles' =>
-                                        array(
-                                            'color' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'backgroundColor' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                        ),
-                                ),
-                        ),
-                    'postfix' =>
-                        array(
-                            'type' => 'object',
-                            'default' =>
-                                array(
-                                    'options' =>
-                                        array(
-                                            'text' => '',
-                                            'class' => 'postfix',
-                                        ),
-                                    'styles' =>
-                                        array(
-                                            'color' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                            'backgroundColor' =>
-                                                array(
-                                                    'Desktop' => '',
-                                                ),
-                                        ),
-                                ),
-                        ),
-                    'customCss' =>
-                        array(
-                            'type' => 'string',
-                            'default' => '',
-                        ),
-                    'blockId' =>
-                        array(
-                            'type' => 'string',
-                            'default' => '',
-                        ),
-                    'blockCssY' =>
-                        array(
-                            'type' => 'object',
-                            'default' =>
-                                array(
-                                    'items' =>
-                                        array(),
-                                ),
-                        ),
-                )
+                'render_callback' => array($this, 'theHTML'),
+
 
 
             )
@@ -324,8 +141,8 @@ class PGBlockWooSale
 
 
         $product_type = ($product != null) ? $product->get_type() : '';
-        
-        
+
+
 
 
 

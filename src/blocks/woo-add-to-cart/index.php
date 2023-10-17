@@ -35,338 +35,16 @@ class PGBlockWooAddToCart
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/woo-add-to-cart/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/woo-add-to-cart', array(
-            // 'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
-            'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => array(
-                'wrapper' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'tag' => 'div',
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'padding' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'margin' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'cartBtn' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'tag' => 'div',
-                                        'postId' => '',
-                                        'sku' => '',
-                                        'text' => 'Add to cart',
-                                        'class' => '',
-                                        'ajax' => true,
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'display' =>
-                                            array(),
-                                        'width' =>
-                                            array(),
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'padding' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'margin' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'quantityWrap' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'enable' => true,
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'display' =>
-                                            array(),
-                                        'width' =>
-                                            array(),
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'padding' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'margin' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'quantityInput' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'display' =>
-                                            array(),
-                                        'width' =>
-                                            array(),
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'padding' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'margin' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'quantityIncrease' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'display' =>
-                                            array(),
-                                        'width' =>
-                                            array(),
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'padding' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'margin' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'quantityDecrease' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'display' =>
-                                            array(),
-                                        'width' =>
-                                            array(),
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'padding' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'margin' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'icon' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'library' => 'fontAwesome',
-                                        'srcType' => 'class',
-                                        'iconSrc' => '',
-                                        'position' => 'beforeCartText',
-                                        'class' => 'sku-icon',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'padding' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'margin' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'display' =>
-                                            array(),
-                                        'fontSize' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'lineHeight' =>
-                                            array(),
-                                        'fontWeight' =>
-                                            array(
-                                                'Desktop' => '700',
-                                            ),
-                                        'textDecoration' =>
-                                            array(),
-                                    ),
-                            ),
-                    ),
-                'prefix' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'text' => ' ',
-                                        'class' => 'prefix',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'postfix' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'text' => '',
-                                        'class' => 'postfix',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'customCss' =>
-                    array(
-                        'type' => 'string',
-                        'default' => '',
-                    ),
-                'blockId' =>
-                    array(
-                        'type' => 'string',
-                        'default' => '',
-                    ),
-                'blockCssY' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'items' =>
-                                    array(),
-                            ),
-                    ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/woo-add-to-cart/block.json',
+            array(
+
+
+                'render_callback' => array($this, 'theHTML'),
+
+
+
             )
-
-
-        )
         );
     }
 
@@ -495,67 +173,78 @@ class PGBlockWooAddToCart
         if (!empty($wrapperTag)):
 
             ?>
-                        <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>">
 
 
-                            <?php if ($iconPosition == 'beforePrefix'): ?>
-                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                            <?php endif; ?>
+                <?php if ($iconPosition == 'beforePrefix'): ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                            <?php if ($prefixText): ?>
-                                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
-                            <?php endif; ?>
+                <?php if ($prefixText): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
+                <?php endif; ?>
 
-                            <?php if ($iconPosition == 'afterPrefix'): ?>
-                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                            <?php endif; ?>
+                <?php if ($iconPosition == 'afterPrefix'): ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                            <?php
+                <?php
 
-                            if ($productType == 'simple'):
-                                ?>
-                                    <div class='quantity-wrap' data-blockid="<?php echo esc_attr($blockId); ?>">
-                                        <span class='quantity-decrease'>-</span>
-                                        <input class='quantity-input' size="3" type="text" value="<?php echo esc_attr($quantityInputQuantity); ?>" />
-                                        <span class='quantity-increase'>+</span>
-                                    </div>
-                                    <a class='<?php echo ($cartBtnAjax) ? 'ajax_add_to_cart' : ''; ?> cartBtn' data-quantity="<?php echo esc_attr($quantityInputQuantity); ?>" data-product_id="<?php echo esc_attr($post_ID); ?>" data-product_sku="<?php echo esc_attr($productSku); ?>" aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
-                                        <?php if ($iconPosition == 'beforeCartText'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
-                                        <?php echo wp_kses_post($cartBtnText); ?>
-                                        <?php if ($iconPosition == 'afterCartText'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
-                                    </a>
-                            <?php else: ?>
-                                    <a class='cartBtn' aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
-                                        <?php if ($iconPosition == 'beforeCartText'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
-                                        <?php echo wp_kses_post($cartBtnText); ?>
-                                        <?php if ($iconPosition == 'afterCartText'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
-                                    </a>
-                            <?php endif; ?>
+                if ($productType == 'simple'):
+                    ?>
+                    <div class='quantity-wrap' data-blockid="<?php echo esc_attr($blockId); ?>">
+                        <span class='quantity-decrease'>-</span>
+                        <input class='quantity-input' size="3" type="text" value="<?php echo esc_attr($quantityInputQuantity); ?>" />
+                        <span class='quantity-increase'>+</span>
+                    </div>
+                    <a class='<?php echo ($cartBtnAjax) ? 'ajax_add_to_cart' : ''; ?> cartBtn'
+                        data-quantity="<?php echo esc_attr($quantityInputQuantity); ?>"
+                        data-product_id="<?php echo esc_attr($post_ID); ?>" data-product_sku="<?php echo esc_attr($productSku); ?>"
+                        aria-label="<?php echo esc_attr($cartBtnRel); ?>" aria-describedby="<?php echo esc_attr($cartBtnRel); ?>"
+                        rel="<?php echo esc_attr($cartBtnRel); ?>" href="<?php echo esc_attr($cartUrl); ?>">
+                        <?php if ($iconPosition == 'beforeCartText'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                        <?php echo wp_kses_post($cartBtnText); ?>
+                        <?php if ($iconPosition == 'afterCartText'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                    </a>
+                <?php else: ?>
+                    <a class='cartBtn' aria-label="<?php echo esc_attr($cartBtnRel); ?>"
+                        aria-describedby="<?php echo esc_attr($cartBtnRel); ?>" rel="<?php echo esc_attr($cartBtnRel); ?>"
+                        href="<?php echo esc_attr($cartUrl); ?>">
+                        <?php if ($iconPosition == 'beforeCartText'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                        <?php echo wp_kses_post($cartBtnText); ?>
+                        <?php if ($iconPosition == 'afterCartText'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                    </a>
+                <?php endif; ?>
 
 
 
 
-                            <?php if ($iconPosition == 'beforePostfix'): ?>
-                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                            <?php endif; ?>
-                            <?php if ($postfixText): ?>
-                                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
-                            <?php endif; ?>
+                <?php if ($iconPosition == 'beforePostfix'): ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+                <?php if ($postfixText): ?>
+                    <span class="<?php echo $postfixClass; ?>">
+                        <?php echo $postfixText; ?>
+                    </span>
+                <?php endif; ?>
 
-                            <?php if ($iconPosition == 'afterPostfix'): ?>
-                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                            <?php endif; ?>
+                <?php if ($iconPosition == 'afterPostfix'): ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                        </<?php echo esc_attr($wrapperTag); ?>>
-                    <?php
+            </<?php echo esc_attr($wrapperTag); ?>>
+            <?php
 
         endif;
 

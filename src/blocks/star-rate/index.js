@@ -31,15 +31,13 @@ import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
+import metadata from "./block.json";
 
 var myStore = wp.data.select('postgrid-shop');
 
 
 
-registerBlockType("post-grid/star-rate", {
-  apiVersion: 2,
-  title: "Star Rate",
-
+registerBlockType(metadata, {
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: '#fff',
@@ -54,117 +52,7 @@ registerBlockType("post-grid/star-rate", {
   },
 
 
-  attributes: {
-
-    wrapper: {
-      type: 'object',
-      default: {
-        options: {
-          tag: 'div', class: '', attr: [],
-        },
-        styles:
-        {
-          color: { Desktop: '' },
-          borderRadius: {},
-
-
-
-        },
-      },
-    },
-
-
-
-
-
-
-
-    icon: {
-      type: 'object',
-      default: {
-        options: {
-          library: 'fontAwesome',
-          srcType: "class", /*class, html, img, svg */
-          iconSrc: 'fas fa-check-circle',
-          class: 'text-icon',
-
-          text: 'Custom Text',
-          isLink: true,
-          linkTo: 'postUrl', /*postUrl, homeUrl, authorUrl, authorLink, mailTo, custom, customField */
-          linkToAuthorMeta: '',
-          linkToCustomMeta: '',
-
-          linkTarget: '_blank',
-          customUrl: '',
-          linkAttr: [],
-        },
-
-        styles:
-        {
-          color: { Desktop: '' },
-
-
-        },
-      },
-    },
-
-
-
-    prefix: {
-      type: 'object',
-      default: {
-        options: { text: '', class: 'prefix' },
-
-        styles:
-        {
-          color: { Desktop: '' },
-
-        },
-      },
-    },
-
-    postfix: {
-      type: 'object',
-      default: {
-        options: { text: '', class: 'postfix' },
-
-        styles:
-        {
-          color: { Desktop: '' },
-
-        },
-      },
-    },
-
-
-    blockId: {
-      "type": "string",
-      "default": ''
-    },
-
-    customCss: {
-      "type": "string",
-      "default": ''
-    },
-
-    linkAttr: {
-      "type": "array",
-      "default": []
-    },
-
-    blockCssY: {
-      "type": "object",
-      "default": { items: {} }
-    },
-
-
-  },
-  usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-  supports: {
-    "align": ["wide", "full"],
-  },
-  category: "post-grid",
+  
 
 
   edit: function (props) {

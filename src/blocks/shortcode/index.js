@@ -66,12 +66,11 @@ import PGDropdown from "../../components/dropdown";
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/shortcode", {
-	apiVersion: 2,
-	title: "Shortcode",
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -92,56 +91,6 @@ registerBlockType("post-grid/shortcode", {
 			</svg>
 		),
 	},
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: {
-					class: "inline-block",
-				},
-				styles: { color: { Desktop: "" }, padding: {}, margin: {} },
-			},
-		},
-
-		shortcodeClassic: {
-			type: "string",
-			default: "",
-		},
-		shortcode: {
-			type: "object",
-			default: {
-				options: {
-					key: "",
-					id: "",
-					prefix: "",
-					postfix: "",
-					prams: [],
-				},
-				styles: { color: { Desktop: "" }, padding: {}, margin: {} },
-			},
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-
-		customCss: {
-			type: "string",
-			default: "",
-		},
-
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
-	usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
 
 	edit: function (props) {
 		var attributes = props.attributes;

@@ -28,14 +28,12 @@ import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGIconPicker from '../../components/icon-picker'
 import PGCssLibrary from '../../components/css-library'
+import metadata from "./block.json";
 
 var myStore = wp.data.select('postgrid-shop');
 
 
-registerBlockType("post-grid/tabs-nested-item", {
-  apiVersion: 2,
-  title: "Tabs Nested Item",
-  parent: ['post-grid/tabs-nested'],
+registerBlockType(metadata, {
 
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
@@ -52,102 +50,7 @@ registerBlockType("post-grid/tabs-nested-item", {
   },
 
 
-  attributes: {
 
-
-    navItem: {
-      type: 'object',
-      default: {
-        options: {
-          viewType: 'horizontal', //horizontal, vertical
-          class: '',
-          activeTab: '',
-        },
-        styles: {},
-      },
-    },
-
-    activeNavItem: {
-      type: 'object',
-      default: {
-        options: {
-          viewType: 'horizontal', //horizontal, vertical
-          class: '',
-        },
-        styles: {},
-      },
-    },
-
-    navLabel: {
-      type: 'object',
-      default: {
-        options: {
-          viewType: 'horizontal', //horizontal, vertical
-          class: '',
-        },
-        styles: {},
-      },
-    },
-
-    icon: {
-      type: 'object',
-      default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-angle-down', position: 'before', /* before, after */ class: 'icon', },
-
-        styles: {},
-      },
-    },
-
-    iconToggle: {
-      type: 'object',
-      default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: 'fas fa-angle-down', position: 'before', /* before, after */ class: 'icon-toggle', },
-
-        styles: {},
-      },
-    },
-
-
-    panelWrap: {
-      type: 'object',
-      default: {
-        options: {
-          viewType: 'horizontal', //horizontal, vertical
-          position: 'left', // left, right, center
-          class: '',
-        },
-        styles: {},
-      },
-    },
-
-
-    activeTab: {
-      "type": "string"
-    },
-
-    uid: {
-      "type": "string"
-    },
-
-    blockId: {
-      "type": "string",
-      "default": ''
-    },
-    customCss: {
-      "type": "string",
-      "default": ''
-    },
-    blockCssY: {
-      "type": "object",
-      "default": { items: {} }
-    },
-  },
-
-
-  supports: {
-    "align": ["wide", "full"],
-  },
-  category: "post-grid",
 
 
   edit: function (props) {

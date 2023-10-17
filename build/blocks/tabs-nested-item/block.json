@@ -1,0 +1,119 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/tabs-nested-item",
+  "title": "Tabs Nested Item",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "parent": [
+    "post-grid/tabs-nested"
+  ],
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "navItem": {
+      "type": "object",
+      "default": {
+        "options": {
+          "viewType": "horizontal",
+          "class": "",
+          "activeTab": ""
+        },
+        "styles": {}
+      }
+    },
+    "activeNavItem": {
+      "type": "object",
+      "default": {
+        "options": {
+          "viewType": "horizontal",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "navLabel": {
+      "type": "object",
+      "default": {
+        "options": {
+          "viewType": "horizontal",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-angle-down",
+          "position": "before",
+          "class": "icon"
+        },
+        "styles": {}
+      }
+    },
+    "iconToggle": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "fas fa-angle-down",
+          "position": "before",
+          "class": "icon-toggle"
+        },
+        "styles": {}
+      }
+    },
+    "panelWrap": {
+      "type": "object",
+      "default": {
+        "options": {
+          "viewType": "horizontal",
+          "position": "left",
+          "class": ""
+        },
+        "styles": {}
+      }
+    },
+    "activeTab": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "string"
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "keywords": [
+    "advanced accordion",
+    "nested accordion",
+    "customizable accordion"
+  ],
+  "description": "Shows warning, error or success notices..."
+}

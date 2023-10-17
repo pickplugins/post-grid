@@ -78,10 +78,13 @@ class PGBlockPostText
         if ($limitBy == 'character') {
             $content = wp_strip_all_tags($content);
             $content = substr($content, 0, (int) $limitCount);
-        } else {
+        } elseif ($limitBy == 'word') {
 
             $content = wp_trim_words($content, (int) $limitCount, '');
         }
+
+
+
 
 
 

@@ -164,9 +164,12 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced multiple file upload",
+    "multiple file upload block",
+    "advanced multiple file upload block",
+    "multiple file upload block for wordpress",
+    "form block for wordpress",
+    "form block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "A form multiple file - upload block is a feature for online forms that allows users to upload multiple files, such as images or documents, to a website."
 }

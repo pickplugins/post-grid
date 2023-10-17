@@ -166,9 +166,12 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced checkbox",
+    "checkbox block",
+    "advanced checkbox block",
+    "checkbox block for wordpress",
+    "form block for wordpress",
+    "form block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "The checkbox block is a specific element in a web form that allows users to select or deselect options via checkboxes. It is commonly used for multiple-choice questions or options."
 }

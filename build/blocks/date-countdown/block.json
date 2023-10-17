@@ -408,9 +408,10 @@
   },
   "style": "front_style",
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced countdown",
+    "advanced date countdown",
+    "date countdown",
+    "date countdown block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "Highlight upcoming events with date countdown block."
 }

@@ -70,9 +70,9 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced form block",
+    "form block for wordpress",
+    "form block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "The form block is an advanced tool for creating interactive online forms, enabling users to input and submit data, such as contact information or survey responses, on a website."
 }

@@ -152,9 +152,9 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced archive title",
+    "archive title",
+    "archive block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "Show archive description on any post or page."
 }

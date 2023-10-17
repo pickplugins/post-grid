@@ -155,9 +155,9 @@
     }
   },
   "keywords": [
-    "advanced archive description block",
-    "archive description block",
-    "customizable archive description"
+    "advanced archive description",
+    "archive description",
+    "archive block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "Show archive description on any post or page."
 }

@@ -135,9 +135,12 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced file upload",
+    "file upload block",
+    "advanced file upload block",
+    "file upload block for wordpress",
+    "form block for wordpress",
+    "form block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "A form file - upload block is a feature for online forms that allows users to upload files, such as images or documents, to a website."
 }

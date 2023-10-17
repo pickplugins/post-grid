@@ -121,9 +121,12 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced textarea field",
+    "textarea field block",
+    "advanced textarea field block",
+    "textarea field block for wordpress",
+    "form block for wordpress",
+    "form block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "The textarea field block provides a space in online forms for users to input more significant amounts of text or comments."
 }

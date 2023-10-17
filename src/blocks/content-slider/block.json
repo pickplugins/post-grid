@@ -136,9 +136,10 @@
   },
   "editorStyle": "pgcontent-slider-splide-core",
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced slider",
+    "advanced content slider",
+    "slider block",
+    "content slider block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "Content slider is a powerful block to display content in a slider."
 }

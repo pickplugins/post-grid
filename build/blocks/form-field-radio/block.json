@@ -157,9 +157,12 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced radio field",
+    "radio field block",
+    "advanced radio field block",
+    "radio field block for wordpress",
+    "form block for wordpress",
+    "form block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "The radio field block is a component in web forms that lets users choose a single option from a list using radio buttons."
 }

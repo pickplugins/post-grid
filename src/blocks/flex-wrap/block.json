@@ -48,9 +48,10 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced flex wrapper",
+    "flex layout",
+    "flex wrapper for wordpress",
+    "flex block for wordpress"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "A flex wrapper provides dynamic control over content organization within a responsive layout."
 }

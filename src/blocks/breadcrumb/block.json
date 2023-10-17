@@ -252,9 +252,9 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced breadcrumb",
+    "breadcrumb",
+    "breadcrumb block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "Display custom breadcrumb for your website."
 }

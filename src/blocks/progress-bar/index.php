@@ -354,8 +354,7 @@ class PGBlockProgressBar
 
                         100% {
                             width:
-                                <?php echo esc_attr($fill); ?>
-                                %;
+                                <?php echo esc_attr($fill); ?>%;
                         }
                     }
 
@@ -371,8 +370,7 @@ class PGBlockProgressBar
 
                         100% {
                             height:
-                                <?php echo esc_attr($fill); ?>
-                                %;
+                                <?php echo esc_attr($fill); ?>%;
                         }
                     }
 
@@ -384,8 +382,7 @@ class PGBlockProgressBar
                     animation:
                         <?php echo esc_attr($animatename); ?>
                         ease
-                        <?php echo esc_attr($animateDuration); ?>
-                        s;
+                        <?php echo esc_attr($animateDuration); ?>s;
                     animation-iteration-count: 1;
 
                 }

@@ -1078,10 +1078,14 @@ registerBlockType(metadata, {
 										<InputControl
 											type="number"
 											className="mr-2"
-											value={progressData.duration}
+											placeholder="In second"
+											value={progressData.animateDuration}
 											onChange={(newVal) => {
 												setAttributes({
-													progressData: { ...progressData, duration: newVal },
+													progressData: {
+														...progressData,
+														animateDuration: newVal,
+													},
 												});
 											}}
 										/>

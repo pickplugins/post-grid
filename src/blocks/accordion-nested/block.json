@@ -235,7 +235,7 @@
   "keywords": [
     "advanced accordion",
     "nested accordion",
-    "customizable accordion"
+    "accordion block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "Create collapsible container that organizes information by allowing users to expand or collapse sections."
 }

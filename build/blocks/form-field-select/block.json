@@ -138,9 +138,12 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced select field",
+    "select field block",
+    "advanced select field block",
+    "select field block for wordpress",
+    "form block for wordpress",
+    "form block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "The select field block is a feature in online forms that allows users to choose one option from a dropdown list."
 }

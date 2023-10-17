@@ -136,9 +136,12 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced input field",
+    "input field block",
+    "advanced input field block",
+    "input field block for wordpress",
+    "form block for wordpress",
+    "form block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "The form-input field is a blank space used in online forms for users to submit text or data, such as names and email addresses."
 }

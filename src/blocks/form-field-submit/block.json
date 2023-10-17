@@ -133,9 +133,12 @@
     }
   },
   "keywords": [
-    "advanced accordion",
-    "nested accordion",
-    "customizable accordion"
+    "advanced submit field",
+    "submit field block",
+    "advanced submit field block",
+    "submit field block for wordpress",
+    "form block for wordpress",
+    "form block"
   ],
-  "description": "Shows warning, error or success notices..."
+  "description": "The submit field block is a button in an online form that users click to submit their entered information."
 }

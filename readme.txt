@@ -384,6 +384,7 @@ You can report a bug via wordpress.org forum, also we are avilable on official f
 
 = 2.2.61 =
 
+- 2023-10-17 - update - Text Block - Limit by word and character count added.
 - 2023-10-17 - update - Block.json Metadata file updated for all blocks.
 - 2023-10-17 - fix - Accordion Block - label icon style icon fix.
 

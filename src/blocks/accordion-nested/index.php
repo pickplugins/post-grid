@@ -39,230 +39,11 @@ class PGBlockAccordionNested
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/accordion-nested', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
-            'provides_context' => array(
-                'post-grid/accordionNestedIcon' => 'icon',
-                'post-grid/accordionNestedIconToggle' => 'iconToggle',
-                'post-grid/accordionNestedLabelIcon' => 'labelIcon',
-
-            ),
-            //'style' => [$this, 'front_style'],
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => array(
-                'wrapper' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'content' => '',
-                                        'tag' => 'div',
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'searchWrap' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'enable' => false,
-                                        'contentSrc' =>
-                                            array(
-                                                0 => 'content',
-                                                1 => 'label',
-                                            ),
-                                        'tag' => 'div',
-                                        'class' => 'accordion-search-wrap',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'searchInput' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'tag' => 'input',
-                                        'type' => 'text',
-                                        'value' => '',
-                                        'placeholder' => 'Search here...',
-                                        'class' => 'accordion-search-input',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'content' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'tag' => 'div',
-                                        'class' => 'accordion-content',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'header' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'tag' => 'div',
-                                        'class' => 'accordion-header',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'headerActive' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'tag' => 'div',
-                                        'class' => 'accordion-header',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'headerLabel' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'text' => 'Accordion Header',
-                                        'tag' => 'div',
-                                        'class' => 'accordion-header-label',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'labelCounter' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'enable' => false,
-                                        'position' => 'left',
-                                        'tag' => 'div',
-                                        'class' => 'label-counter',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'labelIcon' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'library' => 'fontAwesome',
-                                        'srcType' => 'class',
-                                        'iconSrc' => '',
-                                        'position' => '',
-                                        'class' => 'accordion-label-icon',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'icon' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'library' => 'fontAwesome',
-                                        'srcType' => 'class',
-                                        'iconSrc' => '',
-                                        'position' => 'left',
-                                        'class' => 'accordion-icon',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'iconToggle' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'library' => 'fontAwesome',
-                                        'srcType' => 'class',
-                                        'iconSrc' => 'fas fa-angle-up',
-                                        'class' => 'accordion-icon-toggle',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'schema' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'enable' => true,
-                                    ),
-                            ),
-                    ),
-                'blockId' =>
-                    array(
-                        'type' => 'string',
-                        'default' => '',
-                    ),
-                'customCss' =>
-                    array(
-                        'type' => 'string',
-                        'default' => '',
-                    ),
-                'blockCssY' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'items' =>
-                                    array(),
-                            ),
-                    ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/accordion-nested/block.json',
+            array(
+                'render_callback' => array($this, 'theHTML'),
             )
-
-
-
-        )
         );
     }
 
@@ -283,9 +64,9 @@ class PGBlockAccordionNested
 
 
 
-        $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
-        $post_url = get_the_permalink($post_ID);
-        $the_post = get_post($post_ID);
+        // $post_ID = isset($block->context['postId']) ? $block->context['postId'] : '';
+        // $post_url = get_the_permalink($post_ID);
+        // $the_post = get_post($post_ID);
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
         $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
@@ -367,19 +148,19 @@ class PGBlockAccordionNested
         ?>
 
 
-                <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-                    <?php echo $content; ?>
-                </div>
+        <div class="pg-accordion-nested <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+            <?php echo $content; ?>
+        </div>
 
-                <?php
-                if ($schemaEnable):
-                    ?>
-                        <script type="application/ld+json">
-                            <?php echo wp_unslash(json_encode($json)); ?>
-                        </script>
-                    <?php
-                endif;
-                ?>
+        <?php
+        if ($schemaEnable):
+            ?>
+            <script type="application/ld+json">
+                                                                                                    <?php echo wp_unslash(json_encode($json)); ?>
+                                                                                                </script>
+            <?php
+        endif;
+        ?>
 
 
 

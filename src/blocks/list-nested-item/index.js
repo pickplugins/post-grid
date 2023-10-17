@@ -60,16 +60,11 @@ import colorsPresets from "../../colors-presets";
 import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
-import attributes from "./attributes";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/list-nested-item", {
-	apiVersion: 2,
-	title: "List item",
-	apiVersion: 2,
-	parent: ["post-grid/list-nested"],
-
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -78,26 +73,18 @@ registerBlockType("post-grid/list-nested-item", {
 		// Specifying an icon for the block
 		src: (
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-				<rect fill="#fff" x="12.87" y="5.71" width="23.13" height="2.35" />
+				<rect fill="#1d4ed8" x="12.87" y="5.71" width="23.13" height="2.35" />
 				<polygon
-					fill="#fff"
+					fill="#1d4ed8"
 					points="8.41 3.02 3.51 7.93 1.41 5.83 0 7.24 3.51 10.74 9.82 4.43 8.41 3.02"
 				/>
-				<rect fill="#fff" x="12.87" y="16.75" width="23.13" height="2.35" />
-				<rect fill="#fff" x="12.87" y="27.8" width="23.13" height="2.35" />
-				<path fill="#fff" d="M0,13.92v8H8v-8Zm1.87,6.14V15.78H6.15v4.28Z" />
-				<path fill="#fff" d="M0,33H8V25H0Zm6.15-6.16V31.1H1.88V26.82Z" />
+				<rect fill="#1d4ed8" x="12.87" y="16.75" width="23.13" height="2.35" />
+				<rect fill="#1d4ed8" x="12.87" y="27.8" width="23.13" height="2.35" />
+				<path fill="#1d4ed8" d="M0,13.92v8H8v-8Zm1.87,6.14V15.78H6.15v4.28Z" />
+				<path fill="#1d4ed8" d="M0,33H8V25H0Zm6.15-6.16V31.1H1.88V26.82Z" />
 			</svg>
 		),
 	},
-
-	attributes: attributes,
-	usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
 
 	edit: function (props) {
 		var attributes = props.attributes;

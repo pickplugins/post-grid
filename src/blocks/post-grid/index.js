@@ -95,6 +95,7 @@ import PGtab from "../../components/tab";
 import PGCssLibrary from "../../components/css-library";
 
 const ALLOWED_MEDIA_TYPES = ["image"];
+import metadata from "./block.json";
 
 // var queryPramsX = queryPrams.map((x, i) => {
 
@@ -103,10 +104,7 @@ const ALLOWED_MEDIA_TYPES = ["image"];
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/post-grid", {
-	apiVersion: 2,
-	title: "Post Grid",
-
+registerBlockType(metadata, {
 	icon: {
 		background: "#fff",
 		foreground: "#fff",
@@ -124,242 +122,6 @@ registerBlockType("post-grid/post-grid", {
 		),
 	},
 
-	providesContext: {
-		queryId: "queryId",
-		loopIndex: "loopIndex",
-
-		query: "query",
-		displayLayout: "displayLayout",
-	},
-	supports: {
-		align: ["left", "right", "center", "wide", "full"],
-		html: false,
-	},
-
-	attributes: {
-		lazyLoad: {
-			type: "object",
-			default: {
-				options: {
-					class: "lazyLoad",
-					enable: "no",
-					srcUrl: "",
-					srcId: "",
-					icon: {
-						library: "",
-						srcType: "class",
-						/*class, html, img, svg */ iconSrc: "",
-					},
-				},
-
-				styles: {},
-			},
-		},
-
-		search: {
-			type: "object",
-			default: {
-				options: {
-					class: "search",
-					enable: "no",
-					type: "",
-					placeholder: "",
-					icon: "",
-					busyIcon: "",
-				},
-				styles: {},
-			},
-		},
-		container: {
-			type: "object",
-			default: {
-				options: { class: "" },
-				styles: {},
-			},
-		},
-
-		itemsWrap: {
-			type: "object",
-			default: {
-				options: { class: "items-loop" },
-				styles: {},
-			},
-		},
-
-		itemWrap: {
-			type: "object",
-			default: {
-				options: { class: "item" },
-				styles: {},
-			},
-		},
-
-		noPostsWrap: {
-			type: "object",
-			default: {
-				options: { class: "no-posts text-center" },
-				styles: {},
-			},
-		},
-
-		spinnerWrap: {
-			type: "object",
-			default: {
-				options: { class: "spinner" },
-				styles: {},
-			},
-		},
-
-		grid: {
-			type: "object",
-			default: {
-				options: {
-					itemCss: {},
-				},
-
-				styles: {
-					gridTemplateColumns: {},
-					gridTemplateRows: {},
-					colGap: {},
-					rowGap: {},
-
-					color: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-				},
-			},
-		},
-
-		pagination: {
-			type: "object",
-			default: {
-				options: {
-					class: "pagination",
-					type: "normal",
-					maxPageNum: "",
-					prevText: "Previous",
-					nextText: "Next",
-					loadMoreText: "Load More",
-					noMorePosts: "No More Posts",
-					loadingText: "Loading...",
-					loadingIcon: {
-						library: "",
-						srcType: "class",
-						/*class, html, img, svg */ iconSrc: "",
-					},
-				},
-
-				styles: {
-					textAlign: { Desktop: "center" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-					fontSize: { Desktop: "" },
-				},
-			},
-		},
-
-		paginationItem: {
-			type: "object",
-			default: {
-				options: { class: "page-numbers inline-block" },
-
-				styles: {
-					display: { Desktop: "inline-block" },
-					color: { Desktop: "#18978F" },
-					fontSize: { Desktop: "" },
-				},
-			},
-		},
-
-		paginationItemActive: {
-			type: "object",
-			default: {
-				options: { class: "page-numbers inline-block" },
-
-				styles: {
-					color: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-					fontSize: { Desktop: "" },
-				},
-			},
-		},
-
-		layout: {
-			type: "object",
-			default: {
-				id: "",
-				srcServer: "library",
-				data: [
-					{
-						blockName: "core/post-title",
-						attrs: {},
-						innerBlocks: [],
-						innerHTML: "",
-						innerContent: [],
-					},
-					{
-						blockName: null,
-						attrs: {},
-						innerBlocks: [],
-						innerHTML: "\n\n",
-						innerContent: ["\n\n"],
-					},
-					{
-						blockName: "core/post-date",
-						attrs: {},
-						innerBlocks: [],
-						innerHTML: "",
-						innerContent: [],
-					},
-					{
-						blockName: null,
-						attrs: {},
-						innerBlocks: [],
-						innerHTML: "\n\n",
-						innerContent: ["\n\n"],
-					},
-					{
-						blockName: "core/post-excerpt",
-						attrs: { moreText: "", textColor: "primary" },
-						innerBlocks: [],
-						innerHTML: "",
-						innerContent: [],
-					},
-				],
-				rawData:
-					"<!-- wp:post-featured-image  /-->\n\n<!-- wp:post-title /-->\n\n<!-- wp:post-excerpt  /-->",
-			},
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
-
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-		queryArgs: {
-			type: "object",
-			default: {
-				items: [
-					{ val: ["post"], id: "postType" },
-					{ val: ["publish"], id: "postStatus" },
-					{ val: "DESC", id: "order" },
-					{ val: ["date"], id: "orderby" },
-					{ val: 3, id: "postsPerPage" },
-					{ val: 1, id: "paged" },
-				],
-			},
-		},
-	},
-	category: "post-grid",
 	edit: function (props) {
 		var attributes = props.attributes;
 		var clientId = props.clientId;
@@ -1200,7 +962,6 @@ registerBlockType("post-grid/post-grid", {
 		//     };
 		//   }, []);
 
-
 		//   return deviceType;
 		// };
 
@@ -1215,12 +976,10 @@ registerBlockType("post-grid/post-grid", {
 				myStore.generateBlockCss(blockCssY.items, blockId, customCss);
 			});
 
-			const {
-				__experimentalGetPreviewDeviceType: getPreviewDeviceType,
-			} = select("core/edit-post");
+			const { __experimentalGetPreviewDeviceType: getPreviewDeviceType } =
+				select("core/edit-post");
 
 			const gutenbergDeviceType = getPreviewDeviceType();
-
 		}
 
 		useEffect(() => {
@@ -1375,7 +1134,6 @@ registerBlockType("post-grid/post-grid", {
 				var allStyle = {};
 
 				var allStyleX = getCssfromBlocks(allStyle, blocks);
-
 
 				// blocks.map((block, i) => {
 
@@ -1575,10 +1333,8 @@ registerBlockType("post-grid/post-grid", {
 		}
 
 		function updateQueryPram(newVal, index) {
-
 			var queryArgsX = { ...queryArgs };
 			// var itemsX = queryArgsX.items;
-
 
 			// itemsX[index].val = newVal
 
@@ -3035,7 +2791,6 @@ registerBlockType("post-grid/post-grid", {
 							className="w-full rounded-sm  py-2 bg-blue-500 text-[14px] font-bold text-white cursor-pointer my-3 text-center"
 							onClick={(_ev) => {
 								var page = queryLayouts.page + 1;
-
 
 								setQueryLayouts({
 									keyword: queryLayouts.keyword,

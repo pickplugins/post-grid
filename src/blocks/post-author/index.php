@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,153 +19,16 @@ class PGBlockPostAuthor
         // wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-author/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/post-author', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "tag" => "div",
-                            "class" => ""
-                        ],
-                        "styles" => [
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/post-author/block.json',
+            array(
 
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "elements" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => [
-                            [
-                                "id" => "avatar",
-                                "label" => "Avatar"
-                            ],
-                            [
-                                "id" => "name",
-                                "label" => "Name"
-                            ],
-                            [
-                                "id" => "description",
-                                "label" => "Description"
-                            ]
-                        ]
-                    ]
-                ],
-                "avatar" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "avatar",
-                            "size" => "48",
-                            "default" => ""
-                        ],
-                        "styles" => [
-                            "display" => [],
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "verticalAlign" => [],
-                            "borderRadius" => []
-                        ]
-                    ]
-                ],
-                "name" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "name",
-                            "prefix" => "",
-                            "postfix" => "",
-                            "linkTo" => "",
-                            "linkToMeta" => "",
-                            "customUrl" => ""
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "verticalAlign" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "description" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "description",
-                            "prefix" => "",
-                            "postfix" => ""
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "verticalAlign" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "linkAttr" => [
-                    "type" => "array",
-                    "default" => []
-                ],
-                "blockCss" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ]
-            ]
+                'render_callback' => array($this, 'theHTML'),
 
 
-        ));
+
+            )
+        );
     }
 
     function front_script($attributes)
@@ -263,29 +127,39 @@ class PGBlockPostAuthor
 
         $htmlGroups = [];
         ob_start();
-?>
+        ?>
 
         <div class="<?php echo esc_attr($nameClass); ?>">
-            <?php if (!empty($nameLink)) : ?>
+            <?php if (!empty($nameLink)): ?>
 
-                <?php if ($namePrefix) : ?>
-                    <span class="prefix"><?php echo wp_kses_post($namePrefix); ?></span>
+                <?php if ($namePrefix): ?>
+                    <span class="prefix">
+                        <?php echo wp_kses_post($namePrefix); ?>
+                    </span>
                 <?php endif; ?>
-                <a href="<?php echo esc_url_raw($nameLink); ?>"><?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?></a>
-                <?php if ($namePostfix) : ?>
-                    <span class="prefix"><?php echo wp_kses_post($namePostfix); ?></span>
+                <a href="<?php echo esc_url_raw($nameLink); ?>">
+                    <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
+                </a>
+                <?php if ($namePostfix): ?>
+                    <span class="prefix">
+                        <?php echo wp_kses_post($namePostfix); ?>
+                    </span>
                 <?php endif; ?>
 
 
-            <?php else : ?>
+            <?php else: ?>
 
 
-                <?php if ($namePrefix) : ?>
-                    <span class="prefix"><?php echo wp_kses_post($namePrefix); ?></span>
+                <?php if ($namePrefix): ?>
+                    <span class="prefix">
+                        <?php echo wp_kses_post($namePrefix); ?>
+                    </span>
                 <?php endif; ?>
                 <?php echo wp_kses_post(get_the_author_meta('display_name', $post_author_id)); ?>
-                <?php if ($namePostfix) : ?>
-                    <span class="prefix"><?php echo wp_kses_post($namePostfix); ?></span>
+                <?php if ($namePostfix): ?>
+                    <span class="prefix">
+                        <?php echo wp_kses_post($namePostfix); ?>
+                    </span>
                 <?php endif; ?>
             <?php endif; ?>
 
@@ -310,7 +184,8 @@ class PGBlockPostAuthor
         ?>
 
         <div class="<?php echo esc_attr($avatarClass); ?>">
-            <img src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $avatarSize])) ?>" alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
+            <img src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $avatarSize])) ?>"
+                alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
         </div>
 
         <?php
@@ -337,7 +212,8 @@ class PGBlockPostAuthor
         ?>
 
 
-        <<?php echo esc_attr($wrapperTag); ?> class="<?php echo $blockId; ?>">
+        <<?php echo esc_attr($wrapperTag); ?> class="
+            <?php echo $blockId; ?>">
             <?php
             foreach ($elementsItems as $item) {
 
@@ -360,7 +236,7 @@ class PGBlockPostAuthor
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

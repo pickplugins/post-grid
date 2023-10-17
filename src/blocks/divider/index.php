@@ -19,134 +19,12 @@ class PGBlocArchiveTitle
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/archive-title/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/archive-title', array(
-            // 'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
-            'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "tag" => "div",
-                            "class" => ""
-                        ],
-                        "styles" => [
-                            "color" => [],
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/divider/block.json',
+            array(
 
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "archiveTitle" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "tag" => "div",
-                            "archiveType" => "auto",
-                            "customLabel" => "Archive: %s",
-
-                            "linkTo" => "",
-                            "linkToUrl" => "",
-                            "linkToMetaKey" => "",
-                            "linkTarget" => "_blank",
-                            "linkAttr" => [],
-                            "customUrl" => "",
-                            "class" => ""
-                        ],
-                        "styles" => [
-
-                            "display" => [],
-                            "width" => [],
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "icon" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "library" => "fontAwesome",
-                            "srcType" => "class",
-                            "iconSrc" => "far fa-calendar-alt",
-                            "position" => "beforeArchiveTitle",
-                            "class" => "postdate-icon"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => []
-                        ]
-                    ]
-                ],
-                "prefix" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "",
-                            "class" => "prefix"
-                        ],
-                        "styles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "postfix" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "",
-                            "class" => "prefix"
-                        ],
-                        "styles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
-
-
-        )
+                'render_callback' => array($this, 'theHTML'),
+            )
         );
     }
 
@@ -356,121 +234,136 @@ class PGBlocArchiveTitle
         if (!empty($wrapperTag)):
 
             ?>
-                        <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>">
 
 
-                            <?php if ($iconPosition == 'beforePrefix'): ?>
-                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                            <?php endif; ?>
+                <?php if ($iconPosition == 'beforePrefix'): ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                            <?php if ($prefixText): ?>
-                                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
-                            <?php endif; ?>
+                <?php if ($prefixText): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
+                <?php endif; ?>
 
-                            <?php if ($iconPosition == 'afterPrefix'): ?>
-                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                            <?php endif; ?>
+                <?php if ($iconPosition == 'afterPrefix'): ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
 
-                            <?php if (!empty($archiveTitleLinkTo)): ?>
-                                    <a class='archiveTitle' <?php
-                                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                    echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
-                                        <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
-                                        <?php echo wp_kses_post($formatedArchiveTitle); ?>
-                                        <?php if ($iconPosition == 'afterArchiveTitle'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
-                                    </a>
+                <?php if (!empty($archiveTitleLinkTo)): ?>
+                    <a class='archiveTitle' <?php
+                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                    echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>"
+                        rel="<?php echo esc_attr($archiveTitleRel); ?>"
+                        href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+                        <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                        <?php echo wp_kses_post($formatedArchiveTitle); ?>
+                        <?php if ($iconPosition == 'afterArchiveTitle'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                    </a>
 
-                            <?php else: ?>
+                <?php else: ?>
 
-                                    <span class='archiveTitle' <?php
-                                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                    echo ($linkAttrStrarchiveTitle); ?>>
-                                        <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
-                                        <?php echo wp_kses_post($formatedArchiveTitle); ?>
-                                        <?php if ($iconPosition == 'afterArchiveTitle'): ?>
-                                                <?php echo wp_kses_post($fontIconHtml); ?>
-                                        <?php endif; ?>
-                                    </span>
-
-
-                            <?php endif; ?>
-
-
-
+                    <span class='archiveTitle' <?php
+                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                    echo ($linkAttrStrarchiveTitle); ?>>
+                        <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                        <?php echo wp_kses_post($formatedArchiveTitle); ?>
+                        <?php if ($iconPosition == 'afterArchiveTitle'): ?>
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+                        <?php endif; ?>
+                    </span>
 
 
+                <?php endif; ?>
 
-                            <?php if ($iconPosition == 'beforePostfix'): ?>
-                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                            <?php endif; ?>
-                            <?php if ($postfixText): ?>
-                                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
-                            <?php endif; ?>
 
-                            <?php if ($iconPosition == 'afterPostfix'): ?>
-                                    <?php echo wp_kses_post($fontIconHtml); ?>
-                            <?php endif; ?>
 
-                        </<?php echo esc_attr($wrapperTag); ?>>
-                    <?php
+
+
+
+                <?php if ($iconPosition == 'beforePostfix'): ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+                <?php if ($postfixText): ?>
+                    <span class="<?php echo $postfixClass; ?>">
+                        <?php echo $postfixText; ?>
+                    </span>
+                <?php endif; ?>
+
+                <?php if ($iconPosition == 'afterPostfix'): ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+
+            </<?php echo esc_attr($wrapperTag); ?>>
+            <?php
 
         endif;
 
         if (empty($wrapperTag)):
 
             ?>
-                        <?php if ($iconPosition == 'beforePrefix'): ?>
-                                <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                        <?php if ($prefixText): ?>
-                                <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo $prefixText; ?></span>
-                        <?php endif; ?>
+            <?php if ($iconPosition == 'beforePrefix'): ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+            <?php if ($prefixText): ?>
+                <span class="<?php echo esc_attr($prefixClass); ?>">
+                    <?php echo $prefixText; ?>
+                </span>
+            <?php endif; ?>
 
-                        <?php if ($iconPosition == 'afterPrefix'): ?>
-                                <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
+            <?php if ($iconPosition == 'afterPrefix'): ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
 
-                        <?php if (!empty($archiveTitleLinkTo)): ?>
+            <?php if (!empty($archiveTitleLinkTo)): ?>
 
-                                <a class='archiveTitle' <?php
-                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>" rel="<?php echo esc_attr($archiveTitleRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
-                                    <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
-                                            <?php echo wp_kses_post($fontIconHtml); ?>
-                                    <?php endif; ?>
-                                    <?php echo wp_kses_post($formatedArchiveTitle); ?>C
-                                    <?php if ($iconPosition == 'afterArchiveTitle'): ?>
-                                            <?php echo wp_kses_post($fontIconHtml); ?>
-                                    <?php endif; ?>
-                                </a>
-                        <?php else: ?>
-                                <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
-                                        <?php echo wp_kses_post($fontIconHtml); ?>
-                                <?php endif; ?>
-                                <span class='archiveTitle'><?php echo wp_kses_post($formatedArchiveTitle); ?></span>
-                                <?php if ($iconPosition == 'afterArchiveTitle'): ?>
-                                        <?php echo wp_kses_post($fontIconHtml); ?>
-                                <?php endif; ?>
-                        <?php endif; ?>
+                <a class='archiveTitle' <?php
+                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                echo ($linkAttrStrarchiveTitle); ?> target="<?php echo esc_attr($archiveTitleLinkTarget); ?>"
+                    rel="<?php echo esc_attr($archiveTitleRel); ?>"
+                    href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+                    <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
+                    <?php echo wp_kses_post($formatedArchiveTitle); ?>C
+                    <?php if ($iconPosition == 'afterArchiveTitle'): ?>
+                        <?php echo wp_kses_post($fontIconHtml); ?>
+                    <?php endif; ?>
+                </a>
+            <?php else: ?>
+                <?php if ($iconPosition == 'beforeArchiveTitle'): ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+                <span class='archiveTitle'>
+                    <?php echo wp_kses_post($formatedArchiveTitle); ?>
+                </span>
+                <?php if ($iconPosition == 'afterArchiveTitle'): ?>
+                    <?php echo wp_kses_post($fontIconHtml); ?>
+                <?php endif; ?>
+            <?php endif; ?>
 
 
 
-                        <?php if ($iconPosition == 'beforePostfix'): ?>
-                                <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                        <?php if ($postfixText): ?>
-                                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
-                        <?php endif; ?>
-                        <?php if ($iconPosition == 'afterPostfix'): ?>
-                                <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-                    <?php
+            <?php if ($iconPosition == 'beforePostfix'): ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+            <?php if ($postfixText): ?>
+                <span class="<?php echo $postfixClass; ?>">
+                    <?php echo $postfixText; ?>
+                </span>
+            <?php endif; ?>
+            <?php if ($iconPosition == 'afterPostfix'): ?>
+                <?php echo wp_kses_post($fontIconHtml); ?>
+            <?php endif; ?>
+        <?php
 
         endif;
 

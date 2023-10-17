@@ -12,6 +12,7 @@
       "full"
     ]
   },
+  "example": {},
   "attributes": {
     "text": {
       "type": "object",
@@ -37,5 +38,11 @@
         "items": {}
       }
     }
-  }
+  },
+  "keywords": [
+    "advanced text",
+    "rich text",
+    "text block"
+  ],
+  "description": "Shows warning, error or success notices..."
 }

@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,92 +19,16 @@ class BlockPostMeta
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-meta/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/post-meta', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'editor_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "template" => [
-                    "type" => "string",
-                    "default" => "<div>Output HTML: {metaValue}</div>"
-                ],
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "inline-block"
-                        ],
-                        "styles" => [
-                            "color" => [],
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/post-meta/block.json',
+            array(
 
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "meta" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "key" => "",
-                            "type" => "string",
-                            "prefix" => "",
-                            "postfix" => ""
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "separator" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "inline-block"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "frontText" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "Meta Value: ",
-                            "class" => "inline-block"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
+                'render_callback' => array($this, 'theHTML'),
 
 
-        ));
+
+            )
+        );
     }
 
     function front_script($attributes)
@@ -142,7 +67,7 @@ class BlockPostMeta
         global $postGridCss;
 
         $blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
-        $blockAlign = isset($attributes['align']) ? 'align'.$attributes['align'] : '';
+        $blockAlign = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
         $customCss = isset($attributes['customCss']) ? $attributes['customCss'] : '';
 
 
@@ -183,7 +108,7 @@ class BlockPostMeta
 
         if ($metaKeyType != 'string') {
 
-            if (is_plugin_active('advanced-custom-fields/acf.php') ||  is_plugin_active('advanced-custom-fields-pro/acf.php')) {
+            if (is_plugin_active('advanced-custom-fields/acf.php') || is_plugin_active('advanced-custom-fields-pro/acf.php')) {
 
                 $metaValue = get_field($metaKey, $post_ID);
             }
@@ -210,14 +135,15 @@ class BlockPostMeta
 
 
 
-        if (!empty($wrapperTag)) :
-?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+        if (!empty($wrapperTag)):
+            ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>">
 
                 <?php
 
 
-                if (gettype($metaValue) == 'array' ||  gettype($metaValue) == 'object') {
+                if (gettype($metaValue) == 'array' || gettype($metaValue) == 'object') {
 
 
                     if (!empty($templateLoop)) {
@@ -232,17 +158,17 @@ class BlockPostMeta
                                         $tempArgs['{' . $itemIndex . '}'] = $item;
                                     }
 
-                                echo strtr($templateLoop, (array)$tempArgs);
+                                echo strtr($templateLoop, (array) $tempArgs);
                             }
                     } else {
                         $singleArrayForCategory = $this->nestedToSingle($metaValue);
-                        echo strtr($template, (array)$singleArrayForCategory);
+                        echo strtr($template, (array) $singleArrayForCategory);
                     }
                 } else {
 
                     $singleArray = ['{metaValue}' => $metaValue];
 
-                    echo strtr($template, (array)$singleArray);
+                    echo strtr($template, (array) $singleArray);
                 }
 
                 ?>
@@ -250,7 +176,7 @@ class BlockPostMeta
 
             </<?php echo esc_attr($wrapperTag); ?>>
 
-<?php
+            <?php
 
         endif;
 

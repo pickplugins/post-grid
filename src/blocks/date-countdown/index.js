@@ -82,14 +82,11 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import variations from "./variations";
-import attributes from "./attributes";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/date-countdown", {
-	apiVersion: 2,
-	title: "Date Countdown",
-
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -129,14 +126,6 @@ registerBlockType("post-grid/date-countdown", {
 			</svg>
 		),
 	},
-
-	attributes: attributes,
-	usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
 
 	edit: function (props) {
 		var attributes = props.attributes;

@@ -28,15 +28,13 @@ import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
-
+import metadata from "./block.json";
 
 var myStore = wp.data.select('postgrid-shop');
 
 
 
-registerBlockType("post-grid/post-meta", {
-  apiVersion: 2,
-  title: "Post Meta",
+registerBlockType(metadata, {
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: '#fff',
@@ -45,114 +43,7 @@ registerBlockType("post-grid/post-meta", {
     // Specifying an icon for the block
     src: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><rect fill="#1d4ed8" y="27.61" width="13.97" height="2" /><rect fill="#1d4ed8" x="16.42" y="27.61" width="9.96" height="2" /><rect fill="#1d4ed8" y="22.91" width="36" height="2" /><rect fill="#1d4ed8" y="18.22" width="36" height="2" /><rect fill="#1d4ed8" y="6.39" width="36" height="2.35" /><rect fill="#8db1ff" y="13.09" width="10.07" height="2" /><rect fill="#8db1ff" x="15.29" y="13.09" width="10.07" height="2" /></svg>,
   },
-  attributes: {
-
-
-    template: {
-      "type": "string",
-      "default": '<div>Output HTML: {metaValue}</div>'
-    },
-    templateLoop: {
-      "type": "string",
-      "default": ''
-    },
-
-    wrapper: {
-      type: 'object',
-      default: {
-
-        options: {
-          class: '',
-          tag: 'div',
-
-        },
-        styles:
-        {
-
-          color: { Desktop: '' },
-
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          display: {},
-
-        },
-
-
-      },
-    },
-    meta: {
-      type: 'object',
-      default: {
-        options: {
-          key: '', type: 'string', /*string, acfImage, acfFile, , , , acfUser*/ prefix: '', postfix: '',
-        },
-
-        styles: {
-
-          display: {},
-          width: {},
-          color: { Desktop: '' },
-
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
-        },
-
-      },
-    },
-    prefix: {
-      type: 'object',
-      default: {
-        options: { text: '', class: 'prefix' },
-
-        styles:
-        {
-          color: { Desktop: '' },
-
-        },
-      },
-    },
-
-    postfix: {
-      type: 'object',
-      default: {
-        options: { text: '', class: 'postfix' },
-
-        styles:
-        {
-          color: { Desktop: '' },
-
-        },
-      },
-    },
-
-    customCss: {
-      "type": "string",
-      "default": ''
-    },
-    blockId: {
-      "type": "string",
-      "default": ''
-    },
-    blockCssY: {
-      "type": "object",
-      "default": { items: {} }
-    },
-
-  },
-  usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-  supports: {
-    "align": ["wide", "full"],
-  },
-  category: "post-grid",
+  
 
 
   edit: function (props) {

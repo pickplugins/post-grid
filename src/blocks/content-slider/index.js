@@ -80,15 +80,12 @@ import PGIconPicker from "../../components/icon-picker";
 //import Splide from '@splidejs/splide';
 
 import "@splidejs/splide/dist/css/splide-core.min.css";
-import attributes from "./attributes";
+import metadata from "./block.json";
 //import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/content-slider", {
-	apiVersion: 2,
-	title: "Content Slider",
-
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -104,13 +101,7 @@ registerBlockType("post-grid/content-slider", {
 		),
 	},
 
-	attributes: attributes,
-	usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
+	
 
 	edit: function (props) {
 		var attributes = props.attributes;

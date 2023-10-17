@@ -34,13 +34,11 @@ import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
+import metadata from "./block.json";
 
 var myStore = wp.data.select('postgrid-shop');
 
-registerBlockType("post-grid/post-featured-image", {
-  apiVersion: 2,
-  title: "Featured Image",
-
+registerBlockType(metadata, {
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: '#fff',
@@ -59,98 +57,7 @@ registerBlockType("post-grid/post-featured-image", {
   },
 
 
-  attributes: {
-
-
-    wrapper: {
-      type: 'object',
-      default: {
-        options: { tag: 'div', class: '', useAsBackground: 'no' },
-
-        styles:
-        {
-          height: {},
-          overflow: {},
-          color: { Desktop: '' },
-          display: {},
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          backgroundPosition: {},
-          backgroundSize: {},
-
-
-        },
-      },
-    },
-
-    featuredImage: {
-      type: 'object',
-      default: {
-        options: {
-          tag: '',
-          linkTo: '', // postUrl, customField, authorUrl, authorLink, homeUrl, custom
-          customUrl: '',
-          linkToMetaKey: '',
-
-          altTextSrc: 'imgAltText', // imgAltText, imgTitle, imgCaption, imgDescription imgName, imgSlug, postTitle, excerpt, postSlug, customField, custom
-          altTextCustom: '',
-          altTextMetaKey: '',
-
-          titleTextSrc: 'imgTitle', // imgAltText, imgTitle, imgCaption, imgDescription imgName, imgSlug, postTitle, excerpt, postSlug, customField, custom
-
-          titleTextCustom: '',
-          titleTextMetaKey: '',
-
-          linkTarget: '_blank',
-          linkAttr: [],
-          class: '',
-          size: { "Desktop": "full", "Tablet": "full", "Mobile": "full" },
-
-        },
-
-        styles: {
-          width: {},
-          height: {},
-          filter: {},
-          padding: { Desktop: '' },
-          margin: {}
-        },
-        hoverStyles:
-        {
-
-          filter: {},
-        },
-      },
-    },
-
-
-
-
-
-    customCss: {
-      "type": "string",
-      "default": ''
-    },
-
-
-    blockId: {
-      "type": "string",
-      "default": ''
-    },
-    blockCssY: {
-      "type": "object",
-      "default": { items: {} }
-    },
-
-
-  },
-  usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-  supports: {
-    "align": ["wide", "full"],
-
-  },
-  category: "post-grid",
+ 
 
 
   edit: function (props) {

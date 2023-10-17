@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,196 +19,12 @@ class PGBlockFormFieldRadio
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/text/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/form-field-radio', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'label' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'enable' => true,
-                            'tag' => 'label',
-                            'for' => 'label',
-                            'text' => 'Your Name',
-                            'class' => 'pg-form-field-label',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'inputWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                    ),
-                ),
-                'radio' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'value' => NULL,
-                            'name' => '',
-                            'required' => false,
-                            'disabled' => false,
-                            'multiple' => false,
-                            'autofocus' => NULL,
-                            'readonly' => false,
-                            'args' =>
-                            array(
-                                0 =>
-                                array(
-                                    'label' => 'Option 1',
-                                    'value' => 'option1',
-                                ),
-                                1 =>
-                                array(
-                                    'label' => 'Option 2',
-                                    'value' => 'option2',
-                                ),
-                                2 =>
-                                array(
-                                    'label' => 'Option 3',
-                                    'value' => 'option3',
-                                ),
-                            ),
-                            'id' => '',
-                            'class' => 'pg-form-field-radio',
-                            'position' => 'afterLabel',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'item' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'itemLabel' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'labelWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'errorWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'enable' => true,
-                            'text' => '',
-                            'position' => 'afterInput',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'requiredWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'span',
-                            'enable' => true,
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(),
-                    ),
-                ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/form-field-radio/block.json',
+            array(
+                'render_callback' => array($this, 'theHTML'),
             )
-
-
-        ));
+        );
     }
 
     function front_script($attributes)
@@ -279,20 +96,24 @@ class PGBlockFormFieldRadio
         ob_start();
 
 
-?>
+        ?>
 
         <div class="<?php echo esc_attr($blockId); ?>">
 
 
             <div class='label-wrap'>
 
-                <?php if ($labelEnable) : ?>
-                    <label for=""><?php echo wp_kses_post($labelText); ?></label>
+                <?php if ($labelEnable): ?>
+                    <label for="">
+                        <?php echo wp_kses_post($labelText); ?>
+                    </label>
                 <?php endif; ?>
 
 
-                <?php if ($errorWrapPosition == 'afterlabel') : ?>
-                    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                <?php if ($errorWrapPosition == 'afterlabel'): ?>
+                    <div class='error-wrap'>
+                        <?php echo wp_kses_post($errorWrapText); ?>
+                    </div>
                 <?php endif; ?>
 
 
@@ -302,17 +123,22 @@ class PGBlockFormFieldRadio
 
                 <?php
 
-                if (!empty($inputArgs)) :
-                    foreach ($inputArgs as $index => $inputArg) :
+                if (!empty($inputArgs)):
+                    foreach ($inputArgs as $index => $inputArg):
 
-                ?><div className='item'>
-                            <input id="<?php echo esc_attr($blockId . '-' . $index) ?>" type="radio" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputArg['value']); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired) : ?> required <?php endif; ?> <?php if ($inputDisabled) : ?> disabled <?php endif; ?> <?php if ($inputReadonly) : ?> readonly <?php endif; ?> <?php if ($inputValue == $inputArg['value']) : ?> checked <?php endif; ?> />
+                        ?>
+                        <div className='item'>
+                            <input id="<?php echo esc_attr($blockId . '-' . $index) ?>" type="radio"
+                                placeholder="<?php echo esc_attr($inputPlaceholder); ?>"
+                                value="<?php echo esc_attr($inputArg['value']); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>                 <?php if ($inputDisabled): ?> disabled <?php endif; ?>
+                                <?php if ($inputReadonly): ?> readonly <?php endif; ?>                 <?php if ($inputValue == $inputArg['value']): ?>
+                                    checked <?php endif; ?> />
                             <label for="<?php echo esc_attr($blockId . '-' . $index) ?>">
                                 <?php echo wp_kses_post($inputArg['label']); ?>
                             </label>
                         </div>
 
-                <?php
+                        <?php
 
                     endforeach;
                 endif;
@@ -323,8 +149,10 @@ class PGBlockFormFieldRadio
 
 
 
-                <?php if ($errorWrapPosition == 'afterInput') : ?>
-                    <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
+                <?php if ($errorWrapPosition == 'afterInput'): ?>
+                    <div class='error-wrap'>
+                        <?php echo wp_kses_post($errorWrapText); ?>
+                    </div>
 
                 <?php endif; ?>
             </div>
@@ -336,7 +164,7 @@ class PGBlockFormFieldRadio
 
         </div>
 
-<?php
+        <?php
         return ob_get_clean();
     }
 }

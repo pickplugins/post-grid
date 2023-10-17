@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,159 +19,17 @@ class PGBlocpostCommentCount
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-comment-count/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/post-comment-count', array(
-            // 'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/post-comment-count/block.json',
+            array(
 
-                            'color' => [],
-                            'backgroundColor' => [],
-                            'padding' => [],
-                            'margin' => [],
-                            'display' => [],
-                        ),
-                    ),
-                ),
-                'commentCount' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'status' => 'approved',
-                            'customLabel' => 'Count: %s',
-                            'linkTo' => '',
-                            'linkToUrl' => '',
-                            'linkToMetaKey' => '',
-                            'linkTarget' => '_blank',
-                            'linkAttr' => [],
-                            'customUrl' => '',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
 
-                            'display' => [],
-                            'width' => [],
-                            'color' => [],
-                            'backgroundColor' => [],
-                            'padding' => [],
-                            'margin' => [],
-                            'fontSize' => [],
-                            'lineHeight' => [],
-                            'letterSpacing' => [],
-                            'fontFamily' => [],
-                            'fontWeight' => [],
-                            'textDecoration' => [],
-                            'textTransform' => [],
-                        ),
-                    ),
-                ),
-                'icon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => 'far fa-calendar-alt',
-                            'position' => 'beforeCommentCount',
-                            'class' => 'commentCount-icon',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' => [],
-                            'backgroundColor' => [],
-                            'padding' => [],
-                            'margin' => [],
+                'render_callback' => array($this, 'theHTML'),
 
-                            'display' => [],
-                            'fontSize' => [],
-                            'lineHeight' => [],
-                            'fontWeight' =>
-                            array(
-                                'Desktop' => '700',
-                            ),
-                            'textDecoration' => [],
-                        ),
-                    ),
-                ),
-                'prefix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'prefix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' => [],
-                            'backgroundColor' => [],
-                        ),
-                    ),
-                ),
-                'postfix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'prefix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' => [],
-                            'backgroundColor' => [],
-                        ),
-                    ),
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' => [],
-                    ),
-                ),
+
+
             )
-
-
-        ));
+        );
     }
 
     function front_script($attributes)
@@ -256,7 +115,7 @@ class PGBlocpostCommentCount
         $postGridCssY[] = isset($blockCssY['items']) ? $blockCssY['items'] : [];
 
         $counts = wp_count_comments($post_ID);
-        $countbyStatus = isset($counts->$status) ?  $counts->$status : 0;
+        $countbyStatus = isset($counts->$status) ? $counts->$status : 0;
 
         $formatedcommentCount = sprintf($customLabel, $countbyStatus);
 
@@ -324,49 +183,54 @@ class PGBlocpostCommentCount
         ob_start();
 
 
-        if (!empty($wrapperTag)) :
+        if (!empty($wrapperTag)):
 
-?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+            ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>">
 
 
-                <?php if ($iconPosition == 'beforePrefix') : ?>
+                <?php if ($iconPosition == 'beforePrefix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                <?php if ($prefixText): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
                 <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPrefix') : ?>
+                <?php if ($iconPosition == 'afterPrefix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-                <?php if (!empty($commentCountLinkTo)) : ?>
+                <?php if (!empty($commentCountLinkTo)): ?>
                     <a class='commentCount' <?php
-                                            /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                            echo ($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>" rel="<?php echo esc_attr($commentCountRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
-                        <?php if ($iconPosition == 'beforeCommentCount') : ?>
+                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                    echo ($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>"
+                        rel="<?php echo esc_attr($commentCountRel); ?>"
+                        href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+                        <?php if ($iconPosition == 'beforeCommentCount'): ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
                         <?php echo wp_kses_post($formatedcommentCount); ?>
-                        <?php if ($iconPosition == 'afterCommentCount') : ?>
+                        <?php if ($iconPosition == 'afterCommentCount'): ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
                     </a>
 
-                <?php else : ?>
+                <?php else: ?>
 
                     <span class='commentCount' <?php
-                                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                                echo ($linkAttrStrcommentCount); ?>>
-                        <?php if ($iconPosition == 'beforeCommentCount') :
-                        ?>
+                    /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                    echo ($linkAttrStrcommentCount); ?>>
+                        <?php if ($iconPosition == 'beforeCommentCount'):
+                            ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif;
                         ?>
                         <?php echo wp_kses_post($formatedcommentCount); ?>
-                        <?php if ($iconPosition == 'afterCommentCount') : ?>
+                        <?php if ($iconPosition == 'afterCommentCount'): ?>
                             <?php echo wp_kses_post($fontIconHtml); ?>
                         <?php endif; ?>
                     </span>
@@ -379,68 +243,78 @@ class PGBlocpostCommentCount
 
 
 
-                <?php if ($iconPosition == 'beforePostfix') : ?>
+                <?php if ($iconPosition == 'beforePostfix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                <?php if ($postfixText): ?>
+                    <span class="<?php echo $postfixClass; ?>">
+                        <?php echo $postfixText; ?>
+                    </span>
                 <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPostfix') : ?>
+                <?php if ($iconPosition == 'afterPostfix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
             </<?php echo esc_attr($wrapperTag); ?>>
-        <?php
+            <?php
 
         endif;
 
-        if (empty($wrapperTag)) :
+        if (empty($wrapperTag)):
 
-        ?>
-            <?php if ($iconPosition == 'beforePrefix') : ?>
+            ?>
+            <?php if ($iconPosition == 'beforePrefix'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
-            <?php if ($prefixText) : ?>
-                <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo $prefixText; ?></span>
+            <?php if ($prefixText): ?>
+                <span class="<?php echo esc_attr($prefixClass); ?>">
+                    <?php echo $prefixText; ?>
+                </span>
             <?php endif; ?>
 
-            <?php if ($iconPosition == 'afterPrefix') : ?>
+            <?php if ($iconPosition == 'afterPrefix'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
 
-            <?php if (!empty($commentCountLinkTo)) : ?>
+            <?php if (!empty($commentCountLinkTo)): ?>
 
                 <a class='commentCount' <?php
-                                        /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                        echo ($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>" rel="<?php echo esc_attr($commentCountRel); ?>" href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) :  esc_url_raw($post_url); ?>">
-                    <?php if ($iconPosition == 'beforeCommentCount') : ?>
+                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                echo ($linkAttrStrcommentCount); ?> target="<?php echo esc_attr($commentCountLinkTarget); ?>"
+                    rel="<?php echo esc_attr($commentCountRel); ?>"
+                    href="<?php echo (!empty($linkUrl)) ? esc_url_raw($linkUrl) : esc_url_raw($post_url); ?>">
+                    <?php if ($iconPosition == 'beforeCommentCount'): ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
                     <?php echo wp_kses_post($formatedcommentCount); ?>C
-                    <?php if ($iconPosition == 'afterCommentCount') : ?>
+                    <?php if ($iconPosition == 'afterCommentCount'): ?>
                         <?php echo wp_kses_post($fontIconHtml); ?>
                     <?php endif; ?>
                 </a>
-            <?php else : ?>
-                <?php if ($iconPosition == 'beforeCommentCount') : ?>
+            <?php else: ?>
+                <?php if ($iconPosition == 'beforeCommentCount'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <span class='commentCount'><?php echo wp_kses_post($formatedcommentCount); ?></span>
-                <?php if ($iconPosition == 'afterCommentCount') : ?>
+                <span class='commentCount'>
+                    <?php echo wp_kses_post($formatedcommentCount); ?>
+                </span>
+                <?php if ($iconPosition == 'afterCommentCount'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
             <?php endif; ?>
 
 
 
-            <?php if ($iconPosition == 'beforePostfix') : ?>
+            <?php if ($iconPosition == 'beforePostfix'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
-            <?php if ($postfixText) : ?>
-                <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+            <?php if ($postfixText): ?>
+                <span class="<?php echo $postfixClass; ?>">
+                    <?php echo $postfixText; ?>
+                </span>
             <?php endif; ?>
-            <?php if ($iconPosition == 'afterPostfix') : ?>
+            <?php if ($iconPosition == 'afterPostfix'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
         <?php
@@ -457,7 +331,7 @@ class PGBlocpostCommentCount
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

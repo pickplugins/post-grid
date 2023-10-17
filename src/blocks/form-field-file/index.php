@@ -19,54 +19,10 @@ class PGBlockFormFieldFile
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/form-field-file/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/form-field-file', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
+        register_block_type(post_grid_plugin_dir . 'src/blocks/form-field-file/block.json', array(
+            
             'render_callback' => array($this, 'theHTML'),
-            'attributes' => [
-                "text" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-text"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
+            
 
 
         )
@@ -163,7 +119,10 @@ class PGBlockFormFieldFile
 
                     </div>
                     <div class='input-wrap'>
-                        <input type="file" placeholder="<?php echo esc_attr($inputPlaceholder); ?>" value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>         <?php if ($inputDisabled): ?> disabled <?php endif; ?>         <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
+                        <input type="file" 
+                        placeholder="<?php echo esc_attr($inputPlaceholder); ?>" 
+                        value="<?php echo esc_attr($inputValue); ?>" name="<?php echo esc_attr($inputName); ?>" <?php if ($inputRequired): ?> required <?php endif; ?>         <?php if ($inputDisabled): ?> disabled <?php endif; ?>         
+                            <?php if ($inputReadonly): ?> readonly <?php endif; ?> />
                         <?php if ($errorWrapPosition == 'afterInput'): ?>
                                 <div class='error-wrap'><?php echo wp_kses_post($errorWrapText); ?></div>
 

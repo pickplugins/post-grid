@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -19,114 +20,15 @@ class PGBlockNumberCounter
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/number-counter/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/number-counter', array(
-            // 'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  [],
-            'style' => 'front_style',
+        register_block_type(post_grid_plugin_dir . 'src/blocks/number-counter/block.json', array(
+
+
             'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'class' => 'number-counter',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'numberCount' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'div',
-                            'start' => 0,
-                            'end' => 500,
-                            'duration' => 1000,
-                            'onScroll' => false,
-
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'icon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => 'far fa-calendar-alt',
-                            'position' => 'beforeCommentCount',
-                            'class' => 'numberCount-icon',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'prefix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'prefix',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'postfix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'class' => 'prefix',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' => [],
-                    ),
-                ),
-            )
 
 
-        ));
+
+        )
+        );
     }
 
     function front_scripts($attributes)
@@ -239,21 +141,25 @@ class PGBlockNumberCounter
         ob_start();
 
 
-        if (!empty($wrapperTag)) :
+        if (!empty($wrapperTag)):
 
-?>
-            <<?php echo esc_attr($wrapperTag); ?> class="PGBlockNumberCount <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-number-counter="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+            ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="PGBlockNumberCount
+                <?php echo esc_attr($blockId); ?>
+                <?php echo esc_attr($blockAlign); ?>" data-number-counter="<?php echo esc_attr(json_encode($dataAtts)) ?>">
 
 
-                <?php if ($iconPosition == 'beforePrefix') : ?>
+                <?php if ($iconPosition == 'beforePrefix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
-                <?php if ($prefixText) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                <?php if ($prefixText): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
                 <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPrefix') : ?>
+                <?php if ($iconPosition == 'afterPrefix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
@@ -266,19 +172,21 @@ class PGBlockNumberCounter
                 </span>
 
 
-                <?php if ($iconPosition == 'beforePostfix') : ?>
+                <?php if ($iconPosition == 'beforePostfix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
-                <?php if ($postfixText) : ?>
-                    <span class="<?php echo $postfixClass; ?>"><?php echo $postfixText; ?></span>
+                <?php if ($postfixText): ?>
+                    <span class="<?php echo $postfixClass; ?>">
+                        <?php echo $postfixText; ?>
+                    </span>
                 <?php endif; ?>
 
-                <?php if ($iconPosition == 'afterPostfix') : ?>
+                <?php if ($iconPosition == 'afterPostfix'): ?>
                     <?php echo wp_kses_post($fontIconHtml); ?>
                 <?php endif; ?>
 
             </<?php echo esc_attr($wrapperTag); ?>>
-        <?php
+            <?php
 
         endif;
 
@@ -294,7 +202,7 @@ class PGBlockNumberCounter
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

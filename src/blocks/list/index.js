@@ -65,14 +65,11 @@ import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
-import attributes from "./attributes";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/list", {
-	apiVersion: 2,
-	title: "List",
-
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -113,14 +110,6 @@ registerBlockType("post-grid/list", {
 			},
 		},
 	],
-
-	attributes: attributes,
-	usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
 
 	edit: function (props) {
 		var attributes = props.attributes;

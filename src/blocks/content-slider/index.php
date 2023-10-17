@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -57,226 +58,14 @@ class PGBlockContentSlider
         wp_register_style('pgcontent-slider-splide-core', post_grid_plugin_url . 'src/blocks/content-slider/splide-core.min.css');
 
 
-        register_block_type('post-grid/content-slider', array(
-            //'editor_script' => 'editor_script',
-            'editor_style' => 'pgcontent-slider-splide-core',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => [$this, 'front_style'],
+        register_block_type(post_grid_plugin_dir . 'src/blocks/content-slider/block.json', array(
+
             'render_callback' => array($this, 'theHTML'),
-            'attributes' => array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'padding' =>
-                            array(
-                                'Desktop' => '50px 0px 50px 0px',
-                            ),
-                        ),
-                    ),
-                ),
-                'navsWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'nav-wrap',
-                        ),
-                        'styles' =>
-                        array(
-                            'display' =>
-                            array(
-                                'Desktop' => 'flex',
-                            ),
-                            'position' =>
-                            array(
-                                'Desktop' => 'absolute',
-                            ),
-                            'right' =>
-                            array(
-                                'Desktop' => '0px',
-                            ),
-                            'top' =>
-                            array(
-                                'Desktop' => '0px',
-                            ),
-                        ),
-                    ),
-                ),
-                'perv' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => 'Prev',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'padding' =>
-                            array(
-                                'Desktop' => '5px 30px 5px 30px',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '#1418FF8F',
-                            ),
-                            'color' =>
-                            array(
-                                'Desktop' => '#fff',
-                            ),
-                        ),
-                    ),
-                ),
-                'pervIcon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'position' => 'before',
-                            'class' => '',
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => 'fas fa-chevron-left',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'next' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => 'Next',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'padding' =>
-                            array(
-                                'Desktop' => '5px 30px 5px 30px',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '#1418FF8F',
-                            ),
-                            'color' =>
-                            array(
-                                'Desktop' => '#fff',
-                            ),
-                        ),
-                    ),
-                ),
-                'nextIcon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'position' => 'after',
-                            'class' => '',
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => 'fas fa-chevron-right',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'paginationWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'ul',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'pagination' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'span',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'paginationActive' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'sliderOptions' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(),
-                ),
-                'sliderOptionsRes' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(),
-                    ),
-                ),
-            )
 
 
-        ));
+
+        )
+        );
     }
 
     function front_script($attributes)
@@ -403,30 +192,33 @@ class PGBlockContentSlider
 
 
 
-?>
+        ?>
 
 
         <div class="pg-content-slider <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
 
-            <div class="splide" id="splide-<?php echo esc_attr($blockId); ?>" data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
+            <div class="splide" id="splide-<?php echo esc_attr($blockId); ?>"
+                data-splide="<?php echo esc_attr(json_encode($sliderOptions)) ?>">
 
 
                 <div class="splide__arrows">
                     <div class='perv splide__arrow splide__arrow--prev'>
 
-                        <?php if ($pervIconPosition == 'before') : ?>
+                        <?php if ($pervIconPosition == 'before'): ?>
                             <span class='icon'>
                                 <?php echo wp_kses_post($pervIconHtml); ?>
                             </span>
                         <?php endif; ?>
 
-                        <?php if (!empty($pervText)) : ?>
-                            <span><?php echo $pervText; ?></span>
+                        <?php if (!empty($pervText)): ?>
+                            <span>
+                                <?php echo $pervText; ?>
+                            </span>
                         <?php endif; ?>
 
 
 
-                        <?php if ($pervIconPosition == 'after') : ?>
+                        <?php if ($pervIconPosition == 'after'): ?>
                             <span class='icon'>
                                 <?php echo wp_kses_post($pervIconHtml); ?>
                             </span>
@@ -437,18 +229,20 @@ class PGBlockContentSlider
 
 
 
-                        <?php if ($nextIconPosition == 'before') : ?>
+                        <?php if ($nextIconPosition == 'before'): ?>
                             <span class='icon'>
                                 <?php echo wp_kses_post($nextIconHtml); ?>
                             </span>
                         <?php endif; ?>
-                        <?php if (!empty($nextText)) : ?>
-                            <span><?php echo $nextText; ?></span>
+                        <?php if (!empty($nextText)): ?>
+                            <span>
+                                <?php echo $nextText; ?>
+                            </span>
                         <?php endif; ?>
 
 
 
-                        <?php if ($nextIconPosition == 'after') : ?>
+                        <?php if ($nextIconPosition == 'after'): ?>
                             <span class='icon'>
                                 <?php echo wp_kses_post($nextIconHtml); ?>
                             </span>
@@ -470,7 +264,7 @@ class PGBlockContentSlider
 
             </div>
         </div>
-<?php
+        <?php
 
         return ob_get_clean();
     }

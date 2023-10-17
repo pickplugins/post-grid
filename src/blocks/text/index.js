@@ -382,28 +382,37 @@ registerBlockType(metadata, {
 											values={[]}></PGDropdown>
 									</PanelRow>
 
-									{text.options.limitBy.length > 0 && (
-										<div className="bg-gray-500 my-3 text-white p-2">
-											{limitByArgs[text.options.limitBy].label}
-										</div>
-									)}
+									{text.options.limitBy != null &&
+										text.options.limitBy.length > 0 && (
+											<div className="bg-gray-500 my-3 text-white p-2">
+												{limitByArgs[text.options.limitBy].label}
+											</div>
+										)}
 
-									{(text.options.limitBy == "word" ||
-										text.options.limitBy == "character") && (
-										<PanelRow>
-											<label for="">Limit Count</label>
+									{text.options.limitBy != null &&
+										(text.options.limitBy == "word" ||
+											text.options.limitBy == "character") && (
+											<PanelRow>
+												<label for="">Limit Count</label>
 
-											<InputControl
-												value={text.options.limitCount}
-												onChange={(newVal) => {
-													var options = { ...text.options, limitCount: newVal };
-													setAttributes({
-														text: { ...text, options: options },
-													});
-												}}
-											/>
-										</PanelRow>
-									)}
+												<InputControl
+													value={
+														text.options.limitCount == null
+															? "99"
+															: text.options.limitCount
+													}
+													onChange={(newVal) => {
+														var options = {
+															...text.options,
+															limitCount: newVal,
+														};
+														setAttributes({
+															text: { ...text, options: options },
+														});
+													}}
+												/>
+											</PanelRow>
+										)}
 								</PGtab>
 								<PGtab name="styles">
 									<PGStyles

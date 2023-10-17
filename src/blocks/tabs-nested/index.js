@@ -70,12 +70,11 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import variations from "./variations";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/tabs-nested", {
-	apiVersion: 2,
-	title: "Tabs",
+registerBlockType(metadata, {
 
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
@@ -108,183 +107,7 @@ registerBlockType("post-grid/tabs-nested", {
 		),
 	},
 
-	attributes: {
-		items: {
-			type: "array",
-			default: [
-				{
-					isActive: false,
-					headerText: "What is Lorem Ipsum?",
-					content:
-						"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-					icon: "",
-					iconToggle: "",
-					styles: {},
-				},
-			],
-		},
-
-		navsWrap: {
-			type: "object",
-			default: {
-				options: {
-					class: "",
-				},
-
-				styles: {
-					display: { Desktop: "" },
-				},
-			},
-		},
-
-		navItem: {
-			type: "object",
-			default: {
-				options: {
-					class: "",
-				},
-
-				styles: {
-					backgroundColor: { Desktop: "" },
-					color: { Desktop: "" },
-
-					display: { Desktop: "" },
-				},
-			},
-		},
-
-		activeNavItem: {
-			type: "object",
-			default: {
-				options: {
-					class: "",
-					id: "",
-				},
-
-				styles: {
-					backgroundColor: { Desktop: "" },
-					color: { Desktop: "" },
-					display: { Desktop: "" },
-				},
-			},
-		},
-
-		navLabel: {
-			type: "object",
-			default: {
-				options: {
-					class: "",
-				},
-
-				styles: {
-					backgroundColor: { Desktop: "" },
-					color: { Desktop: "" },
-				},
-			},
-		},
-
-		icon: {
-			type: "object",
-			default: {
-				options: {
-					library: "fontAwesome",
-					srcType: "class",
-					/*class, html, img, svg */ iconSrc: "fas fa-angle-down",
-					position: "before",
-					/* before, after */ class: "icon",
-				},
-
-				styles: {
-					backgroundColor: { Desktop: "" },
-					color: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-					fontSize: { Desktop: "" },
-				},
-			},
-		},
-
-		iconToggle: {
-			type: "object",
-			default: {
-				options: {
-					library: "fontAwesome",
-					srcType: "class",
-					/*class, html, img, svg */ iconSrc: "fas fa-angle-down",
-					position: "before",
-					/* before, after */ class: "icon-toggle",
-				},
-
-				styles: {
-					backgroundColor: { Desktop: "" },
-					color: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-					fontSize: { Desktop: "" },
-				},
-			},
-		},
-
-		panelWrap: {
-			type: "object",
-			default: {
-				options: {
-					position: "left", // left, right, center
-					class: "",
-				},
-
-				styles: {
-					backgroundColor: { Desktop: "" },
-					color: { Desktop: "" },
-				},
-			},
-		},
-
-		tabs: {
-			type: "array",
-			default: [],
-		},
-		activeTab: {
-			type: "string",
-		},
-
-		wrapper: {
-			type: "object",
-			default: {
-				options: {
-					content: "",
-					tag: "div",
-					class: "",
-				},
-
-				styles: {
-					color: { Desktop: "" },
-					display: {},
-					position: {},
-					overflow: {},
-				},
-			},
-		},
-		blockId: {
-			type: "string",
-			default: "",
-		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
-	usesContext: [],
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
-
+	
 	edit: function (props) {
 		var attributes = props.attributes;
 		var setAttributes = props.setAttributes;

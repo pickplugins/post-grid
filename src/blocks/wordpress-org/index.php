@@ -19,133 +19,15 @@ class PGBlockWordpressOrg
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/wordpress-org/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/wordpress-org', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => array(
-                'elements' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'items' =>
-                                    array(
-                                        0 =>
-                                            array(
-                                                'id' => 'thumb',
-                                                'label' => 'Thumb',
-                                            ),
-                                        1 =>
-                                            array(
-                                                'id' => 'version',
-                                                'label' => 'Version',
-                                            ),
-                                        2 =>
-                                            array(
-                                                'id' => 'active_installs',
-                                                'label' => 'Active Install',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'wrapper' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'tag' => 'ul',
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'item' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => 'item',
-                                        'tag' => 'li',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'thumb' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => 'thumb',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'object' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'type' => 'plugin',
-                                        'slug' => 'post-grid',
-                                    ),
-                            ),
-                    ),
-                'blockId' =>
-                    array(
-                        'type' => 'string',
-                        'default' => '',
-                    ),
-                'blockCssY' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'items' =>
-                                    array(),
-                            ),
-                    ),
-                'customCss' =>
-                    array(
-                        'type' => 'string',
-                        'default' => '',
-                    ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/wordpress-org/block.json',
+            array(
+
+                'render_callback' => array($this, 'theHTML'),
+
+
+
             )
-
-
-        )
         );
     }
 
@@ -354,9 +236,9 @@ class PGBlockWordpressOrg
 
             ?>
             <pre>
-            <?php //echo //var_export($bodyObj, true);
-                        ?>
-            </pre>
+                        <?php //echo //var_export($bodyObj, true);
+                                    ?>
+                        </pre>
 
             <<?php echo esc_attr($wrapperTag); ?> class="
                 <?php echo esc_attr($blockId); ?>">

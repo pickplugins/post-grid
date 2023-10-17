@@ -1,0 +1,352 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/woo-product-info",
+  "title": "Product Info",
+  "textdomain": "post-grid",
+  "category": "post-grid-woo",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "tag": "ul",
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "icon",
+          "position": "beforePrefix"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "prefix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "postfix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "itemInfo": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": ""
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "object",
+      "default": {
+        "options": {
+          "linkTarget": "_blank",
+          "showIcon": false,
+          "iconPositon": "beforePrefix",
+          "tag": "li"
+        },
+        "styles": {
+          "color": {
+            "Desktop": "#18978F"
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "borderRadius": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          }
+        },
+        "elements": [
+          {
+            "id": "text",
+            "label": "Text",
+            "prefix": "",
+            "postfix": "",
+            "value": "",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {
+              "text": ""
+            },
+            "styles": {
+              "color": {
+                "Desktop": ""
+              },
+              "backgroundColor": {
+                "Desktop": ""
+              },
+              "padding": {
+                "Desktop": ""
+              },
+              "margin": {
+                "Desktop": ""
+              }
+            }
+          },
+          {
+            "id": "weight",
+            "label": "Weight",
+            "prefix": "Weight: ",
+            "postfix": "",
+            "value": "10kg",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {
+              "color": {
+                "Desktop": ""
+              },
+              "backgroundColor": {
+                "Desktop": ""
+              },
+              "padding": {
+                "Desktop": ""
+              },
+              "margin": {
+                "Desktop": ""
+              }
+            }
+          },
+          {
+            "id": "length",
+            "label": "Length",
+            "prefix": "Length: ",
+            "postfix": "",
+            "value": "10cm",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {
+              "color": {
+                "Desktop": ""
+              },
+              "backgroundColor": {
+                "Desktop": ""
+              },
+              "padding": {
+                "Desktop": ""
+              },
+              "margin": {
+                "Desktop": ""
+              }
+            }
+          },
+          {
+            "id": "width",
+            "label": "Width",
+            "prefix": "Width: ",
+            "postfix": "",
+            "value": "10cm",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {
+              "color": {
+                "Desktop": ""
+              },
+              "backgroundColor": {
+                "Desktop": ""
+              },
+              "padding": {
+                "Desktop": ""
+              },
+              "margin": {
+                "Desktop": ""
+              }
+            }
+          },
+          {
+            "id": "height",
+            "label": "Height",
+            "prefix": "Height: ",
+            "postfix": "",
+            "value": "10cm",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {
+              "color": {
+                "Desktop": ""
+              },
+              "backgroundColor": {
+                "Desktop": ""
+              },
+              "padding": {
+                "Desktop": ""
+              },
+              "margin": {
+                "Desktop": ""
+              }
+            }
+          },
+          {
+            "id": "dimensions",
+            "label": "Dimensions",
+            "prefix": "Dimensions: ",
+            "postfix": "",
+            "value": "10cm X 10cm X 10cm",
+            "siteIcon": {
+              "library": "fontAwesome",
+              "srcType": "class",
+              "iconSrc": ""
+            },
+            "options": {},
+            "styles": {
+              "color": {
+                "Desktop": ""
+              },
+              "backgroundColor": {
+                "Desktop": ""
+              },
+              "padding": {
+                "Desktop": ""
+              },
+              "margin": {
+                "Desktop": ""
+              }
+            }
+          }
+        ]
+      }
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "style": "front_style",
+  "keywords": [
+    "advanced accordion",
+    "nested accordion",
+    "customizable accordion"
+  ],
+  "description": "Shows warning, error or success notices..."
+}

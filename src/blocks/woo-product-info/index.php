@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,445 +19,16 @@ class PGBlockWooProductInfo
         // wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/woo-product-info/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/woo-product-info', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'ul',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'icon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'icon',
-                            'position' => 'beforePrefix',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'prefix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'postfix' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'itemInfo' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'items' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'linkTarget' => '_blank',
-                            'showIcon' => false,
-                            'iconPositon' => 'beforePrefix',
-                            'tag' => 'li',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '#18978F',
-                            ),
-                            'backgroundColor' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'borderRadius' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                        'elements' =>
-                        array(
-                            0 =>
-                            array(
-                                'id' => 'text',
-                                'label' => 'Text',
-                                'prefix' => '',
-                                'postfix' => '',
-                                'value' => '',
-                                'siteIcon' =>
-                                array(
-                                    'library' => 'fontAwesome',
-                                    'srcType' => 'class',
-                                    'iconSrc' => '',
-                                ),
-                                'options' =>
-                                array(
-                                    'text' => 'You are here: ',
-                                ),
-                                'styles' =>
-                                array(
-                                    'color' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'backgroundColor' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'padding' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'margin' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                ),
-                            ),
-                            1 =>
-                            array(
-                                'id' => 'weight',
-                                'label' => 'Weight',
-                                'prefix' => 'Weight: ',
-                                'postfix' => '',
-                                'value' => '10kg',
-                                'siteIcon' =>
-                                array(
-                                    'library' => 'fontAwesome',
-                                    'srcType' => 'class',
-                                    'iconSrc' => '',
-                                ),
-                                'options' =>
-                                array(),
-                                'styles' =>
-                                array(
-                                    'color' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'backgroundColor' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'padding' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'margin' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                ),
-                            ),
-                            2 =>
-                            array(
-                                'id' => 'length',
-                                'label' => 'Length',
-                                'prefix' => 'Length: ',
-                                'postfix' => '',
-                                'value' => '10cm',
-                                'siteIcon' =>
-                                array(
-                                    'library' => 'fontAwesome',
-                                    'srcType' => 'class',
-                                    'iconSrc' => '',
-                                ),
-                                'options' =>
-                                array(),
-                                'styles' =>
-                                array(
-                                    'color' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'backgroundColor' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'padding' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'margin' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                ),
-                            ),
-                            3 =>
-                            array(
-                                'id' => 'width',
-                                'label' => 'Width',
-                                'prefix' => 'Width: ',
-                                'postfix' => '',
-                                'value' => '10cm',
-                                'siteIcon' =>
-                                array(
-                                    'library' => 'fontAwesome',
-                                    'srcType' => 'class',
-                                    'iconSrc' => '',
-                                ),
-                                'options' =>
-                                array(),
-                                'styles' =>
-                                array(
-                                    'color' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'backgroundColor' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'padding' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'margin' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                ),
-                            ),
-                            4 =>
-                            array(
-                                'id' => 'height',
-                                'label' => 'Height',
-                                'prefix' => 'Height: ',
-                                'postfix' => '',
-                                'value' => '10cm',
-                                'siteIcon' =>
-                                array(
-                                    'library' => 'fontAwesome',
-                                    'srcType' => 'class',
-                                    'iconSrc' => '',
-                                ),
-                                'options' =>
-                                array(),
-                                'styles' =>
-                                array(
-                                    'color' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'backgroundColor' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'padding' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'margin' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                ),
-                            ),
-                            5 =>
-                            array(
-                                'id' => 'dimensions',
-                                'label' => 'Dimensions',
-                                'prefix' => 'Dimensions: ',
-                                'postfix' => '',
-                                'value' => '10cm X 10cm X 10cm',
-                                'siteIcon' =>
-                                array(
-                                    'library' => 'fontAwesome',
-                                    'srcType' => 'class',
-                                    'iconSrc' => '',
-                                ),
-                                'options' =>
-                                array(),
-                                'styles' =>
-                                array(
-                                    'color' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'backgroundColor' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'padding' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                    'margin' =>
-                                    array(
-                                        'Desktop' => '',
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(),
-                    ),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/woo-product-info/block.json',
+            array(
+
+                'render_callback' => array($this, 'theHTML'),
+
+
+
             )
-
-
-        ));
+        );
     }
 
     function front_script($attributes)
@@ -525,11 +97,11 @@ class PGBlockWooProductInfo
 
         //$product = wc_get_product($post_ID);
         //global $product;
-        if(function_exists("wc_get_product")){
+        if (function_exists("wc_get_product")) {
 
             $product = wc_get_product($post_ID);
 
-        }else{
+        } else {
             $product = null;
         }
 
@@ -537,10 +109,11 @@ class PGBlockWooProductInfo
 
         ob_start();
 
-        if (!empty($wrapperTag)) :
+        if (!empty($wrapperTag)):
 
-?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
+            ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>">
 
 
                 <?php
@@ -578,125 +151,125 @@ class PGBlockWooProductInfo
 
                         $fontIconHtml = '<span class="icon ' . $iconClass . ' ' . $iconSrc . '"></span>';
 
-                ?>
-
-                    <li class="item item-<?php echo esc_attr($i); ?>">
-
-
-                        <?php if (!empty($prefix)) : ?>
-                            <span class='prefix'>
-                                <?php echo wp_kses_post($prefix); ?>
-                            </span>
-                        <?php endif; ?>
-
-                        <?php echo wp_kses_post($fontIconHtml); ?>
-
-                        <?php
-
-
-                        if ($product != null) {
-
-                            if ($id == 'weight') {
-
-                                $weight = ($product == null) ? 0 :  $product->get_weight() ;
-
                         ?>
-                                <span class='value'>
-                                    <?php echo wp_kses_post($weight); ?>kg
+
+                        <li class="item item-<?php echo esc_attr($i); ?>">
+
+
+                            <?php if (!empty($prefix)): ?>
+                                <span class='prefix'>
+                                    <?php echo wp_kses_post($prefix); ?>
                                 </span>
+                            <?php endif; ?>
+
+                            <?php echo wp_kses_post($fontIconHtml); ?>
+
                             <?php
-                            }
-                            if ($id == 'text') {
 
 
-                            ?>
-                                <span class='value'>
-                                    <?php echo wp_kses_post($value); ?>
-                                </span>
-                            <?php
-                            }
+                            if ($product != null) {
 
+                                if ($id == 'weight') {
 
+                                    $weight = ($product == null) ? 0 : $product->get_weight();
 
-                            if ($id == 'length') {
-                                $length = ($product == null) ? 0 :  $product->get_length() ;
-
-                            ?>
-                                <span class='value'>
-                                    <?php echo wp_kses_post($length); ?>cm
-                                </span>
-                            <?php
-                            }
-                            if ($id == 'width') {
-                                $width = ($product == null) ? 0 :  $product->get_width() ;
-
-                            ?>
-                                <span class='value'>
-                                    <?php echo wp_kses_post($width); ?>cm
-                                </span>
-                            <?php
-                            }
-                            if ($id == 'height') {
-                                $height = ($product == null) ? 0 :  $product->get_height() ;
-                            ?>
-                                <span class='value'>
-                                    <?php echo wp_kses_post($height); ?>cm
-                                </span>
-                            <?php
-                            }
-                            if ($id == 'dimensions') {
-                                //$dimensions = $product->get_dimensions();
-
-                            ?>
-                                <span class='value'>
-                                    <?php //echo wp_kses_post($dimensions); 
                                     ?>
-                                </span>
-                        <?php
-                            }
-
-                            if ($type == 'taxonomy') {
-                                if(function_exists("wc_get_product_terms")){
-
-                                    $terms = wc_get_product_terms($post_ID, $id, array('fields' => 'names'));
-                                }else{
-                                    $terms = [];
+                                    <span class='value'>
+                                        <?php echo wp_kses_post($weight); ?>kg
+                                    </span>
+                                    <?php
                                 }
-                                
-                                $termsCount = count($terms);
+                                if ($id == 'text') {
 
-                                if (!empty($terms)) {
-                                    $j = 1;
-                                    foreach ($terms as $term) {
-                                        echo $term;
-                                        $termsCount = count($terms);
-                                        if ($termsCount > $j) {
-                                            echo ', ';
+
+                                    ?>
+                                    <span class='value'>
+                                        <?php echo wp_kses_post($value); ?>
+                                    </span>
+                                    <?php
+                                }
+
+
+
+                                if ($id == 'length') {
+                                    $length = ($product == null) ? 0 : $product->get_length();
+
+                                    ?>
+                                    <span class='value'>
+                                        <?php echo wp_kses_post($length); ?>cm
+                                    </span>
+                                    <?php
+                                }
+                                if ($id == 'width') {
+                                    $width = ($product == null) ? 0 : $product->get_width();
+
+                                    ?>
+                                    <span class='value'>
+                                        <?php echo wp_kses_post($width); ?>cm
+                                    </span>
+                                    <?php
+                                }
+                                if ($id == 'height') {
+                                    $height = ($product == null) ? 0 : $product->get_height();
+                                    ?>
+                                    <span class='value'>
+                                        <?php echo wp_kses_post($height); ?>cm
+                                    </span>
+                                    <?php
+                                }
+                                if ($id == 'dimensions') {
+                                    //$dimensions = $product->get_dimensions();
+        
+                                    ?>
+                                    <span class='value'>
+                                        <?php //echo wp_kses_post($dimensions); 
+                                                                    ?>
+                                    </span>
+                                    <?php
+                                }
+
+                                if ($type == 'taxonomy') {
+                                    if (function_exists("wc_get_product_terms")) {
+
+                                        $terms = wc_get_product_terms($post_ID, $id, array('fields' => 'names'));
+                                    } else {
+                                        $terms = [];
+                                    }
+
+                                    $termsCount = count($terms);
+
+                                    if (!empty($terms)) {
+                                        $j = 1;
+                                        foreach ($terms as $term) {
+                                            echo $term;
+                                            $termsCount = count($terms);
+                                            if ($termsCount > $j) {
+                                                echo ', ';
+                                            }
+
+                                            $j++;
                                         }
-
-                                        $j++;
                                     }
                                 }
                             }
-                        }
 
 
 
 
 
-                        ?>
+                            ?>
 
 
 
-                        <?php if (!empty($postfix)) : ?>
-                            <span class='postfix'>
-                                <?php echo wp_kses_post($postfix); ?>
-                            </span>
-                        <?php endif; ?>
+                            <?php if (!empty($postfix)): ?>
+                                <span class='postfix'>
+                                    <?php echo wp_kses_post($postfix); ?>
+                                </span>
+                            <?php endif; ?>
 
-                    </li>
+                        </li>
 
-                <?php
+                        <?php
                         $i++;
                     }
 
@@ -713,13 +286,13 @@ class PGBlockWooProductInfo
 
 
 
-        <?php
+            <?php
 
         endif;
 
         ?>
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

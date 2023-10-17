@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -37,228 +38,16 @@ class PGBlockTabs
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/tabs-nested', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => [$this, 'front_style'],
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => array(
-                'tabsWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' => array(
-                            'viewType' => 'horizontal',
-                            'navsPosition' => 'left',
-                        ),
-                        'styles' => array(
-                            'color' => array(
-                                'Desktop' => '',
-                            ),
-                            'display' => [],
-                            'position' => [],
-                            'overflow' => [],
-                        ),
-                    ),
-                ),
-                'navsWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' => array(
-                            'class' => '',
-                        ),
-                        'styles' => array(
-                            'display' => array(
-                                'Desktop' => 'flex',
-                            ),
-                            'position' => [],
-                            'overflow' => [],
-                        ),
-                    ),
-                ),
-                'navItem' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' => array(
-                            'viewType' => 'horizontal',
-                            'position' => 'left',
-                            'class' => '',
-                            'activeTab' => '',
-                        ),
-                        'styles' => array(
-                            'display' => array(
-                                'Desktop' => 'flex',
-                            ),
-                            'color' => array(
-                                'Desktop' => '',
-                            ),
-                            'position' => [],
-                            'overflow' => [],
-                        ),
-                    ),
-                ),
-                'activeNavItem' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' => array(
-                            'viewType' => 'horizontal',
-                            'position' => 'left',
-                            'class' => '',
-                            'activeTab' => '',
-                        ),
-                        'styles' => array(
-                            'display' => array(
-                                'Desktop' => 'flex',
-                            ),
-                            'color' => array(
-                                'Desktop' => '',
-                            ),
-                            'position' => [],
-                            'overflow' => [],
-                        ),
-                    ),
-                ),
-                'navLabel' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' => array(
-                            'viewType' => 'horizontal',
-                            'position' => 'left',
-                            'class' => '',
-                            'activeTab' => '',
-                        ),
-                        'styles' => array(
-                            'color' => array(
-                                'Desktop' => '',
-                            ),
-                            'display' => [],
-                            'position' => [],
-                            'overflow' => [],
-                        ),
-                    ),
-                ),
-                'icon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' => array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => '',
-                            'position' => 'before',
-                            'class' => 'icon',
-                        ),
-                        'styles' => array(
-                            'color' => array(
-                                'Desktop' => '',
-                            ),
-                            'padding' => array(
-                                'Desktop' => '',
-                            ),
-                            'margin' => array(
-                                'Desktop' => '',
-                            ),
-                            'display' => [],
-                            'fontSize' => array(
-                                'Desktop' => '',
-                            ),
-                            'lineHeight' => [],
-                            'fontWeight' => array(
-                                'Desktop' => '700',
-                            ),
-                            'textDecoration' => [],
-                        ),
-                    ),
-                ),
-                'contentWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' => array(
-                            'viewType' => 'horizontal',
-                            'position' => 'left',
-                            'class' => '',
-                            'activeTab' => '',
-                        ),
-                        'styles' => array(
-                            'color' => array(
-                                'Desktop' => '',
-                            ),
-                            'display' => [],
-                            'position' => [],
-                            'overflow' => [],
-                        ),
-                    ),
-                ),
-                'tabs' =>
-                array(
-                    'type' => 'array',
-                    'default' => [],
-                ),
-                'activeTab' =>
-                array(
-                    'type' => 'string',
-                ),
-                'viewType' =>
-                array(
-                    'type' => 'string',
-                    'default' => 'horizontal',
-                ),
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' => array(
-                            'content' => '',
-                            'tag' => 'div',
-                            'class' => 'pg-layers',
-                        ),
-                        'styles' => array(
-                            'color' => array(
-                                'Desktop' => '',
-                            ),
-                            'display' => [],
-                            'position' => [],
-                            'overflow' => [],
-                        ),
-                    ),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' => [],
-                    ),
-                ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/tabs-nested/block.json',
+            array(
+
+                'render_callback' => array($this, 'theHTML'),
+
+
+
             )
-
-
-        ));
+        );
     }
 
     function front_script($attributes)
@@ -356,35 +145,38 @@ class PGBlockTabs
 
 
 
-?>
-        <div id="<?php echo esc_attr($blockId); ?>" class="pg-tabs <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+        ?>
+        <div id="<?php echo esc_attr($blockId); ?>"
+            class="pg-tabs <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
             <div class="navs-wrapper">
                 <?php
 
                 foreach ($tabs as $tab) {
 
-                ?>
-                    <div id="<?php echo  esc_attr($tab['uid']); ?>" data-tab-id="<?php echo  esc_attr($tab['uid']); ?>" class="<?php echo ($tab['uid'] == $activeTab) ? 'nav-item nav-item-active  ' : 'nav-item ' ?>" role="tab" tabIndex="0">
+                    ?>
+                    <div id="<?php echo esc_attr($tab['uid']); ?>" data-tab-id="<?php echo esc_attr($tab['uid']); ?>"
+                        class="<?php echo ($tab['uid'] == $activeTab) ? 'nav-item nav-item-active  ' : 'nav-item ' ?>" role="tab"
+                        tabIndex="0">
 
-                        <?php if ($iconPosition == 'before') : ?>
+                        <?php if ($iconPosition == 'before'): ?>
                             <div class='nav-icon'>
-                                <?php echo  wp_kses_post($iconHtml); ?>
+                                <?php echo wp_kses_post($iconHtml); ?>
                             </div>
                         <?php endif; ?>
 
 
                         <div class="nav-label">
-                            <?php echo  wp_kses_post($tab['title']); ?>
+                            <?php echo wp_kses_post($tab['title']); ?>
                         </div>
-                        <?php if ($iconPosition == 'after') : ?>
+                        <?php if ($iconPosition == 'after'): ?>
                             <div class='nav-icon'>
-                                <?php echo  wp_kses_post($iconHtml); ?>
+                                <?php echo wp_kses_post($iconHtml); ?>
                             </div>
                         <?php endif; ?>
 
                     </div>
 
-                <?php
+                    <?php
 
                 }
 
@@ -393,7 +185,7 @@ class PGBlockTabs
 
             </div>
             <div class='panels-wrap'>
-                <?php echo  $content; ?>
+                <?php echo $content; ?>
             </div>
         </div>
 
@@ -416,7 +208,7 @@ class PGBlockTabs
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

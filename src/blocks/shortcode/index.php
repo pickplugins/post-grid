@@ -19,59 +19,15 @@ class BlockPostShortcode
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/shortcode/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/shortcode', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'editor_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "inline-block"
-                        ],
-                        "styles" => [
-                            "color" => [],
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/shortcode/block.json',
+            array(
 
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "shortcode" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "key" => "",
-                            "prefix" => "",
-                            "postfix" => "",
-                            "prams" => []
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
+                'render_callback' => array($this, 'theHTML'),
 
 
-        )
+
+            )
         );
     }
 

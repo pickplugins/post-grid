@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -21,200 +22,16 @@ class PGBlockTabs
 
 
 
-        register_block_type('post-grid/tabs', array(
-            //'editor_script' => 'pgtabs_editor_script',
-            //'script' => 'pgtabs_front_script',
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/tabs/block.json',
+            array(
 
-            //'editor_style' => 'pgtabs_editor_style',
-            //'style' => 'pgtabs_front_style',
-
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-accordion"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "items" => [
-                    "type" => "array",
-                    "default" => [
-                        [
-                            "isActive" => false,
-                            "headerText" => "What is Lorem Ipsum?",
-                            "content" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            "icon" => "",
-                            "iconToggle" => "",
-                            "styles" => []
-                        ]
-                    ]
-                ],
-                "header" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "What is Lorem Ipsum?",
-                            "tag" => "div",
-                            "class" => "tab-nav "
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "cursor" => [],
-                            "borderRadius" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "headerActive" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "What is Lorem Ipsum?",
-                            "tag" => "div",
-                            "class" => "tab-nav ",
-                            "activeIndex" => 0
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "headerWrap" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "tag" => "div",
-                            "class" => "tabs-navs "
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "content" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            "tag" => "div",
-                            "class" => "pg-accordion-content"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "icon" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "library" => "fontAwesome",
-                            "srcType" => "class",
-                            "iconSrc" => "fas fa-chevron-right",
-                            "class" => "icon",
-                            "positon" => "beforeHeader",
-                            "enableToggle" => "yes"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => []
-                        ]
-                    ]
-                ],
-                "iconToggle" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "library" => "fontAwesome",
-                            "srcType" => "class",
-                            "iconSrc" => "fas fa-chevron-down",
-                            "class" => "iconToggle"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => []
-                        ]
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
+                'render_callback' => array($this, 'theHTML'),
 
 
-        ));
+
+            )
+        );
     }
 
 
@@ -324,42 +141,56 @@ class PGBlockTabs
         ob_start();
 
 
-        if (!empty($wrapperTag)) :
-?>
+        if (!empty($wrapperTag)):
+            ?>
 
             <div class="PGBlockTabs <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
                 <div class="tabs-navs">
                     <?php
                     foreach ($items as $index => $item) {
-                    ?><<?php echo esc_attr($headerTag); ?> class="<?php echo esc_attr($headerOptions['class']); ?> <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>" index=<?php echo esc_attr($index); ?> data-id=<?php echo esc_attr($blockId . $index); ?> panelId=<?php echo esc_attr($blockId . $index); ?>>
-                            <?php if ($iconPosition == 'beforeHeader') : ?>
-                                <span class="icon-idle"><?php echo wp_kses_post($iconHtml); ?></span>
-                                <span class="icon-toggled"><?php echo wp_kses_post($iconToggleHtml); ?></span>
-                            <?php endif; ?>
-                            <?php echo $item['headerText']; ?>
-                            <?php if ($iconPosition == 'afterHeader') : ?>
-                                <span class="float-right">
-                                    <span class="icon-idle"><?php echo wp_kses_post($iconHtml); ?></span>
-                                    <span class="icon-toggled"><?php echo wp_kses_post($iconToggleHtml); ?></span>
+                        ?>
+                        <<?php echo esc_attr($headerTag); ?> class="
+                            <?php echo esc_attr($headerOptions['class']); ?>
+                            <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>" index=<?php echo esc_attr($index); ?>
+                            data-id=<?php echo esc_attr($blockId . $index); ?> panelId=<?php echo esc_attr($blockId . $index); ?>>
+                            <?php if ($iconPosition == 'beforeHeader'): ?>
+                                <span class="icon-idle">
+                                    <?php echo wp_kses_post($iconHtml); ?>
+                                </span>
+                                <span class="icon-toggled">
+                                    <?php echo wp_kses_post($iconToggleHtml); ?>
                                 </span>
                             <?php endif; ?>
-                        </<?php echo esc_attr($headerTag); ?>><?php
-                                                            }
-                                                                ?>
+                            <?php echo $item['headerText']; ?>
+                            <?php if ($iconPosition == 'afterHeader'): ?>
+                                <span class="float-right">
+                                    <span class="icon-idle">
+                                        <?php echo wp_kses_post($iconHtml); ?>
+                                    </span>
+                                    <span class="icon-toggled">
+                                        <?php echo wp_kses_post($iconToggleHtml); ?>
+                                    </span>
+                                </span>
+                            <?php endif; ?>
+                        </<?php echo esc_attr($headerTag); ?>>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <div class="tabs-panels">
                     <?php
                     foreach ($items as $index => $item) {
-                    ?>
-                        <div class="tabs-panel <?php echo esc_attr($contentOptions['class']); ?> <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>" id="<?php echo esc_attr($blockId . $index); ?>">
+                        ?>
+                        <div class="tabs-panel <?php echo esc_attr($contentOptions['class']); ?> <?php echo ($headerActiveIndex == $index) ? 'active' : ''; ?>"
+                            id="<?php echo esc_attr($blockId . $index); ?>">
                             <?php echo wp_kses_post($item['content']); ?>
                         </div>
-                    <?php
+                        <?php
                     }
                     ?>
                 </div>
             </div>
-        <?php
+            <?php
 
         endif;
 
@@ -374,7 +205,7 @@ class PGBlockTabs
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

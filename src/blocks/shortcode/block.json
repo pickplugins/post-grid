@@ -1,0 +1,80 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/shortcode",
+  "title": "Shortcode",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "inline-block"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {},
+          "margin": {}
+        }
+      }
+    },
+    "shortcodeClassic": {
+      "type": "string",
+      "default": ""
+    },
+    "shortcode": {
+      "type": "object",
+      "default": {
+        "options": {
+          "key": "",
+          "id": "",
+          "prefix": "",
+          "postfix": "",
+          "prams": []
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {},
+          "margin": {}
+        }
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    }
+  },
+  "keywords": [
+    "advanced accordion",
+    "nested accordion",
+    "customizable accordion"
+  ],
+  "description": "Shows warning, error or success notices..."
+}

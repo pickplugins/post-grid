@@ -69,13 +69,11 @@ import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/woo-sale", {
-	apiVersion: 2,
-	title: "On Sale",
-
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -104,108 +102,7 @@ registerBlockType("post-grid/woo-sale", {
 		),
 	},
 
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: { tag: "div", class: "" },
-
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-				},
-			},
-		},
-
-		sale: {
-			type: "object",
-			default: {
-				options: {
-					text: "Sale",
-					noSale: "No Sale",
-					tag: "span",
-					class: "sale",
-				},
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-				},
-			},
-		},
-
-		icon: {
-			type: "object",
-			default: {
-				options: {
-					library: "fontAwesome",
-					srcType: "class",
-					/*class, html, img, svg */ iconSrc: "",
-					position: "",
-					/*before, after, prefix, postfix */ class: "icon",
-				},
-
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-
-					display: {},
-
-					fontSize: { Desktop: "" },
-					lineHeight: {},
-					fontWeight: { Desktop: "700" },
-					textDecoration: {}, //overline, line-through, underline
-				},
-			},
-		},
-
-		prefix: {
-			type: "object",
-			default: {
-				options: { text: "", class: "prefix" },
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-				},
-			},
-		},
-
-		postfix: {
-			type: "object",
-			default: {
-				options: { text: "", class: "postfix" },
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-				},
-			},
-		},
-
-		customCss: {
-			type: "string",
-			default: "",
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
-	usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid-woo",
+	
 
 	edit: function (props) {
 		var attributes = props.attributes;

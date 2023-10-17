@@ -33,7 +33,7 @@ import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
-
+import metadata from "./block.json";
 
 
 
@@ -41,10 +41,7 @@ var myStore = wp.data.select('postgrid-shop');
 
 
 
-registerBlockType("post-grid/read-more", {
-  apiVersion: 2,
-  title: "Read More",
-
+registerBlockType(metadata, {
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: '#fff',
@@ -61,137 +58,6 @@ registerBlockType("post-grid/read-more", {
   },
 
 
-  attributes: {
-
-    wrapper: {
-      type: 'object',
-      default: {
-        options: { tag: 'div', class: '' },
-        styles:
-        {
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-        },
-      },
-    },
-
-    readMore: {
-      type: 'object',
-      default: {
-        options: {
-          text: 'Read More', linkTo: 'postUrl', linkTarget: '_blank', customUrl: '', linkToAuthorMeta: '',
-          linkToCustomMeta: '',
-          linkAttr: [],
-          class: '',
-        },
-
-        styles:
-        {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          display: {},
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
-
-        },
-      },
-    },
-
-
-    icon: {
-      type: 'object',
-      default: {
-        options: { library: 'fontAwesome', srcType: "class", /*class, html, img, svg */ iconSrc: '', position: '', /*before, after, prefix, postfix */ class: 'readmore-icon', },
-
-        styles:
-        {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-
-          display: {},
-
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          fontWeight: { "Desktop": "700" },
-          textDecoration: {}, //overline, line-through, underline
-        },
-      },
-    },
-
-
-
-    prefix: {
-      type: 'object',
-      default: {
-        options: { text: '', class: 'prefix' },
-
-        styles:
-        {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-
-        },
-      },
-    },
-
-    postfix: {
-      type: 'object',
-      default: {
-        options: { text: '', class: 'postfix' },
-
-        styles:
-        {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-
-        },
-      },
-    },
-
-
-    blockId: {
-      "type": "string",
-      "default": ''
-    },
-
-    customCss: {
-      "type": "string",
-      "default": ''
-    },
-
-    linkAttr: {
-      "type": "array",
-      "default": []
-    },
-
-    blockCssY: {
-      "type": "object",
-      "default": { items: {} }
-    },
-
-
-  },
-  usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-  supports: {
-    "align": ["wide", "full"],
-  },
-  category: "post-grid",
 
 
   edit: function (props) {

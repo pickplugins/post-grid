@@ -69,13 +69,11 @@ import PGtabs from "../../components/tabs";
 import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/woo-star-rate", {
-	apiVersion: 2,
-	title: "Star Rate",
-
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -96,132 +94,7 @@ registerBlockType("post-grid/woo-star-rate", {
 		),
 	},
 
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: { tag: "div", class: "" },
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-				},
-			},
-		},
-
-		iconsWrap: {
-			type: "object",
-			default: {
-				options: {
-					library: "fontAwesome",
-					srcType: "class",
-					/*class, html, img, svg */ iconSrc: "fas fa-star",
-					position: "beforeSku",
-					/*before, after, prefix, postfix */ class: "",
-				},
-
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-
-					display: {},
-
-					fontSize: { Desktop: "" },
-					lineHeight: {},
-					fontWeight: { Desktop: "700" },
-					textDecoration: {}, //overline, line-through, underline
-				},
-			},
-		},
-
-		iconsIdle: {
-			type: "object",
-			default: {
-				options: { tag: "div", class: "" },
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-				},
-			},
-		},
-
-		iconsFilled: {
-			type: "object",
-			default: {
-				options: { tag: "div", class: "" },
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-				},
-			},
-		},
-		summury: {
-			type: "object",
-			default: {
-				options: {
-					type: "",
-					typeCustom: "",
-					linkTo: "reviews",
-					/*postUrl, reviews*/ class: "",
-				},
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-				},
-			},
-		},
-
-		prefix: {
-			type: "object",
-			default: {
-				options: { text: "", class: "prefix" },
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-				},
-			},
-		},
-
-		postfix: {
-			type: "object",
-			default: {
-				options: { text: "", class: "postfix" },
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-				},
-			},
-		},
-
-		customCss: {
-			type: "string",
-			default: "",
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
-	usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid-woo",
+	
 
 	edit: function (props) {
 		var attributes = props.attributes;

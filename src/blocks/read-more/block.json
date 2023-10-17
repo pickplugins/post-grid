@@ -1,11 +1,11 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "post-grid/progress-bar",
-  "title": "Progress Bar",
+  "name": "post-grid/read-more",
+  "title": "Read More",
   "textdomain": "post-grid",
   "category": "post-grid",
-  "usesContext": [],
+  "usesContext": ["postId", "loopIndex", "postType", "queryId"],
   "supports": {
     "align": [
       "wide",
@@ -17,6 +17,7 @@
       "type": "object",
       "default": {
         "options": {
+          "tag": "div",
           "class": ""
         },
         "styles": {
@@ -25,129 +26,54 @@
           },
           "backgroundColor": {
             "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
           }
         }
       }
     },
-    "progressData": {
-      "type": "object",
-      "default": {
-        "type": "",
-        "animate": "",
-        "animateDuration": 1,
-        "animateIteration": 2,
-        "animateDelay": 2,
-        "fill": 45
-      }
-    },
-    "progressInfo": {
+    "readMore": {
       "type": "object",
       "default": {
         "options": {
-          "class": "",
-          "position": "beforeBar"
-        },
-        "styles": {}
-      }
-    },
-    "progressBar": {
-      "type": "object",
-      "default": {
-        "options": {
+          "text": "Read More",
+          "linkTo": "postUrl",
+          "linkTarget": "_blank",
+          "customUrl": "",
+          "linkToAuthorMeta": "",
+          "linkToCustomMeta": "",
+          "linkAttr": [],
           "class": ""
         },
         "styles": {
           "color": {
             "Desktop": ""
           },
-          "fontSize": {
-            "Desktop": ""
-          }
-        }
-      }
-    },
-    "progressFill": {
-      "type": "object",
-      "default": {
-        "options": {
-          "class": ""
-        },
-        "styles": {
-          "color": {
+          "backgroundColor": {
             "Desktop": ""
           },
-          "fontSize": {
-            "Desktop": ""
-          }
-        }
-      }
-    },
-    "progressCount": {
-      "type": "object",
-      "default": {
-        "options": {
-          "position": "afterLabel",
-          "prefix": "",
-          "postfix": "",
-          "class": ""
-        },
-        "styles": {
-          "color": {
+          "padding": {
             "Desktop": ""
           },
-          "fontSize": {
-            "Desktop": ""
-          }
-        }
-      }
-    },
-    "circleOverlay": {
-      "type": "object",
-      "default": {
-        "options": {
-          "class": ""
-        },
-        "styles": {
-          "color": {
+          "margin": {
             "Desktop": ""
           },
+          "display": {},
           "fontSize": {
-            "Desktop": ""
-          }
-        }
-      }
-    },
-    "circleMask": {
-      "type": "object",
-      "default": {
-        "options": {
-          "class": ""
-        },
-        "styles": {
-          "color": {
             "Desktop": ""
           },
-          "fontSize": {
-            "Desktop": ""
-          }
-        }
-      }
-    },
-    "progressLabel": {
-      "type": "object",
-      "default": {
-        "options": {
-          "text": "Digital Marketing",
-          "position": "",
-          "class": ""
-        },
-        "styles": {
-          "color": {
-            "Desktop": ""
+          "lineHeight": {},
+          "letterSpacing": {},
+          "fontFamily": {},
+          "fontWeight": {
+            "Desktop": "700"
           },
-          "fontSize": {
-            "Desktop": ""
-          }
+          "textDecoration": {},
+          "textTransform": {}
         }
       }
     },
@@ -156,10 +82,10 @@
       "default": {
         "options": {
           "library": "fontAwesome",
-          "position": "beforeprogressCount",
           "srcType": "class",
-          "iconSrc": "far fa-calendar-alt",
-          "class": "number-count-icon"
+          "iconSrc": "",
+          "position": "",
+          "class": "readmore-icon"
         },
         "styles": {
           "color": {
@@ -168,19 +94,69 @@
           "backgroundColor": {
             "Desktop": ""
           },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "display": {},
           "fontSize": {
+            "Desktop": ""
+          },
+          "lineHeight": {},
+          "fontWeight": {
+            "Desktop": "700"
+          },
+          "textDecoration": {}
+        }
+      }
+    },
+    "prefix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "prefix"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
             "Desktop": ""
           }
         }
       }
     },
-    "customCss": {
-      "type": "string",
-      "default": ""
+    "postfix": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "",
+          "class": "postfix"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "backgroundColor": {
+            "Desktop": ""
+          }
+        }
+      }
     },
     "blockId": {
       "type": "string",
       "default": ""
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "linkAttr": {
+      "type": "array",
+      "default": []
     },
     "blockCssY": {
       "type": "object",

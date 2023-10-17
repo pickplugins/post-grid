@@ -40,12 +40,11 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 import PGDropdown from "../../components/dropdown";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/wordpress-org", {
-	apiVersion: 2,
-	title: "wordpress-org",
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -68,79 +67,7 @@ registerBlockType("post-grid/wordpress-org", {
 		),
 	},
 
-	attributes: {
-		elements: {
-			type: "object",
-			default: {
-				items: [
-					{ id: "name", label: "Plugin Name", prefix: "Plugin Name: " },
-					{ id: "version", label: "Version", prefix: "Version: " },
-				],
-			},
-		},
-		wrapper: {
-			type: "object",
-			default: {
-				options: { tag: "ul", class: "" },
-
-				styles: {},
-			},
-		},
-		item: {
-			type: "object",
-			default: {
-				options: {
-					class: "item",
-					tag: "li",
-				},
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-				},
-			},
-		},
-
-		thumb: {
-			type: "object",
-			default: {
-				options: {
-					class: "thumb",
-				},
-				styles: {
-					color: { Desktop: "" },
-					backgroundColor: { Desktop: "" },
-				},
-			},
-		},
-
-		object: {
-			type: "object",
-			default: {
-				options: {
-					type: "plugin", // plugin, theme
-					slug: "post-grid", //
-				},
-			},
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
-	},
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
+	
 
 	edit: function (props) {
 		var attributes = props.attributes;

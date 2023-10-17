@@ -33,6 +33,7 @@ import PGcssDisplay from '../../components/css-display'
 import PGtabs from '../../components/tabs'
 import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
+import metadata from "./block.json";
 
 
 
@@ -41,10 +42,7 @@ var myStore = wp.data.select('postgrid-shop');
 
 
 
-registerBlockType("post-grid/post-author", {
-  apiVersion: 2,
-
-  title: "Post Author",
+registerBlockType(metadata, {
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: '#fff',
@@ -57,131 +55,6 @@ registerBlockType("post-grid/post-author", {
   },
 
 
-  attributes: {
-    wrapper: {
-      type: 'object',
-      default: {
-        options: { tag: 'div', class: '', },
-        styles:
-        {
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-        },
-      },
-    },
-    elements: {
-      "type": "object",
-      "default": {
-        items: [
-          { id: 'avatar', label: "Avatar", },
-          { id: 'name', label: "Name", },
-          { id: 'description', label: "Description", },
-        ],
-      } // avatar, name, description, id
-    },
-
-
-    avatar: {
-      "type": "object",
-      "default": {
-        options: { class: 'avatar', size: '48', default: '', },
-        styles:
-        {
-          display: {},
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          verticalAlign: {},
-          borderRadius: {},
-
-
-        },
-      }
-    },
-
-    name: {
-      "type": "object",
-      "default": {
-
-
-        options: { class: 'name', prefix: '', postfix: '', linkTo: '', linkToMeta: '', customUrl: '', },
-        styles:
-        {
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          verticalAlign: {},
-
-          fontSize: { Desktop: '' },
-
-        },
-
-
-      }
-    },
-    description: {
-      "type": "object",
-      "default": {
-
-        options: { class: 'description', prefix: '', postfix: '', },
-        styles:
-        {
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-          verticalAlign: {},
-          fontSize: { Desktop: '' },
-          lineHeight: {},
-          letterSpacing: {},
-          fontFamily: {},
-          fontWeight: {},
-          textDecoration: {}, //overline, line-through, underline
-          textTransform: {},
-        },
-
-      }
-    },
-
-
-    customCss: {
-      "type": "string",
-      "default": ''
-    },
-
-    linkAttr: {
-      "type": "array",
-      "default": []
-    },
-    blockCss: {
-      "type": "object",
-      "default": { items: {} }
-    },
-
-    blockCssY: {
-      "type": "object",
-      "default": { items: {} }
-    },
-
-    blockId: {
-      "type": "string",
-      "default": ''
-    },
-  },
-  usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-  supports: {
-    "align": ["wide", "full"],
-  },
-  category: "post-grid",
 
 
   edit: function (props) {

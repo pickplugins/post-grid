@@ -64,16 +64,11 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGIconPicker from "../../components/icon-picker";
 import PGCssLibrary from "../../components/css-library";
-import attributes from "./attributes";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/image-gallery-item", {
-	apiVersion: 2,
-	title: "Image Gallery Item",
-
-	parent: ["post-grid/image-gallery"],
-
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -146,12 +141,7 @@ registerBlockType("post-grid/image-gallery-item", {
 		),
 	},
 
-	attributes: attributes,
-	usesContext: ["post-grid/galleryId", "post-grid/lightbox"],
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
+	
 
 	edit: function (props) {
 		var attributes = props.attributes;

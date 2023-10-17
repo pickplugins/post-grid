@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -15,7 +16,7 @@ class PGBlockPopup
     function front_scripts($attributes)
     {
         wp_register_script('pgpopup_front_script', post_grid_plugin_url . 'src/blocks/popup/front-scripts.js', [], '', true);
-        wp_register_style('pgpopup_animate',  'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', []);
+        wp_register_style('pgpopup_animate', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', []);
 
 
         if (has_block('post-grid/popup')) {
@@ -33,57 +34,16 @@ class PGBlockPopup
         wp_register_style('pgpopup-animate', post_grid_plugin_url . 'src/blocks/popup/animate.min.css');
 
 
-        register_block_type('post-grid/popup', array(
-            //'editor_script' => 'editor_script',
-            'editor_style' => 'pgpopup-animate',
-            //'script' => 'front_script',
-            'uses_context' =>  [],
-            'provides_context' => array(
-                'post-grid/popupId' => 'blockId',
-            ),
-            //'style' => [$this, 'front_style'],
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-popup"
-                        ],
-                        "styles" => [
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/popup/block.json',
+            array(
 
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "position" => [],
-                            "overflow" => [],
-                            "width" => [],
-                            "height" => []
-                        ]
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
+                'render_callback' => array($this, 'theHTML'),
 
 
-        ));
+
+            )
+        );
     }
 
     function front_script($attributes)
@@ -167,16 +127,19 @@ class PGBlockPopup
 
 
 
-?>
-        <div class="pg-popup   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-visible="<?php echo esc_attr(json_encode($visible)) ?>" data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
+        ?>
+        <div class="pg-popup   <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
+            popup-id="<?php echo esc_attr($blockId); ?>" pgpopup-visible="<?php echo esc_attr(json_encode($visible)) ?>"
+            data-prams="<?php echo esc_attr(json_encode($prams)) ?>" style="display: none;">
             <div class='inner'>
-                <span class='close' popup-id="<?php echo esc_attr($blockId); ?>" close-animation="<?php echo esc_attr($closeWrapAnimation); ?>">
+                <span class='close' popup-id="<?php echo esc_attr($blockId); ?>"
+                    close-animation="<?php echo esc_attr($closeWrapAnimation); ?>">
                     <?php echo $closeIconHtml; ?>
                 </span>
                 <?php echo $content ?>
             </div>
         </div>
-<?php
+        <?php
 
         return ob_get_clean();
     }

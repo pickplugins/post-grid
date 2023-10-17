@@ -155,7 +155,7 @@ registerBlockType(metadata, {
 		const headerSelector = blockClass + "-accordion-header";
 
 		const headerLabelSelector = blockClass + "-accordion-header-label";
-		const labelIconSelector = blockClass + "-accordion-header-label-icon";
+		const labelIconSelector = blockClass + "-accordion-label-icon";
 		const labelCounterSelector = blockClass + "-accordion-label-counter";
 
 		const iconSelector = blockClass + "-accordion-icon";

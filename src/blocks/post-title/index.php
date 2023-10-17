@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,109 +19,16 @@ class PGBlockPostTitle
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-title/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/post-title', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "tag" => "h2",
-                            "class" => ""
-                        ],
-                        "styles" => [
-                            "display" => [],
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/post-title/block.json',
+            array(
 
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "postTitle" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "tag" => "div",
-                            "limitBy" => "",
-                            "limitCount" => 99,
-                            "isLink" => true,
-                            "linkTo" => "postUrl",
-                            "linkToAuthorMeta" => "",
-                            "linkToCustomMeta" => "",
-                            "linkTarget" => "_blank",
-                            "linkAttr" => [],
-                            "customUrl" => "",
-                            "class" => ""
-                        ],
-                        "styles" => [
-
-                            "display" => [],
-                            "width" => [],
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "prefix" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "",
-                            "class" => "prefix"
-                        ],
-                        "styles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "postfix" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "",
-                            "class" => "prefix"
-                        ],
-                        "styles" => [
-                            "color" => [],
-                            "backgroundColor" => []
-                        ]
-                    ]
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
+                'render_callback' => array($this, 'theHTML'),
 
 
-        ));
+
+            )
+        );
     }
 
     function front_script($attributes)
@@ -225,67 +133,87 @@ class PGBlockPostTitle
 
 
 
-?>
+        ?>
         <?php
 
-        if (!empty($wrapperTag)) :
+        if (!empty($wrapperTag)):
 
-        ?>
-            <<?php echo esc_attr($wrapperTag); ?> class="<?php echo esc_attr($blockId); ?>">
-                <?php if ($postTitleIsLink) : ?>
-                    <a href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php
+            ?>
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>">
+                <?php if ($postTitleIsLink): ?>
+                    <a href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>"
+                        rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php
 
-                                                                                                                                                                                                        /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                                                                                                                                                                                        echo ($linkAttrStr); ?>>
-                        <?php if (!empty($prefixText)) : ?>
-                            <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                              /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                              echo ($linkAttrStr); ?>>
+                        <?php if (!empty($prefixText)): ?>
+                            <span class="<?php echo esc_attr($prefixClass); ?>">
+                                <?php echo wp_kses_post($prefixText); ?>
+                            </span>
                         <?php endif; ?>
-                        <?php echo  wp_kses_post($post_title); ?>
-                        <?php if (!empty($postfixText)) : ?>
-                            <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                        <?php echo wp_kses_post($post_title); ?>
+                        <?php if (!empty($postfixText)): ?>
+                            <span class="<?php echo esc_attr($postfixClass); ?>">
+                                <?php echo wp_kses_post($postfixText); ?>
+                            </span>
                         <?php endif; ?>
                     </a>
-                <?php else : ?>
-                    <?php if (!empty($prefixText)) : ?>
-                        <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+                <?php else: ?>
+                    <?php if (!empty($prefixText)): ?>
+                        <span class="<?php echo esc_attr($prefixClass); ?>">
+                            <?php echo wp_kses_post($prefixText); ?>
+                        </span>
                     <?php endif; ?>
                     <?php echo wp_kses_post($post_title); ?>
-                    <?php if (!empty($postfixText)) : ?>
-                        <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                    <?php if (!empty($postfixText)): ?>
+                        <span class="<?php echo esc_attr($postfixClass); ?>">
+                            <?php echo wp_kses_post($postfixText); ?>
+                        </span>
                     <?php endif; ?>
                 <?php endif; ?>
             </<?php echo esc_attr($wrapperTag); ?>>
-        <?php
+            <?php
 
         endif;
 
-        if (empty($wrapperTag)) :
+        if (empty($wrapperTag)):
 
-        ?>
+            ?>
 
-            <?php if ($postTitleIsLink) : ?>
-                <a class="<?php echo esc_attr($blockId); ?>" href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) :  esc_url_raw($post_url); ?>" rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php
-                                                                                                                                                                                                                                                /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-                                                                                                                                                                                                                                                echo ($linkAttrStr); ?>>
-                    <?php if (!empty($prefixText)) : ?>
-                        <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+            <?php if ($postTitleIsLink): ?>
+                <a class="<?php echo esc_attr($blockId); ?>"
+                    href="<?php echo (!empty($customUrl)) ? esc_url_raw($customUrl) : esc_url_raw($post_url); ?>"
+                    rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($linkTarget); ?>" <?php
+                          /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
+                          echo ($linkAttrStr); ?>>
+                    <?php if (!empty($prefixText)): ?>
+                        <span class="<?php echo esc_attr($prefixClass); ?>">
+                            <?php echo wp_kses_post($prefixText); ?>
+                        </span>
                     <?php endif; ?>
                     <?php echo wp_kses_post($post_title); ?>
-                    <?php if (!empty($postfixText)) : ?>
-                        <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                    <?php if (!empty($postfixText)): ?>
+                        <span class="<?php echo esc_attr($postfixClass); ?>">
+                            <?php echo wp_kses_post($postfixText); ?>
+                        </span>
                     <?php endif; ?>
                 </a>
-            <?php else : ?>
-                <?php if (!empty($prefixText)) : ?>
-                    <span class="<?php echo esc_attr($prefixClass); ?>"><?php echo wp_kses_post($prefixText); ?></span>
+            <?php else: ?>
+                <?php if (!empty($prefixText)): ?>
+                    <span class="<?php echo esc_attr($prefixClass); ?>">
+                        <?php echo wp_kses_post($prefixText); ?>
+                    </span>
                 <?php endif; ?>
                 <?php echo wp_kses_post($post_title); ?>
-                <?php if (!empty($postfixText)) : ?>
-                    <span class="<?php echo esc_attr($postfixClass); ?>"><?php echo wp_kses_post($postfixText); ?></span>
+                <?php if (!empty($postfixText)): ?>
+                    <span class="<?php echo esc_attr($postfixClass); ?>">
+                        <?php echo wp_kses_post($postfixText); ?>
+                    </span>
                 <?php endif; ?>
             <?php endif; ?>
 
-        <?php
+            <?php
 
         endif;
 
@@ -299,7 +227,7 @@ class PGBlockPostTitle
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

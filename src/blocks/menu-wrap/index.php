@@ -28,94 +28,15 @@ class PGBlockMenuWrap
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/menu-wrap/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/menu-wrap', array(
-            //'editor_script' => 'editor_script',
-            'editor_style' => 'pgmenu_wrap_editor_style',
-            //'script' => 'front_script',
-            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => [$this, 'front_style'],
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => array(
-                'wrapper' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'tag' => 'div',
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'display' =>
-                                            array(
-                                                'Desktop' => 'flex',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'menuWrap' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'tag' => 'ul',
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'display' =>
-                                            array(
-                                                'Desktop' => 'flex',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'subMenuWrap' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => '',
-                                        'type' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'blockId' =>
-                    array(
-                        'type' => 'string',
-                        'default' => '',
-                    ),
-                'customCss' =>
-                    array(
-                        'type' => 'string',
-                        'default' => '',
-                    ),
-                'blockCssY' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'items' =>
-                                    array(),
-                            ),
-                    ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/menu-wrap/block.json',
+            array(
+
+                'render_callback' => array($this, 'theHTML'),
+
+
+
             )
-
-
-        )
         );
     }
 
@@ -161,9 +82,11 @@ class PGBlockMenuWrap
 
 
         ?>
-                <div class="pg-menu-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
-                    <ul class="menu"><?php echo $content ?></ul>
-                </div>
+        <div class="pg-menu-wrap <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+            <ul class="menu">
+                <?php echo $content ?>
+            </ul>
+        </div>
         <?php
 
         return ob_get_clean();

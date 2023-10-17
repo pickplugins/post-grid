@@ -32,6 +32,7 @@ import PGtab from '../../components/tab'
 import PGStyles from '../../components/styles'
 import PGCssLibrary from '../../components/css-library'
 import PGTemplates from '../../components/templates'
+import metadata from "./block.json";
 
 
 
@@ -39,10 +40,7 @@ import PGTemplates from '../../components/templates'
 
 var myStore = wp.data.select('postgrid-shop');
 
-registerBlockType("post-grid/post-title", {
-  apiVersion: 2,
-
-  title: "Post Title",
+registerBlockType(metadata, {
   icon: {
     // Specifying a background color to appear with the icon e.g.: in the inserter.
     background: '#fff',
@@ -59,117 +57,7 @@ registerBlockType("post-grid/post-title", {
   },
 
 
-  attributes: {
-
-
-    wrapper: {
-      type: 'object',
-      default: {
-        options: { tag: 'h2', class: '' },
-
-        styles:
-        {
-
-        },
-      },
-    },
-
-    postTitle: {
-      type: 'object',
-      default: {
-        options: {
-          tag: '',
-          limitBy: '', /*word, character*/
-          limitCount: 99,
-          isLink: true,
-          linkTo: 'postUrl', /*postUrl, homeUrl, authorUrl, authorLink, mailTo, custom, customField */
-          linkToAuthorMeta: '',
-          linkToCustomMeta: '',
-
-          linkTarget: '_blank',
-          linkAttr: [],
-          customUrl: '',
-          class: '',
-        },
-
-        styles: {
-
-
-
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-          padding: { Desktop: '' },
-          margin: { Desktop: '' },
-        },
-      },
-    },
-
-
-
-    prefix: {
-      type: 'object',
-      default: {
-        options:
-        {
-          text: '',
-          class: 'prefix',
-          position: 'beforebegin ', // beforebegin , afterbegin 
-        },
-        styles:
-        {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-
-        },
-      },
-    },
-
-    postfix: {
-      type: 'object',
-      default: {
-        options:
-        {
-          text: '',
-          class: 'postfix',
-          position: 'afterend', // beforeend , afterend 
-
-        },
-        styles:
-        {
-          color: { Desktop: '' },
-          backgroundColor: { Desktop: '' },
-
-        },
-      },
-    },
-
-
-
-    customCss: {
-      "type": "string",
-      "default": ''
-    },
-
-
-    blockId: {
-      "type": "string",
-      "default": ''
-    },
-    blockCssY: {
-      "type": "object",
-      "default": { items: {} }
-    },
-
-
-  },
-  usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-  supports: {
-    "align": ["wide", "full"],
-
-  },
-  category: "post-grid",
-
+ 
 
   edit: function (props) {
 

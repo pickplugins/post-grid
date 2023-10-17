@@ -78,13 +78,11 @@ import PGIconPicker from "../../components/icon-picker";
 
 import "animate.css";
 import "../../../node_modules/animate.css/animate.css";
+import metadata from "./block.json";
 
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/popup", {
-	apiVersion: 2,
-	title: "Popup",
-
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -109,76 +107,6 @@ registerBlockType("post-grid/popup", {
 			</svg>
 		),
 	},
-
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: {
-					tag: "div",
-					class: "",
-				},
-				styles: {},
-			},
-		},
-
-		inner: {
-			type: "object",
-			default: {
-				options: {
-					tag: "div",
-					class: "",
-				},
-				styles: {},
-			},
-		},
-
-		closeWrap: {
-			type: "object",
-			default: {
-				options: {
-					tag: "span",
-					class: "",
-					animation: "",
-					library: "fontAwesome",
-					srcType: "class" /*class, html, img, svg */,
-					iconSrc: "fas fa-chevron-right",
-				},
-				styles: {},
-			},
-		},
-
-		visible: {
-			type: "object",
-			default: {},
-		},
-
-		editMode: {
-			type: "boolean",
-			default: true,
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-		customCss: {
-			type: "string",
-			default: "",
-		},
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-	},
-	//usesContext: [],
-	providesContext: {
-		"post-grid/popupId": "blockId",
-	},
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
 
 	edit: function (props) {
 		var attributes = props.attributes;

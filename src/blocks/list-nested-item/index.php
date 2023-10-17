@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,58 +19,16 @@ class PGBlockListNestedItem
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/list-nested-item/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/list-nested-item', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-list-nested-item"
-                        ],
-                        "styles" => [
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/list-nested-item/block.json',
+            array(
 
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "position" => [],
-                            "zIndex" => [],
-                            "width" => [],
-                            "height" => [],
-                            "top" => [],
-                            "right" => [],
-                            "bottom" => [],
-                            "left" => []
-                        ]
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
+                'render_callback' => array($this, 'theHTML'),
 
 
-        ));
+
+            )
+        );
     }
 
     function front_script($attributes)
@@ -122,13 +81,10 @@ class PGBlockListNestedItem
 
         ob_start();
 
-        echo  $content;
+        echo $content;
 
 
-?>
-
-
-
+        ?>
 
 
 
@@ -136,7 +92,10 @@ class PGBlockListNestedItem
 
 
 
-<?php return ob_get_clean();
+
+
+
+        <?php return ob_get_clean();
     }
 }
 

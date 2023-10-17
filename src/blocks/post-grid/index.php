@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -21,435 +22,15 @@ class PGBlockPostGrid
 
 
 
-        register_block_type('post-grid/post-grid', array(
-            //'editor_script' => 'pgpostgrid_editor_script',
-            //'style' => 'pgpostgrid_front_style',
-            //'editor_style' => 'pgpostgrid_editor_style',
-            //'script' => 'pgpostgrid_front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'render_callback' => array($this, 'theHTML'),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/post-grid/block.json',
+            array(
 
-            'attributes' =>  array(
-                'lazyLoad' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'lazyLoad',
-                            'enable' => 'no',
-                            'srcUrl' => '',
-                            'srcId' => '',
-                            'icon' =>
-                            array(
-                                'library' => '',
-                                'srcType' => 'class',
-                                'iconSrc' => '',
-                            ),
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'search' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'search',
-                            'enable' => 'no',
-                            'type' => '',
-                            'placeholder' => '',
-                            'icon' => '',
-                            'busyIcon' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'container' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'itemsWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'items-loop',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'itemWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'item',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'noPostsWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'no-posts text-center',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'spinnerWrap' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'spinner',
-                        ),
-                        'styles' =>
-                        array(),
-                    ),
-                ),
-                'grid' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'itemCss' =>
-                            array(),
-                        ),
-                        'styles' =>
-                        array(
-                            'gridTemplateColumns' =>
-                            array(
-                                'Tablet' =>
-                                array(
-                                    0 =>
-                                    array(
-                                        'val' => 1,
-                                        'unit' => 'fr',
-                                    ),
-                                    1 =>
-                                    array(
-                                        'val' => 1,
-                                        'unit' => 'fr',
-                                    ),
-                                ),
-                                'Mobile' =>
-                                array(
-                                    0 =>
-                                    array(
-                                        'val' => 1,
-                                        'unit' => 'fr',
-                                    ),
-                                ),
-                            ),
-                            'gridTemplateRows' =>
-                            array(),
-                            'colGap' =>
-                            array(),
-                            'rowGap' =>
-                            array(),
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'pagination' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'pagination',
-                            'type' => 'normal',
-                            'maxPageNum' => '',
-                            'prevText' => 'Previous',
-                            'nextText' => 'Next',
-                            'loadMoreText' => 'Load More',
-                            'noMorePosts' => 'No More Posts',
-                            'loadingText' => 'Loading...',
-                            'loadingIcon' =>
-                            array(
-                                'library' => '',
-                                'srcType' => 'class',
-                                'iconSrc' => '',
-                            ),
-                        ),
-                        'styles' =>
-                        array(
-                            'textAlign' =>
-                            array(
-                                'Desktop' => 'center',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'paginationItem' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'page-numbers inline-block',
-                        ),
-                        'styles' =>
-                        array(
-                            'display' =>
-                            array(
-                                'Desktop' => 'inline-block',
-                            ),
-                            'color' =>
-                            array(
-                                'Desktop' => '#18978F',
-                            ),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'paginationItemActive' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'class' => 'page-numbers inline-block',
-                        ),
-                        'styles' =>
-                        array(
-                            'display' =>
-                            array(),
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'layout' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'id' => '',
-                        'srcServer' => 'library',
-                        'data' =>
-                        array(
-                            0 =>
-                            array(
-                                'blockName' => 'core/post-title',
-                                'attrs' =>
-                                array(),
-                                'innerBlocks' =>
-                                array(),
-                                'innerHTML' => '',
-                                'innerContent' =>
-                                array(),
-                            ),
-                            1 =>
-                            array(
-                                'blockName' => NULL,
-                                'attrs' =>
-                                array(),
-                                'innerBlocks' =>
-                                array(),
-                                'innerHTML' => '
+                'render_callback' => array($this, 'theHTML'),
 
-',
-                                'innerContent' =>
-                                array(
-                                    0 => '
 
-',
-                                ),
-                            ),
-                            2 =>
-                            array(
-                                'blockName' => 'core/post-date',
-                                'attrs' =>
-                                array(),
-                                'innerBlocks' =>
-                                array(),
-                                'innerHTML' => '',
-                                'innerContent' =>
-                                array(),
-                            ),
-                            3 =>
-                            array(
-                                'blockName' => NULL,
-                                'attrs' =>
-                                array(),
-                                'innerBlocks' =>
-                                array(),
-                                'innerHTML' => '
-
-',
-                                'innerContent' =>
-                                array(
-                                    0 => '
-
-',
-                                ),
-                            ),
-                            4 =>
-                            array(
-                                'blockName' => 'core/post-excerpt',
-                                'attrs' =>
-                                array(
-                                    'moreText' => '',
-                                    'textColor' => 'primary',
-                                ),
-                                'innerBlocks' =>
-                                array(),
-                                'innerHTML' => '',
-                                'innerContent' =>
-                                array(),
-                            ),
-                        ),
-                        'rawData' => '<!-- wp:post-featured-image  /-->
-
-<!-- wp:post-title /-->
-
-<!-- wp:post-excerpt  /-->',
-                    ),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(),
-                    ),
-                ),
-                'queryArgs' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' =>
-                        array(
-                            0 =>
-                            array(
-                                'val' =>
-                                array(
-                                    0 => 'post',
-                                ),
-                                'id' => 'postType',
-                            ),
-                            1 =>
-                            array(
-                                'val' =>
-                                array(
-                                    0 => 'publish',
-                                ),
-                                'id' => 'postStatus',
-                            ),
-                            2 =>
-                            array(
-                                'val' => 'DESC',
-                                'id' => 'order',
-                            ),
-                            3 =>
-                            array(
-                                'val' =>
-                                array(
-                                    0 => 'date',
-                                ),
-                                'id' => 'orderby',
-                            ),
-                            4 =>
-                            array(
-                                'val' => 3,
-                                'id' => 'postsPerPage',
-                            ),
-                            5 =>
-                            array(
-                                'val' => 1,
-                                'id' => 'paged',
-                            ),
-                        ),
-                    ),
-                ),
             )
-        ));
+        );
     }
 
     function front_scripts($attributes)
@@ -510,7 +91,7 @@ class PGBlockPostGrid
                         }
 
 
-                        if ($id == 'inclusive'  || $id == 'compare'  || $id == 'relation') {
+                        if ($id == 'inclusive' || $id == 'compare' || $id == 'relation') {
 
                             if (!empty($value))
                                 $date_query[$id] = $value;
@@ -525,7 +106,7 @@ class PGBlockPostGrid
                                 $date_query[$id]['year'] = $year;
 
                             if (!empty($month))
-                                $date_query[$id]['month'] =  $month;
+                                $date_query[$id]['month'] = $month;
 
                             if (!empty($day))
                                 $date_query[$id]['day'] = $day;
@@ -782,8 +363,8 @@ class PGBlockPostGrid
         if (!empty($gridOptionsItemCss)) {
             foreach ($gridOptionsItemCss as $device => $args) {
 
-                foreach ($args as  $index => $items) {
-                    foreach ($items as  $attr => $val) {
+                foreach ($args as $index => $items) {
+                    foreach ($items as $attr => $val) {
                         $nth = $index + 1;
 
                         $itemCssArr[".$blockId .item:nth-child($nth)"][$attr][$device] = $val;
@@ -803,15 +384,15 @@ class PGBlockPostGrid
         $postGridScriptData[$blockId]['pagination']['type'] = $paginationType;
 
         $layout_id = isset($layout['id']) ? $layout['id'] : '';
-        $layout_id = apply_filters('pgb_post_grid_post_layout_id',  $layout_id);
+        $layout_id = apply_filters('pgb_post_grid_post_layout_id', $layout_id);
 
         ob_start();
 
         $rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
-        $rawData      = !empty($layout['rawData']) ? $layout['rawData'] : $rawData;
+        $rawData = !empty($layout['rawData']) ? $layout['rawData'] : $rawData;
 
 
-        $srcServer      = !empty($layout['srcServer']) ? $layout['srcServer'] : 'library';
+        $srcServer = !empty($layout['srcServer']) ? $layout['srcServer'] : 'library';
 
 
         if ($srcServer == 'saved') {
@@ -843,9 +424,10 @@ class PGBlockPostGrid
 
 
 
-        if ($post_grid_wp_query->have_posts()) :
+        if ($post_grid_wp_query->have_posts()):
 
-            while ($post_grid_wp_query->have_posts()) : $post_grid_wp_query->the_post();
+            while ($post_grid_wp_query->have_posts()):
+                $post_grid_wp_query->the_post();
 
                 $post_id = get_the_id();
                 $blocks = parse_blocks($rawData);
@@ -858,13 +440,14 @@ class PGBlockPostGrid
                 }
 
 
-                $posts[$post_id]            = $html;
+                $posts[$post_id] = $html;
 
             endwhile;
 
 
             $responses['posts'] = $posts;
-            $responses['max_num_pages'] = isset($post_grid_wp_query->max_num_pages) ? $post_grid_wp_query->max_num_pages : 0;;
+            $responses['max_num_pages'] = isset($post_grid_wp_query->max_num_pages) ? $post_grid_wp_query->max_num_pages : 0;
+            ;
 
             wp_reset_query();
             wp_reset_postdata();
@@ -900,43 +483,47 @@ class PGBlockPostGrid
         ];
 
 
-?>
+        ?>
 
 
-        <?php if ($lazyLoadEnable == 'yes') : ?>
+        <?php if ($lazyLoadEnable == 'yes'): ?>
             <div class=" PGBlockPostGrid-lazyload" id="lazyload-<?php echo esc_attr($blockId); ?>">
                 <?php
-                if (!empty($lazyLoadsrcUrl)) :
-                ?>
+                if (!empty($lazyLoadsrcUrl)):
+                    ?>
                     <img src="<?php echo esc_url_raw($lazyLoadsrcUrl); ?>" alt="Post Grid Lazy loading">
-                <?php
-                else :
-                ?>
+                    <?php
+                else:
+                    ?>
                     <i class="<?php echo esc_attr($lazyLoadIconSrc); ?> fa-spin"></i>
-                <?php
+                    <?php
                 endif;
                 ?>
             </div>
         <?php endif; ?>
-        <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?> class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>" postgridargs=<?php echo (wp_json_encode($postGridArgs)); ?>>
+        <div <?php echo ($lazyLoadEnable == 'yes') ? 'style="display: none;" ' : ''; ?>
+            class="<?php echo esc_attr($blockId); ?> PGBlockPostGrid PGBlockPostGrid-<?php echo esc_attr($blockId); ?>"
+            postgridargs=<?php echo (wp_json_encode($postGridArgs)); ?>>
             <div class="loop-loading"></div>
             <div class="items-loop" id="items-loop-<?php echo esc_attr($blockId); ?>">
                 <?php
                 if (!empty($responses['posts'])) {
                     foreach ($responses['posts'] as $post) {
-                ?>
+                        ?>
                         <div class="item">
                             <?php echo wp_kses_post($post); ?>
                         </div>
-                <?php
+                        <?php
                     }
                 }
                 ?>
             </div>
 
-            <?php if ($paginationType != 'none') : ?>
-                <div id="pagination-<?php echo esc_attr($blockId); ?>" class="pagination PGBlockPostGrid-pagination <?php echo esc_attr($paginationType); ?>" blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
-                    <?php if ($paginationType == 'normal') : ?>
+            <?php if ($paginationType != 'none'): ?>
+                <div id="pagination-<?php echo esc_attr($blockId); ?>"
+                    class="pagination PGBlockPostGrid-pagination <?php echo esc_attr($paginationType); ?>"
+                    blockArgs="<?php echo esc_attr(json_encode($blockArgs)); ?>">
+                    <?php if ($paginationType == 'normal'): ?>
                         <?php
                         $big = 999999999; // need an unlikely integer
                         $pagination_max_num_pages = isset($responses['max_num_pages']) ? $responses['max_num_pages'] : 0;
@@ -946,15 +533,15 @@ class PGBlockPostGrid
                                 'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
                                 'format' => '?paged=%#%',
                                 'current' => max(1, $paged),
-                                'total'                 => $pagination_max_num_pages,
-                                'prev_text'          => $prevText,
-                                'next_text'          => $nextText,
-                                'type'          => 'array',
+                                'total' => $pagination_max_num_pages,
+                                'prev_text' => $prevText,
+                                'next_text' => $nextText,
+                                'type' => 'array',
 
                             )
                         );
 
-                        if (!empty($pages)) :
+                        if (!empty($pages)):
                             foreach ($pages as $page) {
                                 echo wp_kses_post($page);
                             }
@@ -963,7 +550,7 @@ class PGBlockPostGrid
                     <?php endif; ?>
 
 
-                    <?php if ($paginationType == 'ajax') : ?>
+                    <?php if ($paginationType == 'ajax'): ?>
                         <?php
                         $big = 999999999; // need an unlikely integer
                         $pagination_max_num_pages = $responses['max_num_pages'];
@@ -975,15 +562,15 @@ class PGBlockPostGrid
                                 'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
                                 'format' => '?paged=%#%',
                                 'current' => max(1, $paged),
-                                'total'                 => $pagination_max_num_pages,
-                                'prev_text'          => $prevText,
-                                'next_text'          => $nextText,
-                                'type'          => 'array',
+                                'total' => $pagination_max_num_pages,
+                                'prev_text' => $prevText,
+                                'next_text' => $nextText,
+                                'type' => 'array',
 
                             )
                         );
 
-                        if (!empty($pages)) :
+                        if (!empty($pages)):
                             foreach ($pages as $page) {
                                 //$links = str_replace('<a ', '<a blockArgs="' . esc_attr(json_encode($blockArgs)) . '" ', $page);
                                 echo wp_kses_post($page);
@@ -993,33 +580,35 @@ class PGBlockPostGrid
                     <?php endif; ?>
 
 
-                    <?php if ($paginationType == 'next_previous') :
+                    <?php if ($paginationType == 'next_previous'):
                         $pagination_max_num_pages = $responses['max_num_pages'];
 
 
                         if ($pagination_max_num_pages) {
-                    ?>
+                            ?>
                             <a class="page-numbers" href="<?php echo esc_url_raw(get_previous_posts_page_link()); ?>">
                                 <?php echo wp_kses_post($prevText); ?>
                             </a>
                             <a class="page-numbers" href="<?php echo esc_url_raw(get_next_posts_page_link()); ?>">
                                 <?php echo wp_kses_post($nextText); ?>
                             </a>
-                        <?php
+                            <?php
                         }
 
                         ?>
 
                     <?php endif; ?>
 
-                    <?php if ($paginationType == 'loadmore') : ?>
+                    <?php if ($paginationType == 'loadmore'): ?>
                         <div class="page-numbers">
                             <?php echo wp_kses_post($loadMoreText); ?>
                         </div>
                     <?php endif; ?>
 
-                    <?php if ($paginationType == 'infinite') : ?>
-                        <div class="infinite-loader box"><?php echo __('Loading...', 'post-grid'); ?></div>
+                    <?php if ($paginationType == 'infinite'): ?>
+                        <div class="infinite-loader box">
+                            <?php echo __('Loading...', 'post-grid'); ?>
+                        </div>
 
 
                     <?php endif; ?>
@@ -1040,7 +629,7 @@ class PGBlockPostGrid
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

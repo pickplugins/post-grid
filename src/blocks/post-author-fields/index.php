@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,135 +19,14 @@ class PGBlockPostAuthorields
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-author-fields/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/post-author-fields', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "",
-                            "tag" => "div",
-                        ],
-                        "styles" => [
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/post-author-fields/block.json',
+            array(
 
-                            "color" => [],
+                'render_callback' => array($this, 'theHTML'),
 
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "field" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "isLink" => false,
-                            "linkTo" => "postUrl",
-                            "linkToMeta" => "",
-                            "linkTarget" => "",
-                            "avatarSize" => "",
-                            "dateFormat" => "",
-                            "customUrl" => "",
-                            "prefix" => "",
-                            "postfix" => "",
-                            "linkAttr" => []
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ],
-                        "after" => [],
-                        "before" => []
-                    ]
-                ],
-                "icon" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "library" => "fontAwesome",
-                            "srcType" => "class",
-                            "iconSrc" => "",
-                            "position" => "beforePostDate",
-                            "class" => "icon"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => []
-                        ]
-                    ]
-                ],
-                "metaKey" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "frontText" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "Author: ",
-                            "class" => "inline-block"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ]
-            ]
-
-
-        ));
+            )
+        );
     }
 
     function front_script($attributes)
@@ -278,51 +158,58 @@ class PGBlockPostAuthorields
         ob_start();
 
 
-?>
+        ?>
 
 
-        <<?php echo esc_attr($wrapperTag); ?> class="<?php echo $blockId; ?>">
+        <<?php echo esc_attr($wrapperTag); ?> class="
+            <?php echo $blockId; ?>">
 
-            <?php if ($iconPosition == 'beforeFronttext') : ?>
+            <?php if ($iconPosition == 'beforeFronttext'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
 
 
-            <?php if (!empty($frontTextText)) : ?>
-                <span class='frontText'><?php echo wp_kses_post($frontTextText); ?></span>
+            <?php if (!empty($frontTextText)): ?>
+                <span class='frontText'>
+                    <?php echo wp_kses_post($frontTextText); ?>
+                </span>
             <?php endif; ?>
 
-            <?php if ($iconPosition == 'afterFronttext') : ?>
+            <?php if ($iconPosition == 'afterFronttext'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
 
-            <?php if ($iconPosition == 'beforeField') : ?>
+            <?php if ($iconPosition == 'beforeField'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
 
-            <?php if (!empty($fieldLink)) : ?>
-                <a <?php if ($fieldLinkTo == 'authorMail') : ?> href="<?php echo esc_url_raw('mailto:' . $fieldLink); ?>" <?php else : ?> href="<?php echo esc_url_raw($fieldLink); ?>" <?php endif; ?>>
+            <?php if (!empty($fieldLink)): ?>
+                <a <?php if ($fieldLinkTo == 'authorMail'): ?> href="<?php echo esc_url_raw('mailto:' . $fieldLink); ?>" <?php else: ?> href="<?php echo esc_url_raw($fieldLink); ?>" <?php endif; ?>>
                 <?php endif; ?>
 
                 <?php
 
-                if ($metaKey == 'id' || $metaKey == 'login' || $metaKey == 'nickname' || $metaKey == 'url' || $metaKey == 'registered' || $metaKey == 'display_name' || $metaKey == 'display_name' || $metaKey == 'last_name' || $metaKey == 'description' || $metaKey == 'display_name') :
-                ?>
-                    <span class="fieldVal"><?php echo wp_kses_post(get_the_author_meta($metaKey, $post_author_id)) ?></span>
-                <?php
-                elseif ($metaKey == 'avatar') :
-                ?>
-                    <img class="fieldVal" src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $fieldAvatarSize])) ?>" alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
+                if ($metaKey == 'id' || $metaKey == 'login' || $metaKey == 'nickname' || $metaKey == 'url' || $metaKey == 'registered' || $metaKey == 'display_name' || $metaKey == 'display_name' || $metaKey == 'last_name' || $metaKey == 'description' || $metaKey == 'display_name'):
+                    ?>
+                    <span class="fieldVal">
+                        <?php echo wp_kses_post(get_the_author_meta($metaKey, $post_author_id)) ?>
+                    </span>
+                    <?php
+                elseif ($metaKey == 'avatar'):
+                    ?>
+                    <img class="fieldVal"
+                        src="<?php echo esc_url_raw(get_avatar_url($post_author_id, ['size' => $fieldAvatarSize])) ?>"
+                        alt=" <?php echo esc_attr(get_the_author_meta('display_name', $post_author_id)) ?> " />
 
-                <?php
+                    <?php
                 endif;
 
                 ?>
 
-                <?php if (!empty($fieldLink)) : ?>
+                <?php if (!empty($fieldLink)): ?>
                 </a>
             <?php endif; ?>
-            <?php if ($iconPosition == 'afterField') : ?>
+            <?php if ($iconPosition == 'afterField'): ?>
                 <?php echo wp_kses_post($fontIconHtml); ?>
             <?php endif; ?>
         </<?php echo esc_attr($wrapperTag); ?>>
@@ -337,7 +224,7 @@ class PGBlockPostAuthorields
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

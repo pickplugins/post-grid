@@ -1,0 +1,222 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "post-grid/post-taxonomies",
+  "title": "Post Terms",
+  "textdomain": "post-grid",
+  "category": "post-grid",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "wrapper": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "",
+          "tag": "div"
+        },
+        "styles": {
+          "display": {},
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {}
+        }
+      }
+    },
+    "taxonomies": {
+      "type": "object",
+      "default": {
+        "options": {
+          "taxName": ""
+        }
+      }
+    },
+    "items": {
+      "type": "object",
+      "default": {
+        "options": {
+          "prefix": "",
+          "postfix": "",
+          "linkTo": "termUrl",
+          "linkToCustomMeta": "",
+          "linkToAuthorMeta": "",
+          "customUrl": "",
+          "maxCount": 99,
+          "postCount": false,
+          "class": " item",
+          "linkTarget": "",
+          "linkAttr": []
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          },
+          "lineHeight": {},
+          "letterSpacing": {},
+          "fontFamily": {},
+          "fontWeight": {},
+          "textDecoration": {},
+          "textTransform": {}
+        }
+      }
+    },
+    "icon": {
+      "type": "object",
+      "default": {
+        "options": {
+          "library": "fontAwesome",
+          "srcType": "class",
+          "iconSrc": "",
+          "position": "beforeFronttext",
+          "class": "icon"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "display": {},
+          "fontSize": {
+            "Desktop": ""
+          },
+          "lineHeight": {},
+          "fontWeight": {
+            "Desktop": "700"
+          },
+          "textDecoration": {}
+        }
+      }
+    },
+    "separator": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "inline-block",
+          "text": ", "
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {}
+        }
+      }
+    },
+    "frontText": {
+      "type": "object",
+      "default": {
+        "options": {
+          "text": "Tags: ",
+          "class": "inline-block"
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {
+            "Desktop": ""
+          },
+          "fontSize": {
+            "Desktop": ""
+          },
+          "lineHeight": {},
+          "letterSpacing": {},
+          "fontFamily": {},
+          "fontWeight": {},
+          "textDecoration": {},
+          "textTransform": {}
+        }
+      }
+    },
+    "postCount": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "",
+          "text": ", "
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {}
+        }
+      }
+    },
+    "termTitle": {
+      "type": "object",
+      "default": {
+        "options": {
+          "class": "",
+          "text": ", "
+        },
+        "styles": {
+          "color": {
+            "Desktop": ""
+          },
+          "padding": {
+            "Desktop": ""
+          },
+          "margin": {}
+        }
+      }
+    },
+    "customCss": {
+      "type": "string",
+      "default": ""
+    },
+    "blockCssY": {
+      "type": "object",
+      "default": {
+        "items": {}
+      }
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "keywords": [
+    "advanced accordion",
+    "nested accordion",
+    "customizable accordion"
+  ],
+  "description": "Shows warning, error or success notices..."
+}

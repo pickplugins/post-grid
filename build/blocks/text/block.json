@@ -12,6 +12,7 @@
       "full"
     ]
   },
+  "example": {},
   "attributes": {
     "text": {
       "type": "object",

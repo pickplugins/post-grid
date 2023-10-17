@@ -20,253 +20,16 @@ class PGBlockProgressBar
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/progress-bar/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/progress-bar', array(
-            // 'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' => [],
-            'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => array(
-                'wrapper' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'progressData' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'type' => '',
-                                'animate' => '',
-                                'animateDuration' => 1,
-                                'animateIteration' => 2,
-                                'animateDelay' => 2,
-                                'fill' => 45,
-                            ),
-                    ),
-                'progressInfo' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => '',
-                                        'position' => 'beforeBar',
-                                    ),
-                                'styles' =>
-                                    array(),
-                            ),
-                    ),
-                'progressBar' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'fontSize' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'progressFill' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'fontSize' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'progressCount' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'position' => 'afterLabel',
-                                        'prefix' => '',
-                                        'postfix' => '',
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'fontSize' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'circleOverlay' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'fontSize' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'circleMask' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'fontSize' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'progressLabel' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'text' => 'Digital Marketing',
-                                        'position' => '',
-                                        'class' => '',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'fontSize' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'icon' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'options' =>
-                                    array(
-                                        'library' => 'fontAwesome',
-                                        'position' => 'beforeprogressCount',
-                                        'srcType' => 'class',
-                                        'iconSrc' => 'far fa-calendar-alt',
-                                        'class' => 'number-count-icon',
-                                    ),
-                                'styles' =>
-                                    array(
-                                        'color' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'backgroundColor' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                        'fontSize' =>
-                                            array(
-                                                'Desktop' => '',
-                                            ),
-                                    ),
-                            ),
-                    ),
-                'customCss' =>
-                    array(
-                        'type' => 'string',
-                        'default' => '',
-                    ),
-                'blockId' =>
-                    array(
-                        'type' => 'string',
-                        'default' => '',
-                    ),
-                'blockCssY' =>
-                    array(
-                        'type' => 'object',
-                        'default' =>
-                            array(
-                                'items' =>
-                                    array(),
-                            ),
-                    ),
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/progress-bar/block.json',
+            array(
+
+
+                'render_callback' => array($this, 'theHTML'),
+
+
+
             )
-
-
-        )
         );
     }
 
@@ -428,105 +191,146 @@ class PGBlockProgressBar
         if (!empty($wrapperTag)):
 
             ?>
-                        <div class="PGBlockProgressBar <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" data-progress-bar="<?php echo esc_attr(json_encode($dataAtts)) ?>">
+            <div class="PGBlockProgressBar <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
+                data-progress-bar="<?php echo esc_attr(json_encode($dataAtts)) ?>">
 
 
-                            <?php if ($progressInfoPosition == 'beforeBar'): ?>
-                                    <div class="progress-info">
+                <?php if ($progressInfoPosition == 'beforeBar'): ?>
+                    <div class="progress-info">
 
-                                        <?php if ($progressCountPosition == 'beforeLabel'): ?>
-                                                <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
-                                        <?php endif; ?>
-
-                                        <div class="progress-label">
-                                            <?php echo wp_kses_post($progressLabelText); ?>
-                                        </div>
-
-                                        <?php if ($progressCountPosition == 'afterLabel'): ?>
-                                                <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
-                                        <?php endif; ?>
-
-                                    </div>
-                            <?php endif; ?>
-
-
-                            <?php if ($progressLabelPosition == 'beforeBar'): ?>
-                                    <div class="progress-label"><?php echo wp_kses_post($progressLabelText); ?></div>
-                            <?php endif; ?>
-
-
-                            <?php if ($progressCountPosition == 'beforeBar'): ?>
-                                    <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
-                            <?php endif; ?>
-
-                            <div class='progress-bar'>
-
-                                <?php if ($progressLabelPosition == 'beforeFill'): ?>
-                                        <div class="progress-label">
-                                            <?php echo wp_kses_post($progressLabelText); ?>
-                                        </div>
-                                <?php endif; ?>
-                                <?php if ($progressCountPosition == 'beforeFill'): ?>
-                                        <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
-                                <?php endif; ?>
-
-                                <div class="progress-fill">
-
-                                    <?php if ($progressLabelPosition == 'insideFill'): ?>
-                                            <div class="progress-label">
-                                                <?php echo wp_kses_post($progressLabelText); ?>
-                                            </div>
-                                    <?php endif; ?>
-                                    <?php if ($progressCountPosition == 'insideFill'): ?>
-                                            <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
-                                    <?php endif; ?>
-
-
-
-
-                                </div>
-
-                                <?php if ($progressLabelPosition == 'afterFill'): ?>
-                                        <div class="progress-label">
-                                            <?php echo wp_kses_post($progressLabelText); ?>
-                                        </div>
-                                <?php endif; ?>
-                                <?php if ($progressCountPosition == 'afterFill'): ?>
-                                        <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
-                                <?php endif; ?>
-
-
+                        <?php if ($progressCountPosition == 'beforeLabel'): ?>
+                            <div class="progress-count">
+                                <?php echo wp_kses_post($progressCountPrefix); ?>
+                                <?php echo wp_kses_post($fill); ?>
+                                <?php echo wp_kses_post($progressCountPostfix); ?>
                             </div>
+                        <?php endif; ?>
+
+                        <div class="progress-label">
+                            <?php echo wp_kses_post($progressLabelText); ?>
+                        </div>
+
+                        <?php if ($progressCountPosition == 'afterLabel'): ?>
+                            <div class="progress-count">
+                                <?php echo wp_kses_post($progressCountPrefix); ?>
+                                <?php echo wp_kses_post($fill); ?>
+                                <?php echo wp_kses_post($progressCountPostfix); ?>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                <?php endif; ?>
 
 
-                            <?php if ($progressLabelPosition == 'afterBar'): ?>
-                                    <div class="progress-label"><?php echo wp_kses_post($progressLabelText); ?></div>
-                            <?php endif; ?>
+                <?php if ($progressLabelPosition == 'beforeBar'): ?>
+                    <div class="progress-label">
+                        <?php echo wp_kses_post($progressLabelText); ?>
+                    </div>
+                <?php endif; ?>
 
 
-                            <?php if ($progressCountPosition == 'afterBar'): ?>
-                                    <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
-                            <?php endif; ?>
+                <?php if ($progressCountPosition == 'beforeBar'): ?>
+                    <div class="progress-count">
+                        <?php echo wp_kses_post($progressCountPrefix); ?>
+                        <?php echo wp_kses_post($fill); ?>
+                        <?php echo wp_kses_post($progressCountPostfix); ?>
+                    </div>
+                <?php endif; ?>
 
-                            <?php if ($progressInfoPosition == 'afterBar'): ?>
-                                    <div class="progress-info">
-                                        <?php if ($progressCountPosition == 'beforeLabel'): ?>
-                                                <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
-                                        <?php endif; ?>
+                <div class='progress-bar'>
 
-                                        <div class="progress-label">
-                                            <?php echo wp_kses_post($progressLabelText); ?>
-                                        </div>
+                    <?php if ($progressLabelPosition == 'beforeFill'): ?>
+                        <div class="progress-label">
+                            <?php echo wp_kses_post($progressLabelText); ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($progressCountPosition == 'beforeFill'): ?>
+                        <div class="progress-count">
+                            <?php echo wp_kses_post($progressCountPrefix); ?>
+                            <?php echo wp_kses_post($fill); ?>
+                            <?php echo wp_kses_post($progressCountPostfix); ?>
+                        </div>
+                    <?php endif; ?>
 
-                                        <?php if ($progressCountPosition == 'afterLabel'): ?>
-                                                <div class="progress-count"><?php echo wp_kses_post($progressCountPrefix); ?><?php echo wp_kses_post($fill); ?><?php echo wp_kses_post($progressCountPostfix); ?></div>
-                                        <?php endif; ?>
-                                    </div>
-                            <?php endif; ?>
+                    <div class="progress-fill">
+
+                        <?php if ($progressLabelPosition == 'insideFill'): ?>
+                            <div class="progress-label">
+                                <?php echo wp_kses_post($progressLabelText); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($progressCountPosition == 'insideFill'): ?>
+                            <div class="progress-count">
+                                <?php echo wp_kses_post($progressCountPrefix); ?>
+                                <?php echo wp_kses_post($fill); ?>
+                                <?php echo wp_kses_post($progressCountPostfix); ?>
+                            </div>
+                        <?php endif; ?>
 
 
-                            </<?php echo esc_attr($wrapperTag); ?>>
-                        <?php
+
+
+                    </div>
+
+                    <?php if ($progressLabelPosition == 'afterFill'): ?>
+                        <div class="progress-label">
+                            <?php echo wp_kses_post($progressLabelText); ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($progressCountPosition == 'afterFill'): ?>
+                        <div class="progress-count">
+                            <?php echo wp_kses_post($progressCountPrefix); ?>
+                            <?php echo wp_kses_post($fill); ?>
+                            <?php echo wp_kses_post($progressCountPostfix); ?>
+                        </div>
+                    <?php endif; ?>
+
+
+                </div>
+
+
+                <?php if ($progressLabelPosition == 'afterBar'): ?>
+                    <div class="progress-label">
+                        <?php echo wp_kses_post($progressLabelText); ?>
+                    </div>
+                <?php endif; ?>
+
+
+                <?php if ($progressCountPosition == 'afterBar'): ?>
+                    <div class="progress-count">
+                        <?php echo wp_kses_post($progressCountPrefix); ?>
+                        <?php echo wp_kses_post($fill); ?>
+                        <?php echo wp_kses_post($progressCountPostfix); ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($progressInfoPosition == 'afterBar'): ?>
+                    <div class="progress-info">
+                        <?php if ($progressCountPosition == 'beforeLabel'): ?>
+                            <div class="progress-count">
+                                <?php echo wp_kses_post($progressCountPrefix); ?>
+                                <?php echo wp_kses_post($fill); ?>
+                                <?php echo wp_kses_post($progressCountPostfix); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="progress-label">
+                            <?php echo wp_kses_post($progressLabelText); ?>
+                        </div>
+
+                        <?php if ($progressCountPosition == 'afterLabel'): ?>
+                            <div class="progress-count">
+                                <?php echo wp_kses_post($progressCountPrefix); ?>
+                                <?php echo wp_kses_post($fill); ?>
+                                <?php echo wp_kses_post($progressCountPostfix); ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+
+
+                </<?php echo esc_attr($wrapperTag); ?>>
+                <?php
 
         endif;
 
@@ -537,43 +341,55 @@ class PGBlockProgressBar
 
 
 
-                    <style>
-                        <?php
-                        if ($type == 'horizontal'):
-                            $animatename = "animateWidthProgress";
+            <style>
+                <?php
+                if ($type == 'horizontal'):
+                    $animatename = "animateWidthProgress";
 
-                            ?>@keyframes animateWidthProgress {
-                                0% {
-                                    width: 0px;
-                                }
-
-                                100% {
-                                    width: <?php echo esc_attr($fill); ?>%;
-                                }
-                            }
-
-                            <?php
-                        elseif ($type == 'vertical'):
-                            $animatename = "animateHeightProgress";
-
-                            ?>@keyframes animateHeightProgress {
-                                0% {
-                                    height: 0px;
-                                }
-
-                                100% {
-                                    height: <?php echo esc_attr($fill); ?>%;
-                                }
-                            }
-
-                            <?php
-                        endif;
-                        ?>        <?php echo esc_attr('.' . $animatename); ?> {
-                            animation: <?php echo esc_attr($animatename); ?> ease <?php echo esc_attr($animateDuration); ?>s;
-                            animation-iteration-count: 1;
-
+                    ?>
+                    @keyframes animateWidthProgress {
+                        0% {
+                            width: 0px;
                         }
-                    </style>
+
+                        100% {
+                            width:
+                                <?php echo esc_attr($fill); ?>
+                                %;
+                        }
+                    }
+
+                    <?php
+                elseif ($type == 'vertical'):
+                    $animatename = "animateHeightProgress";
+
+                    ?>
+                    @keyframes animateHeightProgress {
+                        0% {
+                            height: 0px;
+                        }
+
+                        100% {
+                            height:
+                                <?php echo esc_attr($fill); ?>
+                                %;
+                        }
+                    }
+
+                    <?php
+                endif;
+                ?>
+                <?php echo esc_attr('.' . $animatename); ?>
+                    {
+                    animation:
+                        <?php echo esc_attr($animatename); ?>
+                        ease
+                        <?php echo esc_attr($animateDuration); ?>
+                        s;
+                    animation-iteration-count: 1;
+
+                }
+            </style>
 
 
 

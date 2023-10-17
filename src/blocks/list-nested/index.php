@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -20,155 +21,14 @@ class PGBlockListNested
 
 
 
-        register_block_type('post-grid/list-nested', array(
-            //'editor_script' => 'pglist_editor_script',
-            //'script' => 'pglist_front_script',
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/list-nested/block.json',
+            array(
 
-            //'editor_style' => 'pglist_editor_style',
-            //'style' => 'pglist_front_style',
+                'render_callback' => array($this, 'theHTML'),
 
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => array(
-                'wrapper' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'tag' => 'ul',
-                            'class' => '',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'display' => array(),
-                        ),
-                    ),
-                ),
-                'items' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' => array(),
-                    ),
-                ),
-                'itemsX' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' => array(),
-                    ),
-                ),
-
-
-
-                'item' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'text' => '',
-                            'tag' => 'li',
-                            'counter' => false,
-                            'reversed' => false,
-                            'start' => 1,
-                            'type' => '1',
-                            'class' => 'item',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'display' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'icon' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'options' =>
-                        array(
-                            'library' => 'fontAwesome',
-                            'srcType' => 'class',
-                            'iconSrc' => 'fas fa-chevron-right',
-                            'class' => 'icon',
-                            'positon' => 'before',
-                        ),
-                        'styles' =>
-                        array(
-                            'color' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'padding' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'margin' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                            'fontSize' =>
-                            array(
-                                'Desktop' => '',
-                            ),
-                        ),
-                    ),
-                ),
-                'blockId' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'customCss' =>
-                array(
-                    'type' => 'string',
-                    'default' => '',
-                ),
-                'blockCssY' =>
-                array(
-                    'type' => 'object',
-                    'default' =>
-                    array(
-                        'items' => array(),
-                    ),
-                ),
             )
-
-
-        ));
+        );
     }
 
     // function front_script($attributes)
@@ -247,10 +107,12 @@ class PGBlockListNested
 
 
 
-        if (!empty($wrapperTag)) :
-?>
+        if (!empty($wrapperTag)):
+            ?>
 
-            <<?php echo esc_attr($wrapperTag); ?> class=" <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
+            <<?php echo esc_attr($wrapperTag); ?> class="
+                <?php echo esc_attr($blockId); ?>
+                <?php echo esc_attr($blockAlign); ?>">
 
 
 
@@ -258,42 +120,46 @@ class PGBlockListNested
                 if (!empty($items))
                     foreach ($items as $index => $item) {
 
-                ?>
-                    <<?php echo esc_attr($itemTag); ?> class=" <?php echo esc_attr($itemOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
+                        ?>
+                        <<?php echo esc_attr($itemTag); ?> class="
+                            <?php echo esc_attr($itemOptions['class']); ?>" index=<?php echo esc_attr($index); ?> blockId=<?php echo esc_attr($blockId); ?>>
 
 
-                        <?php if ($iconPosition == 'left') : ?>
-                            <?php echo wp_kses_post($iconHtml); ?>
-                        <?php endif; ?>
-
-                        <span>
-
-                            <?php if ($iconPosition == 'before') : ?>
+                            <?php if ($iconPosition == 'left'): ?>
                                 <?php echo wp_kses_post($iconHtml); ?>
                             <?php endif; ?>
-                            <?php echo (isset($item['text'])) ? wp_kses_post($item['text']) : ''; ?></span>
-                        <?php if ($iconPosition == 'after') : ?>
-                            <?php echo wp_kses_post($iconHtml); ?>
-                        <?php endif; ?>
+
+                            <span>
+
+                                <?php if ($iconPosition == 'before'): ?>
+                                    <?php echo wp_kses_post($iconHtml); ?>
+                                <?php endif; ?>
+                                <?php echo (isset($item['text'])) ? wp_kses_post($item['text']) : ''; ?>
+                            </span>
+                            <?php if ($iconPosition == 'after'): ?>
+                                <?php echo wp_kses_post($iconHtml); ?>
+                            <?php endif; ?>
 
 
-                        <?php if ($iconPosition == 'right') : ?>
-                            <span class="float-right"><?php echo wp_kses_post($iconHtml); ?></span>
-                        <?php endif; ?>
+                            <?php if ($iconPosition == 'right'): ?>
+                                <span class="float-right">
+                                    <?php echo wp_kses_post($iconHtml); ?>
+                                </span>
+                            <?php endif; ?>
 
 
-                    </<?php echo esc_attr($itemTag); ?>>
+                        </<?php echo esc_attr($itemTag); ?>>
 
 
 
 
 
-                <?php
+                        <?php
                     }
 
                 ?>
             </<?php echo esc_attr($wrapperTag); ?>>
-        <?php
+            <?php
 
         endif;
 
@@ -308,7 +174,7 @@ class PGBlockListNested
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

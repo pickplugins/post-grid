@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,147 +19,16 @@ class PGBlockPostTags
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/post-tags/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/post-tags', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' =>  [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "",
-                            "tag" => "div",
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/post-tags/block.json',
+            array(
 
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => []
-                        ]
-                    ]
-                ],
-                "items" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "prefix" => "",
-                            "postfix" => "",
-                            "maxCount" => 99,
-                            "postCount" => false,
-                            "class" => "item inline-block",
-                            "linkTo" => "termUrl",
-                            "linkToAuthorMeta" => "",
-                            "linkToCustomMeta" => "",
-                            "customUrl" => "",
-                            "linkTarget" => "",
-                            "linkAttr" => []
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "icon" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "library" => "fontAwesome",
-                            "srcType" => "class",
-                            "iconSrc" => "",
-                            "position" => "beforeFronttext",
-                            "class" => "icon"
-                        ],
-                        "styles" => [
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-
-                            "display" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "fontWeight" => [
-                                "Desktop" => "700"
-                            ],
-                            "textDecoration" => []
-                        ]
-                    ]
-                ],
-                "separator" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "class" => "inline-block",
-                            "text" => ", "
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => []
-                        ]
-                    ]
-                ],
-                "frontText" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "text" => "Tags: ",
-                            "class" => "inline-block"
-                        ],
-                        "styles" => [
-
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "fontSize" => [],
-                            "lineHeight" => [],
-                            "letterSpacing" => [],
-                            "fontFamily" => [],
-                            "fontWeight" => [],
-                            "textDecoration" => [],
-                            "textTransform" => []
-                        ]
-                    ]
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ]
-            ]
+                'render_callback' => array($this, 'theHTML'),
 
 
-        ));
+
+            )
+        );
     }
 
     function front_script($attributes)
@@ -266,7 +136,7 @@ class PGBlockPostTags
 
         $termsCount = (is_array($terms)) ? count($terms) : 0;
 
-        $maxCount = ($termsCount >  $itemsMaxCount) ? $itemsMaxCount : $termsCount;
+        $maxCount = ($termsCount > $itemsMaxCount) ? $itemsMaxCount : $termsCount;
         $maxCount = (empty($maxCount)) ? $termsCount : $maxCount;
 
         $fontIconHtml = !empty($iconSrc) ? '<span class="' . $iconClass . ' ' . $iconSrc . '"></span>' : '';
@@ -283,12 +153,15 @@ class PGBlockPostTags
         ob_start();
 
 
-?>
+        ?>
 
 
-        <<?php echo esc_attr($wrapperTag); ?> class="<?php echo $blockId; ?>">
-            <?php if (!empty($frontTexttext)) : ?>
-                <span class='frontText '><?php echo $frontTexttext; ?></span>
+        <<?php echo esc_attr($wrapperTag); ?> class="
+            <?php echo $blockId; ?>">
+            <?php if (!empty($frontTexttext)): ?>
+                <span class='frontText '>
+                    <?php echo $frontTexttext; ?>
+                </span>
             <?php endif; ?>
             <?php
 
@@ -319,77 +192,97 @@ class PGBlockPostTags
                         $linkUrl = $itemsCustomUrl;
                     }
 
-                    if ($i > $maxCount) break;
+                    if ($i > $maxCount)
+                        break;
                     /* TO code reviewers, $linkAttrStr escaped correctly before, No need here.*/
-            ?>
+                    ?>
 
-                <?php if (!empty($itemsLinkTo)) : ?>
-                    <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php echo ($linkAttrStr); ?> target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
-
-
-                        <?php if ($iconPosition == 'beforeItem') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-
-                        <?php if (!empty($itemsPrefix)) : ?>
-                            <span class='prefix'><?php echo wp_kses_post($itemsPrefix); ?></span>
-
-                        <?php endif; ?>
-
-                        <span class='termTitle'><?php echo wp_kses_post($term->name); ?></span>
-                        <?php if ($itemsPostCount) : ?>
-                            <span class='postCount'>(<?php echo wp_kses_post($term_post_count); ?>)</span>
-                        <?php endif; ?>
-
-                        <?php if (!empty($itemsPostfix)) : ?>
-                            <span class='postfix'><?php echo wp_kses_post($itemsPostfix); ?></span>
-
-                        <?php endif; ?>
+                    <?php if (!empty($itemsLinkTo)): ?>
+                        <a href="<?php echo esc_url_raw($linkUrl); ?>" <?php echo ($linkAttrStr); ?>
+                            target="<?php echo esc_attr($itemsLinkTarget); ?>" class="<?php echo esc_attr($itemsClass); ?>">
 
 
-                        <?php if ($iconPosition == 'afterItem') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
+                            <?php if ($iconPosition == 'beforeItem'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
 
-                    </a>
-                <?php else : ?>
-                    <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
+                            <?php if (!empty($itemsPrefix)): ?>
+                                <span class='prefix'>
+                                    <?php echo wp_kses_post($itemsPrefix); ?>
+                                </span>
 
+                            <?php endif; ?>
 
-                        <?php if ($iconPosition == 'beforeItem') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
+                            <span class='termTitle'>
+                                <?php echo wp_kses_post($term->name); ?>
+                            </span>
+                            <?php if ($itemsPostCount): ?>
+                                <span class='postCount'>(
+                                    <?php echo wp_kses_post($term_post_count); ?>)
+                                </span>
+                            <?php endif; ?>
 
-                        <?php if (!empty($itemsPrefix)) : ?>
-                            <span class='prefix'><?php echo wp_kses_post($itemsPrefix); ?></span>
+                            <?php if (!empty($itemsPostfix)): ?>
+                                <span class='postfix'>
+                                    <?php echo wp_kses_post($itemsPostfix); ?>
+                                </span>
 
-                        <?php endif; ?>
-
-                        <span class='termTitle'><?php echo wp_kses_post($term->name); ?></span>
-                        <?php if ($itemsPostCount) : ?>
-                            <span class='postCount'>(<?php echo wp_kses_post($term_post_count); ?>)</span>
-                        <?php endif; ?>
-
-                        <?php if (!empty($itemsPostfix)) : ?>
-                            <span class='postfix'><?php echo wp_kses_post($itemsPostfix); ?></span>
-
-                        <?php endif; ?>
-
-
-                        <?php if ($iconPosition == 'afterItem') : ?>
-                            <?php echo wp_kses_post($fontIconHtml); ?>
-                        <?php endif; ?>
-
-                    </span>
-                <?php endif; ?>
+                            <?php endif; ?>
 
 
+                            <?php if ($iconPosition == 'afterItem'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
 
-                <?php if ($maxCount > $i) : ?>
-                    <span class='separator'><?php echo esc_html($separatorText); ?></span>
-                <?php endif; ?>
+                        </a>
+                    <?php else: ?>
+                        <span <?php echo ($linkAttrStr); ?> class="<?php echo esc_attr($itemsClass); ?>">
 
-            <?php
+
+                            <?php if ($iconPosition == 'beforeItem'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
+
+                            <?php if (!empty($itemsPrefix)): ?>
+                                <span class='prefix'>
+                                    <?php echo wp_kses_post($itemsPrefix); ?>
+                                </span>
+
+                            <?php endif; ?>
+
+                            <span class='termTitle'>
+                                <?php echo wp_kses_post($term->name); ?>
+                            </span>
+                            <?php if ($itemsPostCount): ?>
+                                <span class='postCount'>(
+                                    <?php echo wp_kses_post($term_post_count); ?>)
+                                </span>
+                            <?php endif; ?>
+
+                            <?php if (!empty($itemsPostfix)): ?>
+                                <span class='postfix'>
+                                    <?php echo wp_kses_post($itemsPostfix); ?>
+                                </span>
+
+                            <?php endif; ?>
+
+
+                            <?php if ($iconPosition == 'afterItem'): ?>
+                                <?php echo wp_kses_post($fontIconHtml); ?>
+                            <?php endif; ?>
+
+                        </span>
+                    <?php endif; ?>
+
+
+
+                    <?php if ($maxCount > $i): ?>
+                        <span class='separator'>
+                            <?php echo esc_html($separatorText); ?>
+                        </span>
+                    <?php endif; ?>
+
+                    <?php
                     $i++;
                 }
 
@@ -407,7 +300,7 @@ class PGBlockPostTags
 
 
 
-<?php return ob_get_clean();
+        <?php return ob_get_clean();
     }
 }
 

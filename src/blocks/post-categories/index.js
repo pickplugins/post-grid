@@ -73,11 +73,11 @@ import PGtab from "../../components/tab";
 import PGStyles from "../../components/styles";
 import PGCssLibrary from "../../components/css-library";
 
+import metadata from "./block.json";
+
 var myStore = wp.data.select("postgrid-shop");
 
-registerBlockType("post-grid/post-categories", {
-	apiVersion: 2,
-	title: "Post Categories",
+registerBlockType(metadata, {
 	icon: {
 		// Specifying a background color to appear with the icon e.g.: in the inserter.
 		background: "#fff",
@@ -97,159 +97,6 @@ registerBlockType("post-grid/post-categories", {
 			</svg>
 		),
 	},
-	attributes: {
-		wrapper: {
-			type: "object",
-			default: {
-				options: { class: "", tag: "div" },
-				styles: {
-					display: {},
-
-					color: { Desktop: "" },
-
-					padding: { Desktop: "" },
-					margin: {},
-				},
-			},
-		},
-		items: {
-			type: "object",
-			default: {
-				options: {
-					prefix: "",
-					postfix: "",
-					linkTo: "termUrl",
-					linkToCustomMeta: "",
-					linkToAuthorMeta: "",
-					customUrl: "",
-					maxCount: 99,
-					postCount: false,
-					class: " item ",
-					linkTarget: "",
-					linkAttr: [],
-				},
-				styles: {
-					display: {},
-
-					color: { Desktop: "" },
-
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-
-					fontSize: { Desktop: "" },
-					lineHeight: {},
-					letterSpacing: {},
-					fontFamily: {},
-					fontWeight: {},
-					textDecoration: {}, //overline, line-through, underline
-					textTransform: {},
-				},
-			},
-		},
-		icon: {
-			type: "object",
-			default: {
-				options: {
-					library: "fontAwesome",
-					srcType: "class",
-					/*class, html, img, svg */ iconSrc: "",
-					position: "beforeFronttext",
-					/*before, after, prefix, postfix */ class: "icon",
-				},
-
-				styles: {
-					color: { Desktop: "" },
-
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-
-					display: {},
-
-					fontSize: { Desktop: "" },
-					lineHeight: {},
-					fontWeight: { Desktop: "700" },
-					textDecoration: {}, //overline, line-through, underline
-				},
-			},
-		},
-		termTitle: {
-			type: "object",
-			default: {
-				options: { class: "", text: ", " },
-
-				styles: {
-					color: { Desktop: "" },
-
-					padding: { Desktop: "" },
-					margin: {},
-				},
-			},
-		},
-		separator: {
-			type: "object",
-			default: {
-				options: { class: "", text: ", " },
-				styles: {
-					color: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: {},
-				},
-			},
-		},
-		postCount: {
-			type: "object",
-			default: {
-				options: { class: "", text: ", " },
-				styles: {
-					color: { Desktop: "" },
-					padding: { Desktop: "" },
-					margin: {},
-				},
-			},
-		},
-
-		frontText: {
-			type: "object",
-			default: {
-				options: { text: "Categories: ", class: "" },
-				styles: {
-					color: { Desktop: "" },
-
-					padding: { Desktop: "" },
-					margin: { Desktop: "" },
-
-					fontSize: { Desktop: "" },
-					lineHeight: {},
-					letterSpacing: {},
-					fontFamily: {},
-					fontWeight: {},
-					textDecoration: {}, //overline, line-through, underline
-					textTransform: {},
-				},
-			},
-		},
-
-		customCss: {
-			type: "string",
-			default: "",
-		},
-
-		blockCssY: {
-			type: "object",
-			default: { items: {} },
-		},
-
-		blockId: {
-			type: "string",
-			default: "",
-		},
-	},
-	usesContext: ["postId", "loopIndex", "postType", "queryId"],
-
-	supports: {
-		align: ["wide", "full"],
-	},
-	category: "post-grid",
 
 	edit: function (props) {
 		var attributes = props.attributes;

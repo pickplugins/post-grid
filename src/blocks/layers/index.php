@@ -19,54 +19,15 @@ class PGBlockLayers
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layers/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/layers', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' => ["postId", "loopIndex", "postType", "queryId"],
-            //'style' => [$this, 'front_style'],
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-layers"
-                        ],
-                        "styles" => [
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/layers/block.json',
+            array(
 
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "position" => [],
-                            "overflow" => [],
-                            "width" => [],
-                            "height" => []
-                        ]
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
+                'render_callback' => array($this, 'theHTML'),
 
 
-        )
+
+            )
         );
     }
 
@@ -150,15 +111,19 @@ class PGBlockLayers
 
 
         if ($wrapperTag == 'a') { ?>
-                        <a class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>" target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>" href="<?php echo esc_url_raw($linkUrl); ?>">
-                            <?php echo $content ?>
-                        </a>
-                    <?php
+            <a class="pg-layers <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>"
+                target="<?php echo esc_attr($wrapperLinkTarget); ?>" rel="<?php echo esc_attr($wrapperRel); ?>"
+                href="<?php echo esc_url_raw($linkUrl); ?>">
+                <?php echo $content ?>
+            </a>
+            <?php
 
         } else { ?>
-                        <<?php echo esc_attr($wrapperTag); ?> class="pg-layers <?php echo esc_attr($blockId); ?>             <?php echo esc_attr($blockAlign); ?>">
-                            <?php echo $content ?>
-                        </<?php echo esc_attr($wrapperTag); ?>>
+            <<?php echo esc_attr($wrapperTag); ?> class="pg-layers
+                <?php echo esc_attr($blockId); ?>
+                <?php echo esc_attr($blockAlign); ?>">
+                <?php echo $content ?>
+            </<?php echo esc_attr($wrapperTag); ?>>
             <?php
         }
 

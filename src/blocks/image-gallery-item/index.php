@@ -1,5 +1,6 @@
 <?php
-if (!defined('ABSPATH')) exit();
+if (!defined('ABSPATH'))
+    exit();
 
 
 
@@ -18,58 +19,16 @@ class PGBlockImageGalleryItem
         //wp_register_script('editor_script', post_grid_plugin_url . 'src/blocks/layer/index.js', array('wp-blocks', 'wp-element'));
 
 
-        register_block_type('post-grid/image-gallery-item', array(
-            //'editor_script' => 'editor_script',
-            //'editor_style' => 'editor_style',
-            //'script' => 'front_script',
-            'uses_context' =>  ["post-grid/galleryId", "post-grid/lightbox"],
-            //'style' => 'front_style',
-            'render_callback' => array($this, 'theHTML'),
-            'attributes' => [
-                "wrapper" => [
-                    "type" => "object",
-                    "default" => [
-                        "options" => [
-                            "content" => "",
-                            "tag" => "div",
-                            "class" => "pg-layers"
-                        ],
-                        "styles" => [
+        register_block_type(
+            post_grid_plugin_dir . 'src/blocks/image-gallery-item/block.json',
+            array(
 
-                            "color" => [],
-
-                            "padding" => [],
-                            "margin" => [],
-                            "display" => [],
-                            "position" => [],
-                            "zIndex" => [],
-                            "width" => [],
-                            "height" => [],
-                            "top" => [],
-                            "right" => [],
-                            "bottom" => [],
-                            "left" => []
-                        ]
-                    ]
-                ],
-                "blockId" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "customCss" => [
-                    "type" => "string",
-                    "default" => ""
-                ],
-                "blockCssY" => [
-                    "type" => "object",
-                    "default" => [
-                        "items" => []
-                    ]
-                ]
-            ]
+                'render_callback' => array($this, 'theHTML'),
 
 
-        ));
+
+            )
+        );
     }
 
     function front_script($attributes)
@@ -110,11 +69,11 @@ class PGBlockImageGalleryItem
 
         ob_start();
 
-?>
+        ?>
         <div class="pg-image-gallery-item <?php echo esc_attr($blockId); ?> <?php echo esc_attr($blockAlign); ?>">
             <?php echo $content ?>
         </div>
-<?php
+        <?php
         return ob_get_clean();
     }
 }
